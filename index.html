@@ -10,15 +10,17 @@
   .wrap{max-width:520px;margin:0 auto;}
   h1{font-size:32px;font-weight:800;letter-spacing:-.5px;margin:0 0 8px;}
   h1 span{color:#ffb84d;}
-  .sub{color:#a0a4b8;font-size:14px;margin-bottom:32px;}
+  .sub{color:#a0a4b8;font-size:14px;margin-bottom:8px;}
+  .progress{display:inline-block;padding:5px 11px;background:rgba(63,209,122,.12);border:1px solid rgba(63,209,122,.4);color:#3fd17a;border-radius:14px;font-size:12px;font-weight:700;margin-bottom:32px;}
+  .progress::before{content:"●";margin-right:6px;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
   a.card{display:block;padding:24px;background:linear-gradient(180deg,#1a1d2e 0%,#232744 100%);border-radius:18px;color:#fff;text-decoration:none;margin-bottom:16px;border:1px solid rgba(255,255,255,.06);transition:.15s;box-shadow:0 8px 28px rgba(0,0,0,.3);}
   a.card:hover{border-color:#ffb84d;transform:translateY(-2px);}
   a.card .title{font-size:20px;font-weight:800;}
   a.card .desc{font-size:13px;color:#a0a4b8;margin-top:6px;line-height:1.5;}
-  a.card .badge{display:inline-block;font-size:10px;font-weight:800;color:#ffb84d;background:rgba(255,184,77,.12);border:1px solid rgba(255,184,77,.3);padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+  a.card .badge{display:inline-block;font-size:10px;font-weight:800;color:#3fd17a;background:rgba(63,209,122,.12);border:1px solid rgba(63,209,122,.3);padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
   .arrow{float:right;color:#ffb84d;font-size:22px;}
 
-  /* Архив — серый, не привлекает внимание */
   .archive{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);opacity:.65;}
   .archive:hover{opacity:1;transition:opacity .25s;}
   .archive-label{font-size:11px;color:#5a5e76;text-transform:uppercase;letter-spacing:1.8px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
@@ -38,6 +40,20 @@
 <div class="wrap">
   <h1>Битва Чемпионов <span>2026</span></h1>
   <div class="sub">Турнир 826 · Прага · 30 игроков · 15 игр квалификации</div>
+  <div class="progress">LIVE · сыграно 4 из 15 игр</div>
+
+  <a class="card" href="standings.html">
+    <span class="arrow">→</span>
+    <span class="badge">LIVE — обновляется</span>
+    <div class="title">Сводная таблица 826</div>
+    <div class="desc">Промежуточный рейтинг по 4 сыгранным играм. Σ, Σap, победы, K. Клик по игроку → личная карточка.</div>
+  </a>
+
+  <a class="card" href="results.html">
+    <span class="arrow">→</span>
+    <div class="title">Игры с результатами</div>
+    <div class="desc">4 сыгранных стола × 3 — с ролями, доп баллами, цветным центром стола. Несыгранные игры приглушены в навигации.</div>
+  </a>
 
   <a class="card" href="seating.html">
     <span class="arrow">→</span>
@@ -51,26 +67,29 @@
     <div class="desc">30 карточек со статистикой каждого: столы, слоты, частота совместных игр с каждым соперником.</div>
   </a>
 
+  <a class="card" href="player.html">
+    <span class="arrow">→</span>
+    <div class="title">Все игроки 826</div>
+    <div class="desc">Список 30 игроков. Карточка каждого: место, стата, разбивка по сыгранным играм.</div>
+  </a>
+
   <div class="archive">
     <div class="archive-label">Архив · турнир 622 (для референса)</div>
-
-    <a class="archive-card" href="standings.html">
+    <a class="archive-card" href="standings.html?t=622">
       <div>
         <div class="ar-title">Сводная таблица 622</div>
-        <div class="ar-desc">MafiaCl Championship 2026 в Праге, 14.03 · 33 игрока · 3 стадии · awards</div>
+        <div class="ar-desc">MafiaCl Championship 14.03 · 33 игрока · 3 стадии · awards</div>
       </div>
       <span class="ar-arrow">→</span>
     </a>
-
-    <a class="archive-card" href="results.html">
+    <a class="archive-card" href="results.html?t=622">
       <div>
         <div class="ar-title">Игры с результатами 622</div>
         <div class="ar-desc">8 игр квалификации с ролями, доп баллами, цветным центром стола</div>
       </div>
       <span class="ar-arrow">→</span>
     </a>
-
-    <a class="archive-card" href="player.html">
+    <a class="archive-card" href="player.html?t=622">
       <div>
         <div class="ar-title">Карточки игроков 622</div>
         <div class="ar-desc">33 игрока · места по стадиям · номинации · разбивка по играм</div>

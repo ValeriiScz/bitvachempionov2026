@@ -3,31 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Битва Чемпионов 2026 — сводная (референс 622)</title>
+<title>Битва Чемпионов 2026 — сводная</title>
 <style>
   *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
   body{margin:0;background:radial-gradient(circle at 50% 0%,#1a1d2e 0%,#0a0c18 60%);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;padding:24px 16px 60px;}
-
   .topbar{max-width:1280px;margin:0 auto 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
   .nav-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
   .nav-btn{padding:9px 16px;background:rgba(255,184,77,.12);border:1px solid #ffb84d;color:#ffb84d;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:.15s;}
   .nav-btn:hover{background:#ffb84d;color:#1a1d2e;}
   .nav-btn.muted{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:#dfe2f0;}
   .nav-btn.muted:hover{background:rgba(255,255,255,.10);color:#fff;}
-
   .title{font-size:24px;font-weight:800;letter-spacing:-.5px;}
   .title .acc{color:#ffb84d;}
   .sub{color:#a0a4b8;font-size:13px;margin-top:4px;}
-
+  .live-badge{display:inline-block;padding:3px 8px;background:#3fd17a;color:#0a0c18;border-radius:4px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-left:6px;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
   .container{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:320px 1fr;gap:20px;}
   @media (max-width:920px){ .container{grid-template-columns:1fr;} }
-
   .card{background:linear-gradient(180deg,#1a1d2e 0%,#232744 100%);border-radius:18px;padding:22px;box-shadow:0 8px 32px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.04);}
-
   .meta-rows{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:13px;}
   .meta-rows .k{color:#8a8fa8;}
   .meta-rows .v{color:#dfe2f0;font-weight:600;}
-
   .awards h3{margin:0 0 14px;font-size:13px;font-weight:700;color:#ffb84d;text-transform:uppercase;letter-spacing:1.5px;}
   .award-row{padding:10px 0;border-top:1px solid rgba(255,255,255,.06);}
   .award-row:first-of-type{border-top:none;}
@@ -41,13 +37,11 @@
   .award-name{color:#fff;font-weight:600;cursor:pointer;text-decoration:none;}
   .award-name:hover{color:#5dd1ff;}
   .award-val{color:#8a8fa8;font-size:12px;margin-left:auto;}
-
   .stages{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;}
   .stage-btn{padding:9px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#dfe2f0;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:.15s;}
   .stage-btn:hover{background:rgba(255,184,77,.12);border-color:#ffb84d;}
   .stage-btn.active{background:#ffb84d;color:#1a1d2e;border-color:#ffb84d;}
   .stage-btn .count{opacity:.7;font-weight:600;margin-left:6px;}
-
   table.standings{width:100%;border-collapse:collapse;font-size:13px;}
   table.standings th{position:sticky;top:0;background:#0a0c18;color:#8a8fa8;font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:700;padding:10px 6px;text-align:right;border-bottom:1px solid rgba(255,255,255,.08);}
   table.standings th.left{text-align:left;}
@@ -55,7 +49,6 @@
   table.standings td.left{text-align:left;}
   table.standings tr:hover td{background:rgba(255,255,255,.03);}
   table.standings tr.top-3 td.place{color:#ffb84d;font-weight:800;}
-  table.standings tr.top-3:nth-child(1) td.place{font-size:15px;}
   .place{width:36px;color:#a0a4b8;font-weight:700;}
   .player-cell{min-width:180px;}
   .player-name{color:#fff;font-weight:700;text-decoration:none;}
@@ -65,8 +58,9 @@
   .num.dim{color:#5a5e76;}
   .num.neg{color:#e8716b;}
   .num.big{color:#ffb84d;font-weight:800;font-size:14px;}
-
   .empty{padding:40px;text-align:center;color:#8a8fa8;}
+  .progress-note{margin-bottom:16px;padding:12px 14px;background:rgba(63,209,122,.08);border:1px dashed rgba(63,209,122,.35);border-radius:10px;font-size:12px;color:#a0a4b8;line-height:1.6;}
+  .progress-note strong{color:#3fd17a;}
 </style>
 </head>
 <body>
@@ -74,12 +68,16 @@
 <div class="topbar">
   <div class="nav-left">
     <a class="nav-btn muted" href="./">← Главная</a>
-    <a class="nav-btn muted" href="seating.html">Рассадка</a>
-    <a class="nav-btn muted" href="cards.html">Карточки</a>
+    <a class="nav-btn muted" href="results.html" id="link-results">Игры</a>
+    <a class="nav-btn muted" href="player.html" id="link-player">Игроки</a>
     <div>
-      <div class="title">Сводная <span class="acc">· референс турнир 622</span></div>
-      <div class="sub">MafiaCl Championship 2026 — формат и стиль для будущих живых данных</div>
+      <div class="title" id="title">Сводная</div>
+      <div class="sub" id="subtitle">…</div>
     </div>
+  </div>
+  <div id="switcher" style="display:flex;gap:8px;">
+    <a class="nav-btn muted" href="?t=826">826 (текущий)</a>
+    <a class="nav-btn muted" href="?t=622">622 (архив)</a>
   </div>
 </div>
 
@@ -89,142 +87,122 @@
       <h3 style="margin:0 0 14px;font-size:13px;font-weight:700;color:#ffb84d;text-transform:uppercase;letter-spacing:1.5px;">Турнир</h3>
       <div class="meta-rows" id="meta"></div>
     </div>
-    <div class="card awards">
+    <div class="card awards" id="awards-card">
       <h3>Награды</h3>
       <div id="awards"></div>
     </div>
   </aside>
-
-  <main>
-    <div class="stages" id="stages"></div>
-    <div class="card" style="padding:0;overflow-x:auto;">
-      <table class="standings" id="standings-table">
-        <thead>
-          <tr>
-            <th class="left place">#</th>
-            <th class="left player-cell">Игрок</th>
-            <th>Σ</th>
-            <th>Σap</th>
-            <th>+</th>
-            <th>−</th>
-            <th>BM</th>
-            <th>Ci</th>
-            <th>W</th>
-            <th>D</th>
-            <th>S</th>
-            <th>K</th>
-          </tr>
-        </thead>
-        <tbody id="standings-body"></tbody>
-      </table>
-    </div>
-    <div class="sub" style="margin-top:14px;line-height:1.5;">
-      Σ — итоговая сумма баллов. Σap — сумма доп баллов. + / − — положительные и отрицательные доп баллы отдельно. BM — баллы за угадывание мафии из-под расстрела. Ci — прогрессивный бонус за смерть первой ночью. W — побед всего, D — побед доном, S — побед шерифом, K — раз убит первой ночью.
-    </div>
-  </main>
+  <main id="main"></main>
 </div>
 
 <script>
-const STAGES = [
-  {key: 'final', label: 'Финал'},
-  {key: 'semifinal', label: 'Полуфинал'},
-  {key: 'qualification', label: 'Квалификация'}
-];
-
+const T = new URLSearchParams(location.search).get('t') || '826';
+const STAGE_LABELS = {final:'Финал', semifinal:'Полуфинал', qualification:'Квалификация'};
 const AWARD_LABELS = {
-  most_valuable_players: 'MVP турнира',
-  most_valuable_mafia: 'Лучшая мафия',
-  most_valuable_citizen: 'Лучший мирный',
-  best_don: 'Лучший дон',
-  best_sheriff: 'Лучший шериф',
-  most_killed: 'Чаще всех убит 1-й ночью'
+  most_valuable_players:'MVP турнира', most_valuable_mafia:'Лучшая мафия',
+  most_valuable_citizen:'Лучший мирный', best_don:'Лучший дон',
+  best_sheriff:'Лучший шериф', most_killed:'Чаще всех убит 1-й ночью'
 };
-
-let DATA = null;
-let currentStage = 'final';
+let DATA = null, currentStage = null;
 
 async function load() {
-  const r = await fetch('data/tournament_622.json');
+  const r = await fetch(`data/tournament_${T}.json`);
+  if (!r.ok) throw new Error('Нет данных для турнира ' + T);
   DATA = await r.json();
+  // Дефолтная стадия: самая старшая (final → semifinal → qualification)
+  const orderedKeys = ['final','semifinal','qualification'].filter(k => DATA.standings[k]?.length);
+  currentStage = orderedKeys[0] || 'qualification';
+  // Patch nav-btn links to keep ?t
+  document.getElementById('link-results').href = `results.html?t=${T}`;
+  document.getElementById('link-player').href = `player.html?t=${T}`;
+  document.querySelectorAll('#switcher a').forEach(a => {
+    if (a.href.includes(`t=${T}`)) a.classList.remove('muted');
+  });
   renderMeta();
   renderAwards();
-  renderStages();
-  renderTable();
+  renderMain();
 }
 
 function renderMeta() {
-  const fmt = (k, v) => `<div class="k">${k}</div><div class="v">${v}</div>`;
+  const fmt = (k, v) => v ? `<div class="k">${k}</div><div class="v">${v}</div>` : '';
+  const live = DATA.in_progress ? `<span class="live-badge">LIVE</span>` : '';
+  document.getElementById('title').innerHTML = `Сводная <span class="acc">· турнир ${DATA.tournament_id}</span>${live}`;
+  const progress = DATA.games_played != null
+    ? `Сыграно ${DATA.games_played}/${DATA.games_total} игр`
+    : (DATA.closed ? 'Турнир завершён' : '');
+  document.getElementById('subtitle').textContent = `${DATA.tournament_name}${progress ? ' · ' + progress : ''}`;
   document.getElementById('meta').innerHTML = [
     fmt('Название', DATA.tournament_name),
     fmt('Дата', DATA.date),
     fmt('Место', DATA.location),
+    fmt('Формат', DATA.format),
     fmt('Клуб', DATA.club),
     fmt('Организатор', DATA.organizer),
     fmt('Игроков', DATA.players_total),
-    fmt('Дней', DATA.days),
-    fmt('Взнос', DATA.fee_eur + ' EUR'),
-    fmt('Призовой фонд', DATA.prize_fund_eur + ' EUR'),
-    fmt('Победители', DATA.winners.map(linkPlayer).join(' · '))
-  ].join('');
+    fmt('Призовой фонд', DATA.prize_fund_eur ? DATA.prize_fund_eur + ' EUR' : null),
+    DATA.winners?.length ? fmt('Победители', DATA.winners.map(linkPlayer).join(' · ')) : ''
+  ].filter(Boolean).join('');
 }
-
 function linkPlayer(nick) {
-  return `<a class="award-name" href="player.html?nick=${encodeURIComponent(nick)}">${escapeHtml(nick)}</a>`;
+  return `<a class="award-name" href="player.html?nick=${encodeURIComponent(nick)}&t=${T}">${escapeHtml(nick)}</a>`;
 }
-
 function renderAwards() {
+  if (!DATA.awards || !Object.keys(DATA.awards).length) {
+    document.getElementById('awards-card').style.display = 'none';
+    return;
+  }
   const html = Object.entries(DATA.awards).map(([key, list]) => {
     const items = list.map((item, i) => {
-      // item format: "Name (value)" or "Name (W/AP)"
       const m = item.match(/^(.+?)\s*\((.+)\)\s*$/);
       const name = m ? m[1].trim() : item;
       const val = m ? m[2] : '';
-      const medalClass = ['gold', 'silver', 'bronze'][i] || '';
-      return `<div class="award-item">
-        <span class="award-medal ${medalClass}">${i+1}</span>
-        ${linkPlayer(name)}
-        <span class="award-val">${val}</span>
-      </div>`;
+      const medalClass = ['gold','silver','bronze'][i] || '';
+      return `<div class="award-item"><span class="award-medal ${medalClass}">${i+1}</span>${linkPlayer(name)}<span class="award-val">${val}</span></div>`;
     }).join('');
-    return `<div class="award-row">
-      <div class="award-cat">${AWARD_LABELS[key] || key}</div>
-      <div class="award-list">${items}</div>
-    </div>`;
+    return `<div class="award-row"><div class="award-cat">${AWARD_LABELS[key]||key}</div><div class="award-list">${items}</div></div>`;
   }).join('');
   document.getElementById('awards').innerHTML = html;
 }
-
-function renderStages() {
-  document.getElementById('stages').innerHTML = STAGES.map(s => {
-    const rows = DATA.standings[s.key] || [];
-    const active = s.key === currentStage ? ' active' : '';
-    return `<button class="stage-btn${active}" data-stage="${s.key}">${s.label}<span class="count">${rows.length}</span></button>`;
-  }).join('');
-  document.querySelectorAll('.stage-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      currentStage = btn.dataset.stage;
-      document.querySelectorAll('.stage-btn').forEach(b => b.classList.toggle('active', b === btn));
-      renderTable();
-    });
-  });
+function renderMain() {
+  const stages = Object.keys(STAGE_LABELS).filter(k => DATA.standings[k]?.length);
+  const stageHtml = stages.length > 1 ? `<div class="stages">${stages.map(s => {
+    const active = s === currentStage ? ' active' : '';
+    return `<button class="stage-btn${active}" data-stage="${s}">${STAGE_LABELS[s]}<span class="count">${DATA.standings[s].length}</span></button>`;
+  }).join('')}</div>` : '';
+  const note = DATA.in_progress
+    ? `<div class="progress-note">Турнир <strong>в процессе</strong>. Σ считается по 4 сыгранным играм. Финальная таблица появится после закрытия турнира судьёй. <strong>CI и BM пока 0</strong> — точные формулы открыты в SPEC.</div>`
+    : '';
+  document.getElementById('main').innerHTML = `${stageHtml}${note}<div class="card" style="padding:0;overflow-x:auto;">
+    <table class="standings">
+      <thead><tr>
+        <th class="left place">#</th>
+        <th class="left player-cell">Игрок</th>
+        <th>Σ</th><th>WPTS</th><th>Σap</th><th>+</th><th>−</th><th>BM</th><th>Ci</th>
+        <th>W</th><th>D</th><th>S</th><th>K</th>${DATA.in_progress ? '<th>Игр</th>' : ''}
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>`;
+  document.querySelectorAll('.stage-btn').forEach(b => b.addEventListener('click', () => {
+    currentStage = b.dataset.stage;
+    document.querySelectorAll('.stage-btn').forEach(x => x.classList.toggle('active', x === b));
+    renderRows();
+  }));
+  renderRows();
 }
-
-function renderTable() {
+function renderRows() {
   const rows = DATA.standings[currentStage] || [];
-  if (!rows.length) {
-    document.getElementById('standings-body').innerHTML = '<tr><td colspan="12" class="empty">Нет данных</td></tr>';
-    return;
-  }
-  document.getElementById('standings-body').innerHTML = rows.map((r, i) => {
+  document.getElementById('tbody').innerHTML = rows.map((r, i) => {
     const isTop3 = i < 3;
     const cls = isTop3 ? ' class="top-3"' : '';
     return `<tr${cls}>
       <td class="left place">${r.place}</td>
       <td class="left player-cell">
-        <a class="player-name" href="player.html?nick=${encodeURIComponent(r.name)}">${escapeHtml(r.name)}</a>
+        <a class="player-name" href="player.html?nick=${encodeURIComponent(r.name)}&t=${T}">${escapeHtml(r.name)}</a>
         ${r.club ? `<span class="club">${escapeHtml(r.club)}</span>` : ''}
       </td>
       <td>${numCell(r.sigma, 'big')}</td>
+      <td>${numCell(r.wpts != null ? r.wpts : '—')}</td>
       <td>${numCell(r.sigma_ap)}</td>
       <td>${numCell(r.plus, r.plus > 0 ? '' : 'dim')}</td>
       <td>${numCell(r.minus, r.minus > 0 ? 'neg' : 'dim')}</td>
@@ -234,26 +212,19 @@ function renderTable() {
       <td>${numCell(r.d, r.d > 0 ? '' : 'dim')}</td>
       <td>${numCell(r.s, r.s > 0 ? '' : 'dim')}</td>
       <td>${numCell(r.k, r.k > 0 ? '' : 'dim')}</td>
+      ${DATA.in_progress ? `<td>${numCell(r.games)}</td>` : ''}
     </tr>`;
   }).join('');
 }
-
-function numCell(v, cls = '') {
+function numCell(v, cls='') {
+  if (v === '—') return '<span class="num dim">—</span>';
   const n = Number(v);
   if (isNaN(n)) return '—';
   const str = Number.isInteger(n) ? n.toString() : n.toFixed(2).replace(/\.?0+$/, '');
   return `<span class="num ${cls}">${str || '0'}</span>`;
 }
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-load().catch(e => {
-  document.body.innerHTML = '<div style="padding:40px;text-align:center;color:#e8716b;">Ошибка загрузки данных: ' + e.message + '</div>';
-  console.error(e);
-});
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+load().catch(e => { document.body.innerHTML = '<div style="padding:40px;text-align:center;color:#e8716b;">Ошибка: ' + e.message + '</div>'; console.error(e); });
 </script>
-
 </body>
 </html>

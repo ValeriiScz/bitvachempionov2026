@@ -1,0 +1,750 @@
+{
+ "tournament_id": 826,
+ "tournament_name": "Битва Чемпионов 2026",
+ "date": "2026-05-23",
+ "location": "Prague, Czech Republic",
+ "club": "Mafia club \"Champions League\" Prague",
+ "organizer": "Ievgen Sokolskyi (YeS)",
+ "players_total": 30,
+ "days": 2,
+ "fee_eur": 130.0,
+ "prize_fund_eur": 750.0,
+ "format": "15 игр без финала, только победители рейтинговых турниров и MVP",
+ "closed": false,
+ "in_progress": true,
+ "games_played": 4,
+ "games_total": 15,
+ "referees": [
+  "Aragil",
+  "Гармония",
+  "The Godfather"
+ ],
+ "awards": {},
+ "standings": {
+  "qualification": [
+   {
+    "name": "ParadoXx",
+    "games": 4,
+    "w": 4,
+    "d": 1,
+    "s": 2,
+    "k": 0,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0.0,
+    "wpts": 3.0,
+    "roles": {
+     "Citizen": 0,
+     "Sheriff": 2,
+     "Don": 1,
+     "Mafia": 1
+    },
+    "sigma": 4.6,
+    "place": 1
+   },
+   {
+    "name": "KEX",
+    "games": 4,
+    "w": 4,
+    "d": 2,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.9,
+    "plus": 0.9,
+    "minus": 0.0,
+    "wpts": 3.0,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 0,
+     "Don": 2,
+     "Mafia": 0
+    },
+    "sigma": 3.9,
+    "place": 2
+   },
+   {
+    "name": "Eskimo.",
+    "games": 4,
+    "w": 4,
+    "d": 2,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.9,
+    "plus": 0.9,
+    "minus": 0.0,
+    "wpts": 3.0,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 0,
+     "Don": 2,
+     "Mafia": 0
+    },
+    "sigma": 3.9,
+    "place": 3
+   },
+   {
+    "name": "Jerry Hurper",
+    "games": 4,
+    "w": 3,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "sigma_ap": 1.3,
+    "plus": 1.3,
+    "minus": 0.0,
+    "wpts": 2.25,
+    "roles": {
+     "Citizen": 3,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 1
+    },
+    "sigma": 3.55,
+    "place": 4
+   },
+   {
+    "name": "Season's",
+    "games": 4,
+    "w": 3,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "sigma_ap": 1.0,
+    "plus": 1.0,
+    "minus": 0.0,
+    "wpts": 2.25,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 2
+    },
+    "sigma": 3.25,
+    "place": 5
+   },
+   {
+    "name": "Yokai",
+    "games": 4,
+    "w": 3,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.8,
+    "plus": 0.8,
+    "minus": 0.0,
+    "wpts": 2.25,
+    "roles": {
+     "Citizen": 3,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 1
+    },
+    "sigma": 3.05,
+    "place": 6
+   },
+   {
+    "name": "Wapi",
+    "games": 4,
+    "w": 3,
+    "d": 1,
+    "s": 1,
+    "k": 1,
+    "sigma_ap": 0.5,
+    "plus": 0.5,
+    "minus": 0.0,
+    "wpts": 2.25,
+    "roles": {
+     "Citizen": 0,
+     "Sheriff": 2,
+     "Don": 1,
+     "Mafia": 1
+    },
+    "sigma": 2.75,
+    "place": 7
+   },
+   {
+    "name": "Не Злая",
+    "games": 4,
+    "w": 3,
+    "d": 0,
+    "s": 1,
+    "k": 0,
+    "sigma_ap": 0.2,
+    "plus": 0.2,
+    "minus": 0.0,
+    "wpts": 2.25,
+    "roles": {
+     "Citizen": 1,
+     "Sheriff": 1,
+     "Don": 1,
+     "Mafia": 1
+    },
+    "sigma": 2.45,
+    "place": 8
+   },
+   {
+    "name": "DOVOD",
+    "games": 4,
+    "w": 2,
+    "d": 0,
+    "s": 1,
+    "k": 0,
+    "sigma_ap": 0.9,
+    "plus": 0.9,
+    "minus": 0.0,
+    "wpts": 1.5,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 1,
+     "Don": 0,
+     "Mafia": 1
+    },
+    "sigma": 2.4,
+    "place": 9
+   },
+   {
+    "name": "f5",
+    "games": 4,
+    "w": 3,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.0,
+    "plus": 0.0,
+    "minus": 0.0,
+    "wpts": 2.25,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 2
+    },
+    "sigma": 2.25,
+    "place": 10
+   },
+   {
+    "name": "Сью",
+    "games": 4,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0.0,
+    "wpts": 1.5,
+    "roles": {
+     "Citizen": 3,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 1
+    },
+    "sigma": 2.2,
+    "place": 11
+   },
+   {
+    "name": "Lюц",
+    "games": 4,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.6,
+    "plus": 0.6,
+    "minus": 0.0,
+    "wpts": 1.5,
+    "roles": {
+     "Citizen": 3,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 1
+    },
+    "sigma": 2.1,
+    "place": 12
+   },
+   {
+    "name": "Саботаж",
+    "games": 4,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "sigma_ap": 0.5,
+    "plus": 0.5,
+    "minus": 0.0,
+    "wpts": 1.5,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 0,
+     "Don": 1,
+     "Mafia": 1
+    },
+    "sigma": 2.0,
+    "place": 13
+   },
+   {
+    "name": "Молчун",
+    "games": 4,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.4,
+    "plus": 0.4,
+    "minus": 0.0,
+    "wpts": 1.5,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 2
+    },
+    "sigma": 1.9,
+    "place": 14
+   },
+   {
+    "name": "Фортуна",
+    "games": 4,
+    "w": 2,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.3,
+    "plus": 0.3,
+    "minus": 0.0,
+    "wpts": 1.5,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 0,
+     "Don": 1,
+     "Mafia": 1
+    },
+    "sigma": 1.8,
+    "place": 15
+   },
+   {
+    "name": "Дренажная вода deluxe",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 1.0,
+    "plus": 1.0,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 4,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 0
+    },
+    "sigma": 1.75,
+    "place": 16
+   },
+   {
+    "name": "Буржуй",
+    "games": 4,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.2,
+    "plus": 0.2,
+    "minus": 0.0,
+    "wpts": 1.5,
+    "roles": {
+     "Citizen": 3,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 1
+    },
+    "sigma": 1.7,
+    "place": 17
+   },
+   {
+    "name": "Landing",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.5,
+    "plus": 0.5,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 0,
+     "Don": 1,
+     "Mafia": 1
+    },
+    "sigma": 1.25,
+    "place": 18
+   },
+   {
+    "name": "aptah",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.4,
+    "plus": 0.4,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 4,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 0
+    },
+    "sigma": 1.15,
+    "place": 19
+   },
+   {
+    "name": "Грешник",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.3,
+    "plus": 0.3,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 3,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 1
+    },
+    "sigma": 1.05,
+    "place": 20
+   },
+   {
+    "name": "LogisticPro",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "sigma_ap": 0.3,
+    "plus": 0.3,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 4,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 0
+    },
+    "sigma": 1.05,
+    "place": 21
+   },
+   {
+    "name": "YeS",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.2,
+    "plus": 0.2,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 3,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 1
+    },
+    "sigma": 0.95,
+    "place": 22
+   },
+   {
+    "name": "TOPS",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "sigma_ap": 0.2,
+    "plus": 0.2,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 2
+    },
+    "sigma": 0.95,
+    "place": 23
+   },
+   {
+    "name": "КуКуСиК",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.2,
+    "plus": 0.2,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 4,
+     "Sheriff": 0,
+     "Don": 0,
+     "Mafia": 0
+    },
+    "sigma": 0.95,
+    "place": 24
+   },
+   {
+    "name": "Виталий",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.2,
+    "plus": 0.2,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 3,
+     "Sheriff": 1,
+     "Don": 0,
+     "Mafia": 0
+    },
+    "sigma": 0.95,
+    "place": 25
+   },
+   {
+    "name": "Призрак",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "sigma_ap": 0.1,
+    "plus": 0.1,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 3,
+     "Sheriff": 1,
+     "Don": 0,
+     "Mafia": 0
+    },
+    "sigma": 0.85,
+    "place": 26
+   },
+   {
+    "name": "Логика",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.1,
+    "plus": 0.1,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 2,
+     "Don": 0,
+     "Mafia": 0
+    },
+    "sigma": 0.85,
+    "place": 27
+   },
+   {
+    "name": "ШТО?",
+    "games": 4,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "sigma_ap": 0.0,
+    "plus": 0.0,
+    "minus": 0.0,
+    "wpts": 0.75,
+    "roles": {
+     "Citizen": 2,
+     "Sheriff": 1,
+     "Don": 0,
+     "Mafia": 1
+    },
+    "sigma": 0.75,
+    "place": 28
+   },
+   {
+    "name": "Tripok",
+    "games": 4,
+    "w": 0,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "sigma_ap": 0.3,
+    "plus": 0.3,
+    "minus": 0.0,
+    "wpts": 0.0,
+    "roles": {
+     "Citizen": 1,
+     "Sheriff": 1,
+     "Don": 1,
+     "Mafia": 1
+    },
+    "sigma": 0.3,
+    "place": 29
+   },
+   {
+    "name": "Korolevich",
+    "games": 4,
+    "w": 0,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "sigma_ap": 0.0,
+    "plus": 0.0,
+    "minus": 0.0,
+    "wpts": 0.0,
+    "roles": {
+     "Citizen": 3,
+     "Sheriff": 0,
+     "Don": 1,
+     "Mafia": 0
+    },
+    "sigma": 0.0,
+    "place": 30
+   }
+  ]
+ },
+ "players": [
+  {
+   "name": "ParadoXx",
+   "club": ""
+  },
+  {
+   "name": "KEX",
+   "club": ""
+  },
+  {
+   "name": "Eskimo.",
+   "club": ""
+  },
+  {
+   "name": "Jerry Hurper",
+   "club": ""
+  },
+  {
+   "name": "Season's",
+   "club": ""
+  },
+  {
+   "name": "Yokai",
+   "club": ""
+  },
+  {
+   "name": "Wapi",
+   "club": ""
+  },
+  {
+   "name": "Не Злая",
+   "club": ""
+  },
+  {
+   "name": "DOVOD",
+   "club": ""
+  },
+  {
+   "name": "f5",
+   "club": ""
+  },
+  {
+   "name": "Сью",
+   "club": ""
+  },
+  {
+   "name": "Lюц",
+   "club": ""
+  },
+  {
+   "name": "Саботаж",
+   "club": ""
+  },
+  {
+   "name": "Молчун",
+   "club": ""
+  },
+  {
+   "name": "Фортуна",
+   "club": ""
+  },
+  {
+   "name": "Дренажная вода deluxe",
+   "club": ""
+  },
+  {
+   "name": "Буржуй",
+   "club": ""
+  },
+  {
+   "name": "Landing",
+   "club": ""
+  },
+  {
+   "name": "aptah",
+   "club": ""
+  },
+  {
+   "name": "Грешник",
+   "club": ""
+  },
+  {
+   "name": "LogisticPro",
+   "club": ""
+  },
+  {
+   "name": "YeS",
+   "club": ""
+  },
+  {
+   "name": "TOPS",
+   "club": ""
+  },
+  {
+   "name": "КуКуСиК",
+   "club": ""
+  },
+  {
+   "name": "Виталий",
+   "club": ""
+  },
+  {
+   "name": "Призрак",
+   "club": ""
+  },
+  {
+   "name": "Логика",
+   "club": ""
+  },
+  {
+   "name": "ШТО?",
+   "club": ""
+  },
+  {
+   "name": "Tripok",
+   "club": ""
+  },
+  {
+   "name": "Korolevich",
+   "club": ""
+  }
+ ],
+ "_note": "Промежуточные данные — 4 из 15 игр. Σ = WPTS + Σap. Финального CI/BM пока нет (формулы открыты)."
+}
