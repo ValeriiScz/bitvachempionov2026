@@ -1,0 +1,16 @@
+{
+  "tournament_id": 622,
+  "awards": {
+    "most_valuable_players": ["Landing (3.83)", "YeS (3.57)", "f5 (3.03)"],
+    "most_valuable_mafia": ["f5 (1.29)", "Виталий (1.12)", "Landing (1.11)"],
+    "most_valuable_citizen": ["YeS (2.97)", "Landing (2.72)", "Blackout (2.30)"],
+    "best_don": ["f5 (3/0.33)", "Ru (3/0.05)", "TOPS (2/0.20)"],
+    "best_sheriff": ["Season's (3/0.25)", "Mjata (2/0.35)", "Нефть (2/0.25)"],
+    "most_killed": ["LogisticPro (5)"]
+  },
+  "format_notes": {
+    "MVP/MVM/MVC": "имя (баллы)",
+    "best_don/sheriff": "имя (число_побед/доп_баллы_средние?)",
+    "most_killed": "имя (раз_убит_первой_ночью)"
+  }
+}
