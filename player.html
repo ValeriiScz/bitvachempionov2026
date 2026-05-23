@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Игрок — Битва Чемпионов 2026</title>
+<style>
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  body{margin:0;background:radial-gradient(circle at 50% 0%,#1a1d2e 0%,#0a0c18 60%);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;padding:24px 16px 60px;}
+
+  .topbar{max-width:980px;margin:0 auto 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .nav-btn{padding:9px 16px;background:rgba(255,184,77,.12);border:1px solid #ffb84d;color:#ffb84d;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:.15s;}
+  .nav-btn:hover{background:#ffb84d;color:#1a1d2e;}
+  .nav-btn.muted{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:#dfe2f0;}
+  .nav-btn.muted:hover{background:rgba(255,255,255,.10);color:#fff;}
+
+  .wrap{max-width:980px;margin:0 auto;}
+
+  .player-hdr{padding:28px 28px;background:linear-gradient(180deg,#1a1d2e 0%,#232744 100%);border-radius:20px;display:flex;align-items:center;gap:22px;box-shadow:0 8px 32px rgba(0,0,0,.35);margin-bottom:20px;border:1px solid rgba(255,255,255,.04);}
+  .player-avatar{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#ffb84d 0%,#d18a4a 100%);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800;color:#1a1d2e;flex-shrink:0;}
+  .player-nick{font-size:36px;font-weight:800;letter-spacing:-.6px;color:#fff;}
+  .player-club{font-size:13px;color:#a0a4b8;margin-top:6px;}
+  .player-overall{margin-top:14px;display:flex;gap:18px;flex-wrap:wrap;}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,184,77,.12);border:1px solid rgba(255,184,77,.3);color:#ffb84d;border-radius:20px;font-size:12px;font-weight:700;}
+  .pill .v{color:#fff;font-weight:800;}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+  @media (max-width:700px){ .grid{grid-template-columns:1fr;} }
+
+  .card{background:linear-gradient(180deg,#1a1d2e 0%,#232744 100%);border-radius:18px;padding:22px;box-shadow:0 8px 32px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.04);}
+  .card h3{margin:0 0 14px;font-size:11px;font-weight:700;color:#ffb84d;text-transform:uppercase;letter-spacing:1.5px;}
+
+  .places{display:flex;flex-direction:column;gap:10px;}
+  .place-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.04);}
+  .place-row.skipped{opacity:.45;}
+  .place-row.podium{background:rgba(255,184,77,.10);border-color:rgba(255,184,77,.3);}
+  .place-stage{font-size:13px;color:#dfe2f0;font-weight:600;}
+  .place-val{font-size:20px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;}
+  .place-val .of{color:#8a8fa8;font-size:13px;font-weight:600;margin-left:2px;}
+  .place-val.none{color:#5a5e76;font-size:14px;}
+
+  .noms{display:flex;flex-direction:column;gap:8px;}
+  .nom-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(255,184,77,.08);border:1px solid rgba(255,184,77,.25);border-radius:10px;}
+  .nom-medal{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;}
+  .nom-medal.gold{background:#ffb84d;color:#1a1d2e;}
+  .nom-medal.silver{background:#c5cad8;color:#1a1d2e;}
+  .nom-medal.bronze{background:#d18a4a;color:#1a1d2e;}
+  .nom-cat{flex:1;font-size:13px;color:#fff;font-weight:600;}
+  .nom-val{font-size:12px;color:#8a8fa8;font-variant-numeric:tabular-nums;}
+  .no-noms{color:#5a5e76;font-size:13px;font-style:italic;}
+
+  table.stats{width:100%;border-collapse:collapse;font-size:13px;}
+  table.stats th{color:#8a8fa8;font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:700;padding:8px 6px;text-align:right;border-bottom:1px solid rgba(255,255,255,.08);}
+  table.stats th.left{text-align:left;}
+  table.stats td{padding:10px 6px;border-bottom:1px solid rgba(255,255,255,.04);text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:#dfe2f0;}
+  table.stats td.left{text-align:left;color:#fff;font-weight:700;}
+  table.stats td.dim{color:#5a5e76;}
+  table.stats td.neg{color:#e8716b;}
+  table.stats td.big{color:#ffb84d;font-weight:800;}
+  table.stats tr.total td{border-top:2px solid rgba(255,184,77,.25);font-size:14px;font-weight:800;color:#fff;}
+
+  .all-players{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;}
+  .all-players a{display:block;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;transition:.15s;}
+  .all-players a:hover{background:rgba(255,184,77,.12);border-color:#ffb84d;color:#ffb84d;}
+
+  .empty{padding:40px;text-align:center;color:#8a8fa8;}
+  .todo{margin-top:14px;padding:14px;background:rgba(255,184,77,.06);border:1px dashed rgba(255,184,77,.3);border-radius:10px;font-size:12px;color:#a0a4b8;line-height:1.6;}
+  .todo strong{color:#ffb84d;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="nav-btn muted" href="./">← Главная</a>
+  <a class="nav-btn muted" href="standings.html">К сводной</a>
+  <a class="nav-btn muted" href="seating.html">Рассадка</a>
+  <a class="nav-btn muted" href="cards.html">Карточки</a>
+</div>
+
+<div class="wrap" id="content">
+  <div class="card empty">Загрузка…</div>
+</div>
+
+<script>
+const STAGES = [
+  {key: 'final', label: 'Финал', size: 10},
+  {key: 'semifinal', label: 'Полуфинал', size: 30},
+  {key: 'qualification', label: 'Квалификация', size: 33}
+];
+
+const AWARD_LABELS = {
+  most_valuable_players: 'MVP турнира',
+  most_valuable_mafia: 'Лучшая мафия',
+  most_valuable_citizen: 'Лучший мирный',
+  best_don: 'Лучший дон',
+  best_sheriff: 'Лучший шериф',
+  most_killed: 'Чаще всех убит 1-й ночью'
+};
+
+let DATA = null;
+
+async function load() {
+  const r = await fetch('data/tournament_622.json');
+  DATA = await r.json();
+  const nick = new URLSearchParams(location.search).get('nick');
+  if (nick) {
+    renderPlayer(nick);
+  } else {
+    renderAllPlayers();
+  }
+}
+
+function renderAllPlayers() {
+  document.title = 'Все игроки — Битва Чемпионов 2026';
+  const html = `
+    <div class="card">
+      <h3>Все игроки турнира 622 (${DATA.players.length})</h3>
+      <div class="all-players">
+        ${DATA.players.sort((a,b) => a.name.localeCompare(b.name, 'ru'))
+          .map(p => `<a href="?nick=${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a>`).join('')}
+      </div>
+    </div>`;
+  document.getElementById('content').innerHTML = html;
+}
+
+function renderPlayer(nick) {
+  const player = DATA.players.find(p => p.name === nick);
+  if (!player) {
+    document.getElementById('content').innerHTML = `
+      <div class="card empty">
+        Игрок <strong>${escapeHtml(nick)}</strong> не найден в данных турнира 622.<br><br>
+        <a class="nav-btn" href="player.html">Посмотреть всех игроков</a>
+      </div>`;
+    return;
+  }
+
+  document.title = `${nick} — Битва Чемпионов 2026`;
+
+  // Stages: place per stage
+  const stageData = {};
+  STAGES.forEach(s => {
+    const rows = DATA.standings[s.key] || [];
+    stageData[s.key] = rows.find(r => r.name === nick) || null;
+  });
+
+  // Aggregated stats
+  const sum = (field) => STAGES.reduce((acc, s) => acc + (stageData[s.key]?.[field] || 0), 0);
+  const stages_played = STAGES.filter(s => stageData[s.key]).length;
+  const total_sigma = sum('sigma');
+  const total_w = sum('w');
+  const total_d = sum('d');
+  const total_s = sum('s');
+  const total_k = sum('k');
+
+  // Awards: where the player is in top-3
+  const myNoms = [];
+  Object.entries(DATA.awards).forEach(([key, list]) => {
+    list.forEach((item, i) => {
+      const name = (item.match(/^(.+?)\s*\(/) || [])[1]?.trim() || item;
+      if (name === nick) {
+        const val = (item.match(/\((.+)\)/) || [])[1] || '';
+        myNoms.push({cat: key, place: i+1, val});
+      }
+    });
+  });
+
+  const initial = nick.charAt(0).toUpperCase();
+
+  const html = `
+    <div class="player-hdr">
+      <div class="player-avatar">${escapeHtml(initial)}</div>
+      <div style="flex:1;">
+        <div class="player-nick">${escapeHtml(nick)}</div>
+        ${player.club ? `<div class="player-club">${escapeHtml(player.club)}</div>` : ''}
+        <div class="player-overall">
+          <span class="pill">Σ всего: <span class="v">${fmtNum(total_sigma)}</span></span>
+          <span class="pill">Стадий: <span class="v">${stages_played}/3</span></span>
+          <span class="pill">Побед: <span class="v">${total_w}</span></span>
+          ${total_d > 0 ? `<span class="pill">Дон: <span class="v">${total_d}</span></span>` : ''}
+          ${total_s > 0 ? `<span class="pill">Шериф: <span class="v">${total_s}</span></span>` : ''}
+          ${total_k > 0 ? `<span class="pill">Убит 1-й ночью: <span class="v">${total_k}</span></span>` : ''}
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Места по стадиям</h3>
+        <div class="places">
+          ${STAGES.map(s => {
+            const d = stageData[s.key];
+            if (!d) return `<div class="place-row skipped">
+              <span class="place-stage">${s.label}</span>
+              <span class="place-val none">не играл</span>
+            </div>`;
+            const place = parseInt(d.place, 10);
+            const podium = place <= 3 ? ' podium' : '';
+            return `<div class="place-row${podium}">
+              <span class="place-stage">${s.label}</span>
+              <span class="place-val">#${place}<span class="of"> / ${s.size}</span></span>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Личные номинации</h3>
+        ${myNoms.length === 0 ? '<div class="no-noms">Не попал в топ-3 ни одной категории</div>' : `
+          <div class="noms">
+            ${myNoms.map(n => {
+              const medalClass = ['gold','silver','bronze'][n.place-1];
+              return `<div class="nom-row">
+                <span class="nom-medal ${medalClass}">${n.place}</span>
+                <span class="nom-cat">${AWARD_LABELS[n.cat] || n.cat}</span>
+                <span class="nom-val">${escapeHtml(n.val)}</span>
+              </div>`;
+            }).join('')}
+          </div>
+        `}
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Детальная стата по стадиям</h3>
+      <table class="stats">
+        <thead>
+          <tr>
+            <th class="left">Стадия</th>
+            <th>Место</th>
+            <th>Σ</th>
+            <th>Σap</th>
+            <th>+</th>
+            <th>−</th>
+            <th>BM</th>
+            <th>Ci</th>
+            <th>W</th>
+            <th>D</th>
+            <th>S</th>
+            <th>K</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${STAGES.map(s => {
+            const d = stageData[s.key];
+            if (!d) return `<tr><td class="left">${s.label}</td><td colspan="11" class="dim" style="text-align:center;">не играл</td></tr>`;
+            return `<tr>
+              <td class="left">${s.label}</td>
+              <td>${d.place}</td>
+              <td class="big">${fmtNum(d.sigma)}</td>
+              <td>${fmtNum(d.sigma_ap)}</td>
+              <td class="${d.plus > 0 ? '' : 'dim'}">${fmtNum(d.plus)}</td>
+              <td class="${d.minus > 0 ? 'neg' : 'dim'}">${fmtNum(d.minus)}</td>
+              <td class="${d.bm > 0 ? '' : 'dim'}">${fmtNum(d.bm)}</td>
+              <td class="${d.ci > 0 ? '' : 'dim'}">${fmtNum(d.ci)}</td>
+              <td>${d.w}</td>
+              <td class="${d.d > 0 ? '' : 'dim'}">${d.d}</td>
+              <td class="${d.s > 0 ? '' : 'dim'}">${d.s}</td>
+              <td class="${d.k > 0 ? '' : 'dim'}">${d.k}</td>
+            </tr>`;
+          }).join('')}
+          <tr class="total">
+            <td class="left">Итого</td>
+            <td>—</td>
+            <td class="big">${fmtNum(total_sigma)}</td>
+            <td>${fmtNum(sum('sigma_ap'))}</td>
+            <td>${fmtNum(sum('plus'))}</td>
+            <td>${fmtNum(sum('minus'))}</td>
+            <td>${fmtNum(sum('bm'))}</td>
+            <td>${fmtNum(sum('ci'))}</td>
+            <td>${total_w}</td>
+            <td>${total_d}</td>
+            <td>${total_s}</td>
+            <td>${total_k}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="todo">
+        <strong>TODO:</strong> разбивка по конкретным играм (Game 1-1 Red W 0.75 / APTS / CI…) как в Telegram-боте — не парсилась в этой итерации (Games Results на mafgame, ~71 игра). Сейчас показан агрегат по стадиям.
+      </div>
+    </div>
+  `;
+  document.getElementById('content').innerHTML = html;
+}
+
+function fmtNum(v) {
+  const n = Number(v);
+  if (isNaN(n)) return '—';
+  if (n === 0) return '0';
+  return Number.isInteger(n) ? n.toString() : n.toFixed(2).replace(/\.?0+$/, '');
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+load().catch(e => {
+  document.getElementById('content').innerHTML = `<div class="card empty" style="color:#e8716b;">Ошибка загрузки: ${e.message}</div>`;
+  console.error(e);
+});
+</script>
+
+</body>
+</html>
