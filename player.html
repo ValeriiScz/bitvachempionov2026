@@ -59,11 +59,16 @@
   table.stats td.big, table.games-table td.big{color:#ffb84d;font-weight:800;}
   table.stats tr.total td{border-top:2px solid rgba(255,184,77,.25);font-size:14px;font-weight:800;color:#fff;}
 
-  table.games-table .role-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700;}
-  .role-citizen{background:rgba(255,184,77,.10);color:#ffd9a3;}
-  .role-sheriff{background:rgba(93,209,255,.12);color:#5dd1ff;}
-  .role-mafia{background:rgba(232,113,107,.12);color:#e8716b;}
-  .role-don{background:rgba(232,113,107,.20);color:#ff8a82;border:1px solid rgba(232,113,107,.4);}
+  table.games-table .role-pill{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700;}
+  .role-pill svg{width:14px;height:14px;}
+  .role-citizen{background:rgba(255,94,94,.12);color:#ff8a8a;}
+  .role-citizen svg{color:#ff5e5e;}
+  .role-sheriff{background:rgba(255,210,74,.12);color:#ffd24a;}
+  .role-sheriff svg{color:#ffd24a;}
+  .role-mafia{background:rgba(223,226,240,.10);color:#dfe2f0;}
+  .role-mafia svg{color:#dfe2f0;}
+  .role-don{background:rgba(255,210,74,.10);color:#ffd9a3;border:1px solid rgba(255,210,74,.35);}
+  .role-don svg{color:#ffd9a3;}
   .result-W{color:#3fd17a;font-weight:800;}
   .result-L{color:#e8716b;font-weight:700;}
   .game-link{color:#5dd1ff;text-decoration:none;font-weight:700;}
@@ -82,6 +87,28 @@
 </style>
 </head>
 <body>
+
+<!-- SVG-иконки ролей -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ic-citizen" viewBox="0 0 24 24">
+      <path d="M12 21.3l-1.5-1.4C5.4 15.4 2 12.3 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.1 3.8 14.8 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.8-3.4 6.9-8.5 11.5L12 21.3z" fill="currentColor"/>
+    </symbol>
+    <symbol id="ic-sheriff" viewBox="0 0 24 24">
+      <path d="M12 1.5l2.2 5L19.5 5l-1.5 5.3L23 12l-5 1.7 1.5 5.3-5.3-1.5L12 22.5l-2.2-5L4.5 19l1.5-5.3L1 12l5-1.7L4.5 5l5.3 1.5L12 1.5z" fill="currentColor"/>
+      <circle cx="12" cy="12" r="2" fill="#0a0c18"/>
+    </symbol>
+    <symbol id="ic-mafia" viewBox="0 0 32 24">
+      <path d="M2 8h16v3h2l1-3h6v3h2v4h-2v1l-3 3h-4v2l-1 1h-6l-1-2-1-2H4l-2-2V8z" fill="currentColor"/>
+      <rect x="6" y="14" width="6" height="2" fill="#0a0c18"/>
+    </symbol>
+    <symbol id="ic-don" viewBox="0 0 32 24">
+      <path d="M6 19c0-7 4-12 10-12s10 5 10 12v1H6v-1z" fill="currentColor"/>
+      <ellipse cx="16" cy="20" rx="13" ry="2" fill="currentColor"/>
+      <path d="M9 16h14" stroke="#0a0c18" stroke-width="1.5" fill="none"/>
+    </symbol>
+  </defs>
+</svg>
 
 <div class="topbar">
   <a class="nav-btn muted" href="./">← Главная</a>
@@ -108,8 +135,9 @@ const AWARD_LABELS = {
   best_sheriff: 'Лучший шериф',
   most_killed: 'Чаще всех убит 1-й ночью'
 };
-const ROLE_ICON = {Citizen: '❤️', Sheriff: '⭐', Don: '🎩', Mafia: '🔫'};
+const ROLE_ICON_ID = {Citizen: 'ic-citizen', Sheriff: 'ic-sheriff', Don: 'ic-don', Mafia: 'ic-mafia'};
 const ROLE_CLASS = {Citizen: 'role-citizen', Sheriff: 'role-sheriff', Mafia: 'role-mafia', Don: 'role-don'};
+function roleSvg(role) { return `<svg><use href="#${ROLE_ICON_ID[role] || 'ic-citizen'}"/></svg>`; }
 
 let DATA = null;
 let GAMES = null;
@@ -346,45 +374,8 @@ function renderGamesTable(myGames, nick) {
           return `<tr>
             <td class="left"><a class="game-link" href="results.html#g${g.game_idx}">${escapeHtml(g.game_title)}</a></td>
             <td class="left">Стол ${tableRoman}</td>
-            <td class="left"><span class="role-pill ${ROLE_CLASS[g.role] || ''}">${ROLE_ICON[g.role] || ''} ${g.role}</span></td>
+            <td class="left"><span class="role-pill ${ROLE_CLASS[g.role] || ''}">${roleSvg(g.role)} ${g.role}</span></td>
             <td class="result-${g.result}">${g.result}</td>
             <td class="${g.wpts > 0 ? 'big' : 'dim'}">${fmtNum(g.wpts)}</td>
             <td class="${g.aps > 0 ? '' : (g.aps < 0 ? 'neg' : 'dim')}">${g.aps > 0 ? '+' : ''}${fmtNum(g.aps)}</td>
-            <td>${g.marker === 'first_killed' ? '<span class="first-killed-mark" title="убит первой ночью">💀</span>' : '<span class="dim">—</span>'}</td>
-          </tr>`;
-        }).join('')}
-        <tr class="total">
-          <td class="left">Итого по ${myGames.length} играм</td>
-          <td colspan="2"></td>
-          <td>${myGames.filter(g => g.result === 'W').length}W / ${myGames.filter(g => g.result === 'L').length}L</td>
-          <td class="big">${fmtNum(myGames.reduce((a, g) => a + g.wpts, 0))}</td>
-          <td>${fmtNum(myGames.reduce((a, g) => a + g.aps, 0))}</td>
-          <td>${myGames.filter(g => g.marker === 'first_killed').length}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="todo">
-      <strong>TODO:</strong> CI (бонус за смерть первой ночью) показан как ◯/💀 без числового значения — точная формула CI в SPEC §10 пока не решена. В сводной по стадии Ci уже агрегирован верно.
-    </div>
-  </div>`;
-}
-
-function fmtNum(v) {
-  const n = Number(v);
-  if (isNaN(n)) return '—';
-  if (n === 0) return '0';
-  return Number.isInteger(n) ? n.toString() : n.toFixed(2).replace(/\.?0+$/, '');
-}
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-load().catch(e => {
-  document.getElementById('content').innerHTML = `<div class="card empty" style="color:#e8716b;">Ошибка: ${e.message}</div>`;
-  console.error(e);
-});
-</script>
-
-</body>
-</html>
+            <td>${g.marker === 'first_killed' ? '<span class="first-killed-mark" title="убит первой ночью">💀</span>' : '<span class="dim">—</span>'}

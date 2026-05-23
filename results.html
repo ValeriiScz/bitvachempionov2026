@@ -29,11 +29,11 @@
   .table-wrap.red{border-color:rgba(232,74,74,.35);box-shadow:0 8px 40px rgba(178,33,33,.25), inset 0 0 0 1px rgba(232,74,74,.2);}
   .table-wrap.black{border-color:rgba(93,209,255,.25);box-shadow:0 8px 40px rgba(20,24,33,.6), inset 0 0 0 1px rgba(93,209,255,.12);}
 
-  .winner-bar{padding:10px 20px;text-align:center;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .winner-bar{padding:10px 20px;text-align:center;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:10px;}
   .winner-bar.red{background:linear-gradient(90deg,#7a1818 0%,#c52828 50%,#7a1818 100%);color:#fff;}
   .winner-bar.black{background:linear-gradient(90deg,#0d0f17 0%,#1a1d2e 50%,#0d0f17 100%);color:#fff;border-bottom:1px solid rgba(93,209,255,.2);}
   .winner-bar.unknown{background:#2a2d40;color:#8a8fa8;}
-  .winner-bar .emo{font-size:16px;}
+  .winner-bar svg{width:18px;height:18px;}
 
   .table-body{padding:18px 14px 24px;}
   .table-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
@@ -42,8 +42,7 @@
   .circle{position:relative;width:380px;height:380px;max-width:100%;margin:0 auto;aspect-ratio:1/1;}
   @media (max-width:600px){ .circle{width:340px;height:340px;} }
 
-  /* Центр стола — цветной круг под победителя */
-  .circle-inner{position:absolute;left:50%;top:50%;width:170px;height:170px;transform:translate(-50%,-50%);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+  .circle-inner{position:absolute;left:50%;top:50%;width:170px;height:170px;transform:translate(-50%,-50%);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px;}
   .circle-inner.red{
     background:radial-gradient(circle at 50% 35%, #d63838 0%, #8a1d1d 60%, #4a0d0d 100%);
     box-shadow:0 0 60px rgba(214,56,56,.35), inset 0 0 0 3px rgba(255,184,77,.4), inset 0 4px 12px rgba(255,255,255,.18);
@@ -53,13 +52,15 @@
     box-shadow:0 0 60px rgba(93,209,255,.18), inset 0 0 0 3px rgba(255,184,77,.4), inset 0 4px 12px rgba(255,255,255,.08);
   }
   .circle-inner.unknown{background:radial-gradient(circle,rgba(255,184,77,.15) 0%,rgba(255,184,77,0) 70%);border:1px dashed rgba(255,184,77,.25);}
-  .center-emo{font-size:42px;line-height:1;margin-bottom:6px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4));}
+  .center-icon{width:54px;height:54px;display:flex;align-items:center;justify-content:center;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));margin-bottom:4px;}
+  .center-icon svg{width:100%;height:100%;}
+  .circle-inner.red .center-icon{color:#fff5d6;}
+  .circle-inner.black .center-icon{color:#fff;}
   .center-label{font-size:10px;font-weight:800;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:2px;}
   .center-team{font-size:15px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;}
   .circle-inner.red .center-team{color:#fff;}
   .circle-inner.black .center-team{color:#ffd9a3;}
 
-  /* Внешнее свечение круга (тонкое) */
   .circle::before{content:"";position:absolute;inset:-8px;border-radius:50%;pointer-events:none;z-index:0;}
   .circle.red::before{background:radial-gradient(circle, transparent 60%, rgba(214,56,56,.10) 75%, transparent 90%);}
   .circle.black::before{background:radial-gradient(circle, transparent 60%, rgba(93,209,255,.06) 75%, transparent 90%);}
@@ -71,12 +72,19 @@
   .seat-avatar.win-black{border-color:#5dd1ff;box-shadow:0 0 0 2px rgba(93,209,255,.25);}
   .seat-avatar.first-killed{filter:grayscale(.5) brightness(.6);}
   .seat-avatar.first-killed::after{content:"💀";position:absolute;top:-8px;right:-8px;font-size:14px;background:#0a0c18;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.2);}
-  .role-icon{position:absolute;bottom:-6px;right:-4px;font-size:13px;background:#0a0c18;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.15);}
+
+  /* role-icon: бейдж с SVG */
+  .role-icon{position:absolute;bottom:-6px;right:-6px;width:22px;height:22px;background:#0a0c18;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#fff;}
+  .role-icon.role-citizen{color:#ff5e5e;}
+  .role-icon.role-sheriff{color:#ffd24a;}
+  .role-icon.role-mafia{color:#dfe2f0;}
+  .role-icon.role-don{color:#dfe2f0;background:#1a1d2e;border-color:#ffd24a;}
+  .role-icon svg{width:14px;height:14px;}
+
   .seat-name{font-size:11px;color:#dfe2f0;margin-top:6px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px;line-height:1.2;}
   .seat-name a{color:inherit;text-decoration:none;}
   .seat-name a:hover{color:#5dd1ff;}
 
-  /* Допы — теперь все читаемы */
   .seat-aps{display:inline-block;margin-top:3px;font-size:11px;font-variant-numeric:tabular-nums;font-weight:700;padding:2px 8px;border-radius:8px;line-height:1.3;}
   .seat-aps.zero{color:#5a5e76;background:transparent;font-size:10px;font-weight:500;padding:1px 4px;}
   .seat-aps.neg{color:#fff;background:rgba(232,113,107,.85);border:1px solid #e8716b;}
@@ -88,9 +96,36 @@
   .legend strong{color:#fff;}
   .legend-row{display:flex;flex-wrap:wrap;gap:18px;align-items:center;}
   .legend-item{display:flex;align-items:center;gap:6px;}
+  .legend .role-icon{position:static;width:22px;height:22px;}
 </style>
 </head>
 <body>
+
+<!-- SVG-иконки ролей (используются inline через use) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Сердце (мирный) -->
+    <symbol id="ic-citizen" viewBox="0 0 24 24">
+      <path d="M12 21.3l-1.5-1.4C5.4 15.4 2 12.3 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.1 3.8 14.8 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.8-3.4 6.9-8.5 11.5L12 21.3z" fill="currentColor"/>
+    </symbol>
+    <!-- Звезда шерифа (6-конечная с кружком) -->
+    <symbol id="ic-sheriff" viewBox="0 0 24 24">
+      <path d="M12 1.5l2.2 5L19.5 5l-1.5 5.3L23 12l-5 1.7 1.5 5.3-5.3-1.5L12 22.5l-2.2-5L4.5 19l1.5-5.3L1 12l5-1.7L4.5 5l5.3 1.5L12 1.5z" fill="currentColor"/>
+      <circle cx="12" cy="12" r="2" fill="#0a0c18"/>
+    </symbol>
+    <!-- Чёрный пистолет (классический силуэт) -->
+    <symbol id="ic-mafia" viewBox="0 0 32 24">
+      <path d="M2 8h16v3h2l1-3h6v3h2v4h-2v1l-3 3h-4v2l-1 1h-6l-1-2-1-2H4l-2-2V8z" fill="currentColor"/>
+      <rect x="6" y="14" width="6" height="2" fill="#0a0c18"/>
+    </symbol>
+    <!-- Круглая шляпа Дона (bowler / котелок) -->
+    <symbol id="ic-don" viewBox="0 0 32 24">
+      <path d="M6 19c0-7 4-12 10-12s10 5 10 12v1H6v-1z" fill="currentColor"/>
+      <ellipse cx="16" cy="20" rx="13" ry="2" fill="currentColor"/>
+      <path d="M9 16h14" stroke="#0a0c18" stroke-width="1.5" fill="none"/>
+    </symbol>
+  </defs>
+</svg>
 
 <div class="topbar">
   <div class="nav-left">
@@ -111,10 +146,10 @@
 <div class="legend">
   <div class="legend-row" style="margin-bottom:10px;">
     <span><strong>Роли:</strong></span>
-    <span class="legend-item">❤️ Citizen</span>
-    <span class="legend-item">⭐ Sheriff</span>
-    <span class="legend-item">🎩 Don</span>
-    <span class="legend-item">🔫 Mafia</span>
+    <span class="legend-item"><span class="role-icon role-citizen"><svg><use href="#ic-citizen"/></svg></span> Citizen</span>
+    <span class="legend-item"><span class="role-icon role-sheriff"><svg><use href="#ic-sheriff"/></svg></span> Sheriff</span>
+    <span class="legend-item"><span class="role-icon role-don"><svg><use href="#ic-don"/></svg></span> Don</span>
+    <span class="legend-item"><span class="role-icon role-mafia"><svg><use href="#ic-mafia"/></svg></span> Mafia</span>
   </div>
   <div class="legend-row" style="margin-bottom:10px;">
     <span><strong>Маркеры:</strong></span>
@@ -133,7 +168,8 @@
 </div>
 
 <script>
-const ROLE_ICON = {Citizen: '❤️', Sheriff: '⭐', Don: '🎩', Mafia: '🔫'};
+const ROLE_CLASS = {Citizen: 'role-citizen', Sheriff: 'role-sheriff', Don: 'role-don', Mafia: 'role-mafia'};
+const ROLE_ICON_ID = {Citizen: 'ic-citizen', Sheriff: 'ic-sheriff', Don: 'ic-don', Mafia: 'ic-mafia'};
 let DATA = null;
 let currentGame = 0;
 
@@ -166,8 +202,13 @@ function render() {
 function renderTable(t) {
   const winnerKey = t.winner === 'red_win' ? 'red' : t.winner === 'black_win' ? 'black' : 'unknown';
   const winnerLabel = t.winner === 'red_win' ? 'Красные' : t.winner === 'black_win' ? 'Чёрные' : '?';
-  const winnerEmo = t.winner === 'red_win' ? '❤️' : t.winner === 'black_win' ? '🎩' : '❔';
+  // Центр: красные = сердце; чёрные = пистолет
+  const centerIconId = t.winner === 'red_win' ? 'ic-citizen' : t.winner === 'black_win' ? 'ic-mafia' : null;
   const num = ['I','II','III'][t.table_num - 1] || t.table_num;
+
+  const winnerBarIcon = centerIconId
+    ? `<svg><use href="#${centerIconId}"/></svg>`
+    : '';
 
   const seatsHtml = t.seats.map((s, i) => {
     const angle = (i / 10) * 2 * Math.PI - Math.PI / 2;
@@ -183,7 +224,9 @@ function renderTable(t) {
       <div class="seat-num">${s.seat}</div>
       <div class="seat-avatar ${winClass} ${killedClass}">
         ${initial}
-        <span class="role-icon" title="${s.role}">${ROLE_ICON[s.role] || '?'}</span>
+        <span class="role-icon ${ROLE_CLASS[s.role] || ''}" title="${s.role}">
+          <svg><use href="#${ROLE_ICON_ID[s.role] || 'ic-citizen'}"/></svg>
+        </span>
       </div>
       <div class="seat-name"><a href="player.html?nick=${encodeURIComponent(s.name)}">${escapeHtml(s.name)}</a></div>
       <div><span class="seat-aps ${apsClass}">${apsStr}</span></div>
@@ -191,14 +234,14 @@ function renderTable(t) {
   }).join('');
 
   return `<div class="table-wrap ${winnerKey}">
-    <div class="winner-bar ${winnerKey}"><span class="emo">${winnerEmo}</span> Победа ${winnerKey === 'red' ? 'красных' : winnerKey === 'black' ? 'чёрных' : '?'}</div>
+    <div class="winner-bar ${winnerKey}">${winnerBarIcon} Победа ${winnerKey === 'red' ? 'красных' : winnerKey === 'black' ? 'чёрных' : '?'}</div>
     <div class="table-body">
       <div class="table-hdr">
         <div class="table-num">Стол ${num}</div>
       </div>
       <div class="circle ${winnerKey}">
         <div class="circle-inner ${winnerKey}">
-          <div class="center-emo">${winnerEmo}</div>
+          ${centerIconId ? `<div class="center-icon"><svg><use href="#${centerIconId}"/></svg></div>` : ''}
           <div class="center-label">Победа</div>
           <div class="center-team">${winnerLabel}</div>
         </div>
