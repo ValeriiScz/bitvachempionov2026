@@ -88,7 +88,6 @@
 </head>
 <body>
 
-<!-- SVG-иконки ролей -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="ic-citizen" viewBox="0 0 24 24">
@@ -203,7 +202,6 @@ function renderPlayer(nick) {
     });
   });
 
-  // Игры из games_622_sample.json в которых играл этот игрок
   const myGames = [];
   if (GAMES && GAMES.games) {
     GAMES.games.forEach((g, gi) => {
@@ -248,16 +246,10 @@ function renderPlayer(nick) {
         <div class="places">
           ${STAGES.map(s => {
             const d = stageData[s.key];
-            if (!d) return `<div class="place-row skipped">
-              <span class="place-stage">${s.label}</span>
-              <span class="place-val none">не играл</span>
-            </div>`;
+            if (!d) return `<div class="place-row skipped"><span class="place-stage">${s.label}</span><span class="place-val none">не играл</span></div>`;
             const place = parseInt(d.place, 10);
             const podium = place <= 3 ? ' podium' : '';
-            return `<div class="place-row${podium}">
-              <span class="place-stage">${s.label}</span>
-              <span class="place-val">#${place}<span class="of"> / ${s.size}</span></span>
-            </div>`;
+            return `<div class="place-row${podium}"><span class="place-stage">${s.label}</span><span class="place-val">#${place}<span class="of"> / ${s.size}</span></span></div>`;
           }).join('')}
         </div>
       </div>
@@ -267,11 +259,7 @@ function renderPlayer(nick) {
           <div class="noms">
             ${myNoms.map(n => {
               const medalClass = ['gold','silver','bronze'][n.place-1];
-              return `<div class="nom-row">
-                <span class="nom-medal ${medalClass}">${n.place}</span>
-                <span class="nom-cat">${AWARD_LABELS[n.cat] || n.cat}</span>
-                <span class="nom-val">${escapeHtml(n.val)}</span>
-              </div>`;
+              return `<div class="nom-row"><span class="nom-medal ${medalClass}">${n.place}</span><span class="nom-cat">${AWARD_LABELS[n.cat] || n.cat}</span><span class="nom-val">${escapeHtml(n.val)}</span></div>`;
             }).join('')}
           </div>
         `}
@@ -354,7 +342,7 @@ function renderGamesTable(myGames, nick) {
     <h3>Разбивка по играм (как в @mafgamer_bot)</h3>
     <div class="info">
       Показаны игры из <strong>${GAMES.games.length}</strong> распарсенных (квалификация 1–${GAMES.games.length}). 
-      ${nick} сыграл <strong>${myGames.length}</strong> из них. Полный список из 25 игр турнира можно добавить позже.
+      ${escapeHtml(nick)} сыграл <strong>${myGames.length}</strong> из них. Полный список из 25 игр турнира можно добавить позже.
     </div>
     <table class="games-table">
       <thead>
@@ -378,4 +366,41 @@ function renderGamesTable(myGames, nick) {
             <td class="result-${g.result}">${g.result}</td>
             <td class="${g.wpts > 0 ? 'big' : 'dim'}">${fmtNum(g.wpts)}</td>
             <td class="${g.aps > 0 ? '' : (g.aps < 0 ? 'neg' : 'dim')}">${g.aps > 0 ? '+' : ''}${fmtNum(g.aps)}</td>
-            <td>${g.marker === 'first_killed' ? '<span class="first-killed-mark" title="убит первой ночью">💀</span>' : '<span class="dim">—</span>'}
+            <td>${g.marker === 'first_killed' ? '<span class="first-killed-mark" title="убит первой ночью">💀</span>' : '<span class="dim">—</span>'}</td>
+          </tr>`;
+        }).join('')}
+        <tr class="total">
+          <td class="left">Итого по ${myGames.length} играм</td>
+          <td colspan="2"></td>
+          <td>${myGames.filter(g => g.result === 'W').length}W / ${myGames.filter(g => g.result === 'L').length}L</td>
+          <td class="big">${fmtNum(myGames.reduce((a, g) => a + g.wpts, 0))}</td>
+          <td>${fmtNum(myGames.reduce((a, g) => a + g.aps, 0))}</td>
+          <td>${myGames.filter(g => g.marker === 'first_killed').length}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="todo">
+      <strong>TODO:</strong> CI (бонус за смерть первой ночью) показан как —/💀 без числового значения — точная формула CI в SPEC §10 пока не решена. В сводной по стадии Ci уже агрегирован верно.
+    </div>
+  </div>`;
+}
+
+function fmtNum(v) {
+  const n = Number(v);
+  if (isNaN(n)) return '—';
+  if (n === 0) return '0';
+  return Number.isInteger(n) ? n.toString() : n.toFixed(2).replace(/\.?0+$/, '');
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+load().catch(e => {
+  document.getElementById('content').innerHTML = `<div class="card empty" style="color:#e8716b;">Ошибка: ${e.message}</div>`;
+  console.error(e);
+});
+</script>
+
+</body>
+</html>
