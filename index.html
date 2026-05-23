@@ -16,10 +16,20 @@
   a.card .title{font-size:20px;font-weight:800;}
   a.card .desc{font-size:13px;color:#a0a4b8;margin-top:6px;line-height:1.5;}
   a.card .badge{display:inline-block;font-size:10px;font-weight:800;color:#ffb84d;background:rgba(255,184,77,.12);border:1px solid rgba(255,184,77,.3);padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-  a.card.muted{background:linear-gradient(180deg,#161826 0%,#1a1d2e 100%);}
-  a.card.muted .title{color:#dfe2f0;}
   .arrow{float:right;color:#ffb84d;font-size:22px;}
-  .section-label{font-size:11px;color:#8a8fa8;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin:28px 0 12px;}
+
+  /* Архив — серый, не привлекает внимание */
+  .archive{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);opacity:.65;}
+  .archive:hover{opacity:1;transition:opacity .25s;}
+  .archive-label{font-size:11px;color:#5a5e76;text-transform:uppercase;letter-spacing:1.8px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+  .archive-label::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.05);}
+  a.archive-card{display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:12px;color:#a0a4b8;text-decoration:none;margin-bottom:8px;transition:.15s;}
+  a.archive-card:hover{background:rgba(255,255,255,.04);border-color:rgba(255,184,77,.25);color:#dfe2f0;}
+  a.archive-card .ar-arrow{color:#5a5e76;font-size:14px;margin-left:auto;}
+  a.archive-card:hover .ar-arrow{color:#ffb84d;}
+  a.archive-card .ar-title{font-size:13px;font-weight:700;color:#dfe2f0;}
+  a.archive-card .ar-desc{font-size:11px;color:#5a5e76;margin-top:2px;}
+
   .foot{margin-top:40px;text-align:center;color:#555;font-size:12px;}
   .foot a{color:#666;text-decoration:none;}
 </style>
@@ -27,7 +37,7 @@
 <body>
 <div class="wrap">
   <h1>Битва Чемпионов <span>2026</span></h1>
-  <div class="sub">Квалификация · турнир 826 · 30 игроков · 15 игр</div>
+  <div class="sub">Турнир 826 · Прага · 30 игроков · 15 игр квалификации</div>
 
   <a class="card" href="seating.html">
     <span class="arrow">→</span>
@@ -41,27 +51,33 @@
     <div class="desc">30 карточек со статистикой каждого: столы, слоты, частота совместных игр с каждым соперником.</div>
   </a>
 
-  <div class="section-label">Референс — завершённый турнир 622</div>
+  <div class="archive">
+    <div class="archive-label">Архив · турнир 622 (для референса)</div>
 
-  <a class="card" href="standings.html">
-    <span class="arrow">→</span>
-    <span class="badge">MVP · превью стиля</span>
-    <div class="title">Сводная (турнир 622)</div>
-    <div class="desc">MafiaCl Championship 2026 в Праге. 33 игрока, 3 стадии, awards. Кликни по игроку → личная карточка с разбивкой по играм.</div>
-  </a>
+    <a class="archive-card" href="standings.html">
+      <div>
+        <div class="ar-title">Сводная таблица 622</div>
+        <div class="ar-desc">MafiaCl Championship 2026 в Праге, 14.03 · 33 игрока · 3 стадии · awards</div>
+      </div>
+      <span class="ar-arrow">→</span>
+    </a>
 
-  <a class="card" href="results.html">
-    <span class="arrow">→</span>
-    <span class="badge">NEW · игры с результатами</span>
-    <div class="title">Рассадка с результатами (8 игр)</div>
-    <div class="desc">Те же 3 стола, но с ролями, доп баллами и индикатором победы. Цветной центр стола под победителя. 💀 над игроком — убит первой ночью.</div>
-  </a>
+    <a class="archive-card" href="results.html">
+      <div>
+        <div class="ar-title">Игры с результатами 622</div>
+        <div class="ar-desc">8 игр квалификации с ролями, доп баллами, цветным центром стола</div>
+      </div>
+      <span class="ar-arrow">→</span>
+    </a>
 
-  <a class="card muted" href="player.html">
-    <span class="arrow">→</span>
-    <div class="title">Все игроки 622</div>
-    <div class="desc">Список 33 игроков с переходом на карточку каждого.</div>
-  </a>
+    <a class="archive-card" href="player.html">
+      <div>
+        <div class="ar-title">Карточки игроков 622</div>
+        <div class="ar-desc">33 игрока · места по стадиям · номинации · разбивка по играм</div>
+      </div>
+      <span class="ar-arrow">→</span>
+    </a>
+  </div>
 
   <div class="foot">Источник: <a href="https://mafgame.org/tournaments/826/view">mafgame.org/826</a> · <a href="https://mafgame.org/tournaments/622/view">mafgame.org/622</a></div>
 </div>
