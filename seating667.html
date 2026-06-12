@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- MafgameStat · seating667.html · v1.0 · 2026-06-13 · интерактивная рассадка Cyprus Open 667: 12 игр × 7 столов, клик по игроку — его маршрут -->
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Рассадка — Cyprus Open: Summer</title>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{max-width:100%;overflow-x:hidden;}
+  body{margin:0;font-family:'Manrope',sans-serif;color:#0c3a5e;min-height:100vh;padding:18px 12px 60px;
+    background:linear-gradient(180deg,#a7ddf8 0%,#7cc8ef 26%,#4cb4dc 46%,#2ba6cb 56%,#bfe2e0 62%,#f1ddb0 78%,#e9cf96 100%) fixed;}
+  .topbar{max-width:1200px;margin:0 auto 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .nav-btn{padding:9px 14px;background:rgba(255,255,255,.7);border:1px solid rgba(13,108,174,.35);color:#0d5d9e;border-radius:10px;font-size:13px;font-weight:800;text-decoration:none;}
+  .nav-btn:hover{background:#0d6cae;color:#fff;}
+  h1{font-family:'Lilita One',sans-serif;font-weight:400;font-size:24px;color:#0d5d9e;margin:6px 0 2px;text-shadow:0 1px 0 rgba(255,255,255,.7);}
+  .sub{font-size:12.5px;color:#155a86;margin-bottom:12px;}
+  .rounds{max-width:1200px;margin:0 auto 16px;display:flex;gap:6px;flex-wrap:wrap;}
+  .round-btn{min-width:42px;min-height:40px;padding:7px 11px;background:rgba(255,255,255,.65);border:1px solid rgba(13,108,174,.3);color:#0c3a5e;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;}
+  .round-btn.active{background:#0d6cae;color:#fff;border-color:#0d6cae;}
+  .grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px;}
+  .table-wrap{background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.95);border-radius:18px;box-shadow:0 10px 28px rgba(13,71,128,.18);padding:12px 8px 16px;backdrop-filter:blur(5px);}
+  .table-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 10px;margin-bottom:4px;}
+  .table-num{font-family:'Lilita One',sans-serif;font-size:18px;color:#0d5d9e;}
+  .game-label{font-size:12px;font-weight:800;color:#155a86;}
+  a.ytb{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:9px;font-size:11px;font-weight:800;text-decoration:none;background:rgba(224,36,36,.08);border:1px solid rgba(224,36,36,.4);color:#c41818;}
+  a.ytb:hover{background:#e02424;color:#fff;}
+  .circle{position:relative;width:320px;height:320px;margin:0 auto;}
+  .circle-inner{position:absolute;left:50%;top:50%;width:120px;height:120px;transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle at 50% 35%,#7cc8ef 0%,#2ba6cb 70%);box-shadow:inset 0 0 0 3px rgba(255,255,255,.6);}
+  .seat{position:absolute;transform:translate(-50%,-50%);width:72px;text-align:center;cursor:pointer;z-index:2;}
+  .seat-num{position:absolute;left:50%;top:-5px;transform:translateX(-50%);background:#0d5d9e;color:#fff;font-size:10px;font-weight:800;width:19px;height:19px;line-height:19px;border-radius:50%;z-index:3;}
+  .seat-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 3px 10px rgba(13,71,128,.3);margin:0 auto;display:block;background:#d6ecf8;}
+  .seat.is-target .seat-avatar{border-color:#e9a93c;box-shadow:0 0 0 3px rgba(233,169,60,.45);}
+  .seat-name{font-size:10.5px;color:#0c3a5e;margin-top:4px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:74px;}
+  .hidden{display:none;}
+  .player-hdr{max-width:1200px;margin:0 auto 14px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.82);border-radius:16px;padding:12px 16px;box-shadow:0 10px 28px rgba(13,71,128,.18);}
+  .player-hdr img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 3px 10px rgba(13,71,128,.3);}
+  .player-hdr-nick{font-family:'Lilita One',sans-serif;font-size:20px;color:#0d5d9e;}
+  .player-hdr-sub{font-size:12px;color:#155a86;}
+  #back-btn{margin-left:auto;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="nav-btn" href="tournament.html?t=667">← Турнир</a>
+  <a class="nav-btn" href="cards667.html">Карточки</a>
+  <div>
+    <h1>Рассадка · Cyprus Open: Summer</h1>
+    <div class="sub">12 игр квалификации · 7 столов · 70 игроков · клик по игроку — все его столы</div>
+  </div>
+</div>
+<div id="game-view">
+  <div class="rounds" id="rounds"></div>
+  <div class="grid" id="grid"></div>
+</div>
+<div id="player-view" class="hidden">
+  <div class="player-hdr">
+    <img id="ph-av" src="" referrerpolicy="no-referrer">
+    <div><div class="player-hdr-nick" id="ph-nick"></div><div class="player-hdr-sub" id="ph-sub"></div></div>
+    <button class="nav-btn" id="back-btn" style="cursor:pointer;border:none;">← к играм</button>
+  </div>
+  <div class="grid" id="player-grid"></div>
+</div>
+<script src="data/streams.js"></script>
+<script src="data/live.js"></script>
+<script>
+let SEAT=null, AV={}, PLAYED=0;
+const ROMAN=['','I','II','III','IV','V','VI','VII'];
+const $=s=>document.querySelector(s);
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderTable(g,t,target){
+  const names=SEAT[g][t];
+  let seats='';
+  for(let i=0;i<10;i++){
+    const p=names[i];
+    const a=-90+36*i, r=a*Math.PI/180;
+    const x=Math.cos(r)*128, y=Math.sin(r)*128;
+    seats+=`<div class="seat${p===target?' is-target':''}" data-player="${esc(p)}" style="left:calc(50% + ${x.toFixed(1)}px);top:calc(50% + ${y.toFixed(1)}px);">
+      <div class="seat-num">${i+1}</div>
+      <img class="seat-avatar" src="${esc(AV[p]||'')}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='https://mafgame.org/build/assets/avatar-default2-33e44bae.png'">
+      <div class="seat-name">${esc(p)}</div>
+    </div>`;
+  }
+  const yt=window.streamFor?streamFor('667',g,t):null;
+  const glabel=target?`<div class="game-label">Игра ${g}</div>`:'';
+  return `<div class="table-wrap">
+    <div class="table-hdr">${glabel}<div class="table-num">Стол ${ROMAN[t]}</div>${yt?`<a class="ytb" href="${yt}" target="_blank" rel="noopener">▶ Стрим</a>`:''}</div>
+    <div class="circle"><div class="circle-inner"></div>${seats}</div>
+  </div>`;
+}
+function showGame(g){
+  $('#grid').innerHTML=[1,2,3,4,5,6,7].map(t=>renderTable(g,t,null)).join('');
+  document.querySelectorAll('.round-btn').forEach(b=>b.classList.toggle('active',+b.dataset.game===g));
+  bind();
+}
+function showPlayer(nick){
+  $('#ph-av').src=AV[nick]||'';
+  $('#ph-nick').textContent=nick;
+  const occ=[];
+  Object.keys(SEAT).forEach(g=>{ for(const t in SEAT[g]){ const i=SEAT[g][t].indexOf(nick); if(i>=0) occ.push({g:+g,t:+t,slot:i+1}); }});
+  const tc={}; occ.forEach(o=>tc[o.t]=(tc[o.t]||0)+1);
+  $('#ph-sub').textContent=occ.length+' игр · '+Object.keys(tc).sort().map(t=>'Стол '+ROMAN[t]+' — '+tc[t]).join(' · ');
+  $('#player-grid').innerHTML=occ.map(o=>renderTable(o.g,o.t,nick)).join('');
+  $('#game-view').classList.add('hidden');
+  $('#player-view').classList.remove('hidden');
+  window.scrollTo(0,0); bind();
+}
+function bind(){
+  document.querySelectorAll('.seat').forEach(s=>s.onclick=e=>{e.stopPropagation();showPlayer(s.dataset.player);});
+}
+Promise.all([
+  window.loadGames('667'),
+  fetch('data/avatars_667.json').then(r=>r.json())
+]).then(([G,A])=>{
+  AV=A.avatars||{};
+  SEAT={};
+  let played=0;
+  G.games.forEach((g,gi)=>{
+    const num=gi+1;
+    SEAT[num]={};
+    g.tables.forEach(t=>{ SEAT[num][t.table_num]=t.seats.map(s=>s.name); });
+    if(g.tables[0] && g.tables[0].winner!=='unknown') played=num;
+  });
+  PLAYED=played;
+  $('#rounds').innerHTML=Object.keys(SEAT).map(g=>{
+    const cls=+g<=PLAYED?' played':(+g===PLAYED+1?' next':'');
+    return `<button class="round-btn${cls}" data-game="${g}">${g}</button>`;
+  }).join('');
+  document.querySelectorAll('.round-btn').forEach(b=>b.onclick=()=>showGame(+b.dataset.game));
+  $('#back-btn').onclick=()=>{ $('#player-view').classList.add('hidden'); $('#game-view').classList.remove('hidden'); window.scrollTo(0,0); };
+  showGame(Math.min(PLAYED+1, Object.keys(SEAT).length));
+});
+</script>
+</body>
+</html>

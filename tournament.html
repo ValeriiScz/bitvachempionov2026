@@ -17,6 +17,7 @@
     --hairline:rgba(232,200,122,.14);
   }
   *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  html,body{max-width:100%;overflow-x:hidden;}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,sans-serif;min-height:100vh;}
   .wrap{max-width:680px;margin:0 auto;padding:38px 20px 70px;position:relative;}
   a.back{display:inline-flex;align-items:center;gap:8px;color:var(--mut);text-decoration:none;font-size:13px;font-weight:600;margin-bottom:24px;transition:.15s;}
@@ -125,6 +126,7 @@
   <div class="foot">MafgameStat · данные: <a href="https://mafgame.org">mafgame.org</a></div>
 </div>
 <script src="data/tournaments.js"></script>
+<script src="data/live.js"></script>
 <script src="data/streams.js"></script>
 <script>
 function streamsCard(tid){
@@ -188,9 +190,20 @@ const id=new URLSearchParams(location.search).get('t')||'667';
     }).join('');
   }
   if(t.note) html+=`<div class="note"><b>${t.status==='upcoming'?'Скоро.':'Заметка.'}</b> ${esc(t.note)}</div>`;
+  if(t.id==='667') html+=`<div class="note" id="live-note" style="margin-top:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;"><span id="live-status">Проверяю результаты на mafgame…</span><a href="#" id="live-refresh" style="font-weight:800;color:inherit;">⟳ Обновить</a></div>`;
   html+=streamsCard(t.id);
   sec.innerHTML=html;
   document.getElementById('src').innerHTML='Источник: <a href="'+t.mafgame+'">'+t.mafgame.replace('https://','')+'</a>';
+  if(t.id==='667'&&window.loadGames){
+    const upd=()=>window.loadGames('667').then(G=>{
+      const el=document.getElementById('live-status');
+      if(el&&G) el.innerHTML='<b>Сыграно '+G.games_played+' из '+G.games_total+' игр квалификации</b>'+(G.live?' · live с mafgame':' · локальные данные')+'. Страницы обновляются сами каждые 10 минут.';
+      else if(el) el.textContent='Результаты пока недоступны.';
+    });
+    upd();
+    const btn=document.getElementById('live-refresh');
+    if(btn) btn.onclick=e=>{e.preventDefault();document.getElementById('live-status').textContent='Обновляю…';upd();};
+  }
 })(window.TOURNAMENTS_DB);
 </script>
 </body>

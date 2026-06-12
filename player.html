@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · player.html · v2.0 · 2026-06-12 · фото, стата по 4 ролям, место после каждой игры, сравнение топ-10/11-20/среднее -->
+<!-- MafgameStat · player.html · v2.1 · 2026-06-12 · фото, стата по 4 ролям, место после каждой игры, сравнение топ-10/11-20/среднее -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Игрок — Битва Чемпионов 2026</title>
 <style>
   *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  html,body{max-width:100%;overflow-x:hidden;}
   body{margin:0;background:radial-gradient(circle at 50% 0%,#1a1d2e 0%,#0a0c18 60%);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;padding:24px 16px 60px;}
   .topbar{max-width:980px;margin:0 auto 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
   .nav-btn{padding:9px 16px;background:rgba(255,184,77,.12);border:1px solid #ffb84d;color:#ffb84d;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:.15s;}
@@ -100,6 +101,8 @@
   table.cmp tr.me td.left{color:#ffb84d;}
   a.ytmini{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:7px;text-decoration:none;background:rgba(255,0,0,.10);border:1px solid rgba(255,70,70,.4);color:#ff6b6b;}
   a.ytmini:hover{background:#e02424;color:#fff;}
+  .card{overflow-x:auto;}
+  table.games-table,table.stats,table.cmp{min-width:480px;}
 </style>
 </head>
 <body>
@@ -120,6 +123,7 @@
 <div class="wrap" id="content"><div class="card empty">Загрузка…</div></div>
 
 <script src="data/streams.js"></script>
+<script src="data/live.js"></script>
 <script>
 const T = new URLSearchParams(location.search).get('t') || '826';
 const STAGE_INFO = [
@@ -143,7 +147,7 @@ async function load() {
   document.getElementById('link-results').href = `results.html?t=${T}`;
   const [r1, r2] = await Promise.all([
     fetch(`data/tournament_${T}.json`).then(r => r.ok ? r.json() : Promise.reject('Нет tournament_'+T)),
-    fetch(`data/games_${T}_current.json`).then(r => r.ok ? r.json() : null).catch(() => null)
+    window.loadGames(T)
   ]);
   DATA = r1;
   GAMES = r2;

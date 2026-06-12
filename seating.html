@@ -8,6 +8,7 @@
 <title>Битва Чемпионов 2026 — рассадка</title>
 <style>
   *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  html,body{max-width:100%;overflow-x:hidden;}
   body{margin:0;background:radial-gradient(circle at 50% 0%,#1a1d2e 0%,#0a0c18 60%);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;padding:24px 16px 60px;}
   .topbar{max-width:1280px;margin:0 auto 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
   .nav-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
@@ -148,7 +149,7 @@ function renderTable(gameNum, tableNum, targetPlayer){
   const gbadge = gameNum <= PLAYED ? '<span class="gstat done">сыграна</span>' : gameNum === PLAYED + 1 ? '<span class="gstat next">следующая</span>' : '';
   const ghdr = targetPlayer ? `<div class="game-label">Игра ${gameNum}${gbadge}</div>` : '';
   const ytUrl = window.streamFor ? streamFor('826', gameNum, tableNum) : null;
-  const ytBtn = ytUrl ? `<a class="ytb" href="${ytUrl}" target="_blank" rel="noopener">▶ стрим</a>` : '';
+  const ytBtn = ytUrl ? `<a class="ytb" href="${ytUrl}" target="_blank" rel="noopener">▶ Стрим</a>` : '';
   return `<div class="table-wrap${gcls}"><div class="table-hdr">${ghdr}<div class="table-num">Стол ${DATA.roman[tableNum]}</div>${ytBtn}<div class="judge"><img class="judge-avatar" src="${esc(judge.avatar)}" referrerpolicy="no-referrer" onerror="this.style.opacity=.25" alt="${esc(judge.name)}"><div class="judge-meta"><div class="judge-label">Судья</div><div class="judge-name">${esc(judge.name)}</div></div></div></div><div class="circle"><div class="circle-inner"></div>${seats}</div></div>`;
 }
 
