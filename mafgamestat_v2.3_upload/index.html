@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- MafgameStat · index.html · v2.2 · 2026-06-12 · главная-хаб: плашки турниров (актуальные/архив), реестр data/tournaments.js, лого федерации — оригинал с mafgame.org -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MafgameStat — статистика турниров спортивной мафии</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0e; --panel:#131318; --panel2:#17171d;
+    --gold:#c9a14d; --gold-hi:#e8c87a; --gold-dim:rgba(201,161,77,.35);
+    --ink:#f2efe8; --mut:#9b97a8; --dim:#5c5965;
+    --hairline:rgba(232,200,122,.14);
+  }
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,sans-serif;min-height:100vh;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;
+    background:radial-gradient(900px 420px at 50% -120px,rgba(201,161,77,.13),transparent 70%),
+               radial-gradient(600px 300px at 85% 110%,rgba(201,161,77,.05),transparent 70%);}
+  .wrap{max-width:680px;margin:0 auto;padding:46px 20px 70px;position:relative;}
+
+  /* ── шапка бренда ── */
+  .brand{display:flex;align-items:center;gap:15px;margin-bottom:8px;}
+  .emblem{width:56px;height:56px;flex:none;filter:drop-shadow(0 2px 10px rgba(249,214,39,.25));}
+  .wordmark{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;letter-spacing:.5px;
+    background:linear-gradient(105deg,#f0d99a 0%,var(--gold) 45%,#8a6a2a 75%,#e8c87a 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .tagline{color:var(--mut);font-size:13px;letter-spacing:.4px;margin:0 0 6px 71px;}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--hairline) 18%,var(--hairline) 82%,transparent);margin:28px 0 36px;}
+
+  .sec{font-size:11px;font-weight:800;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);
+    display:flex;align-items:center;gap:14px;margin:0 0 18px;}
+  .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--hairline),transparent);}
+  .sec .dia{color:var(--gold-dim);font-size:9px;}
+
+  /* ── обычная плашка ── */
+  a.tile{display:block;text-decoration:none;color:var(--ink);
+    background:linear-gradient(160deg,var(--panel2) 0%,var(--panel) 70%);
+    border:1px solid var(--hairline);border-radius:18px;overflow:hidden;margin-bottom:20px;
+    box-shadow:0 18px 44px rgba(0,0,0,.5);transition:transform .18s,border-color .18s,box-shadow .18s;}
+  a.tile:hover{transform:translateY(-3px);border-color:rgba(232,200,122,.5);box-shadow:0 24px 60px rgba(0,0,0,.6);}
+  .tbody{padding:18px 20px 17px;}
+  .stars{color:var(--gold);font-size:11px;letter-spacing:3px;margin-bottom:7px;}
+  .stars .off{color:#3a3744;}
+  .tname{font-family:'Playfair Display',serif;font-size:21px;font-weight:600;line-height:1.22;margin-bottom:8px;}
+  .tmeta{font-size:13px;color:var(--mut);line-height:1.65;}
+  .tmeta b{color:var(--ink);font-weight:600;}
+  .tmeta .sep{color:var(--dim);margin:0 7px;}
+  .torg{font-size:11.5px;color:var(--dim);margin-top:6px;}
+  .trow{display:flex;align-items:center;justify-content:space-between;margin-top:12px;}
+  .badge{font-size:10.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;padding:5px 12px;border-radius:20px;}
+  .badge.upcoming{color:var(--gold-hi);background:rgba(232,200,122,.08);border:1px solid rgba(232,200,122,.35);}
+  .badge.upcoming::before{content:"◆";font-size:8px;margin-right:7px;animation:pulse 2.2s infinite;}
+  .badge.live{color:#67e08f;background:rgba(63,209,122,.1);border:1px solid rgba(63,209,122,.4);}
+  .badge.live::before{content:"●";margin-right:7px;animation:pulse 1.6s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .go{color:var(--gold);font-size:13px;font-weight:700;}
+  .go::after{content:"→";margin-left:7px;transition:margin .18s;}
+  a.tile:hover .go::after{margin-left:12px;}
+
+  /* ── постер Cyprus Open (тема cyprus) ── */
+  .poster{position:relative;height:170px;overflow:hidden;
+    background:linear-gradient(180deg,#a7ddf8 0%,#74c4ee 34%,#3fb0d9 52%,#23a3c9 60%,#56b8d4 63%,#efdcae 76%,#e9cf96 100%);}
+  .poster .sun{position:absolute;top:14px;right:50px;width:46px;height:46px;border-radius:50%;
+    background:radial-gradient(circle,#fff7d6 0%,#ffe896 45%,rgba(255,232,150,0) 72%);}
+  .poster .cloud{position:absolute;background:rgba(255,255,255,.85);border-radius:40px;filter:blur(1px);}
+  .poster .c1{width:90px;height:16px;top:24px;left:14%;}
+  .poster .c2{width:60px;height:12px;top:48px;left:26%;opacity:.7;}
+  .poster .c3{width:74px;height:13px;top:30px;right:26%;opacity:.8;}
+  .poster svg.palm{position:absolute;width:130px;height:150px;}
+  .poster svg.palm.pl{left:-26px;top:-8px;}
+  .poster svg.palm.pr{right:-26px;top:-4px;transform:scaleX(-1);}
+  .poster .ptxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:6px;}
+  .poster .script{font-family:'Pacifico',cursive;font-size:25px;color:#fff;text-shadow:0 2px 8px rgba(13,71,128,.45);line-height:1;margin-bottom:2px;}
+  .poster .big{font-family:'Lilita One',sans-serif;font-size:30px;letter-spacing:1px;line-height:1.05;
+    background:linear-gradient(180deg,#eaf6ff 0%,#9fd4f7 30%,#2f7fd4 65%,#0d47a8 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 2px 0 rgba(255,255,255,.75)) drop-shadow(0 5px 9px rgba(10,60,110,.5));}
+  .poster .psub{font-family:'Lilita One',sans-serif;font-size:13px;letter-spacing:2.2px;color:#0d6cae;margin-top:7px;
+    text-shadow:0 1px 0 rgba(255,255,255,.7);}
+  .poster img.art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+  .poster.hasart{height:auto;aspect-ratio:907/529;}
+  .poster.hasart .ptxt,.poster.hasart .sun,.poster.hasart .cloud,.poster.hasart svg.palm{display:none;}
+  a.tile.cyprus{border-color:rgba(63,176,217,.35);}
+  a.tile.cyprus:hover{border-color:rgba(116,196,238,.7);}
+
+  /* ── архив ── */
+  .archive{margin-top:42px;}
+  .archive .sec{color:var(--dim);}
+  .archive .sec::after{background:linear-gradient(90deg,rgba(255,255,255,.06),transparent);}
+  a.arc{display:flex;align-items:center;gap:16px;padding:15px 18px;margin-bottom:10px;text-decoration:none;
+    background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.055);border-radius:12px;
+    transition:.18s;opacity:.78;}
+  a.arc:hover{opacity:1;background:rgba(232,200,122,.035);border-color:rgba(232,200,122,.3);}
+  .arc-date{flex:none;width:86px;font-size:11.5px;color:var(--dim);line-height:1.5;}
+  .arc-name{font-family:'Playfair Display',serif;font-size:15.5px;font-weight:600;color:var(--ink);}
+  .arc-meta{font-size:11.5px;color:var(--dim);margin-top:3px;}
+  .arc-arrow{margin-left:auto;color:var(--dim);font-size:15px;transition:.18s;}
+  a.arc:hover .arc-arrow{color:var(--gold);}
+
+  .foot{margin-top:52px;text-align:center;color:#48454f;font-size:11.5px;line-height:1.9;}
+  .foot a{color:#6b6776;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.1);}
+  .foot a:hover{color:var(--gold);}
+  .foot .fdia{color:var(--gold-dim);margin:0 8px;}
+
+  @media(max-width:520px){
+    .wrap{padding-top:34px;}
+    .tagline{margin-left:0;margin-top:4px;}
+    .poster{height:150px;}
+    .poster .big{font-size:24px;}
+    .poster svg.palm{width:104px;height:120px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <img class="emblem" src="https://mafgame.org/build/assets/logo-without-text-4de79fbd.svg"
+         onerror="this.onerror=null;this.src='https://mafgame.org/logo-without-text.png'" alt="MAFGAME">
+    <div class="wordmark">MafgameStat</div>
+  </div>
+  <p class="tagline">спортивная мафия · статистика и аналитика турниров</p>
+
+  <div class="rule"></div>
+
+  <div class="sec"><span class="dia">◆</span> Актуальные турниры</div>
+  <div id="actual"></div>
+
+  <div class="archive">
+    <div class="sec"><span class="dia">◆</span> Архив</div>
+    <div id="archive"></div>
+  </div>
+
+  <div class="foot">
+    MafgameStat — неофициальная статистика турниров
+    <span class="fdia">◆</span> данные: <a href="https://mafgame.org">mafgame.org</a>
+  </div>
+</div>
+
+<script src="data/tournaments.js"></script>
+<script>
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function stars(n){let s='';for(let i=1;i<=5;i++)s+='<span'+(i<=n?'':' class="off"')+'>✦</span> ';return s;}
+const PALM='<svg class="palm" viewBox="0 0 120 140" fill="none"><path d="M38 138 C40 100 44 78 54 60 L60 62 C50 84 47 104 46 138 Z" fill="#1a5a39"/><g fill="#1f6b44"><path d="M56 62 C40 44 22 40 4 46 C20 28 48 34 58 56 Z"/><path d="M57 60 C50 36 34 24 14 22 C36 12 58 32 60 56 Z"/><path d="M58 58 C58 34 70 18 90 14 C76 30 68 44 62 58 Z"/><path d="M60 60 C74 44 94 40 112 48 C94 52 76 58 64 64 Z"/><path d="M59 62 C72 70 80 84 80 102 C68 88 62 76 57 66 Z"/></g><circle cx="54" cy="62" r="3.4" fill="#8a5a2a"/><circle cx="61" cy="64" r="3.4" fill="#8a5a2a"/></svg>';
+function posterTile(t){
+  return `
+  <a class="tile cyprus" href="tournament.html?t=${t.id}">
+    <div class="poster">
+      <img class="art" src="assets/cyprus667.jpg" alt="" onload="this.closest('.poster').classList.add('hasart')" onerror="this.remove()">
+      <div class="sun"></div>
+      <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+      ${PALM.replace('class="palm"','class="palm pl"')}
+      ${PALM.replace('class="palm"','class="palm pr"')}
+      <div class="ptxt">
+        <div class="script">${esc(t.posterScript||'')}</div>
+        <div class="big">${esc(t.posterTitle||t.name)}</div>
+        <div class="psub">${esc(t.posterSub||'')}</div>
+      </div>
+    </div>
+    <div class="tbody">
+      <div class="stars">${stars(t.stars)}</div>
+      <div class="tname">${esc(t.name)}</div>
+      <div class="tmeta"><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков<span class="sep">|</span>${t.days} ${t.days===1?'день':'дня'}</div>
+      <div class="torg">${esc(t.organizer)}</div>
+      <div class="trow">
+        <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+        <span class="go">открыть</span>
+      </div>
+    </div>
+  </a>`;
+}
+function plainTile(t){
+  return `
+  <a class="tile" href="tournament.html?t=${t.id}">
+    <div class="tbody">
+      <div class="stars">${stars(t.stars)}</div>
+      <div class="tname">${esc(t.name)}</div>
+      <div class="tmeta"><b>${esc(t.dates)}</b><span class="sep">|</span><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков</div>
+      <div class="torg">${esc(t.organizer)}</div>
+      <div class="trow">
+        <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+        <span class="go">открыть</span>
+      </div>
+    </div>
+  </a>`;
+}
+(d=>{
+  const ts=d.tournaments;
+  const act=ts.filter(t=>t.status==='upcoming'||t.status==='live');
+  const arc=ts.filter(t=>t.status==='finished');
+  document.getElementById('actual').innerHTML=act.map(t=>t.theme==='cyprus'?posterTile(t):plainTile(t)).join('')||'<div class="tmeta">Сейчас активных турниров нет.</div>';
+  document.getElementById('archive').innerHTML=arc.map(t=>`
+    <a class="arc" href="tournament.html?t=${t.id}">
+      <div class="arc-date">${esc(t.dates)}<br>${esc(t.city)}</div>
+      <div>
+        <div class="arc-name">${esc(t.name)}</div>
+        <div class="arc-meta">${t.players} игроков · ${esc(t.statusLabel)}</div>
+      </div>
+      <span class="arc-arrow">→</span>
+    </a>`).join('');
+})(window.TOURNAMENTS_DB);
+</script>
+</body>
+</html>
