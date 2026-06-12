@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · seating667.html · v1.0 · 2026-06-13 · интерактивная рассадка Cyprus Open 667: 12 игр × 7 столов, клик по игроку — его маршрут -->
+<!-- MafgameStat · seating667.html · v1.2 · 2026-06-13 · интерактивная рассадка Cyprus Open 667: 12 игр × 7 столов, клик по игроку — его маршрут -->
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,6 +41,10 @@
   .player-hdr-nick{font-family:'Lilita One',sans-serif;font-size:20px;color:#0d5d9e;}
   .player-hdr-sub{font-size:12px;color:#155a86;}
   #back-btn{margin-left:auto;}
+  .judge-row{display:flex;justify-content:center;margin:2px 0 4px;}
+  .judge{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:#155a86;background:rgba(124,200,239,.2);border:1px solid rgba(13,108,174,.25);border-radius:18px;padding:3px 11px 3px 4px;}
+  .judge img{width:22px;height:22px;border-radius:50%;object-fit:cover;}
+  .tblelo{font-size:10.5px;font-weight:800;color:#0d6cae;background:rgba(124,200,239,.25);border:1px solid rgba(13,108,174,.25);border-radius:9px;padding:4px 9px;}
 </style>
 </head>
 <body>
@@ -49,7 +53,7 @@
   <a class="nav-btn" href="cards667.html">Карточки</a>
   <div>
     <h1>Рассадка · Cyprus Open: Summer</h1>
-    <div class="sub">12 игр квалификации · 7 столов · 70 игроков · клик по игроку — все его столы</div>
+    <div class="sub">12 игр квалификации · 7 столов · 70 игроков · клик по игроку — все его столы<span id="elo-avg"></span></div>
   </div>
 </div>
 <div id="game-view">
@@ -67,7 +71,7 @@
 <script src="data/streams.js"></script>
 <script src="data/live.js"></script>
 <script>
-let SEAT=null, AV={}, PLAYED=0;
+let SEAT=null, AV={}, PLAYED=0, JUDGES={}, ELO=null;
 const ROMAN=['','I','II','III','IV','V','VI','VII'];
 const $=s=>document.querySelector(s);
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -86,8 +90,16 @@ function renderTable(g,t,target){
   }
   const yt=window.streamFor?streamFor('667',g,t):null;
   const glabel=target?`<div class="game-label">Игра ${g}</div>`:'';
+  const j=JUDGES[t];
+  const jHtml=j?`<span class="judge"><img src="${esc(j.avatar)}" referrerpolicy="no-referrer" onerror="this.style.opacity=.25"><span>${esc(j.name)}</span></span>`:'';
+  let eloHtml='';
+  if(ELO){
+    const vals=names.map(n=>ELO[n]&&ELO[n].global).filter(v=>v);
+    eloHtml=`<span class="tblelo" title="средний ELO стола">Ø ELO ${vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):'—'}</span>`;
+  }
   return `<div class="table-wrap">
-    <div class="table-hdr">${glabel}<div class="table-num">Стол ${ROMAN[t]}</div>${yt?`<a class="ytb" href="${yt}" target="_blank" rel="noopener">▶ Стрим</a>`:''}</div>
+    <div class="table-hdr">${glabel}<div class="table-num">Стол ${ROMAN[t]}</div>${eloHtml}${yt?`<a class="ytb" href="${yt}" target="_blank" rel="noopener">▶ Стрим</a>`:''}</div>
+    ${jHtml?`<div class="judge-row">${jHtml}</div>`:''}
     <div class="circle"><div class="circle-inner"></div>${seats}</div>
   </div>`;
 }
@@ -113,9 +125,16 @@ function bind(){
 }
 Promise.all([
   window.loadGames('667'),
-  fetch('data/avatars_667.json').then(r=>r.json())
-]).then(([G,A])=>{
+  fetch('data/avatars_667.json').then(r=>r.json()),
+  fetch('data/elo_667.json').then(r=>r.ok?r.json():null).catch(()=>null)
+]).then(([G,A,E])=>{
   AV=A.avatars||{};
+  JUDGES=A.judges||{};
+  if(E&&E.players&&Object.values(E.players).some(x=>x&&x.global)){
+    ELO=E.players;
+    const g=Object.values(ELO).map(x=>x.global).filter(v=>v);
+    if(g.length) document.getElementById('elo-avg').innerHTML=' · средний ELO игрока турнира: <b>'+Math.round(g.reduce((a,b)=>a+b,0)/g.length)+'</b>';
+  }
   SEAT={};
   let played=0;
   G.games.forEach((g,gi)=>{

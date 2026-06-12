@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · player.html · v2.1 · 2026-06-12 · фото, стата по 4 ролям, место после каждой игры, сравнение топ-10/11-20/среднее -->
+<!-- MafgameStat · player.html · v2.2 · 2026-06-12 · фото, стата по 4 ролям, место после каждой игры, сравнение топ-10/11-20/среднее -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -236,7 +236,7 @@ function renderPlayer(nick) {
     </div>
 
     <div class="grid">
-      ${DATA.in_progress && GAMES ? progressionCard(nick) : `<div class="card">
+      ${GAMES && GAMES.games?.length ? progressionCard(nick) : `<div class="card">
         <h3>${stages.length > 1 ? 'Места по стадиям' : 'Место в турнире'}</h3>
         <div class="places">
           ${stages.map(s => {
@@ -248,7 +248,7 @@ function renderPlayer(nick) {
           }).join('')}
         </div>
       </div>`}
-      ${DATA.in_progress && GAMES ? roleStatsCard(myGames) : `<div class="card">
+      ${GAMES && GAMES.games?.length ? roleStatsCard(myGames) : `<div class="card">
         <h3>Личные номинации</h3>
         ${myNoms.length === 0 ? `<div class="no-noms">${DATA.in_progress ? 'Awards появятся после закрытия турнира судьёй' : 'Не попал в топ-3 ни одной категории'}</div>` : `
           <div class="noms">
@@ -260,6 +260,27 @@ function renderPlayer(nick) {
         `}
       </div>`}
     </div>
+
+    ${GAMES && GAMES.games?.length && stages.length ? `<div class="grid">
+      <div class="card">
+        <h3>${stages.length > 1 ? 'Места по стадиям (официально)' : 'Место в турнире (официально)'}</h3>
+        <div class="places">
+          ${stages.map(s => {
+            const d = stageData[s.key];
+            if (!d) return `<div class="place-row skipped"><span class="place-stage">${s.label}</span><span class="place-val none">не играл</span></div>`;
+            const place = parseInt(d.place, 10);
+            return `<div class="place-row${place<=3?' podium':''}"><span class="place-stage">${s.label}</span><span class="place-val">#${place}<span class="of"> / ${s.size}</span></span></div>`;
+          }).join('')}
+        </div>
+      </div>
+      <div class="card">
+        <h3>Личные номинации</h3>
+        ${myNoms.length === 0 ? `<div class="no-noms">${DATA.in_progress ? 'Awards появятся после закрытия турнира' : 'Не попал в топ-3 ни одной категории'}</div>` : `<div class="noms">${myNoms.map(n => {
+          const mc = ['gold','silver','bronze'][n.place-1];
+          return `<div class="nom-row"><span class="nom-medal ${mc}">${n.place}</span><span class="nom-cat">${AWARD_LABELS[n.cat] || n.cat}</span><span class="nom-val">${escapeHtml(n.val)}</span></div>`;
+        }).join('')}</div>`}
+      </div>
+    </div>` : ''}
 
     ${renderGamesTable(myGames, nick)}
 
@@ -308,7 +329,7 @@ function renderPlayer(nick) {
       </table>
     </div>` : ''}
 
-    ${DATA.in_progress && GAMES ? compareCard(nick) : ''}
+    ${GAMES && GAMES.games?.length ? compareCard(nick) : ''}
   `;
   document.getElementById('content').innerHTML = html;
 }

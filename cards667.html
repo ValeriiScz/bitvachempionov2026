@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · cards667.html · v1.0 · 2026-06-13 · карточки 70 игроков Cyprus Open 667 в пляжном стиле: фото, клуб, столы, слоты, соперники -->
+<!-- MafgameStat · cards667.html · v1.2 · 2026-06-13 · карточки 70 игроков Cyprus Open 667 в пляжном стиле: фото, клуб, столы, слоты, соперники -->
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,8 +61,10 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 Promise.all([
   window.loadGames('667'),
   fetch('data/avatars_667.json').then(r=>r.json()),
-  fetch('data/tournament_667.json').then(r=>r.json())
-]).then(([G,A,T])=>{
+  fetch('data/tournament_667.json').then(r=>r.json()),
+  fetch('data/elo_667.json').then(r=>r.ok?r.json():null).catch(()=>null)
+]).then(([G,A,T,E])=>{
+  const ELO=(E&&E.players)||{};
   const AV=A.avatars||{};
   const INFO={}; (T.players||[]).forEach(p=>INFO[p.name]=p);
   const occ={}, opp={};
@@ -82,7 +84,9 @@ Promise.all([
     const sc={}; o.forEach(x=>sc[x.slot]=(sc[x.slot]||0)+1);
     const groups={};
     Object.entries(opp[p]).forEach(([m,c])=>{ (groups[c]=groups[c]||[]).push(m); });
-    const oppHtml=Object.keys(groups).sort((a,b)=>b-a).slice(0,5).map(c=>`<div><span class="cnt">${c}</span>${groups[c].sort((x,y)=>x.localeCompare(y,'ru')).map(esc).join(', ')}</div>`).join('');
+    let oppHtml=Object.keys(groups).sort((a,b)=>b-a).slice(0,5).map(c=>`<div><span class="cnt">${c}</span>${groups[c].sort((x,y)=>x.localeCompare(y,'ru')).map(esc).join(', ')}</div>`).join('');
+    const zeros=players.filter(m=>m!==p && !(opp[p]||{})[m]);
+    if(zeros.length) oppHtml+=`<div style="opacity:.65"><span class="cnt" style="background:#8aa6b8">0</span>${zeros.sort((x,y)=>x.localeCompare(y,'ru')).map(esc).join(', ')}</div>`;
     const info=INFO[p]||{};
     return `<div class="card" id="p-${esc(p)}">
       <div class="hdr">
@@ -92,6 +96,7 @@ Promise.all([
           ${info.real?`<div class="real">${esc(info.real)}</div>`:''}
           ${info.club?`<div class="club">${esc(info.club)}</div>`:''}
           <div class="tmeta">Four Seasons. Cyprus Open: Summer · 13–14.06.2026 · Лимассол</div>
+          ${ELO[p]&&ELO[p].global?`<div class="tmeta"><b>ELO ${ELO[p].global}</b> · за 12 мес ${ELO[p].year||'—'}${ELO[p].tournaments?` · турнир №${ELO[p].tournaments}`:''}</div>`:''}
         </div>
       </div>
       <div class="sec">Столы (${o.length} игр)</div>

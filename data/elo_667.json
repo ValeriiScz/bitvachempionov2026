@@ -1,0 +1,360 @@
+{
+"_meta": {
+"файл": "data/elo_667.json",
+"версия": "v0.1 каркас",
+"назначение": "Снапшот ELO markery до старта: global, за 12 мес, номер турнира для игрока. Заполним следующим патчем.",
+"дата": "2026-06-13"
+},
+"players": {
+"Flash": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Xenon": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Паоло": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Золушка": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Goldy 🦋": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Білий": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Лeв": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Вольфрам": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Tommy": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"KEX": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Руанда": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Korolevich": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"doc": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Саботаж": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Малышка Мю": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Призрак": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Eskimo.": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Sэм": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Джошуа": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"KRASNII": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Магнат": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Сабай": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Вольный": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Монтгомери": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Matilda": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Gangster": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Olgierd": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Rivierra": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Lansky": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Mr. Smith": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Свет": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Андромеда": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Квоут": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Зима ❄️": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Ratеl": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Солнце": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Session": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Mauder": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"komilfo": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Morrigan Israel": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"IGRIS": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Luca": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"_Pandora_": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Frеemаn": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Беатрис": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"bun jun lun 999": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Север": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Paul": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Dich": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Фолдэм": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Urs": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Twix": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Chucha": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Луна": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Kobe": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Maser": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Mariposa": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Cimes": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"iceBerg": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Катанчик": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Арчи": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Lavgud": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Удача (lucky)": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Donna": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"DOVOD": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Flame": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Сайфер": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Akali": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"Миф": {
+"global": null,
+"year": null,
+"tournaments": null
+},
+"***Алиса***": {
+"global": null,
+"year": null,
+"tournaments": null
+}
+}
+}

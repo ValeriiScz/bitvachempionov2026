@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · standings.html · v2.1 · 2026-06-12 · сводная таблица: ползунок «после игры N», роли R/S/B/D, сводка красных/чёрных, Δ мест -->
+<!-- MafgameStat · standings.html · v2.2 · 2026-06-12 · сводная таблица: ползунок «после игры N», роли R/S/B/D, сводка красных/чёрных, Δ мест -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -314,8 +314,44 @@ function renderMain() {
   }));
   renderRows();
 }
+function rolesFromGames() {
+  const M = {};
+  if (!GAMES || !GAMES.games) return M;
+  GAMES.games.forEach(g => (g.tables||[]).forEach(tb => (tb.seats||[]).forEach(s => {
+    const p = M[s.name] = M[s.name] || {Citizen:{w:0,g:0},Sheriff:{w:0,g:0},Mafia:{w:0,g:0},Don:{w:0,g:0},k:0};
+    const r = p[s.role]; if (r) { r.g++; if (s.result==='W') r.w++; }
+    if (s.marker==='first_killed') p.k++;
+  })));
+  return M;
+}
 function renderRows() {
   const rows = DATA.standings[currentStage] || [];
+  const RM = (currentStage==='qualification') ? rolesFromGames() : {};
+  const useRoles = Object.keys(RM).length > 0;
+  // перерисовать шапку под формат
+  const thead = document.querySelector('table.standings thead tr');
+  if (thead) thead.innerHTML = useRoles
+    ? `<th class="left place">#</th><th class="left player-cell">Игрок</th><th>Σ</th><th>Σap</th><th>BM</th><th>Ci</th>
+       <th title="мирный: победы/игры">R</th><th title="шериф">S</th><th title="мафия">B</th><th title="дон">D</th><th title="убит 1-й ночью">K</th><th>Игр</th>`
+    : `<th class="left place">#</th><th class="left player-cell">Игрок</th><th>Σ</th><th>WPTS</th><th>Σap</th><th>+</th><th>−</th><th>BM</th><th>Ci</th><th>W</th><th>D</th><th>S</th><th>K</th>`;
+  if (useRoles) {
+    document.getElementById('tbody').innerHTML = rows.map((r, i) => {
+      const rm = RM[r.name] || {Citizen:{w:0,g:0},Sheriff:{w:0,g:0},Mafia:{w:0,g:0},Don:{w:0,g:0},k:0};
+      return `<tr${i<3?' class="top-3"':''}>
+        <td class="left place">${r.place}</td>
+        <td class="left player-cell"><a class="player-name" href="player.html?nick=${encodeURIComponent(r.name)}&t=${T}">${escapeHtml(r.name)}</a>
+          ${r.club ? `<span class="club">${escapeHtml(r.club)}</span>` : ''}</td>
+        <td>${numCell(r.sigma, 'big')}</td>
+        <td>${numCell(r.sigma_ap)}</td>
+        <td>${numCell(r.bm, r.bm > 0 ? '' : 'dim')}</td>
+        <td>${numCell(r.ci, r.ci > 0 ? '' : 'dim')}</td>
+        ${ratioCell(rm.Citizen)}${ratioCell(rm.Sheriff)}${ratioCell(rm.Mafia)}${ratioCell(rm.Don)}
+        <td>${numCell(rm.k, rm.k > 0 ? 'neg' : 'dim')}</td>
+        <td>${numCell(r.games != null ? r.games : (rm.Citizen.g+rm.Sheriff.g+rm.Mafia.g+rm.Don.g))}</td>
+      </tr>`;
+    }).join('');
+    return;
+  }
   document.getElementById('tbody').innerHTML = rows.map((r, i) => {
     return `<tr${i<3?' class="top-3"':''}>
       <td class="left place">${r.place}</td>
