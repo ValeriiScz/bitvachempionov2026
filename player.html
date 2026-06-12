@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- MafgameStat · player.html · v2.0 · 2026-06-12 · фото, стата по 4 ролям, место после каждой игры, сравнение топ-10/11-20/среднее -->
 <meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Игрок — Битва Чемпионов 2026</title>
 <style>
@@ -69,25 +71,55 @@
   .todo strong{color:#ffb84d;}
   .info{padding:12px 14px;background:rgba(93,209,255,.06);border:1px dashed rgba(93,209,255,.3);border-radius:10px;font-size:12px;color:#a0a4b8;line-height:1.6;margin-bottom:14px;}
   .info strong{color:#5dd1ff;}
+  .player-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;}
+  .role-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .rc{padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;}
+  .rc-hdr{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;margin-bottom:8px;}
+  .rc-hdr .role-icon-lg{width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;}
+  .rc-hdr .role-icon-lg svg{width:20px;height:20px;}
+  .rc.role-citizen .rc-hdr{color:#ff8a8a;}
+  .rc.role-sheriff .rc-hdr{color:#ffd24a;}
+  .rc.role-mafia .rc-hdr{color:#c5cad8;}
+  .rc.role-don .rc-hdr{color:#9fb3ff;}
+  .rc-rows{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:11.5px;color:#8a8fa8;}
+  .rc-rows b{color:#fff;font-variant-numeric:tabular-nums;font-weight:700;text-align:right;}
+  .rc.none{opacity:.4;}
+  .prog-wrap{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;}
+  .prog-step{text-align:center;padding:8px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;min-width:58px;}
+  .prog-step .g{font-size:9.5px;color:#5a5e76;text-transform:uppercase;letter-spacing:1px;}
+  .prog-step .p{font-size:17px;font-weight:800;color:#fff;margin-top:2px;}
+  .prog-step .d{font-size:10px;font-weight:800;margin-top:1px;}
+  .prog-step .d.up{color:#3fd17a;}.prog-step .d.dn{color:#e8716b;}.prog-step .d.eq{color:#5a5e76;}
+  .prog-step.cur{border-color:#ffb84d;background:rgba(255,184,77,.10);}
+  .prog-step.cur .p{color:#ffb84d;}
+  table.cmp{width:100%;border-collapse:collapse;font-size:13px;}
+  table.cmp th{color:#8a8fa8;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:8px 6px;text-align:right;border-bottom:1px solid rgba(255,255,255,.08);}
+  table.cmp th.left,table.cmp td.left{text-align:left;}
+  table.cmp td{padding:9px 6px;text-align:right;border-bottom:1px solid rgba(255,255,255,.04);font-variant-numeric:tabular-nums;color:#dfe2f0;}
+  table.cmp tr.me td{background:rgba(255,184,77,.08);color:#fff;font-weight:700;}
+  table.cmp tr.me td.left{color:#ffb84d;}
+  a.ytmini{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:7px;text-decoration:none;background:rgba(255,0,0,.10);border:1px solid rgba(255,70,70,.4);color:#ff6b6b;}
+  a.ytmini:hover{background:#e02424;color:#fff;}
 </style>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="ic-citizen" viewBox="0 0 24 24"><path d="M12 21.3l-1.5-1.4C5.4 15.4 2 12.3 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.1 3.8 14.8 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.8-3.4 6.9-8.5 11.5L12 21.3z" fill="currentColor"/></symbol>
-  <symbol id="ic-sheriff" viewBox="0 0 24 24"><path d="M12 1.5l2.2 5L19.5 5l-1.5 5.3L23 12l-5 1.7 1.5 5.3-5.3-1.5L12 22.5l-2.2-5L4.5 19l1.5-5.3L1 12l5-1.7L4.5 5l5.3 1.5L12 1.5z" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="#0a0c18"/></symbol>
+  <symbol id="ic-sheriff" viewBox="0 0 24 24"><path d="M12 1.8l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7L12 1.8z" fill="currentColor" stroke="rgba(0,0,0,.35)" stroke-width=".6" stroke-linejoin="round"/></symbol>
   <symbol id="ic-mafia" viewBox="0 0 32 24"><path d="M2 8h16v3h2l1-3h6v3h2v4h-2v1l-3 3h-4v2l-1 1h-6l-1-2-1-2H4l-2-2V8z" fill="currentColor"/><rect x="6" y="14" width="6" height="2" fill="#0a0c18"/></symbol>
   <symbol id="ic-don" viewBox="0 0 32 24"><path d="M6 19c0-7 4-12 10-12s10 5 10 12v1H6v-1z" fill="currentColor"/><ellipse cx="16" cy="20" rx="13" ry="2" fill="currentColor"/><path d="M9 16h14" stroke="#0a0c18" stroke-width="1.5" fill="none"/></symbol>
 </defs></svg>
 
 <div class="topbar">
-  <a class="nav-btn muted" href="./">← Главная</a>
+  <a class="nav-btn muted" id="link-tournament" href="./">← Турнир</a>
   <a class="nav-btn muted" href="standings.html" id="link-standings">К сводной</a>
   <a class="nav-btn muted" href="results.html" id="link-results">Игры</a>
 </div>
 
 <div class="wrap" id="content"><div class="card empty">Загрузка…</div></div>
 
+<script src="data/streams.js"></script>
 <script>
 const T = new URLSearchParams(location.search).get('t') || '826';
 const STAGE_INFO = [
@@ -103,9 +135,10 @@ const AWARD_LABELS = {
 const ROLE_ICON_ID = {Citizen:'ic-citizen',Sheriff:'ic-sheriff',Don:'ic-don',Mafia:'ic-mafia'};
 const ROLE_CLASS = {Citizen:'role-citizen',Sheriff:'role-sheriff',Mafia:'role-mafia',Don:'role-don'};
 function roleSvg(role) { return `<svg><use href="#${ROLE_ICON_ID[role] || 'ic-citizen'}"/></svg>`; }
-let DATA = null, GAMES = null;
+let DATA = null, GAMES = null, AV = {};
 
 async function load() {
+  document.getElementById('link-tournament').href = `tournament.html?t=${T}`;
   document.getElementById('link-standings').href = `standings.html?t=${T}`;
   document.getElementById('link-results').href = `results.html?t=${T}`;
   const [r1, r2] = await Promise.all([
@@ -114,6 +147,7 @@ async function load() {
   ]);
   DATA = r1;
   GAMES = r2;
+  try { const a = await fetch(`data/avatars_${T}.json`); if (a.ok) AV = (await a.json()).avatars || {}; } catch(e) {}
   const nick = new URLSearchParams(location.search).get('nick');
   if (nick) renderPlayer(nick); else renderAllPlayers();
 }
@@ -181,7 +215,7 @@ function renderPlayer(nick) {
 
   const html = `
     <div class="player-hdr">
-      <div class="player-avatar">${escapeHtml(initial)}</div>
+      <div class="player-avatar">${AV[nick] ? `<img src="${AV[nick]}" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://mafgame.org/build/assets/avatar-default2-33e44bae.png'">` : escapeHtml(initial)}</div>
       <div style="flex:1;">
         <div class="player-nick">${escapeHtml(nick)}</div>
         ${player.club ? `<div class="player-club">${escapeHtml(player.club)}</div>` : ''}
@@ -198,7 +232,7 @@ function renderPlayer(nick) {
     </div>
 
     <div class="grid">
-      <div class="card">
+      ${DATA.in_progress && GAMES ? progressionCard(nick) : `<div class="card">
         <h3>${stages.length > 1 ? 'Места по стадиям' : 'Место в турнире'}</h3>
         <div class="places">
           ${stages.map(s => {
@@ -209,8 +243,8 @@ function renderPlayer(nick) {
             return `<div class="place-row${podium}"><span class="place-stage">${s.label}</span><span class="place-val">#${place}<span class="of"> / ${s.size}</span></span></div>`;
           }).join('')}
         </div>
-      </div>
-      <div class="card">
+      </div>`}
+      ${DATA.in_progress && GAMES ? roleStatsCard(myGames) : `<div class="card">
         <h3>Личные номинации</h3>
         ${myNoms.length === 0 ? `<div class="no-noms">${DATA.in_progress ? 'Awards появятся после закрытия турнира судьёй' : 'Не попал в топ-3 ни одной категории'}</div>` : `
           <div class="noms">
@@ -220,7 +254,7 @@ function renderPlayer(nick) {
             }).join('')}
           </div>
         `}
-      </div>
+      </div>`}
     </div>
 
     ${renderGamesTable(myGames, nick)}
@@ -269,8 +303,80 @@ function renderPlayer(nick) {
         </tbody>
       </table>
     </div>` : ''}
+
+    ${DATA.in_progress && GAMES ? compareCard(nick) : ''}
   `;
   document.getElementById('content').innerHTML = html;
+}
+
+function liveStandings(n) {
+  const P = {};
+  const get = name => P[name] || (P[name] = {name, wpts:0, aps:0, w:0, games:0});
+  GAMES.games.slice(0, n).forEach(g => (g.tables||[]).forEach(tb => (tb.seats||[]).forEach(x => {
+    const p = get(x.name); p.games++; p.wpts += x.wpts||0; p.aps += x.aps||0; if (x.result==='W') p.w++;
+  })));
+  const rows = Object.values(P).map(p => ({...p, sigma:+(p.wpts+p.aps).toFixed(2)}));
+  rows.sort((a,b) => b.sigma - a.sigma || b.aps - a.aps || a.name.localeCompare(b.name,'ru'));
+  rows.forEach((r,i) => r.place = i+1);
+  return rows;
+}
+function progressionCard(nick) {
+  const played = GAMES.games.length;
+  let prev = null, steps = '';
+  for (let n = 1; n <= played; n++) {
+    const place = (liveStandings(n).find(r => r.name === nick) || {}).place;
+    if (!place) continue;
+    let d = '<span class="d eq">—</span>';
+    if (prev != null) {
+      const diff = prev - place;
+      d = diff > 0 ? `<span class="d up">▲${diff}</span>` : diff < 0 ? `<span class="d dn">▼${-diff}</span>` : '<span class="d eq">·</span>';
+    }
+    steps += `<div class="prog-step${n===played?' cur':''}"><div class="g">игра ${n}</div><div class="p">#${place}</div>${d}</div>`;
+    prev = place;
+  }
+  return `<div class="card"><h3>Место после каждой игры</h3><div class="prog-wrap">${steps || '<span class="dim">нет данных</span>'}</div></div>`;
+}
+function roleStatsCard(myGames) {
+  const ROLES = [['Citizen','Мирный'],['Sheriff','Шериф'],['Mafia','Мафия'],['Don','Дон']];
+  const cards = ROLES.map(([key,label]) => {
+    const gs = myGames.filter(g => g.role === key);
+    const w = gs.filter(g => g.result === 'W').length;
+    const ap = gs.reduce((a,g) => a + (g.aps||0), 0);
+    if (!gs.length) return `<div class="rc ${ROLE_CLASS[key]} none"><div class="rc-hdr"><span class="role-icon-lg">${roleSvg(key)}</span>${label}</div><div class="rc-rows"><span>не играл</span><b>—</b></div></div>`;
+    return `<div class="rc ${ROLE_CLASS[key]}">
+      <div class="rc-hdr"><span class="role-icon-lg">${roleSvg(key)}</span>${label}</div>
+      <div class="rc-rows">
+        <span>Игры</span><b>${gs.length}</b>
+        <span>Победы</span><b>${w}/${gs.length}</b>
+        <span>Σ доп</span><b>${fmtNum(ap)}</b>
+        <span>Доп/игру</span><b>${fmtNum(ap/gs.length)}</b>
+      </div>
+    </div>`;
+  }).join('');
+  return `<div class="card"><h3>Стата по ролям</h3><div class="role-cards">${cards}</div></div>`;
+}
+function compareCard(nick) {
+  const rows = liveStandings(GAMES.games.length);
+  const me = rows.find(r => r.name === nick);
+  if (!me) return '';
+  const avg = list => {
+    const n = list.length || 1;
+    return {w: list.reduce((a,r)=>a+r.w,0)/n, aps: list.reduce((a,r)=>a+r.aps,0)/n, sigma: list.reduce((a,r)=>a+r.sigma,0)/n};
+  };
+  const groups = [
+    ['Топ-10 (среднее)', avg(rows.slice(0,10)), false],
+    ['Места 11–20 (среднее)', avg(rows.slice(10,20)), false],
+    ['Среднее по турниру', avg(rows), false],
+    [`${nick} — место #${me.place}`, {w: me.w, aps: me.aps, sigma: me.sigma}, true]
+  ];
+  return `<div class="card"><h3>Как играет на фоне турнира</h3>
+    <table class="cmp">
+      <thead><tr><th class="left">Срез</th><th>Победы</th><th>Σap</th><th>Σ</th></tr></thead>
+      <tbody>${groups.map(([label, g, isMe]) => `<tr${isMe?' class="me"':''}>
+        <td class="left">${label}</td><td>${fmtNum(g.w)}</td><td>${fmtNum(g.aps)}</td><td>${fmtNum(g.sigma)}</td>
+      </tr>`).join('')}</tbody>
+    </table>
+  </div>`;
 }
 
 function renderGamesTable(myGames, nick) {
@@ -284,7 +390,7 @@ function renderGamesTable(myGames, nick) {
     <table class="games-table">
       <thead><tr>
         <th class="left">Игра</th><th class="left">Стол</th><th class="left">Роль</th>
-        <th>R</th><th>WPTS</th><th>APTS</th><th>1-я ночь</th>
+        <th>R</th><th>WPTS</th><th>APTS</th><th>1-я ночь</th><th>Стрим</th>
       </tr></thead>
       <tbody>
         ${myGames.map(g => {
@@ -297,6 +403,7 @@ function renderGamesTable(myGames, nick) {
             <td class="${g.wpts > 0 ? 'big' : 'dim'}">${fmtNum(g.wpts)}</td>
             <td class="${g.aps > 0 ? '' : (g.aps < 0 ? 'neg' : 'dim')}">${g.aps > 0 ? '+' : ''}${fmtNum(g.aps)}</td>
             <td>${g.marker === 'first_killed' ? '<span class="first-killed-mark" title="убит первой ночью">💀</span>' : '<span class="dim">—</span>'}</td>
+            <td>${(window.streamFor && streamFor(T, g.game_idx + 1, g.table_num)) ? `<a class="ytmini" href="${streamFor(T, g.game_idx + 1, g.table_num)}" target="_blank" rel="noopener">▶</a>` : '<span class="dim">—</span>'}</td>
           </tr>`;
         }).join('')}
         <tr class="total">
@@ -306,6 +413,7 @@ function renderGamesTable(myGames, nick) {
           <td class="big">${fmtNum(myGames.reduce((a, g) => a + g.wpts, 0))}</td>
           <td>${fmtNum(myGames.reduce((a, g) => a + g.aps, 0))}</td>
           <td>${myGames.filter(g => g.marker === 'first_killed').length}</td>
+          <td></td>
         </tr>
       </tbody>
     </table>

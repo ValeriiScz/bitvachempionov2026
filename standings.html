@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- MafgameStat · standings.html · v2.0 · 2026-06-12 · сводная таблица: ползунок «после игры N», роли R/S/B/D, сводка красных/чёрных, Δ мест -->
 <meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Битва Чемпионов 2026 — сводная</title>
+<title>Сводная — MafgameStat</title>
 <style>
   *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
   body{margin:0;background:radial-gradient(circle at 50% 0%,#1a1d2e 0%,#0a0c18 60%);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;padding:24px 16px 60px;}
@@ -49,8 +51,12 @@
   table.standings td.left{text-align:left;}
   table.standings tr:hover td{background:rgba(255,255,255,.03);}
   table.standings tr.top-3 td.place{color:#ffb84d;font-weight:800;}
-  .place{width:36px;color:#a0a4b8;font-weight:700;}
-  .player-cell{min-width:180px;}
+  .place{width:36px;color:#a0a4b8;font-weight:700;white-space:nowrap;}
+  .delta{font-size:10px;font-weight:800;margin-left:4px;}
+  .delta.up{color:#3fd17a;}
+  .delta.dn{color:#e8716b;}
+  .delta.eq{color:#5a5e76;}
+  .player-cell{min-width:170px;}
   .player-name{color:#fff;font-weight:700;text-decoration:none;}
   .player-name:hover{color:#5dd1ff;}
   .club{color:#8a8fa8;font-size:11px;display:block;margin-top:2px;}
@@ -58,16 +64,35 @@
   .num.dim{color:#5a5e76;}
   .num.neg{color:#e8716b;}
   .num.big{color:#ffb84d;font-weight:800;font-size:14px;}
+  .ratio{font-variant-numeric:tabular-nums;font-weight:700;}
+  .ratio .of{color:#5a5e76;font-weight:600;}
+  .ratio.good{color:#3fd17a;}
+  .ratio.bad{color:#e8716b;}
+  .ratio.mid{color:#dfe2f0;}
+  .ratio.zero{color:#5a5e76;}
   .empty{padding:40px;text-align:center;color:#8a8fa8;}
   .progress-note{margin-bottom:16px;padding:12px 14px;background:rgba(63,209,122,.08);border:1px dashed rgba(63,209,122,.35);border-radius:10px;font-size:12px;color:#a0a4b8;line-height:1.6;}
   .progress-note strong{color:#3fd17a;}
+  /* ── сводка-чипы ── */
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+  .chip{padding:10px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;font-size:12px;color:#a0a4b8;}
+  .chip b{display:block;font-size:17px;font-weight:800;color:#fff;margin-top:2px;font-variant-numeric:tabular-nums;}
+  .chip.red b{color:#ff6b6b;}
+  .chip.black b{color:#c5cad8;}
+  .chip.gold b{color:#ffb84d;}
+  /* ── ползунок ── */
+  .slider-wrap{margin-bottom:18px;padding:14px 18px;background:rgba(93,209,255,.06);border:1px solid rgba(93,209,255,.25);border-radius:12px;}
+  .slider-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#a0a4b8;margin-bottom:10px;}
+  .slider-head b{color:#5dd1ff;font-size:14px;}
+  input[type=range]{width:100%;accent-color:#5dd1ff;cursor:pointer;height:26px;}
+  .ticks{display:flex;justify-content:space-between;font-size:10px;color:#5a5e76;padding:0 2px;}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="nav-left">
-    <a class="nav-btn muted" href="./">← Главная</a>
+    <a class="nav-btn muted" id="link-tournament" href="./">← Турнир</a>
     <a class="nav-btn muted" href="results.html" id="link-results">Игры</a>
     <a class="nav-btn muted" href="player.html" id="link-player">Игроки</a>
     <div>
@@ -76,8 +101,8 @@
     </div>
   </div>
   <div id="switcher" style="display:flex;gap:8px;">
-    <a class="nav-btn muted" href="?t=826">826 (текущий)</a>
-    <a class="nav-btn muted" href="?t=622">622 (архив)</a>
+    <a class="nav-btn muted" href="?t=826">826</a>
+    <a class="nav-btn muted" href="?t=622">622</a>
   </div>
 </div>
 
@@ -103,16 +128,20 @@ const AWARD_LABELS = {
   most_valuable_citizen:'Лучший мирный', best_don:'Лучший дон',
   best_sheriff:'Лучший шериф', most_killed:'Чаще всех убит 1-й ночью'
 };
-let DATA = null, currentStage = null;
+let DATA = null, GAMES = null, currentStage = null, sliderN = 0;
 
 async function load() {
   const r = await fetch(`data/tournament_${T}.json`);
   if (!r.ok) throw new Error('Нет данных для турнира ' + T);
   DATA = await r.json();
-  // Дефолтная стадия: самая старшая (final → semifinal → qualification)
+  // live-режим: пробуем подтянуть данные игр для ползунка и ролевой разбивки
+  try {
+    const g = await fetch(`data/games_${T}_current.json`);
+    if (g.ok) GAMES = await g.json();
+  } catch(e) {}
   const orderedKeys = ['final','semifinal','qualification'].filter(k => DATA.standings[k]?.length);
   currentStage = orderedKeys[0] || 'qualification';
-  // Patch nav-btn links to keep ?t
+  document.getElementById('link-tournament').href = `tournament.html?t=${T}`;
   document.getElementById('link-results').href = `results.html?t=${T}`;
   document.getElementById('link-player').href = `player.html?t=${T}`;
   document.querySelectorAll('#switcher a').forEach(a => {
@@ -120,15 +149,107 @@ async function load() {
   });
   renderMeta();
   renderAwards();
-  renderMain();
+  if (DATA.in_progress && GAMES && GAMES.games?.length) {
+    sliderN = GAMES.games.length;
+    renderLive();
+  } else {
+    renderMain();
+  }
 }
 
+/* ════ LIVE: пересчёт из игр + ползунок ════ */
+function buildStandings(n) {
+  // standings по первым n играм
+  const P = {};
+  const get = name => P[name] || (P[name] = {name, wpts:0, aps:0, w:0, games:0, k:0,
+    roles:{Citizen:{w:0,g:0}, Sheriff:{w:0,g:0}, Mafia:{w:0,g:0}, Don:{w:0,g:0}}});
+  let redWins=0, blackWins=0, tables=0, apsSum=0;
+  GAMES.games.slice(0, n).forEach(game => {
+    game.tables.forEach(tb => {
+      tables++;
+      if (tb.winner === 'red_win') redWins++; else blackWins++;
+      tb.seats.forEach(s => {
+        const p = get(s.name);
+        p.games++; p.wpts += s.wpts||0; p.aps += s.aps||0; apsSum += s.aps||0;
+        if (s.result === 'W') p.w++;
+        if (s.marker === 'first_killed') p.k++;
+        const r = p.roles[s.role]; if (r) { r.g++; if (s.result==='W') r.w++; }
+      });
+    });
+  });
+  const rows = Object.values(P).map(p => ({...p, sigma: +(p.wpts + p.aps).toFixed(2)}));
+  rows.sort((a,b) => b.sigma - a.sigma || b.aps - a.aps || a.name.localeCompare(b.name,'ru'));
+  rows.forEach((r,i) => r.place = i+1);
+  return {rows, redWins, blackWins, tables, apsSum};
+}
+function renderLive() {
+  const total = GAMES.games_total || 15;
+  const played = GAMES.games.length;
+  const cur = buildStandings(sliderN);
+  const prev = sliderN > 1 ? buildStandings(sliderN - 1) : null;
+  const prevPlace = {};
+  if (prev) prev.rows.forEach(r => prevPlace[r.name] = r.place);
+
+  const chips = `<div class="chips">
+    <div class="chip">Сыграно игр<b>${played} / ${total}</b></div>
+    <div class="chip red">Победы красных<b>${cur.redWins}</b></div>
+    <div class="chip black">Победы чёрных<b>${cur.blackWins}</b></div>
+    <div class="chip gold">Средний доп / стол<b>${cur.tables ? (cur.apsSum/cur.tables).toFixed(2) : '0'}</b></div>
+  </div>`;
+
+  const slider = played > 1 ? `<div class="slider-wrap">
+    <div class="slider-head"><span>Таблица на момент:</span><b id="slider-label">после игры ${sliderN}${sliderN===played?' (текущая)':''}</b></div>
+    <input type="range" id="slider" min="1" max="${played}" value="${sliderN}" step="1">
+    <div class="ticks">${Array.from({length:played},(_,i)=>`<span>${i+1}</span>`).join('')}</div>
+  </div>` : '';
+
+  const note = `<div class="progress-note">Турнир <strong>в процессе</strong>. Σ = WPTS + Σap по сыгранным играм; CI и BM начислит судья при закрытии. Δ у места — изменение против предыдущей игры. R/S/B/D — победы/игры в роли: мирный, шериф, мафия, дон.</div>`;
+
+  document.getElementById('main').innerHTML = `${chips}${slider}${note}<div class="card" style="padding:0;overflow-x:auto;">
+    <table class="standings">
+      <thead><tr>
+        <th class="left place">#</th>
+        <th class="left player-cell">Игрок</th>
+        <th>Σ</th><th>WPTS</th><th>Σap</th>
+        <th title="мирный: победы/игры">R</th><th title="шериф">S</th><th title="мафия">B</th><th title="дон">D</th>
+        <th title="убит 1-й ночью">K</th><th>Игр</th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>`;
+  document.getElementById('tbody').innerHTML = cur.rows.map((r,i) => {
+    let delta = '';
+    if (prev && prevPlace[r.name]) {
+      const d = prevPlace[r.name] - r.place;
+      delta = d>0 ? `<span class="delta up">▲${d}</span>` : d<0 ? `<span class="delta dn">▼${-d}</span>` : `<span class="delta eq">·</span>`;
+    }
+    return `<tr${i<3?' class="top-3"':''}>
+      <td class="left place">${r.place}${delta}</td>
+      <td class="left player-cell"><a class="player-name" href="player.html?nick=${encodeURIComponent(r.name)}&t=${T}">${escapeHtml(r.name)}</a></td>
+      <td>${numCell(r.sigma,'big')}</td>
+      <td>${numCell(r.wpts)}</td>
+      <td>${numCell(+r.aps.toFixed(2), r.aps>0?'':'dim')}</td>
+      ${ratioCell(r.roles.Citizen)}${ratioCell(r.roles.Sheriff)}${ratioCell(r.roles.Mafia)}${ratioCell(r.roles.Don)}
+      <td>${numCell(r.k, r.k>0?'neg':'dim')}</td>
+      <td>${numCell(r.games)}</td>
+    </tr>`;
+  }).join('');
+  const sl = document.getElementById('slider');
+  if (sl) sl.addEventListener('input', () => { sliderN = +sl.value; renderLive(); });
+}
+function ratioCell(r) {
+  if (!r || !r.g) return '<td><span class="ratio zero">—</span></td>';
+  const cls = r.w === r.g ? 'good' : r.w === 0 ? 'bad' : 'mid';
+  return `<td><span class="ratio ${cls}">${r.w}<span class="of">/${r.g}</span></span></td>`;
+}
+
+/* ════ Завершённые турниры (622): официальные стадии ════ */
 function renderMeta() {
   const fmt = (k, v) => v ? `<div class="k">${k}</div><div class="v">${v}</div>` : '';
   const live = DATA.in_progress ? `<span class="live-badge">LIVE</span>` : '';
   document.getElementById('title').innerHTML = `Сводная <span class="acc">· турнир ${DATA.tournament_id}</span>${live}`;
   const progress = DATA.games_played != null
-    ? `Сыграно ${DATA.games_played}/${DATA.games_total} игр`
+    ? `Сыграно ${GAMES?.games?.length ?? DATA.games_played}/${DATA.games_total} игр`
     : (DATA.closed ? 'Турнир завершён' : '');
   document.getElementById('subtitle').textContent = `${DATA.tournament_name}${progress ? ' · ' + progress : ''}`;
   document.getElementById('meta').innerHTML = [
@@ -169,16 +290,13 @@ function renderMain() {
     const active = s === currentStage ? ' active' : '';
     return `<button class="stage-btn${active}" data-stage="${s}">${STAGE_LABELS[s]}<span class="count">${DATA.standings[s].length}</span></button>`;
   }).join('')}</div>` : '';
-  const note = DATA.in_progress
-    ? `<div class="progress-note">Турнир <strong>в процессе</strong>. Σ считается по 4 сыгранным играм. Финальная таблица появится после закрытия турнира судьёй. <strong>CI и BM пока 0</strong> — точные формулы открыты в SPEC.</div>`
-    : '';
-  document.getElementById('main').innerHTML = `${stageHtml}${note}<div class="card" style="padding:0;overflow-x:auto;">
+  document.getElementById('main').innerHTML = `${stageHtml}<div class="card" style="padding:0;overflow-x:auto;">
     <table class="standings">
       <thead><tr>
         <th class="left place">#</th>
         <th class="left player-cell">Игрок</th>
         <th>Σ</th><th>WPTS</th><th>Σap</th><th>+</th><th>−</th><th>BM</th><th>Ci</th>
-        <th>W</th><th>D</th><th>S</th><th>K</th>${DATA.in_progress ? '<th>Игр</th>' : ''}
+        <th>W</th><th>D</th><th>S</th><th>K</th>
       </tr></thead>
       <tbody id="tbody"></tbody>
     </table>
@@ -193,9 +311,7 @@ function renderMain() {
 function renderRows() {
   const rows = DATA.standings[currentStage] || [];
   document.getElementById('tbody').innerHTML = rows.map((r, i) => {
-    const isTop3 = i < 3;
-    const cls = isTop3 ? ' class="top-3"' : '';
-    return `<tr${cls}>
+    return `<tr${i<3?' class="top-3"':''}>
       <td class="left place">${r.place}</td>
       <td class="left player-cell">
         <a class="player-name" href="player.html?nick=${encodeURIComponent(r.name)}&t=${T}">${escapeHtml(r.name)}</a>
@@ -212,7 +328,6 @@ function renderRows() {
       <td>${numCell(r.d, r.d > 0 ? '' : 'dim')}</td>
       <td>${numCell(r.s, r.s > 0 ? '' : 'dim')}</td>
       <td>${numCell(r.k, r.k > 0 ? '' : 'dim')}</td>
-      ${DATA.in_progress ? `<td>${numCell(r.games)}</td>` : ''}
     </tr>`;
   }).join('');
 }

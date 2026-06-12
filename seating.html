@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- MafgameStat · seating.html · v2.0 · 2026-06-12 · прогресс игр: сыгранные приглушены, следующая подсвечена -->
 <meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <title>Битва Чемпионов 2026 — рассадка</title>
 <style>
@@ -56,6 +58,18 @@
   .player-hdr-nick{font-size:32px;font-weight:800;color:#fff;letter-spacing:-.5px;}
   .player-hdr-sub{font-size:13px;color:#a0a4b8;margin-top:4px;}
   .hidden{display:none !important;}
+  .round-btn.played{opacity:.42;}
+  .round-btn.played::after{content:"✓";margin-left:5px;font-size:10px;color:#3fd17a;}
+  .round-btn.next{border-color:#ffb84d;color:#ffb84d;background:rgba(255,184,77,.12);box-shadow:0 0 12px rgba(255,184,77,.35);animation:nextpulse 2s infinite;}
+  @keyframes nextpulse{0%,100%{box-shadow:0 0 12px rgba(255,184,77,.35)}50%{box-shadow:0 0 4px rgba(255,184,77,.15)}}
+  .table-wrap.g-played{opacity:.72;filter:saturate(.75);}
+  .table-wrap.g-next{border:1px solid rgba(255,184,77,.55);box-shadow:0 8px 40px rgba(255,184,77,.18);}
+  .gstat{display:inline-block;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:8px;margin-left:8px;vertical-align:2px;}
+  .gstat.done{background:rgba(63,209,122,.15);color:#3fd17a;border:1px solid rgba(63,209,122,.35);}
+  .gstat.next{background:rgba(255,184,77,.15);color:#ffb84d;border:1px solid rgba(255,184,77,.4);}
+  a.ytb{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:9px;font-size:11px;font-weight:700;text-decoration:none;
+    background:rgba(255,0,0,.10);border:1px solid rgba(255,70,70,.45);color:#ff6b6b;transition:.15s;}
+  a.ytb:hover{background:#e02424;color:#fff;border-color:#e02424;}
 </style>
 </head>
 <body>
@@ -63,7 +77,7 @@
 <div id="game-view">
   <div class="topbar">
     <div class="nav-left">
-      <a class="nav-btn" href="./">← На главную</a>
+      <a class="nav-btn muted" href="tournament.html?t=826">← Турнир</a>
       <div>
         <div class="title">Битва Чемпионов 2026 <span class="acc">· рассадка</span></div>
         <div class="sub">30 игроков · 3 стола · 15 игр · клик по игроку — все его столы</div>
@@ -108,8 +122,10 @@
   <div class="grid" id="player-grid"></div>
 </div>
 
+<script src="data/streams.js"></script>
 <script>
 const DATA = {"avatars": {"f5": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_118/81dffaa8abc63f95c3c3b3991a925e86e801b191.png", "Lюц": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1050/05d587e41edd71e3a3dc89f2b04b75c964af8cfe.png", "YeS": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_101/07fc4320b90a9dde889cabc002d1cec60c7a5583.png", "LogisticPro": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_201/c371c9f615f42c193898cc15b88800cf1c27892e.png", "Landing": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1481/b033e4506014e23586818760a88ede88a7b79d3d.png", "Саботаж": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_68/e5f69d0c89c3ecec9dee013970b56f8219c70d70.png", "DOVOD": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/1f30664fe58edefde9864af8e39d1508286597f7.png", "Yokai": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_378/7f92183f5baa092eef75c7eb10d1aaa01b7dad2e.png", "TOPS": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1495/242ba9676071458139c03c4fe6781dc6bb820d82.png", "Korolevich": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_461/58bb4e89d26946125a2acc449c729d44547c1485.png", "Призрак": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_264/ed0c386206b7c1ee0f9fb70dfcb0f5bf726749df.png", "Виталий": "https://mafgame.org/build/assets/avatar-default2-33e44bae.png", "aptah": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1358/236f3274a9d37c8006c6d3e18edd9b8071d0ce48.png", "Не Злая": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_152/5ebb58af65c0e6171372d5a0391a6805c35a8a8b.png", "ШТО?": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_792/541b4f4ba3ace7e6b0ffb727ded7f204307e240d.png", "Дренажная вода deluxe": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_187/554934db9be848fa7b75690696f651ec6b42a718.png", "Логика": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_26/2a9bdc90648940b52f1a6bb41746fa28287df207.png", "Сью": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1398/269388ba5e06d783f8c16aae7bb0c84505ab9054.png", "Молчун": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_431/e889e47da03330286ca8f88bcb18dc9678509d0f.png", "Буржуй": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_287/3ddee352574f767cc2ee00cb7690d518c58915a2.png", "Season's": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_280/3b3dae1e7edb1509f07f16e1a57bd401edb4f312.png", "Фортуна": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1049/a4e274ce3a57d46b9911086502f7062c312c3c42.png", "КуКуСиК": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2014/44522094a889fd715880c50ead052ff7143b0797.png", "Eskimo.": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_327/287966a33c62a768a2536cb6d6ac2c7146aa8d69.png", "KEX": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_44/a6bfae05ca17bcfaa2961020a9b44f5860c2f4fe.png", "ParadoXx": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png", "Wapi": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_768/5f701445b96ac6469498c56fa2308c1b9e87609a.png", "Грешник": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_890/09e7e9eefe97e46996af0ae48c968ffea227ce33.png", "Tripok": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_263/c9cc45afe38b5df39f333629598ef3c5f805e9b4.png", "Jerry Hurper": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_480/fb924465b777f19ae1a223ea7452911276c35052.png"}, "judges": {"1": {"name": "The Godfather", "avatar": "https://mafgame.org/build/assets/avatar-default2-33e44bae.png"}, "2": {"name": "Гармония", "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_216/059db2480117575cb071999c556d311cf5a2e674.png"}, "3": {"name": "Aragil", "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_6/808fd686e7a1aed1b75b135ad703bd1d32cee6a0.png"}}, "games": {"1": {"1": ["Грешник", "Призрак", "Фортуна", "Landing", "f5", "Lюц", "KEX", "Не Злая", "YeS", "Буржуй"], "2": ["TOPS", "Логика", "ParadoXx", "Сью", "Korolevich", "Eskimo.", "КуКуСиК", "LogisticPro", "Tripok", "Yokai"], "3": ["Jerry Hurper", "Season's", "Молчун", "Саботаж", "DOVOD", "Wapi", "aptah", "Дренажная вода deluxe", "Виталий", "ШТО?"]}, "2": {"1": ["Landing", "Буржуй", "f5", "ШТО?", "КуКуСиК", "Сью", "Season's", "Саботаж", "Eskimo.", "Дренажная вода deluxe"], "2": ["Wapi", "Не Злая", "Виталий", "TOPS", "aptah", "Грешник", "Korolevich", "Фортуна", "KEX", "Tripok"], "3": ["YeS", "DOVOD", "Логика", "Jerry Hurper", "ParadoXx", "Молчун", "Lюц", "Призрак", "Yokai", "LogisticPro"]}, "3": {"1": ["КуКуСиК", "KEX", "Молчун", "Season's", "Виталий", "aptah", "ParadoXx", "Lюц", "LogisticPro", "f5"], "2": ["Tripok", "Саботаж", "Landing", "Wapi", "Korolevich", "Призрак", "Логика", "TOPS", "Дренажная вода deluxe", "YeS"], "3": ["Eskimo.", "Фортуна", "Не Злая", "Буржуй", "Сью", "ШТО?", "Yokai", "DOVOD", "Грешник", "Jerry Hurper"]}, "4": {"1": ["Lюц", "Eskimo.", "Логика", "Грешник", "Jerry Hurper", "TOPS", "f5", "Виталий", "Wapi", "КуКуСиК"], "2": ["Season's", "LogisticPro", "Призрак", "Фортуна", "Yokai", "Дренажная вода deluxe", "Landing", "ШТО?", "aptah", "Korolevich"], "3": ["Буржуй", "Молчун", "Сью", "Не Злая", "KEX", "Саботаж", "Tripok", "YeS", "DOVOD", "ParadoXx"]}, "5": {"1": ["Фортуна", "Jerry Hurper", "aptah", "Eskimo.", "Landing", "Tripok", "КуКуСиК", "Логика", "Не Злая", "Молчун"], "2": ["Yokai", "Дренажная вода deluxe", "KEX", "DOVOD", "Саботаж", "Буржуй", "LogisticPro", "ШТО?", "TOPS", "Lюц"], "3": ["Сью", "ParadoXx", "Korolevich", "Призрак", "Wapi", "f5", "Грешник", "Season's", "YeS", "Виталий"]}, "6": {"1": ["Саботаж", "Грешник", "Jerry Hurper", "LogisticPro", "ШТО?", "ParadoXx", "Не Злая", "КуКуСиК", "Призрак", "TOPS"], "2": ["Молчун", "Wapi", "Lюц", "Tripok", "Фортуна", "Логика", "Сью", "Буржуй", "Season's", "Дренажная вода deluxe"], "3": ["aptah", "Yokai", "Eskimo.", "Korolevich", "YeS", "Виталий", "DOVOD", "f5", "Landing", "KEX"]}, "7": {"1": ["ШТО?", "Landing", "ParadoXx", "Виталий", "Буржуй", "LogisticPro", "Eskimo.", "Wapi", "Логика", "Не Злая"], "2": ["Дренажная вода deluxe", "f5", "Саботаж", "DOVOD", "Lюц", "Jerry Hurper", "YeS", "Грешник", "Korolevich", "aptah"], "3": ["KEX", "TOPS", "Tripok", "КуКуСиК", "Призрак", "Season's", "Yokai", "Молчун", "Сью", "Фортуна"]}, "8": {"1": ["YeS", "Сью", "LogisticPro", "Дренажная вода deluxe", "Eskimo.", "Фортуна", "Wapi", "KEX", "КуКуСиК", "DOVOD"], "2": ["Призрак", "Виталий", "Season's", "ParadoXx", "Tripok", "Landing", "Jerry Hurper", "TOPS", "Буржуй", "Грешник"], "3": ["f5", "Korolevich", "ШТО?", "Молчун", "Логика", "Не Злая", "Саботаж", "aptah", "Lюц", "Yokai"]}, "9": {"1": ["DOVOD", "Tripok", "КуКуСиК", "KEX", "Логика", "Грешник", "ШТО?", "ParadoXx", "Саботаж", "Призрак"], "2": ["Не Злая", "Landing", "Виталий", "Lюц", "Дренажная вода deluxe", "Yokai", "Korolevich", "Eskimo.", "Jerry Hurper", "Сью"], "3": ["TOPS", "aptah", "Wapi", "f5", "LogisticPro", "YeS", "Фортуна", "Буржуй", "Молчун", "Season's"]}, "10": {"1": ["Виталий", "Jerry Hurper", "Yokai", "Логика", "f5", "Wapi", "Призрак", "Сью", "Фортуна", "Саботаж"], "2": ["Korolevich", "ШТО?", "YeS", "Дренажная вода deluxe", "Season's", "KEX", "TOPS", "Молчун", "ParadoXx", "Eskimo."], "3": ["LogisticPro", "Lюц", "Грешник", "aptah", "Не Злая", "DOVOD", "Буржуй", "Tripok", "КуКуСиК", "Landing"]}, "11": {"1": ["Молчун", "Сью", "ШТО?", "Yokai", "Грешник", "Логика", "LogisticPro", "Season's", "KEX", "Landing"], "2": ["ParadoXx", "TOPS", "Tripok", "Eskimo.", "Фортуна", "Саботаж", "Виталий", "DOVOD", "Lюц", "f5"], "3": ["Korolevich", "Призрак", "Буржуй", "aptah", "YeS", "КуКуСиК", "Дренажная вода deluxe", "Jerry Hurper", "Не Злая", "Wapi"]}, "12": {"1": ["Буржуй", "Логика", "Season's", "ParadoXx", "KEX", "Eskimo.", "aptah", "Yokai", "Фортуна", "DOVOD"], "2": ["Виталий", "ШТО?", "Lюц", "YeS", "Призрак", "Молчун", "Jerry Hurper", "Wapi", "Landing", "Tripok"], "3": ["TOPS", "КуКуСиК", "Саботаж", "Грешник", "LogisticPro", "Korolevich", "Сью", "Дренажная вода deluxe", "f5", "Не Злая"]}, "13": {"1": ["Логика", "Lюц", "Сью", "Jerry Hurper", "Фортуна", "ParadoXx", "YeS", "Landing", "Грешник", "Season's"], "2": ["f5", "Tripok", "Дренажная вода deluxe", "Yokai", "Молчун", "Буржуй", "Eskimo.", "Саботаж", "LogisticPro", "Виталий"], "3": ["Не Злая", "Korolevich", "TOPS", "КуКуСиК", "Wapi", "DOVOD", "ШТО?", "Призрак", "aptah", "KEX"]}, "14": {"1": ["Lюц", "Wapi", "Yokai", "Буржуй", "Eskimo.", "Korolevich", "Грешник", "aptah", "ParadoXx", "Молчун"], "2": ["Jerry Hurper", "LogisticPro", "YeS", "Не Злая", "Дренажная вода deluxe", "ШТО?", "f5", "Сью", "Tripok", "Логика"], "3": ["Саботаж", "КуКуСиК", "DOVOD", "Призрак", "Season's", "Виталий", "Landing", "KEX", "TOPS", "Фортуна"]}, "15": {"1": ["Призрак", "Не Злая", "KEX", "Landing", "TOPS", "Сью", "Молчун", "f5", "Wapi", "Логика"], "2": ["Season's", "Eskimo.", "ШТО?", "Tripok", "КуКуСиК", "Yokai", "ParadoXx", "Lюц", "DOVOD", "YeS"], "3": ["Фортуна", "aptah", "LogisticPro", "Саботаж", "Буржуй", "Korolevich", "Дренажная вода deluxe", "Виталий", "Jerry Hurper", "Грешник"]}}, "roman": {"1": "I", "2": "II", "3": "III"}};
+let PLAYED = 0; // сколько игр сыграно (из games_*_current.json)
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 function esc(s){return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -128,8 +144,12 @@ function renderTable(gameNum, tableNum, targetPlayer){
     const isT = p === targetPlayer;
     seats += `<div class="seat${isT?' is-target':''}" style="left:calc(50% + ${cx.toFixed(1)}px);top:calc(50% + ${cy.toFixed(1)}px);" data-player="${esc(p)}"><div class="seat-num">${i+1}</div><img class="seat-avatar" src="${esc(av)}" referrerpolicy="no-referrer" onerror="this.style.opacity=.25" alt="${esc(p)}"><div class="seat-name">${esc(p)}</div></div>`;
   }
-  const ghdr = targetPlayer ? `<div class="game-label">Игра ${gameNum}</div>` : '';
-  return `<div class="table-wrap"><div class="table-hdr">${ghdr}<div class="table-num">Стол ${DATA.roman[tableNum]}</div><div class="judge"><img class="judge-avatar" src="${esc(judge.avatar)}" referrerpolicy="no-referrer" onerror="this.style.opacity=.25" alt="${esc(judge.name)}"><div class="judge-meta"><div class="judge-label">Судья</div><div class="judge-name">${esc(judge.name)}</div></div></div></div><div class="circle"><div class="circle-inner"></div>${seats}</div></div>`;
+  const gcls = gameNum <= PLAYED ? ' g-played' : gameNum === PLAYED + 1 ? ' g-next' : '';
+  const gbadge = gameNum <= PLAYED ? '<span class="gstat done">сыграна</span>' : gameNum === PLAYED + 1 ? '<span class="gstat next">следующая</span>' : '';
+  const ghdr = targetPlayer ? `<div class="game-label">Игра ${gameNum}${gbadge}</div>` : '';
+  const ytUrl = window.streamFor ? streamFor('826', gameNum, tableNum) : null;
+  const ytBtn = ytUrl ? `<a class="ytb" href="${ytUrl}" target="_blank" rel="noopener">▶ стрим</a>` : '';
+  return `<div class="table-wrap${gcls}"><div class="table-hdr">${ghdr}<div class="table-num">Стол ${DATA.roman[tableNum]}</div>${ytBtn}<div class="judge"><img class="judge-avatar" src="${esc(judge.avatar)}" referrerpolicy="no-referrer" onerror="this.style.opacity=.25" alt="${esc(judge.name)}"><div class="judge-meta"><div class="judge-label">Судья</div><div class="judge-name">${esc(judge.name)}</div></div></div></div><div class="circle"><div class="circle-inner"></div>${seats}</div></div>`;
 }
 
 function showGame(g){
@@ -179,6 +199,19 @@ function attachSeatHandlers(){
 $$('.round-btn').forEach(b => b.addEventListener('click', () => showGame(+b.dataset.game)));
 $('#back-btn').addEventListener('click', showGameView);
 attachSeatHandlers();
+
+// прогресс игр: сыгранные ✓, следующая подсвечена
+fetch('data/games_826_current.json').then(r => r.ok ? r.json() : null).then(G => {
+  if (!G) return;
+  PLAYED = (G.games || []).length;
+  $$('.round-btn').forEach(b => {
+    const g = +b.dataset.game;
+    if (!g) return;
+    b.classList.toggle('played', g <= PLAYED);
+    b.classList.toggle('next', g === PLAYED + 1);
+  });
+  // если открыт «вид игры» — перерисовать текущую, чтобы класс встал
+}).catch(()=>{});
 </script>
 </body>
 </html>

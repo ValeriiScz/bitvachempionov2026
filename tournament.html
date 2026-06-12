@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- MafgameStat · tournament.html · v1.2 · 2026-06-12 · меню разделов турнира (?t=id), реестр data/tournaments.js, тема cyprus для 667 -->
+<meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Турнир — MafgameStat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0e; --panel:#131318; --panel2:#17171d;
+    --gold:#c9a14d; --gold-hi:#e8c87a;
+    --ink:#f2efe8; --mut:#9b97a8; --dim:#5c5965;
+    --hairline:rgba(232,200,122,.14);
+  }
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,sans-serif;min-height:100vh;}
+  .wrap{max-width:680px;margin:0 auto;padding:38px 20px 70px;position:relative;}
+  a.back{display:inline-flex;align-items:center;gap:8px;color:var(--mut);text-decoration:none;font-size:13px;font-weight:600;margin-bottom:24px;transition:.15s;}
+  a.back:hover{color:var(--gold-hi);}
+  a.back::before{content:"←";color:var(--gold);}
+  .stars{color:var(--gold);font-size:12px;letter-spacing:3px;margin-bottom:10px;}
+  .stars .off{opacity:.25;}
+  h1{font-family:'Playfair Display',serif;font-size:30px;font-weight:600;line-height:1.2;margin:0 0 12px;}
+  .tmeta{font-size:14px;color:var(--mut);line-height:1.7;}
+  .tmeta b{color:var(--ink);font-weight:600;}
+  .tmeta .sep{color:var(--dim);margin:0 8px;}
+  .torg{font-size:12px;color:var(--dim);margin-top:6px;}
+  .badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-top:15px;}
+  .badge.upcoming{color:var(--gold-hi);background:rgba(232,200,122,.08);border:1px solid rgba(232,200,122,.35);}
+  .badge.upcoming::before{content:"◆";font-size:8px;margin-right:7px;animation:pulse 2.2s infinite;}
+  .badge.live{color:#67e08f;background:rgba(63,209,122,.1);border:1px solid rgba(63,209,122,.4);}
+  .badge.live::before{content:"●";margin-right:7px;animation:pulse 1.6s infinite;}
+  .badge.finished{color:var(--mut);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--hairline) 18%,var(--hairline) 82%,transparent);margin:28px 0 30px;}
+
+  a.card,.card{display:block;padding:19px 21px;background:linear-gradient(160deg,var(--panel2) 0%,var(--panel) 70%);
+    border:1px solid var(--hairline);border-radius:14px;color:var(--ink);text-decoration:none;margin-bottom:13px;
+    transition:transform .18s,border-color .18s;box-shadow:0 12px 32px rgba(0,0,0,.45);position:relative;}
+  a.card:hover{transform:translateY(-2px);border-color:rgba(232,200,122,.45);}
+  .card .title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;}
+  .card .desc{font-size:12.5px;color:var(--mut);margin-top:5px;line-height:1.55;}
+  .card .arrow{position:absolute;right:20px;top:19px;color:var(--gold);font-size:18px;transition:.18s;}
+  a.card:hover .arrow{right:16px;}
+  .card .soonb{position:absolute;right:18px;top:18px;font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+    padding:4px 9px;border-radius:12px;color:var(--mut);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);}
+  .card.soon{opacity:.62;}
+  .note{padding:20px 22px;border:1px dashed rgba(232,200,122,.3);border-radius:14px;color:var(--mut);font-size:13.5px;line-height:1.7;background:rgba(232,200,122,.025);margin-top:16px;}
+  .note b{color:var(--gold-hi);}
+  .yt-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  a.ytb{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:10px;font-size:12.5px;font-weight:700;text-decoration:none;
+    background:rgba(255,0,0,.10);border:1px solid rgba(255,70,70,.45);color:#ff6b6b;transition:.15s;}
+  a.ytb:hover{background:#e02424;color:#fff;border-color:#e02424;}
+  a.ytb .tri{font-size:9px;}
+  .yt-day{font-size:10.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--mut);margin:14px 0 2px;}
+  body.cyprus a.ytb{background:rgba(224,36,36,.08);border-color:rgba(224,36,36,.45);color:#c41818;}
+  body.cyprus a.ytb:hover{background:#e02424;color:#fff;}
+  body.cyprus .yt-day{color:#155a86;}
+  .src{margin-top:32px;font-size:12px;color:var(--dim);}
+  .src a{color:var(--mut);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.12);}
+  .foot{margin-top:46px;text-align:center;color:#48454f;font-size:11.5px;}
+  .foot a{color:#6b6776;text-decoration:none;}
+
+  .arthero{display:none;margin-bottom:18px;}
+  .arthero img{width:100%;display:block;border-radius:18px;box-shadow:0 18px 50px rgba(13,71,128,.35);}
+  body.hasart .arthero{display:block;}
+  body.hasart .hero{display:none;}
+  /* ════ тема CYPRUS (турнир 667) ════ */
+  body.cyprus{background:linear-gradient(180deg,#a7ddf8 0%,#7cc8ef 26%,#4cb4dc 46%,#2ba6cb 56%,#bfe2e0 62%,#f1ddb0 78%,#e9cf96 100%) fixed;color:#0c3a5e;}
+  body.cyprus .hero{position:relative;text-align:center;padding:26px 10px 6px;}
+  body.cyprus .hero .script{font-family:'Pacifico',cursive;font-size:34px;color:#fff;text-shadow:0 3px 10px rgba(13,71,128,.5);line-height:1;}
+  body.cyprus .hero .big{font-family:'Lilita One',sans-serif;font-size:38px;letter-spacing:1px;line-height:1.05;margin-top:2px;
+    background:linear-gradient(180deg,#ffffff 0%,#bfe2fb 28%,#2f7fd4 66%,#0d47a8 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 2px 0 rgba(255,255,255,.8)) drop-shadow(0 6px 10px rgba(10,60,110,.45));}
+  body.cyprus .hero .psub{font-family:'Lilita One',sans-serif;font-size:14px;letter-spacing:2.4px;color:#0d6cae;margin-top:10px;text-shadow:0 1px 0 rgba(255,255,255,.75);}
+  body.cyprus svg.palm{position:fixed;width:150px;height:175px;z-index:0;opacity:.92;}
+  body.cyprus svg.palm.pl{left:-34px;top:-10px;}
+  body.cyprus svg.palm.pr{right:-34px;top:-6px;transform:scaleX(-1);}
+  body.cyprus .wrap{z-index:1;}
+  body.cyprus a.back{color:#0c3a5e;font-weight:700;}
+  body.cyprus a.back::before{color:#0d6cae;}
+  body.cyprus a.back:hover{color:#0d6cae;}
+  body.cyprus .stars{color:#e9b93c;text-shadow:0 1px 0 #fff;}
+  body.cyprus .tmeta{color:#155a86;}
+  body.cyprus .tmeta b{color:#0c3a5e;}
+  body.cyprus .tmeta .sep{color:#5ba3c9;}
+  body.cyprus .torg{color:#3d83ab;}
+  body.cyprus .badge.upcoming{color:#0d6cae;background:rgba(255,255,255,.55);border-color:rgba(13,108,174,.4);}
+  body.cyprus .badge.live{color:#0c7a40;background:rgba(255,255,255,.55);border-color:rgba(18,150,80,.45);}
+  body.cyprus .rule{background:linear-gradient(90deg,transparent,rgba(13,108,174,.3) 18%,rgba(13,108,174,.3) 82%,transparent);}
+  body.cyprus a.card,body.cyprus .card{background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.9);
+    box-shadow:0 10px 28px rgba(13,71,128,.18);backdrop-filter:blur(6px);color:#0c3a5e;}
+  body.cyprus a.card:hover{border-color:#2f9fd0;}
+  body.cyprus .card .title{font-family:'Lilita One',sans-serif;font-weight:400;color:#0d5d9e;letter-spacing:.4px;}
+  body.cyprus .card .desc{color:#33709a;}
+  body.cyprus .card .arrow{color:#e9a93c;}
+  body.cyprus .card .soonb{color:#0d6cae;background:rgba(180,224,248,.55);border-color:rgba(13,108,174,.3);}
+  body.cyprus .card.soon{opacity:.8;}
+  body.cyprus .note{border-color:rgba(13,108,174,.4);background:rgba(255,255,255,.5);color:#155a86;}
+  body.cyprus .note b{color:#0d5d9e;}
+  body.cyprus .src{color:#3d83ab;}
+  body.cyprus .src a{color:#155a86;border-bottom-color:rgba(13,108,174,.3);}
+  body.cyprus .foot{color:#3d83ab;}
+  body.cyprus .foot a{color:#155a86;}
+
+  @media(max-width:520px){
+    body.cyprus .hero .big{font-size:29px;}
+    body.cyprus svg.palm{width:110px;height:128px;}
+    h1{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">Все турниры</a>
+  <div id="head"></div>
+  <div class="rule"></div>
+  <div id="sections"></div>
+  <div class="src" id="src"></div>
+  <div class="foot">MafgameStat · данные: <a href="https://mafgame.org">mafgame.org</a></div>
+</div>
+<script src="data/tournaments.js"></script>
+<script src="data/streams.js"></script>
+<script>
+function streamsCard(tid){
+  const S=(window.STREAMS_DB||{})[String(tid)];
+  if(!S||!S.days) return '';
+  const yt=id=>'https://www.youtube.com/watch?v='+id;
+  const btn=(id,label)=>`<a class="ytb" href="${yt(id)}" target="_blank" rel="noopener"><span class="tri">▶</span>${label}</a>`;
+  let inner='';
+  Object.keys(S.days).sort().forEach(d=>{
+    const tables=S.days[d];
+    inner+=`<div class="yt-day">День ${d}</div><div class="yt-grid">`+
+      Object.keys(tables).sort((a,b)=>a-b).map(tb=>btn(tables[tb],'Стол '+tb)).join('')+
+      (S.commentary&&S.commentary[d]?btn(S.commentary[d],'Студия / комментарий'):'')+
+      `</div>`;
+  });
+  if(S.final) inner+=`<div class="yt-day">Финал</div><div class="yt-grid">${btn(S.final,'Финальный стол')}</div>`;
+  return `<div class="card" style="margin-top:18px"><div class="title">Трансляции</div><div class="desc">Прямые эфиры столов на YouTube @mafgameorg. Игры 1–8 — день 1, дальше — день 2.</div>${inner}</div>`;
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function stars(n){let s='';for(let i=1;i<=5;i++)s+='<span'+(i<=n?'':' class="off"')+'>✦</span> ';return s;}
+const PALM='<svg class="palm" viewBox="0 0 120 140" fill="none"><path d="M38 138 C40 100 44 78 54 60 L60 62 C50 84 47 104 46 138 Z" fill="#1a5a39"/><g fill="#1f6b44"><path d="M56 62 C40 44 22 40 4 46 C20 28 48 34 58 56 Z"/><path d="M57 60 C50 36 34 24 14 22 C36 12 58 32 60 56 Z"/><path d="M58 58 C58 34 70 18 90 14 C76 30 68 44 62 58 Z"/><path d="M60 60 C74 44 94 40 112 48 C94 52 76 58 64 64 Z"/><path d="M59 62 C72 70 80 84 80 102 C68 88 62 76 57 66 Z"/></g><circle cx="54" cy="62" r="3.4" fill="#8a5a2a"/><circle cx="61" cy="64" r="3.4" fill="#8a5a2a"/></svg>';
+const id=new URLSearchParams(location.search).get('t')||'667';
+(d=>{
+  const t=d.tournaments.find(x=>x.id===id);
+  if(!t){document.getElementById('head').innerHTML='<h1>Турнир не найден</h1>';return;}
+  document.title=t.name+' — MafgameStat';
+  let headHtml='';
+  if(t.theme==='cyprus'){
+    document.body.classList.add('cyprus');
+    document.body.insertAdjacentHTML('afterbegin',PALM.replace('class="palm"','class="palm pl"')+PALM.replace('class="palm"','class="palm pr"'));
+    headHtml=`
+      <div class="arthero"><img src="assets/cyprus667.jpg" alt="" onload="document.body.classList.add('hasart')" onerror="this.parentNode.remove()"></div>
+      <div class="hero">
+        <div class="script">${esc(t.posterScript||'')}</div>
+        <div class="big">${esc(t.posterTitle||t.name)}</div>
+        <div class="psub">${esc(t.posterSub||'')}</div>
+      </div>
+      <div style="text-align:center;margin-top:14px;">
+        <div class="stars">${stars(t.stars)}</div>
+        <div class="tmeta"><b>${esc(t.dates)}</b><span class="sep">|</span><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков</div>
+        <div class="torg">${esc(t.organizer)}</div>
+        <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+      </div>`;
+  } else {
+    headHtml=`
+      <div class="stars">${stars(t.stars)}</div>
+      <h1>${esc(t.name)}</h1>
+      <div class="tmeta"><b>${esc(t.dates)}</b><span class="sep">|</span><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков<span class="sep">|</span>${t.days} ${t.days===1?'день':'дня'}</div>
+      <div class="torg">${esc(t.organizer)}</div>
+      <span class="badge ${t.status}">${esc(t.statusLabel)}</span>`;
+  }
+  document.getElementById('head').innerHTML=headHtml;
+  const sec=document.getElementById('sections');
+  let html='';
+  if(t.sections && t.sections.length){
+    html=t.sections.map(s=>{
+      if(s.soon||!s.href){
+        return `<div class="card soon"><span class="soonb">после старта</span><div class="title">${esc(s.title)}</div><div class="desc">${esc(s.desc)}</div></div>`;
+      }
+      return `<a class="card" href="${s.href}"><span class="arrow">→</span><div class="title">${esc(s.title)}</div><div class="desc">${esc(s.desc)}</div></a>`;
+    }).join('');
+  }
+  if(t.note) html+=`<div class="note"><b>${t.status==='upcoming'?'Скоро.':'Заметка.'}</b> ${esc(t.note)}</div>`;
+  html+=streamsCard(t.id);
+  sec.innerHTML=html;
+  document.getElementById('src').innerHTML='Источник: <a href="'+t.mafgame+'">'+t.mafgame.replace('https://','')+'</a>';
+})(window.TOURNAMENTS_DB);
+</script>
+</body>
+</html>

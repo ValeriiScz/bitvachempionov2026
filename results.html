@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- MafgameStat · results.html · v2.0 · 2026-06-12 · фото игроков, новая звезда шерифа, контраст команд и победителей -->
 <meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <title>Битва Чемпионов 2026 — игры с результатами</title>
 <style>
@@ -74,20 +76,37 @@
   .legend-row{display:flex;flex-wrap:wrap;gap:18px;align-items:center;}
   .legend-item{display:flex;align-items:center;gap:6px;}
   .legend .role-icon{position:static;width:22px;height:22px;}
+  .seat-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;}
+  .seat.loser .seat-avatar{filter:grayscale(.85) brightness(.55);border-color:rgba(255,255,255,.10);box-shadow:none;}
+  .seat.loser .seat-name{color:#6b6f86;}
+  .seat.loser .seat-num{opacity:.55;}
+  .seat-avatar.team-red{border-color:#e84a4a;}
+  .seat-avatar.team-black{border-color:#5dd1ff;}
+  .seat.winner .seat-avatar.team-red{box-shadow:0 0 0 3px rgba(232,74,74,.35),0 0 18px rgba(232,74,74,.45);}
+  .seat.winner .seat-avatar.team-black{box-shadow:0 0 0 3px rgba(93,209,255,.30),0 0 18px rgba(93,209,255,.40);}
+  .seat-name .tm-red{color:#ff8a8a;}
+  .seat-name .tm-black{color:#8fd8ff;}
+  .seat.winner .seat-name{font-weight:800;}
+  .wbadge{display:inline-block;font-size:8.5px;font-weight:800;letter-spacing:.8px;padding:1px 6px;border-radius:6px;margin-left:4px;vertical-align:1px;}
+  .wbadge.w-red{background:#e84a4a;color:#fff;}
+  .wbadge.w-black{background:#5dd1ff;color:#0a0c18;}
+  a.ytb{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:9px;font-size:11.5px;font-weight:700;text-decoration:none;
+    background:rgba(255,0,0,.10);border:1px solid rgba(255,70,70,.45);color:#ff6b6b;transition:.15s;}
+  a.ytb:hover{background:#e02424;color:#fff;border-color:#e02424;}
 </style>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="ic-citizen" viewBox="0 0 24 24"><path d="M12 21.3l-1.5-1.4C5.4 15.4 2 12.3 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.1 3.8 14.8 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.8-3.4 6.9-8.5 11.5L12 21.3z" fill="currentColor"/></symbol>
-  <symbol id="ic-sheriff" viewBox="0 0 24 24"><path d="M12 1.5l2.2 5L19.5 5l-1.5 5.3L23 12l-5 1.7 1.5 5.3-5.3-1.5L12 22.5l-2.2-5L4.5 19l1.5-5.3L1 12l5-1.7L4.5 5l5.3 1.5L12 1.5z" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="#0a0c18"/></symbol>
+  <symbol id="ic-sheriff" viewBox="0 0 24 24"><path d="M12 1.8l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7L12 1.8z" fill="currentColor" stroke="rgba(0,0,0,.35)" stroke-width=".6" stroke-linejoin="round"/></symbol>
   <symbol id="ic-mafia" viewBox="0 0 32 24"><path d="M2 8h16v3h2l1-3h6v3h2v4h-2v1l-3 3h-4v2l-1 1h-6l-1-2-1-2H4l-2-2V8z" fill="currentColor"/><rect x="6" y="14" width="6" height="2" fill="#0a0c18"/></symbol>
   <symbol id="ic-don" viewBox="0 0 32 24"><path d="M6 19c0-7 4-12 10-12s10 5 10 12v1H6v-1z" fill="currentColor"/><ellipse cx="16" cy="20" rx="13" ry="2" fill="currentColor"/><path d="M9 16h14" stroke="#0a0c18" stroke-width="1.5" fill="none"/></symbol>
 </defs></svg>
 
 <div class="topbar">
   <div class="nav-left">
-    <a class="nav-btn muted" href="./">← Главная</a>
+    <a class="nav-btn muted" id="link-tournament" href="./">← Турнир</a>
     <a class="nav-btn muted" href="standings.html" id="link-standings">Сводная</a>
     <a class="nav-btn muted" href="player.html" id="link-player">Игроки</a>
     <div>
@@ -111,8 +130,8 @@
   <div class="legend-row" style="margin-bottom:10px;">
     <span><strong>Маркеры:</strong></span>
     <span class="legend-item">💀 убит первой ночью</span>
-    <span class="legend-item">красная рамка — победил красным</span>
-    <span class="legend-item">синяя рамка — победил чёрным</span>
+    <span class="legend-item">красная рамка — красная команда, синяя — чёрная</span>
+    <span class="legend-item">ярко + WIN — победители, приглушены — проигравшие</span>
   </div>
   <div class="legend-row">
     <span><strong>Допы (Σap):</strong></span>
@@ -124,16 +143,20 @@
   </div>
 </div>
 
+<script src="data/streams.js"></script>
 <script>
 const T = new URLSearchParams(location.search).get('t') || '826';
 const ROLE_CLASS = {Citizen:'role-citizen',Sheriff:'role-sheriff',Don:'role-don',Mafia:'role-mafia'};
 const ROLE_ICON_ID = {Citizen:'ic-citizen',Sheriff:'ic-sheriff',Don:'ic-don',Mafia:'ic-mafia'};
 let DATA = null, currentGame = 0;
 
+let AV = {};
 async function load() {
   const r = await fetch(`data/games_${T}_current.json`);
   if (!r.ok) throw new Error('Нет данных');
   DATA = await r.json();
+  try { const a = await fetch(`data/avatars_${T}.json`); if (a.ok) AV = (await a.json()).avatars || {}; } catch(e) {}
+  document.getElementById('link-tournament').href = `tournament.html?t=${T}`;
   document.getElementById('link-standings').href = `standings.html?t=${T}`;
   document.getElementById('link-player').href = `player.html?t=${T}`;
   document.getElementById('title').innerHTML = `Игры с результатами <span class="acc">· турнир ${DATA.tournament_id}</span>`;
@@ -164,10 +187,11 @@ function renderNav() {
 
 function render() {
   const game = DATA.games[currentGame];
-  document.getElementById('grid').innerHTML = (game.tables || []).map(renderTable).join('');
+  const gameNum = parseInt(game.title.replace(/\D/g, ''), 10) || (currentGame + 1);
+  document.getElementById('grid').innerHTML = (game.tables || []).map(t => renderTable(t, gameNum)).join('');
 }
 
-function renderTable(t) {
+function renderTable(t, gameNum) {
   const winnerKey = t.winner === 'red_win' ? 'red' : t.winner === 'black_win' ? 'black' : 'unknown';
   const winnerLabel = t.winner === 'red_win' ? 'Красные' : t.winner === 'black_win' ? 'Чёрные' : 'Не сыграна';
   const centerIconId = t.winner === 'red_win' ? 'ic-citizen' : t.winner === 'black_win' ? 'ic-mafia' : null;
@@ -180,14 +204,20 @@ function renderTable(t) {
     const x = Math.cos(angle) * radius;
     const y = Math.sin(angle) * radius;
     const initial = (s.name[0] || '?').toUpperCase();
-    const winClass = s.result === 'W' ? (t.winner === 'red_win' ? 'win-red' : 'win-black') : '';
+    const team = (s.role === 'Mafia' || s.role === 'Don') ? 'black' : 'red';
+    const isWin = s.result === 'W';
     const killedClass = s.marker === 'first_killed' ? 'first-killed' : '';
     const apsClass = apsBucket(s.aps);
     const apsStr = s.aps === 0 ? '0' : (s.aps > 0 ? '+' : '') + s.aps.toFixed(2).replace(/\.?0+$/, '');
-    return `<div class="seat" style="left:calc(50% + ${x.toFixed(0)}px);top:calc(50% + ${y.toFixed(0)}px);">
+    const av = AV[s.name];
+    const avInner = av
+      ? `<img src="${av}" referrerpolicy="no-referrer" loading="lazy" alt="${escapeHtml(s.name)}" onerror="this.onerror=null;this.src='https://mafgame.org/build/assets/avatar-default2-33e44bae.png'">`
+      : initial;
+    const wbadge = isWin ? `<span class="wbadge w-${team}">WIN</span>` : '';
+    return `<div class="seat ${isWin ? 'winner' : 'loser'}" style="left:calc(50% + ${x.toFixed(0)}px);top:calc(50% + ${y.toFixed(0)}px);">
       <div class="seat-num">${s.seat}</div>
-      <div class="seat-avatar ${winClass} ${killedClass}">${initial}<span class="role-icon ${ROLE_CLASS[s.role] || ''}" title="${s.role}"><svg><use href="#${ROLE_ICON_ID[s.role] || 'ic-citizen'}"/></svg></span></div>
-      <div class="seat-name"><a href="player.html?nick=${encodeURIComponent(s.name)}&t=${T}">${escapeHtml(s.name)}</a></div>
+      <div class="seat-avatar team-${team} ${killedClass}">${avInner}<span class="role-icon ${ROLE_CLASS[s.role] || ''}" title="${s.role}"><svg><use href="#${ROLE_ICON_ID[s.role] || 'ic-citizen'}"/></svg></span></div>
+      <div class="seat-name"><a href="player.html?nick=${encodeURIComponent(s.name)}&t=${T}"><span class="tm-${team}">${escapeHtml(s.name)}</span></a>${wbadge}</div>
       <div><span class="seat-aps ${apsClass}">${apsStr}</span></div>
     </div>`;
   }).join('');
@@ -195,7 +225,7 @@ function renderTable(t) {
   return `<div class="table-wrap ${winnerKey}">
     <div class="winner-bar ${winnerKey}">${winnerBarIcon} ${winnerKey === 'unknown' ? 'Не сыграна' : 'Победа ' + (winnerKey === 'red' ? 'красных' : 'чёрных')}</div>
     <div class="table-body">
-      <div class="table-hdr"><div class="table-num">Стол ${num}</div></div>
+      <div class="table-hdr"><div class="table-num">Стол ${num}</div>${(window.streamFor && streamFor(T, gameNum, t.table_num)) ? `<a class="ytb" href="${streamFor(T, gameNum, t.table_num)}" target="_blank" rel="noopener">▶ стрим стола</a>` : ''}</div>
       <div class="circle ${winnerKey}">
         <div class="circle-inner ${winnerKey}">
           ${centerIconId ? `<div class="center-icon"><svg><use href="#${centerIconId}"/></svg></div>` : ''}
