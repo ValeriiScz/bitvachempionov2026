@@ -143,7 +143,7 @@ function streamsCard(tid){
       `</div>`;
   });
   if(S.final) inner+=`<div class="yt-day">Финал</div><div class="yt-grid">${btn(S.final,'Финальный стол')}</div>`;
-  return `<div class="card" style="margin-top:18px"><div class="title">Трансляции</div><div class="desc">Прямые эфиры столов на YouTube @mafgameorg. Игры 1–8 — день 1, дальше — день 2.</div>${inner}</div>`;
+  return `<div class="card" style="margin-top:18px"><div class="title">Трансляции</div><div class="desc">Прямые эфиры столов на YouTube @mafgameorg. Игры 1–7 — день 1, дальше — день 2.</div>${inner}</div>`;
 }
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function stars(n){let s='';for(let i=1;i<=5;i++)s+='<span'+(i<=n?'':' class="off"')+'>✦</span> ';return s;}

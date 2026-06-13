@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · standings.html · v2.2 · 2026-06-12 · сводная таблица: ползунок «после игры N», роли R/S/B/D, сводка красных/чёрных, Δ мест -->
+<!-- v2.3 · 2026-06-14 · сводная таблица: ползунок «после игры N», роли R/S/B/D, сводка красных/чёрных, Δ мест -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -152,7 +152,7 @@ async function load() {
   renderMeta();
   renderAwards();
   if (GAMES && GAMES.games?.length && (DATA.in_progress || !DATA.standings || !Object.keys(DATA.standings).length)) {
-    sliderN = GAMES.games.length;
+    sliderN = (GAMES.games_played!=null ? GAMES.games_played : GAMES.games.length); // только доигранные за всеми столами
     renderLive();
   } else {
     renderMain();
@@ -187,7 +187,7 @@ function buildStandings(n) {
 function renderLive(fromOfficial) {
   const backBtn = (!DATA.in_progress && DATA.standings && Object.keys(DATA.standings).length) ? `<div style="margin-bottom:14px;"><button class="stage-btn" id="back-official">← Официальная таблица</button></div>` : '';
   const total = GAMES.games_total || 15;
-  const played = GAMES.games.length;
+  const played = (GAMES.games_played!=null ? GAMES.games_played : GAMES.games.length);
   const cur = buildStandings(sliderN);
   const prev = sliderN > 1 ? buildStandings(sliderN - 1) : null;
   const prevPlace = {};

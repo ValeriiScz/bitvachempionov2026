@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · results.html · v2.1 · 2026-06-12 · фото игроков, новая звезда шерифа, контраст команд и победителей -->
+<!-- v2.2 · 2026-06-14 · фото игроков, новая звезда шерифа, контраст команд и победителей -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -23,6 +23,7 @@
   .game-btn{padding:8px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#dfe2f0;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;min-width:42px;}
   .game-btn:hover{background:rgba(255,184,77,.12);border-color:#ffb84d;}
   .game-btn.active{background:#ffb84d;color:#1a1d2e;border-color:#ffb84d;}
+  .game-btn.unplayed{opacity:.35;cursor:not-allowed;}
   .game-btn.unplayed{opacity:.35;cursor:not-allowed;}
   .grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   @media (max-width:1100px){ .grid{grid-template-columns:1fr;max-width:460px;} }
@@ -163,9 +164,10 @@ async function load() {
   document.getElementById('link-player').href = `player.html?t=${T}`;
   document.getElementById('title').innerHTML = `Игры с результатами <span class="acc">· турнир ${DATA.tournament_id}</span>`;
   document.getElementById('subtitle').textContent = `${DATA.tournament_name} · сыграно ${DATA.games_played}/${DATA.games_total}`;
-  // первая сыгранная игра по умолчанию
-  currentGame = DATA.games.findIndex(g => g.tables?.[0]?.winner !== 'unknown' && g.tables?.length);
-  if (currentGame < 0) currentGame = 0;
+  // последняя ДОИГРАННАЯ (за всеми столами) игра по умолчанию
+  window.__isPlayed = g => g.tables && g.tables.length > 0 && g.tables.every(t => t.winner !== 'unknown');
+  currentGame = 0;
+  for (let i = 0; i < DATA.games.length; i++) if (window.__isPlayed(DATA.games[i])) currentGame = i;
   renderNav();
   render();
 }
@@ -173,7 +175,7 @@ async function load() {
 function renderNav() {
   document.getElementById('games-nav').innerHTML = DATA.games.map((g, i) => {
     const n = g.title.replace('Game ', '');
-    const played = g.tables?.[0]?.winner !== 'unknown' && g.tables?.length;
+    const played = window.__isPlayed(g); // доиграна за ВСЕМИ столами
     const active = i === currentGame ? ' active' : '';
     const unplayed = played ? '' : ' unplayed';
     return `<button class="game-btn${active}${unplayed}" data-i="${i}" ${played ? '' : 'disabled'}>${n}</button>`;

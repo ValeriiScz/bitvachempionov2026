@@ -1,9 +1,9 @@
-// MafgameStat · data/streams.js · v1.0 · 2026-06-12 · трансляции YouTube @mafgameorg: турнир → день → стол → videoId
+// MafgameStat · data/streams.js · v1.1 · 2026-06-14 · трансляции YouTube @mafgameorg: турнир → день → стол → videoId
 // правило: игра N → день 1 если N <= gamesDay1, иначе день 2
 window.STREAMS_DB = {
   "channel": "https://www.youtube.com/@mafgameorg",
   "667": {
-    "gamesDay1": 8,
+    "gamesDay1": 7,
     "days": {
       "1": {"1":"ATlCCOquogQ","2":"yM0jGib3-gU","3":"ZZGk8Et7I9M","4":"Fp_AwLLnsUQ","5":"fVr2d32qNgA","6":"FeRd5JWGnPs","7":"Vbb4YtOO9zg"},
       "2": {"1":"fEDRvWSF584","2":"aCtLtIeLxNg","3":"TyGQsYkCBLE","4":"OxIE2K80VD8","5":"m--ze8D4wxI","6":"62w0gU799lI","7":"LC5xCihkgD8"}

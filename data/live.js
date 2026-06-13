@@ -1,4 +1,4 @@
-// MafgameStat · data/live.js · v1.0 · 2026-06-13 · live-загрузка результатов с mafgame через Netlify-прокси /mafgame/*
+// MafgameStat · data/live.js · v1.1 · 2026-06-14 · live-загрузка результатов с mafgame через Netlify-прокси /mafgame/*
 // Замены игроков поддерживаются автоматически: берём фактический original_nickname из протокола игры.
 window.normRole = function(r){
   if(r==null) return null;
@@ -14,14 +14,15 @@ window.convertInertia667 = function(g){
     if(p.length!==4||p[0]!==1) continue; // 1 = квалификация; финал добавим отдельной стадией
     const [,gm,tb,seat]=p, s=g.seats[k];
     const role=normRole(s.role);
-    const plus=(s.game_bonus||0)+(s.best_move_bonus||0);
+    const bonus=(s.game_bonus||0)+(s.best_move_bonus||0);
     const minus=s.penalty||0;
+    const ci=s.Ci||0;            // компенсация (Ci) — есть в протоколе, входит в офиц. Σ
     const wpts=s.game_points||0;
     ((games[gm]=games[gm]||{})[tb]=games[gm][tb]||[])[seat-1]={
       seat,name:s.original_nickname,role,
-      marker:s.killed_first?'first_killed':(plus>0?'beige':null),
-      aps:+(plus-minus).toFixed(2),wpts,ci:0,
-      sigma:+(wpts+plus-minus).toFixed(2),result:null};
+      marker:s.killed_first?'first_killed':(bonus>0?'beige':null),
+      aps:+(bonus-minus+ci).toFixed(4),wpts,ci:+ci.toFixed(4),
+      sigma:+(wpts+bonus-minus+ci).toFixed(4),result:null};
   }
   const out=[];
   Object.keys(games).map(Number).sort((a,b)=>a-b).forEach(gm=>{

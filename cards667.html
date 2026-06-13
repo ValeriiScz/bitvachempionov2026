@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · cards667.html · v1.3 · 2026-06-13 · карточки 70 игроков Cyprus Open 667 в пляжном стиле: фото, клуб, столы, слоты, соперники -->
+<!-- MafgameStat · cards667.html · v1.3 · 2026-06-13 · карточки 70 игроков Cyprus Open 667: фото, клуб, столы, слоты, соперники + раскрывающийся маршрут по играм (клик) + плавающая кнопка «наверх» -->
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,7 +69,8 @@
 <div class="toc" id="toc"></div>
 <div id="cards"></div>
 <button class="up-btn" id="upBtn" title="Наверх" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<script src="data/live.js">
+<script src="data/live.js"></script>
+<script>
 window.addEventListener('scroll',()=>{const b=document.getElementById('upBtn');if(b)b.classList.toggle('show',window.scrollY>600);});
 </script>
 <script>
