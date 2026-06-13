@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · cards667.html · v1.2 · 2026-06-13 · карточки 70 игроков Cyprus Open 667 в пляжном стиле: фото, клуб, столы, слоты, соперники -->
+<!-- MafgameStat · cards667.html · v1.3 · 2026-06-13 · карточки 70 игроков Cyprus Open 667 в пляжном стиле: фото, клуб, столы, слоты, соперники -->
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,6 +41,20 @@
   .opp b{color:#0d5d9e;}
   .opp .cnt{display:inline-block;min-width:18px;text-align:center;background:#0d6cae;color:#fff;border-radius:6px;font-size:10px;font-weight:800;padding:1px 4px;margin-right:6px;}
   .foot{font-size:10px;color:#3d83ab;margin-top:10px;text-align:right;}
+  .up-btn{position:fixed;right:16px;bottom:16px;z-index:50;width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;
+    background:#0d6cae;color:#fff;font-size:22px;box-shadow:0 6px 18px rgba(13,71,128,.4);display:none;align-items:center;justify-content:center;}
+  .up-btn.show{display:flex;}
+  .route-toggle{margin-top:10px;width:100%;padding:9px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:800;
+    background:rgba(13,108,174,.1);border:1px solid rgba(13,108,174,.3);color:#0d6cae;}
+  .route-toggle:hover{background:#0d6cae;color:#fff;}
+  .route{display:none;margin-top:10px;border:1px solid rgba(13,108,174,.2);border-radius:10px;overflow:hidden;}
+  .route.open{display:block;}
+  .route table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .route td{padding:6px 10px;border-bottom:1px solid rgba(13,108,174,.1);}
+  .route tr:last-child td{border-bottom:none;}
+  .route td:first-child{color:#155a86;font-weight:700;}
+  .route td:nth-child(2){color:#3d83ab;}
+  .route td:last-child{text-align:right;font-weight:800;color:#0d5d9e;}
 </style>
 </head>
 <body>
@@ -54,7 +68,10 @@
 </div>
 <div class="toc" id="toc"></div>
 <div id="cards"></div>
-<script src="data/live.js"></script>
+<button class="up-btn" id="upBtn" title="Наверх" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script src="data/live.js">
+window.addEventListener('scroll',()=>{const b=document.getElementById('upBtn');if(b)b.classList.toggle('show',window.scrollY>600);});
+</script>
 <script>
 const ROMAN=['','I','II','III','IV','V','VI','VII'];
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -105,6 +122,8 @@ Promise.all([
       <div class="slots">${Array.from({length:10},(_,i)=>`<div class="slot${sc[i+1]?'':' zero'}"><div class="n">${i+1}</div><div class="c">${sc[i+1]||0}</div></div>`).join('')}</div>
       <div class="sec">Соперники (общих игр)</div>
       <div class="opp">${oppHtml}</div>
+      <button class="route-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'Скрыть маршрут ▲':'Мой маршрут по играм ▼';">Мой маршрут по играм ▼</button>
+      <div class="route"><table>${o.sort((a,b)=>a.g-b.g).map(x=>`<tr><td>Игра ${x.g}</td><td>стол ${ROMAN[x.t]}</td><td>место ${x.slot}</td></tr>`).join('')}</table></div>
       <div class="foot">mafgame.org/667 · MafgameStat</div>
     </div>`;
   }).join('');
