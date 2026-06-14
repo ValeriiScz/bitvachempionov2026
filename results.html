@@ -112,6 +112,7 @@
     <a class="nav-btn muted" id="link-tournament" href="./">← Турнир</a>
     <a class="nav-btn muted" href="standings.html" id="link-standings">Сводная</a>
     <a class="nav-btn muted" href="player.html" id="link-player">Игроки</a>
+    <a class="nav-btn muted" href="roles.html" id="link-roles">По ролям</a>
     <div>
       <div class="title" id="title">Игры с результатами</div>
       <div class="sub" id="subtitle">…</div>
@@ -162,6 +163,7 @@ async function load() {
   document.getElementById('link-tournament').href = `tournament.html?t=${T}`;
   document.getElementById('link-standings').href = `standings.html?t=${T}`;
   document.getElementById('link-player').href = `player.html?t=${T}`;
+  document.getElementById('link-roles').href = `roles.html?t=${T}`;
   document.getElementById('title').innerHTML = `Игры с результатами <span class="acc">· турнир ${DATA.tournament_id}</span>`;
   document.getElementById('subtitle').textContent = `${DATA.tournament_name} · сыграно ${DATA.games_played}/${DATA.games_total}`;
   // последняя ДОИГРАННАЯ (за всеми столами) игра по умолчанию

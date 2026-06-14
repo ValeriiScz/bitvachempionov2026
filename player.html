@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · player.html · v2.2 · 2026-06-12 · фото, стата по 4 ролям, место после каждой игры, сравнение топ-10/11-20/среднее -->
+<!-- MafgameStat · player.html · v2.5 · 2026-06-14 · фото, стата по 4 ролям, место после каждой игры, сравнение топ-10/11-20/среднее -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,6 +67,11 @@
   .all-players{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;}
   .all-players a{display:block;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;transition:.15s;}
   .all-players a:hover{background:rgba(255,184,77,.12);border-color:#ffb84d;color:#ffb84d;}
+  .all-players a{display:flex;align-items:center;gap:10px;}
+  .all-players a .rk{color:#ffb84d;min-width:26px;text-align:right;flex:none;}
+  .all-players a .sg{margin-left:auto;color:#ffb84d;font-weight:800;}
+  .pnav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px;}
+  .player-jump{flex:1;min-width:180px;max-width:340px;padding:9px 12px;background:#141728;color:#fff;border:1px solid rgba(255,184,77,.35);border-radius:8px;font-size:13px;font-weight:600;}
   .empty{padding:40px;text-align:center;color:#8a8fa8;}
   .todo{margin-top:14px;padding:12px 14px;background:rgba(255,184,77,.06);border:1px dashed rgba(255,184,77,.3);border-radius:10px;font-size:12px;color:#a0a4b8;line-height:1.6;}
   .todo strong{color:#ffb84d;}
@@ -118,6 +123,7 @@
   <a class="nav-btn muted" id="link-tournament" href="./">← Турнир</a>
   <a class="nav-btn muted" href="standings.html" id="link-standings">К сводной</a>
   <a class="nav-btn muted" href="results.html" id="link-results">Игры</a>
+  <a class="nav-btn muted" href="roles.html" id="link-roles">По ролям</a>
 </div>
 
 <div class="wrap" id="content"><div class="card empty">Загрузка…</div></div>
@@ -145,6 +151,7 @@ async function load() {
   document.getElementById('link-tournament').href = `tournament.html?t=${T}`;
   document.getElementById('link-standings').href = `standings.html?t=${T}`;
   document.getElementById('link-results').href = `results.html?t=${T}`;
+  document.getElementById('link-roles').href = `roles.html?t=${T}`;
   const [r1, r2] = await Promise.all([
     fetch(`data/tournament_${T}.json`).then(r => r.ok ? r.json() : Promise.reject('Нет tournament_'+T)),
     window.loadGames(T)
@@ -156,15 +163,22 @@ async function load() {
   if (nick) renderPlayer(nick); else renderAllPlayers();
 }
 
+function ratingOrdered() {
+  if (GAMES && GAMES.games && GAMES.games.length) {
+    const n = (GAMES.games_played != null ? GAMES.games_played : GAMES.games.length);
+    return liveStandings(n).map(r => ({name: r.name, place: r.place, sigma: r.sigma}));
+  }
+  return (DATA.players || []).slice().sort((a,b) => a.name.localeCompare(b.name,'ru')).map(p => ({name: p.name, place: null, sigma: null}));
+}
 function renderAllPlayers() {
-  document.title = `Все игроки ${T} — Битва Чемпионов 2026`;
-  const players = DATA.players || [];
+  document.title = `Все игроки · турнир ${T}`;
+  const list = ratingOrdered();
+  const ranked = list.length && list[0].place != null;
   document.getElementById('content').innerHTML = `
     <div class="card">
-      <h3>Все игроки турнира ${T} (${players.length})</h3>
+      <h3>Игроки турнира ${T} (${list.length})${ranked ? ' · по текущему рейтингу' : ''}</h3>
       <div class="all-players">
-        ${players.sort((a,b) => a.name.localeCompare(b.name, 'ru'))
-          .map(p => `<a href="?nick=${encodeURIComponent(p.name)}&t=${T}">${escapeHtml(p.name)}</a>`).join('')}
+        ${list.map(p => `<a href="?nick=${encodeURIComponent(p.name)}&t=${T}">${p.place != null ? `<b class="rk">${p.place}</b> ` : ''}<span class="nm">${escapeHtml(p.name)}</span>${p.sigma != null ? `<span class="sg">${fmtNum(p.sigma)}</span>` : ''}</a>`).join('')}
       </div>
     </div>`;
 }
@@ -207,7 +221,7 @@ function renderPlayer(nick) {
 
   const myGames = [];
   if (GAMES?.games) {
-    GAMES.games.forEach((g, gi) => {
+    GAMES.games.slice(0, (GAMES.games_played != null ? GAMES.games_played : GAMES.games.length)).forEach((g, gi) => {
       (g.tables || []).forEach(t => {
         const seat = (t.seats || []).find(s => s.name === nick);
         if (seat) myGames.push({game_title: g.title, game_idx: gi, stage: g.stage, table_num: t.table_num, winner: t.winner, ...seat});
@@ -217,7 +231,13 @@ function renderPlayer(nick) {
 
   const initial = nick.charAt(0).toUpperCase();
 
+  const jumpOpts = ratingOrdered().map(p => `<option value="${escapeHtml(p.name)}"${p.name === nick ? ' selected' : ''}>${p.place != null ? p.place + '. ' : ''}${escapeHtml(p.name)}${p.sigma != null ? ' — ' + fmtNum(p.sigma) : ''}</option>`).join('');
+
   const html = `
+    <div class="pnav">
+      <a class="nav-btn" href="player.html?t=${T}">← Ко всем игрокам</a>
+      <select class="player-jump" onchange="if(this.value)location.href='?nick='+encodeURIComponent(this.value)+'&t=${T}'">${jumpOpts}</select>
+    </div>
     <div class="player-hdr">
       <div class="player-avatar">${AV[nick] ? `<img src="${AV[nick]}" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://mafgame.org/build/assets/avatar-default2-33e44bae.png'">` : escapeHtml(initial)}</div>
       <div style="flex:1;">
@@ -336,17 +356,17 @@ function renderPlayer(nick) {
 
 function liveStandings(n) {
   const P = {};
-  const get = name => P[name] || (P[name] = {name, wpts:0, aps:0, w:0, games:0});
+  const get = name => P[name] || (P[name] = {name, wpts:0, aps:0, ci:0, w:0, games:0});
   GAMES.games.slice(0, n).forEach(g => (g.tables||[]).forEach(tb => (tb.seats||[]).forEach(x => {
-    const p = get(x.name); p.games++; p.wpts += x.wpts||0; p.aps += x.aps||0; if (x.result==='W') p.w++;
+    const p = get(x.name); p.games++; p.wpts += x.wpts||0; p.aps += x.aps||0; p.ci += x.ci||0; if (x.result==='W') p.w++;
   })));
-  const rows = Object.values(P).map(p => ({...p, sigma:+(p.wpts+p.aps).toFixed(2)}));
+  const rows = Object.values(P).map(p => ({...p, sigma:+(p.wpts+p.aps+p.ci).toFixed(2)}));
   rows.sort((a,b) => b.sigma - a.sigma || b.aps - a.aps || a.name.localeCompare(b.name,'ru'));
   rows.forEach((r,i) => r.place = i+1);
   return rows;
 }
 function progressionCard(nick) {
-  const played = GAMES.games.length;
+  const played = (GAMES.games_played != null ? GAMES.games_played : GAMES.games.length);
   let prev = null, steps = '';
   for (let n = 1; n <= played; n++) {
     const place = (liveStandings(n).find(r => r.name === nick) || {}).place;
@@ -366,22 +386,27 @@ function roleStatsCard(myGames) {
   const cards = ROLES.map(([key,label]) => {
     const gs = myGames.filter(g => g.role === key);
     const w = gs.filter(g => g.result === 'W').length;
+    const wpts = gs.reduce((a,g) => a + (g.wpts||0), 0);
     const ap = gs.reduce((a,g) => a + (g.aps||0), 0);
+    const ci = gs.reduce((a,g) => a + (g.ci||0), 0);
+    const sig = wpts + ap + ci;
     if (!gs.length) return `<div class="rc ${ROLE_CLASS[key]} none"><div class="rc-hdr"><span class="role-icon-lg">${roleSvg(key)}</span>${label}</div><div class="rc-rows"><span>не играл</span><b>—</b></div></div>`;
     return `<div class="rc ${ROLE_CLASS[key]}">
       <div class="rc-hdr"><span class="role-icon-lg">${roleSvg(key)}</span>${label}</div>
       <div class="rc-rows">
         <span>Игры</span><b>${gs.length}</b>
         <span>Победы</span><b>${w}/${gs.length}</b>
-        <span>Σ доп</span><b>${fmtNum(ap)}</b>
-        <span>Доп/игру</span><b>${fmtNum(ap/gs.length)}</b>
+        <span>Σ роли</span><b class="big">${fmtNum(sig)}</b>
+        <span>WPTS</span><b>${fmtNum(wpts)}</b>
+        <span>Доп${ap<0?' (с минусом)':''}</span><b>${fmtNum(ap)}</b>
+        <span>Ci</span><b>${fmtNum(ci)}</b>
       </div>
     </div>`;
   }).join('');
   return `<div class="card"><h3>Стата по ролям</h3><div class="role-cards">${cards}</div></div>`;
 }
 function compareCard(nick) {
-  const rows = liveStandings(GAMES.games.length);
+  const rows = liveStandings(GAMES.games_played != null ? GAMES.games_played : GAMES.games.length);
   const me = rows.find(r => r.name === nick);
   if (!me) return '';
   const avg = list => {
@@ -415,18 +440,19 @@ function renderGamesTable(myGames, nick) {
     <table class="games-table">
       <thead><tr>
         <th class="left">Игра</th><th class="left">Стол</th><th class="left">Роль</th>
-        <th>R</th><th>WPTS</th><th>APTS</th><th>1-я ночь</th><th>Стрим</th>
+        <th>R</th><th>WPTS</th><th>APTS</th><th title="компенсация">Ci</th><th>1-я ночь</th><th>Стрим</th>
       </tr></thead>
       <tbody>
         ${myGames.map(g => {
           const tableRoman = ['I','II','III'][g.table_num - 1] || g.table_num;
           return `<tr>
             <td class="left"><a class="game-link" href="results.html?t=${T}">${escapeHtml(g.game_title)}</a></td>
-            <td class="left">Стол ${tableRoman}</td>
+            <td class="left">${g.table_num}</td>
             <td class="left"><span class="role-pill ${ROLE_CLASS[g.role] || ''}">${roleSvg(g.role)} ${g.role}</span></td>
             <td class="result-${g.result}">${g.result}</td>
             <td class="${g.wpts > 0 ? 'big' : 'dim'}">${fmtNum(g.wpts)}</td>
             <td class="${g.aps > 0 ? '' : (g.aps < 0 ? 'neg' : 'dim')}">${g.aps > 0 ? '+' : ''}${fmtNum(g.aps)}</td>
+            <td class="${g.ci > 0 ? 'big' : 'dim'}">${fmtNum(g.ci)}</td>
             <td>${g.marker === 'first_killed' ? '<span class="first-killed-mark" title="убит первой ночью">💀</span>' : '<span class="dim">—</span>'}</td>
             <td>${(window.streamFor && streamFor(T, g.game_idx + 1, g.table_num)) ? `<a class="ytmini" href="${streamFor(T, g.game_idx + 1, g.table_num)}" target="_blank" rel="noopener">▶</a>` : '<span class="dim">—</span>'}</td>
           </tr>`;
@@ -437,6 +463,7 @@ function renderGamesTable(myGames, nick) {
           <td>${myGames.filter(g => g.result === 'W').length}W / ${myGames.filter(g => g.result === 'L').length}L</td>
           <td class="big">${fmtNum(myGames.reduce((a, g) => a + g.wpts, 0))}</td>
           <td>${fmtNum(myGames.reduce((a, g) => a + g.aps, 0))}</td>
+          <td>${fmtNum(myGames.reduce((a, g) => a + (g.ci||0), 0))}</td>
           <td>${myGames.filter(g => g.marker === 'first_killed').length}</td>
           <td></td>
         </tr>

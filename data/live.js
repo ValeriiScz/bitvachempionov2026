@@ -1,4 +1,4 @@
-// MafgameStat · data/live.js · v1.1 · 2026-06-14 · live-загрузка результатов с mafgame через Netlify-прокси /mafgame/*
+// MafgameStat · data/live.js · v1.2 · 2026-06-14 · live-загрузка результатов с mafgame через Netlify-прокси /mafgame/*
 // Замены игроков поддерживаются автоматически: берём фактический original_nickname из протокола игры.
 window.normRole = function(r){
   if(r==null) return null;
@@ -21,7 +21,7 @@ window.convertInertia667 = function(g){
     ((games[gm]=games[gm]||{})[tb]=games[gm][tb]||[])[seat-1]={
       seat,name:s.original_nickname,role,
       marker:s.killed_first?'first_killed':(bonus>0?'beige':null),
-      aps:+(bonus-minus+ci).toFixed(4),wpts,ci:+ci.toFixed(4),
+      aps:+(bonus-minus).toFixed(4),wpts,ci:+ci.toFixed(4),
       sigma:+(wpts+bonus-minus+ci).toFixed(4),result:null};
   }
   const out=[];

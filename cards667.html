@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · cards667.html · v1.3 · 2026-06-13 · карточки 70 игроков Cyprus Open 667: фото, клуб, столы, слоты, соперники + раскрывающийся маршрут по играм (клик) + плавающая кнопка «наверх» -->
+<!-- MafgameStat · cards667.html · v1.4 · 2026-06-14 · карточки 70 игроков Cyprus Open 667: фото, клуб, столы, слоты, соперники + раскрывающийся маршрут по играм (клик) + плавающая кнопка «наверх» -->
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -94,8 +94,8 @@ Promise.all([
     });
   }));
   const players=Object.keys(occ).sort((a,b)=>a.localeCompare(b,'ru'));
-  if(players.length!==70) document.title='ВНИМАНИЕ: игроков '+players.length;
-  document.getElementById('toc').innerHTML='<b>70 игроков:</b> '+players.map(p=>`<a href="#p-${encodeURIComponent(p)}">${esc(p)}</a>`).join(' · ');
+  if(players.length!==70) console.warn('игроков на карточках:',players.length,'(70 заявлены + замены)');
+  document.getElementById('toc').innerHTML='<b>Игроки ('+players.length+'):</b> '+players.map(p=>`<a href="#p-${encodeURIComponent(p)}">${esc(p)}</a>`).join(' · ');
   document.getElementById('cards').innerHTML=players.map(p=>{
     const o=occ[p];
     const tc={}; o.forEach(x=>tc[x.t]=(tc[x.t]||0)+1);

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- MafgameStat · roles.html · v1.0 · 2026-06-14 · статистика по ролям 667: Σ роли = WPTS+доп+Ci (доп с учётом минусов); фильтр Все роли/Мирный/Шериф/Мафия/Дон + рейтинг внутри роли -->
+<meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Статистика по ролям — MafgameStat</title>
+<style>
+  :root{--gold:#ffb84d;--mut:#a0a4b8;}
+  *{box-sizing:border-box;}
+  html,body{max-width:100%;overflow-x:hidden;}
+  body{margin:0;background:radial-gradient(circle at 50% 0%,#1a1d2e 0%,#0a0c18 60%);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;padding:24px 16px 60px;}
+  .wrap{max-width:1100px;margin:0 auto;}
+  .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px;}
+  .nav-btn{padding:9px 16px;background:rgba(255,184,77,.12);border:1px solid #ffb84d;color:#ffb84d;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;}
+  .nav-btn.muted{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:#dfe2f0;}
+  .nav-btn.muted:hover{background:rgba(255,255,255,.1);color:#fff;}
+  h1{font-size:24px;margin:6px 0 4px;}
+  .sub{color:var(--mut);font-size:13px;margin-bottom:16px;}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .tab{padding:9px 15px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#dfe2f0;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;}
+  .tab.active{background:var(--gold);color:#1a1d2e;border-color:var(--gold);}
+  .tab.red.active{background:#ff5e5e;border-color:#ff5e5e;color:#fff;}
+  .tab.black.active{background:#5dd1ff;border-color:#5dd1ff;color:#0a0c18;}
+  .card{background:linear-gradient(180deg,#1a1d2e,#232744);border-radius:16px;padding:0;overflow-x:auto;box-shadow:0 8px 32px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.05);}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:580px;}
+  th{position:sticky;top:0;background:#0a0c18;color:var(--mut);font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:10px 6px;text-align:right;border-bottom:1px solid rgba(255,255,255,.08);}
+  th.left,td.left{text-align:left;}
+  td{padding:10px 6px;border-bottom:1px solid rgba(255,255,255,.04);text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:#dfe2f0;}
+  tr:hover td{background:rgba(255,255,255,.03);}
+  tr.top-3 td.place{color:var(--gold);font-weight:800;}
+  .place{width:34px;color:var(--mut);font-weight:700;}
+  .pname{min-width:140px;}
+  .pname a{color:#fff;text-decoration:none;font-weight:700;}
+  .pname a:hover{color:var(--gold);}
+  .big{color:var(--gold);font-weight:800;}
+  .dim{color:#5a5e76;}
+  .neg{color:#e8716b;}
+  .note{margin-top:14px;padding:12px 14px;background:rgba(255,184,77,.06);border:1px dashed rgba(255,184,77,.3);border-radius:10px;color:var(--mut);font-size:12px;line-height:1.6;}
+  @media(max-width:600px){
+    th,td{padding:8px 5px;font-size:12px;}
+    td.place,th.place{position:sticky;left:0;background:#1b1f31;z-index:3;width:30px;min-width:30px;max-width:30px;overflow:hidden;}
+    .pname{min-width:96px;}
+    td.pname,th.pname{position:sticky;left:30px;background:#1b1f31;z-index:3;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar" id="nav"></div>
+  <h1>Статистика по ролям</h1>
+  <div class="sub" id="sub">загрузка…</div>
+  <div class="tabs" id="tabs"></div>
+  <div class="card"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+  <div class="note" id="note"></div>
+</div>
+<script src="data/live.js"></script>
+<script>
+const T=new URLSearchParams(location.search).get('t')||'667';
+const ROLES=[['Citizen','Мирный','red'],['Sheriff','Шериф','red'],['Mafia','Мафия','black'],['Don','Дон','black']];
+const SHORT={Citizen:'Мир',Sheriff:'Шер',Mafia:'Маф',Don:'Дон'};
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function fmt(v){const n=Number(v);if(isNaN(n))return '—';if(n===0)return '0';return Number.isInteger(n)?n.toString():n.toFixed(2).replace(/\.?0+$/,'');}
+function sigCell(v){const c=v<0?'neg':(v>0?'big':'dim');return `<td class="${c}">${v>0?'':''}${fmt(+v.toFixed(2))}</td>`;}
+let STAT={}, PLAYED=0, current='all';
+
+function emptyRole(){return {sigma:0,games:0,w:0};}
+function build(G){
+  PLAYED = (G.games_played!=null?G.games_played:G.games.length);
+  const P={};
+  G.games.slice(0,PLAYED).forEach(g=>(g.tables||[]).forEach(t=>(t.seats||[]).forEach(s=>{
+    if(!s.role) return;
+    const sig=(s.wpts||0)+(s.aps||0)+(s.ci||0);
+    const p=P[s.name]||(P[s.name]={name:s.name,total:emptyRole(),roles:{Citizen:emptyRole(),Sheriff:emptyRole(),Mafia:emptyRole(),Don:emptyRole()}});
+    p.total.sigma+=sig; p.total.games++; if(s.result==='W')p.total.w++;
+    const r=p.roles[s.role]; r.sigma+=sig; r.games++; if(s.result==='W')r.w++;
+  })));
+  STAT=P;
+}
+function renderTabs(){
+  const tabs=[['all','Все роли','']].concat(ROLES.map(([k,l,team])=>[k,l,team]));
+  document.getElementById('tabs').innerHTML=tabs.map(([k,l,team])=>`<button class="tab ${team||''}${k===current?' active':''}" data-k="${k}">${l}</button>`).join('');
+  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{current=b.dataset.k;renderTabs();renderTable();});
+}
+function renderTable(){
+  const players=Object.values(STAT);
+  let thead, rows;
+  if(current==='all'){
+    players.sort((a,b)=>b.total.sigma-a.total.sigma||a.name.localeCompare(b.name,'ru'));
+    thead=`<tr><th class="left place">#</th><th class="left pname">Игрок</th><th>Σ всего</th><th>Мир</th><th>Шер</th><th>Маф</th><th>Дон</th><th>Игр</th></tr>`;
+    rows=players.map((p,i)=>`<tr${i<3?' class="top-3"':''}><td class="left place">${i+1}</td>`+
+      `<td class="left pname"><a href="player.html?nick=${encodeURIComponent(p.name)}&t=${T}">${esc(p.name)}</a></td>`+
+      `<td class="big">${fmt(+p.total.sigma.toFixed(2))}</td>`+
+      ROLES.map(([k])=>{const r=p.roles[k];return r.games?sigCell(r.sigma):'<td class="dim">·</td>';}).join('')+
+      `<td>${p.total.games}</td></tr>`).join('');
+    document.getElementById('note').innerHTML='«Σ всего» = WPTS + доп + Ci по сыгранным играм (доп с учётом минусов). Столбцы Мир/Шер/Маф/Дон — сколько баллов принесла каждая роль; их сумма равна Σ всего. Сортировка по Σ всего.';
+  } else {
+    const label=(ROLES.find(r=>r[0]===current)||[])[1];
+    const list=players.filter(p=>p.roles[current].games>0)
+      .sort((a,b)=>b.roles[current].sigma-a.roles[current].sigma||b.roles[current].games-a.roles[current].games||a.name.localeCompare(b.name,'ru'));
+    thead=`<tr><th class="left place">#</th><th class="left pname">Игрок</th><th>Σ в роли</th><th>Игр</th><th>Побед</th><th>% побед</th></tr>`;
+    rows=list.map((p,i)=>{const r=p.roles[current];const pct=r.games?Math.round(r.w/r.games*100):0;
+      return `<tr${i<3?' class="top-3"':''}><td class="left place">${i+1}</td>`+
+      `<td class="left pname"><a href="player.html?nick=${encodeURIComponent(p.name)}&t=${T}">${esc(p.name)}</a></td>`+
+      sigCell(r.sigma)+`<td>${r.games}</td><td>${r.w}</td><td class="${pct>=50?'big':'dim'}">${pct}%</td></tr>`;}).join('');
+    document.getElementById('note').innerHTML=`Рейтинг в роли «${label}»: от макс к мин по баллам именно в этой роли (WPTS + доп + Ci). Показаны только игроки, игравшие эту роль.`;
+  }
+  document.getElementById('thead').innerHTML=thead;
+  document.getElementById('tbody').innerHTML=rows||'<tr><td class="left" colspan="8">нет данных</td></tr>';
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=
+    `<a class="nav-btn muted" href="tournament.html?t=${T}">← Турнир</a>`+
+    `<a class="nav-btn muted" href="standings.html?t=${T}">Сводная</a>`+
+    `<a class="nav-btn muted" href="results.html?t=${T}">Игры</a>`+
+    `<a class="nav-btn muted" href="player.html?t=${T}">Игроки</a>`+
+    `<a class="nav-btn" href="roles.html?t=${T}">По ролям</a>`;
+}
+renderNav();
+window.loadGames(T).then(G=>{
+  if(!G||!G.games){document.getElementById('sub').textContent='Нет данных турнира '+T;return;}
+  build(G);
+  document.getElementById('sub').innerHTML=`Турнир ${T} · сыграно ${PLAYED}/${G.games_total} игр · ${Object.keys(STAT).length} игроков`;
+  renderTabs(); renderTable();
+}).catch(e=>{document.getElementById('sub').textContent='Ошибка: '+e.message;});
+</script>
+</body>
+</html>

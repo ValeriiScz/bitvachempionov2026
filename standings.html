@@ -58,6 +58,13 @@
   .delta.dn{color:#e8716b;}
   .delta.eq{color:#5a5e76;}
   .player-cell{min-width:170px;}
+  table.standings{min-width:600px;}
+  @media (max-width:600px){
+    table.standings th, table.standings td{padding:8px 5px;font-size:12px;}
+    table.standings td.place, table.standings th.place{position:sticky;left:0;z-index:3;background:#1b1f31;width:34px;min-width:34px;max-width:34px;overflow:hidden;box-sizing:border-box;}
+    .player-cell{min-width:104px;}
+    table.standings td.player-cell, table.standings th.player-cell{position:sticky;left:34px;z-index:3;background:#1b1f31;box-sizing:border-box;}
+  }
   .player-name{color:#fff;font-weight:700;text-decoration:none;}
   .player-name:hover{color:#5dd1ff;}
   .club{color:#8a8fa8;font-size:11px;display:block;margin-top:2px;}
@@ -99,6 +106,7 @@
     <a class="nav-btn muted" id="link-tournament" href="./">← Турнир</a>
     <a class="nav-btn muted" href="results.html" id="link-results">Игры</a>
     <a class="nav-btn muted" href="player.html" id="link-player">Игроки</a>
+    <a class="nav-btn muted" href="roles.html" id="link-roles">По ролям</a>
     <div>
       <div class="title" id="title">Сводная</div>
       <div class="sub" id="subtitle">…</div>
@@ -146,6 +154,7 @@ async function load() {
   document.getElementById('link-tournament').href = `tournament.html?t=${T}`;
   document.getElementById('link-results').href = `results.html?t=${T}`;
   document.getElementById('link-player').href = `player.html?t=${T}`;
+  document.getElementById('link-roles').href = `roles.html?t=${T}`;
   document.querySelectorAll('#switcher a').forEach(a => {
     if (a.href.includes(`t=${T}`)) a.classList.remove('muted');
   });
@@ -163,7 +172,7 @@ async function load() {
 function buildStandings(n) {
   // standings по первым n играм
   const P = {};
-  const get = name => P[name] || (P[name] = {name, wpts:0, aps:0, w:0, games:0, k:0,
+  const get = name => P[name] || (P[name] = {name, wpts:0, aps:0, ci:0, w:0, games:0, k:0,
     roles:{Citizen:{w:0,g:0}, Sheriff:{w:0,g:0}, Mafia:{w:0,g:0}, Don:{w:0,g:0}}});
   let redWins=0, blackWins=0, tables=0, apsSum=0;
   GAMES.games.slice(0, n).forEach(game => {
@@ -172,14 +181,14 @@ function buildStandings(n) {
       if (tb.winner === 'red_win') redWins++; else blackWins++;
       tb.seats.forEach(s => {
         const p = get(s.name);
-        p.games++; p.wpts += s.wpts||0; p.aps += s.aps||0; apsSum += s.aps||0;
+        p.games++; p.wpts += s.wpts||0; p.aps += s.aps||0; p.ci += s.ci||0; apsSum += s.aps||0;
         if (s.result === 'W') p.w++;
         if (s.marker === 'first_killed') p.k++;
         const r = p.roles[s.role]; if (r) { r.g++; if (s.result==='W') r.w++; }
       });
     });
   });
-  const rows = Object.values(P).map(p => ({...p, sigma: +(p.wpts + p.aps).toFixed(2)}));
+  const rows = Object.values(P).map(p => ({...p, sigma: +(p.wpts + p.aps + p.ci).toFixed(2)}));
   rows.sort((a,b) => b.sigma - a.sigma || b.aps - a.aps || a.name.localeCompare(b.name,'ru'));
   rows.forEach((r,i) => r.place = i+1);
   return {rows, redWins, blackWins, tables, apsSum};
@@ -212,7 +221,7 @@ function renderLive(fromOfficial) {
       <thead><tr>
         <th class="left place">#</th>
         <th class="left player-cell">Игрок</th>
-        <th>Σ</th><th>WPTS</th><th>Σap</th>
+        <th>Σ</th><th>WPTS</th><th>Σap</th><th title="компенсация (Ci)">Ci</th>
         <th title="мирный: победы/игры">R</th><th title="шериф">S</th><th title="мафия">B</th><th title="дон">D</th>
         <th title="убит 1-й ночью">K</th><th>Игр</th>
       </tr></thead>
@@ -231,6 +240,7 @@ function renderLive(fromOfficial) {
       <td>${numCell(r.sigma,'big')}</td>
       <td>${numCell(r.wpts)}</td>
       <td>${numCell(+r.aps.toFixed(2), r.aps>0?'':'dim')}</td>
+      <td>${numCell(+r.ci.toFixed(2), r.ci>0?'':'dim')}</td>
       ${ratioCell(r.roles.Citizen)}${ratioCell(r.roles.Sheriff)}${ratioCell(r.roles.Mafia)}${ratioCell(r.roles.Don)}
       <td>${numCell(r.k, r.k>0?'neg':'dim')}</td>
       <td>${numCell(r.games)}</td>
