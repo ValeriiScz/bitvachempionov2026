@@ -30,11 +30,14 @@ window.convertInertia667 = function(g){
     Object.keys(games[gm]).map(Number).sort((a,b)=>a-b).forEach(tb=>{
       const seats=games[gm][tb].filter(Boolean);
       const hasRoles=seats.length===10&&seats.every(x=>x.role);
-      let winner='unknown';
+      const officialWinner=g.results&&g.results['1-'+gm+'-'+tb];
+      let winner=officialWinner==='black'?'black_win':(officialWinner==='red'?'red_win':'unknown');
       if(hasRoles){
-        const blackW=seats.some(x=>(x.role==='Mafia'||x.role==='Don')&&x.wpts>0);
-        const redW=seats.some(x=>(x.role==='Citizen'||x.role==='Sheriff')&&x.wpts>0);
-        winner=blackW?'black_win':(redW?'red_win':'unknown');
+        if(winner==='unknown'){
+          const blackW=seats.some(x=>(x.role==='Mafia'||x.role==='Don')&&x.wpts>0);
+          const redW=seats.some(x=>(x.role==='Citizen'||x.role==='Sheriff')&&x.wpts>0);
+          winner=blackW?'black_win':(redW?'red_win':'unknown');
+        }
         if(winner!=='unknown') seats.forEach(x=>{
           const black=(x.role==='Mafia'||x.role==='Don');
           x.result=((winner==='black_win')===black)?'W':'L';
