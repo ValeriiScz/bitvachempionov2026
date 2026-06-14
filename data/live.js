@@ -41,6 +41,8 @@ window.convertInertia667 = function(g){
         if(winner!=='unknown') seats.forEach(x=>{
           const black=(x.role==='Mafia'||x.role==='Don');
           x.result=((winner==='black_win')===black)?'W':'L';
+          if(x.result==='W'&&!x.wpts) x.wpts=0.75;
+          x.sigma=+(x.wpts+x.aps+x.ci).toFixed(4);
         });
       }
       tables.push({table_num:tb,winner,seats});

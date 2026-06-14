@@ -174,9 +174,12 @@ function renderAllPlayers() {
   document.title = `Все игроки · турнир ${T}`;
   const list = ratingOrdered();
   const ranked = list.length && list[0].place != null;
+  const officialCount = DATA.players?.length || list.length;
+  const extraCount = Math.max(0, list.length - officialCount);
+  const countLabel = extraCount ? `${officialCount} + ${extraCount} замены` : list.length;
   document.getElementById('content').innerHTML = `
     <div class="card">
-      <h3>Игроки турнира ${T} (${list.length})${ranked ? ' · по текущему рейтингу' : ''}</h3>
+      <h3>Игроки турнира ${T} (${countLabel})${ranked ? ' · по текущему рейтингу' : ''}</h3>
       <div class="all-players">
         ${list.map(p => `<a href="?nick=${encodeURIComponent(p.name)}&t=${T}">${p.place != null ? `<b class="rk">${p.place}</b> ` : ''}<span class="nm">${escapeHtml(p.name)}</span>${p.sigma != null ? `<span class="sg">${fmtNum(p.sigma)}</span>` : ''}</a>`).join('')}
       </div>
@@ -184,7 +187,7 @@ function renderAllPlayers() {
 }
 
 function renderPlayer(nick) {
-  const player = (DATA.players || []).find(p => p.name === nick);
+  const player = (DATA.players || []).find(p => p.name === nick) || (GAMES?.games && ratingOrdered().some(p => p.name === nick) ? {name:nick, club:''} : null);
   if (!player) {
     document.getElementById('content').innerHTML = `<div class="card empty">Игрок <strong>${escapeHtml(nick)}</strong> не найден в турнире ${T}.<br><br><a class="nav-btn" href="player.html?t=${T}">Все игроки ${T}</a></div>`;
     return;
