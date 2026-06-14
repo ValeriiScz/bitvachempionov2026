@@ -22,7 +22,7 @@
   .live-badge{display:inline-block;padding:3px 8px;background:#3fd17a;color:#0a0c18;border-radius:4px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-left:6px;animation:pulse 2s infinite;}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
   .container{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:320px 1fr;gap:20px;}
-  @media (max-width:920px){ .container{grid-template-columns:1fr;} }
+  @media (max-width:920px){ .container{grid-template-columns:1fr;} .container>*{min-width:0;} main#main{min-width:0;} }
   .card{background:linear-gradient(180deg,#1a1d2e 0%,#232744 100%);border-radius:18px;padding:22px;box-shadow:0 8px 32px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.04);}
   .meta-rows{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:13px;}
   .meta-rows .k{color:#8a8fa8;}

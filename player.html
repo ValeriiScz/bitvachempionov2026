@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · player.html · v2.5 · 2026-06-14 · фото, стата по 4 ролям, место после каждой игры, сравнение топ-10/11-20/среднее -->
+<!-- MafgameStat · player.html · v2.6 · 2026-06-14 · фото, стата по 4 ролям, место после каждой игры, сравнение топ-10/11-20/среднее -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -229,6 +229,12 @@ function renderPlayer(nick) {
     });
   }
 
+  let headSigma = total_sigma, headW = total_w, headGames = total_games;
+  if (GAMES && myGames.length && (!stages.length || total_games === 0)) {
+    headSigma = +myGames.reduce((a,g)=>a+(g.wpts||0)+(g.aps||0)+(g.ci||0),0).toFixed(2);
+    headW = myGames.filter(g=>g.result==='W').length;
+    headGames = myGames.length;
+  }
   const initial = nick.charAt(0).toUpperCase();
 
   const jumpOpts = ratingOrdered().map(p => `<option value="${escapeHtml(p.name)}"${p.name === nick ? ' selected' : ''}>${p.place != null ? p.place + '. ' : ''}${escapeHtml(p.name)}${p.sigma != null ? ' — ' + fmtNum(p.sigma) : ''}</option>`).join('');
@@ -244,10 +250,10 @@ function renderPlayer(nick) {
         <div class="player-nick">${escapeHtml(nick)}</div>
         ${player.club ? `<div class="player-club">${escapeHtml(player.club)}</div>` : ''}
         <div class="player-overall">
-          <span class="pill">Σ всего: <span class="v">${fmtNum(total_sigma)}</span></span>
+          <span class="pill">Σ всего: <span class="v">${fmtNum(headSigma)}</span></span>
           ${stages.length > 1 ? `<span class="pill">Стадий: <span class="v">${stages_played}/${stages.length}</span></span>` : ''}
-          <span class="pill">Побед: <span class="v">${total_w}</span></span>
-          ${total_games > 0 ? `<span class="pill">Игр: <span class="v">${total_games}</span></span>` : ''}
+          <span class="pill">Побед: <span class="v">${headW}</span></span>
+          ${headGames > 0 ? `<span class="pill">Игр: <span class="v">${headGames}</span></span>` : ''}
           ${total_d > 0 ? `<span class="pill">Дон: <span class="v">${total_d}</span></span>` : ''}
           ${total_s > 0 ? `<span class="pill">Шериф: <span class="v">${total_s}</span></span>` : ''}
           ${total_k > 0 ? `<span class="pill">Убит 1-й ночью: <span class="v">${total_k}</span></span>` : ''}
