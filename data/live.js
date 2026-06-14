@@ -47,7 +47,7 @@ window.convertInertia667 = function(g){
     });
     out.push({title:'Game '+gm,stage:'Квалификация',tables});
   });
-  const playedCnt=out.filter(x=>x.tables.length&&x.tables.every(t=>t.winner!=='unknown')).length;
+  const playedCnt=out.filter(x=>x.tables.length&&x.tables.some(t=>t.winner!=='unknown')).length;
   if(!out.length) return null;
   return {tournament_id:667,tournament_name:'Four Seasons. Cyprus Open: Summer',
           games_played:playedCnt,games_total:out.length,games:out,live:true};
