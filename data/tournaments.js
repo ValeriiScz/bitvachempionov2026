@@ -1,9 +1,9 @@
-// MafgameStat · data/tournaments.js · v2.0 · 2026-06-19 · +693 (парный, рассадка готова) +766 (скоро); 667 +«Совместные посадки»; матрица маркеров для новых турниров
+// MafgameStat · data/tournaments.js · v2.1 · 2026-06-19 · +693 (парный, рассадка готова) +766 (скоро); 667 +«Совместные посадки»; матрица маркеров для новых турниров
 window.TOURNAMENTS_DB = {
   "tournaments": [
     {
       "id": "766",
-      "theme": "cyprus",
+      "theme": "poster",
       "art": "assets/FourSeasonsPolandMafiaOpen2026_27.06.2026.jpg",
       "posterScript": "Poland",
       "posterTitle": "POLAND MAFIA OPEN",

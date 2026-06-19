@@ -193,6 +193,16 @@ const id=new URLSearchParams(location.search).get('t')||'667';
         <div class="torg">${esc(t.organizer)}</div>
         <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
       </div>`;
+  } else if(t.theme==='poster'){
+    headHtml=`
+      <div class="arthero"><img src="${t.art||''}" alt="${esc(t.name)}" onload="document.body.classList.add('hasart')" onerror="this.parentNode.remove()"></div>
+      <div class="hero" style="text-align:center;"><h1>${esc(t.name)}</h1></div>
+      <div style="text-align:center;margin-top:14px;">
+        <div class="stars">${stars(t.stars)}</div>
+        <div class="tmeta"><b>${esc(t.dates)}</b><span class="sep">|</span><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков</div>
+        <div class="torg">${esc(t.organizer)}</div>
+        <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+      </div>`;
   } else if(t.theme==='protocol'){
     document.body.classList.add('protocol');
     headHtml=`
