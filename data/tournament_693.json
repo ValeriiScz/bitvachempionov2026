@@ -12,8 +12,8 @@
  "paired": true,
  "team_size": 2,
  "closed": false,
- "in_progress": false,
- "upcoming": true,
+ "in_progress": true,
+ "upcoming": false,
  "games_played": 0,
  "games_total": 15,
  "referees": [

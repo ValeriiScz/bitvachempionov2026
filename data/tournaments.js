@@ -1,4 +1,4 @@
-// MafgameStat · data/tournaments.js · v2.2 · 2026-06-19 · +693 (парный, рассадка готова) +766 (скоро); 667 +«Совместные посадки»; матрица маркеров для новых турниров
+// MafgameStat · data/tournaments.js · v2.2-live693 · 2026-06-19 · +693 (парный, рассадка готова) +766 (скоро); 667 +«Совместные посадки»; матрица маркеров для новых турниров
 window.TOURNAMENTS_DB = {
   "tournaments": [
     {
@@ -36,8 +36,8 @@ window.TOURNAMENTS_DB = {
       "players": 20,
       "days": 2,
       "stars": 2,
-      "status": "upcoming",
-      "statusLabel": "Скоро · парный · 20–21 июня",
+      "status": "live",
+      "statusLabel": "Идёт · парный · 20–21 июня",
       "organizer": "Mafia club «Champions League» Prague · судьи Trinity, Yokai",
       "mafgame": "https://mafgame.org/tournaments/693/view",
       "note": "Парный турнир: 10 команд по 2 игрока, 15 игр (2 стола), без финала. Рассадка уже готова; результаты — после старта. Судьи: стол I — Trinity, стол II — Yokai.",

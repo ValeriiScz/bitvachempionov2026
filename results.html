@@ -229,7 +229,7 @@ function renderTable(t, gameNum) {
     const team = (s.role === 'Mafia' || s.role === 'Don') ? 'black' : 'red';
     const isWin = s.result === 'W';
     const killedClass = s.marker === 'first_killed' ? 'first-killed' : '';
-    const apsClass = apsBucket(s.aps);
+    const apsClass = (t.winner==='unknown') ? 'zero' : apsBucket(s.aps);
     const apsStr = s.aps === 0 ? '0' : (s.aps > 0 ? '+' : '') + s.aps.toFixed(2).replace(/\.?0+$/, '');
     const av = AV[s.name];
     const avInner = av
