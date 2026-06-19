@@ -1,4 +1,4 @@
-// MafgameStat · data/tournaments.js · v2.1 · 2026-06-19 · +693 (парный, рассадка готова) +766 (скоро); 667 +«Совместные посадки»; матрица маркеров для новых турниров
+// MafgameStat · data/tournaments.js · v2.2 · 2026-06-19 · +693 (парный, рассадка готова) +766 (скоро); 667 +«Совместные посадки»; матрица маркеров для новых турниров
 window.TOURNAMENTS_DB = {
   "tournaments": [
     {
@@ -10,7 +10,7 @@ window.TOURNAMENTS_DB = {
       "posterSub": "JUNE 27\u201328 \u00b7 POLAND",
       "name": "Four Seasons: Poland Mafia Open 2026",
       "dates": "27–28 июня 2026",
-      "city": "Польша",
+      "city": "Вроцлав",
       "country": "Польша",
       "players": 40,
       "days": 2,

@@ -241,15 +241,16 @@ const id=new URLSearchParams(location.search).get('t')||'667';
   let html=isOpen?(gData+gPlay):(gPlay+gData);
   if(t.mafgame) html+=`<a class="src-btn" href="${t.mafgame}" target="_blank" rel="noopener">Турнир на mafgame ↗</a>`;
   if(t.note) html+=`<div class="infonote"><span class="ico">i</span><div><b>${t.status==='upcoming'?'Скоро.':'Инфо.'}</b> ${esc(t.note)}</div></div>`;
-  if(t.id==='667') html+=`<div class="infonote" id="live-note"><span class="ico">i</span><div id="live-status">Турнир завершён · данные заморожены.</div></div>`;
+  if(t.status==='live') html+=`<div class="infonote" id="live-note"><span class="ico">i</span><div id="live-status">Подтягиваю результаты с mafgame…</div></div>`;
+  else if(t.id==='667') html+=`<div class="infonote" id="live-note"><span class="ico">i</span><div id="live-status">Турнир завершён · данные заморожены.</div></div>`;
   html+=streamsCard(t.id);
   sec.innerHTML=html;
   const _src=document.getElementById('src'); if(_src) _src.innerHTML='';
-  if(t.id==='667'&&window.loadGames){
-    window.loadGames('667').then(G=>{
+  if(t.status==='live'&&window.loadGames){
+    window.loadGames(t.id).then(G=>{
       const el=document.getElementById('live-status');
-      if(el&&G) el.innerHTML='<b>Сыграно '+G.games_played+' из '+G.games_total+' игр</b> (12 квалификации + 4 финала). Турнир завершён, данные заморожены.';
-      else if(el) el.textContent='Результаты недоступны.';
+      if(el&&G) el.innerHTML='<b>Сыграно '+G.games_played+' из '+G.games_total+' игр</b>'+(G.live?' · live с mafgame, страница обновляется сама (или кнопкой «⟳ Обновить»)':'')+'.';
+      else if(el) el.textContent='Результаты пока недоступны.';
     });
   }
 })(window.TOURNAMENTS_DB);

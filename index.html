@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- build v6.2 · 2026-06-19 -->
 <!-- MafgameStat · index.html · v2.2 · 2026-06-12 · главная-хаб: плашки турниров (актуальные/архив), реестр data/tournaments.js, лого федерации — оригинал с mafgame.org -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -92,7 +93,8 @@
   a.tile.protocol:hover{border-color:#e23a3a;}
   a.tile.poster{border-color:rgba(201,161,77,.45);}
   a.tile.poster:hover{border-color:#e8c87a;}
-  .tile.poster img.pa{width:100%;display:block;}
+  .poster.poland{height:auto;aspect-ratio:1280/543;}
+  .poster.poland img.art{display:block;}
   .poster.protocol{height:auto;aspect-ratio:1280/720;}
   .poster.protocol img.art{display:block;}
 
@@ -157,7 +159,7 @@ const PALM='<svg class="palm" viewBox="0 0 120 140" fill="none"><path d="M38 138
 function posterArtTile(t){
   return `
   <a class="tile poster" href="tournament.html?t=${t.id}">
-    <img class="pa" src="${t.art||''}" alt="${esc(t.name)}" onerror="this.remove()">
+    <div class="poster poland hasart"><img class="art" src="${t.art||''}" alt="${esc(t.name)}" onerror="this.closest('.poster').classList.remove('hasart')"></div>
     <div class="tbody">
       <div class="tname">${esc(t.name)}</div>
       <div class="tmeta">${esc(t.dates)} · ${esc(t.city)} · ${t.players} игроков</div>
