@@ -24,7 +24,8 @@
   .game-btn:hover{background:rgba(255,184,77,.12);border-color:#ffb84d;}
   .game-btn.active{background:#ffb84d;color:#1a1d2e;border-color:#ffb84d;}
   .game-btn.unplayed{opacity:.35;cursor:not-allowed;}
-  .game-btn.unplayed{opacity:.35;cursor:not-allowed;}
+  .stage-tag{align-self:center;font-size:10px;font-weight:800;color:#8a8fa8;text-transform:uppercase;letter-spacing:1px;padding:0 4px 0 10px;white-space:nowrap;}
+  .stage-tag:first-child{padding-left:0;}
   .grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   @media (max-width:1100px){ .grid{grid-template-columns:1fr;max-width:460px;} }
   .table-wrap{background:linear-gradient(180deg,#1a1d2e 0%,#232744 100%);border-radius:20px;padding:0;box-shadow:0 8px 32px rgba(0,0,0,.35);overflow:hidden;border:1px solid rgba(255,255,255,.06);position:relative;}
@@ -175,12 +176,20 @@ async function load() {
 }
 
 function renderNav() {
-  document.getElementById('games-nav').innerHTML = DATA.games.map((g, i) => {
-    const n = g.title.replace('Game ', '');
-    const played = window.__isPlayed(g); // доиграна за ВСЕМИ столами
-    const active = i === currentGame ? ' active' : '';
-    const unplayed = played ? '' : ' unplayed';
-    return `<button class="game-btn${active}${unplayed}" data-i="${i}" ${played ? '' : 'disabled'}>${n}</button>`;
+  const STAGES = ['Квалификация','Финал'];
+  const byStage = {};
+  DATA.games.forEach((g, i) => { const st = g.stage || 'Квалификация'; (byStage[st] = byStage[st] || []).push({g, i}); });
+  const order = STAGES.filter(st => byStage[st]).concat(Object.keys(byStage).filter(st => !STAGES.includes(st)));
+  const multi = order.length > 1;
+  document.getElementById('games-nav').innerHTML = order.map(st => {
+    const btns = byStage[st].map(({g, i}) => {
+      const n = g.title.replace(/^(Game|Финал)\s*/, '');
+      const played = window.__isPlayed(g);
+      const active = i === currentGame ? ' active' : '';
+      const unplayed = played ? '' : ' unplayed';
+      return `<button class="game-btn${active}${unplayed}" data-i="${i}" ${played ? '' : 'disabled'}>${n}</button>`;
+    }).join('');
+    return `${multi ? `<span class="stage-tag">${st}</span>` : ''}${btns}`;
   }).join('');
   document.querySelectorAll('.game-btn:not(.unplayed)').forEach(b => {
     b.addEventListener('click', () => {

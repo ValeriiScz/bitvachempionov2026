@@ -1,1 +1,5446 @@
-{"tournament_id": 667, "tournament_name": "Four Seasons. Cyprus Open: Summer", "date": "2026-06-13 — 2026-06-14", "location": "Limassol, Cyprus", "club": "Mafia Club Cyprus", "organizer": "Andrey Shtorkh (Aragil)", "players_total": 70, "days": 2, "fee_eur": 120, "format": "12 игр квалификации (7 столов) + финал 4 игры", "closed": false, "in_progress": true, "games_played": 0, "games_total": 12, "referees": ["Lara Croft", "Aragil", "YeS", "Гармония", "Рыба-мОя", "Trinity", "Broniak"], "awards": {}, "players": [{"name": "Flash", "club": "", "real": "Oleksandr Luhovyi"}, {"name": "Xenon", "club": "Mafia Club Cyprus", "real": "Polina"}, {"name": "Паоло", "club": "", "real": "Pavel"}, {"name": "Золушка", "club": "", "real": "Анастасия"}, {"name": "Goldy 🦋", "club": "White Mafia Club Chisinau", "real": "Юля"}, {"name": "Білий", "club": "White Mafia Club Chisinau", "real": "Oleksii"}, {"name": "Лeв", "club": "", "real": "Ivan Mykhailenko"}, {"name": "Вольфрам", "club": "", "real": "Валерия Луговая"}, {"name": "Tommy", "club": "", "real": "Nikita Kovalchuk"}, {"name": "KEX", "club": "Mafia Club Cologne", "real": "Евгений Любинин"}, {"name": "Руанда", "club": "Mafia Club Cyprus", "real": "Alexandra"}, {"name": "Korolevich", "club": "Mafia club \"Champions League\" Prague", "real": "Maksym"}, {"name": "doc", "club": "Клуб, который нельзя называть", "real": "Эрик"}, {"name": "Саботаж", "club": "Bengal Mafia Club", "real": "Александр Ботте"}, {"name": "Малышка Мю", "club": "Vojvodina Mafia Club", "real": "Pavla Tolokonina"}, {"name": "Призрак", "club": "Mafia Club Cologne", "real": "Alexander Wagenfeld"}, {"name": "Eskimo.", "club": "Mafia Club Cologne", "real": "Надежда Нисинова"}, {"name": "Sэм", "club": "Mafia Club Cologne", "real": "Татьяна Юрченко"}, {"name": "Джошуа", "club": "Mafia Club Paphos", "real": "Георгий Смоляр"}, {"name": "KRASNII", "club": "mafia.md", "real": "Александр"}, {"name": "Магнат", "club": "mafia.md", "real": "Хассан"}, {"name": "Сабай", "club": "Mafia Club Cyprus", "real": "Сергей Павлов"}, {"name": "Вольный", "club": "Mafia Club Cyprus", "real": "Nikita"}, {"name": "Монтгомери", "club": "Mafia Club Cyprus", "real": "Алексей"}, {"name": "Matilda", "club": "Mafia Club Cyprus", "real": "Ekaterina"}, {"name": "Gangster", "club": "Красное и Чёрное", "real": "Юрий"}, {"name": "Olgierd", "club": "Mafia Club Cyprus", "real": "Aleksandr"}, {"name": "Rivierra", "club": "mafia.md", "real": "Rivierra"}, {"name": "Lansky", "club": "", "real": "Liubov"}, {"name": "Mr. Smith", "club": "Mafia Club Paphos", "real": "Armen"}, {"name": "Свет", "club": "Mafia Club Cyprus", "real": "Anastasiia"}, {"name": "Андромеда", "club": "Mafia Club Cyprus", "real": "Elena M"}, {"name": "Квоут", "club": "Mafia Club Cyprus", "real": "Dmitrii"}, {"name": "Зима ❄️", "club": "Decem Mafia Club", "real": "Никита Романов"}, {"name": "Ratеl", "club": "Decem Mafia Club", "real": "Denis Mazurok"}, {"name": "Солнце", "club": "Mafia Club Cyprus", "real": "Анастасия"}, {"name": "Session", "club": "", "real": "Nataliia"}, {"name": "Mauder", "club": "Wild Mafia Club", "real": "Марк Неустроев"}, {"name": "komilfo", "club": "Secret Mafia Club", "real": "Rudy Zusman"}, {"name": "Morrigan Israel", "club": "WhiteNights Mafia Club", "real": "Stephanie"}, {"name": "IGRIS", "club": "WhiteNights Mafia Club", "real": "Сергей Клименко"}, {"name": "Luca", "club": "Mafia Club Cyprus", "real": "Artem Kharlamov"}, {"name": "_Pandora_", "club": "AL Capone Club Varna", "real": "Kseniya Spivak"}, {"name": "Frеemаn", "club": "Secret Mafia Club", "real": "Марк Найман"}, {"name": "Беатрис", "club": "Mafia Club Cyprus", "real": "Yuliia"}, {"name": "bun jun lun 999", "club": "", "real": ""}, {"name": "Север", "club": "Mafia Club Cyprus", "real": "Амата"}, {"name": "Paul", "club": "Mafia Club Paphos", "real": "Павел Селезнёв"}, {"name": "Dich", "club": "Vojvodina Mafia Club", "real": "Viacheslav Dyachenko"}, {"name": "Фолдэм", "club": "Wild Mafia Club", "real": "Mark"}, {"name": "Urs", "club": "Sector 7", "real": "Oleh Hrynov"}, {"name": "Twix", "club": "Mafia Club Cyprus", "real": "Ivan"}, {"name": "Chucha", "club": "Mafia Club Cyprus", "real": "Piskareva Olga"}, {"name": "Луна", "club": "Mafia Club Paphos", "real": "Юля"}, {"name": "Kobe", "club": "", "real": "Artem"}, {"name": "Maser", "club": "Wild Mafia Club", "real": "Evgeny"}, {"name": "Mariposa", "club": "Decem Mafia Club", "real": "Felicia"}, {"name": "Cimes", "club": "", "real": "Zhuravskyi Illia"}, {"name": "iceBerg", "club": "", "real": "София Цапкина"}, {"name": "Катанчик", "club": "Инквизиция", "real": "Ekaterina"}, {"name": "Арчи", "club": "Big Game", "real": "Артур Кривенко"}, {"name": "Lavgud", "club": "Mafia Club Cyprus", "real": "Юлианна Шевцова"}, {"name": "Удача (lucky)", "club": "Маска Mafia Club", "real": "Irena"}, {"name": "Donna", "club": "PUDRA mafia club", "real": "Галина"}, {"name": "DOVOD", "club": "Mafia club \"Champions League\" Prague", "real": "Valerii S"}, {"name": "Flame", "club": "", "real": "Ruslan"}, {"name": "Сайфер", "club": "Скажені пси", "real": "Aleksandr Kirakosian"}, {"name": "Akali", "club": "", "real": "Георгий Метревели"}, {"name": "Миф", "club": "Mafia club \"Champions League\" Prague", "real": "Михаил Фишман"}, {"name": "***Алиса***", "club": "Secret Mafia Club", "real": "Borkin Ella"}], "standings": {}}
+{
+ "tournament_id": 667,
+ "tournament_name": "Four Seasons. Cyprus Open: Summer",
+ "date": "2026-06-13 — 2026-06-14",
+ "location": "Limassol, Cyprus",
+ "club": "Mafia Club Cyprus",
+ "organizer": "Andrey Shtorkh (Aragil)",
+ "players_total": 70,
+ "days": 2,
+ "fee_eur": 120,
+ "format": "12 игр квалификации (7 столов) + финал 4 игры",
+ "closed": true,
+ "in_progress": false,
+ "games_played": 16,
+ "games_total": 16,
+ "referees": [
+  "Lara Croft",
+  "Aragil",
+  "YeS",
+  "Гармония",
+  "Рыба-мОя",
+  "Trinity",
+  "Broniak"
+ ],
+ "awards": {},
+ "players": [
+  {
+   "name": "Flash",
+   "club": "",
+   "real": "Oleksandr Luhovyi"
+  },
+  {
+   "name": "Xenon",
+   "club": "Mafia Club Cyprus",
+   "real": "Polina"
+  },
+  {
+   "name": "Паоло",
+   "club": "",
+   "real": "Pavel"
+  },
+  {
+   "name": "Золушка",
+   "club": "",
+   "real": "Анастасия"
+  },
+  {
+   "name": "Goldy 🦋",
+   "club": "White Mafia Club Chisinau",
+   "real": "Юля"
+  },
+  {
+   "name": "Білий",
+   "club": "White Mafia Club Chisinau",
+   "real": "Oleksii"
+  },
+  {
+   "name": "Лeв",
+   "club": "",
+   "real": "Ivan Mykhailenko"
+  },
+  {
+   "name": "Вольфрам",
+   "club": "",
+   "real": "Валерия Луговая"
+  },
+  {
+   "name": "Tommy",
+   "club": "",
+   "real": "Nikita Kovalchuk"
+  },
+  {
+   "name": "KEX",
+   "club": "Mafia Club Cologne",
+   "real": "Евгений Любинин"
+  },
+  {
+   "name": "Руанда",
+   "club": "Mafia Club Cyprus",
+   "real": "Alexandra"
+  },
+  {
+   "name": "Korolevich",
+   "club": "Mafia club \"Champions League\" Prague",
+   "real": "Maksym"
+  },
+  {
+   "name": "doc",
+   "club": "Клуб, который нельзя называть",
+   "real": "Эрик"
+  },
+  {
+   "name": "Саботаж",
+   "club": "Bengal Mafia Club",
+   "real": "Александр Ботте"
+  },
+  {
+   "name": "Малышка Мю",
+   "club": "Vojvodina Mafia Club",
+   "real": "Pavla Tolokonina"
+  },
+  {
+   "name": "Призрак",
+   "club": "Mafia Club Cologne",
+   "real": "Alexander Wagenfeld"
+  },
+  {
+   "name": "Eskimo.",
+   "club": "Mafia Club Cologne",
+   "real": "Надежда Нисинова"
+  },
+  {
+   "name": "Sэм",
+   "club": "Mafia Club Cologne",
+   "real": "Татьяна Юрченко"
+  },
+  {
+   "name": "Джошуа",
+   "club": "Mafia Club Paphos",
+   "real": "Георгий Смоляр"
+  },
+  {
+   "name": "KRASNII",
+   "club": "mafia.md",
+   "real": "Александр"
+  },
+  {
+   "name": "Магнат",
+   "club": "mafia.md",
+   "real": "Хассан"
+  },
+  {
+   "name": "Сабай",
+   "club": "Mafia Club Cyprus",
+   "real": "Сергей Павлов"
+  },
+  {
+   "name": "Вольный",
+   "club": "Mafia Club Cyprus",
+   "real": "Nikita"
+  },
+  {
+   "name": "Монтгомери",
+   "club": "Mafia Club Cyprus",
+   "real": "Алексей"
+  },
+  {
+   "name": "Matilda",
+   "club": "Mafia Club Cyprus",
+   "real": "Ekaterina"
+  },
+  {
+   "name": "Gangster",
+   "club": "Красное и Чёрное",
+   "real": "Юрий"
+  },
+  {
+   "name": "Olgierd",
+   "club": "Mafia Club Cyprus",
+   "real": "Aleksandr"
+  },
+  {
+   "name": "Rivierra",
+   "club": "mafia.md",
+   "real": "Rivierra"
+  },
+  {
+   "name": "Lansky",
+   "club": "",
+   "real": "Liubov"
+  },
+  {
+   "name": "Mr. Smith",
+   "club": "Mafia Club Paphos",
+   "real": "Armen"
+  },
+  {
+   "name": "Свет",
+   "club": "Mafia Club Cyprus",
+   "real": "Anastasiia"
+  },
+  {
+   "name": "Андромеда",
+   "club": "Mafia Club Cyprus",
+   "real": "Elena M"
+  },
+  {
+   "name": "Квоут",
+   "club": "Mafia Club Cyprus",
+   "real": "Dmitrii"
+  },
+  {
+   "name": "Зима ❄️",
+   "club": "Decem Mafia Club",
+   "real": "Никита Романов"
+  },
+  {
+   "name": "Ratеl",
+   "club": "Decem Mafia Club",
+   "real": "Denis Mazurok"
+  },
+  {
+   "name": "Солнце",
+   "club": "Mafia Club Cyprus",
+   "real": "Анастасия"
+  },
+  {
+   "name": "Session",
+   "club": "",
+   "real": "Nataliia"
+  },
+  {
+   "name": "Mauder",
+   "club": "Wild Mafia Club",
+   "real": "Марк Неустроев"
+  },
+  {
+   "name": "komilfo",
+   "club": "Secret Mafia Club",
+   "real": "Rudy Zusman"
+  },
+  {
+   "name": "Morrigan Israel",
+   "club": "WhiteNights Mafia Club",
+   "real": "Stephanie"
+  },
+  {
+   "name": "IGRIS",
+   "club": "WhiteNights Mafia Club",
+   "real": "Сергей Клименко"
+  },
+  {
+   "name": "Luca",
+   "club": "Mafia Club Cyprus",
+   "real": "Artem Kharlamov"
+  },
+  {
+   "name": "_Pandora_",
+   "club": "AL Capone Club Varna",
+   "real": "Kseniya Spivak"
+  },
+  {
+   "name": "Frеemаn",
+   "club": "Secret Mafia Club",
+   "real": "Марк Найман"
+  },
+  {
+   "name": "Беатрис",
+   "club": "Mafia Club Cyprus",
+   "real": "Yuliia"
+  },
+  {
+   "name": "bun jun lun 999",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Север",
+   "club": "Mafia Club Cyprus",
+   "real": "Амата"
+  },
+  {
+   "name": "Paul",
+   "club": "Mafia Club Paphos",
+   "real": "Павел Селезнёв"
+  },
+  {
+   "name": "Dich",
+   "club": "Vojvodina Mafia Club",
+   "real": "Viacheslav Dyachenko"
+  },
+  {
+   "name": "Фолдэм",
+   "club": "Wild Mafia Club",
+   "real": "Mark"
+  },
+  {
+   "name": "Urs",
+   "club": "Sector 7",
+   "real": "Oleh Hrynov"
+  },
+  {
+   "name": "Twix",
+   "club": "Mafia Club Cyprus",
+   "real": "Ivan"
+  },
+  {
+   "name": "Chucha",
+   "club": "Mafia Club Cyprus",
+   "real": "Piskareva Olga"
+  },
+  {
+   "name": "Луна",
+   "club": "Mafia Club Paphos",
+   "real": "Юля"
+  },
+  {
+   "name": "Kobe",
+   "club": "",
+   "real": "Artem"
+  },
+  {
+   "name": "Maser",
+   "club": "Wild Mafia Club",
+   "real": "Evgeny"
+  },
+  {
+   "name": "Mariposa",
+   "club": "Decem Mafia Club",
+   "real": "Felicia"
+  },
+  {
+   "name": "Cimes",
+   "club": "",
+   "real": "Zhuravskyi Illia"
+  },
+  {
+   "name": "iceBerg",
+   "club": "",
+   "real": "София Цапкина"
+  },
+  {
+   "name": "Катанчик",
+   "club": "Инквизиция",
+   "real": "Ekaterina"
+  },
+  {
+   "name": "Арчи",
+   "club": "Big Game",
+   "real": "Артур Кривенко"
+  },
+  {
+   "name": "Lavgud",
+   "club": "Mafia Club Cyprus",
+   "real": "Юлианна Шевцова"
+  },
+  {
+   "name": "Удача (lucky)",
+   "club": "Маска Mafia Club",
+   "real": "Irena"
+  },
+  {
+   "name": "Donna",
+   "club": "PUDRA mafia club",
+   "real": "Галина"
+  },
+  {
+   "name": "DOVOD",
+   "club": "Mafia club \"Champions League\" Prague",
+   "real": "Valerii S"
+  },
+  {
+   "name": "Flame",
+   "club": "",
+   "real": "Ruslan"
+  },
+  {
+   "name": "Сайфер",
+   "club": "Скажені пси",
+   "real": "Aleksandr Kirakosian"
+  },
+  {
+   "name": "Akali",
+   "club": "",
+   "real": "Георгий Метревели"
+  },
+  {
+   "name": "Миф",
+   "club": "Mafia club \"Champions League\" Prague",
+   "real": "Михаил Фишман"
+  },
+  {
+   "name": "***Алиса***",
+   "club": "Secret Mafia Club",
+   "real": "Borkin Ella"
+  }
+ ],
+ "standings": {
+  "total": [
+   {
+    "place": "1",
+    "name": "Tommy",
+    "club": "",
+    "sigma": 12.43,
+    "sigma_ap": 4.25,
+    "plus": 4.65,
+    "minus": 0.4,
+    "bm": 0.5,
+    "ci": 0.68,
+    "w": 10,
+    "d": 1,
+    "s": 2,
+    "k": 4,
+    "games": 16,
+    "R": [
+     6,
+     10
+    ],
+    "S": [
+     2,
+     3
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "2",
+    "name": "doc",
+    "club": "Клуб, который нельзя называть",
+    "sigma": 11.39,
+    "sigma_ap": 4,
+    "plus": 4,
+    "minus": 0,
+    "bm": 0.5,
+    "ci": 0.64,
+    "w": 9,
+    "d": 1,
+    "s": 1,
+    "k": 5,
+    "games": 16,
+    "R": [
+     4,
+     11
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     3,
+     3
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "3",
+    "name": "Золушка",
+    "club": "",
+    "sigma": 11.05,
+    "sigma_ap": 2.8,
+    "plus": 2.8,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 11,
+    "d": 1,
+    "s": 1,
+    "k": 0,
+    "games": 16,
+    "R": [
+     7,
+     11
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "4",
+    "name": "Eskimo.",
+    "club": "Mafia Club Cologne",
+    "sigma": 11.3,
+    "sigma_ap": 2.3,
+    "plus": 2.5,
+    "minus": 0.2,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 12,
+    "d": 1,
+    "s": 3,
+    "k": 3,
+    "games": 16,
+    "R": [
+     5,
+     7
+    ],
+    "S": [
+     3,
+     3
+    ],
+    "B": [
+     3,
+     3
+    ],
+    "D": [
+     1,
+     3
+    ]
+   },
+   {
+    "place": "5",
+    "name": "Gangster",
+    "club": "Красное и Чёрное",
+    "sigma": 10.7,
+    "sigma_ap": 3.2,
+    "plus": 3.2,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 10,
+    "d": 3,
+    "s": 1,
+    "k": 1,
+    "games": 16,
+    "R": [
+     4,
+     7
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     2,
+     4
+    ],
+    "D": [
+     3,
+     4
+    ]
+   },
+   {
+    "place": "6",
+    "name": "Сайфер",
+    "club": "Скажені пси",
+    "sigma": 10.58,
+    "sigma_ap": 3,
+    "plus": 3.4,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 10,
+    "d": 3,
+    "s": 0,
+    "k": 1,
+    "games": 16,
+    "R": [
+     4,
+     6
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     3,
+     5
+    ],
+    "D": [
+     3,
+     5
+    ]
+   },
+   {
+    "place": "7",
+    "name": "***Алиса***",
+    "club": "Secret Mafia Club",
+    "sigma": 10.6,
+    "sigma_ap": 1.6,
+    "plus": 2,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0,
+    "w": 12,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 16,
+    "R": [
+     6,
+     9
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     5,
+     6
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "8",
+    "name": "Саботаж",
+    "club": "Bengal Mafia Club",
+    "sigma": 10.31,
+    "sigma_ap": 3.4,
+    "plus": 3.4,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.16,
+    "w": 9,
+    "d": 0,
+    "s": 0,
+    "k": 2,
+    "games": 16,
+    "R": [
+     7,
+     11
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     4
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "9",
+    "name": "Flash",
+    "club": "",
+    "sigma": 10.2,
+    "sigma_ap": 3.4,
+    "plus": 3.4,
+    "minus": 0,
+    "bm": 0.5,
+    "ci": 0.8,
+    "w": 8,
+    "d": 0,
+    "s": 1,
+    "k": 6,
+    "games": 16,
+    "R": [
+     6,
+     11
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     1,
+     3
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "10",
+    "name": "Магнат",
+    "club": "mafia.md",
+    "sigma": 10.2,
+    "sigma_ap": 2.7,
+    "plus": 2.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 10,
+    "d": 2,
+    "s": 1,
+    "k": 1,
+    "games": 16,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     3,
+     3
+    ],
+    "D": [
+     2,
+     3
+    ]
+   },
+   {
+    "place": "11",
+    "name": "KEX",
+    "club": "Mafia Club Cologne",
+    "sigma": 7.73,
+    "sigma_ap": 3.45,
+    "plus": 3.45,
+    "minus": 0,
+    "bm": 0.75,
+    "ci": 1.28,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 4,
+    "games": 12,
+    "R": [
+     3,
+     6
+    ],
+    "S": [
+     0,
+     3
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "12",
+    "name": "Cimes",
+    "club": "",
+    "sigma": 7.73,
+    "sigma_ap": 2,
+    "plus": 2.2,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.48,
+    "w": 7,
+    "d": 2,
+    "s": 1,
+    "k": 3,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     2,
+     2
+    ]
+   },
+   {
+    "place": "13",
+    "name": "Вольный",
+    "club": "Mafia Club Cyprus",
+    "sigma": 7.35,
+    "sigma_ap": 2.1,
+    "plus": 2.1,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 7,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     5
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     3,
+     5
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "14",
+    "name": "Session",
+    "club": "",
+    "sigma": 7.35,
+    "sigma_ap": 0.6,
+    "plus": 0.8,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 9,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     5
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     4,
+     4
+    ],
+    "D": [
+     1,
+     2
+    ]
+   },
+   {
+    "place": "15",
+    "name": "Olgierd",
+    "club": "Mafia Club Cyprus",
+    "sigma": 7.25,
+    "sigma_ap": 2,
+    "plus": 2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     4,
+     5
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "16",
+    "name": "Chucha",
+    "club": "Mafia Club Cyprus",
+    "sigma": 7.2,
+    "sigma_ap": 1.2,
+    "plus": 1.4,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 8,
+    "d": 2,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     2,
+     2
+    ]
+   },
+   {
+    "place": "17",
+    "name": "Mariposa",
+    "club": "Decem Mafia Club",
+    "sigma": 7.05,
+    "sigma_ap": 1.8,
+    "plus": 2.2,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "d": 1,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "18",
+    "name": "Frеemаn",
+    "club": "Secret Mafia Club",
+    "sigma": 7.05,
+    "sigma_ap": 1.05,
+    "plus": 2.45,
+    "minus": 1.4,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 8,
+    "d": 3,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     4
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     3,
+     4
+    ],
+    "D": [
+     3,
+     3
+    ]
+   },
+   {
+    "place": "19",
+    "name": "Korolevich",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 7.02,
+    "sigma_ap": 2.2,
+    "plus": 2.2,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.32,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 2,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "20",
+    "name": "Вольфрам",
+    "club": "",
+    "sigma": 6.9,
+    "sigma_ap": 2.4,
+    "plus": 2.4,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 2,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     6
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     2,
+     3
+    ]
+   },
+   {
+    "place": "21",
+    "name": "Білий",
+    "club": "White Mafia Club Chisinau",
+    "sigma": 6.9,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0,
+    "bm": 0.4,
+    "ci": 0.8,
+    "w": 6,
+    "d": 0,
+    "s": 1,
+    "k": 5,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     1,
+     3
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "22",
+    "name": "Goldy 🦋",
+    "club": "White Mafia Club Chisinau",
+    "sigma": 6.9,
+    "sigma_ap": 0.9,
+    "plus": 1.4,
+    "minus": 0.5,
+    "bm": 0,
+    "ci": 0,
+    "w": 8,
+    "d": 2,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     5,
+     9
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     2,
+     2
+    ]
+   },
+   {
+    "place": "23",
+    "name": "Xenon",
+    "club": "Mafia Club Cyprus",
+    "sigma": 6.84,
+    "sigma_ap": 1.35,
+    "plus": 1.35,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.24,
+    "w": 7,
+    "d": 0,
+    "s": 2,
+    "k": 3,
+    "games": 12,
+    "R": [
+     4,
+     7
+    ],
+    "S": [
+     2,
+     2
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "24",
+    "name": "Akali",
+    "club": "",
+    "sigma": 6.4,
+    "sigma_ap": 1.9,
+    "plus": 2.1,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 0,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     1,
+     5
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     4,
+     5
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "25",
+    "name": "Джошуа",
+    "club": "Mafia Club Paphos",
+    "sigma": 6.35,
+    "sigma_ap": 1.1,
+    "plus": 1.1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     2,
+     3
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "26",
+    "name": "iceBerg",
+    "club": "",
+    "sigma": 6.27,
+    "sigma_ap": 2.2,
+    "plus": 2.2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.32,
+    "w": 5,
+    "d": 0,
+    "s": 2,
+    "k": 2,
+    "games": 12,
+    "R": [
+     1,
+     6
+    ],
+    "S": [
+     2,
+     2
+    ],
+    "B": [
+     2,
+     4
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "27",
+    "name": "Maser",
+    "club": "Wild Mafia Club",
+    "sigma": 6.18,
+    "sigma_ap": 1.2,
+    "plus": 1.6,
+    "minus": 0.4,
+    "bm": 0.65,
+    "ci": 0.48,
+    "w": 6,
+    "d": 0,
+    "s": 1,
+    "k": 3,
+    "games": 12,
+    "R": [
+     1,
+     4
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     4,
+     6
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "28",
+    "name": "Luca",
+    "club": "Mafia Club Cyprus",
+    "sigma": 6.17,
+    "sigma_ap": 1.7,
+    "plus": 1.7,
+    "minus": 0,
+    "bm": 0.5,
+    "ci": 0.72,
+    "w": 5,
+    "d": 1,
+    "s": 0,
+    "k": 3,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     0,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "29",
+    "name": "Mr. Smith",
+    "club": "Mafia Club Paphos",
+    "sigma": 6.1,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     8
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "30",
+    "name": "Зима ❄️",
+    "club": "Decem Mafia Club",
+    "sigma": 6.1,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     5,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "31",
+    "name": "KRASNII",
+    "club": "mafia.md",
+    "sigma": 5.9,
+    "sigma_ap": 1.4,
+    "plus": 1.6,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     4,
+     9
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "32",
+    "name": "Удача (lucky)",
+    "club": "Маска Mafia Club",
+    "sigma": 5.85,
+    "sigma_ap": 0.6,
+    "plus": 0.8,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     3,
+     3
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "33",
+    "name": "Луна",
+    "club": "Mafia Club Paphos",
+    "sigma": 5.8,
+    "sigma_ap": 1.3,
+    "plus": 1.3,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     3
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "34",
+    "name": "Ratеl",
+    "club": "Decem Mafia Club",
+    "sigma": 5.73,
+    "sigma_ap": 0.4,
+    "plus": 0.8,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 7,
+    "d": 1,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     5,
+     8
+    ],
+    "S": [
+     1,
+     3
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "35",
+    "name": "Rivierra",
+    "club": "mafia.md",
+    "sigma": 5.7,
+    "sigma_ap": 1.2,
+    "plus": 1.8,
+    "minus": 0.6,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 3,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     6
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     3,
+     4
+    ]
+   },
+   {
+    "place": "36",
+    "name": "Квоут",
+    "club": "Mafia Club Cyprus",
+    "sigma": 5.65,
+    "sigma_ap": 1.9,
+    "plus": 2.1,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "37",
+    "name": "DOVOD",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 5.63,
+    "sigma_ap": 1.8,
+    "plus": 1.8,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 5,
+    "d": 2,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     1,
+     6
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     2,
+     2
+    ]
+   },
+   {
+    "place": "38",
+    "name": "Малышка Мю",
+    "club": "Vojvodina Mafia Club",
+    "sigma": 5.6,
+    "sigma_ap": 1.1,
+    "plus": 1.1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     9
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "39",
+    "name": "Андромеда",
+    "club": "Mafia Club Cyprus",
+    "sigma": 5.51,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0,
+    "bm": 0.4,
+    "ci": 0.16,
+    "w": 5,
+    "d": 0,
+    "s": 1,
+    "k": 2,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     2
+    ]
+   },
+   {
+    "place": "40",
+    "name": "Lavgud",
+    "club": "Mafia Club Cyprus",
+    "sigma": 5.3,
+    "sigma_ap": 1.55,
+    "plus": 1.55,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 5,
+    "d": 1,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     1,
+     2
+    ]
+   },
+   {
+    "place": "41",
+    "name": "Dich",
+    "club": "Vojvodina Mafia Club",
+    "sigma": 5.25,
+    "sigma_ap": 1.5,
+    "plus": 1.5,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 3,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     6
+    ],
+    "S": [
+     0,
+     3
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     3,
+     3
+    ]
+   },
+   {
+    "place": "42",
+    "name": "Фолдэм",
+    "club": "Wild Mafia Club",
+    "sigma": 5.24,
+    "sigma_ap": 1.25,
+    "plus": 1.85,
+    "minus": 0.6,
+    "bm": 0.25,
+    "ci": 0.24,
+    "w": 5,
+    "d": 0,
+    "s": 0,
+    "k": 3,
+    "games": 12,
+    "R": [
+     4,
+     7
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     4
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "43",
+    "name": "Свет",
+    "club": "Mafia Club Cyprus",
+    "sigma": 4.93,
+    "sigma_ap": 1.1,
+    "plus": 1.5,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 5,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     6
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     2,
+     5
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "44",
+    "name": "Urs",
+    "club": "Sector 7",
+    "sigma": 4.9,
+    "sigma_ap": 0.4,
+    "plus": 0.4,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     6
+    ],
+    "S": [
+     0,
+     2
+    ],
+    "B": [
+     3,
+     4
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "45",
+    "name": "Призрак",
+    "club": "Mafia Club Cologne",
+    "sigma": 4.82,
+    "sigma_ap": 1.85,
+    "plus": 1.85,
+    "minus": 0,
+    "bm": 0.5,
+    "ci": 0.72,
+    "w": 3,
+    "d": 0,
+    "s": 3,
+    "k": 3,
+    "games": 12,
+    "R": [
+     0,
+     7
+    ],
+    "S": [
+     3,
+     3
+    ],
+    "B": [
+     0,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "46",
+    "name": "Миф",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 4.48,
+    "sigma_ap": 1.4,
+    "plus": 1.6,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     0,
+     3
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "47",
+    "name": "Монтгомери",
+    "club": "Mafia Club Cyprus",
+    "sigma": 4.45,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     4,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "48",
+    "name": "Катанчик",
+    "club": "Инквизиция",
+    "sigma": 4.33,
+    "sigma_ap": 1.25,
+    "plus": 1.45,
+    "minus": 0.2,
+    "bm": 0.25,
+    "ci": 0.08,
+    "w": 4,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     6
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     1,
+     3
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "49",
+    "name": "Арчи",
+    "club": "Big Game",
+    "sigma": 4.28,
+    "sigma_ap": 1.2,
+    "plus": 1.2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     4
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "50",
+    "name": "Paul",
+    "club": "Mafia Club Paphos",
+    "sigma": 4.25,
+    "sigma_ap": 0.5,
+    "plus": 1.4,
+    "minus": 0.9,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 2,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     5
+    ],
+    "S": [
+     0,
+     2
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     2,
+     3
+    ]
+   },
+   {
+    "place": "51",
+    "name": "Twix",
+    "club": "Mafia Club Cyprus",
+    "sigma": 4.1,
+    "sigma_ap": 1.1,
+    "plus": 1.1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     1,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     3,
+     3
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "52",
+    "name": "Kobe",
+    "club": "",
+    "sigma": 4.08,
+    "sigma_ap": 1,
+    "plus": 1.2,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "53",
+    "name": "Лeв",
+    "club": "",
+    "sigma": 4.05,
+    "sigma_ap": 0.3,
+    "plus": 1.4,
+    "minus": 1.1,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 1,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     7
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     1,
+     3
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "54",
+    "name": "Руанда",
+    "club": "Mafia Club Cyprus",
+    "sigma": 4.02,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.32,
+    "w": 4,
+    "d": 1,
+    "s": 0,
+    "k": 2,
+    "games": 12,
+    "R": [
+     3,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "55",
+    "name": "komilfo",
+    "club": "Secret Mafia Club",
+    "sigma": 3.88,
+    "sigma_ap": 0.8,
+    "plus": 1,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     8
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "56",
+    "name": "Mauder",
+    "club": "Wild Mafia Club",
+    "sigma": 3.78,
+    "sigma_ap": 0.7,
+    "plus": 0.9,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     9
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "57",
+    "name": "Flame",
+    "club": "",
+    "sigma": 3.77,
+    "sigma_ap": 1.95,
+    "plus": 1.95,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.32,
+    "w": 2,
+    "d": 0,
+    "s": 1,
+    "k": 2,
+    "games": 12,
+    "R": [
+     1,
+     6
+    ],
+    "S": [
+     1,
+     4
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     0,
+     2
+    ]
+   },
+   {
+    "place": "58",
+    "name": "Matilda",
+    "club": "Mafia Club Cyprus",
+    "sigma": 3.7,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "d": 0,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     8
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "59",
+    "name": "Паоло",
+    "club": "",
+    "sigma": 3.7,
+    "sigma_ap": 0.7,
+    "plus": 0.9,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     4,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "60",
+    "name": "bun jun lun 999",
+    "club": "",
+    "sigma": 3.7,
+    "sigma_ap": -0.05,
+    "plus": 1.35,
+    "minus": 1.4,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 5,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     6
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     3,
+     4
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "61",
+    "name": "Morrigan Israel",
+    "club": "WhiteNights Mafia Club",
+    "sigma": 3.35,
+    "sigma_ap": -0.4,
+    "plus": 0,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     9
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "62",
+    "name": "IGRIS",
+    "club": "WhiteNights Mafia Club",
+    "sigma": 3.1,
+    "sigma_ap": 0.1,
+    "plus": 0.8,
+    "minus": 0.7,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     1,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     3,
+     4
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "63",
+    "name": "Сабай",
+    "club": "Mafia Club Cyprus",
+    "sigma": 3.05,
+    "sigma_ap": 0.8,
+    "plus": 0.8,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 3,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     10
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "64",
+    "name": "Солнце",
+    "club": "Mafia Club Cyprus",
+    "sigma": 2.7,
+    "sigma_ap": -0.3,
+    "plus": 0.4,
+    "minus": 0.7,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     8
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     3
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "65",
+    "name": "_Pandora_",
+    "club": "AL Capone Club Varna",
+    "sigma": 2.63,
+    "sigma_ap": 0.3,
+    "plus": 0.5,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 3,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     6
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     3
+    ],
+    "D": [
+     0,
+     3
+    ]
+   },
+   {
+    "place": "66",
+    "name": "Беатрис",
+    "club": "Mafia Club Cyprus",
+    "sigma": 2.53,
+    "sigma_ap": 0.2,
+    "plus": 0.2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 3,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     7
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     3
+    ],
+    "D": [
+     1,
+     2
+    ]
+   },
+   {
+    "place": "67",
+    "name": "Donna",
+    "club": "PUDRA mafia club",
+    "sigma": 2.45,
+    "sigma_ap": 0.2,
+    "plus": 0.6,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0,
+    "w": 3,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     8
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     3
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "68",
+    "name": "Lansky",
+    "club": "",
+    "sigma": 2.35,
+    "sigma_ap": 0.1,
+    "plus": 0.3,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 3,
+    "d": 0,
+    "s": 1,
+    "k": 0,
+    "games": 7,
+    "R": [
+     1,
+     3
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     0,
+     2
+    ]
+   },
+   {
+    "place": "69",
+    "name": "Север",
+    "club": "Mafia Club Cyprus",
+    "sigma": 2.28,
+    "sigma_ap": 1.45,
+    "plus": 1.45,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.08,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     1,
+     6
+    ],
+    "S": [
+     0,
+     3
+    ],
+    "B": [
+     0,
+     2
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "70",
+    "name": "Sэм",
+    "club": "Mafia Club Cologne",
+    "sigma": 2.28,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     0,
+     9
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "71",
+    "name": "Jerry Hurper",
+    "club": "",
+    "sigma": 1.25,
+    "sigma_ap": 0.5,
+    "plus": 0.5,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 1,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 1,
+    "R": [
+     0,
+     0
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "72",
+    "name": "S1LveR",
+    "club": "",
+    "sigma": 0.4,
+    "sigma_ap": 0.4,
+    "plus": 0.4,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 0,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 2,
+    "R": [
+     0,
+     2
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "73",
+    "name": "Kaory",
+    "club": "",
+    "sigma": -0.2,
+    "sigma_ap": -0.2,
+    "plus": 0,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 0,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 2,
+    "R": [
+     0,
+     1
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     0,
+     1
+    ]
+   }
+  ],
+  "final": [
+   {
+    "place": "1",
+    "name": "Tommy",
+    "club": "",
+    "sigma": 1.5,
+    "sigma_ap": 0.55,
+    "plus": 0.55,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.2,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 4,
+    "R": [
+     1,
+     2
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "2",
+    "name": "doc",
+    "club": "Клуб, который нельзя называть",
+    "sigma": 3.45,
+    "sigma_ap": 1.2,
+    "plus": 1.2,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 3,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 4,
+    "R": [
+     2,
+     3
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "3",
+    "name": "Золушка",
+    "club": "",
+    "sigma": 2.95,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 3,
+    "d": 1,
+    "s": 1,
+    "k": 0,
+    "games": 4,
+    "R": [
+     1,
+     2
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "4",
+    "name": "Eskimo.",
+    "club": "Mafia Club Cologne",
+    "sigma": 0.75,
+    "sigma_ap": 0,
+    "plus": 0.2,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 4,
+    "R": [
+     0,
+     1
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     0,
+     2
+    ]
+   },
+   {
+    "place": "5",
+    "name": "Gangster",
+    "club": "Красное и Чёрное",
+    "sigma": 2.2,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 4,
+    "R": [
+     2,
+     4
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "6",
+    "name": "Сайфер",
+    "club": "Скажені пси",
+    "sigma": 2.1,
+    "sigma_ap": 0.6,
+    "plus": 0.6,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 4,
+    "R": [
+     1,
+     2
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "7",
+    "name": "***Алиса***",
+    "club": "Secret Mafia Club",
+    "sigma": 1.7,
+    "sigma_ap": 0.2,
+    "plus": 0.4,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 2,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 4,
+    "R": [
+     1,
+     2
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "8",
+    "name": "Саботаж",
+    "club": "Bengal Mafia Club",
+    "sigma": 2.2,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 4,
+    "R": [
+     2,
+     4
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "9",
+    "name": "Flash",
+    "club": "",
+    "sigma": 2.3,
+    "sigma_ap": 0.8,
+    "plus": 0.8,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 2,
+    "d": 0,
+    "s": 1,
+    "k": 0,
+    "games": 4,
+    "R": [
+     0,
+     1
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "10",
+    "name": "Магнат",
+    "club": "mafia.md",
+    "sigma": 1.7,
+    "sigma_ap": 0.2,
+    "plus": 0.2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 4,
+    "R": [
+     2,
+     3
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     0,
+     0
+    ]
+   }
+  ],
+  "qualification": [
+   {
+    "place": "1",
+    "name": "Tommy",
+    "club": "",
+    "sigma": 10.93,
+    "sigma_ap": 3.7,
+    "plus": 4.1,
+    "minus": 0.4,
+    "bm": 0.25,
+    "ci": 0.48,
+    "w": 9,
+    "d": 1,
+    "s": 2,
+    "k": 3,
+    "games": 12,
+    "R": [
+     5,
+     8
+    ],
+    "S": [
+     2,
+     2
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "2",
+    "name": "Eskimo.",
+    "club": "Mafia Club Cologne",
+    "sigma": 10.55,
+    "sigma_ap": 2.3,
+    "plus": 2.3,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 11,
+    "d": 1,
+    "s": 3,
+    "k": 3,
+    "games": 12,
+    "R": [
+     5,
+     6
+    ],
+    "S": [
+     3,
+     3
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "3",
+    "name": "***Алиса***",
+    "club": "Secret Mafia Club",
+    "sigma": 8.9,
+    "sigma_ap": 1.4,
+    "plus": 1.6,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 10,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     5,
+     7
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     5,
+     5
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "4",
+    "name": "Магнат",
+    "club": "mafia.md",
+    "sigma": 8.5,
+    "sigma_ap": 2.5,
+    "plus": 2.5,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 8,
+    "d": 2,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     5
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     3,
+     3
+    ],
+    "D": [
+     2,
+     3
+    ]
+   },
+   {
+    "place": "5",
+    "name": "Gangster",
+    "club": "Красное и Чёрное",
+    "sigma": 8.5,
+    "sigma_ap": 2.5,
+    "plus": 2.5,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 8,
+    "d": 3,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     3
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     2,
+     4
+    ],
+    "D": [
+     3,
+     4
+    ]
+   },
+   {
+    "place": "6",
+    "name": "Сайфер",
+    "club": "Скажені пси",
+    "sigma": 8.48,
+    "sigma_ap": 2.4,
+    "plus": 2.8,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 8,
+    "d": 3,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     4
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     2,
+     3
+    ],
+    "D": [
+     3,
+     5
+    ]
+   },
+   {
+    "place": "7",
+    "name": "Саботаж",
+    "club": "Bengal Mafia Club",
+    "sigma": 8.11,
+    "sigma_ap": 2.7,
+    "plus": 2.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.16,
+    "w": 7,
+    "d": 0,
+    "s": 0,
+    "k": 2,
+    "games": 12,
+    "R": [
+     5,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     4
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "8",
+    "name": "Золушка",
+    "club": "",
+    "sigma": 8.1,
+    "sigma_ap": 2.1,
+    "plus": 2.1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 8,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     6,
+     9
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "9",
+    "name": "doc",
+    "club": "Клуб, который нельзя называть",
+    "sigma": 7.94,
+    "sigma_ap": 2.8,
+    "plus": 2.8,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.64,
+    "w": 6,
+    "d": 1,
+    "s": 1,
+    "k": 4,
+    "games": 12,
+    "R": [
+     2,
+     8
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "10",
+    "name": "Flash",
+    "club": "",
+    "sigma": 7.9,
+    "sigma_ap": 2.6,
+    "plus": 2.6,
+    "minus": 0,
+    "bm": 0.5,
+    "ci": 0.8,
+    "w": 6,
+    "d": 0,
+    "s": 0,
+    "k": 6,
+    "games": 12,
+    "R": [
+     6,
+     10
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "11",
+    "name": "KEX",
+    "club": "Mafia Club Cologne",
+    "sigma": 7.73,
+    "sigma_ap": 3.45,
+    "plus": 3.45,
+    "minus": 0,
+    "bm": 0.75,
+    "ci": 1.28,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 4,
+    "games": 12,
+    "R": [
+     3,
+     6
+    ],
+    "S": [
+     0,
+     3
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "12",
+    "name": "Cimes",
+    "club": "",
+    "sigma": 7.73,
+    "sigma_ap": 2,
+    "plus": 2.2,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.48,
+    "w": 7,
+    "d": 2,
+    "s": 1,
+    "k": 3,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     2,
+     2
+    ]
+   },
+   {
+    "place": "13",
+    "name": "Вольный",
+    "club": "Mafia Club Cyprus",
+    "sigma": 7.35,
+    "sigma_ap": 2.1,
+    "plus": 2.1,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 7,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     5
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     3,
+     5
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "14",
+    "name": "Session",
+    "club": "",
+    "sigma": 7.35,
+    "sigma_ap": 0.6,
+    "plus": 0.8,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 9,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     5
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     4,
+     4
+    ],
+    "D": [
+     1,
+     2
+    ]
+   },
+   {
+    "place": "15",
+    "name": "Olgierd",
+    "club": "Mafia Club Cyprus",
+    "sigma": 7.25,
+    "sigma_ap": 2,
+    "plus": 2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     4,
+     5
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "16",
+    "name": "Chucha",
+    "club": "Mafia Club Cyprus",
+    "sigma": 7.2,
+    "sigma_ap": 1.2,
+    "plus": 1.4,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 8,
+    "d": 2,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     2,
+     2
+    ]
+   },
+   {
+    "place": "17",
+    "name": "Mariposa",
+    "club": "Decem Mafia Club",
+    "sigma": 7.05,
+    "sigma_ap": 1.8,
+    "plus": 2.2,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "d": 1,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "18",
+    "name": "Frеemаn",
+    "club": "Secret Mafia Club",
+    "sigma": 7.05,
+    "sigma_ap": 1.05,
+    "plus": 2.45,
+    "minus": 1.4,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 8,
+    "d": 3,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     4
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     3,
+     4
+    ],
+    "D": [
+     3,
+     3
+    ]
+   },
+   {
+    "place": "19",
+    "name": "Korolevich",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 7.02,
+    "sigma_ap": 2.2,
+    "plus": 2.2,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.32,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 2,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "20",
+    "name": "Вольфрам",
+    "club": "",
+    "sigma": 6.9,
+    "sigma_ap": 2.4,
+    "plus": 2.4,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 2,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     6
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     2,
+     3
+    ]
+   },
+   {
+    "place": "21",
+    "name": "Білий",
+    "club": "White Mafia Club Chisinau",
+    "sigma": 6.9,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0,
+    "bm": 0.4,
+    "ci": 0.8,
+    "w": 6,
+    "d": 0,
+    "s": 1,
+    "k": 5,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     1,
+     3
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "22",
+    "name": "Goldy 🦋",
+    "club": "White Mafia Club Chisinau",
+    "sigma": 6.9,
+    "sigma_ap": 0.9,
+    "plus": 1.4,
+    "minus": 0.5,
+    "bm": 0,
+    "ci": 0,
+    "w": 8,
+    "d": 2,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     5,
+     9
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     2,
+     2
+    ]
+   },
+   {
+    "place": "23",
+    "name": "Xenon",
+    "club": "Mafia Club Cyprus",
+    "sigma": 6.84,
+    "sigma_ap": 1.35,
+    "plus": 1.35,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.24,
+    "w": 7,
+    "d": 0,
+    "s": 2,
+    "k": 3,
+    "games": 12,
+    "R": [
+     4,
+     7
+    ],
+    "S": [
+     2,
+     2
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "24",
+    "name": "Akali",
+    "club": "",
+    "sigma": 6.4,
+    "sigma_ap": 1.9,
+    "plus": 2.1,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 0,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     1,
+     5
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     4,
+     5
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "25",
+    "name": "Джошуа",
+    "club": "Mafia Club Paphos",
+    "sigma": 6.35,
+    "sigma_ap": 1.1,
+    "plus": 1.1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     2,
+     3
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "26",
+    "name": "iceBerg",
+    "club": "",
+    "sigma": 6.27,
+    "sigma_ap": 2.2,
+    "plus": 2.2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.32,
+    "w": 5,
+    "d": 0,
+    "s": 2,
+    "k": 2,
+    "games": 12,
+    "R": [
+     1,
+     6
+    ],
+    "S": [
+     2,
+     2
+    ],
+    "B": [
+     2,
+     4
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "27",
+    "name": "Maser",
+    "club": "Wild Mafia Club",
+    "sigma": 6.18,
+    "sigma_ap": 1.2,
+    "plus": 1.6,
+    "minus": 0.4,
+    "bm": 0.65,
+    "ci": 0.48,
+    "w": 6,
+    "d": 0,
+    "s": 1,
+    "k": 3,
+    "games": 12,
+    "R": [
+     1,
+     4
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     4,
+     6
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "28",
+    "name": "Luca",
+    "club": "Mafia Club Cyprus",
+    "sigma": 6.17,
+    "sigma_ap": 1.7,
+    "plus": 1.7,
+    "minus": 0,
+    "bm": 0.5,
+    "ci": 0.72,
+    "w": 5,
+    "d": 1,
+    "s": 0,
+    "k": 3,
+    "games": 12,
+    "R": [
+     4,
+     8
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     0,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "29",
+    "name": "Зима ❄️",
+    "club": "Decem Mafia Club",
+    "sigma": 6.1,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     5,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "30",
+    "name": "Mr. Smith",
+    "club": "Mafia Club Paphos",
+    "sigma": 6.1,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     8
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "31",
+    "name": "KRASNII",
+    "club": "mafia.md",
+    "sigma": 5.9,
+    "sigma_ap": 1.4,
+    "plus": 1.6,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     4,
+     9
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "32",
+    "name": "Удача (lucky)",
+    "club": "Маска Mafia Club",
+    "sigma": 5.85,
+    "sigma_ap": 0.6,
+    "plus": 0.8,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     3,
+     3
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "33",
+    "name": "Луна",
+    "club": "Mafia Club Paphos",
+    "sigma": 5.8,
+    "sigma_ap": 1.3,
+    "plus": 1.3,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     3
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "34",
+    "name": "Ratеl",
+    "club": "Decem Mafia Club",
+    "sigma": 5.73,
+    "sigma_ap": 0.4,
+    "plus": 0.8,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 7,
+    "d": 1,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     5,
+     8
+    ],
+    "S": [
+     1,
+     3
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "35",
+    "name": "Rivierra",
+    "club": "mafia.md",
+    "sigma": 5.7,
+    "sigma_ap": 1.2,
+    "plus": 1.8,
+    "minus": 0.6,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 3,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     6
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     3,
+     4
+    ]
+   },
+   {
+    "place": "36",
+    "name": "Квоут",
+    "club": "Mafia Club Cyprus",
+    "sigma": 5.65,
+    "sigma_ap": 1.9,
+    "plus": 2.1,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "37",
+    "name": "DOVOD",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 5.63,
+    "sigma_ap": 1.8,
+    "plus": 1.8,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 5,
+    "d": 2,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     1,
+     6
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     2,
+     2
+    ]
+   },
+   {
+    "place": "38",
+    "name": "Малышка Мю",
+    "club": "Vojvodina Mafia Club",
+    "sigma": 5.6,
+    "sigma_ap": 1.1,
+    "plus": 1.1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     9
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "39",
+    "name": "Андромеда",
+    "club": "Mafia Club Cyprus",
+    "sigma": 5.51,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0,
+    "bm": 0.4,
+    "ci": 0.16,
+    "w": 5,
+    "d": 0,
+    "s": 1,
+    "k": 2,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     2
+    ]
+   },
+   {
+    "place": "40",
+    "name": "Lavgud",
+    "club": "Mafia Club Cyprus",
+    "sigma": 5.3,
+    "sigma_ap": 1.55,
+    "plus": 1.55,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 5,
+    "d": 1,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     1,
+     2
+    ]
+   },
+   {
+    "place": "41",
+    "name": "Dich",
+    "club": "Vojvodina Mafia Club",
+    "sigma": 5.25,
+    "sigma_ap": 1.5,
+    "plus": 1.5,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 3,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     6
+    ],
+    "S": [
+     0,
+     3
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     3,
+     3
+    ]
+   },
+   {
+    "place": "42",
+    "name": "Фолдэм",
+    "club": "Wild Mafia Club",
+    "sigma": 5.24,
+    "sigma_ap": 1.25,
+    "plus": 1.85,
+    "minus": 0.6,
+    "bm": 0.25,
+    "ci": 0.24,
+    "w": 5,
+    "d": 0,
+    "s": 0,
+    "k": 3,
+    "games": 12,
+    "R": [
+     4,
+     7
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     4
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "43",
+    "name": "Свет",
+    "club": "Mafia Club Cyprus",
+    "sigma": 4.93,
+    "sigma_ap": 1.1,
+    "plus": 1.5,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 5,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     6
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     2,
+     5
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "44",
+    "name": "Urs",
+    "club": "Sector 7",
+    "sigma": 4.9,
+    "sigma_ap": 0.4,
+    "plus": 0.4,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     6
+    ],
+    "S": [
+     0,
+     2
+    ],
+    "B": [
+     3,
+     4
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "45",
+    "name": "Призрак",
+    "club": "Mafia Club Cologne",
+    "sigma": 4.82,
+    "sigma_ap": 1.85,
+    "plus": 1.85,
+    "minus": 0,
+    "bm": 0.5,
+    "ci": 0.72,
+    "w": 3,
+    "d": 0,
+    "s": 3,
+    "k": 3,
+    "games": 12,
+    "R": [
+     0,
+     7
+    ],
+    "S": [
+     3,
+     3
+    ],
+    "B": [
+     0,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "46",
+    "name": "Миф",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 4.48,
+    "sigma_ap": 1.4,
+    "plus": 1.6,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     7
+    ],
+    "S": [
+     0,
+     3
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "47",
+    "name": "Монтгомери",
+    "club": "Mafia Club Cyprus",
+    "sigma": 4.45,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     4,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "48",
+    "name": "Катанчик",
+    "club": "Инквизиция",
+    "sigma": 4.33,
+    "sigma_ap": 1.25,
+    "plus": 1.45,
+    "minus": 0.2,
+    "bm": 0.25,
+    "ci": 0.08,
+    "w": 4,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     6
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     1,
+     3
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "49",
+    "name": "Арчи",
+    "club": "Big Game",
+    "sigma": 4.28,
+    "sigma_ap": 1.2,
+    "plus": 1.2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     4
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "50",
+    "name": "Paul",
+    "club": "Mafia Club Paphos",
+    "sigma": 4.25,
+    "sigma_ap": 0.5,
+    "plus": 1.4,
+    "minus": 0.9,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 2,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     5
+    ],
+    "S": [
+     0,
+     2
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     2,
+     3
+    ]
+   },
+   {
+    "place": "51",
+    "name": "Twix",
+    "club": "Mafia Club Cyprus",
+    "sigma": 4.1,
+    "sigma_ap": 1.1,
+    "plus": 1.1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     1,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     3,
+     3
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "52",
+    "name": "Kobe",
+    "club": "",
+    "sigma": 4.08,
+    "sigma_ap": 1,
+    "plus": 1.2,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "53",
+    "name": "Лeв",
+    "club": "",
+    "sigma": 4.05,
+    "sigma_ap": 0.3,
+    "plus": 1.4,
+    "minus": 1.1,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 1,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     7
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     1,
+     3
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "54",
+    "name": "Руанда",
+    "club": "Mafia Club Cyprus",
+    "sigma": 4.02,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.32,
+    "w": 4,
+    "d": 1,
+    "s": 0,
+    "k": 2,
+    "games": 12,
+    "R": [
+     3,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "55",
+    "name": "komilfo",
+    "club": "Secret Mafia Club",
+    "sigma": 3.88,
+    "sigma_ap": 0.8,
+    "plus": 1,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     8
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "56",
+    "name": "Mauder",
+    "club": "Wild Mafia Club",
+    "sigma": 3.78,
+    "sigma_ap": 0.7,
+    "plus": 0.9,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     9
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "57",
+    "name": "Flame",
+    "club": "",
+    "sigma": 3.77,
+    "sigma_ap": 1.95,
+    "plus": 1.95,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.32,
+    "w": 2,
+    "d": 0,
+    "s": 1,
+    "k": 2,
+    "games": 12,
+    "R": [
+     1,
+     6
+    ],
+    "S": [
+     1,
+     4
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     0,
+     2
+    ]
+   },
+   {
+    "place": "58",
+    "name": "Паоло",
+    "club": "",
+    "sigma": 3.7,
+    "sigma_ap": 0.7,
+    "plus": 0.9,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     4,
+     10
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "59",
+    "name": "Matilda",
+    "club": "Mafia Club Cyprus",
+    "sigma": 3.7,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "d": 0,
+    "s": 1,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     8
+    ],
+    "S": [
+     1,
+     2
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "60",
+    "name": "bun jun lun 999",
+    "club": "",
+    "sigma": 3.7,
+    "sigma_ap": -0.05,
+    "plus": 1.35,
+    "minus": 1.4,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 5,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     6
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     3,
+     4
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "61",
+    "name": "Morrigan Israel",
+    "club": "WhiteNights Mafia Club",
+    "sigma": 3.35,
+    "sigma_ap": -0.4,
+    "plus": 0,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     4,
+     9
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     1,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "62",
+    "name": "IGRIS",
+    "club": "WhiteNights Mafia Club",
+    "sigma": 3.1,
+    "sigma_ap": 0.1,
+    "plus": 0.8,
+    "minus": 0.7,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     1,
+     7
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     3,
+     4
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "63",
+    "name": "Сабай",
+    "club": "Mafia Club Cyprus",
+    "sigma": 3.05,
+    "sigma_ap": 0.8,
+    "plus": 0.8,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 3,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     10
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     0,
+     1
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "64",
+    "name": "Солнце",
+    "club": "Mafia Club Cyprus",
+    "sigma": 2.7,
+    "sigma_ap": -0.3,
+    "plus": 0.4,
+    "minus": 0.7,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     2,
+     8
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     1,
+     3
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "65",
+    "name": "_Pandora_",
+    "club": "AL Capone Club Varna",
+    "sigma": 2.63,
+    "sigma_ap": 0.3,
+    "plus": 0.5,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 3,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     3,
+     6
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     3
+    ],
+    "D": [
+     0,
+     3
+    ]
+   },
+   {
+    "place": "66",
+    "name": "Беатрис",
+    "club": "Mafia Club Cyprus",
+    "sigma": 2.53,
+    "sigma_ap": 0.2,
+    "plus": 0.2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 3,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     2,
+     7
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     3
+    ],
+    "D": [
+     1,
+     2
+    ]
+   },
+   {
+    "place": "67",
+    "name": "Donna",
+    "club": "PUDRA mafia club",
+    "sigma": 2.45,
+    "sigma_ap": 0.2,
+    "plus": 0.6,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0,
+    "w": 3,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 12,
+    "R": [
+     3,
+     8
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     3
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "68",
+    "name": "Lansky",
+    "club": "",
+    "sigma": 2.35,
+    "sigma_ap": 0.1,
+    "plus": 0.3,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 3,
+    "d": 0,
+    "s": 1,
+    "k": 0,
+    "games": 7,
+    "R": [
+     1,
+     3
+    ],
+    "S": [
+     1,
+     1
+    ],
+    "B": [
+     1,
+     1
+    ],
+    "D": [
+     0,
+     2
+    ]
+   },
+   {
+    "place": "69",
+    "name": "Север",
+    "club": "Mafia Club Cyprus",
+    "sigma": 2.28,
+    "sigma_ap": 1.45,
+    "plus": 1.45,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.08,
+    "w": 1,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     1,
+     6
+    ],
+    "S": [
+     0,
+     3
+    ],
+    "B": [
+     0,
+     2
+    ],
+    "D": [
+     0,
+     1
+    ]
+   },
+   {
+    "place": "70",
+    "name": "Sэм",
+    "club": "Mafia Club Cologne",
+    "sigma": 2.28,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 2,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 12,
+    "R": [
+     0,
+     9
+    ],
+    "S": [
+     0,
+     1
+    ],
+    "B": [
+     2,
+     2
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "71",
+    "name": "Jerry Hurper",
+    "club": "",
+    "sigma": 1.25,
+    "sigma_ap": 0.5,
+    "plus": 0.5,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 1,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 1,
+    "R": [
+     0,
+     0
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     1,
+     1
+    ]
+   },
+   {
+    "place": "72",
+    "name": "S1LveR",
+    "club": "",
+    "sigma": 0.4,
+    "sigma_ap": 0.4,
+    "plus": 0.4,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 0,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 2,
+    "R": [
+     0,
+     2
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     0,
+     0
+    ]
+   },
+   {
+    "place": "73",
+    "name": "Kaory",
+    "club": "",
+    "sigma": -0.2,
+    "sigma_ap": -0.2,
+    "plus": 0,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 0,
+    "d": 0,
+    "s": 0,
+    "k": 0,
+    "games": 2,
+    "R": [
+     0,
+     1
+    ],
+    "S": [
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0
+    ],
+    "D": [
+     0,
+     1
+    ]
+   }
+  ]
+ },
+ "winners": [
+  "Tommy",
+  "doc",
+  "Золушка"
+ ],
+ "reconciliation": {
+  "players": 73,
+  "games_total": 16,
+  "games_qual": 12,
+  "games_final": 4,
+  "ctrl_sigma_total": 416.15,
+  "ctrl_sigma_qual": 395.3,
+  "ctrl_sigma_final": 20.85,
+  "sum_check_qual_plus_final_eq_total": true,
+  "sum_check_failures": [],
+  "top10_all_finalists": true,
+  "rest_all_nonfinalists": true,
+  "official_vs_sigma_diffs": [
+   {
+    "name": "Золушка",
+    "off": 3,
+    "sigma_rank": 4,
+    "sigma": 11.05
+   },
+   {
+    "name": "Eskimo.",
+    "off": 4,
+    "sigma_rank": 3,
+    "sigma": 11.3
+   },
+   {
+    "name": "Сайфер",
+    "off": 6,
+    "sigma_rank": 7,
+    "sigma": 10.58
+   },
+   {
+    "name": "***Алиса***",
+    "off": 7,
+    "sigma_rank": 6,
+    "sigma": 10.6
+   },
+   {
+    "name": "Mr. Smith",
+    "off": 29,
+    "sigma_rank": 30,
+    "sigma": 6.1
+   },
+   {
+    "name": "Зима ❄️",
+    "off": 30,
+    "sigma_rank": 29,
+    "sigma": 6.1
+   },
+   {
+    "name": "Matilda",
+    "off": 58,
+    "sigma_rank": 59,
+    "sigma": 3.7
+   },
+   {
+    "name": "Паоло",
+    "off": 59,
+    "sigma_rank": 58,
+    "sigma": 3.7
+   }
+  ]
+ }
+}

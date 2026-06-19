@@ -190,19 +190,16 @@ const id=new URLSearchParams(location.search).get('t')||'667';
     }).join('');
   }
   if(t.note) html+=`<div class="note"><b>${t.status==='upcoming'?'Скоро.':'Заметка.'}</b> ${esc(t.note)}</div>`;
-  if(t.id==='667') html+=`<div class="note" id="live-note" style="margin-top:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;"><span id="live-status">Проверяю результаты на mafgame…</span><a href="#" id="live-refresh" style="font-weight:800;color:inherit;">⟳ Обновить</a></div>`;
+  if(t.id==='667') html+=`<div class="note" id="live-note" style="margin-top:14px;"><span id="live-status">Турнир завершён · данные заморожены.</span></div>`;
   html+=streamsCard(t.id);
   sec.innerHTML=html;
   document.getElementById('src').innerHTML='Источник: <a href="'+t.mafgame+'">'+t.mafgame.replace('https://','')+'</a>';
   if(t.id==='667'&&window.loadGames){
-    const upd=()=>window.loadGames('667').then(G=>{
+    window.loadGames('667').then(G=>{
       const el=document.getElementById('live-status');
-      if(el&&G) el.innerHTML='<b>Сыграно '+G.games_played+' из '+G.games_total+' игр квалификации</b>'+(G.live?' · live с mafgame':' · локальные данные')+'. Страницы обновляются сами каждые 10 минут.';
-      else if(el) el.textContent='Результаты пока недоступны.';
+      if(el&&G) el.innerHTML='<b>Сыграно '+G.games_played+' из '+G.games_total+' игр</b> (12 квалификации + 4 финала). Турнир завершён, данные заморожены.';
+      else if(el) el.textContent='Результаты недоступны.';
     });
-    upd();
-    const btn=document.getElementById('live-refresh');
-    if(btn) btn.onclick=e=>{e.preventDefault();document.getElementById('live-status').textContent='Обновляю…';upd();};
   }
 })(window.TOURNAMENTS_DB);
 </script>

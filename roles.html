@@ -51,6 +51,7 @@
   <div class="topbar" id="nav"></div>
   <h1>Статистика по ролям</h1>
   <div class="sub" id="sub">загрузка…</div>
+  <div class="tabs" id="stage-tabs"></div>
   <div class="tabs" id="tabs"></div>
   <div class="card"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
   <div class="note" id="note"></div>
@@ -63,13 +64,16 @@ const SHORT={Citizen:'Мир',Sheriff:'Шер',Mafia:'Маф',Don:'Дон'};
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function fmt(v){const n=Number(v);if(isNaN(n))return '—';if(n===0)return '0';return Number.isInteger(n)?n.toString():n.toFixed(2).replace(/\.?0+$/,'');}
 function sigCell(v){const c=v<0?'neg':(v>0?'big':'dim');return `<td class="${c}">${v>0?'':''}${fmt(+v.toFixed(2))}</td>`;}
-let STAT={}, PLAYED=0, current='all';
+let STAT={}, PLAYED=0, current='all', curStage='all', GALL=null;
 
 function emptyRole(){return {sigma:0,games:0,w:0};}
 function build(G){
-  PLAYED = (G.games_played!=null?G.games_played:G.games.length);
+  if(G) GALL=G;
+  const upto = (GALL.games_played!=null?GALL.games_played:GALL.games.length);
+  const games = GALL.games.slice(0,upto).filter(g => curStage==='all' || (g.stage||'Квалификация')===curStage);
+  PLAYED = games.length;
   const P={};
-  G.games.slice(0,PLAYED).forEach(g=>(g.tables||[]).forEach(t=>(t.seats||[]).forEach(s=>{
+  games.forEach(g=>(g.tables||[]).forEach(t=>(t.seats||[]).forEach(s=>{
     if(!s.role) return;
     const sig=(s.wpts||0)+(s.aps||0)+(s.ci||0);
     const p=P[s.name]||(P[s.name]={name:s.name,total:emptyRole(),roles:{Citizen:emptyRole(),Sheriff:emptyRole(),Mafia:emptyRole(),Don:emptyRole()}});
@@ -77,6 +81,16 @@ function build(G){
     const r=p.roles[s.role]; r.sigma+=sig; r.games++; if(s.result==='W')r.w++;
   })));
   STAT=P;
+}
+function renderStageTabs(){
+  const order=['all','Квалификация','Финал'];
+  const labels={all:'Все стадии','Квалификация':'Квалификация','Финал':'Финал'};
+  const present=order.filter(st=> st==='all' || (GALL&&GALL.games.some(g=>(g.stage||'Квалификация')===st)));
+  const el=document.getElementById('stage-tabs');
+  if(present.length<=2){ el.innerHTML=''; return; }
+  el.innerHTML=present.map(st=>`<button class="tab${st===curStage?' active':''}" data-st="${st}">${labels[st]}</button>`).join('');
+  el.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ curStage=b.dataset.st; build(); renderStageTabs(); renderTable();
+    document.getElementById('sub').innerHTML=`Турнир ${T} · ${curStage==='all'?'все стадии':curStage} · сыграно ${PLAYED} игр · ${Object.keys(STAT).length} игроков`; });
 }
 function renderTabs(){
   const tabs=[['all','Все роли','']].concat(ROLES.map(([k,l,team])=>[k,l,team]));
@@ -122,7 +136,7 @@ window.loadGames(T).then(G=>{
   if(!G||!G.games){document.getElementById('sub').textContent='Нет данных турнира '+T;return;}
   build(G);
   document.getElementById('sub').innerHTML=`Турнир ${T} · сыграно ${PLAYED}/${G.games_total} игр · ${Object.keys(STAT).length} игроков`;
-  renderTabs(); renderTable();
+  renderStageTabs(); renderTabs(); renderTable();
 }).catch(e=>{document.getElementById('sub').textContent='Ошибка: '+e.message;});
 </script>
 </body>

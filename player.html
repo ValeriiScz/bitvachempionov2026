@@ -133,9 +133,9 @@
 <script>
 const T = new URLSearchParams(location.search).get('t') || '826';
 const STAGE_INFO = [
-  {key:'final', label:'Финал'},
+  {key:'qualification', label:'Квалификация'},
   {key:'semifinal', label:'Полуфинал'},
-  {key:'qualification', label:'Квалификация'}
+  {key:'final', label:'Финал'}
 ];
 const AWARD_LABELS = {
   most_valuable_players:'MVP турнира', most_valuable_mafia:'Лучшая мафия',
@@ -164,6 +164,9 @@ async function load() {
 }
 
 function ratingOrdered() {
+  if (DATA && DATA.standings && DATA.standings.total && DATA.standings.total.length) {
+    return DATA.standings.total.map(r => ({name: r.name, place: parseInt(r.place, 10), sigma: r.sigma}));
+  }
   if (GAMES && GAMES.games && GAMES.games.length) {
     const n = (GAMES.games_played != null ? GAMES.games_played : GAMES.games.length);
     return liveStandings(n).map(r => ({name: r.name, place: r.place, sigma: r.sigma}));
@@ -193,6 +196,10 @@ function renderPlayer(nick) {
 
   // Активные стадии этого турнира
   const stages = STAGE_INFO.filter(s => DATA.standings?.[s.key]?.length);
+  const totalRow = DATA.standings?.total?.find(r => r.name === nick) || null;
+  const totalSize = DATA.standings?.total?.length || 0;
+  const totalPos = totalRow ? parseInt(totalRow.place, 10) : null;
+  const totalPlaceRow = totalPos ? `<div class="place-row${totalPos<=3?' podium':''}" style="border-color:rgba(255,184,77,.45);"><span class="place-stage" style="color:#ffb84d;font-weight:800;">Итог (официально)</span><span class="place-val">#${totalPos}<span class="of"> / ${totalSize}</span></span></div>` : '';
   const stageData = {};
   stages.forEach(s => {
     s.size = DATA.standings[s.key].length;
@@ -251,6 +258,7 @@ function renderPlayer(nick) {
         ${player.club ? `<div class="player-club">${escapeHtml(player.club)}</div>` : ''}
         <div class="player-overall">
           <span class="pill">Σ всего: <span class="v">${fmtNum(headSigma)}</span></span>
+          ${totalPos ? `<span class="pill">Место: <span class="v">#${totalPos}<span style="opacity:.6"> / ${totalSize}</span></span></span>` : ''}
           ${stages.length > 1 ? `<span class="pill">Стадий: <span class="v">${stages_played}/${stages.length}</span></span>` : ''}
           <span class="pill">Побед: <span class="v">${headW}</span></span>
           ${headGames > 0 ? `<span class="pill">Игр: <span class="v">${headGames}</span></span>` : ''}
@@ -265,6 +273,7 @@ function renderPlayer(nick) {
       ${GAMES && GAMES.games?.length ? progressionCard(nick) : `<div class="card">
         <h3>${stages.length > 1 ? 'Места по стадиям' : 'Место в турнире'}</h3>
         <div class="places">
+          ${totalPlaceRow}
           ${stages.map(s => {
             const d = stageData[s.key];
             if (!d) return `<div class="place-row skipped"><span class="place-stage">${s.label}</span><span class="place-val none">не играл</span></div>`;
@@ -291,6 +300,7 @@ function renderPlayer(nick) {
       <div class="card">
         <h3>${stages.length > 1 ? 'Места по стадиям (официально)' : 'Место в турнире (официально)'}</h3>
         <div class="places">
+          ${totalPlaceRow}
           ${stages.map(s => {
             const d = stageData[s.key];
             if (!d) return `<div class="place-row skipped"><span class="place-stage">${s.label}</span><span class="place-val none">не играл</span></div>`;
@@ -339,7 +349,7 @@ function renderPlayer(nick) {
           }).join('')}
           ${stages.length > 1 ? `<tr class="total">
             <td class="left">Итого</td>
-            <td>—</td>
+            <td>${totalPos ? '#'+totalPos : '—'}</td>
             <td class="big">${fmtNum(total_sigma)}</td>
             <td>${fmtNum(sum('sigma_ap'))}</td>
             <td>${fmtNum(sum('plus'))}</td>
@@ -440,41 +450,52 @@ function renderGamesTable(myGames, nick) {
   if (myGames.length === 0) {
     return `<div class="card"><h3>Разбивка по играм</h3><div class="empty">${escapeHtml(nick)} ещё не сыграл ни одной из ${GAMES.games_played || 0} распарсенных игр</div></div>`;
   }
-  return `<div class="card">
-    <h3>Разбивка по играм (как в @mafgamer_bot)</h3>
-    <div class="info">Сыграно ${GAMES.games_played}/${GAMES.games_total} игр турнира. ${escapeHtml(nick)} в ${myGames.length} из них.</div>
-    <table class="games-table">
+  const STAGES_ORDER = ['Квалификация','Финал'];
+  const present = STAGES_ORDER.filter(st => myGames.some(g => g.stage === st));
+  const stagesToShow = present.length ? present : [null];
+  const word = n => (n % 10 === 1 && n % 100 !== 11) ? 'игра' : 'игр';
+  const sectionFor = (st) => {
+    const gs = st ? myGames.filter(g => g.stage === st) : myGames;
+    if (!gs.length) return '';
+    const rowsHtml = gs.map(g => `<tr>
+        <td class="left"><a class="game-link" href="results.html?t=${T}">${escapeHtml(g.game_title)}</a></td>
+        <td class="left">${g.table_num}</td>
+        <td class="left"><span class="role-pill ${ROLE_CLASS[g.role] || ''}">${roleSvg(g.role)} ${g.role}</span></td>
+        <td class="result-${g.result}">${g.result}</td>
+        <td class="${g.wpts > 0 ? 'big' : 'dim'}">${fmtNum(g.wpts)}</td>
+        <td class="${g.aps > 0 ? '' : (g.aps < 0 ? 'neg' : 'dim')}">${g.aps > 0 ? '+' : ''}${fmtNum(g.aps)}</td>
+        <td class="${g.ci > 0 ? 'big' : 'dim'}">${fmtNum(g.ci)}</td>
+        <td>${g.marker === 'first_killed' ? '<span class="first-killed-mark" title="убит первой ночью">💀</span>' : '<span class="dim">—</span>'}</td>
+        <td>${(window.streamFor && streamFor(T, g.game_idx + 1, g.table_num)) ? `<a class="ytmini" href="${streamFor(T, g.game_idx + 1, g.table_num)}" target="_blank" rel="noopener">▶</a>` : '<span class="dim">—</span>'}</td>
+      </tr>`).join('');
+    const header = st ? `<div style="font-size:12px;font-weight:800;color:#ffb84d;text-transform:uppercase;letter-spacing:1px;margin:16px 0 6px;">${st} · ${gs.length} ${word(gs.length)}</div>` : '';
+    return `${header}<table class="games-table">
       <thead><tr>
         <th class="left">Игра</th><th class="left">Стол</th><th class="left">Роль</th>
         <th>R</th><th>WPTS</th><th>APTS</th><th title="компенсация">Ci</th><th>1-я ночь</th><th>Стрим</th>
       </tr></thead>
       <tbody>
-        ${myGames.map(g => {
-          const tableRoman = ['I','II','III'][g.table_num - 1] || g.table_num;
-          return `<tr>
-            <td class="left"><a class="game-link" href="results.html?t=${T}">${escapeHtml(g.game_title)}</a></td>
-            <td class="left">${g.table_num}</td>
-            <td class="left"><span class="role-pill ${ROLE_CLASS[g.role] || ''}">${roleSvg(g.role)} ${g.role}</span></td>
-            <td class="result-${g.result}">${g.result}</td>
-            <td class="${g.wpts > 0 ? 'big' : 'dim'}">${fmtNum(g.wpts)}</td>
-            <td class="${g.aps > 0 ? '' : (g.aps < 0 ? 'neg' : 'dim')}">${g.aps > 0 ? '+' : ''}${fmtNum(g.aps)}</td>
-            <td class="${g.ci > 0 ? 'big' : 'dim'}">${fmtNum(g.ci)}</td>
-            <td>${g.marker === 'first_killed' ? '<span class="first-killed-mark" title="убит первой ночью">💀</span>' : '<span class="dim">—</span>'}</td>
-            <td>${(window.streamFor && streamFor(T, g.game_idx + 1, g.table_num)) ? `<a class="ytmini" href="${streamFor(T, g.game_idx + 1, g.table_num)}" target="_blank" rel="noopener">▶</a>` : '<span class="dim">—</span>'}</td>
-          </tr>`;
-        }).join('')}
+        ${rowsHtml}
         <tr class="total">
-          <td class="left">Итого по ${myGames.length}</td>
+          <td class="left">Итого по ${gs.length}</td>
           <td colspan="2"></td>
-          <td>${myGames.filter(g => g.result === 'W').length}W / ${myGames.filter(g => g.result === 'L').length}L</td>
-          <td class="big">${fmtNum(myGames.reduce((a, g) => a + g.wpts, 0))}</td>
-          <td>${fmtNum(myGames.reduce((a, g) => a + g.aps, 0))}</td>
-          <td>${fmtNum(myGames.reduce((a, g) => a + (g.ci||0), 0))}</td>
-          <td>${myGames.filter(g => g.marker === 'first_killed').length}</td>
+          <td>${gs.filter(g => g.result === 'W').length}W / ${gs.filter(g => g.result === 'L').length}L</td>
+          <td class="big">${fmtNum(gs.reduce((a, g) => a + g.wpts, 0))}</td>
+          <td>${fmtNum(gs.reduce((a, g) => a + g.aps, 0))}</td>
+          <td>${fmtNum(gs.reduce((a, g) => a + (g.ci||0), 0))}</td>
+          <td>${gs.filter(g => g.marker === 'first_killed').length}</td>
           <td></td>
         </tr>
       </tbody>
-    </table>
+    </table>`;
+  };
+  const totalSig = fmtNum(myGames.reduce((a,g)=>a+(g.wpts||0)+(g.aps||0)+(g.ci||0),0));
+  const grand = present.length > 1 ? `<div class="info" style="margin-top:12px;">Итог по всем ${myGames.length} играм: <strong>Σ ${totalSig}</strong> · ${myGames.filter(g=>g.result==='W').length}W / ${myGames.filter(g=>g.result==='L').length}L.</div>` : '';
+  return `<div class="card">
+    <h3>Разбивка по играм (как в @mafgamer_bot)</h3>
+    <div class="info">Сыграно ${GAMES.games_played}/${GAMES.games_total} игр турнира. ${escapeHtml(nick)} — в ${myGames.length}${present.length>1?'; квалификация и финал показаны раздельно':''}.</div>
+    ${stagesToShow.map(sectionFor).join('')}
+    ${grand}
   </div>`;
 }
 

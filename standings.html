@@ -133,7 +133,7 @@
 <script src="data/live.js"></script>
 <script>
 const T = new URLSearchParams(location.search).get('t') || '826';
-const STAGE_LABELS = {final:'Финал', semifinal:'Полуфинал', qualification:'Квалификация'};
+const STAGE_LABELS = {total:'Итоговая', final:'Финал', semifinal:'Полуфинал', qualification:'Квалификация'};
 const AWARD_LABELS = {
   most_valuable_players:'MVP турнира', most_valuable_mafia:'Лучшая мафия',
   most_valuable_citizen:'Лучший мирный', best_don:'Лучший дон',
@@ -147,7 +147,7 @@ async function load() {
   DATA = await r.json();
   // live-режим: пробуем подтянуть данные игр для ползунка и ролевой разбивки
   GAMES = await window.loadGames(T);
-  const orderedKeys = ['final','semifinal','qualification'].filter(k => DATA.standings[k]?.length);
+  const orderedKeys = ['total','final','semifinal','qualification'].filter(k => DATA.standings[k]?.length);
   currentStage = orderedKeys[0] || 'qualification';
   document.getElementById('link-tournament').href = `tournament.html?t=${T}`;
   document.getElementById('link-results').href = `results.html?t=${T}`;
@@ -312,7 +312,7 @@ function renderMain() {
       </tr></thead>
       <tbody id="tbody"></tbody>
     </table>
-  </div>`;
+  </div><div id="recon-note" style="margin-top:14px;"></div>`;
   const dyn = document.getElementById('dyn-btn');
   if (dyn) dyn.addEventListener('click', () => { sliderN = GAMES.games.length; renderLive(true); });
   document.querySelectorAll('.stage-btn[data-stage]').forEach(b => b.addEventListener('click', () => {
@@ -334,7 +334,13 @@ function rolesFromGames() {
 }
 function renderRows() {
   const rows = DATA.standings[currentStage] || [];
-  const RM = (currentStage==='qualification') ? rolesFromGames() : {};
+  renderReconNote();
+  let RM = {};
+  if (rows.length && Array.isArray(rows[0].R)) {
+    rows.forEach(r => RM[r.name] = {Citizen:{w:r.R[0],g:r.R[1]},Sheriff:{w:r.S[0],g:r.S[1]},Mafia:{w:r.B[0],g:r.B[1]},Don:{w:r.D[0],g:r.D[1]},k:r.k});
+  } else if (currentStage==='qualification') {
+    RM = rolesFromGames();
+  }
   const useRoles = Object.keys(RM).length > 0;
   // перерисовать шапку под формат
   const thead = document.querySelector('table.standings thead tr');
@@ -380,6 +386,19 @@ function renderRows() {
       <td>${numCell(r.k, r.k > 0 ? '' : 'dim')}</td>
     </tr>`;
   }).join('');
+}
+function renderReconNote(){
+  const el=document.getElementById('recon-note'); if(!el) return;
+  if(currentStage!=='total' || !DATA.reconciliation){ el.innerHTML=''; return; }
+  const rc=DATA.reconciliation;
+  const diffs=(rc.official_vs_sigma_diffs||[]).map(d=>`${escapeHtml(d.name)} (офиц #${d.off} ↔ по Σ #${d.sigma_rank})`).join(', ');
+  el.innerHTML=`<div class="progress-note" style="background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.12);color:#8a8fa8;">
+    <strong style="color:#ffb84d;">Сверка</strong> (контроль данных): игроков ${rc.players}, игр ${rc.games_total} (${rc.games_qual} квал + ${rc.games_final} финал).
+    Контрольная сумма Σ: итог <b>${rc.ctrl_sigma_total}</b> = квалификация ${rc.ctrl_sigma_qual} + финал ${rc.ctrl_sigma_final}.
+    «Σ квал + Σ финал = Σ итог» для всех игроков: ${rc.sum_check_qual_plus_final_eq_total?'✓ сходится':'✗ расхождение!'}.
+    Топ-10 = 10 финалистов: ${rc.top10_all_finalists?'✓':'✗'}; места 11+ — не финалисты: ${rc.rest_all_nonfinalists?'✓':'✗'}.
+    Где официальный порядок ≠ сортировке по Σ (норма — топ-10 решает финал, ниже равные Σ): ${diffs||'нет'}.
+  </div>`;
 }
 function numCell(v, cls='') {
   if (v === '—') return '<span class="num dim">—</span>';
