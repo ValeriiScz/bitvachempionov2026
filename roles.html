@@ -69,16 +69,13 @@ function emptyRole(){return {sigma:0,games:0,w:0};}
 function build(G){
   PLAYED = (G.games_played!=null?G.games_played:G.games.length);
   const P={};
-  G.games.slice(0,PLAYED).forEach(g=>(g.tables||[]).forEach(t=>{
-    if(t.winner==='unknown') return;
-    (t.seats||[]).forEach(s=>{
-      if(!s.role) return;
-      const sig=(s.wpts||0)+(s.aps||0)+(s.ci||0);
-      const p=P[s.name]||(P[s.name]={name:s.name,total:emptyRole(),roles:{Citizen:emptyRole(),Sheriff:emptyRole(),Mafia:emptyRole(),Don:emptyRole()}});
-      p.total.sigma+=sig; p.total.games++; if(s.result==='W')p.total.w++;
-      const r=p.roles[s.role]; r.sigma+=sig; r.games++; if(s.result==='W')r.w++;
-    });
-  }));
+  G.games.slice(0,PLAYED).forEach(g=>(g.tables||[]).forEach(t=>(t.seats||[]).forEach(s=>{
+    if(!s.role) return;
+    const sig=(s.wpts||0)+(s.aps||0)+(s.ci||0);
+    const p=P[s.name]||(P[s.name]={name:s.name,total:emptyRole(),roles:{Citizen:emptyRole(),Sheriff:emptyRole(),Mafia:emptyRole(),Don:emptyRole()}});
+    p.total.sigma+=sig; p.total.games++; if(s.result==='W')p.total.w++;
+    const r=p.roles[s.role]; r.sigma+=sig; r.games++; if(s.result==='W')r.w++;
+  })));
   STAT=P;
 }
 function renderTabs(){
@@ -124,7 +121,7 @@ renderNav();
 window.loadGames(T).then(G=>{
   if(!G||!G.games){document.getElementById('sub').textContent='Нет данных турнира '+T;return;}
   build(G);
-  document.getElementById('sub').innerHTML=`Турнир ${T} · открыто ${PLAYED}/${G.games_total} игр · ${Object.keys(STAT).length} игроков`;
+  document.getElementById('sub').innerHTML=`Турнир ${T} · сыграно ${PLAYED}/${G.games_total} игр · ${Object.keys(STAT).length} игроков`;
   renderTabs(); renderTable();
 }).catch(e=>{document.getElementById('sub').textContent='Ошибка: '+e.message;});
 </script>

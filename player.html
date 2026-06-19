@@ -174,12 +174,9 @@ function renderAllPlayers() {
   document.title = `Все игроки · турнир ${T}`;
   const list = ratingOrdered();
   const ranked = list.length && list[0].place != null;
-  const officialCount = DATA.players?.length || list.length;
-  const extraCount = Math.max(0, list.length - officialCount);
-  const countLabel = extraCount ? `${officialCount} + ${extraCount} замены` : list.length;
   document.getElementById('content').innerHTML = `
     <div class="card">
-      <h3>Игроки турнира ${T} (${countLabel})${ranked ? ' · по текущему рейтингу' : ''}</h3>
+      <h3>Игроки турнира ${T} (${list.length})${ranked ? ' · по текущему рейтингу' : ''}</h3>
       <div class="all-players">
         ${list.map(p => `<a href="?nick=${encodeURIComponent(p.name)}&t=${T}">${p.place != null ? `<b class="rk">${p.place}</b> ` : ''}<span class="nm">${escapeHtml(p.name)}</span>${p.sigma != null ? `<span class="sg">${fmtNum(p.sigma)}</span>` : ''}</a>`).join('')}
       </div>
@@ -187,7 +184,7 @@ function renderAllPlayers() {
 }
 
 function renderPlayer(nick) {
-  const player = (DATA.players || []).find(p => p.name === nick) || (GAMES?.games && ratingOrdered().some(p => p.name === nick) ? {name:nick, club:''} : null);
+  const player = (DATA.players || []).find(p => p.name === nick);
   if (!player) {
     document.getElementById('content').innerHTML = `<div class="card empty">Игрок <strong>${escapeHtml(nick)}</strong> не найден в турнире ${T}.<br><br><a class="nav-btn" href="player.html?t=${T}">Все игроки ${T}</a></div>`;
     return;
@@ -226,7 +223,6 @@ function renderPlayer(nick) {
   if (GAMES?.games) {
     GAMES.games.slice(0, (GAMES.games_played != null ? GAMES.games_played : GAMES.games.length)).forEach((g, gi) => {
       (g.tables || []).forEach(t => {
-        if (t.winner === 'unknown') return;
         const seat = (t.seats || []).find(s => s.name === nick);
         if (seat) myGames.push({game_title: g.title, game_idx: gi, stage: g.stage, table_num: t.table_num, winner: t.winner, ...seat});
       });
@@ -367,12 +363,9 @@ function renderPlayer(nick) {
 function liveStandings(n) {
   const P = {};
   const get = name => P[name] || (P[name] = {name, wpts:0, aps:0, ci:0, w:0, games:0});
-  GAMES.games.slice(0, n).forEach(g => (g.tables||[]).forEach(tb => {
-    if (tb.winner === 'unknown') return;
-    (tb.seats||[]).forEach(x => {
-      const p = get(x.name); p.games++; p.wpts += x.wpts||0; p.aps += x.aps||0; p.ci += x.ci||0; if (x.result==='W') p.w++;
-    });
-  }));
+  GAMES.games.slice(0, n).forEach(g => (g.tables||[]).forEach(tb => (tb.seats||[]).forEach(x => {
+    const p = get(x.name); p.games++; p.wpts += x.wpts||0; p.aps += x.aps||0; p.ci += x.ci||0; if (x.result==='W') p.w++;
+  })));
   const rows = Object.values(P).map(p => ({...p, sigma:+(p.wpts+p.aps+p.ci).toFixed(2)}));
   rows.sort((a,b) => b.sigma - a.sigma || b.aps - a.aps || a.name.localeCompare(b.name,'ru'));
   rows.forEach((r,i) => r.place = i+1);
@@ -445,11 +438,11 @@ function compareCard(nick) {
 function renderGamesTable(myGames, nick) {
   if (!GAMES) return '';
   if (myGames.length === 0) {
-    return `<div class="card"><h3>Разбивка по играм</h3><div class="empty">${escapeHtml(nick)} ещё не сыграл ни одной из ${GAMES.games_played || 0} открытых игр</div></div>`;
+    return `<div class="card"><h3>Разбивка по играм</h3><div class="empty">${escapeHtml(nick)} ещё не сыграл ни одной из ${GAMES.games_played || 0} распарсенных игр</div></div>`;
   }
   return `<div class="card">
     <h3>Разбивка по играм (как в @mafgamer_bot)</h3>
-    <div class="info">Открыто ${GAMES.games_played}/${GAMES.games_total} игр турнира. ${escapeHtml(nick)} в ${myGames.length} завершённых столах.</div>
+    <div class="info">Сыграно ${GAMES.games_played}/${GAMES.games_total} игр турнира. ${escapeHtml(nick)} в ${myGames.length} из них.</div>
     <table class="games-table">
       <thead><tr>
         <th class="left">Игра</th><th class="left">Стол</th><th class="left">Роль</th>

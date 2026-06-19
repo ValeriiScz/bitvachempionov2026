@@ -159,7 +159,7 @@ async function load() {
   renderMeta();
   renderAwards();
   if (GAMES && GAMES.games?.length && (DATA.in_progress || !DATA.standings || !Object.keys(DATA.standings).length)) {
-    sliderN = (GAMES.games_played!=null ? GAMES.games_played : GAMES.games.length); // игры с хотя бы одним завершённым столом
+    sliderN = (GAMES.games_played!=null ? GAMES.games_played : GAMES.games.length); // только доигранные за всеми столами
     renderLive();
   } else {
     renderMain();
@@ -175,9 +175,8 @@ function buildStandings(n) {
   let redWins=0, blackWins=0, tables=0, apsSum=0;
   GAMES.games.slice(0, n).forEach(game => {
     game.tables.forEach(tb => {
-      if (tb.winner === 'unknown') return;
       tables++;
-      if (tb.winner === 'red_win') redWins++; else if (tb.winner === 'black_win') blackWins++;
+      if (tb.winner === 'red_win') redWins++; else blackWins++;
       tb.seats.forEach(s => {
         const p = get(s.name);
         p.games++; p.wpts += s.wpts||0; p.aps += s.aps||0; p.ci += s.ci||0; apsSum += s.aps||0;
@@ -202,14 +201,14 @@ function renderLive(fromOfficial) {
   if (prev) prev.rows.forEach(r => prevPlace[r.name] = r.place);
 
   const chips = `<div class="chips">
-    <div class="chip">Открыто игр<b>${played} / ${total}</b></div>
+    <div class="chip">Сыграно игр<b>${played} / ${total}</b></div>
     <div class="chip red">Победы красных<b>${cur.redWins}</b></div>
     <div class="chip black">Победы чёрных<b>${cur.blackWins}</b></div>
     <div class="chip gold">Средний доп / стол<b>${cur.tables ? (cur.apsSum/cur.tables).toFixed(2) : '0'}</b></div>
   </div>`;
 
   const slider = played > 1 ? `<div class="gsel-wrap">
-    <div class="gsel-head">Таблица на момент: <b>после игры ${sliderN}${sliderN===played?' (текущий срез)':''}</b></div>
+    <div class="gsel-head">Таблица на момент: <b>после игры ${sliderN}${sliderN===played?' (итог)':''}</b></div>
     <div class="gsel">${Array.from({length:played},(_,i)=>`<button data-n="${i+1}" class="${i+1===sliderN?'on':''}">${i+1}</button>`).join('')}</div>
   </div>` : '';
 
@@ -261,7 +260,7 @@ function renderMeta() {
   const live = DATA.in_progress ? `<span class="live-badge">LIVE</span>` : '';
   document.getElementById('title').innerHTML = `Сводная <span class="acc">· турнир ${DATA.tournament_id}</span>${live}`;
   const progress = DATA.games_played != null
-    ? `${GAMES?.live ? 'Открыто' : 'Сыграно'} ${GAMES?.games_played ?? DATA.games_played}/${DATA.games_total} игр`
+    ? `Сыграно ${GAMES?.games?.length ?? DATA.games_played}/${DATA.games_total} игр`
     : (DATA.closed ? 'Турнир завершён' : '');
   document.getElementById('subtitle').textContent = `${DATA.tournament_name}${progress ? ' · ' + progress : ''}`;
   document.getElementById('meta').innerHTML = [

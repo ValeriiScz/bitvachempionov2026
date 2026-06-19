@@ -30,26 +30,21 @@ window.convertInertia667 = function(g){
     Object.keys(games[gm]).map(Number).sort((a,b)=>a-b).forEach(tb=>{
       const seats=games[gm][tb].filter(Boolean);
       const hasRoles=seats.length===10&&seats.every(x=>x.role);
-      const officialWinner=g.results&&g.results['1-'+gm+'-'+tb];
-      let winner=officialWinner==='black'?'black_win':(officialWinner==='red'?'red_win':'unknown');
+      let winner='unknown';
       if(hasRoles){
-        if(winner==='unknown'){
-          const blackW=seats.some(x=>(x.role==='Mafia'||x.role==='Don')&&x.wpts>0);
-          const redW=seats.some(x=>(x.role==='Citizen'||x.role==='Sheriff')&&x.wpts>0);
-          winner=blackW?'black_win':(redW?'red_win':'unknown');
-        }
+        const blackW=seats.some(x=>(x.role==='Mafia'||x.role==='Don')&&x.wpts>0);
+        const redW=seats.some(x=>(x.role==='Citizen'||x.role==='Sheriff')&&x.wpts>0);
+        winner=blackW?'black_win':(redW?'red_win':'unknown');
         if(winner!=='unknown') seats.forEach(x=>{
           const black=(x.role==='Mafia'||x.role==='Don');
           x.result=((winner==='black_win')===black)?'W':'L';
-          if(x.result==='W'&&!x.wpts) x.wpts=0.75;
-          x.sigma=+(x.wpts+x.aps+x.ci).toFixed(4);
         });
       }
       tables.push({table_num:tb,winner,seats});
     });
     out.push({title:'Game '+gm,stage:'Квалификация',tables});
   });
-  const playedCnt=out.filter(x=>x.tables.length&&x.tables.some(t=>t.winner!=='unknown')).length;
+  const playedCnt=out.filter(x=>x.tables.length&&x.tables.every(t=>t.winner!=='unknown')).length;
   if(!out.length) return null;
   return {tournament_id:667,tournament_name:'Four Seasons. Cyprus Open: Summer',
           games_played:playedCnt,games_total:out.length,games:out,live:true};

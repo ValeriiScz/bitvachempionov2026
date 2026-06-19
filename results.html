@@ -165,9 +165,9 @@ async function load() {
   document.getElementById('link-player').href = `player.html?t=${T}`;
   document.getElementById('link-roles').href = `roles.html?t=${T}`;
   document.getElementById('title').innerHTML = `Игры с результатами <span class="acc">· турнир ${DATA.tournament_id}</span>`;
-  document.getElementById('subtitle').textContent = `${DATA.tournament_name} · открыто игр ${DATA.games_played}/${DATA.games_total}`;
-  // последняя игра, где есть хотя бы один завершённый стол
-  window.__isPlayed = g => g.tables && g.tables.length > 0 && g.tables.some(t => t.winner !== 'unknown');
+  document.getElementById('subtitle').textContent = `${DATA.tournament_name} · сыграно ${DATA.games_played}/${DATA.games_total}`;
+  // последняя ДОИГРАННАЯ (за всеми столами) игра по умолчанию
+  window.__isPlayed = g => g.tables && g.tables.length > 0 && g.tables.every(t => t.winner !== 'unknown');
   currentGame = 0;
   for (let i = 0; i < DATA.games.length; i++) if (window.__isPlayed(DATA.games[i])) currentGame = i;
   renderNav();
@@ -177,7 +177,7 @@ async function load() {
 function renderNav() {
   document.getElementById('games-nav').innerHTML = DATA.games.map((g, i) => {
     const n = g.title.replace('Game ', '');
-    const played = window.__isPlayed(g); // есть хотя бы один завершённый стол
+    const played = window.__isPlayed(g); // доиграна за ВСЕМИ столами
     const active = i === currentGame ? ' active' : '';
     const unplayed = played ? '' : ' unplayed';
     return `<button class="game-btn${active}${unplayed}" data-i="${i}" ${played ? '' : 'disabled'}>${n}</button>`;
