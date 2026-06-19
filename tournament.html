@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · tournament.html · v1.2 · 2026-06-12 · меню разделов турнира (?t=id), реестр data/tournaments.js, тема cyprus для 667 -->
+<!-- build v7.0 · 2026-06-20 -->
+<!-- MafgameStat · tournament.html · v1.3 · 2026-06-20 · +статус gathering (бейдж);  меню разделов турнира (?t=id), реестр data/tournaments.js, тема cyprus для 667 -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,6 +37,8 @@
   .badge.live{color:#67e08f;background:rgba(63,209,122,.1);border:1px solid rgba(63,209,122,.4);}
   .badge.live::before{content:"●";margin-right:7px;animation:pulse 1.6s infinite;}
   .badge.finished{color:var(--mut);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);}
+  .badge.gathering{color:#cfcad6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);}
+  .badge.gathering::before{content:"\25F7";margin-right:7px;color:var(--gold-hi);}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
   .rule{height:1px;background:linear-gradient(90deg,transparent,var(--hairline) 18%,var(--hairline) 82%,transparent);margin:28px 0 30px;}
 
@@ -232,7 +235,7 @@ const id=new URLSearchParams(location.search).get('t')||'667';
   const playS=allS.filter(s=>s.href&&PLAY.test(s.href));
   const dataS=allS.filter(s=>!(s.href&&PLAY.test(s.href)));
   const card=(s,cls)=>{
-    if(s.soon||!s.href) return `<div class="card soon ${cls||''}"><span class="soonb">${t.status==='upcoming'?'старт скоро':'после старта'}</span><div class="title">${esc(s.title)}</div><div class="desc">${esc(s.desc)}</div></div>`;
+    if(s.soon||!s.href) return `<div class="card soon ${cls||''}"><span class="soonb">${t.status==='upcoming'?'старт скоро':(t.status==='gathering'?'после рассадки':'после старта')}</span><div class="title">${esc(s.title)}</div><div class="desc">${esc(s.desc)}</div></div>`;
     return `<a class="card ${cls||''}" href="${s.href}"><span class="arrow">→</span><div class="title">${esc(s.title)}</div><div class="desc">${esc(s.desc)}</div></a>`;
   };
   const grp=(title,tcls,arr,ccls)=>arr.length?`<div class="sec-group-title ${tcls||''}">${title}</div>`+arr.map(x=>card(x,ccls)).join(''):'';

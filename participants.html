@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- build v7.0 · 2026-06-20 -->
+<!-- MafgameStat · participants.html · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
+     заявки mafgame (подтв./заявки/лист ожидания) + ДВОЙНОЙ рейтинг markery(основной)+mafiastats(сверка),
+     счётчик «ожидаемый средний ELO» (markery) на постере, ссылки на профили, флаги неоднозначных матчей.
+     Данные: data/participants_{t}.json (снапшот), реестр data/tournaments.js. -->
+<meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Участники и рейтинг — MafgameStat</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0e; --panel:#131318; --panel2:#17171d;
+    --accent:#c9a14d; --gold:#c9a14d; --gold-hi:#e8c87a;
+    --ink:#f2efe8; --mut:#9b97a8; --dim:#5c5965;
+    --hairline:rgba(232,200,122,.14);
+    --ok:#67e08f; --warn:#e8b94d; --bad:#e0654d;
+  }
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  html,body{max-width:100%;overflow-x:hidden;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,sans-serif;min-height:100vh;}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 16px 70px;position:relative;}
+  a{color:var(--accent);text-decoration:none;}
+  .back{display:inline-block;color:var(--mut);font-size:13px;margin-bottom:16px;}
+  .back:hover{color:var(--accent);}
+
+  /* ── шапка-постер со счётчиком ── */
+  .hero{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--hairline);
+    background:linear-gradient(160deg,var(--panel2),var(--panel));margin-bottom:8px;box-shadow:0 18px 44px rgba(0,0,0,.5);}
+  .hero img{display:block;width:100%;object-fit:cover;max-height:300px;}
+  .hero .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,11,.05) 0%,rgba(8,8,11,.35) 55%,rgba(8,8,11,.86) 100%);}
+  .hero .meter{position:absolute;right:14px;bottom:12px;text-align:right;}
+  .meter .lab{font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold-hi);text-shadow:0 1px 6px rgba(0,0,0,.7);}
+  .meter .val{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;line-height:1;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.65);}
+  .meter .sub{font-size:11px;color:#dcd7cf;text-shadow:0 1px 6px rgba(0,0,0,.7);margin-top:2px;}
+  .hero .ttl{position:absolute;left:16px;bottom:14px;max-width:62%;}
+  .ttl .nm{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;line-height:1.16;text-shadow:0 2px 10px rgba(0,0,0,.7);}
+  .ttl .dt{font-size:12px;color:#dcd7cf;margin-top:4px;text-shadow:0 1px 6px rgba(0,0,0,.7);}
+  .hero.noart{padding:22px 18px;}
+  .hero.noart .ov{display:none;}
+  .hero.noart .ttl,.hero.noart .meter{position:static;max-width:none;text-align:left;}
+  .hero.noart .meter{margin-top:16px;}
+
+  /* ── строка-статистика под постером ── */
+  .summary{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px;}
+  .scard{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--hairline);border-radius:12px;padding:11px 13px;}
+  .scard .k{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--mut);}
+  .scard .v{font-size:20px;font-weight:700;margin-top:3px;}
+  .scard .v small{font-size:12px;color:var(--mut);font-weight:600;}
+
+  /* ── легенда источников ── */
+  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:11.5px;color:var(--mut);margin:6px 0 14px;align-items:center;}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+  .conn{font-weight:700;}
+  .conn.up{color:var(--ok);}
+  .conn.down{color:var(--bad);}
+
+  /* ── таблица ── */
+  .tbl-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--hairline);background:var(--panel);}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:560px;}
+  thead th{position:sticky;top:0;background:#1b1b22;color:var(--mut);font-size:10.5px;font-weight:800;
+    letter-spacing:.8px;text-transform:uppercase;text-align:right;padding:10px 9px;white-space:nowrap;z-index:2;border-bottom:1px solid var(--hairline);}
+  thead th.l{text-align:left;}
+  tbody td{padding:9px 9px;text-align:right;border-bottom:1px solid rgba(255,255,255,.045);white-space:nowrap;}
+  tbody td.l{text-align:left;}
+  tbody tr:nth-child(odd){background:rgba(255,255,255,.022);}      /* зебра */
+  tbody tr:hover{background:rgba(232,200,122,.06);}
+  tbody tr.applied{opacity:.82;}
+  tbody tr.applied .pl-nick::after{content:"заявка";font-size:9px;font-weight:800;letter-spacing:.6px;
+    color:var(--warn);border:1px solid rgba(232,185,77,.4);border-radius:8px;padding:1px 6px;margin-left:7px;text-transform:uppercase;}
+  /* липкий компактный якорь: # + аватар + ник */
+  th.anchor,td.anchor{position:sticky;left:0;background:var(--panel);z-index:1;}
+  thead th.anchor{background:#1b1b22;z-index:3;}
+  tbody tr:nth-child(odd) td.anchor{background:#181820;}
+  tbody tr:hover td.anchor{background:#241f14;}
+  .pl{display:flex;align-items:center;gap:9px;}
+  .pl .num{color:var(--dim);font-size:11px;width:18px;text-align:right;flex:none;}
+  .pl .av{width:30px;height:30px;border-radius:50%;object-fit:cover;flex:none;background:#222;border:1px solid var(--hairline);}
+  .pl .mono{width:30px;height:30px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:800;color:#0b0b0e;background:linear-gradient(135deg,var(--gold-hi),var(--accent));}
+  .pl-nick{font-weight:700;}
+  .pl-real{font-size:11px;color:var(--dim);}
+  .elo{font-weight:700;font-variant-numeric:tabular-nums;}
+  .elo .g{font-size:11px;color:var(--dim);font-weight:500;}
+  .na{color:var(--dim);}
+  .flag{cursor:help;font-size:11px;}
+  .flag.amb{color:var(--warn);}
+  .flag.nomaf{color:var(--mut);}
+  .lnk{font-size:11px;color:var(--mut);}
+  .lnk:hover{color:var(--accent);}
+  .lnk+.lnk{margin-left:8px;}
+  .note{font-size:11.5px;color:var(--dim);margin-top:14px;line-height:1.7;}
+  .foot{margin-top:34px;text-align:center;color:#48454f;font-size:11.5px;line-height:1.9;}
+  .foot a{color:#6b6776;border-bottom:1px solid rgba(255,255,255,.1);}
+  h1.err{font-family:'Playfair Display',serif;}
+  @media(max-width:560px){
+    .meter .val{font-size:32px;}
+    .ttl .nm{font-size:17px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#" id="back">← к турниру</a>
+  <div id="app"><p class="note">Загрузка…</p></div>
+  <div class="foot">
+    MafgameStat — неофициальная статистика <span style="color:var(--gold-dim)">◆</span>
+    рейтинги: <a href="https://markery.online">markery.online</a> · <a href="https://mafiastats.com">mafiastats.com</a> ·
+    заявки: <a href="https://mafgame.org">mafgame.org</a>
+  </div>
+</div>
+
+<script src="data/tournaments.js"></script>
+<script>
+const qs=new URLSearchParams(location.search);
+const T=qs.get('t')||'766';
+document.getElementById('back').href='tournament.html?t='+T;
+const REG=(window.TOURNAMENTS_DB?.tournaments||[]).find(x=>x.id===T)||{};
+if(REG.accent)document.documentElement.style.setProperty('--accent',REG.accent);
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function mono(nick){const m=(nick||'?').replace(/[^A-Za-zА-Яа-яЁё0-9]/g,'').slice(0,2).toUpperCase()||'·';return m;}
+function avatar(p){
+  if(p.av)return `<img class="av" src="${esc(p.av)}" alt="" onerror="this.outerHTML='<span class=\\'mono\\'>'+this.dataset.m+'</span>'" data-m="${esc(mono(p.nick))}">`;
+  return `<span class="mono">${esc(mono(p.nick))}</span>`;
+}
+
+fetch('data/participants_'+T+'.json').then(r=>{if(!r.ok)throw 0;return r.json()}).then(render)
+  .catch(()=>{document.getElementById('app').innerHTML='<h1 class="err">Нет данных</h1><p class="note">Снапшот участников для этого турнира ещё не собран.</p>';});
+
+function render(D){
+  const meta=D.meta, st=D.stats, players=D.players;
+  const art=REG.art;
+  // ── порядок: подтверждённые → заявки → лист ожидания; внутри — по markery ELO убыв. (без ELO в конце) ──
+  const rank={confirmed:0,applied:1,wait:2};
+  players.sort((a,b)=>{
+    if(rank[a.status]!==rank[b.status])return rank[a.status]-rank[b.status];
+    const ea=a.mk.elo==null?-1:a.mk.elo, eb=b.mk.elo==null?-1:b.mk.elo;
+    return eb-ea;
+  });
+  // ── проверка подключения источников ──
+  const mkUp=players.some(p=>p.mk.elo!=null);
+  const msUp=players.some(p=>p.ms.rating!=null);
+  // ── счётчик ──
+  const meterVal = st.mk_avg_ok!=null ? Math.round(st.mk_avg_ok) : (st.mk_avg!=null?Math.round(st.mk_avg):null);
+  const meterHtml = `
+    <div class="meter">
+      <div class="lab">Ожидаемый ср. ELO · markery</div>
+      <div class="val">${meterVal!=null?meterVal:'N/A'}</div>
+      <div class="sub">${meterVal!=null?('по '+ (st.mk_n_ok||st.mk_n) +' из '+st.n_conf+' подтв.'):'нет данных'}${st.ms_avg!=null?(' · mafiastats '+Math.round(st.ms_avg)+' (n'+st.ms_n+')'):''}</div>
+    </div>`;
+  const heroHtml = art ? `
+    <div class="hero">
+      <img src="${esc(art)}" alt="" onerror="this.closest('.hero').classList.add('noart');this.remove()">
+      <div class="ov"></div>
+      <div class="ttl"><div class="nm">${esc(REG.name||meta.name)}</div><div class="dt">${esc(REG.dates||'')} · ${esc(REG.city||'')}</div></div>
+      ${meterHtml}
+    </div>` : `
+    <div class="hero noart">
+      <div class="ttl"><div class="nm">${esc(REG.name||meta.name)}</div><div class="dt">${esc(REG.dates||'')} · ${esc(REG.city||'')}</div></div>
+      ${meterHtml}
+    </div>`;
+
+  const summary = `
+    <div class="summary">
+      <div class="scard"><div class="k">Подтверждено</div><div class="v">${st.n_conf}<small> / ${meta.expected||'—'} ожид.</small></div></div>
+      <div class="scard"><div class="k">Заявки / лист ожид.</div><div class="v">${st.n_apps}</div></div>
+      <div class="scard"><div class="k">markery · ср. ELO</div><div class="v">${st.mk_avg_ok!=null?Math.round(st.mk_avg_ok):'—'}<small> n${st.mk_n_ok}</small></div></div>
+      <div class="scard"><div class="k">mafiastats · ср. ELO</div><div class="v">${st.ms_avg!=null?Math.round(st.ms_avg):'—'}<small> n${st.ms_n}</small></div></div>
+    </div>`;
+
+  const legend = `
+    <div class="legend">
+      <span><span class="dot" style="background:var(--accent)"></span>markery — основной источник: <span class="conn ${mkUp?'up':'down'}">${mkUp?'подключён':'нет подключения'}</span></span>
+      <span><span class="dot" style="background:#7aa7d6"></span>mafiastats — сверка: <span class="conn ${msUp?'up':'down'}">${msUp?'подключён':'нет подключения'}</span></span>
+      <span><span class="flag amb">⚠</span> неоднозначный ник (тёзки) — взят с макс. числом игр</span>
+    </div>`;
+
+  const rows = players.map((p,i)=>{
+    const mafgameLink = p.uid?`<a class="lnk" href="https://mafgame.org/user/${p.uid}/view" target="_blank" rel="noopener">mafgame</a>`:'';
+    const msLink = p.ms.id?`<a class="lnk" href="https://mafiastats.com/players/${p.ms.id}" target="_blank" rel="noopener">mafiastats</a>`:'';
+    // markery
+    let mkCell='<span class="na">—</span>';
+    if(p.mk.elo!=null){
+      const amb = p.mk.conf==='multi' ? `<span class="flag amb" title="тёзки в markery (${(p.mk.alts||[]).map(a=>a.elo).join(', ')}); взят с макс. играми">⚠</span> ` : '';
+      mkCell=`<span class="elo">${amb}${Math.round(p.mk.elo)}</span> <span class="g">${p.mk.tt!=null?p.mk.tt+' т.':''}</span>`;
+    }
+    // mafiastats
+    let msCell='<span class="na">—</span>';
+    if(p.ms.rating!=null){
+      const isMaf=(p.ms.feds||[]).includes('mafgame');
+      const flag = isMaf?'':`<span class="flag nomaf" title="на mafiastats без федерации mafgame (${(p.ms.feds||[]).join(',')||'—'}) — возможно тёзка">≈</span> `;
+      msCell=`<span class="elo">${flag}${Math.round(p.ms.rating)}</span> <span class="g">${p.ms.rank?'#'+p.ms.rank:''}</span>`;
+    }
+    return `<tr class="${p.status}">
+      <td class="l anchor"><div class="pl"><span class="num">${i+1}</span>${avatar(p)}<span><span class="pl-nick">${esc(p.nick)}</span><br><span class="pl-real">${esc(p.real||'')}</span></span></div></td>
+      <td>${mkCell}</td>
+      <td>${msCell}</td>
+      <td class="l">${mafgameLink}${msLink}</td>
+    </tr>`;
+  }).join('');
+
+  const table = `
+    <div class="tbl-wrap"><table>
+      <thead><tr>
+        <th class="l anchor">Игрок</th>
+        <th>markery ELO</th>
+        <th>mafiastats ELO</th>
+        <th class="l">профиль</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
+
+  const note = `<p class="note">
+    Снапшот рейтингов снят вручную (markery.online и mafiastats.com), обновляется по мере приближения турнира.
+    markery и mafiastats — разные рейтинговые системы с разной шкалой, поэтому абсолютные числа между ними не сравниваются напрямую.
+    «⚠» — в markery несколько игроков с таким ником: взят с наибольшим числом турниров. «≈» — на mafiastats совпал ник, но без федерации mafgame (возможно тёзка).
+    Список заявок — с mafgame.org.
+  </p>`;
+
+  document.getElementById('app').innerHTML = heroHtml + summary + legend + table + note;
+}
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- build v6.5 · 2026-06-19 -->
+<!-- build v7.0 · 2026-06-20 -->
 <!-- MafgameStat · index.html · v2.2 · 2026-06-12 · главная-хаб: плашки турниров (актуальные/архив), реестр data/tournaments.js, лого федерации — оригинал с mafgame.org -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -59,6 +59,17 @@
   .badge.upcoming::before{content:"◆";font-size:8px;margin-right:7px;animation:pulse 2.2s infinite;}
   .badge.live{color:#67e08f;background:rgba(63,209,122,.1);border:1px solid rgba(63,209,122,.4);}
   .badge.live::before{content:"●";margin-right:7px;animation:pulse 1.6s infinite;}
+  .badge.gathering{color:#cfcad6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);}
+  .badge.gathering::before{content:"\25F7";margin-right:7px;color:var(--gold-hi);}
+  .elochip{display:inline-flex;align-items:baseline;gap:8px;margin:11px 0 2px;padding:7px 12px;border-radius:12px;
+    background:rgba(232,200,122,.07);border:1px solid var(--gold-dim);}
+  .elochip .ec-lab{font-size:9.5px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:var(--mut);}
+  .elochip .ec-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold-hi);line-height:1;}
+  .elochip .ec-n{font-size:10.5px;color:var(--dim);}
+  .poster .elochip.over{position:absolute;right:12px;top:12px;z-index:3;margin:0;background:rgba(8,8,11,.62);
+    border-color:rgba(232,200,122,.5);backdrop-filter:blur(3px);flex-direction:column;align-items:flex-end;gap:1px;}
+  .poster .elochip.over .ec-val{font-size:26px;color:#fff;}
+  .poster .elochip.over .ec-lab{color:var(--gold-hi);}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
   .go{color:var(--gold);font-size:13px;font-weight:700;}
   .go::after{content:"→";margin-left:7px;transition:margin .18s;}
@@ -155,11 +166,31 @@
 <script>
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function stars(n){let s='';for(let i=1;i<=5;i++)s+='<span'+(i<=n?'':' class="off"')+'>✦</span> ';return s;}
+function eloChip(t,over){
+  if(t.eloAvg==null)return '';
+  return `<div class="elochip${over?' over':''}"><span class="ec-lab">ожид. ср. ELO</span><span class="ec-val">${t.eloAvg}</span><span class="ec-n">markery · ${t.eloN}/${t.eloTotal}</span></div>`;
+}
+function gatheringTile(t){
+  return `
+  <a class="tile" href="tournament.html?t=${t.id}">
+    <div class="tbody">
+      <div class="stars">${stars(t.stars)}</div>
+      <div class="tname">${esc(t.name)}</div>
+      <div class="tmeta"><b>${esc(t.dates)}</b><span class="sep">|</span><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков</div>
+      <div class="torg">${esc(t.organizer)}</div>
+      ${eloChip(t,false)}
+      <div class="trow">
+        <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+        <span class="go">участники</span>
+      </div>
+    </div>
+  </a>`;
+}
 const PALM='<svg class="palm" viewBox="0 0 120 140" fill="none"><path d="M38 138 C40 100 44 78 54 60 L60 62 C50 84 47 104 46 138 Z" fill="#1a5a39"/><g fill="#1f6b44"><path d="M56 62 C40 44 22 40 4 46 C20 28 48 34 58 56 Z"/><path d="M57 60 C50 36 34 24 14 22 C36 12 58 32 60 56 Z"/><path d="M58 58 C58 34 70 18 90 14 C76 30 68 44 62 58 Z"/><path d="M60 60 C74 44 94 40 112 48 C94 52 76 58 64 64 Z"/><path d="M59 62 C72 70 80 84 80 102 C68 88 62 76 57 66 Z"/></g><circle cx="54" cy="62" r="3.4" fill="#8a5a2a"/><circle cx="61" cy="64" r="3.4" fill="#8a5a2a"/></svg>';
 function posterArtTile(t){
   return `
   <a class="tile artwide" href="tournament.html?t=${t.id}">
-    <div class="poster poland hasart"><img class="art" src="${t.art||''}" alt="${esc(t.name)}" onerror="this.closest('.poster').classList.remove('hasart')"></div>
+    <div class="poster poland hasart"><img class="art" src="${t.art||''}" alt="${esc(t.name)}" onerror="this.closest('.poster').classList.remove('hasart')">${eloChip(t,true)}</div>
     <div class="tbody">
       <div class="tname">${esc(t.name)}</div>
       <div class="tmeta">${esc(t.dates)} · ${esc(t.city)} · ${t.players} игроков</div>
@@ -224,9 +255,9 @@ function plainTile(t){
 }
 (d=>{
   const ts=d.tournaments;
-  const act=ts.filter(t=>t.status==='upcoming'||t.status==='live');
+  const act=ts.filter(t=>t.status!=='finished').sort((a,b)=>(a.phase||9)-(b.phase||9));
   const arc=ts.filter(t=>t.status==='finished');
-  document.getElementById('actual').innerHTML=act.map(t=>t.theme==='cyprus'?posterTile(t):t.theme==='protocol'?protocolTile(t):t.theme==='poster'?posterArtTile(t):plainTile(t)).join('')||'<div class="tmeta">Сейчас активных турниров нет.</div>';
+  document.getElementById('actual').innerHTML=act.map(t=>t.theme==='cyprus'?posterTile(t):t.theme==='protocol'?protocolTile(t):t.theme==='poster'?posterArtTile(t):(t.status==='gathering'?gatheringTile(t):plainTile(t))).join('')||'<div class="tmeta">Сейчас активных турниров нет.</div>';
   document.getElementById('archive').innerHTML=arc.map(t=>`
     <a class="arc" href="tournament.html?t=${t.id}">
       <div class="arc-date">${esc(t.dates)}<br>${esc(t.city)}</div>
