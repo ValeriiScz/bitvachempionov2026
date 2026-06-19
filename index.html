@@ -88,6 +88,10 @@
   .poster.hasart .ptxt,.poster.hasart .sun,.poster.hasart .cloud,.poster.hasart svg.palm{display:none;}
   a.tile.cyprus{border-color:rgba(63,176,217,.35);}
   a.tile.cyprus:hover{border-color:rgba(116,196,238,.7);}
+  a.tile.protocol{border-color:rgba(220,40,40,.4);}
+  a.tile.protocol:hover{border-color:#e23a3a;}
+  .poster.protocol{height:auto;aspect-ratio:1280/720;}
+  .poster.protocol img.art{display:block;}
 
   /* ── архив ── */
   .archive{margin-top:42px;}
@@ -147,6 +151,19 @@
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function stars(n){let s='';for(let i=1;i<=5;i++)s+='<span'+(i<=n?'':' class="off"')+'>✦</span> ';return s;}
 const PALM='<svg class="palm" viewBox="0 0 120 140" fill="none"><path d="M38 138 C40 100 44 78 54 60 L60 62 C50 84 47 104 46 138 Z" fill="#1a5a39"/><g fill="#1f6b44"><path d="M56 62 C40 44 22 40 4 46 C20 28 48 34 58 56 Z"/><path d="M57 60 C50 36 34 24 14 22 C36 12 58 32 60 56 Z"/><path d="M58 58 C58 34 70 18 90 14 C76 30 68 44 62 58 Z"/><path d="M60 60 C74 44 94 40 112 48 C94 52 76 58 64 64 Z"/><path d="M59 62 C72 70 80 84 80 102 C68 88 62 76 57 66 Z"/></g><circle cx="54" cy="62" r="3.4" fill="#8a5a2a"/><circle cx="61" cy="64" r="3.4" fill="#8a5a2a"/></svg>';
+function protocolTile(t){
+  return `
+  <a class="tile protocol" href="tournament.html?t=${t.id}">
+    <div class="poster protocol hasart">
+      <img class="art" src="assets/protocol4.jpg" alt="${esc(t.name)}" onerror="this.remove()">
+    </div>
+    <div class="tbody">
+      <div class="tname">${esc(t.name)}</div>
+      <div class="tmeta">${esc(t.dates)} · ${esc(t.city)} · ${t.players} игроков (парный)</div>
+      <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+    </div>
+  </a>`;
+}
 function posterTile(t){
   return `
   <a class="tile cyprus" href="tournament.html?t=${t.id}">
@@ -193,7 +210,7 @@ function plainTile(t){
   const ts=d.tournaments;
   const act=ts.filter(t=>t.status==='upcoming'||t.status==='live');
   const arc=ts.filter(t=>t.status==='finished');
-  document.getElementById('actual').innerHTML=act.map(t=>t.theme==='cyprus'?posterTile(t):plainTile(t)).join('')||'<div class="tmeta">Сейчас активных турниров нет.</div>';
+  document.getElementById('actual').innerHTML=act.map(t=>t.theme==='cyprus'?posterTile(t):t.theme==='protocol'?protocolTile(t):plainTile(t)).join('')||'<div class="tmeta">Сейчас активных турниров нет.</div>';
   document.getElementById('archive').innerHTML=arc.map(t=>`
     <a class="arc" href="tournament.html?t=${t.id}">
       <div class="arc-date">${esc(t.dates)}<br>${esc(t.city)}</div>

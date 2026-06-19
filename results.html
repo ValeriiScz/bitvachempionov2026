@@ -39,6 +39,9 @@
   .table-body{padding:18px 14px 24px;}
   .table-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
   .table-num{font-size:22px;font-weight:800;color:#ffb84d;}
+  .judge-chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#dfe2f0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 10px 3px 3px;}
+  .judge-chip .javatar{width:22px;height:22px;border-radius:50%;background:#3a3d52;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;overflow:hidden;color:#dfe2f0;}
+  .judge-chip .javatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
   .circle{position:relative;width:380px;height:380px;max-width:100%;margin:0 auto;aspect-ratio:1/1;}
   @media (max-width:600px){ .circle{width:340px;height:340px;} }
   .circle-inner{position:absolute;left:50%;top:50%;width:170px;height:170px;transform:translate(-50%,-50%);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px;}
@@ -154,13 +157,15 @@
 const T = new URLSearchParams(location.search).get('t') || '826';
 const ROLE_CLASS = {Citizen:'role-citizen',Sheriff:'role-sheriff',Don:'role-don',Mafia:'role-mafia'};
 const ROLE_ICON_ID = {Citizen:'ic-citizen',Sheriff:'ic-sheriff',Don:'ic-don',Mafia:'ic-mafia'};
-let DATA = null, currentGame = 0;
+let DATA = null, currentGame = 0, TJ = {};
 
 let AV = {};
 async function load() {
   DATA = await window.loadGames(T);
   if (!DATA) throw new Error('Нет данных');
   try { const a = await fetch(`data/avatars_${T}.json`); if (a.ok) AV = (await a.json()).avatars || {}; } catch(e) {}
+  try { const tr = await fetch(`data/tournament_${T}.json`); if (tr.ok) TJ = await tr.json(); } catch(e) {}
+  document.title = `${(TJ.tournament_name||DATA.tournament_name||'Турнир '+T)} — рассадка и игры`;
   document.getElementById('link-tournament').href = `tournament.html?t=${T}`;
   document.getElementById('link-standings').href = `standings.html?t=${T}`;
   document.getElementById('link-player').href = `player.html?t=${T}`;
@@ -240,7 +245,7 @@ function renderTable(t, gameNum) {
   return `<div class="table-wrap ${winnerKey}">
     <div class="winner-bar ${winnerKey}">${winnerBarIcon} ${winnerKey === 'unknown' ? 'Не сыграна' : 'Победа ' + (winnerKey === 'red' ? 'красных' : 'чёрных')}</div>
     <div class="table-body">
-      <div class="table-hdr"><div class="table-num">Стол ${num}</div>${(window.streamFor && streamFor(T, gameNum, t.table_num)) ? `<a class="ytb" href="${streamFor(T, gameNum, t.table_num)}" target="_blank" rel="noopener">▶ Стрим стола</a>` : ''}</div>
+      <div class="table-hdr"><div class="table-num">Стол ${num}</div>${judgeChip(t.table_num)}${(window.streamFor && streamFor(T, gameNum, t.table_num)) ? `<a class="ytb" href="${streamFor(T, gameNum, t.table_num)}" target="_blank" rel="noopener">▶ Стрим</a>` : ''}</div>
       <div class="circle ${winnerKey}">
         <div class="circle-inner ${winnerKey}">
           ${centerIconId ? `<div class="center-icon"><svg><use href="#${centerIconId}"/></svg></div>` : ''}
@@ -253,6 +258,13 @@ function renderTable(t, gameNum) {
   </div>`;
 }
 
+function judgeChip(tableNum){
+  const j = (TJ.judges_by_table||{})[tableNum] || (TJ.judges_by_table||{})[String(tableNum)];
+  if(!j) return '';
+  const av = AV[j];
+  const ph = av ? `<img src="${av}" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : (j[0]||'?').toUpperCase();
+  return `<span class="judge-chip"><span class="javatar">${ph}</span>судья ${escapeHtml(j)}</span>`;
+}
 function apsBucket(v) { if (v === 0) return 'zero'; if (v < 0) return 'neg'; if (v < 0.3) return 'small'; if (v < 0.5) return 'mid'; return 'big'; }
 function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 load().catch(e => { document.body.innerHTML = '<div style="padding:40px;text-align:center;color:#e8716b;">Ошибка: ' + e.message + '</div>'; console.error(e); });

@@ -70,6 +70,14 @@
   .arthero img{width:100%;display:block;border-radius:18px;box-shadow:0 18px 50px rgba(13,71,128,.35);}
   body.hasart .arthero{display:block;}
   body.hasart .hero{display:none;}
+  body.protocol{background:radial-gradient(circle at 50% -10%,#2a0d0d 0%,#120708 55%,#0a0608 100%) fixed;}
+  body.protocol .arthero img{box-shadow:0 18px 50px rgba(200,30,30,.35);}
+  body.protocol .sec-group-title.play{color:#ff6b6b;}
+  body.protocol a.card.play{border-color:rgba(226,58,58,.45);background:linear-gradient(160deg,rgba(226,58,58,.09),var(--panel) 80%);}
+  body.protocol a.card.play:hover{border-color:#e23a3a;}
+  body.protocol .src-btn{border-color:#e23a3a;color:#ff8a8a;background:rgba(226,58,58,.1);}
+  body.protocol .src-btn:hover{background:#e23a3a;color:#fff;}
+  body.protocol .badge.upcoming{color:#ff8a8a;background:rgba(226,58,58,.1);border-color:rgba(226,58,58,.4);}
   /* ════ тема CYPRUS (турнир 667) ════ */
   body.cyprus{background:linear-gradient(180deg,#a7ddf8 0%,#7cc8ef 26%,#4cb4dc 46%,#2ba6cb 56%,#bfe2e0 62%,#f1ddb0 78%,#e9cf96 100%) fixed;color:#0c3a5e;}
   body.cyprus .hero{position:relative;text-align:center;padding:26px 10px 6px;}
@@ -182,6 +190,19 @@ const id=new URLSearchParams(location.search).get('t')||'667';
       <div style="text-align:center;margin-top:14px;">
         <div class="stars">${stars(t.stars)}</div>
         <div class="tmeta"><b>${esc(t.dates)}</b><span class="sep">|</span><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков</div>
+        <div class="torg">${esc(t.organizer)}</div>
+        <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+      </div>`;
+  } else if(t.theme==='protocol'){
+    document.body.classList.add('protocol');
+    headHtml=`
+      <div class="arthero"><img src="assets/protocol4.jpg" alt="${esc(t.name)}" onload="document.body.classList.add('hasart')" onerror="this.parentNode.remove()"></div>
+      <div class="hero" style="text-align:center;">
+        <h1>${esc(t.name)}</h1>
+      </div>
+      <div style="text-align:center;margin-top:14px;">
+        <div class="stars">${stars(t.stars)}</div>
+        <div class="tmeta"><b>${esc(t.dates)}</b><span class="sep">|</span><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков (парный)</div>
         <div class="torg">${esc(t.organizer)}</div>
         <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
       </div>`;

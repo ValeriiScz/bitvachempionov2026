@@ -19,6 +19,9 @@
   h1{font-size:24px;margin:6px 0 4px;}
   .sub{color:var(--mut);font-size:13px;margin-bottom:16px;}
   .legend{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:14px;font-size:12px;color:var(--mut);}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .tab{padding:8px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#dfe2f0;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer;}
+  .tab.active{background:var(--gold);color:#1a1d2e;border-color:var(--gold);}
   .legend i{display:inline-block;width:18px;height:18px;border-radius:4px;vertical-align:-4px;margin-right:5px;}
   .card{background:linear-gradient(180deg,#1a1d2e,#232744);border-radius:16px;padding:0;overflow:auto;max-height:80vh;box-shadow:0 8px 32px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.05);}
   table{border-collapse:separate;border-spacing:0;font-size:11px;}
@@ -40,6 +43,7 @@
   <div class="topbar" id="nav"></div>
   <h1>Совместные посадки</h1>
   <div class="sub" id="sub">загрузка…</div>
+  <div class="tabs" id="stage-tabs"></div>
   <div class="legend">
     <span>Сколько раз игроки сидели за одним столом:</span>
     <span><i style="background:#1a2e22"></i>реже</span>
@@ -67,23 +71,36 @@ function colorFor(v,max){
   const c=a.map((x,i)=>Math.round(x+(b[i]-x)*Math.pow(t,0.7)));
   return `rgb(${c[0]},${c[1]},${c[2]})`;
 }
-renderNav();
-window.loadGames(T).then(G=>{
+let GALL=null, mStage='qual';
+function isFinal(g){return /финал/i.test(g.stage||'');}
+function hasFinal(){return GALL&&GALL.games.some(isFinal);}
+function gamesFor(){
+  if(!GALL) return [];
+  if(!hasFinal()) return GALL.games;
+  return mStage==='all' ? GALL.games : GALL.games.filter(g=>!isFinal(g));
+}
+function renderStageTabs(){
+  const el=document.getElementById('stage-tabs');
+  if(!hasFinal()){el.innerHTML='';return;}
+  el.innerHTML=[['qual','Только квалификация'],['all','С финалом']].map(([k,l])=>`<button class="tab${k===mStage?' active':''}" data-k="${k}">${l}</button>`).join('');
+  el.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{mStage=b.dataset.k;renderStageTabs();draw();});
+}
+function draw(){
   const card=document.getElementById('card');
-  if(!G||!G.games||!G.games.length){document.getElementById('sub').textContent='Нет данных рассадки для турнира '+T;card.innerHTML='<div class="empty">Рассадка появится позже.</div>';return;}
-  // collect players + co-occurrence
+  const games=gamesFor();
   const set=new Set();
-  G.games.forEach(g=>(g.tables||[]).forEach(t=>(t.seats||[]).forEach(s=>set.add(s.name))));
+  games.forEach(g=>(g.tables||[]).forEach(t=>(t.seats||[]).forEach(s=>set.add(s.name))));
   const players=[...set].sort((a,b)=>a.localeCompare(b,'ru'));
   const idx={};players.forEach((p,i)=>idx[p]=i);
   const n=players.length;
   const M=Array.from({length:n},()=>new Array(n).fill(0));
-  G.games.forEach(g=>(g.tables||[]).forEach(t=>{
+  games.forEach(g=>(g.tables||[]).forEach(t=>{
     const names=(t.seats||[]).map(s=>s.name);
     for(let i=0;i<names.length;i++)for(let j=i+1;j<names.length;j++){const a=idx[names[i]],b=idx[names[j]];if(a==null||b==null)continue;M[a][b]++;M[b][a]++;}
   }));
   let max=0;M.forEach(r=>r.forEach(v=>{if(v>max)max=v;}));
-  document.getElementById('sub').innerHTML=`Турнир ${T} · ${G.games.length} игр · ${n} игроков · максимум совместных посадок: <b style="color:#ffd24a">${max}</b>`;
+  const scope=hasFinal()?(mStage==='all'?'с финалом':'только квалификация'):'';
+  document.getElementById('sub').innerHTML=`Турнир ${T} · ${games.length} игр${scope?' ('+scope+')':''} · ${n} игроков · максимум совместных посадок: <b style="color:#ffd24a">${max}</b>`;
   let h='<table><thead><tr><th class="corner"></th>';
   players.forEach(p=>h+=`<th><span class="vname">${esc(p.length>12?p.slice(0,11)+'…':p)}</span></th>`);
   h+='</tr></thead><tbody>';
@@ -98,6 +115,11 @@ window.loadGames(T).then(G=>{
   });
   h+='</tbody></table>';
   card.innerHTML=h;
+}
+renderNav();
+window.loadGames(T).then(G=>{
+  if(!G||!G.games||!G.games.length){document.getElementById('sub').textContent='Нет данных рассадки для турнира '+T;document.getElementById('card').innerHTML='<div class="empty">Рассадка появится позже.</div>';return;}
+  GALL=G; renderStageTabs(); draw();
 }).catch(e=>{document.getElementById('sub').textContent='Ошибка: '+e.message;});
 </script>
 </body>
