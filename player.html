@@ -98,6 +98,8 @@
   .prog-step .d.up{color:#3fd17a;}.prog-step .d.dn{color:#e8716b;}.prog-step .d.eq{color:#5a5e76;}
   .prog-step.cur{border-color:#ffb84d;background:rgba(255,184,77,.10);}
   .prog-step.cur .p{color:#ffb84d;}
+  .prog-step.fin{border-color:rgba(255,184,77,.5);background:rgba(255,184,77,.06);}
+  .prog-step.fin .g{color:#ffb84d;}
   table.cmp{width:100%;border-collapse:collapse;font-size:13px;}
   table.cmp th{color:#8a8fa8;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:8px 6px;text-align:right;border-bottom:1px solid rgba(255,255,255,.08);}
   table.cmp th.left,table.cmp td.left{text-align:left;}
@@ -392,7 +394,7 @@ function progressionCard(nick) {
       const diff = prev - place;
       d = diff > 0 ? `<span class="d up">▲${diff}</span>` : diff < 0 ? `<span class="d dn">▼${-diff}</span>` : '<span class="d eq">·</span>';
     }
-    steps += `<div class="prog-step${n===played?' cur':''}"><div class="g">игра ${n}</div><div class="p">#${place}</div>${d}</div>`;
+    steps += `<div class="prog-step${n===played?' cur':''}${n>12?' fin':''}"><div class="g">${n>12?'финал '+(n-12):'игра '+n}</div><div class="p">#${place}</div>${d}</div>`;
     prev = place;
   }
   return `<div class="card"><h3>Место после каждой игры</h3><div class="prog-wrap">${steps || '<span class="dim">нет данных</span>'}</div></div>`;

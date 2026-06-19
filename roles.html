@@ -95,7 +95,7 @@ function renderStageTabs(){
 function renderTabs(){
   const tabs=[['all','Все роли','']].concat(ROLES.map(([k,l,team])=>[k,l,team]));
   document.getElementById('tabs').innerHTML=tabs.map(([k,l,team])=>`<button class="tab ${team||''}${k===current?' active':''}" data-k="${k}">${l}</button>`).join('');
-  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{current=b.dataset.k;renderTabs();renderTable();});
+  document.querySelectorAll('#tabs .tab').forEach(b=>b.onclick=()=>{current=b.dataset.k;renderTabs();renderTable();});
 }
 function renderTable(){
   const players=Object.values(STAT);

@@ -114,6 +114,21 @@
     body.cyprus svg.palm{width:110px;height:128px;}
     h1{font-size:26px;}
   }
+
+  .sec-group-title{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);margin:8px 0 12px;}
+  .sec-group-title.play{color:#5dd1ff;}
+  body.cyprus .sec-group-title.play{color:#0d6cae;}
+  a.card.play{border-color:rgba(93,209,255,.4);background:linear-gradient(160deg,rgba(93,209,255,.07),var(--panel) 80%);}
+  a.card.play:hover{border-color:#5dd1ff;}
+  body.cyprus a.card.play{border-color:rgba(13,108,174,.4);background:rgba(224,242,255,.7);}
+  .infonote{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-left:3px solid var(--gold);border-radius:0 10px 10px 0;background:rgba(255,255,255,.03);color:var(--mut);font-size:13px;line-height:1.6;margin-top:14px;}
+  .infonote .ico{flex:none;width:18px;height:18px;border-radius:50%;background:var(--gold);color:#1a1d2e;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;font-style:italic;}
+  .infonote b{color:var(--gold-hi);}
+  body.cyprus .infonote{background:rgba(255,255,255,.55);color:#155a86;border-left-color:#0d6cae;}
+  body.cyprus .infonote .ico{background:#0d6cae;color:#fff;}
+  .src-btn{display:inline-block;margin-top:16px;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;background:rgba(255,184,77,.12);border:1px solid var(--gold);color:var(--gold-hi);}
+  .src-btn:hover{background:var(--gold);color:#1a1d2e;}
+  body.cyprus .src-btn{background:rgba(13,108,174,.1);border-color:#0d6cae;color:#0d5d9e;}
 </style>
 </head>
 <body>
@@ -180,20 +195,25 @@ const id=new URLSearchParams(location.search).get('t')||'667';
   }
   document.getElementById('head').innerHTML=headHtml;
   const sec=document.getElementById('sections');
-  let html='';
-  if(t.sections && t.sections.length){
-    html=t.sections.map(s=>{
-      if(s.soon||!s.href){
-        return `<div class="card soon"><span class="soonb">после старта</span><div class="title">${esc(s.title)}</div><div class="desc">${esc(s.desc)}</div></div>`;
-      }
-      return `<a class="card" href="${s.href}"><span class="arrow">→</span><div class="title">${esc(s.title)}</div><div class="desc">${esc(s.desc)}</div></a>`;
-    }).join('');
-  }
-  if(t.note) html+=`<div class="note"><b>${t.status==='upcoming'?'Скоро.':'Заметка.'}</b> ${esc(t.note)}</div>`;
-  if(t.id==='667') html+=`<div class="note" id="live-note" style="margin-top:14px;"><span id="live-status">Турнир завершён · данные заморожены.</span></div>`;
+  const isOpen=(t.status==='finished'||t.status==='closed'||t.closed);
+  const PLAY=/(seating|cards|markers)/;
+  const allS=(t.sections||[]);
+  const playS=allS.filter(s=>s.href&&PLAY.test(s.href));
+  const dataS=allS.filter(s=>!(s.href&&PLAY.test(s.href)));
+  const card=(s,cls)=>{
+    if(s.soon||!s.href) return `<div class="card soon ${cls||''}"><span class="soonb">${t.status==='upcoming'?'старт скоро':'после старта'}</span><div class="title">${esc(s.title)}</div><div class="desc">${esc(s.desc)}</div></div>`;
+    return `<a class="card ${cls||''}" href="${s.href}"><span class="arrow">→</span><div class="title">${esc(s.title)}</div><div class="desc">${esc(s.desc)}</div></a>`;
+  };
+  const grp=(title,tcls,arr,ccls)=>arr.length?`<div class="sec-group-title ${tcls||''}">${title}</div>`+arr.map(x=>card(x,ccls)).join(''):'';
+  const gData=grp('Статистика','',dataS,'');
+  const gPlay=grp('Рассадка · карточки','play',playS,'play');
+  let html=isOpen?(gData+gPlay):(gPlay+gData);
+  if(t.mafgame) html+=`<a class="src-btn" href="${t.mafgame}" target="_blank" rel="noopener">Турнир на mafgame ↗</a>`;
+  if(t.note) html+=`<div class="infonote"><span class="ico">i</span><div><b>${t.status==='upcoming'?'Скоро.':'Инфо.'}</b> ${esc(t.note)}</div></div>`;
+  if(t.id==='667') html+=`<div class="infonote" id="live-note"><span class="ico">i</span><div id="live-status">Турнир завершён · данные заморожены.</div></div>`;
   html+=streamsCard(t.id);
   sec.innerHTML=html;
-  document.getElementById('src').innerHTML='Источник: <a href="'+t.mafgame+'">'+t.mafgame.replace('https://','')+'</a>';
+  const _src=document.getElementById('src'); if(_src) _src.innerHTML='';
   if(t.id==='667'&&window.loadGames){
     window.loadGames('667').then(G=>{
       const el=document.getElementById('live-status');

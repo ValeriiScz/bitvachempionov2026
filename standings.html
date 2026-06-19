@@ -95,6 +95,8 @@
     background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#dfe2f0;transition:.12s;}
   .gsel button:hover{border-color:#5dd1ff;}
   .gsel button.on{background:#5dd1ff;color:#0a0c18;border-color:#5dd1ff;}
+  .gsel button.fin{border-color:#ffb84d;color:#ffb84d;}
+  .gsel button.fin.on{background:#ffb84d;color:#1a1d2e;border-color:#ffb84d;}
 </style>
 </head>
 <body>
@@ -158,7 +160,9 @@ async function load() {
   });
   renderMeta();
   renderAwards();
-  if (GAMES && GAMES.games?.length && (DATA.in_progress || !DATA.standings || !Object.keys(DATA.standings).length)) {
+  if (DATA.teams && DATA.teams.length && (!DATA.standings || !Object.keys(DATA.standings).length)) {
+    renderTeamsRoster();
+  } else if (GAMES && GAMES.games?.length && (DATA.in_progress || !DATA.standings || !Object.keys(DATA.standings).length)) {
     sliderN = (GAMES.games_played!=null ? GAMES.games_played : GAMES.games.length); // только доигранные за всеми столами
     renderLive();
   } else {
@@ -166,6 +170,18 @@ async function load() {
   }
 }
 
+function renderTeamsRoster(){
+  const teams=DATA.teams||[];
+  const note=`<div class="progress-note">Парный турнир · <strong>${teams.length} команд</strong> по ${DATA.team_size||2}. Результаты и зачёт (по командам и игрокам) появятся после старта. Рассадка уже доступна — см. «Игры» и «Совместные посадки».</div>`;
+  const cards=teams.map((t,i)=>`<tr${i<3?'':''}>
+    <td class="left place">${i+1}</td>
+    <td class="left player-cell"><b style="color:#fff;font-size:14px">${escapeHtml(t.team)}</b></td>
+    <td class="left" style="color:#dfe2f0">${(t.members||[]).map(m=>`<a class="player-name" href="player.html?nick=${encodeURIComponent(m)}&t=${T}">${escapeHtml(m)}</a>`).join(' · ')}</td>
+  </tr>`).join('');
+  document.getElementById('main').innerHTML=`${note}<div class="card" style="padding:0;overflow-x:auto;">
+    <table class="standings"><thead><tr><th class="left place">#</th><th class="left player-cell">Команда</th><th class="left">Игроки</th></tr></thead>
+    <tbody>${cards}</tbody></table></div>`;
+}
 /* ════ LIVE: пересчёт из игр + ползунок ════ */
 function buildStandings(n) {
   // standings по первым n играм
@@ -209,7 +225,7 @@ function renderLive(fromOfficial) {
 
   const slider = played > 1 ? `<div class="gsel-wrap">
     <div class="gsel-head">Таблица на момент: <b>после игры ${sliderN}${sliderN===played?' (итог)':''}</b></div>
-    <div class="gsel">${Array.from({length:played},(_,i)=>`<button data-n="${i+1}" class="${i+1===sliderN?'on':''}">${i+1}</button>`).join('')}</div>
+    <div class="gsel">${Array.from({length:played},(_,i)=>`<button data-n="${i+1}" class="${i+1===sliderN?'on':''}${i+1>12?' fin':''}" ${i+1>12?'title="финал"':''}>${i+1}</button>`).join('')}</div>
   </div>` : '';
 
   const note = DATA.in_progress ? `<div class="progress-note">Турнир <strong>в процессе</strong>. Σ = WPTS + Σap по сыгранным играм; CI и BM начислит судья при закрытии. Δ у места — изменение против предыдущей игры. R/S/B/D — победы/игры в роли: мирный, шериф, мафия, дон.</div>` : `<div class="progress-note">Пересчёт по играм: Σ из протоколов (включая Ci построчно), BM не разложен по играм. Официальный итог — по кнопке выше. R/S/B/D — победы/игры в роли.</div>`;
@@ -221,7 +237,7 @@ function renderLive(fromOfficial) {
         <th class="left player-cell">Игрок</th>
         <th>Σ</th><th>WPTS</th><th>Σap</th><th title="компенсация (Ci)">Ci</th>
         <th title="мирный: победы/игры">R</th><th title="шериф">S</th><th title="мафия">B</th><th title="дон">D</th>
-        <th title="убит 1-й ночью">K</th><th>Игр</th>
+        <th title="убит 1-й ночью">K</th><th title="победы / игр">Поб/Игр</th>
       </tr></thead>
       <tbody id="tbody"></tbody>
     </table>
@@ -241,7 +257,7 @@ function renderLive(fromOfficial) {
       <td>${numCell(+r.ci.toFixed(2), r.ci>0?'':'dim')}</td>
       ${ratioCell(r.roles.Citizen)}${ratioCell(r.roles.Sheriff)}${ratioCell(r.roles.Mafia)}${ratioCell(r.roles.Don)}
       <td>${numCell(r.k, r.k>0?'neg':'dim')}</td>
-      <td>${numCell(r.games)}</td>
+      <td><span class="num"><b style="color:#3fd17a">${r.w||0}</b><span style="color:#5a5e76">/${r.games}</span></span></td>
     </tr>`;
   }).join('');
   document.querySelectorAll('.gsel button').forEach(b => b.addEventListener('click', () => { sliderN = +b.dataset.n; renderLive(); }));
@@ -346,7 +362,7 @@ function renderRows() {
   const thead = document.querySelector('table.standings thead tr');
   if (thead) thead.innerHTML = useRoles
     ? `<th class="left place">#</th><th class="left player-cell">Игрок</th><th>Σ</th><th>Σap</th><th>BM</th><th>Ci</th>
-       <th title="мирный: победы/игры">R</th><th title="шериф">S</th><th title="мафия">B</th><th title="дон">D</th><th title="убит 1-й ночью">K</th><th>Игр</th>`
+       <th title="мирный: победы/игры">R</th><th title="шериф">S</th><th title="мафия">B</th><th title="дон">D</th><th title="убит 1-й ночью">K</th><th title="победы / игр">Поб/Игр</th>`
     : `<th class="left place">#</th><th class="left player-cell">Игрок</th><th>Σ</th><th>WPTS</th><th>Σap</th><th>+</th><th>−</th><th>BM</th><th>Ci</th><th>W</th><th>D</th><th>S</th><th>K</th>`;
   if (useRoles) {
     document.getElementById('tbody').innerHTML = rows.map((r, i) => {
@@ -361,7 +377,7 @@ function renderRows() {
         <td>${numCell(r.ci, r.ci > 0 ? '' : 'dim')}</td>
         ${ratioCell(rm.Citizen)}${ratioCell(rm.Sheriff)}${ratioCell(rm.Mafia)}${ratioCell(rm.Don)}
         <td>${numCell(rm.k, rm.k > 0 ? 'neg' : 'dim')}</td>
-        <td>${numCell(r.games != null ? r.games : (rm.Citizen.g+rm.Sheriff.g+rm.Mafia.g+rm.Don.g))}</td>
+        <td><span class="num"><b style="color:#3fd17a">${r.w!=null?r.w:0}</b><span style="color:#5a5e76">/${r.games != null ? r.games : (rm.Citizen.g+rm.Sheriff.g+rm.Mafia.g+rm.Don.g)}</span></span></td>
       </tr>`;
     }).join('');
     return;
@@ -391,13 +407,9 @@ function renderReconNote(){
   const el=document.getElementById('recon-note'); if(!el) return;
   if(currentStage!=='total' || !DATA.reconciliation){ el.innerHTML=''; return; }
   const rc=DATA.reconciliation;
-  const diffs=(rc.official_vs_sigma_diffs||[]).map(d=>`${escapeHtml(d.name)} (офиц #${d.off} ↔ по Σ #${d.sigma_rank})`).join(', ');
   el.innerHTML=`<div class="progress-note" style="background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.12);color:#8a8fa8;">
-    <strong style="color:#ffb84d;">Сверка</strong> (контроль данных): игроков ${rc.players}, игр ${rc.games_total} (${rc.games_qual} квал + ${rc.games_final} финал).
-    Контрольная сумма Σ: итог <b>${rc.ctrl_sigma_total}</b> = квалификация ${rc.ctrl_sigma_qual} + финал ${rc.ctrl_sigma_final}.
-    «Σ квал + Σ финал = Σ итог» для всех игроков: ${rc.sum_check_qual_plus_final_eq_total?'✓ сходится':'✗ расхождение!'}.
-    Топ-10 = 10 финалистов: ${rc.top10_all_finalists?'✓':'✗'}; места 11+ — не финалисты: ${rc.rest_all_nonfinalists?'✓':'✗'}.
-    Где официальный порядок ≠ сортировке по Σ (норма — топ-10 решает финал, ниже равные Σ): ${diffs||'нет'}.
+    <strong style="color:#ffb84d;">Источник.</strong> ${escapeHtml(rc.source||'')} Игроков ${rc.players}, игр ${rc.games_total} (${rc.games_qual} квал + ${rc.games_final} финал). Чемпион — ${escapeHtml(rc.champion||'')}.
+    ${rc.transfer_check_total?`Контроль переноса (Σ = WPTS + Σap + Ci по офиц. данным): итог ${rc.transfer_check_total}, квалификация ${rc.transfer_check_qual}, финал ${rc.transfer_check_final}.`:''}
   </div>`;
 }
 function numCell(v, cls='') {

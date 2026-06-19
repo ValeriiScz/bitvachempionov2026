@@ -1,0 +1,213 @@
+{
+ "tournament_id": 693,
+ "tournament_name": "MafiaCl Protocol 4 2026",
+ "date": "2026-06-20 — 2026-06-21",
+ "location": "Prague, Czechia",
+ "club": "Mafia club «Champions League» Prague",
+ "organizer": "MafiaCL",
+ "players_total": 20,
+ "days": 2,
+ "fee_eur": 85,
+ "format": "Парный турнир: 10 команд по 2 игрока, 15 игр (2 стола), без финала",
+ "paired": true,
+ "team_size": 2,
+ "closed": false,
+ "in_progress": false,
+ "upcoming": true,
+ "games_played": 0,
+ "games_total": 15,
+ "referees": [
+  "Trinity",
+  "Yokai"
+ ],
+ "judges_by_table": {
+  "1": "Trinity",
+  "2": "Yokai"
+ },
+ "teams": [
+  {
+   "num": 2,
+   "team": "Коллекторы Довода",
+   "members": [
+    "LogisticPro",
+    "Maverick"
+   ]
+  },
+  {
+   "num": 3,
+   "team": "Армия ЕС",
+   "members": [
+    "YeS",
+    "Armia"
+   ]
+  },
+  {
+   "num": 4,
+   "team": "ХоровоDovoDоведы",
+   "members": [
+    "DOVOD",
+    "Гармония"
+   ]
+  },
+  {
+   "num": 5,
+   "team": "Casa Antopsio",
+   "members": [
+    "Antonio",
+    "TOPS"
+   ]
+  },
+  {
+   "num": 6,
+   "team": "Who's Your Owner?",
+   "members": [
+    "Dara",
+    "qUAest0r"
+   ]
+  },
+  {
+   "num": 7,
+   "team": "Team Deid_Ara",
+   "members": [
+    "Берлин",
+    "Буржуй"
+   ]
+  },
+  {
+   "num": 8,
+   "team": "Это не жестко",
+   "members": [
+    "Blackout",
+    "Люсі"
+   ]
+  },
+  {
+   "num": 9,
+   "team": "МК",
+   "members": [
+    "MorningStar",
+    "Кайзер"
+   ]
+  },
+  {
+   "num": 10,
+   "team": "Остров Эйнштейна",
+   "members": [
+    "Kramola",
+    "sometimes"
+   ]
+  },
+  {
+   "num": 11,
+   "team": "Название команды",
+   "members": [
+    "Sever",
+    "Link"
+   ]
+  }
+ ],
+ "awards": {},
+ "standings": {},
+ "players": [
+  {
+   "name": "Antonio",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Armia",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Blackout",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "DOVOD",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Dara",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Kramola",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Link",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "LogisticPro",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Maverick",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "MorningStar",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Sever",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "TOPS",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "YeS",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "qUAest0r",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "sometimes",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Берлин",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Буржуй",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Гармония",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Кайзер",
+   "club": "",
+   "real": ""
+  },
+  {
+   "name": "Люсі",
+   "club": "",
+   "real": ""
+  }
+ ]
+}

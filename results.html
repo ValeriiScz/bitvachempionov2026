@@ -23,7 +23,7 @@
   .game-btn{padding:8px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#dfe2f0;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;min-width:42px;}
   .game-btn:hover{background:rgba(255,184,77,.12);border-color:#ffb84d;}
   .game-btn.active{background:#ffb84d;color:#1a1d2e;border-color:#ffb84d;}
-  .game-btn.unplayed{opacity:.35;cursor:not-allowed;}
+  .game-btn.unplayed{opacity:.5;}
   .stage-tag{align-self:center;font-size:10px;font-weight:800;color:#8a8fa8;text-transform:uppercase;letter-spacing:1px;padding:0 4px 0 10px;white-space:nowrap;}
   .stage-tag:first-child{padding-left:0;}
   .grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
@@ -187,11 +187,11 @@ function renderNav() {
       const played = window.__isPlayed(g);
       const active = i === currentGame ? ' active' : '';
       const unplayed = played ? '' : ' unplayed';
-      return `<button class="game-btn${active}${unplayed}" data-i="${i}" ${played ? '' : 'disabled'}>${n}</button>`;
+      return `<button class="game-btn${active}${unplayed}" data-i="${i}">${n}</button>`;
     }).join('');
     return `${multi ? `<span class="stage-tag">${st}</span>` : ''}${btns}`;
   }).join('');
-  document.querySelectorAll('.game-btn:not(.unplayed)').forEach(b => {
+  document.querySelectorAll('.game-btn').forEach(b => {
     b.addEventListener('click', () => {
       currentGame = parseInt(b.dataset.i);
       document.querySelectorAll('.game-btn').forEach(x => x.classList.toggle('active', x === b));

@@ -1,0 +1,26 @@
+{
+ "tournament_id": 766,
+ "tournament_name": "Four Seasons: Poland Mafia Open 2026",
+ "date": "2026-06-27 — 2026-06-28",
+ "location": "Poland",
+ "club": "",
+ "organizer": "Four Seasons",
+ "players_total": 40,
+ "days": 2,
+ "fee_eur": 111,
+ "format": "12 игр квалификации + финал 4 игры",
+ "closed": false,
+ "in_progress": false,
+ "upcoming": true,
+ "games_played": 0,
+ "games_total": 12,
+ "referees": [
+  "YeS",
+  "LiYu",
+  "Кирпич",
+  "Trinity"
+ ],
+ "awards": {},
+ "standings": {},
+ "players": []
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- MafgameStat · markers.html · v1.0 · 2026-06-19 · матрица совместных посадок (кто с кем сколько раз за одним столом) из рассадки турнира -->
+<meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Совместные посадки — MafgameStat</title>
+<style>
+  :root{--gold:#ffb84d;--mut:#a0a4b8;}
+  *{box-sizing:border-box;}
+  html,body{max-width:100%;}
+  body{margin:0;background:radial-gradient(circle at 50% 0%,#1a1d2e 0%,#0a0c18 60%);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;padding:24px 16px 60px;}
+  .wrap{max-width:1500px;margin:0 auto;}
+  .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;}
+  .nav-btn{padding:9px 16px;background:rgba(255,184,77,.12);border:1px solid #ffb84d;color:#ffb84d;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;}
+  .nav-btn.muted{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:#dfe2f0;}
+  .nav-btn.muted:hover{background:rgba(255,255,255,.1);color:#fff;}
+  h1{font-size:24px;margin:6px 0 4px;}
+  .sub{color:var(--mut);font-size:13px;margin-bottom:16px;}
+  .legend{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:14px;font-size:12px;color:var(--mut);}
+  .legend i{display:inline-block;width:18px;height:18px;border-radius:4px;vertical-align:-4px;margin-right:5px;}
+  .card{background:linear-gradient(180deg,#1a1d2e,#232744);border-radius:16px;padding:0;overflow:auto;max-height:80vh;box-shadow:0 8px 32px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.05);}
+  table{border-collapse:separate;border-spacing:0;font-size:11px;}
+  th,td{padding:0;text-align:center;}
+  th.corner{position:sticky;left:0;top:0;z-index:5;background:#0a0c18;}
+  thead th{position:sticky;top:0;z-index:4;background:#0a0c18;color:var(--mut);font-weight:700;height:96px;white-space:nowrap;}
+  thead th .vname{display:inline-block;transform:rotate(-90deg);transform-origin:center;width:18px;font-size:11px;}
+  tbody th{position:sticky;left:0;z-index:3;background:#11142a;color:#fff;font-weight:700;text-align:right;padding:0 10px 0 8px;white-space:nowrap;font-size:12px;min-width:120px;max-width:160px;overflow:hidden;text-overflow:ellipsis;}
+  tbody td{width:30px;height:30px;min-width:30px;font-variant-numeric:tabular-nums;color:#0a0c18;font-weight:700;border:1px solid rgba(10,12,24,.4);}
+  td.diag{background:#0a0c18 !important;color:#3a3d52;}
+  td.zero{color:#e8716b;}
+  a.pn{color:inherit;text-decoration:none;}
+  tbody th a:hover{color:var(--gold);}
+  .empty{padding:40px;text-align:center;color:var(--mut);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar" id="nav"></div>
+  <h1>Совместные посадки</h1>
+  <div class="sub" id="sub">загрузка…</div>
+  <div class="legend">
+    <span>Сколько раз игроки сидели за одним столом:</span>
+    <span><i style="background:#1a2e22"></i>реже</span>
+    <span><i style="background:#ffd24a"></i>чаще</span>
+    <span><i style="background:#0a0c18;border:1px solid #e8716b"></i><span style="color:#e8716b">0</span> — ни разу</span>
+  </div>
+  <div class="card" id="card"><div class="empty">загрузка…</div></div>
+</div>
+<script src="data/live.js"></script>
+<script>
+const T=new URLSearchParams(location.search).get('t')||'667';
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderNav(){
+  document.getElementById('nav').innerHTML=
+    `<a class="nav-btn muted" href="tournament.html?t=${T}">← Турнир</a>`+
+    `<a class="nav-btn muted" href="standings.html?t=${T}">Сводная</a>`+
+    `<a class="nav-btn muted" href="results.html?t=${T}">Игры</a>`+
+    `<a class="nav-btn muted" href="player.html?t=${T}">Игроки</a>`;
+}
+function colorFor(v,max){
+  if(v===0) return '#0a0c18';
+  const t=max>0?v/max:0; // 0..1
+  // muted green -> gold
+  const a=[26,46,34], b=[255,210,74];
+  const c=a.map((x,i)=>Math.round(x+(b[i]-x)*Math.pow(t,0.7)));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+renderNav();
+window.loadGames(T).then(G=>{
+  const card=document.getElementById('card');
+  if(!G||!G.games||!G.games.length){document.getElementById('sub').textContent='Нет данных рассадки для турнира '+T;card.innerHTML='<div class="empty">Рассадка появится позже.</div>';return;}
+  // collect players + co-occurrence
+  const set=new Set();
+  G.games.forEach(g=>(g.tables||[]).forEach(t=>(t.seats||[]).forEach(s=>set.add(s.name))));
+  const players=[...set].sort((a,b)=>a.localeCompare(b,'ru'));
+  const idx={};players.forEach((p,i)=>idx[p]=i);
+  const n=players.length;
+  const M=Array.from({length:n},()=>new Array(n).fill(0));
+  G.games.forEach(g=>(g.tables||[]).forEach(t=>{
+    const names=(t.seats||[]).map(s=>s.name);
+    for(let i=0;i<names.length;i++)for(let j=i+1;j<names.length;j++){const a=idx[names[i]],b=idx[names[j]];if(a==null||b==null)continue;M[a][b]++;M[b][a]++;}
+  }));
+  let max=0;M.forEach(r=>r.forEach(v=>{if(v>max)max=v;}));
+  document.getElementById('sub').innerHTML=`Турнир ${T} · ${G.games.length} игр · ${n} игроков · максимум совместных посадок: <b style="color:#ffd24a">${max}</b>`;
+  let h='<table><thead><tr><th class="corner"></th>';
+  players.forEach(p=>h+=`<th><span class="vname">${esc(p.length>12?p.slice(0,11)+'…':p)}</span></th>`);
+  h+='</tr></thead><tbody>';
+  players.forEach((p,i)=>{
+    h+=`<tr><th><a class="pn" href="player.html?nick=${encodeURIComponent(p)}&t=${T}">${esc(p)}</a></th>`;
+    players.forEach((q,j)=>{
+      if(i===j){h+='<td class="diag">—</td>';return;}
+      const v=M[i][j];
+      h+=`<td class="${v===0?'zero':''}" style="background:${colorFor(v,max)}" title="${esc(p)} · ${esc(q)}: ${v}">${v}</td>`;
+    });
+    h+='</tr>';
+  });
+  h+='</tbody></table>';
+  card.innerHTML=h;
+}).catch(e=>{document.getElementById('sub').textContent='Ошибка: '+e.message;});
+</script>
+</body>
+</html>
