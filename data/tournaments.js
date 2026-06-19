@@ -1,8 +1,13 @@
-// MafgameStat · data/tournaments.js · v1.8 · 2026-06-19 · +693 (парный, рассадка готова) +766 (скоро); 667 +«Совместные посадки»; матрица маркеров для новых турниров
+// MafgameStat · data/tournaments.js · v2.0 · 2026-06-19 · +693 (парный, рассадка готова) +766 (скоро); 667 +«Совместные посадки»; матрица маркеров для новых турниров
 window.TOURNAMENTS_DB = {
   "tournaments": [
     {
       "id": "766",
+      "theme": "cyprus",
+      "art": "assets/FourSeasonsPolandMafiaOpen2026_27.06.2026.jpg",
+      "posterScript": "Poland",
+      "posterTitle": "POLAND MAFIA OPEN",
+      "posterSub": "JUNE 27\u201328 \u00b7 POLAND",
       "name": "Four Seasons: Poland Mafia Open 2026",
       "dates": "27–28 июня 2026",
       "city": "Польша",
@@ -37,10 +42,12 @@ window.TOURNAMENTS_DB = {
       "mafgame": "https://mafgame.org/tournaments/693/view",
       "note": "Парный турнир: 10 команд по 2 игрока, 15 игр (2 стола), без финала. Рассадка уже готова; результаты — после старта. Судьи: стол I — Trinity, стол II — Yokai.",
       "sections": [
-        {"href": "results.html?t=693", "title": "Рассадка по играм", "desc": "15 игр × 2 стола: кто за каким столом (готова до старта)"},
+        {"href": "seating693.html", "title": "Интерактивная рассадка", "desc": "15 игр × 2 стола: клик по игроку — весь его маршрут; судьи Trinity/Yokai с фото"},
+        {"href": "cards693.html", "title": "Карточки игроков", "desc": "20 карточек: фото, клуб, столы, слоты, соперники, маршрут"},
+        {"href": "teams693.html", "title": "Карточки команд", "desc": "10 команд по 2: составы и фото"},
         {"href": "markers.html?t=693", "title": "Совместные посадки", "desc": "Матрица: кто с кем сколько раз за одним столом"},
-        {"href": "cards693.html", "title": "Карточки команд", "desc": "10 команд по 2: фото, составы, судьи Trinity/Yokai"},
-        {"href": "standings.html?t=693", "title": "Команды", "desc": "10 команд по 2 игрока; результаты — после старта"},
+        {"href": "results.html?t=693", "title": "Игры с результатами", "desc": "Раунды и столы; результаты — после старта"},
+        {"href": "standings.html?t=693", "title": "Команды и сводная", "desc": "Составы команд; зачёт — после старта"},
         {"title": "Статистика игрока", "desc": "Появится после старта", "soon": true}
       ]
     },
@@ -48,6 +55,7 @@ window.TOURNAMENTS_DB = {
       "id": "667",
       "name": "Four Seasons. Cyprus Open: Summer",
       "theme": "cyprus",
+      "art": "assets/cyprus667.jpg",
       "posterScript": "Summer",
       "posterTitle": "CYPRUS OPEN 2026",
       "posterSub": "JUNE 13–14 · LIMASSOL",

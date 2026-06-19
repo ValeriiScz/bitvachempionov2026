@@ -7,26 +7,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Игрок — Битва Чемпионов 2026</title>
 <style>
+  :root{--accent:var(--accent);}
   *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
   html,body{max-width:100%;overflow-x:hidden;}
   body{margin:0;background:radial-gradient(circle at 50% 0%,#1a1d2e 0%,#0a0c18 60%);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;padding:24px 16px 60px;}
   .topbar{max-width:980px;margin:0 auto 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-  .nav-btn{padding:9px 16px;background:rgba(255,184,77,.12);border:1px solid #ffb84d;color:#ffb84d;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:.15s;}
-  .nav-btn:hover{background:#ffb84d;color:#1a1d2e;}
+  .nav-btn{padding:9px 16px;background:rgba(255,184,77,.12);border:1px solid var(--accent);color:var(--accent);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:.15s;}
+  .nav-btn:hover{background:var(--accent);color:#1a1d2e;}
   .nav-btn.muted{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:#dfe2f0;}
   .nav-btn.muted:hover{background:rgba(255,255,255,.10);color:#fff;}
   .wrap{max-width:980px;margin:0 auto;}
   .player-hdr{padding:28px;background:linear-gradient(180deg,#1a1d2e 0%,#232744 100%);border-radius:20px;display:flex;align-items:center;gap:22px;box-shadow:0 8px 32px rgba(0,0,0,.35);margin-bottom:20px;border:1px solid rgba(255,255,255,.04);}
-  .player-avatar{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#ffb84d 0%,#d18a4a 100%);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800;color:#1a1d2e;flex-shrink:0;}
+  .player-avatar{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,var(--accent) 0%,#d18a4a 100%);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800;color:#1a1d2e;flex-shrink:0;}
   .player-nick{font-size:36px;font-weight:800;letter-spacing:-.6px;color:#fff;}
   .player-club{font-size:13px;color:#a0a4b8;margin-top:6px;}
   .player-overall{margin-top:14px;display:flex;gap:18px;flex-wrap:wrap;}
-  .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,184,77,.12);border:1px solid rgba(255,184,77,.3);color:#ffb84d;border-radius:20px;font-size:12px;font-weight:700;}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,184,77,.12);border:1px solid rgba(255,184,77,.3);color:var(--accent);border-radius:20px;font-size:12px;font-weight:700;}
   .pill .v{color:#fff;font-weight:800;}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
   @media (max-width:700px){ .grid{grid-template-columns:1fr;} }
   .card{background:linear-gradient(180deg,#1a1d2e 0%,#232744 100%);border-radius:18px;padding:22px;box-shadow:0 8px 32px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.04);margin-bottom:16px;}
-  .card h3{margin:0 0 14px;font-size:11px;font-weight:700;color:#ffb84d;text-transform:uppercase;letter-spacing:1.5px;}
+  .card h3{margin:0 0 14px;font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;}
   .places{display:flex;flex-direction:column;gap:10px;}
   .place-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.04);}
   .place-row.skipped{opacity:.45;}
@@ -38,7 +39,7 @@
   .noms{display:flex;flex-direction:column;gap:8px;}
   .nom-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(255,184,77,.08);border:1px solid rgba(255,184,77,.25);border-radius:10px;}
   .nom-medal{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;}
-  .nom-medal.gold{background:#ffb84d;color:#1a1d2e;}
+  .nom-medal.gold{background:var(--accent);color:#1a1d2e;}
   .nom-medal.silver{background:#c5cad8;color:#1a1d2e;}
   .nom-medal.bronze{background:#d18a4a;color:#1a1d2e;}
   .nom-cat{flex:1;font-size:13px;color:#fff;font-weight:600;}
@@ -51,7 +52,7 @@
   table.stats td.left, table.games-table td.left{text-align:left;color:#fff;font-weight:700;}
   table.stats td.dim, table.games-table td.dim{color:#5a5e76;}
   table.stats td.neg, table.games-table td.neg{color:#e8716b;}
-  table.stats td.big, table.games-table td.big{color:#ffb84d;font-weight:800;}
+  table.stats td.big, table.games-table td.big{color:var(--accent);font-weight:800;}
   table.stats tr.total td{border-top:2px solid rgba(255,184,77,.25);font-size:14px;font-weight:800;color:#fff;}
   table.games-table .role-pill{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700;}
   .role-pill svg{width:14px;height:14px;}
@@ -66,15 +67,15 @@
   .first-killed-mark{color:#a0a4b8;font-size:14px;}
   .all-players{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;}
   .all-players a{display:block;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;transition:.15s;}
-  .all-players a:hover{background:rgba(255,184,77,.12);border-color:#ffb84d;color:#ffb84d;}
+  .all-players a:hover{background:rgba(255,184,77,.12);border-color:var(--accent);color:var(--accent);}
   .all-players a{display:flex;align-items:center;gap:10px;}
-  .all-players a .rk{color:#ffb84d;min-width:26px;text-align:right;flex:none;}
-  .all-players a .sg{margin-left:auto;color:#ffb84d;font-weight:800;}
+  .all-players a .rk{color:var(--accent);min-width:26px;text-align:right;flex:none;}
+  .all-players a .sg{margin-left:auto;color:var(--accent);font-weight:800;}
   .pnav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px;}
   .player-jump{flex:1;min-width:180px;max-width:340px;padding:9px 12px;background:#141728;color:#fff;border:1px solid rgba(255,184,77,.35);border-radius:8px;font-size:13px;font-weight:600;}
   .empty{padding:40px;text-align:center;color:#8a8fa8;}
   .todo{margin-top:14px;padding:12px 14px;background:rgba(255,184,77,.06);border:1px dashed rgba(255,184,77,.3);border-radius:10px;font-size:12px;color:#a0a4b8;line-height:1.6;}
-  .todo strong{color:#ffb84d;}
+  .todo strong{color:var(--accent);}
   .info{padding:12px 14px;background:rgba(93,209,255,.06);border:1px dashed rgba(93,209,255,.3);border-radius:10px;font-size:12px;color:#a0a4b8;line-height:1.6;margin-bottom:14px;}
   .info strong{color:#5dd1ff;}
   .player-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;}
@@ -96,16 +97,16 @@
   .prog-step .p{font-size:17px;font-weight:800;color:#fff;margin-top:2px;}
   .prog-step .d{font-size:10px;font-weight:800;margin-top:1px;}
   .prog-step .d.up{color:#3fd17a;}.prog-step .d.dn{color:#e8716b;}.prog-step .d.eq{color:#5a5e76;}
-  .prog-step.cur{border-color:#ffb84d;background:rgba(255,184,77,.10);}
-  .prog-step.cur .p{color:#ffb84d;}
+  .prog-step.cur{border-color:var(--accent);background:rgba(255,184,77,.10);}
+  .prog-step.cur .p{color:var(--accent);}
   .prog-step.fin{border-color:rgba(255,184,77,.5);background:rgba(255,184,77,.06);}
-  .prog-step.fin .g{color:#ffb84d;}
+  .prog-step.fin .g{color:var(--accent);}
   table.cmp{width:100%;border-collapse:collapse;font-size:13px;}
   table.cmp th{color:#8a8fa8;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:8px 6px;text-align:right;border-bottom:1px solid rgba(255,255,255,.08);}
   table.cmp th.left,table.cmp td.left{text-align:left;}
   table.cmp td{padding:9px 6px;text-align:right;border-bottom:1px solid rgba(255,255,255,.04);font-variant-numeric:tabular-nums;color:#dfe2f0;}
   table.cmp tr.me td{background:rgba(255,184,77,.08);color:#fff;font-weight:700;}
-  table.cmp tr.me td.left{color:#ffb84d;}
+  table.cmp tr.me td.left{color:var(--accent);}
   a.ytmini{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:7px;text-decoration:none;background:rgba(255,0,0,.10);border:1px solid rgba(255,70,70,.4);color:#ff6b6b;}
   a.ytmini:hover{background:#e02424;color:#fff;}
   .card{overflow-x:auto;}
@@ -159,6 +160,7 @@ async function load() {
     window.loadGames(T)
   ]);
   DATA = r1;
+  if (DATA.accent) document.documentElement.style.setProperty('--accent', DATA.accent);
   GAMES = r2;
   try { const a = await fetch(`data/avatars_${T}.json`); if (a.ok) AV = (await a.json()).avatars || {}; } catch(e) {}
   const nick = new URLSearchParams(location.search).get('nick');
@@ -201,7 +203,7 @@ function renderPlayer(nick) {
   const totalRow = DATA.standings?.total?.find(r => r.name === nick) || null;
   const totalSize = DATA.standings?.total?.length || 0;
   const totalPos = totalRow ? parseInt(totalRow.place, 10) : null;
-  const totalPlaceRow = totalPos ? `<div class="place-row${totalPos<=3?' podium':''}" style="border-color:rgba(255,184,77,.45);"><span class="place-stage" style="color:#ffb84d;font-weight:800;">Итог (официально)</span><span class="place-val">#${totalPos}<span class="of"> / ${totalSize}</span></span></div>` : '';
+  const totalPlaceRow = totalPos ? `<div class="place-row${totalPos<=3?' podium':''}" style="border-color:rgba(255,184,77,.45);"><span class="place-stage" style="color:var(--accent);font-weight:800;">Итог (официально)</span><span class="place-val">#${totalPos}<span class="of"> / ${totalSize}</span></span></div>` : '';
   const stageData = {};
   stages.forEach(s => {
     s.size = DATA.standings[s.key].length;
@@ -470,7 +472,7 @@ function renderGamesTable(myGames, nick) {
         <td>${g.marker === 'first_killed' ? '<span class="first-killed-mark" title="убит первой ночью">💀</span>' : '<span class="dim">—</span>'}</td>
         <td>${(window.streamFor && streamFor(T, g.game_idx + 1, g.table_num)) ? `<a class="ytmini" href="${streamFor(T, g.game_idx + 1, g.table_num)}" target="_blank" rel="noopener">▶</a>` : '<span class="dim">—</span>'}</td>
       </tr>`).join('');
-    const header = st ? `<div style="font-size:12px;font-weight:800;color:#ffb84d;text-transform:uppercase;letter-spacing:1px;margin:16px 0 6px;">${st} · ${gs.length} ${word(gs.length)}</div>` : '';
+    const header = st ? `<div style="font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin:16px 0 6px;">${st} · ${gs.length} ${word(gs.length)}</div>` : '';
     return `${header}<table class="games-table">
       <thead><tr>
         <th class="left">Игра</th><th class="left">Стол</th><th class="left">Роль</th>

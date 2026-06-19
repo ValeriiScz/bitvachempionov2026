@@ -181,7 +181,7 @@ const id=new URLSearchParams(location.search).get('t')||'667';
     document.body.classList.add('cyprus');
     document.body.insertAdjacentHTML('afterbegin',PALM.replace('class="palm"','class="palm pl"')+PALM.replace('class="palm"','class="palm pr"'));
     headHtml=`
-      <div class="arthero"><img src="assets/cyprus667.jpg" alt="" onload="document.body.classList.add('hasart')" onerror="this.parentNode.remove()"></div>
+      <div class="arthero"><img src="${t.art||'assets/cyprus667.jpg'}" alt="" onload="document.body.classList.add('hasart')" onerror="this.parentNode.remove()"></div>
       <div class="hero">
         <div class="script">${esc(t.posterScript||'')}</div>
         <div class="big">${esc(t.posterTitle||t.name)}</div>

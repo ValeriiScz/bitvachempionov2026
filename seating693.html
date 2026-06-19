@@ -5,59 +5,59 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Рассадка — Cyprus Open: Summer</title>
+<title>Рассадка — MafiaCl Protocol 4</title>
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;}
   html,body{max-width:100%;overflow-x:hidden;}
-  body{margin:0;font-family:'Manrope',sans-serif;color:#0c3a5e;min-height:100vh;padding:18px 12px 60px;
-    background:linear-gradient(180deg,#a7ddf8 0%,#7cc8ef 26%,#4cb4dc 46%,#2ba6cb 56%,#bfe2e0 62%,#f1ddb0 78%,#e9cf96 100%) fixed;}
+  body{margin:0;font-family:'Manrope',sans-serif;color:#ece2e2;min-height:100vh;padding:18px 12px 60px;
+    background:radial-gradient(circle at 50% -10%,#2a0d0d 0%,#120708 55%,#0a0608 100%) fixed;}
   .topbar{max-width:1200px;margin:0 auto 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-  .nav-btn{padding:9px 14px;background:rgba(255,255,255,.7);border:1px solid rgba(13,108,174,.35);color:#0d5d9e;border-radius:10px;font-size:13px;font-weight:800;text-decoration:none;}
-  .nav-btn:hover{background:#0d6cae;color:#fff;}
-  h1{font-family:'Lilita One',sans-serif;font-weight:400;font-size:24px;color:#0d5d9e;margin:6px 0 2px;text-shadow:0 1px 0 rgba(255,255,255,.7);}
-  .sub{font-size:12.5px;color:#155a86;margin-bottom:12px;}
+  .nav-btn{padding:9px 14px;background:rgba(38,16,18,.75);border:1px solid rgba(226,58,58,.35);color:#ff8a8a;border-radius:10px;font-size:13px;font-weight:800;text-decoration:none;}
+  .nav-btn:hover{background:#e23a3a;color:#fff;}
+  h1{font-family:'Lilita One',sans-serif;font-weight:400;font-size:24px;color:#ff8a8a;margin:6px 0 2px;text-shadow:0 1px 0 rgba(38,16,18,.75);}
+  .sub{font-size:12.5px;color:#c79a9a;margin-bottom:12px;}
   .rounds{max-width:1200px;margin:0 auto 16px;display:flex;gap:6px;flex-wrap:wrap;}
-  .round-btn{min-width:42px;min-height:40px;padding:7px 11px;background:rgba(255,255,255,.65);border:1px solid rgba(13,108,174,.3);color:#0c3a5e;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;}
-  .round-btn.active{background:#0d6cae;color:#fff;border-color:#0d6cae;}
-  .round-btn.played{background:rgba(13,108,174,.18);border-color:rgba(13,108,174,.45);}
+  .round-btn{min-width:42px;min-height:40px;padding:7px 11px;background:rgba(38,16,18,.7);border:1px solid rgba(226,58,58,.3);color:#ece2e2;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;}
+  .round-btn.active{background:#e23a3a;color:#fff;border-color:#e23a3a;}
+  .round-btn.played{background:rgba(226,58,58,.18);border-color:rgba(226,58,58,.45);}
   .round-btn.next{box-shadow:0 0 0 2px #e9a93c;border-color:#e9a93c;}
   .round-btn.upcoming{opacity:.42;}
-  .rleg{max-width:1200px;margin:0 auto 14px;font-size:11.5px;color:#155a86;}
+  .rleg{max-width:1200px;margin:0 auto 14px;font-size:11.5px;color:#c79a9a;}
   .grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px;}
-  .table-wrap{background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.95);border-radius:18px;box-shadow:0 10px 28px rgba(13,71,128,.18);padding:12px 8px 16px;backdrop-filter:blur(5px);}
+  .table-wrap{background:rgba(38,16,18,.85);border:1px solid rgba(226,58,58,.3);border-radius:18px;box-shadow:0 10px 28px rgba(0,0,0,.18);padding:12px 8px 16px;backdrop-filter:blur(5px);}
   .table-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 10px;margin-bottom:4px;}
-  .table-num{font-family:'Lilita One',sans-serif;font-size:18px;color:#0d5d9e;}
-  .game-label{font-size:12px;font-weight:800;color:#155a86;}
+  .table-num{font-family:'Lilita One',sans-serif;font-size:18px;color:#ff8a8a;}
+  .game-label{font-size:12px;font-weight:800;color:#c79a9a;}
   a.ytb{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:9px;font-size:11px;font-weight:800;text-decoration:none;background:rgba(224,36,36,.08);border:1px solid rgba(224,36,36,.4);color:#c41818;}
   a.ytb:hover{background:#e02424;color:#fff;}
   .circle{position:relative;width:320px;height:320px;margin:0 auto;}
   .circle-inner{position:absolute;left:50%;top:50%;width:120px;height:120px;transform:translate(-50%,-50%);border-radius:50%;
-    background:radial-gradient(circle at 50% 35%,#7cc8ef 0%,#2ba6cb 70%);box-shadow:inset 0 0 0 3px rgba(255,255,255,.6);}
+    background:radial-gradient(circle at 50% 35%,#5a1a1a 0%,#2a0d0d 70%);box-shadow:inset 0 0 0 3px rgba(226,58,58,.35);}
   .seat{position:absolute;transform:translate(-50%,-50%);width:72px;text-align:center;cursor:pointer;z-index:2;}
-  .seat-num{position:absolute;left:50%;top:-5px;transform:translateX(-50%);background:#0d5d9e;color:#fff;font-size:10px;font-weight:800;width:19px;height:19px;line-height:19px;border-radius:50%;z-index:3;}
-  .seat-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 3px 10px rgba(13,71,128,.3);margin:0 auto;display:block;background:#d6ecf8;}
+  .seat-num{position:absolute;left:50%;top:-5px;transform:translateX(-50%);background:#ff8a8a;color:#fff;font-size:10px;font-weight:800;width:19px;height:19px;line-height:19px;border-radius:50%;z-index:3;}
+  .seat-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.3);margin:0 auto;display:block;background:#2a1414;}
   .seat.is-target .seat-avatar{border-color:#e9a93c;box-shadow:0 0 0 3px rgba(233,169,60,.45);}
-  .seat-name{font-size:10.5px;color:#0c3a5e;margin-top:4px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:74px;}
+  .seat-name{font-size:10.5px;color:#ece2e2;margin-top:4px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:74px;}
   .hidden{display:none;}
-  .player-hdr{max-width:1200px;margin:0 auto 14px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.82);border-radius:16px;padding:12px 16px;box-shadow:0 10px 28px rgba(13,71,128,.18);}
-  .player-hdr img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 3px 10px rgba(13,71,128,.3);}
-  .player-hdr-nick{font-family:'Lilita One',sans-serif;font-size:20px;color:#0d5d9e;}
-  .player-hdr-sub{font-size:12px;color:#155a86;}
+  .player-hdr{max-width:1200px;margin:0 auto 14px;display:flex;align-items:center;gap:14px;background:rgba(38,16,18,.85);border-radius:16px;padding:12px 16px;box-shadow:0 10px 28px rgba(0,0,0,.18);}
+  .player-hdr img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.3);}
+  .player-hdr-nick{font-family:'Lilita One',sans-serif;font-size:20px;color:#ff8a8a;}
+  .player-hdr-sub{font-size:12px;color:#c79a9a;}
   #back-btn{margin-left:auto;}
   .judge-row{display:flex;justify-content:center;margin:2px 0 4px;}
-  .judge{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:#155a86;background:rgba(124,200,239,.2);border:1px solid rgba(13,108,174,.25);border-radius:18px;padding:3px 11px 3px 4px;}
+  .judge{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:#c79a9a;background:rgba(226,58,58,.2);border:1px solid rgba(226,58,58,.25);border-radius:18px;padding:3px 11px 3px 4px;}
   .judge img{width:22px;height:22px;border-radius:50%;object-fit:cover;}
-  .tblelo{font-size:10.5px;font-weight:800;color:#0d6cae;background:rgba(124,200,239,.25);border:1px solid rgba(13,108,174,.25);border-radius:9px;padding:4px 9px;}
+  .tblelo{font-size:10.5px;font-weight:800;color:#e23a3a;background:rgba(226,58,58,.25);border:1px solid rgba(226,58,58,.25);border-radius:9px;padding:4px 9px;}
 </style>
 </head>
 <body>
 <div class="topbar">
-  <a class="nav-btn" href="tournament.html?t=667">← Турнир</a>
-  <a class="nav-btn" href="cards667.html">Карточки</a>
+  <a class="nav-btn" href="tournament.html?t=693">← Турнир</a>
+  <a class="nav-btn" href="cards693.html">Карточки</a>
   <div>
-    <h1>Рассадка · Cyprus Open: Summer</h1>
-    <div class="sub">16 игр (12 квал + 4 финала) · клик по игроку — все его столы<span id="elo-avg"></span></div>
+    <h1>Рассадка · MafiaCl Protocol 4</h1>
+    <div class="sub">15 игр · 2 стола · 20 игроков (парный) · клик по игроку — все его столы<span id="elo-avg"></span></div>
   </div>
 </div>
 <div id="game-view">
@@ -93,7 +93,7 @@ function renderTable(g,t,target){
       <div class="seat-name">${esc(p)}</div>
     </div>`;
   }
-  const yt=window.streamFor?streamFor('667',g,t):null;
+  const yt=window.streamFor?streamFor('693',g,t):null;
   const glabel=target?`<div class="game-label">Игра ${g}</div>`:'';
   const j=JUDGES[t];
   const jHtml=j?`<span class="judge"><img src="${esc(j.avatar)}" referrerpolicy="no-referrer" onerror="this.style.opacity=.25"><span>${esc(j.name)}</span></span>`:'';
@@ -129,9 +129,9 @@ function bind(){
   document.querySelectorAll('.seat').forEach(s=>s.onclick=e=>{e.stopPropagation();showPlayer(s.dataset.player);});
 }
 Promise.all([
-  window.loadGames('667'),
-  fetch('data/avatars_667.json').then(r=>r.json()),
-  fetch('data/elo_667.json').then(r=>r.ok?r.json():null).catch(()=>null)
+  window.loadGames('693'),
+  fetch('data/avatars_693.json').then(r=>r.json()),
+  fetch('data/elo_693.json').then(r=>r.ok?r.json():null).catch(()=>null)
 ]).then(([G,A,E])=>{
   AV=A.avatars||{};
   JUDGES=A.judges||{};

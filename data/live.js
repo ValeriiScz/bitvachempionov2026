@@ -62,6 +62,7 @@ function injectRefresh(){
   };
   if(document.body) add(); else document.addEventListener('DOMContentLoaded',add);
 }
+window.applyAccent = async function(t){ try{const r=await fetch('data/tournament_'+t+'.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.accent)document.documentElement.style.setProperty('--accent',j.accent);}}catch(e){} };
 window.loadGames = async function(t){
   let inprog=false;
   try{const tr=await fetch('data/tournament_'+t+'.json',{cache:'no-store'});if(tr.ok){const tj=await tr.json();inprog=!!tj.in_progress;}}catch(e){}

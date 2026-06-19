@@ -1,1 +1,683 @@
-{"tournament_id": 826, "tournament_name": "Битва Чемпионов 2026", "date": "2026-05-23 — 2026-05-24", "location": "Prague, Czech Republic (Marriott)", "club": "Mafia club \"Champions League\" Prague", "organizer": "Ievgen Sokolskyi (YeS)", "players_total": 30, "days": 2, "prize_fund_eur": 750, "format": "15 игр без финала, только победители рейтинговых турниров и MVP", "closed": true, "in_progress": false, "games_played": 15, "games_total": 15, "referees": ["Aragil", "Гармония", "The Godfather"], "winners": ["Логика", "Сью", "Season's"], "awards": {"most_valuable_players": ["Логика (3.55)", "Wapi (3.15)", "Комар (2.80)"], "most_valuable_mafia": ["Wapi (2.70)", "Комар (1.50)", "ParadoXx (1.30)"], "most_valuable_citizen": ["LogisticPro (2.60)", "Логика (2.35)", "Призрак (2.25)"], "best_don": ["Фортуна (3/0.33)", "Не Злая (3/0.10)", "Wapi (2/0.35)"], "best_sheriff": ["DOVOD (3/0.33)", "ParadoXx (2/0.30)", "Не Злая (2/0.00)"], "most_killed": ["LogisticPro (3)"]}, "players": [{"name": "Логика", "club": "Mirage Mafia Club"}, {"name": "Сью", "club": "PUDRA mafia club"}, {"name": "Season's", "club": "Mafia Family Wroclaw"}, {"name": "f5", "club": "Midnight Mafia Club"}, {"name": "ParadoXx", "club": "Swiss Mafia Club Zurich"}, {"name": "Фортуна", "club": "PUDRA mafia club"}, {"name": "Не Злая", "club": "Mafia Family Wroclaw"}, {"name": "DOVOD", "club": "Mafia club \"Champions League\" Prague"}, {"name": "KEX", "club": "Mafia Club Cologne"}, {"name": "Lюц", "club": "PUDRA mafia club"}, {"name": "Саботаж", "club": "Bengal Mafia Club"}, {"name": "Грешник", "club": "Mafia Academy Antalya"}, {"name": "Wapi", "club": "Скажені пси"}, {"name": "Yokai", "club": "Midnight Mafia Club"}, {"name": "Eskimo.", "club": "Mafia Club Cologne"}, {"name": "Дренажная вода deluxe", "club": "Mafia club \"Champions League\" Prague"}, {"name": "Призрак", "club": "Mafia Club Cologne"}, {"name": "aptah", "club": "PUDRA mafia club"}, {"name": "Landing", "club": "White Mafia Club Wroclaw"}, {"name": "Jerry Hurper", "club": "Mafia Club Cologne"}, {"name": "LogisticPro", "club": "White Mafia Club Wroclaw"}, {"name": "Виталий", "club": "Los Maffos"}, {"name": "ШТО?", "club": "DarKStadt"}, {"name": "Молчун", "club": "Mafia Club Cologne"}, {"name": "Tripok", "club": "Mafia Club Cologne"}, {"name": "КуКуСиК", "club": "White Mafia Club Chisinau"}, {"name": "Буржуй", "club": "White Mafia Club Wroclaw"}, {"name": "YeS", "club": "Mafia club \"Champions League\" Prague"}, {"name": "Korolevich", "club": "Mafia club \"Champions League\" Prague"}, {"name": "TOPS", "club": "Mafia club \"Champions League\" Prague"}, {"name": "Maverick", "club": "Mafia club \"Champions League\" Prague"}], "standings": {"qualification": [{"place": "1", "name": "Логика", "club": "Mirage Mafia Club", "sigma": 10.37, "sigma_ap": 3.55, "plus": 3.3, "minus": 0.0, "bm": 0.25, "ci": 0.07, "w": 9, "d": 1, "s": 0, "k": 1, "games": 15}, {"place": "2", "name": "Сью", "club": "PUDRA mafia club", "sigma": 9.4, "sigma_ap": 1.9, "plus": 1.65, "minus": 0.0, "bm": 0.25, "ci": 0.0, "w": 10, "d": 0, "s": 1, "k": 1, "games": 15}, {"place": "3", "name": "Season's", "club": "Mafia Family Wroclaw", "sigma": 9.22, "sigma_ap": 2.2, "plus": 2.2, "minus": 0.0, "bm": 0.0, "ci": 0.27, "w": 9, "d": 0, "s": 0, "k": 2, "games": 15}, {"place": "4", "name": "f5", "club": "Midnight Mafia Club", "sigma": 9.07, "sigma_ap": 2.05, "plus": 1.8, "minus": 0.0, "bm": 0.25, "ci": 0.27, "w": 9, "d": 1, "s": 1, "k": 2, "games": 15}, {"place": "5", "name": "ParadoXx", "club": "Swiss Mafia Club Zurich", "sigma": 8.85, "sigma_ap": 2.1, "plus": 2.1, "minus": 0.0, "bm": 0.0, "ci": 0.0, "w": 9, "d": 1, "s": 2, "k": 1, "games": 15}, {"place": "6", "name": "Фортуна", "club": "PUDRA mafia club", "sigma": 8.8, "sigma_ap": 2.4, "plus": 2.35, "minus": 0.2, "bm": 0.25, "ci": 0.4, "w": 8, "d": 3, "s": 0, "k": 3, "games": 15}, {"place": "7", "name": "Не Злая", "club": "Mafia Family Wroclaw", "sigma": 8.37, "sigma_ap": 1.55, "plus": 1.5, "minus": 0.2, "bm": 0.25, "ci": 0.07, "w": 9, "d": 3, "s": 2, "k": 1, "games": 15}, {"place": "8", "name": "DOVOD", "club": "Mafia club \"Champions League\" Prague", "sigma": 8.05, "sigma_ap": 2.8, "plus": 2.4, "minus": 0.0, "bm": 0.4, "ci": 0.0, "w": 7, "d": 0, "s": 3, "k": 1, "games": 15}, {"place": "9", "name": "KEX", "club": "Mafia Club Cologne", "sigma": 7.93, "sigma_ap": 2.61, "plus": 2.61, "minus": 0.0, "bm": 0.0, "ci": 0.07, "w": 7, "d": 2, "s": 0, "k": 1, "games": 15}, {"place": "10", "name": "Lюц", "club": "PUDRA mafia club", "sigma": 7.92, "sigma_ap": 2.6, "plus": 2.8, "minus": 0.2, "bm": 0.0, "ci": 0.07, "w": 7, "d": 2, "s": 0, "k": 1, "games": 15}, {"place": "11", "name": "Саботаж", "club": "Bengal Mafia Club", "sigma": 7.9, "sigma_ap": 1.9, "plus": 2.1, "minus": 0.2, "bm": 0.0, "ci": 0.0, "w": 8, "d": 0, "s": 0, "k": 1, "games": 15}, {"place": "12", "name": "Грешник", "club": "Mafia Academy Antalya", "sigma": 7.85, "sigma_ap": 1.85, "plus": 1.6, "minus": 0.0, "bm": 0.25, "ci": 0.0, "w": 8, "d": 1, "s": 1, "k": 1, "games": 15}, {"place": "13", "name": "Wapi", "club": "Скажені пси", "sigma": 7.78, "sigma_ap": 3.15, "plus": 2.9, "minus": 0.0, "bm": 0.25, "ci": 0.13, "w": 6, "d": 2, "s": 1, "k": 2, "games": 15}, {"place": "14", "name": "Yokai", "club": "Midnight Mafia Club", "sigma": 7.52, "sigma_ap": 2.75, "plus": 2.5, "minus": 0.0, "bm": 0.25, "ci": 0.27, "w": 6, "d": 0, "s": 0, "k": 2, "games": 15}, {"place": "15", "name": "Eskimo.", "club": "Mafia Club Cologne", "sigma": 7.5, "sigma_ap": 1.5, "plus": 1.5, "minus": 0.0, "bm": 0.0, "ci": 0.0, "w": 8, "d": 2, "s": 0, "k": 0, "games": 15}, {"place": "16", "name": "Дренажная вода deluxe", "club": "Mafia club \"Champions League\" Prague", "sigma": 7.37, "sigma_ap": 2.8, "plus": 3.0, "minus": 0.2, "bm": 0.0, "ci": 0.07, "w": 6, "d": 0, "s": 0, "k": 1, "games": 15}, {"place": "17", "name": "Призрак", "club": "Mafia Club Cologne", "sigma": 7.35, "sigma_ap": 2.65, "plus": 2.4, "minus": 0.0, "bm": 0.25, "ci": 0.2, "w": 6, "d": 1, "s": 0, "k": 3, "games": 15}, {"place": "18", "name": "aptah", "club": "PUDRA mafia club", "sigma": 7.22, "sigma_ap": 1.9, "plus": 2.1, "minus": 0.2, "bm": 0.0, "ci": 0.07, "w": 7, "d": 0, "s": 1, "k": 1, "games": 15}, {"place": "19", "name": "Landing", "club": "White Mafia Club Wroclaw", "sigma": 7.17, "sigma_ap": 1.85, "plus": 1.6, "minus": 0.0, "bm": 0.25, "ci": 0.07, "w": 7, "d": 1, "s": 1, "k": 1, "games": 15}, {"place": "20", "name": "Jerry Hurper", "club": "Mafia Club Cologne", "sigma": 6.57, "sigma_ap": 2.0, "plus": 2.2, "minus": 0.2, "bm": 0.0, "ci": 0.07, "w": 6, "d": 0, "s": 0, "k": 1, "games": 15}, {"place": "21", "name": "LogisticPro", "club": "White Mafia Club Wroclaw", "sigma": 5.8, "sigma_ap": 2.6, "plus": 2.35, "minus": 0.0, "bm": 0.25, "ci": 0.2, "w": 4, "d": 0, "s": 1, "k": 3, "games": 15}, {"place": "22", "name": "Виталий", "club": "Los Maffos", "sigma": 5.7, "sigma_ap": 1.2, "plus": 1.2, "minus": 0.0, "bm": 0.0, "ci": 0.0, "w": 6, "d": 0, "s": 1, "k": 0, "games": 15}, {"place": "23", "name": "ШТО?", "club": "DarKStadt", "sigma": 5.63, "sigma_ap": 1.0, "plus": 1.0, "minus": 0.0, "bm": 0.0, "ci": 0.13, "w": 6, "d": 2, "s": 0, "k": 2, "games": 15}, {"place": "24", "name": "Молчун", "club": "Mafia Club Cologne", "sigma": 5.6, "sigma_ap": 1.1, "plus": 1.1, "minus": 0.0, "bm": 0.0, "ci": 0.0, "w": 6, "d": 0, "s": 1, "k": 1, "games": 15}, {"place": "25", "name": "Tripok", "club": "Mafia Club Cologne", "sigma": 5.57, "sigma_ap": 1.75, "plus": 1.5, "minus": 0.0, "bm": 0.25, "ci": 0.07, "w": 5, "d": 1, "s": 0, "k": 1, "games": 15}, {"place": "26", "name": "КуКуСиК", "club": "White Mafia Club Chisinau", "sigma": 5.57, "sigma_ap": 1.55, "plus": 1.05, "minus": 0.0, "bm": 0.5, "ci": 0.27, "w": 5, "d": 1, "s": 0, "k": 2, "games": 15}, {"place": "27", "name": "Буржуй", "club": "White Mafia Club Wroclaw", "sigma": 5.57, "sigma_ap": 1.0, "plus": 1.0, "minus": 0.0, "bm": 0.0, "ci": 0.07, "w": 6, "d": 1, "s": 0, "k": 1, "games": 14}, {"place": "28", "name": "YeS", "club": "Mafia club \"Champions League\" Prague", "sigma": 5.47, "sigma_ap": 2.4, "plus": 2.4, "minus": 0.0, "bm": 0.0, "ci": 0.07, "w": 4, "d": 1, "s": 1, "k": 1, "games": 15}, {"place": "29", "name": "Korolevich", "club": "Mafia club \"Champions League\" Prague", "sigma": 3.67, "sigma_ap": 0.6, "plus": 1.1, "minus": 0.5, "bm": 0.0, "ci": 0.07, "w": 4, "d": 1, "s": 0, "k": 1, "games": 15}, {"place": "30", "name": "TOPS", "club": "Mafia club \"Champions League\" Prague", "sigma": 3.27, "sigma_ap": 0.2, "plus": 0.4, "minus": 0.2, "bm": 0.0, "ci": 0.07, "w": 4, "d": 0, "s": 0, "k": 1, "games": 15}, {"place": "31", "name": "Maverick", "club": "Mafia club \"Champions League\" Prague", "sigma": 1.35, "sigma_ap": 0.6, "plus": 0.6, "minus": 0.0, "bm": 0.0, "ci": 0.0, "w": 1, "d": 1, "s": 0, "k": 0, "games": 1}]}}
+{
+ "tournament_id": 826,
+ "tournament_name": "Битва Чемпионов 2026",
+ "date": "2026-05-23 — 2026-05-24",
+ "location": "Prague, Czech Republic (Marriott)",
+ "club": "Mafia club \"Champions League\" Prague",
+ "organizer": "Ievgen Sokolskyi (YeS)",
+ "players_total": 30,
+ "days": 2,
+ "prize_fund_eur": 750,
+ "format": "15 игр без финала, только победители рейтинговых турниров и MVP",
+ "closed": true,
+ "in_progress": false,
+ "games_played": 15,
+ "games_total": 15,
+ "referees": [
+  "Aragil",
+  "Гармония",
+  "The Godfather"
+ ],
+ "winners": [
+  "Логика",
+  "Сью",
+  "Season's"
+ ],
+ "awards": {
+  "most_valuable_players": [
+   "Логика (3.55)",
+   "Wapi (3.15)",
+   "Комар (2.80)"
+  ],
+  "most_valuable_mafia": [
+   "Wapi (2.70)",
+   "Комар (1.50)",
+   "ParadoXx (1.30)"
+  ],
+  "most_valuable_citizen": [
+   "LogisticPro (2.60)",
+   "Логика (2.35)",
+   "Призрак (2.25)"
+  ],
+  "best_don": [
+   "Фортуна (3/0.33)",
+   "Не Злая (3/0.10)",
+   "Wapi (2/0.35)"
+  ],
+  "best_sheriff": [
+   "DOVOD (3/0.33)",
+   "ParadoXx (2/0.30)",
+   "Не Злая (2/0.00)"
+  ],
+  "most_killed": [
+   "LogisticPro (3)"
+  ]
+ },
+ "players": [
+  {
+   "name": "Логика",
+   "club": "Mirage Mafia Club"
+  },
+  {
+   "name": "Сью",
+   "club": "PUDRA mafia club"
+  },
+  {
+   "name": "Season's",
+   "club": "Mafia Family Wroclaw"
+  },
+  {
+   "name": "f5",
+   "club": "Midnight Mafia Club"
+  },
+  {
+   "name": "ParadoXx",
+   "club": "Swiss Mafia Club Zurich"
+  },
+  {
+   "name": "Фортуна",
+   "club": "PUDRA mafia club"
+  },
+  {
+   "name": "Не Злая",
+   "club": "Mafia Family Wroclaw"
+  },
+  {
+   "name": "DOVOD",
+   "club": "Mafia club \"Champions League\" Prague"
+  },
+  {
+   "name": "KEX",
+   "club": "Mafia Club Cologne"
+  },
+  {
+   "name": "Lюц",
+   "club": "PUDRA mafia club"
+  },
+  {
+   "name": "Саботаж",
+   "club": "Bengal Mafia Club"
+  },
+  {
+   "name": "Грешник",
+   "club": "Mafia Academy Antalya"
+  },
+  {
+   "name": "Wapi",
+   "club": "Скажені пси"
+  },
+  {
+   "name": "Yokai",
+   "club": "Midnight Mafia Club"
+  },
+  {
+   "name": "Eskimo.",
+   "club": "Mafia Club Cologne"
+  },
+  {
+   "name": "Дренажная вода deluxe",
+   "club": "Mafia club \"Champions League\" Prague"
+  },
+  {
+   "name": "Призрак",
+   "club": "Mafia Club Cologne"
+  },
+  {
+   "name": "aptah",
+   "club": "PUDRA mafia club"
+  },
+  {
+   "name": "Landing",
+   "club": "White Mafia Club Wroclaw"
+  },
+  {
+   "name": "Jerry Hurper",
+   "club": "Mafia Club Cologne"
+  },
+  {
+   "name": "LogisticPro",
+   "club": "White Mafia Club Wroclaw"
+  },
+  {
+   "name": "Виталий",
+   "club": "Los Maffos"
+  },
+  {
+   "name": "ШТО?",
+   "club": "DarKStadt"
+  },
+  {
+   "name": "Молчун",
+   "club": "Mafia Club Cologne"
+  },
+  {
+   "name": "Tripok",
+   "club": "Mafia Club Cologne"
+  },
+  {
+   "name": "КуКуСиК",
+   "club": "White Mafia Club Chisinau"
+  },
+  {
+   "name": "Буржуй",
+   "club": "White Mafia Club Wroclaw"
+  },
+  {
+   "name": "YeS",
+   "club": "Mafia club \"Champions League\" Prague"
+  },
+  {
+   "name": "Korolevich",
+   "club": "Mafia club \"Champions League\" Prague"
+  },
+  {
+   "name": "TOPS",
+   "club": "Mafia club \"Champions League\" Prague"
+  },
+  {
+   "name": "Maverick",
+   "club": "Mafia club \"Champions League\" Prague"
+  }
+ ],
+ "standings": {
+  "qualification": [
+   {
+    "place": "1",
+    "name": "Логика",
+    "club": "Mirage Mafia Club",
+    "sigma": 10.37,
+    "sigma_ap": 3.55,
+    "plus": 3.3,
+    "minus": 0.0,
+    "bm": 0.25,
+    "ci": 0.07,
+    "w": 9,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "2",
+    "name": "Сью",
+    "club": "PUDRA mafia club",
+    "sigma": 9.4,
+    "sigma_ap": 1.9,
+    "plus": 1.65,
+    "minus": 0.0,
+    "bm": 0.25,
+    "ci": 0.0,
+    "w": 10,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "3",
+    "name": "Season's",
+    "club": "Mafia Family Wroclaw",
+    "sigma": 9.22,
+    "sigma_ap": 2.2,
+    "plus": 2.2,
+    "minus": 0.0,
+    "bm": 0.0,
+    "ci": 0.27,
+    "w": 9,
+    "d": 0,
+    "s": 0,
+    "k": 2,
+    "games": 15
+   },
+   {
+    "place": "4",
+    "name": "f5",
+    "club": "Midnight Mafia Club",
+    "sigma": 9.07,
+    "sigma_ap": 2.05,
+    "plus": 1.8,
+    "minus": 0.0,
+    "bm": 0.25,
+    "ci": 0.27,
+    "w": 9,
+    "d": 1,
+    "s": 1,
+    "k": 2,
+    "games": 15
+   },
+   {
+    "place": "5",
+    "name": "ParadoXx",
+    "club": "Swiss Mafia Club Zurich",
+    "sigma": 8.85,
+    "sigma_ap": 2.1,
+    "plus": 2.1,
+    "minus": 0.0,
+    "bm": 0.0,
+    "ci": 0.0,
+    "w": 9,
+    "d": 1,
+    "s": 2,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "6",
+    "name": "Фортуна",
+    "club": "PUDRA mafia club",
+    "sigma": 8.8,
+    "sigma_ap": 2.4,
+    "plus": 2.35,
+    "minus": 0.2,
+    "bm": 0.25,
+    "ci": 0.4,
+    "w": 8,
+    "d": 3,
+    "s": 0,
+    "k": 3,
+    "games": 15
+   },
+   {
+    "place": "7",
+    "name": "Не Злая",
+    "club": "Mafia Family Wroclaw",
+    "sigma": 8.37,
+    "sigma_ap": 1.55,
+    "plus": 1.5,
+    "minus": 0.2,
+    "bm": 0.25,
+    "ci": 0.07,
+    "w": 9,
+    "d": 3,
+    "s": 2,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "8",
+    "name": "DOVOD",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 8.05,
+    "sigma_ap": 2.8,
+    "plus": 2.4,
+    "minus": 0.0,
+    "bm": 0.4,
+    "ci": 0.0,
+    "w": 7,
+    "d": 0,
+    "s": 3,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "9",
+    "name": "KEX",
+    "club": "Mafia Club Cologne",
+    "sigma": 7.93,
+    "sigma_ap": 2.61,
+    "plus": 2.61,
+    "minus": 0.0,
+    "bm": 0.0,
+    "ci": 0.07,
+    "w": 7,
+    "d": 2,
+    "s": 0,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "10",
+    "name": "Lюц",
+    "club": "PUDRA mafia club",
+    "sigma": 7.92,
+    "sigma_ap": 2.6,
+    "plus": 2.8,
+    "minus": 0.2,
+    "bm": 0.0,
+    "ci": 0.07,
+    "w": 7,
+    "d": 2,
+    "s": 0,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "11",
+    "name": "Саботаж",
+    "club": "Bengal Mafia Club",
+    "sigma": 7.9,
+    "sigma_ap": 1.9,
+    "plus": 2.1,
+    "minus": 0.2,
+    "bm": 0.0,
+    "ci": 0.0,
+    "w": 8,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "12",
+    "name": "Грешник",
+    "club": "Mafia Academy Antalya",
+    "sigma": 7.85,
+    "sigma_ap": 1.85,
+    "plus": 1.6,
+    "minus": 0.0,
+    "bm": 0.25,
+    "ci": 0.0,
+    "w": 8,
+    "d": 1,
+    "s": 1,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "13",
+    "name": "Wapi",
+    "club": "Скажені пси",
+    "sigma": 7.78,
+    "sigma_ap": 3.15,
+    "plus": 2.9,
+    "minus": 0.0,
+    "bm": 0.25,
+    "ci": 0.13,
+    "w": 6,
+    "d": 2,
+    "s": 1,
+    "k": 2,
+    "games": 15
+   },
+   {
+    "place": "14",
+    "name": "Yokai",
+    "club": "Midnight Mafia Club",
+    "sigma": 7.52,
+    "sigma_ap": 2.75,
+    "plus": 2.5,
+    "minus": 0.0,
+    "bm": 0.25,
+    "ci": 0.27,
+    "w": 6,
+    "d": 0,
+    "s": 0,
+    "k": 2,
+    "games": 15
+   },
+   {
+    "place": "15",
+    "name": "Eskimo.",
+    "club": "Mafia Club Cologne",
+    "sigma": 7.5,
+    "sigma_ap": 1.5,
+    "plus": 1.5,
+    "minus": 0.0,
+    "bm": 0.0,
+    "ci": 0.0,
+    "w": 8,
+    "d": 2,
+    "s": 0,
+    "k": 0,
+    "games": 15
+   },
+   {
+    "place": "16",
+    "name": "Дренажная вода deluxe",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 7.37,
+    "sigma_ap": 2.8,
+    "plus": 3.0,
+    "minus": 0.2,
+    "bm": 0.0,
+    "ci": 0.07,
+    "w": 6,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "17",
+    "name": "Призрак",
+    "club": "Mafia Club Cologne",
+    "sigma": 7.35,
+    "sigma_ap": 2.65,
+    "plus": 2.4,
+    "minus": 0.0,
+    "bm": 0.25,
+    "ci": 0.2,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 3,
+    "games": 15
+   },
+   {
+    "place": "18",
+    "name": "aptah",
+    "club": "PUDRA mafia club",
+    "sigma": 7.22,
+    "sigma_ap": 1.9,
+    "plus": 2.1,
+    "minus": 0.2,
+    "bm": 0.0,
+    "ci": 0.07,
+    "w": 7,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "19",
+    "name": "Landing",
+    "club": "White Mafia Club Wroclaw",
+    "sigma": 7.17,
+    "sigma_ap": 1.85,
+    "plus": 1.6,
+    "minus": 0.0,
+    "bm": 0.25,
+    "ci": 0.07,
+    "w": 7,
+    "d": 1,
+    "s": 1,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "20",
+    "name": "Jerry Hurper",
+    "club": "Mafia Club Cologne",
+    "sigma": 6.57,
+    "sigma_ap": 2.0,
+    "plus": 2.2,
+    "minus": 0.2,
+    "bm": 0.0,
+    "ci": 0.07,
+    "w": 6,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "21",
+    "name": "LogisticPro",
+    "club": "White Mafia Club Wroclaw",
+    "sigma": 5.8,
+    "sigma_ap": 2.6,
+    "plus": 2.35,
+    "minus": 0.0,
+    "bm": 0.25,
+    "ci": 0.2,
+    "w": 4,
+    "d": 0,
+    "s": 1,
+    "k": 3,
+    "games": 15
+   },
+   {
+    "place": "22",
+    "name": "Виталий",
+    "club": "Los Maffos",
+    "sigma": 5.7,
+    "sigma_ap": 1.2,
+    "plus": 1.2,
+    "minus": 0.0,
+    "bm": 0.0,
+    "ci": 0.0,
+    "w": 6,
+    "d": 0,
+    "s": 1,
+    "k": 0,
+    "games": 15
+   },
+   {
+    "place": "23",
+    "name": "ШТО?",
+    "club": "DarKStadt",
+    "sigma": 5.63,
+    "sigma_ap": 1.0,
+    "plus": 1.0,
+    "minus": 0.0,
+    "bm": 0.0,
+    "ci": 0.13,
+    "w": 6,
+    "d": 2,
+    "s": 0,
+    "k": 2,
+    "games": 15
+   },
+   {
+    "place": "24",
+    "name": "Молчун",
+    "club": "Mafia Club Cologne",
+    "sigma": 5.6,
+    "sigma_ap": 1.1,
+    "plus": 1.1,
+    "minus": 0.0,
+    "bm": 0.0,
+    "ci": 0.0,
+    "w": 6,
+    "d": 0,
+    "s": 1,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "25",
+    "name": "Tripok",
+    "club": "Mafia Club Cologne",
+    "sigma": 5.57,
+    "sigma_ap": 1.75,
+    "plus": 1.5,
+    "minus": 0.0,
+    "bm": 0.25,
+    "ci": 0.07,
+    "w": 5,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "26",
+    "name": "КуКуСиК",
+    "club": "White Mafia Club Chisinau",
+    "sigma": 5.57,
+    "sigma_ap": 1.55,
+    "plus": 1.05,
+    "minus": 0.0,
+    "bm": 0.5,
+    "ci": 0.27,
+    "w": 5,
+    "d": 1,
+    "s": 0,
+    "k": 2,
+    "games": 15
+   },
+   {
+    "place": "27",
+    "name": "Буржуй",
+    "club": "White Mafia Club Wroclaw",
+    "sigma": 5.57,
+    "sigma_ap": 1.0,
+    "plus": 1.0,
+    "minus": 0.0,
+    "bm": 0.0,
+    "ci": 0.07,
+    "w": 6,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 14
+   },
+   {
+    "place": "28",
+    "name": "YeS",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 5.47,
+    "sigma_ap": 2.4,
+    "plus": 2.4,
+    "minus": 0.0,
+    "bm": 0.0,
+    "ci": 0.07,
+    "w": 4,
+    "d": 1,
+    "s": 1,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "29",
+    "name": "Korolevich",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 3.67,
+    "sigma_ap": 0.6,
+    "plus": 1.1,
+    "minus": 0.5,
+    "bm": 0.0,
+    "ci": 0.07,
+    "w": 4,
+    "d": 1,
+    "s": 0,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "30",
+    "name": "TOPS",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 3.27,
+    "sigma_ap": 0.2,
+    "plus": 0.4,
+    "minus": 0.2,
+    "bm": 0.0,
+    "ci": 0.07,
+    "w": 4,
+    "d": 0,
+    "s": 0,
+    "k": 1,
+    "games": 15
+   },
+   {
+    "place": "31",
+    "name": "Maverick",
+    "club": "Mafia club \"Champions League\" Prague",
+    "sigma": 1.35,
+    "sigma_ap": 0.6,
+    "plus": 0.6,
+    "minus": 0.0,
+    "bm": 0.0,
+    "ci": 0.0,
+    "w": 1,
+    "d": 1,
+    "s": 0,
+    "k": 0,
+    "games": 1
+   }
+  ]
+ },
+ "accent": "#ffb84d"
+}
