@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- build v7.0 · 2026-06-20 -->
+<!-- build v8.2 · 2026-06-25 · 5 сортируемых колонок рейтинга (markery: ELO тек/ELO 2026/Европа 2026/оффлайн 2026 + mafiastats место); ростер из participants_{t}.json (актуальный mafgame); Season's→Spring -->
 <!-- MafgameStat · participants.html · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
      заявки mafgame (подтв./заявки/лист ожидания) + ДВОЙНОЙ рейтинг markery(основной)+mafiastats(сверка),
      счётчик «ожидаемый средний ELO» (markery) на постере, ссылки на профили, флаги неоднозначных матчей.
@@ -100,6 +100,18 @@
     .meter .val{font-size:32px;}
     .ttl .nm{font-size:17px;}
   }
+
+  /* ── сортируемые заголовки + рейтинговые ячейки ── */
+  thead th.sortable{cursor:pointer;user-select:none;}
+  thead th.sortable:hover{color:var(--gold-hi);}
+  thead th .ar{opacity:.35;font-size:9px;margin-left:3px;}
+  thead th.act{color:var(--gold-hi);}
+  thead th.act .ar{opacity:1;}
+  .rnum{font-weight:700;font-variant-numeric:tabular-nums;}
+  .rrank{font-weight:700;font-variant-numeric:tabular-nums;}
+  .rrank .h{color:var(--dim);font-weight:500;font-size:11px;}
+  td.grp{border-left:1px solid rgba(232,200,122,.10);}
+  th.grp{border-left:1px solid rgba(232,200,122,.10);}
 </style>
 </head>
 <body>
@@ -131,26 +143,46 @@ function avatar(p){
 fetch('data/participants_'+T+'.json').then(r=>{if(!r.ok)throw 0;return r.json()}).then(render)
   .catch(()=>{document.getElementById('app').innerHTML='<h1 class="err">Нет данных</h1><p class="note">Снапшот участников для этого турнира ещё не собран.</p>';});
 
-function render(D){
-  const meta=D.meta, st=D.stats, players=D.players;
-  const art=REG.art;
-  // ── порядок: подтверждённые → заявки → лист ожидания; внутри — по markery ELO убыв. (без ELO в конце) ──
-  const rank={confirmed:0,applied:1,wait:2};
-  players.sort((a,b)=>{
-    if(rank[a.status]!==rank[b.status])return rank[a.status]-rank[b.status];
-    const ea=a.mk.elo==null?-1:a.mk.elo, eb=b.mk.elo==null?-1:b.mk.elo;
-    return eb-ea;
+let DATA=null;
+const COLS=[
+  {key:'elo_cur',  lab:'ELO тек',     hint:'markery — текущий ELO',                 dir:-1, fmt:'elo',  get:p=>p.r_elo_cur},
+  {key:'elo_2026', lab:'ELO 2026',    hint:'markery — ELO за 2026 год',             dir:-1, fmt:'elo',  get:p=>p.r_elo_2026},
+  {key:'eu_2026',  lab:'Европа 2026', hint:'markery — место в рейтинге Европа, 2026',dir:1,  fmt:'rank', get:p=>p.r_rank_eu_2026},
+  {key:'off_2026', lab:'Оффлайн 2026',hint:'markery — место в рейтинге оффлайн, 2026',dir:1, fmt:'rank', get:p=>p.r_rank_off_2026},
+  {key:'ms',       lab:'mafiastats',  hint:'место в рейтинге mafiastats.com',        dir:1,  fmt:'rank', get:p=>p.r_ms_rank},
+];
+let sortKey='elo_cur', sortDir=-1;
+
+function num(v){return (v==null||v==='')?null:+v;}
+function sortPlayers(){
+  const col=COLS.find(c=>c.key===sortKey);
+  DATA.players.sort((a,b)=>{
+    const va=num(col.get(a)), vb=num(col.get(b));
+    if(va==null&&vb==null) return a.nick.localeCompare(b.nick,'ru');
+    if(va==null) return 1;
+    if(vb==null) return -1;
+    if(va===vb) return a.nick.localeCompare(b.nick,'ru');
+    return (va-vb)*sortDir;
   });
-  // ── проверка подключения источников ──
-  const mkUp=players.some(p=>p.mk.elo!=null);
-  const msUp=players.some(p=>p.ms.rating!=null);
-  // ── счётчик ──
-  const meterVal = st.mk_avg_ok!=null ? Math.round(st.mk_avg_ok) : (st.mk_avg!=null?Math.round(st.mk_avg):null);
+}
+function cellRank(v){ v=num(v); return v==null?'<span class="na">—</span>':`<span class="rrank"><span class="h">#</span>${v}</span>`; }
+function cellElo(v){ v=num(v); return v==null?'<span class="na">—</span>':`<span class="rnum">${Math.round(v)}</span>`; }
+
+function render(D){
+  DATA=D;
+  const meta=D.meta, players=D.players, art=REG.art;
+  // статистика считается из игроков (без отдельного stats-объекта)
+  const eloVals=players.map(p=>num(p.r_elo_cur)).filter(v=>v!=null);
+  const eloAvg=eloVals.length?Math.round(eloVals.reduce((a,b)=>a+b,0)/eloVals.length):null;
+  const msVals=players.map(p=>num(p.r_ms_rank)).filter(v=>v!=null);
+  const nConf=players.filter(p=>p.status==='confirmed').length;
+  const mkUp=eloVals.length>0, msUp=msVals.length>0;
+
   const meterHtml = `
     <div class="meter">
       <div class="lab">Ожидаемый ср. ELO · markery</div>
-      <div class="val">${meterVal!=null?meterVal:'N/A'}</div>
-      <div class="sub">${meterVal!=null?('по '+ (st.mk_n_ok||st.mk_n) +' из '+st.n_conf+' подтв.'):'нет данных'}${st.ms_avg!=null?(' · mafiastats '+Math.round(st.ms_avg)+' (n'+st.ms_n+')'):''}</div>
+      <div class="val">${eloAvg!=null?eloAvg:'N/A'}</div>
+      <div class="sub">${eloAvg!=null?('по '+eloVals.length+' из '+players.length+' игроков'):'нет данных'}</div>
     </div>`;
   const heroHtml = art ? `
     <div class="hero">
@@ -166,63 +198,81 @@ function render(D){
 
   const summary = `
     <div class="summary">
-      <div class="scard"><div class="k">Подтверждено</div><div class="v">${st.n_conf}<small> / ${meta.expected||'—'} ожид.</small></div></div>
-      <div class="scard"><div class="k">Заявки / лист ожид.</div><div class="v">${st.n_apps}</div></div>
-      <div class="scard"><div class="k">markery · ср. ELO</div><div class="v">${st.mk_avg_ok!=null?Math.round(st.mk_avg_ok):'—'}<small> n${st.mk_n_ok}</small></div></div>
-      <div class="scard"><div class="k">mafiastats · ср. ELO</div><div class="v">${st.ms_avg!=null?Math.round(st.ms_avg):'—'}<small> n${st.ms_n}</small></div></div>
+      <div class="scard"><div class="k">Участников</div><div class="v">${players.length}<small> / ${meta.expected||'—'} ожид.</small></div></div>
+      <div class="scard"><div class="k">markery · ср. ELO</div><div class="v">${eloAvg!=null?eloAvg:'—'}<small> n${eloVals.length}</small></div></div>
+      <div class="scard"><div class="k">с рейтингом mafiastats</div><div class="v">${msVals.length}<small> / ${players.length}</small></div></div>
     </div>`;
 
   const legend = `
     <div class="legend">
-      <span><span class="dot" style="background:var(--accent)"></span>markery — основной источник: <span class="conn ${mkUp?'up':'down'}">${mkUp?'подключён':'нет подключения'}</span></span>
-      <span><span class="dot" style="background:#7aa7d6"></span>mafiastats — сверка: <span class="conn ${msUp?'up':'down'}">${msUp?'подключён':'нет подключения'}</span></span>
-      <span><span class="flag amb">⚠</span> неоднозначный ник (тёзки) — взят с макс. числом игр</span>
+      <span><span class="dot" style="background:var(--accent)"></span>markery — основной: <span class="conn ${mkUp?'up':'down'}">${mkUp?'подключён':'нет данных'}</span></span>
+      <span><span class="dot" style="background:#7aa7d6"></span>mafiastats — сверка: <span class="conn ${msUp?'up':'down'}">${msUp?'подключён':'нет данных'}</span></span>
+      <span>↕ клик по заголовку колонки — сортировка</span>
     </div>`;
 
-  const rows = players.map((p,i)=>{
-    const mafgameLink = p.uid?`<a class="lnk" href="https://mafgame.org/user/${p.uid}/view" target="_blank" rel="noopener">mafgame</a>`:'';
-    const msLink = p.ms.id?`<a class="lnk" href="https://mafiastats.com/players/${p.ms.id}" target="_blank" rel="noopener">mafiastats</a>`:'';
-    // markery
-    let mkCell='<span class="na">—</span>';
-    if(p.mk.elo!=null){
-      const amb = p.mk.conf==='multi' ? `<span class="flag amb" title="тёзки в markery (${(p.mk.alts||[]).map(a=>a.elo).join(', ')}); взят с макс. играми">⚠</span> ` : '';
-      mkCell=`<span class="elo">${amb}${Math.round(p.mk.elo)}</span> <span class="g">${p.mk.tt!=null?p.mk.tt+' т.':''}</span>`;
-    }
-    // mafiastats
-    let msCell='<span class="na">—</span>';
-    if(p.ms.rating!=null){
-      const isMaf=(p.ms.feds||[]).includes('mafgame');
-      const flag = isMaf?'':`<span class="flag nomaf" title="на mafiastats без федерации mafgame (${(p.ms.feds||[]).join(',')||'—'}) — возможно тёзка">≈</span> `;
-      msCell=`<span class="elo">${flag}${Math.round(p.ms.rating)}</span> <span class="g">${p.ms.rank?'#'+p.ms.rank:''}</span>`;
-    }
+  const app=document.getElementById('app');
+  app.innerHTML = heroHtml + summary + legend +
+    `<div class="tbl-wrap"><table>
+       <thead><tr id="hr"></tr></thead>
+       <tbody id="tb"></tbody>
+     </table></div>` + noteHtml();
+  buildHead(); paint();
+}
+
+function noteHtml(){
+  return `<p class="note">
+    Рейтинги markery (текущий ELO, ELO 2026, места в рейтингах Европа и оффлайн за 2026) и место mafiastats заполняются из базы рейтингов и обновляются по мере приближения турнира.
+    «ELO тек» и «ELO 2026» — шкала markery; место mafiastats — другая система, напрямую не сравнивается. «—» — данных пока нет.
+    У части игроков ник на markery отличается от mafgame (напр. Season's → «Spring») — для таких ссылка ведёт на их профиль markery напрямую. Список и составы — с mafgame.org.
+  </p>`;
+}
+
+function buildHead(){
+  const hr=document.getElementById('hr');
+  let th='<th class="l anchor sortable" data-k="player">Игрок<span class="ar"></span></th>';
+  th+=COLS.map((c,i)=>`<th class="sortable${i===0?' grp':''}${i===2?' grp':''}" data-k="${c.key}" title="${esc(c.hint)}">${esc(c.lab)}<span class="ar"></span></th>`).join('');
+  th+='<th class="l">профиль</th>';
+  hr.innerHTML=th;
+  hr.querySelectorAll('th.sortable').forEach(el=>el.onclick=()=>{
+    const k=el.dataset.k;
+    if(k==='player'){ sortKey='player'; }
+    else if(sortKey===k){ sortDir=-sortDir; }
+    else { sortKey=k; sortDir=(COLS.find(c=>c.key===k)||{}).dir||-1; }
+    paint();
+  });
+}
+
+function paint(){
+  if(sortKey==='player'){ DATA.players.sort((a,b)=>a.nick.localeCompare(b.nick,'ru')); }
+  else sortPlayers();
+  // индикаторы в шапке
+  document.querySelectorAll('#hr th').forEach(th=>{
+    const k=th.dataset.k; const ar=th.querySelector('.ar'); if(!ar)return;
+    if(k===sortKey){ th.classList.add('act'); ar.textContent=(k!=='player'&&sortDir<0)?'▼':'▲'; }
+    else { th.classList.remove('act'); ar.textContent=''; }
+  });
+  const rows=DATA.players.map((p,i)=>{
+    const links=[];
+    if(p.uid) links.push(`<a class="lnk" href="https://mafgame.org/user/${p.uid}/view" target="_blank" rel="noopener">mafgame</a>`);
+    if(p.markery_id) links.push(`<a class="lnk" href="https://markery.online/playerStatistics?eloType=101&playerId=${p.markery_id}&tab=EloHistory" target="_blank" rel="noopener" title="ник на markery: ${esc(p.markery_nick||'')}">markery</a>`);
+    if(p.ms&&p.ms.id) links.push(`<a class="lnk" href="https://mafiastats.com/players/${p.ms.id}" target="_blank" rel="noopener">mafiastats</a>`);
+    // ⚠ неоднозначный markery
+    let amb='';
+    if(p.mk&&p.mk.conf==='multi'){ amb=`<span class="flag amb" title="тёзки в markery (${(p.mk.alts||[]).map(a=>a.elo).join(', ')}); взят с макс. играми">⚠</span> `; }
+    const club=p.club?`<br><span class="pl-real">${esc(p.club)}</span>`:(p.real?`<br><span class="pl-real">${esc(p.real)}</span>`:'');
     return `<tr class="${p.status}">
-      <td class="l anchor"><div class="pl"><span class="num">${i+1}</span>${avatar(p)}<span><span class="pl-nick">${esc(p.nick)}</span><br><span class="pl-real">${esc(p.real||'')}</span></span></div></td>
-      <td>${mkCell}</td>
-      <td>${msCell}</td>
-      <td class="l">${mafgameLink}${msLink}</td>
+      <td class="l anchor"><div class="pl"><span class="num">${i+1}</span>${avatar(p)}<span><span class="pl-nick">${esc(p.nick)}</span>${club}</span></div></td>
+      <td class="grp">${amb}${cellElo(p.r_elo_cur)}</td>
+      <td>${cellElo(p.r_elo_2026)}</td>
+      <td class="grp">${cellRank(p.r_rank_eu_2026)}</td>
+      <td>${cellRank(p.r_rank_off_2026)}</td>
+      <td>${cellRank(p.r_ms_rank)}</td>
+      <td class="l">${links.join(' ')||'<span class="na">—</span>'}</td>
     </tr>`;
   }).join('');
-
-  const table = `
-    <div class="tbl-wrap"><table>
-      <thead><tr>
-        <th class="l anchor">Игрок</th>
-        <th>markery ELO</th>
-        <th>mafiastats ELO</th>
-        <th class="l">профиль</th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table></div>`;
-
-  const note = `<p class="note">
-    Снапшот рейтингов снят вручную (markery.online и mafiastats.com), обновляется по мере приближения турнира.
-    markery и mafiastats — разные рейтинговые системы с разной шкалой, поэтому абсолютные числа между ними не сравниваются напрямую.
-    «⚠» — в markery несколько игроков с таким ником: взят с наибольшим числом турниров. «≈» — на mafiastats совпал ник, но без федерации mafgame (возможно тёзка).
-    Список заявок — с mafgame.org.
-  </p>`;
-
-  document.getElementById('app').innerHTML = heroHtml + summary + legend + table + note;
+  document.getElementById('tb').innerHTML=rows;
 }
+
 </script>
 </body>
 </html>

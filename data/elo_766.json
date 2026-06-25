@@ -1,8 +1,7 @@
 {
  "_meta": {
-  "файл": "data/elo_766.json",
   "дата": "2026-06-25",
-  "назначение": "ELO на старт 766: global = markery ELO (mk.elo), ms = mafiastats rating. Источник: participants_766.json"
+  "назначение": "ELO 766: global=markery текущее, ms=mafiastats"
  },
  "players": {
   "Season's": {
@@ -28,12 +27,6 @@
    "year": null,
    "tournaments": 45,
    "ms": 1300
-  },
-  "Буржуй": {
-   "global": 1158,
-   "year": null,
-   "tournaments": 49,
-   "ms": 1425
   },
   "Сакура": {
    "global": 999,
@@ -82,12 +75,6 @@
    "year": null,
    "tournaments": 17,
    "ms": null
-  },
-  "ParadoXx": {
-   "global": 1105,
-   "year": null,
-   "tournaments": 26,
-   "ms": 1822
   },
   "Сью": {
    "global": 1280,
@@ -227,12 +214,6 @@
    "tournaments": 12,
    "ms": null
   },
-  "To4ka": {
-   "global": 960,
-   "year": null,
-   "tournaments": 8,
-   "ms": 1477
-  },
   "Судья": {
    "global": 978,
    "year": null,
@@ -243,6 +224,24 @@
    "global": 986,
    "year": null,
    "tournaments": 1,
+   "ms": null
+  },
+  "Blackout": {
+   "global": null,
+   "year": null,
+   "tournaments": null,
+   "ms": null
+  },
+  "ParadoXx": {
+   "global": 1105,
+   "year": null,
+   "tournaments": 26,
+   "ms": 1822
+  },
+  "new_katenok": {
+   "global": null,
+   "year": null,
+   "tournaments": null,
    "ms": null
   }
  }

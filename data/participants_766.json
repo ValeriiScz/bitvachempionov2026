@@ -1,1 +1,1440 @@
-{"meta": {"id": 766, "name": "🏆Four Seasons: Poland Mafia Open 2026🏆", "start": "2026-06-27", "days": 2, "city_id": 3081368, "fee": "111.00", "stars": 4, "expected": 40}, "players": [{"nick": "Season's", "uid": 280, "real": "Саша", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_280/3b3dae1e7edb1509f07f16e1a57bd401edb4f312.png", "status": "confirmed", "mk": {"elo": null, "tt": null, "conf": "none", "n": 0, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Нико", "uid": 532, "real": "Bogdan", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_532/97bc759725c554a5b22987d1f0c6e06639b56db2.png", "status": "confirmed", "mk": {"elo": 887.4, "tt": 10, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "LogisticPro", "uid": 201, "real": "Владислав", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_201/c371c9f615f42c193898cc15b88800cf1c27892e.png", "status": "confirmed", "mk": {"elo": 1189.6, "tt": 26, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Jane", "uid": 288, "real": "Tanya", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_288/4082774cd0a41a2bd34928ce499bbdf88824bb66.png", "status": "confirmed", "mk": {"elo": 1182, "tt": 45, "conf": "multi", "n": 2, "alts": [{"nm": "Jane", "elo": 1182, "tt": 45}, {"nm": "Jane", "elo": 1008, "tt": 6}]}, "ms": {"rating": 1299.8556, "rank": 3180, "games": 134, "wr": 44.03, "conf": "mafgame", "feds": ["mafgame", "imafia"], "id": 64334}}, {"nick": "Буржуй", "uid": 287, "real": "Bohdan", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_287/3ddee352574f767cc2ee00cb7690d518c58915a2.png", "status": "confirmed", "mk": {"elo": 1157.5, "tt": 49, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1424.7461, "rank": 2169, "games": 70, "wr": 45.71, "conf": "mafgame", "feds": ["mafgame", "mwt", "imafia"], "id": 63563}}, {"nick": "Сакура", "uid": 272, "real": "Віта", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_272/3386454dda320a9cb15483fd61a1937f39d35932.png", "status": "confirmed", "mk": {"elo": 999.1, "tt": 15, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1435.1007, "rank": 2045, "games": 12, "wr": 50, "conf": "exact_nomaf", "feds": ["imafia"], "id": 65755}}, {"nick": "Добрейший", "uid": 143, "real": "Alexey", "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_143/3fcecd6291cfdc54a60b67a6fc2fd9536b213525.png", "status": "confirmed", "mk": {"elo": 913.6, "tt": 24, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Mjata", "uid": 1598, "real": "Татьяна", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1598/be8734737f19263f5a892c7861541c2b2ce48708.png", "status": "confirmed", "mk": {"elo": 1023.6, "tt": 12, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Mulder", "uid": 1599, "real": "Roman", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1599/521227105368a3dbbcb266ab19d2a4a5dbd943d0.png", "status": "confirmed", "mk": {"elo": 967.2, "tt": 9, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Sever", "uid": 227, "real": "Evgeniia Richik", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_227/a2865db6058247b84f61bf8e10afbb6379699203.png", "status": "confirmed", "mk": {"elo": 939, "tt": 21, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1270.7924, "rank": 3303, "games": 51, "wr": 45.1, "conf": "mafgame", "feds": ["mafgame", "mwt", "emotion"], "id": 57895}}, {"nick": "Link", "uid": 1307, "real": "Denis Sukhonosov", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1307/96843d97fe9b9add3869edce3969301031e49ec9.png", "status": "confirmed", "mk": {"elo": 986.3, "tt": 11, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "qUAest0r", "uid": 704, "real": "Serhii", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_704/7a243b5b522585bb2cac9fa3407aa5a14b38376b.png", "status": "confirmed", "mk": {"elo": 988.4, "tt": 31, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1431.9755, "rank": 2078, "games": 12, "wr": 41.67, "conf": "mafgame", "feds": ["mafgame", "emotion", "imafia"], "id": 406}}, {"nick": "TOPS", "uid": 1495, "real": "Eugeniu", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1495/242ba9676071458139c03c4fe6781dc6bb820d82.png", "status": "confirmed", "mk": {"elo": 1047.1, "tt": 17, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "ParadoXx", "uid": 709, "real": "Aleksandr", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png", "status": "confirmed", "mk": {"elo": 1105.2, "tt": 26, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1822.2161, "rank": 141, "games": 16, "wr": 75, "conf": "exact_nomaf", "feds": ["imafia"], "id": 65399}}, {"nick": "Сью", "uid": 1398, "real": "Sonya Golubovska", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1398/269388ba5e06d783f8c16aae7bb0c84505ab9054.png", "status": "confirmed", "mk": {"elo": 1280, "tt": 34, "conf": "multi", "n": 3, "alts": [{"nm": "Сью", "elo": 1280, "tt": 34}, {"nm": "Сью", "elo": 982, "tt": 12}, {"nm": "Сью", "elo": 994, "tt": 1}]}, "ms": {"rating": 1700.8764, "rank": 257, "games": 224, "wr": 49.11, "conf": "mafgame", "feds": ["mafgame", "imafia"], "id": 63074}}, {"nick": "DOVOD", "uid": 1493, "real": "Valerii S", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/1f30664fe58edefde9864af8e39d1508286597f7.png", "status": "confirmed", "mk": {"elo": 1130.5, "tt": 31, "conf": "multi", "n": 2, "alts": [{"nm": "DOVOD", "elo": 1131, "tt": 31}, {"nm": "DoVoD", "elo": 1014, "tt": 1}]}, "ms": {"rating": 1543.6754, "rank": 706, "games": 16, "wr": 62.5, "conf": "exact_nomaf", "feds": ["mwt"], "id": 59039}}, {"nick": "Tykva", "uid": 2588, "real": "Andrei", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2588/5529b5bb890dd4cc92a5013ab9c9df6c0dd49243.png", "status": "confirmed", "mk": {"elo": 971.2, "tt": 5, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Golubchik", "uid": 3044, "real": "Ksenia", "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3044/ed79cf5eae3015941838ffb09cc4ad8192f9ebaf.png", "status": "confirmed", "mk": {"elo": 972.9, "tt": 2, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Maverick", "uid": 1657, "real": "Zula Badaev", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1657/113c46e18eb1f0829d8677456a66a8e412e76de6.png", "status": "confirmed", "mk": {"elo": 1026.5, "tt": 19, "conf": "multi", "n": 2, "alts": [{"nm": "Maverick", "elo": 1026, "tt": 19}, {"nm": "Maverick", "elo": 990, "tt": 1}]}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Phoenix", "uid": 863, "real": "Viktar", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_863/cb46ba676d81f8d35f458f1f18ce04dd13dd537b.png", "status": "confirmed", "mk": {"elo": 1283, "tt": 67, "conf": "multi", "n": 3, "alts": [{"nm": "Phoenix", "elo": 1283, "tt": 67}, {"nm": "Phoenix", "elo": 971, "tt": 2}, {"nm": "Phoenix", "elo": 999, "tt": 1}]}, "ms": {"rating": 1612.4578, "rank": 435, "games": 557, "wr": 47.94, "conf": "mafgame", "feds": ["mafgame", "emotion", "imafia"], "id": 62893}}, {"nick": "Konark", "uid": 2508, "real": "Vladyslav", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2508/f04b3f1e2b8f711972533c86cd57997b73727e5e.png", "status": "confirmed", "mk": {"elo": 976.2, "tt": 3, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Котяра", "uid": 1054, "real": "Andrei Trukhan", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1054/843cda596ff0716db4f8d34730ae406b90e64471.png", "status": "confirmed", "mk": {"elo": 970.4, "tt": 6, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Legion 🇺🇦", "uid": 1992, "real": "Petro Tomniuk", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1992/e38c8a21e975b1a23e9ccee6907f92c65080e5e1.png", "status": "confirmed", "mk": {"elo": 962.7, "tt": 5, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Specchio", "uid": 765, "real": "Georgios", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_765/e7b3c8ee943021dc7125c6fb74198f2e6c240e23.png", "status": "confirmed", "mk": {"elo": 969.9, "tt": 10, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Afina", "uid": 2862, "real": "Елена Петленко", "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2862/81dd2353160caae1683e164eff2dd7f1a10b3d7b.png", "status": "confirmed", "mk": {"elo": 948.6, "tt": 12, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1491.1554, "rank": 1226, "games": 24, "wr": 50, "conf": "mafgame", "feds": ["mafgame", "imafia"], "id": 63185}}, {"nick": "Магнат", "uid": 2602, "real": "Хассан", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png", "status": "confirmed", "mk": {"elo": 1148.2, "tt": 17, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Tapok", "uid": 561, "real": "Тимур", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_561/3b6199eba3053f42603cffa3d110a2a0a0a47d18.png", "status": "confirmed", "mk": {"elo": 946.9, "tt": 13, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Ёжик", "uid": 2399, "real": "Лиза", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2399/b0387d3bc76b27b28a4662ab5e32811393708f34.png", "status": "confirmed", "mk": {"elo": 915, "tt": 7, "conf": "multi", "n": 3, "alts": [{"nm": "Ёжик", "elo": 915, "tt": 7}, {"nm": "Ёжик", "elo": 1022, "tt": 6}, {"nm": "Ёжик", "elo": 952, "tt": 2}]}, "ms": {"rating": 1035.5004, "rank": 3750, "games": 36, "wr": 27.78, "conf": "exact_nomaf", "feds": ["mwt"], "id": 23155}}, {"nick": "aptah", "uid": 1358, "real": "Volodymyr Hrychenko", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1358/236f3274a9d37c8006c6d3e18edd9b8071d0ce48.png", "status": "confirmed", "mk": {"elo": 1041.4, "tt": 51, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1222.4406, "rank": 3474, "games": 257, "wr": 42.8, "conf": "mafgame", "feds": ["mafgame", "mwt", "imafia"], "id": 983}}, {"nick": "Ru", "uid": 1417, "real": "Руслан Гафаров", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1417/e1814d965c2df83eb9e7ca22f5406f2d15bcba07.png", "status": "confirmed", "mk": {"elo": 917.6, "tt": 21, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1428.2283, "rank": 2125, "games": 11, "wr": 36.36, "conf": "mafgame", "feds": ["mafgame", "imafia"], "id": 789}}, {"nick": "SANYURIK", "uid": 3026, "real": "Александр Кац", "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3026/d81271bfb445f914da8e1039ca6ad3f0c1666879.png", "status": "confirmed", "mk": {"elo": null, "tt": null, "conf": "none", "n": 0, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Lюц", "uid": 1050, "real": "Mykhailo", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1050/05d587e41edd71e3a3dc89f2b04b75c964af8cfe.png", "status": "confirmed", "mk": {"elo": 1217.5, "tt": 37, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1534.2765, "rank": 786, "games": 182, "wr": 46.15, "conf": "mafgame", "feds": ["mafgame", "mwt", "emotion", "imafia"], "id": 63564}}, {"nick": "Raise 📈", "uid": 2134, "real": "Дмитрий", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2134/6be5bfb244d22573373ef728a63e53f693564f41.png", "status": "confirmed", "mk": {"elo": 1080.4, "tt": 36, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1501.4016, "rank": 1120, "games": 138, "wr": 49.28, "conf": "exact_nomaf", "feds": ["emotion", "imafia"], "id": 62883}}, {"nick": "Malvina", "uid": 2400, "real": "Viktoriya", "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2400/a8a3a463c4897f9237685ecb63546466d321e9d8.png", "status": "confirmed", "mk": {"elo": 974.5, "tt": 2, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Donna", "uid": 1400, "real": "Галина", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1400/607b4801b5ffa0923db5c49fb5774be59dbcc216.png", "status": "confirmed", "mk": {"elo": 875.4, "tt": 25, "conf": "multi", "n": 2, "alts": [{"nm": "Donna", "elo": 875, "tt": 25}, {"nm": "Donna", "elo": 930, "tt": 7}]}, "ms": {"rating": 1390.7039, "rank": 2519, "games": 35, "wr": 42.86, "conf": "exact_nomaf", "feds": ["emotion", "imafia"], "id": 64831}}, {"nick": "Светлый", "uid": 1799, "real": "Nikita", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1799/04b61cdfa24c968857d84fcfd74443d9c3e50fe3.png", "status": "confirmed", "mk": {"elo": 967.6, "tt": 11, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1370.1899, "rank": 2710, "games": 24, "wr": 45.83, "conf": "mafgame", "feds": ["mafgame", "mwt", "emotion", "imafia"], "id": 63226}}, {"nick": "Landing", "uid": 1481, "real": "Дима", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1481/b033e4506014e23586818760a88ede88a7b79d3d.png", "status": "confirmed", "mk": {"elo": 1060.2, "tt": 12, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "To4ka", "uid": 2307, "real": "Татьяна", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2307/3d826299c926d7f0aebeb58e07d52ebdeb21e4b0.png", "status": "confirmed", "mk": {"elo": 960.5, "tt": 8, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1476.5832, "rank": 1453, "games": 10, "wr": 60, "conf": "mafgame", "feds": ["mafgame", "mwt"], "id": 61171}}, {"nick": "Судья", "uid": 2329, "real": "Stas", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2329/e50bbc08c28fcd0cb1cc1aa84f29668cb0643ff8.png", "status": "confirmed", "mk": {"elo": 978.4, "tt": 8, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Jinn", "uid": 2966, "real": "Julia", "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2966/fd52f34e282b534bf24010b0639264952ebf3c96.png", "status": "applied", "mk": {"elo": 985.7, "tt": 1, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}], "stats": {"n_conf": 39, "n_apps": 1, "mk_avg": 1026.0, "mk_n": 37, "mk_avg_ok": 1009.0, "mk_n_ok": 30, "ms_avg": 1438.6, "ms_n": 12}}
+{
+ "meta": {
+  "id": 766,
+  "name": "Four Seasons: Poland Mafia Open 2026",
+  "start": "2026-06-27",
+  "days": 2,
+  "city": "Вроцлав",
+  "fee": "111.00",
+  "stars": 4,
+  "expected": 40,
+  "roster_source": "mafgame participants 2026-06-25 (актуальный, 40 confirmed)",
+  "rating_note": "r_elo_2026/r_rank_eu_2026/r_rank_off_2026 — из Excel-базы markery (заполняется вручную). r_elo_cur=markery текущее (snapshot), r_ms_rank=mafiastats."
+ },
+ "players": [
+  {
+   "nick": "Season's",
+   "uid": 280,
+   "num": 1,
+   "real": "Саша",
+   "club": "Mafia Family Wroclaw",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_280/3b3dae1e7edb1509f07f16e1a57bd401edb4f312.png",
+   "mk": {
+    "elo": null,
+    "tt": null,
+    "conf": "none",
+    "n": 0,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": "Spring",
+   "markery_id": 11063,
+   "r_elo_cur": null,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Нико",
+   "uid": 532,
+   "num": 2,
+   "real": "Bogdan",
+   "club": "Mafia Family Wroclaw",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_532/97bc759725c554a5b22987d1f0c6e06639b56db2.png",
+   "mk": {
+    "elo": 887.4,
+    "tt": 10,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 887.4,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "LogisticPro",
+   "uid": 201,
+   "num": 3,
+   "real": "Владислав",
+   "club": "White Mafia Club Wroclaw",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_201/c371c9f615f42c193898cc15b88800cf1c27892e.png",
+   "mk": {
+    "elo": 1189.6,
+    "tt": 26,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1189.6,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Jane",
+   "uid": 288,
+   "num": 4,
+   "real": "Tanya",
+   "club": "White Mafia Club Wroclaw",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_288/4082774cd0a41a2bd34928ce499bbdf88824bb66.png",
+   "mk": {
+    "elo": 1182,
+    "tt": 45,
+    "conf": "multi",
+    "n": 2,
+    "alts": [
+     {
+      "nm": "Jane",
+      "elo": 1182,
+      "tt": 45
+     },
+     {
+      "nm": "Jane",
+      "elo": 1008,
+      "tt": 6
+     }
+    ]
+   },
+   "ms": {
+    "rating": 1299.8556,
+    "rank": 3180,
+    "games": 134,
+    "wr": 44.03,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "imafia"
+    ],
+    "id": 64334
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1182,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 3180
+  },
+  {
+   "nick": "Сакура",
+   "uid": 272,
+   "num": 5,
+   "real": "Віта",
+   "club": "",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_272/3386454dda320a9cb15483fd61a1937f39d35932.png",
+   "mk": {
+    "elo": 999.1,
+    "tt": 15,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1435.1007,
+    "rank": 2045,
+    "games": 12,
+    "wr": 50,
+    "conf": "exact_nomaf",
+    "feds": [
+     "imafia"
+    ],
+    "id": 65755
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 999.1,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 2045
+  },
+  {
+   "nick": "Добрейший",
+   "uid": 143,
+   "num": 6,
+   "real": "Alexey",
+   "club": "White Mafia Club Wroclaw",
+   "status": "confirmed",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_143/3fcecd6291cfdc54a60b67a6fc2fd9536b213525.png",
+   "mk": {
+    "elo": 913.6,
+    "tt": 24,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 913.6,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Mjata",
+   "uid": 1598,
+   "num": 7,
+   "real": "Татьяна",
+   "club": "White Mafia Club Wroclaw",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1598/be8734737f19263f5a892c7861541c2b2ce48708.png",
+   "mk": {
+    "elo": 1023.6,
+    "tt": 12,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1023.6,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Mulder",
+   "uid": 1599,
+   "num": 8,
+   "real": "Roman",
+   "club": "White Mafia Club Wroclaw",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1599/521227105368a3dbbcb266ab19d2a4a5dbd943d0.png",
+   "mk": {
+    "elo": 967.2,
+    "tt": 9,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 967.2,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Sever",
+   "uid": 227,
+   "num": 9,
+   "real": "Evgeniia Richik",
+   "club": "Mafia club \"Champions League\" Prague",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_227/a2865db6058247b84f61bf8e10afbb6379699203.png",
+   "mk": {
+    "elo": 939,
+    "tt": 21,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1270.7924,
+    "rank": 3303,
+    "games": 51,
+    "wr": 45.1,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt",
+     "emotion"
+    ],
+    "id": 57895
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 939,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 3303
+  },
+  {
+   "nick": "Link",
+   "uid": 1307,
+   "num": 10,
+   "real": "Denis Sukhonosov",
+   "club": "Mafia club \"Champions League\" Prague",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1307/96843d97fe9b9add3869edce3969301031e49ec9.png",
+   "mk": {
+    "elo": 986.3,
+    "tt": 11,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 986.3,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "qUAest0r",
+   "uid": 704,
+   "num": 11,
+   "real": "Serhii",
+   "club": "Mafia club \"Champions League\" Prague",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_704/7a243b5b522585bb2cac9fa3407aa5a14b38376b.png",
+   "mk": {
+    "elo": 988.4,
+    "tt": 31,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1431.9755,
+    "rank": 2078,
+    "games": 12,
+    "wr": 41.67,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "emotion",
+     "imafia"
+    ],
+    "id": 406
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 988.4,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 2078
+  },
+  {
+   "nick": "TOPS",
+   "uid": 1495,
+   "num": 12,
+   "real": "Eugeniu",
+   "club": "Mafia club \"Champions League\" Prague",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1495/242ba9676071458139c03c4fe6781dc6bb820d82.png",
+   "mk": {
+    "elo": 1047.1,
+    "tt": 17,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1047.1,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Сью",
+   "uid": 1398,
+   "num": 13,
+   "real": "Sonya Golubovska",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1398/269388ba5e06d783f8c16aae7bb0c84505ab9054.png",
+   "mk": {
+    "elo": 1280,
+    "tt": 34,
+    "conf": "multi",
+    "n": 3,
+    "alts": [
+     {
+      "nm": "Сью",
+      "elo": 1280,
+      "tt": 34
+     },
+     {
+      "nm": "Сью",
+      "elo": 982,
+      "tt": 12
+     },
+     {
+      "nm": "Сью",
+      "elo": 994,
+      "tt": 1
+     }
+    ]
+   },
+   "ms": {
+    "rating": 1700.8764,
+    "rank": 257,
+    "games": 224,
+    "wr": 49.11,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "imafia"
+    ],
+    "id": 63074
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1280,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 257
+  },
+  {
+   "nick": "DOVOD",
+   "uid": 1493,
+   "num": 14,
+   "real": "Valerii S",
+   "club": "Mafia club \"Champions League\" Prague",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/1f30664fe58edefde9864af8e39d1508286597f7.png",
+   "mk": {
+    "elo": 1130.5,
+    "tt": 31,
+    "conf": "multi",
+    "n": 2,
+    "alts": [
+     {
+      "nm": "DOVOD",
+      "elo": 1131,
+      "tt": 31
+     },
+     {
+      "nm": "DoVoD",
+      "elo": 1014,
+      "tt": 1
+     }
+    ]
+   },
+   "ms": {
+    "rating": 1543.6754,
+    "rank": 706,
+    "games": 16,
+    "wr": 62.5,
+    "conf": "exact_nomaf",
+    "feds": [
+     "mwt"
+    ],
+    "id": 59039
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1130.5,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 706
+  },
+  {
+   "nick": "Tykva",
+   "uid": 2588,
+   "num": 15,
+   "real": "Andrei",
+   "club": "White Mafia Club Wroclaw",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2588/5529b5bb890dd4cc92a5013ab9c9df6c0dd49243.png",
+   "mk": {
+    "elo": 971.2,
+    "tt": 5,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 971.2,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Golubchik",
+   "uid": 3044,
+   "num": 16,
+   "real": "Ksenia",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3044/ed79cf5eae3015941838ffb09cc4ad8192f9ebaf.png",
+   "mk": {
+    "elo": 972.9,
+    "tt": 2,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 972.9,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Maverick",
+   "uid": 1657,
+   "num": 17,
+   "real": "Zula Badaev",
+   "club": "Mafia club \"Champions League\" Prague",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1657/113c46e18eb1f0829d8677456a66a8e412e76de6.png",
+   "mk": {
+    "elo": 1026.5,
+    "tt": 19,
+    "conf": "multi",
+    "n": 2,
+    "alts": [
+     {
+      "nm": "Maverick",
+      "elo": 1026,
+      "tt": 19
+     },
+     {
+      "nm": "Maverick",
+      "elo": 990,
+      "tt": 1
+     }
+    ]
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1026.5,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Phoenix",
+   "uid": 863,
+   "num": 18,
+   "real": "Viktar",
+   "club": "",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_863/cb46ba676d81f8d35f458f1f18ce04dd13dd537b.png",
+   "mk": {
+    "elo": 1283,
+    "tt": 67,
+    "conf": "multi",
+    "n": 3,
+    "alts": [
+     {
+      "nm": "Phoenix",
+      "elo": 1283,
+      "tt": 67
+     },
+     {
+      "nm": "Phoenix",
+      "elo": 971,
+      "tt": 2
+     },
+     {
+      "nm": "Phoenix",
+      "elo": 999,
+      "tt": 1
+     }
+    ]
+   },
+   "ms": {
+    "rating": 1612.4578,
+    "rank": 435,
+    "games": 557,
+    "wr": 47.94,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "emotion",
+     "imafia"
+    ],
+    "id": 62893
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1283,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 435
+  },
+  {
+   "nick": "Konark",
+   "uid": 2508,
+   "num": 19,
+   "real": "Vladyslav",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2508/f04b3f1e2b8f711972533c86cd57997b73727e5e.png",
+   "mk": {
+    "elo": 976.2,
+    "tt": 3,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 976.2,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Котяра",
+   "uid": 1054,
+   "num": 20,
+   "real": "Andrei Trukhan",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1054/843cda596ff0716db4f8d34730ae406b90e64471.png",
+   "mk": {
+    "elo": 970.4,
+    "tt": 6,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 970.4,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Legion 🇺🇦",
+   "uid": 1992,
+   "num": 21,
+   "real": "Petro Tomniuk",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1992/e38c8a21e975b1a23e9ccee6907f92c65080e5e1.png",
+   "mk": {
+    "elo": 962.7,
+    "tt": 5,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 962.7,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Specchio",
+   "uid": 765,
+   "num": 22,
+   "real": "Georgios",
+   "club": "Swiss Mafia Club Zurich",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_765/e7b3c8ee943021dc7125c6fb74198f2e6c240e23.png",
+   "mk": {
+    "elo": 969.9,
+    "tt": 10,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 969.9,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Afina",
+   "uid": 2862,
+   "num": 23,
+   "real": "Елена Петленко",
+   "club": "Saloon Mafia Club",
+   "status": "confirmed",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2862/81dd2353160caae1683e164eff2dd7f1a10b3d7b.png",
+   "mk": {
+    "elo": 948.6,
+    "tt": 12,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1491.1554,
+    "rank": 1226,
+    "games": 24,
+    "wr": 50,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "imafia"
+    ],
+    "id": 63185
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 948.6,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 1226
+  },
+  {
+   "nick": "Магнат",
+   "uid": 2602,
+   "num": 24,
+   "real": "Хассан",
+   "club": "mafia.md",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png",
+   "mk": {
+    "elo": 1148.2,
+    "tt": 17,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1148.2,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Tapok",
+   "uid": 561,
+   "num": 25,
+   "real": "Тимур",
+   "club": "White Mafia Club Wroclaw",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_561/3b6199eba3053f42603cffa3d110a2a0a0a47d18.png",
+   "mk": {
+    "elo": 946.9,
+    "tt": 13,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 946.9,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Ёжик",
+   "uid": 2399,
+   "num": 26,
+   "real": "Лиза",
+   "club": "White Mafia Club Wroclaw",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2399/b0387d3bc76b27b28a4662ab5e32811393708f34.png",
+   "mk": {
+    "elo": 915,
+    "tt": 7,
+    "conf": "multi",
+    "n": 3,
+    "alts": [
+     {
+      "nm": "Ёжик",
+      "elo": 915,
+      "tt": 7
+     },
+     {
+      "nm": "Ёжик",
+      "elo": 1022,
+      "tt": 6
+     },
+     {
+      "nm": "Ёжик",
+      "elo": 952,
+      "tt": 2
+     }
+    ]
+   },
+   "ms": {
+    "rating": 1035.5004,
+    "rank": 3750,
+    "games": 36,
+    "wr": 27.78,
+    "conf": "exact_nomaf",
+    "feds": [
+     "mwt"
+    ],
+    "id": 23155
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 915,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 3750
+  },
+  {
+   "nick": "aptah",
+   "uid": 1358,
+   "num": 27,
+   "real": "Volodymyr Hrychenko",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1358/236f3274a9d37c8006c6d3e18edd9b8071d0ce48.png",
+   "mk": {
+    "elo": 1041.4,
+    "tt": 51,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1222.4406,
+    "rank": 3474,
+    "games": 257,
+    "wr": 42.8,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt",
+     "imafia"
+    ],
+    "id": 983
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1041.4,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 3474
+  },
+  {
+   "nick": "Ru",
+   "uid": 1417,
+   "num": 28,
+   "real": "Руслан Гафаров",
+   "club": "Mafia-Club \"Domino\"",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1417/e1814d965c2df83eb9e7ca22f5406f2d15bcba07.png",
+   "mk": {
+    "elo": 917.6,
+    "tt": 21,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1428.2283,
+    "rank": 2125,
+    "games": 11,
+    "wr": 36.36,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "imafia"
+    ],
+    "id": 789
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 917.6,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 2125
+  },
+  {
+   "nick": "SANYURIK",
+   "uid": 3026,
+   "num": 29,
+   "real": "Александр Кац",
+   "club": "",
+   "status": "confirmed",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3026/d81271bfb445f914da8e1039ca6ad3f0c1666879.png",
+   "mk": {
+    "elo": null,
+    "tt": null,
+    "conf": "none",
+    "n": 0,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": null,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Lюц",
+   "uid": 1050,
+   "num": 30,
+   "real": "Mykhailo",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1050/05d587e41edd71e3a3dc89f2b04b75c964af8cfe.png",
+   "mk": {
+    "elo": 1217.5,
+    "tt": 37,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1534.2765,
+    "rank": 786,
+    "games": 182,
+    "wr": 46.15,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt",
+     "emotion",
+     "imafia"
+    ],
+    "id": 63564
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1217.5,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 786
+  },
+  {
+   "nick": "Raise 📈",
+   "uid": 2134,
+   "num": 31,
+   "real": "Дмитрий",
+   "club": "",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2134/6be5bfb244d22573373ef728a63e53f693564f41.png",
+   "mk": {
+    "elo": 1080.4,
+    "tt": 36,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1501.4016,
+    "rank": 1120,
+    "games": 138,
+    "wr": 49.28,
+    "conf": "exact_nomaf",
+    "feds": [
+     "emotion",
+     "imafia"
+    ],
+    "id": 62883
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1080.4,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 1120
+  },
+  {
+   "nick": "Malvina",
+   "uid": 2400,
+   "num": 32,
+   "real": "Viktoriya",
+   "club": "White Mafia Club Wroclaw",
+   "status": "confirmed",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2400/a8a3a463c4897f9237685ecb63546466d321e9d8.png",
+   "mk": {
+    "elo": 974.5,
+    "tt": 2,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 974.5,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Donna",
+   "uid": 1400,
+   "num": 33,
+   "real": "Галина",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1400/607b4801b5ffa0923db5c49fb5774be59dbcc216.png",
+   "mk": {
+    "elo": 875.4,
+    "tt": 25,
+    "conf": "multi",
+    "n": 2,
+    "alts": [
+     {
+      "nm": "Donna",
+      "elo": 875,
+      "tt": 25
+     },
+     {
+      "nm": "Donna",
+      "elo": 930,
+      "tt": 7
+     }
+    ]
+   },
+   "ms": {
+    "rating": 1390.7039,
+    "rank": 2519,
+    "games": 35,
+    "wr": 42.86,
+    "conf": "exact_nomaf",
+    "feds": [
+     "emotion",
+     "imafia"
+    ],
+    "id": 64831
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 875.4,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 2519
+  },
+  {
+   "nick": "Светлый",
+   "uid": 1799,
+   "num": 34,
+   "real": "Nikita",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1799/04b61cdfa24c968857d84fcfd74443d9c3e50fe3.png",
+   "mk": {
+    "elo": 967.6,
+    "tt": 11,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1370.1899,
+    "rank": 2710,
+    "games": 24,
+    "wr": 45.83,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt",
+     "emotion",
+     "imafia"
+    ],
+    "id": 63226
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 967.6,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 2710
+  },
+  {
+   "nick": "Landing",
+   "uid": 1481,
+   "num": 35,
+   "real": "Дима",
+   "club": "White Mafia Club Wroclaw",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1481/b033e4506014e23586818760a88ede88a7b79d3d.png",
+   "mk": {
+    "elo": 1060.2,
+    "tt": 12,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1060.2,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Судья",
+   "uid": 2329,
+   "num": 36,
+   "real": "Stas",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2329/e50bbc08c28fcd0cb1cc1aa84f29668cb0643ff8.png",
+   "mk": {
+    "elo": 978.4,
+    "tt": 8,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 978.4,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Jinn",
+   "uid": 2966,
+   "num": 37,
+   "real": "Julia",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2966/fd52f34e282b534bf24010b0639264952ebf3c96.png",
+   "mk": {
+    "elo": 985.7,
+    "tt": 1,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 985.7,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "Blackout",
+   "uid": 185,
+   "num": 38,
+   "real": "Vladimir",
+   "club": "Mafia club \"Champions League\" Prague",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_185/8824bc2d7416c4265395b8b1c5d143551e0d2097.png",
+   "mk": {
+    "elo": null,
+    "tt": null,
+    "conf": "none",
+    "n": 0,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": null,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  },
+  {
+   "nick": "ParadoXx",
+   "uid": 709,
+   "num": 39,
+   "real": "Aleksandr",
+   "club": "Swiss Mafia Club Zurich",
+   "status": "confirmed",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png",
+   "mk": {
+    "elo": 1105.2,
+    "tt": 26,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1822.2161,
+    "rank": 141,
+    "games": 16,
+    "wr": 75,
+    "conf": "exact_nomaf",
+    "feds": [
+     "imafia"
+    ],
+    "id": 65399
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": 1105.2,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": 141
+  },
+  {
+   "nick": "new_katenok",
+   "uid": 2861,
+   "num": 40,
+   "real": "Катерина",
+   "club": "PUDRA mafia club",
+   "status": "confirmed",
+   "av": "",
+   "mk": {
+    "elo": null,
+    "tt": null,
+    "conf": "none",
+    "n": 0,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_nick": null,
+   "markery_id": null,
+   "r_elo_cur": null,
+   "r_elo_2026": null,
+   "r_rank_eu_2026": null,
+   "r_rank_off_2026": null,
+   "r_ms_rank": null
+  }
+ ]
+}

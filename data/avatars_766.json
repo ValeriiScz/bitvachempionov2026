@@ -1,15 +1,13 @@
 {
  "_meta": {
-  "файл": "data/avatars_766.json",
   "дата": "2026-06-25",
-  "назначение": "Аватары участников 766 (из participants_766) + ники из рассадки"
+  "назначение": "Аватары актуального ростера 766"
  },
  "avatars": {
   "Season's": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_280/3b3dae1e7edb1509f07f16e1a57bd401edb4f312.png",
   "Нико": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_532/97bc759725c554a5b22987d1f0c6e06639b56db2.png",
   "LogisticPro": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_201/c371c9f615f42c193898cc15b88800cf1c27892e.png",
   "Jane": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_288/4082774cd0a41a2bd34928ce499bbdf88824bb66.png",
-  "Буржуй": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_287/3ddee352574f767cc2ee00cb7690d518c58915a2.png",
   "Сакура": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_272/3386454dda320a9cb15483fd61a1937f39d35932.png",
   "Добрейший": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_143/3fcecd6291cfdc54a60b67a6fc2fd9536b213525.png",
   "Mjata": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1598/be8734737f19263f5a892c7861541c2b2ce48708.png",
@@ -18,7 +16,6 @@
   "Link": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1307/96843d97fe9b9add3869edce3969301031e49ec9.png",
   "qUAest0r": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_704/7a243b5b522585bb2cac9fa3407aa5a14b38376b.png",
   "TOPS": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1495/242ba9676071458139c03c4fe6781dc6bb820d82.png",
-  "ParadoXx": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png",
   "Сью": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1398/269388ba5e06d783f8c16aae7bb0c84505ab9054.png",
   "DOVOD": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/1f30664fe58edefde9864af8e39d1508286597f7.png",
   "Tykva": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2588/5529b5bb890dd4cc92a5013ab9c9df6c0dd49243.png",
@@ -42,10 +39,10 @@
   "Donna": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1400/607b4801b5ffa0923db5c49fb5774be59dbcc216.png",
   "Светлый": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1799/04b61cdfa24c968857d84fcfd74443d9c3e50fe3.png",
   "Landing": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1481/b033e4506014e23586818760a88ede88a7b79d3d.png",
-  "To4ka": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2307/3d826299c926d7f0aebeb58e07d52ebdeb21e4b0.png",
   "Судья": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2329/e50bbc08c28fcd0cb1cc1aa84f29668cb0643ff8.png",
   "Jinn": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2966/fd52f34e282b534bf24010b0639264952ebf3c96.png",
-  "Blackout": "",
+  "Blackout": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_185/8824bc2d7416c4265395b8b1c5d143551e0d2097.png",
+  "ParadoXx": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png",
   "new_katenok": ""
  },
  "judges": {}
