@@ -1,4 +1,4 @@
-// MafgameStat · data/live.js · v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
+// MafgameStat · data/live.js · v1.5 · 2026-06-25 · winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
 window.normRole = function(r){
   if(r==null) return null;
   const map={'citizen':'Citizen','sheriff':'Sheriff','mafia':'Mafia','don':'Don',
@@ -34,12 +34,14 @@ window.convertInertia = function(g, t){
         const seats=stages[st][gm][tb].filter(Boolean);
         const hasRoles=seats.length>=6&&seats.every(x=>x.role);
         let winner='unknown';
-        if(hasRoles){
+        const _rv=g.results&&g.results[st+'-'+gm+'-'+tb];
+        if(_rv==='black'||_rv==='red'){ winner=_rv==='black'?'black_win':'red_win'; }
+        else if(hasRoles){
           const blackW=seats.some(x=>(x.role==='Mafia'||x.role==='Don')&&x.wpts>0);
           const redW=seats.some(x=>(x.role==='Citizen'||x.role==='Sheriff')&&x.wpts>0);
           winner=blackW?'black_win':(redW?'red_win':'unknown');
-          if(winner!=='unknown') seats.forEach(x=>{const black=(x.role==='Mafia'||x.role==='Don');x.result=((winner==='black_win')===black)?'W':'L';});
         }
+        if(winner!=='unknown'&&hasRoles) seats.forEach(x=>{const black=(x.role==='Mafia'||x.role==='Don');x.result=((winner==='black_win')===black)?'W':'L';});
         tables.push({table_num:tb,winner,seats});
       });
       out.push({title:(st===2?'Финал ':'Game ')+gm,stage:label,tables});

@@ -11,10 +11,10 @@
  "format": "Парный турнир: 10 команд по 2 игрока, 15 игр (2 стола), без финала",
  "paired": true,
  "team_size": 2,
- "closed": false,
- "in_progress": true,
+ "closed": true,
+ "in_progress": false,
  "upcoming": false,
- "games_played": 0,
+ "games_played": 15,
  "games_total": 15,
  "referees": [
   "Trinity",

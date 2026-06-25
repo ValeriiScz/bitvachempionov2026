@@ -1,1 +1,3580 @@
-{"tournament_id": 693, "tournament_name": "MafiaCl Protocol 4 2026", "games_played": 0, "games_total": 15, "games": [{"title": "Game 1", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 2", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 3", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 4", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 5", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 6", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 7", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 8", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 9", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 10", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 11", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 12", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 13", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 14", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}, {"title": "Game 15", "stage": "Игры", "tables": [{"table_num": 1, "winner": "unknown", "seats": [{"seat": 1, "name": "Dara", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "Armia", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "sometimes", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Sever", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "TOPS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Люсі", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Берлин", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Кайзер", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "LogisticPro", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "DOVOD", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}, {"table_num": 2, "winner": "unknown", "seats": [{"seat": 1, "name": "Antonio", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 2, "name": "YeS", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 3, "name": "Maverick", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 4, "name": "Blackout", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 5, "name": "Link", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 6, "name": "Гармония", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 7, "name": "Буржуй", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 8, "name": "Kramola", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 9, "name": "qUAest0r", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}, {"seat": 10, "name": "MorningStar", "role": null, "marker": null, "aps": 0, "wpts": 0, "ci": 0, "sigma": 0, "result": null}]}]}]}
+{
+ "tournament_id": 693,
+ "tournament_name": "MafiaCl Protocol 4 2026",
+ "games_played": 15,
+ "games_total": 15,
+ "closed": true,
+ "note": "Финальные результаты (snapshot mafgame 2026-06-25). 15 игр, 2 стола, без финала. Победитель стола — из официального поля results mafgame.",
+ "games": [
+  {
+   "title": "Game 1",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Kramola",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "Гармония",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0.07,
+       "sigma": 0.07,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "MorningStar",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Antonio",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 7,
+       "name": "Sever",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "Dara",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "Blackout",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "DOVOD",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Люсі",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "sometimes",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "qUAest0r",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "TOPS",
+       "role": "Don",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Кайзер",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0.07,
+       "sigma": 0.07,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Armia",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Link",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "Буржуй",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "LogisticPro",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 2",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "TOPS",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "sometimes",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "Link",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "Blackout",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Гармония",
+       "role": "Sheriff",
+       "marker": "first_killed",
+       "aps": 0.3,
+       "wpts": 0,
+       "ci": 0.13,
+       "sigma": 0.43,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "qUAest0r",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Armia",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "MorningStar",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "red_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Sever",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "LogisticPro",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 4,
+       "name": "Буржуй",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "DOVOD",
+       "role": "Sheriff",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Dara",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Люсі",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "Kramola",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Antonio",
+       "role": "Don",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "Кайзер",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 3",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Берлин",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Link",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "DOVOD",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.4,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Antonio",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "Dara",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "Kramola",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "MorningStar",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0.07,
+       "sigma": 0.07,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "LogisticPro",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Люсі",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "Armia",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "red_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "sometimes",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "Кайзер",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 4,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "Буржуй",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "TOPS",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 7,
+       "name": "Blackout",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Sever",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "Гармония",
+       "role": "Don",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "qUAest0r",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 4",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "red_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "MorningStar",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Armia",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "qUAest0r",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 4,
+       "name": "Люсі",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "LogisticPro",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Sever",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 7,
+       "name": "TOPS",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "Гармония",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Буржуй",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "Kramola",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Blackout",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "YeS",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "Antonio",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.3,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Dara",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0.07,
+       "sigma": 0.07,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "sometimes",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Кайзер",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Берлин",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Link",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "DOVOD",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 5",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Link",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0.07,
+       "sigma": 0.07,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "qUAest0r",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Буржуй",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Kramola",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "Кайзер",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Люсі",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Antonio",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "YeS",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "Гармония",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "red_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "LogisticPro",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "DOVOD",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "Dara",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 4,
+       "name": "MorningStar",
+       "role": "Don",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "Blackout",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "Armia",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 7,
+       "name": "sometimes",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "TOPS",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0.25,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.0,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Sever",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 6",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "red_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Гармония",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Dara",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "LogisticPro",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 4,
+       "name": "Link",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "Люсі",
+       "role": "Don",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 7,
+       "name": "Antonio",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Буржуй",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.5,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.25,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "MorningStar",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "sometimes",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "red_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "TOPS",
+       "role": "Don",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "Kramola",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 4,
+       "name": "Armia",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "DOVOD",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "qUAest0r",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Blackout",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Кайзер",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "Sever",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 7",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "red_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "qUAest0r",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Kramola",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "TOPS",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 4,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "Буржуй",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Link",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 7,
+       "name": "LogisticPro",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "DOVOD",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Кайзер",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "Blackout",
+       "role": "Don",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "red_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Armia",
+       "role": "Mafia",
+       "marker": null,
+       "aps": -0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": -0.2,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "Antonio",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Sever",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 4,
+       "name": "Люсі",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Гармония",
+       "role": "Don",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Dara",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "MorningStar",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "sometimes",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 8",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "sometimes",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.3,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "Blackout",
+       "role": "Sheriff",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0.07,
+       "sigma": 0.07,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "MorningStar",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Буржуй",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "Antonio",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "LogisticPro",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "qUAest0r",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "Armia",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "DOVOD",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "Link",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Кайзер",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Sever",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Люсі",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "Гармония",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Kramola",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Maverick",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Dara",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "TOPS",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0.2,
+       "sigma": 0.4,
+       "result": "L"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 9",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Люсі",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "qUAest0r",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "DOVOD",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "Sever",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Кайзер",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "YeS",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "sometimes",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0.25,
+       "wpts": 0,
+       "ci": 0.13,
+       "sigma": 0.38,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "LogisticPro",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "Antonio",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Буржуй",
+       "role": "Citizen",
+       "marker": null,
+       "aps": -0.5,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": -0.5,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "MorningStar",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Гармония",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 4,
+       "name": "Blackout",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "Kramola",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "Armia",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.3,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Link",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Dara",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "TOPS",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0.25,
+       "wpts": 0,
+       "ci": 0.2,
+       "sigma": 0.45,
+       "result": "L"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 10",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "DOVOD",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "TOPS",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Blackout",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Sever",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.3,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "Maverick",
+       "role": "Sheriff",
+       "marker": "first_killed",
+       "aps": 0.25,
+       "wpts": 0,
+       "ci": 0.2,
+       "sigma": 0.45,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "sometimes",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 7,
+       "name": "Берлин",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "MorningStar",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "qUAest0r",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Гармония",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0.25,
+       "wpts": 0,
+       "ci": 0.13,
+       "sigma": 0.38,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "Буржуй",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Link",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "LogisticPro",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "Armia",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "Dara",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Кайзер",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Люсі",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Kramola",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "Antonio",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 11",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Dara",
+       "role": "Don",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Sever",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Armia",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Гармония",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "Kramola",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "MorningStar",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": null,
+       "aps": -0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": -0.2,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Буржуй",
+       "role": "Sheriff",
+       "marker": "first_killed",
+       "aps": 0.25,
+       "wpts": 0,
+       "ci": 0.2,
+       "sigma": 0.45,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "TOPS",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "Люсі",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "qUAest0r",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Antonio",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Blackout",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Кайзер",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "sometimes",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Link",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "DOVOD",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "LogisticPro",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.3,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 12",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "red_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Antonio",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Кайзер",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "Armia",
+       "role": "Don",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "Sever",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "Буржуй",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.5,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.25,
+       "result": "W"
+      },
+      {
+       "seat": 7,
+       "name": "DOVOD",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.4,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.15,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "Blackout",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Kramola",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "qUAest0r",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Link",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Dara",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0.2,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "TOPS",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "LogisticPro",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Берлин",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "MorningStar",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Гармония",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "sometimes",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "Люсі",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 13",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Maverick",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Link",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "Кайзер",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "TOPS",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "Armia",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": -0.5,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": -0.5,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "DOVOD",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.3,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Люсі",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "sometimes",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.3,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "Dara",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "Буржуй",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0.3,
+       "wpts": 0,
+       "ci": 0.2,
+       "sigma": 0.5,
+       "result": "L"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Kramola",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "Гармония",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "MorningStar",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": -0.5,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": -0.5,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "qUAest0r",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "Sever",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Antonio",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0.2,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "Blackout",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "LogisticPro",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 14",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "sometimes",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": null,
+       "aps": -0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": -0.2,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Люсі",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Dara",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.1,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "MorningStar",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Sever",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0.07,
+       "sigma": 0.07,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "TOPS",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "DOVOD",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "Буржуй",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.05,
+       "result": "W"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "red_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "Кайзер",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 3,
+       "name": "Antonio",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 4,
+       "name": "LogisticPro",
+       "role": "Mafia",
+       "marker": null,
+       "aps": -0.3,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": -0.3,
+       "result": "L"
+      },
+      {
+       "seat": 5,
+       "name": "Гармония",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Blackout",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.95,
+       "result": "W"
+      },
+      {
+       "seat": 7,
+       "name": "Kramola",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 8,
+       "name": "qUAest0r",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 9,
+       "name": "Armia",
+       "role": "Don",
+       "marker": null,
+       "aps": -0.4,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": -0.4,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "Link",
+       "role": "Mafia",
+       "marker": null,
+       "aps": -0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": -0.2,
+       "result": "L"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 15",
+   "stage": "Игры",
+   "tables": [
+    {
+     "table_num": 1,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Dara",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 2,
+       "name": "Armia",
+       "role": "Citizen",
+       "marker": null,
+       "aps": -0.4,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": -0.4,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "sometimes",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Sever",
+       "role": "Mafia",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.75,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "TOPS",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 6,
+       "name": "Люсі",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Берлин",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Кайзер",
+       "role": "Sheriff",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "LogisticPro",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 10,
+       "name": "DOVOD",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.5,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.25,
+       "result": "W"
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "winner": "black_win",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Antonio",
+       "role": "Mafia",
+       "marker": "beige",
+       "aps": 0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.85,
+       "result": "W"
+      },
+      {
+       "seat": 2,
+       "name": "YeS",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 3,
+       "name": "Maverick",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      },
+      {
+       "seat": 4,
+       "name": "Blackout",
+       "role": "Don",
+       "marker": "beige",
+       "aps": 0.5,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 1.25,
+       "result": "W"
+      },
+      {
+       "seat": 5,
+       "name": "Link",
+       "role": "Mafia",
+       "marker": null,
+       "aps": -0.1,
+       "wpts": 0.75,
+       "ci": 0,
+       "sigma": 0.65,
+       "result": "W"
+      },
+      {
+       "seat": 6,
+       "name": "Гармония",
+       "role": "Sheriff",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 7,
+       "name": "Буржуй",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.3,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.3,
+       "result": "L"
+      },
+      {
+       "seat": 8,
+       "name": "Kramola",
+       "role": "Citizen",
+       "marker": "first_killed",
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0.07,
+       "sigma": 0.07,
+       "result": "L"
+      },
+      {
+       "seat": 9,
+       "name": "qUAest0r",
+       "role": "Citizen",
+       "marker": "beige",
+       "aps": 0.2,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0.2,
+       "result": "L"
+      },
+      {
+       "seat": 10,
+       "name": "MorningStar",
+       "role": "Citizen",
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": "L"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

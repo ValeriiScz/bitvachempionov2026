@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- v1.3 · 2026-06-14 · интерактивная рассадка Poland Mafia Open 766: 12 игр × 4 стола, клик по игроку — его маршрут (snapshot mafgame 2026-06-25) -->
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Рассадка — Poland Mafia Open</title>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{max-width:100%;overflow-x:hidden;}
+  body{margin:0;font-family:'Manrope',sans-serif;color:#3b2c0a;min-height:100vh;padding:18px 12px 60px;
+    background:linear-gradient(180deg,#f6e9c9 0%,#efd9a0 30%,#e6c87f 55%,#dcb968 78%,#cda94f 100%) fixed;}
+  .topbar{max-width:1200px;margin:0 auto 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .nav-btn{padding:9px 14px;background:rgba(255,255,255,.7);border:1px solid rgba(176,125,18,.35);color:#8a5a14;border-radius:10px;font-size:13px;font-weight:800;text-decoration:none;}
+  .nav-btn:hover{background:#b07d12;color:#fff;}
+  h1{font-family:'Lilita One',sans-serif;font-weight:400;font-size:24px;color:#8a5a14;margin:6px 0 2px;text-shadow:0 1px 0 rgba(255,255,255,.7);}
+  .sub{font-size:12.5px;color:#6e5212;margin-bottom:12px;}
+  .rounds{max-width:1200px;margin:0 auto 16px;display:flex;gap:6px;flex-wrap:wrap;}
+  .round-btn{min-width:42px;min-height:40px;padding:7px 11px;background:rgba(255,255,255,.65);border:1px solid rgba(176,125,18,.3);color:#3b2c0a;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;}
+  .round-btn.active{background:#b07d12;color:#fff;border-color:#b07d12;}
+  .round-btn.played{background:rgba(176,125,18,.18);border-color:rgba(176,125,18,.45);}
+  .round-btn.next{box-shadow:0 0 0 2px #b5322b;border-color:#b5322b;}
+  .round-btn.upcoming{opacity:.42;}
+  .rleg{max-width:1200px;margin:0 auto 14px;font-size:11.5px;color:#6e5212;}
+  .grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px;}
+  .table-wrap{background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.95);border-radius:18px;box-shadow:0 10px 28px rgba(90,60,10,.18);padding:12px 8px 16px;backdrop-filter:blur(5px);}
+  .table-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 10px;margin-bottom:4px;}
+  .table-num{font-family:'Lilita One',sans-serif;font-size:18px;color:#8a5a14;}
+  .game-label{font-size:12px;font-weight:800;color:#6e5212;}
+  a.ytb{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:9px;font-size:11px;font-weight:800;text-decoration:none;background:rgba(224,36,36,.08);border:1px solid rgba(224,36,36,.4);color:#c41818;}
+  a.ytb:hover{background:#e02424;color:#fff;}
+  .circle{position:relative;width:320px;height:320px;margin:0 auto;}
+  .circle-inner{position:absolute;left:50%;top:50%;width:120px;height:120px;transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle at 50% 35%,#e6c87f 0%,#c79a2e 70%);box-shadow:inset 0 0 0 3px rgba(255,255,255,.6);}
+  .seat{position:absolute;transform:translate(-50%,-50%);width:72px;text-align:center;cursor:pointer;z-index:2;}
+  .seat-num{position:absolute;left:50%;top:-5px;transform:translateX(-50%);background:#8a5a14;color:#fff;font-size:10px;font-weight:800;width:19px;height:19px;line-height:19px;border-radius:50%;z-index:3;}
+  .seat-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 3px 10px rgba(90,60,10,.3);margin:0 auto;display:block;background:#f2e2bb;}
+  .seat.is-target .seat-avatar{border-color:#b5322b;box-shadow:0 0 0 3px rgba(181,50,43,.45);}
+  .seat-name{font-size:10.5px;color:#3b2c0a;margin-top:4px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:74px;}
+  .hidden{display:none;}
+  .player-hdr{max-width:1200px;margin:0 auto 14px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.82);border-radius:16px;padding:12px 16px;box-shadow:0 10px 28px rgba(90,60,10,.18);}
+  .player-hdr img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 3px 10px rgba(90,60,10,.3);}
+  .player-hdr-nick{font-family:'Lilita One',sans-serif;font-size:20px;color:#8a5a14;}
+  .player-hdr-sub{font-size:12px;color:#6e5212;}
+  #back-btn{margin-left:auto;}
+  .judge-row{display:flex;justify-content:center;margin:2px 0 4px;}
+  .judge{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:#6e5212;background:rgba(224,190,100,.2);border:1px solid rgba(176,125,18,.25);border-radius:18px;padding:3px 11px 3px 4px;}
+  .judge img{width:22px;height:22px;border-radius:50%;object-fit:cover;}
+  .tblelo{font-size:10.5px;font-weight:800;color:#b07d12;background:rgba(224,190,100,.25);border:1px solid rgba(176,125,18,.25);border-radius:9px;padding:4px 9px;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="nav-btn" href="tournament.html?t=766">← Турнир</a>
+  <a class="nav-btn" href="cards766.html">Карточки</a>
+  <div>
+    <h1>Рассадка · Poland Mafia Open</h1>
+    <div class="sub">12 игр квалификации · клик по игроку — все его столы · финал сеется после квалификации<span id="elo-avg"></span></div>
+  </div>
+</div>
+<div id="game-view">
+  <div class="rounds" id="rounds"></div>
+  <div class="rleg">Прошедшие игры (доиграны за всеми столами) активны · ◆ текущая · бледные — ещё впереди</div>
+  <div class="grid" id="grid"></div>
+</div>
+<div id="player-view" class="hidden">
+  <div class="player-hdr">
+    <img id="ph-av" src="" referrerpolicy="no-referrer">
+    <div><div class="player-hdr-nick" id="ph-nick"></div><div class="player-hdr-sub" id="ph-sub"></div></div>
+    <button class="nav-btn" id="back-btn" style="cursor:pointer;border:none;">← к играм</button>
+  </div>
+  <div class="grid" id="player-grid"></div>
+</div>
+<script src="data/streams.js"></script>
+<script src="data/live.js"></script>
+<script>
+let SEAT=null, AV={}, PLAYED=0, JUDGES={}, ELO=null;
+const ROMAN=['','I','II','III','IV','V','VI','VII'];
+const $=s=>document.querySelector(s);
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderTable(g,t,target){
+  const names=SEAT[g][t];
+  let seats='';
+  for(let i=0;i<10;i++){
+    const p=names[i];
+    const a=-90+36*i, r=a*Math.PI/180;
+    const x=Math.cos(r)*128, y=Math.sin(r)*128;
+    seats+=`<div class="seat${p===target?' is-target':''}" data-player="${esc(p)}" style="left:calc(50% + ${x.toFixed(1)}px);top:calc(50% + ${y.toFixed(1)}px);">
+      <div class="seat-num">${i+1}</div>
+      <img class="seat-avatar" src="${esc(AV[p]||'')}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='https://mafgame.org/build/assets/avatar-default2-33e44bae.png'">
+      <div class="seat-name">${esc(p)}</div>
+    </div>`;
+  }
+  const yt=window.streamFor?streamFor('766',g,t):null;
+  const glabel=target?`<div class="game-label">Игра ${g}</div>`:'';
+  const j=JUDGES[t];
+  const jHtml=j?`<span class="judge"><img src="${esc(j.avatar)}" referrerpolicy="no-referrer" onerror="this.style.opacity=.25"><span>${esc(j.name)}</span></span>`:'';
+  let eloHtml='';
+  if(ELO){
+    const vals=names.map(n=>ELO[n]&&ELO[n].global).filter(v=>v);
+    eloHtml=`<span class="tblelo" title="средний ELO стола">Ø ELO ${vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):'—'}</span>`;
+  }
+  return `<div class="table-wrap">
+    <div class="table-hdr">${glabel}<div class="table-num">Стол ${ROMAN[t]}</div>${eloHtml}${yt?`<a class="ytb" href="${yt}" target="_blank" rel="noopener">▶ Стрим</a>`:''}</div>
+    ${jHtml?`<div class="judge-row">${jHtml}</div>`:''}
+    <div class="circle"><div class="circle-inner"></div>${seats}</div>
+  </div>`;
+}
+function showGame(g){
+  $('#grid').innerHTML=Object.keys(SEAT[g]).map(Number).sort((a,b)=>a-b).map(t=>renderTable(g,t,null)).join('');
+  document.querySelectorAll('.round-btn').forEach(b=>b.classList.toggle('active',+b.dataset.game===g));
+  bind();
+}
+function showPlayer(nick){
+  $('#ph-av').src=AV[nick]||'';
+  $('#ph-nick').textContent=nick;
+  const occ=[];
+  Object.keys(SEAT).forEach(g=>{ for(const t in SEAT[g]){ const i=SEAT[g][t].indexOf(nick); if(i>=0) occ.push({g:+g,t:+t,slot:i+1}); }});
+  const tc={}; occ.forEach(o=>tc[o.t]=(tc[o.t]||0)+1);
+  $('#ph-sub').textContent=occ.length+' игр · '+Object.keys(tc).sort().map(t=>'Стол '+ROMAN[t]+' — '+tc[t]).join(' · ');
+  $('#player-grid').innerHTML=occ.map(o=>renderTable(o.g,o.t,nick)).join('');
+  $('#game-view').classList.add('hidden');
+  $('#player-view').classList.remove('hidden');
+  window.scrollTo(0,0); bind();
+}
+function bind(){
+  document.querySelectorAll('.seat').forEach(s=>s.onclick=e=>{e.stopPropagation();showPlayer(s.dataset.player);});
+}
+Promise.all([
+  window.loadGames('766'),
+  fetch('data/avatars_766.json').then(r=>r.json()),
+  fetch('data/elo_766.json').then(r=>r.ok?r.json():null).catch(()=>null)
+]).then(([G,A,E])=>{
+  AV=A.avatars||{};
+  JUDGES=A.judges||{};
+  if(E&&E.players&&Object.values(E.players).some(x=>x&&x.global)){
+    ELO=E.players;
+    const g=Object.values(ELO).map(x=>x.global).filter(v=>v);
+    if(g.length) document.getElementById('elo-avg').innerHTML=' · средний ELO игрока турнира: <b>'+Math.round(g.reduce((a,b)=>a+b,0)/g.length)+'</b>';
+  }
+  SEAT={};
+  let played=0;
+  G.games.forEach((g,gi)=>{
+    const num=gi+1;
+    SEAT[num]={};
+    g.tables.forEach(t=>{ SEAT[num][t.table_num]=t.seats.map(s=>s.name); });
+    if(g.tables.length && g.tables.every(t=>t.winner!=='unknown')) played=num; // прошедшая = доиграна за ВСЕМИ столами
+  });
+  PLAYED=played;
+  $('#rounds').innerHTML=Object.keys(SEAT).map(g=>{
+    const cls=+g<=PLAYED?' played':(+g===PLAYED+1?' next':' upcoming');
+    return `<button class="round-btn${cls}" data-game="${g}">${g}</button>`;
+  }).join('');
+  document.querySelectorAll('.round-btn').forEach(b=>b.onclick=()=>showGame(+b.dataset.game));
+  $('#back-btn').onclick=()=>{ $('#player-view').classList.add('hidden'); $('#game-view').classList.remove('hidden'); window.scrollTo(0,0); };
+  showGame((PLAYED>0 && PLAYED>=Object.keys(SEAT).length) ? 1 : Math.min(PLAYED+1, Object.keys(SEAT).length));
+});
+</script>
+</body>
+</html>

@@ -243,13 +243,14 @@ const id=new URLSearchParams(location.search).get('t')||'667';
   const gPlay=grp('Рассадка · карточки','play',playS,'play');
   let html=isOpen?(gData+gPlay):(gPlay+gData);
   if(t.mafgame) html+=`<a class="src-btn" href="${t.mafgame}" target="_blank" rel="noopener">Турнир на mafgame ↗</a>`;
+  if(t.store) html+=`<div class="infonote" style="border-color:rgba(224,179,65,.5)"><span class="ico">🛍</span><div><b>${esc(t.store.title)}.</b> ${esc(t.store.intro)} <a href="${esc(t.store.url)}" target="_blank" rel="noopener" style="color:var(--accent,#e0b341);font-weight:800;text-decoration:underline">Открыть магазин ↗</a><div style="margin-top:7px">${esc(t.store.lots)}</div><div style="margin-top:7px">${esc(t.store.earn)}</div></div></div>`;
   if(t.note) html+=`<div class="infonote"><span class="ico">i</span><div><b>${t.status==='upcoming'?'Скоро.':'Инфо.'}</b> ${esc(t.note)}</div></div>`;
-  if(t.status==='live') html+=`<div class="infonote" id="live-note"><span class="ico">i</span><div id="live-status">Подтягиваю результаты с mafgame…</div></div>`;
+  if(t.status==='live'||t.status==='upcoming') html+=`<div class="infonote" id="live-note"><span class="ico">i</span><div id="live-status">Подтягиваю результаты с mafgame…</div></div>`;
   else if(t.id==='667') html+=`<div class="infonote" id="live-note"><span class="ico">i</span><div id="live-status">Турнир завершён · данные заморожены.</div></div>`;
   html+=streamsCard(t.id);
   sec.innerHTML=html;
   const _src=document.getElementById('src'); if(_src) _src.innerHTML='';
-  if(t.status==='live'&&window.loadGames){
+  if((t.status==='live'||t.status==='upcoming')&&window.loadGames){
     window.loadGames(t.id).then(G=>{
       const el=document.getElementById('live-status');
       if(el&&G) el.innerHTML='<b>Сыграно '+G.games_played+' из '+G.games_total+' игр</b>'+(G.live?' · live с mafgame, страница обновляется сама (или кнопкой «⟳ Обновить»)':'')+'.';

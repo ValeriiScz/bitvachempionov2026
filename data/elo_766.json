@@ -1,0 +1,249 @@
+{
+ "_meta": {
+  "файл": "data/elo_766.json",
+  "дата": "2026-06-25",
+  "назначение": "ELO на старт 766: global = markery ELO (mk.elo), ms = mafiastats rating. Источник: participants_766.json"
+ },
+ "players": {
+  "Season's": {
+   "global": null,
+   "year": null,
+   "tournaments": null,
+   "ms": null
+  },
+  "Нико": {
+   "global": 887,
+   "year": null,
+   "tournaments": 10,
+   "ms": null
+  },
+  "LogisticPro": {
+   "global": 1190,
+   "year": null,
+   "tournaments": 26,
+   "ms": null
+  },
+  "Jane": {
+   "global": 1182,
+   "year": null,
+   "tournaments": 45,
+   "ms": 1300
+  },
+  "Буржуй": {
+   "global": 1158,
+   "year": null,
+   "tournaments": 49,
+   "ms": 1425
+  },
+  "Сакура": {
+   "global": 999,
+   "year": null,
+   "tournaments": 15,
+   "ms": 1435
+  },
+  "Добрейший": {
+   "global": 914,
+   "year": null,
+   "tournaments": 24,
+   "ms": null
+  },
+  "Mjata": {
+   "global": 1024,
+   "year": null,
+   "tournaments": 12,
+   "ms": null
+  },
+  "Mulder": {
+   "global": 967,
+   "year": null,
+   "tournaments": 9,
+   "ms": null
+  },
+  "Sever": {
+   "global": 939,
+   "year": null,
+   "tournaments": 21,
+   "ms": 1271
+  },
+  "Link": {
+   "global": 986,
+   "year": null,
+   "tournaments": 11,
+   "ms": null
+  },
+  "qUAest0r": {
+   "global": 988,
+   "year": null,
+   "tournaments": 31,
+   "ms": 1432
+  },
+  "TOPS": {
+   "global": 1047,
+   "year": null,
+   "tournaments": 17,
+   "ms": null
+  },
+  "ParadoXx": {
+   "global": 1105,
+   "year": null,
+   "tournaments": 26,
+   "ms": 1822
+  },
+  "Сью": {
+   "global": 1280,
+   "year": null,
+   "tournaments": 34,
+   "ms": 1701
+  },
+  "DOVOD": {
+   "global": 1130,
+   "year": null,
+   "tournaments": 31,
+   "ms": 1544
+  },
+  "Tykva": {
+   "global": 971,
+   "year": null,
+   "tournaments": 5,
+   "ms": null
+  },
+  "Golubchik": {
+   "global": 973,
+   "year": null,
+   "tournaments": 2,
+   "ms": null
+  },
+  "Maverick": {
+   "global": 1026,
+   "year": null,
+   "tournaments": 19,
+   "ms": null
+  },
+  "Phoenix": {
+   "global": 1283,
+   "year": null,
+   "tournaments": 67,
+   "ms": 1612
+  },
+  "Konark": {
+   "global": 976,
+   "year": null,
+   "tournaments": 3,
+   "ms": null
+  },
+  "Котяра": {
+   "global": 970,
+   "year": null,
+   "tournaments": 6,
+   "ms": null
+  },
+  "Legion 🇺🇦": {
+   "global": 963,
+   "year": null,
+   "tournaments": 5,
+   "ms": null
+  },
+  "Specchio": {
+   "global": 970,
+   "year": null,
+   "tournaments": 10,
+   "ms": null
+  },
+  "Afina": {
+   "global": 949,
+   "year": null,
+   "tournaments": 12,
+   "ms": 1491
+  },
+  "Магнат": {
+   "global": 1148,
+   "year": null,
+   "tournaments": 17,
+   "ms": null
+  },
+  "Tapok": {
+   "global": 947,
+   "year": null,
+   "tournaments": 13,
+   "ms": null
+  },
+  "Ёжик": {
+   "global": 915,
+   "year": null,
+   "tournaments": 7,
+   "ms": 1036
+  },
+  "aptah": {
+   "global": 1041,
+   "year": null,
+   "tournaments": 51,
+   "ms": 1222
+  },
+  "Ru": {
+   "global": 918,
+   "year": null,
+   "tournaments": 21,
+   "ms": 1428
+  },
+  "SANYURIK": {
+   "global": null,
+   "year": null,
+   "tournaments": null,
+   "ms": null
+  },
+  "Lюц": {
+   "global": 1218,
+   "year": null,
+   "tournaments": 37,
+   "ms": 1534
+  },
+  "Raise 📈": {
+   "global": 1080,
+   "year": null,
+   "tournaments": 36,
+   "ms": 1501
+  },
+  "Malvina": {
+   "global": 974,
+   "year": null,
+   "tournaments": 2,
+   "ms": null
+  },
+  "Donna": {
+   "global": 875,
+   "year": null,
+   "tournaments": 25,
+   "ms": 1391
+  },
+  "Светлый": {
+   "global": 968,
+   "year": null,
+   "tournaments": 11,
+   "ms": 1370
+  },
+  "Landing": {
+   "global": 1060,
+   "year": null,
+   "tournaments": 12,
+   "ms": null
+  },
+  "To4ka": {
+   "global": 960,
+   "year": null,
+   "tournaments": 8,
+   "ms": 1477
+  },
+  "Судья": {
+   "global": 978,
+   "year": null,
+   "tournaments": 8,
+   "ms": null
+  },
+  "Jinn": {
+   "global": 986,
+   "year": null,
+   "tournaments": 1,
+   "ms": null
+  }
+ }
+}

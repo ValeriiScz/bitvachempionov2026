@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- v2.4 · 2026-06-21 · парный live (693): зачёт по командам = сумма Σ двух игроков + переключатель Команды/Игроки; ростер показывается только до старта -->
 <!-- v2.3 · 2026-06-14 · сводная таблица: ползунок «после игры N», роли R/S/B/D, сводка красных/чёрных, Δ мест -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -163,11 +164,13 @@ async function load() {
   });
   renderMeta();
   renderAwards();
-  if (DATA.teams && DATA.teams.length && (!DATA.standings || !Object.keys(DATA.standings).length)) {
+  buildTeamMap();
+  const hasResults = GAMES && GAMES.games && GAMES.games.some(g=>(g.tables||[]).some(tb=>(tb.seats||[]).some(s=>s.role)));
+  if (DATA.teams && DATA.teams.length && !hasResults) {
     renderTeamsRoster();
   } else if (GAMES && GAMES.games?.length && (DATA.in_progress || !DATA.standings || !Object.keys(DATA.standings).length)) {
-    sliderN = (GAMES.games_played!=null ? GAMES.games_played : GAMES.games.length); // только доигранные за всеми столами
-    renderLive();
+    sliderN = startedCount();
+    if (DATA.teams && DATA.teams.length) renderPaired(); else renderLive();
   } else {
     renderMain();
   }
@@ -195,7 +198,7 @@ function buildStandings(n) {
   GAMES.games.slice(0, n).forEach(game => {
     game.tables.forEach(tb => {
       tables++;
-      if (tb.winner === 'red_win') redWins++; else blackWins++;
+      if (tb.winner === 'red_win') redWins++; else if (tb.winner === 'black_win') blackWins++;
       tb.seats.forEach(s => {
         const p = get(s.name);
         p.games++; p.wpts += s.wpts||0; p.aps += s.aps||0; p.ci += s.ci||0; apsSum += s.aps||0;
@@ -210,7 +213,85 @@ function buildStandings(n) {
   rows.forEach((r,i) => r.place = i+1);
   return {rows, redWins, blackWins, tables, apsSum};
 }
+let PLAYER_TEAM={}, TEAM_INFO={}, pairedView='teams';
+function buildTeamMap(){
+  PLAYER_TEAM={}; TEAM_INFO={};
+  (DATA.teams||[]).forEach(t=>{ TEAM_INFO[t.team]={num:t.num,members:t.members||[]}; (t.members||[]).forEach(m=>PLAYER_TEAM[m]=t.team); });
+}
+function startedCount(){
+  if(!GAMES||!GAMES.games) return 0;
+  return GAMES.games.filter(g=>(g.tables||[]).some(tb=>(tb.seats||[]).some(s=>s.role))).length;
+}
+function aggregateTeams(rows){
+  const M={};
+  rows.forEach(r=>{
+    const tn=PLAYER_TEAM[r.name]; if(!tn) return;
+    const t=M[tn]||(M[tn]={team:tn,num:(TEAM_INFO[tn]||{}).num,sigma:0,wpts:0,aps:0,ci:0,w:0,games:0,k:0,members:[]});
+    t.sigma+=r.sigma; t.wpts+=r.wpts; t.aps+=r.aps; t.ci+=r.ci; t.w+=r.w; t.games+=r.games; t.k+=r.k; t.members.push(r);
+  });
+  const arr=Object.values(M).map(t=>({...t,sigma:+t.sigma.toFixed(2),wpts:+t.wpts.toFixed(2),aps:+t.aps.toFixed(2),ci:+t.ci.toFixed(2)}));
+  arr.sort((a,b)=>b.sigma-a.sigma||b.aps-a.aps||(a.num||0)-(b.num||0));
+  arr.forEach((t,i)=>t.place=i+1);
+  return arr;
+}
+function renderPaired(){
+  const total=GAMES.games_total||15;
+  const maxN=startedCount();
+  const played=(GAMES.games_played!=null?GAMES.games_played:maxN);
+  if(sliderN>maxN||sliderN<1) sliderN=maxN;
+  const cur=buildStandings(sliderN);
+  const teams=aggregateTeams(cur.rows);
+  const chips=`<div class="chips">
+    <div class="chip">Сыграно игр<b>${played} / ${total}</b></div>
+    <div class="chip red">Победы красных<b>${cur.redWins}</b></div>
+    <div class="chip black">Победы чёрных<b>${cur.blackWins}</b></div>
+    <div class="chip gold">Средний доп / стол<b>${cur.tables?(cur.apsSum/cur.tables).toFixed(2):'0'}</b></div>
+  </div>`;
+  const toggle=`<div class="stages">
+    <button class="stage-btn${pairedView==='teams'?' active':''}" data-pv="teams">Команды<span class="count">${teams.length}</span></button>
+    <button class="stage-btn${pairedView==='players'?' active':''}" data-pv="players">Игроки<span class="count">${cur.rows.length}</span></button>
+  </div>`;
+  const slider=maxN>1?`<div class="gsel-wrap">
+    <div class="gsel-head">Таблица на момент: <b>после игры ${sliderN}${sliderN===maxN?' (текущая)':''}</b></div>
+    <div class="gsel">${Array.from({length:maxN},(_,i)=>`<button data-n="${i+1}" class="${i+1===sliderN?'on':''}">${i+1}</button>`).join('')}</div>
+  </div>`:'';
+  const note=`<div class="progress-note">Парный турнир · <strong>${teams.length} команд</strong>. Зачёт команды — сумма Σ обоих игроков. Σ не равно WPTS плюс Σдоп плюс Ci по сыгранным играм; BM и Ci добавит судья при закрытии. Переключатель «Команды / Игроки». R/S/B/D — победы/игры в роли: мирный, шериф, мафия, дон.</div>`;
+  let table;
+  if(pairedView==='teams'){
+    table=`<div class="card" style="padding:0;overflow-x:auto;"><table class="standings">
+      <thead><tr><th class="left place">#</th><th class="left player-cell">Команда</th><th class="left">Игроки</th><th>Σ</th><th>WPTS</th><th>Σap</th><th title="компенсация (Ci)">Ci</th><th title="победы / игр">Поб/Игр</th></tr></thead>
+      <tbody>${teams.map((t,i)=>`<tr${i<3?' class="top-3"':''}>
+        <td class="left place">${t.place}</td>
+        <td class="left player-cell"><b style="color:#fff;font-size:14px">${escapeHtml(t.team)}</b></td>
+        <td class="left">${t.members.slice().sort((a,b)=>b.sigma-a.sigma).map(m=>`<a class="player-name" href="player.html?nick=${encodeURIComponent(m.name)}&t=${T}">${escapeHtml(m.name)}</a> <span class="num dim">${(+m.sigma.toFixed(2))}</span>`).join('<br>')}</td>
+        <td>${numCell(t.sigma,'big')}</td>
+        <td>${numCell(+t.wpts.toFixed(2))}</td>
+        <td>${numCell(+t.aps.toFixed(2),t.aps>0?'':'dim')}</td>
+        <td>${numCell(+t.ci.toFixed(2),t.ci>0?'':'dim')}</td>
+        <td><span class="num"><b style="color:#3fd17a">${t.w}</b><span style="color:#5a5e76">/${t.games}</span></span></td>
+      </tr>`).join('')}</tbody></table></div>`;
+  } else {
+    table=`<div class="card" style="padding:0;overflow-x:auto;"><table class="standings">
+      <thead><tr><th class="left place">#</th><th class="left player-cell">Игрок</th><th>Σ</th><th>WPTS</th><th>Σap</th><th title="компенсация (Ci)">Ci</th>
+        <th title="мирный: победы/игры">R</th><th title="шериф">S</th><th title="мафия">B</th><th title="дон">D</th><th title="убит 1-й ночью">K</th><th title="победы / игр">Поб/Игр</th></tr></thead>
+      <tbody>${cur.rows.map((r,i)=>`<tr${i<3?' class="top-3"':''}>
+        <td class="left place">${r.place}</td>
+        <td class="left player-cell"><a class="player-name" href="player.html?nick=${encodeURIComponent(r.name)}&t=${T}">${escapeHtml(r.name)}</a><span class="club">${escapeHtml(PLAYER_TEAM[r.name]||'')}</span></td>
+        <td>${numCell(r.sigma,'big')}</td>
+        <td>${numCell(r.wpts)}</td>
+        <td>${numCell(+r.aps.toFixed(2),r.aps>0?'':'dim')}</td>
+        <td>${numCell(+r.ci.toFixed(2),r.ci>0?'':'dim')}</td>
+        ${ratioCell(r.roles.Citizen)}${ratioCell(r.roles.Sheriff)}${ratioCell(r.roles.Mafia)}${ratioCell(r.roles.Don)}
+        <td>${numCell(r.k,r.k>0?'neg':'dim')}</td>
+        <td><span class="num"><b style="color:#3fd17a">${r.w||0}</b><span style="color:#5a5e76">/${r.games}</span></span></td>
+      </tr>`).join('')}</tbody></table></div>`;
+  }
+  document.getElementById('main').innerHTML=chips+toggle+slider+note+table;
+  document.querySelectorAll('.stage-btn[data-pv]').forEach(b=>b.addEventListener('click',()=>{pairedView=b.dataset.pv;renderPaired();}));
+  document.querySelectorAll('.gsel button').forEach(b=>b.addEventListener('click',()=>{sliderN=+b.dataset.n;renderPaired();}));
+}
 function renderLive(fromOfficial) {
+  if(startedCount()===0 && DATA.in_progress){ document.getElementById("main").innerHTML=`<div class="progress-note">Турнир ещё не начался. Сводная таблица и зачёт появятся <b>автоматически после первой игры</b> — результаты тянутся с mafgame вживую, перезагрузка сайта не нужна. Рассадка и карточки уже доступны.</div>`; return; }
   const backBtn = (!DATA.in_progress && DATA.standings && Object.keys(DATA.standings).length) ? `<div style="margin-bottom:14px;"><button class="stage-btn" id="back-official">← Официальная таблица</button></div>` : '';
   const total = GAMES.games_total || 15;
   const played = (GAMES.games_played!=null ? GAMES.games_played : GAMES.games.length);

@@ -10,7 +10,7 @@
  "fee_eur": 111,
  "format": "12 игр квалификации + финал 4 игры",
  "closed": false,
- "in_progress": false,
+ "in_progress": true,
  "upcoming": true,
  "games_played": 0,
  "games_total": 12,
@@ -22,6 +22,167 @@
  ],
  "awards": {},
  "standings": {},
- "players": [],
+ "players": [
+  {
+   "name": "Season's",
+   "real": "Саша"
+  },
+  {
+   "name": "Нико",
+   "real": "Bogdan"
+  },
+  {
+   "name": "LogisticPro",
+   "real": "Владислав"
+  },
+  {
+   "name": "Jane",
+   "real": "Tanya"
+  },
+  {
+   "name": "Буржуй",
+   "real": "Bohdan"
+  },
+  {
+   "name": "Сакура",
+   "real": "Віта"
+  },
+  {
+   "name": "Добрейший",
+   "real": "Alexey"
+  },
+  {
+   "name": "Mjata",
+   "real": "Татьяна"
+  },
+  {
+   "name": "Mulder",
+   "real": "Roman"
+  },
+  {
+   "name": "Sever",
+   "real": "Evgeniia Richik"
+  },
+  {
+   "name": "Link",
+   "real": "Denis Sukhonosov"
+  },
+  {
+   "name": "qUAest0r",
+   "real": "Serhii"
+  },
+  {
+   "name": "TOPS",
+   "real": "Eugeniu"
+  },
+  {
+   "name": "ParadoXx",
+   "real": "Aleksandr"
+  },
+  {
+   "name": "Сью",
+   "real": "Sonya Golubovska"
+  },
+  {
+   "name": "DOVOD",
+   "real": "Valerii S"
+  },
+  {
+   "name": "Tykva",
+   "real": "Andrei"
+  },
+  {
+   "name": "Golubchik",
+   "real": "Ksenia"
+  },
+  {
+   "name": "Maverick",
+   "real": "Zula Badaev"
+  },
+  {
+   "name": "Phoenix",
+   "real": "Viktar"
+  },
+  {
+   "name": "Konark",
+   "real": "Vladyslav"
+  },
+  {
+   "name": "Котяра",
+   "real": "Andrei Trukhan"
+  },
+  {
+   "name": "Legion 🇺🇦",
+   "real": "Petro Tomniuk"
+  },
+  {
+   "name": "Specchio",
+   "real": "Georgios"
+  },
+  {
+   "name": "Afina",
+   "real": "Елена Петленко"
+  },
+  {
+   "name": "Магнат",
+   "real": "Хассан"
+  },
+  {
+   "name": "Tapok",
+   "real": "Тимур"
+  },
+  {
+   "name": "Ёжик",
+   "real": "Лиза"
+  },
+  {
+   "name": "aptah",
+   "real": "Volodymyr Hrychenko"
+  },
+  {
+   "name": "Ru",
+   "real": "Руслан Гафаров"
+  },
+  {
+   "name": "SANYURIK",
+   "real": "Александр Кац"
+  },
+  {
+   "name": "Lюц",
+   "real": "Mykhailo"
+  },
+  {
+   "name": "Raise 📈",
+   "real": "Дмитрий"
+  },
+  {
+   "name": "Malvina",
+   "real": "Viktoriya"
+  },
+  {
+   "name": "Donna",
+   "real": "Галина"
+  },
+  {
+   "name": "Светлый",
+   "real": "Nikita"
+  },
+  {
+   "name": "Landing",
+   "real": "Дима"
+  },
+  {
+   "name": "To4ka",
+   "real": "Татьяна"
+  },
+  {
+   "name": "Судья",
+   "real": "Stas"
+  },
+  {
+   "name": "Jinn",
+   "real": "Julia"
+  }
+ ],
  "accent": "#e0b341"
 }
