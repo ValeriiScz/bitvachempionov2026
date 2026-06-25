@@ -101,7 +101,7 @@ Promise.all([
     const tc={}; o.forEach(x=>tc[x.t]=(tc[x.t]||0)+1);
     const sc={}; o.forEach(x=>sc[x.slot]=(sc[x.slot]||0)+1);
     const groups={};
-    Object.entries(opp[p]).forEach(([m,c])=>{ (groups[c]=groups[c]||[]).push(m); });
+    Object.entries(opp[p]||{}).forEach(([m,c])=>{ (groups[c]=groups[c]||[]).push(m); });
     let oppHtml=Object.keys(groups).sort((a,b)=>b-a).slice(0,5).map(c=>`<div><span class="cnt">${c}</span>${groups[c].sort((x,y)=>x.localeCompare(y,'ru')).map(esc).join(', ')}</div>`).join('');
     const zeros=players.filter(m=>m!==p && !(opp[p]||{})[m]);
     if(zeros.length) oppHtml+=`<div style="opacity:.65"><span class="cnt" style="background:#b0a06e">0</span>${zeros.sort((x,y)=>x.localeCompare(y,'ru')).map(esc).join(', ')}</div>`;

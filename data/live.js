@@ -1,4 +1,4 @@
-// MafgameStat · data/live.js · v1.5 · 2026-06-25 · winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
+// MafgameStat · data/live.js · v1.6 · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
 window.normRole = function(r){
   if(r==null) return null;
   const map={'citizen':'Citizen','sheriff':'Sheriff','mafia':'Mafia','don':'Don',
@@ -12,6 +12,7 @@ window.convertInertia = function(g, t){
     const p=k.split('-').map(Number);
     if(p.length!==4) continue;
     const [st,gm,tb,seat]=p, s=g.seats[k];
+    if(!s.original_nickname) continue; // пропускаем незаполненные слоты (напр. финал до посева)
     const role=normRole(s.role);
     const bonus=(s.game_bonus||0)+(s.best_move_bonus||0);
     const minus=s.penalty||0;
@@ -32,6 +33,7 @@ window.convertInertia = function(g, t){
       const tables=[];
       Object.keys(stages[st][gm]).map(Number).sort((a,b)=>a-b).forEach(tb=>{
         const seats=stages[st][gm][tb].filter(Boolean);
+        if(!seats.length) return; // пустой стол не показываем
         const hasRoles=seats.length>=6&&seats.every(x=>x.role);
         let winner='unknown';
         const _rv=g.results&&g.results[st+'-'+gm+'-'+tb];
@@ -44,7 +46,7 @@ window.convertInertia = function(g, t){
         if(winner!=='unknown'&&hasRoles) seats.forEach(x=>{const black=(x.role==='Mafia'||x.role==='Don');x.result=((winner==='black_win')===black)?'W':'L';});
         tables.push({table_num:tb,winner,seats});
       });
-      out.push({title:(st===2?'Финал ':'Game ')+gm,stage:label,tables});
+      if(tables.length) out.push({title:(st===2?'Финал ':'Game ')+gm,stage:label,tables}); // игру без столов пропускаем
     });
   });
   if(!out.length) return null;
