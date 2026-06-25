@@ -1,1 +1,1068 @@
-{"meta": {"id": 634, "name": "Чемпионат Европы 2026", "start": "2026-07-18", "days": 2, "city_id": 2946447, "fee": "105.00", "stars": 5, "expected": 50, "status": "approved", "reg_open": 1, "players_confirmed": 0, "teams": 0, "team_size": 0}, "players": [{"nick": "KEX", "uid": 44, "real": "Евгений Любинин", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_44/a6bfae05ca17bcfaa2961020a9b44f5860c2f4fe.png", "status": "confirmed", "mk": {"elo": 1481.3, "tt": 138, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1436.2366, "rank": 2029, "games": 389, "wr": 44.47, "conf": "mafgame", "feds": ["mafgame", "mwt", "emotion", "imafia"], "id": 3848}}, {"nick": "Jerry Hurper", "uid": 480, "real": "Oleksandra Shapkina", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_480/fb924465b777f19ae1a223ea7452911276c35052.png", "status": "confirmed", "mk": {"elo": 1066.8, "tt": 43, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": 0, "wr": null, "conf": "mafgame", "feds": ["mafgame", "imafia"], "id": 414}}, {"nick": "YeS", "uid": 101, "real": "Ievgen Sokolskyi", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_101/07fc4320b90a9dde889cabc002d1cec60c7a5583.png", "status": "confirmed", "mk": {"elo": 1409.5, "tt": 103, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1520.8229, "rank": 905, "games": 250, "wr": 46.8, "conf": "mafgame", "feds": ["mafgame", "mwt", "emotion", "imafia"], "id": 71}}, {"nick": "Kokocik", "uid": 833, "real": "Iryna", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_833/49611ec38d274c9951c4652dc75c69f4bc4b9461.png", "status": "confirmed", "mk": {"elo": 1000, "tt": 38, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1315.1342, "rank": 3091, "games": 38, "wr": 42.11, "conf": "mafgame", "feds": ["mafgame", "mwt", "emotion", "imafia"], "id": 63694}}, {"nick": "Katusha", "uid": 527, "real": "Kate Lachmann", "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_527/c42165ee9c6876560ed16a08e2b5596b4307aabe.png", "status": "confirmed", "mk": {"elo": 1003.9, "tt": 8, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1510.1035, "rank": 1007, "games": 16, "wr": 68.75, "conf": "exact_nomaf", "feds": ["mwt", "emotion"], "id": 62609}}, {"nick": "Tripok", "uid": 263, "real": "Bohdan", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_263/c9cc45afe38b5df39f333629598ef3c5f805e9b4.png", "status": "confirmed", "mk": {"elo": 1174.9, "tt": 28, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1671.2709, "rank": 303, "games": 48, "wr": 60.42, "conf": "mafgame", "feds": ["mafgame", "mwt", "imafia", "emotion"], "id": 63705}}, {"nick": "Ксюша", "uid": 3090, "real": "Оксана", "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3090/7fc638b2aab2cfdf387df4ed8655a170880bf147.png", "status": "confirmed", "mk": {"elo": 1122.2, "tt": 67, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1479.0342, "rank": 1419, "games": 404, "wr": 48.27, "conf": "exact_nomaf", "feds": ["mwt", "emotion", "imafia"], "id": 64987}}, {"nick": "RAMZES", "uid": 499, "real": "Roman Politov", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_499/a4d55d9d5fa815a6c00f4e29d18ab1fba282f6fe.png", "status": "confirmed", "mk": {"elo": 1104.1, "tt": 40, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1287.8551, "rank": 3232, "games": 32, "wr": 40.62, "conf": "mafgame", "feds": ["mafgame", "emotion", "imafia", "mwt"], "id": 383}}, {"nick": "Bagira_", "uid": 1977, "real": "Волик Ірина", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1977/ada0fe85cf93cc9c8e8057a14f2457f34ee644de.png", "status": "confirmed", "mk": {"elo": null, "tt": null, "conf": "none", "n": 0, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Niko", "uid": 825, "real": "Roman Krasiuk", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_825/c84248e1686c07eadb16b7331e04221936ba56ea.png", "status": "confirmed", "mk": {"elo": 1374.5, "tt": 46, "conf": "multi", "n": 2, "alts": [{"nm": "Niko", "elo": 1375, "tt": 46}, {"nm": "Niko", "elo": 999, "tt": 1}]}, "ms": {"rating": 1851.4477, "rank": 126, "games": 233, "wr": 49.36, "conf": "mafgame", "feds": ["mafgame", "mwt", "emotion"], "id": 61512}}, {"nick": "ParadoXx", "uid": 709, "real": "Aleksandr", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png", "status": "confirmed", "mk": {"elo": 1105.2, "tt": 26, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1822.2161, "rank": 141, "games": 16, "wr": 75, "conf": "exact_nomaf", "feds": ["imafia"], "id": 65399}}, {"nick": "DOVOD", "uid": 1493, "real": "Valerii S", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/1f30664fe58edefde9864af8e39d1508286597f7.png", "status": "confirmed", "mk": {"elo": 1130.5, "tt": 31, "conf": "multi", "n": 2, "alts": [{"nm": "DOVOD", "elo": 1131, "tt": 31}, {"nm": "DoVoD", "elo": 1014, "tt": 1}]}, "ms": {"rating": 1543.6754, "rank": 706, "games": 16, "wr": 62.5, "conf": "exact_nomaf", "feds": ["mwt"], "id": 59039}}, {"nick": "TOPS", "uid": 1495, "real": "Eugeniu", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1495/242ba9676071458139c03c4fe6781dc6bb820d82.png", "status": "confirmed", "mk": {"elo": 1047.1, "tt": 17, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "qUAest0r", "uid": 704, "real": "Serhii", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_704/7a243b5b522585bb2cac9fa3407aa5a14b38376b.png", "status": "confirmed", "mk": {"elo": 988.4, "tt": 31, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1431.9755, "rank": 2078, "games": 12, "wr": 41.67, "conf": "mafgame", "feds": ["mafgame", "emotion", "imafia"], "id": 406}}, {"nick": "Putnik", "uid": 961, "real": "Zans Babinecs", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_961/e47c727a216fdd7e1e2a3f02c738d055d0231e34.png", "status": "confirmed", "mk": {"elo": 1011.6, "tt": 10, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "AquaMarine", "uid": 702, "real": "Viktorija", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_702/ee91c10d4518e35027d0f6b044f22a31d51e5190.png", "status": "confirmed", "mk": {"elo": 982.5, "tt": 11, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Link", "uid": 1307, "real": "Denis Sukhonosov", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1307/96843d97fe9b9add3869edce3969301031e49ec9.png", "status": "confirmed", "mk": {"elo": 986.3, "tt": 11, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "sometimes", "uid": 471, "real": "Teymur Orujov", "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_471/6310e1fe3013c7b491c8aab115032419c31a3825.png", "status": "confirmed", "mk": {"elo": 1046.5, "tt": 12, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "ШТО?", "uid": 792, "real": "Sergei", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_792/541b4f4ba3ace7e6b0ffb727ded7f204307e240d.png", "status": "confirmed", "mk": {"elo": 1039.1, "tt": 36, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1369.4247, "rank": 2717, "games": 61, "wr": 52.46, "conf": "mafgame", "feds": ["mafgame", "imafia"], "id": 63524}}, {"nick": "Maverick", "uid": 1657, "real": "Zula Badaev", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1657/113c46e18eb1f0829d8677456a66a8e412e76de6.png", "status": "confirmed", "mk": {"elo": 1026.5, "tt": 19, "conf": "multi", "n": 2, "alts": [{"nm": "Maverick", "elo": 1026, "tt": 19}, {"nm": "Maverick", "elo": 990, "tt": 1}]}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Designer", "uid": 3019, "real": "Карен Кравченко", "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3019/d6a1521ce22c01ab72f319f0536e54483af50dec.png", "status": "confirmed", "mk": {"elo": 969.9, "tt": 7, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1349.6882, "rank": 2869, "games": 24, "wr": 45.83, "conf": "exact_nomaf", "feds": ["imafia"], "id": 63180}}, {"nick": "Funt", "uid": 573, "real": "Funt", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_573/148480f1abb9e201a49c9656cbf4558e195e70be.png", "status": "confirmed", "mk": {"elo": 979.7, "tt": 14, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1543.0738, "rank": 711, "games": 8, "wr": 62.5, "conf": "mafgame", "feds": ["mafgame", "mwt"], "id": 431}}, {"nick": "Donna", "uid": 1400, "real": "Галина", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1400/607b4801b5ffa0923db5c49fb5774be59dbcc216.png", "status": "confirmed", "mk": {"elo": 875.4, "tt": 25, "conf": "multi", "n": 2, "alts": [{"nm": "Donna", "elo": 875, "tt": 25}, {"nm": "Donna", "elo": 930, "tt": 7}]}, "ms": {"rating": 1390.7039, "rank": 2519, "games": 35, "wr": 42.86, "conf": "exact_nomaf", "feds": ["emotion", "imafia"], "id": 64831}}, {"nick": "Клото", "uid": 199, "real": "Ольга", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_199/37883cb7c4576b4ce877cc5e085b3e927103b18f.png", "status": "confirmed", "mk": {"elo": 1093.8, "tt": 105, "conf": "multi", "n": 2, "alts": [{"nm": "Клото", "elo": 1094, "tt": 105}, {"nm": "Клото", "elo": 1003, "tt": 1}]}, "ms": {"rating": 1142.2086, "rank": 3634, "games": 422, "wr": 49.29, "conf": "mafgame", "feds": ["mafgame", "mwt", "emotion", "imafia"], "id": 64326}}, {"nick": "Провокатор", "uid": 408, "real": "Max", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_408/0d6a1e54afe734f4cf042fedd18b5ba40c2afb23.png", "status": "confirmed", "mk": {"elo": 867.4, "tt": 10, "conf": "multi", "n": 3, "alts": [{"nm": "Провокатор", "elo": 867, "tt": 10}, {"nm": "Провокатор", "elo": 852, "tt": 8}, {"nm": "Провокатор", "elo": 974, "tt": 1}]}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Specchio", "uid": 765, "real": "Georgios", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_765/e7b3c8ee943021dc7125c6fb74198f2e6c240e23.png", "status": "confirmed", "mk": {"elo": 969.9, "tt": 10, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Кайзер", "uid": 2120, "real": "Yaroslav Mamontov", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2120/cffdac56e2c0c0808abdf15395204f955bd117b5.png", "status": "applied", "mk": {"elo": 889.7, "tt": 18, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": 1258.1921, "rank": 3360, "games": 22, "wr": 22.73, "conf": "mafgame", "feds": ["mafgame", "emotion", "imafia"], "id": 1231}}, {"nick": "Sarcazi.!", "uid": 2844, "real": "Николай", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2844/90f011855035b102b36bbcdc64e8141c3705c9e2.png", "status": "applied", "mk": {"elo": 984.8, "tt": 3, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Сергеевна", "uid": 2168, "real": "Mariia Levintsova", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2168/dff414a72842031be16dfa7648b24b1bd247980c.png", "status": "applied", "mk": {"elo": 973.1, "tt": 7, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}, {"nick": "Магнат", "uid": 2602, "real": "Хассан", "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png", "status": "applied", "mk": {"elo": 1148.2, "tt": 17, "conf": "ok", "n": 1, "alts": null}, "ms": {"rating": null, "rank": null, "games": null, "wr": null, "conf": "none", "feds": null, "id": null}}], "stats": {"n_conf": 26, "n_apps": 4, "mk_avg": 1074.3, "mk_n": 25, "mk_avg_ok": 1078.4, "mk_n_ok": 19, "ms_avg": 1456.9, "ms_n": 11}}
+{
+ "meta": {
+  "id": 634,
+  "name": "Чемпионат Европы 2026",
+  "start": "2026-07-18",
+  "days": 2,
+  "city_id": 2946447,
+  "fee": "105.00",
+  "stars": 5,
+  "expected": 50,
+  "status": "approved",
+  "reg_open": 1,
+  "players_confirmed": 0,
+  "teams": 0,
+  "team_size": 0,
+  "rating_note": "markery snapshot 2026-06-25 (API). r_elo_cur=ELO глоб/всё время, r_tier=ранг S..F, r_place_global=место глоб/всё время, r_rank_eu_2026=место Европа-2026, r_place_2026=место глоб-2026. ELO 2026 (число) и место оффлайн-2026 — markery отдаёт только премиум/лидербордом, отдельно."
+ },
+ "players": [
+  {
+   "nick": "KEX",
+   "uid": 44,
+   "real": "Евгений Любинин",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_44/a6bfae05ca17bcfaa2961020a9b44f5860c2f4fe.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1481.3,
+    "tt": 138,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1436.2366,
+    "rank": 2029,
+    "games": 389,
+    "wr": 44.47,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt",
+     "emotion",
+     "imafia"
+    ],
+    "id": 3848
+   },
+   "markery_id": 10439,
+   "r_elo_cur": 1496.34,
+   "r_tier": "S",
+   "r_place_global": 40,
+   "r_rank_eu_2026": 9,
+   "r_place_2026": 4,
+   "r_elo_2026": 1140.45
+  },
+  {
+   "nick": "Jerry Hurper",
+   "uid": 480,
+   "real": "Oleksandra Shapkina",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_480/fb924465b777f19ae1a223ea7452911276c35052.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1066.8,
+    "tt": 43,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": 0,
+    "wr": null,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "imafia"
+    ],
+    "id": 414
+   },
+   "markery_id": 11131,
+   "r_elo_cur": 1066.97,
+   "r_tier": "C",
+   "r_place_global": 578,
+   "r_rank_eu_2026": 186,
+   "r_place_2026": 190,
+   "r_elo_2026": 1012.79
+  },
+  {
+   "nick": "YeS",
+   "uid": 101,
+   "real": "Ievgen Sokolskyi",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_101/07fc4320b90a9dde889cabc002d1cec60c7a5583.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1409.5,
+    "tt": 103,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1520.8229,
+    "rank": 905,
+    "games": 250,
+    "wr": 46.8,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt",
+     "emotion",
+     "imafia"
+    ],
+    "id": 71
+   },
+   "markery_id": 9580,
+   "r_elo_cur": 1411.54,
+   "r_tier": "S",
+   "r_place_global": 61,
+   "r_rank_eu_2026": 30,
+   "r_place_2026": 31,
+   "r_elo_2026": 1079.43
+  },
+  {
+   "nick": "Kokocik",
+   "uid": 833,
+   "real": "Iryna",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_833/49611ec38d274c9951c4652dc75c69f4bc4b9461.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1000,
+    "tt": 38,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1315.1342,
+    "rank": 3091,
+    "games": 38,
+    "wr": 42.11,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt",
+     "emotion",
+     "imafia"
+    ],
+    "id": 63694
+   },
+   "markery_id": 10048,
+   "r_elo_cur": 1000.05,
+   "r_tier": "C",
+   "r_place_global": 2930,
+   "r_rank_eu_2026": 283,
+   "r_place_2026": 651,
+   "r_elo_2026": 1003.72
+  },
+  {
+   "nick": "Katusha",
+   "uid": 527,
+   "real": "Kate Lachmann",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_527/c42165ee9c6876560ed16a08e2b5596b4307aabe.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1003.9,
+    "tt": 8,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1510.1035,
+    "rank": 1007,
+    "games": 16,
+    "wr": 68.75,
+    "conf": "exact_nomaf",
+    "feds": [
+     "mwt",
+     "emotion"
+    ],
+    "id": 62609
+   },
+   "markery_id": 12188,
+   "r_elo_cur": 1003.92,
+   "r_tier": "C",
+   "r_place_global": 2422,
+   "r_rank_eu_2026": 121,
+   "r_place_2026": 228,
+   "r_elo_2026": 1023.81
+  },
+  {
+   "nick": "Tripok",
+   "uid": 263,
+   "real": "Bohdan",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_263/c9cc45afe38b5df39f333629598ef3c5f805e9b4.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1174.9,
+    "tt": 28,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1671.2709,
+    "rank": 303,
+    "games": 48,
+    "wr": 60.42,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt",
+     "imafia",
+     "emotion"
+    ],
+    "id": 63705
+   },
+   "markery_id": 10035,
+   "r_elo_cur": 1180.36,
+   "r_tier": "B",
+   "r_place_global": 228,
+   "r_rank_eu_2026": 63,
+   "r_place_2026": 74,
+   "r_elo_2026": 1046.82
+  },
+  {
+   "nick": "Ксюша",
+   "uid": 3090,
+   "real": "Оксана",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3090/7fc638b2aab2cfdf387df4ed8655a170880bf147.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1122.2,
+    "tt": 67,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1479.0342,
+    "rank": 1419,
+    "games": 404,
+    "wr": 48.27,
+    "conf": "exact_nomaf",
+    "feds": [
+     "mwt",
+     "emotion",
+     "imafia"
+    ],
+    "id": 64987
+   },
+   "markery_id": 10867,
+   "r_elo_cur": 1122.25,
+   "r_tier": "B",
+   "r_place_global": 327,
+   "r_rank_eu_2026": 178,
+   "r_place_2026": 365,
+   "r_elo_2026": 1013.45
+  },
+  {
+   "nick": "RAMZES",
+   "uid": 499,
+   "real": "Roman Politov",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_499/a4d55d9d5fa815a6c00f4e29d18ab1fba282f6fe.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1104.1,
+    "tt": 40,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1287.8551,
+    "rank": 3232,
+    "games": 32,
+    "wr": 40.62,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "emotion",
+     "imafia",
+     "mwt"
+    ],
+    "id": 383
+   },
+   "markery_id": 9752,
+   "r_elo_cur": 1111.97,
+   "r_tier": "B",
+   "r_place_global": 358,
+   "r_rank_eu_2026": 489,
+   "r_place_2026": 1210,
+   "r_elo_2026": 993.0
+  },
+  {
+   "nick": "Bagira_",
+   "uid": 1977,
+   "real": "Волик Ірина",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1977/ada0fe85cf93cc9c8e8057a14f2457f34ee644de.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": null,
+    "tt": null,
+    "conf": "none",
+    "n": 0,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 20070,
+   "r_elo_cur": 1015.62,
+   "r_tier": "C",
+   "r_place_global": 1537,
+   "r_rank_eu_2026": 220,
+   "r_place_2026": 825,
+   "r_elo_2026": 1008.8
+  },
+  {
+   "nick": "Niko",
+   "uid": 825,
+   "real": "Roman Krasiuk",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_825/c84248e1686c07eadb16b7331e04221936ba56ea.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1374.5,
+    "tt": 46,
+    "conf": "multi",
+    "n": 2,
+    "alts": [
+     {
+      "nm": "Niko",
+      "elo": 1375,
+      "tt": 46
+     },
+     {
+      "nm": "Niko",
+      "elo": 999,
+      "tt": 1
+     }
+    ]
+   },
+   "ms": {
+    "rating": 1851.4477,
+    "rank": 126,
+    "games": 233,
+    "wr": 49.36,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt",
+     "emotion"
+    ],
+    "id": 61512
+   },
+   "markery_id": 11175,
+   "r_elo_cur": 1374.56,
+   "r_tier": "S",
+   "r_place_global": 76,
+   "r_rank_eu_2026": 47,
+   "r_place_2026": 62,
+   "r_elo_2026": 1057.6
+  },
+  {
+   "nick": "ParadoXx",
+   "uid": 709,
+   "real": "Aleksandr",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1105.2,
+    "tt": 26,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1822.2161,
+    "rank": 141,
+    "games": 16,
+    "wr": 75,
+    "conf": "exact_nomaf",
+    "feds": [
+     "imafia"
+    ],
+    "id": 65399
+   },
+   "markery_id": 16374,
+   "r_elo_cur": 1098.43,
+   "r_tier": "B",
+   "r_place_global": 410,
+   "r_rank_eu_2026": 21,
+   "r_place_2026": 20,
+   "r_elo_2026": 1092.8
+  },
+  {
+   "nick": "DOVOD",
+   "uid": 1493,
+   "real": "Valerii S",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/1f30664fe58edefde9864af8e39d1508286597f7.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1130.5,
+    "tt": 31,
+    "conf": "multi",
+    "n": 2,
+    "alts": [
+     {
+      "nm": "DOVOD",
+      "elo": 1131,
+      "tt": 31
+     },
+     {
+      "nm": "DoVoD",
+      "elo": 1014,
+      "tt": 1
+     }
+    ]
+   },
+   "ms": {
+    "rating": 1543.6754,
+    "rank": 706,
+    "games": 16,
+    "wr": 62.5,
+    "conf": "exact_nomaf",
+    "feds": [
+     "mwt"
+    ],
+    "id": 59039
+   },
+   "markery_id": 17342,
+   "r_elo_cur": 1147.01,
+   "r_tier": "B",
+   "r_place_global": 277,
+   "r_rank_eu_2026": 22,
+   "r_place_2026": 17,
+   "r_elo_2026": 1089.81
+  },
+  {
+   "nick": "TOPS",
+   "uid": 1495,
+   "real": "Eugeniu",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1495/242ba9676071458139c03c4fe6781dc6bb820d82.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1047.1,
+    "tt": 17,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 17343,
+   "r_elo_cur": 1055.55,
+   "r_tier": "C",
+   "r_place_global": 663,
+   "r_rank_eu_2026": 35,
+   "r_place_2026": 44,
+   "r_elo_2026": 1070.11
+  },
+  {
+   "nick": "qUAest0r",
+   "uid": 704,
+   "real": "Serhii",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_704/7a243b5b522585bb2cac9fa3407aa5a14b38376b.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 988.4,
+    "tt": 31,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1431.9755,
+    "rank": 2078,
+    "games": 12,
+    "wr": 41.67,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "emotion",
+     "imafia"
+    ],
+    "id": 406
+   },
+   "markery_id": 11148,
+   "r_elo_cur": 994.07,
+   "r_tier": "C",
+   "r_place_global": 3862,
+   "r_rank_eu_2026": 589,
+   "r_place_2026": 1466,
+   "r_elo_2026": 986.7
+  },
+  {
+   "nick": "Putnik",
+   "uid": 961,
+   "real": "Zans Babinecs",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_961/e47c727a216fdd7e1e2a3f02c738d055d0231e34.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1011.6,
+    "tt": 10,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 16380,
+   "r_elo_cur": 1000.29,
+   "r_tier": "C",
+   "r_place_global": 2902,
+   "r_rank_eu_2026": 268,
+   "r_place_2026": 603,
+   "r_elo_2026": 1004.74
+  },
+  {
+   "nick": "AquaMarine",
+   "uid": 702,
+   "real": "Viktorija",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_702/ee91c10d4518e35027d0f6b044f22a31d51e5190.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 982.5,
+    "tt": 11,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 16377,
+   "r_elo_cur": 986.63,
+   "r_tier": "D",
+   "r_place_global": 4957,
+   "r_rank_eu_2026": 564,
+   "r_place_2026": 1405,
+   "r_elo_2026": 988.56
+  },
+  {
+   "nick": "Link",
+   "uid": 1307,
+   "real": "Denis Sukhonosov",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1307/96843d97fe9b9add3869edce3969301031e49ec9.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 986.3,
+    "tt": 11,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 19345,
+   "r_elo_cur": 973.5,
+   "r_tier": "D",
+   "r_place_global": 6146,
+   "r_rank_eu_2026": 680,
+   "r_place_2026": 1718,
+   "r_elo_2026": 973.91
+  },
+  {
+   "nick": "sometimes",
+   "uid": 471,
+   "real": "Teymur Orujov",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_471/6310e1fe3013c7b491c8aab115032419c31a3825.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1046.5,
+    "tt": 12,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 17415,
+   "r_elo_cur": 1034.56,
+   "r_tier": "C",
+   "r_place_global": 924,
+   "r_rank_eu_2026": 151,
+   "r_place_2026": 311,
+   "r_elo_2026": 1016.75
+  },
+  {
+   "nick": "ШТО?",
+   "uid": 792,
+   "real": "Sergei",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_792/541b4f4ba3ace7e6b0ffb727ded7f204307e240d.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1039.1,
+    "tt": 36,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1369.4247,
+    "rank": 2717,
+    "games": 61,
+    "wr": 52.46,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "imafia"
+    ],
+    "id": 63524
+   },
+   "markery_id": 9498,
+   "r_elo_cur": 1055.77,
+   "r_tier": "C",
+   "r_place_global": 660,
+   "r_rank_eu_2026": 49,
+   "r_place_2026": 64,
+   "r_elo_2026": 1056.14
+  },
+  {
+   "nick": "Maverick",
+   "uid": 1657,
+   "real": "Zula Badaev",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1657/113c46e18eb1f0829d8677456a66a8e412e76de6.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1026.5,
+    "tt": 19,
+    "conf": "multi",
+    "n": 2,
+    "alts": [
+     {
+      "nm": "Maverick",
+      "elo": 1026,
+      "tt": 19
+     },
+     {
+      "nm": "Maverick",
+      "elo": 990,
+      "tt": 1
+     }
+    ]
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 14653,
+   "r_elo_cur": 1020.43,
+   "r_tier": "C",
+   "r_place_global": 1336,
+   "r_rank_eu_2026": 152,
+   "r_place_2026": 317,
+   "r_elo_2026": 1016.53
+  },
+  {
+   "nick": "Designer",
+   "uid": 3019,
+   "real": "Карен Кравченко",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3019/d6a1521ce22c01ab72f319f0536e54483af50dec.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 969.9,
+    "tt": 7,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1349.6882,
+    "rank": 2869,
+    "games": 24,
+    "wr": 45.83,
+    "conf": "exact_nomaf",
+    "feds": [
+     "imafia"
+    ],
+    "id": 63180
+   },
+   "markery_id": 19600,
+   "r_elo_cur": 969.89,
+   "r_tier": "D",
+   "r_place_global": 6346,
+   "r_rank_eu_2026": 695,
+   "r_place_2026": 1745,
+   "r_elo_2026": 971.34
+  },
+  {
+   "nick": "Funt",
+   "uid": 573,
+   "real": "Funt",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_573/148480f1abb9e201a49c9656cbf4558e195e70be.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 979.7,
+    "tt": 14,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1543.0738,
+    "rank": 711,
+    "games": 8,
+    "wr": 62.5,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt"
+    ],
+    "id": 431
+   },
+   "markery_id": 11146,
+   "r_elo_cur": 979.79,
+   "r_tier": "D",
+   "r_place_global": 5624,
+   "r_rank_eu_2026": 155,
+   "r_place_2026": 319,
+   "r_elo_2026": 1016.23
+  },
+  {
+   "nick": "Donna",
+   "uid": 1400,
+   "real": "Галина",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1400/607b4801b5ffa0923db5c49fb5774be59dbcc216.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 875.4,
+    "tt": 25,
+    "conf": "multi",
+    "n": 2,
+    "alts": [
+     {
+      "nm": "Donna",
+      "elo": 875,
+      "tt": 25
+     },
+     {
+      "nm": "Donna",
+      "elo": 930,
+      "tt": 7
+     }
+    ]
+   },
+   "ms": {
+    "rating": 1390.7039,
+    "rank": 2519,
+    "games": 35,
+    "wr": 42.86,
+    "conf": "exact_nomaf",
+    "feds": [
+     "emotion",
+     "imafia"
+    ],
+    "id": 64831
+   },
+   "markery_id": 19168,
+   "r_elo_cur": 875.44,
+   "r_tier": "F",
+   "r_place_global": 7964,
+   "r_rank_eu_2026": 799,
+   "r_place_2026": 1898,
+   "r_elo_2026": 902.97
+  },
+  {
+   "nick": "Клото",
+   "uid": 199,
+   "real": "Ольга",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_199/37883cb7c4576b4ce877cc5e085b3e927103b18f.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 1093.8,
+    "tt": 105,
+    "conf": "multi",
+    "n": 2,
+    "alts": [
+     {
+      "nm": "Клото",
+      "elo": 1094,
+      "tt": 105
+     },
+     {
+      "nm": "Клото",
+      "elo": 1003,
+      "tt": 1
+     }
+    ]
+   },
+   "ms": {
+    "rating": 1142.2086,
+    "rank": 3634,
+    "games": 422,
+    "wr": 49.29,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "mwt",
+     "emotion",
+     "imafia"
+    ],
+    "id": 64326
+   },
+   "markery_id": 9601,
+   "r_elo_cur": 1094.0,
+   "r_tier": "B",
+   "r_place_global": 422,
+   "r_rank_eu_2026": 58,
+   "r_place_2026": 85,
+   "r_elo_2026": 1050.07
+  },
+  {
+   "nick": "Провокатор",
+   "uid": 408,
+   "real": "Max",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_408/0d6a1e54afe734f4cf042fedd18b5ba40c2afb23.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 867.4,
+    "tt": 10,
+    "conf": "multi",
+    "n": 3,
+    "alts": [
+     {
+      "nm": "Провокатор",
+      "elo": 867,
+      "tt": 10
+     },
+     {
+      "nm": "Провокатор",
+      "elo": 852,
+      "tt": 8
+     },
+     {
+      "nm": "Провокатор",
+      "elo": 974,
+      "tt": 1
+     }
+    ]
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 11115,
+   "r_elo_cur": 867.4,
+   "r_tier": "F",
+   "r_place_global": 8001,
+   "r_rank_eu_2026": 767,
+   "r_place_2026": 1862,
+   "r_elo_2026": 947.05
+  },
+  {
+   "nick": "Specchio",
+   "uid": 765,
+   "real": "Georgios",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_765/e7b3c8ee943021dc7125c6fb74198f2e6c240e23.png",
+   "status": "confirmed",
+   "mk": {
+    "elo": 969.9,
+    "tt": 10,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 17374,
+   "r_elo_cur": 969.89,
+   "r_tier": "D",
+   "r_place_global": 6346,
+   "r_rank_eu_2026": 385,
+   "r_place_2026": 934,
+   "r_elo_2026": 998.15
+  },
+  {
+   "nick": "Кайзер",
+   "uid": 2120,
+   "real": "Yaroslav Mamontov",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2120/cffdac56e2c0c0808abdf15395204f955bd117b5.png",
+   "status": "applied",
+   "mk": {
+    "elo": 889.7,
+    "tt": 18,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": 1258.1921,
+    "rank": 3360,
+    "games": 22,
+    "wr": 22.73,
+    "conf": "mafgame",
+    "feds": [
+     "mafgame",
+     "emotion",
+     "imafia"
+    ],
+    "id": 1231
+   },
+   "markery_id": 19449,
+   "r_elo_cur": 889.67,
+   "r_tier": "E",
+   "r_place_global": 7904,
+   "r_rank_eu_2026": 796,
+   "r_place_2026": 1896,
+   "r_elo_2026": 912.96
+  },
+  {
+   "nick": "Sarcazi.!",
+   "uid": 2844,
+   "real": "Николай",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2844/90f011855035b102b36bbcdc64e8141c3705c9e2.png",
+   "status": "applied",
+   "mk": {
+    "elo": 984.8,
+    "tt": 3,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 19995,
+   "r_elo_cur": 984.76,
+   "r_tier": "D",
+   "r_place_global": 5162,
+   "r_rank_eu_2026": 607,
+   "r_place_2026": 1519,
+   "r_elo_2026": 984.76
+  },
+  {
+   "nick": "Сергеевна",
+   "uid": 2168,
+   "real": "Mariia Levintsova",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2168/dff414a72842031be16dfa7648b24b1bd247980c.png",
+   "status": "applied",
+   "mk": {
+    "elo": 973.1,
+    "tt": 7,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 16240,
+   "r_elo_cur": 973.07,
+   "r_tier": "D",
+   "r_place_global": 6172,
+   "r_rank_eu_2026": 312,
+   "r_place_2026": 729,
+   "r_elo_2026": 1002.26
+  },
+  {
+   "nick": "Магнат",
+   "uid": 2602,
+   "real": "Хассан",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png",
+   "status": "applied",
+   "mk": {
+    "elo": 1148.2,
+    "tt": 17,
+    "conf": "ok",
+    "n": 1,
+    "alts": null
+   },
+   "ms": {
+    "rating": null,
+    "rank": null,
+    "games": null,
+    "wr": null,
+    "conf": "none",
+    "feds": null,
+    "id": null
+   },
+   "markery_id": 15321,
+   "r_elo_cur": 1148.25,
+   "r_tier": "B",
+   "r_place_global": 274,
+   "r_rank_eu_2026": 8,
+   "r_place_2026": 3,
+   "r_elo_2026": 1144.44
+  }
+ ],
+ "stats": {
+  "n_conf": 26,
+  "n_apps": 4,
+  "mk_avg": 1074.3,
+  "mk_n": 25,
+  "mk_avg_ok": 1078.4,
+  "mk_n_ok": 19,
+  "ms_avg": 1456.9,
+  "ms_n": 11
+ }
+}

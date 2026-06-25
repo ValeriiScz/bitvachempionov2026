@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- build v8.2 · 2026-06-25 · 5 сортируемых колонок рейтинга (markery: ELO тек/ELO 2026/Европа 2026/оффлайн 2026 + mafiastats место); ростер из participants_{t}.json (актуальный mafgame); Season's→Spring -->
+<!-- build v8.6 · 2026-06-25 · колонки рейтинга: ELO тек / ТИР (ранг markery S..F) / Место (глоб); тиры с цветом и группировкой («воздух» между рангами) + распределение; markery snapshot через API; Season's→Spring -->
 <!-- MafgameStat · participants.html · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
      заявки mafgame (подтв./заявки/лист ожидания) + ДВОЙНОЙ рейтинг markery(основной)+mafiastats(сверка),
      счётчик «ожидаемый средний ELO» (markery) на постере, ссылки на профили, флаги неоднозначных матчей.
@@ -112,6 +112,22 @@
   .rrank .h{color:var(--dim);font-weight:500;font-size:11px;}
   td.grp{border-left:1px solid rgba(232,200,122,.10);}
   th.grp{border-left:1px solid rgba(232,200,122,.10);}
+  /* ── тиры (ранги markery) ── */
+  .tier{display:inline-block;min-width:24px;padding:2px 8px;border-radius:7px;font-weight:800;font-size:12.5px;text-align:center;letter-spacing:.5px;}
+  .t-S{background:linear-gradient(135deg,#e8c87a,#c9a14d);color:#0b0b0e;box-shadow:0 0 10px rgba(232,200,122,.35);}
+  .t-A{background:rgba(103,224,143,.16);color:#67e08f;border:1px solid rgba(103,224,143,.45);}
+  .t-B{background:rgba(122,167,214,.16);color:#9cc0e6;border:1px solid rgba(122,167,214,.45);}
+  .t-C{background:rgba(232,200,122,.12);color:#e8c87a;border:1px solid rgba(232,200,122,.32);}
+  .t-D{background:rgba(255,255,255,.05);color:#bdb9c8;border:1px solid rgba(255,255,255,.14);}
+  .t-E{background:rgba(155,151,168,.10);color:#9b97a8;border:1px solid rgba(155,151,168,.28);}
+  .t-F{background:rgba(224,101,77,.15);color:#e0654d;border:1px solid rgba(224,101,77,.38);}
+  td.tcell{text-align:center;}
+  tr.tsep td{background:#15151b;color:var(--mut);font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:7px 11px;text-align:left;border-top:2px solid rgba(232,200,122,.20);}
+  tr.tsep .tier{margin-right:8px;}
+  .tdist{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 14px;align-items:center;}
+  .tdist .lbl{font-size:11px;color:var(--mut);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-right:2px;}
+  .tdist .tc{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;padding:3px 9px 3px 4px;border-radius:9px;background:var(--panel);border:1px solid var(--hairline);}
+  .tdist .tc small{color:var(--mut);font-weight:700;}
 </style>
 </head>
 <body>
@@ -119,7 +135,7 @@
   <a class="back" href="#" id="back">← к турниру</a>
   <div id="app"><p class="note">Загрузка…</p></div>
   <div class="foot">
-    MafgameStat — неофициальная статистика <span style="color:var(--gold-dim)">◆</span>
+    MafgameStat — неофициальная статистика <span style="color:var(--gold)">◆</span>
     рейтинги: <a href="https://markery.online">markery.online</a> · <a href="https://mafiastats.com">mafiastats.com</a> ·
     заявки: <a href="https://mafgame.org">mafgame.org</a>
   </div>
@@ -144,29 +160,37 @@ fetch('data/participants_'+T+'.json').then(r=>{if(!r.ok)throw 0;return r.json()}
   .catch(()=>{document.getElementById('app').innerHTML='<h1 class="err">Нет данных</h1><p class="note">Снапшот участников для этого турнира ещё не собран.</p>';});
 
 let DATA=null;
+const TIERS=['S','A','B','C','D','E','F'];
+const TIER_ORD={S:0,A:1,B:2,C:3,D:4,E:5,F:6};
+const TIER_LAB={S:'S — топ',A:'A',B:'B',C:'C',D:'D',E:'E',F:'F'};
 const COLS=[
-  {key:'elo_cur',  lab:'ELO тек',     hint:'markery — текущий ELO',                 dir:-1, fmt:'elo',  get:p=>p.r_elo_cur},
-  {key:'elo_2026', lab:'ELO 2026',    hint:'markery — ELO за 2026 год',             dir:-1, fmt:'elo',  get:p=>p.r_elo_2026},
-  {key:'eu_2026',  lab:'Европа 2026', hint:'markery — место в рейтинге Европа, 2026',dir:1,  fmt:'rank', get:p=>p.r_rank_eu_2026},
-  {key:'off_2026', lab:'Оффлайн 2026',hint:'markery — место в рейтинге оффлайн, 2026',dir:1, fmt:'rank', get:p=>p.r_rank_off_2026},
-  {key:'ms',       lab:'mafiastats',  hint:'место в рейтинге mafiastats.com',        dir:1,  fmt:'rank', get:p=>p.r_ms_rank},
+  {key:'tier',     lab:'Ранг',       hint:'ранг markery (S/A/B/C/D/E/F) по текущему ELO',  dir:1,  fmt:'tier', get:p=>p.r_tier},
+  {key:'elo_cur',  lab:'ELO тек',    hint:'markery — текущий ELO (глобально, всё время)',  dir:-1, fmt:'elo',  get:p=>p.r_elo_cur},
+  {key:'elo_2026', lab:'ELO 2026',   hint:'markery — ELO за сезон 2026',                   dir:-1, fmt:'elo',  get:p=>p.r_elo_2026},
+  {key:'eu26',     lab:'Европа 2026',hint:'markery — место в рейтинге Европа за 2026',      dir:1,  fmt:'rank', get:p=>p.r_rank_eu_2026},
 ];
-let sortKey='elo_cur', sortDir=-1;
+let sortKey='tier', sortDir=1;
 
 function num(v){return (v==null||v==='')?null:+v;}
+function colVal(col,p){ const v=col.get(p); if(col.fmt==='tier'){ return (v in TIER_ORD)?TIER_ORD[v]:null; } return num(v); }
 function sortPlayers(){
   const col=COLS.find(c=>c.key===sortKey);
   DATA.players.sort((a,b)=>{
-    const va=num(col.get(a)), vb=num(col.get(b));
+    const va=colVal(col,a), vb=colVal(col,b);
     if(va==null&&vb==null) return a.nick.localeCompare(b.nick,'ru');
     if(va==null) return 1;
     if(vb==null) return -1;
-    if(va===vb) return a.nick.localeCompare(b.nick,'ru');
+    if(va===vb){ // tie-break: внутри тира — по ELO убыв.
+      const ea=num(a.r_elo_cur), eb=num(b.r_elo_cur);
+      if(ea!=null&&eb!=null&&ea!==eb) return eb-ea;
+      return a.nick.localeCompare(b.nick,'ru');
+    }
     return (va-vb)*sortDir;
   });
 }
 function cellRank(v){ v=num(v); return v==null?'<span class="na">—</span>':`<span class="rrank"><span class="h">#</span>${v}</span>`; }
 function cellElo(v){ v=num(v); return v==null?'<span class="na">—</span>':`<span class="rnum">${Math.round(v)}</span>`; }
+function cellTier(v){ return (v && (v in TIER_ORD))?`<span class="tier t-${v}">${v}</span>`:'<span class="na">—</span>'; }
 
 function render(D){
   DATA=D;
@@ -200,7 +224,7 @@ function render(D){
     <div class="summary">
       <div class="scard"><div class="k">Участников</div><div class="v">${players.length}<small> / ${meta.expected||'—'} ожид.</small></div></div>
       <div class="scard"><div class="k">markery · ср. ELO</div><div class="v">${eloAvg!=null?eloAvg:'—'}<small> n${eloVals.length}</small></div></div>
-      <div class="scard"><div class="k">с рейтингом mafiastats</div><div class="v">${msVals.length}<small> / ${players.length}</small></div></div>
+      <div class="scard"><div class="k">с рейтингом markery</div><div class="v">${eloVals.length}<small> / ${players.length}</small></div></div>
     </div>`;
 
   const legend = `
@@ -210,8 +234,14 @@ function render(D){
       <span>↕ клик по заголовку колонки — сортировка</span>
     </div>`;
 
+  // распределение по тирам
+  const tcounts={}; players.forEach(p=>{ if(p.r_tier in TIER_ORD) tcounts[p.r_tier]=(tcounts[p.r_tier]||0)+1; });
+  const tdistHtml = `<div class="tdist"><span class="lbl">Тиры (markery):</span>` +
+    TIERS.filter(t=>tcounts[t]).map(t=>`<span class="tc"><span class="tier t-${t}">${t}</span><small>${tcounts[t]}</small></span>`).join('') +
+    `</div>`;
+
   const app=document.getElementById('app');
-  app.innerHTML = heroHtml + summary + legend +
+  app.innerHTML = heroHtml + summary + legend + tdistHtml +
     `<div class="tbl-wrap"><table>
        <thead><tr id="hr"></tr></thead>
        <tbody id="tb"></tbody>
@@ -221,9 +251,9 @@ function render(D){
 
 function noteHtml(){
   return `<p class="note">
-    Рейтинги markery (текущий ELO, ELO 2026, места в рейтингах Европа и оффлайн за 2026) и место mafiastats заполняются из базы рейтингов и обновляются по мере приближения турнира.
-    «ELO тек» и «ELO 2026» — шкала markery; место mafiastats — другая система, напрямую не сравнивается. «—» — данных пока нет.
-    У части игроков ник на markery отличается от mafgame (напр. Season's → «Spring») — для таких ссылка ведёт на их профиль markery напрямую. Список и составы — с mafgame.org.
+    Рейтинг markery — снимок через API на 2026-06-25. «ELO тек» — текущий ELO (глобально, всё время); «Тир» — буквенный ранг markery (S/A/B/C/D/E/F) по этому ELO; «Место» — позиция в глобальном рейтинге markery. Клик по «Тир» группирует игроков по рангам.
+    «—» — игрок ещё не сматчен с markery или без рейтинга. Добавлены места Европа-2026 и 2026-глобал. ELO 2026 (число) и оффлайн-2026 — у markery только под премиум/лидербордом, по запросу.
+    У части игроков ник на markery отличается от mafgame (напр. Season's → «Spring») — ссылка ведёт на их профиль markery напрямую. Список и составы — с mafgame.org.
   </p>`;
 }
 
@@ -262,15 +292,30 @@ function paint(){
     const club=p.club?`<br><span class="pl-real">${esc(p.club)}</span>`:(p.real?`<br><span class="pl-real">${esc(p.real)}</span>`:'');
     return `<tr class="${p.status}">
       <td class="l anchor"><div class="pl"><span class="num">${i+1}</span>${avatar(p)}<span><span class="pl-nick">${esc(p.nick)}</span>${club}</span></div></td>
-      <td class="grp">${amb}${cellElo(p.r_elo_cur)}</td>
+      <td class="tcell grp">${cellTier(p.r_tier)}</td>
+      <td>${amb}${cellElo(p.r_elo_cur)}</td>
       <td>${cellElo(p.r_elo_2026)}</td>
       <td class="grp">${cellRank(p.r_rank_eu_2026)}</td>
-      <td>${cellRank(p.r_rank_off_2026)}</td>
-      <td>${cellRank(p.r_ms_rank)}</td>
       <td class="l">${links.join(' ')||'<span class="na">—</span>'}</td>
     </tr>`;
-  }).join('');
-  document.getElementById('tb').innerHTML=rows;
+  });
+  let html='', prevTier=null;
+  const grouping=(sortKey==='tier');
+  const counts={}; DATA.players.forEach(p=>{ if(p.r_tier in TIER_ORD) counts[p.r_tier]=(counts[p.r_tier]||0)+1; });
+  rows.forEach((rowHtml,idx)=>{
+    if(grouping){
+      const t=DATA.players[idx].r_tier; const key=(t in TIER_ORD)?t:'—';
+      if(key!==prevTier){
+        const cls=(key in TIER_ORD)?('t-'+key):'';
+        const badge=(key in TIER_ORD)?`<span class="tier ${cls}">${key}</span>`:'<span class="na">—</span>';
+        const cnt=(key in TIER_ORD)?counts[key]:DATA.players.filter(p=>!(p.r_tier in TIER_ORD)).length;
+        html+=`<tr class="tsep"><td colspan="6">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${cnt} игр.</td></tr>`;
+        prevTier=key;
+      }
+    }
+    html+=rowHtml;
+  });
+  document.getElementById('tb').innerHTML=html;
 }
 
 </script>

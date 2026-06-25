@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · cards667.html · v1.4 · 2026-06-14 · карточки 40 игроков Poland Mafia Open 766: фото, ELO (markery), столы, слоты, соперники; сортировка по ELO убыв. + раскрывающийся маршрут по играм (клик) + плавающая кнопка «наверх» -->
+<!-- MafgameStat · cards766.html · v8.6 · 2026-06-25 · карточки 40 игроков 766: фото, мини-таблица рейтинга (Ранг/ELO тек/ELO 2026/Европа 2026 из markery), навигация по рангам, столы/слоты/соперники, маршрут. База: cards667 -->
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -55,6 +55,29 @@
   .route td:first-child{color:#6e5212;font-weight:700;}
   .route td:nth-child(2){color:#9a7a2e;}
   .route td:last-child{text-align:right;font-weight:800;color:#8a5a14;}
+  /* ── рейтинговая мини-таблица + тиры (светлая тема) ── */
+  .rate{display:flex;gap:6px;margin:2px 0 4px;}
+  .rcell{flex:1;text-align:center;padding:7px 4px;border-radius:10px;background:rgba(224,190,100,.18);border:1px solid rgba(176,125,18,.2);}
+  .rcell .rk{font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#9a7a2e;}
+  .rcell .rv{font-size:15px;font-weight:800;color:#8a5a14;margin-top:3px;}
+  .rcell .rv .h{font-size:10px;color:#9a7a2e;font-weight:700;}
+  .rcell .rv.na{color:#bda86a;}
+  .ctier{display:inline-block;min-width:22px;padding:2px 9px;border-radius:7px;font-weight:800;font-size:15px;}
+  .ct-S{background:linear-gradient(135deg,#f0d488,#c9a14d);color:#3b2c0a;}
+  .ct-A{background:#cdeccd;color:#1f7a3a;border:1px solid #8fcb9f;}
+  .ct-B{background:#cfe0f3;color:#2766a3;border:1px solid #9cc0e6;}
+  .ct-C{background:#f3e6bf;color:#8a5a14;border:1px solid #d9bf7e;}
+  .ct-D{background:#e6ddc8;color:#6e5212;border:1px solid #cdbf99;}
+  .ct-E{background:#e2dcc9;color:#7a6a3e;border:1px solid #c9bd97;}
+  .ct-F{background:#f3d2c2;color:#a8462a;border:1px solid #e0a58c;}
+  /* ── навигация по рангам ── */
+  .navrank{max-width:760px;margin:0 auto 18px;background:rgba(255,255,255,.72);border-radius:14px;padding:10px 16px;box-shadow:0 8px 22px rgba(90,60,10,.15);}
+  .navrank .nrh{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#8a5a14;margin-bottom:6px;}
+  .navrank .grp{display:flex;gap:9px;align-items:baseline;padding:5px 0;border-top:1px solid rgba(176,125,18,.12);}
+  .navrank .glab{flex:none;display:flex;align-items:center;gap:6px;min-width:74px;font-size:11px;color:#9a7a2e;font-weight:800;}
+  .navrank .gls{display:flex;flex-wrap:wrap;gap:3px 10px;font-size:12.5px;}
+  .navrank a{color:#b07d12;text-decoration:none;font-weight:700;white-space:nowrap;}
+  .navrank a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -80,11 +103,15 @@ Promise.all([
   window.loadGames('766'),
   fetch('data/avatars_766.json').then(r=>r.json()),
   fetch('data/tournament_766.json').then(r=>r.json()),
-  fetch('data/elo_766.json').then(r=>r.ok?r.json():null).catch(()=>null)
-]).then(([G,A,T,E])=>{
+  fetch('data/elo_766.json').then(r=>r.ok?r.json():null).catch(()=>null),
+  fetch('data/participants_766.json').then(r=>r.ok?r.json():null).catch(()=>null)
+]).then(([G,A,T,E,P])=>{
   const ELO=(E&&E.players)||{};
   const AV=A.avatars||{};
   const INFO={}; (T.players||[]).forEach(p=>INFO[p.name]=p);
+  const RATE={}; ((P&&P.players)||[]).forEach(p=>RATE[p.nick]={tier:p.r_tier,elo:p.r_elo_cur,elo26:p.r_elo_2026,eu:p.r_rank_eu_2026,mid:p.markery_id});
+  const TORD={S:0,A:1,B:2,C:3,D:4,E:5,F:6};
+  const tierBadge=t=>(t&&t in TORD)?`<span class="ctier ct-${t}">${t}</span>`:'<span style="color:#bda86a">—</span>';
   const occ={}, opp={};
   G.games.forEach((g,gi)=>g.tables.forEach(t=>{
     const names=t.seats.map(s=>s.name);
@@ -93,9 +120,17 @@ Promise.all([
       names.forEach(m=>{ if(m!==n){ (opp[n]=opp[n]||{})[m]=(opp[n][m]||0)+1; } });
     });
   }));
-  const players=Object.keys(occ).sort((a,b)=>{const ea=(ELO[a]&&ELO[a].global)||0,eb=(ELO[b]&&ELO[b].global)||0;return eb!==ea?eb-ea:a.localeCompare(b,'ru');});
+  const eloOf=n=>(RATE[n]&&RATE[n].elo)||(ELO[n]&&ELO[n].global)||0;
+  const tordOf=n=>{const t=RATE[n]&&RATE[n].tier;return (t&&t in TORD)?TORD[t]:9;};
+  const players=Object.keys(occ).sort((a,b)=>{const ta=tordOf(a),tb=tordOf(b);if(ta!==tb)return ta-tb;const ea=eloOf(a),eb=eloOf(b);return eb!==ea?eb-ea:a.localeCompare(b,'ru');});
   if(players.length!==40) console.warn('игроков на карточках:',players.length,'(40 заявлены + замены)');
-  document.getElementById('toc').innerHTML='<b>Игроки ('+players.length+'):</b> '+players.map(p=>`<a href="#p-${encodeURIComponent(p)}">${esc(p)}</a>`).join(' · ');
+  const tocEl=document.getElementById('toc'); tocEl.className='navrank';
+  const byTier={}; players.forEach(p=>{const t=(RATE[p]&&RATE[p].tier&&RATE[p].tier in TORD)?RATE[p].tier:'—';(byTier[t]=byTier[t]||[]).push(p);});
+  let navHtml='<div class="nrh">Игроки по рангам ('+players.length+') — найди себя:</div>';
+  ['S','A','B','C','D','E','F','—'].forEach(t=>{ if(!byTier[t])return;
+    const lab=t==='—'?'<span style="color:#bda86a">—</span>':`<span class="ctier ct-${t}">${t}</span>`;
+    navHtml+=`<div class="grp"><div class="glab">${lab} ${byTier[t].length}</div><div class="gls">`+byTier[t].map(p=>`<a href="#p-${encodeURIComponent(p)}">${esc(p)}</a>`).join('')+`</div></div>`;});
+  tocEl.innerHTML=navHtml;
   document.getElementById('cards').innerHTML=players.map(p=>{
     const o=occ[p];
     const tc={}; o.forEach(x=>tc[x.t]=(tc[x.t]||0)+1);
@@ -116,6 +151,12 @@ Promise.all([
           <div class="tmeta">Four Seasons: Poland Mafia Open · 27–28.06.2026 · Вроцлав</div>
           ${ELO[p]&&ELO[p].global?`<div class="tmeta"><b>ELO ${ELO[p].global}</b> · markery${ELO[p].tournaments?` · ${ELO[p].tournaments} турниров`:''}${ELO[p].ms?` · mafiastats ${ELO[p].ms}`:''}</div>`:`<div class="tmeta" style="opacity:.6">ELO markery — нет данных</div>`}
         </div>
+      </div>
+      <div class="rate">
+        <div class="rcell"><div class="rk">Ранг</div><div class="rv">${tierBadge(RATE[p]&&RATE[p].tier)}</div></div>
+        <div class="rcell"><div class="rk">ELO тек</div><div class="rv${RATE[p]&&RATE[p].elo?'':' na'}">${RATE[p]&&RATE[p].elo?Math.round(RATE[p].elo):'—'}</div></div>
+        <div class="rcell"><div class="rk">ELO 2026</div><div class="rv${RATE[p]&&RATE[p].elo26?'':' na'}">${RATE[p]&&RATE[p].elo26?Math.round(RATE[p].elo26):'—'}</div></div>
+        <div class="rcell"><div class="rk">Европа 2026</div><div class="rv${RATE[p]&&RATE[p].eu?'':' na'}">${RATE[p]&&RATE[p].eu?('<span class=\'h\'>#</span>'+RATE[p].eu):'—'}</div></div>
       </div>
       <div class="sec">Столы (${o.length} игр)</div>
       <div class="tables-row">${Object.keys(tc).sort((a,b)=>a-b).map(t=>`<span class="tchip">Стол <b>${ROMAN[t]}</b> · ${tc[t]}</span>`).join('')}</div>
