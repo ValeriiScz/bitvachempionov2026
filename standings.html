@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- v2.6 · 2026-07-04 · live-режим авто-делит на стадии Итоговая/Финал/Квалификация когда сыгран финал (было: единый Σ с ползунком сливал квал+финал — «странная» таблица 766). Квалификация в процессе — как раньше. -->
 <!-- v2.4 · 2026-06-21 · парный live (693): зачёт по командам = сумма Σ двух игроков + переключатель Команды/Игроки; ростер показывается только до старта -->
 <!-- v2.3 · 2026-06-14 · сводная таблица: ползунок «после игры N», роли R/S/B/D, сводка красных/чёрных, Δ мест -->
 <meta charset="utf-8">
@@ -170,7 +171,7 @@ async function load() {
     renderTeamsRoster();
   } else if (GAMES && GAMES.games?.length && (DATA.in_progress || !DATA.standings || !Object.keys(DATA.standings).length)) {
     sliderN = startedCount();
-    if (DATA.teams && DATA.teams.length) renderPaired(); else renderLive();
+    if (DATA.teams && DATA.teams.length) renderPaired(); else if (hasPlayedFinalStage()) renderLiveStaged(); else renderLive();
   } else {
     renderMain();
   }
@@ -188,6 +189,72 @@ function renderTeamsRoster(){
     <table class="standings"><thead><tr><th class="left place">#</th><th class="left player-cell">Команда</th><th class="left">Игроки</th></tr></thead>
     <tbody>${cards}</tbody></table></div>`;
 }
+/* ════ LIVE STAGED: авто-разбивка Квалификация/Финал/Итоговая (когда сыгран финал) ════ */
+let LIVE_STAGES=null, curLiveStage='total';
+function isFinalStage(g){return (g.stage||'')==='Финал';}
+function gameHasRoles(g){return (g.tables||[]).some(tb=>(tb.seats||[]).some(s=>s.role));}
+function hasPlayedFinalStage(){return !!(GAMES&&GAMES.games&&GAMES.games.some(g=>isFinalStage(g)&&gameHasRoles(g)));}
+function aggregate(gameList){
+  const P={};
+  const get=name=>P[name]||(P[name]={name,wpts:0,aps:0,ci:0,w:0,games:0,k:0,
+    roles:{Citizen:{w:0,g:0},Sheriff:{w:0,g:0},Mafia:{w:0,g:0},Don:{w:0,g:0}}});
+  let redWins=0,blackWins=0,tables=0,apsSum=0;
+  gameList.forEach(game=>game.tables.forEach(tb=>{
+    tables++;
+    if(tb.winner==='red_win')redWins++;else if(tb.winner==='black_win')blackWins++;
+    tb.seats.forEach(s=>{const p=get(s.name);p.games++;p.wpts+=s.wpts||0;p.aps+=s.aps||0;p.ci+=s.ci||0;apsSum+=s.aps||0;
+      if(s.result==='W')p.w++;if(s.marker==='first_killed')p.k++;const r=p.roles[s.role];if(r){r.g++;if(s.result==='W')r.w++;}});
+  }));
+  const rows=Object.values(P).map(p=>({...p,sigma:+(p.wpts+p.aps+p.ci).toFixed(2)}));
+  rows.sort((a,b)=>b.sigma-a.sigma||b.aps-a.aps||a.name.localeCompare(b.name,'ru'));
+  rows.forEach((r,i)=>r.place=i+1);
+  return {rows,redWins,blackWins,tables,apsSum};
+}
+function liveRowsHtml(rows){
+  return rows.map((r,i)=>`<tr${i<3?' class="top-3"':''}>
+      <td class="left place">${r.place}</td>
+      <td class="left player-cell"><a class="player-name" href="player.html?nick=${encodeURIComponent(r.name)}&t=${T}">${escapeHtml(r.name)}</a><span class="club">${escapeHtml(PLAYER_TEAM[r.name]||'')}</span></td>
+      <td>${numCell(r.sigma,'big')}</td>
+      <td>${numCell(r.wpts)}</td>
+      <td>${numCell(+r.aps.toFixed(2), r.aps>0?'':'dim')}</td>
+      <td>${numCell(+r.ci.toFixed(2), r.ci>0?'':'dim')}</td>
+      ${ratioCell(r.roles.Citizen)}${ratioCell(r.roles.Sheriff)}${ratioCell(r.roles.Mafia)}${ratioCell(r.roles.Don)}
+      <td>${numCell(r.k, r.k>0?'neg':'dim')}</td>
+      <td><span class="num"><b style="color:#3fd17a">${r.w||0}</b><span style="color:#5a5e76">/${r.games}</span></span></td>
+    </tr>`).join('');
+}
+function renderLiveStaged(){
+  const qualG=GAMES.games.filter(g=>!isFinalStage(g)&&gameHasRoles(g));
+  const finG=GAMES.games.filter(g=>isFinalStage(g)&&gameHasRoles(g));
+  const allG=GAMES.games.filter(gameHasRoles);
+  LIVE_STAGES={total:aggregate(allG),final:aggregate(finG),qualification:aggregate(qualG)};
+  const labels={total:'Итоговая',final:'Финал',qualification:'Квалификация'};
+  const order=['total','final','qualification'].filter(k=>LIVE_STAGES[k].rows.length);
+  if(!order.includes(curLiveStage))curLiveStage='total';
+  const tabs=`<div class="stages">${order.map(k=>`<button class="stage-btn${k===curLiveStage?' active':''}" data-lstage="${k}">${labels[k]}<span class="count">${LIVE_STAGES[k].rows.length}</span></button>`).join('')}</div>`;
+  const cur=LIVE_STAGES[curLiveStage];
+  const liveBadge=DATA.in_progress?' <span class="live-badge">live</span>':'';
+  const chips=`<div class="chips">
+    <div class="chip">Игроков<b>${cur.rows.length}</b></div>
+    <div class="chip red">Победы красных<b>${cur.redWins}</b></div>
+    <div class="chip black">Победы чёрных<b>${cur.blackWins}</b></div>
+    <div class="chip gold">Средний доп / стол<b>${cur.tables?(cur.apsSum/cur.tables).toFixed(2):'0'}</b></div>
+  </div>`;
+  const reconLine=DATA.in_progress
+    ? `Это <b>наш live-пересчёт</b> по сыгранным играм — mafgame публикует официальную сводную к концу дня, тогда сверим и заморозим.`
+    : `Официальная сводная — по кнопке «Официальная таблица» (сверено с mafgame).`;
+  const note=`<div class="progress-note"><b>Итоговая</b> = Σ квалификации + финала. <b>Финал</b> — только финальные игры (финалисты). <b>Квалификация</b> — 12 игр отбора.${liveBadge} Σ = WPTS + Σap + Ci по сыгранным играм; BM войдёт в Ci при закрытии. ${reconLine} R/S/B/D — победы/игры в роли: мирный, шериф, мафия, дон.</div>`;
+  document.getElementById('main').innerHTML=`${tabs}${chips}${note}<div class="card" style="padding:0;overflow-x:auto;">
+    <table class="standings"><thead><tr>
+      <th class="left place">#</th><th class="left player-cell">Игрок</th>
+      <th>Σ</th><th>WPTS</th><th>Σap</th><th title="компенсация (Ci)">Ci</th>
+      <th title="мирный">R</th><th title="шериф">S</th><th title="мафия">B</th><th title="дон">D</th>
+      <th title="убит 1-й ночью">K</th><th title="победы / игр">Поб/Игр</th>
+    </tr></thead><tbody id="tbody"></tbody></table></div>`;
+  document.getElementById('tbody').innerHTML=liveRowsHtml(cur.rows);
+  document.querySelectorAll('.stage-btn[data-lstage]').forEach(b=>b.addEventListener('click',()=>{curLiveStage=b.dataset.lstage;renderLiveStaged();}));
+}
+
 /* ════ LIVE: пересчёт из игр + ползунок ════ */
 function buildStandings(n) {
   // standings по первым n играм

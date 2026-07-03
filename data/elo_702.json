@@ -1,0 +1,248 @@
+{
+ "_meta": {
+  "дата": "2026-07-03",
+  "назначение": "ELO 702: global=markery текущее, year=ELO 2026, ms=mafiastats"
+ },
+ "players": {
+  "Jerry Hurper": {
+   "global": 1067,
+   "year": 1013,
+   "tournaments": 43,
+   "ms": null
+  },
+  "Абрам": {
+   "global": 922,
+   "year": null,
+   "tournaments": 79,
+   "ms": 1212
+  },
+  "ParadoXx": {
+   "global": 1098,
+   "year": 1093,
+   "tournaments": 26,
+   "ms": 1822
+  },
+  "El_professor": {
+   "global": 997,
+   "year": 997,
+   "tournaments": null,
+   "ms": 1314
+  },
+  "Стикс": {
+   "global": 930,
+   "year": null,
+   "tournaments": 22,
+   "ms": 1391
+  },
+  "Гагарин": {
+   "global": 995,
+   "year": 989,
+   "tournaments": 45,
+   "ms": 976
+  },
+  "Магнат": {
+   "global": 1148,
+   "year": 1144,
+   "tournaments": 17,
+   "ms": null
+  },
+  "Призрак": {
+   "global": 1237,
+   "year": 1009,
+   "tournaments": null,
+   "ms": 1095
+  },
+  "AquaMarine": {
+   "global": 987,
+   "year": 989,
+   "tournaments": 11,
+   "ms": null
+  },
+  "Zico": {
+   "global": 922,
+   "year": 990,
+   "tournaments": 29,
+   "ms": 1280
+  },
+  "Licht": {
+   "global": 1189,
+   "year": 1098,
+   "tournaments": 45,
+   "ms": 1655
+  },
+  "ШТО?": {
+   "global": 1056,
+   "year": 1056,
+   "tournaments": 36,
+   "ms": 1369
+  },
+  "Клото": {
+   "global": 1094,
+   "year": 1050,
+   "tournaments": 105,
+   "ms": 1142
+  },
+  "Гіппократ": {
+   "global": 975,
+   "year": 1002,
+   "tournaments": 10,
+   "ms": null
+  },
+  "Amor": {
+   "global": 927,
+   "year": 933,
+   "tournaments": 10,
+   "ms": 1470
+  },
+  "Леди Luz": {
+   "global": 839,
+   "year": 887,
+   "tournaments": 57,
+   "ms": 1309
+  },
+  "Sova": {
+   "global": 974,
+   "year": null,
+   "tournaments": 4,
+   "ms": null
+  },
+  "Haski": {
+   "global": 994,
+   "year": 994,
+   "tournaments": 2,
+   "ms": null
+  },
+  "Eskimo.": {
+   "global": 1449,
+   "year": 1071,
+   "tournaments": null,
+   "ms": null
+  },
+  "ShakAl": {
+   "global": 1027,
+   "year": null,
+   "tournaments": 8,
+   "ms": null
+  },
+  "Sэм": {
+   "global": 928,
+   "year": 947,
+   "tournaments": 50,
+   "ms": 1175
+  },
+  "RAMZES": {
+   "global": 1112,
+   "year": 993,
+   "tournaments": 40,
+   "ms": 1288
+  },
+  "Armia": {
+   "global": 869,
+   "year": 952,
+   "tournaments": 16,
+   "ms": null
+  },
+  "Sarcazi.!": {
+   "global": 985,
+   "year": 985,
+   "tournaments": 3,
+   "ms": null
+  },
+  "yesterday": {
+   "global": 1024,
+   "year": 1024,
+   "tournaments": 2,
+   "ms": null
+  },
+  "Ириска": {
+   "global": 1019,
+   "year": 1021,
+   "tournaments": 19,
+   "ms": null
+  },
+  "Tripok": {
+   "global": 1180,
+   "year": 1047,
+   "tournaments": 28,
+   "ms": 1671
+  },
+  "Akteur": {
+   "global": 984,
+   "year": 1007,
+   "tournaments": 15,
+   "ms": null
+  },
+  "Donna": {
+   "global": 875,
+   "year": 903,
+   "tournaments": 25,
+   "ms": 1391
+  },
+  "DOVOD": {
+   "global": 1147,
+   "year": 1090,
+   "tournaments": 31,
+   "ms": 1544
+  },
+  "Maverick": {
+   "global": 1020,
+   "year": 1017,
+   "tournaments": 19,
+   "ms": null
+  },
+  "Провокатор": {
+   "global": 867,
+   "year": 947,
+   "tournaments": 10,
+   "ms": null
+  },
+  "August": {
+   "global": 1013,
+   "year": 1013,
+   "tournaments": 34,
+   "ms": 1569
+  },
+  "Katusha": {
+   "global": 1004,
+   "year": 1024,
+   "tournaments": 8,
+   "ms": 1510
+  },
+  "Джоук": {
+   "global": 987,
+   "year": 987,
+   "tournaments": 3,
+   "ms": null
+  },
+  "FaYcT": {
+   "global": 975,
+   "year": null,
+   "tournaments": 11,
+   "ms": 1460
+  },
+  "Скорбный": {
+   "global": 973,
+   "year": 998,
+   "tournaments": 5,
+   "ms": null
+  },
+  "Onegog": {
+   "global": 933,
+   "year": null,
+   "tournaments": 14,
+   "ms": null
+  },
+  "Lady in Black": {
+   "global": 973,
+   "year": null,
+   "tournaments": 10,
+   "ms": null
+  },
+  "Viper_sh": {
+   "global": 993,
+   "year": null,
+   "tournaments": 1,
+   "ms": null
+  }
+ }
+}

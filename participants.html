@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- build v8.6 · 2026-06-25 · колонки рейтинга: ELO тек / ТИР (ранг markery S..F) / Место (глоб); тиры с цветом и группировкой («воздух» между рангами) + распределение; markery snapshot через API; Season's→Spring -->
+<!-- build v8.7 · 2026-06-25 · колонки рейтинга: ELO тек / ТИР (ранг markery S..F) / Место (глоб); тиры с цветом и группировкой («воздух» между рангами) + распределение; markery snapshot через API; Season's→Spring -->
 <!-- MafgameStat · participants.html · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
      заявки mafgame (подтв./заявки/лист ожидания) + ДВОЙНОЙ рейтинг markery(основной)+mafiastats(сверка),
      счётчик «ожидаемый средний ELO» (markery) на постере, ссылки на профили, флаги неоднозначных матчей.
@@ -286,14 +286,12 @@ function paint(){
     if(p.uid) links.push(`<a class="lnk" href="https://mafgame.org/user/${p.uid}/view" target="_blank" rel="noopener">mafgame</a>`);
     if(p.markery_id) links.push(`<a class="lnk" href="https://markery.online/playerStatistics?eloType=101&playerId=${p.markery_id}&tab=EloHistory" target="_blank" rel="noopener" title="ник на markery: ${esc(p.markery_nick||'')}">markery</a>`);
     if(p.ms&&p.ms.id) links.push(`<a class="lnk" href="https://mafiastats.com/players/${p.ms.id}" target="_blank" rel="noopener">mafiastats</a>`);
-    // ⚠ неоднозначный markery
-    let amb='';
-    if(p.mk&&p.mk.conf==='multi'){ amb=`<span class="flag amb" title="тёзки в markery (${(p.mk.alts||[]).map(a=>a.elo).join(', ')}); взят с макс. играми">⚠</span> `; }
+    // (матчинг markery подтверждён вручную — флаг неоднозначности снят)
     const club=p.club?`<br><span class="pl-real">${esc(p.club)}</span>`:(p.real?`<br><span class="pl-real">${esc(p.real)}</span>`:'');
     return `<tr class="${p.status}">
       <td class="l anchor"><div class="pl"><span class="num">${i+1}</span>${avatar(p)}<span><span class="pl-nick">${esc(p.nick)}</span>${club}</span></div></td>
       <td class="tcell grp">${cellTier(p.r_tier)}</td>
-      <td>${amb}${cellElo(p.r_elo_cur)}</td>
+      <td>${cellElo(p.r_elo_cur)}</td>
       <td>${cellElo(p.r_elo_2026)}</td>
       <td class="grp">${cellRank(p.r_rank_eu_2026)}</td>
       <td class="l">${links.join(' ')||'<span class="na">—</span>'}</td>

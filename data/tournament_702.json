@@ -1,0 +1,188 @@
+{
+ "tournament_id": 702,
+ "tournament_name": "Кубок Кёльна 2026",
+ "date": "2026-07-04 — 2026-07-05",
+ "location": "Cologne, Germany",
+ "club": "Mafia Club Cologne",
+ "organizer": "Mafgame",
+ "players_total": 40,
+ "days": 2,
+ "fee_eur": 115,
+ "format": "12 игр квалификации + финал 4 игры",
+ "closed": false,
+ "in_progress": true,
+ "upcoming": true,
+ "games_played": 0,
+ "games_total": 12,
+ "referees": [
+  "KEX",
+  "Рыба-мÓя",
+  "Кура",
+  "Кано"
+ ],
+ "awards": {},
+ "standings": {},
+ "players": [
+  {
+   "name": "Jerry Hurper",
+   "real": "Oleksandra Shapkina"
+  },
+  {
+   "name": "Абрам",
+   "real": "Михаил Уманский"
+  },
+  {
+   "name": "ParadoXx",
+   "real": "Aleksandr"
+  },
+  {
+   "name": "El_professor",
+   "real": "Анна"
+  },
+  {
+   "name": "Стикс",
+   "real": "Dmitry Andreev"
+  },
+  {
+   "name": "Гагарин",
+   "real": "Илья"
+  },
+  {
+   "name": "Магнат",
+   "real": "Хассан"
+  },
+  {
+   "name": "Призрак",
+   "real": "Alexander Wagenfeld"
+  },
+  {
+   "name": "AquaMarine",
+   "real": "Viktorija"
+  },
+  {
+   "name": "Zico",
+   "real": "Дария"
+  },
+  {
+   "name": "Licht",
+   "real": "Антон"
+  },
+  {
+   "name": "ШТО?",
+   "real": "Sergei"
+  },
+  {
+   "name": "Клото",
+   "real": "Ольга"
+  },
+  {
+   "name": "Гіппократ",
+   "real": "Богдан Вінокуров"
+  },
+  {
+   "name": "Amor",
+   "real": "Luba"
+  },
+  {
+   "name": "Леди Luz",
+   "real": "Светлана Новокщенова"
+  },
+  {
+   "name": "Sova",
+   "real": "Валерия Кашина"
+  },
+  {
+   "name": "Haski",
+   "real": "Alena Verevkina"
+  },
+  {
+   "name": "Eskimo.",
+   "real": "Надежда Нисинова"
+  },
+  {
+   "name": "ShakAl",
+   "real": "Alisa"
+  },
+  {
+   "name": "Sэм",
+   "real": "Татьяна Юрченко"
+  },
+  {
+   "name": "RAMZES",
+   "real": "Roman Politov"
+  },
+  {
+   "name": "Armia",
+   "real": "Галина Черткова"
+  },
+  {
+   "name": "Sarcazi.!",
+   "real": "Николай"
+  },
+  {
+   "name": "yesterday",
+   "real": "Michael"
+  },
+  {
+   "name": "Ириска",
+   "real": "Ирина"
+  },
+  {
+   "name": "Tripok",
+   "real": "Bohdan"
+  },
+  {
+   "name": "Akteur",
+   "real": "Yegor"
+  },
+  {
+   "name": "Donna",
+   "real": "Галина"
+  },
+  {
+   "name": "DOVOD",
+   "real": "Valerii S"
+  },
+  {
+   "name": "Maverick",
+   "real": "Zula Badaev"
+  },
+  {
+   "name": "Провокатор",
+   "real": "Max"
+  },
+  {
+   "name": "August",
+   "real": "Kostiantyn"
+  },
+  {
+   "name": "Katusha",
+   "real": "Kate Lachmann"
+  },
+  {
+   "name": "Джоук",
+   "real": "Denys"
+  },
+  {
+   "name": "FaYcT",
+   "real": "Гурам Меладзе"
+  },
+  {
+   "name": "Скорбный",
+   "real": "Artur Grigorev"
+  },
+  {
+   "name": "Onegog",
+   "real": "Андрей"
+  },
+  {
+   "name": "Lady in Black",
+   "real": "Sofiia"
+  },
+  {
+   "name": "Viper_sh",
+   "real": "Константин"
+  }
+ ],
+ "accent": "#d98c3a"
+}
