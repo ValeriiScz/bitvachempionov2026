@@ -353,7 +353,12 @@ function renderPaired(){
         <td><span class="num"><b style="color:#3fd17a">${r.w||0}</b><span style="color:#5a5e76">/${r.games}</span></span></td>
       </tr>`).join('')}</tbody></table></div>`;
   }
-  document.getElementById('main').innerHTML=chips+toggle+slider+note+table;
+  let champ='';
+  if(!DATA.in_progress){
+    const tw=teams[0], pw=cur.rows[0];
+    if(tw) champ=`<div class="progress-note" style="background:rgba(255,184,77,.10);border-color:var(--accent);color:#ffe;">🏆 <b style="color:var(--accent)">Победитель — команда «${escapeHtml(tw.team)}»</b> · Σ ${(+tw.sigma.toFixed(2))}${pw?` · лучший игрок: <b>${escapeHtml(pw.name)}</b> (Σ ${(+pw.sigma.toFixed(2))})`:''}. Официальный зачёт mafgame.</div>`;
+  }
+  document.getElementById('main').innerHTML=champ+chips+toggle+slider+note+table;
   document.querySelectorAll('.stage-btn[data-pv]').forEach(b=>b.addEventListener('click',()=>{pairedView=b.dataset.pv;renderPaired();}));
   document.querySelectorAll('.gsel button').forEach(b=>b.addEventListener('click',()=>{sliderN=+b.dataset.n;renderPaired();}));
 }

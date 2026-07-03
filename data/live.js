@@ -1,4 +1,4 @@
-// MafgameStat · data/live.js · v1.6 · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
+// MafgameStat · data/live.js · v1.7 · 2026-07-04 · кнопка «Обновить» перенесена в левый нижний угол (не налезает на «Наверх»);  · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
 window.normRole = function(r){
   if(r==null) return null;
   const map={'citizen':'Citizen','sheriff':'Sheriff','mafia':'Mafia','don':'Don',
@@ -60,7 +60,7 @@ function injectRefresh(){
     const b=document.createElement('button');
     b.id='__refbtn'; b.textContent='⟳ Обновить';
     b.title='Подтянуть свежие результаты с mafgame';
-    b.style.cssText='position:fixed;right:16px;bottom:16px;z-index:9999;padding:11px 16px;border-radius:24px;border:1px solid #ffb84d;background:#1a1d2e;color:#ffb84d;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);';
+    b.style.cssText='position:fixed;left:16px;bottom:16px;z-index:9999;padding:11px 16px;border-radius:24px;border:1px solid #ffb84d;background:#1a1d2e;color:#ffb84d;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);';
     b.onclick=()=>{b.textContent='Обновляю…';location.reload();};
     document.body.appendChild(b);
   };
