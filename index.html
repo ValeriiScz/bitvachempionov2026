@@ -255,8 +255,8 @@ function plainTile(t){
 }
 (d=>{
   const ts=d.tournaments;
-  const act=ts.filter(t=>t.status!=='finished').sort((a,b)=>(a.phase||9)-(b.phase||9));
-  const arc=ts.filter(t=>t.status==='finished');
+  const act=ts.filter(t=>t.status!=='finished').sort((a,b)=>(a.phase||9)-(b.phase||9)||String(a.start||'').localeCompare(String(b.start||'')));
+  const arc=ts.filter(t=>t.status==='finished').sort((a,b)=>String(b.start||'').localeCompare(String(a.start||'')));
   document.getElementById('actual').innerHTML=act.map(t=>t.theme==='cyprus'?posterTile(t):t.theme==='protocol'?protocolTile(t):t.theme==='poster'?posterArtTile(t):(t.status==='gathering'?gatheringTile(t):plainTile(t))).join('')||'<div class="tmeta">Сейчас активных турниров нет.</div>';
   document.getElementById('archive').innerHTML=arc.map(t=>`
     <a class="arc" href="tournament.html?t=${t.id}">

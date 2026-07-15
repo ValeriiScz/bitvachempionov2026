@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- MafgameStat · cards634.html · v1.0 · 2026-07-16 · карточки 44 игроков ЧЕ-634: премиум navy+gold (корона/вензеля/гексагоны/щиты). Маршрут: Игра/стол/МЕСТО ЗА СТОЛОМ (слот 1-10, НЕ турнирное место). Пропуск игры. База: cards702 -->
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Карточки игроков — Чемпионат Европы 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#d4af37;--gold-hi:#f0d98a;--gold-dk:#a5822b;--ink:#eef3fb;--mut:#9fb2cc;--dim:#6d84a3;
+    --bg:#0a1626;--panel:#0f2138;--panel2:#12294a;--line:rgba(212,175,55,.28);}
+  *{box-sizing:border-box;}
+  html,body{max-width:100%;overflow-x:hidden;}
+  body{margin:0;font-family:'Manrope',sans-serif;color:var(--ink);min-height:100vh;padding:18px 12px 60px;
+    background:radial-gradient(1100px 480px at 72% -8%,rgba(212,175,55,.15),transparent 60%),linear-gradient(180deg,#0d1c30 0%,#0a1626 55%,#070f1c 100%) fixed;}
+  .topbar{max-width:760px;margin:0 auto 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .nav-btn{padding:9px 14px;background:var(--panel);border:1px solid var(--line);color:var(--gold-hi);border-radius:10px;font-size:13px;font-weight:800;text-decoration:none;}
+  .nav-btn:hover{background:var(--gold);color:#0a1626;}
+  h1{font-family:'Cinzel',serif;font-weight:800;font-size:22px;color:var(--gold-hi);margin:6px 0 2px;letter-spacing:.6px;}
+  .sub{font-size:12.5px;color:var(--mut);}
+  .navrank{max-width:760px;margin:0 auto 18px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 16px;box-shadow:0 10px 26px rgba(0,0,0,.5);}
+  .navrank .nrh{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--gold-hi);margin-bottom:6px;}
+  .navrank .grp{display:flex;gap:9px;align-items:baseline;padding:5px 0;border-top:1px solid rgba(212,175,55,.12);}
+  .navrank .glab{flex:none;display:flex;align-items:center;gap:6px;min-width:74px;font-size:11px;color:var(--mut);font-weight:800;}
+  .navrank .gls{display:flex;flex-wrap:wrap;gap:3px 10px;font-size:12.5px;}
+  .navrank a{color:var(--gold-hi);text-decoration:none;font-weight:700;white-space:nowrap;}
+  .navrank a:hover{text-decoration:underline;}
+  /* ── карточка ── */
+  .card{max-width:560px;margin:0 auto 26px;background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:20px;box-shadow:0 16px 40px rgba(0,0,0,.55),inset 0 0 0 1px rgba(212,175,55,.06);
+    padding:16px 16px 14px;position:relative;}
+  .card::before{content:"";position:absolute;inset:6px;border:1px solid rgba(212,175,55,.18);border-radius:15px;pointer-events:none;}
+  .crown{text-align:center;color:var(--gold);font-size:15px;letter-spacing:6px;margin:-2px 0 2px;opacity:.9;}
+  .hdr{display:flex;align-items:center;gap:14px;margin-bottom:10px;position:relative;}
+  .avatar{width:66px;height:66px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.5);background:#12294a;flex:none;}
+  .nick{font-family:'Cinzel',serif;font-size:22px;font-weight:800;color:var(--gold-hi);line-height:1.05;text-shadow:0 1px 0 rgba(0,0,0,.4);}
+  .real{font-size:12px;color:var(--ink);margin-top:3px;opacity:.85;}
+  .club{font-size:11px;color:var(--mut);margin-top:2px;}
+  .tmeta{font-size:10.5px;color:var(--dim);margin-top:3px;}
+  .tmeta b{color:var(--gold-hi);}
+  .skip{display:inline-block;margin-top:5px;font-size:11px;font-weight:800;color:var(--gold-hi);background:rgba(212,175,55,.12);
+    border:1px solid var(--line);border-radius:9px;padding:3px 10px;}
+  .sec{font-size:10px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);margin:12px 0 6px;
+    display:flex;align-items:center;gap:8px;}
+  .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(212,175,55,.4),transparent);}
+  .tables-row{display:flex;gap:6px;flex-wrap:wrap;}
+  .tchip{padding:5px 10px;border-radius:9px;background:rgba(212,175,55,.1);border:1px solid var(--line);font-size:11.5px;font-weight:700;color:var(--ink);}
+  .tchip b{color:var(--gold-hi);}
+  .slots{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;}
+  .slot{text-align:center;padding:4px 0;border-radius:7px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.16);}
+  .slot .n{font-size:9px;color:var(--dim);}
+  .slot .c{font-size:12px;font-weight:800;color:var(--gold-hi);}
+  .slot.zero{opacity:.3;}
+  .opp{font-size:11.5px;line-height:1.7;color:var(--ink);}
+  .opp .cnt{display:inline-block;min-width:18px;text-align:center;background:var(--gold);color:#0a1626;border-radius:6px;font-size:10px;font-weight:800;padding:1px 4px;margin-right:6px;}
+  .foot{font-size:10px;color:var(--dim);margin-top:12px;text-align:right;}
+  .up-btn{position:fixed;right:16px;bottom:16px;z-index:50;width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#0a1626;font-size:22px;box-shadow:0 6px 18px rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;}
+  .up-btn.show{display:flex;}
+  .route-toggle{margin-top:12px;width:100%;padding:10px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:800;
+    background:rgba(212,175,55,.1);border:1px solid var(--line);color:var(--gold-hi);}
+  .route-toggle:hover{background:var(--gold);color:#0a1626;}
+  .route{display:none;margin-top:12px;}
+  .route.open{display:block;}
+  /* ── маршрут в стиле подсказки: Игра | стол | место за столом ── */
+  .rtbl{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:rgba(7,15,28,.5);}
+  .rtbl th{font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--gold-hi);padding:9px 6px;background:rgba(212,175,55,.08);
+    border-bottom:1px solid var(--line);text-align:center;letter-spacing:.5px;}
+  .rtbl td{padding:7px 6px;border-bottom:1px solid rgba(212,175,55,.1);text-align:center;font-size:13px;}
+  .rtbl tr:last-child td{border-bottom:none;}
+  .rtbl tr:nth-child(even) td{background:rgba(212,175,55,.03);}
+  .rtbl .gname{color:var(--ink);font-weight:700;}
+  .rtbl .tname{color:var(--mut);font-weight:600;}
+  .hexn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:29px;color:var(--gold-hi);font-weight:800;font-size:12px;
+    background:linear-gradient(180deg,#12294a,#0c1c32);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);border:0;
+    box-shadow:0 0 0 1px var(--gold) inset;}
+  .seatbadge{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 6px;color:var(--gold-hi);font-weight:800;font-size:13px;
+    background:linear-gradient(180deg,#13294a,#0b1a30);border:1px solid var(--gold);border-radius:8px 8px 10px 10px;box-shadow:0 2px 6px rgba(0,0,0,.4);}
+  .seathdr{display:inline-flex;align-items:center;gap:6px;}
+  .rate{display:flex;gap:6px;margin:2px 0 4px;}
+  .rcell{flex:1;text-align:center;padding:7px 4px;border-radius:10px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.18);}
+  .rcell .rk{font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--dim);}
+  .rcell .rv{font-size:15px;font-weight:800;color:var(--gold-hi);margin-top:3px;}
+  .rcell .rv .h{font-size:10px;color:var(--dim);font-weight:700;}
+  .rcell .rv.na{color:var(--dim);}
+  .ctier{display:inline-block;min-width:22px;padding:2px 9px;border-radius:7px;font-weight:800;font-size:15px;}
+  .ct-S{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#0a1626;}
+  .ct-A{background:rgba(103,224,143,.16);color:#7ce6a0;border:1px solid rgba(103,224,143,.4);}
+  .ct-B{background:rgba(122,167,214,.18);color:#9cc0e6;border:1px solid rgba(122,167,214,.45);}
+  .ct-C{background:rgba(212,175,55,.14);color:var(--gold-hi);border:1px solid var(--line);}
+  .ct-D{background:rgba(255,255,255,.06);color:#c7d2e2;border:1px solid rgba(255,255,255,.14);}
+  .ct-E{background:rgba(159,178,204,.12);color:var(--mut);border:1px solid rgba(159,178,204,.3);}
+  .ct-F{background:rgba(224,101,77,.16);color:#f0906f;border:1px solid rgba(224,101,77,.4);}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="nav-btn" href="tournament.html?t=634">← Турнир</a>
+  <a class="nav-btn" href="seating634.html">Рассадка</a>
+  <div>
+    <h1>Карточки игроков · Чемпионат Европы 2026</h1>
+    <div class="sub">18–19 июля 2026 · Бонн, Германия · 44 игрока · квалификация 11 игр (каждый играет 10) · карточки по рангу ↓</div>
+  </div>
+</div>
+<div class="navrank" id="toc"></div>
+<div id="cards"></div>
+<button class="up-btn" id="upBtn" title="Наверх" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script src="data/live.js"></script>
+<script>
+window.addEventListener('scroll',()=>{const b=document.getElementById('upBtn');if(b)b.classList.toggle('show',window.scrollY>600);});
+const ROMAN=['','I','II','III','IV'];
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+Promise.all([
+  window.loadGames('634'),
+  fetch('data/avatars_634.json').then(r=>r.json()),
+  fetch('data/tournament_634.json').then(r=>r.ok?r.json():{}).catch(()=>({})),
+  fetch('data/elo_634.json').then(r=>r.ok?r.json():null).catch(()=>null),
+  fetch('data/participants_634.json').then(r=>r.ok?r.json():null).catch(()=>null),
+  fetch('data/skip_634.json').then(r=>r.ok?r.json():null).catch(()=>null)
+]).then(([G,A,T,E,P,S])=>{
+  const ELO=(E&&E.players)||{};
+  const AV=A.avatars||{};
+  const SKIP=S||{};
+  const INFO={}; ((P&&P.players)||[]).forEach(p=>INFO[p.nick]={real:p.real,club:(p.ms&&p.ms.club)||''});
+  const RATE={}; ((P&&P.players)||[]).forEach(p=>RATE[p.nick]={tier:p.r_tier,elo:p.r_elo_cur,elo26:p.r_elo_2026,eu:p.r_rank_eu_2026,mid:p.markery_id});
+  const TORD={S:0,A:1,B:2,C:3,D:4,E:5,F:6};
+  const tierBadge=t=>(t&&t in TORD)?`<span class="ctier ct-${t}">${t}</span>`:'<span style="color:var(--dim)">—</span>';
+  const occ={}, opp={};
+  G.games.forEach((g,gi)=>g.tables.forEach(t=>{
+    const names=t.seats.map(s=>s.name);
+    names.forEach((n,i)=>{
+      (occ[n]=occ[n]||[]).push({g:gi+1,t:t.table_num,slot:i+1});
+      names.forEach(m=>{ if(m!==n){ (opp[n]=opp[n]||{})[m]=(opp[n][m]||0)+1; } });
+    });
+  }));
+  const eloOf=n=>(RATE[n]&&RATE[n].elo)||(ELO[n]&&ELO[n].global)||0;
+  const tordOf=n=>{const t=RATE[n]&&RATE[n].tier;return (t&&t in TORD)?TORD[t]:9;};
+  const players=Object.keys(occ).sort((a,b)=>{const ta=tordOf(a),tb=tordOf(b);if(ta!==tb)return ta-tb;const ea=eloOf(a),eb=eloOf(b);return eb!==ea?eb-ea:a.localeCompare(b,'ru');});
+  const tocEl=document.getElementById('toc');
+  const byTier={}; players.forEach(p=>{const t=(RATE[p]&&RATE[p].tier&&RATE[p].tier in TORD)?RATE[p].tier:'—';(byTier[t]=byTier[t]||[]).push(p);});
+  let navHtml='<div class="nrh">Игроки по рангам ('+players.length+') — найди себя:</div>';
+  ['S','A','B','C','D','E','F','—'].forEach(t=>{ if(!byTier[t])return;
+    const lab=t==='—'?'<span style="color:var(--dim)">—</span>':`<span class="ctier ct-${t}">${t}</span>`;
+    navHtml+=`<div class="grp"><div class="glab">${lab} ${byTier[t].length}</div><div class="gls">`+byTier[t].map(p=>`<a href="#p-${encodeURIComponent(p)}">${esc(p)}</a>`).join('')+`</div></div>`;});
+  tocEl.innerHTML=navHtml;
+  document.getElementById('cards').innerHTML=players.map(p=>{
+    const o=occ[p];
+    const tc={}; o.forEach(x=>tc[x.t]=(tc[x.t]||0)+1);
+    const sc={}; o.forEach(x=>sc[x.slot]=(sc[x.slot]||0)+1);
+    const groups={};
+    Object.entries(opp[p]||{}).forEach(([m,c])=>{ (groups[c]=groups[c]||[]).push(m); });
+    let oppHtml=Object.keys(groups).sort((a,b)=>b-a).slice(0,5).map(c=>`<div><span class="cnt">${c}</span>${groups[c].sort((x,y)=>x.localeCompare(y,'ru')).map(esc).join(', ')}</div>`).join('');
+    const info=INFO[p]||{};
+    const R=RATE[p]||{};
+    const skip=SKIP[p];
+    const routeRows=o.sort((a,b)=>a.g-b.g).map(x=>`<tr><td><span class="hexn">${x.g}</span></td><td class="gname">Игра ${x.g}</td><td class="tname">стол ${ROMAN[x.t]}</td><td><span class="seatbadge">${x.slot}</span></td></tr>`).join('');
+    return `<div class="card" id="p-${esc(p)}">
+      <div class="crown">♛</div>
+      <div class="hdr">
+        <img class="avatar" src="${esc(AV[p]||'')}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='https://mafgame.org/build/assets/avatar-default2-33e44bae.png'">
+        <div>
+          <div class="nick">${esc(p)}</div>
+          ${info.real?`<div class="real">${esc(info.real)}</div>`:''}
+          ${info.club?`<div class="club">${esc(info.club)}</div>`:''}
+          <div class="tmeta">Чемпионат Европы 2026 · 18–19.07 · Бонн</div>
+          ${R.elo?`<div class="tmeta"><b>ELO ${Math.round(R.elo)}</b> · markery${ELO[p]&&ELO[p].tournaments?` · ${ELO[p].tournaments} турниров`:''}</div>`:`<div class="tmeta" style="opacity:.6">ELO markery — нет данных</div>`}
+          ${skip?`<span class="skip">⏸ отдыхает в Игре ${skip}</span>`:''}
+        </div>
+      </div>
+      <div class="rate">
+        <div class="rcell"><div class="rk">Ранг</div><div class="rv">${tierBadge(R.tier)}</div></div>
+        <div class="rcell"><div class="rk">ELO тек</div><div class="rv${R.elo?'':' na'}">${R.elo?Math.round(R.elo):'—'}</div></div>
+        <div class="rcell"><div class="rk">ELO 2026</div><div class="rv${R.elo26?'':' na'}">${R.elo26?Math.round(R.elo26):'—'}</div></div>
+        <div class="rcell"><div class="rk">Европа 2026</div><div class="rv${R.eu?'':' na'}">${R.eu?('<span class=\'h\'>#</span>'+R.eu):'—'}</div></div>
+      </div>
+      <div class="sec">Столы (${o.length} игр)</div>
+      <div class="tables-row">${Object.keys(tc).sort((a,b)=>a-b).map(t=>`<span class="tchip">Стол <b>${ROMAN[t]}</b> · ${tc[t]}</span>`).join('')}</div>
+      <div class="sec">Места за столом (слот 1–10)</div>
+      <div class="slots">${Array.from({length:10},(_,i)=>`<div class="slot${sc[i+1]?'':' zero'}"><div class="n">${i+1}</div><div class="c">${sc[i+1]||0}</div></div>`).join('')}</div>
+      <div class="sec">Соперники (общих игр)</div>
+      <div class="opp">${oppHtml}</div>
+      <button class="route-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'Скрыть маршрут ▲':'Мой маршрут по играм ▼';">Мой маршрут по играм ▼</button>
+      <div class="route"><table class="rtbl"><thead><tr><th>#</th><th>Игра</th><th>Стол</th><th><span class="seathdr">🏆 Место<br>за столом</span></th></tr></thead><tbody>${routeRows}</tbody></table></div>
+      <div class="foot">mafgame.org/634 · MafgameStat</div>
+    </div>`;
+  }).join('');
+});
+</script>
+</body>
+</html>

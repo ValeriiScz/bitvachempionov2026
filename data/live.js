@@ -1,4 +1,4 @@
-// MafgameStat · data/live.js · v1.7 · 2026-07-04 · кнопка «Обновить» перенесена в левый нижний угол (не налезает на «Наверх»);  · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
+// MafgameStat · data/live.js · v1.8 · 2026-07-16 · ЧЕ-634: стадии Квалификация/Полуфинал/Финал (3 стадии) + ЗАЩИТА «держим последний топ-снимок» (localStorage): не затираем хорошие данные пустыми/обнулёнными/пропавшими (snapScore/notRegression); live-фейл → отдаём сохранённый снимок. · v1.7 · 2026-07-04 · кнопка «Обновить» перенесена в левый нижний угол (не налезает на «Наверх»);  · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
 window.normRole = function(r){
   if(r==null) return null;
   const map={'citizen':'Citizen','sheriff':'Sheriff','mafia':'Mafia','don':'Don',
@@ -26,9 +26,15 @@ window.convertInertia = function(g, t){
   }
   const stKeys=Object.keys(stages).map(Number).sort((a,b)=>a-b);
   const multi=stKeys.length>1;
+  const maxStage=stKeys[stKeys.length-1];
+  const stageName=(st)=>{
+    if(st===1) return multi?'Квалификация':'Игры';
+    if(maxStage>=3) return st===2?'Полуфинал':(st===3?'Финал':'Стадия '+st); // 3 стадии: квал/полуфинал/финал (ЧЕ)
+    return 'Финал'; // 2 стадии: квал/финал (766/702/667)
+  };
   const out=[];
   stKeys.forEach(st=>{
-    const label = st===2 ? 'Финал' : (multi ? 'Квалификация' : 'Игры');
+    const label = stageName(st);
     Object.keys(stages[st]).map(Number).sort((a,b)=>a-b).forEach(gm=>{
       const tables=[];
       Object.keys(stages[st][gm]).map(Number).sort((a,b)=>a-b).forEach(tb=>{
@@ -46,7 +52,7 @@ window.convertInertia = function(g, t){
         if(winner!=='unknown'&&hasRoles) seats.forEach(x=>{const black=(x.role==='Mafia'||x.role==='Don');x.result=((winner==='black_win')===black)?'W':'L';});
         tables.push({table_num:tb,winner,seats});
       });
-      if(tables.length) out.push({title:(st===2?'Финал ':'Game ')+gm,stage:label,tables}); // игру без столов пропускаем
+      if(tables.length) out.push({title:(st===1?'Game ':stageName(st)+' ')+gm,stage:label,tables}); // игру без столов пропускаем
     });
   });
   if(!out.length) return null;
@@ -67,9 +73,29 @@ function injectRefresh(){
   if(document.body) add(); else document.addEventListener('DOMContentLoaded',add);
 }
 window.applyAccent = async function(t){ try{const r=await fetch('data/tournament_'+t+'.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.accent)document.documentElement.style.setProperty('--accent',j.accent);}}catch(e){} };
+// «Качество» снимка: чем больше доигранных игр и суммарной статистики — тем ценнее.
+// Нужно, чтобы НЕ затирать хорошие данные пустыми/обнулёнными (правило: держим последний топ-снимок).
+window.snapScore = function(conv){
+  if(!conv||!conv.games) return {played:0,sum:0,games:0};
+  let sum=0, seats=0;
+  conv.games.forEach(g=>g.tables.forEach(tb=>tb.seats.forEach(s=>{ sum+=Math.abs(s.sigma||0)+Math.abs(s.wpts||0); if(s.role) seats++; })));
+  return {played:conv.games_played||0, sum:+sum.toFixed(3), games:conv.games.length, seats};
+};
+// не регресс, если новый снимок не хуже сохранённого (не меньше доигранных игр и не «схлопнулась» статистика)
+window.notRegression = function(fresh, saved){
+  if(!saved) return true;
+  const a=snapScore(fresh), b=snapScore(saved);
+  if(a.played < b.played) return false;               // стало меньше доигранных игр → таблицу закрыли/подрезали
+  if(b.sum>0 && a.sum < b.sum*0.5) return false;       // была статистика, а стала почти нулевая → обнуление допов
+  if(a.games < b.games) return false;                  // пропали игры целиком
+  return true;
+};
 window.loadGames = async function(t){
   let inprog=false;
   try{const tr=await fetch('data/tournament_'+t+'.json',{cache:'no-store'});if(tr.ok){const tj=await tr.json();inprog=!!tj.in_progress;}}catch(e){}
+  const LSK='mgs_lastgood_'+t;
+  let saved=null;
+  try{ const raw=localStorage.getItem(LSK); if(raw) saved=JSON.parse(raw); }catch(e){}
   if(inprog){
     try{
       const r=await fetch('/mafgame/tournaments/'+t+'/game_results',{cache:'no-store'});
@@ -79,14 +105,32 @@ window.loadGames = async function(t){
         if(m){
           const dp=JSON.parse(m[1].replace(/&quot;/g,'"').replace(/&amp;/g,'&').replace(/&#039;/g,"'"));
           const conv=convertInertia(dp.props&&dp.props.games, t);
-          if(conv){ injectRefresh(); if(!window._autoref){window._autoref=1;setTimeout(()=>location.reload(),600000);} return conv; }
+          if(conv){
+            injectRefresh(); if(!window._autoref){window._autoref=1;setTimeout(()=>location.reload(),600000);}
+            // защита: принимаем свежий снимок только если он НЕ регресс относительно последнего хорошего
+            if(notRegression(conv, saved)){
+              try{ localStorage.setItem(LSK, JSON.stringify(conv)); }catch(e){}
+              return conv;
+            } else {
+              console.warn('live '+t+': свежий снимок хуже сохранённого (таблицу закрыли/обнулили) — держим последние топ-данные');
+              if(saved) return saved;
+              return conv; // сохранённого нет — отдаём что есть
+            }
+          }
         }
       }
-    }catch(e){console.warn('live '+t+' недоступен, беру локальный файл',e);}
+      // live не отдал данных — падаем на последний хороший снимок, если он есть
+      if(saved) { injectRefresh(); return saved; }
+    }catch(e){ console.warn('live '+t+' недоступен, беру сохранённый/локальный',e); if(saved){ injectRefresh(); return saved; } }
   }
   try{
     const r2=await fetch('data/games_'+t+'_current.json'+(inprog?'?cb='+Date.now():''),{cache:inprog?'no-store':'default'});
-    if(r2.ok) return await r2.json();
+    if(r2.ok){
+      const local=await r2.json();
+      // если сохранённый снимок «богаче» замороженного локального — предпочитаем его
+      if(saved && snapScore(saved).played > snapScore(local).played) return saved;
+      return local;
+    }
   }catch(e){console.warn('нет локального файла игр для '+t,e);}
-  return null;
+  return saved||null;
 };

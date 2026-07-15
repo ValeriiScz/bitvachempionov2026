@@ -1,0 +1,5224 @@
+{
+ "tournament_id": 634,
+ "tournament_name": "Чемпионат Европы 2026",
+ "games_played": 0,
+ "games_total": 17,
+ "closed": false,
+ "note": "Рассадка квалификации (снимок mafgame 2026-07-15). 11 игр × 4 стола × 10. Полуфинал (2 игры, топ-40) и финал (4 игры, топ-10) — после квалификации. Результаты появятся вживую после старта.",
+ "games": [
+  {
+   "title": "Game 1",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Niko",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Katusha",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Призрак",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "yesterday",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "TOPS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Саботаж",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Haski",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Putnik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Клото",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Малышка Мю",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Sancho",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Живи",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Designer",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Sarcazi.!",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Jerry Hurper",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "AquaMarine",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "sometimes",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "DOVOD",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Licht",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "ШТО?",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Zico",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Скорбный",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Гіппократ",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Donna",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "RAMZES",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Akteur",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Гамбитик",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "qUAest0r",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "YeS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Ириска",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Провокатор",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Link",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Tripok",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Царь",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Zorro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Ксюша",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "LogisticPro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Джоук",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Магнат",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Funt",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 2",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Zorro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Tripok",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Провокатор",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Скорбный",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Малышка Мю",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "ParadoXx",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "ШТО?",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "RAMZES",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "YeS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Jerry Hurper",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Putnik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Гамбитик",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Царь",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Ириска",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Sarcazi.!",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Katusha",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Akteur",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Link",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Sancho",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "TOPS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "sometimes",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Specchio",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Niko",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Клото",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Ксюша",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Живи",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Zico",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "yesterday",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "LogisticPro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "DOVOD",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Джоук",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "AquaMarine",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Kokocik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Магнат",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "qUAest0r",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Designer",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Призрак",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Donna",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "KEX",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Licht",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 3",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Zorro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Ириска",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "AquaMarine",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Малышка Мю",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Katusha",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Funt",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "YeS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "LogisticPro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Живи",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "qUAest0r",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "KEX",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "yesterday",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Sarcazi.!",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Ксюша",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Скорбный",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "ParadoXx",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Tripok",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Kokocik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "TOPS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Niko",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Гіппократ",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Putnik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Sancho",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Zico",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Specchio",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Jerry Hurper",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Царь",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Провокатор",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Donna",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Призрак",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Саботаж",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "DOVOD",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "RAMZES",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Haski",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "ШТО?",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Джоук",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Licht",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Гамбитик",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Akteur",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Link",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 4",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Tripok",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Джоук",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Малышка Мю",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "sometimes",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Donna",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Specchio",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Katusha",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Akteur",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Designer",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "YeS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "DOVOD",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "LogisticPro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Ириска",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "ParadoXx",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "KEX",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "RAMZES",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Putnik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Клото",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Живи",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Провокатор",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Link",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Магнат",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Haski",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Niko",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "AquaMarine",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Licht",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Скорбный",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Sarcazi.!",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Zorro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Zico",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Funt",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Jerry Hurper",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Ксюша",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Гамбитик",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Sancho",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Kokocik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "qUAest0r",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Гіппократ",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "yesterday",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Саботаж",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 5",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "ШТО?",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Провокатор",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Скорбный",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Sancho",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Магнат",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Donna",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Ксюша",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Саботаж",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Katusha",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "KEX",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Sarcazi.!",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "TOPS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Джоук",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Призрак",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "DOVOD",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Zorro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Designer",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Licht",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Гіппократ",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "yesterday",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Specchio",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Haski",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "qUAest0r",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Гамбитик",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Клото",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Царь",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Живи",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "AquaMarine",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "ParadoXx",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Tripok",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Jerry Hurper",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Малышка Мю",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Zico",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Kokocik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "sometimes",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Akteur",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Niko",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Funt",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Putnik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "RAMZES",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 6",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Скорбный",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Sancho",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "YeS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Джоук",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Живи",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "yesterday",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Kokocik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "KEX",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Link",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Putnik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "RAMZES",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Саботаж",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Donna",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "TOPS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Licht",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Провокатор",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Zorro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Малышка Мю",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "AquaMarine",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Царь",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Akteur",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "ШТО?",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Niko",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Specchio",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Designer",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Клото",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Гіппократ",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Ириска",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Ксюша",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "LogisticPro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "qUAest0r",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Магнат",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "DOVOD",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Sarcazi.!",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Funt",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Призрак",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "ParadoXx",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Katusha",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "sometimes",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Haski",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 7",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Ксюша",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Funt",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Link",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Jerry Hurper",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Скорбный",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "RAMZES",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Клото",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Designer",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "DOVOD",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Katusha",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Zico",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Kokocik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "ШТО?",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "YeS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Призрак",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "LogisticPro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Саботаж",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "ParadoXx",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Sarcazi.!",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Specchio",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Haski",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Гіппократ",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "KEX",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Провокатор",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Джоук",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "sometimes",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Малышка Мю",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "TOPS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "qUAest0r",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Царь",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Живи",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Licht",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "yesterday",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Tripok",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Putnik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Ириска",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Магнат",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Niko",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Гамбитик",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Donna",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 8",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Царь",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "YeS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Specchio",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "AquaMarine",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Niko",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Джоук",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "KEX",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Ксюша",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "RAMZES",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Sarcazi.!",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Designer",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Клото",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "sometimes",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Саботаж",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Zico",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Putnik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Funt",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Tripok",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Zorro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Sancho",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Провокатор",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Малышка Мю",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Магнат",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Гіппократ",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "yesterday",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Link",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Ириска",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "ШТО?",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Призрак",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "ParadoXx",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Гамбитик",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Donna",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Kokocik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Katusha",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "LogisticPro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "TOPS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Akteur",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Jerry Hurper",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Haski",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Живи",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 9",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "LogisticPro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Akteur",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Haski",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "DOVOD",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Tripok",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "ШТО?",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Specchio",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "sometimes",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Ириска",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Джоук",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Kokocik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Jerry Hurper",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Zorro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Link",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Провокатор",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Sancho",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "RAMZES",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Призрак",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Гамбитик",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Designer",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Licht",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "qUAest0r",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "KEX",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Putnik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "YeS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Магнат",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Sarcazi.!",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Царь",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Katusha",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Ксюша",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "TOPS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "ParadoXx",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Funt",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Малышка Мю",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Гіппократ",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Саботаж",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "AquaMarine",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Zico",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Скорбный",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Клото",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 10",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Putnik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "sometimes",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "LogisticPro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Магнат",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Haski",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "YeS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "TOPS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Гіппократ",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "ШТО?",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Zorro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "AquaMarine",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Niko",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "ParadoXx",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Akteur",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Sancho",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "DOVOD",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "yesterday",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Провокатор",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Jerry Hurper",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "qUAest0r",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Ириска",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Zico",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Licht",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Designer",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Царь",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Tripok",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "RAMZES",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Скорбный",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Саботаж",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Kokocik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Призрак",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "KEX",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Клото",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Donna",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Link",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Гамбитик",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Specchio",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Живи",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Funt",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Sarcazi.!",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Game 11",
+   "stage": "Квалификация",
+   "tables": [
+    {
+     "table_num": 1,
+     "judge": "Рыба-мÓя",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "sometimes",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Джоук",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Клото",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "yesterday",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "ParadoXx",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Haski",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Link",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Katusha",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Zico",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "AquaMarine",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 2,
+     "judge": "Гармония",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Живи",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Призрак",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "TOPS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "Licht",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Ириска",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Funt",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Jerry Hurper",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "YeS",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Specchio",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Ксюша",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 3,
+     "judge": "Тринити",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Малышка Мю",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "DOVOD",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Царь",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "LogisticPro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Kokocik",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "Гіппократ",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "Donna",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Sancho",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Niko",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Скорбный",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    },
+    {
+     "table_num": 4,
+     "judge": "Кура",
+     "winner": "unknown",
+     "seats": [
+      {
+       "seat": 1,
+       "name": "Akteur",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 2,
+       "name": "Designer",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 3,
+       "name": "Гамбитик",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 4,
+       "name": "ШТО?",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 5,
+       "name": "Саботаж",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 6,
+       "name": "KEX",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 7,
+       "name": "qUAest0r",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 8,
+       "name": "Zorro",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 9,
+       "name": "Tripok",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      },
+      {
+       "seat": 10,
+       "name": "Магнат",
+       "role": null,
+       "marker": null,
+       "aps": 0,
+       "wpts": 0,
+       "ci": 0,
+       "sigma": 0,
+       "result": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

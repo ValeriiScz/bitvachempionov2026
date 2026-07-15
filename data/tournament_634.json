@@ -1,0 +1,213 @@
+{
+ "tournament_id": 634,
+ "tournament_name": "Чемпионат Европы 2026",
+ "date": "2026-07-18 — 2026-07-19",
+ "location": "Бонн, Германия",
+ "club": "",
+ "organizer": "Mafgame · World Alliance League",
+ "players_total": 44,
+ "days": 2,
+ "fee_eur": 105,
+ "stars": 5,
+ "prize_eur": 3000,
+ "format": "Квалификация 11 игр (4 стола, каждый играет 10 — одну отдыхает) → Полуфинал 2 игры (топ-40) → Финал 4 игры (топ-10)",
+ "closed": false,
+ "in_progress": true,
+ "upcoming": true,
+ "games_played": 0,
+ "games_total": 17,
+ "accent": "#d4af37",
+ "referees": [
+  "Рыба-мÓя",
+  "Гармония",
+  "Тринити",
+  "Кура"
+ ],
+ "referees_by_table": {
+  "1": "Рыба-мÓя",
+  "2": "Гармония",
+  "3": "Тринити",
+  "4": "Кура"
+ },
+ "awards": {},
+ "standings": {},
+ "players": [
+  {
+   "name": "KEX",
+   "real": "Евгений Любинин"
+  },
+  {
+   "name": "Jerry Hurper",
+   "real": "Oleksandra Shapkina"
+  },
+  {
+   "name": "YeS",
+   "real": "Ievgen Sokolskyi"
+  },
+  {
+   "name": "Kokocik",
+   "real": "Iryna"
+  },
+  {
+   "name": "Katusha",
+   "real": "Kate Lachmann"
+  },
+  {
+   "name": "Tripok",
+   "real": "Bohdan"
+  },
+  {
+   "name": "Ксюша",
+   "real": "Оксана"
+  },
+  {
+   "name": "RAMZES",
+   "real": "Roman Politov"
+  },
+  {
+   "name": "Niko",
+   "real": "Roman Krasiuk"
+  },
+  {
+   "name": "ParadoXx",
+   "real": "Aleksandr"
+  },
+  {
+   "name": "DOVOD",
+   "real": "Valerii S"
+  },
+  {
+   "name": "TOPS",
+   "real": "Eugeniu"
+  },
+  {
+   "name": "qUAest0r",
+   "real": "Serhii"
+  },
+  {
+   "name": "Putnik",
+   "real": "Zans Babinecs"
+  },
+  {
+   "name": "AquaMarine",
+   "real": "Viktorija"
+  },
+  {
+   "name": "Link",
+   "real": "Denis Sukhonosov"
+  },
+  {
+   "name": "sometimes",
+   "real": "Teymur Orujov"
+  },
+  {
+   "name": "ШТО?",
+   "real": "Sergei"
+  },
+  {
+   "name": "Designer",
+   "real": "Карен Кравченко"
+  },
+  {
+   "name": "Funt",
+   "real": "Funt"
+  },
+  {
+   "name": "Donna",
+   "real": "Галина"
+  },
+  {
+   "name": "Клото",
+   "real": "Ольга"
+  },
+  {
+   "name": "Провокатор",
+   "real": "Max"
+  },
+  {
+   "name": "Specchio",
+   "real": "Georgios"
+  },
+  {
+   "name": "Магнат",
+   "real": "Хассан"
+  },
+  {
+   "name": "Sarcazi.!",
+   "real": "Николай"
+  },
+  {
+   "name": "yesterday",
+   "real": "Michael"
+  },
+  {
+   "name": "Akteur",
+   "real": "Yegor"
+  },
+  {
+   "name": "Ириска",
+   "real": "Ирина"
+  },
+  {
+   "name": "Царь",
+   "real": "Nick"
+  },
+  {
+   "name": "Саботаж",
+   "real": "Александр Ботте"
+  },
+  {
+   "name": "Малышка Мю",
+   "real": "Pavla Tolokonina"
+  },
+  {
+   "name": "LogisticPro",
+   "real": "Владислав"
+  },
+  {
+   "name": "Джоук",
+   "real": "Denys"
+  },
+  {
+   "name": "Живи",
+   "real": "Igors"
+  },
+  {
+   "name": "Призрак",
+   "real": "Alexander Wagenfeld"
+  },
+  {
+   "name": "Скорбный",
+   "real": "Artur Grigorev"
+  },
+  {
+   "name": "Zorro",
+   "real": "Іван Сулима"
+  },
+  {
+   "name": "Zico",
+   "real": "Дария"
+  },
+  {
+   "name": "Гіппократ",
+   "real": "Богдан Вінокуров"
+  },
+  {
+   "name": "Licht",
+   "real": "Антон"
+  },
+  {
+   "name": "Haski",
+   "real": "Alena Verevkina"
+  },
+  {
+   "name": "Sancho",
+   "real": "Oleksandr"
+  },
+  {
+   "name": "Гамбитик",
+   "real": "Юрий Шолом"
+  }
+ ],
+ "note": "Титульный турнир сезона — 5★, победитель становится чемпионом Европы. Рассадка квалификации готова (11 игр × 4 стола). Полуфинал (топ-40) и финал (топ-10) сеются после квалификации. Статистика включится автоматически после первой игры (live с mafgame)."
+}

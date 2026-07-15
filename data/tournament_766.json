@@ -20,7 +20,38 @@
   "Кирпич",
   "Trinity"
  ],
- "awards": {},
+ "awards": {
+  "most_valuable_players": [
+   "Lюц (4.07)",
+   "SANYURIK (4.05)",
+   "Jane (3.71)"
+  ],
+  "most_valuable_mafia": [
+   "Season's (1.6)",
+   "new_katenok (1.1)",
+   "Maverick (1.0)"
+  ],
+  "most_valuable_citizen": [
+   "Lюц (2.9)",
+   "SANYURIK (2.9)",
+   "Jane (2.5)"
+  ],
+  "best_don": [
+   "new_katenok (3/1.0)",
+   "Season's (2/0.8)",
+   "aptah (2/0.5)"
+  ],
+  "best_sheriff": [
+   "Нико (3/0.2)",
+   "SANYURIK (2/0.8)",
+   "Phoenix (2/0.75)"
+  ],
+  "most_killed": [
+   "Сью (4)",
+   "aptah (4)",
+   "LogisticPro (3)"
+  ]
+ },
  "standings": {
   "total": [
    {
@@ -1775,5 +1806,11 @@
   "transfer_check_final": "10/10",
   "champion": "Lюц"
  },
- "note": "Завершён. 12 игр квалификации (4 стола) + финал 4 игры. Чемпион — Lюц. Официальная сводная (Итоговая/Финал/Квалификация) сверена с mafgame 1:1."
+ "note": "Завершён. 12 игр квалификации (4 стола) + финал 4 игры. Чемпион — Lюц. Официальная сводная (Итоговая/Финал/Квалификация) сверена с mafgame 1:1.",
+ "winners": [
+  "Lюц",
+  "aptah",
+  "SANYURIK"
+ ],
+ "awards_note": "Победители — офиц. места mafgame. Номинации: MVP — по ΣAP (офиц.); лучшие мафия/мирный/дон/шериф и «убит 1-й» — по протоколам игр."
 }
