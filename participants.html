@@ -150,6 +150,8 @@ const REG=(window.TOURNAMENTS_DB?.tournaments||[]).find(x=>x.id===T)||{};
 if(REG.accent)document.documentElement.style.setProperty('--accent',REG.accent);
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function plW(n,a,b,c){const m=Math.abs(n)%100,m1=m%10;if(m>10&&m<20)return c;if(m1>1&&m1<5)return b;if(m1===1)return a;return c;}
+function players_w(n){return n+' '+plW(n,'игрок','игрока','игроков');}
 function mono(nick){const m=(nick||'?').replace(/[^A-Za-zА-Яа-яЁё0-9]/g,'').slice(0,2).toUpperCase()||'·';return m;}
 function avatar(p){
   if(p.av)return `<img class="av" src="${esc(p.av)}" alt="" onerror="this.outerHTML='<span class=\\'mono\\'>'+this.dataset.m+'</span>'" data-m="${esc(mono(p.nick))}">`;
@@ -210,7 +212,7 @@ function render(D){
     </div>`;
   const heroHtml = art ? `
     <div class="hero">
-      <img src="${esc(art)}" alt="" onerror="this.closest('.hero').classList.add('noart');this.remove()">
+      <img src="${esc(art)}" alt=""${REG.artRatio?` style="aspect-ratio:${REG.artRatio};max-height:none;height:auto"`:''} onerror="this.closest('.hero').classList.add('noart');this.remove()">
       <div class="ov"></div>
       <div class="ttl"><div class="nm">${esc(REG.name||meta.name)}</div><div class="dt">${esc(REG.dates||'')} · ${esc(REG.city||'')}</div></div>
       ${meterHtml}
@@ -222,7 +224,7 @@ function render(D){
 
   const summary = `
     <div class="summary">
-      <div class="scard"><div class="k">Участников</div><div class="v">${players.length}<small> / ${meta.expected||'—'} ожид.</small></div></div>
+      <div class="scard"><div class="k">Участников</div><div class="v">${players.length}<small>${(meta.expected&&players.length>=meta.expected)?(' из '+meta.expected):(' / '+(meta.expected||'—')+' ожид.')}</small></div></div>
       <div class="scard"><div class="k">markery · ср. ELO</div><div class="v">${eloAvg!=null?eloAvg:'—'}<small> n${eloVals.length}</small></div></div>
       <div class="scard"><div class="k">с рейтингом markery</div><div class="v">${eloVals.length}<small> / ${players.length}</small></div></div>
     </div>`;
@@ -307,7 +309,7 @@ function paint(){
         const cls=(key in TIER_ORD)?('t-'+key):'';
         const badge=(key in TIER_ORD)?`<span class="tier ${cls}">${key}</span>`:'<span class="na">—</span>';
         const cnt=(key in TIER_ORD)?counts[key]:DATA.players.filter(p=>!(p.r_tier in TIER_ORD)).length;
-        html+=`<tr class="tsep"><td colspan="6">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${cnt} игр.</td></tr>`;
+        html+=`<tr class="tsep"><td colspan="6">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;
         prevTier=key;
       }
     }

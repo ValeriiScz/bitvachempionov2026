@@ -190,7 +190,7 @@ const PALM='<svg class="palm" viewBox="0 0 120 140" fill="none"><path d="M38 138
 function posterArtTile(t){
   return `
   <a class="tile artwide" href="tournament.html?t=${t.id}">
-    <div class="poster poland hasart"><img class="art" src="${t.art||''}" alt="${esc(t.name)}" onerror="this.closest('.poster').classList.remove('hasart')">${eloChip(t,true)}</div>
+    <div class="poster poland hasart"${t.artRatio?` style="aspect-ratio:${t.artRatio}"`:''}><img class="art" src="${t.art||''}" alt="${esc(t.name)}" onerror="this.closest('.poster').classList.remove('hasart')">${eloChip(t,true)}</div>
     <div class="tbody">
       <div class="tname">${esc(t.name)}</div>
       <div class="tmeta">${esc(t.dates)} · ${esc(t.city)} · ${t.players} игроков</div>

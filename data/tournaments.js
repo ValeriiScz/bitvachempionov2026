@@ -203,7 +203,8 @@ window.TOURNAMENTS_DB = {
     {
       "id": "634",
       "theme": "poster",
-      "art": "assets/bonn634.jpg",
+      "art": "assets/bonn634_card.jpg",
+      "artRatio": "16 / 9",
       "posterScript": "Bonn",
       "posterTitle": "ЧЕМПИОНАТ ЕВРОПЫ",
       "posterSub": "18–19 JULY · BONN · GERMANY",

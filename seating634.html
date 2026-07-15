@@ -25,21 +25,22 @@
   .round-btn.next{box-shadow:0 0 0 2px var(--gold);border-color:var(--gold);}
   .round-btn.upcoming{opacity:.4;}
   .rleg{max-width:1200px;margin:0 auto 14px;font-size:11.5px;color:var(--mut);}
-  .grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px;}
+  .grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}.table-wrap{padding:12px 4px 16px;}}
   .table-wrap{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.5);padding:12px 8px 16px;backdrop-filter:blur(6px);}
   .table-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 10px;margin-bottom:4px;}
   .table-num{font-family:'Cinzel',serif;font-size:17px;color:var(--gold-hi);font-weight:800;}
   .game-label{font-size:12px;font-weight:800;color:var(--mut);}
   a.ytb{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:9px;font-size:11px;font-weight:800;text-decoration:none;background:rgba(224,36,36,.12);border:1px solid rgba(224,36,36,.4);color:#ff6a6a;}
   a.ytb:hover{background:#e02424;color:#fff;}
-  .circle{position:relative;width:320px;height:320px;margin:0 auto;}
-  .circle-inner{position:absolute;left:50%;top:50%;width:120px;height:120px;transform:translate(-50%,-50%);border-radius:50%;
+  .circle{position:relative;width:min(320px,86vw);aspect-ratio:1;margin:0 auto;}
+  .circle-inner{position:absolute;left:50%;top:50%;width:37%;height:37%;transform:translate(-50%,-50%);border-radius:50%;
     background:radial-gradient(circle at 50% 35%,rgba(201,161,77,.35) 0%,rgba(120,90,30,.25) 70%);box-shadow:inset 0 0 0 2px rgba(232,200,122,.4);}
-  .seat{position:absolute;transform:translate(-50%,-50%);width:72px;text-align:center;cursor:pointer;z-index:2;}
+  .seat{position:absolute;transform:translate(-50%,-50%);width:22%;text-align:center;cursor:pointer;z-index:2;}
   .seat-num{position:absolute;left:50%;top:-5px;transform:translateX(-50%);background:var(--gold);color:#0b0a08;font-size:10px;font-weight:800;width:19px;height:19px;line-height:19px;border-radius:50%;z-index:3;}
-  .seat-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid rgba(232,200,122,.5);box-shadow:0 3px 10px rgba(0,0,0,.5);margin:0 auto;display:block;background:#1c170e;}
+  .seat-avatar{width:clamp(38px,12vw,48px);height:clamp(38px,12vw,48px);border-radius:50%;object-fit:cover;border:3px solid rgba(232,200,122,.5);box-shadow:0 3px 10px rgba(0,0,0,.5);margin:0 auto;display:block;background:#1c170e;}
   .seat.is-target .seat-avatar{border-color:var(--gold-hi);box-shadow:0 0 0 3px rgba(232,200,122,.5);}
-  .seat-name{font-size:10.5px;color:var(--ink);margin-top:4px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:74px;}
+  .seat-name{font-size:10px;color:var(--ink);margin-top:4px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .hidden{display:none;}
   .player-hdr{max-width:1200px;margin:0 auto 14px;display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 16px;box-shadow:0 12px 30px rgba(0,0,0,.5);}
   .player-hdr img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid rgba(232,200,122,.5);box-shadow:0 3px 10px rgba(0,0,0,.5);}
@@ -88,8 +89,8 @@ function renderTable(g,t,target){
   for(let i=0;i<10;i++){
     const p=names[i];
     const a=-90+36*i, r=a*Math.PI/180;
-    const x=Math.cos(r)*128, y=Math.sin(r)*128;
-    seats+=`<div class="seat${p===target?' is-target':''}" data-player="${esc(p)}" style="left:calc(50% + ${x.toFixed(1)}px);top:calc(50% + ${y.toFixed(1)}px);">
+    const x=(Math.cos(r)*40).toFixed(2), y=(Math.sin(r)*40).toFixed(2);
+    seats+=`<div class="seat${p===target?' is-target':''}" data-player="${esc(p)}" style="left:calc(50% + ${x}%);top:calc(50% + ${y}%);">
       <div class="seat-num">${i+1}</div>
       <img class="seat-avatar" src="${esc(AV[p]||'')}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='https://mafgame.org/build/assets/avatar-default2-33e44bae.png'">
       <div class="seat-name">${esc(p)}</div>
