@@ -49,7 +49,7 @@
   .topband h1{font-family:'Cinzel',serif;font-weight:800;font-size:23px;color:var(--gold-hi);margin:0 0 3px;letter-spacing:.5px;}
   .topband .meta{font-size:12.5px;color:var(--mut);}
   .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px;}
-  .chip{font-size:11.5px;font-weight:700;color:var(--ink);background:rgba(212,175,55,.10);border:1px solid var(--line);border-radius:9px;padding:5px 10px;}
+  .chip{font-size:11.5px;font-weight:700;color:var(--mut);background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:7px;padding:5px 10px;}
   .chip b{color:var(--gold-hi);}
   .chip.live{color:#7ce6a0;border-color:rgba(124,230,160,.4);background:rgba(124,230,160,.1);}
   .cdown{display:flex;gap:8px;margin-top:12px;}
@@ -302,6 +302,7 @@
     .mtop .burger{display:none;}
     .mtop .mcr{font-size:19px;color:var(--gold);text-shadow:0 0 10px rgba(212,175,55,.5);}
     .mtop .mt{font-family:'Cinzel',serif;font-weight:800;font-size:15px;color:var(--gold-hi);}
+    .mtop .mback{color:var(--gold-hi);font-size:23px;text-decoration:none;line-height:1;padding:0 2px;flex:none;}
     .main{padding:12px 12px calc(80px + env(safe-area-inset-bottom));}
     .topband{margin-bottom:14px;}
     .subtabs{display:none;}
@@ -319,6 +320,18 @@
     .tabbar .tb.on{color:var(--gold-hi);}
     .tabbar .tb.on .ti{filter:drop-shadow(0 0 9px rgba(212,175,55,.7));}
     .rbtn{min-width:46px;min-height:46px;font-size:16px;}
+    .tbl{font-size:14px!important;}
+    .tbl th{font-size:12px;padding:11px 7px;}
+    .tbl td{padding:11px 7px;}
+    .rp{font-size:12px;padding:2px 8px;}
+    .secttl{font-size:19px;}
+    .panel h3{font-size:14px;}
+    .rcards .rcx .rv{font-size:20px;}
+    .rcards .rcx .rs{font-size:12px;}
+    .gcell .sname,.scell .sname{font-size:11.5px;}
+    .gcell .gdop{font-size:11px;} .gdopv{font-size:14px;}
+    .statchips{font-size:13px;}
+    .note{font-size:13px;}
     .btn{padding:11px 18px;}
     .pick{max-width:none;padding:12px 14px;font-size:15px;}
     .secttl{font-size:18px;}
@@ -330,6 +343,64 @@
     #__refbtn{bottom:calc(90px + env(safe-area-inset-bottom))!important;left:12px!important;z-index:50!important;}
   }
 </style>
+<!-- PWA · 2026-07-16 · v12: манифест + iOS-меты + регистрация sw.js + промо-плашка установки (iPhone/Android). Стратегии кэша — в sw.js; live /mafgame/* кэш обходит -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1626">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="MafgameStat">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<script>
+/* SW только по http/https — локальный просмотр file:// не падает */
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+}
+/* Промо-плашка «установите как приложение»: iPhone — инструкция Safari/«На экран Домой»,
+   Android — кнопка установки (beforeinstallprompt) или инструкция про меню Chrome.
+   Не показывается: внутри установленного приложения (standalone) и 14 дней после «Позже». */
+(function(){try{
+  if(!/^https?:$/.test(location.protocol))return;
+  if((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)return;
+  var KEY='mgs_pwa_promo_hide_until';
+  try{if(Date.now()<(+localStorage.getItem(KEY)||0))return;}catch(e){}
+  var deferred=null,shown=false;
+  addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;
+    var b=document.getElementById('mgsPwaGo');if(b){b.style.display='inline-block';}});
+  function hide(days){try{localStorage.setItem(KEY,String(Date.now()+days*864e5));}catch(e){}
+    var el=document.getElementById('mgsPwaPromo');if(el)el.parentNode.removeChild(el);}
+  function show(){
+    if(shown)return;shown=true;
+    var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/.test(ua),isAndroid=/Android/.test(ua);
+    var how;
+    if(isIOS){how='iPhone: откройте сайт в <b>Safari</b> → кнопка «Поделиться» <b>⬆</b> → <b>«На экран “Домой”»</b>.';}
+    else if(isAndroid){how='Android: <b>Chrome</b> → меню <b>⋮</b> → <b>«Установить приложение»</b> (или «Добавить на гл. экран»).';}
+    else{how='В Chrome/Edge: значок установки в адресной строке (справа).';}
+    var tb=document.querySelector('.tabbar'),off='14px';
+    try{if(tb&&getComputedStyle(tb).display!=='none')off='calc(14px + 66px)';}catch(e){}
+    var d=document.createElement('div');d.id='mgsPwaPromo';
+    d.innerHTML='<style>#mgsPwaPromo{position:fixed;left:12px;right:12px;bottom:'+off+';z-index:99990;max-width:520px;margin:0 auto;'+
+      'background:linear-gradient(180deg,#12294a,#0f2138);border:1px solid rgba(212,175,55,.45);border-radius:14px;'+
+      'box-shadow:0 14px 40px rgba(0,0,0,.55);padding:12px 14px;font-family:Manrope,-apple-system,system-ui,sans-serif;color:#eef3fb;}'+
+      '#mgsPwaPromo .t{font-weight:800;font-size:13.5px;color:#f0d98a;margin:0 0 4px;}'+
+      '#mgsPwaPromo .h{font-size:12px;line-height:1.45;color:#9fb2cc;}#mgsPwaPromo .h b{color:#eef3fb;}'+
+      '#mgsPwaPromo .r{display:flex;gap:8px;margin-top:9px;align-items:center;}'+
+      '#mgsPwaPromo button{font:inherit;font-size:12px;font-weight:800;border-radius:9px;padding:7px 13px;cursor:pointer;}'+
+      '#mgsPwaGo{display:none;background:linear-gradient(100deg,#d4af37,#a5822b);border:0;color:#0a1626;}'+
+      '#mgsPwaLater{background:transparent;border:1px solid rgba(212,175,55,.35);color:#9fb2cc;}</style>'+
+      '<div class="t">📲 MafgameStat можно установить как приложение</div>'+
+      '<div class="h">Иконка на экране, полноэкранный режим и быстрый доступ к live-статистике.<br>'+how+'</div>'+
+      '<div class="r"><button id="mgsPwaGo">Установить</button><button id="mgsPwaLater">Позже</button></div>';
+    document.body.appendChild(d);
+    var go=document.getElementById('mgsPwaGo');
+    if(deferred)go.style.display='inline-block';
+    go.onclick=function(){if(!deferred)return;deferred.prompt();deferred.userChoice.then(function(){hide(365);});};
+    document.getElementById('mgsPwaLater').onclick=function(){hide(14);};
+  }
+  if(document.readyState==='loading')addEventListener('DOMContentLoaded',function(){setTimeout(show,900);});
+  else setTimeout(show,900);
+}catch(e){}})();
+</script>
 </head>
 <body>
 <div class="backdrop" id="bd" onclick="toggleNav(false)"></div>
@@ -339,10 +410,11 @@
       <div><div class="bt">Чемпионат<br>Европы 2026</div><div class="bs">Бонн · Германия · new</div></div>
     </div>
     <div id="nav"></div>
-    <a class="toclassic" href="tournament.html?t=634">← классическая версия</a>
+    <a class="toclassic" href="index.html">← все турниры</a>
+    <a class="toclassic" href="tournament.html?t=634" style="margin-top:0;border-top:none;padding-top:2px">классическая версия →</a>
   </nav>
   <div style="flex:1;min-width:0;">
-    <div class="mtop"><span class="mcr">&#9819;</span><span class="mt"><span style="color:var(--gold-hi)">ЧЕ 2026</span> · <span id="mtitle">Обзор</span></span></div>
+    <div class="mtop"><a class="mback" href="index.html" aria-label="Ко всем турнирам">&#8592;</a><span class="mcr">&#9819;</span><span class="mt"><span style="color:var(--gold-hi)">ЧЕ 2026</span> · <span id="mtitle">Обзор</span></span></div>
     <main class="main">
       <div class="topband" id="topband"><div class="info"><p class="note">Загрузка…</p></div></div>
       <div class="subtabs" id="subtabs"></div>
@@ -356,6 +428,38 @@
 <script src="data/streams.js"></script>
 <script src="data/live.js"></script>
 <script>
+/* ============================================================================
+   ce634.html — «new» (мобильная/esports) версия страницы турнира ЧЕ-634.
+   Одностраничное SPA поверх ТЕХ ЖЕ данных, что и классика (data/*_634*).
+   Методология и решения — см. МЕТОДОЛОГИЯ_new_ce634.md в корне проекта.
+
+   ПОТОК ДАННЫХ:
+   - Грузим: participants_634.json (ростер+рейтинг markery), tournament_634.json
+     (мета, in_progress, games_total, accent), avatars_634.json (авы+судьи),
+     elo_634.json, skip_634.json (кто какую игру отдыхает),
+     window.loadGames('634') из live.js (рассадка/результаты; live с mafgame через /mafgame/*).
+   - Всё складывается в объект D. computeSeating() строит D.occ/D.opp/D.seatByGame.
+     computeStats() агрегирует статистику (aggregateN) в D.rows/D.STAT/D.gplist.
+
+   КЛЮЧЕВЫЕ ГЛОБАЛЫ:
+   - D — все данные. D.RATE[nick]={tier,elo,...}. D.gplist — сыгранные игры.
+   - NAV — 4 группы меню (Общее/Участники/Рассадка/Статистика) → строит sidebar (desktop) + tabbar (mobile).
+   - statFull — тумблер Компактно/Подробно (скрывает/показывает .x-колонки в таблицах).
+   - myPlayer / viewMode — «мой игрок» и «с первой/с текущей игры», хранятся в localStorage.
+   - stStage/stGame/stMode — состояние Сводной; rTab — вкладка Ролей; gmRound — выбранная игра в «Играх».
+
+   ФОРМУЛЫ: Σ = WPTS + доп(aps) + Ci. Роли: Citizen/Sheriff/Mafia/Don.
+   winner стола: red_win/black_win/unknown. result места: 'W'/'L'.
+
+   ВАЖНЫЕ РЕШЕНИЯ / ГРАБЛИ (детали в методичке):
+   - Адаптив: breakpoint 1024px (ловит и раскрытый Fold). Мобилка ≠ ужатый десктоп: tabbar снизу, карточки/скролл-таблицы.
+   - «Сайт мелкий на телефоне, а локальный HTML ок» = в Chrome включён режим «Версия для ПК» для домена (грабля браузера, не кода).
+   - Таблицы: залипшие первые колонки (.hasnum → #+ник; иначе ник). На .me-строке залипшие ячейки делаем НЕПРОЗРАЧНЫМИ (#2b2917), иначе цифры просвечивают при скролле.
+   - .seatgrid: repeat(5,minmax(0,1fr)) — minmax(0,..) обязателен, иначе min-content колонок вылезает.
+   - Порядок мест за столом: 1-5 сверху, 10-9-8-7-6 снизу (реальная посадка).
+   - Демо-режим (setDemo): случайный ПОЛНЫЙ бракет (11 квал → топ40 ×2 → топ10 ×5) для проверки статы ДО старта; НЕ трогает реальный localStorage-снимок live.js.
+   - live.js грузится только на проде (в превью вырезан + данные зашиты). Кнопка «Обновить» (#__refbtn) — только на «Обзоре».
+   ============================================================================ */
 const ROMAN=['','I','II','III','IV'];
 const TIERS=['S','A','B','C','D','E','F'];
 const TIER_ORD={S:0,A:1,B:2,C:3,D:4,E:5,F:6};
@@ -469,9 +573,10 @@ function show(id){
   document.querySelectorAll('.tabbar .tb').forEach(b=>b.classList.toggle('on',+b.dataset.gi===gi));
   const grp=NAV[gi],st=document.getElementById('subtabs');
   if(st){ if(grp&&grp.items.length>1){st.innerHTML=grp.items.map(it=>`<button class="st${it.id===id?' on':''}${it.locked?' locked':''}"${it.locked?'':` data-id="${it.id}"`}>${esc(it.lab)}</button>`).join('');st.querySelectorAll('.st[data-id]').forEach(b=>b.onclick=()=>show(b.dataset.id));} else st.innerHTML=''; }
-  const mob=window.matchMedia&&window.matchMedia('(max-width:820px)').matches;
+  const mob=window.matchMedia&&window.matchMedia('(max-width:1024px)').matches;
   const tbp=document.getElementById('topband');if(tbp)tbp.style.display=(mob&&id!=='overview')?'none':'';
   document.getElementById('view').innerHTML=(RENDER[id]?RENDER[id]():stub(id));afterRender(id);
+  const _rb=document.getElementById('__refbtn');if(_rb)_rb.style.display=(id==='overview')?'':'none';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 

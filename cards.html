@@ -46,6 +46,64 @@
     .toc{margin:0 0 8px;border-radius:0;}
   }
 </style>
+<!-- PWA · 2026-07-16 · v12: манифест + iOS-меты + регистрация sw.js + промо-плашка установки (iPhone/Android). Стратегии кэша — в sw.js; live /mafgame/* кэш обходит -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1626">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="MafgameStat">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<script>
+/* SW только по http/https — локальный просмотр file:// не падает */
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+}
+/* Промо-плашка «установите как приложение»: iPhone — инструкция Safari/«На экран Домой»,
+   Android — кнопка установки (beforeinstallprompt) или инструкция про меню Chrome.
+   Не показывается: внутри установленного приложения (standalone) и 14 дней после «Позже». */
+(function(){try{
+  if(!/^https?:$/.test(location.protocol))return;
+  if((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)return;
+  var KEY='mgs_pwa_promo_hide_until';
+  try{if(Date.now()<(+localStorage.getItem(KEY)||0))return;}catch(e){}
+  var deferred=null,shown=false;
+  addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;
+    var b=document.getElementById('mgsPwaGo');if(b){b.style.display='inline-block';}});
+  function hide(days){try{localStorage.setItem(KEY,String(Date.now()+days*864e5));}catch(e){}
+    var el=document.getElementById('mgsPwaPromo');if(el)el.parentNode.removeChild(el);}
+  function show(){
+    if(shown)return;shown=true;
+    var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/.test(ua),isAndroid=/Android/.test(ua);
+    var how;
+    if(isIOS){how='iPhone: откройте сайт в <b>Safari</b> → кнопка «Поделиться» <b>⬆</b> → <b>«На экран “Домой”»</b>.';}
+    else if(isAndroid){how='Android: <b>Chrome</b> → меню <b>⋮</b> → <b>«Установить приложение»</b> (или «Добавить на гл. экран»).';}
+    else{how='В Chrome/Edge: значок установки в адресной строке (справа).';}
+    var tb=document.querySelector('.tabbar'),off='14px';
+    try{if(tb&&getComputedStyle(tb).display!=='none')off='calc(14px + 66px)';}catch(e){}
+    var d=document.createElement('div');d.id='mgsPwaPromo';
+    d.innerHTML='<style>#mgsPwaPromo{position:fixed;left:12px;right:12px;bottom:'+off+';z-index:99990;max-width:520px;margin:0 auto;'+
+      'background:linear-gradient(180deg,#12294a,#0f2138);border:1px solid rgba(212,175,55,.45);border-radius:14px;'+
+      'box-shadow:0 14px 40px rgba(0,0,0,.55);padding:12px 14px;font-family:Manrope,-apple-system,system-ui,sans-serif;color:#eef3fb;}'+
+      '#mgsPwaPromo .t{font-weight:800;font-size:13.5px;color:#f0d98a;margin:0 0 4px;}'+
+      '#mgsPwaPromo .h{font-size:12px;line-height:1.45;color:#9fb2cc;}#mgsPwaPromo .h b{color:#eef3fb;}'+
+      '#mgsPwaPromo .r{display:flex;gap:8px;margin-top:9px;align-items:center;}'+
+      '#mgsPwaPromo button{font:inherit;font-size:12px;font-weight:800;border-radius:9px;padding:7px 13px;cursor:pointer;}'+
+      '#mgsPwaGo{display:none;background:linear-gradient(100deg,#d4af37,#a5822b);border:0;color:#0a1626;}'+
+      '#mgsPwaLater{background:transparent;border:1px solid rgba(212,175,55,.35);color:#9fb2cc;}</style>'+
+      '<div class="t">📲 MafgameStat можно установить как приложение</div>'+
+      '<div class="h">Иконка на экране, полноэкранный режим и быстрый доступ к live-статистике.<br>'+how+'</div>'+
+      '<div class="r"><button id="mgsPwaGo">Установить</button><button id="mgsPwaLater">Позже</button></div>';
+    document.body.appendChild(d);
+    var go=document.getElementById('mgsPwaGo');
+    if(deferred)go.style.display='inline-block';
+    go.onclick=function(){if(!deferred)return;deferred.prompt();deferred.userChoice.then(function(){hide(365);});};
+    document.getElementById('mgsPwaLater').onclick=function(){hide(14);};
+  }
+  if(document.readyState==='loading')addEventListener('DOMContentLoaded',function(){setTimeout(show,900);});
+  else setTimeout(show,900);
+}catch(e){}})();
+</script>
 </head>
 <body>
 <div class="topnav"><a class="home-btn" href="tournament.html?t=826">← Турнир</a> <a class="home-btn" href="./">Главная</a></div>

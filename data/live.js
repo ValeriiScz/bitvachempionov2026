@@ -1,3 +1,19 @@
+/* ============================================================================
+   live.js — LIVE-движок MafgameStat. Единая точка получения игр по турниру.
+   API: window.loadGames(id) -> Promise<{tournament_id,games_played,games_total,games,live?}>
+   Логика:
+   1) Читает tournament_{id}.json.in_progress. Если true (турнир идёт):
+      fetch('/mafgame/tournaments/{id}/game_results')  (Vercel rewrite -> mafgame.org),
+      парсит Inertia-данные -> convertInertia() -> {games:[{title,stage,tables:[{table_num,judge,winner,seats}]}]}.
+   2) ЗАЩИТА ДАННЫХ: сравнивает свежий парс с сохранённым в localStorage снимком
+      (snapScore/notRegression) — НЕ затирает хорошие данные пустыми/обнулёнными/
+      пропавшими (частый глюк mafgame при обновлении таблицы). live-фейл -> отдаёт снимок.
+   3) Не in_progress (скоро/завершён): отдаёт локальный data/games_{id}_current.json (заморожен).
+   Прочее: normRole (роли), convertInertia (парсер), applyAccent (тема), injectRefresh
+   (плавающая кнопка «Обновить», #__refbtn), авто-reload раз в 10 мин.
+   winner стола берётся из официального поля results mafgame (red_win/black_win), НЕ из очков.
+   НЕ ломать защиту снимка — это ключевая гарантия «ничего не терять».
+   ============================================================================ */
 // MafgameStat · data/live.js · v1.8 · 2026-07-16 · ЧЕ-634: стадии Квалификация/Полуфинал/Финал (3 стадии) + ЗАЩИТА «держим последний топ-снимок» (localStorage): не затираем хорошие данные пустыми/обнулёнными/пропавшими (snapScore/notRegression); live-фейл → отдаём сохранённый снимок. · v1.7 · 2026-07-04 · кнопка «Обновить» перенесена в левый нижний угол (не налезает на «Наверх»);  · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
 window.normRole = function(r){
   if(r==null) return null;
