@@ -131,10 +131,31 @@
   .rcards .rcx{background:rgba(7,15,28,.5);border:1px solid var(--line2);border-radius:11px;padding:9px 11px;}
   .rcards .rcx .rt{font-size:11px;font-weight:800;}
   .rcards .rcx .rv{font-family:'Cinzel',serif;font-size:17px;font-weight:800;color:var(--gold-hi);margin-top:3px;}
-  .rcards .rcx .rs{font-size:10.5px;color:var(--mut);}
+  .rcards .rcx .rs{font-size:10.5px;color:var(--mut);line-height:1.4;}
+  .rcx2{font-size:10px;color:var(--mut);margin-top:2px;white-space:nowrap;}
+  .pbig{font-family:'Cinzel',serif;font-size:24px;font-weight:800;margin-top:5px;line-height:1;}
+  .pbig b{color:#7ce6a0;}
+  .pbl{font-size:11px;color:var(--mut);font-family:'Manrope',sans-serif;font-weight:700;}
+  .rvg{font-size:12px;color:var(--mut);font-family:'Manrope',sans-serif;}
+  .rcx-combo{border-color:var(--gold);background:rgba(212,175,55,.08);}
+  .tbl.full .co{display:none;}
+  .rcx-red{border-color:#f0906f!important;background:rgba(224,101,77,.13)!important;}
+  .rcx-blk{border-color:#9cc0e6!important;background:rgba(122,167,214,.13)!important;}
+  .seclist{display:flex;flex-direction:column;gap:9px;}
+  .seci{display:flex;gap:11px;align-items:flex-start;}
+  .seci .sicon{font-size:16px;color:var(--gold);width:22px;text-align:center;flex:none;margin-top:1px;}
+  .seci b{font-size:13px;color:var(--gold-hi);font-weight:800;}
+  .seci .sid{font-size:12px;color:var(--mut);line-height:1.4;margin-top:1px;}
+  .tbl .sp{width:12px;min-width:12px;max-width:12px;padding:0!important;background:transparent!important;border-left:1px dashed var(--line2)!important;}
   .plink{cursor:pointer;color:var(--ink);border-bottom:1px dotted var(--line2);}
   .plink:hover{color:var(--gold-hi);border-bottom-color:var(--gold);}
   .scrollT{overflow:auto;max-height:72vh;-webkit-overflow-scrolling:touch;border-radius:16px;}
+  .scrollT .tbl.hasnum th:nth-child(1),.scrollT .tbl.hasnum td:nth-child(1){position:sticky;left:0;z-index:3;width:26px;min-width:26px;background:#0c1b30;}
+  .scrollT .tbl.hasnum td:nth-child(1){background:#0f2138;}
+  .scrollT .tbl.hasnum th:nth-child(2),.scrollT .tbl.hasnum td:nth-child(2){position:sticky;left:26px;z-index:3;background:#0c1b30;box-shadow:6px 0 9px -6px rgba(0,0,0,.7);}
+  .scrollT .tbl.hasnum td:nth-child(2){background:#0f2138;}
+  .scrollT .tbl:not(.hasnum) th:nth-child(1),.scrollT .tbl:not(.hasnum) td:nth-child(1){position:sticky;left:0;z-index:3;background:#0c1b30;box-shadow:6px 0 9px -6px rgba(0,0,0,.7);}
+  .scrollT .tbl:not(.hasnum) td:nth-child(1){background:#0f2138;}
   .statchips{display:flex;flex-wrap:wrap;gap:7px 14px;font-size:12px;color:var(--mut);margin:2px 0 12px;}
   .statchips b{color:var(--gold-hi);}
   .statchips .cred b{color:#f0906f;} .statchips .cblk b{color:#9cc0e6;}
@@ -142,6 +163,34 @@
   .telo{margin-left:auto;font-size:10.5px;font-weight:800;color:var(--gold-hi);background:rgba(212,175,55,.14);border:1px solid var(--line2);border-radius:9px;padding:3px 8px;white-space:nowrap;}
   .telo.top{color:#7ce6a0;border-color:rgba(124,230,160,.4);background:rgba(124,230,160,.1);}
   .telo.low{color:#9cc0e6;}
+  .rgap{flex:0 0 14px;}
+  .gcell{background:rgba(212,175,55,.06);border:1px solid var(--line2);border-radius:11px;padding:8px 3px 6px;text-align:center;cursor:pointer;position:relative;}
+  .gcell.gw{border-color:rgba(124,230,160,.55);background:rgba(124,230,160,.08);}
+  .gcell.gl{opacity:.42;filter:grayscale(.5);}
+  .gcell.gw{box-shadow:0 0 0 1px rgba(124,230,160,.4);}
+  .gcell.mine{box-shadow:0 0 0 2px var(--gold-hi) inset;}
+  .gcell .snum{position:absolute;top:5px;left:5px;background:var(--gold);color:#0a1626;font-size:9.5px;font-weight:800;width:17px;height:17px;line-height:17px;border-radius:6px;text-align:center;}
+  .gcell .sav{width:clamp(40px,13vw,50px);height:clamp(40px,13vw,50px);border-radius:12px;object-fit:cover;margin:2px auto 5px;display:block;background:#12294a;border:2px solid var(--line2);}
+  .gcell .sname{font-size:10px;font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .gcell .grole{margin-top:3px;}
+  .gcell .gdop{font-size:9.5px;color:var(--mut);margin-top:3px;white-space:nowrap;}
+  .gcell.empty{opacity:.3;cursor:default;}
+  .scell,.gcell{min-width:0;}
+  .gcell .gdop{font-size:9.5px;color:var(--dim);}
+  .gdopv{font-size:13px;font-weight:800;color:var(--ink);}
+  .gdopv{color:var(--ink);} .gdopv.dneg{color:#e8716b;} .gdopv.dneg.b{font-weight:900;} .gdopv.dmid{font-weight:900;color:var(--gold-hi);} .gdopv.dbig{font-weight:900;color:#0a1626;background:linear-gradient(135deg,#f0d98a,#d4af37);padding:1px 7px;border-radius:6px;}
+  .gwin{font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:8px;margin-left:auto;}
+  .gwin-red{background:rgba(224,101,77,.20);color:#f0906f;} .gwin-blk{background:rgba(122,167,214,.20);color:#9cc0e6;}
+  .twrap.win-red{border-color:rgba(224,101,77,.4);} .twrap.win-blk{border-color:rgba(122,167,214,.4);}
+  .ggroups{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:12px;}
+  .rgroup{display:inline-block;vertical-align:top;}
+  .rglab{font-size:9.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--gold);opacity:.85;margin-bottom:4px;}
+  .rgroup .rounds{margin:0;}
+  .tbl tr.me td{background:rgba(212,175,55,.16)!important;}
+  .scrollT .tbl tr.me td:nth-child(1),.scrollT .tbl tr.me td:nth-child(2){background:#2b2917!important;}
+    .scell.mine,.gcell.mine{box-shadow:0 0 0 3px var(--gold-hi),0 0 14px rgba(212,175,55,.55)!important;background:rgba(212,175,55,.2)!important;}
+  .youb{position:absolute;top:4px;right:4px;background:var(--gold-hi);color:#0a1626;font-size:8.5px;font-weight:800;padding:1px 6px;border-radius:6px;letter-spacing:.4px;z-index:2;}
+  .pcard.mecard{box-shadow:0 0 0 2px var(--gold-hi),0 14px 34px rgba(212,175,55,.3)!important;}
   .sheetbd{display:none;position:fixed;inset:0;background:transparent;z-index:75;}
   .sheetbd.on{display:block;}
   .popmenu{position:fixed;bottom:calc(66px + env(safe-area-inset-bottom));z-index:80;width:210px;
@@ -174,7 +223,7 @@
   .tgl{font-size:11px;color:var(--mut);font-weight:800;background:rgba(212,175,55,.1);border:1px solid var(--line2);border-radius:7px;padding:2px 8px;}
   .tjudge{margin-left:auto;font-size:10.5px;color:var(--gold-hi);background:rgba(212,175,55,.14);border:1px solid var(--line2);border-radius:14px;padding:3px 9px 3px 4px;display:inline-flex;align-items:center;gap:6px;}
   .tjudge img{width:20px;height:20px;border-radius:50%;object-fit:cover;}
-  .seatgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;padding:8px;background:linear-gradient(180deg,rgba(31,90,57,.14),rgba(212,175,55,.05));border:1px solid var(--line2);border-radius:14px;position:relative;}
+  .seatgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;padding:8px;background:linear-gradient(180deg,rgba(31,90,57,.14),rgba(212,175,55,.05));border:1px solid var(--line2);border-radius:14px;position:relative;}
   .seatgrid::before{content:"стол";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(212,175,55,.35);pointer-events:none;}
   .scell{background:rgba(212,175,55,.06);border:1px solid var(--line2);border-radius:11px;padding:8px 3px 6px;text-align:center;cursor:pointer;position:relative;transition:border-color .12s,background .12s;z-index:1;}
   .scell:hover{border-color:var(--gold);background:rgba(212,175,55,.1);}
@@ -196,6 +245,8 @@
   .pcav{width:60px;height:60px;border-radius:14px;object-fit:cover;border:3px solid var(--gold);background:#12294a;flex:none;}
   .pcnick{font-family:'Cinzel',serif;font-size:20px;font-weight:800;color:var(--gold-hi);line-height:1.05;}
   .pcreal{font-size:11.5px;color:var(--ink);opacity:.85;margin-top:2px;}
+  .pcmeta{font-size:10px;color:var(--dim);margin-top:3px;letter-spacing:.2px;}
+  .pctier .tpill{font-size:20px;padding:4px 14px;border-radius:11px;box-shadow:0 4px 12px rgba(0,0,0,.45);}
   .pctier{position:absolute;top:0;right:0;}
   .rate{display:flex;gap:6px;margin:12px 0 4px;}
   .rcell{flex:1;text-align:center;padding:7px 4px;border-radius:10px;background:rgba(7,15,28,.5);border:1px solid var(--line2);}
@@ -233,7 +284,10 @@
     .topband .poster img{aspect-ratio:16/9;height:auto;}
     .stages{grid-template-columns:1fr;}
     .tables,.cardgrid{grid-template-columns:1fr;}
-    .tbl td:nth-child(4),.tbl th:nth-child(4){display:none;}
+  }
+  .tbl:not(.full) .x{display:none;}
+  .segwrap{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
+  @media(max-width:1){
   }
   /* ── mobile-app слой: нижний таб-бар + под-вкладки (перекрывает desktop) ── */
   .tabbar{display:none;}
@@ -259,9 +313,9 @@
     .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;
       background:rgba(8,16,28,.98);backdrop-filter:blur(12px);border-top:1px solid var(--line);
       padding:7px 4px calc(7px + env(safe-area-inset-bottom));}
-    .tabbar .tb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 2px;border:none;
-      background:none;color:var(--mut);font-size:10.5px;font-weight:800;cursor:pointer;letter-spacing:.2px;}
-    .tabbar .tb .ti{font-size:21px;line-height:1;}
+    .tabbar .tb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 2px;border:none;
+      background:none;color:var(--mut);font-size:12px;font-weight:800;cursor:pointer;letter-spacing:.2px;}
+    .tabbar .tb .ti{font-size:25px;line-height:1;}
     .tabbar .tb.on{color:var(--gold-hi);}
     .tabbar .tb.on .ti{filter:drop-shadow(0 0 9px rgba(212,175,55,.7));}
     .rbtn{min-width:46px;min-height:46px;font-size:16px;}
@@ -271,7 +325,7 @@
     .panel{padding:14px;border-radius:14px;}
     .scell .sav{width:clamp(38px,13vw,52px);height:clamp(38px,13vw,52px);}
     .scell .sname{font-size:9.5px;}
-    .seatgrid{grid-template-columns:repeat(5,1fr);gap:5px;padding:7px 5px;}
+    .seatgrid{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;padding:7px 5px;}
     .cluster .tf,.tfilter .tf{min-height:40px;padding:8px 13px;}
     #__refbtn{bottom:calc(90px + env(safe-area-inset-bottom))!important;left:12px!important;z-index:50!important;}
   }
@@ -427,7 +481,7 @@ const RENDER={
     const eloVals=D.players.map(p=>num(p.r_elo_cur)).filter(v=>v!=null);
     const eloAvg=eloVals.length?Math.round(eloVals.reduce((a,b)=>a+b,0)/eloVals.length):null;
     const stats=`<div class="stats">
-      <div class="stat"><div class="k">Формат</div><div class="v">11+2+4<small> игр</small></div></div>
+      <div class="stat"><div class="k">Формат</div><div class="v">11+2+5<small> игр</small></div></div>
       <div class="stat"><div class="k">Участников</div><div class="v">${D.players.length}<small> из ${m.expected||D.players.length}</small></div></div>
       <div class="stat"><div class="k">Ожид. ср. ELO</div><div class="v">${eloAvg!=null?eloAvg:'—'}<small> markery</small></div></div>
       <div class="stat"><div class="k">Приз</div><div class="v">${t.prize_eur||'—'}<small>€</small></div></div></div>`;
@@ -435,7 +489,9 @@ const RENDER={
       Object.keys(D.judges).sort().map(k=>{const j=D.judges[k];return `<div class="judge">${j.avatar?`<img src="${esc(j.avatar)}" referrerpolicy="no-referrer" onerror="this.style.display='none'">`:''}<div><div class="jn">Стол ${ROMAN[k]||k} · <b>${esc(j.name)}</b></div>${j.tg?`<div class="jt">${esc(j.tg)}</div>`:''}</div></div>`;}).join('')+`</div></div>`:'';
     return `<div class="view"><div class="secttl">&#9670; Обзор турнира</div>
       ${demoPanel()}
+      ${myPanel()}
       <div class="panel">${stats}<div class="note">Титульный турнир сезона: победитель становится чемпионом Европы. Данные тянутся с mafgame вживую — статистика включится автоматически после первой игры.</div></div>
+      ${secListPanel()}
       ${stagesPanel()}
       <div class="panel"><h3>Ранги состава (markery)</h3><div class="tfilter">`+
         TIERS.filter(x=>tc[x]).map(x=>`<span class="tf on" style="cursor:default"><span class="tpill tp-${x}">${x}</span><small>${tc[x]}</small></span>`).join('')+
@@ -451,8 +507,9 @@ const RENDER={
       <div class="note" style="margin:0 0 10px">Выберите ранг — карточки грузятся кластером, чтобы не тянуть все 44 сразу.</div>
       <div class="cluster" id="cCluster"></div><div id="cardArea"></div></div>`;},
   roster(){return `<div class="view"><div class="secttl">&#8801; Участники · рейтинг</div>
+      <div class="segwrap" id="rTop"></div>
       <div class="tfilter" id="tfil"></div>
-      <div class="panel" style="padding:6px 6px 4px;overflow-x:auto;"><table class="tbl"><thead><tr id="rhr"></tr></thead><tbody id="rtb"></tbody></table></div>
+      <div class="panel scrollT" style="padding:0"><table class="tbl" id="rtable"><thead><tr id="rhr"></tr></thead><tbody id="rtb"></tbody></table></div>
       <div class="note">Рейтинг markery — снимок через API на ${esc(D.stats.snapshot||'2026-07-15')}. «ELO тек» — текущий ELO (глобально); «Ранг» — тир S..F; «ELO 2026» — за сезон 2026; «Европа 2026» — место Европа‑2026. Тап по «Ранг» группирует по тирам. «—» — нет данных markery. Список и составы — с mafgame.org.</div></div>`;},
   together(){
     const opts=Object.keys(D.occ).sort((a,b)=>a.localeCompare(b,'ru'));
@@ -464,7 +521,7 @@ const RENDER={
   stages(){
     if(!D.gp)return statsEmpty('&#9873; Сводная');
     return `<div class="view"><div class="secttl">&#9873; Сводная</div><div id="stTop"></div>
-      <div class="panel scrollT" style="padding:0"><table class="tbl"><thead id="stHead"></thead><tbody id="stBody"></tbody></table></div>
+      <div class="panel scrollT" style="padding:0"><table class="tbl hasnum" id="sttable"><thead id="stHead"></thead><tbody id="stBody"></tbody></table></div>
       <div class="note" id="stNote"></div></div>`;
   },
   games(){
@@ -475,7 +532,7 @@ const RENDER={
     if(!D.gp)return statsEmpty('&#10022; Роли');
     return `<div class="view"><div class="secttl">&#10022; Статистика по ролям</div>
       <div class="tfilter" id="roleTabs"></div>
-      <div class="panel scrollT" style="padding:0"><table class="tbl"><thead id="roleHead"></thead><tbody id="roleBody"></tbody></table></div>
+      <div class="panel scrollT" style="padding:0"><table class="tbl hasnum" id="roletable"><thead id="roleHead"></thead><tbody id="roleBody"></tbody></table></div>
       <div class="note" id="roleNote"></div></div>`;
   },
   player(){
@@ -483,7 +540,8 @@ const RENDER={
     return `<div class="view"><div class="secttl">&#9776; Статистика игрока</div><div id="plTop"></div><div id="plArea"></div></div>`;
   }
 };
-let stStage='all',stGame=0,stMode='total',gmRound=0,curPlayer=null,plQuery='';
+let stStage='all',stGame=0,stMode='total',gmRound=0,curPlayer=null,plQuery='',statFull=false;
+let myPlayer=(function(){try{return localStorage.getItem('ce634_my')||null}catch(e){return null}})(),viewMode=(function(){try{return localStorage.getItem('ce634_view')||'first'}catch(e){return'first'}})();
 let rTab='all';
 const ROLE_DEF=[['all','Все'],['Citizen','Мир'],['Sheriff','Шер'],['Mafia','Маф'],['Don','Дон'],['redsum','К+Ш'],['blacksum','Ч+Д']];
 const RSHORT={Citizen:'Мир',Sheriff:'Шер',Mafia:'Маф',Don:'Дон'};
@@ -492,6 +550,8 @@ const STAB={'Квалификация':'Квал','Полуфинал':'Полу
 function fmt(v){const n=+(+v).toFixed(2);if(!isFinite(n))return '—';if(n===0)return '0';return Number.isInteger(n)?String(n):n.toFixed(2).replace(/\.?0+$/,'');}
 function plink(name){return `<span class="plink" data-p="${esc(name)}" onclick="goPlayer(this.dataset.p)">${esc(name)}</span>`;}
 function goPlayer(name){curPlayer=name;show('player');}
+function fullToggle(){return '<span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Таблица:</span><span class="seg"><button class="'+(statFull?'':'on')+'" onclick="setFull(0)">Компактно</button><button class="'+(statFull?'on':'')+'" onclick="setFull(1)">Подробно</button></span>';}
+function setFull(v){statFull=!!v;show(cur);}
 function statsEmpty(t){return `<div class="view"><div class="secttl">${t}</div><div class="panel"><div class="stub"><div class="si">&#9203;</div><h3>Результатов пока нет</h3><p>Появится после первой игры (18 июля). Чтобы проверить сейчас — включите режим <b>Демо</b> на вкладке «Обзор»: все игры заполнятся случайными результатами (полный турнир: квалификация → полуфинал → финал).</p><button class="btn" onclick="show('overview')">← К обзору</button></div></div></div>`;}
 function demoPanel(){return `<div class="panel"><div class="demobar">
     <span style="font-weight:800;font-size:12.5px;color:var(--gold-hi)">Данные:</span>
@@ -499,13 +559,27 @@ function demoPanel(){return `<div class="panel"><div class="demobar">
     ${D.demo?'<span class="demoflag">● демо: случайный полный турнир (11 квал → топ‑40 полуфинал ×2 → топ‑10 финал ×4) — для проверки статистики</span>':'<span class="note" style="margin:0">Онлайн — только реальные данные с mafgame (сыграно игр: '+(D.gp||0)+').</span>'}
   </div></div>`;}
 function setDemo(on){D.demo=!!on;D.games=on?makeDemo():(D.realGames||[]);stStage='all';stGame=0;gmRound=0;curPlayer=null;computeSeating();computeStats();renderTop();show(cur);}
+function setMy(v){myPlayer=v||null;try{if(myPlayer)localStorage.setItem('ce634_my',myPlayer);else localStorage.removeItem('ce634_my');}catch(e){}if(myPlayer)curPlayer=myPlayer;show(cur);}
+function setView(m){viewMode=m;try{localStorage.setItem('ce634_view',m);}catch(e){}show(cur);}
+function hlMe(el){if(!myPlayer||!el)return;el.querySelectorAll('.plink').forEach(a=>{if(a.dataset.p===myPlayer){const tr=a.closest('tr');if(tr)tr.classList.add('me');}});}
+function myPanel(){
+  const opts=D.players.slice().sort((a,b)=>{const ta=(a.r_tier in TIER_ORD)?TIER_ORD[a.r_tier]:9,tb=(b.r_tier in TIER_ORD)?TIER_ORD[b.r_tier]:9;if(ta!==tb)return ta-tb;return (num(b.r_elo_cur)||0)-(num(a.r_elo_cur)||0);});
+  return `<div class="panel"><div class="demobar">
+    <span style="font-weight:800;font-size:12.5px;color:var(--gold-hi)">Мой игрок:</span>
+    <select class="pick" id="mySel" style="max-width:230px;margin:0" onchange="setMy(this.value)"><option value="">— не выбран —</option>${opts.map(p=>`<option value="${esc(p.nick)}"${p.nick===myPlayer?' selected':''}>${esc(p.nick)}${p.r_tier&&p.r_tier in TIER_ORD?(' · '+p.r_tier):''}</option>`).join('')}</select>
+    ${myPlayer?'<button class="btn ghost" onclick="setMy(\'\')">сбросить</button>':''}
+    <span style="flex-basis:100%;height:0"></span>
+    <span style="font-weight:800;font-size:12.5px;color:var(--gold-hi)">Открывать с:</span>
+    <span class="seg"><button class="${viewMode==='first'?'on':''}" onclick="setView('first')">первой игры</button><button class="${viewMode==='current'?'on':''}" onclick="setView('current')">текущей</button></span>
+  </div>${myPlayer?`<div class="note" style="margin-top:8px">Выбран <b class="win">${esc(myPlayer)}</b> — подсвечивается во всех таблицах и рассадке, открывается по умолчанию в «Игрок». Сохраняется после перезагрузки.</div>`:'<div class="note" style="margin-top:8px">Выберите себя — и во всех разделах вы будете подсвечены и открываться по умолчанию (сохраняется после перезагрузки).</div>'}</div>`;
+}
 function aggregateN(list){
-  const P={};let red=0,black=0,tables=0,apsSum=0;const rr=()=>({sigma:0,g:0,w:0});
-  const get=n=>P[n]||(P[n]={name:n,wpts:0,aps:0,ci:0,g:0,w:0,k:0,roles:{Citizen:rr(),Sheriff:rr(),Mafia:rr(),Don:rr()}});
+  const P={};let red=0,black=0,tables=0,apsSum=0;const rr=()=>({sigma:0,g:0,w:0,wpts:0,aps:0,ci:0,apsW:0,apsL:0,wg:0,lg:0,apsPos:0,apsNeg:0});
+  const get=n=>P[n]||(P[n]={name:n,wpts:0,aps:0,ci:0,g:0,w:0,k:0,apsW:0,apsL:0,wg:0,lg:0,apsPos:0,apsNeg:0,roles:{Citizen:rr(),Sheriff:rr(),Mafia:rr(),Don:rr()}});
   list.forEach(g=>g.tables.forEach(t=>{if(t.winner==='unknown')return;tables++;if(t.winner==='red_win')red++;else if(t.winner==='black_win')black++;
-    t.seats.forEach(s=>{if(!s.name)return;const p=get(s.name);const sig=(s.wpts||0)+(s.aps||0)+(s.ci||0);
-      p.wpts+=s.wpts||0;p.aps+=s.aps||0;p.ci+=s.ci||0;p.g++;if(s.result==='W')p.w++;if(s.marker==='first_killed')p.k++;apsSum+=s.aps||0;
-      if(s.role&&p.roles[s.role]){const r=p.roles[s.role];r.sigma+=sig;r.g++;if(s.result==='W')r.w++;}});}));
+    t.seats.forEach(s=>{if(!s.name)return;const p=get(s.name);const sig=(s.wpts||0)+(s.aps||0)+(s.ci||0);const ap=s.aps||0;const W=s.result==='W';
+      p.wpts+=s.wpts||0;p.aps+=ap;p.ci+=s.ci||0;p.g++;if(W){p.w++;p.apsW+=ap;p.wg++;}else{p.apsL+=ap;p.lg++;}if(ap>0)p.apsPos+=ap;else if(ap<0)p.apsNeg+=ap;if(s.marker==='first_killed')p.k++;apsSum+=ap;
+      if(s.role&&p.roles[s.role]){const r=p.roles[s.role];r.sigma+=sig;r.g++;r.wpts+=s.wpts||0;r.aps+=ap;r.ci+=s.ci||0;if(W){r.w++;r.apsW+=ap;r.wg++;}else{r.apsL+=ap;r.lg++;}if(ap>0)r.apsPos+=ap;else if(ap<0)r.apsNeg+=ap;}});}));
   const rows=Object.values(P).map(p=>({...p,sigma:+(p.wpts+p.aps+p.ci).toFixed(2)}));
   rows.sort((a,b)=>b.sigma-a.sigma||b.aps-a.aps||a.name.localeCompare(b.name,'ru'));rows.forEach((r,i)=>r.place=i+1);
   return {rows,red,black,tables,apsSum};
@@ -523,7 +597,7 @@ function makeDemo(){
   const top40=aggregateN(quals).rows.slice(0,40).map(r=>r.name);
   const semis=[0,1].map(gi=>({title:'Полуфинал '+(gi+1),stage:'Полуфинал',tables:splitPlay(shuf(top40),4)}));
   const top10=aggregateN(semis).rows.slice(0,10).map(r=>r.name);
-  const finals=[0,1,2,3].map(gi=>({title:'Финал '+(gi+1),stage:'Финал',tables:[playTable(top10.slice(),1)]}));
+  const finals=[0,1,2,3,4].map(gi=>({title:'Финал '+(gi+1),stage:'Финал',tables:[playTable(top10.slice(),1)]}));
   return quals.concat(semis,finals);
 }
 function computeStats(){
@@ -533,71 +607,84 @@ function computeStats(){
   D.rows=agg.rows;D.STAT={};agg.rows.forEach(r=>D.STAT[r.name]=r);
   D.redWins=agg.red;D.blackWins=agg.black;D.aps=agg.apsSum;D.tbls=agg.tables;
   D.stagesPresent=['Квалификация','Полуфинал','Финал'].filter(st=>D.gplist.some(g=>(g.stage||'Квалификация')===st));
-  if((!curPlayer||!D.STAT[curPlayer])&&D.rows.length)curPlayer=D.rows[0].name;
+  if((!curPlayer||!D.STAT[curPlayer])&&D.rows.length)curPlayer=(myPlayer&&D.STAT[myPlayer])?myPlayer:D.rows[0].name;
 }
 function afterStats(id){if(id==='stages')paintStages();else if(id==='games')initGames();else if(id==='roles')paintRolesN();else if(id==='player')initPlayerN();}
 /* ── Сводная ── */
 function paintStages(){
   const top=document.getElementById('stTop');if(!top)return;
   const multi=D.stagesPresent.length>1;
-  const scope=(stStage==='all')?D.gplist:D.gplist.filter(g=>(g.stage||'Квалификация')===stStage);
+  const scope=(stStage==='all')?D.gplist:(stStage==='Полуфинал'?D.gplist.filter(g=>['Квалификация','Полуфинал'].includes(g.stage||'Квалификация')):D.gplist.filter(g=>(g.stage||'Квалификация')===stStage));
   if(stGame>scope.length)stGame=0;
   const list=(stGame>0)?scope.slice(0,stGame):scope;
   const agg=aggregateN(list),rows=agg.rows;
   let ctrl='';
   if(multi)ctrl+='<div class="rounds">'+['all'].concat(D.stagesPresent).map(st=>`<button class="rbtn stg ${st===stStage?'active':''}" data-st="${st}">${st==='all'?'Итог':STAB[st]}</button>`).join('')+'</div>';
-  ctrl+='<div class="rounds"><button class="rbtn rg ${}" data-g="0">'+(stGame===0?'Все':'Все')+'</button>'+scope.map((g,i)=>`<button class="rbtn rg ${stGame===i+1?'active':''}" data-g="${i+1}">${i+1}</button>`).join('')+'</div>';
-  ctrl=ctrl.replace('rbtn rg ${}','rbtn rg '+(stGame===0?'active':''));
-  ctrl+='<div class="seg" style="margin-bottom:12px"><button class="'+(stMode==='total'?'on':'')+'" data-m="total">Всего</button><button class="'+(stMode==='cards'?'on':'')+'" data-m="cards">По картам</button></div>';
+  const rgp=[{lab:'',items:[{g:0,t:'Все'}]}];let rqi=0;scope.forEach((game,i)=>{const stt=game.stage||'Квалификация';let lab;if(stt==='Квалификация'){rqi++;lab=rqi<=9?'День 1':'День 2';}else if(stt==='Полуфинал')lab='Полуфинал';else lab='Финал';if(rgp[rgp.length-1].lab!==lab)rgp.push({lab,items:[]});rgp[rgp.length-1].items.push({g:i+1,t:String(i+1)});});
+  ctrl+='<div class="ggroups">'+rgp.map(gr=>`<div class="rgroup"><div class="rglab">${gr.lab||'&nbsp;'}</div><div class="rounds">`+gr.items.map(it=>`<button class="rbtn rg ${stGame===it.g?'active':''}" data-g="${it.g}">${it.t}</button>`).join('')+'</div></div>').join('')+'</div>';
+  ctrl+='<div class="segwrap"><span class="seg stmode" style="margin-bottom:12px"><button class="'+(stMode==='total'?'on':'')+'" data-m="total">Всего</button><button class="'+(stMode==='cards'?'on':'')+'" data-m="cards">По ролям</button></span>'+fullToggle()+'</div>';
   ctrl+=`<div class="statchips"><span>Игроков <b>${rows.length}</b></span><span class="cred">красные <b>${agg.red}</b></span><span class="cblk">чёрные <b>${agg.black}</b></span><span>ср.доп/стол <b>${agg.tables?fmt(agg.apsSum/agg.tables):'0'}</b></span></div>`;
-  top.innerHTML=ctrl;
+  top.innerHTML=ctrl;const stt=document.getElementById('sttable');if(stt)stt.classList.toggle('full',statFull);
   top.querySelectorAll('.rbtn.stg').forEach(b=>b.onclick=()=>{stStage=b.dataset.st;stGame=0;paintStages();});
   top.querySelectorAll('.rbtn.rg').forEach(b=>b.onclick=()=>{stGame=+b.dataset.g;paintStages();});
-  top.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{stMode=b.dataset.m;paintStages();});
+  top.querySelectorAll('.stmode button').forEach(b=>b.onclick=()=>{if(b.dataset.m){stMode=b.dataset.m;paintStages();}});
   const head=document.getElementById('stHead'),body=document.getElementById('stBody'),note=document.getElementById('stNote');
   if(stMode==='total'){
-    head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th><th class="grp">WPTS</th><th>доп</th><th>Ci</th><th class="grp">Поб</th><th>Игр</th><th title="убит 1-й ночью">1н</th></tr>';
-    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td><td class="grp">${fmt(p.wpts)}</td><td>${fmt(p.aps)}</td><td>${fmt(p.ci)}</td><td class="grp"><b class="win">${p.w}</b></td><td>${p.g}</td><td>${p.k||0}</td></tr>`).join('');
-    note.innerHTML='Σ = WPTS + доп + Ci. «Поб» — победы, «1н» — сколько раз убит первой ночью. '+(D.demo?'<b style="color:#f0906f">Демо — случайные цифры.</b>':'');
+    head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th><th class="grp co" title="доп всего (вкл Ci и минусы)">доп</th><th class="x" title="плюсовые допы">доп+</th><th class="x" title="минусовые допы (штрафы)">доп−</th><th class="x">Ci</th><th class="grp" title="побед / игр">Поб/Игр</th><th class="x sp"></th><th class="x" title="средний доп за игру">ср.доп</th><th class="x" title="ср.доп при победе">ср.W</th><th class="x" title="ср.доп при поражении">ср.L</th></tr>';
+    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td><td class="grp co">${fmt(p.aps+p.ci)}</td><td class="x">${fmt(p.apsPos)}</td><td class="x">${fmt(p.apsNeg)}</td><td class="x">${fmt(p.ci)}</td><td class="grp"><b class="win">${p.w}</b><span class="na">/${p.g}</span></td><td class="x sp"></td><td class="x">${p.g?fmt(p.aps/p.g):'·'}</td><td class="x">${p.wg?fmt(p.apsW/p.wg):'·'}</td><td class="x">${p.lg?fmt(p.apsL/p.lg):'·'}</td></tr>`).join('');
+    note.innerHTML='Компактно: Σ · доп-всего · Поб/Игр. Подробно: доп+, доп−, Ci и средние допы (общий/при победе/при поражении) — <b>листайте вправо →</b>. Σ = WPTS + доп + Ci. '+(D.demo?'<b style="color:#f0906f">Демо — случайные цифры.</b>':'');hlMe(body);
   }else{
-    const rc=r=>r.g?`<b class="win">${r.w}</b><span class="na">/${r.g}</span>`:'<span class="na">·</span>';
-    head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th><th class="grp" title="мирный">Мир</th><th title="шериф">Шер</th><th title="мафия">Маф</th><th title="дон">Дон</th></tr>';
-    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td><td class="grp">${rc(p.roles.Citizen)}</td><td>${rc(p.roles.Sheriff)}</td><td>${rc(p.roles.Mafia)}</td><td>${rc(p.roles.Don)}</td></tr>`).join('');
-    note.innerHTML='По картам: <b>побед / игр</b> в каждой роли. Σ — общий балл.';
+    const RLc=[['Citizen','Мир'],['Sheriff','Шер'],['Mafia','Маф'],['Don','Дон']];
+    head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th>'+RLc.map(([k,l],i)=>`<th class="${i===0?'grp':''}" title="${l}: победы/игр">${l}</th>`).join('')+RLc.map(([k,l],i)=>`<th class="x${i===0?' grp':''}" title="${l}: баллы">${l}·Σ</th>`).join('')+'<th class="x sp"></th>'+RLc.map(([k,l])=>`<th class="x" title="${l}: доп">${l}·доп</th>`).join('')+'</tr>';
+    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td>`+RLc.map(([k],i)=>{const r=p.roles[k];return `<td class="${i===0?'grp':''}">${r.g?`<b class="win">${r.w}</b><span class="na">/${r.g}</span>`:'<span class="na">·</span>'}</td>`;}).join('')+RLc.map(([k],i)=>{const r=p.roles[k];return `<td class="x${i===0?' grp':''}">${r.g?fmt(r.sigma):'·'}</td>`;}).join('')+'<td class="x sp"></td>'+RLc.map(([k])=>{const r=p.roles[k];return `<td class="x">${r.g?fmt(r.aps):'·'}</td>`;}).join('')+'</tr>').join('');
+    note.innerHTML='По ролям: <b>побед / игр</b> в каждой роли. В «Подробно» добавляются колонки Σ и доп по каждой роли — <b>листайте таблицу вправо →</b>.';hlMe(body);
   }
 }
 /* ── Игры (по раундам) ── */
-function initGames(){gmRound=D.gplist.length-1;if(gmRound<0)gmRound=0;paintGames();}
+function gmCur(){return Math.max(0,D.gplist.length-1);}
+function gameTableHtml(t){
+  const wl=t.winner==='red_win'?'<span class="gwin gwin-red">победа красных</span>':(t.winner==='black_win'?'<span class="gwin gwin-blk">победа чёрных</span>':'');
+  const wcls=t.winner==='red_win'?' win-red':(t.winner==='black_win'?' win-blk':'');
+  const aps=t.seats.filter(x=>x&&x.name).map(x=>x.aps||0);const mx=aps.length?Math.max(...aps):0,mn=aps.length?Math.min(...aps):0;
+  let cells='';
+  [0,1,2,3,4,9,8,7,6,5].forEach(i=>{const st=t.seats[i];if(!st||!st.name){cells+='<div class="gcell empty"></div>';return;}
+    const W=st.result==='W',L=st.result==='L';const rc=W?'gw':(L?'gl':'');const mine=st.name===myPlayer?' mine':'';const ap=st.aps||0;let dc='';if(ap<0){dc='dneg'+(ap<-0.2?' b':'');}else if(ap>0.4){dc='dbig';}else if(ap>0.2){dc='dmid';}
+    cells+=`<div class="gcell ${rc}${mine}" data-p="${esc(st.name)}" onclick="goPlayer(this.dataset.p)">${st.name===myPlayer?'<div class="youb">вы</div>':''}<div class="snum">${st.seat}</div>`+
+      `<img class="sav" src="${esc(avOf(st.name)||'')}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'">`+
+      `<div class="sname">${esc(st.name)}</div>`+
+      `<div class="grole">${st.role?`<span class="rp rp-${st.role}">${RSHORT[st.role]}</span>`:''}</div>`+
+      `<div class="gdop">доп <b class="gdopv ${dc}">${fmt(ap)}</b></div></div>`;});
+  return `<div class="twrap${wcls}"><div class="thdr"><span class="tnum">Стол ${ROMAN[t.table_num]||t.table_num}</span> ${wl}</div><div class="seatgrid gseat">${cells}</div></div>`;
+}
+function initGames(){gmRound=(viewMode==='current')?gmCur():0;if(gmRound<0)gmRound=0;paintGames();}
 function paintGames(){
   const top=document.getElementById('gmTop'),area=document.getElementById('gmArea');if(!top)return;
   const list=D.gplist;if(gmRound>=list.length)gmRound=list.length-1;
-  top.innerHTML='<div class="rounds">'+list.map((g,i)=>`<button class="rbtn ${i===gmRound?'active':''}" data-i="${i}">${i+1}</button>`).join('')+'</div>';
+  const grp=[];let qi=0;list.forEach((g,i)=>{const stg=g.stage||'Квалификация';let lab;if(stg==='Квалификация'){qi++;lab=qi<=9?'День 1':'День 2';}else if(stg==='Полуфинал')lab='Полуфинал';else lab='Финал';if(!grp.length||grp[grp.length-1].lab!==lab)grp.push({lab,items:[]});grp[grp.length-1].items.push(i);});
+  top.innerHTML='<div class="ggroups">'+grp.map(gr=>`<div class="rgroup"><div class="rglab">${gr.lab}</div><div class="rounds">`+gr.items.map(i=>`<button class="rbtn ${i===gmRound?'active':''}${i===gmCur()?' cur':''}" data-i="${i}">${i+1}</button>`).join('')+'</div></div>').join('')+'</div>';
   top.querySelectorAll('.rbtn').forEach(b=>b.onclick=()=>{gmRound=+b.dataset.i;paintGames();});
   const g=list[gmRound];
-  area.innerHTML=`<div class="note" style="margin:0 0 12px"><b style="color:var(--gold-hi)">${esc(g.stage||'Квалификация')}</b> · игра ${gmRound+1} из ${list.length} · ${g.tables.length} ${g.tables.length===1?'стол':'стола'}</div><div class="tables">`+g.tables.map(t=>{
-    const wl=t.winner==='red_win'?'<span class="rp rp-Citizen">победа красных</span>':(t.winner==='black_win'?'<span class="rp rp-Mafia">победа чёрных</span>':'');
-    const rows=t.seats.map(s=>`<tr><td>${s.seat}</td><td class="l">${plink(s.name)}</td><td>${s.role?`<span class="rp rp-${s.role}">${RSHORT[s.role]}</span>`:'—'}</td><td class="${s.result==='W'?'win':'los'}">${s.result==='W'?'поб':'—'}</td><td>${fmt(s.aps)}</td><td class="sig">${fmt((s.wpts||0)+(s.aps||0)+(s.ci||0))}</td></tr>`).join('');
-    return `<div class="twrap"><div class="thdr"><span class="tnum">Стол ${ROMAN[t.table_num]||t.table_num}</span> ${wl}</div><table class="tbl" style="font-size:12px"><thead><tr><th>#</th><th class="l">Игрок</th><th>Роль</th><th>Рез</th><th>доп</th><th class="sig">Σ</th></tr></thead><tbody>${rows}</tbody></table></div>`;
-  }).join('')+'</div>';
+  area.innerHTML=`<div class="note" style="margin:0 0 12px"><b style="color:var(--gold-hi)">${esc(g.stage||'Квалификация')}</b> · игра ${gmRound+1} из ${list.length} · ${g.tables.length} ${g.tables.length===1?'стол':'стола'}</div><div class="tables">`+g.tables.map(gameTableHtml).join('')+'</div>';
 }
 /* ── Роли ── */
-function sumRoles(p,ks){const r={sigma:0,g:0,w:0};ks.forEach(k=>{const x=p.roles[k];r.sigma+=x.sigma;r.g+=x.g;r.w+=x.w;});return r;}
+function sumRoles(p,ks){const r={sigma:0,g:0,w:0,wpts:0,aps:0,ci:0,apsW:0,apsL:0,wg:0,lg:0,apsPos:0,apsNeg:0};ks.forEach(k=>{const x=p.roles[k];for(const kk in r)r[kk]+=x[kk]||0;});return r;}
 function roleOf(p,k){return k==='redsum'?sumRoles(p,['Citizen','Sheriff']):(k==='blacksum'?sumRoles(p,['Mafia','Don']):p.roles[k]);}
 function paintRolesN(){
   const tabsEl=document.getElementById('roleTabs');if(!tabsEl)return;
-  tabsEl.innerHTML='<span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Роль:</span>'+ROLE_DEF.map(([k,l])=>`<button class="tf${k===rTab?' on':''}" data-k="${k}">${l}</button>`).join('');
+  tabsEl.innerHTML='<span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Роль:</span>'+ROLE_DEF.map(([k,l])=>`<button class="tf${k===rTab?' on':''}" data-k="${k}">${l}</button>`).join('')+'<span class="segwrap" style="margin-left:auto">'+fullToggle()+'</span>';
+  const rtb=document.getElementById('roletable');if(rtb)rtb.classList.toggle('full',statFull);
   tabsEl.querySelectorAll('.tf').forEach(b=>b.onclick=()=>{rTab=b.dataset.k;paintRolesN();});
   const rows=D.rows,head=document.getElementById('roleHead'),body=document.getElementById('roleBody'),note=document.getElementById('roleNote');
   if(rTab==='all'){
-    head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th><th class="grp">Мир</th><th>Шер</th><th>Маф</th><th>Дон</th><th class="grp">Игр</th></tr>';
-    body.innerHTML=rows.map((p,i)=>`<tr><td class="l">${i+1}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td>`+['Citizen','Sheriff','Mafia','Don'].map(k=>`<td${k==='Citizen'?' class="grp"':''}>${p.roles[k].g?fmt(p.roles[k].sigma):'<span class="na">·</span>'}</td>`).join('')+`<td class="grp">${p.g}</td></tr>`).join('');
-    note.innerHTML='Σ в разрезе ролей — сколько баллов принесла каждая роль. Сумма по ролям = Σ всего.';
+    head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th><th class="grp" title="Σ мирным">Мир</th><th title="Σ шерифом">Шер</th><th title="Σ мафией">Маф</th><th title="Σ доном">Дон</th><th class="grp">Игр</th><th class="x sp"></th><th class="x">Мир·доп</th><th class="x">Шер·доп</th><th class="x">Маф·доп</th><th class="x">Дон·доп</th></tr>';
+    body.innerHTML=rows.map((p,i)=>`<tr><td class="l">${i+1}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td>`+['Citizen','Sheriff','Mafia','Don'].map(k=>`<td${k==='Citizen'?' class="grp"':''}>${p.roles[k].g?fmt(p.roles[k].sigma):'<span class="na">·</span>'}</td>`).join('')+`<td class="grp">${p.g}</td><td class="x sp"></td>`+['Citizen','Sheriff','Mafia','Don'].map(k=>`<td class="x">${p.roles[k].g?fmt(p.roles[k].aps):'·'}</td>`).join('')+`</tr>`).join('');
+    note.innerHTML='Σ по каждой роли (сумма = Σ всего). В «Подробно» добавляются допы по каждой роли — <b>листайте вправо →</b>.';hlMe(body);
   }else{
     const lab={Citizen:'Мирный',Sheriff:'Шериф',Mafia:'Мафия',Don:'Дон',redsum:'К+Ш — красные (Мир+Шериф)',blacksum:'Ч+Д — чёрные (Мафия+Дон)'}[rTab];
     const list=rows.map(p=>({p,r:roleOf(p,rTab)})).filter(x=>x.r.g>0).sort((a,b)=>b.r.sigma-a.r.sigma||b.r.g-a.r.g);
-    head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ в роли</th><th class="grp">Поб</th><th>Игр</th><th>%W</th></tr>';
-    body.innerHTML=list.map((x,i)=>{const pct=x.r.g?Math.round(x.r.w/x.r.g*100):0;return `<tr><td class="l">${i+1}</td><td class="l">${plink(x.p.name)}</td><td class="sig">${fmt(x.r.sigma)}</td><td class="grp"><b class="win">${x.r.w}</b></td><td>${x.r.g}</td><td>${pct}%</td></tr>`;}).join('');
-    note.innerHTML=`Рейтинг в роли «${lab}» по баллам именно в этой роли.`;
+    head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="grp">Поб/Игр</th><th class="sig">Σ</th><th class="x">WPTS</th><th class="x">доп</th><th class="x">Ci</th><th class="grp x" title="ср.доп при победе">ср.доп W</th><th class="x" title="ср.доп при поражении">ср.доп L</th></tr>';
+    body.innerHTML=list.map((x,i)=>{const r=x.r;const aw=r.wg?r.apsW/r.wg:null,al=r.lg?r.apsL/r.lg:null;return `<tr><td class="l">${i+1}</td><td class="l">${plink(x.p.name)}</td><td class="grp"><b class="win">${r.w}</b><span class="na">/${r.g}</span></td><td class="sig">${fmt(r.sigma)}</td><td class="x">${fmt(r.wpts)}</td><td class="x">${fmt(r.aps)}</td><td class="x">${fmt(r.ci)}</td><td class="grp x">${aw!=null?fmt(aw):'·'}</td><td class="x">${al!=null?fmt(al):'·'}</td></tr>`;}).join('');
+    note.innerHTML=`Рейтинг в роли «${lab}» по баллам именно в этой роли.`;hlMe(body);
   }
 }
 /* ── Игрок ── */
@@ -605,7 +692,7 @@ function initPlayerN(){
   const top=document.getElementById('plTop');if(!top)return;
   top.innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
     <input id="plSearch" class="pick" style="flex:1;min-width:150px;max-width:none" placeholder="Поиск игрока…" autocomplete="off">
-    <select class="pick" id="plSel" style="flex:1;min-width:150px;max-width:none">${D.rows.map(p=>`<option value="${esc(p.name)}"${p.name===curPlayer?' selected':''}>${p.place}. ${esc(p.name)} — Σ ${fmt(p.sigma)}</option>`).join('')}</select></div>`;
+    <select class="pick" id="plSel" style="flex:1;min-width:150px;max-width:none">${(function(){let list=D.rows.slice();if(!statFull){list.sort((a,b)=>{const ra=D.RATE[a.name]||{},rb=D.RATE[b.name]||{};const ta=(ra.tier in TIER_ORD)?TIER_ORD[ra.tier]:9,tb=(rb.tier in TIER_ORD)?TIER_ORD[rb.tier]:9;if(ta!==tb)return ta-tb;return (rb.elo||0)-(ra.elo||0);});}return list.map(p=>{const R=D.RATE[p.name]||{};const lab=statFull?(p.place+'. '+esc(p.name)+' — Σ '+fmt(p.sigma)):(esc(p.name)+(R.tier&&R.tier in TIER_ORD?(' · '+R.tier):'')+(R.elo?(' '+Math.round(R.elo)):''));return `<option value="${esc(p.name)}"${p.name===curPlayer?' selected':''}>${lab}</option>`;}).join('');})()}</select></div><div class="segwrap" style="margin:0 0 12px">${fullToggle()}</div><div class="note" style="margin:0 0 12px"><b>Компактно</b> — без турнирного места, выбор игрока по рангам/ELO (для тех, кто не хочет знать таблицу). <b>Подробно</b> — с местом и полным логом игр.</div>`;
   const sel=document.getElementById('plSel'),srch=document.getElementById('plSearch');
   sel.onchange=()=>{curPlayer=sel.value;drawPlayerN();};
   srch.oninput=()=>{const q=srch.value.trim().toLowerCase();if(!q)return;const opt=[...sel.options].find(o=>o.value.toLowerCase().indexOf(q)>=0);if(opt){sel.value=opt.value;curPlayer=opt.value;drawPlayerN();}};
@@ -615,18 +702,30 @@ function drawPlayerN(){
   const area=document.getElementById('plArea');if(!area)return;const name=curPlayer;const p=D.STAT[name];
   if(!p){area.innerHTML='<div class="note">Нет данных по игроку</div>';return;}
   const multi=D.stagesPresent.length>1;
-  const mine=[];D.gplist.forEach((g,gi)=>g.tables.forEach(t=>{const s=t.seats.find(x=>x.name===name);if(s)mine.push({gi,stage:g.stage||'Квалификация',t:t.table_num,role:s.role,result:s.result,aps:s.aps,sig:(s.wpts||0)+(s.aps||0)+(s.ci||0)});}));
+  const mine=[];D.gplist.forEach((g,gi)=>g.tables.forEach(t=>{const s=t.seats.find(x=>x.name===name);if(s)mine.push({gi,stage:g.stage||'Квалификация',t:t.table_num,role:s.role,result:s.result,aps:s.aps,ci:s.ci,sig:(s.wpts||0)+(s.aps||0)+(s.ci||0)});}));
   const placeAfter={};D.gplist.forEach((g,gi)=>{const r=aggregateN(D.gplist.slice(0,gi+1)).rows.find(x=>x.name===name);if(r)placeAfter[gi]=r.place;});
-  const rcards=['Citizen','Sheriff','Mafia','Don'].map(k=>{const r=p.roles[k];return `<div class="rcx"><div class="rt"><span class="rp rp-${k}">${RLONG[k]}</span></div><div class="rv">${r.g?fmt(r.sigma):'—'}</div><div class="rs">${r.g} игр · ${r.w} поб</div></div>`;}).join('');
-  const log=mine.map(m=>`<tr><td>${m.gi+1}</td>${multi?`<td>${STAB[m.stage]?STAB[m.stage][0]:''}</td>`:''}<td>${ROMAN[m.t]||m.t}</td><td>${m.role?`<span class="rp rp-${m.role}">${RSHORT[m.role]}</span>`:'—'}</td><td class="${m.result==='W'?'win':'los'}">${m.result==='W'?'поб':'—'}</td><td>${fmt(m.aps)}</td><td class="sig">${fmt(m.sig)}</td><td class="grp">${placeAfter[m.gi]?'#'+placeAfter[m.gi]:'—'}</td></tr>`).join('');
-  area.innerHTML=`<div class="phdr"><img src="${esc(avOf(name)||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><div><div class="pn">${esc(name)}</div><div class="ps">место <b style="color:var(--gold-hi)">${p.place}</b> · Σ ${fmt(p.sigma)} · ${p.w} побед из ${p.g} · убит 1-м ${p.k}</div></div></div>
-    <div class="panel"><h3>Баллы по ролям</h3><div class="rcards">${rcards}</div></div>
-    <div class="panel scrollT" style="padding:0"><table class="tbl" style="font-size:12px"><thead><tr><th>Игра</th>${multi?'<th>Ст</th>':''}<th>Стол</th><th>Роль</th><th>Рез</th><th>доп</th><th class="sig">Σ</th><th class="grp" title="место после этой игры">Место</th></tr></thead><tbody>${log}</tbody></table></div>`;
+  const tavgOf=ks=>{let a=0,g=0;ks.forEach(k=>D.rows.forEach(pp=>{a+=pp.roles[k].aps;g+=pp.roles[k].g;}));return g?a/g:0;};
+  const rccell=(labHtml,r,ks,cls)=>{const aw=r.wg?fmt(r.apsW/r.wg):'·',al=r.lg?fmt(r.apsL/r.lg):'·';const pav=r.g?fmt(r.aps/r.g):'·';return `<div class="rcx${cls?(' '+cls):''}"><div class="rt">${labHtml}</div><div class="rv">${r.g?fmt(r.sigma):'—'}<span class="rvg"> · <b class="win">${r.w}</b>/${r.g}</span></div><div class="rs">ср.доп <b>${pav}</b> <span class="na">(тур ${fmt(tavgOf(ks))})</span><br>W <span class="win">${aw}</span> · L <span class="los">${al}</span></div></div>`;};
+  const rcards=['Citizen','Mafia','Sheriff','Don'].map(k=>rccell(`<span class="rp rp-${k}">${RLONG[k]}</span>`,p.roles[k],[k],'')).join('')+rccell('<span class="rp rp-Citizen">К+Ш</span>',sumRoles(p,['Citizen','Sheriff']),['Citizen','Sheriff'],'rcx-combo rcx-red')+rccell('<span class="rp rp-Mafia">Ч+Д</span>',sumRoles(p,['Mafia','Don']),['Mafia','Don'],'rcx-combo rcx-blk');
+  const log=mine.map(m=>`<tr><td>${m.gi+1}</td><td class="x">${ROMAN[m.t]||m.t}</td><td>${m.role?`<span class="rp rp-${m.role}">${RSHORT[m.role]}</span>`:'—'}</td><td class="${m.result==='W'?'win':(m.result==='L'?'los':'na')}">${m.result==='W'?'поб':(m.result==='L'?'пор':'—')}</td><td>${fmt(m.aps)}</td><td class="x">${fmt(m.ci)}</td><td class="sig">${fmt(m.sig)}</td><td class="grp x">${placeAfter[m.gi]?'#'+placeAfter[m.gi]:'—'}</td></tr>`).join('');
+  area.innerHTML=`<div class="phdr"><img src="${esc(avOf(name)||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><div><div class="pn">${esc(name)}</div><div class="ps">${statFull?`место <b style="color:var(--gold-hi)">${p.place}</b> · `:''}Σ ${fmt(p.sigma)} · убит 1-м ${p.k}</div><div class="pbig"><b class="win">${p.w}</b><span class="na">/${p.g}</span> <span class="pbl">побед / игр</span></div></div></div>
+    <div class="panel"><h3>Баллы по ролям</h3><div class="rcards">${rcards}</div><div class="note" style="margin-top:8px">Крупно — Σ баллов и <b class="win">победы</b>/игр в роли. Ниже — <b>ср.доп</b> игрока и <span class="na">(тур …)</span> средний по турниру в этой роли; <span class="win">W</span> — ср.доп при победе, <span class="los">L</span> — при поражении. <b>К+Ш</b>/<b>Ч+Д</b> — сводные (все красные / все чёрные).</div></div>
+    <div class="panel scrollT" style="padding:0"><table class="tbl${statFull?' full':''}" style="font-size:12px"><thead><tr><th>Игра</th><th class="x">Стол</th><th>Роль</th><th>Рез</th><th>доп</th><th class="x">Ci</th><th class="sig">Σ</th><th class="grp x" title="место после этой игры">Место</th></tr></thead><tbody>${log}</tbody></table></div>`;
 }
+function secListPanel(){const items=[
+ ['≡','Участники · рейтинг','состав, ELO и тиры — кто сильнее по рейтингу'],
+ ['▦','Рассадка · Интерактивная','кто за каким столом каждую игру; тап по игроку — все его столы'],
+ ['♛','Рассадка · Карточки','карточка каждого: рассадка по играм, соперники, «0 игр»'],
+ ['⇄','Рассадка · Пересечения','с кем и сколько раз пересекаешься за столом'],
+ ['⚑','Статистика · Сводная','рейтинг по баллам (Σ), стадии, слайдер по играм'],
+ ['▶','Статистика · Игры','результаты по столам: роли, победа команды, допы'],
+ ['✦','Статистика · Роли','кто силён какой картой (мирный/шериф/мафия/дон, К+Ш/Ч+Д)'],
+ ['☰','Статистика · Игрок','полная статистика игрока: роли, лог игр, место']];
+return `<div class="panel"><h3>Что где смотреть</h3><div class="seclist">`+items.map(([ic,t,d])=>`<div class="seci"><span class="sicon">${ic}</span><div><b>${esc(t)}</b><div class="sid">${esc(d)}</div></div></div>`).join('')+`</div></div>`;}
 function stagesPanel(){return `<div class="panel"><h3>Формат: 3 стадии</h3><div class="stages">
     <div class="stage"><span class="sbadge">старт</span><div class="sn">Квалификация</div><div class="sg">11 игр · 4 стола · каждый играет 10</div><div class="sd">Все 44 играют квалификацию, одну игру отдыхают. По сумме — топ‑40 в полуфинал.</div></div>
     <div class="stage"><div class="sn">Полуфинал</div><div class="sg">2 игры · топ‑40</div><div class="sd">40 лучших по квалификации играют 2 игры. По сумме — топ‑10 финала.</div></div>
-    <div class="stage"><div class="sn">Финал</div><div class="sg">4 игры · топ‑10</div><div class="sd">10 сильнейших разыгрывают титул чемпиона Европы за финальным столом.</div></div></div></div>`;}
+    <div class="stage"><div class="sn">Финал</div><div class="sg">5 игр · топ‑10</div><div class="sd">10 сильнейших разыгрывают титул чемпиона Европы за финальным столом (5 игр).</div></div></div></div>`;}
 
 function afterRender(id){if(id==='roster')paintRoster();else if(id==='seating')initSeating();else if(id==='cards')initCards();else if(id==='together')initTogether();else if(id==='stages'||id==='games'||id==='roles'||id==='player')afterStats(id);}
 
@@ -639,12 +738,14 @@ function avatarCell(p){const f=(p.r_tier in TIER_ORD)?(' f-'+p.r_tier):'';
   return `<span class="mono">${esc(mono(p.nick))}</span>`;}
 function paintRoster(){
   const tc=D.stats.tiers||{};const fil=document.getElementById('tfil');
+  const rt=document.getElementById('rTop');if(rt)rt.innerHTML=fullToggle();
+  const rtable=document.getElementById('rtable');if(rtable)rtable.classList.toggle('full',statFull);
   if(fil){fil.innerHTML='<span class="lbl">Фильтр по рангу:</span>'+
     `<span class="tf ${rFilter?'':'on'}" data-t="">Все <small>${D.players.length}</small></span>`+
     TIERS.filter(x=>tc[x]).map(x=>`<span class="tf ${rFilter===x?'on':''}" data-t="${x}"><span class="tpill tp-${x}">${x}</span><small>${tc[x]}</small></span>`).join('');
     fil.querySelectorAll('.tf').forEach(b=>b.onclick=()=>{rFilter=b.dataset.t||null;paintRoster();});}
   const hr=document.getElementById('rhr');
-  hr.innerHTML='<th class="l" data-k="player">Игрок<span class="ar"></span></th>'+RCOLS.map(c=>`<th data-k="${c.key}">${esc(c.lab)}<span class="ar"></span></th>`).join('')+'<th class="l" style="cursor:default">Профиль</th>';
+  hr.innerHTML='<th class="l" data-k="player">Игрок<span class="ar"></span></th>'+RCOLS.map(c=>`<th data-k="${c.key}" class="${(c.key==='elo_2026'||c.key==='eu26')?'x':''}">${esc(c.lab)}<span class="ar"></span></th>`).join('')+'<th class="l x" style="cursor:default">Профиль</th>';
   hr.querySelectorAll('th[data-k]').forEach(el=>el.onclick=()=>{const k=el.dataset.k;
     if(k==='player')rSortKey='player';else if(rSortKey===k)rSortDir=-rSortDir;else{rSortKey=k;rSortDir=(RCOLS.find(c=>c.key===k)||{}).dir||-1;}paintRoster();});
   let list=D.players.slice();if(rFilter)list=list.filter(p=>p.r_tier===rFilter);
@@ -666,15 +767,15 @@ function paintRoster(){
     html+=`<tr class="${p.status==='confirmed'?'':'applied'}"><td class="l"><div class="pl"><span class="num">${i+1}</span>${avatarCell(p)}<span><span class="pl-nick">${esc(p.nick)}</span>${sub}</span></div></td>
       <td>${(p.r_tier in TIER_ORD)?`<span class="tpill tp-${p.r_tier}">${p.r_tier}</span>`:'<span class="na">—</span>'}</td>
       <td>${et!=null?`<span class="rnum">${Math.round(et)}</span>`:'<span class="na">—</span>'}</td>
-      <td>${e26!=null?`<span class="rnum">${Math.round(e26)}</span>`:'<span class="na">—</span>'}</td>
-      <td>${eu!=null?`<span class="rrank"><span class="h">#</span>${eu}</span>`:'<span class="na">—</span>'}</td>
-      <td class="l">${links.join(' ')||'<span class="na">—</span>'}</td></tr>`;});
-  document.getElementById('rtb').innerHTML=html;
+      <td class="x">${e26!=null?`<span class="rnum">${Math.round(e26)}</span>`:'<span class="na">—</span>'}</td>
+      <td class="x">${eu!=null?`<span class="rrank"><span class="h">#</span>${eu}</span>`:'<span class="na">—</span>'}</td>
+      <td class="l x">${links.join(' ')||'<span class="na">—</span>'}</td></tr>`;});
+  document.getElementById('rtb').innerHTML=html;if(myPlayer)document.querySelectorAll('#rtb tr').forEach(tr=>{const n=tr.querySelector('.pl-nick');if(n&&n.textContent===myPlayer)tr.classList.add('me');});
 }
 
 /* seating (grid) */
 let seatMode='games',seatGame=1,seatPlayer=null;
-function initSeating(){seatMode='games';seatGame=Math.min((D.played||0)+1,D.games.length)||1;drawSeating();}
+function initSeating(){seatMode='games';seatGame=(viewMode==='current')?(Math.min((D.played||0)+1,D.games.length)||1):1;drawSeating();}
 function drawSeating(){
   const area=document.getElementById('seatArea');if(!area)return;
   if(seatMode==='player'&&seatPlayer){
@@ -692,26 +793,28 @@ function drawSeating(){
 }
 function tableHtml(g,t,target,showG){
   const names=(D.seatByGame[g]||{})[t]||[];let cells='';
-  for(let i=0;i<10;i++){const p=names[i]||'';const tier=(D.RATE[p]&&D.RATE[p].tier&&D.RATE[p].tier in TIER_ORD)?D.RATE[p].tier:null;
-    cells+=`<div class="scell${p===target?' tgt':''}${p?'':' empty'}" data-p="${esc(p)}"><div class="snum">${i+1}</div>
+  [0,1,2,3,4,9,8,7,6,5].forEach(i=>{const p=names[i]||'';const tier=(D.RATE[p]&&D.RATE[p].tier&&D.RATE[p].tier in TIER_ORD)?D.RATE[p].tier:null;
+    cells+=`<div class="scell${p===target?' tgt':''}${p===myPlayer?' mine':''}${p?'':' empty'}" data-p="${esc(p)}">${p===myPlayer?'<div class="youb">вы</div>':''}<div class="snum">${i+1}</div>
       <img class="sav ${tier?'f-'+tier:''}" src="${esc(avOf(p)||'')}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'">
-      <div class="sname">${esc(p)||'—'}</div></div>`;}
+      <div class="sname">${esc(p)||'—'}</div></div>`;});
   const j=D.judges[t];const jh=j?`<span class="tjudge"><img src="${esc(j.avatar||'')}" referrerpolicy="no-referrer" onerror="this.style.opacity=.2"> ${esc(j.name)}</span>`:'';
   const eloAvg=ns=>{const v=ns.map(x=>D.RATE[x]&&D.RATE[x].elo).filter(Boolean);return v.length?v.reduce((a,b)=>a+b,0)/v.length:0;};
   const my=eloAvg(names);let eloBadge='';
-  if(my>0){const allT=Object.keys(D.seatByGame[g]||{}).map(k=>eloAvg(D.seatByGame[g][k])).filter(x=>x>0);
-    const nt=allT.length,rank=allT.filter(x=>x>my+0.001).length+1;
-    const cls=nt>1?(rank===1?'top':(rank===nt?'low':'')):'';const lbl=nt>1?(rank===1?'сильнейший стол':(rank===nt?'слабейший стол':'#'+rank+' из '+nt+' по ELO')):'ELO стола';
-    eloBadge=`<span class="telo ${cls}" title="средний ELO стола">Ø ${Math.round(my)} · ${lbl}</span>`;}
+  if(my>0){
+    if(!D.eloRange){const all=Object.values(D.RATE).map(r=>r.elo).filter(Boolean).sort((a,b)=>a-b);const n=Math.max(1,Math.min(10,all.length));const lo=all.slice(0,n),hi=all.slice(-n);D.eloRange={min:lo.reduce((a,b)=>a+b,0)/n,max:hi.reduce((a,b)=>a+b,0)/n};}
+    const R=D.eloRange;let pct=R.max>R.min?Math.round((my-R.min)/(R.max-R.min)*100):50;pct=Math.max(1,Math.min(99,pct));
+    const cls=pct>=67?'top':(pct<=33?'low':'');
+    eloBadge=`<span class="telo ${cls}" title="сильнее ${pct}% возможных столов турнира">Ø ${Math.round(my)} · топ ${pct}%</span>`;}
   return `<div class="twrap"><div class="thdr">${showG?`<span class="tgl">Игра ${g}</span>`:''}<span class="tnum">Стол ${ROMAN[t]}</span>${jh}${eloBadge}</div><div class="seatgrid">${cells}</div></div>`;
 }
 
 /* cards */
+function cardMe(){if(!myPlayer)return;const R=D.RATE[myPlayer]||{};cardTier=(R.tier in TIER_ORD)?R.tier:'—';drawCards();setTimeout(()=>{document.querySelectorAll('#cardArea .pcard').forEach(c=>{const n=c.querySelector('.pcnick');if(n&&n.textContent===myPlayer){c.classList.add('mecard');c.scrollIntoView({behavior:'smooth',block:'center'});}});},80);}
 function cardsByTier(){const by={};Object.keys(D.occ).forEach(n=>{const t=(D.RATE[n]&&D.RATE[n].tier&&D.RATE[n].tier in TIER_ORD)?D.RATE[n].tier:'—';(by[t]=by[t]||[]).push(n);});
   Object.keys(by).forEach(t=>by[t].sort((a,b)=>{const ea=(D.RATE[a]&&D.RATE[a].elo)||0,eb=(D.RATE[b]&&D.RATE[b].elo)||0;return eb-ea||a.localeCompare(b,'ru');}));return by;}
 let cardTier=null;
 function initCards(){const by=cardsByTier();const cl=document.getElementById('cCluster');
-  cl.innerHTML='<span class="lbl" style="font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--dim)">Ранг:</span>'+
+  cl.innerHTML='<span class="lbl" style="font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--dim)">Ранг:</span>'+(myPlayer?'<button class="tf" style="border-color:var(--gold);color:var(--gold-hi)" onclick="cardMe()">★ моя карточка</button>':'')+
     TIERS.filter(t=>by[t]).map(t=>`<button class="tf" data-t="${t}"><span class="tpill tp-${t}">${t}</span><small>${by[t].length}</small></button>`).join('')+
     (by['—']?`<button class="tf" data-t="—">— <small>${by['—'].length}</small></button>`:'');
   cl.querySelectorAll('.tf[data-t]').forEach(b=>b.onclick=()=>{cardTier=b.dataset.t;drawCards();});drawCards();}
@@ -730,7 +833,7 @@ function cardHtml(nick){
   const tier=(R.tier in TIER_ORD)?R.tier:null;const rc=(k,v,na)=>`<div class="rcell"><div class="rk">${k}</div><div class="rv${na?' na':''}">${v}</div></div>`;
   return `<div class="pcard" id="c-${esc(nick)}"><div class="pcrown">&#9819;</div>
     <div class="pchead"><img class="pcav ${tier?'f-'+tier:''}" src="${esc(avOf(nick)||'')}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'">
-      <div><div class="pcnick">${esc(nick)}</div>${info.real?`<div class="pcreal">${esc(info.real)}</div>`:''}</div>
+      <div><div class="pcnick">${esc(nick)}</div>${info.real?`<div class="pcreal">${esc(info.real)}</div>`:''}<div class="pcmeta">Чемпионат Европы 2026 · 18–19.07 · Бонн</div></div>
       <div class="pctier">${tier?`<span class="tpill tp-${tier}">${tier}</span>`:''}</div></div>
     <div class="rate">${rc('ELO тек',R.elo?Math.round(R.elo):'—',!R.elo)}${rc('ELO 2026',R.elo26?Math.round(R.elo26):'—',!R.elo26)}${rc('Европа 26',R.eu?('#'+R.eu):'—',!R.eu)}</div>
     <div class="csec">Рассадка по играм</div>
@@ -746,7 +849,11 @@ function drawTogether(nick){const area=document.getElementById('togArea');if(!ar
   const opp=D.opp[nick]||{};const groups={};Object.entries(opp).forEach(([m,c])=>{(groups[c]=groups[c]||[]).push(m);});
   const met=new Set(Object.keys(opp));const never=Object.keys(D.occ).filter(n=>n!==nick&&!met.has(n)).sort((a,b)=>a.localeCompare(b,'ru'));
   const rows=Object.keys(groups).sort((a,b)=>b-a).map(c=>`<div style="margin-bottom:6px"><span class="cnt">${c} игр</span> ${groups[c].sort((x,y)=>x.localeCompare(y,'ru')).map(esc).join(', ')}</div>`).join('');
+  let interHtml='';
+  if(myPlayer&&myPlayer!==nick){const mine=D.occ[myPlayer]||[];const shared=mine.filter(o=>(D.occ[nick]||[]).some(x=>x.g===o.g&&x.t===o.t)).sort((a,b)=>a.g-b.g);
+    interHtml=`<div class="panel" style="border-color:var(--gold)"><h3>Вы (${esc(myPlayer)}) × ${esc(nick)}</h3>${shared.length?`<div class="opp"><b class="win">${shared.length}</b> совместных: ${shared.map(o=>`игра ${o.g} <span class="na">(стол ${ROMAN[o.t]})</span>`).join(', ')}</div>`:'<div class="zero">за одним столом не пересекаетесь ни разу</div>'}</div>`;}
   area.innerHTML=`<div class="phdr"><img src="${esc(avOf(nick)||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><div><div class="pn">${esc(nick)}</div><div class="ps">${(D.occ[nick]||[]).length} игр · сидит с ${players_w(met.size)}</div></div></div>
+    ${interHtml}
     <div class="panel"><h3>Сколько раз с кем</h3><div class="opp">${rows||'—'}</div></div>
     <div class="panel"><h3>Ни разу за столом (${never.length})</h3><div class="zero">${never.length?never.map(esc).join(', '):'пересекается со всеми'}</div></div>`;}
 

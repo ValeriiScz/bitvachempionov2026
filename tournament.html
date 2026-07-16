@@ -205,7 +205,7 @@ const id=new URLSearchParams(location.search).get('t')||'667';
         <div class="tmeta"><b>${esc(t.dates)}</b><span class="sep">|</span><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков</div>
         <div class="torg">${esc(t.organizer)}</div>
         <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
-        ${t.id==='634'?`<div style="margin-top:16px;"><a href="ce634.html" style="display:inline-block;padding:11px 22px;border-radius:12px;font-weight:800;font-size:13.5px;text-decoration:none;color:#0a1626;background:linear-gradient(135deg,#f0d98a,#d4af37);box-shadow:0 8px 22px rgba(212,175,55,.35);">✦ Новая версия страницы · beta →</a></div>`:''}
+        ${t.id==='634'?`<div style="margin-top:16px;"><a href="ce634.html" style="display:inline-block;padding:11px 22px;border-radius:12px;font-weight:800;font-size:13.5px;text-decoration:none;color:#0a1626;background:linear-gradient(135deg,#f0d98a,#d4af37);box-shadow:0 8px 22px rgba(212,175,55,.35);">✦ Мобильная версия · beta →</a></div>`:''}
       </div>`;
   } else if(t.theme==='protocol'){
     document.body.classList.add('protocol');
