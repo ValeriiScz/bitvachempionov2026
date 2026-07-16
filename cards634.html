@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · cards634.html · v1.0 · 2026-07-16 · карточки 44 игроков ЧЕ-634: премиум navy+gold (корона/вензеля/гексагоны/щиты). Маршрут: Игра/стол/МЕСТО ЗА СТОЛОМ (слот 1-10, НЕ турнирное место). Пропуск игры. База: cards702 -->
+<!-- MafgameStat · cards634.html · v1.1 · 2026-07-16 · карточки 44 игроков ЧЕ-634 (navy+gold). v1.1: корона крупнее+glow; «Пропуск игры X» перенесён вниз к рассадке; «Маршрут»→«Рассадка по играм» (Игра/Стол/Место, без гексагонов/щитов/кубка, отдых — строка-заглушка); возвращён блок «0 игр — ни разу не встречает». Место=место за столом (слот 1-10) -->
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +31,7 @@
     border:1px solid var(--line);border-radius:20px;box-shadow:0 16px 40px rgba(0,0,0,.55),inset 0 0 0 1px rgba(212,175,55,.06);
     padding:16px 16px 14px;position:relative;}
   .card::before{content:"";position:absolute;inset:6px;border:1px solid rgba(212,175,55,.18);border-radius:15px;pointer-events:none;}
-  .crown{text-align:center;color:var(--gold);font-size:15px;letter-spacing:6px;margin:-2px 0 2px;opacity:.9;}
+  .crown{text-align:center;color:var(--gold);font-size:26px;line-height:1;margin:-4px 0 2px;filter:drop-shadow(0 0 9px rgba(212,175,55,.75));}
   .hdr{display:flex;align-items:center;gap:14px;margin-bottom:10px;position:relative;}
   .avatar{width:66px;height:66px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.5);background:#12294a;flex:none;}
   .nick{font-family:'Cinzel',serif;font-size:22px;font-weight:800;color:var(--gold-hi);line-height:1.05;text-shadow:0 1px 0 rgba(0,0,0,.4);}
@@ -92,6 +92,8 @@
   .ct-D{background:rgba(255,255,255,.06);color:#c7d2e2;border:1px solid rgba(255,255,255,.14);}
   .ct-E{background:rgba(159,178,204,.12);color:var(--mut);border:1px solid rgba(159,178,204,.3);}
   .ct-F{background:rgba(224,101,77,.16);color:#f0906f;border:1px solid rgba(224,101,77,.4);}
+  .skipband{font-size:12px;font-weight:800;color:#f0d98a;background:rgba(224,101,77,.12);border:1px solid rgba(224,101,77,.35);border-radius:9px;padding:6px 10px;margin-bottom:8px;}
+  .rtbl tr.rest td{background:rgba(224,101,77,.10);color:#f0906f;font-weight:800;font-style:italic;}
 </style>
 </head>
 <body>
@@ -154,7 +156,11 @@ Promise.all([
     const info=INFO[p]||{};
     const R=RATE[p]||{};
     const skip=SKIP[p];
-    const routeRows=o.sort((a,b)=>a.g-b.g).map(x=>`<tr><td><span class="hexn">${x.g}</span></td><td class="gname">Игра ${x.g}</td><td class="tname">стол ${ROMAN[x.t]}</td><td><span class="seatbadge">${x.slot}</span></td></tr>`).join('');
+    const total=(G.games||[]).length||o.reduce((m,x)=>Math.max(m,x.g),0);
+    const bySlot={}; o.forEach(x=>{bySlot[x.g]={t:x.t,slot:x.slot};});
+    let routeRows='';
+    for(let gg=1;gg<=total;gg++){ if(gg===skip){routeRows+=`<tr class="rest"><td class="gname">${gg}</td><td colspan="2">— отдых —</td></tr>`;} else if(bySlot[gg]){routeRows+=`<tr><td class="gname">${gg}</td><td class="tname">${ROMAN[bySlot[gg].t]}</td><td>${bySlot[gg].slot}</td></tr>`;} }
+    const never=players.filter(n=>n!==p && !(opp[p]&&opp[p][n])).sort((a,b)=>a.localeCompare(b,'ru'));
     return `<div class="card" id="p-${esc(p)}">
       <div class="crown">♛</div>
       <div class="hdr">
@@ -165,7 +171,6 @@ Promise.all([
           ${info.club?`<div class="club">${esc(info.club)}</div>`:''}
           <div class="tmeta">Чемпионат Европы 2026 · 18–19.07 · Бонн</div>
           ${R.elo?`<div class="tmeta"><b>ELO ${Math.round(R.elo)}</b> · markery${ELO[p]&&ELO[p].tournaments?` · ${ELO[p].tournaments} турниров`:''}</div>`:`<div class="tmeta" style="opacity:.6">ELO markery — нет данных</div>`}
-          ${skip?`<span class="skip">⏸ отдыхает в Игре ${skip}</span>`:''}
         </div>
       </div>
       <div class="rate">
@@ -180,8 +185,10 @@ Promise.all([
       <div class="slots">${Array.from({length:10},(_,i)=>`<div class="slot${sc[i+1]?'':' zero'}"><div class="n">${i+1}</div><div class="c">${sc[i+1]||0}</div></div>`).join('')}</div>
       <div class="sec">Соперники (общих игр)</div>
       <div class="opp">${oppHtml}</div>
-      <button class="route-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'Скрыть маршрут ▲':'Мой маршрут по играм ▼';">Мой маршрут по играм ▼</button>
-      <div class="route"><table class="rtbl"><thead><tr><th>#</th><th>Игра</th><th>Стол</th><th><span class="seathdr">🏆 Место<br>за столом</span></th></tr></thead><tbody>${routeRows}</tbody></table></div>
+      <div class="sec">0 игр — ни разу не встречает (${never.length})</div>
+      <div class="opp" style="color:var(--mut);font-size:11.5px;line-height:1.6;">${never.length?never.map(esc).join(', '):'встречает всех'}</div>
+      <button class="route-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'Скрыть ▲':'Рассадка по играм ▼';">Рассадка по играм ▼</button>
+      <div class="route">${skip?`<div class="skipband">⏸ Пропуск игры ${skip} — отдыхает</div>`:''}<table class="rtbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th></tr></thead><tbody>${routeRows}</tbody></table></div>
       <div class="foot">mafgame.org/634 · MafgameStat</div>
     </div>`;
   }).join('');

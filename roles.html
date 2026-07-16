@@ -70,6 +70,7 @@ let STAT={}, PLAYED=0, current='all', curStage='all', GALL=null;
 let PT={}, TEAMSTAT={}, TEAMS_PRESENT=false, scope='players';
 
 function emptyRole(){return {sigma:0,games:0,w:0};}
+function comboRole(p,key){const ks=key==='redsum'?['Citizen','Sheriff']:['Mafia','Don'];const r=emptyRole();ks.forEach(k=>{const s=p.roles[k];r.sigma+=s.sigma;r.games+=s.games;r.w+=s.w;});return r;}
 function build(G){
   if(G) GALL=G;
   const upto = (GALL.games_played!=null?GALL.games_played:GALL.games.length);
@@ -115,7 +116,7 @@ function renderStageTabs(){
     document.getElementById('sub').innerHTML=`Турнир ${T} · ${curStage==='all'?'все стадии':curStage} · сыграно ${PLAYED} игр · ${Object.keys(STAT).length} игроков`; });
 }
 function renderTabs(){
-  const tabs=[['all','Все роли','']].concat(ROLES.map(([k,l,team])=>[k,l,team]));
+  const tabs=[['all','Все роли','']].concat(ROLES.map(([k,l,team])=>[k,l,team])).concat([['redsum','К+Ш','red'],['blacksum','Ч+Д','black']]);
   document.getElementById('tabs').innerHTML=tabs.map(([k,l,team])=>`<button class="tab ${team||''}${k===current?' active':''}" data-k="${k}">${l}</button>`).join('');
   document.querySelectorAll('#tabs .tab').forEach(b=>b.onclick=()=>{current=b.dataset.k;renderTabs();renderTable();});
 }
@@ -132,11 +133,13 @@ function renderTable(){
       `<td>${p.total.games}</td></tr>`).join('');
     document.getElementById('note').innerHTML='«Σ всего» = WPTS + доп + Ci по сыгранным играм (доп с учётом минусов). Столбцы Мир/Шер/Маф/Дон — сколько баллов принесла каждая роль; их сумма равна Σ всего. Сортировка по Σ всего.';
   } else {
-    const label=(ROLES.find(r=>r[0]===current)||[])[1];
-    const list=players.filter(p=>p.roles[current].games>0)
-      .sort((a,b)=>b.roles[current].sigma-a.roles[current].sigma||b.roles[current].games-a.roles[current].games||a.name.localeCompare(b.name,'ru'));
+    const LBL={redsum:'К+Ш — красные (Мирный+Шериф)',blacksum:'Ч+Д — чёрные (Мафия+Дон)'};
+    const getRole=p=>(current==='redsum'||current==='blacksum')?comboRole(p,current):p.roles[current];
+    const label=LBL[current]||(ROLES.find(r=>r[0]===current)||[])[1];
+    const list=players.filter(p=>getRole(p).games>0)
+      .sort((a,b)=>getRole(b).sigma-getRole(a).sigma||getRole(b).games-getRole(a).games||a.name.localeCompare(b.name,'ru'));
     thead=`<tr><th class="left place">#</th><th class="left pname">${scope==='teams'?'Команда':'Игрок'}</th><th>Σ в роли</th><th>Игр</th><th>Побед</th><th>% побед</th></tr>`;
-    rows=list.map((p,i)=>{const r=p.roles[current];const pct=r.games?Math.round(r.w/r.games*100):0;
+    rows=list.map((p,i)=>{const r=getRole(p);const pct=r.games?Math.round(r.w/r.games*100):0;
       return `<tr${i<3?' class="top-3"':''}><td class="left place">${i+1}</td>`+
       `<td class="left pname">${pcell(p)}</td>`+
       sigCell(r.sigma)+`<td>${r.games}</td><td>${r.w}</td><td class="${pct>=50?'big':'dim'}">${pct}%</td></tr>`;}).join('');
