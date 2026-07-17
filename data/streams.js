@@ -1,7 +1,15 @@
-// MafgameStat · data/streams.js · v1.1 · 2026-06-14 · трансляции YouTube @mafgameorg: турнир → день → стол → videoId
+// MafgameStat · data/streams.js · v1.2 · 2026-07-17 · +заготовка 634 (ЧЕ): день1 = игры 1-9, день2 = 10-11 + полуфинал; final — отдельный стрим финала. Ссылки вписать в день турнира — кнопки на сайте появятся сами. · v1.1 · 2026-06-14 · трансляции YouTube @mafgameorg: турнир → день → стол → videoId
 // правило: игра N → день 1 если N <= gamesDay1, иначе день 2
 window.STREAMS_DB = {
   "channel": "https://www.youtube.com/@mafgameorg",
+  "634": {
+    "gamesDay1": 9,
+    "days": {
+      "1": {},
+      "2": {}
+    },
+    "final": null
+  },
   "667": {
     "gamesDay1": 7,
     "days": {

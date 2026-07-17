@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · ce634.html · v1.0 (v11 "new") · 2026-07-16 · esports-версия ЧЕ-634 (эксперимент поверх тех же данных).
+<!-- MafgameStat · ce634.html · v2.4 (v13.4) · 2026-07-17 · «Судьи» переработаны по фидбеку: карточки сверху, сводная внизу (компактно 5 колонок / подробно 12, воздух группами: база | охват % | средние | штрафы), штрафы детально (кол-во · Σ · ср.), модель девиаций (подсветка ячеек, пороги-оценка JD_T), скрываемые авто-выводы по 5 пунктам · ранее: v2.3 (v13.3) · 2026-07-17 · хотфикс липкой шапки Таблицы: правило z5 для угловых ячеек переехало НИЖЕ правил липких колонок (каскад: при равной специфичности побеждает позднее; в v13.2 колонка «Игрок» оставалась z3 и данные ехали поверх) · ранее: v2.2 (v13.2) · 2026-07-17 · фикс липких шапок (th z4/z5, непрозрачный Σ-фон); «Моё»: компактно (без места, дефолт) / с местом + клик по строке лога → игра в «Играх» с подсветкой стола; «Кто с кем» секциями по числу игр; стримы-фолбэк на канал (кнопки видны до ссылок); «1н»→«ПУ» · ранее: v2.1 (v13.1) · 2026-07-17 · судьи: сводная таблица ГС (Δ от медианы светофором, %W+/%L+, ср.размер плюса W/L, штрафы) + ср.плюс в карточках; стримы ▶ у каждой игры (лог «Моё», рассадка по играм, шапки столов) — паттерн 667; «назад» по разделам (pushState); колонка «1н» · ранее: v2.0 (v13) · 2026-07-17 · структура v2: Обзор · Моё · Игроки · Результаты (+Судьи, стримы, линия отсечения) · ранее: v1.0 (v11 "new") · 2026-07-16 · esports-версия ЧЕ-634 (эксперимент поверх тех же данных).
      Левое меню сгруппировано: Общее · Рассадка (интерактивная/карточки/пересечения) · Статистика (рейтинг/стадии; после старта — игры/роли/игрок).
      Палитра Бонна (золото/чёрное/navy, готика Cinzel); mobile-first; кластеры для тяжёлого; рассадка — сетка квадратных «мест».
      Данные — те же data/*_634* (один источник правды) через window.loadGames('634'). НЕ трогает боевые 634-файлы и live.js. -->
@@ -92,7 +92,7 @@
   .tp-E{background:rgba(159,178,204,.12);color:var(--mut);border:1px solid rgba(159,178,204,.3);}
   .tp-F{background:rgba(224,101,77,.16);color:#f0906f;border:1px solid rgba(224,101,77,.4);}
   .tbl{width:100%;border-collapse:separate;border-spacing:0;}
-  .tbl th{position:sticky;top:0;background:#0c1b30;font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--gold);padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap;z-index:2;}
+  .tbl th{position:sticky;top:0;background:#0c1b30;font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--gold);padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap;z-index:4;} /* v13.2: z4 — выше липких колонок (z3), чтобы строки не ехали поверх шапки */
   .tbl th.l{text-align:left;}
   .tbl th .ar{font-size:9px;margin-left:3px;color:var(--gold-hi);}
   .tbl td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--line2);font-size:13px;}
@@ -117,6 +117,7 @@
   .tbl tbody tr:nth-child(even) td{background:rgba(255,255,255,.022);}
   .tbl tbody tr.tsep td{background:rgba(212,175,55,.07);}
   .tbl td.sig,.tbl th.sig{background:rgba(212,175,55,.10);color:var(--gold-hi);font-weight:800;}
+  .tbl th.sig{background:linear-gradient(rgba(212,175,55,.12),rgba(212,175,55,.12)),#0c1b30;} /* v13.2: липкая шапка была полупрозрачной — строки просвечивали */
   .tbl td.grp,.tbl th.grp{border-left:1px solid var(--line2);}
   .win{color:#7ce6a0;font-weight:800;} .los{color:#e8716b;}
   .rp{display:inline-block;padding:1px 7px;border-radius:6px;font-size:11px;font-weight:800;}
@@ -142,7 +143,11 @@
   .rcx-red{border-color:#f0906f!important;background:rgba(224,101,77,.13)!important;}
   .rcx-blk{border-color:#9cc0e6!important;background:rgba(122,167,214,.13)!important;}
   .seclist{display:flex;flex-direction:column;gap:9px;}
-  .seci{display:flex;gap:11px;align-items:flex-start;}
+  .seci{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;cursor:pointer;
+    background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:11px;padding:10px 12px;
+    color:var(--ink);font:inherit;transition:border-color .12s,background .12s;}
+  .seci:hover{border-color:var(--line);background:rgba(212,175,55,.07);}
+  .seci .go{margin-left:auto;align-self:center;color:var(--gold);font-size:20px;font-weight:800;flex:none;}
   .seci .sicon{font-size:16px;color:var(--gold);width:22px;text-align:center;flex:none;margin-top:1px;}
   .seci b{font-size:13px;color:var(--gold-hi);font-weight:800;}
   .seci .sid{font-size:12px;color:var(--mut);line-height:1.4;margin-top:1px;}
@@ -156,6 +161,7 @@
   .scrollT .tbl.hasnum td:nth-child(2){background:#0f2138;}
   .scrollT .tbl:not(.hasnum) th:nth-child(1),.scrollT .tbl:not(.hasnum) td:nth-child(1){position:sticky;left:0;z-index:3;background:#0c1b30;box-shadow:6px 0 9px -6px rgba(0,0,0,.7);}
   .scrollT .tbl:not(.hasnum) td:nth-child(1){background:#0f2138;}
+  .scrollT .tbl.hasnum th:nth-child(1),.scrollT .tbl.hasnum th:nth-child(2),.scrollT .tbl:not(.hasnum) th:nth-child(1){z-index:5;} /* v13.3: угловые ячейки шапки поверх липких колонок; ОБЯЗАН стоять ниже правил z3, иначе каскад его съедает (грабля v13.2) */
   .statchips{display:flex;flex-wrap:wrap;gap:7px 14px;font-size:12px;color:var(--mut);margin:2px 0 12px;}
   .statchips b{color:var(--gold-hi);}
   .statchips .cred b{color:#f0906f;} .statchips .cblk b{color:#9cc0e6;}
@@ -312,13 +318,19 @@
     .subtabs .st.on{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#0a1626;border-color:var(--gold);}
     .subtabs .st.locked{opacity:.4;}
     .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;
-      background:rgba(8,16,28,.98);backdrop-filter:blur(12px);border-top:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(18,41,74,.97),rgba(8,16,28,.99));backdrop-filter:blur(12px);
+      border-top:2px solid var(--gold);box-shadow:0 -8px 24px rgba(0,0,0,.55);
       padding:7px 4px calc(7px + env(safe-area-inset-bottom));}
-    .tabbar .tb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 2px;border:none;
+    .tabbar .tb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 2px;border:none;border-radius:10px;
       background:none;color:var(--mut);font-size:12px;font-weight:800;cursor:pointer;letter-spacing:.2px;}
     .tabbar .tb .ti{font-size:25px;line-height:1;}
-    .tabbar .tb.on{color:var(--gold-hi);}
+    .tabbar .tb.on{color:var(--gold-hi);background:rgba(212,175,55,.13);}
     .tabbar .tb.on .ti{filter:drop-shadow(0 0 9px rgba(212,175,55,.7));}
+    .coach{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(78px + env(safe-area-inset-bottom));z-index:71;
+      background:linear-gradient(100deg,#d4af37,#a5822b);color:#0a1626;font-weight:800;font-size:13px;
+      border-radius:12px;padding:10px 16px;box-shadow:0 10px 28px rgba(0,0,0,.5);animation:coachb 1.2s ease-in-out infinite alternate;}
+    .coach:after{content:'';position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);border:8px solid transparent;border-top-color:#a5822b;border-bottom:0;}
+    @keyframes coachb{from{transform:translateX(-50%) translateY(0)}to{transform:translateX(-50%) translateY(-6px)}}
     .rbtn{min-width:46px;min-height:46px;font-size:16px;}
     .tbl{font-size:14px!important;}
     .tbl th{font-size:12px;padding:11px 7px;}
@@ -342,6 +354,65 @@
     .cluster .tf,.tfilter .tf{min-height:40px;padding:8px 13px;}
     #__refbtn{bottom:calc(90px + env(safe-area-inset-bottom))!important;left:12px!important;z-index:50!important;}
   }
+  /* ── v13: Моё / Кто с кем / Судьи / стримы ── */
+  .mebadge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;background:linear-gradient(100deg,#d4af37,#a5822b);color:#0a1626;border-radius:6px;padding:2px 7px;vertical-align:2px;}
+  .nextg{border-color:var(--gold);}
+  .nextrow{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;}
+  .nx{background:rgba(212,175,55,.07);border:1px solid var(--line2);border-radius:12px;padding:9px 14px;min-width:74px;text-align:center;}
+  .nk{font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--dim);}
+  .nx .nv{font-size:24px;font-weight:800;color:var(--gold-hi);line-height:1.15;}
+  .nx .nv small{font-size:12px;color:var(--dim);font-weight:700;}
+  .nx.nxj{text-align:left;}
+  .nv.nvj{display:flex;align-items:center;gap:8px;font-size:14.5px;}
+  .nv.nvj img{width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid var(--line);}
+  .btn.strm{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(100deg,#d4af37,#a5822b);color:#0a1626;border:0;border-radius:10px;padding:9px 14px;font-weight:800;font-size:12.5px;text-decoration:none;align-self:center;}
+  .strms{display:flex;gap:8px;flex-wrap:wrap;}
+  .strm-sm{margin-left:auto;font-size:11px;font-weight:800;color:#0a1626;background:linear-gradient(100deg,#d4af37,#a5822b);border-radius:7px;padding:3px 9px;text-decoration:none;}
+  .ytm{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:7px;text-decoration:none;color:#0a1626;background:linear-gradient(100deg,#d4af37,#a5822b);}
+  .glrow{cursor:pointer;} .glrow:hover td{background:rgba(212,175,55,.06);}
+  .oppminis{display:flex;gap:7px;flex-wrap:wrap;}
+  .oppmini{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:9px;padding:4px 9px 4px 5px;font-size:12px;font-weight:700;cursor:pointer;}
+  .oppmini:hover{border-color:var(--line);color:var(--gold-hi);}
+  .oppmini img{width:22px;height:22px;border-radius:50%;object-fit:cover;}
+  .oppmini b{color:var(--gold-hi);}
+  .oppcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:9px;}
+  .oppcard{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:11px;padding:9px 11px;cursor:pointer;}
+  .oppcard:hover{border-color:var(--line);}
+  .oppcard img{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none;}
+  .oc-b{min-width:0;}
+  .oc-n{font-size:13px;font-weight:800;}
+  .oc-n .cnt{color:var(--gold-hi);}
+  .oc-g{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px;}
+  .gchip{font-size:10.5px;font-weight:700;color:var(--gold-hi);background:rgba(212,175,55,.13);border:1px solid var(--line);border-radius:6px;padding:2px 7px;}
+  .gchip.done{color:var(--dim);background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08);}
+  tr.dim td{opacity:.5;}
+  tr.hotrow td{border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);background:rgba(212,175,55,.08)!important;}
+  #rtb tr.rrow{cursor:pointer;}
+  #rtb tr.rrow:hover td{background:rgba(212,175,55,.06);}
+  .cutrow td{padding:3px 8px;border-bottom:1px dashed var(--gold);background:rgba(212,175,55,.06)!important;}
+  .cutrow span{font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--gold-hi);}
+  .jcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+  .jcard{margin:0;}
+  .jcard.j-warn{border-color:rgba(245,200,110,.5);}
+  .jcard.j-bad{border-color:rgba(240,138,122,.55);}
+  .jhead{display:flex;gap:10px;align-items:center;margin-bottom:8px;}
+  .jhead img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid var(--line);}
+  .jhead .jn{font-size:13.5px;}
+  .jhead .jt{font-size:11px;color:var(--dim);}
+  .jlight{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;border-radius:7px;padding:3px 8px;}
+  .jlight.ok{color:#7ce6a0;background:rgba(124,230,160,.12);border:1px solid rgba(124,230,160,.3);}
+  .jlight.warn{color:#f5c86e;background:rgba(245,200,110,.12);border:1px solid rgba(245,200,110,.35);}
+  .jlight.bad{color:#f08a7a;background:rgba(240,138,122,.12);border:1px solid rgba(240,138,122,.4);}
+  .jbig{font-size:26px;font-weight:800;color:var(--gold-hi);}
+  .jbig small{font-size:11.5px;color:var(--mut);font-weight:700;margin-left:6px;}
+  .jrow{font-size:12.5px;color:var(--mut);margin-top:6px;}
+  .jsumt th,.jsumt td{padding:9px 11px;}
+  .jsumt td.jd-warn,.rcell.jd-warn{background:rgba(245,200,110,.10);}
+  .jsumt td.jd-bad,.rcell.jd-bad{background:rgba(240,138,122,.14);border-radius:6px;}
+  .jsumt .dlt{font-weight:800;border-radius:6px;padding:2px 6px;font-size:11px;}
+  .jsumt .dlt.ok{color:#7ce6a0;background:rgba(124,230,160,.12);}
+  .jsumt .dlt.warn{color:#f5c86e;background:rgba(245,200,110,.12);}
+  .jsumt .dlt.bad{color:#f08a7a;background:rgba(240,138,122,.12);}
 </style>
 <!-- PWA · 2026-07-16 · v12: манифест + iOS-меты + регистрация sw.js + промо-плашка установки (iPhone/Android). Стратегии кэша — в sw.js; live /mafgame/* кэш обходит -->
 <link rel="manifest" href="manifest.json">
@@ -443,7 +514,11 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 
    КЛЮЧЕВЫЕ ГЛОБАЛЫ:
    - D — все данные. D.RATE[nick]={tier,elo,...}. D.gplist — сыгранные игры.
-   - NAV — 4 группы меню (Общее/Участники/Рассадка/Статистика) → строит sidebar (desktop) + tabbar (mobile).
+   - NAV — 4 группы (Обзор / Моё / Игроки[состав·кто-с-кем·по-играм] / Результаты[таблица·игры·по-картам·судьи]) → sidebar (desktop) + tabbar (mobile).
+     v13: «Моё» = страница игрока (initMy/drawMy): следующая игра (стол/место/соперники/судья/стрим), рассадка, результат; goPlayer(name) ведёт сюда (старые #cards/#player мигрируют).
+     «Кто с кем» (initTogether/drawTogether): явный выбранный игрок, карточки соперников с ярлыками игр (золотые — впереди, серые — сыграны).
+     «Судьи» (paintJudges): плюс-допы по столам, светофор ±0.25/±0.4 от медианы, только квалификация.
+     Стримы: data/streams.js STREAMS_DB['634'] (gamesDay1=9); кнопки в Обзоре/Играх/«Моё» появляются сами, когда заданы ссылки.
    - statFull — тумблер Компактно/Подробно (скрывает/показывает .x-колонки в таблицах).
    - myPlayer / viewMode — «мой игрок» и «с первой/с текущей игры», хранятся в localStorage.
    - stStage/stGame/stMode — состояние Сводной; rTab — вкладка Ролей; gmRound — выбранная игра в «Играх».
@@ -472,17 +547,17 @@ function plW(n,a,b,c){const m=Math.abs(n)%100,m1=m%10;if(m>10&&m<20)return c;if(
 function players_w(n){return n+' '+plW(n,'игрок','игрока','игроков');}
 
 const NAV=[
-  {group:'Общее',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Обзор'}]},
-  {group:'Участники',ic:'≡',items:[{id:'roster',ic:'≡',lab:'Рейтинг · состав'}]},
-  {group:'Рассадка',ic:'▦',items:[
-    {id:'seating',ic:'▦',lab:'Интерактивная'},
-    {id:'cards',ic:'♛',lab:'Карточки'},
-    {id:'together',ic:'⇄',lab:'Пересечения'}]},
-  {group:'Статистика',ic:'✦',items:[
-    {id:'stages',ic:'⚑',lab:'Сводная'},
+  {group:'Обзор',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Обзор'}]},
+  {group:'Моё',ic:'♟',items:[{id:'my',ic:'♟',lab:'Моё'}]},
+  {group:'Игроки',ic:'≡',items:[
+    {id:'roster',ic:'≡',lab:'Состав · рейтинг'},
+    {id:'together',ic:'⇄',lab:'Кто с кем'},
+    {id:'seating',ic:'▦',lab:'По играм'}]},
+  {group:'Результаты',ic:'⚑',items:[
+    {id:'stages',ic:'⚑',lab:'Таблица'},
     {id:'games',ic:'▶',lab:'Игры'},
-    {id:'roles',ic:'✦',lab:'Роли'},
-    {id:'player',ic:'☰',lab:'Игрок'}]},
+    {id:'roles',ic:'✦',lab:'По картам'},
+    {id:'judges',ic:'⚖',lab:'Судьи'}]},
 ];
 const SECTIONS=[]; NAV.forEach(g=>g.items.forEach(it=>SECTIONS.push(it)));
 
@@ -527,6 +602,14 @@ function buildTabbar(){
   const el=document.getElementById('tabbar');
   el.innerHTML=NAV.map((g,i)=>`<button class="tb" data-gi="${i}"><span class="ti">${g.ic}</span>${esc(g.group)}</button>`).join('');
   el.querySelectorAll('.tb').forEach(b=>b.onclick=()=>openGroup(+b.dataset.gi));
+  /* v13: одноразовая подсказка «разделы внизу» — по фидбеку люди не замечали таб-бар */
+  try{
+    if(window.matchMedia&&matchMedia('(max-width:1024px)').matches&&!localStorage.getItem('ce634_coach')){
+      const c=document.createElement('div');c.className='coach';c.textContent='Разделы — внизу ⬇';document.body.appendChild(c);
+      const kill=()=>{try{localStorage.setItem('ce634_coach','1');}catch(e){}if(c.parentNode)c.parentNode.removeChild(c);};
+      c.onclick=kill;el.addEventListener('click',kill,{once:true});setTimeout(kill,7000);
+    }
+  }catch(e){}
 }
 function openGroup(i){const g=NAV[i];if(g.items.length===1){const it=g.items[0];if(!it.locked)show(it.id);return;}openSheet(i);}
 function openSheet(i){const g=NAV[i];const pm=document.getElementById('sheet');
@@ -564,9 +647,19 @@ function tick(){const el=document.getElementById('cdown');if(!el)return;
   const d=Math.floor(diff/86400),h=Math.floor(diff%86400/3600),mi=Math.floor(diff%3600/60);
   el.innerHTML=[[d,'дней'],[h,'часов'],[mi,'минут']].map(x=>`<div class="cu"><div class="n">${x[0]}</div><div class="l">${x[1]}</div></div>`).join('');setTimeout(tick,30000);}
 
-function show(id){
+let __navInit=false;
+window.addEventListener('popstate',()=>{show((location.hash||'').replace('#','')||'overview',true);});
+function show(id,fromPop){
+  if(id==='cards')id='roster';if(id==='player')id='my'; /* v13: старые хэши */
   const s=SECTIONS.find(x=>x.id===id&&!x.locked);if(!s)id='overview';cur=id;
-  try{history.replaceState(null,'','#'+id);}catch(e){}
+  /* v13.1: pushState — кнопка «назад» ходит по разделам, а не выбрасывает с сайта */
+  try{
+    if(!fromPop){
+      if(!__navInit){history.replaceState(null,'','#'+id);__navInit=true;}
+      else if(location.hash!=='#'+id)history.pushState(null,'','#'+id);
+      else history.replaceState(null,'','#'+id);
+    }
+  }catch(e){}
   document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.id===id));
   const lab=(SECTIONS.find(x=>x.id===id)||{}).lab||'Обзор';const mt=document.getElementById('mtitle');if(mt)mt.textContent=lab;
   const gi=NAV.findIndex(g=>g.items.some(it=>it.id===id));
@@ -595,7 +688,9 @@ const RENDER={
     return `<div class="view"><div class="secttl">&#9670; Обзор турнира</div>
       ${demoPanel()}
       ${myPanel()}
+      ${myPlayer?nextGamePanel(myPlayer,true):''}
       <div class="panel">${stats}<div class="note">Титульный турнир сезона: победитель становится чемпионом Европы. Данные тянутся с mafgame вживую — статистика включится автоматически после первой игры.</div></div>
+      ${streamsPanel()}
       ${secListPanel()}
       ${stagesPanel()}
       <div class="panel"><h3>Ранги состава (markery)</h3><div class="tfilter">`+
@@ -608,24 +703,16 @@ const RENDER={
       <div class="note" style="margin:0 0 12px">11 игр × 4 стола · каждый играет 10 из 11 (одну отдыхает) · тап по игроку — все его столы. «Место» = место за столом (слот 1–10).</div>
       <div id="seatArea"></div></div>`;
   },
-  cards(){return `<div class="view"><div class="secttl">&#9819; Карточки игроков</div>
-      <div class="note" style="margin:0 0 10px">Выберите ранг — карточки грузятся кластером, чтобы не тянуть все 44 сразу.</div>
-      <div class="cluster" id="cCluster"></div><div id="cardArea"></div></div>`;},
+  my(){return `<div class="view"><div class="secttl" id="myTtl">&#9823; Моё на турнире</div><div id="myTop"></div><div id="myArea"></div></div>`;},
   roster(){return `<div class="view"><div class="secttl">&#8801; Участники · рейтинг</div>
       <div class="segwrap" id="rTop"></div>
       <div class="tfilter" id="tfil"></div>
       <div class="panel scrollT" style="padding:0"><table class="tbl" id="rtable"><thead><tr id="rhr"></tr></thead><tbody id="rtb"></tbody></table></div>
-      <div class="note">Рейтинг markery — снимок через API на ${esc(D.stats.snapshot||'2026-07-15')}. «ELO тек» — текущий ELO (глобально); «Ранг» — тир S..F; «ELO 2026» — за сезон 2026; «Европа 2026» — место Европа‑2026. Тап по «Ранг» группирует по тирам. «—» — нет данных markery. Список и составы — с mafgame.org.</div></div>`;},
-  together(){
-    const opts=Object.keys(D.occ).sort((a,b)=>a.localeCompare(b,'ru'));
-    if(!opts.length)return `<div class="view"><div class="secttl">&#8644; Пересечения</div><div class="panel"><div class="stub"><div class="si">&#8644;</div><h3>Нет данных рассадки</h3><p>Раздел заработает, когда загрузятся составы игр.</p></div></div></div>`;
-    return `<div class="view"><div class="secttl">&#8644; Пересечения игроков</div>
-      <div class="note" style="margin:0 0 10px">Выберите игрока — с кем и сколько раз он сидит за квалификацию, и с кем не пересекается ни разу.</div>
-      <select class="pick" id="togSel">${opts.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('')}</select><div id="togArea"></div></div>`;
-  },
+      <div class="note">Рейтинг markery — снимок через API на ${esc(D.stats.snapshot||'2026-07-15')}. «ELO тек» — текущий ELO (глобально); «Ранг» — тир S..F; «ELO 2026» — за сезон 2026; «Европа 2026» — место Европа‑2026. Тап по «Ранг» группирует по тирам. «—» — нет данных markery. Список и составы — с mafgame.org. <b>Тап по игроку</b> — его страница: рассадка, соперники, статистика.</div></div>`;},
+  together(){return `<div class="view"><div class="secttl">&#8644; Кто с кем за столом</div><div id="togTop"></div><div id="togArea"></div></div>`;},
   stages(){
-    if(!D.gp)return statsEmpty('&#9873; Сводная');
-    return `<div class="view"><div class="secttl">&#9873; Сводная</div><div id="stTop"></div>
+    if(!D.gp)return statsEmpty('&#9873; Таблица');
+    return `<div class="view"><div class="secttl">&#9873; Турнирная таблица</div><div id="stTop"></div>
       <div class="panel scrollT" style="padding:0"><table class="tbl hasnum" id="sttable"><thead id="stHead"></thead><tbody id="stBody"></tbody></table></div>
       <div class="note" id="stNote"></div></div>`;
   },
@@ -634,16 +721,13 @@ const RENDER={
     return `<div class="view"><div class="secttl">&#9654; Игры по столам</div><div id="gmTop"></div><div id="gmArea"></div></div>`;
   },
   roles(){
-    if(!D.gp)return statsEmpty('&#10022; Роли');
-    return `<div class="view"><div class="secttl">&#10022; Статистика по ролям</div>
+    if(!D.gp)return statsEmpty('&#10022; По картам');
+    return `<div class="view"><div class="secttl">&#10022; По картам (ролям)</div>
       <div class="tfilter" id="roleTabs"></div>
       <div class="panel scrollT" style="padding:0"><table class="tbl hasnum" id="roletable"><thead id="roleHead"></thead><tbody id="roleBody"></tbody></table></div>
       <div class="note" id="roleNote"></div></div>`;
   },
-  player(){
-    if(!D.gp)return statsEmpty('&#9776; Игрок');
-    return `<div class="view"><div class="secttl">&#9776; Статистика игрока</div><div id="plTop"></div><div id="plArea"></div></div>`;
-  }
+  judges(){return `<div class="view"><div class="secttl">&#9878; Судьи столов</div><div id="jdArea"></div></div>`;}
 };
 let stStage='all',stGame=0,stMode='total',gmRound=0,curPlayer=null,plQuery='',statFull=false;
 let myPlayer=(function(){try{return localStorage.getItem('ce634_my')||null}catch(e){return null}})(),viewMode=(function(){try{return localStorage.getItem('ce634_view')||'first'}catch(e){return'first'}})();
@@ -654,7 +738,7 @@ const RLONG={Citizen:'Мирный',Sheriff:'Шериф',Mafia:'Мафия',Don:
 const STAB={'Квалификация':'Квал','Полуфинал':'Полу','Финал':'Финал'};
 function fmt(v){const n=+(+v).toFixed(2);if(!isFinite(n))return '—';if(n===0)return '0';return Number.isInteger(n)?String(n):n.toFixed(2).replace(/\.?0+$/,'');}
 function plink(name){return `<span class="plink" data-p="${esc(name)}" onclick="goPlayer(this.dataset.p)">${esc(name)}</span>`;}
-function goPlayer(name){curPlayer=name;show('player');}
+function goPlayer(name){curPlayer=name;show('my');}
 function fullToggle(){return '<span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Таблица:</span><span class="seg"><button class="'+(statFull?'':'on')+'" onclick="setFull(0)">Компактно</button><button class="'+(statFull?'on':'')+'" onclick="setFull(1)">Подробно</button></span>';}
 function setFull(v){statFull=!!v;show(cur);}
 function statsEmpty(t){return `<div class="view"><div class="secttl">${t}</div><div class="panel"><div class="stub"><div class="si">&#9203;</div><h3>Результатов пока нет</h3><p>Появится после первой игры (18 июля). Чтобы проверить сейчас — включите режим <b>Демо</b> на вкладке «Обзор»: все игры заполнятся случайными результатами (полный турнир: квалификация → полуфинал → финал).</p><button class="btn" onclick="show('overview')">← К обзору</button></div></div></div>`;}
@@ -666,6 +750,13 @@ function demoPanel(){return `<div class="panel"><div class="demobar">
 function setDemo(on){D.demo=!!on;D.games=on?makeDemo():(D.realGames||[]);stStage='all';stGame=0;gmRound=0;curPlayer=null;computeSeating();computeStats();renderTop();show(cur);}
 function setMy(v){myPlayer=v||null;try{if(myPlayer)localStorage.setItem('ce634_my',myPlayer);else localStorage.removeItem('ce634_my');}catch(e){}if(myPlayer)curPlayer=myPlayer;show(cur);}
 function setView(m){viewMode=m;try{localStorage.setItem('ce634_view',m);}catch(e){}show(cur);}
+/* v13.2: «Моё» — компактно (без места, спойлер) / подробно (с местом); выбор запоминаем */
+let myFull=(function(){try{return localStorage.getItem('ce634_myfull')==='1'}catch(e){return false}})();
+function setMyFull(v){myFull=!!v;try{localStorage.setItem('ce634_myfull',v?'1':'0');}catch(e){}drawMy();}
+/* v13.2: клик по строке лога «Моё» → эта игра в «Играх», стол игрока подсвечен */
+let jumpGame=null,jumpNick=null;
+function openGameAt(gi,nick){jumpGame=gi;jumpNick=nick||curPlayer;show('games');}
+function highlightJump(){if(!jumpNick)return;const nick=jumpNick;jumpNick=null;setTimeout(()=>{const c=[...document.querySelectorAll('#gmArea .gcell')].find(x=>x.dataset.p===nick);if(c){const w=c.closest('.twrap');if(w){w.style.boxShadow='0 0 0 2px var(--gold)';w.scrollIntoView({block:'center',behavior:'smooth'});setTimeout(()=>{w.style.boxShadow='';},2500);}}},80);}
 function hlMe(el){if(!myPlayer||!el)return;el.querySelectorAll('.plink').forEach(a=>{if(a.dataset.p===myPlayer){const tr=a.closest('tr');if(tr)tr.classList.add('me');}});}
 function myPanel(){
   const opts=D.players.slice().sort((a,b)=>{const ta=(a.r_tier in TIER_ORD)?TIER_ORD[a.r_tier]:9,tb=(b.r_tier in TIER_ORD)?TIER_ORD[b.r_tier]:9;if(ta!==tb)return ta-tb;return (num(b.r_elo_cur)||0)-(num(a.r_elo_cur)||0);});
@@ -676,7 +767,7 @@ function myPanel(){
     <span style="flex-basis:100%;height:0"></span>
     <span style="font-weight:800;font-size:12.5px;color:var(--gold-hi)">Открывать с:</span>
     <span class="seg"><button class="${viewMode==='first'?'on':''}" onclick="setView('first')">первой игры</button><button class="${viewMode==='current'?'on':''}" onclick="setView('current')">текущей</button></span>
-  </div>${myPlayer?`<div class="note" style="margin-top:8px">Выбран <b class="win">${esc(myPlayer)}</b> — подсвечивается во всех таблицах и рассадке, открывается по умолчанию в «Игрок». Сохраняется после перезагрузки.</div>`:'<div class="note" style="margin-top:8px">Выберите себя — и во всех разделах вы будете подсвечены и открываться по умолчанию (сохраняется после перезагрузки).</div>'}</div>`;
+  </div>${myPlayer?`<div class="note" style="margin-top:8px">Выбран <b class="win">${esc(myPlayer)}</b> — подсвечивается во всех таблицах и рассадке; раздел «Моё» открывается сразу на вас. Сохраняется после перезагрузки.</div>`:'<div class="note" style="margin-top:8px">Выберите себя — появится плашка «следующая игра», раздел «Моё» и подсветка во всех таблицах (сохраняется после перезагрузки).</div>'}</div>`;
 }
 function aggregateN(list){
   const P={};let red=0,black=0,tables=0,apsSum=0;const rr=()=>({sigma:0,g:0,w:0,wpts:0,aps:0,ci:0,apsW:0,apsL:0,wg:0,lg:0,apsPos:0,apsNeg:0});
@@ -714,8 +805,15 @@ function computeStats(){
   D.stagesPresent=['Квалификация','Полуфинал','Финал'].filter(st=>D.gplist.some(g=>(g.stage||'Квалификация')===st));
   if((!curPlayer||!D.STAT[curPlayer])&&D.rows.length)curPlayer=(myPlayer&&D.STAT[myPlayer])?myPlayer:D.rows[0].name;
 }
-function afterStats(id){if(id==='stages')paintStages();else if(id==='games')initGames();else if(id==='roles')paintRolesN();else if(id==='player')initPlayerN();}
-/* ── Сводная ── */
+function afterStats(id){if(id==='stages')paintStages();else if(id==='games')initGames();else if(id==='roles')paintRolesN();}
+/* ── Таблица ── */
+function cutAfter(scope){
+  const stgs=scope.map(g=>g.stage||'Квалификация');
+  if(stgs.includes('Финал'))return null;
+  if(stgs.includes('Полуфинал'))return {n:10,lab:'выше линии — финал (топ‑10)'};
+  return {n:40,lab:'выше линии — полуфинал (топ‑40)'};
+}
+function cutRow(cut){return `<tr class="cutrow"><td colspan="20"><span>▲ ${cut.lab}</span></td></tr>`;}
 function paintStages(){
   const top=document.getElementById('stTop');if(!top)return;
   const multi=D.stagesPresent.length>1;
@@ -735,19 +833,21 @@ function paintStages(){
   top.querySelectorAll('.stmode button').forEach(b=>b.onclick=()=>{if(b.dataset.m){stMode=b.dataset.m;paintStages();}});
   const head=document.getElementById('stHead'),body=document.getElementById('stBody'),note=document.getElementById('stNote');
   if(stMode==='total'){
-    head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th><th class="grp co" title="доп всего (вкл Ci и минусы)">доп</th><th class="x" title="плюсовые допы">доп+</th><th class="x" title="минусовые допы (штрафы)">доп−</th><th class="x">Ci</th><th class="grp" title="побед / игр">Поб/Игр</th><th class="x sp"></th><th class="x" title="средний доп за игру">ср.доп</th><th class="x" title="ср.доп при победе">ср.W</th><th class="x" title="ср.доп при поражении">ср.L</th></tr>';
-    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td><td class="grp co">${fmt(p.aps+p.ci)}</td><td class="x">${fmt(p.apsPos)}</td><td class="x">${fmt(p.apsNeg)}</td><td class="x">${fmt(p.ci)}</td><td class="grp"><b class="win">${p.w}</b><span class="na">/${p.g}</span></td><td class="x sp"></td><td class="x">${p.g?fmt(p.aps/p.g):'·'}</td><td class="x">${p.wg?fmt(p.apsW/p.wg):'·'}</td><td class="x">${p.lg?fmt(p.apsL/p.lg):'·'}</td></tr>`).join('');
-    note.innerHTML='Компактно: Σ · доп-всего · Поб/Игр. Подробно: доп+, доп−, Ci и средние допы (общий/при победе/при поражении) — <b>листайте вправо →</b>. Σ = WPTS + доп + Ci. '+(D.demo?'<b style="color:#f0906f">Демо — случайные цифры.</b>':'');hlMe(body);
+    head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th><th class="grp co" title="доп всего (вкл Ci и минусы)">доп</th><th class="x" title="плюсовые допы">доп+</th><th class="x" title="минусовые допы (штрафы)">доп−</th><th class="x">Ci</th><th class="grp" title="побед / игр">Поб/Игр</th><th title="первый убиенный — сколько раз убит в 1-ю ночь, от этого зависит Ci">ПУ</th><th class="x sp"></th><th class="x" title="средний доп за игру">ср.доп</th><th class="x" title="ср.доп при победе">ср.W</th><th class="x" title="ср.доп при поражении">ср.L</th></tr>';
+    const cut=cutAfter(list);
+    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td><td class="grp co">${fmt(p.aps+p.ci)}</td><td class="x">${fmt(p.apsPos)}</td><td class="x">${fmt(p.apsNeg)}</td><td class="x">${fmt(p.ci)}</td><td class="grp"><b class="win">${p.w}</b><span class="na">/${p.g}</span></td><td>${p.k?p.k:'<span class="na">·</span>'}</td><td class="x sp"></td><td class="x">${p.g?fmt(p.aps/p.g):'·'}</td><td class="x">${p.wg?fmt(p.apsW/p.wg):'·'}</td><td class="x">${p.lg?fmt(p.apsL/p.lg):'·'}</td></tr>`+((cut&&p.place===cut.n&&rows.length>cut.n)?cutRow(cut):'')).join('');
+    note.innerHTML='Компактно: Σ · доп-всего · Поб/Игр · ПУ (первый убиенный — сколько раз убит в 1-ю ночь, влияет на Ci). Подробно: доп+, доп−, Ci и средние допы (общий/при победе/при поражении) — <b>листайте вправо →</b>. Σ = WPTS + доп + Ci. '+(D.demo?'<b style="color:#f0906f">Демо — случайные цифры.</b>':'');hlMe(body);
   }else{
     const RLc=[['Citizen','Мир'],['Sheriff','Шер'],['Mafia','Маф'],['Don','Дон']];
     head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th>'+RLc.map(([k,l],i)=>`<th class="${i===0?'grp':''}" title="${l}: победы/игр">${l}</th>`).join('')+RLc.map(([k,l],i)=>`<th class="x${i===0?' grp':''}" title="${l}: баллы">${l}·Σ</th>`).join('')+'<th class="x sp"></th>'+RLc.map(([k,l])=>`<th class="x" title="${l}: доп">${l}·доп</th>`).join('')+'</tr>';
-    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td>`+RLc.map(([k],i)=>{const r=p.roles[k];return `<td class="${i===0?'grp':''}">${r.g?`<b class="win">${r.w}</b><span class="na">/${r.g}</span>`:'<span class="na">·</span>'}</td>`;}).join('')+RLc.map(([k],i)=>{const r=p.roles[k];return `<td class="x${i===0?' grp':''}">${r.g?fmt(r.sigma):'·'}</td>`;}).join('')+'<td class="x sp"></td>'+RLc.map(([k])=>{const r=p.roles[k];return `<td class="x">${r.g?fmt(r.aps):'·'}</td>`;}).join('')+'</tr>').join('');
+    const cut2=cutAfter(list);
+    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td>`+RLc.map(([k],i)=>{const r=p.roles[k];return `<td class="${i===0?'grp':''}">${r.g?`<b class="win">${r.w}</b><span class="na">/${r.g}</span>`:'<span class="na">·</span>'}</td>`;}).join('')+RLc.map(([k],i)=>{const r=p.roles[k];return `<td class="x${i===0?' grp':''}">${r.g?fmt(r.sigma):'·'}</td>`;}).join('')+'<td class="x sp"></td>'+RLc.map(([k])=>{const r=p.roles[k];return `<td class="x">${r.g?fmt(r.aps):'·'}</td>`;}).join('')+'</tr>'+((cut2&&p.place===cut2.n&&rows.length>cut2.n)?cutRow(cut2):'')).join('');
     note.innerHTML='По ролям: <b>побед / игр</b> в каждой роли. В «Подробно» добавляются колонки Σ и доп по каждой роли — <b>листайте таблицу вправо →</b>.';hlMe(body);
   }
 }
 /* ── Игры (по раундам) ── */
 function gmCur(){return Math.max(0,D.gplist.length-1);}
-function gameTableHtml(t){
+function gameTableHtml(t,gnum,stage){
   const wl=t.winner==='red_win'?'<span class="gwin gwin-red">победа красных</span>':(t.winner==='black_win'?'<span class="gwin gwin-blk">победа чёрных</span>':'');
   const wcls=t.winner==='red_win'?' win-red':(t.winner==='black_win'?' win-blk':'');
   const aps=t.seats.filter(x=>x&&x.name).map(x=>x.aps||0);const mx=aps.length?Math.max(...aps):0,mn=aps.length?Math.min(...aps):0;
@@ -759,9 +859,11 @@ function gameTableHtml(t){
       `<div class="sname">${esc(st.name)}</div>`+
       `<div class="grole">${st.role?`<span class="rp rp-${st.role}">${RSHORT[st.role]}</span>`:''}</div>`+
       `<div class="gdop">доп <b class="gdopv ${dc}">${fmt(ap)}</b></div></div>`;});
-  return `<div class="twrap${wcls}"><div class="thdr"><span class="tnum">Стол ${ROMAN[t.table_num]||t.table_num}</span> ${wl}</div><div class="seatgrid gseat">${cells}</div></div>`;
+  const su=(typeof gnum==='number')?streamOf(gnum,t.table_num,stage):null;
+  const sb=su?`<a class="strm-sm" href="${esc(su)}" target="_blank" rel="noopener">&#9654; стрим</a>`:'';
+  return `<div class="twrap${wcls}"><div class="thdr"><span class="tnum">Стол ${ROMAN[t.table_num]||t.table_num}</span> ${wl}${sb}</div><div class="seatgrid gseat">${cells}</div></div>`;
 }
-function initGames(){gmRound=(viewMode==='current')?gmCur():0;if(gmRound<0)gmRound=0;paintGames();}
+function initGames(){if(jumpGame!=null){gmRound=jumpGame;jumpGame=null;}else{gmRound=(viewMode==='current')?gmCur():0;}if(gmRound<0)gmRound=0;paintGames();highlightJump();}
 function paintGames(){
   const top=document.getElementById('gmTop'),area=document.getElementById('gmArea');if(!top)return;
   const list=D.gplist;if(gmRound>=list.length)gmRound=list.length-1;
@@ -769,7 +871,7 @@ function paintGames(){
   top.innerHTML='<div class="ggroups">'+grp.map(gr=>`<div class="rgroup"><div class="rglab">${gr.lab}</div><div class="rounds">`+gr.items.map(i=>`<button class="rbtn ${i===gmRound?'active':''}${i===gmCur()?' cur':''}" data-i="${i}">${i+1}</button>`).join('')+'</div></div>').join('')+'</div>';
   top.querySelectorAll('.rbtn').forEach(b=>b.onclick=()=>{gmRound=+b.dataset.i;paintGames();});
   const g=list[gmRound];
-  area.innerHTML=`<div class="note" style="margin:0 0 12px"><b style="color:var(--gold-hi)">${esc(g.stage||'Квалификация')}</b> · игра ${gmRound+1} из ${list.length} · ${g.tables.length} ${g.tables.length===1?'стол':'стола'}</div><div class="tables">`+g.tables.map(gameTableHtml).join('')+'</div>';
+  area.innerHTML=`<div class="note" style="margin:0 0 12px"><b style="color:var(--gold-hi)">${esc(g.stage||'Квалификация')}</b> · игра ${gmRound+1} из ${list.length} · ${g.tables.length} ${g.tables.length===1?'стол':'стола'}</div><div class="tables">`+g.tables.map(t=>gameTableHtml(t,gmRound+1,g.stage||'Квалификация')).join('')+'</div>';
 }
 /* ── Роли ── */
 function sumRoles(p,ks){const r={sigma:0,g:0,w:0,wpts:0,aps:0,ci:0,apsW:0,apsL:0,wg:0,lg:0,apsPos:0,apsNeg:0};ks.forEach(k=>{const x=p.roles[k];for(const kk in r)r[kk]+=x[kk]||0;});return r;}
@@ -792,47 +894,23 @@ function paintRolesN(){
     note.innerHTML=`Рейтинг в роли «${lab}» по баллам именно в этой роли.`;hlMe(body);
   }
 }
-/* ── Игрок ── */
-function initPlayerN(){
-  const top=document.getElementById('plTop');if(!top)return;
-  top.innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
-    <input id="plSearch" class="pick" style="flex:1;min-width:150px;max-width:none" placeholder="Поиск игрока…" autocomplete="off">
-    <select class="pick" id="plSel" style="flex:1;min-width:150px;max-width:none">${(function(){let list=D.rows.slice();if(!statFull){list.sort((a,b)=>{const ra=D.RATE[a.name]||{},rb=D.RATE[b.name]||{};const ta=(ra.tier in TIER_ORD)?TIER_ORD[ra.tier]:9,tb=(rb.tier in TIER_ORD)?TIER_ORD[rb.tier]:9;if(ta!==tb)return ta-tb;return (rb.elo||0)-(ra.elo||0);});}return list.map(p=>{const R=D.RATE[p.name]||{};const lab=statFull?(p.place+'. '+esc(p.name)+' — Σ '+fmt(p.sigma)):(esc(p.name)+(R.tier&&R.tier in TIER_ORD?(' · '+R.tier):'')+(R.elo?(' '+Math.round(R.elo)):''));return `<option value="${esc(p.name)}"${p.name===curPlayer?' selected':''}>${lab}</option>`;}).join('');})()}</select></div><div class="segwrap" style="margin:0 0 12px">${fullToggle()}</div><div class="note" style="margin:0 0 12px"><b>Компактно</b> — без турнирного места, выбор игрока по рангам/ELO (для тех, кто не хочет знать таблицу). <b>Подробно</b> — с местом и полным логом игр.</div>`;
-  const sel=document.getElementById('plSel'),srch=document.getElementById('plSearch');
-  sel.onchange=()=>{curPlayer=sel.value;drawPlayerN();};
-  srch.oninput=()=>{const q=srch.value.trim().toLowerCase();if(!q)return;const opt=[...sel.options].find(o=>o.value.toLowerCase().indexOf(q)>=0);if(opt){sel.value=opt.value;curPlayer=opt.value;drawPlayerN();}};
-  drawPlayerN();
-}
-function drawPlayerN(){
-  const area=document.getElementById('plArea');if(!area)return;const name=curPlayer;const p=D.STAT[name];
-  if(!p){area.innerHTML='<div class="note">Нет данных по игроку</div>';return;}
-  const multi=D.stagesPresent.length>1;
-  const mine=[];D.gplist.forEach((g,gi)=>g.tables.forEach(t=>{const s=t.seats.find(x=>x.name===name);if(s)mine.push({gi,stage:g.stage||'Квалификация',t:t.table_num,role:s.role,result:s.result,aps:s.aps,ci:s.ci,sig:(s.wpts||0)+(s.aps||0)+(s.ci||0)});}));
-  const placeAfter={};D.gplist.forEach((g,gi)=>{const r=aggregateN(D.gplist.slice(0,gi+1)).rows.find(x=>x.name===name);if(r)placeAfter[gi]=r.place;});
-  const tavgOf=ks=>{let a=0,g=0;ks.forEach(k=>D.rows.forEach(pp=>{a+=pp.roles[k].aps;g+=pp.roles[k].g;}));return g?a/g:0;};
-  const rccell=(labHtml,r,ks,cls)=>{const aw=r.wg?fmt(r.apsW/r.wg):'·',al=r.lg?fmt(r.apsL/r.lg):'·';const pav=r.g?fmt(r.aps/r.g):'·';return `<div class="rcx${cls?(' '+cls):''}"><div class="rt">${labHtml}</div><div class="rv">${r.g?fmt(r.sigma):'—'}<span class="rvg"> · <b class="win">${r.w}</b>/${r.g}</span></div><div class="rs">ср.доп <b>${pav}</b> <span class="na">(тур ${fmt(tavgOf(ks))})</span><br>W <span class="win">${aw}</span> · L <span class="los">${al}</span></div></div>`;};
-  const rcards=['Citizen','Mafia','Sheriff','Don'].map(k=>rccell(`<span class="rp rp-${k}">${RLONG[k]}</span>`,p.roles[k],[k],'')).join('')+rccell('<span class="rp rp-Citizen">К+Ш</span>',sumRoles(p,['Citizen','Sheriff']),['Citizen','Sheriff'],'rcx-combo rcx-red')+rccell('<span class="rp rp-Mafia">Ч+Д</span>',sumRoles(p,['Mafia','Don']),['Mafia','Don'],'rcx-combo rcx-blk');
-  const log=mine.map(m=>`<tr><td>${m.gi+1}</td><td class="x">${ROMAN[m.t]||m.t}</td><td>${m.role?`<span class="rp rp-${m.role}">${RSHORT[m.role]}</span>`:'—'}</td><td class="${m.result==='W'?'win':(m.result==='L'?'los':'na')}">${m.result==='W'?'поб':(m.result==='L'?'пор':'—')}</td><td>${fmt(m.aps)}</td><td class="x">${fmt(m.ci)}</td><td class="sig">${fmt(m.sig)}</td><td class="grp x">${placeAfter[m.gi]?'#'+placeAfter[m.gi]:'—'}</td></tr>`).join('');
-  area.innerHTML=`<div class="phdr"><img src="${esc(avOf(name)||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><div><div class="pn">${esc(name)}</div><div class="ps">${statFull?`место <b style="color:var(--gold-hi)">${p.place}</b> · `:''}Σ ${fmt(p.sigma)} · убит 1-м ${p.k}</div><div class="pbig"><b class="win">${p.w}</b><span class="na">/${p.g}</span> <span class="pbl">побед / игр</span></div></div></div>
-    <div class="panel"><h3>Баллы по ролям</h3><div class="rcards">${rcards}</div><div class="note" style="margin-top:8px">Крупно — Σ баллов и <b class="win">победы</b>/игр в роли. Ниже — <b>ср.доп</b> игрока и <span class="na">(тур …)</span> средний по турниру в этой роли; <span class="win">W</span> — ср.доп при победе, <span class="los">L</span> — при поражении. <b>К+Ш</b>/<b>Ч+Д</b> — сводные (все красные / все чёрные).</div></div>
-    <div class="panel scrollT" style="padding:0"><table class="tbl${statFull?' full':''}" style="font-size:12px"><thead><tr><th>Игра</th><th class="x">Стол</th><th>Роль</th><th>Рез</th><th>доп</th><th class="x">Ci</th><th class="sig">Σ</th><th class="grp x" title="место после этой игры">Место</th></tr></thead><tbody>${log}</tbody></table></div>`;
-}
+/* ── (v13) «Игрок» переехал в раздел «Моё» (initMy/drawMy ниже) ── */
 function secListPanel(){const items=[
- ['≡','Участники · рейтинг','состав, ELO и тиры — кто сильнее по рейтингу'],
- ['▦','Рассадка · Интерактивная','кто за каким столом каждую игру; тап по игроку — все его столы'],
- ['♛','Рассадка · Карточки','карточка каждого: рассадка по играм, соперники, «0 игр»'],
- ['⇄','Рассадка · Пересечения','с кем и сколько раз пересекаешься за столом'],
- ['⚑','Статистика · Сводная','рейтинг по баллам (Σ), стадии, слайдер по играм'],
- ['▶','Статистика · Игры','результаты по столам: роли, победа команды, допы'],
- ['✦','Статистика · Роли','кто силён какой картой (мирный/шериф/мафия/дон, К+Ш/Ч+Д)'],
- ['☰','Статистика · Игрок','полная статистика игрока: роли, лог игр, место']];
-return `<div class="panel"><h3>Что где смотреть</h3><div class="seclist">`+items.map(([ic,t,d])=>`<div class="seci"><span class="sicon">${ic}</span><div><b>${esc(t)}</b><div class="sid">${esc(d)}</div></div></div>`).join('')+`</div></div>`;}
+ ['my','♟','Моё','следующая игра — стол, место, соперники, судья; вся ваша рассадка и статистика'],
+ ['roster','≡','Игроки · Состав','рейтинг ELO и тиры; тап по игроку — его страница'],
+ ['together','⇄','Игроки · Кто с кем','с кем сидите за одним столом: сколько раз и в каких играх'],
+ ['seating','▦','Игроки · По играм','рассадка всех столов по каждой игре'],
+ ['stages','⚑','Результаты · Таблица','турнирная таблица (Σ) с линией выхода в полуфинал и финал'],
+ ['games','▶','Результаты · Игры','протоколы по столам: роли, победа команды, допы, стрим'],
+ ['roles','✦','Результаты · По картам','кто как играет мирным / шерифом / мафией / доном'],
+ ['judges','⚖','Результаты · Судьи','ровно ли столы ставят допы — светофор для главного судьи']];
+return `<div class="panel"><h3>Разделы — тапайте</h3><div class="seclist">`+items.map(([id,ic,t,d])=>`<button class="seci" data-id="${id}" onclick="show(this.dataset.id)"><span class="sicon">${ic}</span><div><b>${esc(t)}</b><div class="sid">${esc(d)}</div></div><span class="go">›</span></button>`).join('')+`</div></div>`;}
 function stagesPanel(){return `<div class="panel"><h3>Формат: 3 стадии</h3><div class="stages">
     <div class="stage"><span class="sbadge">старт</span><div class="sn">Квалификация</div><div class="sg">11 игр · 4 стола · каждый играет 10</div><div class="sd">Все 44 играют квалификацию, одну игру отдыхают. По сумме — топ‑40 в полуфинал.</div></div>
     <div class="stage"><div class="sn">Полуфинал</div><div class="sg">2 игры · топ‑40</div><div class="sd">40 лучших по квалификации играют 2 игры. По сумме — топ‑10 финала.</div></div>
     <div class="stage"><div class="sn">Финал</div><div class="sg">5 игр · топ‑10</div><div class="sd">10 сильнейших разыгрывают титул чемпиона Европы за финальным столом (5 игр).</div></div></div></div>`;}
 
-function afterRender(id){if(id==='roster')paintRoster();else if(id==='seating')initSeating();else if(id==='cards')initCards();else if(id==='together')initTogether();else if(id==='stages'||id==='games'||id==='roles'||id==='player')afterStats(id);}
+function afterRender(id){if(id==='roster')paintRoster();else if(id==='seating')initSeating();else if(id==='my')initMy();else if(id==='together')initTogether();else if(id==='judges')paintJudges();else if(id==='stages'||id==='games'||id==='roles')afterStats(id);}
 
 /* roster */
 const RCOLS=[{key:'tier',lab:'Ранг',dir:1,get:p=>p.r_tier,fmt:'tier'},{key:'elo_cur',lab:'ELO тек',dir:-1,get:p=>p.r_elo_cur,fmt:'elo'},{key:'elo_2026',lab:'ELO 2026',dir:-1,get:p=>p.r_elo_2026,fmt:'elo'},{key:'eu26',lab:'Европа 2026',dir:1,get:p=>p.r_rank_eu_2026,fmt:'rank'}];
@@ -869,13 +947,15 @@ function paintRoster(){
     if(p.markery_id)links.push(`<a class="lnk" href="https://markery.online/playerStatistics?eloType=101&playerId=${p.markery_id}&tab=EloHistory" target="_blank" rel="noopener">markery</a>`);
     if(p.ms&&p.ms.id)links.push(`<a class="lnk" href="https://mafiastats.com/players/${p.ms.id}" target="_blank" rel="noopener">mafiastats</a>`);
     const sub=p.real?`<div class="pl-real">${esc(p.real)}</div>`:'';const et=num(p.r_elo_cur),e26=num(p.r_elo_2026),eu=num(p.r_rank_eu_2026);
-    html+=`<tr class="${p.status==='confirmed'?'':'applied'}"><td class="l"><div class="pl"><span class="num">${i+1}</span>${avatarCell(p)}<span><span class="pl-nick">${esc(p.nick)}</span>${sub}</span></div></td>
+    html+=`<tr class="rrow ${p.status==='confirmed'?'':'applied'}" data-p="${esc(p.nick)}"><td class="l"><div class="pl"><span class="num">${i+1}</span>${avatarCell(p)}<span><span class="pl-nick">${esc(p.nick)}</span>${sub}</span></div></td>
       <td>${(p.r_tier in TIER_ORD)?`<span class="tpill tp-${p.r_tier}">${p.r_tier}</span>`:'<span class="na">—</span>'}</td>
       <td>${et!=null?`<span class="rnum">${Math.round(et)}</span>`:'<span class="na">—</span>'}</td>
       <td class="x">${e26!=null?`<span class="rnum">${Math.round(e26)}</span>`:'<span class="na">—</span>'}</td>
       <td class="x">${eu!=null?`<span class="rrank"><span class="h">#</span>${eu}</span>`:'<span class="na">—</span>'}</td>
       <td class="l x">${links.join(' ')||'<span class="na">—</span>'}</td></tr>`;});
-  document.getElementById('rtb').innerHTML=html;if(myPlayer)document.querySelectorAll('#rtb tr').forEach(tr=>{const n=tr.querySelector('.pl-nick');if(n&&n.textContent===myPlayer)tr.classList.add('me');});
+  document.getElementById('rtb').innerHTML=html;
+  document.querySelectorAll('#rtb tr.rrow').forEach(tr=>tr.onclick=e=>{if(e.target.closest('a'))return;goPlayer(tr.dataset.p);});
+  if(myPlayer)document.querySelectorAll('#rtb tr').forEach(tr=>{const n=tr.querySelector('.pl-nick');if(n&&n.textContent===myPlayer)tr.classList.add('me');});
 }
 
 /* seating (grid) */
@@ -910,58 +990,233 @@ function tableHtml(g,t,target,showG){
     const R=D.eloRange;let pct=R.max>R.min?Math.round((my-R.min)/(R.max-R.min)*100):50;pct=Math.max(1,Math.min(99,pct));
     const cls=pct>=67?'top':(pct<=33?'low':'');
     eloBadge=`<span class="telo ${cls}" title="сильнее ${pct}% возможных столов турнира">Ø ${Math.round(my)} · топ ${pct}%</span>`;}
-  return `<div class="twrap"><div class="thdr">${showG?`<span class="tgl">Игра ${g}</span>`:''}<span class="tnum">Стол ${ROMAN[t]}</span>${jh}${eloBadge}</div><div class="seatgrid">${cells}</div></div>`;
+  const su=(typeof streamOf==='function')?streamOf(g,t,null):null;
+  const sb=su?`<a class="strm-sm" href="${esc(su)}" target="_blank" rel="noopener">&#9654; стрим</a>`:'';
+  return `<div class="twrap"><div class="thdr">${showG?`<span class="tgl">Игра ${g}</span>`:''}<span class="tnum">Стол ${ROMAN[t]}</span>${jh}${eloBadge}${sb}</div><div class="seatgrid">${cells}</div></div>`;
 }
 
-/* cards */
-function cardMe(){if(!myPlayer)return;const R=D.RATE[myPlayer]||{};cardTier=(R.tier in TIER_ORD)?R.tier:'—';drawCards();setTimeout(()=>{document.querySelectorAll('#cardArea .pcard').forEach(c=>{const n=c.querySelector('.pcnick');if(n&&n.textContent===myPlayer){c.classList.add('mecard');c.scrollIntoView({behavior:'smooth',block:'center'});}});},80);}
-function cardsByTier(){const by={};Object.keys(D.occ).forEach(n=>{const t=(D.RATE[n]&&D.RATE[n].tier&&D.RATE[n].tier in TIER_ORD)?D.RATE[n].tier:'—';(by[t]=by[t]||[]).push(n);});
-  Object.keys(by).forEach(t=>by[t].sort((a,b)=>{const ea=(D.RATE[a]&&D.RATE[a].elo)||0,eb=(D.RATE[b]&&D.RATE[b].elo)||0;return eb-ea||a.localeCompare(b,'ru');}));return by;}
-let cardTier=null;
-function initCards(){const by=cardsByTier();const cl=document.getElementById('cCluster');
-  cl.innerHTML='<span class="lbl" style="font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--dim)">Ранг:</span>'+(myPlayer?'<button class="tf" style="border-color:var(--gold);color:var(--gold-hi)" onclick="cardMe()">★ моя карточка</button>':'')+
-    TIERS.filter(t=>by[t]).map(t=>`<button class="tf" data-t="${t}"><span class="tpill tp-${t}">${t}</span><small>${by[t].length}</small></button>`).join('')+
-    (by['—']?`<button class="tf" data-t="—">— <small>${by['—'].length}</small></button>`:'');
-  cl.querySelectorAll('.tf[data-t]').forEach(b=>b.onclick=()=>{cardTier=b.dataset.t;drawCards();});drawCards();}
-function drawCards(){const by=cardsByTier();document.querySelectorAll('#cCluster .tf').forEach(b=>b.classList.toggle('on',b.dataset.t===cardTier));
-  const area=document.getElementById('cardArea');
-  if(!cardTier){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9819;</div><h3>Выберите ранг сверху</h3><p>Карточки игроков этого ранга откроются здесь. Так страница грузится быстрее.</p></div></div>';return;}
-  area.innerHTML=`<div class="cardgrid">${(by[cardTier]||[]).map(cardHtml).join('')}</div>`;}
-function cardHtml(nick){
-  const R=D.RATE[nick]||{},info=D.INFO[nick]||{},occ=(D.occ[nick]||[]),skip=D.skip[nick],total=D.games.length;
-  const bySlot={};occ.forEach(o=>bySlot[o.g]={t:o.t,slot:o.slot});let rows='';
-  for(let g=1;g<=total;g++){if(g===skip)rows+=`<tr class="rest"><td class="gn">${g}</td><td colspan="2">— отдых —</td></tr>`;
-    else if(bySlot[g])rows+=`<tr><td class="gn">${g}</td><td>${ROMAN[bySlot[g].t]}</td><td>${bySlot[g].slot}</td></tr>`;}
-  const opp=D.opp[nick]||{};const groups={};Object.entries(opp).forEach(([m,c])=>{(groups[c]=groups[c]||[]).push(m);});
-  const oppHtml=Object.keys(groups).sort((a,b)=>b-a).slice(0,4).map(c=>`<div><span class="cnt">${c}</span>${groups[c].sort((x,y)=>x.localeCompare(y,'ru')).map(esc).join(', ')}</div>`).join('')||'<div class="zero">—</div>';
-  const met=new Set(Object.keys(opp));const never=Object.keys(D.occ).filter(n=>n!==nick&&!met.has(n)).sort((a,b)=>a.localeCompare(b,'ru'));
-  const tier=(R.tier in TIER_ORD)?R.tier:null;const rc=(k,v,na)=>`<div class="rcell"><div class="rk">${k}</div><div class="rv${na?' na':''}">${v}</div></div>`;
-  return `<div class="pcard" id="c-${esc(nick)}"><div class="pcrown">&#9819;</div>
-    <div class="pchead"><img class="pcav ${tier?'f-'+tier:''}" src="${esc(avOf(nick)||'')}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'">
-      <div><div class="pcnick">${esc(nick)}</div>${info.real?`<div class="pcreal">${esc(info.real)}</div>`:''}<div class="pcmeta">Чемпионат Европы 2026 · 18–19.07 · Бонн</div></div>
-      <div class="pctier">${tier?`<span class="tpill tp-${tier}">${tier}</span>`:''}</div></div>
-    <div class="rate">${rc('ELO тек',R.elo?Math.round(R.elo):'—',!R.elo)}${rc('ELO 2026',R.elo26?Math.round(R.elo26):'—',!R.elo26)}${rc('Европа 26',R.eu?('#'+R.eu):'—',!R.eu)}</div>
-    <div class="csec">Рассадка по играм</div>
-    ${skip?`<div class="skipband">&#9208; Пропуск игры ${skip} — отдыхает</div>`:''}
-    <table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th></tr></thead><tbody>${rows}</tbody></table>
-    <div class="csec">Соперники (общих игр)</div><div class="opp">${oppHtml}</div>
-    <div class="csec">0 игр — ни разу не встречает (${never.length})</div><div class="zero">${never.length?never.map(esc).join(', '):'встречает всех'}</div></div>`;
+/* ── v13: Моё / Кто с кем / Судьи / стримы ── */
+function nextOccOf(nick){const occ=(D.occ[nick]||[]).slice().sort((a,b)=>a.g-b.g);return occ.find(o=>o.g>(D.played||0))||null;}
+function streamOf(gnum,table,stage){
+  const s=window.STREAMS_DB&&window.STREAMS_DB['634'];if(!s)return chURL();
+  if(stage==='Финал')return (s.final?('https://www.youtube.com/watch?v='+s.final):null)||chURL();
+  return (window.streamFor?window.streamFor('634',gnum,table):null)||chURL();
 }
-
-/* together */
-function initTogether(){const sel=document.getElementById('togSel');if(!sel)return;sel.onchange=()=>drawTogether(sel.value);drawTogether(sel.value);}
-function drawTogether(nick){const area=document.getElementById('togArea');if(!area)return;
-  const opp=D.opp[nick]||{};const groups={};Object.entries(opp).forEach(([m,c])=>{(groups[c]=groups[c]||[]).push(m);});
-  const met=new Set(Object.keys(opp));const never=Object.keys(D.occ).filter(n=>n!==nick&&!met.has(n)).sort((a,b)=>a.localeCompare(b,'ru'));
-  const rows=Object.keys(groups).sort((a,b)=>b-a).map(c=>`<div style="margin-bottom:6px"><span class="cnt">${c} игр</span> ${groups[c].sort((x,y)=>x.localeCompare(y,'ru')).map(esc).join(', ')}</div>`).join('');
-  let interHtml='';
-  if(myPlayer&&myPlayer!==nick){const mine=D.occ[myPlayer]||[];const shared=mine.filter(o=>(D.occ[nick]||[]).some(x=>x.g===o.g&&x.t===o.t)).sort((a,b)=>a.g-b.g);
-    interHtml=`<div class="panel" style="border-color:var(--gold)"><h3>Вы (${esc(myPlayer)}) × ${esc(nick)}</h3>${shared.length?`<div class="opp"><b class="win">${shared.length}</b> совместных: ${shared.map(o=>`игра ${o.g} <span class="na">(стол ${ROMAN[o.t]})</span>`).join(', ')}</div>`:'<div class="zero">за одним столом не пересекаетесь ни разу</div>'}</div>`;}
-  area.innerHTML=`<div class="phdr"><img src="${esc(avOf(nick)||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><div><div class="pn">${esc(nick)}</div><div class="ps">${(D.occ[nick]||[]).length} игр · сидит с ${players_w(met.size)}</div></div></div>
-    ${interHtml}
-    <div class="panel"><h3>Сколько раз с кем</h3><div class="opp">${rows||'—'}</div></div>
-    <div class="panel"><h3>Ни разу за столом (${never.length})</h3><div class="zero">${never.length?never.map(esc).join(', '):'пересекается со всеми'}</div></div>`;}
-
+/* v13.2: пока конкретных ссылок нет — кнопки ведут на канал mafgame (видно, как выглядят); впишем ссылки в streams.js — сами переключатся на видео */
+function chURL(){return (window.STREAMS_DB&&window.STREAMS_DB.channel)||'https://www.youtube.com/@mafgameorg';}
+function streamsPanel(){
+  const s=window.STREAMS_DB&&window.STREAMS_DB['634'];
+  const ch=(window.STREAMS_DB&&window.STREAMS_DB.channel)||'https://www.youtube.com/@mafgameorg';
+  const day=((D.played||0)>=9)?'2':'1';
+  let btns='';
+  if(s&&s.days){[1,2,3,4].forEach(t=>{const id=(s.days[day]||{})[String(t)];if(id)btns+=`<a class="btn strm" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">&#9654; Стол ${ROMAN[t]}</a>`;});
+    if(s.final&&(D.played||0)>=11)btns+=`<a class="btn strm" href="https://www.youtube.com/watch?v=${s.final}" target="_blank" rel="noopener">&#9654; Финал</a>`;}
+  return `<div class="panel"><h3>Трансляции</h3>${btns?`<div class="strms">${btns}</div><div class="note" style="margin:8px 0 0">День ${day}: ${day==='1'?'игры 1–9':'игры 10–11, полуфинал и финал'}. Канал — <a class="lnk" href="${ch}" target="_blank" rel="noopener">youtube @mafgameorg</a>.</div>`
+    :`<div class="note" style="margin:0">Ссылки на стримы столов появятся в день турнира: день 1 — игры 1–9, день 2 — игры 10–11, полуфинал и финал. Канал: <a class="lnk" href="${ch}" target="_blank" rel="noopener">youtube @mafgameorg</a>.</div>`}</div>`;
+}
+function nextGamePanel(nick,compact){
+  if(!nick||!D.occ[nick])return '';
+  const total=D.games.length,played=D.played||0;
+  if(total&&played>=total)return '';
+  const skip=D.skip[nick];
+  const restNote=(skip&&skip===played+1)?`<div class="note" style="margin:8px 0 0">&#9208; В игре ${skip} — отдых, дальше по расписанию ниже.</div>`:'';
+  const nx=nextOccOf(nick);
+  if(!nx){
+    if(played<11)return '';
+    return `<div class="panel nextg"><h3>${compact?'Ваша следующая игра':'Следующая игра'}</h3><div class="note" style="margin:0">Квалификация сыграна. Рассадка полуфинала/финала появится после посева стадии.</div></div>`;
+  }
+  const names=((D.seatByGame[nx.g]||{})[nx.t])||[];
+  const opp=names.filter(n=>n&&n!==nick);
+  const j=D.judges[nx.t];
+  const st=streamOf(nx.g,nx.t,null);
+  const oppHtml=opp.map(n=>`<span class="oppmini" data-p="${esc(n)}" onclick="goPlayer(this.dataset.p)"><img src="${esc(avOf(n)||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'">${esc(n)}</span>`).join('');
+  return `<div class="panel nextg"><h3>${compact?'Ваша следующая игра':'Следующая игра'}</h3>
+    <div class="nextrow"><div class="nx"><div class="nk">Игра</div><div class="nv">${nx.g}<small>/${total||11}</small></div></div>
+      <div class="nx"><div class="nk">Стол</div><div class="nv">${ROMAN[nx.t]||nx.t}</div></div>
+      <div class="nx"><div class="nk">Место</div><div class="nv">${nx.slot}</div></div>
+      ${j?`<div class="nx nxj"><div class="nk">Судья</div><div class="nv nvj">${j.avatar?`<img src="${esc(j.avatar)}" referrerpolicy="no-referrer" onerror="this.style.display='none'">`:''}<span>${esc(j.name)}</span></div></div>`:''}
+      ${st?`<a class="btn strm" href="${esc(st)}" target="_blank" rel="noopener">&#9654; Стрим стола</a>`:''}</div>
+    ${restNote}
+    ${compact?`<div class="note" style="margin:8px 0 0"><span class="lnk" style="cursor:pointer" onclick="show('my')">Соперники, вся рассадка и статистика — в «Моё» →</span></div>`
+      :(opp.length?`<div class="nk" style="margin:12px 0 6px">За столом вместе</div><div class="oppminis">${oppHtml}</div>`:'')}
+  </div>`;
+}
+/* «Моё» / страница игрока */
+function initMy(){
+  const top=document.getElementById('myTop');if(!top)return;
+  if(!curPlayer||!D.INFO[curPlayer])curPlayer=(myPlayer&&D.INFO[myPlayer])?myPlayer:curPlayer;
+  const opts=D.players.slice().sort((a,b)=>{const ta=(a.r_tier in TIER_ORD)?TIER_ORD[a.r_tier]:9,tb=(b.r_tier in TIER_ORD)?TIER_ORD[b.r_tier]:9;if(ta!==tb)return ta-tb;return (num(b.r_elo_cur)||0)-(num(a.r_elo_cur)||0);});
+  top.innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+    <input id="mySearch" class="pick" style="flex:1;min-width:130px;max-width:none" placeholder="Найти игрока…" autocomplete="off">
+    <select class="pick" id="myPick" style="flex:1;min-width:150px;max-width:none"><option value="">— игрок —</option>${opts.map(pp=>`<option value="${esc(pp.nick)}"${pp.nick===curPlayer?' selected':''}>${esc(pp.nick)}${(pp.r_tier in TIER_ORD)?' · '+pp.r_tier:''}</option>`).join('')}</select>
+    ${myPlayer&&curPlayer!==myPlayer?`<button class="btn ghost" data-p="${esc(myPlayer)}" onclick="curPlayer=this.dataset.p;initMy()">← я</button>`:''}
+  </div>`;
+  const sel=document.getElementById('myPick'),srch=document.getElementById('mySearch');
+  sel.onchange=()=>{curPlayer=sel.value||null;drawMy();};
+  srch.oninput=()=>{const q=srch.value.trim().toLowerCase();if(!q)return;const o=[...sel.options].find(x=>x.value&&x.value.toLowerCase().indexOf(q)>=0);if(o){sel.value=o.value;curPlayer=o.value;drawMy();}};
+  drawMy();
+}
+function drawMy(){
+  const area=document.getElementById('myArea');if(!area)return;
+  const name=curPlayer;
+  const tt=document.getElementById('myTtl');if(tt)tt.innerHTML='&#9823; '+((myPlayer&&name===myPlayer)?'Моё на турнире':(name?'Игрок':'Моё на турнире'));
+  if(!name){area.innerHTML=`<div class="panel"><div class="stub"><div class="si">&#9823;</div><h3>Выберите игрока</h3><p>Выберите себя в списке сверху — здесь соберётся всё ваше: следующая игра (стол, место, соперники, судья), рассадка на весь турнир и статистика. Закрепить себя навсегда — на «Обзоре», блок «Мой игрок».</p></div></div>`;return;}
+  const isMe=myPlayer&&name===myPlayer;
+  const R=D.RATE[name]||{},info=D.INFO[name]||{};const tier=(R.tier in TIER_ORD)?R.tier:null;
+  const p=D.STAT&&D.STAT[name];
+  let html=`<div class="phdr"><img class="${tier?'f-'+tier:''}" src="${esc(avOf(name)||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'">
+    <div><div class="pn">${esc(name)} ${tier?`<span class="tpill tp-${tier}">${tier}</span>`:''}${isMe?' <span class="mebadge">вы</span>':''}</div>
+    ${info.real?`<div class="ps">${esc(info.real)}</div>`:''}
+    ${(p&&D.gp)?`<div class="pbig"><b class="win">${p.w}</b><span class="na">/${p.g}</span> <span class="pbl">побед / игр</span></div>`:`<div class="ps">ELO ${R.elo?Math.round(R.elo):'—'} · Европа‑2026 ${R.eu?('#'+R.eu):'—'}</div>`}</div>
+    ${!isMe?`<button class="btn ghost" style="margin-left:auto" data-p="${esc(name)}" onclick="setMy(this.dataset.p)">сделать моим</button>`:''}</div>`;
+  html+=nextGamePanel(name,false);
+  if(p&&D.gp){
+    const mine=[];D.gplist.forEach((g,gi)=>g.tables.forEach(t=>{const st=t.seats.find(x=>x.name===name);if(st)mine.push({gi,t:t.table_num,role:st.role,result:st.result,aps:st.aps,ci:st.ci,sig:(st.wpts||0)+(st.aps||0)+(st.ci||0),stage:g.stage||'Квалификация'});}));
+    const placeAfter={};D.gplist.forEach((g,gi)=>{const r=aggregateN(D.gplist.slice(0,gi+1)).rows.find(x=>x.name===name);if(r)placeAfter[gi]=r.place;});
+    const tavgOf=ks=>{let a=0,g=0;ks.forEach(k=>D.rows.forEach(pp=>{a+=pp.roles[k].aps;g+=pp.roles[k].g;}));return g?a/g:0;};
+    const rccell=(labHtml,r,ks,cls)=>{const aw=r.wg?fmt(r.apsW/r.wg):'·',al=r.lg?fmt(r.apsL/r.lg):'·';const pav=r.g?fmt(r.aps/r.g):'·';return `<div class="rcx${cls?(' '+cls):''}"><div class="rt">${labHtml}</div><div class="rv">${r.g?fmt(r.sigma):'—'}<span class="rvg"> · <b class="win">${r.w}</b>/${r.g}</span></div><div class="rs">ср.доп <b>${pav}</b> <span class="na">(тур ${fmt(tavgOf(ks))})</span><br>W <span class="win">${aw}</span> · L <span class="los">${al}</span></div></div>`;};
+    const rcards=['Citizen','Mafia','Sheriff','Don'].map(k=>rccell(`<span class="rp rp-${k}">${RLONG[k]}</span>`,p.roles[k],[k],'')).join('')+rccell('<span class="rp rp-Citizen">К+Ш</span>',sumRoles(p,['Citizen','Sheriff']),['Citizen','Sheriff'],'rcx-combo rcx-red')+rccell('<span class="rp rp-Mafia">Ч+Д</span>',sumRoles(p,['Mafia','Don']),['Mafia','Don'],'rcx-combo rcx-blk');
+    const log=mine.map(m=>`<tr class="glrow" data-gi="${m.gi}" onclick="if(event.target.closest('a'))return;openGameAt(+this.dataset.gi)"><td>${m.gi+1}</td><td>${ROMAN[m.t]||m.t}</td><td>${m.role?`<span class="rp rp-${m.role}">${RSHORT[m.role]}</span>`:'—'}</td><td class="${m.result==='W'?'win':(m.result==='L'?'los':'na')}">${m.result==='W'?'поб':(m.result==='L'?'пор':'—')}</td><td>${fmt(m.aps)}</td><td>${fmt(m.ci)}</td><td class="sig">${fmt(m.sig)}</td>${myFull?`<td class="grp">${placeAfter[m.gi]?'#'+placeAfter[m.gi]:'—'}</td>`:''}<td>${(u=>u?`<a class="ytm" href="${esc(u)}" target="_blank" rel="noopener">&#9654;</a>`:'<span class="na">·</span>')(streamOf(m.gi+1,m.t,m.stage))}</td></tr>`).join('');
+    html+=`<div class="panel"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><h3 style="margin:0">Результат</h3><span class="seg" style="margin-left:auto"><button class="${myFull?'':'on'}" onclick="setMyFull(false)">компактно</button><button class="${myFull?'on':''}" onclick="setMyFull(true)">с местом</button></span></div><div class="statchips" style="margin:0 0 10px">${myFull?`<span>место <b style="color:var(--gold-hi)">#${p.place}</b></span>`:''}<span>Σ <b>${fmt(p.sigma)}</b></span><span>убит 1-м <b>${p.k}</b></span></div>
+      <div class="rcards">${rcards}</div><div class="note" style="margin-top:8px">Крупно — Σ и <b class="win">победы</b>/игры в роли; ниже ср.доп против среднего по турниру, W/L — при победе/поражении. Тап по строке лога — открыть эту игру и стол в «Играх»; ▶ — стрим.</div></div>
+      <div class="panel scrollT" style="padding:0"><table class="tbl full" style="font-size:12px"><thead><tr><th>Игра</th><th>Стол</th><th>Роль</th><th>Рез</th><th>доп</th><th>Ci</th><th class="sig">Σ</th>${myFull?'<th class="grp" title="место после этой игры">Место</th>':''}<th title="трансляция стола">&#9654;</th></tr></thead><tbody>${log}</tbody></table></div>`;
+  }
+  const occ=(D.occ[name]||[]);const bySlot={};occ.forEach(o=>bySlot[o.g]={t:o.t,slot:o.slot});const skip=D.skip[name];const total=D.games.length||11;
+  let rows='';for(let g=1;g<=total;g++){const done=g<=(D.played||0);const nxt=g===(D.played||0)+1;
+    if(g===skip)rows+=`<tr class="rest${done?' dim':''}"><td class="gn">${g}</td><td colspan="3">— отдых —</td></tr>`;
+    else if(bySlot[g])rows+=`<tr class="${done?'dim':''}${nxt?' hotrow':''}"><td class="gn">${g}</td><td>${ROMAN[bySlot[g].t]}</td><td>${bySlot[g].slot}</td><td>${(u=>u?`<a class="ytm" href="${esc(u)}" target="_blank" rel="noopener">&#9654;</a>`:'<span class="na">·</span>')(streamOf(g,bySlot[g].t,null))}</td></tr>`;}
+  if(rows)html+=`<div class="panel"><h3>Рассадка по играм</h3>${skip?`<div class="skipband">&#9208; Пропуск игры ${skip} — отдыхает</div>`:''}<table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th><th title="трансляция стола в этот день">&#9654;</th></tr></thead><tbody>${rows}</tbody></table><div class="note" style="margin-top:6px">Серым — сыгранные, золотой рамкой — следующая.</div></div>`;
+  const opp=D.opp[name]||{};const topOpp=Object.entries(opp).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  if(topOpp.length){
+    const groups={};Object.entries(opp).forEach(([m,c])=>{(groups[c]=groups[c]||[]).push(m);});
+    const met=new Set(Object.keys(opp));
+    const never=Object.keys(D.occ).filter(n=>n!==name&&!met.has(n)).sort((a,b)=>a.localeCompare(b,'ru'));
+    const grHtml=Object.keys(groups).sort((a,b)=>b-a).map(c=>`<div style="margin-bottom:6px"><span class="cnt">×${c}</span> ${groups[c].sort((x,y)=>x.localeCompare(y,'ru')).map(n=>plink(n)).join(', ')}</div>`).join('');
+    html+=`<div class="panel"><h3>Чаще всего за одним столом</h3><div class="oppminis">${topOpp.map(([n,c])=>`<span class="oppmini" data-p="${esc(n)}" onclick="goPlayer(this.dataset.p)"><img src="${esc(avOf(n)||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'">${esc(n)} <b>×${c}</b></span>`).join('')}</div>
+    <div class="csec" style="margin-top:12px">С кем сколько игр</div><div class="opp">${grHtml}</div>
+    ${never.length?`<div class="csec">0 игр — ни разу не встречает (${never.length})</div><div class="zero">${never.map(esc).join(', ')}</div>`:''}
+    <div class="note" style="margin:8px 0 0"><span class="lnk" style="cursor:pointer" data-p="${esc(name)}" onclick="openTogether(this.dataset.p)">В каких именно играх пересекаетесь — в «Кто с кем» →</span></div></div>`;
+  }
+  area.innerHTML=html;
+}
+/* «Кто с кем» */
+let togNick=null;
+function openTogether(n){togNick=n;show('together');}
+function initTogether(){
+  const top=document.getElementById('togTop');if(!top)return;
+  const all=Object.keys(D.occ).sort((a,b)=>a.localeCompare(b,'ru'));
+  if(!all.length){top.innerHTML='';document.getElementById('togArea').innerHTML='<div class="panel"><div class="stub"><div class="si">&#8644;</div><h3>Нет данных рассадки</h3><p>Раздел заработает, когда загрузятся составы игр.</p></div></div>';return;}
+  if(!togNick||!D.occ[togNick])togNick=(myPlayer&&D.occ[myPlayer])?myPlayer:all[0];
+  top.innerHTML=`<div class="note" style="margin:0 0 10px">С кем игрок сидит за одним столом: сколько раз, в каких играх — и с кем не встретится ни разу. <b>Золотые ярлыки — игры впереди</b>, серые — уже сыграны.</div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+    <select class="pick" id="togSel" style="margin:0;flex:1;min-width:150px;max-width:none">${all.map(n=>`<option value="${esc(n)}"${n===togNick?' selected':''}>${esc(n)}</option>`).join('')}</select>
+    ${myPlayer&&togNick!==myPlayer?`<button class="btn ghost" data-p="${esc(myPlayer)}" onclick="openTogether(this.dataset.p)">← я</button>`:''}</div>`;
+  document.getElementById('togSel').onchange=e=>{togNick=e.target.value;drawTogether();};
+  drawTogether();
+}
+function drawTogether(){
+  const area=document.getElementById('togArea');if(!area)return;const nick=togNick;
+  const opp=D.opp[nick]||{};const met=Object.keys(opp);
+  const never=Object.keys(D.occ).filter(n=>n!==nick&&!opp[n]).sort((a,b)=>a.localeCompare(b,'ru'));
+  const games={};(D.occ[nick]||[]).forEach(o=>{const names=((D.seatByGame[o.g]||{})[o.t])||[];names.forEach(m=>{if(m&&m!==nick)(games[m]=games[m]||[]).push(o);});});
+  const list=met.map(m=>({m,c:opp[m],gs:(games[m]||[]).slice().sort((a,b)=>a.g-b.g)})).sort((a,b)=>b.c-a.c||a.m.localeCompare(b.m,'ru'));
+  /* v13.2: секции по количеству игр (от макс к мин) — удобнее скроллить */
+  const byC={};list.forEach(x=>{(byC[x.c]=byC[x.c]||[]).push(x);});
+  const chip=o=>{const done=o.g<=(D.played||0);return `<span class="gchip${done?' done':''}">игра ${o.g} · ${ROMAN[o.t]||o.t}</span>`;};
+  const cardO=x=>`<div class="oppcard" data-p="${esc(x.m)}" onclick="goPlayer(this.dataset.p)"><img src="${esc(avOf(x.m)||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'"><div class="oc-b"><div class="oc-n">${esc(x.m)} <b class="cnt">×${x.c}</b></div><div class="oc-g">${x.gs.map(chip).join('')}</div></div></div>`;
+  const R=D.RATE[nick]||{};const tier=(R.tier in TIER_ORD)?R.tier:null;
+  const myx=(myPlayer&&myPlayer!==nick&&D.occ[myPlayer])?(function(){const mine=(games[myPlayer]||[]).slice().sort((a,b)=>a.g-b.g);return `<div class="panel" style="border-color:var(--gold)"><h3>Вы (${esc(myPlayer)}) × ${esc(nick)}</h3>${mine.length?`<div class="oc-g" style="margin-top:2px">${mine.map(chip).join('')}</div>`:'<div class="zero">за одним столом не пересекаетесь ни разу</div>'}</div>`;})():'';
+  area.innerHTML=`<div class="phdr"><img class="${tier?'f-'+tier:''}" src="${esc(avOf(nick)||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><div><div class="pn">${esc(nick)}${nick===myPlayer?' <span class="mebadge">вы</span>':''}</div><div class="ps">${(D.occ[nick]||[]).length} игр · за столом с ${players_w(met.length)} из ${Math.max(0,Object.keys(D.occ).length-1)}</div></div>
+     <button class="btn ghost" style="margin-left:auto" data-p="${esc(nick)}" onclick="goPlayer(this.dataset.p)">страница игрока →</button></div>
+   ${myx}
+   ${Object.keys(byC).map(Number).sort((a,b)=>b-a).map(c=>`<div class="panel"><h3>${c===1?'Одна игра вместе':'×'+c+' — '+c+' '+plW(c,'игра','игры','игр')+' вместе'} (${byC[c].length})</h3><div class="oppcards">${byC[c].map(cardO).join('')}</div></div>`).join('')}
+   <div class="panel"><h3>Ни разу за столом (${never.length})</h3><div class="zero">${never.length?never.map(esc).join(', '):'пересекается со всеми'}</div></div>`;
+}
+/* «Судьи» — допы по столам (квалификация). v13.4: сводная внизу (компакт/подробно), модель девиаций, штрафы детально, авто-выводы */
+let jdFull=(function(){try{return localStorage.getItem('ce634_jdfull')==='1'}catch(e){return false}})();
+let jdConcl=false;
+function setJdFull(v){jdFull=!!v;try{localStorage.setItem('ce634_jdfull',v?'1':'0');}catch(e){}paintJudges();}
+function toggleJdConcl(){jdConcl=!jdConcl;paintJudges();}
+/* Пороги девиаций от медианы (ОЦЕНКА, калибруем по ходу ЧЕ): допы/игру ±0.25/±0.4 (канон судейского отчёта), доли ±12/±25 пп, ср. размеры ±0.07/±0.15, штрафов/игру ±0.3/±0.6, роли ±0.12/±0.25 */
+const JD_T={dpg:[0.25,0.4],pct:[12,25],avg:[0.07,0.15],npg:[0.3,0.6],role:[0.12,0.25]};
+function jdMed(a){const q=a.slice().sort((x,y)=>x-y);return q.length?q[Math.floor(q.length/2)]:0;}
+function jdGrade(v,m,t){const d=Math.abs(v-m);return d<=t[0]?'':(d<=t[1]?'warn':'bad');}
+function paintJudges(){
+  const area=document.getElementById('jdArea');if(!area)return;
+  const quals=(D.gplist||[]).filter(g=>(g.stage||'Квалификация')==='Квалификация');
+  const tabs={};
+  quals.forEach(g=>g.tables.forEach(t=>{const T=tabs[t.table_num]=tabs[t.table_num]||{games:0,seats:0,pos:0,posSum:0,neg:0,negSum:0,w:[0,0,0],l:[0,0,0],roles:{Citizen:[0,0],Sheriff:[0,0],Mafia:[0,0],Don:[0,0]}};
+    T.games++;t.seats.forEach(st=>{if(!st.name)return;const a=st.aps||0;T.seats++;
+      if(a>0){T.pos++;T.posSum+=a;}if(a<0){T.neg++;T.negSum+=a;}
+      const b=(st.result==='W')?T.w:T.l;b[0]++;if(a>0){b[1]++;b[2]+=a;}
+      if(st.role&&T.roles[st.role]){T.roles[st.role][0]++;if(a>0)T.roles[st.role][1]+=a;}});}));
+  const keys=Object.keys(tabs).map(Number).sort((a,b)=>a-b);
+  if(!keys.length){area.innerHTML=`<div class="panel"><div class="stub"><div class="si">&#9878;</div><h3>Пока нечего измерять</h3><p>Цифры появятся после первых сыгранных игр. Судьи столов: ${Object.keys(D.judges).sort().map(k=>'стол '+(ROMAN[k]||k)+' — '+esc((D.judges[k]||{}).name||'?')).join(' · ')||'—'}.</p><p>До старта можно посмотреть на демо-данных: «Обзор» → Демо.</p></div></div>`;return;}
+  const per=keys.map(t=>{const T=tabs[t];return {t,T,
+    dpg:T.games?T.posSum/T.games:0,
+    cov:T.seats?T.pos/T.seats*100:0,
+    shw:T.w[0]?T.w[1]/T.w[0]*100:0, shl:T.l[0]?T.l[1]/T.l[0]*100:0,
+    avw:T.w[1]?T.w[2]/T.w[1]:null, avl:T.l[1]?T.l[2]/T.l[1]:null,
+    npg:T.games?T.neg/T.games:0, avn:T.neg?T.negSum/T.neg:null};});
+  const M={dpg:jdMed(per.map(x=>x.dpg)),cov:jdMed(per.map(x=>x.cov)),shw:jdMed(per.map(x=>x.shw)),shl:jdMed(per.map(x=>x.shl)),
+    avw:jdMed(per.filter(x=>x.avw!=null).map(x=>x.avw)),avl:jdMed(per.filter(x=>x.avl!=null).map(x=>x.avl)),npg:jdMed(per.map(x=>x.npg))};
+  const med=M.dpg;
+  const MR={};['Citizen','Sheriff','Mafia','Don'].forEach(k=>{MR[k]=jdMed(per.filter(x=>x.T.roles[k][0]>0).map(x=>x.T.roles[k][1]/x.T.roles[k][0]));});
+  const nameOf=x=>{const jj=D.judges[x.t];return 'стол '+(ROMAN[x.t]||x.t)+(jj?' ('+esc(jj.name)+')':'');};
+  /* карточки (сверху) */
+  const cards=per.map(x=>{const T=x.T,jj=D.judges[x.t];
+    const dev=x.dpg-med;const g=jdGrade(x.dpg,med,JD_T.dpg);const cls=g||'ok';
+    const light=cls==='ok'?'в норме':(cls==='warn'?'на грани':(dev>0?'шире всех':'уже всех'));
+    const roleRow=['Citizen','Sheriff','Mafia','Don'].map(k=>{const r=T.roles[k];const rv=r[0]?r[1]/r[0]:null;const rc=rv!=null?jdGrade(rv,MR[k],JD_T.role):'';return `<div class="rcell${rc?' jd-'+rc:''}"><div class="rk">${RSHORT[k]}</div><div class="rv${r[0]?'':' na'}">${r[0]?fmt(rv):'—'}</div></div>`;}).join('');
+    return `<div class="panel jcard j-${cls}"><div class="jhead">${jj&&jj.avatar?`<img src="${esc(jj.avatar)}" referrerpolicy="no-referrer" onerror="this.style.display='none'">`:''}<div><div class="jn">Стол ${ROMAN[x.t]||x.t}${jj?` · <b>${esc(jj.name)}</b>`:''}</div><div class="jt">${T.games} игр · штрафов ${T.neg}${T.neg?` (Σ ${fmt(T.negSum)}, ср. ${fmt(x.avn)})`:''}</div></div><span class="jlight ${cls}">${light}</span></div>
+      <div class="jbig">${fmt(x.dpg)}<small> плюсовых допов за игру</small></div>
+      <div class="jrow">плюс получают <b>${Math.round(x.cov)}%</b> игроков: победители <b class="win">${Math.round(x.shw)}%</b> · проигравшие <b class="los">${Math.round(x.shl)}%</b></div>
+      <div class="jrow">средний плюс (когда ставит): победителю <b class="win">${x.avw!=null?fmt(x.avw):'—'}</b> · проигравшему <b class="los">${x.avl!=null?fmt(x.avl):'—'}</b></div>
+      <div class="rk" style="margin:10px 0 4px">Средний плюс по ролям (на игрока-игру)</div><div class="rate">${roleRow}</div></div>`;
+  }).join('');
+  /* сводная (внизу): компактно/подробно, подсветка девиаций */
+  const cell=(val,cls,extra)=>`<td class="${extra||''}${cls?' jd-'+cls:''}">${val}</td>`;
+  const rows=per.map(x=>{const jj=D.judges[x.t];const dev=x.dpg-med;const cD=jdGrade(x.dpg,med,JD_T.dpg);
+    const base=`<tr><td class="l" style="white-space:nowrap">${ROMAN[x.t]||x.t} · <b>${jj?esc(jj.name):'—'}</b></td><td>${x.T.games}</td>`+
+      cell(fmt(x.dpg),cD,'sig')+`<td><span class="dlt ${cD||'ok'}">${dev>0?'+':''}${fmt(dev)}</span></td>`;
+    const pen=cell(x.T.neg,jdGrade(x.npg,M.npg,JD_T.npg),'grp');
+    if(!jdFull)return base+pen+'</tr>';
+    return base+
+      cell(Math.round(x.cov)+'%',jdGrade(x.cov,M.cov,JD_T.pct),'grp')+
+      cell('<span class="win">'+Math.round(x.shw)+'%</span>',jdGrade(x.shw,M.shw,JD_T.pct))+
+      cell('<span class="los">'+Math.round(x.shl)+'%</span>',jdGrade(x.shl,M.shl,JD_T.pct))+
+      cell(x.avw!=null?fmt(x.avw):'—',x.avw!=null?jdGrade(x.avw,M.avw,JD_T.avg):'','grp')+
+      cell(x.avl!=null?fmt(x.avl):'—',x.avl!=null?jdGrade(x.avl,M.avl,JD_T.avg):'')+
+      pen+cell(x.T.neg?fmt(x.T.negSum):'—','')+cell(x.avn!=null?fmt(x.avn):'—','')+'</tr>';}).join('');
+  const head=jdFull
+    ?`<tr><th class="l">Стол · судья</th><th>Игр</th><th class="sig" title="плюсовых допов за игру">Доп/игру</th><th title="отклонение от медианы столов">Δ мед</th><th class="grp" title="доля игроков с плюсом">Допы %</th><th title="доля победителей с плюсом">%W+</th><th title="доля проигравших с плюсом">%L+</th><th class="grp" title="средний размер плюса победителю (когда ставит)">ср.+W</th><th title="средний размер плюса проигравшему (когда ставит)">ср.+L</th><th class="grp" title="штрафных допов (количество)">Штраф</th><th title="сумма штрафов">Σ штр</th><th title="средний размер штрафа">ср. штр</th></tr>`
+    :`<tr><th class="l">Стол · судья</th><th>Игр</th><th class="sig" title="плюсовых допов за игру">Доп/игру</th><th title="отклонение от медианы столов">Δ мед</th><th class="grp" title="штрафных допов (количество)">Штраф</th></tr>`;
+  const sumTbl=`<div class="panel" style="margin-top:12px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap"><h3 style="margin:0">Сводная по судьям</h3><span class="seg" style="margin-left:auto"><button class="${jdFull?'':'on'}" onclick="setJdFull(false)">компактно</button><button class="${jdFull?'on':''}" onclick="setJdFull(true)">подробно</button></span></div>
+   <div style="overflow:auto;margin:0 -4px"><table class="tbl jsumt" style="font-size:12px"><thead>${head}</thead><tbody>${rows}</tbody></table></div>
+   <div class="note" style="margin-top:8px">Подсветка ячейки — отклонение от медианы столов: жёлтая «на грани», красная «выбивается». Пороги — оценка, калибруем по ходу: допы ±0.25/±0.4, доли ±12/±25 пп, средние ±0.07/±0.15, штрафов/игру ±0.3/±0.6.</div></div>`;
+  /* авто-выводы (скрываемые) */
+  const out=[];
+  const offD=per.filter(x=>jdGrade(x.dpg,med,JD_T.dpg));
+  out.push('<b>1. Средний плюс между столами.</b> Медиана — '+fmt(med)+' за игру. '+(offD.length?offD.map(x=>nameOf(x)+' — '+fmt(x.dpg)+' ('+(x.dpg>med?'+':'')+fmt(x.dpg-med)+', '+(x.dpg>med?'шире':'уже')+' медианы)').join('; ')+'. Остальные в норме.':'Все столы в пределах обычного разброса (±0.25) — ок.'));
+  const offC=per.filter(x=>jdGrade(x.cov,M.cov,JD_T.pct));
+  out.push('<b>2. Сколько игроков получают допы.</b> Медиана — '+Math.round(M.cov)+'% игроков за игру. '+(offC.length?offC.map(x=>nameOf(x)+' — '+Math.round(x.cov)+'%'+(x.cov>M.cov?' (раздаёт шире)':' (жаднее)')).join('; ')+'.':'Разброс небольшой — ок.'));
+  const offL=per.filter(x=>jdGrade(x.shl,M.shl,JD_T.pct)||(x.avl!=null&&jdGrade(x.avl,M.avl,JD_T.avg)));
+  out.push('<b>3. Допы проигравшим</b> (историческая точка расхождения судей). Медиана: плюс у '+Math.round(M.shl)+'% проигравших, средний размер '+(M.avl?fmt(M.avl):'—')+'. '+(offL.length?offL.map(x=>nameOf(x)+' — '+Math.round(x.shl)+'%'+(x.avl!=null?' по '+fmt(x.avl):'')).join('; ')+' — следим.':'Столы судят проигравших похоже — ок.'));
+  const offR=[];['Citizen','Sheriff','Mafia','Don'].forEach(k=>{per.forEach(x=>{const r=x.T.roles[k];if(!r[0])return;const v=r[1]/r[0];if(jdGrade(v,MR[k],JD_T.role))offR.push(nameOf(x)+': '+RLONG[k].toLowerCase()+' '+fmt(v)+' против медианы '+fmt(MR[k]));});});
+  out.push('<b>4. По картам.</b> '+(offR.length?offR.join('; ')+'.':'Заметных перекосов по ролям нет — ок.'));
+  const offN=per.filter(x=>jdGrade(x.npg,M.npg,JD_T.npg));
+  const totN=per.reduce((a,x)=>a+x.T.neg,0),totNS=per.reduce((a,x)=>a+x.T.negSum,0);
+  out.push('<b>5. Штрафы.</b> Всего '+totN+(totN?' (Σ '+fmt(totNS)+', ср. '+fmt(totN?totNS/totN:0)+')':'')+'. '+(offN.length?offN.map(x=>nameOf(x)+' — '+fmt(x.npg)+' за игру'+(x.avn!=null?' (ср. '+fmt(x.avn)+')':'')).join('; ')+' — чаще остальных.':'Частота по столам сопоставима; размеры штрафов в федерации стандартизированы.'));
+  const conclBlock=`<div style="margin-top:12px"><button class="btn ghost" onclick="toggleJdConcl()">${jdConcl?'скрыть выводы &#9650;':'выводы по судьям &#9660;'}</button></div>`+
+    (jdConcl?`<div class="panel" style="margin-top:10px"><h3>Выводы — автоматические, черновые</h3>${out.map(o=>`<div class="jrow" style="margin:0 0 8px">${o}</div>`).join('')}<div class="note" style="margin-top:6px">Считается на лету из сыгранных игр по порогам сводной. Пока игр мало, «выбивается» может быть просто случайностью — оргвыводы не отсюда, отсюда — куда смотреть.</div></div>`:'');
+  const few=per.some(x=>x.T.games<4);
+  area.innerHTML=`<div class="note" style="margin:0 0 10px">Судьи закреплены за столами, поэтому стол = почерк судьи. Считаем по квалификации: финал не сравниваем — там один стол и другой коэффициент допов. «В норме» — в пределах ±0.25 от медианы: такую разницу даёт обычная случайность.</div>
+   ${few?'<div class="note" style="margin:0 0 10px">&#9203; Игр пока мало — цифры устаканятся к концу дня, раньше времени выводов не делаем.</div>':''}
+   <div class="jcards">${cards}</div>
+   ${sumTbl}
+   ${conclBlock}
+   <div class="note" style="margin-top:10px">Зачем это: штрафы в федерации стандартизированы, а плюсовые допы судьи ставят в разной манере. Если один стол системно шире или уже других — таблица начинает зависеть от того, за какой стол игрока посадило расписание. Эта страница делает почерк судей видимым — и для главного судьи, и для игроков.</div>`;
+}
 function stub(id){const s=SECTIONS.find(x=>x.id===id)||{};
   return `<div class="view"><div class="secttl">${s.ic||'◆'} ${esc(s.lab||'')}</div><div class="panel"><div class="stub"><div class="si">${s.ic||'◆'}</div><h3>Откроется после старта</h3>
     <p>Игры, роли и статистика игрока появятся здесь автоматически после первой сыгранной игры (18 июля). До старта доступны рассадка, карточки и составы.</p></div></div></div>`;}
