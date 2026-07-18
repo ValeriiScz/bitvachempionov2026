@@ -1,14 +1,14 @@
-// MafgameStat · data/streams.js · v1.2 · 2026-07-17 · +заготовка 634 (ЧЕ): день1 = игры 1-9, день2 = 10-11 + полуфинал; final — отдельный стрим финала. Ссылки вписать в день турнира — кнопки на сайте появятся сами. · v1.1 · 2026-06-14 · трансляции YouTube @mafgameorg: турнир → день → стол → videoId
+// MafgameStat · data/streams.js · v1.3 · 2026-07-18 · ссылки ЧЕ-634 вписаны (плейлист @mafgameorg, титулы сверены oEmbed): день 1 столы 1-4, день 2 столы 1-4, финал · v1.2 · 2026-07-17 · +заготовка 634 (ЧЕ): день1 = игры 1-9, день2 = 10-11 + полуфинал; final — отдельный стрим финала. Ссылки вписать в день турнира — кнопки на сайте появятся сами. · v1.1 · 2026-06-14 · трансляции YouTube @mafgameorg: турнир → день → стол → videoId
 // правило: игра N → день 1 если N <= gamesDay1, иначе день 2
 window.STREAMS_DB = {
   "channel": "https://www.youtube.com/@mafgameorg",
   "634": {
     "gamesDay1": 9,
     "days": {
-      "1": {},
-      "2": {}
+      "1": {"1":"mJLwDJ2z4Xs","2":"e5YdLN0HO28","3":"JJcE1Jmt8Jw","4":"sNYDxPQUuMQ"},
+      "2": {"1":"SZgXjykMG80","2":"ruQbp0jYZfA","3":"YFu-hx5Deps","4":"1m4DoxJLTUo"}
     },
-    "final": null
+    "final": "-Erzky4iGgk"
   },
   "667": {
     "gamesDay1": 7,
