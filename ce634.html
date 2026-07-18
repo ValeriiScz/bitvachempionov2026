@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · ce634.html · v2.4 (v13.4) · 2026-07-17 · «Судьи» переработаны по фидбеку: карточки сверху, сводная внизу (компактно 5 колонок / подробно 12, воздух группами: база | охват % | средние | штрафы), штрафы детально (кол-во · Σ · ср.), модель девиаций (подсветка ячеек, пороги-оценка JD_T), скрываемые авто-выводы по 5 пунктам · ранее: v2.3 (v13.3) · 2026-07-17 · хотфикс липкой шапки Таблицы: правило z5 для угловых ячеек переехало НИЖЕ правил липких колонок (каскад: при равной специфичности побеждает позднее; в v13.2 колонка «Игрок» оставалась z3 и данные ехали поверх) · ранее: v2.2 (v13.2) · 2026-07-17 · фикс липких шапок (th z4/z5, непрозрачный Σ-фон); «Моё»: компактно (без места, дефолт) / с местом + клик по строке лога → игра в «Играх» с подсветкой стола; «Кто с кем» секциями по числу игр; стримы-фолбэк на канал (кнопки видны до ссылок); «1н»→«ПУ» · ранее: v2.1 (v13.1) · 2026-07-17 · судьи: сводная таблица ГС (Δ от медианы светофором, %W+/%L+, ср.размер плюса W/L, штрафы) + ср.плюс в карточках; стримы ▶ у каждой игры (лог «Моё», рассадка по играм, шапки столов) — паттерн 667; «назад» по разделам (pushState); колонка «1н» · ранее: v2.0 (v13) · 2026-07-17 · структура v2: Обзор · Моё · Игроки · Результаты (+Судьи, стримы, линия отсечения) · ранее: v1.0 (v11 "new") · 2026-07-16 · esports-версия ЧЕ-634 (эксперимент поверх тех же данных).
+<!-- MafgameStat · ce634.html · v2.5 (v13.6) · 2026-07-18 · LIVE-фикс дня 1: стол считается и показывается сразу после ввода результата, не ждём все 4 стола игры (gplist по some, судьи/лог «Моё» пропускают несыгранные столы, в «Играх» бейдж «ещё играет») · ранее: v2.4 (v13.4) · 2026-07-17 · «Судьи» переработаны по фидбеку: карточки сверху, сводная внизу (компактно 5 колонок / подробно 12, воздух группами: база | охват % | средние | штрафы), штрафы детально (кол-во · Σ · ср.), модель девиаций (подсветка ячеек, пороги-оценка JD_T), скрываемые авто-выводы по 5 пунктам · ранее: v2.3 (v13.3) · 2026-07-17 · хотфикс липкой шапки Таблицы: правило z5 для угловых ячеек переехало НИЖЕ правил липких колонок (каскад: при равной специфичности побеждает позднее; в v13.2 колонка «Игрок» оставалась z3 и данные ехали поверх) · ранее: v2.2 (v13.2) · 2026-07-17 · фикс липких шапок (th z4/z5, непрозрачный Σ-фон); «Моё»: компактно (без места, дефолт) / с местом + клик по строке лога → игра в «Играх» с подсветкой стола; «Кто с кем» секциями по числу игр; стримы-фолбэк на канал (кнопки видны до ссылок); «1н»→«ПУ» · ранее: v2.1 (v13.1) · 2026-07-17 · судьи: сводная таблица ГС (Δ от медианы светофором, %W+/%L+, ср.размер плюса W/L, штрафы) + ср.плюс в карточках; стримы ▶ у каждой игры (лог «Моё», рассадка по играм, шапки столов) — паттерн 667; «назад» по разделам (pushState); колонка «1н» · ранее: v2.0 (v13) · 2026-07-17 · структура v2: Обзор · Моё · Игроки · Результаты (+Судьи, стримы, линия отсечения) · ранее: v1.0 (v11 "new") · 2026-07-16 · esports-версия ЧЕ-634 (эксперимент поверх тех же данных).
      Левое меню сгруппировано: Общее · Рассадка (интерактивная/карточки/пересечения) · Статистика (рейтинг/стадии; после старта — игры/роли/игрок).
      Палитра Бонна (золото/чёрное/navy, готика Cinzel); mobile-first; кластеры для тяжёлого; рассадка — сетка квадратных «мест».
      Данные — те же data/*_634* (один источник правды) через window.loadGames('634'). НЕ трогает боевые 634-файлы и live.js. -->
@@ -797,7 +797,7 @@ function makeDemo(){
   return quals.concat(semis,finals);
 }
 function computeStats(){
-  D.gplist=(D.games||[]).filter(g=>g.tables.length&&g.tables.every(t=>t.winner!=='unknown'));
+  D.gplist=(D.games||[]).filter(g=>g.tables.some(t=>t.winner!=='unknown')); /* v13.6: live-частично — считаем стол сразу после ввода результата, не ждём всю игру (aggregateN пропускает unknown сам) */
   D.gp=D.gplist.length;
   const agg=aggregateN(D.gplist);
   D.rows=agg.rows;D.STAT={};agg.rows.forEach(r=>D.STAT[r.name]=r);
@@ -848,7 +848,7 @@ function paintStages(){
 /* ── Игры (по раундам) ── */
 function gmCur(){return Math.max(0,D.gplist.length-1);}
 function gameTableHtml(t,gnum,stage){
-  const wl=t.winner==='red_win'?'<span class="gwin gwin-red">победа красных</span>':(t.winner==='black_win'?'<span class="gwin gwin-blk">победа чёрных</span>':'');
+  const wl=t.winner==='red_win'?'<span class="gwin gwin-red">победа красных</span>':(t.winner==='black_win'?'<span class="gwin gwin-blk">победа чёрных</span>':'<span class="gwin" style="color:var(--dim)">ещё играет</span>');
   const wcls=t.winner==='red_win'?' win-red':(t.winner==='black_win'?' win-blk':'');
   const aps=t.seats.filter(x=>x&&x.name).map(x=>x.aps||0);const mx=aps.length?Math.max(...aps):0,mn=aps.length?Math.min(...aps):0;
   let cells='';
@@ -1071,7 +1071,7 @@ function drawMy(){
     ${!isMe?`<button class="btn ghost" style="margin-left:auto" data-p="${esc(name)}" onclick="setMy(this.dataset.p)">сделать моим</button>`:''}</div>`;
   html+=nextGamePanel(name,false);
   if(p&&D.gp){
-    const mine=[];D.gplist.forEach((g,gi)=>g.tables.forEach(t=>{const st=t.seats.find(x=>x.name===name);if(st)mine.push({gi,t:t.table_num,role:st.role,result:st.result,aps:st.aps,ci:st.ci,sig:(st.wpts||0)+(st.aps||0)+(st.ci||0),stage:g.stage||'Квалификация'});}));
+    const mine=[];D.gplist.forEach((g,gi)=>g.tables.forEach(t=>{if(t.winner==='unknown')return; /* v13.6 */ const st=t.seats.find(x=>x.name===name);if(st)mine.push({gi,t:t.table_num,role:st.role,result:st.result,aps:st.aps,ci:st.ci,sig:(st.wpts||0)+(st.aps||0)+(st.ci||0),stage:g.stage||'Квалификация'});}));
     const placeAfter={};D.gplist.forEach((g,gi)=>{const r=aggregateN(D.gplist.slice(0,gi+1)).rows.find(x=>x.name===name);if(r)placeAfter[gi]=r.place;});
     const tavgOf=ks=>{let a=0,g=0;ks.forEach(k=>D.rows.forEach(pp=>{a+=pp.roles[k].aps;g+=pp.roles[k].g;}));return g?a/g:0;};
     const rccell=(labHtml,r,ks,cls)=>{const aw=r.wg?fmt(r.apsW/r.wg):'·',al=r.lg?fmt(r.apsL/r.lg):'·';const pav=r.g?fmt(r.aps/r.g):'·';return `<div class="rcx${cls?(' '+cls):''}"><div class="rt">${labHtml}</div><div class="rv">${r.g?fmt(r.sigma):'—'}<span class="rvg"> · <b class="win">${r.w}</b>/${r.g}</span></div><div class="rs">ср.доп <b>${pav}</b> <span class="na">(тур ${fmt(tavgOf(ks))})</span><br>W <span class="win">${aw}</span> · L <span class="los">${al}</span></div></div>`;};
@@ -1145,7 +1145,8 @@ function paintJudges(){
   const area=document.getElementById('jdArea');if(!area)return;
   const quals=(D.gplist||[]).filter(g=>(g.stage||'Квалификация')==='Квалификация');
   const tabs={};
-  quals.forEach(g=>g.tables.forEach(t=>{const T=tabs[t.table_num]=tabs[t.table_num]||{games:0,seats:0,pos:0,posSum:0,neg:0,negSum:0,w:[0,0,0],l:[0,0,0],roles:{Citizen:[0,0],Sheriff:[0,0],Mafia:[0,0],Don:[0,0]}};
+  quals.forEach(g=>g.tables.forEach(t=>{if(t.winner==='unknown')return; /* v13.6 */
+    const T=tabs[t.table_num]=tabs[t.table_num]||{games:0,seats:0,pos:0,posSum:0,neg:0,negSum:0,w:[0,0,0],l:[0,0,0],roles:{Citizen:[0,0],Sheriff:[0,0],Mafia:[0,0],Don:[0,0]}};
     T.games++;t.seats.forEach(st=>{if(!st.name)return;const a=st.aps||0;T.seats++;
       if(a>0){T.pos++;T.posSum+=a;}if(a<0){T.neg++;T.negSum+=a;}
       const b=(st.result==='W')?T.w:T.l;b[0]++;if(a>0){b[1]++;b[2]+=a;}
