@@ -116,9 +116,12 @@ window.loadGames = async function(t){
   const LSK='mgs_lastgood_'+t;
   let saved=null;
   try{ const raw=localStorage.getItem(LSK); if(raw) saved=JSON.parse(raw); }catch(e){}
+  const liveUrl = (location.protocol === 'file:')
+    ? ('https://mafgame.org/tournaments/' + t + '/game_results')
+    : ('/mafgame/tournaments/' + t + '/game_results');
   if(inprog){
     try{
-      const r=await fetch('/mafgame/tournaments/'+t+'/game_results',{cache:'no-store'});
+      const r=await fetch(liveUrl,{cache:'no-store'});
       if(r.ok){
         const html=await r.text();
         const m=html.match(/data-page="([^"]+)"/);
