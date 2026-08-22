@@ -50,9 +50,9 @@
               "role": "Mafia",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -72,9 +72,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.6,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.6,
+              "sigma": 1.35,
               "result": "W"
             },
             {
@@ -116,9 +116,9 @@
               "role": "Don",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             }
           ]
@@ -133,9 +133,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -144,9 +144,9 @@
               "role": "Citizen",
               "marker": "first_killed",
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -155,9 +155,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -177,9 +177,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -188,9 +188,9 @@
               "role": "Sheriff",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -199,9 +199,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -210,9 +210,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -249,9 +249,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.5,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.5,
+              "sigma": 1.25,
               "result": "W"
             },
             {
@@ -271,9 +271,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -293,9 +293,9 @@
               "role": "Citizen",
               "marker": "first_killed",
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -304,9 +304,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -315,9 +315,9 @@
               "role": "Sheriff",
               "marker": "beige",
               "aps": 0.5,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.5,
+              "sigma": 1.25,
               "result": "W"
             },
             {
@@ -337,9 +337,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -348,9 +348,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             }
           ]
@@ -371,9 +371,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -437,9 +437,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -448,9 +448,9 @@
               "role": "Don",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -487,9 +487,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -509,9 +509,9 @@
               "role": "Don",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -553,9 +553,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -614,9 +614,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -647,9 +647,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -658,9 +658,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -669,9 +669,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -680,9 +680,9 @@
               "role": "Sheriff",
               "marker": "first_killed",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -691,9 +691,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.5,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.5,
+              "sigma": 1.25,
               "result": "W"
             },
             {
@@ -702,9 +702,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             }
           ]
@@ -736,9 +736,9 @@
               "role": "Don",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -802,9 +802,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -824,9 +824,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             }
           ]
@@ -841,9 +841,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.5,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.5,
+              "sigma": 1.25,
               "result": "W"
             },
             {
@@ -852,9 +852,9 @@
               "role": "Sheriff",
               "marker": "first_killed",
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -874,9 +874,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -885,9 +885,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -896,9 +896,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -907,9 +907,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -929,9 +929,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -968,9 +968,9 @@
               "role": "Mafia",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -979,9 +979,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -1023,9 +1023,9 @@
               "role": "Don",
               "marker": "beige",
               "aps": 0.5,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.5,
+              "sigma": 1.25,
               "result": "W"
             },
             {
@@ -1079,9 +1079,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -1123,9 +1123,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -1134,9 +1134,9 @@
               "role": "Don",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -1195,9 +1195,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -1206,9 +1206,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -1250,9 +1250,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -1261,9 +1261,9 @@
               "role": "Sheriff",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -1272,9 +1272,9 @@
               "role": "Citizen",
               "marker": "first_killed",
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -1283,9 +1283,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -1294,9 +1294,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             }
           ]
@@ -1366,9 +1366,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.5,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.5,
+              "sigma": 1.25,
               "result": "W"
             },
             {
@@ -1377,9 +1377,9 @@
               "role": "Don",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -1399,9 +1399,9 @@
               "role": "Mafia",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -1433,9 +1433,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -1444,9 +1444,9 @@
               "role": "Don",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -1466,9 +1466,9 @@
               "role": "Mafia",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -1571,9 +1571,9 @@
               "role": "Don",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -1593,9 +1593,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -1648,9 +1648,9 @@
               "role": "Mafia",
               "marker": null,
               "aps": -0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": -0.2,
+              "sigma": 0.55,
               "result": "W"
             }
           ]
@@ -1676,9 +1676,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -1687,9 +1687,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -1698,9 +1698,9 @@
               "role": "Sheriff",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -1709,9 +1709,9 @@
               "role": "Citizen",
               "marker": "first_killed",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -1720,9 +1720,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -1742,9 +1742,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -1764,9 +1764,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             }
           ]
@@ -1787,9 +1787,9 @@
               "role": "Sheriff",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -1798,9 +1798,9 @@
               "role": "Citizen",
               "marker": "first_killed",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -1820,9 +1820,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -1842,9 +1842,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -1853,9 +1853,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -1864,9 +1864,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -1875,9 +1875,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -1914,9 +1914,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -1925,9 +1925,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -1936,9 +1936,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": -0.5,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": -0.5,
+              "sigma": 0.25,
               "result": "W"
             },
             {
@@ -1947,9 +1947,9 @@
               "role": "Sheriff",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -1969,9 +1969,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -1991,9 +1991,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -2002,9 +2002,9 @@
               "role": "Citizen",
               "marker": "first_killed",
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             }
           ]
@@ -2019,9 +2019,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -2052,9 +2052,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -2074,9 +2074,9 @@
               "role": "Don",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -2152,9 +2152,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -2163,9 +2163,9 @@
               "role": "Citizen",
               "marker": "first_killed",
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -2174,9 +2174,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -2185,9 +2185,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -2196,9 +2196,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -2207,9 +2207,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -2218,9 +2218,9 @@
               "role": "Sheriff",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -2290,9 +2290,9 @@
               "role": "Mafia",
               "marker": "beige",
               "aps": 0.6,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.6,
+              "sigma": 1.35,
               "result": "W"
             },
             {
@@ -2334,9 +2334,9 @@
               "role": "Mafia",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -2345,9 +2345,9 @@
               "role": "Don",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -2373,9 +2373,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -2384,9 +2384,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.1,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.1,
+              "sigma": 0.85,
               "result": "W"
             },
             {
@@ -2395,9 +2395,9 @@
               "role": "Sheriff",
               "marker": "beige",
               "aps": 0.3,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.3,
+              "sigma": 1.05,
               "result": "W"
             },
             {
@@ -2406,9 +2406,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             },
             {
@@ -2428,9 +2428,9 @@
               "role": "Citizen",
               "marker": null,
               "aps": 0,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0,
+              "sigma": 0.75,
               "result": "W"
             },
             {
@@ -2461,9 +2461,9 @@
               "role": "Citizen",
               "marker": "beige",
               "aps": 0.4,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.4,
+              "sigma": 1.15,
               "result": "W"
             },
             {
@@ -2472,9 +2472,9 @@
               "role": "Citizen",
               "marker": "first_killed",
               "aps": 0.2,
-              "wpts": 0,
+              "wpts": 0.75,
               "ci": 0,
-              "sigma": 0.2,
+              "sigma": 0.95,
               "result": "W"
             }
           ]

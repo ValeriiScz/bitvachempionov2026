@@ -69,7 +69,13 @@ window.convertInertia = function(g, t){
           const redW=seats.some(x=>(x.role==='Citizen'||x.role==='Sheriff')&&x.wpts>0);
           winner=blackW?'black_win':(redW?'red_win':'unknown');
         }
-        if(winner!=='unknown'&&hasRoles) seats.forEach(x=>{const black=(x.role==='Mafia'||x.role==='Don');x.result=((winner==='black_win')===black)?'W':'L';});
+        if(winner!=='unknown'&&hasRoles) seats.forEach(x=>{
+          const black=(x.role==='Mafia'||x.role==='Don');
+          const won=((winner==='black_win')===black);
+          if(won && !(x.wpts>0)) x.wpts=0.75; // в live mafgame базовые баллы победы иногда приходят нулём
+          x.sigma=+(x.wpts+x.aps+x.ci).toFixed(4);
+          x.result=won?'W':'L';
+        });
         tables.push({table_num:tb,winner,seats});
       });
       if(tables.length) out.push({title:(st===1?'Game ':stageName(st)+' ')+gm,stage:label,tables}); // игру без столов пропускаем
