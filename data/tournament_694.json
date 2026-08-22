@@ -1,0 +1,151 @@
+{
+ "tournament_id": 694,
+ "tournament_name": "Central Euro Cup 2026",
+ "date": "2026-08-22 — 2026-08-23",
+ "location": "Прага, Чехия (Praha 1, Těšnov 5)",
+ "club": "Mafia club \"Champions League\" Prague",
+ "organizer": "YeS (Ievgen Sokolskyi) · Mafia club \"Champions League\" Prague",
+ "players_total": 30,
+ "days": 2,
+ "fee_eur": 120,
+ "stars": 3,
+ "prize_eur": 2000,
+ "prize_split": "750 / 550 / 350 / 250 / 100 (топ-5)",
+ "format": "Финал серийного турнира (15 серий → 30 финалистов): квалификация 12 игр (3 стола, все играют каждую) → финал 5 игр (топ-10, один стол)",
+ "closed": false,
+ "in_progress": true,
+ "upcoming": true,
+ "games_played": 0,
+ "games_total": 17,
+ "accent": "#c9a227",
+ "referees": [
+  "Кирпич",
+  "Trinity",
+  "Broniak"
+ ],
+ "referees_by_table": {},
+ "awards": {},
+ "standings": {},
+ "players": [
+  {
+   "name": "YeS",
+   "real": "Ievgen Sokolskyi"
+  },
+  {
+   "name": "Kleo",
+   "real": "Elvira"
+  },
+  {
+   "name": "DOVOD",
+   "real": "Valerii S"
+  },
+  {
+   "name": "Maverick",
+   "real": "Zula Badaev"
+  },
+  {
+   "name": "qUAest0r",
+   "real": "Serhii"
+  },
+  {
+   "name": "Niko",
+   "real": "Roman Krasiuk"
+  },
+  {
+   "name": "Badwin",
+   "real": "Диана"
+  },
+  {
+   "name": "LogisticPro",
+   "real": "Владислав"
+  },
+  {
+   "name": "Season's",
+   "real": "Саша"
+  },
+  {
+   "name": "Марселия",
+   "real": "Мария"
+  },
+  {
+   "name": "Комар",
+   "real": "Ostap Komar"
+  },
+  {
+   "name": "КуКуСиК",
+   "real": "Vasili"
+  },
+  {
+   "name": "Магнат",
+   "real": "Хассан"
+  },
+  {
+   "name": "Дийкстра",
+   "real": "Артем Иоселевский"
+  },
+  {
+   "name": "Буржуй",
+   "real": "Bohdan"
+  },
+  {
+   "name": "Lюц",
+   "real": "Mykhailo"
+  },
+  {
+   "name": "Люсі",
+   "real": "Liudmyla"
+  },
+  {
+   "name": "Мини",
+   "real": "ツ"
+  },
+  {
+   "name": "Skywalker",
+   "real": "Yulian Horobets"
+  },
+  {
+   "name": "Blackout",
+   "real": "Vladimir"
+  },
+  {
+   "name": "Yokai",
+   "real": "Aituar Assanov"
+  },
+  {
+   "name": "aptah",
+   "real": "Volodymyr Hrychenko"
+  },
+  {
+   "name": "Mr. Trust",
+   "real": "Pavlo Semenenko"
+  },
+  {
+   "name": "Нико",
+   "real": "Bogdan"
+  },
+  {
+   "name": "Urs",
+   "real": "Oleh Hrynov"
+  },
+  {
+   "name": "Panda Kung-Fu",
+   "real": "Ihor"
+  },
+  {
+   "name": "Ru",
+   "real": "Руслан Гафаров"
+  },
+  {
+   "name": "Sura",
+   "real": "Anna Kalb"
+  },
+  {
+   "name": "Mr. Smith🚀",
+   "real": "Max"
+  },
+  {
+   "name": "JadeYogg",
+   "real": "Roman"
+  }
+ ]
+}

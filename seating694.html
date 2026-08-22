@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- MafgameStat · seating694.html · v1.0 · 2026-08-22 · интерактивная рассадка Central Euro Cup 2026 (Прага): квалификация 12 игр × 3 стола, все 30 играют каждую (пропусков нет), клик по игроку — его маршрут. База: seating634 -->
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Рассадка — Central Euro Cup 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#d4af37;--gold-hi:#f0d98a;--ink:#eef3fb;--mut:#9fb2cc;--bg:#0a1626;--panel:rgba(16,32,56,.72);--line:rgba(212,175,55,.24);}
+  *{box-sizing:border-box;}
+  html,body{max-width:100%;overflow-x:hidden;}
+  body{margin:0;font-family:'Manrope',sans-serif;color:var(--ink);min-height:100vh;padding:18px 12px 60px;
+    background:radial-gradient(1200px 520px at 70% -10%,rgba(212,175,55,.16),transparent 60%),linear-gradient(180deg,#0d1c30 0%,#0a1626 55%,#070f1c 100%) fixed;}
+  .topbar{max-width:1200px;margin:0 auto 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .nav-btn{padding:9px 14px;background:var(--panel);border:1px solid var(--line);color:var(--gold-hi);border-radius:10px;font-size:13px;font-weight:800;text-decoration:none;}
+  .nav-btn:hover{background:var(--gold);color:#0b0a08;}
+  h1{font-family:'Cinzel',serif;font-weight:800;font-size:23px;color:var(--gold-hi);margin:6px 0 2px;letter-spacing:.5px;}
+  .sub{font-size:12.5px;color:var(--mut);margin-bottom:12px;}
+  .rounds{max-width:1200px;margin:0 auto 16px;display:flex;gap:6px;flex-wrap:wrap;}
+  .round-btn{min-width:42px;min-height:40px;padding:7px 11px;background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;}
+  .round-btn.active{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#0b0a08;border-color:var(--gold);}
+  .round-btn.played{background:rgba(201,161,77,.16);border-color:rgba(201,161,77,.4);}
+  .round-btn.next{box-shadow:0 0 0 2px var(--gold);border-color:var(--gold);}
+  .round-btn.upcoming{opacity:.4;}
+  .rleg{max-width:1200px;margin:0 auto 14px;font-size:11.5px;color:var(--mut);}
+  .grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}.table-wrap{padding:12px 4px 16px;}}
+  .table-wrap{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.5);padding:12px 8px 16px;backdrop-filter:blur(6px);}
+  .table-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 10px;margin-bottom:4px;}
+  .table-num{font-family:'Cinzel',serif;font-size:17px;color:var(--gold-hi);font-weight:800;}
+  .game-label{font-size:12px;font-weight:800;color:var(--mut);}
+  a.ytb{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:9px;font-size:11px;font-weight:800;text-decoration:none;background:rgba(224,36,36,.12);border:1px solid rgba(224,36,36,.4);color:#ff6a6a;}
+  a.ytb:hover{background:#e02424;color:#fff;}
+  .circle{position:relative;width:min(320px,86vw);aspect-ratio:1;margin:0 auto;}
+  .circle-inner{position:absolute;left:50%;top:50%;width:37%;height:37%;transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle at 50% 35%,rgba(201,161,77,.35) 0%,rgba(120,90,30,.25) 70%);box-shadow:inset 0 0 0 2px rgba(232,200,122,.4);}
+  .seat{position:absolute;transform:translate(-50%,-50%);width:22%;text-align:center;cursor:pointer;z-index:2;}
+  .seat-num{position:absolute;left:50%;top:-5px;transform:translateX(-50%);background:var(--gold);color:#0b0a08;font-size:10px;font-weight:800;width:19px;height:19px;line-height:19px;border-radius:50%;z-index:3;}
+  .seat-avatar{width:clamp(38px,12vw,48px);height:clamp(38px,12vw,48px);border-radius:50%;object-fit:cover;border:3px solid rgba(232,200,122,.5);box-shadow:0 3px 10px rgba(0,0,0,.5);margin:0 auto;display:block;background:#1c170e;}
+  .seat.is-target .seat-avatar{border-color:var(--gold-hi);box-shadow:0 0 0 3px rgba(232,200,122,.5);}
+  .seat-name{font-size:10px;color:var(--ink);margin-top:4px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .hidden{display:none;}
+  .player-hdr{max-width:1200px;margin:0 auto 14px;display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 16px;box-shadow:0 12px 30px rgba(0,0,0,.5);}
+  .player-hdr img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid rgba(232,200,122,.5);box-shadow:0 3px 10px rgba(0,0,0,.5);}
+  .player-hdr-nick{font-family:'Cinzel',serif;font-size:19px;color:var(--gold-hi);font-weight:800;}
+  .player-hdr-sub{font-size:12px;color:var(--mut);}
+  #back-btn{margin-left:auto;}
+  .judge-row{display:flex;justify-content:center;margin:2px 0 4px;}
+  .judge{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:var(--gold-hi);background:rgba(201,161,77,.14);border:1px solid var(--line);border-radius:18px;padding:3px 11px 3px 4px;}
+  .judge img{width:22px;height:22px;border-radius:50%;object-fit:cover;}
+  .judge .rk{font-size:9px;color:var(--mut);font-weight:800;}
+  .tblelo{font-size:10.5px;font-weight:800;color:var(--gold-hi);background:rgba(201,161,77,.16);border:1px solid var(--line);border-radius:9px;padding:4px 9px;}
+</style>
+<!-- PWA · 2026-07-16 · v12: манифест + iOS-меты + регистрация sw.js + промо-плашка установки (iPhone/Android). Стратегии кэша — в sw.js; live /mafgame/* кэш обходит -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1626">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="MafgameStat">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<script>
+/* SW только по http/https — локальный просмотр file:// не падает */
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+}
+/* Промо-плашка «установите как приложение»: iPhone — инструкция Safari/«На экран Домой»,
+   Android — кнопка установки (beforeinstallprompt) или инструкция про меню Chrome.
+   Не показывается: внутри установленного приложения (standalone) и 14 дней после «Позже». */
+(function(){try{
+  if(!/^https?:$/.test(location.protocol))return;
+  if((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)return;
+  var KEY='mgs_pwa_promo_hide_until';
+  try{if(Date.now()<(+localStorage.getItem(KEY)||0))return;}catch(e){}
+  var deferred=null,shown=false;
+  addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;
+    var b=document.getElementById('mgsPwaGo');if(b){b.style.display='inline-block';}});
+  function hide(days){try{localStorage.setItem(KEY,String(Date.now()+days*864e5));}catch(e){}
+    var el=document.getElementById('mgsPwaPromo');if(el)el.parentNode.removeChild(el);}
+  function show(){
+    if(shown)return;shown=true;
+    var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/.test(ua),isAndroid=/Android/.test(ua);
+    var how;
+    if(isIOS){how='iPhone: откройте сайт в <b>Safari</b> → кнопка «Поделиться» <b>⬆</b> → <b>«На экран “Домой”»</b>.';}
+    else if(isAndroid){how='Android: <b>Chrome</b> → меню <b>⋮</b> → <b>«Установить приложение»</b> (или «Добавить на гл. экран»).';}
+    else{how='В Chrome/Edge: значок установки в адресной строке (справа).';}
+    var tb=document.querySelector('.tabbar'),off='14px';
+    try{if(tb&&getComputedStyle(tb).display!=='none')off='calc(14px + 66px)';}catch(e){}
+    var d=document.createElement('div');d.id='mgsPwaPromo';
+    d.innerHTML='<style>#mgsPwaPromo{position:fixed;left:12px;right:12px;bottom:'+off+';z-index:99990;max-width:520px;margin:0 auto;'+
+      'background:linear-gradient(180deg,#12294a,#0f2138);border:1px solid rgba(212,175,55,.45);border-radius:14px;'+
+      'box-shadow:0 14px 40px rgba(0,0,0,.55);padding:12px 14px;font-family:Manrope,-apple-system,system-ui,sans-serif;color:#eef3fb;}'+
+      '#mgsPwaPromo .t{font-weight:800;font-size:13.5px;color:#f0d98a;margin:0 0 4px;}'+
+      '#mgsPwaPromo .h{font-size:12px;line-height:1.45;color:#9fb2cc;}#mgsPwaPromo .h b{color:#eef3fb;}'+
+      '#mgsPwaPromo .r{display:flex;gap:8px;margin-top:9px;align-items:center;}'+
+      '#mgsPwaPromo button{font:inherit;font-size:12px;font-weight:800;border-radius:9px;padding:7px 13px;cursor:pointer;}'+
+      '#mgsPwaGo{display:none;background:linear-gradient(100deg,#d4af37,#a5822b);border:0;color:#0a1626;}'+
+      '#mgsPwaLater{background:transparent;border:1px solid rgba(212,175,55,.35);color:#9fb2cc;}</style>'+
+      '<div class="t">📲 MafgameStat можно установить как приложение</div>'+
+      '<div class="h">Иконка на экране, полноэкранный режим и быстрый доступ к live-статистике.<br>'+how+'</div>'+
+      '<div class="r"><button id="mgsPwaGo">Установить</button><button id="mgsPwaLater">Позже</button></div>';
+    document.body.appendChild(d);
+    var go=document.getElementById('mgsPwaGo');
+    if(deferred)go.style.display='inline-block';
+    go.onclick=function(){if(!deferred)return;deferred.prompt();deferred.userChoice.then(function(){hide(365);});};
+    document.getElementById('mgsPwaLater').onclick=function(){hide(14);};
+  }
+  if(document.readyState==='loading')addEventListener('DOMContentLoaded',function(){setTimeout(show,900);});
+  else setTimeout(show,900);
+}catch(e){}})();
+</script>
+</head>
+<body>
+<div class="topbar">
+  <a class="nav-btn" href="tournament.html?t=694">← Турнир</a>
+  <a class="nav-btn" href="cards694.html">Карточки</a>
+  <div>
+    <h1>Рассадка · Central Euro Cup 2026</h1>
+    <div class="sub">Квалификация · 12 игр × 3 стола · клик по игроку — все его столы и маршрут · <b>играют все 30, пропусков нет</b><span id="elo-avg"></span></div>
+  </div>
+</div>
+<div id="game-view">
+  <div class="rounds" id="rounds"></div>
+  <div class="rleg">Прошедшие игры (доиграны за всеми столами) активны · золотая рамка — текущая · бледные — впереди · «место» = место за столом (слот)</div>
+  <div class="grid" id="grid"></div>
+</div>
+<div id="player-view" class="hidden">
+  <div class="player-hdr">
+    <img id="ph-av" src="" referrerpolicy="no-referrer">
+    <div><div class="player-hdr-nick" id="ph-nick"></div><div class="player-hdr-sub" id="ph-sub"></div></div>
+    <button class="nav-btn" id="back-btn" style="cursor:pointer;border:none;">← к играм</button>
+  </div>
+  <div class="grid" id="player-grid"></div>
+</div>
+<script src="data/streams.js"></script>
+<script src="data/live.js"></script>
+<script>
+let SEAT=null, AV={}, PLAYED=0, JUDGES={}, ELO=null, SKIP={};
+const ROMAN=['','I','II','III','IV'];
+const $=s=>document.querySelector(s);
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderTable(g,t,target){
+  const names=SEAT[g][t];
+  let seats='';
+  for(let i=0;i<10;i++){
+    const p=names[i];
+    const a=-90+36*i, r=a*Math.PI/180;
+    const x=(Math.cos(r)*40).toFixed(2), y=(Math.sin(r)*40).toFixed(2);
+    seats+=`<div class="seat${p===target?' is-target':''}" data-player="${esc(p)}" style="left:calc(50% + ${x}%);top:calc(50% + ${y}%);">
+      <div class="seat-num">${i+1}</div>
+      <img class="seat-avatar" src="${esc(AV[p]||'')}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='https://mafgame.org/build/assets/avatar-default2-33e44bae.png'">
+      <div class="seat-name">${esc(p)}</div>
+    </div>`;
+  }
+  const yt=window.streamFor?streamFor('694',g,t):null;
+  const glabel=target?`<div class="game-label">Игра ${g}</div>`:'';
+  const j=JUDGES[t];
+  const jHtml=j?`<span class="judge"><img src="${esc(j.avatar||'')}" referrerpolicy="no-referrer" onerror="this.style.opacity=.25"><span><span class="rk">судья</span> ${esc(j.name)}</span></span>`:'';
+  let eloHtml='';
+  if(ELO){
+    const vals=names.map(n=>ELO[n]&&ELO[n].global).filter(v=>v);
+    eloHtml=`<span class="tblelo" title="средний ELO стола">Ø ELO ${vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):'—'}</span>`;
+  }
+  return `<div class="table-wrap">
+    <div class="table-hdr">${glabel}<div class="table-num">Стол ${ROMAN[t]}</div>${eloHtml}${yt?`<a class="ytb" href="${yt}" target="_blank" rel="noopener">▶ Стрим</a>`:''}</div>
+    ${jHtml?`<div class="judge-row">${jHtml}</div>`:''}
+    <div class="circle"><div class="circle-inner"></div>${seats}</div>
+  </div>`;
+}
+function showGame(g){
+  $('#grid').innerHTML=Object.keys(SEAT[g]).map(Number).sort((a,b)=>a-b).map(t=>renderTable(g,t,null)).join('');
+  document.querySelectorAll('.round-btn').forEach(b=>b.classList.toggle('active',+b.dataset.game===g));
+  bind();
+}
+function showPlayer(nick){
+  $('#ph-av').src=AV[nick]||'';
+  $('#ph-nick').textContent=nick;
+  const occ=[];
+  Object.keys(SEAT).forEach(g=>{ for(const t in SEAT[g]){ const i=SEAT[g][t].indexOf(nick); if(i>=0) occ.push({g:+g,t:+t,slot:i+1}); }});
+  const tc={}; occ.forEach(o=>tc[o.t]=(tc[o.t]||0)+1);
+  const skip=SKIP[nick];
+  const skipTxt=skip?` · отдыхает в Игре ${skip}`:'';
+  $('#ph-sub').textContent=occ.length+' игр'+skipTxt+' · '+Object.keys(tc).sort().map(t=>'Стол '+ROMAN[t]+' — '+tc[t]).join(' · ');
+  $('#player-grid').innerHTML=occ.map(o=>renderTable(o.g,o.t,nick)).join('');
+  $('#game-view').classList.add('hidden');
+  $('#player-view').classList.remove('hidden');
+  window.scrollTo(0,0); bind();
+}
+function bind(){
+  document.querySelectorAll('.seat').forEach(s=>s.onclick=e=>{e.stopPropagation();showPlayer(s.dataset.player);});
+}
+Promise.all([
+  window.loadGames('694'),
+  fetch('data/avatars_694.json').then(r=>r.json()),
+  fetch('data/elo_694.json').then(r=>r.ok?r.json():null).catch(()=>null),
+  fetch('data/skip_694.json').then(r=>r.ok?r.json():null).catch(()=>null)
+]).then(([G,A,E,S])=>{
+  AV=A.avatars||{};
+  JUDGES=A.judges||{};
+  SKIP=S||{};
+  if(E&&E.players&&Object.values(E.players).some(x=>x&&x.global)){
+    ELO=E.players;
+    const g=Object.values(ELO).map(x=>x.global).filter(v=>v);
+    if(g.length) document.getElementById('elo-avg').innerHTML=' · средний ELO состава: <b>'+Math.round(g.reduce((a,b)=>a+b,0)/g.length)+'</b>';
+  }
+  SEAT={};
+  let played=0;
+  G.games.forEach((g,gi)=>{
+    const num=gi+1;
+    SEAT[num]={};
+    g.tables.forEach(t=>{ SEAT[num][t.table_num]=t.seats.map(s=>s.name); });
+    if(g.tables.length && g.tables.every(t=>t.winner!=='unknown')) played=num;
+  });
+  PLAYED=played;
+  $('#rounds').innerHTML=Object.keys(SEAT).map(g=>{
+    const cls=+g<=PLAYED?' played':(+g===PLAYED+1?' next':' upcoming');
+    return `<button class="round-btn${cls}" data-game="${g}">${g}</button>`;
+  }).join('');
+  document.querySelectorAll('.round-btn').forEach(b=>b.onclick=()=>showGame(+b.dataset.game));
+  $('#back-btn').onclick=()=>{ $('#player-view').classList.add('hidden'); $('#game-view').classList.remove('hidden'); window.scrollTo(0,0); };
+  showGame((PLAYED>0 && PLAYED>=Object.keys(SEAT).length) ? 1 : Math.min(PLAYED+1, Object.keys(SEAT).length));
+});
+</script>
+</body>
+</html>
