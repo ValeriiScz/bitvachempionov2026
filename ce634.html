@@ -713,7 +713,9 @@ const RENDER={
   together(){return `<div class="view"><div class="secttl">&#8644; Кто с кем за столом</div><div id="togTop"></div><div id="togArea"></div></div>`;},
   stages(){
     if(!D.gp)return statsEmpty('&#9873; Таблица');
-    return `<div class="view"><div class="secttl">&#9873; Турнирная таблица</div><div id="stTop"></div>
+    return `<div class="view"><div class="secttl">&#9873; Турнирная таблица</div>
+      ${(D.tour&&D.tour.closed)?resultsPanel():''}
+      <div id="stTop"></div>
       <div class="panel scrollT" style="padding:0"><table class="tbl hasnum" id="sttable"><thead id="stHead"></thead><tbody id="stBody"></tbody></table></div>
       <div class="note" id="stNote"></div></div>`;
   },
