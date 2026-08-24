@@ -638,7 +638,7 @@ function renderTop(){
         <span class="chip">Приз <b>${t.prize_eur?t.prize_eur+'€':'—'}</b></span>
         <span class="chip"><b>${D.players.length}</b> из ${m.expected||D.players.length} игроков</span>
         <span class="chip">Ожид. ср. ELO <b>${eloAvg!=null?eloAvg:'—'}</b> · markery</span>
-        <span class="chip ${started?'live':''}">${started?'● идёт · игра '+t.games_played+'/'+t.games_total:'скоро · старт 18 июля'}</span>
+        <span class="chip ${started&&!t.closed?'live':''}">${t.closed?'завершён · '+t.games_total+' игр':started?'● идёт · игра '+t.games_played+'/'+t.games_total:'скоро · старт 18 июля'}</span>
       </div>${started?'':'<div class="cdown" id="cdown"></div>'}</div>`;
   if(!started)tick();
 }

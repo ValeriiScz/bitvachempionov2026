@@ -210,7 +210,6 @@ async function load() {
   if (!r.ok) throw new Error('Нет данных для турнира ' + T);
   DATA = await r.json();
   if (DATA.accent) document.documentElement.style.setProperty('--accent', DATA.accent);
-  normalizeOfficialStandings();
   // live-режим: пробуем подтянуть данные игр для ползунка и ролевой разбивки
   GAMES = await window.loadGames(T);
   const orderedKeys = ['total','final','semifinal','qualification'].filter(k => DATA.standings[k]?.length);
@@ -235,6 +234,7 @@ async function load() {
     renderMain();
   }
 }
+
 function renderTeamsRoster(){
   const teams=DATA.teams||[];
   const note=`<div class="progress-note">Парный турнир · <strong>${teams.length} команд</strong> по ${DATA.team_size||2}. Результаты и зачёт (по командам и игрокам) появятся после старта. Рассадка уже доступна — см. «Игры» и «Совместные посадки».</div>`;
@@ -311,20 +311,6 @@ function renderLiveStaged(){
     </tr></thead><tbody id="tbody"></tbody></table></div>`;
   document.getElementById('tbody').innerHTML=liveRowsHtml(cur.rows);
   document.querySelectorAll('.stage-btn[data-lstage]').forEach(b=>b.addEventListener('click',()=>{curLiveStage=b.dataset.lstage;renderLiveStaged();}));
-}
-
-function normalizeOfficialStandings() {
-  if (!DATA?.standings) return;
-  Object.values(DATA.standings).forEach(rows => {
-    (rows || []).forEach(r => {
-      if (r.wpts == null && r.sigma != null) {
-        const sigma = Number(r.sigma);
-        const ap = Number(r.sigma_ap || 0);
-        const ci = Number(r.ci || 0);
-        if (!Number.isNaN(sigma)) r.wpts = +(sigma - ap - ci).toFixed(2);
-      }
-    });
-  });
 }
 
 /* ════ LIVE: пересчёт из игр + ползунок ════ */
@@ -611,7 +597,6 @@ function renderRows() {
     return;
   }
   document.getElementById('tbody').innerHTML = rows.map((r, i) => {
-    const wpts = r.wpts != null ? r.wpts : (r.sigma != null ? +(Number(r.sigma) - Number(r.sigma_ap || 0) - Number(r.ci || 0)).toFixed(2) : '—');
     return `<tr${i<3?' class="top-3"':''}>
       <td class="left place">${r.place}</td>
       <td class="left player-cell">
@@ -619,7 +604,7 @@ function renderRows() {
         ${r.club ? `<span class="club">${escapeHtml(r.club)}</span>` : ''}
       </td>
       <td>${numCell(r.sigma, 'big')}</td>
-      <td>${numCell(wpts)}</td>
+      <td>${numCell(r.wpts != null ? r.wpts : '—')}</td>
       <td>${numCell(r.sigma_ap)}</td>
       <td>${numCell(r.plus, r.plus > 0 ? '' : 'dim')}</td>
       <td>${numCell(r.minus, r.minus > 0 ? 'neg' : 'dim')}</td>
