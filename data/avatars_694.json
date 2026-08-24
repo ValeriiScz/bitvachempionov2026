@@ -31,5 +31,15 @@
   "Mr. Smith🚀": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2002/be9dbdebb8531804b92ac3cd751f3632716e3931.png",
   "JadeYogg": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_257/1fd535eb04d6ae00778ac52dcbb09c674fffcdec.png"
  },
- "judges": {}
+ "judges": {
+  "1": {
+   "name": "Broniak"
+  },
+  "2": {
+   "name": "Trinity"
+  },
+  "3": {
+   "name": "Кирпич"
+  }
+ }
 }

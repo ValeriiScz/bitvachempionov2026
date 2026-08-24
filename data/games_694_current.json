@@ -13,7 +13,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "black_win",
      "seats": [
       {
@@ -130,7 +130,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "red_win",
      "seats": [
       {
@@ -247,7 +247,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "red_win",
      "seats": [
       {
@@ -370,7 +370,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "black_win",
      "seats": [
       {
@@ -487,7 +487,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "black_win",
      "seats": [
       {
@@ -604,7 +604,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "red_win",
      "seats": [
       {
@@ -727,7 +727,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "black_win",
      "seats": [
       {
@@ -844,7 +844,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "red_win",
      "seats": [
       {
@@ -961,7 +961,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "black_win",
      "seats": [
       {
@@ -1084,7 +1084,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "black_win",
      "seats": [
       {
@@ -1201,7 +1201,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "red_win",
      "seats": [
       {
@@ -1318,7 +1318,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "black_win",
      "seats": [
       {
@@ -1441,7 +1441,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "black_win",
      "seats": [
       {
@@ -1558,7 +1558,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "black_win",
      "seats": [
       {
@@ -1675,7 +1675,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "red_win",
      "seats": [
       {
@@ -1798,7 +1798,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "red_win",
      "seats": [
       {
@@ -1915,7 +1915,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "red_win",
      "seats": [
       {
@@ -2032,7 +2032,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "black_win",
      "seats": [
       {
@@ -2155,7 +2155,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "red_win",
      "seats": [
       {
@@ -2272,7 +2272,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "black_win",
      "seats": [
       {
@@ -2389,7 +2389,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "red_win",
      "seats": [
       {
@@ -2512,7 +2512,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "black_win",
      "seats": [
       {
@@ -2629,7 +2629,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "red_win",
      "seats": [
       {
@@ -2746,7 +2746,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "black_win",
      "seats": [
       {
@@ -2869,7 +2869,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "black_win",
      "seats": [
       {
@@ -2986,7 +2986,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "black_win",
      "seats": [
       {
@@ -3103,7 +3103,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "red_win",
      "seats": [
       {
@@ -3226,7 +3226,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "black_win",
      "seats": [
       {
@@ -3343,7 +3343,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "red_win",
      "seats": [
       {
@@ -3460,7 +3460,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "red_win",
      "seats": [
       {
@@ -3583,7 +3583,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "red_win",
      "seats": [
       {
@@ -3700,7 +3700,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "black_win",
      "seats": [
       {
@@ -3817,7 +3817,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "red_win",
      "seats": [
       {
@@ -3940,7 +3940,7 @@
    "tables": [
     {
      "table_num": 1,
-     "judge": null,
+     "judge": "Broniak",
      "winner": "red_win",
      "seats": [
       {
@@ -4057,7 +4057,7 @@
     },
     {
      "table_num": 2,
-     "judge": null,
+     "judge": "Trinity",
      "winner": "black_win",
      "seats": [
       {
@@ -4174,7 +4174,7 @@
     },
     {
      "table_num": 3,
-     "judge": null,
+     "judge": "Кирпич",
      "winner": "black_win",
      "seats": [
       {

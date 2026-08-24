@@ -1148,6 +1148,47 @@ function toggleJdConcl(){jdConcl=!jdConcl;paintJudges();}
 const JD_T={dpg:[0.25,0.4],pct:[12,25],avg:[0.07,0.15],npg:[0.3,0.6],role:[0.12,0.25]};
 function jdMed(a){const q=a.slice().sort((x,y)=>x-y);return q.length?q[Math.floor(q.length/2)]:0;}
 function jdGrade(v,m,t){const d=Math.abs(v-m);return d<=t[0]?'':(d<=t[1]?'warn':'bad');}
+/* v14.4: предвзятость — связки судья×игрок и щедрость по тирам (только квалификация) */
+function jdBias(quals){
+  const rows=[]; quals.forEach(g=>g.tables.forEach(t=>{if(t.winner==='unknown')return;t.seats.forEach(s=>{if(s.name)rows.push({p:s.name,t:t.table_num,a:s.aps||0,r:s.result});});}));
+  if(!rows.length)return {html:'',c1:'',c2:''};
+  const jn=t=>{const j=D.judges&&D.judges[t];return j&&j.name?j.name:('стол '+(ROMAN[t]||t));};
+  const byP={}; rows.forEach(r=>{(byP[r.p]=byP[r.p]||[]).push(r);});
+  const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+  /* связки */
+  const links=[];
+  Object.keys(byP).forEach(p=>{const pr=byP[p];const tset=[...new Set(pr.map(x=>x.t))];
+    tset.forEach(t=>{const at=pr.filter(x=>x.t===t).map(x=>x.a);const el=pr.filter(x=>x.t!==t).map(x=>x.a);
+      if(at.length>=3&&el.length>=3)links.push({p,t,n:at.length,at:mean(at),el:mean(el),d:mean(at)-mean(el)});});});
+  links.sort((a,b)=>Math.abs(b.d)-Math.abs(a.d));
+  const shown=links.slice(0,10);
+  const badge=d=>Math.abs(d)>=0.25?`<span style="color:#f0906f;font-weight:800">${fmt(d)}</span>`:(Math.abs(d)>=0.15?`<span style="color:var(--gold-hi);font-weight:800">${fmt(d)}</span>`:`<span style="color:var(--dim)">${fmt(d)}</span>`);
+  const linkRows=shown.map(l=>`<tr><td style="text-align:left">${plink(l.p)}</td><td>${esc(jn(l.t))}</td><td>${l.n}</td><td>${fmt(l.at)}</td><td>${fmt(l.el)}</td><td>${badge(l.d)}</td></tr>`).join('');
+  const nPairs=links.length;
+  const linksHtml=`<div class="panel" style="margin-top:12px"><h3>Связки судья × игрок</h3>
+    <div class="note" style="margin:0 0 8px">Для каждого игрока сравниваем его средний доп у конкретного судьи с его же средним у остальных судей (та же сила игрока — честное сравнение). Δ — разница. Минимум 3 игры у судьи.</div>
+    <div class="scrollT" style="overflow-x:auto"><table class="tbl"><thead><tr><th style="text-align:left">Игрок</th><th>Судья</th><th>игр</th><th>у судьи</th><th>у других</th><th>Δ</th></tr></thead><tbody>${linkRows||'<tr><td colspan=6>мало данных</td></tr>'}</tbody></table></div>
+    <div class="note" style="margin-top:8px">&#9888; Про честность цифр: пар «игрок × судья» здесь ${nPairs}, и при выборке в 3–5 игр 1–2 отклонения на ±0.25 возникают чисто случайно. Разовое отклонение — не приговор; сигнал — когда одна и та же связка повторяется из турнира в турнир.</div></div>`;
+  /* тиры */
+  const TORDER=['S','A','B','C','D','E','F','—'];
+  const byTier={};
+  Object.keys(byP).forEach(p=>{const st={aps:mean(byP[p].map(x=>x.a))};const L=byP[p].filter(x=>x.r==='L').map(x=>x.a);st.apsL=L.length?mean(L):null;
+    const tr=(D.RATE[p]&&D.RATE[p].tier)||'—';(byTier[tr]=byTier[tr]||[]).push({p,...st});});
+  const med=a=>{const s=a.slice().sort((x,y)=>x-y);const m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2;};
+  const tierRows=TORDER.filter(t=>byTier[t]).map(t=>{const arr=byTier[t];
+    const m=med(arr.map(x=>x.aps));const lv=arr.filter(x=>x.apsL!=null);const mL=lv.length?med(lv.map(x=>x.apsL)):null;
+    const out1=arr.filter(x=>m>0&&x.aps>=1.8*m&&x.aps-m>=0.08).map(x=>plink(x.p)+' <span style="color:var(--gold-hi)">'+fmt(x.aps)+'</span>');
+    const out2=lv.filter(x=>mL!=null&&x.apsL>=Math.max(2*mL,mL+0.12)).map(x=>plink(x.p)+' <span style="color:var(--gold-hi)">'+fmt(x.apsL)+'</span>');
+    return `<tr><td>${t}</td><td>${arr.length}</td><td>${fmt(m)}</td><td>${mL!=null?fmt(mL):'—'}</td><td style="text-align:left">${out1.join(', ')||'<span style=color:var(--dim)>—</span>'}</td><td style="text-align:left">${out2.join(', ')||'<span style=color:var(--dim)>—</span>'}</td></tr>`;}).join('');
+  const tiersHtml=`<div class="panel" style="margin-top:12px"><h3>Щедрость по тирам</h3>
+    <div class="note" style="margin:0 0 8px">Сильным ставят больше — это нормально. Ненормально — когда игрок получает сильно больше СВОЕГО тира: медиана тира и выбросы (≥1.8× медианы), отдельно средний доп при поражении (там «сыпать» проще всего).</div>
+    <div class="scrollT" style="overflow-x:auto"><table class="tbl"><thead><tr><th>Тир</th><th>n</th><th>медиана ср.допа</th><th>медиана при пораж.</th><th style="text-align:left">выбросы (ср.доп)</th><th style="text-align:left">выбросы (при пораж.)</th></tr></thead><tbody>${tierRows}</tbody></table></div></div>`;
+  const reds=shown.filter(l=>Math.abs(l.d)>=0.25);
+  const c1='<b>6. Связки судья × игрок.</b> '+(reds.length?('Наибольшие отклонения: '+reds.slice(0,3).map(l=>l.p+' × '+jn(l.t)+' ('+fmt(l.d)+', '+l.n+' игр)').join('; ')+'. При '+nPairs+' парах и 3–5 играх такое бывает случайно — фиксируем и смотрим, повторится ли на следующих турнирах.'):('Явных связок не видно: все отклонения в пределах случайного разброса ('+nPairs+' пар проверено).'));
+  const allOut=[]; TORDER.forEach(t=>{(byTier[t]||[]).forEach(x=>{const arr=byTier[t];const m=med(arr.map(y=>y.aps));if(m>0&&x.aps>=1.8*m&&x.aps-m>=0.08)allOut.push(x.p+' (тир '+t+', '+fmt(x.aps)+' против медианы '+fmt(m)+')');});});
+  const c2='<b>7. Щедрость по тирам.</b> '+(allOut.length?('Выше своего тира заметно: '+allOut.join('; ')+'.'):'Внутри тиров выбросов нет — допы распределены ровно относительно уровня игроков.');
+  return {html:linksHtml+tiersHtml,c1,c2};
+}
 function paintJudges(){
   const area=document.getElementById('jdArea');if(!area)return;
   const quals=(D.gplist||[]).filter(g=>(g.stage||'Квалификация')==='Квалификация');
@@ -1215,6 +1256,7 @@ function paintJudges(){
   const offN=per.filter(x=>jdGrade(x.npg,M.npg,JD_T.npg));
   const totN=per.reduce((a,x)=>a+x.T.neg,0),totNS=per.reduce((a,x)=>a+x.T.negSum,0);
   out.push('<b>5. Штрафы.</b> Всего '+totN+(totN?' (Σ '+fmt(totNS)+', ср. '+fmt(totN?totNS/totN:0)+')':'')+'. '+(offN.length?offN.map(x=>nameOf(x)+' — '+fmt(x.npg)+' за игру'+(x.avn!=null?' (ср. '+fmt(x.avn)+')':'')).join('; ')+' — чаще остальных.':'Частота по столам сопоставима; размеры штрафов в федерации стандартизированы.'));
+  const bias=jdBias(quals); if(bias.c1)out.push(bias.c1); if(bias.c2)out.push(bias.c2);
   const conclBlock=`<div style="margin-top:12px"><button class="btn ghost" onclick="toggleJdConcl()">${jdConcl?'скрыть выводы &#9650;':'выводы по судьям &#9660;'}</button></div>`+
     (jdConcl?`<div class="panel" style="margin-top:10px"><h3>Выводы — автоматические, черновые</h3>${out.map(o=>`<div class="jrow" style="margin:0 0 8px">${o}</div>`).join('')}<div class="note" style="margin-top:6px">Считается на лету из сыгранных игр по порогам сводной. Пока игр мало, «выбивается» может быть просто случайностью — оргвыводы не отсюда, отсюда — куда смотреть.</div></div>`:'');
   const few=per.some(x=>x.T.games<4);
@@ -1222,6 +1264,7 @@ function paintJudges(){
    ${few?'<div class="note" style="margin:0 0 10px">&#9203; Игр пока мало — цифры устаканятся к концу дня, раньше времени выводов не делаем.</div>':''}
    <div class="jcards">${cards}</div>
    ${sumTbl}
+   ${bias.html}
    ${conclBlock}
    <div class="note" style="margin-top:10px">Зачем это: штрафы в федерации стандартизированы, а плюсовые допы судьи ставят в разной манере. Если один стол системно шире или уже других — таблица начинает зависеть от того, за какой стол игрока посадило расписание. Эта страница делает почерк судей видимым — и для главного судьи, и для игроков.</div>`;
 }

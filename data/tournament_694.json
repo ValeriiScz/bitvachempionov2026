@@ -19,11 +19,15 @@
  "games_total": 17,
  "accent": "#c9a227",
  "referees": [
-  "Кирпич",
+  "Broniak",
   "Trinity",
-  "Broniak"
+  "Кирпич"
  ],
- "referees_by_table": {},
+ "referees_by_table": {
+  "1": "Broniak",
+  "2": "Trinity",
+  "3": "Кирпич"
+ },
  "awards": {
   "most_valuable_players": [
    "Lюц (4.89)",
