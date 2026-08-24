@@ -1,151 +1,1218 @@
 {
-  "tournament_id": 694,
-  "tournament_name": "Central Euro Cup 2026",
-  "date": "2026-08-22 — 2026-08-23",
-  "location": "Прага, Чехия (Praha 1, Těšnov 5)",
-  "club": "Mafia club \"Champions League\" Prague",
-  "organizer": "YeS (Ievgen Sokolskyi) · Mafia club \"Champions League\" Prague",
-  "players_total": 30,
-  "days": 2,
-  "fee_eur": 120,
-  "stars": 3,
-  "prize_eur": 2000,
-  "prize_split": "750 / 550 / 350 / 250 / 100 (топ-5)",
-  "format": "Финал серийного турнира (15 серий → 30 финалистов): квалификация 12 игр (3 стола, все играют каждую) → финал 5 игр (топ-10, один стол)",
-  "closed": false,
-  "in_progress": true,
-  "upcoming": true,
-  "games_played": 7,
-  "games_total": 12,
-  "accent": "#c9a227",
-  "referees": [
-    "Кирпич",
-    "Trinity",
-    "Broniak"
+ "tournament_id": 694,
+ "tournament_name": "Central Euro Cup 2026",
+ "date": "2026-08-22 — 2026-08-23",
+ "location": "Прага, Чехия (Praha 1, Těšnov 5)",
+ "club": "Mafia club \"Champions League\" Prague",
+ "organizer": "YeS (Ievgen Sokolskyi) · Mafia club \"Champions League\" Prague",
+ "players_total": 30,
+ "days": 2,
+ "fee_eur": 120,
+ "stars": 3,
+ "prize_eur": 2000,
+ "prize_split": "750 / 550 / 350 / 250 / 100 (топ-5)",
+ "format": "Финал серийного турнира (15 серий → 30 финалистов): квалификация 12 игр (3 стола, все играют каждую) → финал 5 игр (топ-10, один стол)",
+ "closed": true,
+ "in_progress": false,
+ "upcoming": false,
+ "games_played": 17,
+ "games_total": 17,
+ "accent": "#c9a227",
+ "referees": [
+  "Кирпич",
+  "Trinity",
+  "Broniak"
+ ],
+ "referees_by_table": {},
+ "awards": {},
+ "standings": {
+  "total": [
+   {
+    "place": "1",
+    "name": "Lюц",
+    "club": "",
+    "sigma": 13.065,
+    "wpts": 8.175,
+    "sigma_ap": 4.89,
+    "plus": 4.64,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 10,
+    "k": 1,
+    "games": 5
+   },
+   {
+    "place": "2",
+    "name": "Магнат",
+    "club": "",
+    "sigma": 12.98,
+    "wpts": 9.15,
+    "sigma_ap": 3.67,
+    "plus": 3.67,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.16,
+    "w": 11,
+    "k": 2,
+    "games": 5
+   },
+   {
+    "place": "3",
+    "name": "aptah",
+    "club": "",
+    "sigma": 12.17,
+    "wpts": 7.425,
+    "sigma_ap": 3.905,
+    "plus": 3.58,
+    "minus": 0,
+    "bm": 0.325,
+    "ci": 0.84,
+    "w": 9,
+    "k": 6,
+    "games": 5
+   },
+   {
+    "place": "4",
+    "name": "DOVOD",
+    "club": "",
+    "sigma": 11.965,
+    "wpts": 8.175,
+    "sigma_ap": 3.71,
+    "plus": 3.71,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 10,
+    "k": 1,
+    "games": 5
+   },
+   {
+    "place": "5",
+    "name": "YeS",
+    "club": "",
+    "sigma": 11.295,
+    "wpts": 8.175,
+    "sigma_ap": 3.12,
+    "plus": 3.18,
+    "minus": 0.46,
+    "bm": 0.4,
+    "ci": 0,
+    "w": 10,
+    "k": 1,
+    "games": 5
+   },
+   {
+    "place": "6",
+    "name": "Буржуй",
+    "club": "",
+    "sigma": 10.54,
+    "wpts": 6.45,
+    "sigma_ap": 4.01,
+    "plus": 4.01,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 8,
+    "k": 1,
+    "games": 5
+   },
+   {
+    "place": "7",
+    "name": "Badwin",
+    "club": "",
+    "sigma": 10.43,
+    "wpts": 7.95,
+    "sigma_ap": 2.48,
+    "plus": 2.48,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 10,
+    "k": 0,
+    "games": 5
+   },
+   {
+    "place": "8",
+    "name": "Yokai",
+    "club": "",
+    "sigma": 10.32,
+    "wpts": 7.2,
+    "sigma_ap": 3.12,
+    "plus": 3.32,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 9,
+    "k": 0,
+    "games": 5
+   },
+   {
+    "place": "9",
+    "name": "Мини",
+    "club": "",
+    "sigma": 9.195,
+    "wpts": 5.475,
+    "sigma_ap": 3.24,
+    "plus": 2.99,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.48,
+    "w": 7,
+    "k": 3,
+    "games": 5
+   },
+   {
+    "place": "10",
+    "name": "Sura",
+    "club": "",
+    "sigma": 7.5,
+    "wpts": 6.75,
+    "sigma_ap": 0.33,
+    "plus": 1.1,
+    "minus": 1.17,
+    "bm": 0.4,
+    "ci": 0.42,
+    "w": 9,
+    "k": 3,
+    "games": 5
+   },
+   {
+    "place": "11",
+    "name": "LogisticPro",
+    "club": "",
+    "sigma": 7.23,
+    "wpts": 5.25,
+    "sigma_ap": 1.9,
+    "plus": 1.9,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 7,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "12",
+    "name": "Люсі",
+    "club": "",
+    "sigma": 7.2,
+    "wpts": 5.25,
+    "sigma_ap": 1.95,
+    "plus": 1.7,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 7,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "13",
+    "name": "Panda Kung-Fu",
+    "club": "",
+    "sigma": 7,
+    "wpts": 6,
+    "sigma_ap": 1,
+    "plus": 1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 8,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "14",
+    "name": "Марселия",
+    "club": "",
+    "sigma": 5.9,
+    "wpts": 4.5,
+    "sigma_ap": 1.4,
+    "plus": 1.6,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "15",
+    "name": "КуКуСиК",
+    "club": "",
+    "sigma": 5.9,
+    "wpts": 4.5,
+    "sigma_ap": 1.4,
+    "plus": 1,
+    "minus": 0,
+    "bm": 0.4,
+    "ci": 0,
+    "w": 6,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "16",
+    "name": "Season's",
+    "club": "",
+    "sigma": 5.85,
+    "wpts": 5.25,
+    "sigma_ap": 0.6,
+    "plus": 0.6,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "17",
+    "name": "Kleo",
+    "club": "",
+    "sigma": 5.8,
+    "wpts": 4.5,
+    "sigma_ap": 1.3,
+    "plus": 1.5,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "18",
+    "name": "Mr. Smith🚀",
+    "club": "",
+    "sigma": 4.95,
+    "wpts": 3.75,
+    "sigma_ap": 1.2,
+    "plus": 1.2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "19",
+    "name": "Blackout",
+    "club": "",
+    "sigma": 4.9,
+    "wpts": 3,
+    "sigma_ap": 1.9,
+    "plus": 1.9,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "20",
+    "name": "Ru",
+    "club": "",
+    "sigma": 4.9,
+    "wpts": 4.5,
+    "sigma_ap": 0.4,
+    "plus": 0.8,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "21",
+    "name": "Skywalker",
+    "club": "",
+    "sigma": 4.76,
+    "wpts": 3,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.16,
+    "w": 4,
+    "k": 2,
+    "games": 12
+   },
+   {
+    "place": "22",
+    "name": "Maverick",
+    "club": "",
+    "sigma": 4.73,
+    "wpts": 3.75,
+    "sigma_ap": 0.9,
+    "plus": 0.9,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 5,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "23",
+    "name": "Urs",
+    "club": "",
+    "sigma": 4.63,
+    "wpts": 3.75,
+    "sigma_ap": 0.8,
+    "plus": 1,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 5,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "24",
+    "name": "Niko",
+    "club": "",
+    "sigma": 4.62,
+    "wpts": 2.25,
+    "sigma_ap": 1.65,
+    "plus": 2.2,
+    "minus": 0.8,
+    "bm": 0.25,
+    "ci": 0.72,
+    "w": 3,
+    "k": 3,
+    "games": 12
+   },
+   {
+    "place": "25",
+    "name": "Нико",
+    "club": "",
+    "sigma": 4.6,
+    "wpts": 4.5,
+    "sigma_ap": 0.1,
+    "plus": 0.8,
+    "minus": 0.7,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "26",
+    "name": "Дийкстра",
+    "club": "",
+    "sigma": 4.48,
+    "wpts": 3,
+    "sigma_ap": 1.4,
+    "plus": 1.4,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "27",
+    "name": "Комар",
+    "club": "",
+    "sigma": 4.28,
+    "wpts": 3,
+    "sigma_ap": 1.2,
+    "plus": 1.45,
+    "minus": 0.5,
+    "bm": 0.25,
+    "ci": 0.08,
+    "w": 4,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "28",
+    "name": "qUAest0r",
+    "club": "",
+    "sigma": 4.26,
+    "wpts": 3,
+    "sigma_ap": 1.1,
+    "plus": 1.1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.16,
+    "w": 4,
+    "k": 2,
+    "games": 12
+   },
+   {
+    "place": "29",
+    "name": "Mr. Trust",
+    "club": "",
+    "sigma": 4.05,
+    "wpts": 3.75,
+    "sigma_ap": 0.3,
+    "plus": 0.5,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "k": 2,
+    "games": 12
+   },
+   {
+    "place": "30",
+    "name": "JadeYogg",
+    "club": "",
+    "sigma": 3.78,
+    "wpts": 3,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "k": 1,
+    "games": 12
+   }
   ],
-  "referees_by_table": {},
-  "awards": {},
-  "standings": {},
-  "players": [
-    {
-      "name": "YeS",
-      "real": "Ievgen Sokolskyi"
-    },
-    {
-      "name": "Kleo",
-      "real": "Elvira"
-    },
-    {
-      "name": "DOVOD",
-      "real": "Valerii S"
-    },
-    {
-      "name": "Maverick",
-      "real": "Zula Badaev"
-    },
-    {
-      "name": "qUAest0r",
-      "real": "Serhii"
-    },
-    {
-      "name": "Niko",
-      "real": "Roman Krasiuk"
-    },
-    {
-      "name": "Badwin",
-      "real": "Диана"
-    },
-    {
-      "name": "LogisticPro",
-      "real": "Владислав"
-    },
-    {
-      "name": "Season's",
-      "real": "Саша"
-    },
-    {
-      "name": "Марселия",
-      "real": "Мария"
-    },
-    {
-      "name": "Комар",
-      "real": "Ostap Komar"
-    },
-    {
-      "name": "КуКуСиК",
-      "real": "Vasili"
-    },
-    {
-      "name": "Магнат",
-      "real": "Хассан"
-    },
-    {
-      "name": "Дийкстра",
-      "real": "Артем Иоселевский"
-    },
-    {
-      "name": "Буржуй",
-      "real": "Bohdan"
-    },
-    {
-      "name": "Lюц",
-      "real": "Mykhailo"
-    },
-    {
-      "name": "Люсі",
-      "real": "Liudmyla"
-    },
-    {
-      "name": "Мини",
-      "real": "ツ"
-    },
-    {
-      "name": "Skywalker",
-      "real": "Yulian Horobets"
-    },
-    {
-      "name": "Blackout",
-      "real": "Vladimir"
-    },
-    {
-      "name": "Yokai",
-      "real": "Aituar Assanov"
-    },
-    {
-      "name": "aptah",
-      "real": "Volodymyr Hrychenko"
-    },
-    {
-      "name": "Mr. Trust",
-      "real": "Pavlo Semenenko"
-    },
-    {
-      "name": "Нико",
-      "real": "Bogdan"
-    },
-    {
-      "name": "Urs",
-      "real": "Oleh Hrynov"
-    },
-    {
-      "name": "Panda Kung-Fu",
-      "real": "Ihor"
-    },
-    {
-      "name": "Ru",
-      "real": "Руслан Гафаров"
-    },
-    {
-      "name": "Sura",
-      "real": "Anna Kalb"
-    },
-    {
-      "name": "Mr. Smith🚀",
-      "real": "Max"
-    },
-    {
-      "name": "JadeYogg",
-      "real": "Roman"
-    }
+  "final": [
+   {
+    "place": "1",
+    "name": "Lюц",
+    "club": "",
+    "sigma": 13.065,
+    "wpts": 8.175,
+    "sigma_ap": 4.89,
+    "plus": 4.64,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 10,
+    "k": 1,
+    "games": 5
+   },
+   {
+    "place": "2",
+    "name": "Магнат",
+    "club": "",
+    "sigma": 12.98,
+    "wpts": 9.15,
+    "sigma_ap": 3.67,
+    "plus": 3.67,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.16,
+    "w": 11,
+    "k": 2,
+    "games": 5
+   },
+   {
+    "place": "3",
+    "name": "aptah",
+    "club": "",
+    "sigma": 12.17,
+    "wpts": 7.425,
+    "sigma_ap": 3.905,
+    "plus": 3.58,
+    "minus": 0,
+    "bm": 0.325,
+    "ci": 0.84,
+    "w": 9,
+    "k": 6,
+    "games": 5
+   },
+   {
+    "place": "4",
+    "name": "DOVOD",
+    "club": "",
+    "sigma": 11.965,
+    "wpts": 8.175,
+    "sigma_ap": 3.71,
+    "plus": 3.71,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 10,
+    "k": 1,
+    "games": 5
+   },
+   {
+    "place": "5",
+    "name": "YeS",
+    "club": "",
+    "sigma": 11.295,
+    "wpts": 8.175,
+    "sigma_ap": 3.12,
+    "plus": 3.18,
+    "minus": 0.46,
+    "bm": 0.4,
+    "ci": 0,
+    "w": 10,
+    "k": 1,
+    "games": 5
+   },
+   {
+    "place": "6",
+    "name": "Буржуй",
+    "club": "",
+    "sigma": 10.54,
+    "wpts": 6.45,
+    "sigma_ap": 4.01,
+    "plus": 4.01,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 8,
+    "k": 1,
+    "games": 5
+   },
+   {
+    "place": "7",
+    "name": "Badwin",
+    "club": "",
+    "sigma": 10.43,
+    "wpts": 7.95,
+    "sigma_ap": 2.48,
+    "plus": 2.48,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 10,
+    "k": 0,
+    "games": 5
+   },
+   {
+    "place": "8",
+    "name": "Yokai",
+    "club": "",
+    "sigma": 10.32,
+    "wpts": 7.2,
+    "sigma_ap": 3.12,
+    "plus": 3.32,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 9,
+    "k": 0,
+    "games": 5
+   },
+   {
+    "place": "9",
+    "name": "Мини",
+    "club": "",
+    "sigma": 9.195,
+    "wpts": 5.475,
+    "sigma_ap": 3.24,
+    "plus": 2.99,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.48,
+    "w": 7,
+    "k": 3,
+    "games": 5
+   },
+   {
+    "place": "10",
+    "name": "Sura",
+    "club": "",
+    "sigma": 7.5,
+    "wpts": 6.75,
+    "sigma_ap": 0.33,
+    "plus": 1.1,
+    "minus": 1.17,
+    "bm": 0.4,
+    "ci": 0.42,
+    "w": 9,
+    "k": 3,
+    "games": 5
+   }
+  ],
+  "qualification": [
+   {
+    "place": "1",
+    "name": "Lюц",
+    "club": "",
+    "sigma": 8.45,
+    "wpts": 5.25,
+    "sigma_ap": 3.2,
+    "plus": 2.95,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 7,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "2",
+    "name": "Sura",
+    "club": "",
+    "sigma": 8.41,
+    "wpts": 6.75,
+    "sigma_ap": 1.5,
+    "plus": 1.1,
+    "minus": 0,
+    "bm": 0.4,
+    "ci": 0.16,
+    "w": 9,
+    "k": 2,
+    "games": 12
+   },
+   {
+    "place": "3",
+    "name": "DOVOD",
+    "club": "",
+    "sigma": 8.13,
+    "wpts": 5.25,
+    "sigma_ap": 2.8,
+    "plus": 2.8,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 7,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "4",
+    "name": "Магнат",
+    "club": "",
+    "sigma": 7.91,
+    "wpts": 5.25,
+    "sigma_ap": 2.5,
+    "plus": 2.5,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.16,
+    "w": 7,
+    "k": 2,
+    "games": 12
+   },
+   {
+    "place": "5",
+    "name": "YeS",
+    "club": "",
+    "sigma": 7.85,
+    "wpts": 5.25,
+    "sigma_ap": 2.6,
+    "plus": 2.4,
+    "minus": 0.2,
+    "bm": 0.4,
+    "ci": 0,
+    "w": 7,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "6",
+    "name": "Yokai",
+    "club": "",
+    "sigma": 7.85,
+    "wpts": 5.25,
+    "sigma_ap": 2.6,
+    "plus": 2.8,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "7",
+    "name": "Мини",
+    "club": "",
+    "sigma": 7.83,
+    "wpts": 4.5,
+    "sigma_ap": 2.85,
+    "plus": 2.6,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0.48,
+    "w": 6,
+    "k": 3,
+    "games": 12
+   },
+   {
+    "place": "8",
+    "name": "Badwin",
+    "club": "",
+    "sigma": 7.7,
+    "wpts": 6,
+    "sigma_ap": 1.7,
+    "plus": 1.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 8,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "9",
+    "name": "Буржуй",
+    "club": "",
+    "sigma": 7.68,
+    "wpts": 4.5,
+    "sigma_ap": 3.1,
+    "plus": 3.1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 6,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "10",
+    "name": "aptah",
+    "club": "",
+    "sigma": 7.62,
+    "wpts": 4.5,
+    "sigma_ap": 2.8,
+    "plus": 2.8,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.32,
+    "w": 6,
+    "k": 4,
+    "games": 12
+   },
+   {
+    "place": "11",
+    "name": "LogisticPro",
+    "club": "",
+    "sigma": 7.23,
+    "wpts": 5.25,
+    "sigma_ap": 1.9,
+    "plus": 1.9,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 7,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "12",
+    "name": "Люсі",
+    "club": "",
+    "sigma": 7.2,
+    "wpts": 5.25,
+    "sigma_ap": 1.95,
+    "plus": 1.7,
+    "minus": 0,
+    "bm": 0.25,
+    "ci": 0,
+    "w": 7,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "13",
+    "name": "Panda Kung-Fu",
+    "club": "",
+    "sigma": 7,
+    "wpts": 6,
+    "sigma_ap": 1,
+    "plus": 1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 8,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "14",
+    "name": "Марселия",
+    "club": "",
+    "sigma": 5.9,
+    "wpts": 4.5,
+    "sigma_ap": 1.4,
+    "plus": 1.6,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "15",
+    "name": "КуКуСиК",
+    "club": "",
+    "sigma": 5.9,
+    "wpts": 4.5,
+    "sigma_ap": 1.4,
+    "plus": 1,
+    "minus": 0,
+    "bm": 0.4,
+    "ci": 0,
+    "w": 6,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "16",
+    "name": "Season's",
+    "club": "",
+    "sigma": 5.85,
+    "wpts": 5.25,
+    "sigma_ap": 0.6,
+    "plus": 0.6,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 7,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "17",
+    "name": "Kleo",
+    "club": "",
+    "sigma": 5.8,
+    "wpts": 4.5,
+    "sigma_ap": 1.3,
+    "plus": 1.5,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "18",
+    "name": "Mr. Smith🚀",
+    "club": "",
+    "sigma": 4.95,
+    "wpts": 3.75,
+    "sigma_ap": 1.2,
+    "plus": 1.2,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "19",
+    "name": "Blackout",
+    "club": "",
+    "sigma": 4.9,
+    "wpts": 3,
+    "sigma_ap": 1.9,
+    "plus": 1.9,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0,
+    "w": 4,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "20",
+    "name": "Ru",
+    "club": "",
+    "sigma": 4.9,
+    "wpts": 4.5,
+    "sigma_ap": 0.4,
+    "plus": 0.8,
+    "minus": 0.4,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "21",
+    "name": "Skywalker",
+    "club": "",
+    "sigma": 4.76,
+    "wpts": 3,
+    "sigma_ap": 1.6,
+    "plus": 1.6,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.16,
+    "w": 4,
+    "k": 2,
+    "games": 12
+   },
+   {
+    "place": "22",
+    "name": "Maverick",
+    "club": "",
+    "sigma": 4.73,
+    "wpts": 3.75,
+    "sigma_ap": 0.9,
+    "plus": 0.9,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 5,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "23",
+    "name": "Urs",
+    "club": "",
+    "sigma": 4.63,
+    "wpts": 3.75,
+    "sigma_ap": 0.8,
+    "plus": 1,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 5,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "24",
+    "name": "Niko",
+    "club": "",
+    "sigma": 4.62,
+    "wpts": 2.25,
+    "sigma_ap": 1.65,
+    "plus": 2.2,
+    "minus": 0.8,
+    "bm": 0.25,
+    "ci": 0.72,
+    "w": 3,
+    "k": 3,
+    "games": 12
+   },
+   {
+    "place": "25",
+    "name": "Нико",
+    "club": "",
+    "sigma": 4.6,
+    "wpts": 4.5,
+    "sigma_ap": 0.1,
+    "plus": 0.8,
+    "minus": 0.7,
+    "bm": 0,
+    "ci": 0,
+    "w": 6,
+    "k": 0,
+    "games": 12
+   },
+   {
+    "place": "26",
+    "name": "Дийкстра",
+    "club": "",
+    "sigma": 4.48,
+    "wpts": 3,
+    "sigma_ap": 1.4,
+    "plus": 1.4,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "27",
+    "name": "Комар",
+    "club": "",
+    "sigma": 4.28,
+    "wpts": 3,
+    "sigma_ap": 1.2,
+    "plus": 1.45,
+    "minus": 0.5,
+    "bm": 0.25,
+    "ci": 0.08,
+    "w": 4,
+    "k": 1,
+    "games": 12
+   },
+   {
+    "place": "28",
+    "name": "qUAest0r",
+    "club": "",
+    "sigma": 4.26,
+    "wpts": 3,
+    "sigma_ap": 1.1,
+    "plus": 1.1,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.16,
+    "w": 4,
+    "k": 2,
+    "games": 12
+   },
+   {
+    "place": "29",
+    "name": "Mr. Trust",
+    "club": "",
+    "sigma": 4.05,
+    "wpts": 3.75,
+    "sigma_ap": 0.3,
+    "plus": 0.5,
+    "minus": 0.2,
+    "bm": 0,
+    "ci": 0,
+    "w": 5,
+    "k": 2,
+    "games": 12
+   },
+   {
+    "place": "30",
+    "name": "JadeYogg",
+    "club": "",
+    "sigma": 3.78,
+    "wpts": 3,
+    "sigma_ap": 0.7,
+    "plus": 0.7,
+    "minus": 0,
+    "bm": 0,
+    "ci": 0.08,
+    "w": 4,
+    "k": 1,
+    "games": 12
+   }
   ]
+ },
+ "players": [
+  {
+   "name": "YeS",
+   "real": "Ievgen Sokolskyi"
+  },
+  {
+   "name": "Kleo",
+   "real": "Elvira"
+  },
+  {
+   "name": "DOVOD",
+   "real": "Valerii S"
+  },
+  {
+   "name": "Maverick",
+   "real": "Zula Badaev"
+  },
+  {
+   "name": "qUAest0r",
+   "real": "Serhii"
+  },
+  {
+   "name": "Niko",
+   "real": "Roman Krasiuk"
+  },
+  {
+   "name": "Badwin",
+   "real": "Диана"
+  },
+  {
+   "name": "LogisticPro",
+   "real": "Владислав"
+  },
+  {
+   "name": "Season's",
+   "real": "Саша"
+  },
+  {
+   "name": "Марселия",
+   "real": "Мария"
+  },
+  {
+   "name": "Комар",
+   "real": "Ostap Komar"
+  },
+  {
+   "name": "КуКуСиК",
+   "real": "Vasili"
+  },
+  {
+   "name": "Магнат",
+   "real": "Хассан"
+  },
+  {
+   "name": "Дийкстра",
+   "real": "Артем Иоселевский"
+  },
+  {
+   "name": "Буржуй",
+   "real": "Bohdan"
+  },
+  {
+   "name": "Lюц",
+   "real": "Mykhailo"
+  },
+  {
+   "name": "Люсі",
+   "real": "Liudmyla"
+  },
+  {
+   "name": "Мини",
+   "real": "ツ"
+  },
+  {
+   "name": "Skywalker",
+   "real": "Yulian Horobets"
+  },
+  {
+   "name": "Blackout",
+   "real": "Vladimir"
+  },
+  {
+   "name": "Yokai",
+   "real": "Aituar Assanov"
+  },
+  {
+   "name": "aptah",
+   "real": "Volodymyr Hrychenko"
+  },
+  {
+   "name": "Mr. Trust",
+   "real": "Pavlo Semenenko"
+  },
+  {
+   "name": "Нико",
+   "real": "Bogdan"
+  },
+  {
+   "name": "Urs",
+   "real": "Oleh Hrynov"
+  },
+  {
+   "name": "Panda Kung-Fu",
+   "real": "Ihor"
+  },
+  {
+   "name": "Ru",
+   "real": "Руслан Гафаров"
+  },
+  {
+   "name": "Sura",
+   "real": "Anna Kalb"
+  },
+  {
+   "name": "Mr. Smith🚀",
+   "real": "Max"
+  },
+  {
+   "name": "JadeYogg",
+   "real": "Roman"
+  }
+ ],
+ "final_coef": 1.3,
+ "champion": "Lюц",
+ "winners": [
+  "Lюц",
+  "Магнат",
+  "aptah"
+ ],
+ "standings_note": "Официальные таблицы mafgame (сняты 23.08.2026). «Финал» — кумулятив топ-10 за весь турнир (баллы финальных игр входят с коэффициентом ×1.3). «Итоговая» по правилу mafgame: топ-10 по финалу, места 11–30 по квалификации.",
+ "reconciliation": "Сверка 1:1: квалификация — 30/30 полей (Σ/WPTS/допы/штрафы/ЛХ/Ci/победы/игры/ПУ) без расхождений; финал-кумулятив — 10/10 после применения коэффициента финала ×1.3 ко ВСЕМ баллам финальных игр (WPTS, допы, штрафы, лучший ход, Ci). Причина девиаций live-таблицы в финале — именно этот коэффициент: в протоколах mafgame сырые баллы.",
+ "note": "Завершён 23.08.2026. Чемпион — Lюц (Σ 13.065), 2-е Магнат (12.98), 3-е aptah (12.17), 4-е DOVOD (11.965). Награды (MVP/по ролям) на mafgame не публиковались. Протоколы 17 игр заморожены, финал — с офиц. коэффициентом ×1.3."
 }

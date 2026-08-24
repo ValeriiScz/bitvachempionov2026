@@ -14,15 +14,16 @@
    winner стола берётся из официального поля results mafgame (red_win/black_win), НЕ из очков.
    НЕ ломать защиту снимка — это ключевая гарантия «ничего не терять».
    ============================================================================ */
-// MafgameStat · data/live.js · v2.0 · 2026-08-22 · CEC-694 (финал серийника, Прага): стадия 1 всегда «Квалификация», стадия 2 — «Финал»; стадии 3+ (пустые заглушки 15 серий в данных mafgame) игнорируются · v1.9 · 2026-07-18 · фикс дня 1 ЧЕ: пока в снимке одна стадия, она звалась «Игры» и ce634 группировал её как «Финал» — для 634 стадия 1 всегда «Квалификация» · v1.8 · 2026-07-16 · ЧЕ-634: стадии Квалификация/Полуфинал/Финал (3 стадии) + ЗАЩИТА «держим последний топ-снимок» (localStorage): не затираем хорошие данные пустыми/обнулёнными/пропавшими (snapScore/notRegression); live-фейл → отдаём сохранённый снимок. · v1.7 · 2026-07-04 · кнопка «Обновить» перенесена в левый нижний угол (не налезает на «Наверх»);  · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
+// MafgameStat · data/live.js · v2.1 · 2026-08-23 · коэффициент финала (tournament_{id}.json final_coef, напр. 1.3): в протоколах mafgame сырые баллы, в офиц. таблицу баллы финальных игр входят с коэффициентом — live-таблица финала занижала Σ (урок 694; уточнение урока 702: коэффициент действует на ВСЕ баллы финала — WPTS/допы/штрафы/ЛХ/Ci) · v2.0 · 2026-08-22 · CEC-694 (финал серийника, Прага): стадия 1 всегда «Квалификация», стадия 2 — «Финал»; стадии 3+ (пустые заглушки 15 серий в данных mafgame) игнорируются · v1.9 · 2026-07-18 · фикс дня 1 ЧЕ: пока в снимке одна стадия, она звалась «Игры» и ce634 группировал её как «Финал» — для 634 стадия 1 всегда «Квалификация» · v1.8 · 2026-07-16 · ЧЕ-634: стадии Квалификация/Полуфинал/Финал (3 стадии) + ЗАЩИТА «держим последний топ-снимок» (localStorage): не затираем хорошие данные пустыми/обнулёнными/пропавшими (snapScore/notRegression); live-фейл → отдаём сохранённый снимок. · v1.7 · 2026-07-04 · кнопка «Обновить» перенесена в левый нижний угол (не налезает на «Наверх»);  · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
 window.normRole = function(r){
   if(r==null) return null;
   const map={'citizen':'Citizen','sheriff':'Sheriff','mafia':'Mafia','don':'Don',
              '1':'Citizen','2':'Sheriff','3':'Mafia','4':'Don','red':'Citizen','black':'Mafia'};
   return map[String(r).toLowerCase()]||null;
 };
-window.convertInertia = function(g, t){
+window.convertInertia = function(g, t, fc){
   if(!g||!g.seats) return null;
+  fc=+fc||1; // коэффициент финала: офиц. таблица mafgame умножает баллы финальных игр (напр. x1.3)
   const stages={};
   for(const k in g.seats){
     const p=k.split('-').map(Number);
@@ -55,10 +56,11 @@ window.convertInertia = function(g, t){
   const out=[];
   stKeys.forEach(st=>{
     const label = stageName(st);
+    const k=(label==='Финал'&&fc!==1)?fc:1; // финал — с офиц. коэффициентом
     Object.keys(stages[st]).map(Number).sort((a,b)=>a-b).forEach(gm=>{
       const tables=[];
       Object.keys(stages[st][gm]).map(Number).sort((a,b)=>a-b).forEach(tb=>{
-        const seats=stages[st][gm][tb].filter(Boolean);
+        const seats=stages[st][gm][tb].filter(Boolean).map(x=>k===1?x:{...x,aps:+(x.aps*k).toFixed(4),wpts:+(x.wpts*k).toFixed(4),ci:+(x.ci*k).toFixed(4),sigma:+(x.sigma*k).toFixed(4)});
         if(!seats.length) return; // пустой стол не показываем
         const hasRoles=seats.length>=6&&seats.every(x=>x.role);
         let winner='unknown';
@@ -69,13 +71,7 @@ window.convertInertia = function(g, t){
           const redW=seats.some(x=>(x.role==='Citizen'||x.role==='Sheriff')&&x.wpts>0);
           winner=blackW?'black_win':(redW?'red_win':'unknown');
         }
-        if(winner!=='unknown'&&hasRoles) seats.forEach(x=>{
-          const black=(x.role==='Mafia'||x.role==='Don');
-          const won=((winner==='black_win')===black);
-          if(won && !(x.wpts>0)) x.wpts=0.75; // в live mafgame базовые баллы победы иногда приходят нулём
-          x.sigma=+(x.wpts+x.aps+x.ci).toFixed(4);
-          x.result=won?'W':'L';
-        });
+        if(winner!=='unknown'&&hasRoles) seats.forEach(x=>{const black=(x.role==='Mafia'||x.role==='Don');x.result=((winner==='black_win')===black)?'W':'L';});
         tables.push({table_num:tb,winner,seats});
       });
       if(tables.length) out.push({title:(st===1?'Game ':stageName(st)+' ')+gm,stage:label,tables}); // игру без столов пропускаем
@@ -117,23 +113,20 @@ window.notRegression = function(fresh, saved){
   return true;
 };
 window.loadGames = async function(t){
-  let inprog=false;
-  try{const tr=await fetch('data/tournament_'+t+'.json',{cache:'no-store'});if(tr.ok){const tj=await tr.json();inprog=!!tj.in_progress;}}catch(e){}
+  let inprog=false, fcoef=1;
+  try{const tr=await fetch('data/tournament_'+t+'.json',{cache:'no-store'});if(tr.ok){const tj=await tr.json();inprog=!!tj.in_progress;fcoef=+tj.final_coef||1;}}catch(e){}
   const LSK='mgs_lastgood_'+t;
   let saved=null;
   try{ const raw=localStorage.getItem(LSK); if(raw) saved=JSON.parse(raw); }catch(e){}
-  const liveUrl = (location.protocol === 'file:')
-    ? ('https://mafgame.org/tournaments/' + t + '/game_results')
-    : ('/mafgame/tournaments/' + t + '/game_results');
   if(inprog){
     try{
-      const r=await fetch(liveUrl,{cache:'no-store'});
+      const r=await fetch('/mafgame/tournaments/'+t+'/game_results',{cache:'no-store'});
       if(r.ok){
         const html=await r.text();
         const m=html.match(/data-page="([^"]+)"/);
         if(m){
           const dp=JSON.parse(m[1].replace(/&quot;/g,'"').replace(/&amp;/g,'&').replace(/&#039;/g,"'"));
-          const conv=convertInertia(dp.props&&dp.props.games, t);
+          const conv=convertInertia(dp.props&&dp.props.games, t, fcoef);
           if(conv){
             injectRefresh(); if(!window._autoref){window._autoref=1;setTimeout(()=>location.reload(),600000);}
             // защита: принимаем свежий снимок только если он НЕ регресс относительно последнего хорошего
