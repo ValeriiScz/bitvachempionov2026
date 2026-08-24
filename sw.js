@@ -1,5 +1,5 @@
 /* ============================================================================
-   MafgameStat · sw.js (Service Worker для PWA) · v1.3 · 2026-08-22 (кэш v14: +ce694 в прекэш)
+   MafgameStat · sw.js (Service Worker для PWA) · v1.4 · 2026-08-24 (кэш v15: +research2025 в прекэш; JSON исследований идут по data/*-стратегии network-first)
    Назначение: офлайн-кэш ОБОЛОЧКИ сайта (html/js/иконки) + установка как
    приложение. Данные турниров НЕ замораживаются кэшем.
 
@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'mafgamestat-v14.5';
+const CACHE_VERSION = 'mafgamestat-v15.0';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -28,6 +28,7 @@ const PRECACHE = [
   'index.html',
   'ce634.html',
   'ce694.html',
+  'research2025.html',
   'tournament.html',
   'participants.html',
   'data/tournaments.js',

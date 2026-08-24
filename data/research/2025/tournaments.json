@@ -1,0 +1,942 @@
+{
+ "132": {
+  "name": "Limassol Cup",
+  "stars": 2,
+  "teams": 0,
+  "serial": 1,
+  "online": 0,
+  "ptsNZ": 31,
+  "seats": 90,
+  "games": 0
+ },
+ "191": {
+  "name": "Rhein Open 2025",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 30,
+  "seats": 400,
+  "games": 0
+ },
+ "196": {
+  "name": "MAFWEEKEND: Турнир №1",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 41,
+  "seats": 480,
+  "games": 0
+ },
+ "199": {
+  "name": "Vyshnia Cup 2025",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 30,
+  "seats": 400,
+  "games": 0
+ },
+ "203": {
+  "name": "Four Seasons: Cyprus Open 2025.Summer",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 40,
+  "seats": 520,
+  "games": 0
+ },
+ "206": {
+  "name": "Four Seasons: Cyprus Open 2025.Spring",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 37,
+  "seats": 460,
+  "games": 0
+ },
+ "212": {
+  "name": "Four Seasons: Cyprus Open 25. Autumn",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 35,
+  "seats": 430,
+  "games": 0
+ },
+ "213": {
+  "name": "Four Seasons: Cyprus Open 25. Winter",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 44,
+  "seats": 560,
+  "games": 0
+ },
+ "214": {
+  "name": "Four Seasons 2025. Final",
+  "stars": 6,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 320,
+  "games": 0
+ },
+ "215": {
+  "name": "Mediterranean Grand-Prix 2025",
+  "stars": 5,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 33,
+  "seats": 430,
+  "games": 0
+ },
+ "221": {
+  "name": "Four Seasons: Dutch Open 2025",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 31,
+  "seats": 400,
+  "games": 0
+ },
+ "223": {
+  "name": "Four Seasons: Belgium Open 2025",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 40,
+  "seats": 520,
+  "games": 0
+ },
+ "225": {
+  "name": "United Nations Cup 2025",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 32,
+  "seats": 400,
+  "games": 0
+ },
+ "227": {
+  "name": "Кубок Кёльна 2025",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 33,
+  "seats": 430,
+  "games": 0
+ },
+ "233": {
+  "name": "Battle of Young Dragons 2025",
+  "stars": 2,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 0,
+  "games": 0
+ },
+ "249": {
+  "name": "White Battle of the Cities 2025",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 30,
+  "seats": 400,
+  "games": 0
+ },
+ "250": {
+  "name": "🧁 Sweet Spring Cup",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 33,
+  "seats": 430,
+  "games": 0
+ },
+ "251": {
+  "name": "Poland Strongest Player 2025",
+  "stars": 2,
+  "teams": 0,
+  "serial": 1,
+  "online": 0,
+  "ptsNZ": 49,
+  "seats": 180,
+  "games": 0
+ },
+ "252": {
+  "name": "Турнир Победителей MafiaCl 2025",
+  "stars": 2,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 20,
+  "seats": 280,
+  "games": 0
+ },
+ "253": {
+  "name": "MafiaCl Championship 2025",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 33,
+  "seats": 430,
+  "games": 0
+ },
+ "255": {
+  "name": "Four Seasons: Central Cup 2025",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 40,
+  "seats": 520,
+  "games": 0
+ },
+ "257": {
+  "name": "Mafia World Championship 2025",
+  "stars": 5,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 55,
+  "seats": 700,
+  "games": 0
+ },
+ "259": {
+  "name": "\"Mafia Champions league\" Europe 2025",
+  "stars": 4,
+  "teams": 0,
+  "serial": 1,
+  "online": 0,
+  "ptsNZ": 137,
+  "seats": 160,
+  "games": 0
+ },
+ "261": {
+  "name": "EU PRO-AM Mafia Tournament 2025",
+  "stars": 3,
+  "teams": 1,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 0,
+  "games": 0
+ },
+ "264": {
+  "name": "Four Seasons: Wroclaw Mafia Open 2025",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 30,
+  "seats": 400,
+  "games": 0
+ },
+ "265": {
+  "name": "Poland Mafia Open 2025",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 43,
+  "seats": 520,
+  "games": 0
+ },
+ "267": {
+  "name": "Lodz Mafia Open 2025",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 30,
+  "seats": 400,
+  "games": 0
+ },
+ "268": {
+  "name": "Lodz Team Cup 2025",
+  "stars": 3,
+  "teams": 1,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 33,
+  "seats": 450,
+  "games": 0
+ },
+ "271": {
+  "name": "White Mafia Final 2024",
+  "stars": 0,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 80,
+  "games": 0
+ },
+ "272": {
+  "name": "The Chosen II",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 40,
+  "seats": 540,
+  "games": 0
+ },
+ "275": {
+  "name": "🇪🇺 Чемпионат Европы 2025 🇪🇺",
+  "stars": 5,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 44,
+  "seats": 560,
+  "games": 0
+ },
+ "276": {
+  "name": "German Mafia Open 2025",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 42,
+  "seats": 510,
+  "games": 0
+ },
+ "277": {
+  "name": "German Mafia Cup Europa Edition 2025",
+  "stars": 4,
+  "teams": 0,
+  "serial": 1,
+  "online": 0,
+  "ptsNZ": 226,
+  "seats": 540,
+  "games": 0
+ },
+ "278": {
+  "name": "Tulip Season 2025",
+  "stars": 2,
+  "teams": 1,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 21,
+  "seats": 320,
+  "games": 0
+ },
+ "279": {
+  "name": "Benelux Plus Series",
+  "stars": 2,
+  "teams": 0,
+  "serial": 1,
+  "online": 0,
+  "ptsNZ": 56,
+  "seats": 140,
+  "games": 0
+ },
+ "280": {
+  "name": "Prague Open 2025",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 30,
+  "seats": 400,
+  "games": 0
+ },
+ "281": {
+  "name": "The Power of Four",
+  "stars": 4,
+  "teams": 1,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 61,
+  "seats": 840,
+  "games": 0
+ },
+ "282": {
+  "name": "Mafia Online Open66 II",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 60,
+  "seats": 780,
+  "games": 0
+ },
+ "284": {
+  "name": "Vendetta Valenciana",
+  "stars": 2,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 21,
+  "seats": 310,
+  "games": 0
+ },
+ "285": {
+  "name": "La casa de papel",
+  "stars": 2,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 20,
+  "seats": 310,
+  "games": 0
+ },
+ "286": {
+  "name": "Кубок Испании \"Two days one cup\"",
+  "stars": 2,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 20,
+  "seats": 290,
+  "games": 0
+ },
+ "289": {
+  "name": "🏆Mafia Family Cup🏆",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 30,
+  "seats": 400,
+  "games": 0
+ },
+ "326": {
+  "name": "Poltava Birthday Cup",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 0,
+  "games": 0
+ },
+ "327": {
+  "name": "TEAM CUP DNIPRO MAFIA OPEN 2025",
+  "stars": 3,
+  "teams": 1,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 0,
+  "games": 0
+ },
+ "331": {
+  "name": "Swiss Open 2025",
+  "stars": 2,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 20,
+  "seats": 280,
+  "games": 0
+ },
+ "336": {
+  "name": "Covenant of Tree 2",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 22,
+  "seats": 410,
+  "games": 0
+ },
+ "337": {
+  "name": "Covenant of Branch 2",
+  "stars": 2,
+  "teams": 0,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 30,
+  "seats": 600,
+  "games": 0
+ },
+ "341": {
+  "name": "MGL (MafGame League)",
+  "stars": 5,
+  "teams": 0,
+  "serial": 1,
+  "online": 1,
+  "ptsNZ": 0,
+  "seats": 0,
+  "games": 0
+ },
+ "350": {
+  "name": "Game of Masks 2025",
+  "stars": 1,
+  "teams": 1,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 20,
+  "seats": 100,
+  "games": 0
+ },
+ "355": {
+  "name": "Four Seasons: Call of Earth. Spring",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 40,
+  "seats": 520,
+  "games": 0
+ },
+ "356": {
+  "name": "Four Seasons: Call of Fire. Summer",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 34,
+  "seats": 430,
+  "games": 0
+ },
+ "357": {
+  "name": "Four Seasons: Call of Wind. Autumn",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 30,
+  "seats": 400,
+  "games": 0
+ },
+ "358": {
+  "name": "Four Seasons: Call of Water. Winter",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 33,
+  "seats": 430,
+  "games": 0
+ },
+ "361": {
+  "name": "Four Seasons: New York Times",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 31,
+  "seats": 400,
+  "games": 0
+ },
+ "365": {
+  "name": "Florida Cup",
+  "stars": 2,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 20,
+  "seats": 280,
+  "games": 0
+ },
+ "373": {
+  "name": "CHICAGO TRIBUNE",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 33,
+  "seats": 430,
+  "games": 0
+ },
+ "374": {
+  "name": "Four Seasons: Moldova. Autumn",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 40,
+  "seats": 520,
+  "games": 0
+ },
+ "376": {
+  "name": "MAFGAME ASIA OPEN 2025",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 29,
+  "seats": 400,
+  "games": 0
+ },
+ "377": {
+  "name": "FOUR SEASONS: ASTANA",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 41,
+  "seats": 520,
+  "games": 0
+ },
+ "379": {
+  "name": "FOUR SEASONS: TASHKENT",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 30,
+  "seats": 400,
+  "games": 0
+ },
+ "380": {
+  "name": "FOUR SEASONS: ALL STARS",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 29,
+  "seats": 400,
+  "games": 0
+ },
+ "385": {
+  "name": "Mafia Online Open66 III",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 51,
+  "seats": 660,
+  "games": 0
+ },
+ "390": {
+  "name": "MAFGAME Bishkek CUP",
+  "stars": 3,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 20,
+  "seats": 280,
+  "games": 0
+ },
+ "397": {
+  "name": "TWINBLADES 5",
+  "stars": 3,
+  "teams": 1,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 41,
+  "seats": 400,
+  "games": 0
+ },
+ "406": {
+  "name": "VEIL",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 60,
+  "seats": 1490,
+  "games": 0
+ },
+ "413": {
+  "name": "🏆Командный чемпионат Польши 🏆",
+  "stars": 4,
+  "teams": 1,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 41,
+  "seats": 560,
+  "games": 0
+ },
+ "416": {
+  "name": "THE LONDON OPEN 2025 - MAFIA WORLD CUP QUALIFIER",
+  "stars": 1,
+  "teams": 1,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 20,
+  "seats": 120,
+  "games": 0
+ },
+ "420": {
+  "name": "The Chosen III",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 0,
+  "seats": 0,
+  "games": 0
+ },
+ "422": {
+  "name": "DarKStadt Summer Cup",
+  "stars": 2,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 20,
+  "seats": 280,
+  "games": 0
+ },
+ "425": {
+  "name": "THE DUBLIN OPEN 2025 - MAFIA WORLD CUP QUALIFIER",
+  "stars": 1,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 10,
+  "seats": 70,
+  "games": 0
+ },
+ "478": {
+  "name": "Arena. Moldova Mafia Series",
+  "stars": 2,
+  "teams": 0,
+  "serial": 1,
+  "online": 0,
+  "ptsNZ": 32,
+  "seats": 140,
+  "games": 0
+ },
+ "484": {
+  "name": "AMSTERDAM OPEN 6 JULY 2025",
+  "stars": 1,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 14,
+  "seats": 70,
+  "games": 0
+ },
+ "487": {
+  "name": "AMG Antalya Maf Game",
+  "stars": 2,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 0,
+  "games": 0
+ },
+ "489": {
+  "name": "Montreal Open 2025 - World Cup City Qualifier",
+  "stars": 1,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 10,
+  "seats": 80,
+  "games": 0
+ },
+ "492": {
+  "name": "LONDON OPEN - MIND SPORTS OLYMPIAD 19 AUG 2025 - W",
+  "stars": 1,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 10,
+  "seats": 60,
+  "games": 0
+ },
+ "504": {
+  "name": "Васлуйская битва",
+  "stars": 2,
+  "teams": 0,
+  "serial": 1,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 0,
+  "games": 0
+ },
+ "505": {
+  "name": "Mafia Pro Series",
+  "stars": 1,
+  "teams": 0,
+  "serial": 1,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 0,
+  "games": 0
+ },
+ "509": {
+  "name": "Васлуйская Битва 2025",
+  "stars": 2,
+  "teams": 0,
+  "serial": 1,
+  "online": 0,
+  "ptsNZ": 32,
+  "seats": 120,
+  "games": 0
+ },
+ "516": {
+  "name": "FOUR SEASONS ALMATY: AUTUMN",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 28,
+  "seats": 400,
+  "games": 0
+ },
+ "520": {
+  "name": "Four Seasons: Moldova. Summer",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 33,
+  "seats": 430,
+  "games": 0
+ },
+ "530": {
+  "name": "Лига Западной Германии 2025",
+  "stars": 2,
+  "teams": 0,
+  "serial": 1,
+  "online": 0,
+  "ptsNZ": 40,
+  "seats": 130,
+  "games": 0
+ },
+ "542": {
+  "name": "Four Seasons: Over Hype",
+  "stars": 4,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 44,
+  "seats": 560,
+  "games": 0
+ },
+ "559": {
+  "name": "THE BRIGHTON OPEN 2025 - MAFIA WORLD CUP QUALIFIER",
+  "stars": 1,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 15,
+  "seats": 150,
+  "games": 0
+ },
+ "589": {
+  "name": "Montreal Open 2025 - World Cup City Qualifier 2nd ",
+  "stars": 1,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 10,
+  "seats": 80,
+  "games": 0
+ },
+ "594": {
+  "name": "Финал рейтинга \"ИСMG\"",
+  "stars": 0,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 180,
+  "games": 0
+ },
+ "596": {
+  "name": "Mind Forge Online Final",
+  "stars": 0,
+  "teams": 0,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 0,
+  "seats": 50,
+  "games": 0
+ },
+ "603": {
+  "name": "MAFGAME US Invitational",
+  "stars": 1,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 12,
+  "seats": 120,
+  "games": 0
+ },
+ "610": {
+  "name": "ONLINE DUBLIN 2025 WORLD CUP QUALIFIER",
+  "stars": 1,
+  "teams": 0,
+  "serial": 0,
+  "online": 1,
+  "ptsNZ": 10,
+  "seats": 100,
+  "games": 0
+ },
+ "621": {
+  "name": "English Montreal Mafia Cup - Fall 2025",
+  "stars": 1,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 10,
+  "seats": 80,
+  "games": 0
+ },
+ "624": {
+  "name": "White Mafia Final 2025",
+  "stars": 0,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 80,
+  "games": 0
+ },
+ "627": {
+  "name": "MafiaCl Premier League 2025 Final",
+  "stars": 0,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 50,
+  "games": 0
+ },
+ "628": {
+  "name": "MafiaCl Liga Mova 2025 Final",
+  "stars": 0,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 50,
+  "games": 0
+ },
+ "629": {
+  "name": "MafiaCl First League 2025 Final",
+  "stars": 0,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 0,
+  "seats": 50,
+  "games": 0
+ },
+ "630": {
+  "name": "Tel Aviv Open - Last Chance - World Cup Qualifier ",
+  "stars": 1,
+  "teams": 0,
+  "serial": 0,
+  "online": 0,
+  "ptsNZ": 10,
+  "seats": 80,
+  "games": 0
+ }
+}
