@@ -676,13 +676,14 @@ const RENDER={
     const eloVals=D.players.map(p=>num(p.r_elo_cur)).filter(v=>v!=null);
     const eloAvg=eloVals.length?Math.round(eloVals.reduce((a,b)=>a+b,0)/eloVals.length):null;
     const stats=`<div class="stats">
-      <div class="stat"><div class="k">Формат</div><div class="v">11+2+5<small> игр</small></div></div>
+      <div class="stat"><div class="k">Формат</div><div class="v">12+5<small> игр</small></div></div>
       <div class="stat"><div class="k">Участников</div><div class="v">${D.players.length}<small> из ${m.expected||D.players.length}</small></div></div>
       <div class="stat"><div class="k">Ожид. ср. ELO</div><div class="v">${eloAvg!=null?eloAvg:'—'}<small> markery</small></div></div>
       <div class="stat"><div class="k">Приз</div><div class="v">${t.prize_eur||'—'}<small>€</small></div></div></div>`;
     const jud=Object.keys(D.judges).length?`<div class="panel"><h3>Судьи столов</h3><div class="judges">`+
       Object.keys(D.judges).sort().map(k=>{const j=D.judges[k];return `<div class="judge">${j.avatar?`<img src="${esc(j.avatar)}" referrerpolicy="no-referrer" onerror="this.style.display='none'">`:''}<div><div class="jn">Стол ${ROMAN[k]||k} · <b>${esc(j.name)}</b></div>${j.tg?`<div class="jt">${esc(j.tg)}</div>`:''}</div></div>`;}).join('')+`</div></div>`:'';
     return `<div class="view"><div class="secttl">&#9670; Обзор турнира</div>
+      ${resultsPanel()}
       ${demoPanel()}
       ${myPanel()}
       ${myPlayer?nextGamePanel(myPlayer,true):''}
@@ -899,6 +900,17 @@ function secListPanel(){const items=[
  ['roles','✦','Результаты · По картам','кто как играет мирным / шерифом / мафией / доном'],
  ['judges','⚖','Результаты · Судьи','ровно ли столы ставят допы — светофор для главного судьи']];
 return `<div class="panel"><h3>Разделы — тапайте</h3><div class="seclist">`+items.map(([id,ic,t,d])=>`<button class="seci" data-id="${id}" onclick="show(this.dataset.id)"><span class="sicon">${ic}</span><div><b>${esc(t)}</b><div class="sid">${esc(d)}</div></div><span class="go">›</span></button>`).join('')+`</div></div>`;}
+function resultsPanel(){
+  const t=D.tour; if(!t||!t.closed) return '';
+  const med=['🥇','🥈','🥉'];
+  const wins=(t.winners||[]).map((n,i)=>`<div style="display:flex;align-items:center;gap:9px;padding:5px 0;font-size:${i?'14px':'16.5px'};font-weight:${i?'700':'800'}"><span>${med[i]||''}</span>${plink(n)}${i===0?'<span class="chip live" style="margin-left:6px">чемпион</span>':''}</div>`).join('');
+  const AWL={most_valuable_players:'MVP турнира',most_valuable_mafia:'Лучшая мафия',most_valuable_citizen:'Лучший мирный',best_don:'Лучший дон',best_sheriff:'Лучший шериф',most_killed:'Чаще всех убит 1-й ночью'};
+  const aw=t.awards&&Object.keys(t.awards).length?Object.entries(t.awards).map(([k,list])=>{
+    const items=list.map((it,i)=>{const m=it.match(/^(.+?)\s*\((.+)\)\s*$/);const nm=m?m[1].trim():it;const val=m?m[2]:'';
+      return `<div style="display:flex;align-items:center;gap:7px;font-size:12.5px;padding:2px 0"><span style="width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;background:${['var(--gold)','#c5cad8','#d18a4a'][i]||'rgba(255,255,255,.1)'};color:#0a1626">${i+1}</span>${plink(nm)}<span style="color:var(--dim);margin-left:auto">${esc(val)}</span></div>`;}).join('');
+    return `<div style="padding:7px 0;border-top:1px solid rgba(212,175,55,.12)"><div style="font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:4px">${AWL[k]||k}</div>${items}</div>`;}).join(''):'';
+  return `<div class="panel"><h3>🏆 Итоги турнира</h3>${wins}${aw?`<div style="margin-top:8px">${aw}</div>`:''}${t.awards_note?`<div class="note" style="margin-top:8px">${esc(t.awards_note)}</div>`:''}</div>`;
+}
 function stagesPanel(){return `<div class="panel"><h3>Формат: 2 стадии</h3><div class="stages">
     <div class="stage"><span class="sbadge">старт</span><div class="sn">Квалификация</div><div class="sg">12 игр · 3 стола · играют все</div><div class="sd">Все 30 финалистов серийного турнира играют каждую из 12 игр — пропусков нет. По сумме — топ‑10 в финал.</div></div>
     <div class="stage"><div class="sn">Финал</div><div class="sg">5 игр · топ‑10</div><div class="sd">10 сильнейших разыгрывают Кубок за одним финальным столом (5 игр). Приз 2000€: 750/550/350/250/100.</div></div></div></div>`;}
