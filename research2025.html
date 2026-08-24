@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · research2025.html · v1.0 · 2026-08-24 · Исследования: допы 2025 — остатки против страт (турнир×карта×исход×стадия), перестановочные тесты + FDR, стабильность, ПУ/ЛХ/Ci, профили, щедрость турниров. Данные: data/research/2025/*.json -->
+<!-- MafgameStat · research2025.html · v1.1 · 2026-08-24 · Исследования: допы 2025 — остатки против страт (турнир×карта×исход×стадия), поправка на когорту по силе (winrate), перестановочные тесты + FDR, стабильность, профили, щедрость. Убраны ЛХ/Ci/ПУ-углы: это автоматика (угадайка чёрных 0.25/0.4, прогрессия Ci), не судейская воля. Данные: data/research/2025/*.json -->
+<!-- v1.0 · 2026-08-24 · первая версия (с ПУ/ЛХ/Ci-углами) -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -112,7 +113,7 @@ let F=null, FULL=null;
 
 const SECTIONS=[
  ['summary','Сводка'],['rating','Рейтинг'],['resid','Остатки'],['loss','Поражения'],
- ['pu','ПУ и ЛХ'],['sig','Значимость'],['profiles','Профили'],['tourn','Турниры'],
+ ['sig','Значимость'],['profiles','Профили'],['tourn','Турниры'],
  ['method','Метод'],['all','Все игроки']
 ];
 
@@ -132,7 +133,7 @@ const sigRow=q=>(q!=null&&q<=0.05)?' class="sig"':'';
 function render(id){
   const el=document.getElementById('content');
   if(id==='all'){renderAll(el);return;}
-  el.innerHTML=({summary,rating,resid,loss,pu,sig,profiles,tourn,method})[id]();
+  el.innerHTML=({summary,rating,resid,loss,sig,profiles,tourn,method})[id]();
 }
 
 /* ── секции ── */
@@ -151,7 +152,7 @@ function summary(){
   <div class="note">1. <b style="color:var(--ink)">${F.fdr_sig.length} игроков</b> получают допы значимо выше нормы своих ситуаций — даже с поправкой на то, что при 525 проверках кто-то «выпадет» случайно.<br><br>
   2. Самые крупные остатки года: ${F.top_resid.slice(0,5).map(r=>`<b style="color:var(--ink)">${esc(r.nick)}</b> (${f3(r.resid)}/игру)`).join(', ')}.<br><br>
   3. Самый живучий сигнал — <b style="color:var(--ink)">стабильность</b>: у ${F.stab[0].nick} остаток в плюс в ${F.stab[0].nPosT}/${F.stab[0].nTeff} турнирах, у KEX — в 17/18. Случайный всплеск так себя не ведёт.<br><br>
-  4. Отдельный канал — <b style="color:var(--ink)">«обвес первому убитому»</b>: допы, лучший ход и Ci в играх, где игрок мёртв с первой ночи (см. «ПУ и ЛХ»).<br><br>
+  4. Проверка «сильным просто дают больше»: поправка на <b style="color:var(--ink)">когорту по силе</b> (winrate за сезон — он не зависит от допов) почти не меняет топ — сила объясняет лишь ~${Math.round(F.cohort_fit.r2*100)}% различий в остатках (см. «Остатки»).<br><br>
   5. Щедрость турниров различается в ×2.2 (см. «Турниры») — сырые допы между турнирами сравнивать нельзя.</div>`;
 }
 function rating(){
@@ -162,14 +163,18 @@ function rating(){
   <div class="legend">Остаток — излишек допа за игру против нормы ситуации; «Стаб.» — доля турниров игрока, где его средний остаток в плюс.</div>`;
 }
 function resid(){
-  const r1=F.top_resid.map((r,i)=>`<tr${sigRow(r.qFDR)}><td class="mut">${i+1}</td><td class="nick l">${esc(r.nick)}</td><td>${r.g}</td><td>${pc(r.winrate)}</td><td class="${cls(r.resid)}">${f3(r.resid)}</td><td class="${cls(r.residL)}">${f3(r.residL)}</td><td>${pc(r.stabShare)}</td><td class="mut">${fp(r.pPerm)}</td><td class="mut">${fp(r.qFDR)}</td></tr>`);
+  const r1=F.top_resid.map((r,i)=>`<tr${sigRow(r.qFDR)}><td class="mut">${i+1}</td><td class="nick l">${esc(r.nick)}</td><td>${r.g}</td><td>${pc(r.winrate)}</td><td class="${cls(r.resid)}">${f3(r.resid)}</td><td class="${cls(r.residL)}">${f3(r.residL)}</td><td class="${cls(r.residAdj)}">${f3(r.residAdj)}</td><td>${pc(r.stabShare)}</td><td class="mut">${fp(r.pPerm)}</td><td class="mut">${fp(r.qFDR)}</td></tr>`);
   const r2=F.top_residL.map((r,i)=>`<tr${sigRow(r.qFDR)}><td class="mut">${i+1}</td><td class="nick l">${esc(r.nick)}</td><td>${r.g}</td><td>${pc(r.winrate)}</td><td class="${cls(r.residL)}">${f3(r.residL)}</td><td class="${cls(r.resid)}">${f3(r.resid)}</td><td>${f3p(r.plusLossPG)}</td><td class="mut">${fp(r.qFDR)}</td></tr>`);
+  const r3t=F.top_residAdj.map((r,i)=>`<tr${sigRow(r.qFDR)}><td class="mut">${i+1}</td><td class="nick l">${esc(r.nick)}</td><td>${r.g}</td><td>${pc(r.winrate)}</td><td class="${cls(r.residAdj)}">${f3(r.residAdj)}</td><td class="${cls(r.resid)}">${f3(r.resid)}</td><td class="${cls(r.residLAdj)}">${f3(r.residLAdj)}</td><td class="mut">${fp(r.qFDR)}</td></tr>`);
   return `<div class="sec">Остаток допа за игру · топ-30</div>
   <div class="note">Насколько игрок получает больше нормы своей ситуации (турнир × карта × исход × стадия).</div>
-  ${tbl(['#','Игрок','Игр','WR','Остаток','Ост. пораж.','Стаб.','p','q FDR'],r1,{left:[1]})}
+  ${tbl(['#','Игрок','Игр','WR','Остаток','Ост. пораж.','Над когортой','Стаб.','p','q FDR'],r1,{left:[1]})}
   <div class="sec">Остаток в поражениях · топ-30</div>
   <div class="note">Главный маркер: в проигранной игре «за вклад в победу» не заплатишь — если допы всё равно капают, это вопрос.</div>
-  ${tbl(['#','Игрок','Игр','WR','Ост. пораж.','Ост. общий','Сырой доп в пораж.','q FDR'],r2,{left:[1]})}`;
+  ${tbl(['#','Игрок','Игр','WR','Ост. пораж.','Ост. общий','Сырой доп в пораж.','q FDR'],r2,{left:[1]})}
+  <div class="sec">Над когортой по силе · топ-30</div>
+  <div class="note">Ответ на «сильному просто дают больше»: сила игрока измерена winrate за сезон (на winrate допы не влияют — исход игры от них не зависит), и остаток каждого сравнён с ожиданием для его силы. Сила объясняет лишь ~${Math.round(F.cohort_fit.r2*100)}% различий в остатках — топ почти не меняется.</div>
+  ${tbl(['#','Игрок','Игр','WR','Над когортой','Остаток','Над когортой в пораж.','q FDR'],r3t,{left:[1]})}`;
 }
 function loss(){
   const raw=F.top_plusLoss.map((r,i)=>`<tr><td class="mut">${i+1}</td><td class="nick l">${esc(r.nick)}</td><td>${r.g}</td><td>${pc(r.winrate)}</td><td>${f3p(r.plusLossPG)}</td><td class="${cls(r.residL)}">${f3(r.residL)}</td><td>${pc(r.lossShareOfPlus)}</td></tr>`);
@@ -185,20 +190,6 @@ function loss(){
   <div class="mini">${Object.entries(roleTabs).map(([k,[l]])=>`<div class="m${k===rk?' on':''}" onclick="window.__lossRole='${k}';render('loss')">${l}</div>`).join('')}</div>
   <div class="note">${roleTabs[rk][0]} · лиговая норма при поражении: ${roleTabs[rk][1]} · топ-15 (≥6 поражений на карте)</div>
   ${tbl(['#','Игрок','Игр всего','Доп при пораж.','WR на карте','Доп/игру на карте'],rrows,{left:[1]})}`;
-}
-function pu(){
-  const lb=F.league_base;
-  const r1=F.top_kfPlus.map((r,i)=>`<tr><td class="mut">${i+1}</td><td class="nick l">${esc(r.nick)}</td><td>${r.g}</td><td>${r.kfG}</td><td>${f3p(r.kfPlusPG)}</td><td>${f3p(r.lhPerPU)}</td><td>${pc(r.lhShare)}</td><td class="${cls(r.resid)}">${f3(r.resid)}</td></tr>`);
-  const r2=F.top_lh.map((r,i)=>`<tr><td class="mut">${i+1}</td><td class="nick l">${esc(r.nick)}</td><td>${r.g}</td><td>${r.kfG}</td><td>${f3p(r.lhPerPU)}</td><td>${r.bmSum.toFixed(2)}</td><td>${r.bmN}</td></tr>`);
-  const r3=F.top_ci.map((r,i)=>`<tr><td class="mut">${i+1}</td><td class="nick l">${esc(r.nick)}</td><td>${r.g}</td><td>${f3p(r.ciPG)}</td><td>${r.ciSum.toFixed(2)}</td><td>${r.ciN}</td></tr>`);
-  return `<div class="sec">Обвес первому убитому (ПУ)</div>
-  <div class="note">Игрок убит в первую ночь и не участвует в игре, но получает допы «за постановку», баллы лучшего хода (ЛХ) и Ci. Канал, слабо привязанный к результату. Лига: доп при ПУ ${f3p(lb.kfPlusPG)} · ЛХ на ПУ ${f3p(lb.lhPerPU)} · Ci ${f3p(lb.ciPG)}/игру.</div>
-  <div class="sec">Средний доп при ПУ · топ-25 (≥8 ПУ)</div>
-  ${tbl(['#','Игрок','Игр','ПУ','Доп при ПУ','ЛХ на ПУ','ПУ с ЛХ','Ост. общий'],r1,{left:[1]})}
-  <div class="sec">Баллы ЛХ на одну ПУ-игру · топ-20</div>
-  ${tbl(['#','Игрок','Игр','ПУ','ЛХ на ПУ','ЛХ сумма','ЛХ раз'],r2,{left:[1]})}
-  <div class="sec">Ci на игру · топ-20</div>
-  ${tbl(['#','Игрок','Игр','Ci/игру','Ci сумма','Ci раз'],r3,{left:[1]})}`;
 }
 function sig(){
   const r1=F.fdr_sig.map((r,i)=>{const p=F.top_susp.find(x=>x.nick===r.nick);return `<tr class="sig"><td class="mut">${i+1}</td><td class="nick l">${esc(r.nick)}</td><td class="mut">${fp(r.p)}</td><td class="mut">${fp(r.q)}</td></tr>`;});
@@ -221,16 +212,16 @@ function profiles(){
       <div class="row"><span>Winrate / доп за игру</span><b>${pc(c.winrate)} / ${f3p(c.plusPG)}</b></div>
       <div class="row"><span>Доп при победе / при поражении</span><b>${f3p(c.plusWinPG)} / ${f3p(c.plusLossPG)}</b></div>
       <div class="row"><span>Остаток / остаток в поражениях</span><b>${f3(c.resid)} / ${f3(c.residL)}</b></div>
+      <div class="row"><span>Над когортой по силе / в поражениях</span><b>${f3(c.residAdj)} / ${f3(c.residLAdj)}</b></div>
       <div class="row"><span>p перест. / q FDR</span><b>${fp(c.pPerm)} / ${fp(c.qFDR)}</b></div>
       <div class="row"><span>Игр с допом / «жирных» (≥0.3)</span><b>${pc(c.posShare)} / ${pc(c.fatShare)}</b></div>
       <div class="row"><span>Турниров с остатком в плюс</span><b>${c.nTeff?c.nPosT+'/'+c.nTeff:'—'}</b></div>
-      <div class="row"><span>ПУ игр / доп при ПУ / ЛХ на ПУ / Ci за игру</span><b>${c.kfG} / ${f3p(c.kfPlusPG)} / ${f3p(c.lhPerPU)} / ${f3p(c.ciPG)}</b></div>
       <div class="row"><span>По картам</span><b class="tagline2" style="text-align:right">${roles}</b></div>
       <div style="margin-top:9px"><span class="tagline2">Наибольший остаток — турниры:</span><br>${feed}</div>
       </div></div>`;
   }).join('');
   return `<div class="sec">Профили · ${F.cards.length} самых заметных</div>
-  <div class="note">Карточки игроков с наибольшими отклонениями (по остатку и композитному индексу). Тап по карточке — детали. Лиговая база: доп ${f3p(F.league_base.plusPG)}/игру, при ПУ ${f3p(F.league_base.kfPlusPG)}, Ci ${f3p(F.league_base.ciPG)}.</div>${cards}`;
+  <div class="note">Карточки игроков с наибольшими отклонениями (по остатку и композитному индексу). Тап по карточке — детали. Лиговая база: доп ${f3p(F.league_base.plusPG)}/игру, при поражении ${f3p(F.league_base.plusLossPG)}.</div>${cards}`;
 }
 function tourn(){
   const rows=F.tournament_generosity.map((r,i)=>`<tr><td class="mut">${i+1}</td><td class="nick l">${esc(r.name)}</td><td>${'★'.repeat(r.stars)||'—'}</td><td class="mut">${r.online?'онлайн':'офлайн'}</td><td>${r.seats.toLocaleString('ru')}</td><td>${f3p(r.plusPG)}</td></tr>`);
@@ -244,6 +235,8 @@ function method(){
    ['Данные','Протоколы game_results: карта, исход стола, стадия, доп (game_bonus), лучший ход, Ci, штраф, killed_first. Недоигранные столы отброшены. 30 170 посадок, 525 игроков с ≥15 играми.'],
    ['Ситуации (страты)','Каждая посадка отнесена к ситуации: турнир × карта × исход × стадия — 1 076 групп. Средний доп группы = норма.'],
    ['Остаток','Факт минус норма, в среднем за игру. Снимает эффекты щедрости турнира, карты, результата и стадии. Не снимает реальное качество игры — поэтому это флаг, а не приговор.'],
+   ['Когорты по силе','Сила игрока измерена winrate за сезон — на него допы не влияют (исход игры от допов не зависит), поэтому он чист как прокси. residAdj — остаток минус линейное ожидание для игрока такой силы; winrate объясняет лишь ~4% различий в остатках.'],
+   ['Почему без ЛХ и Ci','Баллы лучшего хода начисляются автоматически за угаданных чёрных (2 = 0.25, 3 = 0.4), Ci — автоматическая прогрессия за частые ранние смерти в рамках турнира. Судейской воли в них нет, а угаданных чёрных протокол не раскрывает — поэтому игры первого убитого и эти баллы в анализ предвзятости не входят.'],
    ['Перестановочный тест','2000 итераций на игрока: каждая его игра получает случайный доп из своей ситуации; p — доля итераций со случайным результатом не хуже фактического.'],
    ['Поправка на множественность','FDR Бенджамини-Хохберга по всем 525 проверкам. Порог q≤0.05: в списке значимых ожидается не более 5% случайных.'],
    ['Стабильность','Средний остаток по каждому турниру игрока, биномиальный тест доли турниров «в плюс».'],
