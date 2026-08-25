@@ -1,5 +1,5 @@
 /* ============================================================================
-   MafgameStat · sw.js (Service Worker для PWA) · v1.6 · 2026-08-25 (кэш v17: +gmc2026.html — серийник GMC Europa 2026)
+   MafgameStat · sw.js (Service Worker для PWA) · v1.7 · 2026-08-25 (кэш v17.2: gmc2026 — судьи серий из карточек /view)
    Назначение: офлайн-кэш ОБОЛОЧКИ сайта (html/js/иконки) + установка как
    приложение. Данные турниров НЕ замораживаются кэшем.
 
@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'mafgamestat-v17.1';
+const CACHE_VERSION = 'mafgamestat-v17.2';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
