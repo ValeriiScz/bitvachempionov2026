@@ -1,5 +1,5 @@
 /* ============================================================================
-   MafgameStat · sw.js (Service Worker для PWA) · v1.7 · 2026-08-25 (кэш v17.2: gmc2026 — судьи серий из карточек /view)
+   MafgameStat · sw.js (Service Worker для PWA) · v1.8 · 2026-08-25 (кэш v17.3: gmc2026 — таблица «Судьи · агрегат» в Наблюдениях)
    Назначение: офлайн-кэш ОБОЛОЧКИ сайта (html/js/иконки) + установка как
    приложение. Данные турниров НЕ замораживаются кэшем.
 
@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'mafgamestat-v17.2';
+const CACHE_VERSION = 'mafgamestat-v17.3';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
