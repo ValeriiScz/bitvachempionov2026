@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- MafgameStat · gmc2026.html · v1.0 · 2026-08-25 · GMC Europa Edition 2026 (серийник 664): слотовый зачёт (топ-2 серии → финал), 14 сыгранных серий, финалисты и резерв замен по допам, наблюдения (остатки против страт). Временная страница; данные вшиты снимком, обновляется перегенерацией (пайплайн 71_Mafia_website/build_page_gmc.py) -->
+<meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GMC Europa 2026 · MafgameStat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0b0b0e;--panel:#131318;--panel2:#17171d;--gold:#c9a14d;--gold-hi:#e8c87a;--ink:#f2efe8;--mut:#9b97a8;--dim:#5c5965;--hairline:rgba(232,200,122,.14);--lime:#8dc63f;--red:#e06c5c;}
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  html,body{max-width:100%;overflow-x:hidden;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,sans-serif;min-height:100vh;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(900px 420px at 50% -120px,rgba(201,161,77,.13),transparent 70%);}
+  .wrap{max-width:760px;margin:0 auto;padding:34px 14px 80px;position:relative;}
+  a{color:var(--gold-hi);text-decoration:none;}
+  .back{font-size:12px;color:var(--mut);letter-spacing:.4px;}
+  .eyebrow{margin-top:18px;font-size:11px;font-weight:800;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);}
+  h1{font-family:'Playfair Display',serif;font-size:30px;margin:6px 0 4px;line-height:1.15;}
+  .sub{color:var(--mut);font-size:13px;line-height:1.5;}
+  .disc{margin:16px 0 0;padding:12px 14px;border:1px solid var(--hairline);border-radius:12px;background:var(--panel);font-size:12.5px;color:var(--mut);line-height:1.55;}
+  .disc b{color:var(--ink);}
+  .nav{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,var(--bg) 78%,transparent);margin:14px -14px 4px;padding:10px 14px 8px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;}
+  .nav::-webkit-scrollbar{display:none;}
+  .chip{flex:none;font-size:12px;font-weight:700;color:var(--mut);border:1px solid var(--hairline);border-radius:999px;padding:7px 13px;background:var(--panel);cursor:pointer;white-space:nowrap;}
+  .chip.on{color:#0b0b0e;background:var(--gold);border-color:var(--gold);}
+  .sec{margin:30px 0 10px;font-size:11px;font-weight:800;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;}
+  .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--hairline),transparent);}
+  .note{font-size:12px;color:var(--mut);line-height:1.55;margin:6px 0 10px;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px;}
+  .kpi{background:var(--panel);border:1px solid var(--hairline);border-radius:12px;padding:12px 13px;}
+  .kpi .v{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold-hi);}
+  .kpi .l{font-size:11px;color:var(--mut);margin-top:3px;line-height:1.4;}
+  .tblwrap{overflow-x:auto;border:1px solid var(--hairline);border-radius:12px;background:var(--panel);}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:520px;}
+  th{position:sticky;top:0;font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--gold);background:var(--panel2);text-align:right;padding:9px 10px;white-space:nowrap;border-bottom:1px solid var(--hairline);}
+  th:first-child,td:first-child{text-align:left;}
+  th.l,td.l{text-align:left;}
+  td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);text-align:right;white-space:nowrap;color:var(--ink);}
+  tr:last-child td{border-bottom:none;}
+  td.nick{font-weight:700;}
+  td.pos{color:var(--lime);font-weight:700;}
+  td.neg{color:var(--red);}
+  td.mut{color:var(--mut);}
+  tr.zone td{background:rgba(141,198,63,.08);}
+  .legend{font-size:11px;color:var(--dim);margin:8px 2px 0;line-height:1.5;}
+  .blk{border:1px solid var(--hairline);border-radius:14px;background:var(--panel);margin-bottom:10px;padding:13px 15px;}
+  .blk .t{font-family:'Playfair Display',serif;font-size:17px;color:var(--gold-hi);margin-bottom:6px;}
+  .blk .b{font-size:12.5px;line-height:1.6;color:var(--mut);}
+  .blk .b b{color:var(--ink);}
+  .foot{margin-top:44px;font-size:11.5px;color:var(--dim);text-align:center;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← MafgameStat</a>
+  <div class="eyebrow">Серийник · German Mafia Cup</div>
+  <h1>GMC Europa 2026</h1>
+  <div class="sub" id="subline"></div>
+  <div class="disc"><b>Как устроен зачёт.</b> Никаких таблиц среднего балла: <b>топ-2 каждой отборочной серии проходит в финал напрямую</b> (10 игроков × 9 игр на серию). Финал — <b>14 ноября, Кёльн</b>, 18 игр каждому, приз от 3000&nbsp;€; организаторы планируют финал на 50–60 человек. Освободившиеся места отдают третьим местам серий — <b>по сумме набранных допов</b>.</div>
+  <div class="nav" id="nav"></div>
+  <div id="content"></div>
+  <div class="foot">MafgameStat · временная страница серийника · данные: <a href="https://mafgame.org/tournaments/664/view">mafgame.org</a> (протоколы 14 серий), регламент: описание турнира + канал germanmafiacup2019<br>сверка: протоколы ↔ официальные таблицы серий — 141/141 строка, 0 расхождений · победители ↔ посты канала — 12/12</div>
+</div>
+
+<script>
+'use strict';
+const D={"snapshot":"25.08.2026","qualified":[{"nick":"Ириска","series":"Köln 1","date":"02-08","place":1,"score":5.45,"ok":true},{"nick":"Akteur","series":"Köln 1","date":"02-08","place":2,"score":5.2,"ok":true},{"nick":"Берлин","series":"Прага 1","date":"03-01","place":1,"score":6.85,"ok":true},{"nick":"qUAest0r","series":"Прага 1","date":"03-01","place":2,"score":6.5,"ok":true},{"nick":"Барон","series":"Берлин 1","date":"03-15","place":1,"score":6.15,"ok":true},{"nick":"Mr. Smith🚀","series":"Берлин 1","date":"03-15","place":2,"score":5.5,"ok":true},{"nick":"Calypso","series":"Варшава","date":"04-18","place":1,"score":6.55,"ok":true},{"nick":"Landing","series":"Варшава","date":"04-18","place":2,"score":6.3,"ok":true},{"nick":"Licht","series":"Utrecht","date":"04-25","place":1,"score":6.85,"ok":true},{"nick":"KEX","series":"Utrecht","date":"04-25","place":2,"score":6.3,"ok":true},{"nick":"Медовая","series":"Брюссель 1","date":"05-09","place":1,"score":5.15,"ok":true},{"nick":"Sova","series":"Брюссель 1","date":"05-09","place":2,"score":5.1,"ok":true},{"nick":"VVince","series":"Вроцлав 1","date":"05-09","place":1,"score":6.9,"ok":true},{"nick":"Mjata","series":"Вроцлав 1","date":"05-09","place":2,"score":6.2,"ok":true},{"nick":"Capybara","series":"Краков 1","date":"05-10","place":1,"score":7.75,"ok":true},{"nick":"Foxy1","series":"Краков 1","date":"05-10","place":2,"score":6,"ok":true},{"nick":"Agent","series":"Франкфурт 1","date":"05-10","place":1,"score":5.9,"ok":true},{"nick":"Работяга","series":"Франкфурт 1","date":"05-10","place":2,"score":5.45,"ok":true},{"nick":"ParadoXx","series":"Берн","date":"05-16","place":1,"score":6.35,"ok":true},{"nick":"kser","series":"Берн","date":"05-16","place":2,"score":5.5,"ok":true},{"nick":"Мориарти","series":"Stuttgart","date":"05-17","place":1,"score":6.7,"ok":true},{"nick":"R.I.P.","series":"Stuttgart","date":"05-17","place":2,"score":6.15,"ok":true},{"nick":"Сергеевна","series":"Прага 2","date":"06-13","place":1,"score":6.7,"ok":true},{"nick":"Приезжий","series":"Прага 2","date":"06-13","place":2,"score":6.35,"ok":true},{"nick":"YeS","series":"Прага 3","date":"07-12","place":1,"score":7.25,"ok":true},{"nick":"Blackout","series":"Прага 3","date":"07-12","place":2,"score":5.7,"ok":true},{"nick":"Tommy","series":"Amsterdam 1","date":"08-15","place":1,"score":5.2,"ok":false},{"nick":"RAMZES","series":"Amsterdam 1","date":"08-15","place":2,"score":4.65,"ok":false}],"reserve":[{"nick":"Link","series":"Прага 2","gb":1.9,"score":5.45},{"nick":"mobi.","series":"Прага 1","gb":1.7,"score":6.2},{"nick":"Kokocik","series":"Stuttgart","gb":1.6,"score":5.55},{"nick":"jaraxxus","series":"Берлин 1","gb":1.3,"score":5.05},{"nick":"El_professor","series":"Брюссель 1","gb":1.2,"score":4.2},{"nick":"KEX","series":"Köln 1","gb":1.15,"score":5.15},{"nick":"Гіппократ","series":"Берн","gb":1.1,"score":4.85},{"nick":"El_professor","series":"Amsterdam 1","gb":1.1,"score":4.55},{"nick":"Кувер","series":"Вроцлав 1","gb":0.9,"score":4.15},{"nick":"Лео","series":"Франкфурт 1","gb":0.9,"score":4.8},{"nick":"Tихий","series":"Варшава","gb":0.8,"score":5.2},{"nick":"Funt","series":"Utrecht","gb":0.8,"score":6.05},{"nick":"TOPS","series":"Прага 3","gb":0.8,"score":5.4},{"nick":"Sweet Malina","series":"Краков 1","gb":0.7,"score":5.95}],"series":[{"id":732,"num":1,"city":"Cologne","date":"2026-02-08","judge":"Кура","top2":"Ириска 5.45 · Akteur 5.20","third":"KEX 5.15","town":4,"games":9,"gb":0.0828,"closed":true},{"id":741,"num":2,"city":"Prague","date":"2026-03-01","judge":null,"top2":"Берлин 6.85 · qUAest0r 6.50","third":"mobi. 6.20","town":5,"games":9,"gb":0.1333,"closed":true},{"id":742,"num":3,"city":"Berlin","date":"2026-03-15","judge":null,"top2":"Барон 6.15 · Mr. Smith🚀 5.50","third":"jaraxxus 5.05","town":4,"games":9,"gb":0.0944,"closed":true},{"id":820,"num":4,"city":"Warsaw","date":"2026-04-18","judge":null,"top2":"Calypso 6.55 · Landing 6.30","third":"Tихий 5.20","town":6,"games":9,"gb":0.0994,"closed":true},{"id":848,"num":5,"city":"Utrecht","date":"2026-04-25","judge":null,"top2":"Licht 6.85 · KEX 6.30","third":"Funt 6.05","town":5,"games":9,"gb":0.1067,"closed":true},{"id":778,"num":6,"city":"City of Brussels","date":"2026-05-09","judge":null,"top2":"Медовая 5.15 · Sova 5.10","third":"El_professor 4.20","town":2,"games":9,"gb":0.1067,"closed":true},{"id":856,"num":7,"city":"Wroclaw","date":"2026-05-09","judge":null,"top2":"VVince 6.90 · Mjata 6.20","third":"Кувер 4.15","town":4,"games":9,"gb":0.0922,"closed":true},{"id":743,"num":8,"city":"Krakow","date":"2026-05-10","judge":null,"top2":"Capybara 7.75 · Foxy1 6.00","third":"Sweet Malina 5.95","town":5,"games":9,"gb":0.1039,"closed":true},{"id":746,"num":9,"city":"Frankfurt am Main","date":"2026-05-10","judge":null,"top2":"Agent 5.90 · Работяга 5.45","third":"Лео 4.80","town":4,"games":9,"gb":0.1011,"closed":true},{"id":754,"num":10,"city":"Berne","date":"2026-05-16","judge":null,"top2":"ParadoXx 6.35 · kser 5.50","third":"Гіппократ 4.85","town":3,"games":9,"gb":0.0867,"closed":true},{"id":859,"num":11,"city":"Stuttgart","date":"2026-05-17","judge":null,"top2":"Мориарти 6.70 · R.I.P. 6.15","third":"Kokocik 5.55","town":4,"games":9,"gb":0.1111,"closed":true},{"id":806,"num":12,"city":"Prague","date":"2026-06-13","judge":null,"top2":"Сергеевна 6.70 · Приезжий 6.35","third":"Link 5.45","town":7,"games":9,"gb":0.1289,"closed":true},{"id":852,"num":13,"city":"Prague","date":"2026-07-12","judge":null,"top2":"YeS 7.25 · Blackout 5.70","third":"TOPS 5.40","town":5,"games":9,"gb":0.1022,"closed":true},{"id":936,"num":14,"city":"Amsterdam","date":"2026-08-15","judge":null,"top2":"Tommy 5.20 · RAMZES 4.65","third":"El_professor 4.55","town":1,"games":9,"gb":0.1111,"closed":false}],"upcoming":[{"id":891,"city":"Дортмунд","date":"2026-08-22"},{"id":753,"city":"Хемниц","date":"2026-08-29"},{"id":744,"city":"Брюссель 2","date":"2026-08-30"},{"id":948,"city":"Wroclaw 2","date":"2026-08-30"},{"id":945,"city":"Торревьеха","date":"2026-09-05"},{"id":748,"city":"Нюрнберг","date":"2026-09-12"},{"id":934,"city":"Берлин 2","date":"2026-09-13"},{"id":953,"city":"Lissabon","date":"2026-09-13"},{"id":779,"city":"Eindhoven","date":"2026-09-20"},{"id":960,"city":"Valencia","date":"2026-09-20"},{"id":747,"city":"Франкфурт 2","date":"2026-10-24"}],"kpi":[["14 / 25","серий сыграно (по регламенту будет 30)"],["126","игр · 1260 посадок · 121 игрок"],["28","слотов в финал занято — повторов нет"],["46.8%","игр выиграл город (59 из 126)"]]};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const f2=v=>v==null?'—':v.toFixed(2);
+const f3=v=>v==null?'—':v.toFixed(3);
+document.getElementById('subline').textContent='Финалисты и статус · снимок '+D.snapshot+' · сыграно 14 серий из 25';
+const SECTIONS=[['final','Финалисты'],['series','Серии'],['cal','Календарь'],['obs','Наблюдения'],['method','Метод']];
+function nav(cur){document.getElementById('nav').innerHTML=SECTIONS.map(([id,l])=>`<div class="chip${id===cur?' on':''}" onclick="go('${id}')">${l}</div>`).join('');}
+function go(id){nav(id);render(id);window.scrollTo({top:0});}
+function tbl(headers,rows,left){
+  const ths=headers.map((h,i)=>`<th${i===0||(left||[]).includes(i)?' class="l"':''}>${h}</th>`).join('');
+  return `<div class="tblwrap"><table><thead><tr>${ths}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
+}
+function final(){
+  const rows=D.qualified.map((q,i)=>`<tr class="zone"><td>${i+1}</td><td class="nick l">${esc(q.nick)}</td><td class="l">${esc(q.series)}</td><td>${q.place}</td><td class="pos">${f2(q.score)}</td><td class="mut l">${q.ok?'подтверждён':'серия не закрыта'}</td></tr>`);
+  const rrows=D.reserve.map((q,i)=>`<tr><td>${i+1}</td><td class="nick l">${esc(q.nick)}</td><td class="l">${esc(q.series)}</td><td class="pos">${f2(q.gb)}</td><td class="mut">${f2(q.score)}</td></tr>`);
+  return `<div class="sec">Прошли в финал · 28 слотов</div>
+  <div class="note">Топ-2 каждой серии. Повторов нет — 28 разных игроков. «Серия не закрыта» — Амстердам сыгран, но не закрыт на mafgame, поста о победителях пока нет.</div>
+  ${tbl(['#','Игрок','Серия','Место','Балл','Статус'],rows,[1,2,5])}
+  <div class="sec">Резерв замен — по сумме допов</div>
+  <div class="note">Если финалист снимается, место уходит третьим местам всех серий — в порядке <b style="color:var(--ink)">суммы набранных допов</b> (п.4 регламента). В 2025 по такой очереди в финал зашли 6 человек из 30.</div>
+  ${tbl(['#','Игрок','Серия','Сумма допов','Балл'],rrows,[1,2])}
+  <div class="legend">KEX в очереди с Кёльном, но он уже прошёл через Утрехт — его строка из очереди выпадает.</div>`;
+}
+function series(){
+  const rows=D.series.map(s=>`<tr><td>${s.num}</td><td class="l">${s.date.slice(5).replace('-','.')}</td><td class="l">${esc(s.city)}</td><td class="l">${s.judge?esc(s.judge):'—'}</td><td class="nick l">${esc(s.top2)}</td><td class="mut l">${esc(s.third)}</td><td>${s.town}/${s.games}</td><td>${f3(s.gb)}</td></tr>`);
+  return `<div class="sec">14 сыгранных серий</div>
+  <div class="note">Судью mafgame не хранит, канал назвал только одного (Кура, Кёльн-1). «Доп/посадку» — сырая рука серии: сравнивать серии между собой напрямую нельзя.</div>
+  ${tbl(['№','Дата','Город','Судья','Топ-2 → финал','3-е место','Город','Доп/пос.'],rows,[1,2,3,4,5])}
+  <div class="legend">Город выиграл 59 из 126 игр (46.8%) — контур сбалансирован. Крайности: Амстердам 1/9 за город, Прага-2 — 7/9. Ссылки на таблицы серий — mafgame.org/tournaments/{id}/results.</div>`;
+}
+function cal(){
+  const up=D.upcoming.map(u=>`<tr><td class="l">${u.date.slice(5).replace('-','.')}</td><td class="l">${esc(u.city)}</td><td class="mut l"><a href="https://mafgame.org/tournaments/${u.id}/view">id ${u.id}</a></td></tr>`);
+  return `<div class="sec">Ключевые цифры</div>
+  <div class="kpis">${D.kpi.map(([v,l])=>`<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('')}</div>
+  <div class="sec">Анонсированные серии</div>
+  ${tbl(['Дата','Город',''],up,[1,2])}
+  <div class="note">Дортмунд (22.08, id 891) числится с пустыми протоколами — не сыгран или не внесён. По регламенту серий будет 30 — до пяти могут ещё добавить. Дальше — финал <b style="color:var(--ink)">14 ноября, Кёльн</b>: 18 игр каждому, взнос 100&nbsp;€, приз от 3000&nbsp;€.</div>
+  <div class="sec">Регламент — коротко</div>
+  <div class="blk"><div class="b">Топ-2 каждой серии — в финал (пост канала от 05.02; описание турнира с «топ-1» устарело). План — 30 серий по 10 игроков × 9 игр, создано 25. Финал на 50–60 человек; если большинство согласится на полуфиналы — «2 по 30», и в финал выйдут 20. Замены — третьим местам по сумме допов. Главный судья и организатор — KEX. Баллы рейтинга mafgame серийник раздаст одним пакетом после финала (в 2025: 42…20 верхушке, остальным по 4).</div></div>`;
+}
+function obs(){
+  return `<div class="sec">Наблюдения по допам</div>
+  <div class="disc"><b>Флаг, а не обвинение.</b> Допы сравниваются с нормой той же серии, той же карты и того же исхода («остаток»). Высокий остаток — повод посмотреть игры глазами. Выборки маленькие (18–27 игр у игравших 2–3 серии); значимость — перестановочные тесты (6000 итераций) с поправкой FDR на 16 игроков с 15+ играми. ЛХ и Ci — автоматика платформы, в «щедрость» не входят.</div>
+  <div class="blk"><div class="t">Tommy: победа серии с двумя выигранными играми</div><div class="b">Амстердам: 2 победы из 9, но <b>допы 2.00 + Ci 1.60 + ЛХ 0.50</b> − штраф 0.40 = 5.20 и первое место — 71% балла набежало не из побед. Ci — автоматика (умирал первым 5 раз из 9), а вот допы ставит судья. Остаток по двум сериям +0.121/игру (p=0.0003, q=0.002). Амстердам-2025 Tommy тоже выигрывал.</div></div>
+  <div class="blk"><div class="t">YeS: вторая красная тряпка сезона</div><div class="b">По <b>2.00 допов</b> в каждой из двух серий; остаток +0.116/игру (p=0.0002, q=0.002). В Праге-3 подтвердил игрой (7 побед), во Франкфурте с 3 победами всё равно стал топ-1 серии по допам. Прагу-3 выигрывает второй год подряд.</div></div>
+  <div class="blk"><div class="t">Допы = путёвки: 6 слотов из 28</div><div class="b">Пересчёт таблиц без судейских допов меняет топ-2 в <b>6 сериях из 14</b>: слоты теряют qUAest0r, KEX, Foxy1, Работяга, Blackout, RAMZES; получают TOPS (дважды), Funt, Sweet Malina, Лео, El_professor. Медианный отрыв второго места от третьего — 0.45 балла: один-два допа решают путёвку. Это цена формата, не обвинение судьям.</div></div>
+  <div class="blk"><div class="t">Рука серии гуляет в 1.6 раза — судьи анонимны</div><div class="b">Кёльн-1 — 0.083 допа на посадку, Прага-1 — 0.133, Прага-2 — 0.129. Кто судил 13 серий из 14 — неизвестно: ни протоколы, ни канал этого не хранят. Анализ «судья × игрок» для GMC пока невозможен.</div></div>
+  <div class="blk"><div class="t">KEX в трёх ролях</div><div class="b">Главный судья и организатор чемпионата — и действующий игрок: 3-й в Кёльне, 2-й в Утрехте (слот в финал; без допов слот уходил Funt). Остаток +0.054/игру (p=0.032) — на грани, поправку не проходит.</div></div>`;
+}
+function method(){
+  return `<div class="sec">Метод и данные</div>
+  <div class="blk"><div class="b">Данные — протоколы game_results всех 14 сыгранных серий контура 664 на mafgame.org (126 игр, 1260 посадок), сверенные с официальными таблицами серий 1:1 (141 строка, 0 расхождений) и с постами канала germanmafiacup2019 (12/12 постов о победителях). Идентичность игроков между сериями — по user_id. Остатки: каждая посадка сравнивается со средним допом посадок той же серии, той же карты и того же исхода; сумма остатков игрока проверяется перестановочным тестом (6000 итераций) с поправкой Бенджамини-Хохберга. Страница временная, обновляется вручную после новых серий.</div></div>`;
+}
+function render(id){document.getElementById('content').innerHTML=({final,series,cal,obs,method})[id]();}
+go('final');
+</script>
+</body>
+</html>
