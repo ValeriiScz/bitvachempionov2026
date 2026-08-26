@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · calendar.html · v1.1 · 2026-08-26 · Календарь турниров mafgame 2026: три вида (лента уикендов / месяц-грид СБ-ВС / обзор года), MECE-фильтры (показ/тип/серии/звёзды/страны/игроки), «свой вид» (скрытия в localStorage), лобби с записанными и тирами гонки (топ-12/30/50), «еду» + экспорт .ics. v1.1: лобби = заявки+подтверждённые, составы прошедших турниров (фильтр игрока видит сыгранное), пресет «все 1★+», сброс фильтров сверху. Данные вшиты снимком 26.08 (пайплайн build_calendar3.py + calendar_2026.json в корне проекта); живая подтяжка через /mafgame/ — следующая версия -->
+<!-- MafgameStat · calendar.html · v1.2 · 2026-08-26 · Календарь турниров mafgame 2026: три вида (лента уикендов / месяц-грид СБ-ВС / обзор года), MECE-фильтры (показ/тип/серии/звёзды/страны/игроки), «свой вид» (скрытия в localStorage), лобби с записанными и тирами гонки (топ-12/30/50), «еду» + экспорт .ics. v1.1: лобби = заявки+подтверждённые, составы прошедших турниров (фильтр игрока видит сыгранное), пресет «все 1★+», сброс фильтров сверху. v1.2: тип «Командные» (7 турниров; kind=teams, ссылка «составы по командам» вместо лобби — mafgame отдаёт команды, не игроков; фильтр игрока их не прячет). Данные вшиты снимком 26.08 (пайплайн build_calendar3.py + calendar_2026.json в корне проекта); живая подтяжка через /mafgame/ — следующая версия -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -241,14 +241,16 @@ T.forEach(t=>{if(t.serialKey!=null && !serialNames[t.serialKey]){const n=(t.name
 const tierOf=pos=> pos<=12?'gold': pos<=30?'silv':'bron';
 
 /* состояние */
-const DEF={types:{reg:true,fin:true,ser:false},stars:{'0':false,'12':true,'3':true,'4':true},countries:[],sers:[],players:[],mineOnly:false,showPast:false,hideC:[],hideS:[],hideT:[],view:'feed',month:'2026-09'};
+const DEF={types:{reg:true,fin:true,ser:false,team:true},stars:{'0':false,'12':true,'3':true,'4':true},countries:[],sers:[],players:[],mineOnly:false,showPast:false,hideC:[],hideS:[],hideT:[],view:'feed',month:'2026-09'};
 let S=JSON.parse(JSON.stringify(DEF));
 try{const s=localStorage.getItem('cal26v3'); if(s) S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(s));}catch(e){}
+/* сохранённое состояние может быть без новых ключей (team и т.п.) — доливаем из DEF */
+S.types=Object.assign({},DEF.types,S.types||{}); S.stars=Object.assign({},DEF.stars,S.stars||{});
 let MY={}; try{MY=JSON.parse(localStorage.getItem('cal26_my')||'{}');}catch(e){}
 let OPENMENU=null, EXPREGS={}, SELDAY=null, plOpen=false;
 const save=()=>{try{localStorage.setItem('cal26v3',JSON.stringify(S));localStorage.setItem('cal26_my',JSON.stringify(MY));}catch(e){}};
 
-const typeOf=t=> t.kind==='serial' ? 'ser' : t.kind==='serial_final' ? 'fin' : 'reg';
+const typeOf=t=> t.kind==='serial' ? 'ser' : t.kind==='serial_final' ? 'fin' : t.kind==='teams' ? 'team' : 'reg';
 const starB=t=> t.stars===0?'0': t.stars<=2?'12': t.stars===3?'3':'4';
 
 function pass(t, ignorePast){
@@ -263,7 +265,10 @@ function pass(t, ignorePast){
   if(t.serialKey!=null && S.hideS.includes(t.serialKey)) return false;
   if(S.hideT.includes(t.id)) return false;
   if(S.players.length){
-    if(!t.regs || !t.regs.some(r=>S.players.some(p=>p[0]===r[0]))) return false;
+    const known=t.regs&&t.regs.length;
+    /* командные без пофамильного состава не прячем — состав по командам, сверить некем */
+    if(!known && t.kind!=='teams') return false;
+    if(known && !t.regs.some(r=>S.players.some(p=>p[0]===r[0]))) return false;
   }
   return true;
 }
@@ -287,6 +292,7 @@ function drawBar(){
     `<span class="sl">Тип</span>`+
     fb(S.types.reg,'Турниры',cN('reg'),"S.types.reg=!S.types.reg;refresh()")+
     fb(S.types.fin,'🏆 Финалы серий',cN('fin'),"S.types.fin=!S.types.fin;refresh()")+
+    fb(S.types.team,'👥 Командные',cN('team'),"S.types.team=!S.types.team;refresh()")+
     fb(S.types.ser,'Серии',cN('ser'),"S.types.ser=!S.types.ser;refresh()",'ser');
   // под-ряд конкретных серийников
   const rs=document.getElementById('rowSers');
@@ -367,6 +373,7 @@ function regsBlock(t){
   const past=t.start<TODAY;
   const regs=t.regs||[];
   const cap=t.exp||10;
+  if(t.kind==='teams' && !regs.length) return `<div class="lobby"><div class="lb-head"><span class="lt">${past?'Играли':'Лобби'}</span><span class="tops"><a href="https://mafgame.org/tournaments/${t.id}/participants" target="_blank" rel="noopener">составы по командам → mafgame</a></span></div></div>`;
   if(!regs.length) return past?'':`<div class="lobby"><div class="lb-head"><span class="lt">Лобби</span><span class="cnt">0<span style="color:var(--dim)">/${cap}</span></span><span class="tops"><a href="https://mafgame.org/tournaments/${t.id}/view">регистрация →</a></span></div><div class="lb-bar"><i style="width:0"></i></div></div>`;
   const conf=regs.filter(r=>r[2]!==0).length, appl=regs.length-conf;
   const tops=regs.filter(r=>TOPMAP[r[0]]).sort((a,b)=>TOPMAP[a[0]].pos-TOPMAP[b[0]].pos);
@@ -416,7 +423,7 @@ function card(t){
       <div class="danger" onclick="hideCountry('${esc(t.country)}')">Скрыть страну: ${esc(RU_C[t.country]||t.country)}</div>
       ${t.kind==='serial'?`<div onclick="onlySerial(${t.serialKey})">Только серия ${esc(t.serialName)}</div>`:''}
       ${t.serialKey!=null?`<div class="danger" onclick="hideSerial(${t.serialKey})">Скрыть серию: ${esc(t.serialName)}</div>`:''}
-      ${t.kind==='serial'?`<div class="danger" onclick="hideAllSer()">Скрыть все серии</div>`:`<div class="danger" onclick="hideStarB('${b}')">Скрыть все ${bl}</div>`}
+      ${t.kind==='serial'?`<div class="danger" onclick="hideAllSer()">Скрыть все серии</div>`:t.kind==='teams'?`<div class="danger" onclick="S.types.team=false;OPENMENU=null;refresh()">Скрыть все командные</div>`:`<div class="danger" onclick="hideStarB('${b}')">Скрыть все ${bl}</div>`}
       <div class="danger" onclick="hideT(${t.id})">Скрыть этот турнир</div>
     </div>`:'';
   return `<div class="card ${cls}" style="--acc:${acc}">
