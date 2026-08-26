@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v7.0 · 2026-06-20 -->
-<!-- MafgameStat · index.html · v2.5 · 2026-08-26 · главная-хаб: плашки турниров (актуальные/архив), реестр data/tournaments.js; секция «Серийник сезона» — промоблок MCL Europe 2026 в бренде лиги (видео/логотип, mcl2026.html v2.0); секция «Исследования» -->
+<!-- MafgameStat · index.html · v2.7 · 2026-08-26 · главная-хаб: плашки турниров (актуальные/архив), реестр data/tournaments.js; секция «Планировщик» (calendar.html); «Исследования» (research2025.html); MCL — промоблок в бренде лиги с видео (mcl2026.html v2.0), GMC — плашка (gmc2026.html) -->
 <!-- v2.2 · 2026-06-12 · плашки турниров, лого федерации — оригинал с mafgame.org -->
 <meta charset="utf-8">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -137,9 +137,9 @@
     .poster svg.palm{width:104px;height:120px;}
   }
 
-  /* промо серийника MCL */
+  /* промо серийника MCL (страница лиги в своём бренде) */
   .mclp{position:relative;display:block;overflow:hidden;border:1px solid rgba(198,90,180,.35);background:#0a0810;
-    margin:10px 0 18px;min-height:210px;text-decoration:none}
+    margin:10px 0 10px;min-height:210px;text-decoration:none}
   .mclp-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
   .mclp-sh{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,7,11,.96) 8%,rgba(8,7,11,.72) 46%,rgba(129,34,118,.42) 100%)}
   .mclp-lg{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:120px;opacity:.5}
@@ -229,16 +229,14 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   <div class="sec"><span class="dia">◆</span> Актуальные турниры</div>
   <div id="actual"></div>
 
-  <div class="sec"><span class="dia">◆</span> Серийник сезона</div>
-  <a class="mclp" href="mcl2026.html">
-    <video class="mclp-v" src="assets/mcl/intro.mp4" poster="assets/mcl/hero.jpg" muted playsinline loop preload="none"></video>
-    <div class="mclp-sh"></div>
-    <img class="mclp-lg" src="assets/mcl/logo-white.png" alt="MCL">
-    <div class="mclp-b">
-      <div class="mclp-e">IX season · 3 конференции</div>
-      <div class="mclp-t">MCL EUROPE <i>2026</i></div>
-      <div class="mclp-m">Зачёт, состав финала, серии и разбор данных. Финал 21–22.11, Прага · 3000 €</div>
-      <div class="mclp-r"><span class="mclp-go">Открыть страницу лиги →</span><span class="mclp-n">12 / 26 серий</span></div>
+  <div class="sec"><span class="dia">◆</span> Планировщик</div>
+  <a class="tile" href="calendar.html">
+    <div class="tbody">
+      <div class="stars">📅 КАЛЕНДАРЬ · ВЕСЬ ГОД</div>
+      <div class="tname">Календарь турниров 2026</div>
+      <div class="tmeta"><b>72 турнира впереди</b><span class="sep">·</span><b>13 стран</b><span class="sep">·</span><b>баллы и лобби</b><br>
+      кто уже записан из топ-30 гонки, фильтры по сериям/звёздам/странам, «свой вид» и экспорт в календарь телефона</div>
+      <div class="trow"><span class="badge upcoming">Новое</span><span class="go">Открыть</span></div>
     </div>
   </a>
 
@@ -253,6 +251,27 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     </div>
   </a>
 
+  <a class="mclp" href="mcl2026.html">
+    <video class="mclp-v" src="assets/mcl/intro.mp4" poster="assets/mcl/hero.jpg" muted playsinline loop preload="none"></video>
+    <div class="mclp-sh"></div>
+    <img class="mclp-lg" src="assets/mcl/logo-white.png" alt="MCL">
+    <div class="mclp-b">
+      <div class="mclp-e">IX season · 3 конференции</div>
+      <div class="mclp-t">MCL EUROPE <i>2026</i></div>
+      <div class="mclp-m">Зачёт, состав финала, серии и разбор данных. Финал 21–22.11, Прага · 3000 €</div>
+      <div class="mclp-r"><span class="mclp-go">Открыть страницу лиги →</span><span class="mclp-n">12 / 26 серий</span></div>
+    </div>
+  </a>
+
+  <a class="tile" href="gmc2026.html">
+    <div class="tbody">
+      <div class="stars">🏆 СЕРИЙНИК · СЕЗОН 2026</div>
+      <div class="tname">GMC Europa 2026 — финалисты и статус</div>
+      <div class="tmeta"><b>25 серий</b><span class="sep">·</span><b>14 сыграно</b><span class="sep">·</span><b>121 игрок</b><br>
+      топ-2 серии → финал, резерв замен по допам, календарь — финал 14.11 в Кёльне</div>
+      <div class="trow"><span class="badge upcoming">Новое</span><span class="go">Открыть</span></div>
+    </div>
+  </a>
 
   <div class="archive">
     <div class="sec"><span class="dia">◆</span> Архив</div>
