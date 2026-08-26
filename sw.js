@@ -1,5 +1,5 @@
 /* ============================================================================
-   MafgameStat · sw.js (Service Worker для PWA) · v1.8 · 2026-08-25 (кэш v17.3: gmc2026 — таблица «Судьи · агрегат» в Наблюдениях)
+   MafgameStat · sw.js (Service Worker для PWA) · v1.9 · 2026-08-26 (кэш v18: +calendar.html — календарь турниров года)
    Назначение: офлайн-кэш ОБОЛОЧКИ сайта (html/js/иконки) + установка как
    приложение. Данные турниров НЕ замораживаются кэшем.
 
@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'mafgamestat-v17.3';
+const CACHE_VERSION = 'mafgamestat-v18';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -31,6 +31,7 @@ const PRECACHE = [
   'research2025.html',
   'mcl2026.html',
   'gmc2026.html',
+  'calendar.html',
   'tournament.html',
   'participants.html',
   'data/tournaments.js',
