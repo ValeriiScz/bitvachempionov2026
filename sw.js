@@ -1,5 +1,5 @@
 /* ============================================================================
-   MafgameStat · sw.js (Service Worker для PWA) · v1.11 · 2026-08-26 (кэш v18.2: calendar.html v1.2 — тип «Командные»)
+   MafgameStat · sw.js (Service Worker для PWA) · v1.12 · 2026-08-26 (кэш v18.3: calendar.html v1.3 — составы командных)
    Назначение: офлайн-кэш ОБОЛОЧКИ сайта (html/js/иконки) + установка как
    приложение. Данные турниров НЕ замораживаются кэшем.
 
@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'mafgamestat-v18.2';
+const CACHE_VERSION = 'mafgamestat-v18.3';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
