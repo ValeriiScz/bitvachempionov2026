@@ -1,153 +1,560 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl2026.html · v1.1 · 2026-08-25 · +квоты и сила конференций в «Наблюдениях», календарь со странами и ссылками на регистрацию, ссылки серий на mafgame, призёры столбиком -->
-<!-- v1.0 · 2026-08-25 · MCL Europe 2026 (серийник 757): зачёт трёх конференций по регламенту (средний балл, мин. 2 серии), серии с судьями (из канала @mafiamcl), календарь, наблюдения по допам (остатки против страт). Временная страница; данные вшиты снимком, обновляется перегенерацией (пайплайн 71_Mafia_website/build_page.py) -->
+<!-- MafgameStat · mcl2026.html · v2.0 · 2026-08-26 · РЕДИЗАЙН в бренде MCL (чёрный/#812276/#db514e, конденсед-италик): интро-анимация логотипа, видео-герой, тикер, зачёт всех игроков с подсветкой числа серий, состав финала карточками, серии с фото победителей, календарь, разбор. Ассеты: assets/mcl/*. Данные вшиты снимком (пайплайн build_data.py + build_page2.py) -->
+<!-- v1.1 · 2026-08-25 · квоты/календарь/призёры · v1.0 · 2026-08-25 · первая версия -->
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08070b">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MCL Europe 2026 · MafgameStat</title>
+<meta name="description" content="Mafia Champions League Europe 2026: зачёт трёх конференций, состав финала, серии, календарь и разбор данных.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,400;0,600;0,700;1,700;1,800&family=Fira+Sans+Extra+Condensed:ital,wght@0,800;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0b0b0e;--panel:#131318;--panel2:#17171d;--gold:#c9a14d;--gold-hi:#e8c87a;--ink:#f2efe8;--mut:#9b97a8;--dim:#5c5965;--hairline:rgba(232,200,122,.14);--lime:#8dc63f;--red:#e06c5c;}
-  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
-  html,body{max-width:100%;overflow-x:hidden;}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,sans-serif;min-height:100vh;}
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(900px 420px at 50% -120px,rgba(201,161,77,.13),transparent 70%);}
-  .wrap{max-width:760px;margin:0 auto;padding:34px 14px 80px;position:relative;}
-  a{color:var(--gold-hi);text-decoration:none;}
-  .back{font-size:12px;color:var(--mut);letter-spacing:.4px;}
-  .eyebrow{margin-top:18px;font-size:11px;font-weight:800;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);}
-  h1{font-family:'Playfair Display',serif;font-size:30px;margin:6px 0 4px;line-height:1.15;}
-  .sub{color:var(--mut);font-size:13px;line-height:1.5;}
-  .disc{margin:16px 0 0;padding:12px 14px;border:1px solid var(--hairline);border-radius:12px;background:var(--panel);font-size:12.5px;color:var(--mut);line-height:1.55;}
-  .disc b{color:var(--ink);}
-  .nav{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,var(--bg) 78%,transparent);margin:14px -14px 4px;padding:10px 14px 8px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;}
-  .nav::-webkit-scrollbar{display:none;}
-  .chip{flex:none;font-size:12px;font-weight:700;color:var(--mut);border:1px solid var(--hairline);border-radius:999px;padding:7px 13px;background:var(--panel);cursor:pointer;white-space:nowrap;}
-  .chip.on{color:#0b0b0e;background:var(--gold);border-color:var(--gold);}
-  .sec{margin:30px 0 10px;font-size:11px;font-weight:800;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;}
-  .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--hairline),transparent);}
-  .note{font-size:12px;color:var(--mut);line-height:1.55;margin:6px 0 10px;}
-  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px;}
-  .kpi{background:var(--panel);border:1px solid var(--hairline);border-radius:12px;padding:12px 13px;}
-  .kpi .v{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold-hi);}
-  .kpi .l{font-size:11px;color:var(--mut);margin-top:3px;line-height:1.4;}
-  .tblwrap{overflow-x:auto;border:1px solid var(--hairline);border-radius:12px;background:var(--panel);}
-  table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:520px;}
-  th{position:sticky;top:0;font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--gold);background:var(--panel2);text-align:right;padding:9px 10px;white-space:nowrap;border-bottom:1px solid var(--hairline);}
-  th:first-child,td:first-child{text-align:left;}
-  th.l,td.l{text-align:left;}
-  td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);text-align:right;white-space:nowrap;color:var(--ink);}
-  tr:last-child td{border-bottom:none;}
-  td.nick{font-weight:700;}
-  td.pos{color:var(--lime);font-weight:700;}
-  td.neg{color:var(--red);}
-  td.mut{color:var(--mut);}
-  tr.zone td{background:rgba(141,198,63,.08);}
-  tr.cut td{border-bottom:2px solid var(--gold-dim, rgba(201,161,77,.35));}
-  .legend{font-size:11px;color:var(--dim);margin:8px 2px 0;line-height:1.5;}
-  .mini{display:flex;gap:6px;margin:8px 0 10px;flex-wrap:wrap;}
-  .mini .m{font-size:11.5px;font-weight:700;color:var(--mut);border:1px solid var(--hairline);border-radius:8px;padding:5px 10px;background:var(--panel);cursor:pointer;}
-  .mini .m.on{color:#0b0b0e;background:var(--gold-hi);border-color:var(--gold-hi);}
-  .blk{border:1px solid var(--hairline);border-radius:14px;background:var(--panel);margin-bottom:10px;padding:13px 15px;}
-  .blk .t{font-family:'Playfair Display',serif;font-size:17px;color:var(--gold-hi);margin-bottom:6px;}
-  .blk .b{font-size:12.5px;line-height:1.6;color:var(--mut);}
-  .blk .b b{color:var(--ink);}
-  .foot{margin-top:44px;font-size:11.5px;color:var(--dim);text-align:center;line-height:1.6;}
+:root{
+  --bg:#08070b; --bg2:#0d0b11; --panel:#131018; --panel2:#191320; --line:rgba(198,90,180,.20);
+  --pur:#812276; --pur-hi:#c65ab4; --pur-dp:#4a1243; --red:#db514e;
+  --ink:#ffffff; --mut:#9c93a6; --dim:#615a6c;
+  --ff-h:'Fira Sans Extra Condensed','Fira Sans Condensed','PT Sans Narrow','Arial Narrow',sans-serif;
+  --ff-n:'Fira Sans Condensed','Arial Narrow',sans-serif;
+  --ff-b:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --cut:14px;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+html,body{max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:66px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-b);font-size:15px;line-height:1.55}
+a{color:var(--pur-hi);text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{width:min(1180px,100%);margin:0 auto;padding:0 16px}
+.h{font-family:var(--ff-h);font-style:italic;font-weight:800;text-transform:uppercase;letter-spacing:.01em;line-height:.92}
+.num{font-family:var(--ff-n);font-variant-numeric:tabular-nums;font-weight:700}
+.cutbox{clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.22;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.scan{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.35;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px)}
+
+/* ── интро ── */
+#intro{position:fixed;inset:0;z-index:60;background:#000;display:grid;place-items:center;transition:opacity .5s ease,visibility .5s}
+#intro[hidden]{display:none}
+#intro.off{opacity:0;visibility:hidden}
+#intro video{width:min(78vw,560px);mix-blend-mode:screen}
+#intro .cap{position:absolute;bottom:16%;left:0;right:0;text-align:center;font-family:var(--ff-h);font-style:italic;font-weight:800;
+  font-size:clamp(15px,3.4vw,24px);letter-spacing:.22em;color:#fff;opacity:0;animation:capin .9s ease 2.1s forwards;text-transform:uppercase}
+#intro .cap b{color:var(--pur-hi);font-weight:800}
+@keyframes capin{to{opacity:1}}
+#intro .skip{position:absolute;bottom:26px;right:22px;font-size:11px;letter-spacing:.18em;color:var(--dim);
+  border:1px solid rgba(255,255,255,.14);border-radius:2px;padding:8px 14px;background:transparent;cursor:pointer;text-transform:uppercase;font-family:var(--ff-b)}
+#intro .skip:hover{color:#fff;border-color:var(--pur-hi)}
+
+/* ── шапка ── */
+.top{position:sticky;top:0;z-index:30;background:rgba(8,7,11,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .in{display:flex;align-items:center;gap:14px;height:58px}
+.top .mark{display:flex;align-items:center;gap:10px;flex:none}
+.top .mark img{width:34px;height:34px;object-fit:contain}
+.top .mark span{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:19px;letter-spacing:.06em}
+.top .mark i{color:var(--pur-hi);font-style:italic}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-family:var(--ff-n);font-weight:600;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);
+  padding:9px 13px;white-space:nowrap;transform:skewX(-11deg);transition:.15s}
+.nav a span{display:inline-block;transform:skewX(11deg)}
+.nav a:hover{color:#fff}
+.nav a.on{background:var(--pur);color:#fff}
+.tobtn{flex:none;font-family:var(--ff-n);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--red);color:#fff;border:0;padding:9px 15px;cursor:pointer;transform:skewX(-11deg);font-family:var(--ff-b)}
+.tobtn span{display:inline-block;transform:skewX(11deg)}
+.tobtn:hover{background:#e8615e}
+
+/* ── герой ── */
+.hero{position:relative;min-height:clamp(520px,86svh,760px);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero .bg{position:absolute;inset:0;z-index:-2;background:#000 center/cover no-repeat;transform:scale(1.06);animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{to{transform:scale(1.14) translate3d(-1.6%,-1.2%,0)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(8,7,11,.72) 0%,rgba(8,7,11,.30) 34%,rgba(8,7,11,.86) 74%,var(--bg) 100%),
+             radial-gradient(90% 60% at 50% 8%,rgba(129,34,118,.42),transparent 66%)}
+.hero .spot{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;transition:background-position .25s ease;
+  background:radial-gradient(320px 320px at var(--mx,50%) var(--my,30%),rgba(198,90,180,.30),transparent 70%)}
+.hero .in{padding:0 16px 34px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--ff-n);font-weight:700;font-size:12px;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--pur-hi)}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--red)}
+.hero h1{margin:12px 0 0;font-size:clamp(54px,13.5vw,168px);letter-spacing:-.012em}
+.hero h1 .o{-webkit-text-stroke:2px rgba(255,255,255,.72);color:transparent;paint-order:stroke fill}
+.hero .sub{margin-top:10px;font-family:var(--ff-h);font-style:italic;font-weight:800;text-transform:uppercase;
+  font-size:clamp(17px,4.2vw,30px);color:#fff;letter-spacing:.03em}
+.hero .sub b{color:var(--pur-hi)}
+.hero .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.fact{background:rgba(19,16,24,.72);border:1px solid var(--line);padding:9px 14px;backdrop-filter:blur(6px)}
+.fact .k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.fact .v{font-family:var(--ff-n);font-weight:700;font-size:19px;color:#fff;margin-top:1px}
+.fact .v i{color:var(--red);font-style:normal}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--ff-n);font-weight:700;font-size:13px;letter-spacing:.16em;
+  text-transform:uppercase;padding:13px 22px;border:0;cursor:pointer;transform:skewX(-11deg);background:var(--pur);color:#fff;transition:.15s}
+.btn>*{transform:skewX(11deg)}
+.btn:hover{background:var(--pur-hi)}
+.btn.gh{background:transparent;border:1px solid rgba(255,255,255,.28);color:#fff}
+.btn.gh:hover{border-color:var(--pur-hi);background:rgba(129,34,118,.22)}
+.play{width:9px;height:11px;background:#fff;clip-path:polygon(0 0,100% 50%,0 100%)}
+
+/* ── тикер ── */
+.tick{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,var(--pur-dp),#120b12 55%,var(--pur-dp));overflow:hidden}
+.tick .row{display:flex;gap:0;width:max-content;animation:run 46s linear infinite}
+.tick:hover .row{animation-play-state:paused}
+@keyframes run{to{transform:translateX(-50%)}}
+.tick span{font-family:var(--ff-n);font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.86);padding:11px 0;white-space:nowrap}
+.tick span::after{content:"◆";color:var(--red);margin:0 20px;font-size:9px;vertical-align:middle}
+
+/* ── секции ── */
+section{padding:64px 0 8px;position:relative}
+.sechead{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.sechead .no{font-family:var(--ff-n);font-weight:700;font-size:13px;color:var(--red);letter-spacing:.2em}
+.sechead h2{margin:0;font-size:clamp(30px,7vw,58px)}
+.sechead .line{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent);align-self:center}
+.lead{color:var(--mut);font-size:14px;max-width:62ch;margin:10px 0 26px}
+.lead b{color:#fff;font-weight:600}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
+.kpi{background:var(--panel);border:1px solid var(--line);padding:16px 16px 14px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur)}
+.kpi .v{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:34px;line-height:1;color:#fff}
+.kpi .l{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:7px}
+/* прогресс конференций */
+.confs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.cbox{background:var(--panel);border:1px solid var(--line);padding:16px}
+.cbox .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase}
+.cbox .q{font-size:12px;color:var(--mut);margin-top:2px}
+.cbox .bar{height:6px;background:#241c2b;margin-top:12px;position:relative;overflow:hidden}
+.cbox .bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--pur),var(--pur-hi))}
+.cbox .n{display:flex;justify-content:space-between;margin-top:7px;font-family:var(--ff-n);font-size:12.5px;color:var(--mut)}
+.cbox .n b{color:#fff}
+
+/* табы */
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 16px}
+.tab{font-family:var(--ff-n);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);
+  background:var(--panel);border:1px solid var(--line);padding:11px 18px;cursor:pointer;transform:skewX(-11deg);transition:.15s}
+.tab span{display:inline-block;transform:skewX(11deg)}
+.tab:hover{color:#fff}
+.tab.on{background:var(--pur);border-color:var(--pur);color:#fff}
+
+/* зачёт */
+.stbl{border:1px solid var(--line);background:var(--panel);}
+.sth,.srow{display:grid;grid-template-columns:40px 42px minmax(0,1fr) 82px 88px;gap:10px;align-items:center;padding:9px 14px}
+.sth{background:var(--panel2);border-bottom:1px solid var(--line);position:sticky;top:58px;z-index:6}
+.sth div{font-family:var(--ff-n);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pur-hi)}
+.sth .r,.srow .r{text-align:right}
+.srow{border-bottom:1px solid rgba(255,255,255,.05);position:relative}
+.srow:last-child{border-bottom:0}
+.srow:hover{background:rgba(129,34,118,.10)}
+.srow .rk{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:21px;color:var(--dim);text-align:center}
+.srow.zone .rk{color:var(--pur-hi)}
+.srow.zone::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur-hi)}
+.srow.zone{background:linear-gradient(90deg,rgba(129,34,118,.18),transparent 62%)}
+.av{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#241c2b;border:1px solid rgba(255,255,255,.12)}
+.srow.zone .av{border-color:var(--pur-hi);box-shadow:0 0 0 2px rgba(198,90,180,.25)}
+.nick{font-family:var(--ff-n);font-weight:700;font-size:16px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.det{font-size:11px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.avg{font-family:var(--ff-n);font-weight:700;font-size:19px;text-align:right;color:#fff}
+.srow.zone .avg{color:var(--pur-hi)}
+.pill em{font-style:normal}
+.pill{display:inline-block;min-width:76px;white-space:nowrap;text-align:center;font-family:var(--ff-n);font-weight:700;font-size:12px;
+  letter-spacing:.06em;padding:4px 8px;border:1px solid var(--line);color:var(--pur-hi);background:rgba(129,34,118,.16)}
+.srow.one{opacity:.72}
+.srow.one .nick,.srow.one .avg{color:var(--mut)}
+.srow.one .pill{color:var(--red);border-color:rgba(219,81,78,.4);background:rgba(219,81,78,.10)}
+.cutline{display:flex;align-items:center;gap:12px;padding:7px 14px;background:rgba(198,90,180,.10);border-top:1px dashed rgba(198,90,180,.5);border-bottom:1px dashed rgba(198,90,180,.5)}
+.cutline b{font-family:var(--ff-n);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pur-hi)}
+.cutline i{flex:1;height:1px;background:rgba(198,90,180,.32)}
+.legend{font-size:11.5px;color:var(--dim);margin-top:10px;line-height:1.6}
+.legend em{color:var(--red);font-style:normal}
+
+/* состав */
+.squad{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px}
+.sq{position:relative;aspect-ratio:3/4;background:var(--panel);border:1px solid var(--line);overflow:hidden}
+.sq .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12) brightness(.86)}
+.sq .duo{position:absolute;inset:0;background:linear-gradient(165deg,rgba(198,90,180,.65),rgba(74,18,67,.9));mix-blend-mode:color}
+.sq .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,7,11,.15) 30%,rgba(8,7,11,.86) 72%,rgba(8,7,11,.97))}
+.sq .ghost{position:absolute;right:-8px;top:-14px;font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:96px;
+  color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.16);line-height:1}
+.sq .slot{position:absolute;top:9px;left:10px;font-family:var(--ff-n);font-weight:700;font-size:10.5px;letter-spacing:.14em;
+  color:#fff;background:var(--red);padding:3px 7px}
+.sq .body{position:absolute;left:11px;right:11px;bottom:10px}
+.sq .nm{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:26px;text-transform:uppercase;line-height:.95;
+  color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.6);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sq .st{display:flex;gap:10px;margin-top:6px;align-items:baseline}
+.sq .st b{font-family:var(--ff-n);font-weight:700;font-size:20px;color:var(--pur-hi)}
+.sq .st s{text-decoration:none;font-size:11px;color:var(--mut);letter-spacing:.04em}
+.sq.empty{display:grid;place-items:center}
+.sq.empty .q{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:64px;color:rgba(255,255,255,.14)}
+.sq:hover .ph{filter:grayscale(.15) contrast(1.06) brightness(1)}
+.sq:hover .duo{opacity:.45}
+
+/* серии */
+.wcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:14px}
+.wcard{position:relative;overflow:hidden;border:1px solid var(--line);background:#000}
+.wcard img{width:100%;aspect-ratio:16/9;object-fit:cover;opacity:.92;transition:.4s}
+.wcard:hover img{transform:scale(1.03);opacity:1}
+.wcard .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;
+  background:linear-gradient(180deg,transparent,rgba(8,7,11,.92))}
+.wcard .cap .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase}
+.wcard .cap .s{font-size:11.5px;color:var(--mut);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.slist{display:grid;gap:8px}
+.sitem{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:14px;align-items:center;background:var(--panel);
+  border:1px solid var(--line);padding:12px 14px;transition:.15s}
+.sitem:hover{border-color:rgba(198,90,180,.45);background:var(--panel2)}
+.sitem .id{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:26px;color:var(--pur-hi);line-height:1}
+.sitem .id s{display:block;text-decoration:none;font-family:var(--ff-b);font-style:normal;font-weight:600;font-size:10px;
+  letter-spacing:.1em;color:var(--dim);margin-top:2px}
+.sitem .meta{font-size:12px;color:var(--mut);letter-spacing:.04em}
+.sitem .meta b{color:#fff;font-family:var(--ff-n);font-size:15px;font-weight:700;letter-spacing:0}
+.pod{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.pod span{font-size:12px;color:var(--mut);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:3px 8px}
+.pod span b{color:#fff;font-family:var(--ff-n);font-weight:700}
+.pod span:first-child{border-color:rgba(198,90,180,.45);background:rgba(129,34,118,.18)}
+.pod span:first-child b{color:var(--pur-hi)}
+.sitem .go{font-family:var(--ff-n);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pur-hi);white-space:nowrap}
+
+/* календарь */
+.cal{display:grid;gap:8px}
+.cev{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center;background:var(--panel);border:1px solid var(--line);padding:13px 14px;position:relative}
+.cev::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}
+.cev .d{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:24px;color:#fff;line-height:1}
+.cev .d s{display:block;text-decoration:none;font-family:var(--ff-b);font-style:normal;font-weight:600;font-size:10.5px;letter-spacing:.14em;color:var(--red);margin-top:3px}
+.cev .w{font-family:var(--ff-n);font-weight:700;font-size:16px;color:#fff}
+.cev .w s{text-decoration:none;color:var(--mut);font-weight:400;font-size:12.5px;display:block;letter-spacing:.05em;font-family:var(--ff-b)}
+.cev .reg{font-family:var(--ff-n);font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid rgba(198,90,180,.45);color:var(--pur-hi);padding:8px 13px;white-space:nowrap;transition:.15s}
+.cev .reg:hover{background:var(--pur);color:#fff;border-color:var(--pur)}
+.final{margin-top:12px;background:linear-gradient(120deg,var(--pur-dp),#140d16 60%);border:1px solid rgba(198,90,180,.4);padding:22px 18px;position:relative;overflow:hidden}
+.final .lbl{font-family:var(--ff-n);font-weight:700;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--red)}
+.final .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:clamp(28px,6vw,46px);text-transform:uppercase;margin-top:4px}
+.final .row{display:flex;flex-wrap:wrap;gap:20px;margin-top:14px}
+.final .row div .k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.final .row div .v{font-family:var(--ff-n);font-weight:700;font-size:20px;color:#fff}
+.final img{position:absolute;right:-30px;top:-30px;width:220px;opacity:.10;pointer-events:none}
+
+/* разбор */
+.blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.blk{background:var(--panel);border:1px solid var(--line);padding:18px;position:relative}
+.blk .bt{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase;color:#fff;line-height:1.05}
+.blk .bb{font-size:13.5px;color:var(--mut);margin-top:9px;line-height:1.62}
+.blk .bb b{color:#fff}
+.blk .big{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:44px;color:var(--pur-hi);line-height:1;margin-bottom:2px}
+.tw{overflow-x:auto;border:1px solid var(--line);background:var(--panel);margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:560px}
+th{font-family:var(--ff-n);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--pur-hi);
+  background:var(--panel2);text-align:right;padding:10px;white-space:nowrap;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);text-align:right;white-space:nowrap;color:#e9e5ee}
+tr:last-child td{border-bottom:0}
+td.nm{font-family:var(--ff-n);font-weight:700;color:#fff}
+.zero{color:var(--red);font-weight:700}
+
+/* модалка */
+#modal{position:fixed;inset:0;z-index:50;background:rgba(4,3,6,.94);display:none;place-items:center;padding:16px}
+#modal.on{display:grid}
+#modal .box{width:min(1000px,100%)}
+#modal video{width:100%;border:1px solid var(--line);background:#000}
+#modal .x{margin:10px 0 0;background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;padding:9px 16px;
+  font-family:var(--ff-n);font-weight:700;letter-spacing:.14em;font-size:12px;text-transform:uppercase;cursor:pointer}
+
+footer{margin-top:60px;border-top:1px solid var(--line);background:#050409;padding:30px 0 44px}
+footer .in{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+footer img{width:64px;opacity:.85}
+footer .txt{font-size:12px;color:var(--dim);line-height:1.7}
+footer .txt b{color:var(--mut)}
+.up{margin-left:auto;font-family:var(--ff-n);font-weight:700;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pur-hi)}
+
+@media (max-width:720px){
+  html{scroll-padding-top:112px}
+  .top .in{height:auto;flex-wrap:wrap;padding-top:9px;row-gap:0}
+  .top .mark img{width:30px;height:30px}.top .mark span{font-size:17px}
+  .nav{order:3;width:100%;margin:7px -16px 0;padding:0 16px;border-top:1px solid rgba(255,255,255,.06)}
+  .nav a{padding:10px 10px;font-size:11.5px;letter-spacing:.1em}
+  .tobtn{margin-left:auto;padding:8px 12px;font-size:11px}
+  .sth{top:104px}
+  .hero::after{background:linear-gradient(180deg,rgba(8,7,11,.82) 0%,rgba(8,7,11,.46) 30%,rgba(8,7,11,.9) 72%,var(--bg) 100%),radial-gradient(90% 60% at 50% 8%,rgba(129,34,118,.42),transparent 66%)}
+  .sth,.srow{grid-template-columns:26px 32px minmax(0,1fr) 62px 44px;gap:7px;padding:9px 10px}
+  .srow .rk{font-size:17px}.avg{font-size:16px}.nick{font-size:14.5px}.av{width:32px;height:32px}
+  .pill{min-width:38px;font-size:11.5px;padding:3px 4px}
+  .det{display:none}
+  .pill em{display:none}
+  .sitem{grid-template-columns:46px minmax(0,1fr);row-gap:8px}
+  .sitem .go{grid-column:1/-1}
+  .cev{grid-template-columns:60px 1fr;row-gap:10px}
+  .cev .reg{grid-column:1/-1;text-align:center}
+  section{padding:46px 0 6px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero .bg{animation:none}.tick .row{animation:none}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html">← MafgameStat</a>
-  <div class="eyebrow">Серийник · сезон IX</div>
-  <h1>MCL Europe 2026</h1>
-  <div class="sub" id="subline"></div>
-  <div class="disc"><b>Как устроен зачёт.</b> Три конференции (Central Europe, Израиль, Кипр). Зачёт — <b>средний балл за серию</b>, играть нужно <b>минимум 2 серии</b>. В финал (21–22.11, Прага, приз 3000&nbsp;€) идут 6 из CE напрямую и по 2 из Израиля и Кипра через полуфиналы (итог ПФ = 40% отбора + 60% полуфинала). Таблица ниже — срез на дату снимка: сезон в середине, зачёт ещё много раз перевернётся.</div>
-  <div class="nav" id="nav"></div>
-  <div id="content"></div>
-  <div class="foot">MafgameStat · временная страница серийника · данные: <a href="https://mafgame.org/tournaments/757/view">mafgame.org</a> (протоколы 12 серий), регламент и судьи: канал @mafiamcl<br>сверка: протоколы ↔ официальные таблицы серий — 120/120 строк, 0 расхождений</div>
+<div class="grain"></div><div class="scan"></div>
+
+<div id="intro" hidden>
+  <video id="introv" muted playsinline preload="auto" src="assets/mcl/intro.mp4"></video>
+  <div class="cap">Mafia Champions League · <b>Europe 2026</b></div>
+  <button class="skip" id="skip">пропустить</button>
 </div>
+
+<header class="top">
+  <div class="wrap in">
+    <a class="mark" href="index.html" title="На главную MafgameStat">
+      <img src="assets/mcl/logo-white.png" alt="MCL">
+      <span>MCL <i>2026</i></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#season"><span>Сезон</span></a>
+      <a href="#stand"><span>Зачёт</span></a>
+      <a href="#squad"><span>Состав</span></a>
+      <a href="#series"><span>Серии</span></a>
+      <a href="#cal"><span>Календарь</span></a>
+      <a href="#lab"><span>Разбор</span></a>
+    </nav>
+    <button class="tobtn" id="teaser1"><span>▶ Анонс</span></button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="bg" style="background-image:url(assets/mcl/hero.jpg)"></div>
+  <div class="spot" id="spot"></div>
+  <div class="wrap in">
+    <div class="eyebrow">IX season · Mafgame ★★★★</div>
+    <h1 class="h">MCL <span class="o">EUROPE</span></h1>
+    <div class="sub">Три конференции · <b>10 мест в финале</b> · Прага, 21–22.11</div>
+    <div class="facts" id="facts"></div>
+    <div class="cta">
+      <a class="btn" href="#stand"><span>Смотреть зачёт</span></a>
+      <button class="btn gh" id="teaser2"><i class="play"></i><span>Анонс сезона</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="tick"><div class="row" id="tick"></div></div>
+
+<main>
+<section id="season"><div class="wrap">
+  <div class="sechead"><div class="no">01</div><h2 class="h">Сезон</h2><div class="line"></div></div>
+  <p class="lead">Сезон прошёл половину дистанции. Зачёт — <b>средний балл за серию</b>, в зачёт попадают только те, кто сыграл <b>минимум две</b>. Очки не сгорают, поэтому таблица переворачивается до последней серии.</p>
+  <div class="kpis" id="kpis"></div>
+  <div class="confs" id="confs"></div>
+</div></section>
+
+<section id="stand"><div class="wrap">
+  <div class="sechead"><div class="no">02</div><h2 class="h">Зачёт</h2><div class="line"></div></div>
+  <p class="lead">Все игроки конференции по среднему баллу. <b>Подсвечены</b> те, кто выполнил норму в две серии и сейчас в зоне квоты; <em>приглушённые</em> сыграли одну — им нужна вторая, чтобы попасть в зачёт.</p>
+  <div class="tabs" id="tabs"></div>
+  <div id="stbl"></div>
+  <div class="legend" id="stleg"></div>
+</div></section>
+
+<section id="squad"><div class="wrap">
+  <div class="sechead"><div class="no">03</div><h2 class="h">Состав финала</h2><div class="line"></div></div>
+  <p class="lead">Как выглядел бы финал, если бы сезон закончился сегодня: <b>6 мест Central Europe</b>, по <b>2</b> от Израиля и Кипра (через полуфиналы). Это срез на дату, а не итог.</p>
+  <div class="squad" id="squadgrid"></div>
+</div></section>
+
+<section id="series"><div class="wrap">
+  <div class="sechead"><div class="no">04</div><h2 class="h">Серии</h2><div class="line"></div></div>
+  <p class="lead">12 сыгранных серий. Судьи — из анонсов канала лиги, в протоколах mafgame судья не хранится. Номер серии ведёт на официальную таблицу.</p>
+  <div class="wcards" id="wcards"></div>
+  <div class="slist" id="slist"></div>
+</div></section>
+
+<section id="cal"><div class="wrap">
+  <div class="sechead"><div class="no">05</div><h2 class="h">Календарь</h2><div class="line"></div></div>
+  <p class="lead">Анонсированные серии и финал. Регистрация — на странице серии в mafgame.</p>
+  <div class="cal" id="callist"></div>
+  <div class="final">
+    <img src="assets/mcl/logo-white.png" alt="">
+    <div class="lbl">Финал сезона</div>
+    <div class="t">Прага · 21–22 ноября</div>
+    <div class="row">
+      <div><div class="k">Призовой фонд</div><div class="v">3000 €</div></div>
+      <div><div class="k">Игроков</div><div class="v">10</div></div>
+      <div><div class="k">Игр</div><div class="v">16</div></div>
+      <div><div class="k">Взнос</div><div class="v">110 €</div></div>
+      <div><div class="k">Осталось</div><div class="v" id="cd">—</div></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="lab"><div class="wrap">
+  <div class="sechead"><div class="no">06</div><h2 class="h">Разбор</h2><div class="line"></div></div>
+  <p class="lead">Что видно в протоколах, кроме таблицы. Допы игрока сравниваются с нормой той же серии, той же карты и того же исхода — «остаток». Высокий остаток это <b>флаг, куда смотреть</b>, а не обвинение.</p>
+  <div class="blocks" id="blocks"></div>
+  <h3 class="h" style="font-size:26px;margin:34px 0 0">Конференции · поле и квоты</h3>
+  <div class="tw" id="qtbl"></div>
+  <h3 class="h" style="font-size:26px;margin:30px 0 0">Судьи · агрегат по их сериям</h3>
+  <div class="tw" id="jtbl"></div>
+  <div class="legend">ЛХ (0.25/0.4 за угаданных чёрных) и Ci (компенсация ранних смертей) — автоматика платформы, в «щедрость судьи» не входят. Рейтинговые позиции — снимок рейтинга mafgame на 03.08.2026 (459 игроков).</div>
+</div></section>
+
+<section id="method"><div class="wrap">
+  <div class="sechead"><div class="no">07</div><h2 class="h">Данные</h2><div class="line"></div></div>
+  <p class="lead">Протоколы game_results всех 12 сыгранных серий контура 757 на mafgame.org — 120 игр, 1200 посадок. Сверено с официальными таблицами серий 1:1 (0 расхождений) и с таблицей организаторов. Судьи, календарь и регламент — из канала лиги. Остатки: перестановочный тест 6000 итераций с поправкой Бенджамини-Хохберга. Страница обновляется вручную после новых серий.</p>
+</div></section>
+</main>
+
+<footer><div class="wrap in">
+  <img src="assets/mcl/logo-white.png" alt="MCL">
+  <div class="txt"><b>MafgameStat</b> · неофициальная статистика турниров спортивной мафии<br>
+    данные: <a href="https://mafgame.org/tournaments/757/view" target="_blank" rel="noopener">mafgame.org</a> · регламент и судьи: канал лиги · снимок <span id="snap"></span></div>
+  <a class="up" href="#">↑ наверх</a>
+</div></footer>
+
+<div id="modal"><div class="box">
+  <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/teaser.mp4"></video>
+  <button class="x" id="close">закрыть</button>
+</div></div>
 
 <script>
 'use strict';
-const D={"snapshot":"25.08.2026","conf":{"CE":{"name":"Central Europe","quota":6,"played":6,"total":16,"mode":"напрямую","table":[{"nick":"KEX","avg":6.6,"n":2,"det":[{"l":"Dortmund 05.10","v":8.05},{"l":"Cologne 05.14","v":5.15}]},{"nick":"Link","avg":6.45,"n":1,"det":[{"l":"Prague 03.29","v":6.45}]},{"nick":"sometimes","avg":6.3,"n":1,"det":[{"l":"Prague 03.29","v":6.3}]},{"nick":"Kotopes","avg":6.25,"n":1,"det":[{"l":"Wroclaw 08.16","v":6.25}]},{"nick":"Season's","avg":6.05,"n":1,"det":[{"l":"Wroclaw 08.16","v":6.05}]},{"nick":"LogisticPro","avg":6.05,"n":1,"det":[{"l":"Prague 08.16","v":6.05}]},{"nick":"Сметана","avg":5.95,"n":1,"det":[{"l":"Dortmund 05.10","v":5.95}]},{"nick":"Giper","avg":5.95,"n":1,"det":[{"l":"Brussel 05.30","v":5.95}]},{"nick":"Yokai","avg":5.7,"n":1,"det":[{"l":"Prague 08.16","v":5.7}]},{"nick":"qUAest0r","avg":5.675,"n":2,"det":[{"l":"Prague 03.29","v":4.55},{"l":"Prague 08.16","v":6.8}]},{"nick":"Сергеевна","avg":5.55,"n":1,"det":[{"l":"Prague 03.29","v":5.55}]},{"nick":"Blackout","avg":5.35,"n":1,"det":[{"l":"Prague 03.29","v":5.35}]},{"nick":"August","avg":5.3,"n":1,"det":[{"l":"Brussel 05.30","v":5.3}]},{"nick":"DOVOD","avg":5.2,"n":1,"det":[{"l":"Prague 03.29","v":5.2}]},{"nick":"DK","avg":5.2,"n":1,"det":[{"l":"Wroclaw 08.16","v":5.2}]},{"nick":"Akteur","avg":5.025,"n":2,"det":[{"l":"Dortmund 05.10","v":5.45},{"l":"Cologne 05.14","v":4.6}]},{"nick":"Sэм","avg":4.975,"n":2,"det":[{"l":"Cologne 05.14","v":5.4},{"l":"Brussel 05.30","v":4.55}]},{"nick":"Ну погоди","avg":4.9,"n":2,"det":[{"l":"Cologne 05.14","v":3.7},{"l":"Brussel 05.30","v":6.1}]},{"nick":"Lime","avg":4.85,"n":1,"det":[{"l":"Brussel 05.30","v":4.85}]},{"nick":"Патологоанатом","avg":4.85,"n":1,"det":[{"l":"Prague 08.16","v":4.85}]},{"nick":"Kleo","avg":4.85,"n":1,"det":[{"l":"Prague 08.16","v":4.85}]},{"nick":"Алиса","avg":4.65,"n":1,"det":[{"l":"Dortmund 05.10","v":4.65}]},{"nick":"Spice","avg":4.6,"n":1,"det":[{"l":"Prague 03.29","v":4.6}]},{"nick":"Призрак","avg":4.6,"n":1,"det":[{"l":"Cologne 05.14","v":4.6}]},{"nick":"Landing","avg":4.55,"n":1,"det":[{"l":"Wroclaw 08.16","v":4.55}]},{"nick":"Klepantino","avg":4.55,"n":1,"det":[{"l":"Wroclaw 08.16","v":4.55}]},{"nick":"Сакура","avg":4.5,"n":1,"det":[{"l":"Wroclaw 08.16","v":4.5}]},{"nick":"Nemo333","avg":4.25,"n":1,"det":[{"l":"Brussel 05.30","v":4.25}]},{"nick":"MiLady","avg":4.25,"n":1,"det":[{"l":"Brussel 05.30","v":4.25}]},{"nick":"Zico","avg":4.25,"n":1,"det":[{"l":"Brussel 05.30","v":4.25}]},{"nick":"Pudding","avg":4.25,"n":1,"det":[{"l":"Wroclaw 08.16","v":4.25}]},{"nick":"TOPS","avg":4.1,"n":1,"det":[{"l":"Prague 03.29","v":4.1}]},{"nick":"Чикаго","avg":4.1,"n":1,"det":[{"l":"Prague 08.16","v":4.1}]},{"nick":"Клото","avg":4.075,"n":2,"det":[{"l":"Cologne 05.14","v":2.65},{"l":"Brussel 05.30","v":5.5}]},{"nick":"Sever","avg":4.05,"n":1,"det":[{"l":"Prague 08.16","v":4.05}]},{"nick":"Грек","avg":3.95,"n":1,"det":[{"l":"Dortmund 05.10","v":3.95}]},{"nick":"Tripok","avg":3.7,"n":1,"det":[{"l":"Cologne 05.14","v":3.7}]},{"nick":"Saint Laurent","avg":3.7,"n":1,"det":[{"l":"Wroclaw 08.16","v":3.7}]},{"nick":"Гармония","avg":3.6,"n":1,"det":[{"l":"Prague 03.29","v":3.6}]},{"nick":"Scalene","avg":3.5,"n":1,"det":[{"l":"Dortmund 05.10","v":3.5}]},{"nick":"Кура","avg":3.5,"n":1,"det":[{"l":"Cologne 05.14","v":3.5}]},{"nick":"IslaDeMuerta","avg":3.5,"n":1,"det":[{"l":"Wroclaw 08.16","v":3.5}]},{"nick":"Провокатор","avg":3.4,"n":1,"det":[{"l":"Dortmund 05.10","v":3.4}]},{"nick":"Maverick","avg":3.3,"n":2,"det":[{"l":"Prague 03.29","v":3.4},{"l":"Prague 08.16","v":3.2}]},{"nick":"Кайзер","avg":2.9,"n":1,"det":[{"l":"Prague 08.16","v":2.9}]},{"nick":"Джоук","avg":2.85,"n":1,"det":[{"l":"Dortmund 05.10","v":2.85}]},{"nick":"Диван","avg":2.8,"n":1,"det":[{"l":"Dortmund 05.10","v":2.8}]},{"nick":"Met1da","avg":2.65,"n":1,"det":[{"l":"Dortmund 05.10","v":2.65}]},{"nick":"Amor","avg":2.65,"n":1,"det":[{"l":"Cologne 05.14","v":2.65}]},{"nick":"Sova","avg":2.55,"n":1,"det":[{"l":"Brussel 05.30","v":2.55}]},{"nick":"Miss Belle","avg":2.4,"n":1,"det":[{"l":"Prague 08.16","v":2.4}]},{"nick":"Молчун","avg":2.3,"n":1,"det":[{"l":"Cologne 05.14","v":2.3}]},{"nick":"Tapok","avg":0.7,"n":1,"det":[{"l":"Wroclaw 08.16","v":0.7}]}]},"IL":{"name":"Израиль","quota":2,"played":4,"total":5,"mode":"через полуфинал","table":[{"nick":"Lisbon","avg":8.4,"n":1,"det":[{"l":"Ramat Gan 06.06","v":8.4}]},{"nick":"Kiwi","avg":7.4,"n":1,"det":[{"l":"Ramat Gan 07.25","v":7.4}]},{"nick":"***Алиса***","avg":6.65,"n":1,"det":[{"l":"Ramat Gan 07.25","v":6.65}]},{"nick":"Король","avg":5.9,"n":1,"det":[{"l":"Ramat Gan 07.25","v":5.9}]},{"nick":"Колибри","avg":5.4,"n":1,"det":[{"l":"Ramat Gan 06.06","v":5.4}]},{"nick":"Фолдэм","avg":5.4,"n":2,"det":[{"l":"Ramat Gan 07.25","v":3.7},{"l":"Haifa 08.01","v":7.1}]},{"nick":"Maser","avg":5.225,"n":2,"det":[{"l":"Ramat Gan 06.06","v":7.45},{"l":"Haifa 06.20","v":3}]},{"nick":"IGRIS","avg":5.2,"n":2,"det":[{"l":"Haifa 06.20","v":6},{"l":"Haifa 08.01","v":4.4}]},{"nick":"Morrigan Israel","avg":5.0,"n":1,"det":[{"l":"Haifa 06.20","v":5}]},{"nick":"Nixie","avg":4.95,"n":1,"det":[{"l":"Ramat Gan 07.25","v":4.95}]},{"nick":"Котёныш","avg":4.5,"n":1,"det":[{"l":"Ramat Gan 06.06","v":4.5}]},{"nick":"Frеemаn","avg":4.5,"n":1,"det":[{"l":"Haifa 08.01","v":4.5}]},{"nick":"GOLDMAN","avg":4.45,"n":1,"det":[{"l":"Ramat Gan 06.06","v":4.45}]},{"nick":"Дон Винченцо","avg":4.4,"n":2,"det":[{"l":"Haifa 06.20","v":3.95},{"l":"Haifa 08.01","v":4.85}]},{"nick":"Айвенго","avg":4.3,"n":1,"det":[{"l":"Ramat Gan 07.25","v":4.3}]},{"nick":"Stiеrlitz","avg":4.15,"n":1,"det":[{"l":"Haifa 06.20","v":4.15}]},{"nick":"Восьмеркин","avg":4.1,"n":2,"det":[{"l":"Haifa 06.20","v":4.95},{"l":"Haifa 08.01","v":3.25}]},{"nick":"Удача (lucky)","avg":3.9,"n":1,"det":[{"l":"Ramat Gan 06.06","v":3.9}]},{"nick":"Mauder","avg":3.65,"n":3,"det":[{"l":"Haifa 06.20","v":5.15},{"l":"Ramat Gan 07.25","v":2.85},{"l":"Haifa 08.01","v":2.95}]},{"nick":"Барселона","avg":3.5,"n":3,"det":[{"l":"Haifa 06.20","v":5.2},{"l":"Ramat Gan 07.25","v":3.4},{"l":"Haifa 08.01","v":1.9}]},{"nick":"Mike Isr","avg":3.3,"n":2,"det":[{"l":"Ramat Gan 07.25","v":4.2},{"l":"Haifa 08.01","v":2.4}]},{"nick":"Uno","avg":3.125,"n":2,"det":[{"l":"Haifa 06.20","v":1.8},{"l":"Haifa 08.01","v":4.45}]},{"nick":"Эклектик","avg":2.95,"n":2,"det":[{"l":"Ramat Gan 06.06","v":4.75},{"l":"Haifa 08.01","v":1.15}]},{"nick":"BigSam","avg":2.9,"n":2,"det":[{"l":"Ramat Gan 06.06","v":3.35},{"l":"Haifa 06.20","v":2.45}]},{"nick":"Манон","avg":2.8,"n":1,"det":[{"l":"Ramat Gan 07.25","v":2.8}]},{"nick":"AffrycT","avg":2.75,"n":1,"det":[{"l":"Ramat Gan 06.06","v":2.75}]},{"nick":"Ryu","avg":1.35,"n":1,"det":[{"l":"Ramat Gan 06.06","v":1.35}]}]},"CY":{"name":"Кипр","quota":2,"played":2,"total":5,"mode":"через полуфинал","table":[{"nick":"Квоут","avg":7.2,"n":1,"det":[{"l":"Limassol 07.12","v":7.2}]},{"nick":"Mr. Smith","avg":6.5,"n":1,"det":[{"l":"Limassol 07.12","v":6.5}]},{"nick":"Chucha","avg":6.45,"n":1,"det":[{"l":"Limassol 07.12","v":6.45}]},{"nick":"Сабай","avg":5.05,"n":2,"det":[{"l":"Limassol 06.28","v":6.55},{"l":"Limassol 07.12","v":3.55}]},{"nick":"Мачете","avg":4.9,"n":1,"det":[{"l":"Limassol 07.12","v":4.9}]},{"nick":"Луна","avg":4.55,"n":1,"det":[{"l":"Limassol 06.28","v":4.55}]},{"nick":"Монтгомери","avg":4.35,"n":1,"det":[{"l":"Limassol 06.28","v":4.35}]},{"nick":"Matilda","avg":4.075,"n":2,"det":[{"l":"Limassol 06.28","v":5.7},{"l":"Limassol 07.12","v":2.45}]},{"nick":"Беатрис","avg":3.975,"n":2,"det":[{"l":"Limassol 06.28","v":5.15},{"l":"Limassol 07.12","v":2.8}]},{"nick":"Terpsichore","avg":3.775,"n":2,"det":[{"l":"Limassol 06.28","v":4.8},{"l":"Limassol 07.12","v":2.75}]},{"nick":"Руанда","avg":2.8,"n":2,"det":[{"l":"Limassol 06.28","v":4},{"l":"Limassol 07.12","v":1.6}]},{"nick":"Mizart","avg":2.1,"n":1,"det":[{"l":"Limassol 06.28","v":2.1}]},{"nick":"Вольный","avg":2.025,"n":2,"det":[{"l":"Limassol 06.28","v":3.8},{"l":"Limassol 07.12","v":0.25}]},{"nick":"Солнце","avg":1.25,"n":1,"det":[{"l":"Limassol 06.28","v":1.25}]}]}},"series":[{"id":768,"conf":"CE","num":1,"city":"Prague","date":"2026-03-29","judge":"YeS","flag":"🇨🇿","top3":[["Link",6.45],["sometimes",6.3],["Сергеевна",5.55]],"town":5,"gb":0.1205,"pen":1.7},{"id":823,"conf":"CE","num":2,"city":"Dortmund","date":"2026-05-10","judge":"Кано","flag":"🇩🇪","top3":[["KEX",8.05],["Сметана",5.95],["Akteur",5.45]],"town":4,"gb":0.091,"pen":1.3},{"id":861,"conf":"CE","num":3,"city":"Cologne","date":"2026-05-14","judge":"Кано","flag":"🇩🇪","top3":[["Sэм",5.4],["KEX",5.15],["Akteur",4.6]],"town":1,"gb":0.097,"pen":0.2},{"id":871,"conf":"CE","num":4,"city":"Brussel","date":"2026-05-30","judge":"Рыба-мОя","flag":"🇧🇪","top3":[["Ну погоди",6.1],["Giper",5.95],["Клото",5.5]],"town":5,"gb":0.0835,"pen":0.6},{"id":947,"conf":"CE","num":7,"city":"Wroclaw","date":"2026-08-16","judge":"Кирпич","flag":"🇵🇱","top3":[["Kotopes",6.25],["Season's",6.05],["DK",5.2]],"town":3,"gb":0.126,"pen":2.1},{"id":951,"conf":"CE","num":8,"city":"Prague","date":"2026-08-16","judge":"YeS","flag":"🇨🇿","top3":[["qUAest0r",6.8],["LogisticPro",6.05],["Yokai",5.7]],"town":3,"gb":0.108,"pen":0.4},{"id":884,"conf":"CY","num":1,"city":"Limassol","date":"2026-06-28","judge":"Olgierd","flag":"🇨🇾","top3":[["Сабай",6.55],["Matilda",5.7],["Беатрис",5.15]],"town":3,"gb":0.1055,"pen":1.0},{"id":912,"conf":"CY","num":2,"city":"Limassol","date":"2026-07-12","judge":"Olgierd","flag":"🇨🇾","top3":[["Квоут",7.2],["Mr. Smith",6.5],["Chucha",6.45]],"town":2,"gb":0.1045,"pen":2.5},{"id":853,"conf":"IL","num":1,"city":"Ramat Gan","date":"2026-06-06","judge":"Фолдэм","flag":"🇮🇱","top3":[["Lisbon",8.4],["Maser",7.45],["Колибри",5.4]],"town":4,"gb":0.109,"pen":1.3},{"id":889,"conf":"IL","num":2,"city":"Haifa","date":"2026-06-20","judge":"Фолдэм","flag":"🇮🇱","top3":[["IGRIS",6],["Барселона",5.2],["Mauder",5.15]],"town":3,"gb":0.0985,"pen":1.3},{"id":910,"conf":"IL","num":3,"city":"Ramat Gan","date":"2026-07-25","judge":"Dogfather","flag":"🇮🇱","top3":[["Kiwi",7.4],["***Алиса***",6.65],["Король",5.9]],"town":4,"gb":0.1215,"pen":2.3},{"id":942,"conf":"IL","num":4,"city":"Haifa","date":"2026-08-01","judge":"Dogfather","flag":"🇮🇱","top3":[["Фолдэм",7.1],["Дон Винченцо",4.85],["Frеemаn",4.5]],"town":1,"gb":0.111,"pen":1.2}],"upcoming":[{"id":965,"conf":"IL","num":5,"city":"Ramat Gan","date":"2026-08-29","country":"🇮🇱 Израиль"},{"id":874,"conf":"CE","num":5,"city":"Chemnitz","date":"2026-09-06","country":"🇩🇪 Германия"},{"id":940,"conf":"CE","num":6,"city":"Nürnberg","date":"2026-09-19","country":"🇩🇪 Германия"},{"id":913,"conf":"CY","num":3,"city":"Limassol","date":"2026-09-20","country":"🇨🇾 Кипр"}],"quotas":{"rows":[["Central Europe",53,"~106 (сезон-2025)",14,21,"№2",6,"8.8 → ~18"],["Израиль",27,"~30",0,1,"№94",2,"13.5 → ~15"],["Кипр",14,"~18–20",0,1,"№83",2,"7 → ~9"]],"note2025":[5,9,10]},"judges":[{"judge":"Кирпич","series":[947],"seats":100,"gb_per":0.126,"posShare":0.48,"gbL_per":0.0621,"fatShare":0.21,"pen_per":0.021},{"judge":"Dogfather","series":[910,942],"seats":200,"gb_per":0.1163,"posShare":0.5,"gbL_per":0.0792,"fatShare":0.19,"pen_per":0.0175},{"judge":"YeS","series":[768,951],"seats":200,"gb_per":0.1143,"posShare":0.55,"gbL_per":0.0625,"fatShare":0.145,"pen_per":0.0105},{"judge":"Olgierd","series":[884,912],"seats":200,"gb_per":0.105,"posShare":0.485,"gbL_per":0.0379,"fatShare":0.185,"pen_per":0.0175},{"judge":"Фолдэм","series":[853,889],"seats":200,"gb_per":0.1038,"posShare":0.395,"gbL_per":0.0344,"fatShare":0.19,"pen_per":0.013},{"judge":"Кано","series":[823,861],"seats":200,"gb_per":0.094,"posShare":0.385,"gbL_per":0.0379,"fatShare":0.17,"pen_per":0.0075},{"judge":"Рыба-мОя","series":[871],"seats":100,"gb_per":0.0835,"posShare":0.34,"gbL_per":0.015,"fatShare":0.16,"pen_per":0.006}],"kpi":[["12 / ~26","серий сыграно (CE 6/16 · Израиль 4/5 · Кипр 2/5)"],["120","игр · 1200 посадок"],["94","игрока — пересечений конференций нет"],["31.7%","игр выиграл город (38 из 120)"]]};
+const D={"snap":"25.08.2026","finalISO":"2026-11-21T10:00:00+01:00","conf":{"CE":{"name":"Central Europe","short":"CENTRAL EU","quota":6,"played":6,"total":16,"mode":"напрямую в финал","rows":[{"u":44,"n":"KEX","a":6.6,"s":2,"d":[["Dortmund 10.05",8.05],["Cologne 14.05",5.15]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_44/24879757d10e225ec915d22544432c8e1fe3674b_photo.jpg"},{"u":1307,"n":"Link","a":6.45,"s":1,"d":[["Prague 29.03",6.45]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1307/96843d97fe9b9add3869edce3969301031e49ec9.png"},{"u":471,"n":"sometimes","a":6.3,"s":1,"d":[["Prague 29.03",6.3]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_471/e1fa6de7fdd630ff00fbace535f203e4005984b0_photo.jpg"},{"u":159,"n":"Kotopes","a":6.25,"s":1,"d":[["Wroclaw 16.08",6.25]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_159/52570accb3eb2789a5941959c81c64831a66717a_photo.jpg"},{"u":280,"n":"Season's","a":6.05,"s":1,"d":[["Wroclaw 16.08",6.05]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_280/b5bfaf34e5b141590f84294f7afd08b4d5a9501b_photo.jpg"},{"u":201,"n":"LogisticPro","a":6.05,"s":1,"d":[["Prague 16.08",6.05]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_201/9cf0aba07b13cca881fb70f512e33b82ca80d3dd_photo.jpg"},{"u":1683,"n":"Сметана","a":5.95,"s":1,"d":[["Dortmund 10.05",5.95]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1683/aafc90bd257aff6f07839439f623f27d18c567ac.png"},{"u":260,"n":"Giper","a":5.95,"s":1,"d":[["Brussel 30.05",5.95]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_260/5221be7a7e91a77bc639f2fefca9c57648a13758.png"},{"u":378,"n":"Yokai","a":5.7,"s":1,"d":[["Prague 16.08",5.7]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_378/9d3333a440dc107af8b9a3bf573d7abf72910c64_photo.jpg"},{"u":704,"n":"qUAest0r","a":5.675,"s":2,"d":[["Prague 29.03",4.55],["Prague 16.08",6.8]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_704/502f14f479f47b26b51096357d84d6a0eb8a0091_photo.jpg"},{"u":2168,"n":"Сергеевна","a":5.55,"s":1,"d":[["Prague 29.03",5.55]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2168/8b0a71b88b6ce199a06675b7ad3d33d188db8fe8_photo.jpg"},{"u":185,"n":"Blackout","a":5.35,"s":1,"d":[["Prague 29.03",5.35]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_185/8824bc2d7416c4265395b8b1c5d143551e0d2097.png"},{"u":600,"n":"August","a":5.3,"s":1,"d":[["Brussel 30.05",5.3]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_600/203c7520aa531d3a8aebc29b2a796bff5d5ba0d3.png"},{"u":1493,"n":"DOVOD","a":5.2,"s":1,"d":[["Prague 29.03",5.2]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/e5c4ffd088b5ac53886a228c1afffa0a032716af_photo.jpg"},{"u":787,"n":"DK","a":5.2,"s":1,"d":[["Wroclaw 16.08",5.2]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_787/a92d11756852b4522a72cef44c45576f97a9aa78_photo.jpg"},{"u":689,"n":"Akteur","a":5.025,"s":2,"d":[["Dortmund 10.05",5.45],["Cologne 14.05",4.6]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_689/bcf0812a6746e5f17fb2f59d672a752fd44cf462_photo.jpg"},{"u":224,"n":"Sэм","a":4.975,"s":2,"d":[["Cologne 14.05",5.4],["Brussel 30.05",4.55]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_224/6f2b83f1bd5ef20ebbcf85a370c8980c9761b1c2.png"},{"u":420,"n":"Ну погоди","a":4.9,"s":2,"d":[["Cologne 14.05",3.7],["Brussel 30.05",6.1]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_420/a7ac56aa203580715e879cae7ca1fff3b240f5ee_photo.jpg"},{"u":516,"n":"Lime","a":4.85,"s":1,"d":[["Brussel 30.05",4.85]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_516/da8fac6adc3a522f57160b0ab5cebe12d1cb9477.png"},{"u":3117,"n":"Патологоанатом","a":4.85,"s":1,"d":[["Prague 16.08",4.85]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3117/c1909afa7bb4f27073432e95746b63eb650a5244_photo.jpg"},{"u":1642,"n":"Kleo","a":4.85,"s":1,"d":[["Prague 16.08",4.85]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1642/59d41b0e9f6b546a3dcd4eac04e04960001fc6f1.png"},{"u":33,"n":"Алиса","a":4.65,"s":1,"d":[["Dortmund 10.05",4.65]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_33/7ec33d1cb74ab783598a1762b4f17d8411d460fa_photo.jpg"},{"u":1886,"n":"Spice","a":4.6,"s":1,"d":[["Prague 29.03",4.6]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1886/5dd9a056e96e4c922415a759d20a83bf713258d3_photo.jpg"},{"u":264,"n":"Призрак","a":4.6,"s":1,"d":[["Cologne 14.05",4.6]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_264/ed0c386206b7c1ee0f9fb70dfcb0f5bf726749df.png"},{"u":1481,"n":"Landing","a":4.55,"s":1,"d":[["Wroclaw 16.08",4.55]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1481/185f6858db51e02afbc0e88b785629d0a4f48586_photo.jpg"},{"u":794,"n":"Klepantino","a":4.55,"s":1,"d":[["Wroclaw 16.08",4.55]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_794/cb1601a802ed28db4af3e1d0c2edb2ea96be3907_photo.jpg"},{"u":272,"n":"Сакура","a":4.5,"s":1,"d":[["Wroclaw 16.08",4.5]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_272/19279a3f9f7ded81ecbddbfee3d0f94d431d6b4f_photo.jpg"},{"u":2583,"n":"Nemo333","a":4.25,"s":1,"d":[["Brussel 30.05",4.25]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2583/b7a11fcf4d50a3b4d769422b772c271e641e643a_photo.jpg"},{"u":2493,"n":"MiLady","a":4.25,"s":1,"d":[["Brussel 30.05",4.25]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2493/103b8e54c0f5e913af04658367d16e0c564748d5.png"},{"u":1198,"n":"Zico","a":4.25,"s":1,"d":[["Brussel 30.05",4.25]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_1198/474aa88d17292215064751764e996daccf03adb4_photo.jpg"},{"u":536,"n":"Pudding","a":4.25,"s":1,"d":[["Wroclaw 16.08",4.25]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_536/9f0918b4449715a71334e72becfb8f7f1539fdb8.png"},{"u":1495,"n":"TOPS","a":4.1,"s":1,"d":[["Prague 29.03",4.1]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1495/d540f8b5507068e41e86be4678d6370bdb41fdec_photo.jpg"},{"u":1268,"n":"Чикаго","a":4.1,"s":1,"d":[["Prague 16.08",4.1]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1268/68f41dd813fe4dceea4790369d4a39944655716e_photo.jpg"},{"u":199,"n":"Клото","a":4.075,"s":2,"d":[["Cologne 14.05",2.65],["Brussel 30.05",5.5]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_199/9eb8c85804dc2994deb603bfd10717b241972c94_photo.png"},{"u":227,"n":"Sever","a":4.05,"s":1,"d":[["Prague 16.08",4.05]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_227/102d6ea798cb1724a47bbebfa66f78f579191648_photo.jpg"},{"u":1137,"n":"Грек","a":3.95,"s":1,"d":[["Dortmund 10.05",3.95]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1137/63f696ec27d54ea78b74a0dd1535a49a77ee4c72.png"},{"u":263,"n":"Tripok","a":3.7,"s":1,"d":[["Cologne 14.05",3.7]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_263/a0a4f86225916c73b8cd4fa0c25f3f6b3f59e07a_photo.jpg"},{"u":308,"n":"Saint Laurent","a":3.7,"s":1,"d":[["Wroclaw 16.08",3.7]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_308/ca2427a7163d14dab860db355f7aa90eb228c95b_photo.jpg"},{"u":216,"n":"Гармония","a":3.6,"s":1,"d":[["Prague 29.03",3.6]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_216/6d65ed4844b9ed161edf1a5083b32969fc51ca9b_photo.jpg"},{"u":2177,"n":"Scalene","a":3.5,"s":1,"d":[["Dortmund 10.05",3.5]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2177/362494e3fa48eda3847f09b0b8130220d012f9aa.png"},{"u":416,"n":"Кура","a":3.5,"s":1,"d":[["Cologne 14.05",3.5]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_416/aa46aa8ee671d7b7759acc3a57c99dfce56b8c2c_photo.jpg"},{"u":318,"n":"IslaDeMuerta","a":3.5,"s":1,"d":[["Wroclaw 16.08",3.5]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_318/4016bfbbad97187ce51dd03504fff5274878318f_photo.jpg"},{"u":408,"n":"Провокатор","a":3.4,"s":1,"d":[["Dortmund 10.05",3.4]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_408/f2ab57cc6aa31564704f2b9e73d370782528218b_photo.jpg"},{"u":1657,"n":"Maverick","a":3.3,"s":2,"d":[["Prague 29.03",3.4],["Prague 16.08",3.2]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1657/113c46e18eb1f0829d8677456a66a8e412e76de6.png"},{"u":2120,"n":"Кайзер","a":2.9,"s":1,"d":[["Prague 16.08",2.9]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2120/8f7b37546d09fb91a99ebb57c7f1e2a947a5dab8_photo.jpg"},{"u":3103,"n":"Джоук","a":2.85,"s":1,"d":[["Dortmund 10.05",2.85]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3103/a42f0a2e93459badc88ef7824fc787c8804ffb45.png"},{"u":2543,"n":"Диван","a":2.8,"s":1,"d":[["Dortmund 10.05",2.8]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2543/ed7b0a1761b7494c09c3de84c9313231dd25db2a.png"},{"u":414,"n":"Met1da","a":2.65,"s":1,"d":[["Dortmund 10.05",2.65]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_414/4bb249df9bf70d839f7627ce9f83cd0370fff8b0_photo.jpg"},{"u":2378,"n":"Amor","a":2.65,"s":1,"d":[["Cologne 14.05",2.65]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2378/31f81db3c53553a33fefa0fed33124e4ec554d8e.png"},{"u":376,"n":"Sova","a":2.55,"s":1,"d":[["Brussel 30.05",2.55]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_376/5411a806d62f7abf4d027818b4484a550704cb30_photo.jpg"},{"u":2522,"n":"Miss Belle","a":2.4,"s":1,"d":[["Prague 16.08",2.4]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2522/58be85ac4c05a7b771f87498cd226c1a65ee1a93_photo.jpg"},{"u":431,"n":"Молчун","a":2.3,"s":1,"d":[["Cologne 14.05",2.3]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_431/218f44cad135785673f3b7a0c65381b1681c2488_photo.jpg"},{"u":561,"n":"Tapok","a":0.7,"s":1,"d":[["Wroclaw 16.08",0.7]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_561/6f5da0d04f38469eeca79a7144762deb01071e9d_photo.jpg"}],"played2":7},"IL":{"name":"Израиль","short":"ISRAEL","quota":2,"played":4,"total":5,"mode":"через полуфинал","rows":[{"u":435,"n":"Lisbon","a":8.4,"s":1,"d":[["Ramat Gan 06.06",8.4]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_435/0d8991e257e1dce69691b593a785b77439548b00.png"},{"u":2451,"n":"Kiwi","a":7.4,"s":1,"d":[["Ramat Gan 25.07",7.4]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2451/e3ec8be8ac6a92ef06ad46ff26c75a3cbdbf867e_photo.jpg"},{"u":168,"n":"***Алиса***","a":6.65,"s":1,"d":[["Ramat Gan 25.07",6.65]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_168/3282ae6f76d8cd0230241fa277609cce1274a6d7_photo.jpg"},{"u":3214,"n":"Король","a":5.9,"s":1,"d":[["Ramat Gan 25.07",5.9]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3214/09b09e97793b019e7bc16f999f204ec763bcbbbb.png"},{"u":205,"n":"Колибри","a":5.4,"s":1,"d":[["Ramat Gan 06.06",5.4]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_205/4d2d042b634c71073cf63b64fe2bf020a3cce7d3.png"},{"u":221,"n":"Фолдэм","a":5.4,"s":2,"d":[["Ramat Gan 25.07",3.7],["Haifa 01.08",7.1]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_221/fb160a7ba2dfdfa5b4a82b3fac0f566ddde97e24.png"},{"u":1701,"n":"Maser","a":5.225,"s":2,"d":[["Ramat Gan 06.06",7.45],["Haifa 20.06",3]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1701/32e5b46617dd7dbe41c3b08d5ca48590e6741bb3_photo.jpg"},{"u":157,"n":"IGRIS","a":5.2,"s":2,"d":[["Haifa 20.06",6],["Haifa 01.08",4.4]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_157/308bfa35ef52b6985fa45dc70aeef22f29d6253b_photo.jpg"},{"u":1804,"n":"Morrigan Israel","a":5.0,"s":1,"d":[["Haifa 20.06",5]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_1804/9e61a928c749d281d0111b5e9929aaddc1ca4e1b_photo.jpg"},{"u":2465,"n":"Nixie","a":4.95,"s":1,"d":[["Ramat Gan 25.07",4.95]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2465/5f45374ad1ef0236fa77617f992703f164dd4bf4_photo.jpg"},{"u":1082,"n":"Котёныш","a":4.5,"s":1,"d":[["Ramat Gan 06.06",4.5]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1082/eec6c06957451d8be235c726c47b07adbb71a375.png"},{"u":179,"n":"Frеemаn","a":4.5,"s":1,"d":[["Haifa 01.08",4.5]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_179/f0f8ef58a5a004e008bee3cdcb6053345b2f021c_photo.png"},{"u":3130,"n":"GOLDMAN","a":4.45,"s":1,"d":[["Ramat Gan 06.06",4.45]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3130/74eda7115f83b67e760654608f4dd1084c2125f8_photo.jpg"},{"u":1468,"n":"Дон Винченцо","a":4.4,"s":2,"d":[["Haifa 20.06",3.95],["Haifa 01.08",4.85]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1468/41b39ee63369fed39d83f7203b9d86a207647fff_photo.jpg"},{"u":1442,"n":"Айвенго","a":4.3,"s":1,"d":[["Ramat Gan 25.07",4.3]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1442/6b4592a347ae03494b70f8bbe57ec7b1f147c14b.png"},{"u":2314,"n":"Stiеrlitz","a":4.15,"s":1,"d":[["Haifa 20.06",4.15]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2314/013e40c493fb1630377f9dece8b1f70d88121ddd.png"},{"u":70,"n":"Восьмеркин","a":4.1,"s":2,"d":[["Haifa 20.06",4.95],["Haifa 01.08",3.25]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_70/bcb794ca1e8781b348303827aa49f012c4dd368d_photo.jpg"},{"u":647,"n":"Удача (lucky)","a":3.9,"s":1,"d":[["Ramat Gan 06.06",3.9]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_647/7df68f11064b8ca3b1d04210a5bc13c63060a169_photo.jpg"},{"u":2282,"n":"Mauder","a":3.65,"s":3,"d":[["Haifa 20.06",5.15],["Ramat Gan 25.07",2.85],["Haifa 01.08",2.95]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2282/0ef1621043ad44d7817bc3f0b0515be8e42f7138_photo.jpg"},{"u":3187,"n":"Барселона","a":3.5,"s":3,"d":[["Haifa 20.06",5.2],["Ramat Gan 25.07",3.4],["Haifa 01.08",1.9]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3187/5096e9233ce164b2c7b124e4186612fe2be147cd_photo.jpg"},{"u":375,"n":"Mike Isr","a":3.3,"s":2,"d":[["Ramat Gan 25.07",4.2],["Haifa 01.08",2.4]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_375/611df65c64f44c2b684732cc2151ad6b053356c9.png"},{"u":364,"n":"Uno","a":3.125,"s":2,"d":[["Haifa 20.06",1.8],["Haifa 01.08",4.45]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_364/5ffb85fdd4384c49bdb8564eef3eb732d251143b_photo.jpg"},{"u":1441,"n":"Эклектик","a":2.95,"s":2,"d":[["Ramat Gan 06.06",4.75],["Haifa 01.08",1.15]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_1441/3356e5703ecff34be5b676c24e38107cf1d600d4_photo.jpg"},{"u":1543,"n":"BigSam","a":2.9,"s":2,"d":[["Ramat Gan 06.06",3.35],["Haifa 20.06",2.45]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1543/4c47dfa155dbb2f977b4c42760c07771c8f9a406.png"},{"u":383,"n":"Манон","a":2.8,"s":1,"d":[["Ramat Gan 25.07",2.8]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_383/32608c53ba52f60c6a6158be95fb347242db62ef_photo.jpg"},{"u":1439,"n":"AffrycT","a":2.75,"s":1,"d":[["Ramat Gan 06.06",2.75]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1439/e1178c9abda7db8d7c4fd376836ee42947df1c3a_photo.jpg"},{"u":161,"n":"Ryu","a":1.35,"s":1,"d":[["Ramat Gan 06.06",1.35]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_161/805dce5a7043ff4fe5b9c07ea85ef672d99ce294_photo.jpg"}],"played2":11},"CY":{"name":"Кипр","short":"CYPRUS","quota":2,"played":2,"total":5,"mode":"через полуфинал","rows":[{"u":9,"n":"Квоут","a":7.2,"s":1,"d":[["Limassol 12.07",7.2]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_9/cfef97c0174c1f1564cf009fbfe17ee293f55179_photo.jpg"},{"u":80,"n":"Mr. Smith","a":6.5,"s":1,"d":[["Limassol 12.07",6.5]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_80/4032b5263a435017eb32f3451d1cae81246f2e20_photo.jpg"},{"u":915,"n":"Chucha","a":6.45,"s":1,"d":[["Limassol 12.07",6.45]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_915/0b28f6f3c61e768bcb66266a1a26aca3a5121b7e_photo.jpg"},{"u":8,"n":"Сабай","a":5.05,"s":2,"d":[["Limassol 28.06",6.55],["Limassol 12.07",3.55]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_8/380c1c53475cb2917c2179d32547ecd0783dd1a0_photo.png"},{"u":3231,"n":"Мачете","a":4.9,"s":1,"d":[["Limassol 12.07",4.9]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3231/f5c96db717f2eada68ef713a3809dc0ba23ec05a_photo.jpg"},{"u":113,"n":"Луна","a":4.55,"s":1,"d":[["Limassol 28.06",4.55]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_113/acfbf089a1c8c4daa4df981744277296aa12bf72.png"},{"u":2309,"n":"Монтгомери","a":4.35,"s":1,"d":[["Limassol 28.06",4.35]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2309/85fc53b85138d79dd6b4e1f23e0fc20bb8a5f8fa_photo.jpg"},{"u":29,"n":"Matilda","a":4.075,"s":2,"d":[["Limassol 28.06",5.7],["Limassol 12.07",2.45]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_29/40d284761e2120097a7f1baa57f0d0e799e194b3_photo.png"},{"u":2214,"n":"Беатрис","a":3.975,"s":2,"d":[["Limassol 28.06",5.15],["Limassol 12.07",2.8]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2214/933834ca1dff25e13d69a6c3f0daf5980aea6547.png"},{"u":2076,"n":"Terpsichore","a":3.775,"s":2,"d":[["Limassol 28.06",4.8],["Limassol 12.07",2.75]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2076/eca8bfcafdc15c4cbc3286a736e870834f8cc860.png"},{"u":38,"n":"Руанда","a":2.8,"s":2,"d":[["Limassol 28.06",4],["Limassol 12.07",1.6]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_38/63a400eb7d1b0fb6f878d2a1789e65db8c6171fa_photo.png"},{"u":990,"n":"Mizart","a":2.1,"s":1,"d":[["Limassol 28.06",2.1]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_990/73dd790724ea7dfbc4bcf7545473dde1e336c606_photo.jpg"},{"u":749,"n":"Вольный","a":2.025,"s":2,"d":[["Limassol 28.06",3.8],["Limassol 12.07",0.25]],"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_749/b383a29ac42b8d5703f1b1ea8021cd4d658dcbbb_photo.jpg"},{"u":620,"n":"Солнце","a":1.25,"s":1,"d":[["Limassol 28.06",1.25]],"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_620/4f40f842e34fe66dc28eb2ef90ada04b701cb222_photo.jpg"}],"played2":6}},"series":[{"id":768,"c":"CE","num":1,"city":"Prague","fl":"CZ","date":"2026-03-29","j":"YeS","top":[["Link",6.45],["sometimes",6.3],["Сергеевна",5.55]],"town":5,"gb":0.1205,"pen":1.7,"ph":"assets/mcl/w-768-link.jpg"},{"id":823,"c":"CE","num":2,"city":"Dortmund","fl":"DE","date":"2026-05-10","j":"Кано","top":[["KEX",8.05],["Сметана",5.95],["Akteur",5.45]],"town":4,"gb":0.091,"pen":1.3,"ph":""},{"id":861,"c":"CE","num":3,"city":"Cologne","fl":"DE","date":"2026-05-14","j":"Кано","top":[["Sэм",5.4],["KEX",5.15],["Akteur",4.6]],"town":1,"gb":0.097,"pen":0.2,"ph":""},{"id":871,"c":"CE","num":4,"city":"Brussel","fl":"BE","date":"2026-05-30","j":"Рыба-мОя","top":[["Ну погоди",6.1],["Giper",5.95],["Клото",5.5]],"town":5,"gb":0.0835,"pen":0.6,"ph":""},{"id":947,"c":"CE","num":7,"city":"Wroclaw","fl":"PL","date":"2026-08-16","j":"Кирпич","top":[["Kotopes",6.25],["Season's",6.05],["DK",5.2]],"town":3,"gb":0.126,"pen":2.1,"ph":""},{"id":951,"c":"CE","num":8,"city":"Prague","fl":"CZ","date":"2026-08-16","j":"YeS","top":[["qUAest0r",6.8],["LogisticPro",6.05],["Yokai",5.7]],"town":3,"gb":0.108,"pen":0.4,"ph":""},{"id":884,"c":"CY","num":1,"city":"Limassol","fl":"CY","date":"2026-06-28","j":"Olgierd","top":[["Сабай",6.55],["Matilda",5.7],["Беатрис",5.15]],"town":3,"gb":0.1055,"pen":1.0,"ph":"assets/mcl/w-884-sabay.jpg"},{"id":912,"c":"CY","num":2,"city":"Limassol","fl":"CY","date":"2026-07-12","j":"Olgierd","top":[["Квоут",7.2],["Mr. Smith",6.5],["Chucha",6.45]],"town":2,"gb":0.1045,"pen":2.5,"ph":""},{"id":853,"c":"IL","num":1,"city":"Ramat Gan","fl":"IL","date":"2026-06-06","j":"Фолдэм","top":[["Lisbon",8.4],["Maser",7.45],["Колибри",5.4]],"town":4,"gb":0.109,"pen":1.3,"ph":""},{"id":889,"c":"IL","num":2,"city":"Haifa","fl":"IL","date":"2026-06-20","j":"Фолдэм","top":[["IGRIS",6],["Барселона",5.2],["Mauder",5.15]],"town":3,"gb":0.0985,"pen":1.3,"ph":""},{"id":910,"c":"IL","num":3,"city":"Ramat Gan","fl":"IL","date":"2026-07-25","j":"Dogfather","top":[["Kiwi",7.4],["***Алиса***",6.65],["Король",5.9]],"town":4,"gb":0.1215,"pen":2.3,"ph":""},{"id":942,"c":"IL","num":4,"city":"Haifa","fl":"IL","date":"2026-08-01","j":"Dogfather","top":[["Фолдэм",7.1],["Дон Винченцо",4.85],["Frеemаn",4.5]],"town":1,"gb":0.111,"pen":1.2,"ph":""}],"upcoming":[{"id":965,"c":"IL","num":5,"city":"Ramat Gan","date":"2026-08-29","fl":"IL","country":"Израиль"},{"id":874,"c":"CE","num":5,"city":"Chemnitz","date":"2026-09-06","fl":"DE","country":"Германия"},{"id":940,"c":"CE","num":6,"city":"Nürnberg","date":"2026-09-19","fl":"DE","country":"Германия"},{"id":913,"c":"CY","num":3,"city":"Limassol","date":"2026-09-20","fl":"CY","country":"Кипр"}],"squad":[{"c":"CE","slot":"CENTRAL·1","conf":"Central Europe","n":"KEX","a":6.6,"s":2,"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_44/24879757d10e225ec915d22544432c8e1fe3674b_photo.jpg"},{"c":"CE","slot":"CENTRAL·2","conf":"Central Europe","n":"qUAest0r","a":5.675,"s":2,"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_704/502f14f479f47b26b51096357d84d6a0eb8a0091_photo.jpg"},{"c":"CE","slot":"CENTRAL·3","conf":"Central Europe","n":"Akteur","a":5.025,"s":2,"p":"https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_689/bcf0812a6746e5f17fb2f59d672a752fd44cf462_photo.jpg"},{"c":"CE","slot":"CENTRAL·4","conf":"Central Europe","n":"Sэм","a":4.975,"s":2,"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_224/6f2b83f1bd5ef20ebbcf85a370c8980c9761b1c2.png"},{"c":"CE","slot":"CENTRAL·5","conf":"Central Europe","n":"Ну погоди","a":4.9,"s":2,"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_420/a7ac56aa203580715e879cae7ca1fff3b240f5ee_photo.jpg"},{"c":"CE","slot":"CENTRAL·6","conf":"Central Europe","n":"Клото","a":4.075,"s":2,"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_199/9eb8c85804dc2994deb603bfd10717b241972c94_photo.png"},{"c":"IL","slot":"ISRAEL·1","conf":"Израиль","n":"Фолдэм","a":5.4,"s":2,"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_221/fb160a7ba2dfdfa5b4a82b3fac0f566ddde97e24.png"},{"c":"IL","slot":"ISRAEL·2","conf":"Израиль","n":"Maser","a":5.225,"s":2,"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1701/32e5b46617dd7dbe41c3b08d5ca48590e6741bb3_photo.jpg"},{"c":"CY","slot":"CYPRUS·1","conf":"Кипр","n":"Сабай","a":5.05,"s":2,"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_8/380c1c53475cb2917c2179d32547ecd0783dd1a0_photo.png"},{"c":"CY","slot":"CYPRUS·2","conf":"Кипр","n":"Matilda","a":4.075,"s":2,"p":"https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_29/40d284761e2120097a7f1baa57f0d0e799e194b3_photo.png"}],"ticker":["PRAGUE — Link 6.45","DORTMUND — KEX 8.05","COLOGNE — Sэм 5.40","BRUSSEL — Ну погоди 6.10","WROCLAW — Kotopes 6.25","PRAGUE — qUAest0r 6.80","LIMASSOL — Сабай 6.55","LIMASSOL — Квоут 7.20","RAMAT GAN — Lisbon 8.40","HAIFA — IGRIS 6.00","RAMAT GAN — Kiwi 7.40","HAIFA — Фолдэм 7.10"],"judges":[{"judge":"Кирпич","series":[947],"seats":100,"gb_per":0.126,"posShare":0.48,"gbL_per":0.0621,"fatShare":0.21,"pen_per":0.021},{"judge":"Dogfather","series":[910,942],"seats":200,"gb_per":0.1163,"posShare":0.5,"gbL_per":0.0792,"fatShare":0.19,"pen_per":0.0175},{"judge":"YeS","series":[768,951],"seats":200,"gb_per":0.1143,"posShare":0.55,"gbL_per":0.0625,"fatShare":0.145,"pen_per":0.0105},{"judge":"Olgierd","series":[884,912],"seats":200,"gb_per":0.105,"posShare":0.485,"gbL_per":0.0379,"fatShare":0.185,"pen_per":0.0175},{"judge":"Фолдэм","series":[853,889],"seats":200,"gb_per":0.1038,"posShare":0.395,"gbL_per":0.0344,"fatShare":0.19,"pen_per":0.013},{"judge":"Кано","series":[823,861],"seats":200,"gb_per":0.094,"posShare":0.385,"gbL_per":0.0379,"fatShare":0.17,"pen_per":0.0075},{"judge":"Рыба-мОя","series":[871],"seats":100,"gb_per":0.0835,"posShare":0.34,"gbL_per":0.015,"fatShare":0.16,"pen_per":0.006}],"kpi":[["12/26","серий сыграно"],["120","игр · 1200 посадок"],["94","игрока в контуре"],["3000 €","призовой фонд"]],"quotas":[["Central Europe",53,"~106 (факт 2025)",14,21,"№2",6,"8.8 → ~18"],["Израиль",27,"~30",0,1,"№94",2,"13.5 → ~15"],["Кипр",14,"~18–20",0,1,"№83",2,"7 → ~9"]]};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const SER=n=>n===1?'серия':(n<5?'серии':'серий');
+const MM=q=>{try{return !!(window.matchMedia&&window.matchMedia(q).matches);}catch(e){return false;}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const f2=v=>v==null?'—':v.toFixed(2);
-const f3=v=>v==null?'—':v.toFixed(3);
-document.getElementById('subline').textContent='Зачёт и статус · снимок '+D.snapshot+' · сыграно 12 серий из ~26';
-const SECTIONS=[['stand','Зачёт'],['series','Серии'],['cal','Календарь'],['obs','Наблюдения'],['method','Метод']];
-function nav(cur){document.getElementById('nav').innerHTML=SECTIONS.map(([id,l])=>`<div class="chip${id===cur?' on':''}" onclick="go('${id}')">${l}</div>`).join('');}
-function go(id){nav(id);render(id);window.scrollTo({top:0});}
-function tbl(headers,rows,left){
-  const ths=headers.map((h,i)=>`<th${i===0||(left||[]).includes(i)?' class="l"':''}>${h}</th>`).join('');
-  return `<div class="tblwrap"><table><thead><tr>${ths}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
-}
+const f2=v=>v==null?'—':v.toFixed(2), f3=v=>v==null?'—':v.toFixed(3);
+const FL={CZ:'🇨🇿',DE:'🇩🇪',BE:'🇧🇪',PL:'🇵🇱',IL:'🇮🇱',CY:'🇨🇾'};
+const dm=d=>d.slice(8,10)+'.'+d.slice(5,7);
+
+/* интро: один раз в сутки */
+(function(){
+  const el=$('#intro'), v=$('#introv');
+  let seen=false; try{ seen=(Date.now()-(+localStorage.getItem('mclIntro')||0))<864e5; }catch(e){}
+  const reduce=MM('(prefers-reduced-motion: reduce)');
+  if(seen||reduce||location.search.includes('nointro')) return;
+  el.hidden=false; document.body.style.overflow='hidden';
+  const done=()=>{ el.classList.add('off'); document.body.style.overflow='';
+    try{ localStorage.setItem('mclIntro',Date.now()); }catch(e){}
+    setTimeout(()=>{el.hidden=true;},600); };
+  v.play().catch(done);
+  v.addEventListener('ended',done); $('#skip').addEventListener('click',done);
+  setTimeout(done,11000);
+})();
+
+/* герой: факты, прожектор, тикер, обратный отсчёт */
+$('#facts').innerHTML=[['Сыграно серий','12 <i>/ 26</i>'],['Игроков','94'],['Призовой фонд','3000 €'],['Финал','21–22.11 Прага']]
+  .map(([k,v])=>`<div class="fact"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+$('#tick').innerHTML=(D.ticker.concat(D.ticker)).map(t=>`<span>${esc(t)}</span>`).join('');
+$('#snap').textContent=D.snap;
+(function(){ const days=Math.max(0,Math.ceil((new Date(D.finalISO)-new Date())/864e5));
+  $('#cd').textContent=days+' дн.'; })();
+(function(){ const h=$('.hero'), s=$('#spot'); if(MM('(pointer:coarse)')) return;
+  h.addEventListener('pointermove',e=>{ const r=h.getBoundingClientRect();
+    s.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+    s.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%'); }); })();
+
+/* 01 сезон */
+$('#kpis').innerHTML=D.kpi.map(([v,l])=>`<div class="kpi"><div class="v">${esc(v)}</div><div class="l">${esc(l)}</div></div>`).join('');
+$('#confs').innerHTML=['CE','IL','CY'].map(c=>{const k=D.conf[c];
+  return `<div class="cbox"><div class="t">${esc(k.name)}</div>
+   <div class="q">квота ${k.quota} · ${esc(k.mode)}</div>
+   <div class="bar"><i style="width:${Math.round(k.played/k.total*100)}%"></i></div>
+   <div class="n"><span>сыграно <b>${k.played}</b> из ${k.total}</span><span>с 2+ сериями <b>${k.played2}</b> из ${k.rows.length}</span></div></div>`}).join('');
+
+/* 02 зачёт */
 let CONF='CE';
-function setConf(c){CONF=c;render('stand');}
+$('#tabs').innerHTML=['CE','IL','CY'].map(c=>`<div class="tab${c===CONF?' on':''}" data-c="${c}"><span>${esc(D.conf[c].name)}</span></div>`).join('');
+$('#tabs').addEventListener('click',e=>{const t=e.target.closest('.tab'); if(!t)return;
+  CONF=t.dataset.c; $$('#tabs .tab').forEach(x=>x.classList.toggle('on',x.dataset.c===CONF)); stand();});
 function stand(){
-  const c=D.conf[CONF];
-  const q=c.table.filter(p=>p.n>=2), one=c.table.filter(p=>p.n===1);
-  const rows=[];
-  q.forEach((p,i)=>{
-    const zone=i<c.quota?' class="zone"':'';
-    const det=p.det.map(d=>`${esc(d.l)} — <b style="color:var(--ink)">${f2(d.v)}</b>`).join(' · ');
-    rows.push(`<tr${zone}><td>${i+1}</td><td class="nick l">${esc(p.nick)}</td><td class="pos">${p.avg.toFixed(3)}</td><td>${p.n}</td><td class="mut l" style="white-space:normal">${det}</td></tr>`);
+  const k=D.conf[CONF], q=k.quota; let placed=0, out=[];
+  out.push(`<div class="stbl"><div class="sth"><div>#</div><div></div><div>Игрок</div><div class="r">Средний</div><div class="r">Серий</div></div>`);
+  k.rows.forEach((r,i)=>{
+    const ok=r.s>=2; if(ok) placed++;
+    const zone=ok&&placed<=q;
+    const det=r.d.map(d=>esc(d[0])+' — '+f2(d[1])).join('   ·   ');
+    const ph=r.p?`<img class="av" loading="lazy" src="${esc(r.p)}" alt="">`:`<div class="av"></div>`;
+    out.push(`<div class="srow${zone?' zone':''}${ok?'':' one'}">
+      <div class="rk">${ok?placed:'·'}</div>${ph}
+      <div><div class="nick">${esc(r.n)}</div><div class="det">${det}</div></div>
+      <div class="avg">${r.a.toFixed(3)}</div>
+      <div class="r"><span class="pill">${r.s}<em>&nbsp;${SER(r.s)}</em></span></div></div>`);
+    if(zone&&placed===q) out.push(`<div class="cutline"><b>линия прохода · ${q} ${q===6?'мест':'места'}</b><i></i></div>`);
   });
-  const rows1=one.map(p=>`<tr><td class="mut">—</td><td class="nick l" style="color:var(--mut)">${esc(p.nick)}</td><td class="mut">${p.avg.toFixed(2)}</td><td class="mut">1</td><td class="mut l" style="white-space:normal">${p.det.map(d=>esc(d.l)+' — '+f2(d.v)).join(' · ')}</td></tr>`);
-  const mini=`<div class="mini">${Object.entries(D.conf).map(([k,v])=>`<div class="m${k===CONF?' on':''}" onclick="setConf('${k}')">${v.name}</div>`).join('')}</div>`;
-  return `<div class="sec">Зачёт · ${c.name} (${c.played} из ${c.total} серий, квота ${c.quota} — ${c.mode})</div>${mini}
-  <div class="note">Подсвечена текущая зона квоты среди выполнивших норму «2+ серии». Это не прогноз: впереди ${c.total-c.played} серий, состав зоны будет меняться.</div>
-  ${tbl(['#','Игрок','Средний','Серий','Серии'],rows,[1,4])}
-  <div class="sec">Сыграли одну серию — норма не выполнена</div>
-  <div class="note">Для входа в зачёт достаточно сыграть вторую серию: среднее считается по всем сыгранным.</div>
-  ${tbl(['','Игрок','Балл','Серий','Серия'],rows1,[1,4])}`;
+  out.push('</div>');
+  $('#stbl').innerHTML=out.join('');
+  $('#stleg').innerHTML=`В зачёте <b style="color:#fff">${k.played2}</b> из ${k.rows.length} игроков конференции · осталось <b style="color:#fff">${k.total-k.played}</b> ${k.total-k.played===1?'серия':'серий'} · <em>приглушённые строки</em> — одна серия, норма не выполнена.`;
 }
-function series(){
-  const medal=['🥇','🥈','🥉'];
-  const rows=D.series.map(s=>{
-    const pods=s.top3.map((t,i)=>`<div style="display:flex;gap:8px;align-items:baseline;padding:1px 0"><span>${medal[i]}</span><span class="${i===0?'nick':''}" style="min-width:110px">${esc(t[0])}</span><span style="color:var(--gold-hi);font-weight:700">${f2(t[1])}</span></div>`).join('');
-    return `<tr><td class="l"><a href="https://mafgame.org/tournaments/${s.id}/results" target="_blank" rel="noopener">${s.conf}/${String(s.num).padStart(2,'0')} ↗</a></td><td class="l">${s.date.slice(5).replace('-','.')}</td><td class="l">${s.flag} ${esc(s.city)}</td><td class="l">${esc(s.judge)}</td><td class="l" style="white-space:normal">${pods}</td><td>${s.town}/10</td><td>${f3(s.gb)}</td></tr>`;
-  });
-  return `<div class="sec">12 сыгранных серий</div>
-  <div class="note">Судьи — из анонсов канала @mafiamcl (в протоколах mafgame судья не хранится). Клик по номеру серии — официальная таблица на mafgame. «Доп/посадку» — сырая щедрость серии: сравнивать серии между собой напрямую нельзя, у судей разная рука.</div>
-  ${tbl(['Серия','Дата','Место','Судья','Призёры','Город','Доп/пос.'],rows,[1,2,3,4])}
-  <div class="legend">Город выиграл 38 из 120 игр (31.7%): CE 21/60 · Израиль 12/40 · Кипр 5/20. Кёльн-03 и Хайфа-04 — по 1/10 за город.</div>`;
-}
-function cal(){
-  const up=D.upcoming.map(u=>`<tr><td class="l">${u.conf}/${String(u.num).padStart(2,'0')}</td><td class="l">${u.date.slice(5).replace('-','.')}</td><td class="l">${esc(u.country)}</td><td class="l">${esc(u.city)}</td><td class="l"><a href="https://mafgame.org/tournaments/${u.id}/view" target="_blank" rel="noopener">регистрация ↗</a></td></tr>`);
-  return `<div class="sec">Ключевые цифры</div>
-  <div class="kpis">${D.kpi.map(([v,l])=>`<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('')}</div>
-  <div class="sec">Анонсированные серии</div>
-  <div class="note">Ссылка ведёт на страницу серии на mafgame — там же регистрация.</div>
-  ${tbl(['Серия','Дата','Страна','Город','Ссылка'],up,[1,2,3,4])}
-  <div class="note">Дальше: ещё 8 серий Central Europe и 2 серии Кипра (не анонсированы), полуфиналы Израиля и Кипра, финал <b style="color:var(--ink)">21–22 ноября, Прага</b> — 10 игроков, 16 игр, взнос 110&nbsp;€, призовой фонд 3000&nbsp;€ (1000+700+500+300+200+150+150).</div>
-  <div class="sec">Регламент — коротко</div>
-  <div class="blk"><div class="b">Средний балл за серию, минимум 2 серии; очки не аннулируются. Полуфиналы Израиля и Кипра: итог = 40% балла отбора + 60% балла полуфинала. Квоты финала: CE — 6, Израиль — 2, Кипр — 2. Дистанция для финалиста — минимум 36 игр (CE) / 46 игр (IL, CY). Баллы рейтинга mafgame серийник раздаст одним пакетом после финала (в 2025: финалисты 42…22, участники серий по 4).</div></div>`;
-}
-function obs(){
-  const jr=D.judges.map(j=>`<tr><td class="nick l">${esc(j.judge)}</td><td>${j.seats/100}</td><td>${f3(j.gb_per)}</td><td>${Math.round(j.posShare*100)}%</td><td>${f3(j.gbL_per)}</td><td>${f3(j.pen_per)}</td></tr>`);
-  return `<div class="sec">Наблюдения по допам</div>
-  <div class="disc"><b>Флаг, а не обвинение.</b> Допы сравниваются с нормой той же серии, той же карты и того же исхода («остаток»). Высокий остаток — повод посмотреть игры глазами: качество игры цифры ловят лишь частично. Выборки маленькие (20–30 игр), значимость проверена перестановочными тестами с поправкой FDR на 24 игроков с 20+ играми.</div>
-  <div class="blk"><div class="t">Самый большой остаток — KEX</div><div class="b"><b>+0.115 за игру</b> к норме собственных серий (p=0.0002, q=0.004 — единственный значимый результат сезона). Доп в 15 из 20 посадок при средней по лиге 45%; в Дортмунде — 30% всех допов серии. Обе серии KEX судил один судья (Кано). В исследовании допов-2025 KEX также в списке значимых.</div></div>
-  <div class="blk"><div class="t">Контур играет «в чёрных»</div><div class="b">Город выиграл лишь <b>31.7%</b> игр — заметно ниже обычного. Возможная причина — малые закрытые составы по 10 человек, где все друг друга знают; может быть и просто дисперсией 120 игр.</div></div>
-  <div class="blk"><div class="t">Рука судьи различается в 1.5 раза</div><div class="b">Самая сдержанная — Рыба-мОя (0.083 допа на посадку, проигравшим почти не платит), самые щедрые — Кирпич (0.126) и Dogfather (0.116, проигравшим 0.079). YeS даёт допы чаще всех (55% посадок), но небольшими порциями. Поэтому сырые баллы игроков из разных серий не сравниваются.</div></div>
-  <div class="blk"><div class="t">Квоты финала и сила конференций</div><div class="b">Финал делится 6+2+2, и по числу серий это почти ровно (CE — 2.67 серии на место, Израиль и Кипр — по 2.5). Но поля конференций очень разные. В CE играют <b>14 игроков из топ-50</b> рейтинга mafgame и 21 из топ-100 (лучшие — №2 и №3 рейтинга); в Израиле и на Кипре игроков топ-50 <b>нет ни одного</b> (лучшие — №94 и №83). Конкуренция за место: в CE сейчас 8.8 игрока на место (к концу сезона, по темпу 2025 года, будет ~18), в Израиле ~13.5, на Кипре ~7. В финале-2025 это уже проявилось: израильская тройка заняла 5-е, 9-е и 10-е места, европейцы — все остальные. Обратная сторона: финалист из Израиля и Кипра проходит дистанцию минимум 46 игр против 36 у CE, а сама модель конференций — классическая «развивающая» (платить местами финала за рост регионов).</div></div>
-  <div class="sec">Конференции · поле и квоты</div>
-  ${tbl(['Конференция','Игроков сейчас','Прогноз на сезон','Из топ-50','Из топ-100','Лучший в рейтинге','Мест в финале','Игроков на место'],D.quotas.rows.map(r=>`<tr><td class="nick l">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td></tr>`),[])}
-  <div class="legend">Рейтинговые позиции — снимок рейтинга mafgame на 03.08.2026 (459 игроков). Население стран там же: Кипр — 23 игрока в рейтинге, Израиль — 24, остальная Европа — ~412.</div>
-  <div class="sec">Судьи · агрегат по их сериям</div>
-  ${tbl(['Судья','Серий','Доп/пос.','% с допом','Доп при пораж.','Штраф/пос.'],jr,[])}
-  <div class="legend">ЛХ (0.25/0.4 за угаданных чёрных) и Ci (компенсация ранних смертей) — автоматика платформы, в «щедрость судьи» не входят.</div>`;
-}
-function method(){
-  return `<div class="sec">Метод и данные</div>
-  <div class="blk"><div class="b">Данные — протоколы game_results всех 12 сыгранных серий контура 757 на mafgame.org (120 игр, 1200 посадок), сверенные с официальными таблицами серий 1:1 (0 расхождений) и с таблицей организаторов. Судьи и календарь — из постов канала @mafiamcl. Остатки: каждая посадка сравнивается со средним допом посадок той же серии, той же карты и того же исхода; сумма остатков игрока проверяется перестановочным тестом (6000 итераций) с поправкой Бенджамини-Хохберга. Страница временная, обновляется вручную после новых серий.</div></div>`;
-}
-function render(id){document.getElementById('content').innerHTML=({stand,series,cal,obs,method})[id]();}
-go('stand');
+stand();
+
+/* 03 состав */
+$('#squadgrid').innerHTML=D.squad.map((s,i)=>{
+  if(!s.n) return `<div class="sq empty"><div class="slot">${esc(s.slot)}</div><div class="q">?</div></div>`;
+  const ph=s.p?`<img class="ph" loading="lazy" src="${esc(s.p)}" alt=""><div class="duo"></div>`:'';
+  return `<div class="sq">${ph}<div class="shade"></div><div class="ghost">${i+1}</div>
+    <div class="slot">${esc(s.slot)}</div>
+    <div class="body"><div class="nm">${esc(s.n)}</div>
+      <div class="st"><b>${s.a.toFixed(3)}</b><s>${s.s} серии</s></div></div></div>`;
+}).join('');
+
+/* 04 серии */
+$('#wcards').innerHTML=D.series.filter(s=>s.ph).map(s=>`
+  <a class="wcard" href="https://mafgame.org/tournaments/${s.id}/results" target="_blank" rel="noopener">
+    <img loading="lazy" src="${esc(s.ph)}" alt="${esc(s.top[0][0])}">
+    <div class="cap"><div class="t">${esc(s.top[0][0])} · ${f2(s.top[0][1])}</div>
+      <div class="s">${FL[s.fl]||''} ${esc(s.city)} · серия ${s.c}/${String(s.num).padStart(2,'0')} · судья ${esc(s.j)}</div></div></a>`).join('');
+$('#slist').innerHTML=D.series.map(s=>`
+  <div class="sitem">
+    <div class="id">${s.c}<s>${String(s.num).padStart(2,'0')} серия</s></div>
+    <div><div class="meta">${dm(s.date)} · ${FL[s.fl]||''} <b>${esc(s.city)}</b> · судья ${esc(s.j)} · город ${s.town}/10 · доп ${f3(s.gb)}</div>
+      <div class="pod">${s.top.map((t,i)=>`<span>${['🥇','🥈','🥉'][i]} ${esc(t[0])} <b>${f2(t[1])}</b></span>`).join('')}</div></div>
+    <a class="go" href="https://mafgame.org/tournaments/${s.id}/results" target="_blank" rel="noopener">таблица ↗</a>
+  </div>`).join('');
+
+/* 05 календарь */
+$('#callist').innerHTML=D.upcoming.map(u=>`
+  <div class="cev">
+    <div class="d">${dm(u.date)}<s>${u.c}/${String(u.num).padStart(2,'0')}</s></div>
+    <div class="w">${FL[u.fl]||''} ${esc(u.city)}<s>${esc(u.country===D.conf[u.c].name?u.country:u.country+' · '+D.conf[u.c].name)}</s></div>
+    <a class="reg" href="https://mafgame.org/tournaments/${u.id}/view" target="_blank" rel="noopener">регистрация ↗</a>
+  </div>`).join('');
+
+/* 06 разбор */
+$('#blocks').innerHTML=[
+ ['+0.115','KEX · самый большой остаток','Больше нормы собственных серий на <b>0.115 допа за игру</b> (p=0.0002 — единственный значимый результат сезона из 24 проверенных). Доп в 15 посадках из 20 при средней по лиге 45%; в Дортмунде собрал 30% всех допов серии. Обе его серии судил один судья.'],
+ ['31.7%','Контур играет «в чёрных»','Город выиграл лишь 38 игр из 120: Central Europe 21/60, Израиль 12/40, Кипр 5/20. Кёльн и Хайфа-04 — по одной победе города за серию. Причина — либо малые закрытые составы по 10 человек, либо дисперсия.'],
+ ['×1.5','Рука судьи различается','Самая сдержанная — Рыба-мОя (0.083 допа на посадку, проигравшим почти не платит), самые щедрые — Кирпич (0.126) и Dogfather (0.116, проигравшим 0.079). YeS раздаёт чаще всех — 55% посадок, но малыми порциями.'],
+ ['6+2+2','Квоты и сила конференций','По числу серий деление ровное (2.67 серии на место у CE против 2.5). Но в Central Europe играют <b>14 игроков из топ-50</b> рейтинга, а в Израиле и на Кипре — <b>ни одного</b> (лучшие №94 и №83). В финале-2025 израильская квота дала 5-е, 9-е и 10-е места.'],
+].map(([n,t,b])=>`<div class="blk"><div class="big">${n}</div><div class="bt">${t}</div><div class="bb">${b}</div></div>`).join('');
+
+$('#qtbl').innerHTML=`<table><thead><tr>
+ <th>Конференция</th><th>Игроков</th><th>Прогноз</th><th>Топ-50</th><th>Топ-100</th><th>Лучший</th><th>Мест</th><th>На место</th></tr></thead><tbody>
+ ${D.quotas.map(r=>`<tr><td class="nm">${esc(r[0])}</td><td>${r[1]}</td><td>${esc(r[2])}</td>
+   <td class="${r[3]===0?'zero':''}">${r[3]}</td><td>${r[4]}</td><td>${esc(r[5])}</td><td>${r[6]}</td><td>${esc(r[7])}</td></tr>`).join('')}
+ </tbody></table>`;
+$('#jtbl').innerHTML=`<table><thead><tr>
+ <th>Судья</th><th>Серий</th><th>Доп/посадку</th><th>% с допом</th><th>При поражении</th><th>Жирных ≥0.3</th><th>Штраф/пос.</th></tr></thead><tbody>
+ ${D.judges.map(j=>`<tr><td class="nm">${esc(j.judge)}</td><td>${j.seats/100}</td><td>${f3(j.gb_per)}</td>
+   <td>${Math.round(j.posShare*100)}%</td><td>${f3(j.gbL_per)}</td><td>${Math.round(j.fatShare*100)}%</td><td>${f3(j.pen_per)}</td></tr>`).join('')}
+ </tbody></table>`;
+
+/* модалка с анонсом */
+const modal=$('#modal'), tv=$('#tv');
+const openM=()=>{modal.classList.add('on'); tv.play().catch(()=>{});};
+const closeM=()=>{modal.classList.remove('on'); tv.pause();};
+$('#teaser1').addEventListener('click',openM); $('#teaser2').addEventListener('click',openM);
+$('#close').addEventListener('click',closeM);
+modal.addEventListener('click',e=>{if(e.target===modal)closeM();});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
+
+/* scroll-spy */
+(function(){ const links=$$('#nav a'), secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+  if(!window.IntersectionObserver) return;
+  const io=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){
+    const i=secs.indexOf(e.target); links.forEach((l,j)=>l.classList.toggle('on',j===i)); }});},
+    {rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>s&&io.observe(s)); })();
 </script>
 </body>
 </html>
