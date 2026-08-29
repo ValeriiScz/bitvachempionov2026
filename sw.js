@@ -1,5 +1,5 @@
 /* ============================================================================
-   MafgameStat · sw.js (Service Worker для PWA) · v1.14 · 2026-08-27 (кэш v19.2: календарь с городами в клетках и карточками серий, кнопка «наверх»; v19.1: карточки победителей 9 серий из канала, финал золотым в календаре; MCL разрезан на 4 страницы — mcl2026/mcl-standings/mcl-series/mcl-lab + data/mcl2026.js в прекэше; видео не кэшируем)
+   MafgameStat · sw.js (Service Worker для PWA) · v1.14 · 2026-08-27 (кэш v19.3: ФИКС — медиа и Range-запросы мимо воркера (из-за 206 не открывался ролик-анонс); v19.2: календарь с городами в клетках и карточками серий, кнопка «наверх»; v19.1: карточки победителей 9 серий из канала, финал золотым в календаре; MCL разрезан на 4 страницы — mcl2026/mcl-standings/mcl-series/mcl-lab + data/mcl2026.js в прекэше; видео не кэшируем)
    Назначение: офлайн-кэш ОБОЛОЧКИ сайта (html/js/иконки) + установка как
    приложение. Данные турниров НЕ замораживаются кэшем.
 
@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'mafgamestat-v19.2';
+const CACHE_VERSION = 'mafgamestat-v19.3';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -71,6 +71,13 @@ self.addEventListener('fetch', (e) => {
   if (req.method !== 'GET') return; /* не-GET не трогаем */
   const url = new URL(req.url);
 
+  /* 0) МЕДИА И RANGE-ЗАПРОСЫ — мимо воркера.
+     Видео браузер тянет кусками (Range → ответ 206 Partial Content), а 206
+     нельзя положить в Cache API: cache.put бросает исключение, respondWith
+     отдаёт ошибку и ролик не открывается вообще. Поэтому не трогаем. */
+  if (req.headers.has('range') ||
+      /\.(mp4|webm|m4v|mov|ogv|mp3|m4a|ogg|wav)$/i.test(url.pathname)) return;
+
   /* 1) live-прокси mafgame — только сеть, никакого кэша */
   if (url.pathname.startsWith('/mafgame/')) return;
 
@@ -96,7 +103,10 @@ self.addEventListener('fetch', (e) => {
     caches.open(SHELL_CACHE).then(cache =>
       cache.match(req).then(cached => {
         const fresh = fetch(req).then(res => {
-          if (res && (res.ok || res.type === 'opaque')) cache.put(req, res.clone());
+          /* в кэш кладём только полные ответы (200) и opaque; put может бросить — гасим */
+          if (res && (res.status === 200 || res.type === 'opaque')) {
+            cache.put(req, res.clone()).catch(() => {});
+          }
           return res;
         }).catch(() => cached); /* офлайн → отдаём кэш (или undefined) */
         return cached || fresh;
