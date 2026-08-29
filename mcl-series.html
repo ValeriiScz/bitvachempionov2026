@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl2026.html · v3.0 · 2026-08-27 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. Данные: data/mcl2026.js (снимок 25.08). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-series.html · v1.0 · 2026-08-27 · MCL Europe 2026, серии и календарь: сетка выходных с раскрытием, список серий с фото и деталями. Данные: data/mcl2026.js (снимок 25.08). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<title>MCL Europe 2026 · MafgameStat</title>
-<meta name="description" content="Mafia Champions League Europe 2026: статус сезона, состав финала, победители серий и календарь.">
+<title>Серии и календарь · MCL Europe 2026</title>
+<meta name="description" content="Все серии MCL Europe 2026: победители, судьи, взносы, календарь ближайших серий.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,400;0,600;0,700;1,700;1,800&family=Fira+Sans+Extra+Condensed:ital,wght@0,800;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -391,82 +391,43 @@ footer .ct a:hover{color:var(--pur-hi)}
     <a class="mark" href="mcl2026.html" title="MCL Europe 2026">
       <img src="assets/mcl/logo-white.png" alt="MCL"><span>MCL <i>2026</i></span>
     </a>
-    <nav class="nav"><a href="mcl2026.html" class="on"><span>Обзор</span></a><a href="mcl-standings.html"><span>Зачёт</span></a><a href="mcl-series.html"><span>Серии</span></a><a href="mcl-lab.html"><span>Разбор</span></a></nav>
+    <nav class="nav"><a href="mcl2026.html"><span>Обзор</span></a><a href="mcl-standings.html"><span>Зачёт</span></a><a href="mcl-series.html" class="on"><span>Серии</span></a><a href="mcl-lab.html"><span>Разбор</span></a></nav>
     <button class="tobtn" id="teaser1"><span>&#9654; Анонс</span></button>
   </div>
 </header>
 
-<div id="intro" hidden>
-  <video id="introv" muted playsinline preload="auto" src="assets/mcl/intro.mp4"></video>
-  <div class="cap">Mafia Champions League · <b>Europe 2026</b></div>
-  <button class="skip" id="skip">пропустить</button>
-</div>
-
-<div class="hero">
-  <div class="bg" style="background-image:url(assets/mcl/hero.jpg)"></div>
-  <div class="spot" id="spot"></div>
+<div class="phead"><div class="bg" style="background-image:url(assets/mcl/hero.jpg)"></div>
   <div class="wrap in">
-    <div class="eyebrow">IX season · Mafgame &#9733;&#9733;&#9733;&#9733;</div>
-    <h1 class="h">MCL <span class="o">EUROPE</span></h1>
-    <div class="sub">Central Europe · Israel · Cyprus — <b>10 мест в финале</b></div>
-    <div class="facts" id="facts"></div>
-    <div class="cta">
-      <a class="btn" href="mcl-standings.html"><span>Смотреть зачёт</span></a>
-      <button class="btn gh" id="teaser2"><i class="play"></i><span>Анонс сезона</span></button>
+    <div class="eyebrow">IX season · серии и календарь</div>
+    <h1 class="h">Серии</h1>
+    <div class="sub">Двенадцать сыгранных серий и всё, что впереди. Календарь показывает только выходные — в будни серий не бывает. Клик по дню открывает детали, клик по <b>«Таблица»</b> — официальный протокол на mafgame.</div>
+  </div></div>
+<main><div class="wrap">
+  <section style="padding-top:34px">
+    <div class="sechead"><div class="no">01</div><h2 class="h">Календарь</h2><div class="line"></div></div>
+    <p class="lead">Лиловым — серии впереди, серым — уже сыгранные. Выбери день, чтобы увидеть город, судью, взнос и ссылку.</p>
+    <div class="cal" id="cal"></div>
+    <div class="dayinfo" id="dayinfo"></div>
+    <div class="final">
+      <img src="assets/mcl/logo-white.png" alt="">
+      <div class="lbl">Финал сезона</div>
+      <div class="t">Прага · 21–22 ноября</div>
+      <div class="row">
+        <div><div class="k">Призовой фонд</div><div class="v">3000 €</div></div>
+        <div><div class="k">Игроков</div><div class="v">10</div></div>
+        <div><div class="k">Игр</div><div class="v">16</div></div>
+        <div><div class="k">Взнос</div><div class="v">110 €</div></div>
+        <div><div class="k">Осталось</div><div class="v" id="cd">—</div></div>
+      </div>
     </div>
-  </div>
-</div>
-<div class="tick"><div class="row" id="tick"></div></div>
+  </section>
 
-<main>
-<section id="season"><div class="wrap">
-  <div class="sechead"><div class="no">01</div><h2 class="h">Сезон</h2><div class="line"></div></div>
-  <p class="lead">Зачёт — <b>средний балл за серию</b>, в зачёт идут только те, кто сыграл <b>минимум две</b>. Очки не сгорают, поэтому таблица переворачивается до последней серии.</p>
-  <div class="kpis" id="kpis"></div>
-  <div class="confs" id="confs"></div>
-</div></section>
-
-<section id="winners"><div class="wrap">
-  <div class="sechead"><div class="no">02</div><h2 class="h">Победители серий</h2><div class="line"></div></div>
-  <p class="lead">Двенадцать сыгранных серий сезона. Листается само — или стрелками и свайпом.</p>
-  <div class="car" id="car"><div class="cartrack" id="cartrack"></div>
-    <button class="carbtn p" id="carp" aria-label="назад">&#10094;</button>
-    <button class="carbtn n" id="carn" aria-label="вперёд">&#10095;</button></div>
-  <div class="cardots" id="cardots"></div>
-  <a class="more" href="mcl-series.html">Все серии и календарь &rarr;</a>
-</div></section>
-
-<section id="squad"><div class="wrap">
-  <div class="sechead"><div class="no">03</div><h2 class="h">Состав финала</h2><div class="line"></div></div>
-  <p class="lead">Как выглядел бы финал, если бы сезон закончился сегодня: <b>6 мест Central Europe</b>, по <b>2</b> от Israel и Cyprus через полуфиналы. Срез на дату, а не итог.</p>
-  <div class="squad" id="squadgrid"></div>
-</div></section>
-
-<section id="top"><div class="wrap">
-  <div class="sechead"><div class="no">04</div><h2 class="h">Зона прохода</h2><div class="line"></div></div>
-  <p class="lead">Кто сейчас в квоте по каждой конференции. Полные таблицы со всеми игроками, фильтром и калькулятором — на странице зачёта.</p>
-  <div class="confs" id="minis"></div>
-  <a class="more" href="mcl-standings.html">Весь зачёт и калькулятор прохода &rarr;</a>
-</div></section>
-
-<section id="next"><div class="wrap">
-  <div class="sechead"><div class="no">05</div><h2 class="h">Ближайшие серии</h2><div class="line"></div></div>
-  <div class="slist" id="nextlist"></div>
-  <div class="final">
-    <img src="assets/mcl/logo-white.png" alt="">
-    <div class="lbl">Финал сезона</div>
-    <div class="t">Прага · 21–22 ноября</div>
-    <div class="row">
-      <div><div class="k">Призовой фонд</div><div class="v">3000 €</div></div>
-      <div><div class="k">Игроков</div><div class="v">10</div></div>
-      <div><div class="k">Игр</div><div class="v">16</div></div>
-      <div><div class="k">Взнос</div><div class="v">110 €</div></div>
-      <div><div class="k">Осталось</div><div class="v" id="cd">—</div></div>
-    </div>
-  </div>
-  <a class="more" href="mcl-lab.html">Разбор данных: кому сыплют допы, судьи и честность квот &rarr;</a>
-</div></section>
-</main>
+  <section>
+    <div class="sechead"><div class="no">02</div><h2 class="h">Сыгранные серии</h2><div class="line"></div></div>
+    <p class="lead">Судьи — из анонсов канала лиги: в протоколах mafgame судья не хранится. Под кнопкой <b>ⓘ</b> — цифры серии с расшифровкой.</p>
+    <div class="slist" id="slist"></div>
+  </section>
+</div></main>
 <footer><div class="wrap fin">
   <img class="flogo" src="assets/mcl/logo-white.png" alt="MCL">
   <div class="txt"><b>Mafia Champions League Europe 2026</b> · IX season · финал 21–22.11, Прага<br>
@@ -511,90 +472,92 @@ if($('#snap')) $('#snap').textContent=D.snap;
 </script>
 <script>
 
-/* интро — один раз в сутки */
-(function(){
-  var el=$('#intro'), v=$('#introv'); if(!el) return;
-  var seen=false; try{ seen=(Date.now()-(+localStorage.getItem('mclIntro')||0))<864e5; }catch(e){}
-  if(seen||MM('(prefers-reduced-motion: reduce)')||location.search.indexOf('nointro')>-1) return;
-  el.hidden=false; document.body.style.overflow='hidden';
-  var done=function(){ el.classList.add('off'); document.body.style.overflow='';
-    try{ localStorage.setItem('mclIntro',Date.now()); }catch(e){}
-    setTimeout(function(){el.hidden=true;},600); };
-  v.play().catch(done);
-  v.addEventListener('ended',done); $('#skip').addEventListener('click',done);
-  setTimeout(done,11000);
-})();
-
-/* герой */
-$('#facts').innerHTML=[['Сыграно серий','12 <i>/ 26</i>'],['Игроков','94'],['Призовой фонд','3000 €'],['Финал','21–22.11 Прага']]
-  .map(function(x){return '<div class="fact"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div></div>';}).join('');
-$('#tick').innerHTML=D.ticker.concat(D.ticker).map(function(t){return '<span>'+esc(t)+'</span>';}).join('');
 (function(){var days=Math.max(0,Math.ceil((new Date(D.finalISO)-new Date())/864e5)); $('#cd').textContent=days+' дн.';})();
-(function(){var h=$('.hero'), s=$('#spot'); if(MM('(pointer:coarse)')) return;
-  h.addEventListener('pointermove',function(e){var r=h.getBoundingClientRect();
-    s.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
-    s.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');});})();
 
-/* 01 сезон */
-$('#kpis').innerHTML=D.kpi.map(function(x){return '<div class="kpi"><div class="v">'+esc(x[0])+'</div><div class="l">'+esc(x[1])+'</div></div>';}).join('');
-$('#confs').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
-  return '<a class="cbox" href="mcl-standings.html?c='+c+'"><div class="t">'+esc(k.name)+'</div>'+
-   '<div class="q">квота '+k.quota+' · '+esc(k.mode)+'</div>'+
-   '<div class="bar"><i style="width:'+Math.round(k.played/k.total*100)+'%"></i></div>'+
-   '<div class="n"><span>сыграно <b>'+k.played+'</b> из '+k.total+'</span><span>с нормой 2+ <b>'+k.played2+'</b> из '+k.rows.length+'</span></div></a>';}).join('');
-
-/* 02 карусель победителей */
+/* ── календарь: только выходные, с августа по ноябрь ── */
 (function(){
-  var list=D.series.filter(function(s){return s.img;});
-  var track=$('#cartrack'), dots=$('#cardots'), i=0, timer=null;
-  track.innerHTML=list.map(function(s){
-    return '<div class="carslide"><img loading="lazy" src="'+esc(s.img)+'" alt="'+esc(s.top[0][0])+'">'+
-      '<div class="cap"><div class="t">'+esc(s.top[0][0])+' <b>'+f2(s.top[0][1])+'</b></div>'+
-      '<div class="s">'+(FL[s.fl]||'')+' '+esc(s.city)+' · серия '+scode(s)+' · судья '+esc(s.j)+' · '+dm(s.date)+'</div></div></div>';
+  var evs={};
+  D.series.forEach(function(s){ (evs[s.date]=evs[s.date]||[]).push({t:'done',s:s}); });
+  D.upcoming.forEach(function(u){ (evs[u.date]=evs[u.date]||[]).push({t:'next',s:u}); });
+  evs['2026-11-21']=[{t:'final'}]; evs['2026-11-22']=[{t:'final'}];
+  var months=[[2026,7],[2026,8],[2026,9],[2026,10]];
+  var WD=['вс','пн','вт','ср','чт','пт','сб'];
+  var html=months.map(function(m){
+    var y=m[0], mo=m[1], last=new Date(y,mo+1,0).getDate(), cells='';
+    for(var d=1; d<=last; d++){
+      var dt=new Date(y,mo,d), w=dt.getDay();
+      if(w!==0&&w!==6) continue;
+      var iso=y+'-'+('0'+(mo+1)).slice(-2)+'-'+('0'+d).slice(-2);
+      var e=evs[iso], cls='day';
+      if(e){ cls+=(e[0].t==='done'?' done':' has'); }
+      cells+='<div class="'+cls+'"'+(e?' data-d="'+iso+'"':'')+'><div class="dn">'+d+'</div><div class="dw">'+WD[w]+'</div></div>';
+    }
+    return '<div class="month"><div class="mt">'+MONN[mo]+' '+y+'</div><div class="days">'+cells+'</div></div>';
   }).join('');
-  dots.innerHTML=list.map(function(s,n){return '<button class="cardot'+(n===0?' on':'')+'" data-i="'+n+'" aria-label="'+esc(s.city)+'"></button>';}).join('');
-  var go=function(n){ i=(n+list.length)%list.length; track.style.transform='translateX(-'+(i*100)+'%)';
-    $$('#cardots .cardot').forEach(function(d,k){d.classList.toggle('on',k===i);}); };
-  var start=function(){ if(MM('(prefers-reduced-motion: reduce)')) return; stop(); timer=setInterval(function(){go(i+1);},4000); };
-  var stop=function(){ if(timer) clearInterval(timer); timer=null; };
-  $('#carn').addEventListener('click',function(){go(i+1); start();});
-  $('#carp').addEventListener('click',function(){go(i-1); start();});
-  dots.addEventListener('click',function(e){var b=e.target.closest('.cardot'); if(b){go(+b.dataset.i); start();}});
-  var car=$('#car');
-  car.addEventListener('mouseenter',stop); car.addEventListener('mouseleave',start);
-  var x0=null;
-  car.addEventListener('touchstart',function(e){x0=e.touches[0].clientX; stop();},{passive:true});
-  car.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0;
-    if(Math.abs(dx)>40) go(i+(dx<0?1:-1)); x0=null; start();},{passive:true});
-  start();
+  $('#cal').innerHTML=html;
+
+  var info=$('#dayinfo');
+  $('#cal').addEventListener('click',function(e){
+    var el=e.target.closest('.day[data-d]'); if(!el) return;
+    $$('.day').forEach(function(d){d.classList.remove('on');}); el.classList.add('on');
+    var iso=el.dataset.d, list=evs[iso], parts=[];
+    list.forEach(function(x){
+      if(x.t==='final'){
+        parts.push('<div class="t">Финал MCL Europe · Прага</div>'+
+          '<div class="r"><div><div class="k">Игроков</div><div class="v">10</div></div>'+
+          '<div><div class="k">Игр</div><div class="v">16</div></div>'+
+          '<div><div class="k">Взнос</div><div class="v">110 €</div></div>'+
+          '<div><div class="k">Призовой фонд</div><div class="v">3000 €</div></div></div>');
+        return;
+      }
+      var s=x.s, done=x.t==='done';
+      parts.push('<div class="t">'+(FL[s.fl]||'')+' '+esc(s.city)+' · '+scode(s)+'</div>'+
+        '<div class="r">'+
+        '<div><div class="k">Конференция</div><div class="v">'+esc(D.conf[s.c].name)+'</div></div>'+
+        '<div><div class="k">Судья</div><div class="v">'+esc(s.j||'не объявлен')+'</div></div>'+
+        '<div><div class="k">Взнос</div><div class="v">'+esc(s.fee||'—')+'</div></div>'+
+        (s.time?'<div><div class="k">Старт</div><div class="v">'+esc(s.time)+'</div></div>':'')+
+        (done?'<div><div class="k">Победитель</div><div class="v">'+esc(s.top[0][0])+' '+f2(s.top[0][1])+'</div></div>':'')+
+        '</div>'+
+        '<div class="acts">'+(done
+          ? '<a class="tblink" href="https://mafgame.org/tournaments/'+s.id+'/results" target="_blank" rel="noopener">Таблица серии &#8599;</a>'
+          : '<a class="tblink" href="https://mafgame.org/tournaments/'+s.id+'/view" target="_blank" rel="noopener">Регистрация &#8599;</a>')+
+        '<a class="ibtn" href="'+D.tg+'" target="_blank" rel="noopener">Канал лиги</a></div>');
+    });
+    info.innerHTML=parts.join('<div style="height:14px"></div>');
+    info.classList.add('on');
+  });
 })();
 
-/* 03 состав */
-$('#squadgrid').innerHTML=D.squad.map(function(s,i){
-  if(!s.n) return '<div class="sq empty"><div class="slot">'+esc(s.slot)+'</div><div class="q">?</div></div>';
-  var ph=s.p?'<img class="ph" loading="lazy" src="'+esc(s.p)+'" alt=""><div class="duo"></div>':'';
-  return '<div class="sq">'+ph+'<div class="shade"></div><div class="ghost">'+(i+1)+'</div>'+
-    '<div class="slot">'+esc(s.slot)+'</div><div class="body"><div class="nm">'+esc(s.n)+'</div>'+
-    '<div class="st"><b>'+s.a.toFixed(3)+'</b><s>'+s.s+' '+SER(s.s)+'</s></div></div></div>';
+/* ── список серий ── */
+$('#slist').innerHTML=D.series.slice().reverse().map(function(s){
+  var medal=['🥇','🥈','🥉'];
+  var pod=s.top.map(function(t,i){return '<span>'+medal[i]+' '+esc(t[0])+' <b>'+f2(t[1])+'</b></span>';}).join('');
+  var thumb=s.img?'<img class="sithumb" loading="lazy" src="'+esc(s.img)+'" alt="">':'<div class="sithumb"></div>';
+  return '<div class="sitem" data-id="'+s.id+'">'+
+    '<div class="sihead">'+thumb+
+      '<div><div class="simeta">'+dm(s.date)+' · '+(FL[s.fl]||'')+' <b>'+esc(s.city)+'</b> · '+esc(D.conf[s.c].name)+' · серия '+scode(s)+' · судья '+esc(s.j)+'</div>'+
+      '<div class="pod">'+pod+'</div></div>'+
+      '<div class="siact">'+
+        '<a class="tblink" href="https://mafgame.org/tournaments/'+s.id+'/results" target="_blank" rel="noopener">Таблица &#8599;</a>'+
+        '<button class="ibtn" data-t="'+s.id+'"><i>i</i> Детали</button>'+
+      '</div>'+
+    '</div>'+
+    '<div class="sidet"><div class="dgrid">'+
+      '<div class="dg"><div class="k">Побед города</div><div class="v">'+s.town+' из 10</div><div class="h2n">Сколько игр из десяти выиграла красная команда. По всем сериям сезона — 32%.</div></div>'+
+      '<div class="dg"><div class="k">Средний доп судьи</div><div class="v">'+f3(s.gb)+'</div><div class="h2n">Дополнительные баллы «за качество игры» в среднем на одну посадку. По лиге сезона — 0.106.</div></div>'+
+      '<div class="dg"><div class="k">Доп при поражении</div><div class="v">'+f3(s.gbl)+'</div><div class="h2n">Тот же доп, но только в проигранных играх — показывает, платит ли судья за игру без результата.</div></div>'+
+      '<div class="dg"><div class="k">Штрафы за серию</div><div class="v">'+s.pen.toFixed(1)+'</div><div class="h2n">Сумма всех снятых баллов за нарушения.</div></div>'+
+      '<div class="dg"><div class="k">Взнос</div><div class="v">'+esc(s.fee||'—')+'</div>'+(s.time?'<div class="h2n">Старт '+esc(s.time)+'</div>':'')+'</div>'+
+      '<div class="dg"><div class="k">Игроков</div><div class="v">'+s.players+'</div><div class="h2n">10 игр за серию, каждый играет все десять.</div></div>'+
+    '</div>'+
+    (s.post?'<div style="margin-top:12px"><a class="ibtn" href="'+D.tg+'/'+s.post+'" target="_blank" rel="noopener">Пост серии в канале лиги &#8599;</a></div>':'')+
+    '</div></div>';
 }).join('');
-
-/* 04 мини-таблицы зоны */
-$('#minis').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
-  var q=k.rows.filter(function(r){return r.s>=2;}).slice(0,k.quota);
-  var rows=q.map(function(r,n){
-    var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
-    return '<div class="mrow"><div class="rk">'+(n+1)+'</div>'+ph+
-      '<div class="nick">'+esc(r.n)+'</div><div class="avg">'+r.a.toFixed(3)+'</div></div>';}).join('');
-  return '<div class="mini"><div class="mh"><b>'+esc(k.name)+'</b><s>квота '+k.quota+'</s></div>'+rows+'</div>';}).join('');
-
-/* 05 ближайшие серии */
-$('#nextlist').innerHTML=D.upcoming.slice(0,3).map(function(u){
-  return '<div class="sitem"><div class="sihead">'+
-    (u.img?'<img class="sithumb" loading="lazy" src="'+esc(u.img)+'" alt="">':'<div class="sithumb"></div>')+
-    '<div><div class="simeta">'+dm(u.date)+' · '+(FL[u.fl]||'')+' <b>'+esc(u.city)+'</b> · '+esc(D.conf[u.c].name)+
-      (u.j?' · судья '+esc(u.j):'')+(u.fee?' · взнос '+esc(u.fee):'')+(u.time?' · старт '+esc(u.time):'')+'</div></div>'+
-    '<div class="siact"><a class="tblink" href="https://mafgame.org/tournaments/'+u.id+'/view" target="_blank" rel="noopener">Регистрация &#8599;</a></div>'+
-    '</div></div>';}).join('');
+$('#slist').addEventListener('click',function(e){
+  var b=e.target.closest('.ibtn[data-t]'); if(!b) return;
+  b.closest('.sitem').classList.toggle('open');
+});
 
 </script>
 </body>

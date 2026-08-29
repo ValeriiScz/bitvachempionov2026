@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl2026.html · v3.0 · 2026-08-27 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. Данные: data/mcl2026.js (снимок 25.08). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-lab.html · v1.0 · 2026-08-27 · MCL Europe 2026, разбор данных: находки по допам, квоты и сила конференций, судьи, метод. Данные: data/mcl2026.js (снимок 25.08). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<title>MCL Europe 2026 · MafgameStat</title>
-<meta name="description" content="Mafia Champions League Europe 2026: статус сезона, состав финала, победители серий и календарь.">
+<title>Разбор данных · MCL Europe 2026</title>
+<meta name="description" content="Разбор протоколов MCL Europe 2026: остатки допов, судьи, честность квот, метод и данные.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,400;0,600;0,700;1,700;1,800&family=Fira+Sans+Extra+Condensed:ital,wght@0,800;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -391,82 +391,40 @@ footer .ct a:hover{color:var(--pur-hi)}
     <a class="mark" href="mcl2026.html" title="MCL Europe 2026">
       <img src="assets/mcl/logo-white.png" alt="MCL"><span>MCL <i>2026</i></span>
     </a>
-    <nav class="nav"><a href="mcl2026.html" class="on"><span>Обзор</span></a><a href="mcl-standings.html"><span>Зачёт</span></a><a href="mcl-series.html"><span>Серии</span></a><a href="mcl-lab.html"><span>Разбор</span></a></nav>
+    <nav class="nav"><a href="mcl2026.html"><span>Обзор</span></a><a href="mcl-standings.html"><span>Зачёт</span></a><a href="mcl-series.html"><span>Серии</span></a><a href="mcl-lab.html" class="on"><span>Разбор</span></a></nav>
     <button class="tobtn" id="teaser1"><span>&#9654; Анонс</span></button>
   </div>
 </header>
 
-<div id="intro" hidden>
-  <video id="introv" muted playsinline preload="auto" src="assets/mcl/intro.mp4"></video>
-  <div class="cap">Mafia Champions League · <b>Europe 2026</b></div>
-  <button class="skip" id="skip">пропустить</button>
-</div>
-
-<div class="hero">
-  <div class="bg" style="background-image:url(assets/mcl/hero.jpg)"></div>
-  <div class="spot" id="spot"></div>
+<div class="phead"><div class="bg" style="background-image:url(assets/mcl/hero.jpg)"></div>
   <div class="wrap in">
-    <div class="eyebrow">IX season · Mafgame &#9733;&#9733;&#9733;&#9733;</div>
-    <h1 class="h">MCL <span class="o">EUROPE</span></h1>
-    <div class="sub">Central Europe · Israel · Cyprus — <b>10 мест в финале</b></div>
-    <div class="facts" id="facts"></div>
-    <div class="cta">
-      <a class="btn" href="mcl-standings.html"><span>Смотреть зачёт</span></a>
-      <button class="btn gh" id="teaser2"><i class="play"></i><span>Анонс сезона</span></button>
-    </div>
-  </div>
-</div>
-<div class="tick"><div class="row" id="tick"></div></div>
-
-<main>
-<section id="season"><div class="wrap">
-  <div class="sechead"><div class="no">01</div><h2 class="h">Сезон</h2><div class="line"></div></div>
-  <p class="lead">Зачёт — <b>средний балл за серию</b>, в зачёт идут только те, кто сыграл <b>минимум две</b>. Очки не сгорают, поэтому таблица переворачивается до последней серии.</p>
-  <div class="kpis" id="kpis"></div>
-  <div class="confs" id="confs"></div>
-</div></section>
-
-<section id="winners"><div class="wrap">
-  <div class="sechead"><div class="no">02</div><h2 class="h">Победители серий</h2><div class="line"></div></div>
-  <p class="lead">Двенадцать сыгранных серий сезона. Листается само — или стрелками и свайпом.</p>
-  <div class="car" id="car"><div class="cartrack" id="cartrack"></div>
-    <button class="carbtn p" id="carp" aria-label="назад">&#10094;</button>
-    <button class="carbtn n" id="carn" aria-label="вперёд">&#10095;</button></div>
-  <div class="cardots" id="cardots"></div>
-  <a class="more" href="mcl-series.html">Все серии и календарь &rarr;</a>
-</div></section>
-
-<section id="squad"><div class="wrap">
-  <div class="sechead"><div class="no">03</div><h2 class="h">Состав финала</h2><div class="line"></div></div>
-  <p class="lead">Как выглядел бы финал, если бы сезон закончился сегодня: <b>6 мест Central Europe</b>, по <b>2</b> от Israel и Cyprus через полуфиналы. Срез на дату, а не итог.</p>
-  <div class="squad" id="squadgrid"></div>
-</div></section>
-
-<section id="top"><div class="wrap">
-  <div class="sechead"><div class="no">04</div><h2 class="h">Зона прохода</h2><div class="line"></div></div>
-  <p class="lead">Кто сейчас в квоте по каждой конференции. Полные таблицы со всеми игроками, фильтром и калькулятором — на странице зачёта.</p>
-  <div class="confs" id="minis"></div>
-  <a class="more" href="mcl-standings.html">Весь зачёт и калькулятор прохода &rarr;</a>
-</div></section>
-
-<section id="next"><div class="wrap">
-  <div class="sechead"><div class="no">05</div><h2 class="h">Ближайшие серии</h2><div class="line"></div></div>
-  <div class="slist" id="nextlist"></div>
-  <div class="final">
-    <img src="assets/mcl/logo-white.png" alt="">
-    <div class="lbl">Финал сезона</div>
-    <div class="t">Прага · 21–22 ноября</div>
-    <div class="row">
-      <div><div class="k">Призовой фонд</div><div class="v">3000 €</div></div>
-      <div><div class="k">Игроков</div><div class="v">10</div></div>
-      <div><div class="k">Игр</div><div class="v">16</div></div>
-      <div><div class="k">Взнос</div><div class="v">110 €</div></div>
-      <div><div class="k">Осталось</div><div class="v" id="cd">—</div></div>
-    </div>
-  </div>
-  <a class="more" href="mcl-lab.html">Разбор данных: кому сыплют допы, судьи и честность квот &rarr;</a>
-</div></section>
-</main>
+    <div class="eyebrow">IX season · аналитика</div>
+    <h1 class="h">Разбор</h1>
+    <div class="sub">Что видно в протоколах, кроме таблицы. Допы игрока сравниваются с нормой той же серии, той же карты и того же исхода — это «остаток». Высокий остаток — <b>флаг, куда смотреть</b>, а не обвинение.</div>
+  </div></div>
+<main><div class="wrap">
+  <section style="padding-top:34px">
+    <div class="sechead"><div class="no">01</div><h2 class="h">Находки</h2><div class="line"></div></div>
+    <div class="blocks" id="blocks"></div>
+  </section>
+  <section>
+    <div class="sechead"><div class="no">02</div><h2 class="h">Конференции и квоты</h2><div class="line"></div></div>
+    <p class="lead">По числу серий деление ровное: у Central Europe 2.67 серии на одно место в финале, у Israel и Cyprus по 2.5. Разница — в силе полей.</p>
+    <div class="tw" id="qtbl"></div>
+    <div class="legend">Рейтинговые позиции — снимок рейтинга mafgame на 03.08.2026 (459 игроков). В финале-2025 израильская квота дала 5-е, 9-е и 10-е места.</div>
+  </section>
+  <section>
+    <div class="sechead"><div class="no">03</div><h2 class="h">Судьи</h2><div class="line"></div></div>
+    <p class="lead">Рука судьи различается в полтора раза. Поэтому сырые баллы игроков из разных серий не сравниваются — только остатки против нормы своей серии.</p>
+    <div class="tw" id="jtbl"></div>
+    <div class="legend">ЛХ (0.25 и 0.4 за угаданных чёрных) и Ci (компенсация ранних смертей) — автоматика платформы, в «щедрость судьи» не входят.</div>
+  </section>
+  <section>
+    <div class="sechead"><div class="no">04</div><h2 class="h">Данные и метод</h2><div class="line"></div></div>
+    <p class="lead">Протоколы game_results всех 12 сыгранных серий контура 757 на mafgame.org — 120 игр, 1200 посадок. Сверено с официальными таблицами серий 1:1 (ноль расхождений) и с таблицей организаторов. Судьи, взносы, календарь и регламент — из канала лиги. Остатки: перестановочный тест 6000 итераций с поправкой Бенджамини-Хохберга на 24 игроков с 20+ играми. Страница обновляется вручную после новых серий.</p>
+    <a class="more" href="mcl-standings.html">Вернуться к зачёту &rarr;</a>
+  </section>
+</div></main>
 <footer><div class="wrap fin">
   <img class="flogo" src="assets/mcl/logo-white.png" alt="MCL">
   <div class="txt"><b>Mafia Champions League Europe 2026</b> · IX season · финал 21–22.11, Прага<br>
@@ -511,90 +469,20 @@ if($('#snap')) $('#snap').textContent=D.snap;
 </script>
 <script>
 
-/* интро — один раз в сутки */
-(function(){
-  var el=$('#intro'), v=$('#introv'); if(!el) return;
-  var seen=false; try{ seen=(Date.now()-(+localStorage.getItem('mclIntro')||0))<864e5; }catch(e){}
-  if(seen||MM('(prefers-reduced-motion: reduce)')||location.search.indexOf('nointro')>-1) return;
-  el.hidden=false; document.body.style.overflow='hidden';
-  var done=function(){ el.classList.add('off'); document.body.style.overflow='';
-    try{ localStorage.setItem('mclIntro',Date.now()); }catch(e){}
-    setTimeout(function(){el.hidden=true;},600); };
-  v.play().catch(done);
-  v.addEventListener('ended',done); $('#skip').addEventListener('click',done);
-  setTimeout(done,11000);
-})();
+$('#blocks').innerHTML=[
+ ['+0.115','KEX · самый большой остаток','Больше нормы собственных серий на <b>0.115 допа за игру</b> (p=0.0002 — единственный значимый результат сезона из 24 проверенных). Доп в 15 посадках из 20 при средней по лиге 45%; в Дортмунде собрал 30% всех допов серии. Обе его серии судил один судья.'],
+ ['31.7%','Контур играет «в чёрных»','Город выиграл лишь 38 игр из 120: Central Europe 21/60, Israel 12/40, Cyprus 5/20. Cologne и Haifa-04 — по одной победе города за серию. Причина — либо малые закрытые составы по 10 человек, либо дисперсия.'],
+ ['×1.5','Рука судьи различается','Самая сдержанная — Рыба-мОя (0.083 допа на посадку, проигравшим почти не платит), самые щедрые — Кирпич (0.126) и Dogfather (0.116, проигравшим 0.079). YeS раздаёт чаще всех — 55% посадок, но малыми порциями.'],
+ ['6+2+2','Квоты и сила конференций','В Central Europe играют <b>14 игроков из топ-50</b> рейтинга mafgame и 21 из топ-100 (лучшие — №2 и №3). В Israel и Cyprus игроков топ-50 <b>нет ни одного</b> (лучшие — №94 и №83). Обратная сторона: финалист из этих конференций проходит 46 игр против 36 у Central Europe.'],
+].map(function(x){return '<div class="blk"><div class="big">'+x[0]+'</div><div class="bt">'+x[1]+'</div><div class="bb">'+x[2]+'</div></div>';}).join('');
 
-/* герой */
-$('#facts').innerHTML=[['Сыграно серий','12 <i>/ 26</i>'],['Игроков','94'],['Призовой фонд','3000 €'],['Финал','21–22.11 Прага']]
-  .map(function(x){return '<div class="fact"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div></div>';}).join('');
-$('#tick').innerHTML=D.ticker.concat(D.ticker).map(function(t){return '<span>'+esc(t)+'</span>';}).join('');
-(function(){var days=Math.max(0,Math.ceil((new Date(D.finalISO)-new Date())/864e5)); $('#cd').textContent=days+' дн.';})();
-(function(){var h=$('.hero'), s=$('#spot'); if(MM('(pointer:coarse)')) return;
-  h.addEventListener('pointermove',function(e){var r=h.getBoundingClientRect();
-    s.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
-    s.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');});})();
+$('#qtbl').innerHTML='<table><thead><tr><th>Конференция</th><th>Игроков</th><th>Прогноз</th><th>Топ-50</th><th>Топ-100</th><th>Лучший</th><th>Мест</th><th>На место</th></tr></thead><tbody>'+
+ D.quotas.map(function(r){return '<tr><td class="nm">'+esc(r[0])+'</td><td>'+r[1]+'</td><td>'+esc(r[2])+'</td>'+
+  '<td class="'+(r[3]===0?'zero':'')+'">'+r[3]+'</td><td>'+r[4]+'</td><td>'+esc(r[5])+'</td><td>'+r[6]+'</td><td>'+esc(r[7])+'</td></tr>';}).join('')+'</tbody></table>';
 
-/* 01 сезон */
-$('#kpis').innerHTML=D.kpi.map(function(x){return '<div class="kpi"><div class="v">'+esc(x[0])+'</div><div class="l">'+esc(x[1])+'</div></div>';}).join('');
-$('#confs').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
-  return '<a class="cbox" href="mcl-standings.html?c='+c+'"><div class="t">'+esc(k.name)+'</div>'+
-   '<div class="q">квота '+k.quota+' · '+esc(k.mode)+'</div>'+
-   '<div class="bar"><i style="width:'+Math.round(k.played/k.total*100)+'%"></i></div>'+
-   '<div class="n"><span>сыграно <b>'+k.played+'</b> из '+k.total+'</span><span>с нормой 2+ <b>'+k.played2+'</b> из '+k.rows.length+'</span></div></a>';}).join('');
-
-/* 02 карусель победителей */
-(function(){
-  var list=D.series.filter(function(s){return s.img;});
-  var track=$('#cartrack'), dots=$('#cardots'), i=0, timer=null;
-  track.innerHTML=list.map(function(s){
-    return '<div class="carslide"><img loading="lazy" src="'+esc(s.img)+'" alt="'+esc(s.top[0][0])+'">'+
-      '<div class="cap"><div class="t">'+esc(s.top[0][0])+' <b>'+f2(s.top[0][1])+'</b></div>'+
-      '<div class="s">'+(FL[s.fl]||'')+' '+esc(s.city)+' · серия '+scode(s)+' · судья '+esc(s.j)+' · '+dm(s.date)+'</div></div></div>';
-  }).join('');
-  dots.innerHTML=list.map(function(s,n){return '<button class="cardot'+(n===0?' on':'')+'" data-i="'+n+'" aria-label="'+esc(s.city)+'"></button>';}).join('');
-  var go=function(n){ i=(n+list.length)%list.length; track.style.transform='translateX(-'+(i*100)+'%)';
-    $$('#cardots .cardot').forEach(function(d,k){d.classList.toggle('on',k===i);}); };
-  var start=function(){ if(MM('(prefers-reduced-motion: reduce)')) return; stop(); timer=setInterval(function(){go(i+1);},4000); };
-  var stop=function(){ if(timer) clearInterval(timer); timer=null; };
-  $('#carn').addEventListener('click',function(){go(i+1); start();});
-  $('#carp').addEventListener('click',function(){go(i-1); start();});
-  dots.addEventListener('click',function(e){var b=e.target.closest('.cardot'); if(b){go(+b.dataset.i); start();}});
-  var car=$('#car');
-  car.addEventListener('mouseenter',stop); car.addEventListener('mouseleave',start);
-  var x0=null;
-  car.addEventListener('touchstart',function(e){x0=e.touches[0].clientX; stop();},{passive:true});
-  car.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0;
-    if(Math.abs(dx)>40) go(i+(dx<0?1:-1)); x0=null; start();},{passive:true});
-  start();
-})();
-
-/* 03 состав */
-$('#squadgrid').innerHTML=D.squad.map(function(s,i){
-  if(!s.n) return '<div class="sq empty"><div class="slot">'+esc(s.slot)+'</div><div class="q">?</div></div>';
-  var ph=s.p?'<img class="ph" loading="lazy" src="'+esc(s.p)+'" alt=""><div class="duo"></div>':'';
-  return '<div class="sq">'+ph+'<div class="shade"></div><div class="ghost">'+(i+1)+'</div>'+
-    '<div class="slot">'+esc(s.slot)+'</div><div class="body"><div class="nm">'+esc(s.n)+'</div>'+
-    '<div class="st"><b>'+s.a.toFixed(3)+'</b><s>'+s.s+' '+SER(s.s)+'</s></div></div></div>';
-}).join('');
-
-/* 04 мини-таблицы зоны */
-$('#minis').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
-  var q=k.rows.filter(function(r){return r.s>=2;}).slice(0,k.quota);
-  var rows=q.map(function(r,n){
-    var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
-    return '<div class="mrow"><div class="rk">'+(n+1)+'</div>'+ph+
-      '<div class="nick">'+esc(r.n)+'</div><div class="avg">'+r.a.toFixed(3)+'</div></div>';}).join('');
-  return '<div class="mini"><div class="mh"><b>'+esc(k.name)+'</b><s>квота '+k.quota+'</s></div>'+rows+'</div>';}).join('');
-
-/* 05 ближайшие серии */
-$('#nextlist').innerHTML=D.upcoming.slice(0,3).map(function(u){
-  return '<div class="sitem"><div class="sihead">'+
-    (u.img?'<img class="sithumb" loading="lazy" src="'+esc(u.img)+'" alt="">':'<div class="sithumb"></div>')+
-    '<div><div class="simeta">'+dm(u.date)+' · '+(FL[u.fl]||'')+' <b>'+esc(u.city)+'</b> · '+esc(D.conf[u.c].name)+
-      (u.j?' · судья '+esc(u.j):'')+(u.fee?' · взнос '+esc(u.fee):'')+(u.time?' · старт '+esc(u.time):'')+'</div></div>'+
-    '<div class="siact"><a class="tblink" href="https://mafgame.org/tournaments/'+u.id+'/view" target="_blank" rel="noopener">Регистрация &#8599;</a></div>'+
-    '</div></div>';}).join('');
+$('#jtbl').innerHTML='<table><thead><tr><th>Судья</th><th>Серий</th><th>Доп/посадку</th><th>% с допом</th><th>При поражении</th><th>Жирных ≥0.3</th><th>Штраф/пос.</th></tr></thead><tbody>'+
+ D.judges.map(function(j){return '<tr><td class="nm">'+esc(j.judge)+'</td><td>'+(j.seats/100)+'</td><td>'+f3(j.gb_per)+'</td>'+
+  '<td>'+Math.round(j.posShare*100)+'%</td><td>'+f3(j.gbL_per)+'</td><td>'+Math.round(j.fatShare*100)+'%</td><td>'+f3(j.pen_per)+'</td></tr>';}).join('')+'</tbody></table>';
 
 </script>
 </body>

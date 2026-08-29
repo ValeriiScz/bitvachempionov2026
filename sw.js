@@ -1,5 +1,5 @@
 /* ============================================================================
-   MafgameStat · sw.js (Service Worker для PWA) · v1.13 · 2026-08-26 (кэш v18.5: редизайн mcl2026 v2.0 в бренде MCL — в прекэш logo-white.png и hero.jpg; видео не кэшируем)
+   MafgameStat · sw.js (Service Worker для PWA) · v1.14 · 2026-08-27 (кэш v19: MCL разрезан на 4 страницы — mcl2026/mcl-standings/mcl-series/mcl-lab + data/mcl2026.js в прекэше; видео не кэшируем)
    Назначение: офлайн-кэш ОБОЛОЧКИ сайта (html/js/иконки) + установка как
    приложение. Данные турниров НЕ замораживаются кэшем.
 
@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'mafgamestat-v18.5';
+const CACHE_VERSION = 'mafgamestat-v19';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -30,6 +30,10 @@ const PRECACHE = [
   'ce694.html',
   'research2025.html',
   'mcl2026.html',
+  'mcl-standings.html',
+  'mcl-series.html',
+  'mcl-lab.html',
+  'data/mcl2026.js',
   'gmc2026.html',
   'calendar.html',
   'assets/mcl/logo-white.png',
