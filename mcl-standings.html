@@ -14,7 +14,7 @@
 <style>
 :root{
   --bg:#08070b; --bg2:#0d0b11; --panel:#131018; --panel2:#191320; --line:rgba(198,90,180,.20);
-  --pur:#812276; --pur-hi:#c65ab4; --pur-dp:#4a1243; --red:#db514e;
+  --pur:#812276; --pur-hi:#c65ab4; --pur-dp:#4a1243; --red:#db514e; --gold:#c9a14d; --gold-hi:#f0d488;
   --ink:#ffffff; --mut:#9c93a6; --dim:#615a6c;
   --ff-h:'Fira Sans Extra Condensed','Fira Sans Condensed','PT Sans Narrow','Arial Narrow',sans-serif;
   --ff-n:'Fira Sans Condensed','Arial Narrow',sans-serif;
@@ -297,6 +297,17 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .day.has .dn{color:#fff}
 .day.has .dw{color:var(--pur-hi)}
 .day.has:hover{background:var(--pur)}
+.day.fin{border-color:var(--gold);background:linear-gradient(180deg,rgba(201,161,77,.55),rgba(201,161,77,.14));color:#fff;cursor:pointer}
+.day.fin .dn{color:var(--gold-hi)}
+.day.fin .dw{color:var(--gold)}
+.day.fin:hover{background:linear-gradient(180deg,rgba(201,161,77,.75),rgba(201,161,77,.3))}
+.day.fin.on{outline-color:var(--gold-hi)}
+.dayinfo.gold{border-color:rgba(201,161,77,.55);background:linear-gradient(120deg,rgba(96,72,20,.55),var(--panel) 60%)}
+.dayinfo.gold .t{color:var(--gold-hi)}
+.dayinfo .fintag{display:inline-block;font-family:var(--ff-n);font-weight:700;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:#1a1206;background:var(--gold);padding:3px 8px;margin-bottom:8px}
+.final{border-color:rgba(201,161,77,.45)}
+.final .lbl{color:var(--gold-hi)}
 .day.done{border-color:rgba(255,255,255,.12);background:#100d15}
 .day.done .dn{color:var(--dim)}
 .day.on{outline:2px solid var(--pur-hi);outline-offset:1px}
