@@ -289,10 +289,14 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .cal{display:grid;gap:14px}
 .month{border:1px solid var(--line);background:var(--panel);padding:14px}
 .month .mt{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase;color:#fff;margin-bottom:10px}
-.days{display:flex;flex-wrap:wrap;gap:8px}
-.day{width:64px;padding:9px 4px;text-align:center;border:1px solid rgba(255,255,255,.07);background:#0e0b13;color:var(--dim);cursor:default}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px}
+.day{padding:9px 6px 8px;text-align:center;border:1px solid rgba(255,255,255,.07);background:#0e0b13;color:var(--dim);cursor:default;min-height:66px}
 .day .dn{font-family:var(--ff-n);font-weight:700;font-size:19px;line-height:1;color:var(--mut)}
 .day .dw{font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+.day .dc{font-family:var(--ff-n);font-weight:700;font-size:11px;line-height:1.15;margin-top:5px;color:var(--pur-hi);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.02em}
+.day.done .dc{color:var(--dim)}
+.day.fin .dc{color:var(--gold-hi)}
 .day.has{border-color:var(--pur-hi);background:linear-gradient(180deg,rgba(129,34,118,.5),rgba(129,34,118,.16));cursor:pointer;color:#fff}
 .day.has .dn{color:#fff}
 .day.has .dw{color:var(--pur-hi)}
@@ -311,6 +315,20 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .day.done{border-color:rgba(255,255,255,.12);background:#100d15}
 .day.done .dn{color:var(--dim)}
 .day.on{outline:2px solid var(--pur-hi);outline-offset:1px}
+.evlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-top:14px}
+.evcard{background:var(--panel);border:1px solid var(--line);padding:14px;position:relative;transition:box-shadow .3s,border-color .3s}
+.evcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur-hi)}
+.evcard.gold::before{background:var(--gold)}
+.evcard.hi{border-color:var(--pur-hi);box-shadow:0 0 0 2px rgba(198,90,180,.45),0 10px 30px rgba(0,0,0,.5)}
+.evcard.gold.hi{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,161,77,.5),0 10px 30px rgba(0,0,0,.5)}
+.evcard .ed{font-family:var(--ff-n);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.evcard.gold .ed{color:var(--gold-hi)}
+.evcard .et{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:24px;text-transform:uppercase;color:#fff;line-height:1;margin-top:5px}
+.evcard .em{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:10px}
+.evcard .em div .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.evcard .em div .v{font-family:var(--ff-n);font-weight:700;font-size:15px;color:#fff}
+.evcard .ea{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.sitem.hi{border-color:var(--pur-hi);box-shadow:0 0 0 2px rgba(198,90,180,.45)}
 .dayinfo{margin-top:12px;border:1px solid rgba(198,90,180,.4);background:linear-gradient(120deg,rgba(74,18,67,.5),var(--panel) 60%);padding:14px;display:none}
 .dayinfo.on{display:block}
 .dayinfo .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:24px;text-transform:uppercase;color:#fff}
@@ -353,6 +371,12 @@ td.nm{font-family:var(--ff-n);font-weight:700;color:#fff}
 #modal .x{margin:10px 0 0;background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;padding:9px 16px;
   font-family:var(--ff-n);font-weight:700;letter-spacing:.14em;font-size:12px;text-transform:uppercase;cursor:pointer}
 
+.upfab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:41;width:44px;height:44px;
+  display:grid;place-items:center;border-radius:50%;border:1px solid rgba(198,90,180,.5);background:rgba(19,16,24,.86);
+  backdrop-filter:blur(8px);color:var(--pur-hi);font-size:19px;line-height:1;cursor:pointer;opacity:0;visibility:hidden;
+  transform:translateY(8px);transition:opacity .25s,visibility .25s,transform .25s,background .15s}
+.upfab.on{opacity:1;visibility:visible;transform:none}
+.upfab:hover{background:var(--pur);color:#fff;border-color:var(--pur)}
 footer{margin-top:56px;border-top:1px solid var(--line);background:#050409;padding:30px 0 44px}
 footer .fin{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:start}
 footer img.flogo{width:64px;opacity:.85}
@@ -387,7 +411,11 @@ footer .ct a:hover{color:var(--pur-hi)}
   .sithumb{width:72px;height:46px}
   .siact{grid-column:1/-1;flex-direction:row}
   .siact>*{flex:1;justify-content:center}
-  .day{width:calc(25% - 6px)}
+  .days{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px}
+  .day{min-height:62px;padding:8px 4px 7px}
+  .day .dn{font-size:17px}
+  .day .dc{font-size:10.5px}
+  .upfab{width:40px;height:40px;font-size:17px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}
   section{padding:40px 0 6px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -436,6 +464,7 @@ footer .ct a:hover{color:var(--pur-hi)}
     <a class="more" href="mcl-standings.html">Вернуться к зачёту &rarr;</a>
   </section>
 </div></main>
+<button class="upfab" id="upfab" aria-label="Наверх" title="Наверх">&#8593;</button>
 <footer><div class="wrap fin">
   <img class="flogo" src="assets/mcl/logo-white.png" alt="MCL">
   <div class="txt"><b>Mafia Champions League Europe 2026</b> · IX season · финал 21–22.11, Прага<br>
@@ -467,6 +496,14 @@ var MONN=['Январь','Февраль','Март','Апрель','Май','И
 var dm=function(d){return d.slice(8,10)+'.'+d.slice(5,7);};
 var scode=function(s){return s.c+'/'+String(s.num<10?'0'+s.num:s.num);};
 if($('#snap')) $('#snap').textContent=D.snap;
+/* плавающая кнопка «наверх» */
+(function(){var f=$('#upfab'); if(!f) return;
+ var on=false, tick=false;
+ var upd=function(){ var y=window.pageYOffset||document.documentElement.scrollTop;
+   var need=y>500; if(need!==on){ on=need; f.classList.toggle('on',on);} tick=false; };
+ addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(upd);} },{passive:true});
+ f.addEventListener('click',function(){ window.scrollTo({top:0,behavior:MM('(prefers-reduced-motion: reduce)')?'auto':'smooth'}); });
+ upd();})();
 /* модалка с анонсом */
 (function(){var m=$('#modal'), tv=$('#tv'), b=$('#teaser1');
  if(!m||!b) return;

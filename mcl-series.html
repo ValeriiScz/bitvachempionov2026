@@ -289,10 +289,14 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .cal{display:grid;gap:14px}
 .month{border:1px solid var(--line);background:var(--panel);padding:14px}
 .month .mt{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase;color:#fff;margin-bottom:10px}
-.days{display:flex;flex-wrap:wrap;gap:8px}
-.day{width:64px;padding:9px 4px;text-align:center;border:1px solid rgba(255,255,255,.07);background:#0e0b13;color:var(--dim);cursor:default}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px}
+.day{padding:9px 6px 8px;text-align:center;border:1px solid rgba(255,255,255,.07);background:#0e0b13;color:var(--dim);cursor:default;min-height:66px}
 .day .dn{font-family:var(--ff-n);font-weight:700;font-size:19px;line-height:1;color:var(--mut)}
 .day .dw{font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+.day .dc{font-family:var(--ff-n);font-weight:700;font-size:11px;line-height:1.15;margin-top:5px;color:var(--pur-hi);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.02em}
+.day.done .dc{color:var(--dim)}
+.day.fin .dc{color:var(--gold-hi)}
 .day.has{border-color:var(--pur-hi);background:linear-gradient(180deg,rgba(129,34,118,.5),rgba(129,34,118,.16));cursor:pointer;color:#fff}
 .day.has .dn{color:#fff}
 .day.has .dw{color:var(--pur-hi)}
@@ -311,6 +315,20 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .day.done{border-color:rgba(255,255,255,.12);background:#100d15}
 .day.done .dn{color:var(--dim)}
 .day.on{outline:2px solid var(--pur-hi);outline-offset:1px}
+.evlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-top:14px}
+.evcard{background:var(--panel);border:1px solid var(--line);padding:14px;position:relative;transition:box-shadow .3s,border-color .3s}
+.evcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur-hi)}
+.evcard.gold::before{background:var(--gold)}
+.evcard.hi{border-color:var(--pur-hi);box-shadow:0 0 0 2px rgba(198,90,180,.45),0 10px 30px rgba(0,0,0,.5)}
+.evcard.gold.hi{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,161,77,.5),0 10px 30px rgba(0,0,0,.5)}
+.evcard .ed{font-family:var(--ff-n);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.evcard.gold .ed{color:var(--gold-hi)}
+.evcard .et{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:24px;text-transform:uppercase;color:#fff;line-height:1;margin-top:5px}
+.evcard .em{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:10px}
+.evcard .em div .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.evcard .em div .v{font-family:var(--ff-n);font-weight:700;font-size:15px;color:#fff}
+.evcard .ea{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.sitem.hi{border-color:var(--pur-hi);box-shadow:0 0 0 2px rgba(198,90,180,.45)}
 .dayinfo{margin-top:12px;border:1px solid rgba(198,90,180,.4);background:linear-gradient(120deg,rgba(74,18,67,.5),var(--panel) 60%);padding:14px;display:none}
 .dayinfo.on{display:block}
 .dayinfo .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:24px;text-transform:uppercase;color:#fff}
@@ -353,6 +371,12 @@ td.nm{font-family:var(--ff-n);font-weight:700;color:#fff}
 #modal .x{margin:10px 0 0;background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;padding:9px 16px;
   font-family:var(--ff-n);font-weight:700;letter-spacing:.14em;font-size:12px;text-transform:uppercase;cursor:pointer}
 
+.upfab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:41;width:44px;height:44px;
+  display:grid;place-items:center;border-radius:50%;border:1px solid rgba(198,90,180,.5);background:rgba(19,16,24,.86);
+  backdrop-filter:blur(8px);color:var(--pur-hi);font-size:19px;line-height:1;cursor:pointer;opacity:0;visibility:hidden;
+  transform:translateY(8px);transition:opacity .25s,visibility .25s,transform .25s,background .15s}
+.upfab.on{opacity:1;visibility:visible;transform:none}
+.upfab:hover{background:var(--pur);color:#fff;border-color:var(--pur)}
 footer{margin-top:56px;border-top:1px solid var(--line);background:#050409;padding:30px 0 44px}
 footer .fin{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:start}
 footer img.flogo{width:64px;opacity:.85}
@@ -387,7 +411,11 @@ footer .ct a:hover{color:var(--pur-hi)}
   .sithumb{width:72px;height:46px}
   .siact{grid-column:1/-1;flex-direction:row}
   .siact>*{flex:1;justify-content:center}
-  .day{width:calc(25% - 6px)}
+  .days{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px}
+  .day{min-height:62px;padding:8px 4px 7px}
+  .day .dn{font-size:17px}
+  .day .dc{font-size:10.5px}
+  .upfab{width:40px;height:40px;font-size:17px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}
   section{padding:40px 0 6px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -416,10 +444,10 @@ footer .ct a:hover{color:var(--pur-hi)}
 <main><div class="wrap">
   <section style="padding-top:34px">
     <div class="sechead"><div class="no">01</div><h2 class="h">Календарь</h2><div class="line"></div></div>
-    <p class="lead">Лиловым — серии впереди, серым — уже сыгранные, золотым — финал. Выбери день, чтобы увидеть город, судью, взнос и ссылку.</p>
+    <p class="lead">В квадратике видно город, который играет в этот день. Ниже — карточки всех ближайших серий: клик по дню в календаре подсвечивает нужную.</p>
     <div class="cal" id="cal"></div>
-    <div class="dayinfo" id="dayinfo"></div>
-    <div class="legend"><span style="color:var(--pur-hi)">■</span> серии впереди &nbsp;·&nbsp; <span style="color:var(--dim)">■</span> уже сыграны &nbsp;·&nbsp; <span style="color:var(--gold)">■</span> финал сезона</div>
+    <div class="legend"><span style="color:var(--pur-hi)">■</span> серии впереди &nbsp;·&nbsp; <span style="color:var(--dim)">■</span> уже сыграны &nbsp;·&nbsp; <span style="color:var(--gold)">■</span> финал сезона &nbsp;·&nbsp; клик по дню подсветит карточку ниже</div>
+    <div class="evlist" id="evlist"></div>
     <div class="final">
       <img src="assets/mcl/logo-white.png" alt="">
       <div class="lbl">Финал сезона</div>
@@ -440,6 +468,7 @@ footer .ct a:hover{color:var(--pur-hi)}
     <div class="slist" id="slist"></div>
   </section>
 </div></main>
+<button class="upfab" id="upfab" aria-label="Наверх" title="Наверх">&#8593;</button>
 <footer><div class="wrap fin">
   <img class="flogo" src="assets/mcl/logo-white.png" alt="MCL">
   <div class="txt"><b>Mafia Champions League Europe 2026</b> · IX season · финал 21–22.11, Прага<br>
@@ -471,6 +500,14 @@ var MONN=['Январь','Февраль','Март','Апрель','Май','И
 var dm=function(d){return d.slice(8,10)+'.'+d.slice(5,7);};
 var scode=function(s){return s.c+'/'+String(s.num<10?'0'+s.num:s.num);};
 if($('#snap')) $('#snap').textContent=D.snap;
+/* плавающая кнопка «наверх» */
+(function(){var f=$('#upfab'); if(!f) return;
+ var on=false, tick=false;
+ var upd=function(){ var y=window.pageYOffset||document.documentElement.scrollTop;
+   var need=y>500; if(need!==on){ on=need; f.classList.toggle('on',on);} tick=false; };
+ addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(upd);} },{passive:true});
+ f.addEventListener('click',function(){ window.scrollTo({top:0,behavior:MM('(prefers-reduced-motion: reduce)')?'auto':'smooth'}); });
+ upd();})();
 /* модалка с анонсом */
 (function(){var m=$('#modal'), tv=$('#tv'), b=$('#teaser1');
  if(!m||!b) return;
@@ -486,7 +523,7 @@ if($('#snap')) $('#snap').textContent=D.snap;
 
 (function(){var days=Math.max(0,Math.ceil((new Date(D.finalISO)-new Date())/864e5)); $('#cd').textContent=days+' дн.';})();
 
-/* ── календарь: только выходные, с августа по ноябрь ── */
+/* ── календарь: выходные авг–ноя, город в клетке, карточки ниже ── */
 (function(){
   var evs={};
   D.series.forEach(function(s){ (evs[s.date]=evs[s.date]||[]).push({t:'done',s:s}); });
@@ -494,52 +531,68 @@ if($('#snap')) $('#snap').textContent=D.snap;
   evs['2026-11-21']=[{t:'final'}]; evs['2026-11-22']=[{t:'final'}];
   var months=[[2026,7],[2026,8],[2026,9],[2026,10]];
   var WD=['вс','пн','вт','ср','чт','пт','сб'];
-  var html=months.map(function(m){
+  var label=function(list){
+    if(list[0].t==='final') return 'ФИНАЛ';
+    if(list.length>1) return list.length+' серии';
+    return list[0].s.city;
+  };
+  $('#cal').innerHTML=months.map(function(m){
     var y=m[0], mo=m[1], last=new Date(y,mo+1,0).getDate(), cells='';
     for(var d=1; d<=last; d++){
       var dt=new Date(y,mo,d), w=dt.getDay();
       if(w!==0&&w!==6) continue;
       var iso=y+'-'+('0'+(mo+1)).slice(-2)+'-'+('0'+d).slice(-2);
       var e=evs[iso], cls='day';
-      if(e){ cls+=(e[0].t==='final'?' fin':(e[0].t==='done'?' done':' has')); }
-      cells+='<div class="'+cls+'"'+(e?' data-d="'+iso+'"':'')+'><div class="dn">'+d+'</div><div class="dw">'+WD[w]+'</div></div>';
+      if(e) cls+=(e[0].t==='final'?' fin':(e[0].t==='done'?' done':' has'));
+      cells+='<div class="'+cls+'"'+(e?' data-d="'+iso+'"':'')+'><div class="dn">'+d+'</div><div class="dw">'+WD[w]+'</div>'+
+        (e?'<div class="dc">'+esc(label(e))+'</div>':'')+'</div>';
     }
     return '<div class="month"><div class="mt">'+MONN[mo]+' '+y+'</div><div class="days">'+cells+'</div></div>';
   }).join('');
-  $('#cal').innerHTML=html;
 
-  var info=$('#dayinfo');
+  /* карточки ближайших серий — всегда на виду */
+  var cards=D.upcoming.map(function(u){
+    return '<div class="evcard" data-ev="'+u.date+'" id="ev-'+u.id+'">'+
+      '<div class="ed">'+dm(u.date)+' · '+scode(u)+'</div>'+
+      '<div class="et">'+(FL[u.fl]||'')+' '+esc(u.city)+'</div>'+
+      '<div class="em">'+
+        '<div><div class="k">Конференция</div><div class="v">'+esc(D.conf[u.c].name)+'</div></div>'+
+        '<div><div class="k">Судья</div><div class="v">'+esc(u.j||'не объявлен')+'</div></div>'+
+        '<div><div class="k">Взнос</div><div class="v">'+esc(u.fee||'—')+'</div></div>'+
+        (u.time?'<div><div class="k">Старт</div><div class="v">'+esc(u.time)+'</div></div>':'')+
+      '</div>'+
+      '<div class="ea"><a class="tblink" href="https://mafgame.org/tournaments/'+u.id+'/view" target="_blank" rel="noopener">Регистрация &#8599;</a>'+
+      '<a class="ibtn" href="'+D.tg+'" target="_blank" rel="noopener">Канал лиги</a></div></div>';
+  });
+  cards.push('<div class="evcard gold" data-ev="2026-11-21" id="ev-final">'+
+    '<div class="ed">21–22.11 · финал сезона</div>'+
+    '<div class="et">🇨🇿 Прага</div>'+
+    '<div class="em">'+
+      '<div><div class="k">Игроков</div><div class="v">10</div></div>'+
+      '<div><div class="k">Игр</div><div class="v">16</div></div>'+
+      '<div><div class="k">Взнос</div><div class="v">110 €</div></div>'+
+      '<div><div class="k">Призовой фонд</div><div class="v">3000 €</div></div>'+
+    '</div>'+
+    '<div class="ea"><a class="tblink" href="https://mafgame.org/tournaments/757/view" target="_blank" rel="noopener">Страница финала &#8599;</a></div></div>');
+  $('#evlist').innerHTML=cards.join('');
+
+  var hiTimer=null;
+  var flash=function(el){
+    if(!el) return;
+    $$('.evcard.hi,.sitem.hi').forEach(function(x){x.classList.remove('hi');});
+    el.classList.add('hi');
+    el.scrollIntoView({behavior:MM('(prefers-reduced-motion: reduce)')?'auto':'smooth', block:'center'});
+    if(hiTimer) clearTimeout(hiTimer);
+    hiTimer=setTimeout(function(){el.classList.remove('hi');},2600);
+  };
   $('#cal').addEventListener('click',function(e){
     var el=e.target.closest('.day[data-d]'); if(!el) return;
     $$('.day').forEach(function(d){d.classList.remove('on');}); el.classList.add('on');
-    var iso=el.dataset.d, list=evs[iso], parts=[], gold=false;
-    list.forEach(function(x){
-      if(x.t==='final'){
-        gold=true;
-        parts.push('<div class="fintag">финал сезона</div><div class="t">Финал MCL Europe · Прага</div>'+
-          '<div class="r"><div><div class="k">Игроков</div><div class="v">10</div></div>'+
-          '<div><div class="k">Игр</div><div class="v">16</div></div>'+
-          '<div><div class="k">Взнос</div><div class="v">110 €</div></div>'+
-          '<div><div class="k">Призовой фонд</div><div class="v">3000 €</div></div></div>');
-        return;
-      }
-      var s=x.s, done=x.t==='done';
-      parts.push('<div class="t">'+(FL[s.fl]||'')+' '+esc(s.city)+' · '+scode(s)+'</div>'+
-        '<div class="r">'+
-        '<div><div class="k">Конференция</div><div class="v">'+esc(D.conf[s.c].name)+'</div></div>'+
-        '<div><div class="k">Судья</div><div class="v">'+esc(s.j||'не объявлен')+'</div></div>'+
-        '<div><div class="k">Взнос</div><div class="v">'+esc(s.fee||'—')+'</div></div>'+
-        (s.time?'<div><div class="k">Старт</div><div class="v">'+esc(s.time)+'</div></div>':'')+
-        (done?'<div><div class="k">Победитель</div><div class="v">'+esc(s.top[0][0])+' '+f2(s.top[0][1])+'</div></div>':'')+
-        '</div>'+
-        '<div class="acts">'+(done
-          ? '<a class="tblink" href="https://mafgame.org/tournaments/'+s.id+'/results" target="_blank" rel="noopener">Таблица серии &#8599;</a>'
-          : '<a class="tblink" href="https://mafgame.org/tournaments/'+s.id+'/view" target="_blank" rel="noopener">Регистрация &#8599;</a>')+
-        '<a class="ibtn" href="'+D.tg+'" target="_blank" rel="noopener">Канал лиги</a></div>');
-    });
-    info.innerHTML=parts.join('<div style="height:14px"></div>');
-    info.classList.toggle('gold', gold);
-    info.classList.add('on');
+    var iso=el.dataset.d, list=evs[iso];
+    if(list[0].t==='final'){ flash($('#ev-final')); return; }
+    if(list[0].t==='next'){ flash($('#ev-'+list[0].s.id)); return; }
+    var item=$('.sitem[data-id="'+list[0].s.id+'"]');
+    if(item){ item.classList.add('open'); flash(item); }
   });
 })();
 
