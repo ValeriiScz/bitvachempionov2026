@@ -95,8 +95,19 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   else setTimeout(show,900);
 }catch(e){}})();
 </script>
+<style id="dvcrumbcss">
+.dv-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;margin:0;
+ font:700 10px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
+ background:#05060a;border-bottom:1px solid rgba(255,255,255,.10);position:relative;z-index:60}
+.dv-crumb a{color:#8a91a0;text-decoration:none;border:0;transition:color .15s}
+.dv-crumb a.dv-home{color:#f5ff35;font-weight:800}
+.dv-crumb a:hover{color:#eef3fb}
+.dv-crumb i{color:#39404c;font-style:normal}
+.dv-crumb span{color:#5f6675}
+</style>
 </head>
 <body>
+<nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><span>Совместные посадки</span></nav>
 <div class="wrap">
   <div class="topbar" id="nav"></div>
   <h1>Совместные посадки</h1>

@@ -104,9 +104,20 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   else setTimeout(show,900);
 }catch(e){}})();
 </script>
+<style id="dvcrumbcss">
+.dv-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;margin:0;
+ font:700 10px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
+ background:#05060a;border-bottom:1px solid rgba(255,255,255,.10);position:relative;z-index:60}
+.dv-crumb a{color:#8a91a0;text-decoration:none;border:0;transition:color .15s}
+.dv-crumb a.dv-home{color:#f5ff35;font-weight:800}
+.dv-crumb a:hover{color:#eef3fb}
+.dv-crumb i{color:#39404c;font-style:normal}
+.dv-crumb span{color:#5f6675}
+</style>
 </head>
 <body>
-<div class="topnav"><a class="home-btn" href="tournament.html?t=826">← Турнир</a> <a class="home-btn" href="./">Главная</a></div>
+<nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><span>Карточки</span></nav>
+<div class="topnav"><a class="home-btn" href="tournament.html?t=826">← Турнир</a> <a class="home-btn" href="tournaments.html">Главная</a></div>
 <div class="toc">
   <div class="toc-title">Навигация — 30 игроков</div>
   <a href="#p-DOVOD">DOVOD</a> · <a href="#p-aptah">aptah</a> · <a href="#p-Eskimo.">Eskimo.</a> · <a href="#p-f5">f5</a> · <a href="#p-Jerry Hurper">Jerry Hurper</a> · <a href="#p-KEX">KEX</a> · <a href="#p-Korolevich">Korolevich</a> · <a href="#p-Landing">Landing</a> · <a href="#p-LogisticPro">LogisticPro</a> · <a href="#p-Lюц">Lюц</a> · <a href="#p-ParadoXx">ParadoXx</a> · <a href="#p-Season&#x27;s">Season&#x27;s</a> · <a href="#p-TOPS">TOPS</a> · <a href="#p-Tripok">Tripok</a> · <a href="#p-Wapi">Wapi</a> · <a href="#p-YeS">YeS</a> · <a href="#p-Yokai">Yokai</a> · <a href="#p-Буржуй">Буржуй</a> · <a href="#p-Виталий">Виталий</a> · <a href="#p-Грешник">Грешник</a> · <a href="#p-Дренажная вода deluxe">Дренажная вода deluxe</a> · <a href="#p-КуКуСиК">КуКуСиК</a> · <a href="#p-Логика">Логика</a> · <a href="#p-Молчун">Молчун</a> · <a href="#p-Не Злая">Не Злая</a> · <a href="#p-Призрак">Призрак</a> · <a href="#p-Саботаж">Саботаж</a> · <a href="#p-Сью">Сью</a> · <a href="#p-Фортуна">Фортуна</a> · <a href="#p-ШТО?">ШТО?</a>
@@ -501,6 +512,6 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   <div class="footer">mafgame.org · турнир 826 · квалификация</div>
 </div>
 
-<div style="text-align:center;padding:24px;"><a class="home-btn" href="./">← На главную</a></div>
+<div style="text-align:center;padding:24px;"><a class="home-btn" href="tournaments.html">← На главную</a></div>
 </body>
 </html>
