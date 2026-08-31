@@ -211,15 +211,18 @@
 .fb{border-radius:2px}
 .fb.on{border-color:rgba(245,255,53,.55)}
 .seg>div.on{color:#0c0d10}
+/* ── ряды фильтров: только перенос строк, никакой горизонтальной прокрутки ── */
+#fset .g{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 0 6px;overflow:visible}
+#fset .g + .g{border-top:1px solid rgba(255,255,255,.06)}
+#fset .sl{flex:0 0 100%;width:auto;position:static;background:none;margin:0 0 2px;
+  font:800 8.5px/1.4 var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--dim)}
+#fset .fb{max-width:100%}
+.geomore{flex:none;display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;
+  color:var(--gold);border:1px dashed rgba(245,255,53,.45);background:transparent;padding:6px 10px;cursor:pointer;user-select:none}
+.geomore:hover{background:rgba(245,255,53,.08)}
 @media (max-width:640px){
-  .topline,#rowShow,#rowType,#rowSers,#rowStars,#rowGeo,#rowPl{
-    flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .topline::-webkit-scrollbar,#rowShow::-webkit-scrollbar,#rowType::-webkit-scrollbar,
-  #rowSers::-webkit-scrollbar,#rowStars::-webkit-scrollbar,#rowGeo::-webkit-scrollbar,
-  #rowPl::-webkit-scrollbar{display:none}
-  .sl{width:auto;flex:0 0 auto;padding-right:4px;position:sticky;left:0;background:rgba(5,6,10,.96);z-index:1}
-  .g{padding:4px 0}
-  #fset{max-height:52vh;overflow-y:auto}
+  .topline{flex-wrap:wrap;gap:8px}
+  #fset{max-height:46vh;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
 }
 @media (max-width:640px){.kpis{flex-wrap:wrap}.kpi{flex:1 1 50%;min-width:50%;border-bottom:1px solid var(--line)}.kpi:nth-child(2n){border-right:0}}
 
@@ -363,7 +366,7 @@ T.forEach(t=>(t.regs||[]).forEach(r=>{const e=PIDX[r[0]]=PIDX[r[0]]||{uid:r[0],n
 function fb(on,label,n,fn,extra){return `<div class="fb ${extra||''}${on?' on':''}" onclick="${fn}"><span class="bx">${on?'✓':''}</span>${label}${n!=null?`<span class="n">${n}</span>`:''}</div>`;}
 
 /* ── DOVOD: сколько фильтров реально отличается от умолчания ── */
-let FOPEN=false;
+let FOPEN=false, GEOALL=false;
 try{ FOPEN = localStorage.getItem('cal26_fopen')==='1'; }catch(e){}
 function activeCount(){
   let n=0;
@@ -429,9 +432,15 @@ function drawBar(){
     [['0','0★'],['12','1–2★'],['3','3★'],['4','4★+']].map(([k,l])=>fb(S.stars[k],l,sN(k),`S.stars['${k}']=!S.stars['${k}'];refresh()`)).join('');
   const geo={}; fut.forEach(t=>{if(!t.country)return; geo[t.country]=(geo[t.country]||0)+1;});
   const order=Object.keys(geo).sort((a,b)=>geo[b]-geo[a]);
+  const GEOLIM=4;
+  const shownGeo = (GEOALL||order.length<=GEOLIM+1) ? order
+    : order.slice(0,GEOLIM).concat(S.countries.filter(c=>order.indexOf(c)>=GEOLIM));
+  const hiddenGeo = order.length - shownGeo.length;
   document.getElementById('rowGeo').innerHTML =
     `<span class="sl">Страны</span>`+fb(!S.countries.length,'все страны',null,"S.countries=[];refresh()")+
-    order.map(c=>fb(S.countries.includes(c),(FLAGS[c]||'')+' '+esc(RU_C[c]||c),geo[c],`tgC('${esc(c)}')`)).join('');
+    shownGeo.map(c=>fb(S.countries.includes(c),(FLAGS[c]||'')+' '+esc(RU_C[c]||c),geo[c],`tgC('${esc(c)}')`)).join('')+
+    (hiddenGeo>0 ? `<div class="geomore" onclick="GEOALL=true;drawBar()">+ ещё ${hiddenGeo}</div>`
+                 : (GEOALL&&order.length>GEOLIM+1 ? `<div class="geomore" onclick="GEOALL=false;drawBar()">свернуть</div>` : ''));
   const hb=document.getElementById('hiddenbar');
   const pills=[];
   S.hideC.forEach(c=>pills.push(`<span class="hpill" onclick="unhide('C','${esc(c)}')">${FLAGS[c]||''} ${esc(RU_C[c]||c)} ✕</span>`));
