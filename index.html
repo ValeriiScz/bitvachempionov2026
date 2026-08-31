@@ -3,11 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>DOVOD — мафия: турниры, статистика, разборы</title>
-<meta name="description" content="Спортивная мафия: турниры и результаты, календарь года, серийные лиги MCL и GMC, закрытые исследования.">
+<title>DOVOD — доводы спортивной мафии</title>
+<meta name="description" content="Доводы спортивной мафии: результаты турниров, календарь года, зачёты серийных лиг и разборы данных.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -130,14 +132,25 @@ body{
 @media (min-width:900px){
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .tile{min-height:238px;padding:24px 24px 20px}
+  .tile.soon{grid-column:1 / -1;min-height:150px}
   .ttl{font-size:clamp(28px,2.9vw,40px)}
+  .tile.soon .ttl{font-size:28px}
   .tnum{font-size:56px;right:20px;top:14px}
 }
+
+
+.tile.soon{cursor:default;opacity:.62;filter:saturate(.5)}
+.tile.soon:hover{transform:none;border-color:var(--line)}
+.tile.soon:hover::after{opacity:0}
+.soonb{display:inline-flex;align-items:center;font:700 9.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+  color:#0c0d10;background:var(--ye);padding:7px 10px;border-radius:2px}
+.tile.soon .ttl{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 
 /* ── подвал ── */
 .foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
   display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between;
   font:400 12px/1.6 Inter,sans-serif;color:#6f7684}
+.foot b{color:#9aa2b0;font-weight:600}
 .foot a{color:#9aa2b0;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}
 .foot a:hover{color:var(--cy);border-color:var(--cy)}
 .foot .org{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
@@ -166,13 +179,13 @@ body{
 
   <div class="top">
     <div><span class="dot"></span>dovod-mafia.com</div>
-    <div><a href="https://t.me/Yes1911" target="_blank" rel="noopener">@Yes1911</a></div>
+    <div><a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a></div>
   </div>
 
   <header class="hero">
-    <div class="hline"><s></s><span>mafia · statistics &amp; research</span></div>
+    <div class="hline"><s></s><span>доводы спортивной мафии</span></div>
     <h1 class="wm" id="wm" data-t="DOVOD"><em>DOVOD</em></h1>
-    <p class="sub">Спортивная мафия без догадок: <b>результаты турниров</b>, <b>календарь года</b>, <b>серийные лиги</b> и разборы данных, которых нет на платформе.</p>
+    <p class="sub">В игре побеждает тот, у кого довод сильнее. Здесь собраны доводы про саму игру: <b>результаты турниров</b> до последней посадки, <b>календарь всего года</b>, <b>зачёты серийных лиг</b> и <b>разборы данных</b>, которых на платформе не увидишь. Считаем, а не гадаем.</p>
     <div class="chips">
       <span class="chip"><b>308</b> турниров 2026</span>
       <span class="chip"><b>30 170</b> посадок в базе</span>
@@ -181,7 +194,7 @@ body{
   </header>
 
   <section class="gridsec">
-    <div class="ghead"><span>Разделы</span><s></s><span>04</span></div>
+    <div class="ghead"><span>Разделы</span><s></s><span>05</span></div>
 
     <div class="tiles">
 
@@ -198,12 +211,12 @@ body{
         </div>
       </a>
 
-      <a class="tile" href="calendar.html" style="--c:var(--ye)">
+      <a class="tile" href="season.html" style="--c:var(--ye)">
         <span class="tnum">02</span>
         <div>
-          <div class="tkick"><i></i>Весь год</div>
+          <div class="tkick"><i></i>Сезон mafgame</div>
           <h2 class="ttl">Календарь</h2>
-          <p class="tdesc">Все турниры сезона: кто уже записан, баллы, фильтры по странам и сериям, экспорт в календарь телефона.</p>
+          <p class="tdesc">Сводка сезона и полный календарь турниров mafgame: кто уже записан, баллы, звёзды, страны, экспорт в календарь телефона.</p>
         </div>
         <div class="tfoot">
           <div class="tstat"><b>72</b> впереди</div>
@@ -216,7 +229,7 @@ body{
         <div>
           <div class="tkick"><i></i>Лиги сезона</div>
           <h2 class="ttl">Серийники</h2>
-          <p class="tdesc">MCL Europe и GMC Europa: зачёт конференций, кто в финале, разбор серий и судейства.</p>
+          <p class="tdesc">MCL Europe и GMC Europa: зачёт по сериям, кто уже в финале, разбор серий и судейства.</p>
         </div>
         <div class="tfoot">
           <div class="tstat"><b>2</b> лиги · 51 серия</div>
@@ -239,16 +252,30 @@ body{
         </div>
       </a>
 
+
+      <div class="tile soon" style="--c:var(--ye)" aria-disabled="true">
+        <span class="tnum">05</span>
+        <div>
+          <div class="tkick"><i></i>Рейтинг-2026</div>
+          <h2 class="ttl">Статистика гонки
+            <span class="soonb">скоро</span>
+          </h2>
+          <p class="tdesc">Кто идёт в топ-50 сезона, чем живёт борьба за места и что осталось добрать до конца года.</p>
+        </div>
+        <div class="tfoot">
+          <div class="tstat">в работе</div>
+          <span class="tgo">Скоро</span>
+        </div>
+      </div>
     </div>
   </section>
 
   <footer class="foot">
     <div class="org">
-      <span>Mafia Club «Champions league» Prague</span>
-      <a href="https://t.me/Yes1911" target="_blank" rel="noopener">@Yes1911</a>
-      <a href="tel:+420773194945">+420 773 194 945</a>
+      <span><b>DOVOD</b> — некоммерческий проект, делается для игроков и по любви к игре.</span>
+      <span>автор — господин DOVOD, <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a></span>
     </div>
-    <div>данные: <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a></div>
+    <div>рейтинг игроков обновлён <b id="ratedate">—</b> · данные: <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a></div>
   </footer>
 
 </div>
@@ -316,5 +343,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   else setTimeout(show,900);
 }catch(e){}})();
 </script>
+<script src="data/meta.js"></script>
+<script>(function(){var e=document.getElementById("ratedate");if(e&&window.SITE&&SITE.ratingUpdated)e.textContent=SITE.ratingUpdated;})();</script>
 </body>
 </html>

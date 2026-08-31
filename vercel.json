@@ -1,5 +1,48 @@
 {
+  "redirects": [
+    {
+      "source": "/research2025.html",
+      "destination": "/lab.html",
+      "permanent": false
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "bitvachempionov2026.vercel.app"
+        }
+      ],
+      "destination": "https://dovod-mafia.com/$1",
+      "permanent": false
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "mafgamestat.vercel.app"
+        }
+      ],
+      "destination": "https://dovod-mafia.com/$1",
+      "permanent": false
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "mafgamestat-git-main-s-valeriicz-s-projects.vercel.app"
+        }
+      ],
+      "destination": "https://dovod-mafia.com/$1",
+      "permanent": false
+    }
+  ],
   "rewrites": [
-    { "source": "/mafgame/:path*", "destination": "https://mafgame.org/:path*" }
+    {
+      "source": "/mafgame/:path*",
+      "destination": "https://mafgame.org/:path*"
+    }
   ]
 }

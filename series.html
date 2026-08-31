@@ -5,9 +5,12 @@
 <!-- DOVOD · series.html · v1.0 · 2026-08-31 · раздел «Серийники»: промоблок MCL Europe 2026 (mcl2026.html) и плашка GMC Europa 2026 (gmc2026.html). Хаб выбора разделов — index.html -->
 <!-- v2.2 · 2026-06-12 · плашки турниров, лого федерации — оригинал с mafgame.org -->
 <meta charset="utf-8">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Серийные турниры · DOVOD</title>
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&display=swap" rel="stylesheet">
@@ -168,7 +171,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="MafgameStat">
-<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <script>
 /* SW только по http/https — локальный просмотр file:// не падает */
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
@@ -255,7 +257,9 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   </a>
 
   <div class="foot">
-    MafgameStat — неофициальная статистика турниров
+    <b>DOVOD</b> — некоммерческий проект, делается для игроков и по любви к игре.
+    <span class="fdia">◆</span> автор — господин DOVOD, <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a>
+    <span class="fdia">◆</span> рейтинг игроков обновлён <b id="ratedate">—</b>
     <span class="fdia">◆</span> данные: <a href="https://mafgame.org">mafgame.org</a>
   </div>
 </div>
@@ -266,5 +270,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
  p.addEventListener('mouseenter',function(){v.play().catch(function(){});});
  p.addEventListener('mouseleave',function(){v.pause();});})();
 </script>
+<script src="data/meta.js"></script>
+<script>(function(){var e=document.getElementById("ratedate");if(e&&window.SITE&&SITE.ratingUpdated)e.textContent=SITE.ratingUpdated;})();</script>
 </body>
 </html>

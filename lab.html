@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Лаборатория · DOVOD</title>
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -105,6 +109,10 @@ button.go:disabled{opacity:.5;cursor:default}
   .list{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.labfoot{margin-top:38px;padding-top:18px;border-top:1px solid var(--line);font:400 12px/1.6 Inter,sans-serif;color:#6f7684}
+.labfoot b{color:#9aa2b0;font-weight:600}
+.labfoot a{color:#9aa2b0;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}
+.labfoot a:hover{color:var(--rd);border-color:var(--rd)}
 </style>
 </head>
 <body>
@@ -135,6 +143,7 @@ button.go:disabled{opacity:.5;cursor:default}
   </div>
 
   <div class="list" id="list" hidden></div>
+  <footer class="labfoot"><b>DOVOD</b> — некоммерческий проект · автор — господин DOVOD, <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a></footer>
 </div>
 
 <div class="load" id="load">расшифровываю…</div>

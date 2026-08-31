@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'mafgamestat-v21';
+const CACHE_VERSION = 'dovod-v22';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -28,6 +28,9 @@ const PRECACHE = [
   'index.html',
   'tournaments.html',
   'series.html',
+  'season.html',
+  'data/season.js',
+  'data/meta.js',
   'lab.html',
   'ce634.html',
   'ce694.html',

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Сезон 2026 · DOVOD</title>
+<meta name="description" content="Сводка сезона турниров MAFGAME 2026: сколько сыграно, что впереди, по звёздам, сериям и странам.">
+<meta name="theme-color" content="#05060a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05060a; --ink:#eef3fb; --dim:#79808f; --line:rgba(255,255,255,.10);
+  --cy:#26e0ff; --ye:#f5ff35; --li:#c14bbd; --rd:#db514e; --c:var(--ye);
+  --disp:'Unbounded',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.55 Inter,-apple-system,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bgfx i{position:absolute;display:block}
+.bgfx .grid{inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:64px 64px;
+  mask-image:radial-gradient(120% 90% at 50% 0%,#000 30%,transparent 78%)}
+.bgfx .g1{width:70vw;height:70vw;max-width:860px;max-height:860px;top:-26vw;left:-18vw;
+  background:radial-gradient(circle,rgba(245,255,53,.10),transparent 62%);filter:blur(22px)}
+.bgfx .g2{width:70vw;height:70vw;max-width:860px;max-height:860px;bottom:-30vw;right:-20vw;
+  background:radial-gradient(circle,rgba(38,224,255,.12),transparent 62%);filter:blur(22px)}
+.bgfx .scan{inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);opacity:.5}
+.bgfx .vig{inset:0;background:radial-gradient(120% 80% at 50% 40%,transparent 40%,rgba(0,0,0,.76) 100%)}
+
+.shell{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:20px 15px 40px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nb{display:inline-flex;align-items:center;gap:8px;font:700 10px/1 var(--mono);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);text-decoration:none;border:1px solid var(--line);
+  padding:9px 12px;border-radius:2px;transition:.18s}
+.nb:hover{color:var(--ink);border-color:var(--ye)}
+.nb.pri{color:#0c0d10;background:var(--ye);border-color:var(--ye)}
+.nb.pri:hover{filter:brightness(1.1)}
+
+.hd{margin:26px 0 6px}
+.hline{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.hline s{flex:0 0 34px;height:2px;background:var(--ye);text-decoration:none;box-shadow:0 0 12px rgba(245,255,53,.5)}
+.hline span{font:700 10px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ye)}
+h1{margin:0;font:900 clamp(30px,9vw,62px)/0.94 var(--disp);letter-spacing:-.035em;text-transform:uppercase}
+h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.32)}
+.sub{margin:14px 0 0;max-width:60ch;color:#a7aebb;font-size:14.5px}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:24px 0 0}
+.kpi{border:1px solid var(--line);padding:15px 14px;background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3));
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.kpi b{display:block;font:900 clamp(22px,5vw,34px)/1 var(--disp);letter-spacing:-.03em}
+.kpi span{display:block;margin-top:7px;font:700 9px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#8a91a0}
+.kpi.a b{color:var(--ye)} .kpi.b b{color:var(--cy)} .kpi.c b{color:var(--li)}
+
+.sec{margin:34px 0 0}
+.sh{display:flex;align-items:center;gap:12px;margin:0 0 14px;
+  font:700 10px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.sh s{flex:1;height:1px;background:var(--line);text-decoration:none}
+.sh em{font-style:normal;color:#5f6675}
+
+/* карточки-переходы */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.card{position:relative;display:flex;flex-direction:column;gap:10px;padding:15px 15px 13px;text-decoration:none;color:inherit;
+  border:1px solid var(--line);background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3));
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
+  transition:transform .18s,border-color .18s}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--c);opacity:.8}
+.card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--c) 55%,transparent)}
+.card .n{font:900 30px/1 var(--disp);letter-spacing:-.03em;color:var(--c)}
+.card .t{font:600 13.5px/1.35 Inter,sans-serif}
+.card .g{font:700 9px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7e8595}
+
+/* звёзды — полосы */
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar{display:grid;grid-template-columns:74px 1fr 46px;align-items:center;gap:12px;text-decoration:none;color:inherit;
+  padding:7px 9px;border:1px solid transparent;transition:.16s}
+.bar:hover{border-color:var(--line);background:rgba(255,255,255,.03)}
+.bar .lab{font:700 11px/1 var(--mono);letter-spacing:.1em;color:#c8cfdb}
+.bar .track{height:12px;background:rgba(255,255,255,.06);position:relative;overflow:hidden}
+.bar .fill{position:absolute;left:0;top:0;bottom:0;background:var(--c);box-shadow:0 0 14px var(--c);opacity:.85}
+.bar .v{text-align:right;font:900 15px/1 var(--disp);color:var(--ink)}
+
+/* страны */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chipl{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#c3cad6;
+  font:600 12.5px/1 Inter,sans-serif;border:1px solid var(--line);padding:9px 11px;border-radius:2px;
+  background:rgba(255,255,255,.02);transition:.16s}
+.chipl:hover{color:var(--ink);border-color:var(--ye)}
+.chipl b{font:700 10px/1 var(--mono);color:var(--ye)}
+
+.cta{margin:34px 0 0;display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+  border:1px solid var(--line);padding:18px 18px;background:linear-gradient(150deg,rgba(245,255,53,.07),rgba(0,0,0,.3));
+  clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px))}
+.cta .txt{flex:1 1 260px;min-width:0}
+.cta .txt b{display:block;font:900 20px/1.15 var(--disp);text-transform:uppercase;letter-spacing:-.02em}
+.cta .txt span{display:block;margin-top:6px;color:#a7aebb;font-size:13px}
+
+.foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;
+  font:400 12px/1.6 Inter,sans-serif;color:#6f7684}
+.foot a{color:#9aa2b0;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}
+.foot a:hover{color:var(--ye);border-color:var(--ye)}
+.foot b{color:#9aa2b0;font-weight:600}
+
+@media (max-width:720px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card .n{font-size:26px}
+  .bar{grid-template-columns:66px 1fr 40px;gap:9px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="bgfx" aria-hidden="true"><i class="grid"></i><i class="g1"></i><i class="g2"></i><i class="scan"></i><i class="vig"></i></div>
+
+<div class="shell">
+  <div class="nav">
+    <a class="nb" href="/">&#8592; DOVOD</a>
+    <a class="nb pri" href="calendar.html">Календарь целиком &#8594;</a>
+  </div>
+
+  <header class="hd">
+    <div class="hline"><s></s><span>турниры mafgame</span></div>
+    <h1>СЕЗОН <em>2026</em></h1>
+    <p class="sub">Что уже сыграно и что осталось. Любая цифра ниже — ссылка: открывает календарь с уже выставленным фильтром.</p>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section class="sec">
+    <div class="sh"><span>Что впереди</span><s></s><em id="futfrom"></em></div>
+    <div class="cards" id="cardsFut"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><span>Впереди по звёздам</span><s></s><em>вес турнира</em></div>
+    <div class="bars" id="barsStars"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><span>Уже сыграно</span><s></s><em>с начала года</em></div>
+    <div class="cards" id="cardsPast"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><span>География впереди</span><s></s><em>клик — только эта страна</em></div>
+    <div class="chips" id="geo"></div>
+  </section>
+
+  <a class="cta" href="calendar.html">
+    <div class="txt"><b>Открыть календарь</b><span>Все турниры по датам: лобби, взносы, баллы, «еду» и экспорт в календарь телефона.</span></div>
+    <span class="nb pri">Открыть &#8594;</span>
+  </a>
+
+  <footer class="foot">
+    <div><b>DOVOD</b> — некоммерческий проект · автор — господин DOVOD, <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a></div>
+    <div>снимок календаря <b id="snap">—</b> · рейтинг игроков обновлён <b id="ratedate">—</b> · данные: <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a></div>
+  </footer>
+</div>
+
+<script src="data/season.js"></script>
+<script src="data/meta.js"></script>
+<script>
+(function(){
+'use strict';
+var S=window.SEASON||{rows:[],players:0,cities:0,serials:0,snap:''};
+var TODAY=new Date().toISOString().slice(0,10);
+var rows=S.rows||[];
+var KIND=['reg','ser','fin','team'];
+var fut=rows.filter(function(r){return r[0]>=TODAY;});
+var past=rows.filter(function(r){return r[0]<TODAY;});
+var cnt=function(arr,f){return arr.filter(f).length;};
+var byKind=function(arr,k){return cnt(arr,function(r){return KIND[r[1]]===k;});};
+var starB=function(s){return s===0?'0':s<=2?'12':s===3?'3':'4';};
+var byStar=function(arr,b){return cnt(arr,function(r){return starB(r[2])===b;});};
+var nf=function(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ');};
+var $=function(id){return document.getElementById(id);};
+var CAL='calendar.html?preset=1';
+
+$('kpis').innerHTML=[
+  ['a',rows.length,'турниров в году'],
+  ['b',past.length,'уже сыграно'],
+  ['',fut.length,'ещё впереди'],
+  ['c',S.players,'игроков сыграло']
+].map(function(k){return '<div class="kpi '+k[0]+'"><b>'+nf(k[1])+'</b><span>'+k[2]+'</span></div>';}).join('');
+
+$('futfrom').textContent='с '+TODAY.slice(8,10)+'.'+TODAY.slice(5,7);
+
+var futCards=[
+  {n:fut.length,   t:'турниров впереди',        g:'все типы',      u:CAL+'&type=reg,fin,team,ser&stars=0,12,3,4'},
+  {n:byKind(fut,'reg'),  t:'обычных турниров',  g:'без серий',     u:CAL+'&type=reg'},
+  {n:byKind(fut,'fin'),  t:'финалов серийников',g:'главные ставки',u:CAL+'&type=fin&stars=0,12,3,4'},
+  {n:byKind(fut,'ser'),  t:'серий лиг',         g:'этапы MCL, GMC и др.',u:CAL+'&type=ser&stars=0,12,3,4'},
+  {n:byKind(fut,'team'), t:'командных',         g:'пары и тройки', u:CAL+'&type=team&stars=0,12,3,4'}
+];
+$('cardsFut').innerHTML=futCards.map(function(c){
+  return '<a class="card" href="'+c.u+'"><div class="n">'+c.n+'</div><div class="t">'+c.t+'</div><div class="g">'+c.g+'</div></a>';
+}).join('');
+
+var stars=[['4','4★ и выше'],['3','3★'],['12','1–2★'],['0','0★ / без баллов']];
+var vals=stars.map(function(s){return byStar(fut,s[0]);});
+var mx=Math.max.apply(null,vals.concat([1]));
+$('barsStars').innerHTML=stars.map(function(s,i){
+  var w=Math.round(vals[i]/mx*100);
+  return '<a class="bar" href="'+CAL+'&stars='+s[0]+'&type=reg,fin,team,ser"><span class="lab">'+s[1]+'</span>'+
+    '<span class="track"><span class="fill" style="width:'+w+'%"></span></span><span class="v">'+vals[i]+'</span></a>';
+}).join('');
+
+$('cardsPast').innerHTML=[
+  {n:past.length, t:'турниров сыграно', g:'клик — показать прошедшие', u:CAL+'&past=1&type=reg,fin,team,ser&stars=0,12,3,4'},
+  {n:byKind(past,'ser'), t:'этапов серий сыграно', g:'лиги сезона', u:CAL+'&past=1&type=ser&stars=0,12,3,4'},
+  {n:S.serials, t:'серийников в году', g:'считая завершённые', u:'series.html'},
+  {n:S.cities, t:'городов на карте', g:'вся Европа', u:CAL+'&past=1&type=reg,fin,team,ser&stars=0,12,3,4'}
+].map(function(c){
+  return '<a class="card" href="'+c.u+'"><div class="n">'+nf(c.n)+'</div><div class="t">'+c.t+'</div><div class="g">'+c.g+'</div></a>';
+}).join('');
+
+var geo={}; fut.forEach(function(r){geo[r[3]]=(geo[r[3]]||0)+1;});
+var FLAG={'Germany':'🇩🇪','Poland':'🇵🇱','Cyprus':'🇨🇾','Czech Republic':'🇨🇿','Switzerland':'🇨🇭',
+  'Republic of Moldova':'🇲🇩','Serbia':'🇷🇸','Spain':'🇪🇸','Portugal':'🇵🇹','Netherlands':'🇳🇱',
+  'Belgium':'🇧🇪','Israel':'🇮🇱','Austria':'🇦🇹','France':'🇫🇷','Italy':'🇮🇹','Georgia':'🇬🇪',
+  'United Kingdom':'🇬🇧','Hungary':'🇭🇺','Bulgaria':'🇧🇬','Romania':'🇷🇴','Greece':'🇬🇷','Turkey':'🇹🇷'};
+var RU={'Germany':'Германия','Poland':'Польша','Cyprus':'Кипр','Czech Republic':'Чехия','Switzerland':'Швейцария',
+  'Republic of Moldova':'Молдова','Serbia':'Сербия','Spain':'Испания','Portugal':'Португалия','Netherlands':'Нидерланды',
+  'Belgium':'Бельгия','Israel':'Израиль','Austria':'Австрия','France':'Франция','Italy':'Италия','Georgia':'Грузия',
+  'United Kingdom':'Британия','Hungary':'Венгрия','Bulgaria':'Болгария','Romania':'Румыния','Greece':'Греция','Turkey':'Турция'};
+$('geo').innerHTML=Object.keys(geo).sort(function(a,b){return geo[b]-geo[a];}).map(function(c){
+  return '<a class="chipl" href="'+CAL+'&country='+encodeURIComponent(c)+'&type=reg,fin,team,ser&stars=0,12,3,4">'+
+    (FLAG[c]||'🏳')+' '+(RU[c]||c)+' <b>'+geo[c]+'</b></a>';
+}).join('');
+
+var sn=S.snap||''; if(sn) $('snap').textContent=sn.slice(8,10)+'.'+sn.slice(5,7)+'.'+sn.slice(0,4);
+if(window.SITE&&SITE.ratingUpdated) $('ratedate').textContent=SITE.ratingUpdated;
+
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+}
+})();
+</script>
+</body>
+</html>

@@ -4,9 +4,12 @@
 <!-- build v7.0 · 2026-06-20 -->
 <!-- MafgameStat · tournament.html · v1.3 · 2026-06-20 · +статус gathering (бейдж);  меню разделов турнира (?t=id), реестр data/tournaments.js, тема cyprus для 667 -->
 <meta charset="utf-8">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Турнир — MafgameStat</title>
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&display=swap" rel="stylesheet">
@@ -148,7 +151,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="MafgameStat">
-<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <script>
 /* SW только по http/https — локальный просмотр file:// не падает */
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
@@ -202,7 +204,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="index.html">Все турниры</a>
+  <a class="back" href="tournaments.html">Все турниры</a>
   <div id="head"></div>
   <div class="rule"></div>
   <div id="sections"></div>
