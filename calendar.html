@@ -222,6 +222,30 @@
   #fset{max-height:52vh;overflow-y:auto}
 }
 @media (max-width:640px){.kpis{flex-wrap:wrap}.kpi{flex:1 1 50%;min-width:50%;border-bottom:1px solid var(--line)}.kpi:nth-child(2n){border-right:0}}
+
+/* ── переключатель вида: отдельная строка, крупный, очевидный ── */
+.vswrap{display:flex;align-items:center;gap:10px;padding:9px 0 7px}
+.vslab{flex:none;font:800 8.5px/1.3 var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);
+  writing-mode:horizontal-tb}
+.vsw{flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line);padding:4px}
+.vsw button{appearance:none;display:flex;align-items:center;justify-content:center;gap:7px;
+  min-height:42px;padding:0 8px;border:0;cursor:pointer;background:transparent;color:var(--mut);
+  font:800 11px/1 var(--mono);letter-spacing:1.4px;text-transform:uppercase;transition:.16s;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.vsw button svg{width:15px;height:15px;flex:none;opacity:.8}
+.vsw button:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+.vsw button.on{background:var(--gold);color:#0c0d10;box-shadow:0 0 18px rgba(245,255,53,.32)}
+.vsw button.on svg{opacity:1}
+@media (max-width:640px){
+  .vswrap{gap:8px;padding:8px 0 6px}
+  .vslab{display:none}
+  .vsw button{min-height:46px;font-size:10.5px;letter-spacing:1px;gap:6px}
+  .vsw button svg{width:14px;height:14px}
+}
+.vhint{margin-left:auto;font:600 9.5px/1 var(--mono);letter-spacing:.10em;text-transform:uppercase;color:#5a6170;white-space:nowrap}
+@media (max-width:640px){.vhint{display:none}}
+.sub b{color:var(--gold-hi);font-weight:800}
 </style>
 </head>
 <body>
@@ -229,11 +253,12 @@
   <div class="hero">
     <div class="navrow"><a class="back" href="season.html">&#8592; Сводка сезона</a><a class="back dv" href="/">DOVOD</a></div>
     <h1>КАЛЕНДАРЬ<br><span>ТУРНИРОВ MAFGAME</span></h1>
-    <div class="sub">Все турниры платформы MAFGAME на 2026 год: даты, баллы, взносы и кто уже записан. Фильтры — под кнопкой «Фильтры», «свой вид» — через меню ⋯ на карточке.</div>
+    <div class="sub">Все турниры платформы MAFGAME на 2026 год: даты, баллы, взносы и кто уже записан. Три вида — <b>лента</b>, <b>месяц</b>, <b>обзор года</b> — переключаются кнопками ниже. Фильтры прячутся под кнопкой «Фильтры», «свой вид» — через меню ⋯ на карточке.</div>
     <div class="kpis" id="kpis"></div>
   </div>
 
   <div class="bar" id="bar">
+    <div class="vswrap" id="rowSwitch"></div>
     <div class="g topline" id="rowView"></div>
     <div id="fset" hidden>
       <div class="g" id="rowShow"></div>
@@ -363,10 +388,19 @@ function drawBar(){
   const fut=T.filter(t=>t.start>=TODAY);
   const cN=k=>fut.filter(t=>typeOf(t)===k).length;
   const nAct=activeCount();
+  const ICO={
+    feed:'<svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="3" rx="1" fill="currentColor"/><rect x="1" y="6.5" width="14" height="3" rx="1" fill="currentColor"/><rect x="1" y="11" width="14" height="3" rx="1" fill="currentColor"/></svg>',
+    grid:'<svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1" fill="currentColor"/><rect x="1" y="9" width="6" height="6" rx="1" fill="currentColor"/><rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor"/></svg>',
+    scan:'<svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="9" height="2.6" rx="1" fill="currentColor"/><rect x="1" y="6.7" width="14" height="2.6" rx="1" fill="currentColor"/><rect x="1" y="11.4" width="6" height="2.6" rx="1" fill="currentColor"/></svg>'};
+  const VIEWS=[['feed','Лента'],['grid','Месяц'],['scan','Обзор']];
+  document.getElementById('rowSwitch').innerHTML =
+    `<span class="vslab">Вид</span><div class="vsw" role="tablist" aria-label="Вид календаря">`+
+    VIEWS.map(([k,t])=>`<button type="button" role="tab" aria-selected="${S.view===k}" class="${S.view===k?'on':''}" onclick="S.view='${k}';refresh()">${ICO[k]}${t}</button>`).join('')+
+    `</div>`;
   document.getElementById('rowView').innerHTML =
-    `<div class="seg wide"><div class="${S.view==='feed'?'on':''}" onclick="S.view='feed';refresh()">Лента</div><div class="${S.view==='grid'?'on':''}" onclick="S.view='grid';refresh()">Месяц</div><div class="${S.view==='scan'?'on':''}" onclick="S.view='scan';refresh()">Обзор</div></div>`+
     `<div class="ftog${FOPEN?' act':''}" onclick="toggleFilters()">Фильтры${nAct?`<span class="cnt">${nAct}</span>`:''}<span class="car">${FOPEN?'▲':'▼'}</span></div>`+
-    (nAct?`<div class="ftog" onclick="resetAll()">↺ сброс</div>`:'');
+    (nAct?`<div class="ftog" onclick="resetAll()">↺ сброс</div>`:'')+
+    `<span class="vhint">переключай вид выше</span>`;
   document.getElementById('rowShow').innerHTML =
     `<span class="sl">Показ</span>`+
     fb(S.mineOnly,'🎯 мои',null,"S.mineOnly=!S.mineOnly;refresh()")+
