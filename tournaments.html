@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- build v7.0 · 2026-06-20 -->
+<!-- DOVOD · tournaments.html · v3.0 · 2026-08-31 · раздел «Турниры» (бывшая главная MafgameStat): актуальные турниры + архив сезона из data/tournaments.js. Календарь, серийники и исследования вынесены в свои разделы; хаб выбора — index.html -->
+<!-- v2.2 · 2026-06-12 · плашки турниров, лого федерации — оригинал с mafgame.org -->
+<meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Турниры · DOVOD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0e; --panel:#131318; --panel2:#17171d;
+    --gold:#c9a14d; --gold-hi:#e8c87a; --gold-dim:rgba(201,161,77,.35);
+    --ink:#f2efe8; --mut:#9b97a8; --dim:#5c5965;
+    --hairline:rgba(232,200,122,.14);
+  }
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  html,body{max-width:100%;overflow-x:hidden;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,sans-serif;min-height:100vh;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;
+    background:radial-gradient(900px 420px at 50% -120px,rgba(201,161,77,.13),transparent 70%),
+               radial-gradient(600px 300px at 85% 110%,rgba(201,161,77,.05),transparent 70%);}
+  .wrap{max-width:680px;margin:0 auto;padding:46px 20px 70px;position:relative;}
+
+  /* ── шапка бренда ── */
+  .brand{display:flex;align-items:center;gap:15px;margin-bottom:8px;}
+  .emblem{width:56px;height:56px;flex:none;filter:drop-shadow(0 2px 10px rgba(249,214,39,.25));}
+  .wordmark{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;letter-spacing:.5px;
+    background:linear-gradient(105deg,#f0d99a 0%,var(--gold) 45%,#8a6a2a 75%,#e8c87a 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .tagline{color:var(--mut);font-size:13px;letter-spacing:.4px;margin:0 0 6px 71px;}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--hairline) 18%,var(--hairline) 82%,transparent);margin:28px 0 36px;}
+
+  .sec{font-size:11px;font-weight:800;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);
+    display:flex;align-items:center;gap:14px;margin:0 0 18px;}
+  .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--hairline),transparent);}
+  .sec .dia{color:var(--gold-dim);font-size:9px;}
+
+  /* ── обычная плашка ── */
+  a.tile{display:block;text-decoration:none;color:var(--ink);
+    background:linear-gradient(160deg,var(--panel2) 0%,var(--panel) 70%);
+    border:1px solid var(--hairline);border-radius:18px;overflow:hidden;margin-bottom:20px;
+    box-shadow:0 18px 44px rgba(0,0,0,.5);transition:transform .18s,border-color .18s,box-shadow .18s;}
+  a.tile:hover{transform:translateY(-3px);border-color:rgba(232,200,122,.5);box-shadow:0 24px 60px rgba(0,0,0,.6);}
+  .tbody{padding:18px 20px 17px;}
+  .stars{color:var(--gold);font-size:11px;letter-spacing:3px;margin-bottom:7px;}
+  .stars .off{color:#3a3744;}
+  .tname{font-family:'Playfair Display',serif;font-size:21px;font-weight:600;line-height:1.22;margin-bottom:8px;}
+  .tmeta{font-size:13px;color:var(--mut);line-height:1.65;}
+  .tmeta b{color:var(--ink);font-weight:600;}
+  .tmeta .sep{color:var(--dim);margin:0 7px;}
+  .torg{font-size:11.5px;color:var(--dim);margin-top:6px;}
+  .trow{display:flex;align-items:center;justify-content:space-between;margin-top:12px;}
+  .badge{font-size:10.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;padding:5px 12px;border-radius:20px;}
+  .badge.upcoming{color:var(--gold-hi);background:rgba(232,200,122,.08);border:1px solid rgba(232,200,122,.35);}
+  .badge.upcoming::before{content:"◆";font-size:8px;margin-right:7px;animation:pulse 2.2s infinite;}
+  .badge.live{color:#67e08f;background:rgba(63,209,122,.1);border:1px solid rgba(63,209,122,.4);}
+  .badge.live::before{content:"●";margin-right:7px;animation:pulse 1.6s infinite;}
+  .badge.gathering{color:#cfcad6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);}
+  .badge.gathering::before{content:"\25F7";margin-right:7px;color:var(--gold-hi);}
+  .elochip{display:inline-flex;align-items:baseline;gap:8px;margin:11px 0 2px;padding:7px 12px;border-radius:12px;
+    background:rgba(232,200,122,.07);border:1px solid var(--gold-dim);}
+  .elochip .ec-lab{font-size:9.5px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:var(--mut);}
+  .elochip .ec-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold-hi);line-height:1;}
+  .elochip .ec-n{font-size:10.5px;color:var(--dim);}
+  .poster .elochip.over{position:absolute;right:12px;top:12px;z-index:3;margin:0;background:rgba(8,8,11,.62);
+    border-color:rgba(232,200,122,.5);backdrop-filter:blur(3px);flex-direction:column;align-items:flex-end;gap:1px;}
+  .poster .elochip.over .ec-val{font-size:26px;color:#fff;}
+  .poster .elochip.over .ec-lab{color:var(--gold-hi);}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .go{color:var(--gold);font-size:13px;font-weight:700;}
+  .go::after{content:"→";margin-left:7px;transition:margin .18s;}
+  a.tile:hover .go::after{margin-left:12px;}
+
+  /* ── постер Cyprus Open (тема cyprus) ── */
+  .poster{position:relative;height:170px;overflow:hidden;
+    background:linear-gradient(180deg,#a7ddf8 0%,#74c4ee 34%,#3fb0d9 52%,#23a3c9 60%,#56b8d4 63%,#efdcae 76%,#e9cf96 100%);}
+  .poster .sun{position:absolute;top:14px;right:50px;width:46px;height:46px;border-radius:50%;
+    background:radial-gradient(circle,#fff7d6 0%,#ffe896 45%,rgba(255,232,150,0) 72%);}
+  .poster .cloud{position:absolute;background:rgba(255,255,255,.85);border-radius:40px;filter:blur(1px);}
+  .poster .c1{width:90px;height:16px;top:24px;left:14%;}
+  .poster .c2{width:60px;height:12px;top:48px;left:26%;opacity:.7;}
+  .poster .c3{width:74px;height:13px;top:30px;right:26%;opacity:.8;}
+  .poster svg.palm{position:absolute;width:130px;height:150px;}
+  .poster svg.palm.pl{left:-26px;top:-8px;}
+  .poster svg.palm.pr{right:-26px;top:-4px;transform:scaleX(-1);}
+  .poster .ptxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:6px;}
+  .poster .script{font-family:'Pacifico',cursive;font-size:25px;color:#fff;text-shadow:0 2px 8px rgba(13,71,128,.45);line-height:1;margin-bottom:2px;}
+  .poster .big{font-family:'Lilita One',sans-serif;font-size:30px;letter-spacing:1px;line-height:1.05;
+    background:linear-gradient(180deg,#eaf6ff 0%,#9fd4f7 30%,#2f7fd4 65%,#0d47a8 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 2px 0 rgba(255,255,255,.75)) drop-shadow(0 5px 9px rgba(10,60,110,.5));}
+  .poster .psub{font-family:'Lilita One',sans-serif;font-size:13px;letter-spacing:2.2px;color:#0d6cae;margin-top:7px;
+    text-shadow:0 1px 0 rgba(255,255,255,.7);}
+  .poster img.art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+  .poster.hasart{height:auto;aspect-ratio:907/529;}
+  .poster.hasart .ptxt,.poster.hasart .sun,.poster.hasart .cloud,.poster.hasart svg.palm{display:none;}
+  a.tile.cyprus{border-color:rgba(63,176,217,.35);}
+  a.tile.cyprus:hover{border-color:rgba(116,196,238,.7);}
+  a.tile.protocol{border-color:rgba(220,40,40,.4);}
+  a.tile.protocol:hover{border-color:#e23a3a;}
+  a.tile.artwide{border-color:rgba(201,161,77,.45);}
+  a.tile.artwide:hover{border-color:#e8c87a;}
+  .poster.poland{height:auto;aspect-ratio:1280/543;}
+  .poster.poland img.art{display:block;}
+  .poster.protocol{height:auto;aspect-ratio:1280/720;}
+  .poster.protocol img.art{display:block;}
+
+  /* ── архив ── */
+  .archive{margin-top:42px;}
+  .archive .sec{color:var(--dim);}
+  .archive .sec::after{background:linear-gradient(90deg,rgba(255,255,255,.06),transparent);}
+  a.arc{display:flex;align-items:center;gap:16px;padding:15px 18px;margin-bottom:10px;text-decoration:none;
+    background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.055);border-radius:12px;
+    transition:.18s;opacity:.78;}
+  a.arc:hover{opacity:1;background:rgba(232,200,122,.035);border-color:rgba(232,200,122,.3);}
+  .arc-date{flex:none;width:86px;font-size:11.5px;color:var(--dim);line-height:1.5;}
+  .arc-name{font-family:'Playfair Display',serif;font-size:15.5px;font-weight:600;color:var(--ink);}
+  .arc-meta{font-size:11.5px;color:var(--dim);margin-top:3px;}
+  .arc-arrow{margin-left:auto;color:var(--dim);font-size:15px;transition:.18s;}
+  a.arc:hover .arc-arrow{color:var(--gold);}
+
+  .foot{margin-top:52px;text-align:center;color:#48454f;font-size:11.5px;line-height:1.9;}
+  .foot a{color:#6b6776;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.1);}
+  .foot a:hover{color:var(--gold);}
+  .foot .fdia{color:var(--gold-dim);margin:0 8px;}
+
+  @media(max-width:520px){
+    .wrap{padding-top:34px;}
+    .tagline{margin-left:0;margin-top:4px;}
+    .poster{height:150px;}
+    .poster .big{font-size:24px;}
+    .poster svg.palm{width:104px;height:120px;}
+  }
+
+  /* промо серийника MCL (страница лиги в своём бренде) */
+  .mclp{position:relative;display:block;overflow:hidden;border:1px solid rgba(198,90,180,.35);background:#0a0810;
+    margin:10px 0 10px;min-height:210px;text-decoration:none}
+  .mclp-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+  .mclp-sh{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,7,11,.96) 8%,rgba(8,7,11,.72) 46%,rgba(129,34,118,.42) 100%)}
+  .mclp-lg{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:120px;opacity:.5}
+  .mclp-b{position:relative;padding:20px 18px}
+  .mclp-e{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#c65ab4;font-weight:700}
+  .mclp-t{font-family:'Arial Narrow',Arial,sans-serif;font-style:italic;font-weight:700;font-size:clamp(28px,7vw,44px);
+    line-height:1;color:#fff;margin-top:6px;letter-spacing:.01em}
+  .mclp-t i{color:#c65ab4;font-style:italic}
+  .mclp-m{margin-top:9px;font-size:13px;color:#b9b2c4;max-width:52ch;line-height:1.5}
+  .mclp-r{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:14px}
+  .mclp-go{background:#812276;color:#fff;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px}
+  .mclp-n{font-size:12px;color:#db514e;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  .mclp:hover .mclp-go{background:#c65ab4}
+  .mclp:hover .mclp-v{opacity:.72}
+  @media (max-width:520px){.mclp-lg{width:86px;opacity:.3}}
+
+.backbar{max-width:var(--w,900px);margin:0 auto 10px;padding:14px 0 0}
+.backlnk{display:inline-flex;align-items:center;gap:8px;font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
+ color:#8b8f9a;text-decoration:none;border:1px solid rgba(255,255,255,.14);padding:9px 13px;border-radius:2px;transition:.18s}
+.backlnk:hover{color:#eaf6ff;border-color:#26e0ff;box-shadow:0 0 0 1px rgba(38,224,255,.25)}
+</style>
+<!-- PWA · 2026-07-16 · v12: манифест + iOS-меты + регистрация sw.js + промо-плашка установки (iPhone/Android). Стратегии кэша — в sw.js; live /mafgame/* кэш обходит -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1626">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="MafgameStat">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<script>
+/* SW только по http/https — локальный просмотр file:// не падает */
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+}
+/* Промо-плашка «установите как приложение»: iPhone — инструкция Safari/«На экран Домой»,
+   Android — кнопка установки (beforeinstallprompt) или инструкция про меню Chrome.
+   Не показывается: внутри установленного приложения (standalone) и 14 дней после «Позже». */
+(function(){try{
+  if(!/^https?:$/.test(location.protocol))return;
+  if((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)return;
+  var KEY='mgs_pwa_promo_hide_until';
+  try{if(Date.now()<(+localStorage.getItem(KEY)||0))return;}catch(e){}
+  var deferred=null,shown=false;
+  addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;
+    var b=document.getElementById('mgsPwaGo');if(b){b.style.display='inline-block';}});
+  function hide(days){try{localStorage.setItem(KEY,String(Date.now()+days*864e5));}catch(e){}
+    var el=document.getElementById('mgsPwaPromo');if(el)el.parentNode.removeChild(el);}
+  function show(){
+    if(shown)return;shown=true;
+    var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/.test(ua),isAndroid=/Android/.test(ua);
+    var how;
+    if(isIOS){how='iPhone: откройте сайт в <b>Safari</b> → кнопка «Поделиться» <b>⬆</b> → <b>«На экран “Домой”»</b>.';}
+    else if(isAndroid){how='Android: <b>Chrome</b> → меню <b>⋮</b> → <b>«Установить приложение»</b> (или «Добавить на гл. экран»).';}
+    else{how='В Chrome/Edge: значок установки в адресной строке (справа).';}
+    var tb=document.querySelector('.tabbar'),off='14px';
+    try{if(tb&&getComputedStyle(tb).display!=='none')off='calc(14px + 66px)';}catch(e){}
+    var d=document.createElement('div');d.id='mgsPwaPromo';
+    d.innerHTML='<style>#mgsPwaPromo{position:fixed;left:12px;right:12px;bottom:'+off+';z-index:99990;max-width:520px;margin:0 auto;'+
+      'background:linear-gradient(180deg,#12294a,#0f2138);border:1px solid rgba(212,175,55,.45);border-radius:14px;'+
+      'box-shadow:0 14px 40px rgba(0,0,0,.55);padding:12px 14px;font-family:Manrope,-apple-system,system-ui,sans-serif;color:#eef3fb;}'+
+      '#mgsPwaPromo .t{font-weight:800;font-size:13.5px;color:#f0d98a;margin:0 0 4px;}'+
+      '#mgsPwaPromo .h{font-size:12px;line-height:1.45;color:#9fb2cc;}#mgsPwaPromo .h b{color:#eef3fb;}'+
+      '#mgsPwaPromo .r{display:flex;gap:8px;margin-top:9px;align-items:center;}'+
+      '#mgsPwaPromo button{font:inherit;font-size:12px;font-weight:800;border-radius:9px;padding:7px 13px;cursor:pointer;}'+
+      '#mgsPwaGo{display:none;background:linear-gradient(100deg,#d4af37,#a5822b);border:0;color:#0a1626;}'+
+      '#mgsPwaLater{background:transparent;border:1px solid rgba(212,175,55,.35);color:#9fb2cc;}</style>'+
+      '<div class="t">📲 MafgameStat можно установить как приложение</div>'+
+      '<div class="h">Иконка на экране, полноэкранный режим и быстрый доступ к live-статистике.<br>'+how+'</div>'+
+      '<div class="r"><button id="mgsPwaGo">Установить</button><button id="mgsPwaLater">Позже</button></div>';
+    document.body.appendChild(d);
+    var go=document.getElementById('mgsPwaGo');
+    if(deferred)go.style.display='inline-block';
+    go.onclick=function(){if(!deferred)return;deferred.prompt();deferred.userChoice.then(function(){hide(365);});};
+    document.getElementById('mgsPwaLater').onclick=function(){hide(14);};
+  }
+  if(document.readyState==='loading')addEventListener('DOMContentLoaded',function(){setTimeout(show,900);});
+  else setTimeout(show,900);
+}catch(e){}})();
+</script>
+</head>
+<body>
+<div class="backbar"><a class="backlnk" href="/">&#8592; Разделы</a></div>
+<div class="wrap">
+  <div class="brand">
+    <img class="emblem" src="https://mafgame.org/build/assets/logo-without-text-4de79fbd.svg"
+         onerror="this.onerror=null;this.src='https://mafgame.org/logo-without-text.png'" alt="MAFGAME">
+    <div class="wordmark">Турниры</div>
+  </div>
+  <p class="tagline">результаты, рассадки, роли · и кто уже записан на ближайшие</p>
+
+  <div class="rule"></div>
+
+  <div class="sec"><span class="dia">◆</span> Актуальные турниры</div>
+  <div id="actual"></div>
+
+  </a>
+
+  </a>
+
+  <div class="archive">
+    <div class="sec"><span class="dia">◆</span> Архив</div>
+    <div id="archive"></div>
+  </div>
+
+  <div class="foot">
+    MafgameStat — неофициальная статистика турниров
+    <span class="fdia">◆</span> данные: <a href="https://mafgame.org">mafgame.org</a>
+  </div>
+</div>
+
+<script src="data/tournaments.js"></script>
+<script>
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function stars(n){let s='';for(let i=1;i<=5;i++)s+='<span'+(i<=n?'':' class="off"')+'>✦</span> ';return s;}
+function eloChip(t,over){
+  if(t.eloAvg==null)return '';
+  return `<div class="elochip${over?' over':''}"><span class="ec-lab">ожид. ср. ELO</span><span class="ec-val">${t.eloAvg}</span><span class="ec-n">markery · ${t.eloN}/${t.eloTotal}</span></div>`;
+}
+function gatheringTile(t){
+  return `
+  <a class="tile" href="tournament.html?t=${t.id}">
+    <div class="tbody">
+      <div class="stars">${stars(t.stars)}</div>
+      <div class="tname">${esc(t.name)}</div>
+      <div class="tmeta"><b>${esc(t.dates)}</b><span class="sep">|</span><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков</div>
+      <div class="torg">${esc(t.organizer)}</div>
+      ${eloChip(t,false)}
+      <div class="trow">
+        <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+        <span class="go">участники</span>
+      </div>
+    </div>
+  </a>`;
+}
+const PALM='<svg class="palm" viewBox="0 0 120 140" fill="none"><path d="M38 138 C40 100 44 78 54 60 L60 62 C50 84 47 104 46 138 Z" fill="#1a5a39"/><g fill="#1f6b44"><path d="M56 62 C40 44 22 40 4 46 C20 28 48 34 58 56 Z"/><path d="M57 60 C50 36 34 24 14 22 C36 12 58 32 60 56 Z"/><path d="M58 58 C58 34 70 18 90 14 C76 30 68 44 62 58 Z"/><path d="M60 60 C74 44 94 40 112 48 C94 52 76 58 64 64 Z"/><path d="M59 62 C72 70 80 84 80 102 C68 88 62 76 57 66 Z"/></g><circle cx="54" cy="62" r="3.4" fill="#8a5a2a"/><circle cx="61" cy="64" r="3.4" fill="#8a5a2a"/></svg>';
+function posterArtTile(t){
+  return `
+  <a class="tile artwide" href="tournament.html?t=${t.id}">
+    <div class="poster poland hasart"${t.artRatio?` style="aspect-ratio:${t.artRatio}"`:''}><img class="art" src="${t.art||''}" alt="${esc(t.name)}" onerror="this.closest('.poster').classList.remove('hasart')">${eloChip(t,true)}</div>
+    <div class="tbody">
+      <div class="tname">${esc(t.name)}</div>
+      <div class="tmeta">${esc(t.dates)} · ${esc(t.city)} · ${t.players} игроков</div>
+      <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+    </div>
+  </a>`;
+}
+function protocolTile(t){
+  return `
+  <a class="tile protocol" href="tournament.html?t=${t.id}">
+    <div class="poster protocol hasart">
+      <img class="art" src="assets/protocol4.jpg" alt="${esc(t.name)}" onerror="this.remove()">
+    </div>
+    <div class="tbody">
+      <div class="tname">${esc(t.name)}</div>
+      <div class="tmeta">${esc(t.dates)} · ${esc(t.city)} · ${t.players} игроков (парный)</div>
+      <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+    </div>
+  </a>`;
+}
+function posterTile(t){
+  return `
+  <a class="tile cyprus" href="tournament.html?t=${t.id}">
+    <div class="poster">
+      <img class="art" src="${t.art||'assets/cyprus667.jpg'}" alt="" onload="this.closest('.poster').classList.add('hasart')" onerror="this.remove()">
+      <div class="sun"></div>
+      <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+      ${PALM.replace('class="palm"','class="palm pl"')}
+      ${PALM.replace('class="palm"','class="palm pr"')}
+      <div class="ptxt">
+        <div class="script">${esc(t.posterScript||'')}</div>
+        <div class="big">${esc(t.posterTitle||t.name)}</div>
+        <div class="psub">${esc(t.posterSub||'')}</div>
+      </div>
+    </div>
+    <div class="tbody">
+      <div class="stars">${stars(t.stars)}</div>
+      <div class="tname">${esc(t.name)}</div>
+      <div class="tmeta"><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков<span class="sep">|</span>${t.days} ${t.days===1?'день':'дня'}</div>
+      <div class="torg">${esc(t.organizer)}</div>
+      <div class="trow">
+        <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+        <span class="go">открыть</span>
+      </div>
+    </div>
+  </a>`;
+}
+function plainTile(t){
+  return `
+  <a class="tile" href="tournament.html?t=${t.id}">
+    <div class="tbody">
+      <div class="stars">${stars(t.stars)}</div>
+      <div class="tname">${esc(t.name)}</div>
+      <div class="tmeta"><b>${esc(t.dates)}</b><span class="sep">|</span><b>${esc(t.city)}</b> · ${esc(t.country)}<span class="sep">|</span><b>${t.players}</b> игроков</div>
+      <div class="torg">${esc(t.organizer)}</div>
+      <div class="trow">
+        <span class="badge ${t.status}">${esc(t.statusLabel)}</span>
+        <span class="go">открыть</span>
+      </div>
+    </div>
+  </a>`;
+}
+(d=>{
+  const ts=d.tournaments;
+  const act=ts.filter(t=>t.status!=='finished').sort((a,b)=>(a.phase||9)-(b.phase||9)||String(a.start||'').localeCompare(String(b.start||'')));
+  const arc=ts.filter(t=>t.status==='finished').sort((a,b)=>String(b.start||'').localeCompare(String(a.start||'')));
+  document.getElementById('actual').innerHTML=act.map(t=>t.theme==='cyprus'?posterTile(t):t.theme==='protocol'?protocolTile(t):t.theme==='poster'?posterArtTile(t):(t.status==='gathering'?gatheringTile(t):plainTile(t))).join('')||'<div class="tmeta">Сейчас активных турниров нет.</div>';
+  document.getElementById('archive').innerHTML=arc.map(t=>`
+    <a class="arc" href="tournament.html?t=${t.id}">
+      <div class="arc-date">${esc(t.dates)}<br>${esc(t.city)}</div>
+      <div>
+        <div class="arc-name">${esc(t.name)}</div>
+        <div class="arc-meta">${t.players} игроков · ${esc(t.statusLabel)}</div>
+      </div>
+      <span class="arc-arrow">→</span>
+    </a>`).join('');
+})(window.TOURNAMENTS_DB);
+</script>
+<script>
+(function(){var p=document.querySelector('.mclp'); if(!p) return; var v=p.querySelector('.mclp-v');
+ if(!v||window.matchMedia('(pointer:coarse)').matches) return;
+ p.addEventListener('mouseenter',function(){v.play().catch(function(){});});
+ p.addEventListener('mouseleave',function(){v.pause();});})();
+</script>
+</body>
+</html>

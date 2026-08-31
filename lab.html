@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Лаборатория · DOVOD</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#05060a">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05060a; --ink:#eef3fb; --dim:#79808f; --line:rgba(255,255,255,.10);
+  --cy:#26e0ff; --ye:#f5ff35; --li:#c14bbd; --rd:#db514e; --c:var(--rd);
+  --disp:'Unbounded',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.55 Inter,-apple-system,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bgfx i{position:absolute;display:block}
+.bgfx .grid{inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:64px 64px;
+  mask-image:radial-gradient(120% 90% at 50% 0%,#000 30%,transparent 78%)}
+.bgfx .g1{width:70vw;height:70vw;max-width:820px;max-height:820px;top:-26vw;right:-18vw;
+  background:radial-gradient(circle,rgba(219,81,78,.15),transparent 62%);filter:blur(20px)}
+.bgfx .scan{inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);opacity:.5}
+.bgfx .vig{inset:0;background:radial-gradient(120% 80% at 50% 40%,transparent 40%,rgba(0,0,0,.78) 100%)}
+
+.shell{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:22px 16px 40px}
+.backlnk{display:inline-flex;align-items:center;gap:8px;font:700 10.5px/1 var(--mono);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);text-decoration:none;border:1px solid var(--line);
+  padding:9px 13px;border-radius:2px;transition:.18s}
+.backlnk:hover{color:var(--ink);border-color:var(--rd)}
+
+.hd{margin:30px 0 8px}
+.hline{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.hline s{flex:0 0 34px;height:2px;background:var(--rd);text-decoration:none;box-shadow:0 0 12px rgba(219,81,78,.5)}
+.hline span{font:700 10px/1 var(--mono);letter-spacing:.26em;text-transform:uppercase;color:var(--rd)}
+h1{margin:0;font:900 clamp(30px,8.5vw,60px)/0.94 var(--disp);letter-spacing:-.035em;text-transform:uppercase}
+.sub{margin:14px 0 0;max-width:56ch;color:#a7aebb;font-size:14.5px}
+
+/* ── гейт ── */
+.gate{margin:30px 0 0;max-width:460px;padding:22px 20px;border:1px solid var(--line);
+  background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3));
+  clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px))}
+.gate.shake{animation:shk .38s}
+@keyframes shk{10%,90%{transform:translateX(-2px)}30%,70%{transform:translateX(4px)}50%{transform:translateX(-4px)}}
+.glab{font:700 10px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--rd);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px}
+.glab svg{width:12px;height:14px}
+.gform{display:flex;gap:8px;flex-wrap:wrap}
+input[type=password]{flex:1 1 190px;min-width:0;background:rgba(0,0,0,.45);border:1px solid var(--line);color:var(--ink);
+  font:600 15px/1 var(--mono);letter-spacing:.14em;padding:13px 14px;border-radius:2px;outline:none;transition:.18s}
+input[type=password]:focus{border-color:var(--rd);box-shadow:0 0 0 1px rgba(219,81,78,.35)}
+button.go{flex:0 0 auto;background:var(--rd);border:0;color:#120606;font:700 11px/1 var(--mono);
+  letter-spacing:.18em;text-transform:uppercase;padding:14px 18px;border-radius:2px;cursor:pointer;transition:.18s}
+button.go:hover{filter:brightness(1.12)}
+button.go:disabled{opacity:.5;cursor:default}
+.rem{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:12.5px;color:#8a91a0;cursor:pointer}
+.rem input{accent-color:var(--rd);width:15px;height:15px}
+.err{margin-top:12px;font:600 12.5px/1.4 Inter,sans-serif;color:var(--rd);display:none}
+.err.on{display:block}
+.note{margin-top:16px;font-size:11.5px;line-height:1.5;color:#666d7a}
+
+/* ── список ── */
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:26px}
+.doc{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:16px;
+  padding:18px 18px 16px;text-align:left;cursor:pointer;color:inherit;font:inherit;
+  background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(255,255,255,.01) 46%,rgba(0,0,0,.32));
+  border:1px solid var(--line);
+  clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px));
+  transition:transform .2s,border-color .2s}
+.doc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--rd);
+  box-shadow:0 0 16px var(--rd);opacity:.7}
+.doc:hover{transform:translateY(-3px);border-color:rgba(219,81,78,.55)}
+.dk{font:700 9.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--rd)}
+.dt{margin:10px 0 7px;font:900 19px/1.15 var(--disp);letter-spacing:-.02em}
+.dd{margin:0;color:#a0a7b4;font-size:13px;line-height:1.5}
+.df{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:12px}
+.dn{font:700 9.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#868d9b}
+.dgo{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--rd)}
+
+/* ── просмотр ── */
+.view{position:fixed;inset:0;z-index:9999;background:#05060a;display:none;flex-direction:column}
+.view.on{display:flex}
+.vbar{display:flex;align-items:center;gap:10px;padding:10px 12px;padding-top:calc(10px + env(safe-area-inset-top));
+  border-bottom:1px solid var(--line);background:#080a11}
+.vttl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font:700 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#a7aebb}
+.vbtn{background:transparent;border:1px solid var(--line);color:#a7aebb;font:700 10px/1 var(--mono);
+  letter-spacing:.16em;text-transform:uppercase;padding:10px 12px;border-radius:2px;cursor:pointer}
+.vbtn:hover{color:var(--ink);border-color:var(--rd)}
+.view iframe{flex:1;width:100%;border:0;background:#fff}
+.load{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;
+  background:rgba(5,6,10,.86);font:700 11px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--rd)}
+.load.on{display:flex}
+
+@media (max-width:640px){
+  .shell{padding:18px 13px 34px}
+  .list{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="bgfx" aria-hidden="true"><i class="grid"></i><i class="g1"></i><i class="scan"></i><i class="vig"></i></div>
+
+<div class="shell">
+  <a class="backlnk" href="/">&#8592; Разделы</a>
+
+  <div class="hd">
+    <div class="hline"><s></s><span>closed section</span></div>
+    <h1>Лаборатория</h1>
+    <p class="sub">Исследования и расследования по данным платформы. Раздел закрыт: материалы на сервере лежат зашифрованными и собираются в браузере только после ввода пароля.</p>
+  </div>
+
+  <div class="gate" id="gate">
+    <div class="glab">
+      <svg viewBox="0 0 12 14" fill="none"><rect x=".8" y="5.6" width="10.4" height="7.6" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3.2 5.6V3.8a2.8 2.8 0 0 1 5.6 0v1.8" stroke="currentColor" stroke-width="1.3"/></svg>
+      Доступ по паролю
+    </div>
+    <form class="gform" id="form" autocomplete="off">
+      <input type="password" id="pw" placeholder="пароль" aria-label="Пароль" autocomplete="current-password">
+      <button class="go" id="btn" type="submit">Войти</button>
+    </form>
+    <label class="rem"><input type="checkbox" id="rem" checked> запомнить на этом устройстве</label>
+    <div class="err" id="err">Пароль не подошёл.</div>
+    <div class="note">Материалы расшифровываются локально, в вашем браузере. Пароль никуда не отправляется.</div>
+  </div>
+
+  <div class="list" id="list" hidden></div>
+</div>
+
+<div class="load" id="load">расшифровываю…</div>
+
+<div class="view" id="view">
+  <div class="vbar">
+    <button class="vbtn" id="vclose">&#8592; Назад</button>
+    <div class="vttl" id="vttl"></div>
+    <button class="vbtn" id="vtab">В новой вкладке</button>
+  </div>
+  <iframe id="vframe" title="Документ"></iframe>
+</div>
+
+<script>
+(function(){
+'use strict';
+var KEY='dovod_lab_pw';
+var $=function(s){return document.querySelector(s);};
+var gate=$('#gate'), form=$('#form'), pw=$('#pw'), btn=$('#btn'), err=$('#err'), rem=$('#rem');
+var list=$('#list'), load=$('#load'), view=$('#view'), vframe=$('#vframe'), vttl=$('#vttl');
+var CRYPTO = window.crypto && window.crypto.subtle;
+var cache={}, KEYOBJ=null, PASS='', blobUrl=null;
+
+function b2a(b64){var s=atob(b64),u=new Uint8Array(s.length);for(var i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u;}
+
+async function deriveKey(pass, salt, iters){
+  var base=await CRYPTO.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+  return CRYPTO.deriveKey({name:'PBKDF2',salt:salt,iterations:iters,hash:'SHA-256'},
+    base, {name:'AES-GCM',length:256}, false, ['decrypt']);
+}
+async function fetchDec(path, pass){
+  var r=await fetch(path,{cache:'no-store'});
+  if(!r.ok) throw new Error('http '+r.status);
+  var o=await r.json();
+  var key=await deriveKey(pass, b2a(o.s), o.it||250000);
+  var pt=await CRYPTO.decrypt({name:'AES-GCM',iv:b2a(o.i)}, key, b2a(o.c));
+  return new TextDecoder().decode(pt);
+}
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+function render(items){
+  list.innerHTML=items.map(function(d){
+    return '<button class="doc" data-id="'+esc(d.id)+'" data-t="'+esc(d.t)+'">'+
+      '<div><div class="dk">'+esc(d.k)+'</div>'+
+      '<div class="dt">'+esc(d.t)+'</div>'+
+      '<p class="dd">'+esc(d.d)+'</p></div>'+
+      '<div class="df"><span class="dn">'+esc(d.n)+'</span><span class="dgo">Открыть &#8599;</span></div>'+
+    '</button>';
+  }).join('');
+  list.hidden=false;
+  gate.style.display='none';
+}
+
+async function openDoc(id, title){
+  load.classList.add('on');
+  try{
+    var html=cache[id] || (cache[id]=await fetchDec('vault/'+id+'.json', PASS));
+    // база для относительных путей внутри документа
+    var withBase=html.replace(/<head([^>]*)>/i, '<head$1><base href="'+location.origin+'/">');
+    if(blobUrl) URL.revokeObjectURL(blobUrl);
+    blobUrl=URL.createObjectURL(new Blob([withBase],{type:'text/html;charset=utf-8'}));
+    vframe.src=blobUrl; vttl.textContent=title; view.classList.add('on');
+    document.body.style.overflow='hidden';
+  }catch(e){ alert('Не удалось открыть документ: '+e.message); }
+  load.classList.remove('on');
+}
+
+async function unlock(pass, silent){
+  if(!CRYPTO){ err.textContent='Браузер не поддерживает расшифровку (нужен https).'; err.classList.add('on'); return false; }
+  btn.disabled=true; load.classList.add('on');
+  try{
+    var txt=await fetchDec('vault/idx.json', pass);
+    PASS=pass; render(JSON.parse(txt));
+    try{ if(rem.checked) localStorage.setItem(KEY, pass); else localStorage.removeItem(KEY); }catch(e){}
+    return true;
+  }catch(e){
+    if(!silent){ err.classList.add('on'); gate.classList.remove('shake'); void gate.offsetWidth; gate.classList.add('shake'); pw.value=''; pw.focus(); }
+    try{ localStorage.removeItem(KEY); }catch(e2){}
+    return false;
+  }finally{ btn.disabled=false; load.classList.remove('on'); }
+}
+
+form.addEventListener('submit', function(e){ e.preventDefault(); err.classList.remove('on'); unlock(pw.value.trim(), false); });
+list.addEventListener('click', function(e){
+  var b=e.target.closest('.doc'); if(!b) return;
+  openDoc(b.getAttribute('data-id'), b.getAttribute('data-t'));
+});
+$('#vclose').addEventListener('click', function(){
+  view.classList.remove('on'); vframe.src='about:blank'; document.body.style.overflow='';
+});
+$('#vtab').addEventListener('click', function(){ if(blobUrl) window.open(blobUrl,'_blank','noopener'); });
+addEventListener('keydown', function(e){ if(e.key==='Escape' && view.classList.contains('on')) $('#vclose').click(); });
+
+/* автовход, если пароль сохранён */
+(function(){ var p=null; try{ p=localStorage.getItem(KEY); }catch(e){} if(p) unlock(p, true); else pw.focus(); })();
+
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+}
+})();
+</script>
+</body>
+</html>

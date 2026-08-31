@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'mafgamestat-v20';
+const CACHE_VERSION = 'mafgamestat-v21';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -26,9 +26,11 @@ const DATA_CACHE  = CACHE_VERSION + '-data';
    докэшируются на лету при первом просмотре). */
 const PRECACHE = [
   'index.html',
+  'tournaments.html',
+  'series.html',
+  'lab.html',
   'ce634.html',
   'ce694.html',
-  'research2025.html',
   'mcl2026.html',
   'mcl-standings.html',
   'mcl-series.html',

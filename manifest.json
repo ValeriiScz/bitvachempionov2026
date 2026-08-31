@@ -1,18 +1,24 @@
 {
-  "name": "MafgameStat — статистика турниров",
-  "short_name": "MafgameStat",
-  "description": "Статистика турниров спортивной мафии: составы, рассадка, роли, live-результаты.",
+  "name": "DOVOD — мафия: турниры, статистика, разборы",
+  "short_name": "DOVOD",
+  "description": "Спортивная мафия: результаты турниров, календарь года, серийные лиги и закрытые исследования.",
   "lang": "ru",
   "dir": "ltr",
   "id": "/",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui"],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "orientation": "any",
-  "background_color": "#080f1c",
-  "theme_color": "#0a1626",
-  "categories": ["sports", "entertainment"],
+  "background_color": "#05060a",
+  "theme_color": "#05060a",
+  "categories": [
+    "sports",
+    "entertainment"
+  ],
   "icons": [
     {
       "src": "/assets/icons/icon-192.png",
