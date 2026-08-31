@@ -421,6 +421,16 @@ footer .ct a:hover{color:var(--pur-hi)}
 @media (prefers-reduced-motion:reduce){
   .hero .bg{animation:none}.tick .row{animation:none}.cartrack{transition:none}
 }
+
+/* ссылка на пост в канале */
+.carlink{display:block;position:relative}
+.carlink .tgb{position:absolute;right:14px;bottom:14px;font:700 11px/1 var(--fc,inherit);letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(8,7,11,.72);border:1px solid rgba(255,255,255,.22);color:#fff;padding:7px 10px;border-radius:999px;backdrop-filter:blur(4px);opacity:.85;transition:opacity .2s,background .2s}
+.carlink:hover .tgb{opacity:1;background:var(--p,#812276)}
+a .sithumb{cursor:pointer;transition:filter .2s}
+a:hover .sithumb{filter:brightness(1.12)}
+.tblink.tgl{border-color:rgba(255,255,255,.28)}
+@media (max-width:640px){.carlink .tgb{right:10px;bottom:10px;font-size:10px;padding:6px 8px}}
 </style>
 </head>
 <body>
@@ -601,12 +611,14 @@ $('#slist').innerHTML=D.series.slice().reverse().map(function(s){
   var medal=['🥇','🥈','🥉'];
   var pod=s.top.map(function(t,i){return '<span>'+medal[i]+' '+esc(t[0])+' <b>'+f2(t[1])+'</b></span>';}).join('');
   var thumb=s.img?'<img class="sithumb" loading="lazy" src="'+esc(s.img)+'" alt="">':'<div class="sithumb"></div>';
+  if(s.img&&s.post) thumb='<a href="https://t.me/mafiamcl/'+s.post+'" target="_blank" rel="noopener" title="открыть пост в канале">'+thumb+'</a>';
   return '<div class="sitem" data-id="'+s.id+'">'+
     '<div class="sihead">'+thumb+
       '<div><div class="simeta">'+dm(s.date)+' · '+(FL[s.fl]||'')+' <b>'+esc(s.city)+'</b> · '+esc(D.conf[s.c].name)+' · серия '+scode(s)+' · судья '+esc(s.j)+'</div>'+
       '<div class="pod">'+pod+'</div></div>'+
       '<div class="siact">'+
         '<a class="tblink" href="https://mafgame.org/tournaments/'+s.id+'/results" target="_blank" rel="noopener">Таблица &#8599;</a>'+
+        (s.post?'<a class="tblink tgl" href="https://t.me/mafiamcl/'+s.post+'" target="_blank" rel="noopener">Пост &#8599;</a>':'')+
         '<button class="ibtn" data-t="'+s.id+'"><i>i</i> Детали</button>'+
       '</div>'+
     '</div>'+

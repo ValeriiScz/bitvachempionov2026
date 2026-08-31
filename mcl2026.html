@@ -421,6 +421,16 @@ footer .ct a:hover{color:var(--pur-hi)}
 @media (prefers-reduced-motion:reduce){
   .hero .bg{animation:none}.tick .row{animation:none}.cartrack{transition:none}
 }
+
+/* ссылка на пост в канале */
+.carlink{display:block;position:relative}
+.carlink .tgb{position:absolute;right:14px;bottom:14px;font:700 11px/1 var(--fc,inherit);letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(8,7,11,.72);border:1px solid rgba(255,255,255,.22);color:#fff;padding:7px 10px;border-radius:999px;backdrop-filter:blur(4px);opacity:.85;transition:opacity .2s,background .2s}
+.carlink:hover .tgb{opacity:1;background:var(--p,#812276)}
+a .sithumb{cursor:pointer;transition:filter .2s}
+a:hover .sithumb{filter:brightness(1.12)}
+.tblink.tgl{border-color:rgba(255,255,255,.28)}
+@media (max-width:640px){.carlink .tgb{right:10px;bottom:10px;font-size:10px;padding:6px 8px}}
 </style>
 </head>
 <body>
@@ -596,7 +606,10 @@ $('#confs').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
   var list=D.series.filter(function(s){return s.img;});
   var track=$('#cartrack'), dots=$('#cardots'), i=0, timer=null;
   track.innerHTML=list.map(function(s){
-    return '<div class="carslide"><img loading="lazy" src="'+esc(s.img)+'" alt="'+esc(s.top[0][0])+'">'+
+    var im='<img loading="lazy" src="'+esc(s.img)+'" alt="'+esc(s.top[0][0])+'">';
+    var tg=s.post?('https://t.me/mafiamcl/'+s.post):'';
+    if(tg) im='<a class="carlink" href="'+tg+'" target="_blank" rel="noopener" title="открыть пост в канале">'+im+'<span class="tgb">пост в канале &#8599;</span></a>';
+    return '<div class="carslide">'+im+
       '<div class="cap"><div class="t">'+esc(s.top[0][0])+' <b>'+f2(s.top[0][1])+'</b></div>'+
       '<div class="s">'+(FL[s.fl]||'')+' '+esc(s.city)+' · серия '+scode(s)+' · судья '+esc(s.j)+' · '+dm(s.date)+'</div></div></div>';
   }).join('');
@@ -638,7 +651,7 @@ $('#minis').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
 /* 05 ближайшие серии */
 $('#nextlist').innerHTML=D.upcoming.slice(0,3).map(function(u){
   return '<div class="sitem"><div class="sihead">'+
-    (u.img?'<img class="sithumb" loading="lazy" src="'+esc(u.img)+'" alt="">':'<div class="sithumb"></div>')+
+    (u.img?((u.post?'<a href="https://t.me/mafiamcl/'+u.post+'" target="_blank" rel="noopener" title="открыть пост в канале">':'')+'<img class="sithumb" loading="lazy" src="'+esc(u.img)+'" alt="">'+(u.post?'</a>':'')):'<div class="sithumb"></div>')+
     '<div><div class="simeta">'+dm(u.date)+' · '+(FL[u.fl]||'')+' <b>'+esc(u.city)+'</b> · '+esc(D.conf[u.c].name)+
       (u.j?' · судья '+esc(u.j):'')+(u.fee?' · взнос '+esc(u.fee):'')+(u.time?' · старт '+esc(u.time):'')+'</div></div>'+
     '<div class="siact"><a class="tblink" href="https://mafgame.org/tournaments/'+u.id+'/view" target="_blank" rel="noopener">Регистрация &#8599;</a></div>'+
