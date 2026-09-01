@@ -88,6 +88,11 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px rgba(255,255
 .bar .track{height:12px;background:rgba(255,255,255,.06);position:relative;overflow:hidden}
 .bar .fill{position:absolute;left:0;top:0;bottom:0;background:var(--c);box-shadow:0 0 14px var(--c);opacity:.85}
 .bar .v{text-align:right;font:900 15px/1 var(--disp);color:var(--ink)}
+.barnote{display:block;margin-top:4px;padding:9px 11px;text-decoration:none;
+ border:1px dashed rgba(193,75,189,.45);background:rgba(193,75,189,.07);color:#d7a6d5;
+ font:700 10.5px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.barnote:active{background:rgba(193,75,189,.16)}
+.card.nolink{cursor:default;opacity:.9}
 
 /* страны */
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -180,6 +185,11 @@ var rows=S.rows||[];
 var KIND=['reg','ser','fin','team'];
 var fut=rows.filter(function(r){return r[0]>=TODAY;});
 var past=rows.filter(function(r){return r[0]<TODAY;});
+/* этапы серийных лиг в календаре по умолчанию выключены — считаем их отдельно,
+   иначе «22 турнира 4★+» включает 10 этапов, которых на экране нет */
+var noSer=function(a){return a.filter(function(r){return r[1]!==1;});};
+var futT=noSer(fut), pastT=noSer(past);
+var TY='&type=reg,fin,team';
 var cnt=function(arr,f){return arr.filter(f).length;};
 var byKind=function(arr,k){return cnt(arr,function(r){return KIND[r[1]]===k;});};
 var starB=function(s){return s===0?'0':s<=2?'12':s===3?'3':'4';};
@@ -189,17 +199,17 @@ var $=function(id){return document.getElementById(id);};
 var CAL='calendar.html?preset=1';
 
 $('kpis').innerHTML=[
-  ['a',rows.length,'турниров в году'],
-  ['b',past.length,'уже сыграно'],
-  ['',fut.length,'ещё впереди'],
+  ['a',noSer(rows).length,'турниров в году'],
+  ['b',pastT.length,'уже сыграно'],
+  ['',futT.length,'ещё впереди'],
   ['c',S.players,'игроков сыграло']
 ].map(function(k){return '<div class="kpi '+k[0]+'"><b>'+nf(k[1])+'</b><span>'+k[2]+'</span></div>';}).join('');
 
 $('futfrom').textContent='с '+TODAY.slice(8,10)+'.'+TODAY.slice(5,7);
 
 var futCards=[
-  {n:fut.length,   t:'турниров впереди',        g:'все типы',      u:CAL+'&type=reg,fin,team,ser&stars=0,12,3,4'},
-  {n:byKind(fut,'reg'),  t:'обычных турниров',  g:'без серий',     u:CAL+'&type=reg'},
+  {n:futT.length,  t:'турниров впереди',        g:'без этапов серий', u:CAL+TY+'&stars=0,12,3,4'},
+  {n:byKind(fut,'reg'),  t:'обычных турниров',  g:'без серий',     u:CAL+'&type=reg&stars=0,12,3,4'},
   {n:byKind(fut,'fin'),  t:'финалов серийников',g:'главные ставки',u:CAL+'&type=fin&stars=0,12,3,4'},
   {n:byKind(fut,'ser'),  t:'серий лиг',         g:'этапы MCL, GMC и др.',u:CAL+'&type=ser&stars=0,12,3,4'},
   {n:byKind(fut,'team'), t:'командных',         g:'пары и тройки', u:CAL+'&type=team&stars=0,12,3,4'}
@@ -209,24 +219,28 @@ $('cardsFut').innerHTML=futCards.map(function(c){
 }).join('');
 
 var stars=[['4','4★ и выше'],['3','3★'],['12','1–2★'],['0','0★ / без баллов']];
-var vals=stars.map(function(s){return byStar(fut,s[0]);});
+var vals=stars.map(function(s){return byStar(futT,s[0]);});
+var valsSer=stars.map(function(s){return byStar(fut,s[0])-byStar(futT,s[0]);});
 var mx=Math.max.apply(null,vals.concat([1]));
 $('barsStars').innerHTML=stars.map(function(s,i){
   var w=Math.round(vals[i]/mx*100);
-  return '<a class="bar" href="'+CAL+'&stars='+s[0]+'&type=reg,fin,team,ser"><span class="lab">'+s[1]+'</span>'+
+  return '<a class="bar" href="'+CAL+TY+'&stars='+s[0]+'"><span class="lab">'+s[1]+'</span>'+
     '<span class="track"><span class="fill" style="width:'+w+'%"></span></span><span class="v">'+vals[i]+'</span></a>';
-}).join('');
+}).join('')+
+'<a class="barnote" href="'+CAL+'&type=ser&stars=0,12,3,4">+ '+byKind(fut,'ser')+
+' этапов серийных лиг впереди (из них '+valsSer[0]+' на 4★+) — показать отдельно →</a>';
 
 $('cardsPast').innerHTML=[
-  {n:past.length, t:'турниров сыграно', g:'клик — показать прошедшие', u:CAL+'&past=1&type=reg,fin,team,ser&stars=0,12,3,4'},
-  {n:byKind(past,'ser'), t:'этапов серий сыграно', g:'лиги сезона', u:CAL+'&past=1&type=ser&stars=0,12,3,4'},
+  {n:pastT.length, t:'турниров сыграно', g:'без этапов серий', u:CAL+'&past=only'+TY+'&stars=0,12,3,4'},
+  {n:byKind(past,'ser'), t:'этапов серий сыграно', g:'лиги сезона', u:CAL+'&past=only&type=ser&stars=0,12,3,4'},
   {n:S.serials, t:'серийников в году', g:'считая завершённые', u:'series.html'},
-  {n:S.cities, t:'городов на карте', g:'вся Европа', u:CAL+'&past=1&type=reg,fin,team,ser&stars=0,12,3,4'}
+  {n:S.cities, t:'городов на карте', g:'вся Европа', u:''}
 ].map(function(c){
-  return '<a class="card" href="'+c.u+'"><div class="n">'+nf(c.n)+'</div><div class="t">'+c.t+'</div><div class="g">'+c.g+'</div></a>';
+  var tg=c.u?'a':'div', hr=c.u?' href="'+c.u+'"':' class="nolink"';
+  return '<'+tg+' class="card'+(c.u?'':' nolink')+'"'+(c.u?' href="'+c.u+'"':'')+'><div class="n">'+nf(c.n)+'</div><div class="t">'+c.t+'</div><div class="g">'+c.g+'</div></'+tg+'>';
 }).join('');
 
-var geo={}; fut.forEach(function(r){geo[r[3]]=(geo[r[3]]||0)+1;});
+var geo={}; futT.forEach(function(r){geo[r[3]]=(geo[r[3]]||0)+1;});
 var FLAG={'Germany':'🇩🇪','Poland':'🇵🇱','Cyprus':'🇨🇾','Czech Republic':'🇨🇿','Switzerland':'🇨🇭',
   'Republic of Moldova':'🇲🇩','Serbia':'🇷🇸','Spain':'🇪🇸','Portugal':'🇵🇹','Netherlands':'🇳🇱',
   'Belgium':'🇧🇪','Israel':'🇮🇱','Austria':'🇦🇹','France':'🇫🇷','Italy':'🇮🇹','Georgia':'🇬🇪',
@@ -236,7 +250,7 @@ var RU={'Germany':'Германия','Poland':'Польша','Cyprus':'Кипр'
   'Belgium':'Бельгия','Israel':'Израиль','Austria':'Австрия','France':'Франция','Italy':'Италия','Georgia':'Грузия',
   'United Kingdom':'Британия','Hungary':'Венгрия','Bulgaria':'Болгария','Romania':'Румыния','Greece':'Греция','Turkey':'Турция'};
 $('geo').innerHTML=Object.keys(geo).sort(function(a,b){return geo[b]-geo[a];}).map(function(c){
-  return '<a class="chipl" href="'+CAL+'&country='+encodeURIComponent(c)+'&type=reg,fin,team,ser&stars=0,12,3,4">'+
+  return '<a class="chipl" href="'+CAL+'&country='+encodeURIComponent(c)+TY+'&stars=0,12,3,4">'+
     (FLAG[c]||'🏳')+' '+(RU[c]||c)+' <b>'+geo[c]+'</b></a>';
 }).join('');
 

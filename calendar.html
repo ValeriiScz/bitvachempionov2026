@@ -312,7 +312,7 @@ T.forEach(t=>{if(t.serialKey!=null && !serialNames[t.serialKey]){const n=(t.name
 const tierOf=pos=> pos<=12?'gold': pos<=30?'silv':'bron';
 
 /* состояние */
-const DEF={types:{reg:true,fin:true,ser:false,team:true},stars:{'0':false,'12':true,'3':true,'4':true},countries:[],sers:[],players:[],mineOnly:false,showPast:false,hideC:[],hideS:[],hideT:[],view:'feed',month:'2026-09'};
+const DEF={types:{reg:true,fin:true,ser:false,team:true},stars:{'0':false,'12':true,'3':true,'4':true},countries:[],sers:[],players:[],mineOnly:false,showPast:false,onlyPast:false,hideC:[],hideS:[],hideT:[],view:'feed',month:'2026-09'};
 let S=JSON.parse(JSON.stringify(DEF));
 try{const s=localStorage.getItem('cal26v3'); if(s) S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(s));}catch(e){}
 /* сохранённое состояние может быть без новых ключей (team и т.п.) — доливаем из DEF */
@@ -323,7 +323,9 @@ S.types=Object.assign({},DEF.types,S.types||{}); S.stars=Object.assign({},DEF.st
   const q=new URLSearchParams(location.search); if(!q.toString()) return;
   if(q.get('preset')==='1'){ S=JSON.parse(JSON.stringify(DEF)); }
   const v=q.get('view'); if(v) S.view=v;
-  if(q.get('past')==='1') S.showPast=true;
+  const pq=q.get('past');
+  if(pq==='1'){ S.showPast=true; }
+  if(pq==='only'){ S.showPast=true; S.onlyPast=true; }
   if(q.get('mine')==='1') S.mineOnly=true;
   const ty=q.get('type'); if(ty){ Object.keys(S.types).forEach(k=>S.types[k]=false);
     ty.split(',').forEach(k=>{ if(k in S.types) S.types[k]=true; }); }
@@ -342,6 +344,8 @@ const starB=t=> t.stars===0?'0': t.stars<=2?'12': t.stars===3?'3':'4';
 function pass(t, ignorePast){
   /* ignorePast===true строго: filter(pass) передаёт индекс вторым аргументом */
   if(ignorePast!==true && !S.showPast && t.start<TODAY) return false;
+  if(ignorePast!==true && S.onlyPast && t.start>=TODAY) return false;
+  if(S.onlyPast && t.cancelled) return false; /* отменённый ≠ сыгранный */
   if(S.mineOnly && !MY[t.id]) return false;
   if(!S.types[typeOf(t)]) return false;
   if(!S.stars[starB(t)]) return false;
@@ -371,6 +375,7 @@ try{ FOPEN = localStorage.getItem('cal26_fopen')==='1'; }catch(e){}
 function activeCount(){
   let n=0;
   if(S.mineOnly) n++;
+  if(S.onlyPast) n++;
   if(S.showPast) n++;
   ['reg','fin','ser','team'].forEach(k=>{ if(S.types[k]!==DEF.types[k]) n++; });
   ['0','12','3','4'].forEach(k=>{ if(S.stars[k]!==DEF.stars[k]) n++; });
@@ -387,9 +392,31 @@ function toggleFilters(){
   drawBar();
 }
 
+/* счётчик грани: все фильтры кроме той, что рисуем (иначе «4★+ 22» включает
+   выключенные этапы серий и цифра врёт) */
+function passExcept(t, dim){
+  if(!S.showPast && t.start<TODAY) return false;
+  if(S.onlyPast && t.start>=TODAY) return false;
+  if(S.onlyPast && t.cancelled) return false;
+  if(S.mineOnly && !MY[t.id]) return false;
+  if(dim!=='type'    && !S.types[typeOf(t)]) return false;
+  if(dim!=='stars'   && !S.stars[starB(t)]) return false;
+  if(dim!=='sers'    && typeOf(t)==='ser' && S.sers.length && !S.sers.includes(t.serialKey)) return false;
+  if(dim!=='country' && S.countries.length && !S.countries.includes(t.country)) return false;
+  if(S.hideC.includes(t.country)) return false;
+  if(t.serialKey!=null && S.hideS.includes(t.serialKey)) return false;
+  if(S.hideT.includes(t.id)) return false;
+  if(S.players.length){
+    const known=t.regs&&t.regs.length;
+    if(!known && t.kind!=='teams') return false;
+    if(known && !t.regs.some(r=>S.players.some(p=>p[0]===r[0]))) return false;
+  }
+  return true;
+}
+
 function drawBar(){
   const fut=T.filter(t=>t.start>=TODAY);
-  const cN=k=>fut.filter(t=>typeOf(t)===k).length;
+  const cN=k=>T.filter(t=>typeOf(t)===k && passExcept(t,'type')).length;
   const nAct=activeCount();
   const ICO={
     feed:'<svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="3" rx="1" fill="currentColor"/><rect x="1" y="6.5" width="14" height="3" rx="1" fill="currentColor"/><rect x="1" y="11" width="14" height="3" rx="1" fill="currentColor"/></svg>',
@@ -407,7 +434,8 @@ function drawBar(){
   document.getElementById('rowShow').innerHTML =
     `<span class="sl">Показ</span>`+
     fb(S.mineOnly,'🎯 мои',null,"S.mineOnly=!S.mineOnly;refresh()")+
-    fb(S.showPast,'прошедшие',null,"S.showPast=!S.showPast;refresh()");
+    fb(S.showPast,'прошедшие',null,"S.showPast=!S.showPast;if(!S.showPast)S.onlyPast=false;refresh()")+
+    (S.showPast?fb(S.onlyPast,'только сыгранные',null,"S.onlyPast=!S.onlyPast;refresh()"):'');
   document.getElementById('rowType').innerHTML =
     `<span class="sl">Тип</span>`+
     fb(S.types.reg,'Турниры',cN('reg'),"S.types.reg=!S.types.reg;refresh()")+
@@ -417,20 +445,20 @@ function drawBar(){
   // под-ряд конкретных серийников
   const rs=document.getElementById('rowSers');
   if(S.types.ser){
-    const base=S.showPast?T:fut;
-    const cnt={}; base.filter(t=>typeOf(t)==='ser'&&t.serialKey!=null&&S.stars[starB(t)]).forEach(t=>cnt[t.serialKey]=(cnt[t.serialKey]||0)+1);
+    const cnt={}; T.filter(t=>typeOf(t)==='ser'&&t.serialKey!=null&&passExcept(t,'sers')).forEach(t=>cnt[t.serialKey]=(cnt[t.serialKey]||0)+1);
     const keys=Object.keys(cnt).map(Number).sort((a,b)=>cnt[b]-cnt[a]);
     rs.style.display='flex';
     rs.innerHTML = `<span class="sl">Серии</span><div class="fb ser sm2${!S.sers.length?' on':''}" onclick="S.sers=[];refresh()"><span class="bx">${!S.sers.length?'✓':''}</span>все серии</div>`+
       keys.map(k=>`<div class="fb ser sm2${S.sers.includes(k)?' on':''}" onclick="tgSer(${k})"><span class="bx">${S.sers.includes(k)?'✓':''}</span>${esc(serialNames[k]||k)}<span class="n">${cnt[k]}</span></div>`).join('');
   } else { rs.style.display='none'; rs.innerHTML=''; }
-  const sN=b=>fut.filter(t=>starB(t)===b).length;
+  const sN=b=>T.filter(t=>starB(t)===b && passExcept(t,'stars')).length;
   const all1p=!S.stars['0']&&S.stars['12']&&S.stars['3']&&S.stars['4'];
   document.getElementById('rowStars').innerHTML =
     `<span class="sl">Звёзды</span>`+
     fb(all1p,'все 1★+',null,"S.stars={'0':false,'12':true,'3':true,'4':true};refresh()")+
     [['0','0★'],['12','1–2★'],['3','3★'],['4','4★+']].map(([k,l])=>fb(S.stars[k],l,sN(k),`S.stars['${k}']=!S.stars['${k}'];refresh()`)).join('');
-  const geo={}; fut.forEach(t=>{if(!t.country)return; geo[t.country]=(geo[t.country]||0)+1;});
+  const geo={}; T.forEach(t=>{if(!t.country)return; if(!passExcept(t,'country'))return; geo[t.country]=(geo[t.country]||0)+1;});
+  S.countries.forEach(c=>{ if(!(c in geo)) geo[c]=0; });
   const order=Object.keys(geo).sort((a,b)=>geo[b]-geo[a]);
   const GEOLIM=4;
   const shownGeo = (GEOALL||order.length<=GEOLIM+1) ? order
