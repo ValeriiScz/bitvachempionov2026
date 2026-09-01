@@ -115,6 +115,15 @@
   .lb-head .lt{font-size:9px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);}
   .lb-head .cnt{font-family:'Unbounded';font-weight:700;font-size:13px;color:var(--ink);}
   .lb-head .cnt b{color:var(--lime);}
+  /* призёры прошедшего турнира */
+  .pod{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 7px;}
+  .pod .pd{display:inline-flex;align-items:center;gap:6px;padding:5px 9px 5px 6px;
+    border:1px solid var(--hairline);background:rgba(255,255,255,.03);font-size:11.5px;font-weight:600;color:var(--ink);}
+  .pod .pd i{font-style:normal;font-size:12px;line-height:1}
+  .pod .pd.g{border-color:rgba(245,255,53,.45);background:rgba(245,255,53,.07)}
+  .pod .pd.s{border-color:rgba(255,255,255,.22)}
+  .pod .pd.b{border-color:rgba(219,81,78,.30)}
+  .pod .pdl{align-self:center;font-size:9px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);margin-right:2px}
   .lb-head .tops{margin-left:auto;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold-hi);}
   .lb-bar{height:4px;background:var(--panel2);margin-bottom:7px;position:relative;overflow:hidden;}
   .lb-bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--lime),#7fae2f);box-shadow:0 0 10px rgba(182,240,74,.5);}
@@ -292,6 +301,7 @@
   <div class="foot"><b>DOVOD</b> · календарь турниров MAFGAME · снимок данных <span id="fsnap"></span> · рейтинг игроков обновлён <b id="ratedate">—</b> · баллы победителю — <a href="https://mafgame.org/pages/mafgame_points">официальная сетка MAFGAME</a><br>«в гонке» = топ-30 рейтинга-2026: <span style="color:var(--gold-hi)">золото топ-12</span> · <span style="color:var(--silver)">серебро 13–30</span>; <span style="color:var(--bronze)">бронза 31–50</span> — претенденты · «✓ еду» и «свой вид» хранятся в этом браузере<br>некоммерческий проект · автор — господин DOVOD, <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a></div>
 </div>
 
+<script src="data/results3.js"></script>
 <script src="data/meta.js"></script>
 <script>
 'use strict';
@@ -522,6 +532,24 @@ function togglePin(id){MY[id]=!MY[id];if(!MY[id])delete MY[id];refresh();}
 function expandRegs(id){EXPREGS[id]=!EXPREGS[id];refresh();}
 
 /* ===== CARD ===== */
+/* призёры прошедшего турнира: топ-3 из data/results3.js.
+   Данных пока не по всем турнирам — где нет, блок просто не рисуется. */
+function podium(t){
+  const R=(window.RES3||{})[t.id];
+  if(!R||!R.length) return '';
+  const team=(window.RES3T||{})[t.id];
+  const M=['🥇','🥈','🥉'], C=['g','s','b'];
+  return `<div class="pod"><span class="pdl">${team?'Команды':'Призёры'}</span>`+
+    R.slice(0,3).map((n,i)=>`<span class="pd ${C[i]}"><i>${M[i]}</i>${esc(n)}</span>`).join('')+
+    `</div>`;
+}
+/* ссылка на зачёт серии — там видно, кто и как прошёл этапы */
+function serLink(t){
+  const n=t.serialName||'';
+  const u = n==='MCL' ? 'mcl-series.html' : (n==='GMC' ? 'gmc2026.html' : '');
+  if(!u) return '';
+  return `<span class="tops"><a href="${u}">зачёт ${esc(n)} →</a></span>`;
+}
 function regsBlock(t){
   if(!('regs' in t)) return '';
   const past=t.start<TODAY;
@@ -545,7 +573,8 @@ function regsBlock(t){
   const teamsLine = (exp && t.tteams && t.tteams.length)
     ? `<div class="tm-row">👥 ${t.tteams.map(([nm,ms])=>`<span><i>${esc(nm)}</i> ${ms.map(esc).join(' + ')}</span>`).join('')}</div>` : '';
   if(past) return `<div class="lobby">
-    <div class="lb-head"><span class="lt">Играли</span><span class="cnt"><b>${regs.length}</b></span>${race.length?`<span class="tops">из гонки: ${race.length}</span>`:''}</div>
+    ${podium(t)}
+    <div class="lb-head"><span class="lt">Играли</span><span class="cnt"><b>${regs.length}</b></span>${race.length?`<span class="tops">из гонки: ${race.length}</span>`:''}${serLink(t)}</div>
     <div class="pl-row">${chips}</div>${teamsLine}</div>`;
   const fill=Math.min(100,Math.round(regs.length/cap*100));
   return `<div class="lobby">

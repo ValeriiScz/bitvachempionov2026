@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'dovod-v28';
+const CACHE_VERSION = 'dovod-v29';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -31,6 +31,7 @@ const PRECACHE = [
   'season.html',
   'data/season.js',
   'data/meta.js',
+  'data/results3.js',
   'lab.html',
   'ce634.html',
   'ce694.html',
