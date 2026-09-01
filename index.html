@@ -82,6 +82,8 @@ body{
 .chip{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#9aa2b0;
   border:1px solid var(--line);padding:8px 11px;border-radius:2px;background:rgba(255,255,255,.02)}
 .chip b{color:var(--ink)}
+.chip.ser{border-color:rgba(193,75,189,.35)}
+.chip.ser b{color:var(--li)}
 
 /* ── плитки ── */
 .gridsec{margin-top:min(6vh,40px)}
@@ -186,10 +188,11 @@ body{
     <div class="hline"><s></s><span>доводы спортивной мафии</span></div>
     <h1 class="wm" id="wm" data-t="DOVOD"><em>DOVOD</em></h1>
     <p class="sub">В игре побеждает тот, у кого довод сильнее. Здесь собраны доводы про саму игру: <b>результаты турниров</b> до последней посадки, <b>календарь всего года</b>, <b>зачёты серийных лиг</b> и <b>разборы данных</b>, которых на платформе не увидишь. Считаем, а не гадаем.</p>
-    <div class="chips">
-      <span class="chip"><b>308</b> турниров 2026</span>
+    <div class="chips" id="chips">
+      <span class="chip"><b id="cTour">181</b> <span id="cTourL">турнир</span> 2026</span>
+      <span class="chip ser"><b id="cSer">126</b> <span id="cSerL">этап</span> серийных лиг</span>
       <span class="chip"><b>30 170</b> посадок в базе</span>
-      <span class="chip"><b>13</b> стран</span>
+      <span class="chip"><b id="cGeo">19</b> <span id="cGeoL">стран</span></span>
     </div>
   </header>
 
@@ -343,7 +346,21 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   else setTimeout(show,900);
 }catch(e){}})();
 </script>
+<script src="data/season.js"></script>
 <script src="data/meta.js"></script>
-<script>(function(){var e=document.getElementById("ratedate");if(e&&window.SITE&&SITE.ratingUpdated)e.textContent=SITE.ratingUpdated;})();</script>
+<script>(function(){
+var e=document.getElementById("ratedate");if(e&&window.SITE&&SITE.ratingUpdated)e.textContent=SITE.ratingUpdated;
+/* чипы считаем из данных: турнир — турнир, этап серийной лиги — этап (kind 1 = серия) */
+var S=window.SEASON; if(!S||!S.rows) return;
+var t=S.rows.filter(function(r){return r[1]!==1;}).length;
+var se=S.rows.length-t;
+var g={}; S.rows.forEach(function(r){ if(r[3]) g[r[3]]=1; });
+var geo=Object.keys(g).length;
+var pl=function(n,a,b,c){var n10=n%10,n100=n%100;return (n10===1&&n100!==11)?a:((n10>=2&&n10<=4)&&(n100<10||n100>=20))?b:c;};
+var set=function(id,v){var x=document.getElementById(id); if(x) x.textContent=v;};
+set('cTour',t);  set('cTourL', pl(t,'турнир','турнира','турниров'));
+set('cSer',se);  set('cSerL',  pl(se,'этап','этапа','этапов'));
+set('cGeo',geo); set('cGeoL',  pl(geo,'страна','страны','стран'));
+})();</script>
 </body>
 </html>
