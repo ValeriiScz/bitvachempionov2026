@@ -222,7 +222,7 @@ body{
           <p class="tdesc">Сводка сезона и полный календарь турниров mafgame: кто уже записан, баллы, звёзды, страны, экспорт в календарь телефона.</p>
         </div>
         <div class="tfoot">
-          <div class="tstat"><b>72</b> впереди</div>
+          <div class="tstat" id="tCal"><b>47</b> турниров · <b>13</b> этапов впереди</div>
           <span class="tgo">Открыть <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
         </div>
       </a>
@@ -235,7 +235,7 @@ body{
           <p class="tdesc">MCL Europe и GMC Europa: зачёт по сериям, кто уже в финале, разбор серий и судейства.</p>
         </div>
         <div class="tfoot">
-          <div class="tstat"><b>2</b> лиги · 51 серия</div>
+          <div class="tstat"><b>MCL Europe</b> · <b>GMC Europa</b></div>
           <span class="tgo">Открыть <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
         </div>
       </a>
@@ -361,6 +361,11 @@ var set=function(id,v){var x=document.getElementById(id); if(x) x.textContent=v;
 set('cTour',t);  set('cTourL', pl(t,'турнир','турнира','турниров'));
 set('cSer',se);  set('cSerL',  pl(se,'этап','этапа','этапов'));
 set('cGeo',geo); set('cGeoL',  pl(geo,'страна','страны','стран'));
+var TODAY=new Date().toISOString().slice(0,10);
+var fut=S.rows.filter(function(r){return r[0]>=TODAY;});
+var fT=fut.filter(function(r){return r[1]!==1;}).length, fS=fut.length-fT;
+var tc=document.getElementById('tCal');
+if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','турниров')+' · <b>'+fS+'</b> '+pl(fS,'этап','этапа','этапов')+' впереди';
 })();</script>
 </body>
 </html>
