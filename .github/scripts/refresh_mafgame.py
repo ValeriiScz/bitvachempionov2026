@@ -197,7 +197,7 @@ def build_season(D):
     return S
 
 # ── 5 · даты и версия кэша ────────────────────────────────────────────────────
-def bump_meta_and_sw():
+def bump_meta_and_sw(bump_sw=True):
     d = datetime.date.today().strftime('%d.%m.%Y')
     m = io.open(META, encoding='utf-8').read()
     m2 = re.sub(r"calendarSnapshot:\s*'[^']*'", "calendarSnapshot: '%s'" % d, m)
@@ -207,10 +207,12 @@ def bump_meta_and_sw():
     mm = re.search(r"const CACHE_VERSION = 'dovod-v(\d+)';", s)
     if not mm:
         fail('в sw.js не найден CACHE_VERSION')
-    nxt = int(mm.group(1)) + 1
+    cur = int(mm.group(1))
+    if not bump_sw:
+        return cur
     io.open(SW, 'w', encoding='utf-8').write(
-        s.replace(mm.group(0), "const CACHE_VERSION = 'dovod-v%d';" % nxt))
-    return nxt
+        s.replace(mm.group(0), "const CACHE_VERSION = 'dovod-v%d';" % (cur + 1)))
+    return cur + 1
 
 # ── 6 · прогон ────────────────────────────────────────────────────────────────
 def main():
@@ -244,11 +246,16 @@ def main():
     rep = patch(D, new, fresh)
     io.open(CAL, 'w', encoding='utf-8').write(s[:i + 8] + json.dumps(D, ensure_ascii=False) + s[j + 1:])
     S = build_season(D)
-    ver = bump_meta_and_sw()
+    # оболочку сбрасываем только когда поменялся сам календарь: новые/снятые турниры,
+    # переносы дат, правки полей. Ежедневное движение заявок доедет само
+    # (service worker отдаёт кэш и тут же обновляет его в фоне) — иначе приложение
+    # каждую ночь перекачивало бы страницу целиком без причины.
+    material = bool(rep['added'] or rep['moved'] or rep['removed'] or rep['fields'])
+    ver = bump_meta_and_sw(bump_sw=material)
 
     lines = ['## Обновление данных mafgame · %s' % TODAY, '',
-             'Турниров в реестре: **%d** · строк в сводке: %d · игроков: %d · версия кэша: dovod-v%d' %
-             (len(new), len(S['rows']), S['players'], ver), '']
+             'Турниров в реестре: **%d** · строк в сводке: %d · игроков: %d · версия кэша: dovod-v%d%s' %
+             (len(new), len(S['rows']), S['players'], ver, '' if material else ' (не менялась: правились только заявки)'), '']
     def block(title, items):
         if not items:
             return
