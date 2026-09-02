@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: '0 18 * * 0'
   workflow_dispatch:
+  # правка самого робота запускает прогон — так его можно проверить без ожидания воскресенья
+  push:
+    paths:
+      - '.github/workflows/refresh-data.yml'
+      - '.github/scripts/refresh_mafgame.py'
 
 permissions:
   contents: write
