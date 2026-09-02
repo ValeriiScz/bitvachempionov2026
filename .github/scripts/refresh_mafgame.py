@@ -31,7 +31,7 @@ YEAR              = datetime.date.today().year
 TODAY             = datetime.date.today().isoformat()
 MIN_TOURNAMENTS   = 300      # меньше — считаем выгрузку сломанной
 MAX_DISAPPEARED   = 15       # больше — на прод не пускаем, нужен человек
-MAX_PARTICIPANTS  = 60       # сколько составов тянуть за один прогон
+MAX_PARTICIPANTS  = 90       # сколько составов тянуть за один прогон (будущих турниров ~72)
 HOSTS             = ['https://mafgame.org', 'https://dovod-mafia.com/mafgame']  # второй — наш прокси, запас
 PAUSE             = 0.4      # сек между запросами, чтобы не долбить платформу
 CAL, SEASON, META, SW = 'calendar.html', 'data/season.js', 'data/meta.js', 'sw.js'
@@ -226,9 +226,9 @@ def main():
     if len(gone) > MAX_DISAPPEARED:
         fail('из листинга исчезло %d турниров (порог %d) — на прод не выкатываю, нужен человек' % (len(gone), MAX_DISAPPEARED))
 
-    # свежие заявки: будущие рейтинговые турниры, самые близкие вперёд
-    fut = sorted([t for t in new.values()
-                  if t['start_date'][:10] >= TODAY and (t.get('no_of_stars') or 0) >= 1],
+    # свежие заявки: ВСЕ будущие турниры, начиная с ближайших.
+    # 0★-миникапы тоже спрашиваем — они пятая часть календаря, и их лобби людям видно.
+    fut = sorted([t for t in new.values() if t['start_date'][:10] >= TODAY],
                  key=lambda t: t['start_date'])[:MAX_PARTICIPANTS]
     fresh = {}
     log('Составы (%d турниров):' % len(fut))
