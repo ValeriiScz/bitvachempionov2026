@@ -1,0 +1,61 @@
+# Еженедельное обновление данных сайта DOVOD из mafgame.org.
+# Работает на серверах GitHub: мак и Claude не нужны. Vercel выкатывает сайт по коммиту.
+# Расписание: воскресенье 18:00 UTC = 20:00 Прага летом, 19:00 зимой.
+# Запустить вручную: вкладка Actions → «Обновление данных mafgame» → Run workflow.
+name: Обновление данных mafgame
+
+on:
+  schedule:
+    - cron: '0 18 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Выгрузить и обновить данные
+        run: python .github/scripts/refresh_mafgame.py
+
+      - name: Проверить, что датасет цел
+        run: |
+          python - <<'PY'
+          import io,json,re,sys
+          s=io.open('calendar.html',encoding='utf-8').read()
+          i=s.find('const D=');j=s.find('};',i)
+          D=json.loads(s[i+8:j+1])
+          n=len(D['tournaments'])
+          assert n>=300, 'турниров всего %d' % n
+          assert D['snapshot'], 'нет даты снимка'
+          se=io.open('data/season.js',encoding='utf-8').read()
+          k=se.find('{'); S=json.loads(se[k:se.rfind('}')+1])
+          assert len(S['rows'])>=300, 'в сводке строк %d' % len(S['rows'])
+          assert re.search(r"const CACHE_VERSION = 'dovod-v\d+';", io.open('sw.js',encoding='utf-8').read())
+          print('датасет цел: турниров', n, 'снимок', D['snapshot'])
+          PY
+
+      - name: Закоммитить, если что-то изменилось
+        run: |
+          if git diff --quiet; then
+            echo "изменений нет — коммит не нужен"
+            exit 0
+          fi
+          git config user.name  "dovod-bot"
+          git config user.email "noreply@dovod-mafia.com"
+          git add calendar.html data/season.js data/meta.js sw.js
+          git commit -m "данные mafgame: автообновление $(date +%d.%m.%Y)"
+          git push
+          echo "обновление выкачено"
