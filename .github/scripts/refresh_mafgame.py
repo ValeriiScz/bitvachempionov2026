@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-refresh_mafgame · v1.0 · 2026-09-02
-Назначение: раз в неделю обновить данные сайта DOVOD из mafgame.org без участия человека.
+refresh_mafgame · v1.1 · 2026-09-06
+Назначение: каждую ночь обновить данные сайта DOVOD из mafgame.org без участия человека.
 Запускается GitHub Actions (.github/workflows/refresh-data.yml), работает на серверах GitHub —
 ни мак Валерия, ни Claude для этого не нужны.
 
@@ -22,6 +22,9 @@ refresh_mafgame · v1.0 · 2026-09-02
   - в листинге меньше MIN_TOURNAMENTS турниров (значит платформа отдала мусор);
   - разом исчезает больше MAX_DISAPPEARED турниров;
   - хоть одна страница листинга не распарсилась.
+v1.1: исправлен UnboundLocalError в сводке (block делал `lines +=`, что делало `lines`
+локальной переменной закрытия). Скрипт падал в любой прогон, где были новые/снятые
+турниры или переносы дат — то есть всегда, кроме ночей без изменений в календаре.
 """
 import datetime, html, io, json, os, re, sys, time
 import urllib.request, urllib.error
@@ -260,7 +263,7 @@ def main():
         if not items:
             return
         lines.append('**%s (%d):**' % (title, len(items)))
-        lines += ['- ' + x for x in items[:25]]
+        lines.extend('- ' + x for x in items[:25])
         if len(items) > 25:
             lines.append('- …и ещё %d' % (len(items) - 25))
         lines.append('')
