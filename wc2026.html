@@ -122,11 +122,10 @@ section.closed .grid{display:none}
 .pm{margin-top:auto;padding-top:7px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.35;color:var(--muted)}
 .pm .p::before{content:'+ ';color:var(--gd);font-weight:800}.pm .m::before{content:'− ';color:#EF4444;font-weight:800}
 .nodata{font-size:11px;color:var(--muted);font-style:italic;padding:8px 0}
-/* tooltips */
-.tip{position:relative;cursor:help;border-bottom:1px dotted currentColor}
-.tip::after{content:attr(data-tip);position:absolute;left:0;bottom:calc(100% + 6px);z-index:80;width:230px;max-width:70vw;padding:8px 10px;background:#161a24;border:1px solid var(--line);color:var(--ink);font:400 11px/1.4 Inter,sans-serif;text-transform:none;letter-spacing:0;box-shadow:0 8px 24px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .12s;white-space:normal;text-align:left}
-.tip:hover::after,.tip.open::after{opacity:1}
-.tip.r::after{left:auto;right:0}
+/* tooltips (рисуем в body, иначе режет overflow карточки) */
+.tip{cursor:help;border-bottom:1px dotted currentColor}
+#tipbox{position:fixed;z-index:1000;width:250px;max-width:calc(100vw - 20px);padding:8px 10px;background:#161a24;border:1px solid var(--line);color:var(--ink);font:400 11px/1.4 Inter,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.55);pointer-events:none;display:none}
+#tipbox b{display:block;color:var(--gd);font:700 9px var(--mono);letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
 /* footer */
 footer{padding:26px 0 40px;border-top:1px solid var(--line);color:var(--dim);font-size:11px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 footer a{color:var(--muted)}
@@ -230,14 +229,21 @@ main.addEventListener('touchstart',e=>{const t=e.touches[0];tx=t.clientX;ty=t.cl
 main.addEventListener('touchend',e=>{const t=e.changedTouches[0]; const dx=t.clientX-tx, dy=t.clientY-ty; if(Math.abs(dx)>45&&Math.abs(dy)<40){const fc=e.target.closest('.fc'); if(fc){toggleFlip(fc); e.preventDefault();}}},{passive:false});
 function toggleFlip(fc){ const uid=+fc.dataset.uid; if(flipped.has(uid)) flipped.delete(uid); else flipped.add(uid); fc.classList.toggle('flipped'); }
 main.addEventListener('click',e=>{
-  const tip=e.target.closest('.tip'); if(tip){ e.stopPropagation(); const was=tip.classList.contains('open'); document.querySelectorAll('.tip.open').forEach(x=>x.classList.remove('open')); if(!was) tip.classList.add('open'); return; }
-  document.querySelectorAll('.tip.open').forEach(x=>x.classList.remove('open'));
+  const tip=e.target.closest('.tip'); if(tip){ e.stopPropagation(); if(tipFor===tip) hideTip(); else showTip(tip); return; }
+  hideTip();
   const fs=e.target.closest('.flipsec'); if(fs){ e.stopPropagation(); const cc=fs.dataset.cc; const ps=D.players.filter(p=>p.cc===cc); const allF=ps.every(p=>flipped.has(p.uid)); ps.forEach(p=>{ if(allF) flipped.delete(p.uid); else flipped.add(p.uid); }); document.querySelectorAll(`#c-${cc} .fc`).forEach(fc=>fc.classList.toggle('flipped',!allF)); return; }
   const ch=e.target.closest('.ch'); if(ch){ const sec=ch.closest('section'); const cc=sec.dataset.cc; if(closed.has(cc)) closed.delete(cc); else closed.add(cc); sec.classList.toggle('closed'); ch.querySelector('.car').textContent=closed.has(cc)?'развернуть':'свернуть'; document.getElementById('collAll').textContent = closed.size===D.meta.order.length ? 'Развернуть все' : 'Свернуть все'; return; }
   if(moved) return;
   const fc=e.target.closest('.fc'); if(fc && !e.target.closest('a')) toggleFlip(fc);
 });
-document.addEventListener('click',e=>{ if(!e.target.closest('.tip')) document.querySelectorAll('.tip.open').forEach(x=>x.classList.remove('open')); });
+const tipbox=document.createElement('div'); tipbox.id='tipbox'; document.body.appendChild(tipbox); let tipFor=null;
+function showTip(el){ tipbox.innerHTML=`<b>${esc(el.textContent)}</b>${esc(el.dataset.tip)}`; tipbox.style.display='block'; const r=el.getBoundingClientRect(); const w=tipbox.offsetWidth, h=tipbox.offsetHeight;
+  let x=Math.min(Math.max(10,r.left), window.innerWidth-w-10); let y=r.top-h-8; if(y<8) y=r.bottom+8; tipbox.style.left=x+'px'; tipbox.style.top=y+'px'; tipFor=el; }
+function hideTip(){ tipbox.style.display='none'; tipFor=null; }
+main.addEventListener('mouseover',e=>{ const t=e.target.closest('.tip'); if(t && matchMedia('(hover:hover)').matches) showTip(t); });
+main.addEventListener('mouseout',e=>{ const t=e.target.closest('.tip'); if(t && matchMedia('(hover:hover)').matches) hideTip(); });
+document.addEventListener('click',e=>{ if(!e.target.closest('.tip')) hideTip(); });
+window.addEventListener('scroll',hideTip,{passive:true});
 document.getElementById('flipAll').onclick=()=>{ const all=D.players.every(p=>flipped.has(p.uid)); D.players.forEach(p=>{ if(all) flipped.delete(p.uid); else flipped.add(p.uid); }); document.querySelectorAll('.fc').forEach(fc=>fc.classList.toggle('flipped',!all)); };
 document.getElementById('collAll').onclick=()=>{ if(closed.size===D.meta.order.length) closed.clear(); else D.meta.order.forEach(cc=>closed.add(cc)); render(); };
 document.querySelectorAll('[data-per]').forEach(b=>b.onclick=()=>{per=b.dataset.per;document.querySelectorAll('[data-per]').forEach(x=>x.classList.toggle('on',x===b));render();});
