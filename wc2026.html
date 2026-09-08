@@ -229,19 +229,19 @@ main.addEventListener('touchstart',e=>{const t=e.touches[0];tx=t.clientX;ty=t.cl
 main.addEventListener('touchend',e=>{const t=e.changedTouches[0]; const dx=t.clientX-tx, dy=t.clientY-ty; if(Math.abs(dx)>45&&Math.abs(dy)<40){const fc=e.target.closest('.fc'); if(fc){toggleFlip(fc); e.preventDefault();}}},{passive:false});
 function toggleFlip(fc){ const uid=+fc.dataset.uid; if(flipped.has(uid)) flipped.delete(uid); else flipped.add(uid); fc.classList.toggle('flipped'); }
 main.addEventListener('click',e=>{
-  const tip=e.target.closest('.tip'); if(tip){ e.stopPropagation(); if(tipFor===tip) hideTip(); else showTip(tip); return; }
+  const tip=e.target.closest('.tip'); if(tip){ e.stopPropagation(); if(tipFor===tip && tipPinned) hideTip(); else { showTip(tip); tipPinned=true; } return; }
   hideTip();
   const fs=e.target.closest('.flipsec'); if(fs){ e.stopPropagation(); const cc=fs.dataset.cc; const ps=D.players.filter(p=>p.cc===cc); const allF=ps.every(p=>flipped.has(p.uid)); ps.forEach(p=>{ if(allF) flipped.delete(p.uid); else flipped.add(p.uid); }); document.querySelectorAll(`#c-${cc} .fc`).forEach(fc=>fc.classList.toggle('flipped',!allF)); return; }
   const ch=e.target.closest('.ch'); if(ch){ const sec=ch.closest('section'); const cc=sec.dataset.cc; if(closed.has(cc)) closed.delete(cc); else closed.add(cc); sec.classList.toggle('closed'); ch.querySelector('.car').textContent=closed.has(cc)?'развернуть':'свернуть'; document.getElementById('collAll').textContent = closed.size===D.meta.order.length ? 'Развернуть все' : 'Свернуть все'; return; }
   if(moved) return;
   const fc=e.target.closest('.fc'); if(fc && !e.target.closest('a')) toggleFlip(fc);
 });
-const tipbox=document.createElement('div'); tipbox.id='tipbox'; document.body.appendChild(tipbox); let tipFor=null;
+const tipbox=document.createElement('div'); tipbox.id='tipbox'; document.body.appendChild(tipbox); let tipFor=null, tipPinned=false;
 function showTip(el){ tipbox.innerHTML=`<b>${esc(el.textContent)}</b>${esc(el.dataset.tip)}`; tipbox.style.display='block'; const r=el.getBoundingClientRect(); const w=tipbox.offsetWidth, h=tipbox.offsetHeight;
   let x=Math.min(Math.max(10,r.left), window.innerWidth-w-10); let y=r.top-h-8; if(y<8) y=r.bottom+8; tipbox.style.left=x+'px'; tipbox.style.top=y+'px'; tipFor=el; }
-function hideTip(){ tipbox.style.display='none'; tipFor=null; }
+function hideTip(){ tipbox.style.display='none'; tipFor=null; tipPinned=false; }
 main.addEventListener('mouseover',e=>{ const t=e.target.closest('.tip'); if(t && matchMedia('(hover:hover)').matches) showTip(t); });
-main.addEventListener('mouseout',e=>{ const t=e.target.closest('.tip'); if(t && matchMedia('(hover:hover)').matches) hideTip(); });
+main.addEventListener('mouseout',e=>{ const t=e.target.closest('.tip'); if(t && matchMedia('(hover:hover)').matches && !tipPinned) hideTip(); });
 document.addEventListener('click',e=>{ if(!e.target.closest('.tip')) hideTip(); });
 window.addEventListener('scroll',hideTip,{passive:true});
 document.getElementById('flipAll').onclick=()=>{ const all=D.players.every(p=>flipped.has(p.uid)); D.players.forEach(p=>{ if(all) flipped.delete(p.uid); else flipped.add(p.uid); }); document.querySelectorAll('.fc').forEach(fc=>fc.classList.toggle('flipped',!all)); };
