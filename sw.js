@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'dovod-v36';
+const CACHE_VERSION = 'dovod-v37';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -33,6 +33,7 @@ const PRECACHE = [
   'data/meta.js',
   'data/results3.js',
   'lab.html',
+  'wc2026.html',
   'ce634.html',
   'ce694.html',
   'mcl2026.html',

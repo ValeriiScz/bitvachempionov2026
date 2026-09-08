@@ -135,12 +135,15 @@ body{
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .tile{min-height:238px;padding:24px 24px 20px}
   .tile.soon{grid-column:1 / -1;min-height:150px}
+  .tile.wc{grid-column:1 / -1;min-height:170px}
   .ttl{font-size:clamp(28px,2.9vw,40px)}
   .tile.soon .ttl{font-size:28px}
   .tnum{font-size:56px;right:20px;top:14px}
 }
 
 
+.tile.wc .ttl{background:linear-gradient(180deg,#f6f8fb,#c9d0da 50%,#e6eaf0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tile.wc .tkick{color:#e3b04b}
 .tile.soon{cursor:default;opacity:.62;filter:saturate(.5)}
 .tile.soon:hover{transform:none;border-color:var(--line)}
 .tile.soon:hover::after{opacity:0}
@@ -197,7 +200,7 @@ body{
   </header>
 
   <section class="gridsec">
-    <div class="ghead"><span>Разделы</span><s></s><span>05</span></div>
+    <div class="ghead"><span>Разделы</span><s></s><span>06</span></div>
 
     <div class="tiles">
 
@@ -255,6 +258,20 @@ body{
         </div>
       </a>
 
+
+
+      <a class="tile wc" href="wc2026.html" style="--c:#d7dde6">
+        <span class="tnum">06</span>
+        <div>
+          <div class="tkick"><i></i>12–13 сентября · 55 игроков · 13 сборных</div>
+          <h2 class="ttl">Чемпионат мира 2026</h2>
+          <p class="tdesc">Кто приехал: карточки всех участников — амплуа, роли, сравнение со средним игроком турнира и со всей базой маркерев. Переворачиваются.</p>
+        </div>
+        <div class="tfoot">
+          <div class="tstat"><b>13</b> сборных · <b>41</b> из топ-50 mafgame · роли и амплуа</div>
+          <span class="tgo">Открыть <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        </div>
+      </a>
 
       <div class="tile soon" style="--c:var(--ye)" aria-disabled="true">
         <span class="tnum">05</span>
