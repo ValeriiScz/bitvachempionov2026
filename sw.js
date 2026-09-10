@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'dovod-v45';
+const CACHE_VERSION = 'dovod-v46';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -35,6 +35,8 @@ const PRECACHE = [
   'lab.html',
   'wc2026.html',
   'wc2026-cards.html',
+  'wc2026-tournament.html',
+  'wc2026-fans.html',
   'ce634.html',
   'ce694.html',
   'mcl2026.html',

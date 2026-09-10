@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- DOVOD · wc2026-fans.html · v1.0 · 2026-09-10 · ЧМ-2026 «Для зрителей»: одна колонка, минимум кнопок.
+     Логика: выбираешь, за кем следишь (игроки и/или сборные, localStorage wcf_follow) → страница сама показывает, где они сидят
+     в ближайшей игре и какой стрим включать, таблицу после каждого раунда с движением мест (▲/▼), зачёт сборных, лог игрока.
+     Данные — те же, что у страницы турнира: data/participants_710.json, data/avatars_710.json, data/skip_710.json,
+     loadGames('710') из data/live.js (live в дни турнира по live_from/live_to), стримы — data/streams.js. Демо — случайный турнир для проверки. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ЧМ-2026 · Для зрителей — DOVOD</title>
+<meta name="description" content="Mafia World Championship 2026: следите за своим игроком или сборной — какой стол, какой стрим, таблица после каждого раунда.">
+<meta name="theme-color" content="#05060a">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05060a;--panel:#0b0d14;--panel2:#11141d;--ink:#eef3fb;--mut:#a4adbd;--dim:#79808f;--line:rgba(227,176,75,.28);--line2:rgba(255,255,255,.10);
+ --gold:#e3b04b;--gold-hi:#f6d27a;--cyan:#26e0ff;--red:#db514e;--green:#7ce6a0;--disp:'Unbounded',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}html,body{max-width:100%;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 Inter,-apple-system,system-ui,sans-serif;min-height:100vh;position:relative}
+body::before{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(900px 500px at 80% -10%,rgba(215,221,230,.08),transparent 60%),radial-gradient(700px 420px at 0% 10%,rgba(227,176,75,.08),transparent 60%),linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px) 0 0/44px 44px}
+a{color:inherit}
+.dv-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;font:700 10px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;background:#05060a;border-bottom:1px solid var(--line2)}
+.dv-crumb a{color:#8a91a0;text-decoration:none}.dv-crumb a.dv-home{color:#f5ff35;font-weight:800}.dv-crumb i{color:#39404c;font-style:normal}.dv-crumb span{color:#5f6675}
+.dv-crumb .sh{margin-left:auto;font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-hi);background:rgba(227,176,75,.10);border:1px solid var(--line);padding:6px 10px;cursor:pointer}
+.wrap{max-width:760px;margin:0 auto;padding:14px 14px calc(30px + env(safe-area-inset-bottom))}
+h1{font:900 clamp(20px,5vw,28px)/1.05 var(--disp);text-transform:uppercase;margin:6px 0 4px;background:linear-gradient(180deg,#f6f8fb,#c9d0da 50%,#e6eaf0);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 b{background:linear-gradient(180deg,var(--gold-hi),var(--gold) 60%,#a9771c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kick{font:700 10px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px}.kick i{width:22px;height:2px;background:var(--gold);display:inline-block}
+.lead{color:var(--mut);font-size:13.5px;margin:0 0 14px}
+.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line2);padding:14px;margin-bottom:12px;position:relative;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.panel::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),transparent 80%);opacity:.6}
+.panel.hot{border-color:var(--gold)}
+.panel h2{font:700 11px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.panel h2 .r{margin-left:auto;font-weight:400;letter-spacing:0;text-transform:none;color:var(--dim);font-size:11px}
+.note{font-size:12.5px;color:var(--mut);line-height:1.55}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:10px 16px;border:1px solid var(--line);background:rgba(227,176,75,.10);color:var(--gold-hi);font:800 13.5px Inter,sans-serif;cursor:pointer;text-decoration:none;clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px)}
+.btn.big{width:100%;min-height:54px;font-size:15px;background:linear-gradient(100deg,var(--gold-hi),var(--gold));color:#15100a;border:0}
+.btn.off{opacity:.45;cursor:default;background:rgba(255,255,255,.05);color:var(--mut);border-color:var(--line2)}
+.btn.ghost{background:transparent;color:var(--mut)}
+.btn.mini{min-height:36px;padding:6px 12px;font-size:12.5px}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+/* follow */
+.pick{width:100%;padding:13px 14px;border:1px solid var(--line);background:rgba(5,6,10,.7);color:var(--ink);font:600 15px Inter,sans-serif}
+.pick::placeholder{color:var(--dim)}
+.sugg{display:flex;flex-direction:column;gap:4px;margin-top:8px;max-height:46vh;overflow:auto}
+.sg{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--line2);background:rgba(255,255,255,.03);cursor:pointer;text-align:left;color:var(--ink);font:inherit;width:100%}
+.sg:hover{border-color:var(--line)}
+.sg img,.sg .fl{width:32px;height:32px;border-radius:50%;object-fit:cover;flex:none;background:#11141d;display:inline-flex;align-items:center;justify-content:center;font-size:20px}
+.sg b{font-weight:700}.sg small{color:var(--dim);font-size:11.5px;margin-left:auto;white-space:nowrap}
+.sg.cc b{color:var(--gold-hi)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 8px 7px 10px;border:1px solid var(--line);background:rgba(227,176,75,.08);font-weight:700;font-size:13.5px}
+.chip img{width:22px;height:22px;border-radius:50%;object-fit:cover}
+.chip .x{width:24px;height:24px;border-radius:50%;border:1px solid var(--line2);background:#11141d;color:var(--mut);cursor:pointer;font-size:13px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+.chip.cc{border-color:var(--cyan);background:rgba(38,224,255,.08)}
+.qc{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.qc button{border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--ink);font:700 13px Inter,sans-serif;padding:8px 10px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.qc button small{color:var(--dim);font-weight:600}
+/* now cards */
+.nowg{display:flex;flex-direction:column;gap:8px}
+.nw{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--line2);background:rgba(255,255,255,.03)}
+.nw img{width:44px;height:44px;border-radius:50%;object-fit:cover;background:#11141d;border:2px solid var(--line2)}
+.nw .n{font-weight:800;font-size:15px}.nw .s{font:400 11.5px var(--mono);color:var(--mut);margin-top:2px;display:flex;flex-wrap:wrap;gap:4px 10px}
+.nw .s b{color:var(--gold-hi);font-weight:700}
+.nw .rest{color:var(--dim);font-style:italic}
+.tbig{font:900 22px/1 var(--disp);color:var(--gold-hi);text-align:center;min-width:54px}
+.tbig small{display:block;font:700 8px var(--mono);letter-spacing:.14em;color:var(--dim);margin-top:4px;text-transform:uppercase}
+.strms{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.strms .btn{padding:8px 4px;min-height:48px;flex-direction:column;gap:2px;font-size:12px}
+.strms .btn small{font:700 8.5px var(--mono);letter-spacing:.1em;color:inherit;opacity:.7;text-transform:uppercase}
+.strms .btn.my{border:2px solid var(--gold-hi);color:var(--gold-hi);opacity:1;background:rgba(227,176,75,.16)}
+/* standings */
+.rounds{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.rounds button{min-width:38px;min-height:38px;border:1px solid var(--line2);background:rgba(5,6,10,.5);color:var(--ink);font:800 13px var(--mono);cursor:pointer}
+.rounds button.on{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#15100a;border-color:var(--gold)}
+.rounds button.up{opacity:.35}
+.seg{display:inline-flex;border:1px solid var(--line);overflow:hidden}
+.seg button{padding:8px 13px;background:transparent;border:0;color:var(--mut);font:800 12.5px Inter,sans-serif;cursor:pointer}
+.seg button.on{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#15100a}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font:700 9.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold);text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+.tbl td{padding:9px 6px;border-bottom:1px solid var(--line2);vertical-align:middle;font-size:14px}
+.tbl tr.me td{background:rgba(227,176,75,.14)}
+.tbl tr.cc td{background:rgba(38,224,255,.06)}
+.tbl tr.cut td{border-bottom:1px dashed var(--gold)}
+.tbl tr{cursor:pointer}
+.pl{display:flex;align-items:center;gap:8px;min-width:0}
+.pl img{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#11141d;flex:none}
+.pl .nm{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pl .sub{font:400 10.5px var(--mono);color:var(--dim)}
+.num{font:700 14px var(--mono);color:var(--gold-hi);text-align:right;white-space:nowrap}
+.mv{font:800 12px var(--mono);white-space:nowrap;text-align:center}
+.mv.up{color:var(--green)}.mv.dn{color:#ff6b6b}.mv.eq{color:var(--dim)}
+.lg{font:700 11.5px var(--mono);white-space:nowrap;text-align:right}
+.lg.w{color:var(--green)}.lg.l{color:#ff8a8a}
+.pos{font:800 14px var(--mono);color:var(--dim);text-align:right;width:28px}
+.more{width:100%;margin-top:8px}
+.cutlab{font:700 9px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-hi);padding:3px 6px}
+/* countries */
+.ct{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2)}
+.ct:last-child{border-bottom:0}
+.ct .f{font-size:24px;width:30px;text-align:center}
+.ct .b{flex:1;min-width:0}.ct .b b{font-weight:800}.ct .b small{display:block;color:var(--dim);font:400 11px var(--mono)}
+.ct .v{text-align:right}.ct .v b{font:800 16px var(--mono);color:var(--gold-hi)}.ct .v small{display:block;color:var(--dim);font-size:10.5px}
+.bar{height:5px;background:#1a1e2a;margin-top:5px;position:relative}.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--gold)}
+/* log */
+.log td{font-size:13px}
+.rp{display:inline-block;padding:1px 7px;font:800 11px var(--mono)}
+.rp-Citizen{background:rgba(239,68,68,.18);color:#f0906f}.rp-Sheriff{background:rgba(251,191,36,.18);color:#f6d27a}.rp-Mafia{background:rgba(156,163,175,.18);color:#c7d2e2}.rp-Don{background:rgba(167,139,250,.18);color:#c4b5fd}
+.stub{text-align:center;padding:26px 12px;color:var(--mut)}.stub .si{font-size:34px;color:var(--gold);opacity:.7}
+.foot{font-size:11.5px;color:var(--dim);padding:14px 0 0;display:flex;flex-wrap:wrap;gap:6px 14px}
+.foot a{color:var(--mut)}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);z-index:9999;max-width:min(520px,calc(100vw - 24px));background:#11141d;border:1px solid var(--line);color:var(--ink);font-size:13px;padding:11px 14px;opacity:0;pointer-events:none;transition:.18s;word-break:break-word}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.demoflag{font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#ff8a8a}
+.hidden{display:none!important}
+@media(min-width:700px){.wrap{padding-top:20px}.nw{grid-template-columns:48px 1fr auto}}
+@media(max-width:380px){.strms{grid-template-columns:repeat(5,minmax(0,1fr))}.strms .btn{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<script>if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</head>
+<body>
+<nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="wc2026.html">Чемпионат мира 2026</a><i>/</i><span>Для зрителей</span><button class="sh" onclick="sharePage()">⤴ Поделиться</button></nav>
+<div class="wrap">
+  <div class="kick"><i></i>Mafia World Championship · Прага · 12–13.09</div>
+  <h1>ЧМ-2026 <b>для зрителей</b></h1>
+  <p class="lead" id="lead">Выберите, за кем следить — дальше страница сама подскажет, какой стол и какой стрим включать, и покажет таблицу после каждого раунда.</p>
+  <div id="app"><div class="stub"><div class="si">⏳</div>Загрузка…</div></div>
+  <div class="foot"><span id="ftdata">Данные: mafgame.org (протоколы, live в дни турнира) · markery.online (ELO)</span><a href="wc2026-tournament.html">полная страница турнира →</a><a href="wc2026-cards.html">карточки по странам →</a></div>
+</div>
+<script src="data/streams.js"></script>
+<script src="data/live.js"></script>
+<script>
+const ROMAN=['','I','II','III','IV','V'];
+const RSHORT={Citizen:'Мир',Sheriff:'Шер',Mafia:'Маф',Don:'Дон'};
+const DEF_AV='https://mafgame.org/build/assets/avatar-default2-33e44bae.png';
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=v=>{const n=+(+v).toFixed(2);if(!isFinite(n))return '—';return Number.isInteger(n)?String(n):n.toFixed(2).replace(/\.?0+$/,'');};
+const plW=(n,a,b,c)=>{const m=Math.abs(n)%100,m1=m%10;if(m>10&&m<20)return c;if(m1>1&&m1<5)return b;if(m1===1)return a;return c;};
+const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v);}catch(e){return null}};
+let D={},follow=[],round=null,tblMode='all',demo=false,showAll=false,openLog=null,pickOpen=false;
+try{follow=JSON.parse(LS('wcf_follow')||'[]');}catch(e){follow=[];}
+Promise.all([
+  fetch('data/participants_710.json').then(r=>r.json()).catch(()=>null),
+  fetch('data/avatars_710.json').then(r=>r.json()).catch(()=>({})),
+  fetch('data/skip_710.json').then(r=>r.json()).catch(()=>({})),
+  fetch('data/tournament_710.json').then(r=>r.json()).catch(()=>({})),
+  (window.loadGames?loadGames('710'):Promise.resolve(null)).catch(()=>null)
+]).then(([P,A,S,T,G])=>{
+  D.players=(P&&P.players)||[];D.av=(A&&A.avatars)||{};D.judges=(A&&A.judges)||{};D.skip=S||{};D.tour=T||{};
+  D.realGames=(G&&G.games)||[];D.games=D.realGames;
+  D.P={};D.players.forEach(p=>D.P[p.nick]=p);
+  D.countries={};D.players.forEach(p=>{(D.countries[p.cc]=D.countries[p.cc]||{cc:p.cc,name:p.country,flag:p.flag,players:[]}).players.push(p.nick);});
+  compute();render();
+  if(window.__refbtn===undefined){const rb=document.getElementById('__refbtn');if(rb)rb.style.bottom='calc(16px + env(safe-area-inset-bottom))';}
+}).catch(e=>{document.getElementById('app').innerHTML='<div class="stub">Не удалось загрузить данные турнира.</div>';console.error(e);});
+function avOf(n){return D.av[n]||(D.P[n]&&D.P[n].av)||DEF_AV;}
+function flagOf(n){const p=D.P[n];return p?p.flag:'';}
+function compute(){
+  D.occ={};D.seat={};D.played=0;
+  D.games.forEach((g,gi)=>{const gn=gi+1;let done=g.tables.length>0;g.tables.forEach(t=>{if(t.winner==='unknown')done=false;t.seats.forEach((s,i)=>{if(!s||!s.name)return;(D.occ[s.name]=D.occ[s.name]||[]).push({g:gn,t:t.table_num,slot:s.seat||i+1,stage:g.stage||'Квалификация',role:s.role,result:s.result,sig:(s.wpts||0)+(s.aps||0)+(s.ci||0),done:t.winner!=='unknown'});});});if(done)D.played=gn;});
+  D.gplist=D.games.filter(g=>g.tables.some(t=>t.winner!=='unknown'));
+  D.snap=[];for(let k=1;k<=D.gplist.length;k++)D.snap[k]=aggregate(D.gplist.slice(0,k));
+  if(round==null||round>D.gplist.length)round=D.gplist.length;
+}
+function aggregate(list){const P={};list.forEach(g=>g.tables.forEach(t=>{if(t.winner==='unknown')return;t.seats.forEach(s=>{if(!s||!s.name)return;const p=P[s.name]||(P[s.name]={name:s.name,sigma:0,g:0,w:0,last:0});const sig=(s.wpts||0)+(s.aps||0)+(s.ci||0);p.sigma+=sig;p.g++;if(s.result==='W')p.w++;p.last=sig;p.lastW=s.result==='W';});}));
+  const rows=Object.values(P).map(p=>({...p,sigma:+p.sigma.toFixed(2)}));rows.sort((a,b)=>b.sigma-a.sigma||a.name.localeCompare(b.name,'ru'));const place={};rows.forEach((r,i)=>{r.place=i+1;place[r.name]=i+1;});return {rows,place};}
+function isFollowed(n){return follow.some(f=>f.t==='p'&&f.id===n)||follow.some(f=>f.t==='c'&&D.P[n]&&D.P[n].cc===f.id);}
+function followedPlayers(){const set=new Set();follow.forEach(f=>{if(f.t==='p')set.add(f.id);else(D.countries[f.id]||{players:[]}).players.forEach(n=>set.add(n));});return [...set];}
+function addFollow(t,id){if(follow.some(f=>f.t===t&&f.id===id))return;follow.push({t,id});LS('wcf_follow',JSON.stringify(follow));pickOpen=false;render();}
+function rmFollow(i){follow.splice(i,1);LS('wcf_follow',JSON.stringify(follow));render();}
+function streamUrl(gnum,table,stage){const s=window.STREAMS_DB&&window.STREAMS_DB['710'];if(!s)return null;if(stage==='Финал')return s.final?'https://www.youtube.com/watch?v='+s.final:null;return window.streamFor?window.streamFor('710',gnum,table):null;}
+function mainStream(){const s=window.STREAMS_DB&&window.STREAMS_DB['710'];const day=(D.played||0)>=((s&&s.gamesDay1)||8)?'2':'1';const id=s&&s.commentary&&s.commentary[day];return id?'https://www.youtube.com/watch?v='+id:null;}
+function nextGame(){const total=D.games.length;return D.played>=total?null:D.played+1;}
+/* ── render ── */
+function render(){const app=document.getElementById('app');
+  app.innerHTML=followPanel()+nowPanel()+streamsPanel()+standingsPanel()+countriesPanel()+demoPanel();
+  bind();}
+function followPanel(){
+  const chips=follow.map((f,i)=>f.t==='p'?`<span class="chip"><img src="${esc(avOf(f.id))}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'">${flagOf(f.id)} ${esc(f.id)}<button class="x" data-i="${i}" aria-label="убрать">×</button></span>`:`<span class="chip cc">${D.countries[f.id]?D.countries[f.id].flag:''} ${esc(D.countries[f.id]?D.countries[f.id].name:f.id)} <small style="color:var(--dim)">${D.countries[f.id]?D.countries[f.id].players.length:''}</small><button class="x" data-i="${i}" aria-label="убрать">×</button></span>`).join('');
+  const quick=!follow.length&&!pickOpen?`<div class="qc">${Object.values(D.countries).sort((a,b)=>b.players.length-a.players.length).slice(0,6).map(c=>`<button data-cc="${c.cc}">${c.flag} ${esc(c.name)} <small>${c.players.length}</small></button>`).join('')}</div>`:'';
+  return `<div class="panel hot"><h2>За кем следим <span class="r">${follow.length?'можно добавить ещё':'игрок или сборная'}</span></h2>
+    ${chips?`<div class="chips" style="margin:0 0 10px">${chips}</div>`:''}
+    <input class="pick" id="pick" placeholder="${follow.length?'＋ добавить игрока или сборную…':'Введите ник или страну…'}" autocomplete="off">
+    <div class="sugg hidden" id="sugg"></div>
+    ${quick}
+    ${!follow.length?'<div class="note" style="margin-top:8px">Выбор запоминается на этом телефоне. Сборную можно выбрать целиком — тогда покажем все её столы.</div>':''}</div>`;}
+function nowPanel(){
+  const ng=nextGame();const fp=followedPlayers();const cur=D.gplist.length;
+  const stageOf=g=>(D.games[g-1]&&D.games[g-1].stage)||'Квалификация';
+  const head=ng?`<h2>Игра ${ng} <span class="r">${esc(stageOf(ng))} · из ${D.games.length}${cur?` · сыграно ${cur}`:''}</span></h2>`:`<h2>Турнир завершён</h2>`;
+  if(!fp.length){return `<div class="panel">${head}<div class="note">Выберите игрока или сборную сверху — здесь появится, за каким столом они сидят в ближайшей игре, кто судит и какой стрим включать. Пока можно просто открыть любой стол ниже.</div></div>`;}
+  const sorted=fp.slice().sort((a,b)=>{const oa=ng?((D.occ[a]||[]).find(o=>o.g===ng)||{t:99}).t:0,ob=ng?((D.occ[b]||[]).find(o=>o.g===ng)||{t:99}).t:0;return oa-ob||a.localeCompare(b,'ru');});
+  const items=sorted.map(n=>{const occ=(D.occ[n]||[]);const nx=ng?occ.find(o=>o.g===ng):null;const last=occ.filter(o=>o.done).slice(-1)[0];
+    let mid,right;
+    if(!ng){mid='<span class="rest">турнир завершён</span>';right='';}
+    else if(!nx){const skip=D.skip[n];mid=`<span class="rest">${skip===ng?'отдыхает эту игру':'в этой стадии не играет'}</span>`;right='';}
+    else{const j=D.judges[nx.t];const su=streamUrl(nx.g,nx.t,nx.stage);mid=`<span>место <b>${nx.slot}</b></span>${j?`<span>судья <b>${esc(j.name)}</b></span>`:''}${su?`<a class="btn mini" href="${esc(su)}" target="_blank" rel="noopener" style="margin-top:6px">▶ Стрим стола ${ROMAN[nx.t]}</a>`:''}`;right=`<div class="tbig">${ROMAN[nx.t]}<small>стол</small></div>`;}
+    const lastTxt=last?`<span class="${last.result==='W'?'lg w':'lg l'}" style="text-align:left">${last.result==='W'?'победа':'поражение'} в игре ${last.g}${last.role?' · '+RSHORT[last.role]:''}</span>`:'';
+    const pl=D.snap[cur]&&D.snap[cur].place[n];
+    return `<div class="nw"><img src="${esc(avOf(n))}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><div><div class="n">${flagOf(n)} ${esc(n)}${pl?` <span style="color:var(--gold-hi);font:800 12px var(--mono)">#${pl}</span>`:''}</div><div class="s">${mid}${lastTxt}</div></div>${right}</div>`;}).join('');
+  return `<div class="panel">${head}<div class="nowg">${items}</div></div>`;}
+function streamsPanel(){
+  const ng=nextGame();const fp=followedPlayers();const my=new Set();if(ng)fp.forEach(n=>{const o=(D.occ[n]||[]).find(x=>x.g===ng);if(o)my.add(o.t);});
+  const ms=mainStream();
+  const stage=ng?((D.games[ng-1]&&D.games[ng-1].stage)||'Квалификация'):'Квалификация';
+  const tables=stage==='Финал'?[1]:[1,2,3,4,5];
+  const b=tables.map(t=>{const su=ng?streamUrl(ng,t,stage):null;const j=D.judges[t];const cls='btn'+(su?'':' off')+(my.has(t)?' my':'');const inner=`Стол ${ROMAN[t]}<small>${j?esc(j.name):''}</small>`;return su?`<a class="${cls}" href="${esc(su)}" target="_blank" rel="noopener">${inner}</a>`:`<span class="${cls}">${inner}</span>`;}).join('');
+  return `<div class="panel"><h2>Трансляции <span class="r">${ms||(window.STREAMS_DB&&Object.keys((window.STREAMS_DB['710']||{}).days?.['1']||{}).length)?'YouTube @mafgameorg':'ссылки появятся в день турнира'}</span></h2>
+    ${ms?`<a class="btn big" href="${esc(ms)}" target="_blank" rel="noopener" style="margin-bottom:8px">▶ Главный эфир · комментирует Walle</a>`:`<span class="btn big off" style="margin-bottom:8px">▶ Главный эфир · комментирует Walle</span>`}
+    <div class="strms">${b}</div>${my.size?'<div class="note" style="margin-top:8px">Золотая рамка — столы ваших игроков в ближайшей игре.</div>':''}</div>`;}
+function standingsPanel(){
+  const n=D.gplist.length;
+  if(!n)return `<div class="panel"><h2>Таблица</h2><div class="note">Заполнится после первого сыгранного стола. Тут будет место каждого игрока после каждого раунда и на сколько позиций он поднялся или упал.</div></div>`;
+  const k=Math.max(1,Math.min(round||n,n));const cur=D.snap[k],prev=k>1?D.snap[k-1]:null;
+  const fp=new Set(followedPlayers());
+  let rows=cur.rows.slice();
+  if(tblMode==='my')rows=rows.filter(r=>fp.has(r.name));
+  const lim=(tblMode==='all'&&!showAll)?15:999;
+  const stage=(D.gplist[k-1]&&D.gplist[k-1].stage)||'Квалификация';
+  const cut=stage==='Финал'?null:(stage==='Полуфинал'?10:50);
+  const rbtn=D.gplist.map((g,i)=>`<button class="${i+1===k?'on':''}" data-r="${i+1}">${i+1}</button>`).join('');
+  const html=rows.slice(0,lim).map(r=>{const pp=prev?prev.place[r.name]:null;const d=pp?pp-r.place:0;const mv=prev?(pp?(d>0?`<span class="mv up">▲${d}</span>`:d<0?`<span class="mv dn">▼${-d}</span>`:'<span class="mv eq">=</span>'):'<span class="mv up">new</span>'):'<span class="mv eq">·</span>';
+    const p=D.P[r.name]||{};const cls=(fp.has(r.name)?'me':'')+(cut&&r.place===cut&&rows.length>cut?' cut':'');
+    return `<tr class="${cls}" data-p="${esc(r.name)}"><td class="pos">${r.place}</td><td>${mv}</td><td><div class="pl"><img src="${esc(avOf(r.name))}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'"><span style="min-width:0"><div class="nm">${p.flag||''} ${esc(r.name)}</div><div class="sub">${r.w}/${r.g} побед${p.r_tier?' · '+p.r_tier:''}</div></span></div></td><td class="num">${fmt(r.sigma)}</td><td class="lg ${r.lastW?'w':'l'}">${r.last>=0?'+':''}${fmt(r.last)}</td></tr>`+(openLog===r.name?logRow(r.name):'');}).join('');
+  return `<div class="panel"><h2>Таблица <span class="r">после игры ${k}${k<n?' · есть новее':''} · ${esc(stage)}</span></h2>
+    <div class="rounds">${rbtn}</div>
+    <div class="row" style="margin-bottom:10px;align-items:center"><span class="seg"><button class="${tblMode==='all'?'on':''}" data-m="all">Все</button><button class="${tblMode==='my'?'on':''}" data-m="my">Мои${fp.size?' · '+fp.size:''}</button></span><span class="note" style="margin-left:auto">▲▼ — движение мест за раунд</span></div>
+    <div style="overflow:auto"><table class="tbl"><thead><tr><th>#</th><th>±</th><th>Игрок</th><th style="text-align:right">Σ</th><th style="text-align:right">игра</th></tr></thead><tbody>${html||'<tr><td colspan=5 class="note">Ваши игроки ещё не сыграли.</td></tr>'}</tbody></table></div>
+    ${(tblMode==='all'&&rows.length>lim)?`<button class="btn ghost more" id="more">Показать всех ${rows.length} ▾</button>`:(tblMode==='all'&&showAll?'<button class="btn ghost more" id="more">Свернуть ▴</button>':'')}
+    <div class="note" style="margin-top:8px">${cut?`Пунктир — линия ${cut===50?'полуфинала (топ‑50)':'финала (топ‑10)'}. `:''}Тап по игроку — его игры. Σ = баллы за победы + допы + Ci; в финале — с коэффициентом 1.3.</div></div>`;}
+function logRow(n){const occ=(D.occ[n]||[]).filter(o=>o.done);
+  return `<tr><td colspan="5" style="padding:0 0 6px"><table class="tbl log" style="margin:0"><thead><tr><th>Игра</th><th>Стол</th><th>Роль</th><th>Итог</th><th style="text-align:right">Σ игры</th><th style="text-align:right">Место</th></tr></thead><tbody>${occ.map(o=>{const gi=D.gplist.findIndex(g=>g===D.games[o.g-1]);const pl=gi>=0&&D.snap[gi+1]?D.snap[gi+1].place[n]:'';return `<tr style="cursor:default"><td>${o.g}</td><td>${ROMAN[o.t]}</td><td>${o.role?`<span class="rp rp-${o.role}">${RSHORT[o.role]}</span>`:'—'}</td><td class="${o.result==='W'?'lg w':'lg l'}" style="text-align:left">${o.result==='W'?'поб':'пор'}</td><td class="num">${fmt(o.sig)}</td><td class="num" style="color:var(--mut)">${pl?'#'+pl:''}</td></tr>`;}).join('')}</tbody></table>${D.P[n]?`<div style="padding:6px 6px 0"><a class="btn mini ghost" href="wc2026-tournament.html#my" onclick="try{localStorage.setItem('wc710_my',${JSON.stringify(n)})}catch(e){}">страница игрока →</a></div>`:''}</td></tr>`;}
+function countriesPanel(){
+  const n=D.gplist.length;const cur=n?D.snap[n]:null;
+  const list=Object.values(D.countries).map(c=>{const ps=c.players;const st=cur?ps.map(x=>cur.rows.find(r=>r.name===x)).filter(Boolean):[];
+    const avg=st.length?st.reduce((a,r)=>a+r.sigma,0)/st.length:0;const best=st.length?Math.min(...st.map(r=>r.place)):null;const top10=st.filter(r=>r.place<=10).length,top50=st.filter(r=>r.place<=50).length;
+    return {c,avg,best,top10,top50,n:ps.length};});
+  list.sort((a,b)=>b.avg-a.avg||b.n-a.n);const mx=Math.max(...list.map(x=>x.avg),0.01);
+  const fc=new Set(follow.filter(f=>f.t==='c').map(f=>f.id));
+  return `<div class="panel"><h2>Сборные <span class="r">${n?'средняя Σ игрока · после игры '+n:'состав по квотам mafgame'}</span></h2>
+    ${list.map(x=>`<div class="ct" data-cc="${x.c.cc}" style="cursor:pointer${fc.has(x.c.cc)?';background:rgba(38,224,255,.06)':''}"><span class="f">${x.c.flag}</span><div class="b"><b>${esc(x.c.name)}</b><small>${x.n} ${plW(x.n,'игрок','игрока','игроков')}${n?` · лучший #${x.best} · в топ‑10: ${x.top10} · в топ‑50: ${x.top50}`:' · '+x.c.players.slice(0,4).join(', ')+(x.n>4?'…':'')}</small>${n?`<div class="bar"><i style="width:${Math.round(x.avg/mx*100)}%"></i></div>`:''}</div>${n?`<div class="v"><b>${fmt(x.avg)}</b><small>ср. Σ</small></div>`:''}</div>`).join('')}
+    <div class="note" style="margin-top:8px">${n?'Средний балл игрока сборной — честнее суммы: у Польши 11 игроков, у Румынии один. Тап по сборной — следить за ней.':'Тап по сборной — следить за всеми её игроками.'}</div></div>`;}
+function demoPanel(){return `<div class="panel"><h2>Данные <span class="r">${demo?'<span class="demoflag">● демо</span>':'онлайн с mafgame'}</span></h2><div class="row" style="align-items:center"><span class="seg"><button class="${demo?'':'on'}" data-d="0">Онлайн</button><button class="${demo?'on':''}" data-d="1">Демо</button></span><span class="note" style="flex:1;min-width:200px">${demo?'Случайный полный турнир — чтобы посмотреть, как всё выглядит с результатами. Реальные данные не тронуты.':'До первого стола таблица пустая. Включите «Демо», чтобы увидеть страницу с результатами.'}</span></div></div>`;}
+/* ── demo ── */
+function makeDemo(){const rnd=(a,b)=>a+Math.random()*(b-a);const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  const play=(names,tn)=>{const roles=shuf(['Don','Mafia','Mafia','Sheriff'].concat(Array(Math.max(0,names.length-4)).fill('Citizen')));const winner=Math.random()<0.5?'red_win':'black_win';
+    return {table_num:tn,winner,seats:names.map((nm,i)=>{const role=roles[i];const red=role==='Citizen'||role==='Sheriff';const win=(winner==='red_win')===red;return {seat:i+1,name:nm,role,result:win?'W':'L',wpts:win?+rnd(0.7,1).toFixed(2):0,aps:+rnd(-0.2,0.6).toFixed(2),ci:+rnd(0,0.3).toFixed(2)};})};};
+  const quals=D.realGames.filter(g=>(g.stage||'Квалификация')==='Квалификация').map((g,i)=>({title:'Game '+(i+1),stage:'Квалификация',tables:g.tables.map(t=>play(t.seats.map(s=>s.name),t.table_num))}));
+  const top50=aggregate(quals).rows.slice(0,50).map(r=>r.name);const semis=[0,1].map(i=>{const s=shuf(top50);return {title:'Полуфинал '+(i+1),stage:'Полуфинал',tables:[0,1,2,3,4].map(t=>play(s.slice(t*10,t*10+10),t+1))};});
+  const top10=aggregate(quals.concat(semis)).rows.slice(0,10).map(r=>r.name);const finals=[0,1,2,3,4].map(i=>({title:'Финал '+(i+1),stage:'Финал',tables:[play(top10.slice(),1)]}));
+  const all=quals.concat(semis,finals);const cutAt=7+Math.floor(Math.random()*6);/* демо «идёт»: сыграно 7–12 игр */
+  return all.map((g,i)=>i<cutAt?g:{...g,tables:g.tables.map(t=>({...t,winner:'unknown',seats:t.seats.map(s=>({seat:s.seat,name:s.name,role:null,result:null,wpts:0,aps:0,ci:0}))}))});}
+function setDemo(on){demo=on;D.games=on?makeDemo():D.realGames;round=null;showAll=false;openLog=null;compute();render();window.scrollTo({top:0,behavior:'smooth'});}
+/* ── bind ── */
+function bind(){
+  const pick=document.getElementById('pick'),sugg=document.getElementById('sugg');
+  const draw=q=>{q=(q||'').trim().toLowerCase();const cs=Object.values(D.countries).filter(c=>!q||c.name.toLowerCase().includes(q)||c.cc.toLowerCase()===q);const ps=D.players.filter(p=>!q||p.nick.toLowerCase().includes(q)||(p.real||'').toLowerCase().includes(q));
+    sugg.innerHTML=cs.map(c=>`<button class="sg cc" data-cc="${c.cc}"><span class="fl">${c.flag}</span><b>${esc(c.name)}</b><small>сборная · ${c.players.length}</small></button>`).join('')+ps.slice(0,q?20:60).map(p=>`<button class="sg" data-p="${esc(p.nick)}"><img src="${esc(avOf(p.nick))}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'"><b>${p.flag} ${esc(p.nick)}</b><small>${p.r_tier?p.r_tier+' · ':''}${p.r_elo_cur?p.r_elo_cur+' ELO':''}</small></button>`).join('');
+    sugg.classList.toggle('hidden',!(pickOpen||q));
+    sugg.querySelectorAll('.sg').forEach(b=>b.onclick=()=>{if(b.dataset.cc)addFollow('c',b.dataset.cc);else addFollow('p',b.dataset.p);});};
+  if(pick){pick.oninput=()=>{pickOpen=true;draw(pick.value);};pick.onfocus=()=>{pickOpen=true;draw(pick.value);};if(pickOpen)draw(pick.value);}
+  document.querySelectorAll('.chip .x').forEach(b=>b.onclick=()=>rmFollow(+b.dataset.i));
+  document.querySelectorAll('.qc button,.ct[data-cc]').forEach(b=>b.onclick=()=>{const cc=b.dataset.cc;if(follow.some(f=>f.t==='c'&&f.id===cc)){toast('Уже следим за этой сборной');return;}addFollow('c',cc);});
+  document.querySelectorAll('.rounds button').forEach(b=>b.onclick=()=>{round=+b.dataset.r;openLog=null;render();});
+  document.querySelectorAll('.seg button[data-m]').forEach(b=>b.onclick=()=>{tblMode=b.dataset.m;render();});
+  document.querySelectorAll('.seg button[data-d]').forEach(b=>b.onclick=()=>setDemo(b.dataset.d==='1'));
+  const more=document.getElementById('more');if(more)more.onclick=()=>{showAll=!showAll;render();};
+  document.querySelectorAll('.tbl tr[data-p]').forEach(tr=>tr.onclick=e=>{if(e.target.closest('a'))return;openLog=openLog===tr.dataset.p?null:tr.dataset.p;render();});
+  document.addEventListener('click',e=>{if(!e.target.closest('#pick,#sugg')&&pickOpen){pickOpen=false;const s=document.getElementById('sugg');if(s)s.classList.add('hidden');}},{once:true});
+}
+function sharePage(){const url=location.origin+location.pathname;const title='ЧМ-2026 по мафии — для зрителей';const text='Следите за своим игроком или сборной: столы, стримы, таблица после каждого раунда';
+  if(navigator.share){navigator.share({title,text,url}).catch(()=>{});return;}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>toast('Ссылка скопирована'),()=>toast(url,6000));return;}toast(url,6000);}
+let _tt=null;function toast(h,ms){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t);}t.textContent=h;t.classList.add('on');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('on'),ms||2400);}
+</script>
+</body>
+</html>
