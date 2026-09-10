@@ -180,7 +180,7 @@ function followedPlayers(){const set=new Set();follow.forEach(f=>{if(f.t==='p')s
 function addFollow(t,id){if(follow.some(f=>f.t===t&&f.id===id))return;follow.push({t,id});LS('wcf_follow',JSON.stringify(follow));pickOpen=false;render();}
 function rmFollow(i){follow.splice(i,1);LS('wcf_follow',JSON.stringify(follow));render();}
 function streamUrl(gnum,table,stage){const s=window.STREAMS_DB&&window.STREAMS_DB['710'];if(!s)return null;if(stage==='Финал')return s.final?'https://www.youtube.com/watch?v='+s.final:null;return window.streamFor?window.streamFor('710',gnum,table):null;}
-function mainStream(){const s=window.STREAMS_DB&&window.STREAMS_DB['710'];const day=(D.played||0)>=((s&&s.gamesDay1)||8)?'2':'1';const id=s&&s.commentary&&s.commentary[day];return id?'https://www.youtube.com/watch?v='+id:null;}
+function mainStream(){const s=window.STREAMS_DB&&window.STREAMS_DB['710'];const day=(D.played||0)>=((s&&s.gamesDay1)||8)?'2':'1';const id=s&&s.commentary&&(s.commentary[day]||s.commentary['1']);return id?'https://www.youtube.com/watch?v='+id:null;}
 function nextGame(){const total=D.games.length;return D.played>=total?null:D.played+1;}
 /* ── render ── */
 function render(){const app=document.getElementById('app');
@@ -222,7 +222,7 @@ function streamsPanel(){
   const stage=ng?((D.games[ng-1]&&D.games[ng-1].stage)||'Квалификация'):'Квалификация';
   const tables=stage==='Финал'?[1]:[1,2,3,4,5];
   const b=tables.map(t=>{const su=ng?streamUrl(ng,t,stage):null;const j=D.judges[t];const cls='btn'+(su?'':' off')+(my.has(t)?' my':'');const inner=`Стол ${ROMAN[t]}<small>${j?esc(j.name):''}</small>`;return su?`<a class="${cls}" href="${esc(su)}" target="_blank" rel="noopener">${inner}</a>`:`<span class="${cls}">${inner}</span>`;}).join('');
-  return `<div class="panel"><h2>Трансляции <span class="r">${ms||(window.STREAMS_DB&&Object.keys((window.STREAMS_DB['710']||{}).days?.['1']||{}).length)?'YouTube @mafgameorg':'ссылки появятся в день турнира'}</span></h2>
+  return `<div class="panel"><h2>Трансляции <span class="r">${ms?`<a href="${esc((window.STREAMS_DB['710']||{}).playlist||'https://www.youtube.com/@mafgameorg')}" target="_blank" rel="noopener" style="color:var(--gold-hi);text-decoration:none">плейлист YouTube ↗</a>`:'ссылки появятся в день турнира'}</span></h2>
     ${ms?`<a class="btn big" href="${esc(ms)}" target="_blank" rel="noopener" style="margin-bottom:8px">▶ Главный эфир · комментирует Walle</a>`:`<span class="btn big off" style="margin-bottom:8px">▶ Главный эфир · комментирует Walle</span>`}
     <div class="strms">${b}</div>${my.size?`<div class="note" style="margin-top:8px">Золотая рамка — столы ваших игроков в игре ${ng}.</div>`:''}</div>`;}
 function standingsPanel(){

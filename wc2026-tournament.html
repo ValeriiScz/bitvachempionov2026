@@ -1232,12 +1232,12 @@ function streamsPanel(){
   const ch=(window.STREAMS_DB&&window.STREAMS_DB.channel)||'https://www.youtube.com/@mafgameorg';
   const day=((D.played||0)>=gamesDay1())?'2':'1';
   const yt=id=>'https://www.youtube.com/watch?v='+id;
-  const com=st&&st.commentary&&st.commentary[day];
+  const com=st&&st.commentary&&(st.commentary[day]||st.commentary['1']);
   const main=com?`<a class="btn strm main" href="${yt(com)}" target="_blank" rel="noopener">&#9654; Главный эфир · комментирует Walle</a>`:`<span class="btn strm main off">&#9654; Главный эфир · комментирует Walle <small>ссылка появится в день турнира</small></span>`;
   let tbl='';[1,2,3,4,5].forEach(t=>{const id=st&&st.days&&(st.days[day]||{})[String(t)];tbl+=id?`<a class="btn strm" href="${yt(id)}" target="_blank" rel="noopener">&#9654; Стол ${ROMAN[t]}</a>`:`<span class="btn strm off">&#9654; Стол ${ROMAN[t]}</span>`;});
   if(st&&st.final&&(D.played||0)>=11)tbl+=`<a class="btn strm" href="${yt(st.final)}" target="_blank" rel="noopener">&#9654; Финал</a>`;
   return `<div class="panel"><h3>Трансляции</h3><div class="strms" style="margin-bottom:8px">${main}</div><div class="strms">${tbl}</div>
-    <div class="note" style="margin:8px 0 0">День ${day}. Серые кнопки — заглушки: ссылки на YouTube впишем, как только орги их опубликуют, кнопки включатся сами. Канал — <a class="lnk" href="${ch}" target="_blank" rel="noopener">youtube @mafgameorg</a>.</div></div>`;
+    <div class="note" style="margin:8px 0 0">День ${day}. Кнопки ведут на трансляции столов текущего дня. Плейлист — <a class="lnk" href="https://www.youtube.com/playlist?list=PLXdDgdvp5aJs" target="_blank" rel="noopener">YouTube ↗</a>, канал — <a class="lnk" href="${ch}" target="_blank" rel="noopener">youtube @mafgameorg</a>.</div></div>`;
 }
 function nextGamePanel(nick,compact){
   if(!nick||!D.occ[nick])return '';
