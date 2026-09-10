@@ -136,6 +136,8 @@ body{
   .tile{min-height:238px;padding:24px 24px 20px}
   .tile.soon{grid-column:1 / -1;min-height:150px}
   .tile.wc{grid-column:1 / -1;min-height:170px}
+  .wcstream{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:12px 16px;border:1px solid rgba(227,176,75,.35);background:rgba(227,176,75,.06);font:600 13px/1.4 Inter,system-ui,sans-serif;color:#eef3fb;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+  .wcstream b{color:#f6d27a}.wcstream .soon{color:#79808f;font-weight:500}.wcstream a{color:#f6d27a;font-weight:800;text-decoration:none}
   .ttl{font-size:clamp(28px,2.9vw,40px)}
   .tile.soon .ttl{font-size:28px}
   .tnum{font-size:56px;right:20px;top:14px}
@@ -265,13 +267,14 @@ body{
         <div>
           <div class="tkick"><i></i>12–13 сентября · 55 игроков · 13 сборных</div>
           <h2 class="ttl">Чемпионат мира 2026</h2>
-          <p class="tdesc">Кто приехал: карточки всех участников — амплуа, роли, сравнение со средним игроком турнира и со всей базой маркерев. Переворачиваются.</p>
+          <p class="tdesc">Рассадка и сила столов, жребий соперников, карточки всех 55 игроков, live-таблица и роли в дни турнира, судьи. Прежние карточки по странам — внутри.</p>
         </div>
         <div class="tfoot">
-          <div class="tstat"><b>13</b> сборных · <b>41</b> из топ-50 mafgame · роли и амплуа</div>
+          <div class="tstat"><b>5</b> столов · <b>11+2+5</b> игр · live 12–13.09</div>
           <span class="tgo">Открыть <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
         </div>
       </a>
+      <div class="wcstream" id="wcstream">▶ <b>Главный эфир ЧМ-2026</b> · комментирует Walle · <span class="soon">ссылка на YouTube появится 12 сентября — пока смотрите столы и жребий на странице турнира</span></div>
 
       <div class="tile soon" style="--c:var(--ye)" aria-disabled="true">
         <span class="tnum">05</span>

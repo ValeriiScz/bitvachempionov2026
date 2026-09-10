@@ -1,0 +1,99 @@
+{
+ "avatars": {
+  "Flash": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_569/6fedf1822018a41654ad8b7afe5154c21331b53d.png",
+  "f5": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_118/81dffaa8abc63f95c3c3b3991a925e86e801b191.png",
+  "Tommy": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_650/a71d5bc0efb9d54508be8de08ad3a4e3d362bf1c.png",
+  "KEX": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_44/a6bfae05ca17bcfaa2961020a9b44f5860c2f4fe.png",
+  "Eskimo.": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_327/287966a33c62a768a2536cb6d6ac2c7146aa8d69.png",
+  "YeS": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_101/07fc4320b90a9dde889cabc002d1cec60c7a5583.png",
+  "Niko": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_825/c84248e1686c07eadb16b7331e04221936ba56ea.png",
+  "Lюц": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1050/05d587e41edd71e3a3dc89f2b04b75c964af8cfe.png",
+  "Саботаж": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_68/e5f69d0c89c3ecec9dee013970b56f8219c70d70.png",
+  "Сью": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1398/269388ba5e06d783f8c16aae7bb0c84505ab9054.png",
+  "Фортуна": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1049/a4e274ce3a57d46b9911086502f7062c312c3c42.png",
+  "Bard": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1031/1fa426591383a408e84f609803cd3197c731dade.png",
+  "Gangster": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2547/eb53900c47fc03a2b681bbcbe62f994021e9f4d8.png",
+  "RAMZES": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_499/a4d55d9d5fa815a6c00f4e29d18ab1fba282f6fe.png",
+  "Flame": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2589/0371b90e7ab581f2eb51a0d438b6b7d23cc20566.png",
+  "Tripok": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_263/c9cc45afe38b5df39f333629598ef3c5f805e9b4.png",
+  "Буржуй": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_287/3ddee352574f767cc2ee00cb7690d518c58915a2.png",
+  "Призрак": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_264/ed0c386206b7c1ee0f9fb70dfcb0f5bf726749df.png",
+  "Грешник": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_890/09e7e9eefe97e46996af0ae48c968ffea227ce33.png",
+  "ParadoXx": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png",
+  "LogisticPro": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_201/984138350d2f651d9f6ba748b8103926bb8ff525.png",
+  "DOVOD": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/1f30664fe58edefde9864af8e39d1508286597f7.png",
+  "Магнат": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png",
+  "Blessed": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_891/9da5273eb050734e31832c5176781e00f59f4c99.png",
+  "Не Злая": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_152/5ebb58af65c0e6171372d5a0391a6805c35a8a8b.png",
+  "Клото": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_199/37883cb7c4576b4ce877cc5e085b3e927103b18f.png",
+  "aptah": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1358/236f3274a9d37c8006c6d3e18edd9b8071d0ce48.png",
+  "Blackout": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_185/8824bc2d7416c4265395b8b1c5d143551e0d2097.png",
+  "Jerry Hurper": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_480/fb924465b777f19ae1a223ea7452911276c35052.png",
+  "ШТО?": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_792/541b4f4ba3ace7e6b0ffb727ded7f204307e240d.png",
+  "Sancho": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_711/b4e1f91b6d575060404e45d237437457c9d692db.png",
+  "***Алиса***": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_168/27c051b52030fe3b34bc2d4e45a63f0076097096.png",
+  "MadMax": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2164/414549b345b22fbd744e46e27bd8d10ab420ba52.png",
+  "TOPS": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1495/242ba9676071458139c03c4fe6781dc6bb820d82.png",
+  "Xenon": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_13/513fd3e86f07480968406cd3231266b8298f4492.png",
+  "Landing": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1481/b033e4506014e23586818760a88ede88a7b79d3d.png",
+  "Ириска": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_659/45acab162953d022193c36296b5eab68873f8d5a.png",
+  "sometimes": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_471/6310e1fe3013c7b491c8aab115032419c31a3825.png",
+  "KRASNII": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2337/58436cd9de6a9b8348c93e505db938f4fc267998.png",
+  "Maverick": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1657/113c46e18eb1f0829d8677456a66a8e412e76de6.png",
+  "Kokocik": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_833/49611ec38d274c9951c4652dc75c69f4bc4b9461.png",
+  "Катанчик": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2935/2b1761183c7567bdab1c26ceabe1835018d9afe7.png",
+  "Светлый": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1799/04b61cdfa24c968857d84fcfd74443d9c3e50fe3.png",
+  "Link": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1307/96843d97fe9b9add3869edce3969301031e49ec9.png",
+  "Batman": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1440/f743c348935fbde94ab49db3afd56b540f41560f.png",
+  "Зима ❄️": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_1901/b9ef18e060aa0c98998078e022317af021b68858.png",
+  "Logica": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1462/a72bd608825940a2e94daf389217e78bd33974eb.png",
+  "Джошуа": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_43/db7dc03d7e8ed85e2102baf0617ef9362b9d0c72.png",
+  "Ru": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1417/e1814d965c2df83eb9e7ca22f5406f2d15bcba07.png",
+  "Леди Luz": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_214/1c19f1eb95a26d6bda58c53002ddd0cebb956f23.png",
+  "Urs": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_273/4dca0c50d18fde72ac7488e667b4510ad1a0b791.png",
+  "Мартовский котик": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1575/7aa407396bc3f621c7835198bceab28922fad714.png",
+  "Donna": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1400/607b4801b5ffa0923db5c49fb5774be59dbcc216.png",
+  "Малышка Мю": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2606/687ea7fae7d461054706a9025d0eac07c1f05c3f.png",
+  "Nostradamus": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1970/1a57fafd079d67885d536c02acd18b902538f3ce.png"
+ },
+ "judges": {
+  "1": {
+   "name": "Aragil",
+   "tg": "@aragil69",
+   "role": "Главный судья",
+   "avatar": ""
+  },
+  "2": {
+   "name": "Рыба-мÓя",
+   "tg": "@yanadovh",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_247/608e827555f51ee98a1d7474e61d3a0fc10042d0.png"
+  },
+  "3": {
+   "name": "Trinity",
+   "tg": "@dariana_darianaa",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_357/3033a4749ce5c728b79fba0a65d33008787f86d5.png"
+  },
+  "4": {
+   "name": "Кура",
+   "tg": "@kyraleibiuk",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_416/13ca6c564cb7170459accf579e1441fb7de792d6.png"
+  },
+  "5": {
+   "name": "Кирпич",
+   "tg": "@alexgrod",
+   "avatar": ""
+  }
+ },
+ "duty": {
+  "name": "Гармония",
+  "tg": "@garmmoniya",
+  "role": "Дежурный СК",
+  "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_216/059db2480117575cb071999c556d311cf5a2e674.png"
+ },
+ "commentator": {
+  "name": "Walle",
+  "tg": "@nikita_pitalenko",
+  "role": "Комментатор",
+  "avatar": ""
+ }
+}

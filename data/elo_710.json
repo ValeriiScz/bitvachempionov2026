@@ -1,0 +1,224 @@
+{
+ "players": {
+  "Flash": {
+   "global": 1719,
+   "tier": "L"
+  },
+  "f5": {
+   "global": 1717,
+   "tier": "L"
+  },
+  "Tommy": {
+   "global": 1573,
+   "tier": "S"
+  },
+  "KEX": {
+   "global": 1501,
+   "tier": "S"
+  },
+  "Eskimo.": {
+   "global": 1464,
+   "tier": "S"
+  },
+  "YeS": {
+   "global": 1458,
+   "tier": "S"
+  },
+  "Niko": {
+   "global": 1426,
+   "tier": "S"
+  },
+  "Lюц": {
+   "global": 1319,
+   "tier": "S"
+  },
+  "Саботаж": {
+   "global": 1295,
+   "tier": "A"
+  },
+  "Сью": {
+   "global": 1244,
+   "tier": "A"
+  },
+  "Фортуна": {
+   "global": 1236,
+   "tier": "A"
+  },
+  "Bard": {
+   "global": 1233,
+   "tier": "A"
+  },
+  "Gangster": {
+   "global": 1232,
+   "tier": "A"
+  },
+  "RAMZES": {
+   "global": 1219,
+   "tier": "A"
+  },
+  "Flame": {
+   "global": 1216,
+   "tier": "A"
+  },
+  "Tripok": {
+   "global": 1209,
+   "tier": "A"
+  },
+  "Буржуй": {
+   "global": 1196,
+   "tier": "B"
+  },
+  "Призрак": {
+   "global": 1189,
+   "tier": "B"
+  },
+  "Грешник": {
+   "global": 1187,
+   "tier": "B"
+  },
+  "ParadoXx": {
+   "global": 1183,
+   "tier": "B"
+  },
+  "LogisticPro": {
+   "global": 1173,
+   "tier": "B"
+  },
+  "DOVOD": {
+   "global": 1152,
+   "tier": "B"
+  },
+  "Магнат": {
+   "global": 1146,
+   "tier": "B"
+  },
+  "Blessed": {
+   "global": 1142,
+   "tier": "B"
+  },
+  "Не Злая": {
+   "global": 1124,
+   "tier": "B"
+  },
+  "Клото": {
+   "global": 1109,
+   "tier": "B"
+  },
+  "aptah": {
+   "global": 1105,
+   "tier": "B"
+  },
+  "Blackout": {
+   "global": 1081,
+   "tier": "B"
+  },
+  "Jerry Hurper": {
+   "global": 1078,
+   "tier": "B"
+  },
+  "ШТО?": {
+   "global": 1067,
+   "tier": "C"
+  },
+  "Sancho": {
+   "global": 1066,
+   "tier": "C"
+  },
+  "***Алиса***": {
+   "global": 1062,
+   "tier": "C"
+  },
+  "MadMax": {
+   "global": 1051,
+   "tier": "C"
+  },
+  "TOPS": {
+   "global": 1037,
+   "tier": "C"
+  },
+  "Xenon": {
+   "global": 1033,
+   "tier": "C"
+  },
+  "Landing": {
+   "global": 1028,
+   "tier": "C"
+  },
+  "Ириска": {
+   "global": 1023,
+   "tier": "C"
+  },
+  "sometimes": {
+   "global": 1020,
+   "tier": "C"
+  },
+  "KRASNII": {
+   "global": 1008,
+   "tier": "C"
+  },
+  "Maverick": {
+   "global": 1007,
+   "tier": "C"
+  },
+  "Kokocik": {
+   "global": 1002,
+   "tier": "C"
+  },
+  "Катанчик": {
+   "global": 996,
+   "tier": "D"
+  },
+  "Светлый": {
+   "global": 976,
+   "tier": "D"
+  },
+  "Link": {
+   "global": 969,
+   "tier": "D"
+  },
+  "Batman": {
+   "global": 954,
+   "tier": "D"
+  },
+  "Зима ❄️": {
+   "global": 951,
+   "tier": "D"
+  },
+  "Logica": {
+   "global": 927,
+   "tier": "E"
+  },
+  "Джошуа": {
+   "global": 910,
+   "tier": "E"
+  },
+  "Ru": {
+   "global": 909,
+   "tier": "E"
+  },
+  "Леди Luz": {
+   "global": 883,
+   "tier": "F"
+  },
+  "Urs": {
+   "global": 854,
+   "tier": "F"
+  },
+  "Мартовский котик": {
+   "global": 832,
+   "tier": "F"
+  },
+  "Donna": {
+   "global": 830,
+   "tier": "F"
+  },
+  "Малышка Мю": {
+   "global": 783,
+   "tier": "F"
+  },
+  "Nostradamus": {
+   "global": null,
+   "tier": null
+  }
+ }
+}
