@@ -450,6 +450,14 @@
   #toast.on{opacity:1;transform:translate(-50%,0);}
   #toast b{display:block;color:var(--gold-hi);font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px;}
   @media(min-width:1025px){#toast{bottom:24px;}}
+  .chooser{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .chs{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border:1px solid var(--line2);background:linear-gradient(180deg,var(--panel2),var(--panel));color:var(--ink);text-decoration:none;position:relative;
+    clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);}
+  .chs b{font-family:var(--disp);font-size:13px;font-weight:700;color:var(--gold-hi);} .chs small{font-size:11.5px;color:var(--mut);line-height:1.4;}
+  .chs .chk{font:700 9px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);}
+  .chs.on{border-color:var(--gold);} .chs.on .chk{color:var(--gold);}
+  a.chs:hover{border-color:var(--cyan);} a.chs:hover b{color:var(--cyan);}
+  @media(max-width:480px){.chooser{grid-template-columns:1fr;}}
   /* категории силы */
   .kb{display:inline-flex;align-items:center;gap:5px;font:700 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid;background:rgba(0,0,0,.35);white-space:nowrap;
     clip-path:polygon(4px 0,100% 0,100% calc(100% - 4px),calc(100% - 4px) 100%,0 100%,0 4px);}
@@ -529,7 +537,7 @@
   .bw{flex:1;height:7px;background:#1a1e2a;position:relative;}
   .bw::after{content:'';position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:rgba(255,255,255,.35);}
   .bf{position:absolute;height:100%;}
-  .rv{font:700 11px var(--mono);width:36px;text-align:right;flex:none;}
+  .wrv{font:700 11px var(--mono);width:36px;text-align:right;flex:none;}
   .rb{font:400 10px var(--mono);width:38px;text-align:right;flex:none;color:var(--mut);}
   .rm{width:18px;text-align:center;flex:none;font-size:12px;line-height:1;}
   .rg{font:400 9px var(--mono);width:28px;text-align:right;flex:none;color:var(--dim);}
@@ -544,7 +552,7 @@
   .cmpp{border-color:var(--cyan);} .cmpp::before{background:var(--cyan);}
   .cmpt td,.cmpt th{padding:7px 8px;font-size:12.5px;} .cmpt td.l{color:var(--mut);font-size:11.5px;}
   .cmph{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;} .cmph img{width:36px;height:36px;border-radius:50%;object-fit:cover;}
-  .cmph .x{position:absolute;top:-4px;right:-6px;width:18px;height:18px;border-radius:50%;border:1px solid var(--line);background:#11141d;color:var(--mut);font-size:11px;cursor:pointer;line-height:1;}
+  .cmph .cx{position:absolute;top:-4px;right:-6px;width:18px;height:18px;border-radius:50%;border:1px solid var(--line);background:#11141d;color:var(--mut);font-size:11px;cursor:pointer;line-height:1;}
   .cardviewer{display:none;position:fixed;inset:0;z-index:99995;background:rgba(5,6,10,.97);flex-direction:column;}
   .cardviewer.open{display:flex;}
   .noscroll{overflow:hidden;}
@@ -736,9 +744,9 @@ const NAV=[
     {id:'roster',ic:'≡',lab:'Состав · рейтинг'},
     {id:'together',ic:'⇄',lab:'Кто с кем'}]},
   {group:'Столы',ic:'▦',items:[
-    {id:'seating',ic:'▦',lab:'Рассадка'},
+    {id:'seating',ic:'▦',lab:'По играм'},
     {id:'strength',ic:'◍',lab:'Сила столов'},
-    {id:'luck',ic:'⚄',lab:'Жребий'}]},
+    {id:'luck',ic:'⚄',lab:'Рассадка'}]},
   {group:'Результаты',ic:'⚑',items:[
     {id:'stages',ic:'⚑',lab:'Таблица'},
     {id:'games',ic:'▶',lab:'Игры'},
@@ -877,7 +885,7 @@ const RENDER={
     const jcard=(j,lab)=>`<div class="judge">${j.avatar?`<img src="${esc(j.avatar)}" referrerpolicy="no-referrer" onerror="this.style.display='none'">`:`<span class="jmono">${esc(mono(j.name))}</span>`}<div><div class="jn">${lab} · <b>${esc(j.name)}</b>${j.role?` <span class="jrole">${esc(j.role)}</span>`:''}</div>${j.tg?`<div class="jt"><a class="lnk" style="margin:0" href="https://t.me/${esc(j.tg.replace('@',''))}" target="_blank" rel="noopener">${esc(j.tg)}</a></div>`:''}</div></div>`;
     const jud=Object.keys(D.judges).length?`<div class="panel"><h3>Судейская бригада</h3><div class="judges">`+
       Object.keys(D.judges).sort().map(k=>jcard(D.judges[k],'Стол '+(ROMAN[k]||k))).join('')+(D.duty?jcard(D.duty,'Дежурный СК'):'')+(D.commentator?jcard(D.commentator,'Эфир'):'')+`</div><div class="note" style="margin-top:8px">Стол I — главный судья. Тап по @ — телеграм.</div></div>`:'';
-    return `<div class="view"><div class="secttl">&#9670; Обзор турнира</div>
+    return `<div class="view">${chooserPanel()}<div class="secttl">&#9670; Обзор турнира</div>
       ${resultsPanel()}
       ${demoPanel()}
       ${myPanel()}
@@ -904,7 +912,7 @@ const RENDER={
       <div class="segwrap" id="rTop"></div>
       <div class="tfilter" id="tfil"></div>
       <div class="panel scrollT" style="padding:0"><table class="tbl" id="rtable"><thead><tr id="rhr"></tr></thead><tbody id="rtb"></tbody></table></div>
-      <div class="note">Рейтинг markery — снимок ${esc(D.stats.snapshot||'2026-09-06')}. «ELO тек» — текущий ELO; «Ранг» — тир L/S…F (L — 1600+). Тап по «Ранг» группирует по тирам. «—» — нет данных markery (Nostradamus — единственный без профиля). Составы, страны и аватарки — с mafgame.org. <b>Тап по игроку</b> — его страница: рассадка, жребий, соперники, статистика.</div></div>`;},
+      <div class="note">Рейтинг markery — снимок ${esc(D.stats.snapshot||'2026-09-06')}. «ELO тек» — текущий ELO; «Ранг» — тир L/S…F (L — 1600+). Тап по «Ранг» группирует по тирам. «—» — нет данных markery (Nostradamus — единственный без профиля). Составы, страны и аватарки — с mafgame.org. <b>Тап по игроку</b> — его страница: столы, рассадка, соперники, статистика.</div></div>`;},
   together(){return `<div class="view"><div class="secttl">&#8644; Кто с кем за столом</div><div id="togTop"></div><div id="togArea"></div></div>`;},
   stages(){
     if(!D.gp)return statsEmpty('&#9873; Таблица');
@@ -1099,9 +1107,9 @@ function secListPanel(){const items=[
  ['cards','▮','Игроки · Карточки','55 разборов: амплуа, роли против турнира и всей базы маркерев — листаются свайпом'],
  ['roster','≡','Игроки · Состав','рейтинг ELO и тиры; тап по игроку — его страница'],
  ['together','⇄','Игроки · Кто с кем','с кем сидите за одним столом: сколько раз и в каких играх'],
- ['seating','▦','Столы · Рассадка','все столы по каждой игре с меткой силы'],
+ ['seating','▦','Столы · По играм','все столы по каждой игре с меткой силы'],
  ['strength','◍','Столы · Сила столов','карта 11 игр × 5 столов: где самые жаркие партии'],
- ['luck','⚄','Столы · Жребий','кому достались сильные соперники, а кому — спокойные'],
+ ['luck','⚄','Столы · Рассадка','кому достались экстремальные соперники, а кому — спокойные'],
  ['stages','⚑','Результаты · Таблица','турнирная таблица (Σ) с линией выхода в полуфинал (топ‑50) и финал (топ‑10)'],
  ['games','▶','Результаты · Игры','протоколы по столам: роли, победа команды, допы, стрим'],
  ['roles','✦','Результаты · По картам','кто как играет мирным / шерифом / мафией / доном'],
@@ -1273,7 +1281,7 @@ function drawMy(){
   const area=document.getElementById('myArea');if(!area)return;
   const name=curPlayer;
   const tt=document.getElementById('myTtl');if(tt)tt.innerHTML='&#9823; '+((myPlayer&&name===myPlayer)?'Моё на турнире':(name?'Игрок':'Моё на турнире'));
-  if(!name){area.innerHTML=`<div class="panel"><div class="stub"><div class="si">&#9823;</div><h3>Выберите игрока</h3><p>Выберите себя в списке сверху — здесь соберётся всё ваше: следующая игра (стол, место, соперники, судья), рассадка на весь турнир, ваш жребий по силе соперников и статистика. Закрепить себя навсегда — на «Обзоре», блок «Мой игрок».</p></div></div>`;return;}
+  if(!name){area.innerHTML=`<div class="panel"><div class="stub"><div class="si">&#9823;</div><h3>Выберите игрока</h3><p>Выберите себя в списке сверху — здесь соберётся всё ваше: следующая игра (стол, место, соперники, судья), столы на весь турнир, сила ваших соперников и статистика. Закрепить себя навсегда — на «Обзоре», блок «Мой игрок».</p></div></div>`;return;}
   const isMe=myPlayer&&name===myPlayer;
   const R=D.RATE[name]||{},info=D.INFO[name]||{};const tier=(R.tier in TIER_ORD)?R.tier:null;
   const p=D.STAT&&D.STAT[name];
@@ -1298,7 +1306,7 @@ function drawMy(){
   let rows='';for(let g=1;g<=total;g++){const done=g<=(D.played||0);const nxt=g===(D.played||0)+1;
     if(g===skip)rows+=`<tr class="rest${done?' dim':''}"><td class="gn">${g}</td><td colspan="5">— отдых —</td></tr>`;
     else if(bySlot[g])rows+=`<tr class="${done?'dim':''}${nxt?' hotrow':''}"><td class="gn">${g}</td><td>${ROMAN[bySlot[g].t]}</td><td>${bySlot[g].slot}</td><td>${catBadge(g,bySlot[g].t,false)}</td><td>${oppBadge(name,g)}</td><td>${(u=>u?`<a class="ytm" href="${esc(u)}" target="_blank" rel="noopener">&#9654;</a>`:'<span class="na">·</span>')(streamOf(g,bySlot[g].t,null))}</td></tr>`;}
-  if(rows)html+=`<div class="panel"><h3>Рассадка по играм</h3>${skip?`<div class="skipband">&#9208; Пропуск игры ${skip} — отдыхает</div>`:''}<table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th><th>Сила стола</th><th>Соперники</th><th title="трансляция стола в этот день">&#9654;</th></tr></thead><tbody>${rows}</tbody></table><div class="note" style="margin-top:6px">Серым — сыгранные, золотой рамкой — следующая. «Сила стола» — категория всего стола по ELO, «Соперники» — категория девяти соперников без вас (см. «Столы»).</div></div>`;
+  if(rows)html+=`<div class="panel"><h3>Рассадка по играм</h3>${skip?`<div class="skipband">&#9208; Пропуск игры ${skip} — отдыхает</div>`:''}<table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th><th>Сила стола</th><th>Соперники</th><th title="трансляция стола в этот день">&#9654;</th></tr></thead><tbody>${rows}</tbody></table><div class="note" style="margin-top:6px">Серым — сыгранные, золотой рамкой — следующая. «Сила стола» — категория всего стола по ELO, «Соперники» — рассадка: категория девяти соперников без вас, от спокойной до экстремальной (см. «Столы»).</div></div>`;
   html+=luckPanel(name);
   const opp=D.opp[name]||{};const topOpp=Object.entries(opp).sort((a,b)=>b[1]-a[1]).slice(0,6);
   if(topOpp.length){
@@ -1481,12 +1489,14 @@ function paintJudges(){
 }
 function stub(id){const s=SECTIONS.find(x=>x.id===id)||{};
   return `<div class="view"><div class="secttl">${s.ic||'◆'} ${esc(s.lab||'')}</div><div class="panel"><div class="stub"><div class="si">${s.ic||'◆'}</div><h3>Откроется после старта</h3>
-    <p>Игры, роли и статистика появятся здесь автоматически после первого сыгранного стола (12 сентября). До старта доступны рассадка, сила столов, жребий, карточки и составы.</p></div></div></div>`;}
+    <p>Игры, роли и статистика появятся здесь автоматически после первого сыгранного стола (12 сентября). До старта доступны столы по играм, сила столов, рассадка, карточки и составы.</p></div></div></div>`;}
 
 /* ══════════════════════════════════════════════════════════════════════════
    ЧМ-2026 · надстройка v2.0 (2026-09-10): сила столов, жребий, карточки, share
    ══════════════════════════════════════════════════════════════════════════ */
 const CAT=[null,{n:'Элитный',k:'k1',d:'самые сильные составы турнира'},{n:'Сильный',k:'k2',d:'выше среднего'},{n:'Средний',k:'k3',d:'типичный стол ЧМ'},{n:'Ровный',k:'k4',d:'чуть спокойнее среднего'},{n:'Мягкий',k:'k5',d:'самые спокойные составы'}];
+/* Рассадка (сила соперников без самого игрока) — названия Валерия, 1 = самые сильные соперники */
+const CATO=[null,{n:'Экстремальная',k:'k1'},{n:'Плотная',k:'k2'},{n:'Ровная',k:'k3'},{n:'Помягче',k:'k4'},{n:'Спокойная',k:'k5'}];
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
 function median(a){const q=a.slice().sort((x,y)=>x-y);const m=q.length>>1;return q.length?(q.length%2?q[m]:(q[m-1]+q[m])/2):0;}
 /* Сила столов: две линейки. TS — весь стол (10 ELO), категория по рангу среди всех столов квалификации равными долями (55 → по 11).
@@ -1512,31 +1522,32 @@ function computeStrength(){
 }
 function catBadge(g,t,withElo){const T=D.TS&&D.TS[g+'-'+t];if(!T)return '';const c=CAT[T.cat];
   return `<span class="kb ${c.k}" title="${c.n} стол · средний ELO ${Math.round(T.avg)} · #${T.rank} из ${D.tblN} столов квалификации">${c.n}${withElo?` <small>Ø ${Math.round(T.avg)}</small>`:''}</span>`;}
-function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const c=CAT[o.cat];return `<span class="kb ${c.k}" title="соперники без вас: средний ELO ${Math.round(o.avg)}">${c.n}</span>`;}
+function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const c=CATO[o.cat];return `<span class="kb ${c.k}" title="соперники без вас: средний ELO ${Math.round(o.avg)}">${c.n}</span>`;}
 function luckVerdict(L){const d=L.avg-D.oppMean;const ad=Math.abs(Math.round(d));
-  if(d>=25)return {t:'строгий жребий',s:`соперники в среднем на ${ad} ELO сильнее, чем у среднего участника`,k:'k1'};
-  if(d>=10)return {t:'жребий с перцем',s:`соперники на ${ad} ELO сильнее среднего`,k:'k2'};
-  if(d<=-25)return {t:'добрый жребий',s:`соперники на ${ad} ELO спокойнее, чем у среднего участника`,k:'k5'};
-  if(d<=-10)return {t:'жребий помягче',s:`соперники на ${ad} ELO спокойнее среднего`,k:'k4'};
-  return {t:'ровный жребий',s:`соперники практически как у всех (${d>=0?'+':''}${Math.round(d)} ELO к среднему)`,k:'k3'};}
-function luckSquares(L,big){return `<span class="lsq${big?' big':''}">`+L.list.map(x=>`<i class="${CAT[x.cat].k}" title="игра ${x.g} · стол ${ROMAN[x.t]} · ${CAT[x.cat].n} соперники (Ø ${Math.round(x.avg)})"><b>${big?x.g:''}</b></i>`).join('')+'</span>';}
+  if(d>=25)return {t:'экстремальная рассадка',s:`соперники в среднем на ${ad} ELO сильнее, чем у среднего участника`,k:'k1'};
+  if(d>=10)return {t:'плотная рассадка',s:`соперники на ${ad} ELO сильнее среднего`,k:'k2'};
+  if(d<=-25)return {t:'спокойная рассадка',s:`соперники на ${ad} ELO спокойнее, чем у среднего участника`,k:'k5'};
+  if(d<=-10)return {t:'рассадка помягче',s:`соперники на ${ad} ELO спокойнее среднего`,k:'k4'};
+  return {t:'ровная рассадка',s:`соперники практически как у всех (${d>=0?'+':''}${Math.round(d)} ELO к среднему)`,k:'k3'};}
+function luckSquares(L,big){return `<span class="lsq${big?' big':''}">`+L.list.map(x=>`<i class="${CATO[x.cat].k}" title="игра ${x.g} · стол ${ROMAN[x.t]} · ${CATO[x.cat].n.toLowerCase()} рассадка (соперники Ø ${Math.round(x.avg)})"><b>${big?x.g:''}</b></i>`).join('')+'</span>';}
 function luckPanel(name){const L=D.LUCK&&D.LUCK[name];if(!L)return '';const v=luckVerdict(L);
-  const dist=[1,2,3,4,5].map(c=>`<span class="kb ${CAT[c].k}">${CAT[c].n} <b>${L.cnt[c]}</b></span>`).join('');
-  return `<div class="panel"><h3>Жребий · сила соперников</h3>
-    <div class="luckhead"><span class="kb big ${v.k}">${v.t}</span><span class="jbig">${Math.round(L.avg)}<small> средний ELO девяти соперников · #${L.rank} из ${D.luckOrder.length} по строгости</small></span></div>
+  const dist=[5,4,3,2,1].map(c=>`<span class="kb ${CATO[c].k}">${CATO[c].n} <b>${L.cnt[c]}</b></span>`).join('');
+  return `<div class="panel"><h3>Рассадка · сила соперников</h3>
+    <div class="luckhead"><span class="kb big ${v.k}">${v.t}</span><span class="jbig">${Math.round(L.avg)}<small> средний ELO девяти соперников · #${L.rank} из ${D.luckOrder.length} по плотности</small></span></div>
     <div class="note" style="margin:6px 0 10px">${v.s}. Считаем без самого игрока — иначе сильный «утяжелял» бы собственные столы, а слабый «облегчал». Средний по турниру — ${Math.round(D.oppMean)}.</div>
     <div class="nk" style="margin-bottom:6px">По играм (тап — подсказка)</div>${luckSquares(L,true)}
     <div class="nk" style="margin:12px 0 6px">Сколько раз в какой категории</div><div class="kbrow">${dist}</div>
-    <div class="note" style="margin-top:8px"><span class="lnk" style="cursor:pointer" onclick="show('luck')">Все 55 игроков по строгости жребия →</span></div></div>`;}
+    <div class="note" style="margin-top:8px"><span class="lnk" style="cursor:pointer" onclick="show('luck')">Все 55 игроков по рассадке →</span></div></div>`;}
+function chooserPanel(){return `<div class="chooser"><div class="chs on"><span class="chk">вы здесь</span><b>Страница турнира</b><small>рассадка и сила столов · карточки · live-результаты · судьи</small></div><a class="chs" href="wc2026-cards.html"><span class="chk">v1 · 08.09</span><b>Карточки по странам →</b><small>13 сборных, перевёртыши, «12 месяцев / карьера» — та самая страница, как была</small></a></div>`;}
 function strengthTeaser(){if(!D.TS||!D.tblN)return '';
   const hot=Object.values(D.TS).filter(x=>x.cat===1).sort((a,b)=>a.g-b.g).slice(0,4);
   const chips=hot.map(x=>`<button class="tf" data-g="${x.g}" data-t="${x.t}" onclick="seatJump=+this.dataset.g;show('seating')">игра ${x.g} · стол ${ROMAN[x.t]} <small>Ø ${Math.round(x.avg)}</small></button>`).join('');
   return `<div class="panel"><h3>Сила столов</h3><div class="kbrow" style="margin-bottom:8px">${[1,2,3,4,5].map(c=>`<span class="kb ${CAT[c].k}">${CAT[c].n}</span>`).join('')}</div>
     <div class="note" style="margin:0 0 8px">55 столов квалификации поделены на пять равных корзин по среднему ELO состава. Первые элитные столы:</div><div class="tfilter" style="margin:0">${chips}</div>
-    <div class="note" style="margin-top:8px"><span class="lnk" style="cursor:pointer" onclick="show('strength')">Карта всех столов →</span> · <span class="lnk" style="cursor:pointer" onclick="show('luck')">Кому какой жребий →</span></div></div>`;}
+    <div class="note" style="margin-top:8px"><span class="lnk" style="cursor:pointer" onclick="show('strength')">Карта всех столов →</span> · <span class="lnk" style="cursor:pointer" onclick="show('luck')">Кому какая рассадка →</span></div></div>`;}
 /* ── Сила столов: карта ── */
 RENDER.strength=function(){return `<div class="view"><div class="secttl">&#9741; Сила столов</div><div id="strArea"></div></div>`;};
-RENDER.luck=function(){return `<div class="view"><div class="secttl">&#9860; Жребий</div><div id="luckArea"></div></div>`;};
+RENDER.luck=function(){return `<div class="view"><div class="secttl">&#9860; Рассадка · сила соперников</div><div id="luckArea"></div></div>`;};
 RENDER.cards=function(){return `<div class="view"><div class="secttl">&#9646; Карточки игроков</div><div id="cardTop"></div><div id="cardArea"></div></div>`;};
 function paintStrength(){const area=document.getElementById('strArea');if(!area)return;
   if(!D.TS||!D.tblN){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9741;</div><h3>Рассадки пока нет</h3><p>Карта столов появится, когда mafgame опубликует посадку квалификации.</p></div></div>';return;}
@@ -1552,20 +1563,20 @@ function paintStrength(){const area=document.getElementById('strArea');if(!area)
     <div class="panel" style="padding:10px">${grid}<div class="note" style="margin-top:8px">Строки — игры (Д1/Д2 — день по плану трансляций, уточним по факту), столбцы — столы с судьями. Золотая рамка — ваш стол, если выбран «мой игрок».</div></div>
     <div class="panel"><h3>Пять корзин</h3><div class="lgl">${legend}</div><div class="note" style="margin-top:8px">Почему равными долями, а не «сигмой»: разброс средних по столам небольшой (${Math.round(Math.min(...Object.values(D.TS).map(x=>x.avg)))}–${Math.round(Math.max(...Object.values(D.TS).map(x=>x.avg)))}), и любая абсолютная граница либо сваливала бы все столы в середину, либо зависела бы от одного-двух топов. Ранг честнее: «элитный» — это буквально 11 самых сильных составов турнира.</div></div>
     <div class="panel"><h3>Пять самых жарких столов</h3>${hot}</div>
-    <div class="panel"><h3>А кому повезло?</h3><div class="note" style="margin:0">Сильный игрок сам утяжеляет свой стол — поэтому у топов чаще «элитные» столы, и это не про жребий. Честный вопрос «кому достались сильные соперники» считаем без самого игрока — в разделе <span class="lnk" style="cursor:pointer" onclick="show('luck')">«Жребий» →</span></div></div>`;
+    <div class="panel"><h3>А кому как рассадило?</h3><div class="note" style="margin:0">Сильный игрок сам утяжеляет свой стол — поэтому у топов чаще «элитные» столы, и это не про жребий. Честный вопрос «кому достались сильные соперники» считаем без самого игрока — в разделе <span class="lnk" style="cursor:pointer" onclick="show('luck')">«Рассадка» →</span></div></div>`;
   area.querySelectorAll('.smc[data-g]').forEach(b=>b.onclick=()=>{seatJump=+b.dataset.g;show('seating');setTimeout(()=>{const w=[...document.querySelectorAll('#seatArea .twrap')].find(x=>x.querySelector('.tnum')&&x.querySelector('.tnum').textContent.trim()==='Стол '+ROMAN[+b.dataset.t]);if(w){w.style.boxShadow='0 0 0 2px var(--gold)';w.scrollIntoView({block:'center',behavior:'smooth'});setTimeout(()=>w.style.boxShadow='',2500);}},120);});
 }
 let luckSort='opp';
 function paintLuck(){const area=document.getElementById('luckArea');if(!area)return;
-  if(!D.LUCK||!D.luckOrder){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9860;</div><h3>Рассадки пока нет</h3><p>Жребий посчитаем, когда появится посадка.</p></div></div>';return;}
+  if(!D.LUCK||!D.luckOrder){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9860;</div><h3>Посадки пока нет</h3><p>Силу соперников посчитаем, когда появится посадка квалификации.</p></div></div>';return;}
   let order=D.luckOrder.slice();
   if(luckSort==='elo')order.sort((a,b)=>((D.RATE[b]&&D.RATE[b].elo)||0)-((D.RATE[a]&&D.RATE[a].elo)||0));
   else if(luckSort==='soft')order.reverse();
   const rows=order.map(n=>{const L=D.LUCK[n],R=D.RATE[n]||{},I=D.INFO[n]||{};const d=Math.round(L.avg-D.oppMean);const v=luckVerdict(L);
     return `<button class="lrow${n===myPlayer?' me':''}" data-p="${esc(n)}" onclick="goPlayer(this.dataset.p)"><span class="lr">${L.rank}</span><img class="lav${R.tier?' f-'+R.tier:''}" src="${esc(avOf(n)||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'"><span class="lmain"><span class="ln">${I.flag||''} ${esc(n)}${R.tier?` <span class="tpill tp-${R.tier}" style="font-size:9px;padding:0 5px">${R.tier}</span>`:''}</span><span class="ls">Ø сопер. <b>${Math.round(L.avg)}</b> <span class="dlt ${v.k}">${d>0?'+':''}${d}</span></span></span>${luckSquares(L,false)}</button>`;}).join('');
-  area.innerHTML=`<div class="note" style="margin:0 0 10px">Для каждого игрока — средний ELO его <b>девяти соперников</b> в каждой из десяти игр, без него самого. Категория квадратика — место этой посадки среди всех 550 посадок квалификации (пять равных корзин). Чем «краснее» — тем строже жребий. Тап — страница игрока.</div>
-    <div class="segwrap"><span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Сортировка:</span><span class="seg"><button class="${luckSort==='opp'?'on':''}" onclick="luckSort='opp';paintLuck()">строгий жребий</button><button class="${luckSort==='soft'?'on':''}" onclick="luckSort='soft';paintLuck()">добрый</button><button class="${luckSort==='elo'?'on':''}" onclick="luckSort='elo';paintLuck()">по ELO</button></span></div>
-    <div class="kbrow" style="margin:6px 0 10px">${[1,2,3,4,5].map(c=>`<span class="kb ${CAT[c].k}">${CAT[c].n}</span>`).join('')}</div>
+  area.innerHTML=`<div class="note" style="margin:0 0 10px">Для каждого игрока — средний ELO его <b>девяти соперников</b> в каждой из десяти игр, без него самого. Категория квадратика — место этой посадки среди всех 550 посадок квалификации (пять равных корзин): от <b>спокойной</b> до <b>экстремальной</b>. Тап — страница игрока.</div>
+    <div class="segwrap"><span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Сначала:</span><span class="seg"><button class="${luckSort==='opp'?'on':''}" onclick="luckSort='opp';paintLuck()">экстремальные</button><button class="${luckSort==='soft'?'on':''}" onclick="luckSort='soft';paintLuck()">спокойные</button><button class="${luckSort==='elo'?'on':''}" onclick="luckSort='elo';paintLuck()">по ELO</button></span></div>
+    <div class="kbrow" style="margin:6px 0 10px">${[5,4,3,2,1].map(c=>`<span class="kb ${CATO[c].k}">${CATO[c].n}</span>`).join('')}</div>
     <div class="llist">${rows}</div>
     <div class="note">Средний по турниру — ${Math.round(D.oppMean)} ELO. Разница ±10 — шум, ±25 и больше — уже заметно. Собственный ELO игрока и категория его столов связаны (сильные сами делают стол «элитным»), поэтому эта таблица — про соперников, а не про столы. Nostradamus без профиля markery: для него и для его соседей взята медиана состава.</div>`;
 }
@@ -1602,7 +1613,7 @@ function cardFull(p,inViewer){const C=D.cards;const A=C.avg[cPer];const ds=p.des
   if(!p.pid)body=`<div class="nodata">нет профиля на маркерях — единственный в составе. Загадка в чистом виде.</div>`;
   else{const P=p[cPer];
     const rows=RK.map(k=>{const r=P[k];const few=!r||r.g<A.min;const db=r&&r.g&&!few?(r.dop-A[k].dop):null;
-      return `<div class="rr" style="--rc:${RC[k]}"><div class="rl" style="color:${RC[k]}">${RN[k].slice(0,3)}</div>${cbar(r,A[k],A.min)}<div class="rv" style="color:${few?'var(--dim)':RC[k]}">${r&&r.g?Math.round(r.wr)+'%':'—'}</div><div class="rb" style="color:${db==null?'var(--dim)':db>=0?RC[k]:'var(--mut)'}" title="доп в ${r&&r.g?r.dop:''}% партий против ${A[k].dop}% у турнира">${db==null?'':(db>=0?'+':'−')+Math.abs(db).toFixed(0)+'%'}</div><div class="rm">${few?'':medal(r.wr_top)}</div><div class="rg">${r&&r.g?r.g:''}</div></div>`;}).join('');
+      return `<div class="rr" style="--rc:${RC[k]}"><div class="rl" style="color:${RC[k]}">${RN[k].slice(0,3)}</div>${cbar(r,A[k],A.min)}<div class="wrv" style="color:${few?'var(--dim)':RC[k]}">${r&&r.g?Math.round(r.wr)+'%':'—'}</div><div class="rb" style="color:${db==null?'var(--dim)':db>=0?RC[k]:'var(--mut)'}" title="доп в ${r&&r.g?r.dop:''}% партий против ${A[k].dop}% у турнира">${db==null?'':(db>=0?'+':'−')+Math.abs(db).toFixed(0)+'%'}</div><div class="rm">${few?'':medal(r.wr_top)}</div><div class="rg">${r&&r.g?r.g:''}</div></div>`;}).join('');
     body=`<div class="hd"><span></span><span>победы к среднему турнира</span><span>WR</span><span>доп</span><span>база</span><span>игр</span></div><div class="bars">${rows}</div>
       <div class="pm">${ds.plus.map(x=>`<span class="p">${esc(x)}</span>`).join('')}${ds.minus.map(x=>`<span class="m">${esc(x)}</span>`).join('')}</div>`;}
   const S=D.STAT&&D.STAT[p.nick];
@@ -1613,7 +1624,7 @@ function cardFull(p,inViewer){const C=D.cards;const A=C.avg[cPer];const ds=p.des
         ${rl?`<div class="rolelbl"><span style="color:${rl.color};border-color:${rl.color}66" title="${esc(rl.tip)}">${rl.name}</span><small>роль в турнире</small></div>`:''}</div></div>
     ${ds?`<div class="amp"><b style="color:${rc}">${tipSpan(ds.role.name)}</b> <span class="st">· ${tipSpan(ds.style.name)}</span><span class="f">${esc(ds.role.fact)}. ${esc(ds.style.fact[0].toUpperCase()+ds.style.fact.slice(1))}.</span></div>`:''}
     ${body}${live}
-    ${v?`<div class="csec">Жребий</div><div class="kbrow"><span class="kb ${v.k}">${v.t}</span>${luckSquares(L,false)}</div>`:''}
+    ${v?`<div class="csec">Рассадка</div><div class="kbrow"><span class="kb ${v.k}">${v.t}</span>${luckSquares(L,false)}</div>`:''}
     <div class="wcf"><button class="btn ghost" data-p="${esc(p.nick)}" onclick="goPlayer(this.dataset.p)">страница игрока</button><button class="btn ghost ${cmp.has(p.nick)?'on':''}" data-p="${esc(p.nick)}" onclick="toggleCmp(this.dataset.p)">${cmp.has(p.nick)?'✓ в сравнении':'+ сравнить'}</button></div></div>`;}
 function initCards(){const top=document.getElementById('cardTop'),area=document.getElementById('cardArea');if(!top)return;
   if(!D.cards){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9646;</div><h3>Карточки не загрузились</h3><p>Файл data/wc2026_cards.json недоступен.</p></div></div>';return;}
@@ -1644,13 +1655,13 @@ function cmpPanel(){if(cmp.size<2)return cmp.size===1?`<div class="note" style="
   const C=D.cards,A=C.avg[cPer];const ps=[...cmp].map(n=>C.players.find(p=>p.nick===n)).filter(Boolean);
   const cell=(p,k)=>{const r=p[cPer]&&p[cPer][k];if(!r||!r.g||r.g<A.min)return '<td class="na">—</td>';const d=r.wr-A[k].wr;return `<td><b style="color:${RC[k]}">${Math.round(r.wr)}%</b><small class="na"> ${d>=0?'+':''}${d.toFixed(0)}</small> ${medal(r.wr_top)}</td>`;};
   return `<div class="panel cmpp"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><h3 style="margin:0">Сравнение</h3><button class="btn ghost" style="margin-left:auto" onclick="cmp.clear();drawCards()">сбросить</button></div>
-    <div style="overflow:auto"><table class="tbl cmpt"><thead><tr><th class="l"></th>${ps.map(p=>`<th><div class="cmph"><img src="${esc(p.avatar||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><b>${esc(p.nick)}</b><button class="x" data-p="${esc(p.nick)}" onclick="toggleCmp(this.dataset.p)" title="убрать">×</button></div></th>`).join('')}</tr></thead><tbody>
+    <div style="overflow:auto"><table class="tbl cmpt"><thead><tr><th class="l"></th>${ps.map(p=>`<th><div class="cmph"><img src="${esc(p.avatar||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><b>${esc(p.nick)}</b><button class="cx" data-p="${esc(p.nick)}" onclick="toggleCmp(this.dataset.p)" title="убрать">×</button></div></th>`).join('')}</tr></thead><tbody>
     <tr><td class="l">ELO · тир</td>${ps.map(p=>`<td>${p.elo||'—'} ${p.tier?`<span class="tierb" style="background:${TC[p.tier]}">${p.tier}</span>`:''}</td>`).join('')}</tr>
     ${RK.map(k=>`<tr><td class="l" style="color:${RC[k]}">${RN[k]}</td>${ps.map(p=>cell(p,k)).join('')}</tr>`).join('')}
     <tr><td class="l">Амплуа</td>${ps.map(p=>`<td>${p.desc?esc(p.desc[cPer].role.name):'—'}</td>`).join('')}</tr>
     <tr><td class="l">Стиль</td>${ps.map(p=>`<td>${p.desc?esc(p.desc[cPer].style.name):'—'}</td>`).join('')}</tr>
     <tr><td class="l">Партий</td>${ps.map(p=>`<td>${p[cPer]&&p[cPer].A?p[cPer].A.g:'—'}</td>`).join('')}</tr>
-    ${D.LUCK?`<tr><td class="l">Жребий</td>${ps.map(p=>{const L=D.LUCK[p.nick];return L?`<td><span class="kb ${luckVerdict(L).k}">${Math.round(L.avg)}</span></td>`:'<td>—</td>';}).join('')}</tr>`:''}
+    ${D.LUCK?`<tr><td class="l">Рассадка</td>${ps.map(p=>{const L=D.LUCK[p.nick];return L?`<td><span class="kb ${luckVerdict(L).k}">${Math.round(L.avg)}</span></td>`:'<td>—</td>';}).join('')}</tr>`:''}
     </tbody></table></div><div class="note" style="margin-top:6px">Процент побед в роли за ${cPer==='ly'?'12 месяцев':'карьеру'}; мелким — отличие от среднего участника турнира; медаль — место по всей базе маркерев.</div></div>`;}
 /* просмотр карточки на весь экран */
 let vwOpen=false,vwIdx=0,vwList=[];
