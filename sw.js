@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'dovod-v51';
+const CACHE_VERSION = 'dovod-v52';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -56,7 +56,10 @@ const PRECACHE = [
   'assets/favicon.svg',
   'assets/icons/icon-192.png',
   'assets/icons/icon-512.png',
-  'manifest.json'
+  'manifest.json',
+  'manifest-wc2026.json',
+  'manifest-wc2026-tournament.json',
+  'manifest-wc2026-fans.json'
 ];
 
 self.addEventListener('install', (e) => {

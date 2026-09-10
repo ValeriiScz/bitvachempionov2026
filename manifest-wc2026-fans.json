@@ -1,0 +1,48 @@
+{
+  "name": "ЧМ-2026 · Для зрителей — DOVOD",
+  "short_name": "ЧМ зрителю",
+  "description": "Следите за игроком или сборной: столы, стримы, таблица после каждого раунда.",
+  "lang": "ru",
+  "dir": "ltr",
+  "id": "/wc2026-fans",
+  "start_url": "/wc2026-fans.html",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#05060a",
+  "theme_color": "#05060a",
+  "categories": [
+    "sports",
+    "entertainment"
+  ],
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
