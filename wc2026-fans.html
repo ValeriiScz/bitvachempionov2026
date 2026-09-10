@@ -79,6 +79,10 @@ h1 b{background:linear-gradient(180deg,var(--gold-hi),var(--gold) 60%,#a9771c);-
 .rounds button{min-width:38px;min-height:38px;border:1px solid var(--line2);background:rgba(5,6,10,.5);color:var(--ink);font:800 13px var(--mono);cursor:pointer}
 .rounds button.on{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#15100a;border-color:var(--gold)}
 .rounds button.up{opacity:.35}
+.rounds button.lv{box-shadow:inset 0 0 0 2px var(--green)}
+.gsel{margin-bottom:10px}
+.lv{color:var(--green);font-weight:800}
+.nw .s b.neg{color:#ff8a8a}
 .seg{display:inline-flex;border:1px solid var(--line);overflow:hidden}
 .seg button{padding:8px 13px;background:transparent;border:0;color:var(--mut);font:800 12.5px Inter,sans-serif;cursor:pointer}
 .seg button.on{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#15100a}
@@ -144,7 +148,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const fmt=v=>{const n=+(+v).toFixed(2);if(!isFinite(n))return '—';return Number.isInteger(n)?String(n):n.toFixed(2).replace(/\.?0+$/,'');};
 const plW=(n,a,b,c)=>{const m=Math.abs(n)%100,m1=m%10;if(m>10&&m<20)return c;if(m1>1&&m1<5)return b;if(m1===1)return a;return c;};
 const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v);}catch(e){return null}};
-let D={},follow=[],round=null,tblMode='all',demo=false,showAll=false,openLog=null,pickOpen=false;
+let D={},follow=[],round=null,tblMode='all',demo=false,showAll=false,openLog=null,pickOpen=false,viewGame=null; /* viewGame: null = live/ближайшая */
 try{follow=JSON.parse(LS('wcf_follow')||'[]');}catch(e){follow=[];}
 Promise.all([
   fetch('data/participants_710.json').then(r=>r.json()).catch(()=>null),
@@ -164,7 +168,7 @@ function avOf(n){return D.av[n]||(D.P[n]&&D.P[n].av)||DEF_AV;}
 function flagOf(n){const p=D.P[n];return p?p.flag:'';}
 function compute(){
   D.occ={};D.seat={};D.played=0;
-  D.games.forEach((g,gi)=>{const gn=gi+1;let done=g.tables.length>0;g.tables.forEach(t=>{if(t.winner==='unknown')done=false;t.seats.forEach((s,i)=>{if(!s||!s.name)return;(D.occ[s.name]=D.occ[s.name]||[]).push({g:gn,t:t.table_num,slot:s.seat||i+1,stage:g.stage||'Квалификация',role:s.role,result:s.result,sig:(s.wpts||0)+(s.aps||0)+(s.ci||0),done:t.winner!=='unknown'});});});if(done)D.played=gn;});
+  D.games.forEach((g,gi)=>{const gn=gi+1;let done=g.tables.length>0;g.tables.forEach(t=>{if(t.winner==='unknown')done=false;t.seats.forEach((s,i)=>{if(!s||!s.name)return;(D.occ[s.name]=D.occ[s.name]||[]).push({g:gn,t:t.table_num,slot:s.seat||i+1,stage:g.stage||'Квалификация',role:s.role,result:s.result,aps:s.aps||0,sig:(s.wpts||0)+(s.aps||0)+(s.ci||0),done:t.winner!=='unknown'});});});if(done)D.played=gn;});
   D.gplist=D.games.filter(g=>g.tables.some(t=>t.winner!=='unknown'));
   D.snap=[];for(let k=1;k<=D.gplist.length;k++)D.snap[k]=aggregate(D.gplist.slice(0,k));
   if(round==null||round>D.gplist.length)round=D.gplist.length;
@@ -191,30 +195,36 @@ function followPanel(){
     <div class="sugg hidden" id="sugg"></div>
     ${quick}
     ${!follow.length?'<div class="note" style="margin-top:8px">Выбор запоминается на этом телефоне. Сборную можно выбрать целиком — тогда покажем все её столы.</div>':''}</div>`;}
+function liveGame(){const ng=nextGame();const inPlay=D.games.findIndex(g=>g.tables.some(t=>t.winner!=='unknown')&&g.tables.some(t=>t.winner==='unknown'))+1;return inPlay||ng;}
+function curGame(){return viewGame||liveGame();}
+function gameState(g){const gm=D.games[g-1];if(!gm||!gm.tables.length)return 'future';const done=gm.tables.filter(t=>t.winner!=='unknown').length;return done===gm.tables.length?'done':(done?'live':'future');}
 function nowPanel(){
-  const ng=nextGame();const fp=followedPlayers();const cur=D.gplist.length;
-  const stageOf=g=>(D.games[g-1]&&D.games[g-1].stage)||'Квалификация';
-  const head=ng?`<h2>Игра ${ng} <span class="r">${esc(stageOf(ng))} · из ${D.games.length}${cur?` · сыграно ${cur}`:''}</span></h2>`:`<h2>Турнир завершён</h2>`;
-  if(!fp.length){return `<div class="panel">${head}<div class="note">Выберите игрока или сборную сверху — здесь появится, за каким столом они сидят в ближайшей игре, кто судит и какой стрим включать. Пока можно просто открыть любой стол ниже.</div></div>`;}
-  const sorted=fp.slice().sort((a,b)=>{const oa=ng?((D.occ[a]||[]).find(o=>o.g===ng)||{t:99}).t:0,ob=ng?((D.occ[b]||[]).find(o=>o.g===ng)||{t:99}).t:0;return oa-ob||a.localeCompare(b,'ru');});
-  const items=sorted.map(n=>{const occ=(D.occ[n]||[]);const nx=ng?occ.find(o=>o.g===ng):null;const last=occ.filter(o=>o.done).slice(-1)[0];
-    let mid,right;
-    if(!ng){mid='<span class="rest">турнир завершён</span>';right='';}
-    else if(!nx){const skip=D.skip[n];mid=`<span class="rest">${skip===ng?'отдыхает эту игру':'в этой стадии не играет'}</span>`;right='';}
-    else{const j=D.judges[nx.t];const su=streamUrl(nx.g,nx.t,nx.stage);mid=`<span>место <b>${nx.slot}</b></span>${j?`<span>судья <b>${esc(j.name)}</b></span>`:''}${su?`<a class="btn mini" href="${esc(su)}" target="_blank" rel="noopener" style="margin-top:6px">▶ Стрим стола ${ROMAN[nx.t]}</a>`:''}`;right=`<div class="tbig">${ROMAN[nx.t]}<small>стол</small></div>`;}
-    const lastTxt=last?`<span class="${last.result==='W'?'lg w':'lg l'}" style="text-align:left">${last.result==='W'?'победа':'поражение'} в игре ${last.g}${last.role?' · '+RSHORT[last.role]:''}</span>`:'';
-    const pl=D.snap[cur]&&D.snap[cur].place[n];
-    return `<div class="nw"><img src="${esc(avOf(n))}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><div><div class="n">${flagOf(n)} ${esc(n)}${pl?` <span style="color:var(--gold-hi);font:800 12px var(--mono)">#${pl}</span>`:''}</div><div class="s">${mid}${lastTxt}</div></div>${right}</div>`;}).join('');
-  return `<div class="panel">${head}<div class="nowg">${items}</div></div>`;}
+  const fp=followedPlayers();const g=curGame();const total=D.games.length;const stageOf=x=>(D.games[x-1]&&D.games[x-1].stage)||'Квалификация';
+  const lg=liveGame();
+  const sel=`<div class="rounds gsel">${D.games.map((_,i)=>{const n=i+1;const st=gameState(n);return `<button class="${n===g?'on':''}${st==='future'&&n!==lg?' up':''}${n===lg?' lv':''}" data-g="${n}" title="${esc(stageOf(n))}">${n}</button>`;}).join('')}</div>`;
+  if(!g){return `<div class="panel"><h2>Игры</h2>${sel}<div class="note">Турнир завершён.</div></div>`;}
+  const st=gameState(g);const stLab=st==='done'?'сыграна':st==='live'?'<span class="lv">● идёт сейчас</span>':(g===lg?'ближайшая':'впереди');
+  const head=`<h2>Игра ${g} <span class="r">${esc(stageOf(g))} · из ${total} · ${stLab}</span></h2>`;
+  if(!fp.length){return `<div class="panel">${head}${sel}<div class="note">Выберите игрока или сборную сверху — здесь появится, за каким столом они сидят в этой игре, кто судит и какой стрим включать. Номера сверху — пощёлкать по играм.</div></div>`;}
+  const sorted=fp.slice().sort((a,b)=>{const oa=((D.occ[a]||[]).find(o=>o.g===g)||{t:99}).t,ob=((D.occ[b]||[]).find(o=>o.g===g)||{t:99}).t;return oa-ob||a.localeCompare(b,'ru');});
+  const items=sorted.map(n=>{const nx=(D.occ[n]||[]).find(o=>o.g===g);let mid,right;
+    if(!nx){const skip=D.skip[n];mid=`<span class="rest">${skip===g?'отдыхает':(stageOf(g)==='Квалификация'?'не в этой игре':'не прошёл в эту стадию')}</span>`;right='';}
+    else{const j=D.judges[nx.t];const su=streamUrl(nx.g,nx.t,nx.stage);
+      const res=nx.done?`<span class="${nx.result==='W'?'lg w':'lg l'}" style="text-align:left">${nx.result==='W'?'победа':'поражение'}</span>${nx.role?`<span class="rp rp-${nx.role}">${RSHORT[nx.role]}</span>`:''}<span>доп <b class="${nx.aps<0?'neg':''}">${nx.aps>0?'+':''}${fmt(nx.aps)}</b></span>`:(st==='live'?'<span class="lv">идёт игра</span>':'');
+      mid=`<span>место <b>${nx.slot}</b></span>${j?`<span>судья <b>${esc(j.name)}</b></span>`:''}${res}${su&&!nx.done?`<a class="btn mini" href="${esc(su)}" target="_blank" rel="noopener" style="margin-top:4px">▶ Стрим стола ${ROMAN[nx.t]}</a>`:''}`;right=`<div class="tbig">${ROMAN[nx.t]}<small>стол</small></div>`;}
+    const cur=D.gplist.length;const pl=D.snap[cur]&&D.snap[cur].place[n];
+    return `<div class="nw"><img src="${esc(avOf(n))}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'"><div><div class="n">${flagOf(n)} ${esc(n)}${pl?` <span style="color:var(--gold-hi);font:800 12px var(--mono)">#${pl}</span>`:''}</div><div class="s">${mid}</div></div>${right}</div>`;}).join('');
+  const byT={};sorted.forEach(n=>{const o=(D.occ[n]||[]).find(x=>x.g===g);if(o)(byT[o.t]=byT[o.t]||[]).push(n);});const same=Object.entries(byT).filter(([t,l])=>l.length>1).map(([t,l])=>`стол ${ROMAN[t]}: ${l.join(', ')}`);
+  return `<div class="panel">${head}${sel}${same.length?`<div class="note" style="margin:0 0 8px;color:var(--gold-hi)">⚡ Ваши за одним столом — ${same.join(' · ')}</div>`:''}<div class="nowg">${items}</div></div>`;}
 function streamsPanel(){
-  const ng=nextGame();const fp=followedPlayers();const my=new Set();if(ng)fp.forEach(n=>{const o=(D.occ[n]||[]).find(x=>x.g===ng);if(o)my.add(o.t);});
+  const ng=curGame();const fp=followedPlayers();const my=new Set();if(ng)fp.forEach(n=>{const o=(D.occ[n]||[]).find(x=>x.g===ng);if(o)my.add(o.t);});
   const ms=mainStream();
   const stage=ng?((D.games[ng-1]&&D.games[ng-1].stage)||'Квалификация'):'Квалификация';
   const tables=stage==='Финал'?[1]:[1,2,3,4,5];
   const b=tables.map(t=>{const su=ng?streamUrl(ng,t,stage):null;const j=D.judges[t];const cls='btn'+(su?'':' off')+(my.has(t)?' my':'');const inner=`Стол ${ROMAN[t]}<small>${j?esc(j.name):''}</small>`;return su?`<a class="${cls}" href="${esc(su)}" target="_blank" rel="noopener">${inner}</a>`:`<span class="${cls}">${inner}</span>`;}).join('');
   return `<div class="panel"><h2>Трансляции <span class="r">${ms||(window.STREAMS_DB&&Object.keys((window.STREAMS_DB['710']||{}).days?.['1']||{}).length)?'YouTube @mafgameorg':'ссылки появятся в день турнира'}</span></h2>
     ${ms?`<a class="btn big" href="${esc(ms)}" target="_blank" rel="noopener" style="margin-bottom:8px">▶ Главный эфир · комментирует Walle</a>`:`<span class="btn big off" style="margin-bottom:8px">▶ Главный эфир · комментирует Walle</span>`}
-    <div class="strms">${b}</div>${my.size?'<div class="note" style="margin-top:8px">Золотая рамка — столы ваших игроков в ближайшей игре.</div>':''}</div>`;}
+    <div class="strms">${b}</div>${my.size?`<div class="note" style="margin-top:8px">Золотая рамка — столы ваших игроков в игре ${ng}.</div>`:''}</div>`;}
 function standingsPanel(){
   const n=D.gplist.length;
   if(!n)return `<div class="panel"><h2>Таблица</h2><div class="note">Заполнится после первого сыгранного стола. Тут будет место каждого игрока после каждого раунда и на сколько позиций он поднялся или упал.</div></div>`;
@@ -245,7 +255,7 @@ function countriesPanel(){
   list.sort((a,b)=>b.avg-a.avg||b.n-a.n);const mx=Math.max(...list.map(x=>x.avg),0.01);
   const fc=new Set(follow.filter(f=>f.t==='c').map(f=>f.id));
   return `<div class="panel"><h2>Сборные <span class="r">${n?'средняя Σ игрока · после игры '+n:'состав по квотам mafgame'}</span></h2>
-    ${list.map(x=>`<div class="ct" data-cc="${x.c.cc}" style="cursor:pointer${fc.has(x.c.cc)?';background:rgba(38,224,255,.06)':''}"><span class="f">${x.c.flag}</span><div class="b"><b>${esc(x.c.name)}</b><small>${x.n} ${plW(x.n,'игрок','игрока','игроков')}${n?` · лучший #${x.best} · в топ‑10: ${x.top10} · в топ‑50: ${x.top50}`:' · '+x.c.players.slice(0,4).join(', ')+(x.n>4?'…':'')}</small>${n?`<div class="bar"><i style="width:${Math.round(x.avg/mx*100)}%"></i></div>`:''}</div>${n?`<div class="v"><b>${fmt(x.avg)}</b><small>ср. Σ</small></div>`:''}</div>`).join('')}
+    ${list.map(x=>`<div class="ct" data-cc="${x.c.cc}" style="cursor:pointer${fc.has(x.c.cc)?';background:rgba(38,224,255,.06)':''}"><span class="f">${x.c.flag}</span><div class="b"><b>${esc(x.c.name)}</b><small>${x.n} ${plW(x.n,'игрок','игрока','игроков')}${n?` · лучший #${x.best} · в топ‑10 сейчас: ${x.top10}`:' · '+x.c.players.slice(0,4).join(', ')+(x.n>4?'…':'')}</small>${n?`<div class="bar"><i style="width:${Math.round(x.avg/mx*100)}%"></i></div>`:''}</div>${n?`<div class="v"><b>${fmt(x.avg)}</b><small>ср. Σ</small></div>`:''}</div>`).join('')}
     <div class="note" style="margin-top:8px">${n?'Средний балл игрока сборной — честнее суммы: у Польши 11 игроков, у Румынии один. Тап по сборной — следить за ней.':'Тап по сборной — следить за всеми её игроками.'}</div></div>`;}
 function demoPanel(){return `<div class="panel"><h2>Данные <span class="r">${demo?'<span class="demoflag">● демо</span>':'онлайн с mafgame'}</span></h2><div class="row" style="align-items:center"><span class="seg"><button class="${demo?'':'on'}" data-d="0">Онлайн</button><button class="${demo?'on':''}" data-d="1">Демо</button></span><span class="note" style="flex:1;min-width:200px">${demo?'Случайный полный турнир — чтобы посмотреть, как всё выглядит с результатами. Реальные данные не тронуты.':'До первого стола таблица пустая. Включите «Демо», чтобы увидеть страницу с результатами.'}</span></div></div>`;}
 /* ── demo ── */
@@ -257,7 +267,7 @@ function makeDemo(){const rnd=(a,b)=>a+Math.random()*(b-a);const shuf=a=>{a=a.sl
   const top10=aggregate(quals.concat(semis)).rows.slice(0,10).map(r=>r.name);const finals=[0,1,2,3,4].map(i=>({title:'Финал '+(i+1),stage:'Финал',tables:[play(top10.slice(),1)]}));
   const all=quals.concat(semis,finals);const cutAt=7+Math.floor(Math.random()*6);/* демо «идёт»: сыграно 7–12 игр */
   return all.map((g,i)=>i<cutAt?g:{...g,tables:g.tables.map(t=>({...t,winner:'unknown',seats:t.seats.map(s=>({seat:s.seat,name:s.name,role:null,result:null,wpts:0,aps:0,ci:0}))}))});}
-function setDemo(on){demo=on;D.games=on?makeDemo():D.realGames;round=null;showAll=false;openLog=null;compute();render();window.scrollTo({top:0,behavior:'smooth'});}
+function setDemo(on){demo=on;D.games=on?makeDemo():D.realGames;round=null;viewGame=null;showAll=false;openLog=null;compute();render();window.scrollTo({top:0,behavior:'smooth'});}
 /* ── bind ── */
 function bind(){
   const pick=document.getElementById('pick'),sugg=document.getElementById('sugg');
@@ -268,7 +278,8 @@ function bind(){
   if(pick){pick.oninput=()=>{pickOpen=true;draw(pick.value);};pick.onfocus=()=>{pickOpen=true;draw(pick.value);};if(pickOpen)draw(pick.value);}
   document.querySelectorAll('.chip .x').forEach(b=>b.onclick=()=>rmFollow(+b.dataset.i));
   document.querySelectorAll('.qc button,.ct[data-cc]').forEach(b=>b.onclick=()=>{const cc=b.dataset.cc;if(follow.some(f=>f.t==='c'&&f.id===cc)){toast('Уже следим за этой сборной');return;}addFollow('c',cc);});
-  document.querySelectorAll('.rounds button').forEach(b=>b.onclick=()=>{round=+b.dataset.r;openLog=null;render();});
+  document.querySelectorAll('.rounds button[data-r]').forEach(b=>b.onclick=()=>{round=+b.dataset.r;openLog=null;render();});
+  document.querySelectorAll('.gsel button').forEach(b=>b.onclick=()=>{const n=+b.dataset.g;viewGame=(n===liveGame())?null:n;render();});
   document.querySelectorAll('.seg button[data-m]').forEach(b=>b.onclick=()=>{tblMode=b.dataset.m;render();});
   document.querySelectorAll('.seg button[data-d]').forEach(b=>b.onclick=()=>setDemo(b.dataset.d==='1'));
   const more=document.getElementById('more');if(more)more.onclick=()=>{showAll=!showAll;render();};

@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- DOVOD · wc2026-cards.html · v1.1 · 2026-09-10 · карточки по странам v1 (08.09) + сравнение до 4 игроков (кнопка на карточке → плашка снизу → таблица). Остальное не тронуто. -->
 <html lang="ru">
 <head>
 <meta charset="utf-8">
@@ -132,6 +133,33 @@ footer a{color:var(--muted)}
 @media(max-width:640px){.ava,.ava-ph{width:96px;height:96px}.wrap{padding:0 12px}.grid{grid-template-columns:1fr 1fr;gap:8px}.ctrl{align-items:flex-start}.row{justify-content:flex-start}.ch .tools{margin-left:0;width:100%}.hero{padding-top:22px}}
 @media(max-width:400px){.grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.fc .in{transition:none}}
+
+/* v1.1 · сравнение игроков (по образцу страницы турнира) */
+.cmpbtn{position:absolute;left:8px;bottom:8px;height:22px;padding:0 8px;border-radius:11px;border:1px solid var(--line);background:rgba(0,0,0,.45);color:var(--muted);font:700 10px var(--mono);letter-spacing:.06em;cursor:pointer;z-index:3}
+.cmpbtn:hover{color:var(--ink);border-color:var(--sv)}
+.fc.incmp .face{border-color:#26e0ff}.fc.incmp .cmpbtn{background:#26e0ff;color:#05060a;border-color:#26e0ff}
+#cmpbar{position:fixed;left:50%;bottom:18px;transform:translate(-50%,120%);z-index:900;display:flex;gap:8px;align-items:center;padding:8px 8px 8px 14px;background:#11141d;border:1px solid #26e0ff;box-shadow:0 12px 40px rgba(0,0,0,.6);font:600 13px Inter,sans-serif;transition:transform .2s;max-width:calc(100vw - 24px);clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+#cmpbar.on{transform:translate(-50%,0)}
+#cmpbar b{color:#26e0ff}
+#cmpbar button{font:800 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:9px 13px;border:0;background:#26e0ff;color:#05060a;cursor:pointer}
+#cmpbar button.g{background:transparent;color:var(--muted);border:1px solid var(--line)}
+#cmpov{position:fixed;inset:0;z-index:950;background:#05060a;display:none;flex-direction:column}
+#cmpov.on{display:flex}
+#cmpov .bar{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+#cmpov .bar h3{margin:0;font:700 11px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--gd);flex:1;min-width:0}
+#cmpov .bar .tog{flex:none}#cmpov .bar .tog button{white-space:nowrap;padding:10px 10px}
+#cmpov .bar > button{width:40px;height:40px;border:1px solid var(--line);background:var(--bg2);color:var(--gd2);font-size:17px;cursor:pointer}
+#cmpov .body{flex:1;overflow:auto;padding:14px}
+.cmpt{width:100%;border-collapse:collapse;min-width:320px}
+.cmpt th,.cmpt td{padding:8px 8px;border-bottom:1px solid var(--line);text-align:center;font-size:13px;vertical-align:middle}
+.cmpt td.l,.cmpt th.l{text-align:left;color:var(--muted);font:400 11px var(--mono);white-space:nowrap;position:sticky;left:0;background:#05060a;z-index:2}
+.cmpt th{border-bottom:1px solid var(--gd)}
+.cmph{display:flex;flex-direction:column;align-items:center;gap:5px;position:relative;min-width:84px}
+.cmph img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--line)}
+.cmph b{font:700 13px Inter,sans-serif;color:#fff}
+.cmph .x{position:absolute;top:-4px;right:2px;width:20px;height:20px;border-radius:50%;border:1px solid var(--line);background:#11141d;color:var(--muted);font-size:12px;cursor:pointer;line-height:1}
+.cmpt .wr b{font:800 15px var(--mono)}.cmpt .wr small{color:var(--muted);font:400 10px var(--mono);display:block}
+.cmpt .amp{font-size:12px;color:var(--ink)}.cmpt .amp small{display:block;color:var(--muted);font-size:10.5px}
 </style>
 </head>
 <body>
@@ -156,7 +184,7 @@ footer a{color:var(--muted)}
   <div><h4>Роли — цвета карт</h4><div class="r" id="lg-roles"></div></div>
   <div><h4>Роль в шапке</h4><div class="r"><span style="color:#EF4444">Мирный</span><span style="color:#FBBF24">Шериф</span><span style="color:#9CA3AF">Мафия</span><span style="color:#A78BFA">Дон</span><span style="color:#F87171">Красный</span> = мирный + шериф <span style="color:#B8BEC9">Чёрный</span> = мафия + дон <span style="color:#F59E0B">Вскрытие</span> = шериф + дон <span style="color:#e3b04b">Универсал</span> = всё ровно</div></div>
   <div><h4>Медали — место по всей базе маркерев</h4><div class="r"><span class="m1">✦</span> топ-1% <span class="m5">★</span> топ-5% <span class="m10">★</span> топ-10% <span class="m25">●</span> топ-25% <span class="m50">○</span> выше среднего</div></div>
-  <div><h4>Карточка</h4><div class="r"><span>клик или свайп — перевернуть · наведение на амплуа — подсказка</span></div></div>
+  <div><h4>Карточка</h4><div class="r"><span>клик или свайп — перевернуть · наведение на амплуа — подсказка · «+ сравнить» на карточке — до четырёх игроков рядом</span></div></div>
 </div>
 <details class="how"><summary>Как читать карточки: амплуа, стили и пороги</summary><div class="how-grid" id="howgrid"></div></details>
 <nav class="nav" id="nav"></nav>
@@ -169,7 +197,7 @@ const D={"meta":{"date":"2026-09-08","source":"markery.online (снимок 08.0
 const RK=['C','S','M','D'], RN={C:'Мирный',S:'Шериф',M:'Мафия',D:'Дон'}, RC={C:'#EF4444',S:'#FBBF24',M:'#9CA3AF',D:'#A78BFA'};
 const TC={L:'#FFD700',S:'#FF8C00',A:'#8DC63F',B:'#4A90D9',C:'#A78BFA',D:'#9CA3AF',E:'#6B7280',F:'#4B5563'};
 const LC={red:'#F87171',black:'#B8BEC9',open:'#F59E0B',uni:'#e3b04b'};
-let per='ly'; const flipped=new Set(); const closed=new Set();
+let per='ly'; const flipped=new Set(); const closed=new Set(); const cmp=new Set();
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function medal(t){ if(t==null) return ''; if(t<=1) return '<span class="m1" title="топ-1% базы">✦</span>'; if(t<=5) return '<span class="m5" title="топ-5% базы">★</span>'; if(t<=10) return '<span class="m10" title="топ-10% базы">★</span>'; if(t<=25) return '<span class="m25" title="топ-25% базы">●</span>'; if(t<=50) return '<span class="m50" title="выше среднего по базе">○</span>'; return ''; }
 function roleLabel(P,A){ const z={}; for(const rk of RK){const r=P[rk]; if(r.g>=A.min) z[rk]=(r.wr-A[rk].wr)/A[rk].wr_sd;} const ks=Object.keys(z); if(ks.length<2) return null;
@@ -190,7 +218,7 @@ function card(p){
   const ds=p.desc?p.desc[per]:null;
   const ava=p.avatar?`<img class="ava" src="${esc(p.avatar)}" alt="${esc(p.nick)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<div class=ava-ph>${esc(p.nick[0])}</div>'">`:`<div class="ava-ph">${esc(p.nick[0])}</div>`;
   const front=`<div class="face front"><div class="fhead" style="padding:10px 13px 0"><div class="nick">${esc(p.nick)}</div>${badge}${labHtml(p)}</div><div class="avaw">${ava}</div><div class="fbody"><div class="meta">${meta}</div>
-    ${ds?`<div class="famp"><b style="color:${rc}">${tipSpan(ds.role.name)}</b> <span class="st">· ${tipSpan(ds.style.name,'r')}</span><span class="f">${esc(ds.role.fact)}. ${esc(ds.style.fact[0].toUpperCase()+ds.style.fact.slice(1))}.</span></div>`:`<div class="famp" style="color:var(--muted)">единственный без профиля на маркерях</div>`}</div><button class="flipbtn" title="перевернуть" aria-label="перевернуть">↻</button></div>`;
+    ${ds?`<div class="famp"><b style="color:${rc}">${tipSpan(ds.role.name)}</b> <span class="st">· ${tipSpan(ds.style.name,'r')}</span><span class="f">${esc(ds.role.fact)}. ${esc(ds.style.fact[0].toUpperCase()+ds.style.fact.slice(1))}.</span></div>`:`<div class="famp" style="color:var(--muted)">единственный без профиля на маркерях</div>`}</div><button class="flipbtn" title="перевернуть" aria-label="перевернуть">↻</button><button class="cmpbtn" data-c="${p.uid}" title="в сравнение">${cmp.has(p.uid)?'✓ сравн.':'+ сравнить'}</button></div>`;
   let body='';
   if(!p.pid) body=`<div class="nodata">нет профиля на маркерях — единственный в составе. Загадка в чистом виде.</div>`;
   else { const P=p[per], A=D.avg[per];
@@ -203,7 +231,7 @@ function card(p){
       <div class="hd"><span></span><span>к среднему турнира</span><span>WR</span><span>доп</span><span></span></div><div class="bars">${rows}</div>
       <div class="pm">${ds.plus.map(x=>`<span class="p">${esc(x)}</span>`).join('')}${ds.minus.map(x=>`<span class="m">${esc(x)}</span>`).join('')}</div>`; }
   const back=`<div class="face back"><div class="head"><div class="nick">${esc(p.nick)}</div>${badge}${labHtml(p)}</div><div class="sub2">${meta}</div><div class="body">${body}</div><button class="flipbtn" title="перевернуть" aria-label="перевернуть">↻</button></div>`;
-  return `<div class="fc ${flipped.has(p.uid)?'flipped':''}" data-uid="${p.uid}" style="--acc:${acc}"><div class="in">${front}${back}</div></div>`;
+  return `<div class="fc ${flipped.has(p.uid)?'flipped':''}${cmp.has(p.uid)?' incmp':''}" data-uid="${p.uid}" style="--acc:${acc}"><div class="in">${front}${back}</div></div>`;
 }
 function section(cc){ const ps=D.players.filter(p=>p.cc===cc); const [name,flag]=D.meta.countries[cc]; const acc=D.meta.accent[cc];
   const elos=ps.filter(p=>p.elo).map(p=>p.elo); const avg=Math.round(elos.reduce((a,b)=>a+b,0)/elos.length); const mx=Math.max(...elos); const top=ps.filter(p=>p.mg_rank).length;
@@ -229,6 +257,7 @@ main.addEventListener('touchstart',e=>{const t=e.touches[0];tx=t.clientX;ty=t.cl
 main.addEventListener('touchend',e=>{const t=e.changedTouches[0]; const dx=t.clientX-tx, dy=t.clientY-ty; if(Math.abs(dx)>45&&Math.abs(dy)<40){const fc=e.target.closest('.fc'); if(fc){toggleFlip(fc); e.preventDefault();}}},{passive:false});
 function toggleFlip(fc){ const uid=+fc.dataset.uid; if(flipped.has(uid)) flipped.delete(uid); else flipped.add(uid); fc.classList.toggle('flipped'); }
 main.addEventListener('click',e=>{
+  const cb=e.target.closest('.cmpbtn'); if(cb){ e.stopPropagation(); toggleCmp(+cb.dataset.c); return; }
   const tip=e.target.closest('.tip'); if(tip){ e.stopPropagation(); if(tipFor===tip && tipPinned) hideTip(); else { showTip(tip); tipPinned=true; } return; }
   hideTip();
   const fs=e.target.closest('.flipsec'); if(fs){ e.stopPropagation(); const cc=fs.dataset.cc; const ps=D.players.filter(p=>p.cc===cc); const allF=ps.every(p=>flipped.has(p.uid)); ps.forEach(p=>{ if(allF) flipped.delete(p.uid); else flipped.add(p.uid); }); document.querySelectorAll(`#c-${cc} .fc`).forEach(fc=>fc.classList.toggle('flipped',!allF)); return; }
@@ -246,7 +275,36 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.tip')) hideTip(); 
 window.addEventListener('scroll',hideTip,{passive:true});
 document.getElementById('flipAll').onclick=()=>{ const all=D.players.every(p=>flipped.has(p.uid)); D.players.forEach(p=>{ if(all) flipped.delete(p.uid); else flipped.add(p.uid); }); document.querySelectorAll('.fc').forEach(fc=>fc.classList.toggle('flipped',!all)); };
 document.getElementById('collAll').onclick=()=>{ if(closed.size===D.meta.order.length) closed.clear(); else D.meta.order.forEach(cc=>closed.add(cc)); render(); };
-document.querySelectorAll('[data-per]').forEach(b=>b.onclick=()=>{per=b.dataset.per;document.querySelectorAll('[data-per]').forEach(x=>x.classList.toggle('on',x===b));render();});
+document.querySelectorAll('[data-per]').forEach(b=>b.onclick=()=>setPer(b.dataset.per));
+
+/* ── v1.1 сравнение ── */
+const cmpbar=document.createElement('div'); cmpbar.id='cmpbar'; document.body.appendChild(cmpbar);
+const cmpov=document.createElement('div'); cmpov.id='cmpov'; document.body.appendChild(cmpov);
+function toggleCmp(uid){ if(cmp.has(uid)) cmp.delete(uid); else { if(cmp.size>=4){ showToast('Сравниваем до четырёх игроков — уберите одного'); return; } cmp.add(uid); }
+  document.querySelectorAll(`.fc[data-uid="${uid}"]`).forEach(fc=>{ fc.classList.toggle('incmp',cmp.has(uid)); const b=fc.querySelector('.cmpbtn'); if(b) b.textContent=cmp.has(uid)?'✓ сравн.':'+ сравнить'; });
+  drawCmpBar(); if(cmpov.classList.contains('on')) drawCmp(); }
+function drawCmpBar(){ const n=cmp.size; cmpbar.classList.toggle('on',n>0);
+  cmpbar.innerHTML=`<span>В сравнении: <b>${n}</b>${n<2?' · добавьте ещё':''}</span><button ${n<2?'disabled style="opacity:.4"':''} onclick="openCmp()">Сравнить</button><button class="g" onclick="clearCmp()">сброс</button>`; }
+function clearCmp(){ [...cmp].forEach(u=>toggleCmp(u)); }
+function openCmp(){ if(cmp.size<2) return; cmpov.classList.add('on'); document.body.style.overflow='hidden'; drawCmp(); }
+function closeCmp(){ cmpov.classList.remove('on'); document.body.style.overflow=''; }
+function drawCmp(){ const ps=[...cmp].map(u=>D.players.find(p=>p.uid===u)).filter(Boolean); const A=D.avg[per];
+  const cell=(p,k)=>{ const r=p[per]&&p[per][k]; if(!r||!r.g||r.g<A.min) return '<td class="wr" style="color:var(--dim2)">—</td>'; const d=r.wr-A[k].wr; const db=r.dop-A[k].dop;
+    return `<td class="wr"><b style="color:${RC[k]}">${Math.round(r.wr)}%</b> ${medal(r.wr_top)}<small>${d>=0?'+':''}${d.toFixed(0)} к турниру · доп ${db>=0?'+':''}${db.toFixed(0)}% · ${r.g} игр</small></td>`; };
+  const rl=p=>{ if(!p.pid||!p[per]) return '—'; const l=roleLabel(p[per],A); return l?`<span style="color:${l.color};font:800 10px var(--mono);letter-spacing:.14em;text-transform:uppercase">${l.name}</span>`:'—'; };
+  cmpov.innerHTML=`<div class="bar"><h3>Сравнение · ${per==='ly'?'12 месяцев':'вся карьера'}</h3><span class="tog" style="display:inline-flex"><button class="${per==='ly'?'on':''}" onclick="setPer('ly')">12 мес</button><button class="${per==='at'?'on':''}" onclick="setPer('at')">карьера</button></span><button onclick="closeCmp()" aria-label="закрыть">✕</button></div>
+    <div class="body"><div style="overflow:auto"><table class="cmpt"><thead><tr><th class="l"></th>${ps.map(p=>`<th><div class="cmph">${p.avatar?`<img src="${esc(p.avatar)}" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">`:'<div class="ava-ph" style="width:44px;height:44px;font-size:18px">'+esc(p.nick[0])+'</div>'}<b>${D.meta.countries[p.cc][1]} ${esc(p.nick)}</b><button class="x" onclick="toggleCmp(${p.uid})" title="убрать">×</button></div></th>`).join('')}</tr></thead><tbody>
+    <tr><td class="l">ELO · тир</td>${ps.map(p=>`<td><b style="color:var(--acc,#fff);font:800 15px var(--mono)">${p.elo||'—'}</b> ${p.tier?`<span class="tierb" style="background:${TC[p.tier]||'#555'}">${p.tier}</span>`:''}${p.mg_rank?`<div style="font:400 10px var(--mono);color:var(--muted)">mafgame топ-${p.mg_rank}</div>`:''}</td>`).join('')}</tr>
+    <tr><td class="l">Роль в турнире</td>${ps.map(p=>`<td>${rl(p)}</td>`).join('')}</tr>
+    ${RK.map(k=>`<tr><td class="l" style="color:${RC[k]}">${RN[k]}</td>${ps.map(p=>cell(p,k)).join('')}</tr>`).join('')}
+    <tr><td class="l">Амплуа · стиль</td>${ps.map(p=>`<td class="amp">${p.desc?esc(p.desc[per].role.name)+'<small>'+esc(p.desc[per].style.name)+'</small>':'—'}</td>`).join('')}</tr>
+    <tr><td class="l">Партий</td>${ps.map(p=>`<td>${p[per]&&p[per].A?p[per].A.g:'—'}</td>`).join('')}</tr>
+    <tr><td class="l">Сильная сторона</td>${ps.map(p=>`<td class="amp" style="text-align:left">${p.desc&&p.desc[per].plus[0]?esc(p.desc[per].plus[0]):'—'}</td>`).join('')}</tr>
+    <tr><td class="l">Слабая сторона</td>${ps.map(p=>`<td class="amp" style="text-align:left">${p.desc&&p.desc[per].minus[0]?esc(p.desc[per].minus[0]):'—'}</td>`).join('')}</tr>
+    </tbody></table></div><p style="font-size:11.5px;color:var(--muted);margin-top:12px">Процент побед в роли за выбранный период; мелким — отличие от среднего участника турнира и как часто получает доп относительно турнира; медаль — место по всей базе маркерев. Роль учитываем от ${A.min} партий.</p></div>`; }
+function setPer(v){ per=v; document.querySelectorAll('[data-per]').forEach(x=>x.classList.toggle('on',x.dataset.per===v)); render(); if(cmpov.classList.contains('on')) drawCmp(); }
+function showToast(t){ let el=document.getElementById('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; el.style.cssText='position:fixed;left:50%;bottom:70px;transform:translateX(-50%);z-index:999;background:#11141d;border:1px solid var(--line);color:var(--ink);font:500 13px Inter,sans-serif;padding:10px 14px;max-width:calc(100vw - 24px)'; document.body.appendChild(el); } el.textContent=t; el.style.display='block'; clearTimeout(el._t); el._t=setTimeout(()=>el.style.display='none',2500); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeCmp(); });
 render();
 </script>
 </body>
