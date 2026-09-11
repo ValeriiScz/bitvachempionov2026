@@ -458,6 +458,29 @@
   .chs.on{border-color:var(--gold);} .chs.on .chk{color:var(--gold);}
   a.chs:hover{border-color:var(--cyan);} a.chs:hover b{color:var(--cyan);}
   @media(max-width:480px){.chooser{grid-template-columns:1fr;}}
+
+  .pk{cursor:pointer;}
+  .peekbd{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99980;}
+  .peekbd.on{display:block;}
+  .peek{position:fixed;left:50%;bottom:0;transform:translate(-50%,110%);width:min(440px,100vw);z-index:99985;background:#0f121b;border:1px solid var(--line);border-bottom:0;padding:12px 14px calc(14px + env(safe-area-inset-bottom));transition:transform .2s ease;
+    clip-path:polygon(12px 0,100% 0,100% 100%,0 100%,0 12px);box-shadow:0 -12px 40px rgba(0,0,0,.6);}
+  .peek.open{transform:translate(-50%,0);}
+  .pkh{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+  .pkh b{font:700 13px var(--disp);color:var(--gold-hi);}
+  .pkj{font:400 11px var(--mono);color:var(--dim);}
+  .pkx{margin-left:auto;width:32px;height:32px;border:1px solid var(--line2);background:var(--panel);color:var(--gold-hi);font-size:14px;cursor:pointer;}
+  .pkl{display:grid;grid-template-columns:1fr 1fr;gap:3px 10px;}
+  .pkr{display:flex;align-items:center;gap:6px;padding:4px 4px;min-width:0;cursor:pointer;border-radius:3px;}
+  .pkr:hover{background:rgba(255,255,255,.05);}
+  .pkr.me{background:rgba(227,176,75,.16);} .pkr.my{box-shadow:inset 0 0 0 1px var(--gold);}
+  .pks{font:700 9px var(--mono);color:var(--dim);width:12px;text-align:right;flex:none;}
+  .pkr img{width:24px;height:24px;border-radius:50%;object-fit:cover;flex:none;background:#11141d;}
+  .pkn{font-size:12.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;}
+  .pkr .tpill{font-size:8.5px;padding:0 4px;min-width:0;flex:none;}
+  .pke{font:400 10.5px var(--mono);color:var(--mut);flex:none;}
+  .pkgo{width:100%;margin-top:10px;font-size:12px;}
+  @media(min-width:1025px){.peek{bottom:auto;top:50%;transform:translate(-50%,-40%) scale(.98);opacity:0;border-bottom:1px solid var(--line);clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);transition:transform .15s,opacity .15s;} .peek.open{transform:translate(-50%,-50%) scale(1);opacity:1;}}
+  @media(max-width:520px){.pkl{grid-template-columns:1fr;} .pkr{padding:3px 4px;} .pkn{font-size:13px;}}
   /* категории силы */
   .kb{display:inline-flex;align-items:center;gap:5px;font:700 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid;background:rgba(0,0,0,.35);white-space:nowrap;
     clip-path:polygon(4px 0,100% 0,100% calc(100% - 4px),calc(100% - 4px) 100%,0 100%,0 4px);}
@@ -688,6 +711,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   </div>
 </div>
 <div class="cardviewer" id="cardViewer" role="dialog" aria-modal="true"></div>
+<div class="peekbd" id="peekbd"></div><div class="peek" id="peek" role="dialog"></div>
 <script src="data/streams.js"></script>
 <script src="data/live.js"></script>
 <script>
@@ -1530,21 +1554,21 @@ function computeStrength(){
   D.catRange=[null,1,2,3,4,5].map(c=>{if(!c)return null;const v=tabs.filter(x=>x.cat===c).map(x=>x.avg);return v.length?{min:Math.min(...v),max:Math.max(...v),n:v.length}:null;});
 }
 function catBadge(g,t,withElo){const T=D.TS&&D.TS[g+'-'+t];if(!T)return '';const c=CAT[T.cat];
-  return `<span class="kb ${c.k}" title="${c.n} стол · средний ELO ${Math.round(T.avg)} · #${T.rank} из ${D.tblN} столов квалификации">${c.n}${withElo?` <small>Ø ${Math.round(T.avg)}</small>`:''}</span>`;}
-function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const c=CATO[o.cat];return `<span class="kb ${c.k}" title="соперники без вас: средний ELO ${Math.round(o.avg)}">${c.n}</span>`;}
+  return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${t}" title="${c.n} стол · средний ELO ${Math.round(T.avg)} · #${T.rank} из ${D.tblN} столов квалификации">${c.n}${withElo?` <small>Ø ${Math.round(T.avg)}</small>`:''}</span>`;}
+function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const c=CATO[o.cat];return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${o.t}" data-p="${esc(nick)}" title="соперники без вас: средний ELO ${Math.round(o.avg)}">${c.n}</span>`;}
 function luckVerdict(L){const d=L.d;const ad=Math.abs(Math.round(d));
   if(d>=22)return {t:'экстремальная рассадка',s:`соперники в среднем на ${ad} ELO сильнее, чем ждали бы при случайном жребии`,k:'k1'};
   if(d>=10)return {t:'плотная рассадка',s:`соперники на ${ad} ELO сильнее ожидания`,k:'k2'};
   if(d<=-22)return {t:'спокойная рассадка',s:`соперники на ${ad} ELO спокойнее, чем ждали бы при случайном жребии`,k:'k5'};
   if(d<=-10)return {t:'рассадка помягче',s:`соперники на ${ad} ELO спокойнее ожидания`,k:'k4'};
   return {t:'ровная рассадка',s:`соперники практически как ждали (${d>=0?'+':''}${Math.round(d)} ELO к ожиданию)`,k:'k3'};}
-function luckSquares(L,big){return `<span class="lsq${big?' big':''}">`+L.list.map(x=>`<i class="${CATO[x.cat].k}" title="игра ${x.g} · стол ${ROMAN[x.t]} · ${CATO[x.cat].n.toLowerCase()} рассадка (соперники Ø ${Math.round(x.avg)})"><b>${big?x.g:''}</b></i>`).join('')+'</span>';}
+function luckSquares(L,big){return `<span class="lsq${big?' big':''}">`+L.list.map(x=>`<i class="pk ${CATO[x.cat].k}" data-g="${x.g}" data-t="${x.t}" data-p="${esc(x.n)}" title="игра ${x.g} · стол ${ROMAN[x.t]} · ${CATO[x.cat].n.toLowerCase()} рассадка (соперники Ø ${Math.round(x.avg)})"><b>${big?x.g:''}</b></i>`).join('')+'</span>';}
 function luckPanel(name){const L=D.LUCK&&D.LUCK[name];if(!L)return '';const v=luckVerdict(L);
   const dist=[5,4,3,2,1].map(c=>`<span class="kb ${CATO[c].k}">${CATO[c].n} <b>${L.cnt[c]}</b></span>`).join('');
   return `<div class="panel"><h3>Рассадка · сила соперников</h3>
     <div class="luckhead"><span class="kb big ${v.k}">${v.t}</span><span class="jbig">${Math.round(L.avg)}<small> средний ELO девяти соперников · ждали ${Math.round(L.exp)} · #${L.rank} из ${D.luckOrder.length} по плотности</small></span></div>
     <div class="note" style="margin:6px 0 10px">${v.s}. Считаем без самого игрока, а «ждали» — это его личное ожидание при случайном жребии: (сумма ELO всех − свой)/54. Так топы не выглядят «в мягкой рассадке» только потому, что не могут сидеть против самих себя.</div>
-    <div class="nk" style="margin-bottom:6px">По играм (тап — подсказка)</div>${luckSquares(L,true)}
+    <div class="nk" style="margin-bottom:6px">По играм (тап — кто за столом)</div>${luckSquares(L,true)}
     <div class="nk" style="margin:12px 0 6px">Сколько раз в какой категории</div><div class="kbrow">${dist}</div>
     <div class="note" style="margin-top:8px"><span class="lnk" style="cursor:pointer" onclick="show('luck')">Все 55 игроков по рассадке →</span></div></div>`;}
 function chooserPanel(){return `<div class="chooser"><div class="chs on"><span class="chk">вы здесь</span><b>Страница турнира</b><small>рассадка и сила столов · карточки · live-результаты · судьи</small></div><a class="chs" href="wc2026-cards.html"><span class="chk">v1 · 08.09</span><b>Карточки по странам →</b><small>13 сборных, перевёртыши, «12 месяцев / карьера» — та самая страница, как была</small></a></div>`;}
@@ -1691,6 +1715,18 @@ function drawViewer(anim){const ov=document.getElementById('cardViewer');const p
   b.scrollTop=0;}
 document.addEventListener('keydown',e=>{if(!vwOpen)return;if(e.key==='Escape')closeCard();else if(e.key==='ArrowRight')vwGo(1);else if(e.key==='ArrowLeft')vwGo(-1);});
 window.addEventListener('popstate',()=>{if(vwOpen)closeCard(true);});
+
+/* ── превью стола по тапу на плашку категории / квадратик (мини-шторка) ── */
+function openPeek(g,t,me){const names=((D.seatByGame[g]||{})[t])||[];if(!names.length)return;const T=D.TS&&D.TS[g+'-'+t];const c=T?CAT[T.cat]:null;const j=D.judges[t];
+  const rows=names.map((n,i)=>{const R=D.RATE[n]||{},I=D.INFO[n]||{};return `<div class="pkr${n===me?' me':''}${n===myPlayer&&n!==me?' my':''}" data-p="${esc(n)}"><span class="pks">${i+1}</span><img src="${esc(avOf(n)||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'"><span class="pkn">${I.flag||''} ${esc(n)}</span>${R.tier?`<span class="tpill tp-${R.tier}">${R.tier}</span>`:''}<span class="pke">${R.elo?Math.round(R.elo):'—'}</span></div>`;}).join('');
+  const el=document.getElementById('peek');el.innerHTML=`<div class="pkh"><b>Игра ${g} · стол ${ROMAN[t]||t}</b>${c?`<span class="kb ${c.k}">${c.n}</span>`:''}${j?`<span class="pkj">${esc(j.name)}</span>`:''}<button class="pkx" onclick="closePeek()" aria-label="закрыть">✕</button></div><div class="pkl">${rows}</div><button class="btn ghost pkgo" data-g="${g}" data-t="${t}">открыть в рассадке →</button>`;
+  el.querySelector('.pkgo').onclick=()=>{closePeek();seatJump=g;show('seating');setTimeout(()=>{const w=[...document.querySelectorAll('#seatArea .twrap')].find(x=>x.querySelector('.tnum')&&x.querySelector('.tnum').textContent.trim()==='Стол '+ROMAN[t]);if(w){w.style.boxShadow='0 0 0 2px var(--gold)';w.scrollIntoView({block:'center',behavior:'smooth'});setTimeout(()=>w.style.boxShadow='',2500);}},120);};
+  el.querySelectorAll('.pkr').forEach(r=>r.onclick=()=>{closePeek();goPlayer(r.dataset.p);});
+  el.classList.add('open');document.getElementById('peekbd').classList.add('on');}
+function closePeek(){document.getElementById('peek').classList.remove('open');document.getElementById('peekbd').classList.remove('on');}
+document.addEventListener('click',e=>{const k=e.target.closest('.pk[data-g]');if(!k)return;if(e.target.closest('.smc'))return;e.preventDefault();e.stopPropagation();openPeek(+k.dataset.g,+k.dataset.t,k.dataset.p||curPlayer||null);},true);
+document.getElementById('peekbd').onclick=closePeek;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePeek();});
 /* ── Поделиться: Web Share (PWA/телефон) → буфер → показать ссылку ── */
 function sharePage(hash){const h=hash!=null?hash:(location.hash||'');const url=location.origin+location.pathname+h;
   const title='Чемпионат мира по мафии 2026 — DOVOD';const text='ЧМ-2026, Прага: рассадка, сила столов, карточки игроков, live-результаты';
