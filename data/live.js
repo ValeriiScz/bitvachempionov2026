@@ -133,7 +133,7 @@ window.loadGames = async function(t){
           const dp=JSON.parse(m[1].replace(/&quot;/g,'"').replace(/&amp;/g,'&').replace(/&#039;/g,"'"));
           const conv=convertInertia(dp.props&&dp.props.games, t, fcoef);
           if(conv){
-            injectRefresh(); if(!window._autoref){window._autoref=1;setTimeout(()=>location.reload(),600000);}
+            injectRefresh(); if(!window._autoref){window._autoref=1;setTimeout(()=>location.reload(),120000);/* v2.3: было 10 мин — на ЧМ игроки ждали результат слишком долго */}
             // защита: принимаем свежий снимок только если он НЕ регресс относительно последнего хорошего
             if(notRegression(conv, saved)){
               try{ localStorage.setItem(LSK, JSON.stringify(conv)); }catch(e){}

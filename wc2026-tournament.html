@@ -1437,6 +1437,47 @@ function jdBias(quals){
   const c2='<b>7. Щедрость по тирам.</b> '+(allOut.length?('Выше своего тира заметно: '+allOut.join('; ')+'.'):'Внутри тиров выбросов нет — допы распределены ровно относительно уровня игроков.');
   return {html:linksHtml+tiersHtml,c1,c2};
 }
+
+/* ── Журнал изменений протоколов (v13.9, 12.09.2026) ────────────────────────
+   Робот .github/scripts/wc710_audit.py снимает протоколы всех столов каждые 5 минут
+   и пишет расхождения в data/wc710_audit.json. Здесь — показ внизу судейского раздела:
+   видно, кому и когда поменяли балл, роль, доп или штраф (апелляции и правки судей).
+   Живёт под тем же паролем, что и весь раздел. */
+let auditOnlyEdits=true;
+function renderAudit(area){
+  if(!area) return;
+  const box=document.createElement('div');box.className='panel';box.id='auditPanel';
+  box.innerHTML='<h3>Журнал изменений протоколов</h3><div class="note" style="margin:0">Загружаю…</div>';
+  area.appendChild(box);
+  fetch('data/wc710_audit.json?cb='+Date.now(),{cache:'no-store'})
+    .then(r=>r.ok?r.json():null)
+    .then(j=>{ auditData=(j&&j.events)||[]; auditUpd=(j&&j.updated)||null; paintAudit(); })
+    .catch(()=>{ const b=document.getElementById('auditPanel'); if(b)b.innerHTML='<h3>Журнал изменений протоколов</h3><div class="note" style="margin:0">Журнала пока нет — робот начнёт писать его с первого снятого протокола.</div>'; });
+}
+let auditData=[],auditUpd=null;
+function auditTime(ts){try{const d=new Date(ts);return d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Prague'});}catch(e){return ts;}}
+function auditDate(ts){try{const d=new Date(ts);return d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'});}catch(e){return '';}}
+function paintAudit(){
+  const box=document.getElementById('auditPanel'); if(!box) return;
+  const all=auditData.slice().reverse();
+  const list=auditOnlyEdits?all.filter(e=>e.kind==='ИЗМЕНЕНИЕ'):all;
+  const edits=all.filter(e=>e.kind==='ИЗМЕНЕНИЕ').length;
+  const rows=list.slice(0,300).map(e=>`<tr class="${e.kind==='ИЗМЕНЕНИЕ'?'hotrow':'dim'}">
+      <td class="gn">${auditDate(e.ts)} ${auditTime(e.ts)}</td>
+      <td>${e.stage===1?'кв.':(e.stage===2?'п/ф':'фин.')} ${e.game}</td>
+      <td>${ROMAN[e.table]||e.table}${e.seat?' · '+e.seat:''}</td>
+      <td>${esc(e.player||'')}</td>
+      <td>${esc(e.label||e.field)}</td>
+      <td>${esc(String(e.was))} → <b>${esc(String(e.now))}</b></td></tr>`).join('');
+  box.innerHTML=`<h3>Журнал изменений протоколов</h3>
+    <div class="note" style="margin:0 0 8px">Робот снимает протоколы всех столов каждые 5 минут и сравнивает со своим прошлым снимком. Сюда попадает всё, что изменилось после первичной простановки: апелляции, правки баллов и ролей, снятые места. ${auditUpd?'Последний снимок — '+auditDate(auditUpd)+' '+auditTime(auditUpd)+' (Прага).':''}</div>
+    <div class="ggroups" style="margin-bottom:8px"><button class="rbtn ${auditOnlyEdits?'active':''}" id="auEd">Только правки (${edits})</button><button class="rbtn ${auditOnlyEdits?'':'active'}" id="auAll">Все события (${all.length})</button></div>
+    ${list.length?`<div class="scrollT"><table class="tbl full" style="font-size:12px"><thead><tr><th>Время</th><th>Игра</th><th>Стол · место</th><th>Игрок</th><th>Что</th><th>Было → стало</th></tr></thead><tbody>${rows}</tbody></table></div>`
+      :'<div class="note" style="margin:0">Пока пусто — изменений после простановки не было.</div>'}`;
+  const ed=document.getElementById('auEd'),al=document.getElementById('auAll');
+  if(ed)ed.onclick=()=>{auditOnlyEdits=true;paintAudit();};
+  if(al)al.onclick=()=>{auditOnlyEdits=false;paintAudit();};
+}
 function paintJudges(){
   const area=document.getElementById('jdArea');if(!area)return;
   const quals=(D.gplist||[]).filter(g=>(g.stage||'Квалификация')==='Квалификация');
@@ -1448,7 +1489,7 @@ function paintJudges(){
       const b=(st.result==='W')?T.w:T.l;b[0]++;if(a>0){b[1]++;b[2]+=a;}
       if(st.role&&T.roles[st.role]){T.roles[st.role][0]++;if(a>0)T.roles[st.role][1]+=a;}});}));
   const keys=Object.keys(tabs).map(Number).sort((a,b)=>a-b);
-  if(!keys.length){area.innerHTML=`<div class="panel"><div class="stub"><div class="si">&#9878;</div><h3>Пока нечего измерять</h3><p>Цифры появятся после первых сыгранных игр. Судьи столов: ${Object.keys(D.judges).sort().map(k=>'стол '+(ROMAN[k]||k)+' — '+esc((D.judges[k]||{}).name||'?')).join(' · ')||'—'}.</p><p>До старта можно посмотреть на демо-данных: «Обзор» → Демо.</p></div></div>`;return;}
+  if(!keys.length){area.innerHTML=`<div class="panel"><div class="stub"><div class="si">&#9878;</div><h3>Пока нечего измерять</h3><p>Цифры появятся после первых сыгранных игр. Судьи столов: ${Object.keys(D.judges).sort().map(k=>'стол '+(ROMAN[k]||k)+' — '+esc((D.judges[k]||{}).name||'?')).join(' · ')||'—'}.</p><p>До старта можно посмотреть на демо-данных: «Обзор» → Демо.</p></div></div>`;renderAudit(area);return;}
   const per=keys.map(t=>{const T=tabs[t];return {t,T,
     dpg:T.games?T.posSum/T.games:0,
     cov:T.seats?T.pos/T.seats*100:0,
@@ -1515,6 +1556,7 @@ function paintJudges(){
    ${bias.html}
    ${conclBlock}
    <div class="note" style="margin-top:10px">Зачем это: штрафы в федерации стандартизированы, а плюсовые допы судьи ставят в разной манере. Если один стол системно шире или уже других — таблица начинает зависеть от того, за какой стол игрока посадило расписание. Эта страница делает почерк судей видимым — и для главного судьи, и для игроков.</div>`;
+  renderAudit(area);
 }
 function stub(id){const s=SECTIONS.find(x=>x.id===id)||{};
   return `<div class="view"><div class="secttl">${s.ic||'◆'} ${esc(s.lab||'')}</div><div class="panel"><div class="stub"><div class="si">${s.ic||'◆'}</div><h3>Откроется после старта</h3>
