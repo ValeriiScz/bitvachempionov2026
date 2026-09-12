@@ -23,6 +23,17 @@ window.normRole = function(r){
 };
 window.convertInertia = function(g, t, fc){
   if(!g||!g.seats) return null;
+  /* v2.4 (12.09.2026): балл за победу.
+     Официальная сетка mafgame даёт за победу 0.75 — проверено на 634/694/702/766:
+     в seats.game_points ровно два значения, 0 и 0.75, и сумма по игроку совпадает
+     с официальной таблицей (total_score = 0.75×победы + допы + ЛХ − штрафы + Ci,
+     финальные игры ×final_coef; сверено на дне 3 ЧЕ-634 — 10 строк из 10 до цента).
+     НО платформа проставляет game_points только при пересчёте результатов: на идущем ЧМ
+     у всех 550 мест ноль, хотя победители столов уже известны. Поэтому: если победа стола
+     известна, а баллы за победу на столе не проставлены — начисляем 0.75 сами.
+     Как только mafgame проставит свои — берём их (условие «все нули» перестанет выполняться). */
+  const WIN_PTS = 0.75;
+  let winSelf = false;
   fc=+fc||1; // коэффициент финала: офиц. таблица mafgame умножает баллы финальных игр (напр. x1.3)
   const stages={};
   for(const k in g.seats){
@@ -73,7 +84,13 @@ window.convertInertia = function(g, t, fc){
           const redW=seats.some(x=>(x.role==='Citizen'||x.role==='Sheriff')&&x.wpts>0);
           winner=blackW?'black_win':(redW?'red_win':'unknown');
         }
-        if(winner!=='unknown'&&hasRoles) seats.forEach(x=>{const black=(x.role==='Mafia'||x.role==='Don');x.result=((winner==='black_win')===black)?'W':'L';});
+        if(winner!=='unknown'&&hasRoles){
+          seats.forEach(x=>{const black=(x.role==='Mafia'||x.role==='Don');x.result=((winner==='black_win')===black)?'W':'L';});
+          if(seats.every(x=>!x.wpts)){ // платформа ещё не проставила баллы за победу — считаем сами
+            seats.forEach(x=>{ if(x.result==='W'){ x.wpts=+(WIN_PTS*k).toFixed(4); x.sigma=+(x.wpts+x.aps+x.ci).toFixed(4); } });
+            winSelf = true;
+          }
+        }
         tables.push({table_num:tb,winner,seats});
       });
       if(tables.length) out.push({title:(st===1?'Game ':stageName(st)+' ')+gm,stage:label,tables}); // игру без столов пропускаем
@@ -81,7 +98,8 @@ window.convertInertia = function(g, t, fc){
   });
   if(!out.length) return null;
   const played=out.filter(x=>x.tables.length&&x.tables.every(t=>t.winner!=='unknown')).length;
-  return {tournament_id:+t,games_played:played,games_total:out.length,games:out,live:true};
+  if(winSelf) window.__winSelf = true;
+  return {tournament_id:+t,games_played:played,games_total:out.length,games:out,live:true,win_self:winSelf};
 };
 function injectRefresh(){
   if(document.getElementById('__refbtn')) return;

@@ -1049,11 +1049,14 @@ function cutRow(cut){return `<tr class="cutrow"><td colspan="20"><span>▲ ${cut
 function paintStages(){
   const top=document.getElementById('stTop');if(!top)return;
   const multi=D.stagesPresent.length>1;
+  /* v14.0: пока mafgame не пересчитал турнир, баллы за победу в его выгрузке нули —
+     live.js начисляет 0.75 сам и поднимает флаг. Говорим об этом читателю прямо. */
+  const winNote = window.__winSelf ? '<div class="note" style="margin:0 0 10px">Баллы за победу (0.75 за игру) мы считаем сами по итогу стола: mafgame проставляет их в выгрузке только при пересчёте турнира. Допы, штрафы и Ci — как их отдаёт платформа. После официального пересчёта цифры сойдутся.</div>' : '';
   const scope=(stStage==='all')?D.gplist:(stStage==='Полуфинал'?D.gplist.filter(g=>['Квалификация','Полуфинал'].includes(g.stage||'Квалификация')):D.gplist.filter(g=>(g.stage||'Квалификация')===stStage));
   if(stGame>scope.length)stGame=0;
   const list=(stGame>0)?scope.slice(0,stGame):scope;
   const agg=aggregateN(list),rows=agg.rows;
-  let ctrl='';
+  let ctrl=winNote;
   if(multi)ctrl+='<div class="rounds">'+['all'].concat(D.stagesPresent).map(st=>`<button class="rbtn stg ${st===stStage?'active':''}" data-st="${st}">${st==='all'?'Итог':STAB[st]}</button>`).join('')+'</div>';
   const rgp=[{lab:'',items:[{g:0,t:'Все'}]}];let rqi=0;scope.forEach((game,i)=>{const stt=game.stage||'Квалификация';let lab;if(stt==='Квалификация'){rqi++;lab=rqi<=gamesDay1()?'День 1':'День 2';}else if(stt==='Полуфинал')lab='Полуфинал';else lab='Финал';if(rgp[rgp.length-1].lab!==lab)rgp.push({lab,items:[]});rgp[rgp.length-1].items.push({g:i+1,t:String(i+1)});});
   ctrl+='<div class="ggroups">'+rgp.map(gr=>`<div class="rgroup"><div class="rglab">${gr.lab||'Игра'}</div><div class="rounds">`+gr.items.map(it=>`<button class="rbtn rg ${stGame===it.g?'active':''}" data-g="${it.g}">${it.t}</button>`).join('')+'</div></div>').join('')+'</div>';
