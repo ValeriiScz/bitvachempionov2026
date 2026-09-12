@@ -516,6 +516,12 @@
   .lgl{display:flex;flex-direction:column;gap:8px;}
   .lgi{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:center;font-size:12.5px;}
   .lgi .lgt{color:var(--ink);font-weight:700;} .lgi .lgd{grid-column:2;color:var(--mut);font-size:11.5px;}
+  .jcm{margin:8px 10px 10px;border-top:1px solid var(--line);padding-top:8px;}
+  .jcm summary{cursor:pointer;font:700 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-hi);list-style:none;}
+  .jcm summary::-webkit-details-marker{display:none;}
+  .jcm summary:before{content:'+ ';color:var(--dim);}
+  .jcm[open] summary:before{content:'– ';}
+  .jcmt{margin-top:6px;font-size:12.5px;line-height:1.5;color:var(--mut);white-space:normal;}
   .hotrowx{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:8px 0;border-top:1px solid var(--line2);font-size:13px;}
   .hotrowx:first-child{border-top:0;padding-top:0;}
   .hotrowx .hotn{flex-basis:100%;font-size:12px;color:var(--mut);line-height:1.7;}
@@ -1097,7 +1103,10 @@ function gameTableHtml(t,gnum,stage){
   const su=(typeof gnum==='number')?streamOf(gnum,t.table_num,stage):null;
   const sb=su?`<a class="strm-sm" href="${esc(su)}" target="_blank" rel="noopener">&#9654; стрим</a>`:'';
   const cb=(!stage||!/Полуфинал|Финал/i.test(String(stage)))?catBadge(gnum,t.table_num,false):'';
-  return `<div class="twrap${wcls}"><div class="thdr"><span class="tnum">Стол ${ROMAN[t.table_num]||t.table_num}</span>${cb} ${wl}${sb}</div><div class="seatgrid gseat">${cells}</div></div>`;
+  /* v14.1: комментарий судьи к столу — mafgame отдаёт его в game_comments, там написано,
+     за что поставлены допы и штрафы. Раньше это было видно только на самом mafgame. */
+  const cm = t.comment ? `<details class="jcm"><summary>Комментарий судьи</summary><div class="jcmt">${esc(String(t.comment)).replace(/\n/g,'<br>')}</div></details>` : '';
+  return `<div class="twrap${wcls}"><div class="thdr"><span class="tnum">Стол ${ROMAN[t.table_num]||t.table_num}</span>${cb} ${wl}${sb}</div><div class="seatgrid gseat">${cells}</div>${cm}</div>`;
 }
 function initGames(){if(jumpGame!=null){gmRound=jumpGame;jumpGame=null;}else{gmRound=(viewMode==='current')?gmCur():0;}if(gmRound<0)gmRound=0;paintGames();highlightJump();}
 function paintGames(){

@@ -33,6 +33,12 @@ window.convertInertia = function(g, t, fc){
      известна, а баллы за победу на столе не проставлены — начисляем 0.75 сами.
      Как только mafgame проставит свои — берём их (условие «все нули» перестанет выполняться). */
   const WIN_PTS = 0.75;
+  /* v2.5 (12.09.2026): бонус первому убитому за запись чёрных — 0.25 за двоих, 0.4 за троих.
+     `best_move` = сколько чёрных записал игрок, убитый первой ночью; проверено на ЧЕ-634:
+     пересчитанный бонус совпал с `best_move_bonus` платформы у всех 44 игроков.
+     Платформа, как и баллы за победу, проставляет его только при пересчёте турнира,
+     поэтому на живом турнире считаем сами — по тому же условию «стол ещё не посчитан». */
+  const BM_BONUS = m => (m >= 3 ? 0.4 : (m === 2 ? 0.25 : 0));
   let winSelf = false;
   fc=+fc||1; // коэффициент финала: офиц. таблица mafgame умножает баллы финальных игр (напр. x1.3)
   const stages={};
@@ -50,7 +56,7 @@ window.convertInertia = function(g, t, fc){
     (((stages[st]=stages[st]||{})[gm]=stages[st][gm]||{})[tb]=stages[st][gm][tb]||[])[seat-1]={
       seat,name:s.original_nickname,role,
       marker:s.killed_first?'first_killed':(bonus-minus>0?'beige':null),
-      aps:+(bonus-minus).toFixed(4),wpts,ci:+ci.toFixed(4),
+      aps:+(bonus-minus).toFixed(4),wpts,ci:+ci.toFixed(4),kf:+s.killed_first||0,bm:+s.best_move||0,bmb:+s.best_move_bonus||0,
       sigma:+(wpts+bonus-minus+ci).toFixed(4),result:null};
   }
   const stKeys=Object.keys(stages).map(Number).sort((a,b)=>a-b);
@@ -84,14 +90,19 @@ window.convertInertia = function(g, t, fc){
           const redW=seats.some(x=>(x.role==='Citizen'||x.role==='Sheriff')&&x.wpts>0);
           winner=blackW?'black_win':(redW?'red_win':'unknown');
         }
+        let selfTable = false; // этот стол платформа ещё не считала — баллы за победу и бонус записи ставим сами
         if(winner!=='unknown'&&hasRoles){
           seats.forEach(x=>{const black=(x.role==='Mafia'||x.role==='Don');x.result=((winner==='black_win')===black)?'W':'L';});
-          if(seats.every(x=>!x.wpts)){ // платформа ещё не проставила баллы за победу — считаем сами
-            seats.forEach(x=>{ if(x.result==='W'){ x.wpts=+(WIN_PTS*k).toFixed(4); x.sigma=+(x.wpts+x.aps+x.ci).toFixed(4); } });
-            winSelf = true;
+          if(seats.every(x=>!x.wpts)){
+            selfTable = true; winSelf = true;
+            seats.forEach(x=>{ if(x.result==='W'){ x.wpts=+(WIN_PTS*k).toFixed(4); } });
           }
         }
-        tables.push({table_num:tb,winner,seats});
+        if(selfTable&&seats.every(x=>!x.bmb)){ // платформа ещё не считала стол — начисляем бонус за запись сами
+          seats.forEach(x=>{ if(x.kf){ const b=BM_BONUS(x.bm); if(b){ x.bmb=+(b*k).toFixed(4); x.aps=+(x.aps+x.bmb).toFixed(4); } } });
+        }
+        seats.forEach(x=>{ x.sigma=+(x.wpts+x.aps+x.ci).toFixed(4); });
+        tables.push({table_num:tb,winner,seats,comment:(g.game_comments&&g.game_comments[st+'-'+gm+'-'+tb])||null});
       });
       if(tables.length) out.push({title:(st===1?'Game ':stageName(st)+' ')+gm,stage:label,tables}); // игру без столов пропускаем
     });
