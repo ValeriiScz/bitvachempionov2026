@@ -107,6 +107,46 @@ window.convertInertia = function(g, t, fc){
       if(tables.length) out.push({title:(st===1?'Game ':stageName(st)+' ')+gm,stage:label,tables}); // игру без столов пропускаем
     });
   });
+  /* ── Ci: компенсация за отстрелы в первую ночь (расчётная) ─────────────────
+     Регламент 7.5.2: Ci = i × 0.4 / B при i ≤ B, иначе 0.4. i — сколько раз игрока
+     убили первой ночью за красного или шерифа на дистанции; B = 40% от сыгранных им
+     игр на этой дистанции, округлённое до целого. Дистанция = стадия (квалификация,
+     полуфинал, финал считаются отдельно).
+     ⚠ Это НАШ расчёт по тексту регламента. Собственные цифры mafgame воспроизвести
+     не удалось: на ЧЕ-634 перебор 12 вариантов (дистанция турнир/стадия, отстрелы все/
+     только за красного, три способа округления) дал максимум 22 совпадения из 54 —
+     значит платформа считает как-то иначе, чем написано. Поэтому: если платформа свой Ci
+     уже проставила — берём её, свой не трогаем; если нет — считаем сами и помечаем
+     расчётным (window.__ciSelf), а страница пишет об этом под таблицей. */
+  let ciSelf = false;
+  (function(){
+    const stages = {};
+    out.forEach(g => { const st = g.stage || 'Квалификация'; (stages[st] = stages[st] || []).push(g); });
+    Object.keys(stages).forEach(st => {
+      const games = stages[st];
+      const platformHasCi = games.some(g => g.tables.some(t => t.seats.some(x => x.ci)));
+      if (platformHasCi) return;                 // платформа посчитала — не лезем
+      const stat = {};                           // ник → {games, hits: [место…]}
+      games.forEach(g => g.tables.forEach(t => t.seats.forEach(x => {
+        if (!x || !x.name) return;
+        const a = stat[x.name] = stat[x.name] || { games: 0, hits: [] };
+        a.games++;
+        if (x.kf && (x.role === 'Citizen' || x.role === 'Sheriff')) a.hits.push(x);
+      })));
+      Object.keys(stat).forEach(n => {
+        const a = stat[n], i = a.hits.length;
+        if (!i) return;
+        const B = Math.round(0.4 * a.games);
+        let ci = (B > 0 && i <= B) ? (i * 0.4 / B) : 0.4;
+        if (st === 'Финал' && fc !== 1) ci *= fc;   // на финале официальный коэффициент бьёт по всем баллам
+        const last = a.hits[a.hits.length - 1];  // всю компенсацию вешаем на последний отстрел,
+        last.ci = +ci.toFixed(4);                // чтобы сумма по игроку была ровно Ci
+        last.sigma = +(last.wpts + last.aps + last.ci).toFixed(4);
+        ciSelf = true;
+      });
+    });
+  })();
+  if(ciSelf) window.__ciSelf = true;
   if(!out.length) return null;
   const played=out.filter(x=>x.tables.length&&x.tables.every(t=>t.winner!=='unknown')).length;
   if(winSelf) window.__winSelf = true;
