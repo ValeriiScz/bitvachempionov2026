@@ -129,6 +129,7 @@ window.convertInertia = function(g, t, fc){
       const stat = {};                           // ник → {games, hits: [место…]}
       games.forEach(g => g.tables.forEach(t => t.seats.forEach(x => {
         if (!x || !x.name) return;
+        if (!x.result) return;                  // игра ещё не сыграна — в знаменатель не идёт
         const a = stat[x.name] = stat[x.name] || { games: 0, hits: [] };
         a.games++;
         if (x.kf && (x.role === 'Citizen' || x.role === 'Sheriff')) a.hits.push(x);
