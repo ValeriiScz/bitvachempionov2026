@@ -1093,7 +1093,7 @@ function gameTableHtml(t,gnum,stage){
       `<div class="gdop">доп <b class="gdopv ${dc}">${fmt(ap)}</b></div></div>`;});
   const su=(typeof gnum==='number')?streamOf(gnum,t.table_num,stage):null;
   const sb=su?`<a class="strm-sm" href="${esc(su)}" target="_blank" rel="noopener">&#9654; стрим</a>`:'';
-  const cb=(stage==='Квалификация'||!stage)?catBadge(gnum,t.table_num,false):'';
+  const cb=(!stage||!/Полуфинал|Финал/i.test(String(stage)))?catBadge(gnum,t.table_num,false):'';
   return `<div class="twrap${wcls}"><div class="thdr"><span class="tnum">Стол ${ROMAN[t.table_num]||t.table_num}</span>${cb} ${wl}${sb}</div><div class="seatgrid gseat">${cells}</div></div>`;
 }
 function initGames(){if(jumpGame!=null){gmRound=jumpGame;jumpGame=null;}else{gmRound=(viewMode==='current')?gmCur():0;}if(gmRound<0)gmRound=0;paintGames();highlightJump();}
@@ -1535,7 +1535,7 @@ function computeStrength(){
   const elos=Object.values(D.RATE).map(r=>r.elo).filter(Boolean);const med=median(elos)||1100;
   const eloOf=n=>(D.RATE[n]&&D.RATE[n].elo)||med;
   const tabs=[],seats=[];
-  (D.games||[]).forEach((g,gi)=>{if((g.stage||'Квалификация')!=='Квалификация')return;g.tables.forEach(t=>{const names=t.seats.map(s=>s&&s.name).filter(Boolean);if(names.length<6)return;
+  (D.games||[]).forEach((g,gi)=>{if(/Полуфинал|Финал/i.test(String(g.stage||'')))return;/* v13.8: всё, что не полу/финал — квалификация; live мог назвать стадию «Игры» */g.tables.forEach(t=>{const names=t.seats.map(s=>s&&s.name).filter(Boolean);if(names.length<6)return;
     const e=names.map(eloOf);const avg=mean(e);tabs.push({g:gi+1,t:t.table_num,avg,names});
     names.forEach((n,i)=>{const o=e.filter((_,j)=>j!==i);seats.push({n,g:gi+1,t:t.table_num,avg:mean(o)});});});});
   if(!tabs.length)return;
