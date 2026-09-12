@@ -3,7 +3,7 @@
 window.STREAMS_DB = {
   "channel": "https://www.youtube.com/@mafgameorg",
   "710": {
-    "gamesDay1": 9,   /* подтверждено Валерием 12.09: в первый день 9 туров, во второй — 10-я и 11-я */
+    "gamesDay1": 8,   /* по факту 12.09: успели 8 туров, 9-й и остальные — во второй день */
     "days": {
       "1": {"1":"7k5M0oEGXZs","2":"txIps74ftbU","3":"ooHNwmzalO4","4":"5xzUo7FvDM4","5":"W3q32nFgV7k"},
       "2": {"1":"UZrv4iyCxUo","2":"0ibZYJhGwuQ","3":"-qg3JY8B63E","4":"1VE4a-Cp5QA","5":"GvhGLPQc5s0"}
