@@ -107,42 +107,46 @@ window.convertInertia = function(g, t, fc){
       if(tables.length) out.push({title:(st===1?'Game ':stageName(st)+' ')+gm,stage:label,tables}); // игру без столов пропускаем
     });
   });
-  /* ── Ci: компенсация за отстрелы в первую ночь (расчётная) ─────────────────
-     Регламент 7.5.2: Ci = i × 0.4 / B при i ≤ B, иначе 0.4. i — сколько раз игрока
-     убили первой ночью за красного или шерифа на дистанции; B = 40% от сыгранных им
-     игр на этой дистанции, округлённое до целого. Дистанция = стадия (квалификация,
-     полуфинал, финал считаются отдельно).
-     ⚠ Это НАШ расчёт по тексту регламента. Собственные цифры mafgame воспроизвести
-     не удалось: на ЧЕ-634 перебор 12 вариантов (дистанция турнир/стадия, отстрелы все/
-     только за красного, три способа округления) дал максимум 22 совпадения из 54 —
-     значит платформа считает как-то иначе, чем написано. Поэтому: если платформа свой Ci
-     уже проставила — берём её, свой не трогаем; если нет — считаем сами и помечаем
-     расчётным (window.__ciSelf), а страница пишет об этом под таблицей. */
+  /* ── Ci: компенсация за отстрелы в первую ночь ─────────────────────────────
+     Регламент 7.5.1–7.5.2 + РАСШИФРОВАНО по данным платформы 12.09.2026.
+     Точное правило (совпало с Ci самой mafgame на 191 месте из 191 — турниры
+     634, 694, 702, 766, ноль расхождений):
+       · дистанция = всё до финала вместе (квалификация + полуфинал), финал — отдельно;
+       · i  = сколько раз игрока убили первой ночью за красного или шерифа на дистанции,
+              считаются ВСЕ такие игры, в том числе выигранные красными;
+       · B  = round(0.4 × игр, сыгранных игроком на дистанции);
+       · величина = min(0.4, i × 0.4 / B) — одинаковая для всех его отстрелов;
+       · НАЧИСЛЯЕТСЯ только за те отстрелы, где красные проиграли (7.5.1), за
+         остальные ноль. Именно это и давало «нули при тех же вводных».
+     Если платформа свой Ci уже проставила (турнир пересчитан) — не вмешиваемся. */
   let ciSelf = false;
   (function(){
-    const stages = {};
-    out.forEach(g => { const st = g.stage || 'Квалификация'; (stages[st] = stages[st] || []).push(g); });
-    Object.keys(stages).forEach(st => {
-      const games = stages[st];
-      const platformHasCi = games.some(g => g.tables.some(t => t.seats.some(x => x.ci)));
-      if (platformHasCi) return;                 // платформа посчитала — не лезем
-      const stat = {};                           // ник → {games, hits: [место…]}
+    const dist = {};   // 'Q' — до финала, 'F' — финал
+    out.forEach(g => {
+      const key = (g.stage === 'Финал') ? 'F' : 'Q';
+      (dist[key] = dist[key] || []).push(g);
+    });
+    Object.keys(dist).forEach(key => {
+      const games = dist[key];
+      if (games.some(g => g.tables.some(t => t.seats.some(x => x.ci)))) return;  // платформа посчитала
+      const stat = {};
       games.forEach(g => g.tables.forEach(t => t.seats.forEach(x => {
-        if (!x || !x.name) return;
-        if (!x.result) return;                  // игра ещё не сыграна — в знаменатель не идёт
-        const a = stat[x.name] = stat[x.name] || { games: 0, hits: [] };
+        if (!x || !x.name || !x.result) return;          // несыгранную игру не считаем
+        const a = stat[x.name] = stat[x.name] || { games: 0, hits: [], lost: [] };
         a.games++;
-        if (x.kf && (x.role === 'Citizen' || x.role === 'Sheriff')) a.hits.push(x);
+        const red = (x.role === 'Citizen' || x.role === 'Sheriff');
+        if (x.kf && red) { a.hits.push(x); if (x.result === 'L') a.lost.push(x); }
       })));
       Object.keys(stat).forEach(n => {
         const a = stat[n], i = a.hits.length;
-        if (!i) return;
+        if (!i || !a.lost.length) return;
         const B = Math.round(0.4 * a.games);
         let ci = (B > 0 && i <= B) ? (i * 0.4 / B) : 0.4;
-        if (st === 'Финал' && fc !== 1) ci *= fc;   // на финале официальный коэффициент бьёт по всем баллам
-        const last = a.hits[a.hits.length - 1];  // всю компенсацию вешаем на последний отстрел,
-        last.ci = +ci.toFixed(4);                // чтобы сумма по игроку была ровно Ci
-        last.sigma = +(last.wpts + last.aps + last.ci).toFixed(4);
+        if (key === 'F' && fc !== 1) ci *= fc;            // на финале коэффициент бьёт по всем баллам
+        a.lost.forEach(x => {
+          x.ci = +ci.toFixed(4);
+          x.sigma = +(x.wpts + x.aps + x.ci).toFixed(4);
+        });
         ciSelf = true;
       });
     });
