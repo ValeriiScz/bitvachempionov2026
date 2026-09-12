@@ -274,7 +274,7 @@ body{
           <span class="tgo">Открыть <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
         </div>
       </a>
-      <div class="wcstream" id="wcstream">▶ <b>Главный эфир ЧМ-2026</b> · комментирует Walle · <a href="https://www.youtube.com/watch?v=vu-6aK_tdN4" target="_blank" rel="noopener">смотреть день 1 ↗</a> · <a href="https://www.youtube.com/playlist?list=PLXdDgdvp5aJs" target="_blank" rel="noopener">все столы — плейлист ↗</a> · <a href="wc2026-fans.html">режим для зрителей →</a></div>
+      <div class="wcstream" id="wcstream">▶ <b>Главный эфир ЧМ-2026</b> · комментирует Walle · <a href="https://www.youtube.com/watch?v=vu-6aK_tdN4" target="_blank" rel="noopener" id="wcair">смотреть день 1 ↗</a> · <a href="https://www.youtube.com/playlist?list=PLXdDgdvp5aJs" target="_blank" rel="noopener">все столы — плейлист ↗</a> · <a href="wc2026-fans.html">режим для зрителей →</a></div>
 
       <div class="tile soon" style="--c:var(--ye)" aria-disabled="true">
         <span class="tnum">05</span>
@@ -387,5 +387,15 @@ var fT=fut.filter(function(r){return r[1]!==1;}).length, fS=fut.length-fT;
 var tc=document.getElementById('tCal');
 if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','турниров')+' · <b>'+fS+'</b> '+pl(fS,'этап','этапа','этапов')+' впереди';
 })();</script>
+<script>
+/* Главный эфир ЧМ: со второго дня (13.09, Прага) ссылка сама ведёт на комментаторскую дня 2 —
+   чтобы не править главную руками посреди турнира. */
+(function(){try{
+  var a=document.getElementById('wcair'); if(!a) return;
+  var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'}));
+  var d2=new Date(2026,8,13,0,0,0); /* 13.09.2026 */
+  if(now>=d2){ a.href='https://www.youtube.com/watch?v=HsyqZA_6V0k'; a.textContent='смотреть день 2 ↗'; }
+}catch(e){}})();
+</script>
 </body>
 </html>
