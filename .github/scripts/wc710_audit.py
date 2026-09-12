@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-wc710_audit · v1.0 · 2026-09-12
+wc710_audit · v1.1 · 2026-09-12
 Назначение: во время ЧМ-2026 (mafgame t710) каждые 5 минут снимать протоколы всех столов
 и вести журнал изменений — кому и когда поменяли балл, роль, доп или штраф (апелляции,
 правки судей, замены игроков). Журнал показывается внизу судейского раздела сайта.
@@ -28,7 +28,9 @@ MIN_SEATS  = 400
 MAX_EVENTS = 3000
 HOSTS      = ['https://mafgame.org', 'https://dovod-mafia.com/mafgame']
 SNAP, AUDIT = 'data/wc710_live.json', 'data/wc710_audit.json'
-UA = 'DOVOD-bot/1.0 (+https://dovod-mafia.com; аудит протоколов ЧМ-2026)'
+# ⚠ только латиница: urllib кодирует заголовки в latin-1, кириллица в User-Agent
+# роняет запрос ещё до сети ('latin-1' codec can't encode characters) — прогон #1 упал именно так
+UA = 'DOVOD-bot/1.0 (+https://dovod-mafia.com; WC-2026 protocol audit)'
 
 # следим за этими полями; подпись — как показываем человеку
 FIELDS = [('name','игрок'),('role','роль'),('gp','баллы за победу'),('gb','доп'),
