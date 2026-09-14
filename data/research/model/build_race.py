@@ -14,7 +14,7 @@ plan={r['uid']:r for r in PL['rows']}; tick={r['uid']:r for r in TK['rows']}
 mid=g.standings(2026,T)
 # планки
 planks={'floor':115,'usual':round(SC['1 обычный ритм']['thr_med']),'usual_lo':round(SC['1 обычный ритм']['thr10']),'usual_hi':round(SC['1 обычный ритм']['thr90']),
-        'active':round(SC['2 активно и стараются']['thr_med']),'beast':round(SC['3 как звери']['thr_med']),'work':[140,150]}
+        'active':round(SC['2 активно и стараются']['thr_med']),'beast':round(SC['3 как звери']['thr_med']),'work':[140,150],'regs':[120,130],'regs_note':'только уже записанные + финалы серийников: медиана 120 (114–127), с поправкой ~128'}
 # турниры впереди
 events=[]
 for e in sorted(se.events,key=lambda e:e['date']):
@@ -32,7 +32,8 @@ rows=[]
 for i,(s,u) in enumerate(mid[:40]):
     t=tick.get(u); p=plan.get(u)
     base=se.base[u]; ten=sorted([x for x,_ in base],reverse=True)
-    rec={'uid':u,'nick':g.NICK[u],'rank':i+1,'sigma':s,'ten':ten[:10],'tail':sum(ten[5:10]) if len(ten)>=10 else 0,'free':max(0,10-len(ten)),'country':g.COUNTRY.get(u)}
+    regs=[{'id':e['id'],'date':e['date'],'name':e['name'],'stars':e['stars'],'N':e['N'],'c':e['regs'].get(u)} for e in se.events if e['type']!='contour' and e['regs'].get(u) is not None]
+    rec={'uid':u,'nick':g.NICK[u],'rank':i+1,'sigma':s,'ten':ten[:10],'base':[[p,sflag] for p,sflag in base],'tail':sum(ten[5:10]) if len(ten)>=10 else 0,'free':max(0,10-len(ten)),'country':g.COUNTRY.get(u),'regs':regs}
     if t:
         rec.update({'n12m':t['n12m'],'p10':round(t['p10'],2),'p5':round(t['p5'],2),'finals':t['finals'],
                     'need':{k:{'top5':v['top5'],'final':v['final'],'words':words(v['top5'],v['final']),'of5':min(5,v['top5']+v['final'])} for k,v in t['need'].items()}})
