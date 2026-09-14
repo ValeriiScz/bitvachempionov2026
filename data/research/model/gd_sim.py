@@ -1,11 +1,3 @@
-"""
-Модель «Гонка за золотую дюжину» · v0.9 (черновик, бэктест пройден) · 2026-09-14
-Назначение: Монте-Карло остатка сезона mafgame → P(топ-12) для каждого игрока.
-Состав: gd_data.py (данные) · gd_strength.py (сила, Plackett-Luce) · gd_attend.py (явка, логит) · gd_sim.py (симулятор + серийники) · backtest.py (проверка на 2025) · bt2024.py (2024, с оговоркой).
-Данные: repo/data/research/ledger/*.json + series/*.json + calendar.html (клон публичного репо ValeriiScz/bitvachempionov2026).
-Параметры: LAM=0.1 (усадка силы), C=1.1 (масштаб силы), RACE_BOOST=1.2 (явка мест 1–25), frailty=None.
-Бэктест 2025 (срез 14.09): дюжина 11/12 (наивно 7/12), порог 130 [121–139] при факте 144, Brier 0.0143. 2024: 9/12 (наивно 8), порог 107 [100–114] при факте 113 (модель явки с утечкой — нет данных 2023).
-"""
 """gd_sim · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
 import numpy as np, datetime, collections
 import gd_data as g
@@ -78,6 +70,7 @@ class Season:
         if verbose:
             print(f'Season {year} T={T}: событий {len(self.events)} (контуров {sum(1 for e in self.events if e["type"]=="contour")}), пул {len(self.pool)}, сила из {len(self.beta)} игроков')
 
+    FINALISTS_PLAY=False   # 2026: прошедшие в финал играют его почти наверняка (Валерий)
     def contour(self, pid, stars, date, name):
         """серийный финал: финалисты с вероятностями явки, кандидаты, сетка, база"""
         d=g.SER.get(pid); rule=RULES.get(pid,'top2')
@@ -107,7 +100,7 @@ class Season:
                 for c,k in quotas:
                     tab=sorted([(sum(v)/len(v),u) for u,v in conf[c].items() if len(v)>=2],reverse=True); q|={u for s,u in tab[:k]}
             # явка финалиста: игроки в гонке (топ-40 на T) едут почти всегда (GMC-2025: 12/14), остальные — реже (16/40)
-            for u in q: fin[u]=0.85 if self.race.get(u,999)<=40 else 0.45
+            for u in q: fin[u]=(0.95 if self.race.get(u,999)<=40 else 0.75) if self.FINALISTS_PLAY else (0.85 if self.race.get(u,999)<=40 else 0.45)
             # кандидаты из будущих серий: заявленные (2026) или фактические участники (бэктест); шанс пройти ~2/10 × доехать
             for u in cand_from_future(future):
                 if u not in fin: cand[u]=0.2*(0.85 if self.race.get(u,999)<=40 else 0.45); part.add(u)
