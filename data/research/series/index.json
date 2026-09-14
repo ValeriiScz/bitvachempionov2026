@@ -1,0 +1,239 @@
+{
+ "snapshot": "2026-09-14",
+ "parents": [
+  {
+   "file": "2025_478.json",
+   "id": 478,
+   "year": 2025,
+   "name": "Arena. Moldova Mafia Series",
+   "start_date": "2025-06-28",
+   "stars": 2,
+   "series": 5,
+   "played": 5,
+   "final": true
+  },
+  {
+   "file": "2025_132.json",
+   "id": 132,
+   "year": 2025,
+   "name": "Limassol Cup",
+   "start_date": "2025-07-06",
+   "stars": 2,
+   "series": 6,
+   "played": 6,
+   "final": true
+  },
+  {
+   "file": "2025_504.json",
+   "id": 504,
+   "year": 2025,
+   "name": "Васлуйская битва",
+   "start_date": "2025-07-06",
+   "stars": 2,
+   "series": 0,
+   "played": 0,
+   "final": false
+  },
+  {
+   "file": "2025_505.json",
+   "id": 505,
+   "year": 2025,
+   "name": "Mafia Pro Series",
+   "start_date": "2025-07-06",
+   "stars": 1,
+   "series": 0,
+   "played": 0,
+   "final": false
+  },
+  {
+   "file": "2025_509.json",
+   "id": 509,
+   "year": 2025,
+   "name": "Васлуйская Битва 2025",
+   "start_date": "2025-08-24",
+   "stars": 2,
+   "series": 5,
+   "played": 5,
+   "final": true
+  },
+  {
+   "file": "2025_341.json",
+   "id": 341,
+   "year": 2025,
+   "name": "MGL (MafGame League)",
+   "start_date": "2025-10-25",
+   "stars": 5,
+   "series": 13,
+   "played": 13,
+   "final": true
+  },
+  {
+   "file": "2025_530.json",
+   "id": 530,
+   "year": 2025,
+   "name": "Лига Западной Германии 2025",
+   "start_date": "2025-11-01",
+   "stars": 2,
+   "series": 5,
+   "played": 5,
+   "final": true
+  },
+  {
+   "file": "2025_277.json",
+   "id": 277,
+   "year": 2025,
+   "name": "German Mafia Cup Europa Edition 2025",
+   "start_date": "2025-11-15",
+   "stars": 4,
+   "series": 30,
+   "played": 30,
+   "final": true
+  },
+  {
+   "file": "2025_259.json",
+   "id": 259,
+   "year": 2025,
+   "name": "\"Mafia Champions league\" Europe 2025",
+   "start_date": "2025-11-22",
+   "stars": 4,
+   "series": 22,
+   "played": 22,
+   "final": true
+  },
+  {
+   "file": "2025_251.json",
+   "id": 251,
+   "year": 2025,
+   "name": "Poland Strongest Player 2025",
+   "start_date": "2025-11-29",
+   "stars": 2,
+   "series": 6,
+   "played": 6,
+   "final": true
+  },
+  {
+   "file": "2025_279.json",
+   "id": 279,
+   "year": 2025,
+   "name": "Benelux Plus Series",
+   "start_date": "2025-12-13",
+   "stars": 2,
+   "series": 9,
+   "played": 9,
+   "final": true
+  },
+  {
+   "file": "2026_694.json",
+   "id": 694,
+   "year": 2026,
+   "name": "Central Euro Cup 2026",
+   "start_date": "2026-08-22",
+   "stars": 3,
+   "series": 15,
+   "played": 15,
+   "final": true
+  },
+  {
+   "file": "2026_639.json",
+   "id": 639,
+   "year": 2026,
+   "name": "Poland Strongest Player 2026",
+   "start_date": "2026-10-10",
+   "stars": 2,
+   "series": 6,
+   "played": 5,
+   "final": true
+  },
+  {
+   "file": "2026_579.json",
+   "id": 579,
+   "year": 2026,
+   "name": "Cyprus Mafia Series 2026",
+   "start_date": "2026-10-11",
+   "stars": 2,
+   "series": 9,
+   "played": 8,
+   "final": false
+  },
+  {
+   "file": "2026_645.json",
+   "id": 645,
+   "year": 2026,
+   "name": "White Mafia Best Player",
+   "start_date": "2026-11-07",
+   "stars": 2,
+   "series": 4,
+   "played": 4,
+   "final": true
+  },
+  {
+   "file": "2026_664.json",
+   "id": 664,
+   "year": 2026,
+   "name": "German Mafia Cup Europa Edition 2026",
+   "start_date": "2026-11-14",
+   "stars": 4,
+   "series": 26,
+   "played": 18,
+   "final": true
+  },
+  {
+   "file": "2026_757.json",
+   "id": 757,
+   "year": 2026,
+   "name": "\"Mafia Champions league\" Europe 2026",
+   "start_date": "2026-11-21",
+   "stars": 4,
+   "series": 17,
+   "played": 13,
+   "final": true
+  },
+  {
+   "file": "2026_685.json",
+   "id": 685,
+   "year": 2026,
+   "name": "Arena Moldova Cup",
+   "start_date": "2026-11-28",
+   "stars": 2,
+   "series": 9,
+   "played": 6,
+   "final": true
+  },
+  {
+   "file": "2026_670.json",
+   "id": 670,
+   "year": 2026,
+   "name": "Васлуйская Битва 2026. Реванш.",
+   "start_date": "2026-12-05",
+   "stars": 2,
+   "series": 7,
+   "played": 6,
+   "final": true
+  },
+  {
+   "file": "2026_749.json",
+   "id": 749,
+   "year": 2026,
+   "name": "ЛЗГ Лига Западной Германии 2026",
+   "start_date": "2026-12-05",
+   "stars": 2,
+   "series": 7,
+   "played": 5,
+   "final": true
+  },
+  {
+   "file": "2026_740.json",
+   "id": 740,
+   "year": 2026,
+   "name": "Benelux Plus 2026",
+   "start_date": "2026-12-19",
+   "stars": 2,
+   "series": 10,
+   "played": 6,
+   "final": true
+  }
+ ],
+ "errors": [
+  "https://dovod-mafia.com/mafgame/tournaments/579/results: HTTP Error 403: Forbidden"
+ ]
+}
