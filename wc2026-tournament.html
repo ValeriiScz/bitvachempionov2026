@@ -516,6 +516,9 @@
   .lgl{display:flex;flex-direction:column;gap:8px;}
   .lgi{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:center;font-size:12.5px;}
   .lgi .lgt{color:var(--ink);font-weight:700;} .lgi .lgd{grid-column:2;color:var(--mut);font-size:11.5px;}
+  .seattbl .stgrow td{padding:9px 8px 5px;font:700 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+    color:var(--gold-hi);border-bottom:1px solid var(--line2);background:rgba(227,176,75,.07);}
+  .seattbl .stgrow:first-child td{padding-top:4px;}
   .jcm{margin:8px 10px 10px;border-top:1px solid var(--line);padding-top:8px;}
   .jcm summary{cursor:pointer;font:700 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-hi);list-style:none;}
   .jcm summary::-webkit-details-marker{display:none;}
@@ -1344,9 +1347,15 @@ function drawMy(){
       <div class="panel scrollT" style="padding:0"><table class="tbl full" style="font-size:12px"><thead><tr><th>Игра</th><th>Стол</th><th>Роль</th><th>Рез</th><th>доп</th><th>Ci</th><th class="sig">Σ</th>${myFull?'<th class="grp" title="место после этой игры">Место</th>':''}<th title="трансляция стола">&#9654;</th></tr></thead><tbody>${log}</tbody></table></div>`;
   }
   const occ=(D.occ[name]||[]);const bySlot={};occ.forEach(o=>bySlot[o.g]={t:o.t,slot:o.slot});const skip=D.skip[name];const total=D.games.length||11;
-  let rows='';for(let g=1;g<=total;g++){const done=g<=(D.played||0);const nxt=g===(D.played||0)+1;
-    if(g===skip)rows+=`<tr class="rest${done?' dim':''}"><td class="gn">${g}</td><td colspan="5">— отдых —</td></tr>`;
-    else if(bySlot[g])rows+=`<tr class="${done?'dim':''}${nxt?' hotrow':''}"><td class="gn">${g}</td><td>${ROMAN[bySlot[g].t]}</td><td>${bySlot[g].slot}</td><td>${catBadge(g,bySlot[g].t,false)}</td><td>${oppBadge(name,g)}</td><td>${(u=>u?`<a class="ytm" href="${esc(u)}" target="_blank" rel="noopener">&#9654;</a>`:'<span class="na">·</span>')(streamOf(g,bySlot[g].t,null))}</td></tr>`;}
+  /* v14.2: рассадка делится по стадиям — раньше игры шли сквозной нумерацией 1…17 и было
+     не понять, где кончилась квалификация. Теперь у каждой стадии свой заголовок и своя нумерация. */
+  let rows='',curStage='';
+  for(let g=1;g<=total;g++){const done=g<=(D.played||0);const nxt=g===(D.played||0)+1;
+    const stg=((D.gplist&&D.gplist[g-1])||{}).stage||'Квалификация';
+    const stNum=(()=>{let k=0;for(let i=1;i<=g;i++){const s2=((D.gplist&&D.gplist[i-1])||{}).stage||'Квалификация';if(s2===stg)k++;}return k;})();
+    if(stg!==curStage){curStage=stg;rows+=`<tr class="stgrow"><td colspan="6">${esc(stg)}</td></tr>`;}
+    if(g===skip)rows+=`<tr class="rest${done?' dim':''}"><td class="gn">${stNum}</td><td colspan="5">— отдых —</td></tr>`;
+    else if(bySlot[g])rows+=`<tr class="${done?'dim':''}${nxt?' hotrow':''}"><td class="gn">${stNum}</td><td>${ROMAN[bySlot[g].t]}</td><td>${bySlot[g].slot}</td><td>${catBadge(g,bySlot[g].t,false)}</td><td>${oppBadge(name,g)}</td><td>${(u=>u?`<a class="ytm" href="${esc(u)}" target="_blank" rel="noopener">&#9654;</a>`:'<span class="na">·</span>')(streamOf(g,bySlot[g].t,null))}</td></tr>`;}
   if(rows)html+=`<div class="panel"><h3>Рассадка по играм</h3>${skip?`<div class="skipband">&#9208; Пропуск игры ${skip} — отдыхает</div>`:''}<table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th><th>Сила стола</th><th>Соперники</th><th title="трансляция стола в этот день">&#9654;</th></tr></thead><tbody>${rows}</tbody></table><div class="note" style="margin-top:6px">Серым — сыгранные, золотой рамкой — следующая. «Сила стола» — категория всего стола по ELO, «Соперники» — рассадка: категория девяти соперников без вас, от спокойной до экстремальной (см. «Столы»).</div></div>`;
   html+=luckPanel(name);
   const opp=D.opp[name]||{};const topOpp=Object.entries(opp).sort((a,b)=>b[1]-a[1]).slice(0,6);
@@ -1369,10 +1378,12 @@ function initTogether(){
   const top=document.getElementById('togTop');if(!top)return;
   const all=Object.keys(D.occ).sort((a,b)=>a.localeCompare(b,'ru'));
   if(!all.length){top.innerHTML='';document.getElementById('togArea').innerHTML='<div class="panel"><div class="stub"><div class="si">&#8644;</div><h3>Нет данных рассадки</h3><p>Раздел заработает, когда загрузятся составы игр.</p></div></div>';return;}
-  if(!togNick||!D.occ[togNick])togNick=(myPlayer&&D.occ[myPlayer])?myPlayer:all[0];
+  /* v14.2: раньше подставлялся «мой» игрок или первый по алфавиту — человек заходил сюда после «Моё»
+     и не находил себя. Теперь: мой игрок → тот, кого смотрели в «Моё» → первый по алфавиту. */
+  if(!togNick||!D.occ[togNick])togNick=(myPlayer&&D.occ[myPlayer])?myPlayer:((curPlayer&&D.occ[curPlayer])?curPlayer:all[0]);
   top.innerHTML=`<div class="note" style="margin:0 0 10px">С кем игрок сидит за одним столом: сколько раз, в каких играх — и с кем не встретится ни разу. <b>Золотые ярлыки — игры впереди</b>, серые — уже сыграны.</div>
    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
-    <select class="pick" id="togSel" style="margin:0;flex:1;min-width:150px;max-width:none">${all.map(n=>`<option value="${esc(n)}"${n===togNick?' selected':''}>${esc(n)}</option>`).join('')}</select>
+    <select class="pick" id="togSel" style="margin:0;flex:1;min-width:150px;max-width:none">${all.map(n=>`<option value="${esc(n)}"${n===togNick?' selected':''}>${esc(n)}${n===myPlayer?' — вы':''}</option>`).join('')}</select>
     ${myPlayer&&togNick!==myPlayer?`<button class="btn ghost" data-p="${esc(myPlayer)}" onclick="openTogether(this.dataset.p)">← я</button>`:''}</div>`;
   document.getElementById('togSel').onchange=e=>{togNick=e.target.value;drawTogether();};
   drawTogether();
