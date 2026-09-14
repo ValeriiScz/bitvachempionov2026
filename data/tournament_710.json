@@ -12,14 +12,14 @@
  "fee_eur": 130,
  "stars": 5,
  "prize_eur": 3000,
- "format": "11 квалификационных игр (5 столов, каждый отдыхает одну) → полуфинал 2 игры (топ-50) → финал 5 игр (топ-10, баллы квалификации сохраняются, Ci обнуляется, коэффициент 1.3)",
- "closed": false,
+ "format": "11 квалификационных игр (5 столов, каждый отдыхает одну) → полуфинал 2 игры (топ-50) → финал 4 игры (топ-10, баллы квалификации сохраняются, коэффициент 1.3). ⚠ Регламент финала изменили по ходу турнира: анонсировали 5 игр, сыграли 4.",
+ "closed": true,
  "in_progress": false,
  "live_from": "2026-09-12",
  "live_to": "2026-09-13",
- "upcoming": true,
- "games_played": 0,
- "games_total": 18,
+ "upcoming": false,
+ "games_played": 17,
+ "games_total": 17,
  "final_coef": 1.3,
  "accent": "#e3b04b",
  "referees_by_table": {
@@ -33,5 +33,388 @@
  "duty_referee": "Гармония",
  "commentator": "Walle",
  "start_iso": "2026-09-12T11:00:00+02:00",
- "note": "Квоты стран — по сумме баллов mafgame за 7 месяцев 2026 (порог 2%); 5 мест Северной Америки — через отбор CLM."
+ "note": "Квоты стран — по сумме баллов mafgame за 7 месяцев 2026 (порог 2%); 5 мест Северной Америки — через отбор CLM. | ЗАКРЫТ 14.09.2026: live отключён, данные заморожены в data/games_710_current.json.",
+ "champion": "Призрак",
+ "winners": [
+  "1. Призрак — 13.185",
+  "2. RAMZES — 12.97",
+  "3. Сью — 12.85"
+ ],
+ "standings": [
+  {
+   "place": 1,
+   "name": "Призрак",
+   "sigma": 13.185,
+   "games": 16
+  },
+  {
+   "place": 2,
+   "name": "RAMZES",
+   "sigma": 12.97,
+   "games": 16
+  },
+  {
+   "place": 3,
+   "name": "Сью",
+   "sigma": 12.85,
+   "games": 16
+  },
+  {
+   "place": 4,
+   "name": "Фортуна",
+   "sigma": 12.44,
+   "games": 16
+  },
+  {
+   "place": 5,
+   "name": "Flame",
+   "sigma": 12.04,
+   "games": 16
+  },
+  {
+   "place": 6,
+   "name": "Gangster",
+   "sigma": 11.55,
+   "games": 16
+  },
+  {
+   "place": 7,
+   "name": "Не Злая",
+   "sigma": 11.47,
+   "games": 16
+  },
+  {
+   "place": 8,
+   "name": "Леди Luz",
+   "sigma": 10.38,
+   "games": 16
+  },
+  {
+   "place": 9,
+   "name": "DOVOD",
+   "sigma": 10.09,
+   "games": 16
+  },
+  {
+   "place": 10,
+   "name": "Грешник",
+   "sigma": 9.975,
+   "games": 16
+  },
+  {
+   "place": 11,
+   "name": "sometimes",
+   "sigma": 8.2,
+   "games": 12
+  },
+  {
+   "place": 12,
+   "name": "Саботаж",
+   "sigma": 7.8,
+   "games": 12
+  },
+  {
+   "place": 13,
+   "name": "Tommy",
+   "sigma": 7.7,
+   "games": 12
+  },
+  {
+   "place": 14,
+   "name": "Bard",
+   "sigma": 7.65,
+   "games": 12
+  },
+  {
+   "place": 15,
+   "name": "Flash",
+   "sigma": 7.47,
+   "games": 12
+  },
+  {
+   "place": 16,
+   "name": "f5",
+   "sigma": 7.45,
+   "games": 12
+  },
+  {
+   "place": 17,
+   "name": "Nostradamus",
+   "sigma": 7.38,
+   "games": 12
+  },
+  {
+   "place": 18,
+   "name": "***Алиса***",
+   "sigma": 7.28,
+   "games": 12
+  },
+  {
+   "place": 19,
+   "name": "Jerry Hurper",
+   "sigma": 7.2,
+   "games": 12
+  },
+  {
+   "place": 20,
+   "name": "Sancho",
+   "sigma": 7.05,
+   "games": 12
+  },
+  {
+   "place": 21,
+   "name": "Катанчик",
+   "sigma": 6.95,
+   "games": 12
+  },
+  {
+   "place": 22,
+   "name": "LogisticPro",
+   "sigma": 6.9,
+   "games": 12
+  },
+  {
+   "place": 23,
+   "name": "Niko",
+   "sigma": 6.83,
+   "games": 12
+  },
+  {
+   "place": 24,
+   "name": "ШТО?",
+   "sigma": 6.8,
+   "games": 12
+  },
+  {
+   "place": 25,
+   "name": "KRASNII",
+   "sigma": 6.3,
+   "games": 12
+  },
+  {
+   "place": 26,
+   "name": "Logica",
+   "sigma": 6.25,
+   "games": 12
+  },
+  {
+   "place": 27,
+   "name": "Maverick",
+   "sigma": 6.16,
+   "games": 12
+  },
+  {
+   "place": 28,
+   "name": "Donna",
+   "sigma": 6.1,
+   "games": 12
+  },
+  {
+   "place": 29,
+   "name": "MadMax",
+   "sigma": 6.02,
+   "games": 12
+  },
+  {
+   "place": 30,
+   "name": "Lюц",
+   "sigma": 6.01,
+   "games": 12
+  },
+  {
+   "place": 31,
+   "name": "Буржуй",
+   "sigma": 5.95,
+   "games": 11
+  },
+  {
+   "place": 32,
+   "name": "aptah",
+   "sigma": 5.78,
+   "games": 12
+  },
+  {
+   "place": 33,
+   "name": "Светлый",
+   "sigma": 5.7,
+   "games": 12
+  },
+  {
+   "place": 34,
+   "name": "Landing",
+   "sigma": 5.65,
+   "games": 12
+  },
+  {
+   "place": 35,
+   "name": "Ru",
+   "sigma": 5.65,
+   "games": 12
+  },
+  {
+   "place": 36,
+   "name": "TOPS",
+   "sigma": 5.48,
+   "games": 12
+  },
+  {
+   "place": 37,
+   "name": "Мартовский котик",
+   "sigma": 5.35,
+   "games": 12
+  },
+  {
+   "place": 38,
+   "name": "Xenon",
+   "sigma": 5.33,
+   "games": 12
+  },
+  {
+   "place": 39,
+   "name": "YeS",
+   "sigma": 5.3,
+   "games": 12
+  },
+  {
+   "place": 40,
+   "name": "KEX",
+   "sigma": 5.3,
+   "games": 12
+  },
+  {
+   "place": 41,
+   "name": "Kokocik",
+   "sigma": 5.3,
+   "games": 12
+  },
+  {
+   "place": 42,
+   "name": "Kleo",
+   "sigma": 5.15,
+   "games": 12
+  },
+  {
+   "place": 43,
+   "name": "Джошуа",
+   "sigma": 4.98,
+   "games": 12
+  },
+  {
+   "place": 44,
+   "name": "Blackout",
+   "sigma": 4.93,
+   "games": 12
+  },
+  {
+   "place": 45,
+   "name": "Tripok",
+   "sigma": 4.45,
+   "games": 12
+  },
+  {
+   "place": 46,
+   "name": "Urs",
+   "sigma": 4.45,
+   "games": 12
+  },
+  {
+   "place": 47,
+   "name": "ParadoXx",
+   "sigma": 4.43,
+   "games": 12
+  },
+  {
+   "place": 48,
+   "name": "Blessed",
+   "sigma": 4.4,
+   "games": 12
+  },
+  {
+   "place": 49,
+   "name": "Ириска",
+   "sigma": 4.31,
+   "games": 12
+  },
+  {
+   "place": 50,
+   "name": "Клото",
+   "sigma": 3.45,
+   "games": 12
+  },
+  {
+   "place": 51,
+   "name": "Eskimo.",
+   "sigma": 2.4,
+   "games": 10
+  },
+  {
+   "place": 52,
+   "name": "Малышка Мю",
+   "sigma": 2.0,
+   "games": 10
+  },
+  {
+   "place": 53,
+   "name": "Link",
+   "sigma": 1.9,
+   "games": 10
+  },
+  {
+   "place": 54,
+   "name": "Batman",
+   "sigma": 1.9,
+   "games": 10
+  },
+  {
+   "place": 55,
+   "name": "Зима ❄️",
+   "sigma": 1.35,
+   "games": 10
+  },
+  {
+   "place": 56,
+   "name": "Walle",
+   "sigma": 1.25,
+   "games": 1
+  }
+ ],
+ "standings_note": "Итоговая таблица собрана из замороженных протоколов после официального пересчёта mafgame. Сверено с официальной таблицей платформы (день 3, 10 финалистов): все 10 строк совпали до тысячных — 13.185 / 12.97 / 12.85 / 12.44 / 12.04 / 11.55 / 11.47 / 10.38 / 10.09 / 9.975.",
+ "awards": {
+  "most_valuable_players": [
+   "RAMZES (4.86)",
+   "Gangster (4.56)",
+   "Фортуна (4.25)"
+  ],
+  "most_valuable_mafia": [
+   "Gangster (1.9)",
+   "RAMZES (1.75)",
+   "Призрак (1.7)"
+  ],
+  "most_valuable_citizen": [
+   "RAMZES (3.11)",
+   "Flame (2.99)",
+   "Фортуна (2.89)"
+  ],
+  "best_don": [
+   "Леди Luz (4/0.09)",
+   "Грешник (2/0.45)",
+   "Саботаж (2/0.45)"
+  ],
+  "best_sheriff": [
+   "Грешник (2/0.4)",
+   "Не Злая (2/0.37)",
+   "Саботаж (2/0.35)"
+  ],
+  "most_killed": [
+   "Tommy (6)"
+  ]
+ },
+ "awards_note": "Награды mafgame отдельно не публиковал — посчитаны из замороженных протоколов: MVP и «лучшие» по сумме допов (в финале — с официальным коэффициентом ×1.3), дон и шериф — победы в роли и средний доп за игру, «чаще всех убит первым» — по отметкам протокола.",
+ "reconciliation": "14.09.2026: наши суммы по всем 55 игрокам пересчитаны из протоколов и сверены с официальной таблицей mafgame — расхождений нет. Замена по ходу: вместо Магната (Молдова) играла Kleo (Чехия), платформа провела её 12.09 в 12:46 — в протоколах стоит Kleo.",
+ "substitution": {
+  "out": "Магнат",
+  "in": "Kleo",
+  "when": "2026-09-12 12:46",
+  "note": "замена в том же слоте (игрок №21)"
+ }
 }
