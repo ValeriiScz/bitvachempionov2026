@@ -134,7 +134,7 @@ body{
 @media (min-width:900px){
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .tile{min-height:238px;padding:24px 24px 20px}
-  .tile.soon{grid-column:1 / -1;min-height:150px}
+  .tile.soon,.tile.race{grid-column:1 / -1;min-height:150px}
   .tile.wc{grid-column:1 / -1;min-height:170px}
   .wcstream{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:12px 16px;border:1px solid rgba(227,176,75,.35);background:rgba(227,176,75,.06);font:600 13px/1.4 Inter,system-ui,sans-serif;color:#eef3fb;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
   .wcstream b{color:#f6d27a}.wcstream .soon{color:#79808f;font-weight:500}.wcstream a{color:#f6d27a;font-weight:800;text-decoration:none}
@@ -276,20 +276,18 @@ body{
       </a>
       <div class="wcstream" id="wcstream">▶ <b>Главный эфир ЧМ-2026</b> · комментирует Walle · <a href="https://www.youtube.com/watch?v=vu-6aK_tdN4" target="_blank" rel="noopener" id="wcair">смотреть день 1 ↗</a> · <a href="https://www.youtube.com/playlist?list=PLXdDgdvp5aJs" target="_blank" rel="noopener">все столы — плейлист ↗</a> · <a href="wc2026-fans.html">режим для зрителей →</a></div>
 
-      <div class="tile soon" style="--c:var(--ye)" aria-disabled="true">
+      <a class="tile race" href="race.html" style="--c:var(--ye)">
         <span class="tnum">05</span>
         <div>
           <div class="tkick"><i></i>Рейтинг-2026</div>
-          <h2 class="ttl">Статистика гонки
-            <span class="soonb">скоро</span>
-          </h2>
-          <p class="tdesc">Кто идёт в топ-50 сезона, чем живёт борьба за места и что осталось добрать до конца года.</p>
+          <h2 class="ttl">Гонка за дюжину</h2>
+          <p class="tdesc">Какой будет проходной балл в топ-12, кому сколько турниров и результатов осталось, и калькулятор по своему профилю mafgame.</p>
         </div>
         <div class="tfoot">
-          <div class="tstat">в работе</div>
-          <span class="tgo">Скоро</span>
+          <div class="tstat"><b>Планка</b> · билеты топ-30 · калькулятор</div>
+          <span class="tgo">Открыть <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
         </div>
-      </div>
+      </a>
     </div>
   </section>
 

@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Гонка за золотую дюжину · DOVOD</title>
+<meta name="description" content="Рейтинг MAFGAME 2026: планка топ-12, кому сколько турниров и результатов нужно до конца года, калькулятор по своему профилю.">
+<meta name="theme-color" content="#05060a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05060a; --ink:#eef3fb; --dim:#79808f; --line:rgba(255,255,255,.10);
+  --cy:#26e0ff; --ye:#f5ff35; --li:#c14bbd; --rd:#db514e; --gn:#5ee08a; --c:var(--ye);
+  --disp:'Unbounded',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.55 Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bgfx i{position:absolute;display:block}
+.bgfx .grid{inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(120% 90% at 50% 0%,#000 30%,transparent 78%)}
+.bgfx .g1{width:70vw;height:70vw;max-width:860px;max-height:860px;top:-26vw;left:-18vw;background:radial-gradient(circle,rgba(245,255,53,.10),transparent 62%);filter:blur(22px)}
+.bgfx .g2{width:70vw;height:70vw;max-width:860px;max-height:860px;bottom:-30vw;right:-20vw;background:radial-gradient(circle,rgba(38,224,255,.12),transparent 62%);filter:blur(22px)}
+.bgfx .scan{inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);opacity:.5}
+.bgfx .vig{inset:0;background:radial-gradient(120% 80% at 50% 40%,transparent 40%,rgba(0,0,0,.76) 100%)}
+.shell{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:20px 15px 40px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.nb{display:inline-flex;align-items:center;gap:8px;font:700 10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;border:1px solid var(--line);padding:9px 12px;border-radius:2px;transition:.18s}
+.nb:hover{color:var(--ink);border-color:var(--ye)}
+.nb.pri{color:#0c0d10;background:var(--ye);border-color:var(--ye)}
+.hd{margin:26px 0 6px}
+.hline{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.hline s{flex:0 0 34px;height:2px;background:var(--ye);text-decoration:none;box-shadow:0 0 12px rgba(245,255,53,.5)}
+.hline span{font:700 10px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ye)}
+h1{margin:0;font:900 clamp(28px,8vw,58px)/0.94 var(--disp);letter-spacing:-.035em;text-transform:uppercase}
+h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.32)}
+.sub{margin:14px 0 0;max-width:64ch;color:#a7aebb;font-size:14.5px}
+.sub b{color:var(--ink);font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:24px 0 0}
+.kpi{border:1px solid var(--line);padding:15px 14px;background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3));clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.kpi b{display:block;font:900 clamp(22px,5vw,34px)/1 var(--disp);letter-spacing:-.03em}
+.kpi span{display:block;margin-top:7px;font:700 9px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#8a91a0}
+.kpi.a b{color:var(--ye)} .kpi.b b{color:var(--cy)} .kpi.c b{color:var(--li)} .kpi.d b{color:var(--gn)}
+.sec{margin:36px 0 0}
+.sh{display:flex;align-items:center;gap:12px;margin:0 0 14px;font:700 10px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.sh s{flex:1;height:1px;background:var(--line);text-decoration:none}
+.sh em{font-style:normal;color:#5f6675}
+h2.big{margin:0 0 10px;font:900 clamp(20px,4.5vw,30px)/1.1 var(--disp);letter-spacing:-.03em;text-transform:uppercase}
+p.lead{margin:0 0 14px;color:#b6bdc9;max-width:72ch}
+p.lead b{color:var(--ink);font-weight:600}
+/* планки */
+.planks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.plank{position:relative;border:1px solid var(--line);padding:16px 15px 14px;background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3));clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.plank::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c)}
+.plank .k{font:700 9px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--c)}
+.plank .v{margin:9px 0 6px;font:900 clamp(26px,6vw,40px)/1 var(--disp);letter-spacing:-.03em}
+.plank .v small{font:700 12px/1 var(--mono);color:#8a91a0;letter-spacing:.06em;margin-left:6px}
+.plank .d{color:#a7aebb;font-size:12.5px;line-height:1.45}
+.plank.f{--c:#8a91a0} .plank.u{--c:var(--ye)} .plank.a{--c:var(--cy)} .plank.b{--c:var(--rd)}
+.hist{margin-top:14px;border:1px dashed var(--line);padding:12px 14px;color:#a7aebb;font-size:13px}
+.hist b{color:var(--ink);font-weight:600}
+.hist .bands{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:8px}
+.hist .bands span{font:700 11px/1.4 var(--mono);color:#c8cfdb} .hist .bands span i{font-style:normal;color:var(--ye)}
+/* таблица */
+.tabwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:rgba(0,0,0,.25)}
+table.race{width:100%;border-collapse:collapse;min-width:820px;font-size:13.5px;table-layout:fixed}
+table.race th{position:sticky;top:0;background:#0b0d13;text-align:left;padding:10px 10px;font:700 9.5px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#8a91a0;border-bottom:1px solid var(--line);white-space:nowrap}
+table.race td{padding:10px 10px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top}
+table.race tr.r{cursor:pointer;transition:background .15s}
+table.race tr.r:hover{background:rgba(245,255,53,.05)}
+table.race tr.open{background:rgba(245,255,53,.07)}
+td.num{font:700 12px/1 var(--mono);color:#7e8595}
+td.nick{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+td.nick small{display:block;font:400 11px/1.3 Inter,sans-serif;color:#7e8595;margin-top:2px}
+td.sig{font:900 17px/1 var(--disp);letter-spacing:-.02em}
+td.sig small{display:block;font:700 9.5px/1.4 var(--mono);color:#7e8595;letter-spacing:.06em;margin-top:3px}
+td.need b{display:block;font-weight:600;color:var(--ink)}
+td.need small{display:block;color:#8a91a0;font-size:11.5px;margin-top:2px}
+td.fin{color:#c9a3c8;font-size:12.5px}
+td.fin small{color:#7e8595}
+.tag{display:inline-block;padding:3px 7px;border-radius:2px;font:700 9.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.tag.in{background:rgba(94,224,138,.15);color:var(--gn)} .tag.near{background:rgba(245,255,53,.15);color:var(--ye)} .tag.fight{background:rgba(38,224,255,.13);color:var(--cy)} .tag.far{background:rgba(255,255,255,.08);color:#a7aebb}
+tr.det td{background:rgba(255,255,255,.025);padding:14px 12px 18px;white-space:normal}
+.plan{display:grid;grid-template-columns:1.1fr 1fr;gap:18px}
+.plan h4{margin:0 0 8px;font:700 10px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ye)}
+.plan p{margin:0 0 10px;color:#c3cad6;font-size:13.5px}
+.plan p b{color:var(--ink);font-weight:600}
+.ten{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 10px}
+.ten span{font:700 12px/1 var(--mono);padding:6px 8px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.ten span.t{border-color:rgba(219,81,78,.5);color:#f0a5a3} .ten span.e{border-style:dashed;color:#6f7684}
+table.mini{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+table.mini th,table.mini td{padding:6px 7px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+table.mini th{font:700 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#8a91a0}
+table.mini td.w{font:700 10px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.w-miss{color:#8a91a0} .w-edge{color:var(--ye)} .w-pass{color:var(--cy)} .w-sure{color:var(--gn)}
+ul.ev{list-style:none;margin:6px 0 0;padding:0;font-size:13px;color:#c3cad6}
+ul.ev li{display:flex;gap:10px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+ul.ev li i{font:700 11px/1.5 var(--mono);color:#7e8595;flex:0 0 46px;font-style:normal}
+ul.ev li b{font-weight:600;flex:1}
+ul.ev li em{font-style:normal;color:var(--ye);font:700 11px/1.5 var(--mono)}
+/* калькулятор */
+.calc{border:1px solid var(--line);padding:18px;background:linear-gradient(150deg,rgba(38,224,255,.07),rgba(0,0,0,.3));clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px))}
+.calc .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.calc input{flex:1 1 260px;min-width:0;background:#0b0d13;border:1px solid var(--line);color:var(--ink);padding:12px 13px;font:500 14px/1.2 Inter,sans-serif;border-radius:2px}
+.calc input:focus{outline:none;border-color:var(--cy)}
+.btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:1px solid var(--cy);background:var(--cy);color:#0c0d10;padding:12px 16px;font:700 10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;border-radius:2px;transition:.18s}
+.btn:hover{filter:brightness(1.1)} .btn:disabled{opacity:.5;cursor:default}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.calc .hint{margin:8px 0 0;color:#8a91a0;font-size:12.5px}
+.calc .hint a{color:#c3cad6}
+.res{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.res .head{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+.res .head b{font:900 26px/1 var(--disp);letter-spacing:-.02em}
+.res .head span{color:#a7aebb;font-size:13px}
+.res .err{color:#f0a5a3}
+.foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font:400 12px/1.6 Inter,sans-serif;color:#6f7684}
+.foot a{color:#9aa2b0;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}
+.foot b{color:#9aa2b0;font-weight:600}
+details.m{margin-top:12px;border:1px solid var(--line);padding:10px 14px;color:#a7aebb;font-size:13px}
+details.m summary{cursor:pointer;font:700 10px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#c8cfdb}
+details.m p{margin:8px 0 0}
+@media (max-width:720px){
+  .kpis,.planks{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plan{grid-template-columns:1fr}
+  /* таблица → карточки */
+  .tabwrap{overflow:visible;border:0;background:transparent}
+  table.race{min-width:0;table-layout:auto;display:block}
+  table.race thead{display:none}
+  table.race tbody{display:block}
+  table.race tr.r{display:grid;grid-template-columns:34px 1fr auto;grid-template-areas:"num nick sig" "fin fin fin" "n140 n140 n140" "n150 n150 n150" "freq freq st";gap:4px 8px;padding:12px 12px;margin-bottom:8px;border:1px solid var(--line);background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3))}
+  table.race>tbody>tr.r>td{display:block;padding:0;border:0}
+  td.num{grid-area:num;padding-top:3px!important} td.nick{grid-area:nick;white-space:normal} td.sig{grid-area:sig;text-align:right}
+  td.fin{grid-area:fin;margin-top:6px} td.need:nth-of-type(5){grid-area:n140} td.need:nth-of-type(6){grid-area:n150} td.freq{grid-area:freq;font-size:12.5px} td.st{grid-area:st;text-align:right}
+  table.race td[data-l]::before{content:attr(data-l);display:block;font:700 9px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7e8595;margin-top:6px}
+  td.need b{display:inline;margin-right:6px} td.need small{display:inline}
+  td.fin br{display:none} td.fin small{margin-left:2px;margin-right:8px}
+  table.race tr.det{display:block;margin:-8px 0 10px;border:1px solid var(--line);border-top:0}
+  table.race>tbody>tr.det>td{display:block;padding:12px 12px 16px}
+  table.mini{display:table;width:100%} table.mini thead{display:table-header-group} table.mini tbody{display:table-row-group} table.mini tr{display:table-row} table.mini th,table.mini td{display:table-cell}
+  table.mini{font-size:12px} table.mini th,table.mini td{padding:5px 5px}
+  ul.ev li{flex-wrap:wrap} ul.ev li b{flex:1 1 calc(100% - 60px)} ul.ev li em{flex:0 0 100%;padding-left:56px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style id="dvcrumbcss">.dv-crumb{position:relative;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;max-width:1080px;margin:0 auto;padding:12px 15px 0;font:700 10px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#79808f}.dv-crumb a{color:#c3cad6;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}.dv-crumb a:hover{color:#f5ff35;border-color:#f5ff35}.dv-crumb i{font-style:normal;opacity:.5}</style>
+</head>
+<body>
+<nav class="dv-crumb"><a href="/">DOVOD</a><i>/</i><span>Статистика гонки</span></nav>
+<div class="bgfx" aria-hidden="true"><i class="grid"></i><i class="g1"></i><i class="g2"></i><i class="scan"></i><i class="vig"></i></div>
+
+<div class="shell">
+  <div class="nav">
+    <a class="nb" href="/">&#8592; Разделы</a>
+    <a class="nb pri" href="#calc">Посчитать себя &#8594;</a>
+  </div>
+
+  <header class="hd">
+    <div class="hline"><s></s><span>рейтинг mafgame 2026 · топ-12 сезона</span></div>
+    <h1>ГОНКА ЗА <em>ДЮЖИНУ</em></h1>
+    <p class="sub">Двенадцать лучших по итогам года едут на MAFGAME MAJOR «Золотая Дюжина». В зачёт идут <b>десять лучших турниров</b>, из них не больше двух серийных. Ниже — какая сумма, скорее всего, будет проходной, и кому сколько результатов до неё осталось.</p>
+    <div class="kpis" id="kpis"></div>
+  </header>
+
+  <section class="sec">
+    <div class="sh"><span>01 · планка</span><s></s><em id="snapDate"></em></div>
+    <h2 class="big">Сколько будет стоить 12-е место</h2>
+    <p class="lead">Четыре сценария того, как остаток года сыграют те, кто в борьбе. Пол — чтобы понимать, ниже чего быть не может. Рабочие планки — <b>140 и 150</b>.</p>
+    <div class="planks" id="planks"></div>
+    <div class="hist" id="hist"></div>
+    <details class="m"><summary>Как считаем</summary>
+      <p>По каждому игроку — его леджер mafgame и места за последние 12 месяцев. По каждому турниру впереди — звёзды, ожидаемое поле и сетка баллов такого же турнира в прошлом. Финалы серийников — по регламентам контуров и текущему зачёту серий: кто уже прошёл, тот играет. Дальше сезон разыгрывается несколько тысяч раз: кто поедет, какое место возьмёт, что вытеснит из своей десятки, — и в каждом розыгрыше смотрим сумму 12-го места. На прошлом сезоне такой пересчёт с 14 сентября угадал 11 из 12 итоговой дюжины, но занизил порог примерно на 7% — поправка учтена.</p>
+      <p>Сценарии отличаются тем, сколько турниров играет топ-30 (3–4 · 5 · 6) и насколько выше своего обычного уровня. «Пол» — никто из гонки не берёт ничего сверх участия, финалы серийников по минимуму сетки.</p>
+    </details>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><span>02 · билеты</span><s></s><em>топ-30 на дату снимка</em></div>
+    <h2 class="big">Кому что нужно</h2>
+    <p class="lead">Билет — это результат. <b>Финал</b> — 6–10-е место на четвёрке, около 12 баллов. <b>Топ-5</b> на четвёрке — около 24, на пятёрке — ещё больше. Считается с учётом того, что новый результат вытесняет худший из десятки. Финалы серийников, куда игрок уже прошёл, учтены по минимуму сетки — они гарантированы. Нажми на строку, чтобы раскрыть план игрока.</p>
+    <div class="tabwrap">
+      <table class="race" id="race">
+        <colgroup><col style="width:36px"><col style="width:150px"><col style="width:86px"><col style="width:150px"><col><col><col style="width:120px"><col style="width:110px"></colgroup>
+        <thead><tr>
+          <th>#</th><th>Игрок</th><th>Σ сейчас</th><th>Гарантировано финалами</th><th>До 140</th><th>До 150</th><th>Твоя частота<br>топ-10 · топ-5</th><th>Статус</th>
+        </tr></thead>
+        <tbody id="tb"></tbody>
+      </table>
+    </div>
+    <p class="hint" style="color:#8a91a0;font-size:12.5px;margin-top:10px">Частота — доля турниров за последние 12 месяцев, где игрок попал в топ-10 и в топ-5; при малом числе турниров подтянута к среднему топ-30. «Из 5» — сколько из пяти ближайших поездок должны стать результатом, чтобы билеты закрылись.</p>
+  </section>
+
+  <section class="sec" id="calc">
+    <div class="sh"><span>03 · калькулятор</span><s></s><em>любой игрок mafgame</em></div>
+    <h2 class="big">Посчитать себя</h2>
+    <div class="calc">
+      <p class="lead" style="margin:0">Вставь ссылку на свой профиль на mafgame — получишь свою десятку, хвост, сколько билетов до планок и что это значит при твоей частоте результатов. Данные берутся с mafgame напрямую, ничего не сохраняется.</p>
+      <div class="row">
+        <input id="mgUrl" type="url" inputmode="url" placeholder="https://mafgame.org/user/1493/view" autocomplete="off">
+        <button class="btn" id="mgGo">Посчитать</button>
+      </div>
+      <div class="row">
+        <input id="mkUrl" type="url" inputmode="url" placeholder="ссылка на твой профиль на markery.online (по желанию)" autocomplete="off">
+        <button class="btn ghost" id="mkSend" title="Откроется Telegram с готовым сообщением автору">Отправить пару автору</button>
+      </div>
+      <p class="hint">Зачем маркеры: у многих в рейтинге 4–6 турниров за год — по ним силу не оценить. ЭЛО с маркеров считается по сотням игр. Собираем пары «профиль mafgame — профиль маркеров», чтобы следующая версия калькулятора учитывала обе.</p>
+      <div class="res" id="res" hidden></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><span>04 · календарь остатка</span><s></s><em>рейтинговые турниры и финалы</em></div>
+    <h2 class="big">Где брать билеты</h2>
+    <p class="lead">Что осталось до конца года. У турнира — сетка: сколько даёт 1-е, 5-е и 10-е место при ожидаемом поле; у финалов серийников — кто из гонки уже прошёл.</p>
+    <ul class="ev" id="evlist"></ul>
+  </section>
+
+  <footer class="foot">
+    <div><b>DOVOD</b> · снимок данных <span id="footSnap"></span> · рейтинг <span id="footRating"></span></div>
+    <div>источник — <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a> · модель и пересчёт — DOVOD</div>
+  </footer>
+</div>
+
+<script src="data/meta.js"></script>
+<script src="data/race2026.js"></script>
+<script>
+(function(){
+  const R=window.RACE; if(!R){return}
+  const $=s=>document.querySelector(s);
+  const fmt=n=>Math.round(n);
+  const P=R.planks;
+  $('#snapDate').textContent='снимок '+R.snapshot.split('-').reverse().join('.');
+  $('#footSnap').textContent=R.snapshot.split('-').reverse().join('.');
+  $('#footRating').textContent=(window.SITE&&window.SITE.ratingUpdated)||'';
+  const finalsAhead=R.events.filter(e=>e.kind==='final').length, regAhead=R.events.filter(e=>e.kind!=='final').length, big=R.events.filter(e=>e.kind!=='final'&&e.stars>=4).length;
+  $('#kpis').innerHTML=`
+    <div class="kpi a"><b>${fmt(R.thr12_now)}</b><span>12-е место сейчас</span></div>
+    <div class="kpi b"><b>${P.work[0]}–${P.work[1]}</b><span>рабочая планка на 31.12</span></div>
+    <div class="kpi c"><b>${regAhead}</b><span>турниров впереди · ${big} на 4–5★</span></div>
+    <div class="kpi d"><b>${finalsAhead}</b><span>финалов серийников</span></div>`;
+  $('#planks').innerHTML=`
+    <div class="plank f"><div class="k">0 · пол</div><div class="v">${P.floor}</div><div class="d">Никто из гонки не выигрывает ничего, только участие и финалы серийников по минимуму. Ниже — не бывает.</div></div>
+    <div class="plank u"><div class="k">1 · обычный ритм</div><div class="v">${P.usual}<small>${P.usual_lo}–${P.usual_hi}</small></div><div class="d">Топ-30 играют 3–4 турнира до конца года в своей обычной силе — как в прошлом сезоне.</div></div>
+    <div class="plank a"><div class="k">2 · стараются</div><div class="v">${P.active}</div><div class="d">Пять турниров на человека, играют выше своего среднего.</div></div>
+    <div class="plank b"><div class="k">3 · как звери</div><div class="v">${P.beast}</div><div class="d">Шесть турниров, лучшее, что могут. Разрыв со сценарием 1 всего ${P.beast-P.usual} баллов — гонка не резиновая.</div></div>`;
+  $('#hist').innerHTML=`<b>Проверка на прошлых сезонах.</b> ${R.hist.note}:<div class="bands">${R.hist.bands.map(b=>`<span>${b.band}: <i>${b.k} из ${b.n}</i></span>`).join('')}</div><div style="margin-top:8px">Сейчас 12-е место — ${fmt(R.thr12_now)}. «Выше на 15–35%» — это ${fmt(R.thr12_now*1.15)}–${fmt(R.thr12_now*1.35)}, «около порога» — ${fmt(R.thr12_now*0.95)}–${fmt(R.thr12_now*1.15)}.</div>`;
+
+  // статус по билетам до 140/150
+  function status(r){
+    if(!r.need) return ['far','—'];
+    const a=r.need['140'], b=r.need['150'];
+    const ta=a.top5+a.final, tb=b.top5+b.final;
+    if(ta===0) return ['in','внутри'];
+    if(ta<=1) return ['in','почти'];
+    if(ta<=2) return ['near','1–2 билета'];
+    if(ta<=3) return ['fight','3 билета'];
+    return ['far','нужен подвиг'];
+  }
+  const wordCls={'мимо':'w-miss','на грани':'w-edge','проходишь':'w-pass','уверенно':'w-sure'};
+  function of5(r,k){const n=r.need[k]; const t=n.top5+n.final; if(!t) return ''; const need=Math.min(5,t); const tail=n.top5&&n.final?` (${n.top5} — топ-5)`:n.top5?' — топ-5':' — в десятку'; return `<small>${need} из 5 поездок${tail}</small>`}
+  function row(r){
+    const [cls,txt]=status(r);
+    const fin=(r.finals&&r.finals.length)?r.finals.map(f=>`${f.name} <small>${f.min}–${f.mid}+</small>`).join('<br>'):'<small>—</small>';
+    const freq=r.p10!=null?`${Math.round(r.p10*100)}% · ${Math.round(r.p5*100)}%<br><small style="color:#7e8595">${r.n12m} турн. за год</small>`:'—';
+    return `<tr class="r" data-uid="${r.uid}">
+      <td class="num">${r.rank}</td>
+      <td class="nick">${r.nick}<small>${r.country||''}</small></td>
+      <td class="sig">${fmt(r.sigma)}<small>${r.free?`${r.free} слот${r.free>1?'а':''} свободн${r.free>1?'ы':''}`:`хвост ${fmt(r.tail)}`}</small></td>
+      <td class="fin" data-l="финалы">${fin}</td>
+      <td class="need" data-l="до 140">${r.need?`<b>${r.need['140'].words}</b>${of5(r,'140')}`:'—'}</td>
+      <td class="need" data-l="до 150">${r.need?`<b>${r.need['150'].words}</b>${of5(r,'150')}`:'—'}</td>
+      <td class="freq" data-l="топ-10 · топ-5">${freq}</td>
+      <td class="st"><span class="tag ${cls}">${txt}</span></td>
+    </tr>`;
+  }
+  $('#tb').innerHTML=R.rows.slice(0,30).map(row).join('');
+  function detail(r){
+    const ten=r.ten.map((v,i)=>`<span class="${i>=5?'t':''}">${fmt(v)}</span>`).join('')+Array.from({length:r.free},()=>'<span class="e">·</span>').join('');
+    const one=r.one_result?`4★: победа +${fmt(r.one_result['4★']['1'])} · 3-е +${fmt(r.one_result['4★']['3'])} · 5-е +${fmt(r.one_result['4★']['5'])} · 10-е +${fmt(r.one_result['4★']['10'])} &nbsp;|&nbsp; 5★: победа +${fmt(r.one_result['5★']['1'])} · 5-е +${fmt(r.one_result['5★']['5'])} · 10-е +${fmt(r.one_result['5★']['10'])}`:'';
+    let tbl='';
+    if(r.table){
+      const ks=Object.keys(r.table).filter(k=>['2','3','4','5','6'].includes(k));
+      tbl=`<table class="mini"><thead><tr><th>турниров</th><th>как обычно</th><th>хороший сезон</th><th>сезон мечты</th></tr></thead><tbody>${ks.map(k=>{const t=r.table[k];const c=l=>t[l]?`<td>Σ≈${fmt(t[l].sigma)} <span class="w ${wordCls[t[l].word]||''}">${t[l].word}</span></td>`:'<td>—</td>';return `<tr><td class="num">${k}</td>${c('обычно')}${c('хороший')}${c('мечта')}</tr>`}).join('')}</tbody></table>
+      <p style="margin-top:8px;color:#8a91a0;font-size:12px">«Как обычно» — места из твоих последних 12 месяцев; «хороший сезон» — верхняя половина твоих результатов; «сезон мечты» — верхняя четверть. Слово — где ты относительно планки 140–150.</p>`;
+    }
+    const likely=(r.likely||[]).map(e=>`<li><i>${e.date.slice(5).split('-').reverse().join('.')}</i><b>${e.name}</b><em>${e.stars}★</em></li>`).join('');
+    const fins=(r.finals||[]).map(f=>`<li><i>финал</i><b>${f.name}</b><em>${f.min}–${f.mid}+ баллов</em></li>`).join('');
+    const n140=r.need?r.need['140']:null, n150=r.need?r.need['150']:null;
+    const what=n140?`До 140 — <b>${n140.words}</b>${n140.top5+n140.final?`; до 150 — <b>${n150.words}</b>`:''}. ${r.p5!=null&&(n140.top5+n140.final)?`Твоя частота топ-5 за год — ${Math.round(r.p5*100)}%, топ-10 — ${Math.round(r.p10*100)}%: в обычном ритме на это ушло бы ${Math.ceil(Math.max(n140.top5/Math.max(r.p5,.05),(n140.top5+n140.final)/Math.max(r.p10,.1)))} турниров, а поездок реально 4–6 — значит, бить надо чаще обычного.`:''}`:'';
+    return `<tr class="det"><td colspan="8"><div class="plan">
+      <div>
+        <h4>Где ты</h4>
+        <p>Σ <b>${fmt(r.sigma)}</b> · ${r.free?`в десятке ${10-r.free} турниров, ${r.free} слот${r.free>1?'а':''} пуст${r.free>1?'ы':''} — новый результат ложится целиком`:`десятка полная, хвост ${fmt(r.tail)} баллов — его и вытесняем`}</p>
+        <div class="ten">${ten}</div>
+        <h4>Что должно случиться</h4>
+        <p>${what}</p>
+        <p style="color:#8a91a0;font-size:12.5px">Один результат чистыми: ${one}</p>
+        ${fins?`<h4>Финалы, куда уже прошёл</h4><ul class="ev">${fins}</ul>`:''}
+      </div>
+      <div>
+        <h4>Сколько ездить</h4>${tbl}
+        <h4 style="margin-top:12px">Куда, скорее всего, поедешь</h4><ul class="ev">${likely||'<li><b>—</b></li>'}</ul>
+      </div>
+    </div></td></tr>`;
+  }
+  $('#tb').addEventListener('click',ev=>{
+    const tr=ev.target.closest('tr.r'); if(!tr) return;
+    const open=tr.classList.contains('open');
+    document.querySelectorAll('tr.det').forEach(x=>x.remove()); document.querySelectorAll('tr.open').forEach(x=>x.classList.remove('open'));
+    if(open) return;
+    const r=R.rows.find(x=>String(x.uid)===tr.dataset.uid); tr.classList.add('open'); tr.insertAdjacentHTML('afterend',detail(r));
+  });
+  // календарь
+  $('#evlist').innerHTML=R.events.map(e=>{
+    const d=e.date.slice(5).split('-').reverse().join('.');
+    if(e.kind==='final') return `<li><i>${d}</i><b>${e.name} <span style="color:#c9a3c8">· финал серийника</span>${e.fin&&e.fin.length?`<br><small style="color:#8a91a0">из гонки прошли: ${e.fin.join(', ')}</small>`:''}</b><em>${e.stars}★ · ${e.grid_min}–${e.grid_max}</em></li>`;
+    return `<li><i>${d}</i><b>${e.name} <small style="color:#8a91a0">${e.country||''} · поле ~${e.N}${e.regs&&e.regs.length?` · из топ-30 записаны: ${e.regs.join(', ')}`:''}</small></b><em>${e.stars}★ · 1-е ${e.g1} · 5-е ${e.g5} · 10-е ${e.g10}</em></li>`;
+  }).join('');
+
+  // ---------- калькулятор ----------
+  const REF={p10:.40,p5:.20,k0:8};
+  const FIN=12,TOP5=24;
+  function best10(recs){recs=[...recs].sort((a,b)=>b[0]-a[0]);let tot=0,n=0,ser=0;for(const [p,s] of recs){if(n>=10)break;if(s){if(ser>=2)continue;ser++}tot+=p;n++}return tot}
+  function combo(base,target){for(let tot=0;tot<9;tot++){for(let z=0;z<=tot;z++){const y=tot-z;if(best10([...base,...Array(z).fill([TOP5,0]),...Array(y).fill([FIN,0])])>=target)return [z,y]}}return [9,9]}
+  function words(z,y){const p=[];if(z)p.push(`${z} топ-5`);if(y)p.push(`${y} финал${[2,3,4].includes(y)?'а':''}`);return p.length?p.join(' + '):'уже есть'}
+  function parseId(u){const m=String(u).match(/user\/(\d+)/)||String(u).match(/^(\d+)$/);return m?m[1]:null}
+  async function calc(){
+    const id=parseId($('#mgUrl').value.trim()); const res=$('#res'); res.hidden=false;
+    if(!id){res.innerHTML='<p class="err">Не вижу номер игрока. Ссылка выглядит так: mafgame.org/user/1493/view</p>';return}
+    res.innerHTML='<p style="color:#8a91a0">Тяну леджер с mafgame…</p>'; $('#mgGo').disabled=true;
+    try{
+      const html=await (await fetch(`/mafgame/user/${id}/view`,{cache:'no-store'})).text();
+      const m=html.match(/data-page="([^"]+)"/); if(!m) throw new Error('mafgame не отдал данные');
+      const txt=document.createElement('textarea'); txt.innerHTML=m[1]; const page=JSON.parse(txt.value);
+      const rp=page.props.rating_points||[]; const nick=(page.props.user_data||{}).nickname||('#'+id);
+      const year=new Date().getFullYear();
+      const base=rp.filter(r=>r.year===year).map(r=>[parseFloat(r.points),r.tournament&&r.tournament.serial?1:0]);
+      const sigma=best10(base); const ten=[...base.map(x=>x[0])].sort((a,b)=>b-a).slice(0,10); const free=Math.max(0,10-ten.length); const tail=ten.length>=10?ten.slice(5).reduce((a,b)=>a+b,0):0;
+      const since=new Date(Date.now()-365*864e5).toISOString().slice(0,10);
+      const last=rp.filter(r=>r.date_acquired>=since&&!(r.tournament&&r.tournament.serial)&&r.position&&r.position<1000);
+      const n=last.length,t10=last.filter(r=>r.position<=10).length,t5=last.filter(r=>r.position<=5).length;
+      const p10=(t10+REF.p10*REF.k0)/(n+REF.k0), p5=(t5+REF.p5*REF.k0)/(n+REF.k0);
+      const parts=[140,150,P.beast].map(t=>{const [z,y]=combo(base,t);const need=z+y;const X=need?Math.ceil(Math.max(z/Math.max(p5,.05),need/Math.max(p10,.1))):0;return {t,z,y,need,X}});
+      const known=R.rows.find(r=>String(r.uid)===String(id));
+      res.innerHTML=`<div class="head"><b>${nick}</b><span>Σ ${fmt(sigma)} · ${free?`${free} свободных слота`:`хвост ${fmt(tail)}`} · за 12 месяцев ${n} турниров, топ-10 в ${t10}, топ-5 в ${t5}</span></div>
+        <div class="ten">${ten.map((v,i)=>`<span class="${i>=5?'t':''}">${fmt(v)}</span>`).join('')}${Array.from({length:free},()=>'<span class="e">·</span>').join('')}</div>
+        <table class="mini"><thead><tr><th>планка</th><th>нужно</th><th>в обычном ритме это</th><th>из 5 поездок</th></tr></thead><tbody>
+        ${parts.map(p=>`<tr><td class="num">${p.t}</td><td><b>${words(p.z,p.y)}</b></td><td>${p.need?`${p.X} турниров при твоей частоте (топ-10 ${Math.round(p10*100)}%, топ-5 ${Math.round(p5*100)}%)`:'—'}</td><td>${p.need?`${Math.min(5,p.need)} с результатом${p.z?`, ${p.z} из них топ-5`:''}`:'—'}</td></tr>`).join('')}
+        </tbody></table>
+        <p style="margin:10px 0 0;color:#8a91a0;font-size:12.5px">${sigma<60?'До планки далеко: это уже не про ритм, а про несколько подиумов подряд — так в 2025 зашёл Luca с 23-го места.':''} Финалы серийников здесь не учтены${known&&known.finals&&known.finals.length?` — у тебя они есть (${known.finals.map(f=>f.name).join(', ')}), смотри строку в таблице выше`:''}. Результат за 12 месяцев — по местам в турнирах, серии не считаются.</p>`;
+    }catch(e){res.innerHTML=`<p class="err">Не получилось: ${e.message}. Попробуй ещё раз или проверь ссылку.</p>`}
+    $('#mgGo').disabled=false;
+  }
+  $('#mgGo').addEventListener('click',calc); $('#mgUrl').addEventListener('keydown',e=>{if(e.key==='Enter')calc()});
+  $('#mkSend').addEventListener('click',()=>{
+    const mg=$('#mgUrl').value.trim(), mk=$('#mkUrl').value.trim();
+    if(!mg||!mk){alert('Нужны обе ссылки: mafgame и markery.');return}
+    try{localStorage.setItem('dovod_pair',JSON.stringify({mg,mk,t:Date.now()}))}catch(e){}
+    const text=encodeURIComponent(`Пара для DOVOD:\nmafgame: ${mg}\nmarkery: ${mk}`);
+    window.open(`https://t.me/share/url?url=${encodeURIComponent('https://dovod-mafia.com/race.html')}&text=${text}`,'_blank');
+  });
+})();
+</script>
+</body>
+</html>
