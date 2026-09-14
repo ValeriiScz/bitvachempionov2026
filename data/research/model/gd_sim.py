@@ -21,7 +21,8 @@ def cand_from_future(future):
 # экспертный календарь явки (Валерий, 14.09.2026): множитель привлекательности турнира поверх модели.
 # 1.5 = «все поедут», 1.0 = обычный, 0.5 = «маловероятно соберётся», 0.3 = «туда не едут»
 EVENT_WEIGHT={}
-TARGET_TOP30_MEAN=None   # если задано — явка масштабируется так, чтобы у топ-30 гонки среднее число обычных турниров = это
+TARGET_TOP30_MEAN=None
+RACE_BETA_SHIFT=0.0   # сценарии «стараются»/«звери»: сдвиг силы топ-30 относительно фона   # если задано — явка масштабируется так, чтобы у топ-30 гонки среднее число обычных турниров = это
 
 class Season:
     def __init__(self, year, T, cal_future=None, verbose=True, att_T=None):
@@ -144,7 +145,7 @@ class Season:
         """force: {uid: set(event ids)} — принудительная явка. Возвращает результаты."""
         rng=np.random.default_rng(seed)
         pool=self.pool; idx={u:i for i,u in enumerate(pool)}; n=len(pool)
-        beta=np.array([self.beta.get(u,self.default) for u in pool])*C
+        beta=np.array([self.beta.get(u,self.default)+(RACE_BETA_SHIFT if self.race.get(u,999)<=30 else 0) for u in pool])*C
         top12=np.zeros(n); top30=np.zeros(n); sums=np.zeros((S,n)); thr=np.zeros(S); played=np.zeros(n); new_reg=np.zeros(n); new_ser=np.zeros(n)
         base_recs=[list(self.base[u]) for u in pool]
         for s in range(S):
