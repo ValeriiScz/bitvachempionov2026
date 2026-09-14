@@ -5,7 +5,7 @@ from gd_strength import rankings_before, fit_pl
 from gd_attend import Attend
 
 LAM, C = 0.1, 1.1
-RACE_BOOST = 1.2   # калибровочный множитель явки для мест 1–25 гонки (подбирается на бэктесте)
+RACE_BOOST = 1.0   # калибровочный множитель явки для мест 1–25 гонки (подбирается на бэктесте)
 GRID_2S=[30,27,25,22,20,18,16,14,12,10,8,6]
 GRID_4S=[42,39,37,34,32,30,28,26,24,22,20,16,14,10,8]
 RULES={664:'top2',277:'top2',757:'mcl',259:'mcl',639:'top2',251:'top2',645:'top2',685:'top1mvp',478:'top1mvp',740:'sum2',279:'sum2',749:'top2',530:'top2',670:'top2',509:'top2',579:'top2',132:'top2',694:'top2'}
@@ -17,6 +17,11 @@ def cand_from_future(future):
         us=[r[0] for r in s['rows']] if s['rows'] else [r[0] for r in s['regs']]
         out|=set(us)
     return out
+
+# экспертный календарь явки (Валерий, 14.09.2026): множитель привлекательности турнира поверх модели.
+# 1.5 = «все поедут», 1.0 = обычный, 0.5 = «маловероятно соберётся», 0.3 = «туда не едут»
+EVENT_WEIGHT={}
+TARGET_TOP30_MEAN=None   # если задано — явка масштабируется так, чтобы у топ-30 гонки среднее число обычных турниров = это
 
 class Season:
     def __init__(self, year, T, cal_future=None, verbose=True, att_T=None):
@@ -67,6 +72,21 @@ class Season:
                 elif f==0: pu=max(pu,0.6)
                 p[u]=pu
             ev['p']=p; ev['pv']=np.array([p[u] for u in self.pool])
+        # экспертные веса турниров + нормировка на целевую явку топ-30
+        regs=[ev for ev in self.events if ev['type']!='contour']
+        for ev in regs:
+            a=EVENT_WEIGHT.get(ev['id'],1.0)
+            for u in self.pool:
+                f=ev['regs'].get(u)
+                if f is None: ev['p'][u]=min(0.97,ev['p'][u]*a)
+        if TARGET_TOP30_MEAN:
+            top=[u for u,r in self.race.items() if r<=30 and u in set(self.pool)]
+            cur=sum(ev['p'][u] for ev in regs for u in top)/max(1,len(top))
+            k=TARGET_TOP30_MEAN/cur
+            for ev in regs:
+                for u in self.pool:
+                    if ev['regs'].get(u) is None: ev['p'][u]=min(0.97,ev['p'][u]*k)
+        for ev in regs: ev['pv']=np.array([ev['p'][u] for u in self.pool])
         if verbose:
             print(f'Season {year} T={T}: событий {len(self.events)} (контуров {sum(1 for e in self.events if e["type"]=="contour")}), пул {len(self.pool)}, сила из {len(self.beta)} игроков')
 

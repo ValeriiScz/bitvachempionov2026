@@ -1,8 +1,9 @@
 """plan2.py · v2 — «план игрока» для топ-30: перцентили мест (со сглаживанием к пулу) × сетка его вероятных турниров × хвост десятки; серийники — диапазоном; планка — из Монте-Карло."""
-import numpy as np, json, sys, collections, gd_data as g, gd_sim
+import numpy as np, json, sys, collections, gd_data as g, gd_sim, calendar_expert
 from gd_sim import Season
+gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=4.0
 T='2026-09-14'; rng=np.random.default_rng(0)
-F=json.load(open('forecast2026.json')); thr=np.array(F['thr'])*1.05
+F=json.load(open('forecast2026.json')); thr=np.array(F['thr'])*1.07   # +7%: бэктест-2025 занижал порог
 PL=(np.percentile(thr,25),np.percentile(thr,50),np.percentile(thr,75)); played_exp={r['uid']:r['played'] for r in F['rows']}
 Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
@@ -35,7 +36,7 @@ def sim_sigma(uid, base, k, level, S=4000, with_finals=False):
     P,n=smoothed(uid); P=np.sort(P)
     if level=='хороший': P=P[:max(3,len(P)//2)]
     if level=='мечта': P=P[:max(2,len(P)//4)]
-    evs=sorted(regular,key=lambda e:-e['p'][uid])[:k]   # k самых вероятных для него турниров
+    evs=sorted(regular,key=lambda e:-(e['p'][uid]*(0.15 if e['stars']<=1 else 1.0)))[:k]   # k самых вероятных для него турниров (1★ — в конец: баллов там нет)
     out=[]
     for _ in range(S):
         new=[]
@@ -67,7 +68,7 @@ for s0,uid in mid[:30]:
     print(f"{rank[uid]:>2} {g.NICK[uid]:14s} {s0:4.0f} {tail:5.0f} {PL[1]-s0:+5.0f} {n:4d} {np.median(pcts(uid))*100 if pcts(uid) else 0:12.0f}% {k:9d} | "+" | ".join(cells)+f" | {fstr}")
     # таблица турниров×уровень для JSON
     table={}
-    for kk in (3,5,7,9,12):
+    for kk in (1,2,3,4,5,6,8):
         table[kk]={}
         for lvl in ('обычно','хороший','мечта'):
             sig,evs=sim_sigma(uid,base,kk,lvl,S=1500); w,p=word(sig); table[kk][lvl]={'sigma':float(np.median(sig)),'p10':float(np.percentile(sig,10)),'p90':float(np.percentile(sig,90)),'word':w,'p':float(p)}
@@ -75,5 +76,5 @@ for s0,uid in mid[:30]:
     rows.append({'uid':uid,'nick':g.NICK[uid],'rank':rank[uid],'sigma':s0,'ten':ten[:10],'tail':tail,'need':float(PL[1]-s0),'hist_n':n,'hist_median_pct':float(np.median(pcts(uid))) if pcts(uid) else None,
                  'expected_k':k,'detail':detail,'finals':[{'name':f[0],'date':f[1],'stars':f[2],'n_fin':f[3],'lo':f[4],'mid':f[5],'hi':f[6]} for f in fins],'table':table,
                  'one_result':{'4★':{pos:se.grid_pts(4,'regular',40)[pos-1]-worst for pos in (1,3,5,10)},'5★':{pos:se.grid_pts(5,'regular',44)[pos-1]-worst for pos in (1,3,5,10)}},
-                 'likely_events':[{'id':e['id'],'name':e['name'],'date':e['date'],'stars':e['stars'],'p':round(e['p'][uid],2)} for e in sorted(regular,key=lambda e:-e['p'][uid])[:8]]})
+                 'likely_events':[{'id':e['id'],'name':e['name'],'date':e['date'],'stars':e['stars'],'p':round(e['p'][uid],2)} for e in sorted(regular,key=lambda e:-(e['p'][uid]*(0.15 if e['stars']<=1 else 1.0)))[:8]]})
 json.dump({'T':T,'planka':{'p25':PL[0],'p50':PL[1],'p75':PL[2]},'rows':rows},open('plan2026.json','w'),ensure_ascii=False,indent=0)
