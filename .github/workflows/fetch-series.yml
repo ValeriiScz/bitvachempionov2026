@@ -1,0 +1,38 @@
+# Снимки серийников mafgame (регламент + результаты серий) для исследования «Гонка за золотую дюжину».
+# Запуск: вручную (Actions → «Серийники mafgame» → Run workflow) или пушем правки скрипта.
+name: Серийники mafgame
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/fetch-series.yml'
+      - '.github/scripts/fetch_series.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-series
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Снять серийники
+        run: python .github/scripts/fetch_series.py
+      - name: Закоммитить
+        run: |
+          git config user.name  "dovod-bot"
+          git config user.email "noreply@dovod-mafia.com"
+          git add data/research/series
+          if git diff --cached --quiet; then echo "изменений нет"; exit 0; fi
+          git commit -m "research: серийники mafgame $(date -u +%d.%m.%Y)"
+          git pull --rebase --autostash
+          git push
