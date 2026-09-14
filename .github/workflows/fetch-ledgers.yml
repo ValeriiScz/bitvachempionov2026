@@ -1,0 +1,39 @@
+# Выкачка данных рейтинга mafgame для исследования «Гонка за золотую дюжину».
+# Запускается вручную (Actions → «Леджеры рейтинга mafgame» → Run workflow)
+# или пушем правки самого скрипта. Пишет data/research/ledger/*.json.
+name: Леджеры рейтинга mafgame
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/fetch-ledgers.yml'
+      - '.github/scripts/fetch_ledgers.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-ledgers
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Выкачать данные
+        run: python .github/scripts/fetch_ledgers.py
+      - name: Закоммитить
+        run: |
+          git config user.name  "dovod-bot"
+          git config user.email "noreply@dovod-mafia.com"
+          git add data/research/ledger
+          if git diff --cached --quiet; then echo "изменений нет"; exit 0; fi
+          git commit -m "research: леджеры рейтинга mafgame $(date -u +%d.%m.%Y)"
+          git pull --rebase --autostash
+          git push
