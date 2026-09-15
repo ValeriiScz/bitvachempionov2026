@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v7.0 · 2026-06-20 -->
+<!-- DOVOD · series.html · v1.1 · 2026-09-15 · + ближайшие серии (14 дней) и плашки остальных серийников из data/series2026.js (регламент, финал, кто прошёл, что осталось) -->
 <!-- DOVOD · series.html · v1.0 · 2026-08-31 · раздел «Серийники»: промоблок MCL Europe 2026 (mcl2026.html) и плашка GMC Europa 2026 (gmc2026.html). Хаб выбора разделов — index.html -->
 <!-- v2.2 · 2026-06-12 · плашки турниров, лого федерации — оригинал с mafgame.org -->
 <meta charset="utf-8">
@@ -159,6 +160,44 @@
   .mclp:hover .mclp-v{opacity:.72}
   @media (max-width:520px){.mclp-lg{width:86px;opacity:.3}}
 
+  /* ── v1.1 · ближайшие серии и остальные серийники (data/series2026.js) ── */
+  .upc{margin:6px 0 26px;border:1px solid var(--hairline);border-radius:14px;background:rgba(255,255,255,.015);overflow:hidden}
+  .upc-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+  .upc-h b{font-size:11px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold)}
+  .upc-h a{font-size:12px;color:var(--mut);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)} .upc-h a:hover{color:var(--gold)}
+  .upc-l{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+  .upc-l:last-child{border-bottom:0}
+  .upc-d{flex:none;width:44px;font-weight:800;color:var(--gold-hi);font-size:12px}
+  .upc-c{flex:none;width:34%;color:var(--ink);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .upc-w{flex:1;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .upc-r{flex:none;font-size:11.5px;color:var(--dim)} .upc-r b{color:var(--ink);font-weight:700}
+  .upc-r.full b{color:#67e08f}
+  .stiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px}
+  .stile{cursor:pointer;border:1px solid var(--hairline);border-radius:14px;padding:14px 15px 12px;background:linear-gradient(160deg,var(--panel2),var(--panel) 70%);transition:.18s;text-align:left;color:var(--ink);font:inherit}
+  .stile:hover,.stile.on{border-color:rgba(232,200,122,.5);transform:translateY(-2px)}
+  .stile .st{font-size:10px;letter-spacing:2.4px;color:var(--gold);margin-bottom:6px}
+  .stile .sn{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;line-height:1.25}
+  .stile .sm{font-size:12px;color:var(--mut);margin-top:7px;line-height:1.55}
+  .stile .sm b{color:var(--ink)}
+  .stile .bar{height:4px;background:rgba(255,255,255,.06);border-radius:3px;margin-top:10px;overflow:hidden}
+  .stile .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-hi))}
+  .sdet{display:none;border:1px solid rgba(232,200,122,.35);border-radius:14px;padding:18px 18px 16px;margin:-8px 0 22px;background:rgba(232,200,122,.03)}
+  .sdet.on{display:block}
+  .sdet h3{margin:0 0 6px;font-family:'Playfair Display',serif;font-size:20px;font-weight:600}
+  .sdet .k{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:800;margin:14px 0 6px}
+  .sdet p{margin:0;font-size:13.5px;color:#cfcad6;line-height:1.6} .sdet p b{color:var(--ink)}
+  .sdet .src{font-size:11px;color:var(--dim);margin-top:3px}
+  .sdet .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 14px}
+  .sdet .cell b{display:block;font-size:12px;color:var(--mut);font-weight:600} .sdet .cell span{font-size:14px;color:var(--ink)}
+  .qual{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+  .qual span{font-size:12.5px;padding:5px 9px;border-radius:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+  .qual span.top{border-color:rgba(232,200,122,.5);color:var(--gold-hi)} .qual span small{color:var(--dim);margin-left:4px}
+  .sdet ul{margin:4px 0 0;padding:0;list-style:none} .sdet li{font-size:13px;color:#cfcad6;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:10px}
+  .sdet li i{font-style:normal;color:var(--gold-hi);font-weight:700;flex:none;width:44px} .sdet li em{font-style:normal;color:var(--dim);margin-left:auto;white-space:nowrap}
+  .sdet .links{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px} .sdet .links a{font-size:12px;color:var(--gold);text-decoration:none;border:1px solid var(--gold-dim);padding:7px 11px;border-radius:9px} .sdet .links a:hover{border-color:var(--gold)}
+  .stale{font-size:12px;color:#c98a5a;margin-top:6px}
+  @media(max-width:520px){.upc-c{width:40%} .upc-w{display:none}}
+
 .backbar{max-width:var(--w,900px);margin:0 auto 10px;padding:14px 0 0}
 .backlnk{display:inline-flex;align-items:center;gap:8px;font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
  color:#8b8f9a;text-decoration:none;border:1px solid rgba(255,255,255,.14);padding:9px 13px;border-radius:2px;transition:.18s}
@@ -256,6 +295,14 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     </div>
   </a>
 
+  <div class="sec"><span class="dia">◆</span> Ближайшие серии</div>
+  <div class="upc" id="upc"><div class="upc-h"><b>на 2 недели · все серийники</b><a href="calendar.html?preset=1&type=ser&view=feed">все серии в календаре →</a></div><div id="upcList"></div></div>
+
+  <div class="sec"><span class="dia">◆</span> Остальные серийники</div>
+  <p class="tagline" style="margin:0 0 14px">Двухзвёздочные лиги, чей финал платит как регулярная четвёрка: победителю 30 баллов. Нажми на плашку — регламент, кто уже прошёл, что осталось.</p>
+  <div class="stiles" id="stiles"></div>
+  <div class="sdet" id="sdet"></div>
+
   <div class="foot">
     <b>DOVOD</b> — некоммерческий проект, делается для игроков и по любви к игре.
     <span class="fdia">◆</span> автор — господин DOVOD, <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a>
@@ -270,6 +317,44 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
  p.addEventListener('mouseenter',function(){v.play().catch(function(){});});
  p.addEventListener('mouseleave',function(){v.pause();});})();
 </script>
+<script src="data/series2026.js"></script>
+<script>(function(){
+  const S=window.SERIES; if(!S) return;
+  const dd=d=>d.slice(5).split('-').reverse().join('.');
+  const byId={}; S.contours.forEach(c=>byId[c.id]=c);
+  // цифры в больших плашках MCL/GMC
+  const mcl=byId[757], gmc=byId[664];
+  if(mcl){const n=document.querySelector('.mclp-n'); if(n) n.textContent=`${mcl.series_played} / ${mcl.series_total} серий · прошли ${mcl.qualified.length}`;
+    const m=document.querySelector('.mclp-m'); if(m) m.textContent=`Зачёт, состав финала, серии и разбор данных. Финал ${mcl.final} · ${mcl.prize}`;}
+  if(gmc){const t=document.querySelector('a.tile[href="gmc2026.html"] .tmeta'); if(t) t.innerHTML=`<b>${gmc.series_total} серий</b><span class="sep">·</span><b>${gmc.series_played} сыграно</b><span class="sep">·</span><b>${gmc.players} игроков</b><span class="sep">·</span><b>${gmc.qualified.length} прошли</b><br>${gmc.rule} — финал ${gmc.final}, ${gmc.prize}`;}
+  // ближайшие серии
+  const up=S.upcoming;
+  document.getElementById('upcList').innerHTML=up.length?up.map(u=>`<div class="upc-l"><span class="upc-d">${dd(u.date)}</span><span class="upc-c">${u.contour}</span><span class="upc-w">${u.city}${u.country?', '+u.country:''}</span><span class="upc-r ${u.regs>=u.exp?'full':''}"><b>${u.regs}</b>/${u.exp} записано</span></div>`).join('')
+    :'<div class="upc-l"><span class="upc-w">В ближайшие две недели серий нет.</span></div>';
+  // плашки остальных
+  const rest=S.contours.filter(c=>!c.page);
+  document.getElementById('stiles').innerHTML=rest.map(c=>`<button class="stile" data-id="${c.id}">
+    <div class="st">${'★'.repeat(c.stars)} · финал ${dd(c.final_date)}</div>
+    <div class="sn">${c.short}</div>
+    <div class="sm">серий <b>${c.series_played}</b> из ${c.series_total}${c.series_ahead?` · впереди ${c.series_ahead}`:' · все сыграны'}<br>прошли <b>${c.qualified.length}</b> · ${c.city}</div>
+    <div class="bar"><i style="width:${Math.round(c.series_played/Math.max(1,c.series_total)*100)}%"></i></div></button>`).join('');
+  const det=document.getElementById('sdet');
+  function show(c){
+    const q=c.qualified.map(x=>`<span class="${x.rank&&x.rank<=30?'top':''}">${x.nick}${x.rank?`<small>#${x.rank}</small>`:''}</span>`).join('')||'<span>пока никого</span>';
+    const nx=c.next.map(s=>`<li><i>${dd(s.date)}</i>${s.city}${s.country?', '+s.country:''}<em>${s.regs}/${s.exp} записано</em></li>`).join('');
+    const st=c.series_stale&&c.series_stale.length?`<div class="stale">Без протокола на mafgame: ${c.series_stale.map(x=>dd(x.date)+' '+x.city).join(', ')} — состоялись ли, неизвестно.</div>`:'';
+    det.innerHTML=`<h3>${c.name}</h3><p style="color:var(--mut);font-size:12.5px">${c.tag?c.tag+' · ':''}${'★'.repeat(c.stars)} · ${c.players} игроков сыграли серии</p>
+      <div class="k">Как пройти в финал</div><p>${c.rule}</p><div class="src">${c.rule_src}</div>
+      <div class="k">Финал</div><div class="grid"><div class="cell"><b>Когда и где</b><span>${c.final}</span></div><div class="cell"><b>Формат</b><span>${c.final_size||'—'}</span></div><div class="cell"><b>Призовой</b><span>${c.prize||'—'}</span></div><div class="cell"><b>Баллы рейтинга</b><span>${c.points.max} победителю … ${c.points.min} последнему в сетке; участникам серий ${c.points.base}</span></div></div>
+      <div class="k">Серии: сыграно ${c.series_played} из ${c.series_total}${c.planned?` (по регламенту ${c.planned})`:''}</div>${nx?`<ul>${nx}</ul>`:'<p>Все серии сыграны — ждём финал.</p>'}${st}
+      <div class="k">Уже прошли (${c.qualified.length})<span style="color:var(--dim);font-weight:600;letter-spacing:0;text-transform:none;margin-left:8px">золотым — из топ-30 гонки</span></div><div class="qual">${q}</div>
+      <div class="links"><a href="${c.mafgame}" target="_blank" rel="noopener">страница на mafgame ↗</a><a href="calendar.html?preset=1&type=ser&view=feed">серии в календаре</a><a href="race.html">гонка за дюжину</a></div>`;
+    det.classList.add('on'); document.querySelectorAll('.stile').forEach(b=>b.classList.toggle('on',b.dataset.id==String(c.id)));
+    det.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  document.getElementById('stiles').addEventListener('click',e=>{const b=e.target.closest('.stile');if(!b)return;const c=byId[b.dataset.id];if(det.classList.contains('on')&&b.classList.contains('on')){det.classList.remove('on');b.classList.remove('on');return}show(c)});
+  const f=document.querySelector('.foot'); if(f){const s=document.createElement('span');s.innerHTML=`<span class="fdia">◆</span> серии: снимок ${dd(S.snapshot)}`;f.appendChild(s)}
+})();</script>
 <script src="data/meta.js"></script>
 <script>(function(){var e=document.getElementById("ratedate");if(e&&window.SITE&&SITE.ratingUpdated)e.textContent=SITE.ratingUpdated;})();</script>
 </body>
