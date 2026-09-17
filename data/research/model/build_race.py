@@ -1,5 +1,6 @@
-"""build_race.py · v1.0 · 2026-09-14 — собирает data/race2026.js для страницы «Гонка за золотую дюжину» из результатов модели.
-Вход: tickets2026.json, plan2026.json, scenarios3.json, леджеры. Выход: window.RACE = {...}"""
+"""build_race.py · v1.1 · 2026-09-17 (v1.0 — 2026-09-14) — собирает data/race2026.js для страницы «Гонка за золотую дюжину» из результатов модели.
+Вход: tickets2026.json, plan2026.json, scenarios3.json, леджеры. Выход: window.RACE = {...}
+v1.1: у игроков sim три оценки силы — beta (вся история с 2024, веса 1/.5/.25), b12 (12 месяцев), b26 (только 2026) — для переключателя «Форма» в генераторе."""
 import json, numpy as np, gd_data as g, gd_sim
 from gd_sim import Season
 T='2026-09-14'; Season.FINALISTS_PLAY=True
@@ -47,9 +48,25 @@ hist={'note':'после ЧМ 2024 и 2025: доля прошедших в дю�
 import numpy as np
 regs_ev=[e for e in se.events if e['type']!='contour']; cont_ev=[e for e in se.events if e['type']=='contour']
 simpool=[u for s_,u in mid[:60]]
+# альтернативные окна оценки силы: 12 месяцев и только 2026 (веса 1.0, та же усадка)
+import datetime
+from gd_strength import rankings_before, fit_pl
+def beta_window(since):
+    Td=datetime.date.fromisoformat(T); rk=[]
+    for e in g.EV.values():
+        if not e['N'] or e['date']>=T or e['date']<since: continue
+        rows=[r for r in e['rows'] if r[2] is not None and r[2]<1000]; rows.sort(key=lambda r:r[2])
+        if len(rows)<6: continue
+        rk.append((1.0,[r[0] for r in rows]))
+    b=fit_pl(rk,lam=gd_sim.LAM); d=float(np.percentile(np.array(list(b.values())),30))
+    return b,d,len(rk)
+B12,D12,N12=beta_window((datetime.date.fromisoformat(T)-datetime.timedelta(days=365)).isoformat())
+B26,D26,N26=beta_window('2026-01-01')
+print('окна силы: всё',len(se.beta),'игроков; 12м',N12,'турниров; 2026',N26,'турниров')
 players=[]
 for u in simpool:
     players.append({'uid':u,'nick':g.NICK[u],'rank':se.race.get(u),'base':[[p,sf] for p,sf in se.base[u]],'beta':round(float(se.beta.get(u,se.default)),3),
+                    'b12':round(float(B12.get(u,D12)),3),'b26':round(float(B26.get(u,D26)),3),
                     'p':[round(float(e['p'][u]),3) for e in regs_ev],'reg':[e['regs'].get(u) if e['regs'].get(u) is not None else -1 for e in regs_ev]})
 sim_events=[{'id':e['id'],'date':e['date'],'stars':e['stars'],'N':e['N'],'grid':[float(x) for x in se.grid_pts(e['stars'],e['type'],e['N'])]} for e in regs_ev]
 sim_cont=[{'id':c['id'],'name':SHORT.get(c['name'][:10],c['name']),'fin':{str(u):round(p,2) for u,p in c['fin'].items() if u in set(simpool)},'cand':{str(u):round(p,2) for u,p in c['cand'].items() if u in set(simpool)},
@@ -58,7 +75,7 @@ sim_cont=[{'id':c['id'],'name':SHORT.get(c['name'][:10],c['name']),'fin':{str(u)
                   'beta':round(float(np.mean([se.beta.get(u,se.default) for u in c['fin'] if u not in set(simpool)])) if any(u not in set(simpool) for u in c['fin']) else float(se.default),2),
                   'ncand':round(float(sum(p for u,p in c['cand'].items() if u not in set(simpool))),1)}} for c in cont_ev]
 rng=np.random.default_rng(0); bg=[round(float(x),2) for x in rng.choice(se.bg,200)]
-SIM={'players':players,'events':sim_events,'contours':sim_cont,'bg':bg,'C':gd_sim.C,'top30_mean':3.5,'levels':{'обычно':[1.0,0.0],'стараются':[5/3.5,0.35],'максимум':[6/3.5,0.7]},
+SIM={'players':players,'forms':{'all':'вся история (с 2024, свежее — весомее)','y12':'последние 12 месяцев','y26':'только 2026 год'},'events':sim_events,'contours':sim_cont,'bg':bg,'C':gd_sim.C,'top30_mean':3.5,'levels':{'обычно':[1.0,0.0],'стараются':[5/3.5,0.35],'максимум':[6/3.5,0.7]},
      'server':{'S':F.get('S',3000),'date':T,'p12':{str(r['uid']):round(r['p12'],3) for r in F['rows']}}}
 RACE={'snapshot':T,'sim':SIM,'thr12_now':mid[11][0],'planks':planks,'events':events,'rows':rows,'hist':hist,
       'method':'Σ = 10 лучших турниров года, не более 2 серийных. Финал = 6–10 место на 4★ ≈ 12 баллов, топ-5 на 4★ ≈ 24. Частоты — за последние 12 месяцев, сглажены к среднему топ-30.'}

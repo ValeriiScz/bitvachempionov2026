@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
+<!-- race.html v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
 <meta name="description" content="Рейтинг MAFGAME 2026: планка топ-12, кому сколько турниров и результатов нужно до конца года, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -178,13 +179,35 @@ details.m p{margin:8px 0 0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-<style id="dvcrumbcss">.dv-crumb{position:relative;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;max-width:1080px;margin:0 auto;padding:12px 15px 0;font:700 10px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#79808f}.dv-crumb a{color:#c3cad6;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}.dv-crumb a:hover{color:#f5ff35;border-color:#f5ff35}.dv-crumb i{font-style:normal;opacity:.5}</style>
+<style id="dvcrumbcss">.dv-crumb{position:relative;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;max-width:1080px;margin:0 auto;padding:12px 15px 0;font:700 10px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#79808f}.dv-crumb a{color:#c3cad6;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}.dv-crumb a:hover{color:#f5ff35;border-color:#f5ff35}.dv-crumb i{font-style:normal;opacity:.5}
+/* ── закрытый раздел: гейт ── */
+.shell.locked .sec,.shell.locked .kpis,.shell.locked .nav .pri{display:none}
+.gate{max-width:560px;margin:22px 0 10px;border:1px solid var(--line);padding:22px 20px 18px;position:relative;
+  background:linear-gradient(150deg,rgba(245,255,53,.07),rgba(0,0,0,.32));
+  clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px))}
+.gate::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ye);box-shadow:0 0 16px var(--ye);opacity:.7}
+.gate .glab{display:flex;align-items:center;gap:9px;font:700 10px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ye);margin-bottom:14px}
+.gate .glab svg{width:12px;height:14px}
+.gform{display:flex;gap:8px;flex-wrap:wrap}
+.gform input{flex:1 1 190px;min-width:0;background:#0b0d13;border:1px solid var(--line);color:var(--ink);
+  font:600 15px/1 var(--mono);letter-spacing:.14em;padding:13px 14px;border-radius:2px;outline:none;transition:.18s}
+.gform input:focus{border-color:var(--ye);box-shadow:0 0 0 1px rgba(245,255,53,.3)}
+.gform .btn{background:var(--ye);border-color:var(--ye)}
+.gate .rem{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:12.5px;color:#8a91a0;cursor:pointer}
+.gate .rem input{accent-color:var(--ye);width:15px;height:15px}
+.gate .gerr{margin-top:12px;font:600 12.5px/1.4 Inter,sans-serif;color:var(--rd);display:none}
+.gate .gerr.on{display:block}
+.gate .gnote{margin-top:14px;font-size:11.5px;line-height:1.5;color:#666d7a}
+.gate.shake{animation:gshake .4s}
+@keyframes gshake{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.gate[hidden]{display:none}
+</style>
 </head>
 <body>
 <nav class="dv-crumb"><a href="/">DOVOD</a><i>/</i><span>Статистика гонки</span></nav>
 <div class="bgfx" aria-hidden="true"><i class="grid"></i><i class="g1"></i><i class="g2"></i><i class="scan"></i><i class="vig"></i></div>
 
-<div class="shell">
+<div class="shell locked" id="shell">
   <div class="nav">
     <a class="nb" href="/">&#8592; Разделы</a>
     <a class="nb" href="calendar.html?preset=1&type=reg,fin,team&stars=3,4&view=feed">Календарь &#8594;</a>
@@ -197,6 +220,17 @@ details.m p{margin:8px 0 0}
     <p class="sub">Двенадцать лучших по итогам года едут на MAFGAME MAJOR «Золотая Дюжина». В зачёт идут <b>десять лучших турниров</b>, из них не больше двух серийных. Ниже — какая сумма, скорее всего, будет проходной, и кому сколько результатов до неё осталось.</p>
     <div class="kpis" id="kpis"></div>
   </header>
+
+  <div class="gate" id="gate">
+    <div class="glab"><svg viewBox="0 0 12 14" fill="none"><rect x=".8" y="5.6" width="10.4" height="7.6" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3.2 5.6V3.8a2.8 2.8 0 0 1 5.6 0v1.8" stroke="currentColor" stroke-width="1.3"/></svg>Раздел закрыт · доступ по паролю</div>
+    <form class="gform" id="gform" autocomplete="off">
+      <input type="password" id="gpw" placeholder="пароль" aria-label="Пароль" autocomplete="current-password">
+      <button class="btn" id="gbtn" type="submit">Войти</button>
+    </form>
+    <label class="rem"><input type="checkbox" id="grem" checked> запомнить на этом устройстве</label>
+    <div class="gerr" id="gerr">Пароль не подошёл.</div>
+    <div class="gnote">Данные гонки лежат на сервере зашифрованными и расшифровываются в вашем браузере. Пароль никуда не отправляется. Пароль — у автора: <a href="https://t.me/SivValerii" target="_blank" rel="noopener" style="color:#c3cad6">@SivValerii</a>.</div>
+  </div>
 
   <section class="sec">
     <div class="sh"><span>01 · планка</span><s></s><em id="snapDate"></em></div>
@@ -233,11 +267,11 @@ details.m p{margin:8px 0 0}
   <section class="sec" id="gen">
     <div class="sh"><span>02b · генератор сезонов</span><s></s><em>случайные составы дюжины</em></div>
     <h2 class="big">Сгенерировать остаток сезона</h2>
-    <p class="lead">Одна генерация — это один случайно разыгранный остаток года: кто поехал, какое место взял, что вытеснил из десятки, как сыграли финалы серийников. Запускаем много раз и смотрим, <b>сколько раз из N игрок оказался в дюжине</b>. Явка и уровень игры — на выбор.</p>
+    <p class="lead">Одна генерация — это один случайно разыгранный остаток года: кто поехал, какое место взял, что вытеснил из десятки, как сыграли финалы серийников. Запускаем 500 раз и смотрим, <b>сколько раз из 500 игрок оказался в дюжине</b>. На выбор — явка, уровень игры и по какому периоду оцениваем силу игрока: вся история с 2024 (свежее весомее), последние 12 месяцев или только 2026 год.</p>
     <div class="genctl">
       <div class="gengrp"><span>Явка</span><button class="gb on" data-k="att" data-v="regs">только заявки</button><button class="gb" data-k="att" data-v="forecast">прогноз посещений</button></div>
       <div class="gengrp"><span>Игра</span><button class="gb on" data-k="lvl" data-v="обычно">как обычно</button><button class="gb" data-k="lvl" data-v="стараются">стараются</button><button class="gb" data-k="lvl" data-v="максимум">максимум</button></div>
-      <div class="gengrp"><span>Сезонов</span><button class="gb" data-k="n" data-v="100">100</button><button class="gb on" data-k="n" data-v="300">300</button><button class="gb" data-k="n" data-v="1000">1000</button></div>
+      <div class="gengrp"><span>Форма</span><button class="gb on" data-k="form" data-v="all">вся история</button><button class="gb" data-k="form" data-v="y12">12 месяцев</button><button class="gb" data-k="form" data-v="y26">только 2026</button></div>
       <button class="btn" id="genGo">Сгенерировать</button>
     </div>
     <div id="genOut" class="genout"></div>
@@ -273,9 +307,8 @@ details.m p{margin:8px 0 0}
 </div>
 
 <script src="data/meta.js"></script>
-<script src="data/race2026.js"></script>
 <script>
-(function(){
+function initRace(){
   const R=window.RACE; if(!R){return}
   const $=s=>document.querySelector(s);
   const fmt=n=>Math.round(n);
@@ -384,7 +417,7 @@ details.m p{margin:8px 0 0}
   // ---------- генератор сезонов (клиентская симуляция) ----------
   (function(){
     const SIM=R.sim; if(!SIM) return;
-    const st={att:'regs',lvl:'обычно',n:300};
+    const st={att:'regs',lvl:'обычно',form:'all',n:500}; const BK={all:'beta',y12:'b12',y26:'b26'};
     const gum=()=>-Math.log(-Math.log(Math.random()));
     const P=SIM.players, EV=SIM.events, CT=SIM.contours, BG=SIM.bg, C=SIM.C;
     function once(attMult,shift){
@@ -396,7 +429,7 @@ details.m p{margin:8px 0 0}
           const p=P[i]; let pr;
           if(st.att==='regs'){pr=p.reg[e]===1?0.95:p.reg[e]===0?0.7:0}
           else{pr=Math.min(0.97,p.p[e]*attMult); if(p.reg[e]===1)pr=Math.max(pr,0.9); else if(p.reg[e]===0)pr=Math.max(pr,0.6)}
-          if(Math.random()<pr){ids.push(i);perf.push(C*(p.beta+(p.rank&&p.rank<=30?shift:0))+gum())}
+          if(Math.random()<pr){ids.push(i);perf.push(C*(p[BK[st.form]]+(p.rank&&p.rank<=30?shift:0))+gum())}
         }
         const nbg=Math.max(0,ev.N-ids.length);
         for(let b=0;b<nbg;b++){ids.push(-1);perf.push(C*BG[(Math.random()*BG.length)|0]+gum())}
@@ -406,8 +439,8 @@ details.m p{margin:8px 0 0}
       // финалы серийников
       for(const c of CT){
         const ids=[],perf=[]; const got=new Set();
-        for(const [u,pp] of Object.entries(c.fin)){if(Math.random()<pp){const i=P.findIndex(x=>String(x.uid)===u); if(i>=0){ids.push(i);perf.push(C*(P[i].beta+(P[i].rank&&P[i].rank<=30?shift:0))+gum())}}}
-        for(const [u,pp] of Object.entries(c.cand)){if(Math.random()<pp){const i=P.findIndex(x=>String(x.uid)===u); if(i>=0&&!ids.includes(i)){ids.push(i);perf.push(C*(P[i].beta+(P[i].rank&&P[i].rank<=30?shift:0))+gum())}}}
+        for(const [u,pp] of Object.entries(c.fin)){if(Math.random()<pp){const i=P.findIndex(x=>String(x.uid)===u); if(i>=0){ids.push(i);perf.push(C*(P[i][BK[st.form]]+(P[i].rank&&P[i].rank<=30?shift:0))+gum())}}}
+        for(const [u,pp] of Object.entries(c.cand)){if(Math.random()<pp){const i=P.findIndex(x=>String(x.uid)===u); if(i>=0&&!ids.includes(i)){ids.push(i);perf.push(C*(P[i][BK[st.form]]+(P[i].rank&&P[i].rank<=30?shift:0))+gum())}}}
         const next=c.ext.n*c.ext.p+c.ext.ncand; const m=Math.floor(next)+(Math.random()<(next%1)?1:0);
         for(let k=0;k<m;k++){ids.push(-1);perf.push(C*c.ext.beta+gum())}
         const order=perf.map((v,i)=>i).sort((a,b)=>perf[b]-perf[a]);
@@ -426,11 +459,12 @@ details.m p{margin:8px 0 0}
         const rows=P.map((p,i)=>({p,i,c:cnt[i],med:med(sums[i])})).sort((a,b)=>b.c-a.c||b.med-a.med).slice(0,24);
         const attTxt=st.att==='regs'?'только уже записанные + финалы серийников':'прогноз посещений (3–4 турнира на человека в топ-30)';
         const lvlTxt={'обычно':'играют как обычно','стараются':'играют выше своего среднего, 5 турниров','максимум':'лучшее, что могут, 6 турниров'}[st.lvl];
-        $('#genOut').innerHTML=`<div class="genhead"><b>${N} сезонов</b><span>${attTxt}</span><span>${lvlTxt}</span><span>12-е место в среднем: <b>${fmt(med(thr))}</b></span></div>
+        const formTxt={all:'сила по всей истории',y12:'сила по последним 12 месяцам',y26:'сила только по 2026 году'}[st.form];
+        $('#genOut').innerHTML=`<div class="genhead"><b>${N} сезонов</b><span>${attTxt}</span><span>${lvlTxt}</span><span>${formTxt}</span><span>12-е место в среднем: <b>${fmt(med(thr))}</b></span></div>
           <table class="gen"><thead><tr><th>#</th><th>игрок</th><th>в дюжине</th><th>Σ в среднем</th><th>сейчас</th></tr></thead><tbody>
           ${rows.map((r,k)=>`<tr class="${r.p.uid===1493?'me':''}"><td class="n">${k+1}</td><td class="nk">${r.p.nick}<small>#${r.p.rank||'—'}</small></td><td class="bar"><div class="gbar"><i class="${r.c/N<0.5?'low':''}" style="width:${Math.round(r.c/N*100)}%"></i><em>${r.c} из ${N}</em></div></td><td class="s">Σ≈${fmt(r.med)}</td><td class="s">${fmt(sigmaOf(r.p))}</td></tr>`).join('')}
           </tbody></table>`;
-        $('#genNote').textContent=`Каждый запуск — новые случайные сезоны, цифры немного гуляют: при 300 сезонах ±3–4 на сотню. Наш большой прогон (${SIM.server.S} сезонов от ${SIM.server.date.split('-').reverse().join('.')}, прогноз посещений, как обычно): ${Object.entries(SIM.server.p12).sort((a,b)=>b[1]-a[1]).slice(0,14).map(([u,v])=>{const p=P.find(x=>String(x.uid)===u);return p?`${p.nick} ${Math.round(v*100)}`:''}).filter(Boolean).join(' · ')} — из 100.`;
+        $('#genNote').textContent=`Каждый запуск — новые случайные сезоны, цифры немного гуляют: при 500 сезонах ±2–3 на сотню. Наш большой прогон (${SIM.server.S} сезонов от ${SIM.server.date.split('-').reverse().join('.')}, прогноз посещений, как обычно): ${Object.entries(SIM.server.p12).sort((a,b)=>b[1]-a[1]).slice(0,14).map(([u,v])=>{const p=P.find(x=>String(x.uid)===u);return p?`${p.nick} ${Math.round(v*100)}`:''}).filter(Boolean).join(' · ')} — из 100.`;
         btn.disabled=false; btn.textContent='Сгенерировать ещё';
       },30);
     }
@@ -474,6 +508,42 @@ details.m p{margin:8px 0 0}
     $('#mgGo').disabled=false;
   }
   $('#mgGo').addEventListener('click',calc); ['#mgUrl','#mkUrl'].forEach(s=>$(s).addEventListener('keydown',e=>{if(e.key==='Enter')calc()}));
+}
+
+/* ── гейт: vault/race.json → window.RACE → initRace() ── */
+(function(){
+  'use strict';
+  var KEY='dovod_race_pw', CRYPTO=window.crypto&&window.crypto.subtle;
+  var $=function(s){return document.querySelector(s);};
+  var gate=$('#gate'), form=$('#gform'), pw=$('#gpw'), btn=$('#gbtn'), err=$('#gerr'), rem=$('#grem'), shell=$('#shell');
+  function b2a(b64){var s=atob(b64),u=new Uint8Array(s.length);for(var i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u;}
+  async function fetchDec(path,pass){
+    var r=await fetch(path,{cache:'no-store'}); if(!r.ok) throw new Error('http '+r.status);
+    var o=await r.json();
+    var base=await CRYPTO.importKey('raw',new TextEncoder().encode(pass),'PBKDF2',false,['deriveKey']);
+    var key=await CRYPTO.deriveKey({name:'PBKDF2',salt:b2a(o.s),iterations:o.it||250000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+    var pt=await CRYPTO.decrypt({name:'AES-GCM',iv:b2a(o.i)},key,b2a(o.c));
+    return new TextDecoder().decode(pt);
+  }
+  async function unlock(pass,silent){
+    if(!CRYPTO){err.textContent='Браузер не поддерживает расшифровку (нужен https).';err.classList.add('on');return false;}
+    btn.disabled=true; btn.textContent='…';
+    try{
+      var js=await fetchDec('vault/race.json',pass);
+      (new Function(js))();
+      if(!window.RACE) throw new Error('no data');
+      try{ if(rem.checked) localStorage.setItem(KEY,pass); else localStorage.removeItem(KEY); }catch(e){}
+      gate.hidden=true; shell.classList.remove('locked'); initRace();
+      return true;
+    }catch(e){
+      if(!silent){err.classList.add('on');gate.classList.remove('shake');void gate.offsetWidth;gate.classList.add('shake');pw.value='';pw.focus();}
+      try{localStorage.removeItem(KEY);}catch(e2){}
+      return false;
+    }finally{btn.disabled=false; btn.textContent='Войти';}
+  }
+  form.addEventListener('submit',function(e){e.preventDefault();err.classList.remove('on');unlock(pw.value.trim(),false);});
+  var p=null; try{p=localStorage.getItem(KEY);}catch(e){}
+  if(p) unlock(p,true); else pw.focus();
 })();
 </script>
 </body>
