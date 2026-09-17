@@ -4,10 +4,11 @@ import json, numpy as np, gd_data as g, gd_sim
 from gd_sim import Season
 T='2026-09-14'; Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
-gd_sim.EVENT_WEIGHT={}; gd_sim.TARGET_TOP30_MEAN=None; gd_sim.RACE_BETA_SHIFT=0
+import calendar_expert
+gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=3.5; gd_sim.RACE_BETA_SHIFT=0
 se=Season(2026,T,cal_future=fut,verbose=False)
 SHORT={'German Maf':'GMC','"Mafia Cha':'MCL','Poland Str':'PSP','White Mafi':'White Mafia','Arena Mold':'Arena Moldova','Васлуйская':'Васлуй','ЛЗГ Лига З':'ЛЗГ','Benelux Pl':'Benelux','Cyprus Maf':'Cyprus MS','Central Eu':'CEC'}
-TK=json.load(open('tickets2026.json'))
+TK=json.load(open('tickets2026.json')); F=json.load(open('forecast2026.json'))
 for r in TK['rows']:
     for f in r['finals']: f['name']=SHORT.get(f['name'],f['name']); PL=json.load(open('plan2026.json')); SC=json.load(open('scenarios3.json'))
 plan={r['uid']:r for r in PL['rows']}; tick={r['uid']:r for r in TK['rows']}
@@ -42,7 +43,24 @@ for i,(s,u) in enumerate(mid[:40]):
     rows.append(rec)
 hist={'note':'после ЧМ 2024 и 2025: доля прошедших в дюжину по Σ относительно 12-го места на тот момент',
       'bands':[{'band':'выше порога на 35%+','k':8,'n':8},{'band':'выше на 15–35%','k':2,'n':2},{'band':'около порога (−5…+15%)','k':8,'n':14},{'band':'ниже на 5–25%','k':2,'n':10},{'band':'ниже на 25–40%','k':4,'n':19}]}
-RACE={'snapshot':T,'thr12_now':mid[11][0],'planks':planks,'events':events,'rows':rows,'hist':hist,
+# ---- данные для клиентского генератора сезонов ----
+import numpy as np
+regs_ev=[e for e in se.events if e['type']!='contour']; cont_ev=[e for e in se.events if e['type']=='contour']
+simpool=[u for s_,u in mid[:60]]
+players=[]
+for u in simpool:
+    players.append({'uid':u,'nick':g.NICK[u],'rank':se.race.get(u),'base':[[p,sf] for p,sf in se.base[u]],'beta':round(float(se.beta.get(u,se.default)),3),
+                    'p':[round(float(e['p'][u]),3) for e in regs_ev],'reg':[e['regs'].get(u) if e['regs'].get(u) is not None else -1 for e in regs_ev]})
+sim_events=[{'id':e['id'],'date':e['date'],'stars':e['stars'],'N':e['N'],'grid':[float(x) for x in se.grid_pts(e['stars'],e['type'],e['N'])]} for e in regs_ev]
+sim_cont=[{'id':c['id'],'name':SHORT.get(c['name'][:10],c['name']),'fin':{str(u):round(p,2) for u,p in c['fin'].items() if u in set(simpool)},'cand':{str(u):round(p,2) for u,p in c['cand'].items() if u in set(simpool)},
+           'part':[u for u in c['part'] if u in set(simpool)],'grid':c['grid'],'base':c['base'],'nfin_all':len(c['fin']),'ncand_all':round(sum(c['cand'].values()),1),
+           'ext':{'n':len([u for u in c['fin'] if u not in set(simpool)]),'p':round(float(np.mean([p for u,p in c['fin'].items() if u not in set(simpool)])) if any(u not in set(simpool) for u in c['fin']) else 0,2),
+                  'beta':round(float(np.mean([se.beta.get(u,se.default) for u in c['fin'] if u not in set(simpool)])) if any(u not in set(simpool) for u in c['fin']) else float(se.default),2),
+                  'ncand':round(float(sum(p for u,p in c['cand'].items() if u not in set(simpool))),1)}} for c in cont_ev]
+rng=np.random.default_rng(0); bg=[round(float(x),2) for x in rng.choice(se.bg,200)]
+SIM={'players':players,'events':sim_events,'contours':sim_cont,'bg':bg,'C':gd_sim.C,'top30_mean':3.5,'levels':{'обычно':[1.0,0.0],'стараются':[5/3.5,0.35],'максимум':[6/3.5,0.7]},
+     'server':{'S':F.get('S',3000),'date':T,'p12':{str(r['uid']):round(r['p12'],3) for r in F['rows']}}}
+RACE={'snapshot':T,'sim':SIM,'thr12_now':mid[11][0],'planks':planks,'events':events,'rows':rows,'hist':hist,
       'method':'Σ = 10 лучших турниров года, не более 2 серийных. Финал = 6–10 место на 4★ ≈ 12 баллов, топ-5 на 4★ ≈ 24. Частоты — за последние 12 месяцев, сглажены к среднему топ-30.'}
 open('race2026.js','w',encoding='utf-8').write('/* race2026.js — данные страницы «Гонка за золотую дюжину». Генератор: _scripts_golden_dozen_v0.9/build_race.py. Руками не править. */\nwindow.RACE='+json.dumps(RACE,ensure_ascii=False,separators=(',',':'))+';\n')
 import os; print('race2026.js', os.path.getsize('race2026.js')//1024,'КБ; планки',planks,'; игроков',len(rows),'; событий',len(events))

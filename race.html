@@ -111,6 +111,29 @@ ul.ev li{display:flex;gap:10px;padding:4px 0;border-bottom:1px solid rgba(255,25
 ul.ev li i{font:700 11px/1.5 var(--mono);color:#7e8595;flex:0 0 46px;font-style:normal}
 ul.ev li b{font-weight:600;flex:1}
 ul.ev li em{font-style:normal;color:var(--ye);font:700 11px/1.5 var(--mono)}
+/* генератор */
+.genctl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end;border:1px solid var(--line);padding:14px 16px;background:linear-gradient(150deg,rgba(245,255,53,.05),rgba(0,0,0,.3))}
+.gengrp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.gengrp span{flex:0 0 100%;font:700 9px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#8a91a0;margin-bottom:2px}
+.gb{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#c3cad6;padding:8px 11px;border-radius:2px;font:600 12.5px/1 Inter,sans-serif;transition:.15s}
+.gb.on{border-color:var(--ye);color:var(--ye);background:rgba(245,255,53,.1)}
+.genout{margin-top:14px}
+.genhead{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;margin-bottom:10px;color:#a7aebb;font-size:13px}
+.genhead b{color:var(--ink);font-weight:600}
+table.gen{width:100%;border-collapse:collapse;font-size:13.5px}
+table.gen th{text-align:left;padding:8px 8px;font:700 9.5px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#8a91a0;border-bottom:1px solid var(--line)}
+table.gen td{padding:8px 8px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:middle}
+table.gen td.n{font:700 12px/1 var(--mono);color:#7e8595;width:34px}
+table.gen td.nk{font-weight:600}
+table.gen td.nk small{color:#7e8595;font-weight:400;margin-left:6px}
+table.gen td.bar{width:38%}
+.gbar{position:relative;height:18px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden}
+.gbar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,rgba(245,255,53,.55),var(--ye));box-shadow:0 0 10px rgba(245,255,53,.35)}
+.gbar i.low{background:linear-gradient(90deg,rgba(38,224,255,.4),var(--cy));box-shadow:none}
+.gbar em{position:absolute;right:8px;top:0;bottom:0;display:flex;align-items:center;font:700 11px/1 var(--mono);color:var(--ink);font-style:normal;text-shadow:0 0 4px #000,0 0 8px #000}
+table.gen td.s{font:700 12px/1 var(--mono);color:#a7aebb;white-space:nowrap}
+table.gen tr.me td{background:rgba(245,255,53,.06)}
+@media (max-width:720px){table.gen td.bar{width:30%} table.gen td.s{display:none}}
 /* калькулятор */
 .calc{border:1px solid var(--line);padding:18px;background:linear-gradient(150deg,rgba(38,224,255,.07),rgba(0,0,0,.3));clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px))}
 .calc .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
@@ -205,6 +228,20 @@ details.m p{margin:8px 0 0}
       </table>
     </div>
     <p class="hint" style="color:#8a91a0;font-size:12.5px;margin-top:10px"><b>Топ-10</b> на четвёрке — 6–10-е место, около 12 баллов; <b>топ-5</b> — около 24 (на пятёрке больше). Новый результат вытесняет худший из десятки — это учтено. Финалы серийников, куда игрок уже прошёл, посчитаны по минимуму сетки: они гарантированы. Частота — доля турниров за последние 12 месяцев с топ-10 и топ-5; при малом числе турниров подтянута к среднему топ-30.</p>
+  </section>
+
+  <section class="sec" id="gen">
+    <div class="sh"><span>02b · генератор сезонов</span><s></s><em>случайные составы дюжины</em></div>
+    <h2 class="big">Сгенерировать остаток сезона</h2>
+    <p class="lead">Одна генерация — это один случайно разыгранный остаток года: кто поехал, какое место взял, что вытеснил из десятки, как сыграли финалы серийников. Запускаем много раз и смотрим, <b>сколько раз из N игрок оказался в дюжине</b>. Явка и уровень игры — на выбор.</p>
+    <div class="genctl">
+      <div class="gengrp"><span>Явка</span><button class="gb on" data-k="att" data-v="regs">только заявки</button><button class="gb" data-k="att" data-v="forecast">прогноз посещений</button></div>
+      <div class="gengrp"><span>Игра</span><button class="gb on" data-k="lvl" data-v="обычно">как обычно</button><button class="gb" data-k="lvl" data-v="стараются">стараются</button><button class="gb" data-k="lvl" data-v="максимум">максимум</button></div>
+      <div class="gengrp"><span>Сезонов</span><button class="gb" data-k="n" data-v="100">100</button><button class="gb on" data-k="n" data-v="300">300</button><button class="gb" data-k="n" data-v="1000">1000</button></div>
+      <button class="btn" id="genGo">Сгенерировать</button>
+    </div>
+    <div id="genOut" class="genout"></div>
+    <p class="hint" style="color:#8a91a0;font-size:12.5px;margin-top:10px" id="genNote"></p>
   </section>
 
   <section class="sec" id="calc">
@@ -343,6 +380,64 @@ details.m p{margin:8px 0 0}
   });
   const regAll=R.events.filter(e=>e.kind!=='final'); const bigAll=regAll.filter(e=>e.stars>=4);
   $('#ctaText').textContent=`${regAll.length} рейтинговых турниров, из них ${bigAll.length} на 4–5★, и ${R.events.length-regAll.length} финалов серийников. В календаре — сетка баллов, кто записан и экспорт в свой календарь.`;
+
+  // ---------- генератор сезонов (клиентская симуляция) ----------
+  (function(){
+    const SIM=R.sim; if(!SIM) return;
+    const st={att:'regs',lvl:'обычно',n:300};
+    const gum=()=>-Math.log(-Math.log(Math.random()));
+    const P=SIM.players, EV=SIM.events, CT=SIM.contours, BG=SIM.bg, C=SIM.C;
+    function once(attMult,shift){
+      const recs=P.map(p=>p.base.map(x=>[x[0],x[1]]));
+      // обычные турниры
+      for(let e=0;e<EV.length;e++){
+        const ev=EV[e]; const ids=[]; const perf=[];
+        for(let i=0;i<P.length;i++){
+          const p=P[i]; let pr;
+          if(st.att==='regs'){pr=p.reg[e]===1?0.95:p.reg[e]===0?0.7:0}
+          else{pr=Math.min(0.97,p.p[e]*attMult); if(p.reg[e]===1)pr=Math.max(pr,0.9); else if(p.reg[e]===0)pr=Math.max(pr,0.6)}
+          if(Math.random()<pr){ids.push(i);perf.push(C*(p.beta+(p.rank&&p.rank<=30?shift:0))+gum())}
+        }
+        const nbg=Math.max(0,ev.N-ids.length);
+        for(let b=0;b<nbg;b++){ids.push(-1);perf.push(C*BG[(Math.random()*BG.length)|0]+gum())}
+        const order=perf.map((v,i)=>i).sort((a,b)=>perf[b]-perf[a]);
+        for(let r=0;r<order.length;r++){const i=ids[order[r]]; if(i>=0){recs[i].push([ev.grid[Math.min(r,ev.grid.length-1)],0])}}
+      }
+      // финалы серийников
+      for(const c of CT){
+        const ids=[],perf=[]; const got=new Set();
+        for(const [u,pp] of Object.entries(c.fin)){if(Math.random()<pp){const i=P.findIndex(x=>String(x.uid)===u); if(i>=0){ids.push(i);perf.push(C*(P[i].beta+(P[i].rank&&P[i].rank<=30?shift:0))+gum())}}}
+        for(const [u,pp] of Object.entries(c.cand)){if(Math.random()<pp){const i=P.findIndex(x=>String(x.uid)===u); if(i>=0&&!ids.includes(i)){ids.push(i);perf.push(C*(P[i].beta+(P[i].rank&&P[i].rank<=30?shift:0))+gum())}}}
+        const next=c.ext.n*c.ext.p+c.ext.ncand; const m=Math.floor(next)+(Math.random()<(next%1)?1:0);
+        for(let k=0;k<m;k++){ids.push(-1);perf.push(C*c.ext.beta+gum())}
+        const order=perf.map((v,i)=>i).sort((a,b)=>perf[b]-perf[a]);
+        for(let r=0;r<order.length;r++){const i=ids[order[r]]; if(i>=0){recs[i].push([r<c.grid.length?c.grid[r]:c.base,1]);got.add(i)}}
+        for(const u of c.part){const i=P.findIndex(x=>x.uid===u); if(i>=0&&!got.has(i)) recs[i].push([c.base,1])}
+      }
+      const sig=recs.map(best10); const order=sig.map((v,i)=>i).sort((a,b)=>sig[b]-sig[a]);
+      return {sig,top12:order.slice(0,12),thr:sig[order[11]]};
+    }
+    function run(){
+      const btn=$('#genGo'); btn.disabled=true; btn.textContent='Считаю…';
+      setTimeout(()=>{
+        const [attMult,shift]=SIM.levels[st.lvl]; const N=st.n; const cnt=new Array(P.length).fill(0); const sums=P.map(()=>[]); const thr=[];
+        for(let s=0;s<N;s++){const r=once(attMult,shift); r.top12.forEach(i=>cnt[i]++); r.sig.forEach((v,i)=>sums[i].push(v)); thr.push(r.thr)}
+        const med=a=>{const b=[...a].sort((x,y)=>x-y);return b[Math.floor(b.length/2)]};
+        const rows=P.map((p,i)=>({p,i,c:cnt[i],med:med(sums[i])})).sort((a,b)=>b.c-a.c||b.med-a.med).slice(0,24);
+        const attTxt=st.att==='regs'?'только уже записанные + финалы серийников':'прогноз посещений (3–4 турнира на человека в топ-30)';
+        const lvlTxt={'обычно':'играют как обычно','стараются':'играют выше своего среднего, 5 турниров','максимум':'лучшее, что могут, 6 турниров'}[st.lvl];
+        $('#genOut').innerHTML=`<div class="genhead"><b>${N} сезонов</b><span>${attTxt}</span><span>${lvlTxt}</span><span>12-е место в среднем: <b>${fmt(med(thr))}</b></span></div>
+          <table class="gen"><thead><tr><th>#</th><th>игрок</th><th>в дюжине</th><th>Σ в среднем</th><th>сейчас</th></tr></thead><tbody>
+          ${rows.map((r,k)=>`<tr class="${r.p.uid===1493?'me':''}"><td class="n">${k+1}</td><td class="nk">${r.p.nick}<small>#${r.p.rank||'—'}</small></td><td class="bar"><div class="gbar"><i class="${r.c/N<0.5?'low':''}" style="width:${Math.round(r.c/N*100)}%"></i><em>${r.c} из ${N}</em></div></td><td class="s">Σ≈${fmt(r.med)}</td><td class="s">${fmt(sigmaOf(r.p))}</td></tr>`).join('')}
+          </tbody></table>`;
+        $('#genNote').textContent=`Каждый запуск — новые случайные сезоны, цифры немного гуляют: при 300 сезонах ±3–4 на сотню. Наш большой прогон (${SIM.server.S} сезонов от ${SIM.server.date.split('-').reverse().join('.')}, прогноз посещений, как обычно): ${Object.entries(SIM.server.p12).sort((a,b)=>b[1]-a[1]).slice(0,14).map(([u,v])=>{const p=P.find(x=>String(x.uid)===u);return p?`${p.nick} ${Math.round(v*100)}`:''}).filter(Boolean).join(' · ')} — из 100.`;
+        btn.disabled=false; btn.textContent='Сгенерировать ещё';
+      },30);
+    }
+    function sigmaOf(p){return best10(p.base)}
+    document.querySelector('.genctl').addEventListener('click',ev=>{const b=ev.target.closest('.gb'); if(!b) return; st[b.dataset.k]=b.dataset.k==='n'?+b.dataset.v:b.dataset.v; b.parentElement.querySelectorAll('.gb').forEach(x=>x.classList.toggle('on',x===b))});
+    $('#genGo').addEventListener('click',run);
+  })();
 
   // ---------- калькулятор ----------
   const REF={p10:.40,p5:.20,k0:8};
