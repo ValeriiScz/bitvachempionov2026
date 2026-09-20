@@ -1,2 +1,2 @@
 /* meta.js — даты, которые показываются в подвалах. ratingUpdated обновлять руками при подтяжке рейтинга. */
-window.SITE = { ratingUpdated: '14.09.2026', calendarSnapshot: '19.09.2026' };
+window.SITE = { ratingUpdated: '14.09.2026', calendarSnapshot: '20.09.2026' };
