@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v1.7 · 21.09.2026 · фикс логики «что должно случиться»: вывод зависит от сравнения нужных турниров с ожидаемыми поездками · v1.6 · слоты десятки: серийные помечены, строка «Серийные k из 2» (Валерий) · v1.5 · явка топ-20 5–6 (Валерий), 21–30 ≈4 · v1.4 · явка топ-30 ≈4, планы игроков; финалы серийников: баллы у 10 мест, поле 20 · v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
+<!-- race.html v1.8 · 21.09.2026 · таблица «сколько ездить»: подсвечена строка ожидаемого числа турниров; генератор: столбец «турниров» и пояснение · v1.7 · фикс логики «что должно случиться»: вывод зависит от сравнения нужных турниров с ожидаемыми поездками · v1.6 · слоты десятки: серийные помечены, строка «Серийные k из 2» (Валерий) · v1.5 · явка топ-20 5–6 (Валерий), 21–30 ≈4 · v1.4 · явка топ-30 ≈4, планы игроков; финалы серийников: баллы у 10 мест, поле 20 · v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
 <meta name="description" content="Рейтинг MAFGAME 2026: планка топ-12, кому сколько турниров и результатов нужно до конца года, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -108,6 +108,8 @@ table.mini{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
 table.mini th,table.mini td{padding:6px 7px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
 table.mini th{font:700 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#8a91a0}
 table.mini td.w{font:700 10px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+table.mini tr.exp td{background:rgba(245,255,53,.07)} table.mini tr.exp td.num{color:var(--ye)} table.mini tr.exp td.num small{display:block;font:600 9px/1.2 Inter,sans-serif;letter-spacing:0;text-transform:none;color:var(--ye);opacity:.85;margin-top:2px}
+table.gen td.k{font:700 12px/1 var(--mono);color:#c3cad6;white-space:nowrap;text-align:center}
 .w-miss{color:#8a91a0} .w-edge{color:var(--ye)} .w-pass{color:var(--cy)} .w-sure{color:var(--gn)}
 ul.ev{list-style:none;margin:6px 0 0;padding:0;font-size:13px;color:#c3cad6}
 ul.ev li{display:flex;gap:10px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}
@@ -389,7 +391,8 @@ function initRace(){
     let tbl='';
     if(r.table){
       const ks=Object.keys(r.table).filter(k=>['2','3','4','5','6'].includes(k));
-      tbl=`<table class="mini"><thead><tr><th>турниров</th><th>как обычно</th><th>хороший сезон</th><th>сезон мечты</th></tr></thead><tbody>${ks.map(k=>{const t=r.table[k];const c=l=>t[l]?`<td>Σ≈${fmt(t[l].sigma)} <span class="w ${wordCls[t[l].word]||''}">${t[l].word}</span></td>`:'<td>—</td>';return `<tr><td class="num">${k}</td>${c('обычно')}${c('хороший')}${c('мечта')}</tr>`}).join('')}</tbody></table>
+      const EK=r.expected_k||0; const ekIn=ks.includes(String(EK));
+      tbl=`<p style="margin:0 0 6px;color:#a7aebb;font-size:12.5px">Каждая строка — «если сыграешь столько турниров». Модель ждёт от тебя <b>~${EK||'?'}</b> (история за год${(r.regs||[]).length?`, заявок сейчас ${(r.regs||[]).length}`:', заявок пока нет'}${EK&&!ekIn?` — это ${EK<2?'меньше двух, в таблице такой строки нет: без поездок ничего не случится':'больше шести, смотри нижнюю строку'}`:''}).</p><table class="mini"><thead><tr><th>турниров</th><th>как обычно</th><th>хороший сезон</th><th>сезон мечты</th></tr></thead><tbody>${ks.map(k=>{const t=r.table[k];const c=l=>t[l]?`<td>Σ≈${fmt(t[l].sigma)} <span class="w ${wordCls[t[l].word]||''}">${t[l].word}</span></td>`:'<td>—</td>';const isE=String(EK)===k;return `<tr class="${isE?'exp':''}"><td class="num">${k}${isE?'<small>ожидаем</small>':''}</td>${c('обычно')}${c('хороший')}${c('мечта')}</tr>`}).join('')}</tbody></table>
       <p style="margin-top:8px;color:#8a91a0;font-size:12px">«Как обычно» — места из твоих последних 12 месяцев; «хороший сезон» — верхняя половина твоих результатов; «сезон мечты» — верхняя четверть. Слово — где ты относительно планки ${PL[MODE][0]}–${PL[MODE][1]}.</p>`;
     }
     const evs=MODE==='regs'?(r.regs||[]).map(e=>({...e,tag:e.c===1?'подтверждён':'заявка'})):(r.likely||[]);
@@ -469,15 +472,16 @@ function initRace(){
         const [attMult,shift]=SIM.levels[st.lvl]; const N=st.n; const cnt=new Array(P.length).fill(0); const sums=P.map(()=>[]); const thr=[];
         for(let s=0;s<N;s++){const r=once(attMult,shift); r.top12.forEach(i=>cnt[i]++); r.sig.forEach((v,i)=>sums[i].push(v)); thr.push(r.thr)}
         const med=a=>{const b=[...a].sort((x,y)=>x-y);return b[Math.floor(b.length/2)]};
-        const rows=P.map((p,i)=>({p,i,c:cnt[i],med:med(sums[i])})).sort((a,b)=>b.c-a.c||b.med-a.med).slice(0,24);
+        const expK=p=>{let k=0;for(let e=0;e<EV.length;e++){let pr;if(st.att==='regs'){pr=p.reg[e]===1?0.95:p.reg[e]===0?0.7:0}else{pr=Math.min(0.97,p.p[e]*attMult);if(p.reg[e]===1)pr=Math.max(pr,0.9);else if(p.reg[e]===0)pr=Math.max(pr,0.6)}k+=pr}return k};
+        const rows=P.map((p,i)=>({p,i,c:cnt[i],med:med(sums[i]),k:expK(p)})).sort((a,b)=>b.c-a.c||b.med-a.med).slice(0,24);
         const attTxt=st.att==='regs'?'только уже записанные + финалы серийников':'прогноз посещений (топ-20 — 5–6 турниров, места 21–30 — около 4)';
         const lvlTxt={'обычно':'играют как обычно','стараются':'играют выше своего среднего, ~6 турниров','максимум':'лучшее, что могут, 6–7 турниров'}[st.lvl];
         const formTxt={all:'сила по всей истории',y12:'сила по последним 12 месяцам',y26:'сила только по 2026 году'}[st.form];
         $('#genOut').innerHTML=`<div class="genhead"><b>${N} сезонов</b><span>${attTxt}</span><span>${lvlTxt}</span><span>${formTxt}</span><span>12-е место в среднем: <b>${fmt(med(thr))}</b></span></div>
-          <table class="gen"><thead><tr><th>#</th><th>игрок</th><th>в дюжине</th><th>Σ в среднем</th><th>сейчас</th></tr></thead><tbody>
-          ${rows.map((r,k)=>`<tr class="${r.p.uid===1493?'me':''}"><td class="n">${k+1}</td><td class="nk">${r.p.nick}<small>#${r.p.rank||'—'}</small></td><td class="bar"><div class="gbar"><i class="${r.c/N<0.5?'low':''}" style="width:${Math.round(r.c/N*100)}%"></i><em>${r.c} из ${N}</em></div></td><td class="s">Σ≈${fmt(r.med)}</td><td class="s">${fmt(sigmaOf(r.p))}</td></tr>`).join('')}
+          <table class="gen"><thead><tr><th>#</th><th>игрок</th><th>в дюжине</th><th title="сколько обычных турниров игрок сыграет в среднем при выбранной явке; финалы серийников — сверх этого">турниров</th><th>Σ в среднем</th><th>сейчас</th></tr></thead><tbody>
+          ${rows.map((r,k)=>`<tr class="${r.p.uid===1493?'me':''}"><td class="n">${k+1}</td><td class="nk">${r.p.nick}<small>#${r.p.rank||'—'}</small></td><td class="bar"><div class="gbar"><i class="${r.c/N<0.5?'low':''}" style="width:${Math.round(r.c/N*100)}%"></i><em>${r.c} из ${N}</em></div></td><td class="k">≈${r.k<1?r.k.toFixed(1):Math.round(r.k)}</td><td class="s">Σ≈${fmt(r.med)}</td><td class="s">${fmt(sigmaOf(r.p))}</td></tr>`).join('')}
           </tbody></table>`;
-        $('#genNote').textContent=`Каждый запуск — новые случайные сезоны, цифры немного гуляют: при 500 сезонах ±2–3 на сотню. Наш большой прогон (${SIM.server.S} сезонов от ${SIM.server.date.split('-').reverse().join('.')}, прогноз посещений, как обычно): ${Object.entries(SIM.server.p12).sort((a,b)=>b[1]-a[1]).slice(0,14).map(([u,v])=>{const p=P.find(x=>String(x.uid)===u);return p?`${p.nick} ${Math.round(v*100)}`:''}).filter(Boolean).join(' · ')} — из 100.`;
+        $('#genNote').textContent=`«В дюжине k из N» сильнее всего зависит от столбца «турниров» — сколько игрок реально сыграет: сильный игрок с двумя стартами проходит редко, средний с семью — часто. Каждый запуск — новые случайные сезоны, цифры немного гуляют: при 500 сезонах ±2–3 на сотню. Наш большой прогон (${SIM.server.S} сезонов от ${SIM.server.date.split('-').reverse().join('.')}, прогноз посещений, как обычно): ${Object.entries(SIM.server.p12).sort((a,b)=>b[1]-a[1]).slice(0,14).map(([u,v])=>{const p=P.find(x=>String(x.uid)===u);return p?`${p.nick} ${Math.round(v*100)}`:''}).filter(Boolean).join(' · ')} — из 100.`;
         btn.disabled=false; btn.textContent='Сгенерировать ещё';
       },30);
     }
