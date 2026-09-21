@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-09-14",
+ "snapshot": "2026-09-21",
  "parents": [
   {
    "file": "2025_478.json",
@@ -141,7 +141,7 @@
    "start_date": "2026-10-10",
    "stars": 2,
    "series": 6,
-   "played": 5,
+   "played": 6,
    "final": true
   },
   {
@@ -174,7 +174,7 @@
    "start_date": "2026-11-14",
    "stars": 4,
    "series": 26,
-   "played": 18,
+   "played": 21,
    "final": true
   },
   {
@@ -185,7 +185,7 @@
    "start_date": "2026-11-21",
    "stars": 4,
    "series": 17,
-   "played": 13,
+   "played": 14,
    "final": true
   },
   {
