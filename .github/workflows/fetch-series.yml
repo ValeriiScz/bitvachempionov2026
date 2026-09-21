@@ -4,6 +4,8 @@ name: Серийники mafgame
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '30 22 * * 0'   # вс 22:30 UTC = пн 00:30 Прага, после ночного refresh-data и турниров выходных
   push:
     paths:
       - '.github/workflows/fetch-series.yml'
