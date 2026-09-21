@@ -1,0 +1,65 @@
+# Ежедневное обновление данных страниц MCL (mcl2026.html и соседние).
+# Работает на серверах GitHub: мак и Claude не нужны, Vercel выкатывает сайт по коммиту.
+# Тот же робот стоит у партнёров на mafiacl.com — данные там и здесь считаются одинаково.
+# Запустить вручную: Actions → «Обновление данных MCL» → Run workflow.
+name: Обновление данных MCL
+
+on:
+  schedule:
+    # 04:00 UTC = 06:00 в Праге летом, 05:00 зимой — до утреннего прогона календаря незачем,
+    # важно лишь, чтобы данные были свежими к началу дня.
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+  # правка самого робота запускает прогон — так его можно проверить сразу
+  push:
+    paths:
+      - '.github/workflows/refresh-mcl.yml'
+      - '.github/scripts/refresh_mcl.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-mcl
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Обновить данные MCL
+        run: python .github/scripts/refresh_mcl.py
+
+      - name: Проверить датафайл
+        run: |
+          python - <<'PY'
+          import io, json, re
+          s = io.open('data/mcl2026.js', encoding='utf-8').read()
+          d = json.loads(re.search(r'window\.MCL=(\{.*\});', s, re.S).group(1))
+          assert d['conf'] and d['series'] and d['squad'], 'пустые блоки данных'
+          played = sum(1 for x in d['series'] if x.get('r'))
+          assert played >= 10, 'серий с протоколом всего %d' % played
+          assert len(d['squad']) == sum(d['conf'][c]['quota'] for c in ('CE','IL','CY')), 'состав финала не сходится с квотами'
+          assert re.search(r"const CACHE_VERSION = 'dovod-v\d+';", io.open('sw.js', encoding='utf-8').read())
+          print('датафайл в порядке: серий с протоколом', played, '· снимок', d['snap'])
+          PY
+
+      - name: Закоммитить, если что-то изменилось
+        run: |
+          if git diff --quiet; then
+            echo "изменений нет — коммит не нужен"
+            exit 0
+          fi
+          git config user.name  "dovod-bot"
+          git config user.email "noreply@dovod-mafia.com"
+          git add data/mcl2026.js assets/mcl sw.js
+          git commit -m "MCL: автообновление данных $(date +%d.%m.%Y)"
+          git push
+          echo "обновление выкачено"
