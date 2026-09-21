@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""run_all.py · v1.0 · 2026-09-21 — весь конвейер «Гонки за золотую дюжину» одной командой.
+"""run_all.py · v1.1 · 2026-09-21 (+ update_top50: D.top50 календаря и ratingUpdated в meta.js) · v1.0 — весь конвейер «Гонки за золотую дюжину» одной командой.
 Шаги: recal (прогноз 3000 сезонов) → scenarios3 (планки 1/2/3) → tickets → plan2 → build_race (race2026.js)
-      → encrypt_race (vault/race.json, пароль из RACE_PASS) → build_series (data/series2026.js) → bump CACHE_VERSION в sw.js.
+      → encrypt_race (vault/race.json, пароль из RACE_PASS) → build_series (data/series2026.js) → update_top50 (calendar.html D.top50, data/meta.js) → bump CACHE_VERSION в sw.js.
 Окружение: GD_REPO (корень репо; по умолчанию — три уровня вверх от этого файла), GD_T (дата снимка, по умолчанию сегодня),
            GD_OUT (папка промежуточных json, по умолчанию $GD_REPO/.gd_out — не коммитится), RACE_PASS (обязателен).
 Запуск:   RACE_PASS=… python3 data/research/model/run_all.py            (из корня репо, локально или в GitHub Actions)
@@ -31,6 +31,7 @@ step('build_race', 'build_race.py')
 plain=os.path.join(OUT,'race2026.js'); vault=os.path.join(REPO,'vault','race.json')
 step('encrypt',    'encrypt_race.py', plain, vault, '--pass', PASS)
 step('build_series','build_series.py')
+step('top50+дата рейтинга','update_top50.py')
 shutil.copy(os.path.join(OUT,'series2026.js'), os.path.join(REPO,'data','series2026.js'))
 if '--keep-plain' not in sys.argv: os.remove(plain)
 if '--no-sw' not in sys.argv:
