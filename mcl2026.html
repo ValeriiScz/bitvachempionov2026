@@ -340,6 +340,27 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .dayinfo .r div .v{font-family:var(--ff-n);font-weight:700;font-size:17px;color:#fff}
 .dayinfo .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 
+/* маршруты отбора */
+.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin:0 0 14px}
+.route{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--pur);padding:13px 15px}
+.route.semi{border-left-color:var(--gold)}
+.route .rh{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px}
+.route .rh b{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:19px;text-transform:uppercase;color:#fff;line-height:1}
+.route .rh s{text-decoration:none;font-family:var(--ff-n);font-weight:700;font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:#fff;background:var(--pur);padding:2px 7px;border-radius:2px;white-space:nowrap}
+.route.semi .rh s{color:#1a1206;background:var(--gold)}
+.route .rsteps{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.route .rstep .rk{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.route .rstep .rv{font-family:var(--ff-n);font-weight:700;font-size:15px;color:#fff;margin-top:1px}
+.route .rarr{color:var(--dim);font-size:15px}
+.route .rnote{margin-top:10px;padding-top:9px;border-top:1px solid var(--line);font-size:12px;color:var(--mut);line-height:1.5}
+.route .rnote b{color:#f0d488}
+.sq.empty.semi .qn{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold-hi)}
+.sq.empty.semi{border-color:rgba(201,161,77,.4)}
+.cbox .rt{color:#fff}
+.cbox .rt.gold{color:#f0d488}
+
 /* финал */
 .final{display:block;text-decoration:none;color:inherit;margin-top:14px;background:linear-gradient(120deg,var(--pur-dp),#140d16 60%);border:1px solid rgba(198,90,180,.4);padding:22px 18px;position:relative;overflow:hidden;
   transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease}
@@ -516,7 +537,8 @@ a:hover .sithumb{filter:brightness(1.12)}
 
 <section id="squad"><div class="wrap">
   <div class="sechead"><div class="no">03</div><h2 class="h">Состав финала</h2><div class="line"></div></div>
-  <p class="lead">Как выглядел бы финал, если бы сезон закончился сегодня: <b>6 мест Central Europe</b>, <b>3</b> от Israel и <b>1</b> от Cyprus — через полуфинал. Срез на дату, а не итог.</p>
+  <p class="lead">В финале 10 мест. <b>6</b> Central Europe отбирает зачётом серий — это срез на дату, а не итог. <b>3</b> места Israel и <b>1</b> место Cyprus разыгрываются в полуфиналах, поэтому пока стоят пустыми.</p>
+  <div class="routes" id="routes"></div>
   <div class="squad" id="squadgrid"></div>
 </div></section>
 
@@ -628,7 +650,9 @@ $('#tick').innerHTML=D.ticker.concat(D.ticker).map(function(t){return '<span>'+e
 $('#kpis').innerHTML=D.kpi.map(function(x){return '<div class="kpi"><div class="v">'+esc(x[0])+'</div><div class="l">'+esc(x[1])+'</div></div>';}).join('');
 $('#confs').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
   return '<a class="cbox" href="mcl-standings.html?c='+c+'"><div class="t">'+esc(k.name)+'</div>'+
-   '<div class="q">квота '+k.quota+' · '+esc(k.mode)+'</div>'+
+   '<div class="q">'+(k.route==='semi'
+       ? '<b class="rt gold">'+(k.semiSlots||10)+' → полуфинал → '+k.quota+'</b> в финал'
+       : '<b class="rt">'+k.quota+' мест</b> напрямую в финал')+'</div>'+
    '<div class="bar"><i style="width:'+Math.round(k.played/k.total*100)+'%"></i></div>'+
    '<div class="n"><span>'+(k.played>=k.total?'<b class="donetag">'+(/полуфинал/i.test(k.mode||'')?'серии сыграны':'отбор завершён')+'</b>':'сыграно <b>'+k.played+'</b> из '+k.total)+'</span><span>с нормой 2+ <b>'+k.played2+'</b> из '+k.rows.length+'</span></div></a>';}).join('');
 
@@ -661,8 +685,32 @@ $('#confs').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
   start();
 })();
 
+/* 03 маршруты отбора: у трёх конференций они разные */
+$('#routes').innerHTML=['CE','IL','CY'].map(function(c){
+  var k=D.conf[c], semi=k.route==='semi', slots=semi?(k.semiSlots||10):k.quota;
+  var steps=[['серий в сезоне', k.total+' '+SER(k.total)]];
+  if(semi){
+    steps.push(['зачёт серий', slots+' в полуфинал']);
+    steps.push(['полуфинал'+(k.semiDate?' '+dm(k.semiDate):''), k.quota+(k.quota===1?' место':' места')+' в финале']);
+  } else {
+    steps.push(['зачёт серий', k.quota+' мест в финале']);
+  }
+  var extra = semi
+    ? (k.semiPrize ? 'Призовые полуфинала: <b>'+esc(k.semiPrize)+'</b>' : '')
+      + (k.semiPrize && k.semiNote ? '. ' : '')
+      + (k.semiNote ? esc(k.semiNote.charAt(0).toUpperCase()+k.semiNote.slice(1)) : '')
+    : 'Никакого полуфинала: зачёт серий сразу отправляет шестерых в Прагу';
+  return '<div class="route'+(semi?' semi':'')+'">'+
+    '<div class="rh"><b>'+esc(k.name)+'</b><s>'+(semi?'через полуфинал':'напрямую')+'</s></div>'+
+    '<div class="rsteps">'+steps.map(function(st,i){
+      return '<div class="rstep"><div class="rk">'+esc(st[0])+'</div><div class="rv">'+esc(st[1])+'</div></div>'+
+             (i<steps.length-1?'<div class="rarr">&rarr;</div>':'');}).join('')+'</div>'+
+    (extra?'<div class="rnote">'+extra+'</div>':'')+'</div>';}).join('');
+
 /* 03 состав */
 $('#squadgrid').innerHTML=D.squad.map(function(s,i){
+  if(!s.n && s.semi) return '<div class="sq empty semi"><div class="slot">'+esc(s.slot)+'</div>'+
+    '<div class="q">?</div><div class="qn">определит полуфинал</div></div>';
   if(!s.n) return '<div class="sq empty"><div class="slot">'+esc(s.slot)+'</div><div class="q">?</div></div>';
   var ph=s.p?'<img class="ph" loading="lazy" src="'+esc(s.p)+'" alt=""><div class="duo"></div>':'';
   return '<div class="sq">'+ph+'<div class="shade"></div><div class="ghost">'+(i+1)+'</div>'+
@@ -672,15 +720,20 @@ $('#squadgrid').innerHTML=D.squad.map(function(s,i){
 
 /* 04 мини-таблицы зоны */
 $('#minis').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
-  var q=k.rows.filter(function(r){return r.s>=2;}).slice(0,k.quota);
+  var semi=k.route==='semi', slots=semi?(k.semiSlots||10):k.quota;
+  var q=semi ? k.rows.slice(0,slots) : k.rows.filter(function(r){return r.s>=2;}).slice(0,k.quota);
   var rows=q.map(function(r,n){
     var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
     return '<div class="mrow"><div class="rk">'+(n+1)+'</div>'+ph+
       '<div class="nick">'+esc(r.n)+'</div><div class="avg">'+r.a.toFixed(3)+'</div></div>';}).join('');
-  var done=k.played>=k.total, viaSemi=/полуфинал/i.test(k.mode||'');
-  return '<div class="mini'+(done?' done':'')+'"><div class="mh"><b>'+esc(k.name)+'</b><s>'+
-    (done?(viaSemi?'серии сыграны':'путёвк'+(k.quota===1?'а определена':'и определены')):'квота '+k.quota)+'</s></div>'+rows+
-    (done?'<div class="mnote">все '+k.total+' '+SER(k.total)+' позади — '+(viaSemi?'дальше полуфинал':'это итог, а не срез')+'</div>':'')+'</div>';}).join('');
+  var done=k.played>=k.total;
+  var cap = semi ? slots+' в полуфинал' : k.quota+' в финал';
+  var note = semi
+    ? ('Полуфинал'+(k.semiDate?' '+dm(k.semiDate):'')+': в финал '+(k.quota===1?'едет победитель':'едут трое')+
+       (k.semiPrize?', призовые '+esc(k.semiPrize):'')+(k.semiNote?'. '+esc(k.semiNote.charAt(0).toUpperCase()+k.semiNote.slice(1)):'')+'.')
+    : (done?'Все '+k.total+' '+SER(k.total)+' позади — это итог, а не срез.':'Шесть лучших с нормой «две серии» едут в финал без полуфинала.');
+  return '<div class="mini'+(semi?' semi':'')+'"><div class="mh"><b>'+esc(k.name)+'</b><s>'+cap+'</s></div>'+rows+
+    '<div class="mnote">'+note+'</div></div>';}).join('');
 
 /* 05 ближайшие серии */
 $('#nextlist').innerHTML=D.upcoming.slice(0,4).map(function(u){

@@ -184,6 +184,12 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
   font-size:13px;color:var(--mut)}
 .donebar b{font-family:var(--ff-n);font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pur-hi)}
 .donebar i{font-style:normal;color:#fff;font-weight:600}
+.donebar.semi{border-color:rgba(201,161,77,.5);background:linear-gradient(120deg,rgba(96,72,20,.4),var(--panel) 65%)}
+.donebar.semi b{color:#f0d488}
+.donebar.semi::before{content:'полуфинал';font-family:var(--ff-n);font-weight:700;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:#1a1206;background:#c9a14d;padding:2px 7px;border-radius:2px;align-self:center}
+.donebar:not(.semi)::before{content:'напрямую';font-family:var(--ff-n);font-weight:700;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:#fff;background:var(--pur);padding:2px 7px;border-radius:2px;align-self:center}
 .nomore{color:var(--dim);font-weight:400}
 .avg{font-family:var(--ff-n);font-weight:700;font-size:19px;text-align:right;color:#fff}
 .srow.zone .avg{color:var(--pur-hi)}
@@ -469,7 +475,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <div class="wrap in">
     <div class="eyebrow">IX season · зачёт конференций</div>
     <h1 class="h">Зачёт</h1>
-    <div class="sub">Средний балл за серию. В зачёт попадают сыгравшие <b>минимум две серии</b> — у остальных строка приглушена и показано, <b>сколько нужно набрать</b> во второй, чтобы войти в зону.</div>
+    <div class="sub">Средний балл за серию, норма — <b>минимум две сыгранные</b>. Дальше маршруты расходятся: Central Europe отдаёт <b>шесть путёвок в финал напрямую</b>, Israel и Cyprus играют <b>полуфинал</b>, куда выходят по десять человек.</div>
   </div></div>
 <main><div class="wrap">
   <section style="padding-top:34px">
@@ -566,26 +572,34 @@ function needFor(k,r){ /* сколько нужно в следующей сер
 function stand(){
   var k=D.conf[CONF], q=k.quota, placed=0, out=[];
   var done=k.played>=k.total;                    /* все серии конференции сыграны */
-  if(done){
-    var win=k.rows.filter(function(r){return r.s>=2;}).slice(0,q).map(function(r){return esc(r.n);});
-    /* у конференций «через полуфинал» зачёт серий — это ещё не финальная путёвка */
-    var viaSemi=/полуфинал/i.test(k.mode||'');
-    var semiEv=(D.upcoming||[]).filter(function(u){return u.semi;})[0];
-    out.push('<div class="donebar"><b>'+(viaSemi?'Серии сыграны':'Отбор завершён')+'</b> · все '+k.total+' '+SER(k.total)+' позади · '+
-      (viaSemi ? 'дальше '+(q===1?'проходит':'проходят')+' <i>'+(win.join(', ')||'—')+'</i>'+
-                 (semiEv?' · полуфинал '+dm(semiEv.date):'')
-               : (q===1?'путёвка в финал: ':'путёвки в финал: ')+'<i>'+(win.join(', ')||'—')+'</i>')+
-      '</div>');
+  var semi=k.route==='semi', slots=semi?(k.semiSlots||10):q;
+  /* маршрут конференции: он у всех трёх разный, поэтому пишем его прямо над таблицей */
+  var head1, head2;
+  if(semi){
+    head1=(done?'Серии сыграны':'Идёт отбор в полуфинал');
+    head2='в полуфинал выходят <i>'+slots+'</i> · '+
+      (k.semiDate?'полуфинал '+dm(k.semiDate)+' · ':'') +
+      'в финал '+(q===1?'едет <i>победитель</i> полуфинала':'едут <i>трое</i>')+
+      (k.semiPrize?' · призовые полуфинала <i>'+esc(k.semiPrize)+'</i>':'')+
+      (k.semiNote?' · '+esc(k.semiNote):'');
+  } else {
+    head1=(done?'Отбор завершён':'Прямой отбор');
+    head2='<i>'+q+'</i> лучших с нормой «две серии» едут в финал напрямую, без полуфинала';
   }
+  out.push('<div class="donebar'+(semi?' semi':'')+(done?' done':'')+'"><b>'+head1+'</b> · '+head2+'</div>');
   out.push('<div class="stbl"><div class="sth"><div>#</div><div></div><div>Игрок</div><div class="r">Средний</div><div class="r">Серий</div><div class="r cneed">Нужно</div></div>');
   k.rows.forEach(function(r){
-    var ok=r.s>=2; if(ok) placed++;
-    var zone=ok&&placed<=q;
+    var ok=r.s>=2;
+    if(semi){ placed++; } else if(ok){ placed++; }
+    var zone=semi ? placed<=slots : (ok&&placed<=q);
     if(FILT==='q'&&!ok) return;
     var det=r.d.map(function(d){return esc(d[0])+' — '+f2(d[1]);}).join('   ·   ');
     var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
     var need=needFor(k,r), nd='', ndm='';
-    if(done){
+    if(semi&&!ok&&!done){ /* добор идёт после всех, кто выполнил норму */
+      nd='<span class="nomore">добор</span><s>после игроков с двумя сериями</s>';
+      ndm='<div class="needm nomore">добор — после тех, у кого две серии</div>';
+    } else if(done){
       if(!zone){ nd='<span class="nomore">—</span><s>серий больше нет</s>';
                  ndm='<div class="needm nomore">серий больше нет</div>'; }
     } else if(!zone){
@@ -593,16 +607,27 @@ function stand(){
                    : need.toFixed(2)+'<s>в '+(r.s+1)+'-й серии</s>';
       ndm = '<div class="needm">нужно '+(need<=0?'любой результат':need.toFixed(2))+' в '+(r.s+1)+'-й</div>';
     }
-    out.push('<div class="srow'+(zone?' zone':'')+(ok?'':' one')+'">'+
-      '<div class="rk">'+(ok?placed:'·')+'</div>'+ph+
+    out.push('<div class="srow'+(zone?' zone':'')+((ok||zone)?'':' one')+'">'+
+      '<div class="rk">'+((ok||semi)?placed:'·')+'</div>'+ph+
       '<div><div class="nick">'+esc(r.n)+'</div><div class="det">'+det+'</div>'+ndm+'</div>'+
       '<div class="avg">'+r.a.toFixed(3)+'</div>'+
       '<div class="r"><span class="pill">'+r.s+'<em>&nbsp;'+SER(r.s)+'</em></span></div>'+
       '<div class="need cneed">'+nd+'</div></div>');
-    if(zone&&placed===q) out.push('<div class="cutline"><b>линия прохода · '+q+' '+(q===6?'мест':'места')+' · порог '+k.cut.toFixed(3)+'</b><i></i></div>');
+    if(zone&&placed===slots) out.push('<div class="cutline"><b>'+
+      (semi ? 'линия полуфинала · '+slots+' мест'
+            : 'линия прохода · '+q+' '+(q===6?'мест':'места')+' · порог '+(k.cut!=null?k.cut.toFixed(3):'—'))+
+      '</b><i></i></div>');
   });
   out.push('</div>');
   $('#stbl').innerHTML=out.join('');
+  if(semi){
+    $('#stleg').innerHTML = 'Порядок такой: сначала все, кто сыграл <b style="color:#fff">две серии и больше</b> — по среднему баллу, '+
+      'затем добором те, у кого одна серия. Первые <b style="color:#fff">'+slots+'</b> играют полуфинал'+
+      (k.semiDate?' '+dm(k.semiDate):'')+'. '+
+      (q===1 ? 'Единственную путёвку в финал даёт победа в полуфинале'+(k.semiPrize?', призовые получают первые трое: '+esc(k.semiPrize):'')+'.'
+             : 'Путёвки в финал получают трое лучших полуфинала'+(k.semiNote?'; '+esc(k.semiNote):'')+'.');
+    return;
+  }
   $('#stleg').innerHTML = done
     ? ('В зачёте <b style="color:#fff">'+k.played2+'</b> из '+k.rows.length+' игроков конференции · все '+k.total+' '+SER(k.total)+
        ' сыграны, догнать зону уже нельзя. <em>Приглушённые строки</em> — сыграна одна серия: норма «минимум две» не выполнена, поэтому в зачёт такие результаты не идут, каким бы высоким ни был балл.')
