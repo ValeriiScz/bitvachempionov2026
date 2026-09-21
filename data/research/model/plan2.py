@@ -1,9 +1,10 @@
 """plan2.py · v2 — «план игрока» для топ-30: перцентили мест (со сглаживанием к пулу) × сетка его вероятных турниров × хвост десятки; серийники — диапазоном; планка — из Монте-Карло."""
 import numpy as np, json, sys, collections, gd_data as g, gd_sim, calendar_expert
+from gd_cfg import T, out as OUTP
 from gd_sim import Season
 gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=4.0
-T='2026-09-14'; rng=np.random.default_rng(0)
-F=json.load(open('forecast2026.json')); thr=np.array(F['thr'])*1.07   # +7%: бэктест-2025 занижал порог
+rng=np.random.default_rng(0)
+F=json.load(open(OUTP('forecast2026.json'))); thr=np.array(F['thr'])*1.07   # +7%: бэктест-2025 занижал порог
 PL=(np.percentile(thr,25),np.percentile(thr,50),np.percentile(thr,75)); played_exp={r['uid']:r['played'] for r in F['rows']}
 Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
@@ -77,4 +78,4 @@ for s0,uid in mid[:30]:
                  'expected_k':k,'detail':detail,'finals':[{'name':f[0],'date':f[1],'stars':f[2],'n_fin':f[3],'lo':f[4],'mid':f[5],'hi':f[6]} for f in fins],'table':table,
                  'one_result':{'4★':{pos:se.grid_pts(4,'regular',40)[pos-1]-worst for pos in (1,3,5,10)},'5★':{pos:se.grid_pts(5,'regular',44)[pos-1]-worst for pos in (1,3,5,10)}},
                  'likely_events':[{'id':e['id'],'name':e['name'],'date':e['date'],'stars':e['stars'],'p':round(e['p'][uid],2)} for e in sorted(regular,key=lambda e:-(e['p'][uid]*(0.15 if e['stars']<=1 else 1.0)))[:8]]})
-json.dump({'T':T,'planka':{'p25':PL[0],'p50':PL[1],'p75':PL[2]},'rows':rows},open('plan2026.json','w'),ensure_ascii=False,indent=0)
+json.dump({'T':T,'planka':{'p25':PL[0],'p50':PL[1],'p75':PL[2]},'rows':rows},open(OUTP('plan2026.json'),'w'),ensure_ascii=False,indent=0)

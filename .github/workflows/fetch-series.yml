@@ -1,11 +1,9 @@
 # Снимки серийников mafgame (регламент + результаты серий) для исследования «Гонка за золотую дюжину».
-# Запуск: вручную (Actions → «Серийники mafgame» → Run workflow) или пушем правки скрипта.
+# Еженедельно скрипт гоняет rebuild-race.yml; отдельно — вручную (Actions → «Серийники mafgame» → Run workflow) или пушем правки скрипта.
 name: Серийники mafgame
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '30 22 * * 0'   # вс 22:30 UTC = пн 00:30 Прага, после ночного refresh-data и турниров выходных
   push:
     paths:
       - '.github/workflows/fetch-series.yml'

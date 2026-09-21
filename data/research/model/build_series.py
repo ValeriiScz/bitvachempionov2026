@@ -1,11 +1,12 @@
-"""build_series.py · v1.0 · 2026-09-15 — data/series2026.js для раздела «Серийники»: по каждому рейтинговому серийнику 2026 —
+"""build_series.py · v1.1 · 2026-09-21 (T из gd_cfg, не сегодня) · v1.0 · 2026-09-15 — data/series2026.js для раздела «Серийники»: по каждому рейтинговому серийнику 2026 —
 описание/правило прохода, финал, серии (сыграно/впереди), кто уже прошёл (с местом в гонке), ближайшие серии всех контуров."""
 import json, datetime, collections, gd_data as g, gd_sim
 from gd_sim import Season
-T=datetime.date.today().isoformat(); Season.FINALISTS_PLAY=True
-fut=[t for t in g.CAL['tournaments'] if t['start']>'2026-09-14' and not t.get('cancelled') and t['pts']]
+from gd_cfg import T, out as OUTP
+Season.FINALISTS_PLAY=True
+fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
 gd_sim.EVENT_WEIGHT={}; gd_sim.TARGET_TOP30_MEAN=None; gd_sim.RACE_BETA_SHIFT=0
-se=Season(2026,'2026-09-14',cal_future=fut,verbose=False)
+se=Season(2026,T,cal_future=fut,verbose=False)
 race=se.race
 META={
  664:{'short':'GMC Europa 2026','tag':'German Mafia Cup','rule':'в финал проходят 1-е и 2-е места каждой серии; замены — 3-и места по сумме допов','rule_src':'FACT: описание турнира','final':'14–15.11, Кёльн','final_size':'50–60 человек, 18 игр','prize':'от 2500–3000 €, взнос финала 100 €','planned':'25–30 серий','page':'gmc2026.html'},
@@ -20,7 +21,7 @@ META={
 }
 GRID2=[30,27,25,22,20,18,16,14,12,10,8,6]; GRID4=[42,39,37,34,32,30,28,26,24,22,20,16,14,10,8]
 out=[]; upcoming=[]
-horizon=(datetime.date.today()+datetime.timedelta(days=16)).isoformat()
+horizon=(datetime.date.fromisoformat(T)+datetime.timedelta(days=16)).isoformat()
 for c in se.events:
     if c['type']!='contour': continue
     pid=c['id']; d=g.SER[pid]; m=META.get(pid,{})
@@ -41,7 +42,7 @@ for c in se.events:
 out.sort(key=lambda x:(-x['stars'],x['final_date']))
 upcoming.sort(key=lambda s:s['date'])
 S={'snapshot':T,'contours':out,'upcoming':upcoming,'horizon_days':16}
-open('series2026.js','w',encoding='utf-8').write('/* series2026.js — данные раздела «Серийники». Генератор: _scripts_golden_dozen_v0.9/build_series.py (снимки серий — робот fetch_series). Руками не править. */\nwindow.SERIES='+json.dumps(S,ensure_ascii=False,separators=(',',':'))+';\n')
-import os; print(os.path.getsize('series2026.js')//1024,'КБ; контуров',len(out),'; ближайших серий',len(upcoming))
+open(OUTP('series2026.js'),'w',encoding='utf-8').write('/* series2026.js — данные раздела «Серийники». Генератор: _scripts_golden_dozen_v0.9/build_series.py (снимки серий — робот fetch_series). Руками не править. */\nwindow.SERIES='+json.dumps(S,ensure_ascii=False,separators=(',',':'))+';\n')
+import os; print(os.path.getsize(OUTP('series2026.js'))//1024,'КБ; контуров',len(out),'; ближайших серий',len(upcoming))
 for c in out: print(f"  {c['short']:28s} {c['stars']}★ серий {c['series_played']}/{c['series_total']} впереди {c['series_ahead']} прошли {len(c['qualified'])} игроков {c['players']}")
 for u in upcoming: print('   ',u['date'],u['contour'][:20],u['city'],'заявок',u['regs'])

@@ -1,6 +1,8 @@
-"""gd_data · v1.0 · 2026-09-14 — загрузка данных «золотой дюжины»: леджеры, таблицы, листинги, серийники, календарь."""
-import json, collections, datetime
-R='/tmp/claude-0/-home-claude/a54b72ce-f72e-5c02-98ee-5f25f1671c21/scratchpad/repo/'
+"""gd_data · v1.1 · 2026-09-21 (путь репо: GD_REPO или относительно файла) · v1.0 · 2026-09-14 — загрузка данных «золотой дюжины»: леджеры, таблицы, листинги, серийники, календарь."""
+import json, collections, datetime, os
+_here=os.path.dirname(os.path.abspath(__file__))
+_guess=os.path.abspath(os.path.join(_here,'..','..','..'))  # data/research/model → корень репо
+R=(os.environ.get('GD_REPO') or (_guess if os.path.exists(os.path.join(_guess,'calendar.html')) else '/tmp/claude-0/-home-claude/a54b72ce-f72e-5c02-98ee-5f25f1671c21/scratchpad/repo')).rstrip('/')+'/'
 D=R+'data/research/ledger/'
 L=json.load(open(D+'ledgers.json')); P=json.load(open(D+'points.json')); T=json.load(open(D+'tournaments.json')); RT=json.load(open(D+'ratings.json'))
 SER_IX=json.load(open(R+'data/research/series/index.json'))

@@ -1,7 +1,8 @@
 """tickets.py — «поеду X, нужно Y финалов и Z топ-5»: минимальные комбинации результатов до планок сценариев. Финал 4★ (6–10 место) ≈ 12 баллов, топ-5 4★ ≈ 24, 3★: финал ≈ 7, топ-5 ≈ 17."""
 import numpy as np, json, itertools, gd_data as g, gd_sim
+from gd_cfg import T, out as OUTP
 from gd_sim import Season
-T='2026-09-14'; Season.FINALISTS_PLAY=True
+Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
 gd_sim.EVENT_WEIGHT={}; gd_sim.TARGET_TOP30_MEAN=None; gd_sim.RACE_BETA_SHIFT=0
 se=Season(2026,T,cal_future=fut,verbose=False)
@@ -41,4 +42,4 @@ for i,u in enumerate(top):
         cells.append(f"{z}+{y} → {X:2d}"); rec['need'][tgt]={'top5':z,'final':y,'tournaments':X}
     print(f"{i+1:>2} {g.NICK[u]:13s} {s:4.0f} | {r10*100:6.0f}% {r5*100:5.0f}% | {cells[0]:>12} | {cells[1]:>9} | {cells[2]:>9} | {cells[3]:>9} | {', '.join(f'{nm} {lo:.0f}/{md:.0f}' for lo,md,nm in fm) or '—'}")
     rows.append(rec)
-json.dump({'T':T,'FIN':FIN,'TOP5':TOP5,'rows':rows},open('tickets2026.json','w'),ensure_ascii=False,indent=0)
+json.dump({'T':T,'FIN':FIN,'TOP5':TOP5,'rows':rows},open(OUTP('tickets2026.json'),'w'),ensure_ascii=False,indent=0)

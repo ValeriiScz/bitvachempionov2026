@@ -1,22 +1,23 @@
-"""build_race.py · v1.1 · 2026-09-17 (v1.0 — 2026-09-14) — собирает data/race2026.js для страницы «Гонка за золотую дюжину» из результатов модели.
+"""build_race.py · v1.2 · 2026-09-21 (T/OUT из gd_cfg) · v1.1 · 2026-09-17 (v1.0 — 2026-09-14) — собирает data/race2026.js для страницы «Гонка за золотую дюжину» из результатов модели.
 Вход: tickets2026.json, plan2026.json, scenarios3.json, леджеры. Выход: window.RACE = {...}
 v1.1: у игроков sim три оценки силы — beta (вся история с 2024, веса 1/.5/.25), b12 (12 месяцев), b26 (только 2026) — для переключателя «Форма» в генераторе."""
 import json, numpy as np, gd_data as g, gd_sim
 from gd_sim import Season
-T='2026-09-14'; Season.FINALISTS_PLAY=True
+from gd_cfg import T, out as OUTP
+Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
 import calendar_expert
 gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=3.5; gd_sim.RACE_BETA_SHIFT=0
 se=Season(2026,T,cal_future=fut,verbose=False)
 SHORT={'German Maf':'GMC','"Mafia Cha':'MCL','Poland Str':'PSP','White Mafi':'White Mafia','Arena Mold':'Arena Moldova','Васлуйская':'Васлуй','ЛЗГ Лига З':'ЛЗГ','Benelux Pl':'Benelux','Cyprus Maf':'Cyprus MS','Central Eu':'CEC'}
-TK=json.load(open('tickets2026.json')); F=json.load(open('forecast2026.json'))
+TK=json.load(open(OUTP('tickets2026.json'))); F=json.load(open(OUTP('forecast2026.json')))
 for r in TK['rows']:
-    for f in r['finals']: f['name']=SHORT.get(f['name'],f['name']); PL=json.load(open('plan2026.json')); SC=json.load(open('scenarios3.json'))
+    for f in r['finals']: f['name']=SHORT.get(f['name'],f['name']); PL=json.load(open(OUTP('plan2026.json'))); SC=json.load(open(OUTP('scenarios3.json')))
 plan={r['uid']:r for r in PL['rows']}; tick={r['uid']:r for r in TK['rows']}
 mid=g.standings(2026,T)
 # планки
 planks={'floor':115,'usual':round(SC['1 обычный ритм']['thr_med']),'usual_lo':round(SC['1 обычный ритм']['thr10']),'usual_hi':round(SC['1 обычный ритм']['thr90']),
-        'active':round(SC['2 активно и стараются']['thr_med']),'beast':round(SC['3 как звери']['thr_med']),'work':[140,150],'regs':[120,130],'regs_note':'только уже записанные + финалы серийников: медиана 120 (114–127), с поправкой ~128'}
+        'active':round(SC['2 активно и стараются']['thr_med']),'beast':round(SC['3 как звери']['thr_med']),'work':[140,150],'regs':[120,130],'regs_note':'только уже записанные + финалы серийников'}
 # турниры впереди
 events=[]
 for e in sorted(se.events,key=lambda e:e['date']):
@@ -79,5 +80,5 @@ SIM={'players':players,'forms':{'all':'вся история (с 2024, свеж�
      'server':{'S':F.get('S',3000),'date':T,'p12':{str(r['uid']):round(r['p12'],3) for r in F['rows']}}}
 RACE={'snapshot':T,'sim':SIM,'thr12_now':mid[11][0],'planks':planks,'events':events,'rows':rows,'hist':hist,
       'method':'Σ = 10 лучших турниров года, не более 2 серийных. Финал = 6–10 место на 4★ ≈ 12 баллов, топ-5 на 4★ ≈ 24. Частоты — за последние 12 месяцев, сглажены к среднему топ-30.'}
-open('race2026.js','w',encoding='utf-8').write('/* race2026.js — данные страницы «Гонка за золотую дюжину». Генератор: _scripts_golden_dozen_v0.9/build_race.py. Руками не править. */\nwindow.RACE='+json.dumps(RACE,ensure_ascii=False,separators=(',',':'))+';\n')
-import os; print('race2026.js', os.path.getsize('race2026.js')//1024,'КБ; планки',planks,'; игроков',len(rows),'; событий',len(events))
+open(OUTP('race2026.js'),'w',encoding='utf-8').write('/* race2026.js — данные страницы «Гонка за золотую дюжину». Генератор: _scripts_golden_dozen_v0.9/build_race.py. Руками не править. */\nwindow.RACE='+json.dumps(RACE,ensure_ascii=False,separators=(',',':'))+';\n')
+import os; print('race2026.js', os.path.getsize(OUTP('race2026.js'))//1024,'КБ; планки',planks,'; игроков',len(rows),'; событий',len(events))
