@@ -408,6 +408,17 @@ def main():
     changed = re.sub(r'^/\*.*?\*/\n', '', old, flags=re.S) != re.sub(r'^/\*.*?\*/\n', '', new, flags=re.S)
     if changed:
         io.open(DATA, 'w', encoding='utf-8').write(new)
+        # версия у ссылки на датафайл: без неё браузер отдаёт читателю вчерашние цифры
+        stamp = datetime.date.today().strftime('%Y%m%d')
+        for page in ('mcl2026.html', 'mcl-standings.html', 'mcl-series.html', 'mcl-lab.html'):
+            fp = os.path.join(BASE, page)
+            if not os.path.exists(fp):
+                continue
+            src = io.open(fp, encoding='utf-8').read()
+            upd = re.sub(r'<script src="data/mcl2026\.js(\?v=\d+)?"></script>',
+                         '<script src="data/mcl2026.js?v=%s"></script>' % stamp, src)
+            if upd != src:
+                io.open(fp, 'w', encoding='utf-8').write(upd)
         # сервис-воркер держит датафайл в кэше — без нового номера версии
         # читатели увидят старые цифры до второго открытия страницы
         sw = io.open(SW, encoding='utf-8').read()
