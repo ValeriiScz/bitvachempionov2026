@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v1.5 · 21.09.2026 · явка топ-20 5–6 (Валерий), 21–30 ≈4 · v1.4 · явка топ-30 ≈4, планы игроков; финалы серийников: баллы у 10 мест, поле 20 · v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
+<!-- race.html v1.6 · 21.09.2026 · слоты десятки: серийные помечены, строка «Серийные k из 2» (Валерий) · v1.5 · явка топ-20 5–6 (Валерий), 21–30 ≈4 · v1.4 · явка топ-30 ≈4, планы игроков; финалы серийников: баллы у 10 мест, поле 20 · v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
 <meta name="description" content="Рейтинг MAFGAME 2026: планка топ-12, кому сколько турниров и результатов нужно до конца года, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -102,6 +102,8 @@ tr.det td{background:rgba(255,255,255,.025);padding:14px 12px 18px;white-space:n
 .ten{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 10px}
 .ten span{font:700 12px/1 var(--mono);padding:6px 8px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
 .ten span.t{border-color:rgba(219,81,78,.5);color:#f0a5a3} .ten span.e{border-style:dashed;color:#6f7684}
+.ten span.s{border-color:rgba(245,255,53,.55);background:rgba(245,255,53,.06)} .ten span.s i{font-style:normal;font-size:8px;color:var(--ye);margin-left:4px;vertical-align:top}
+.ser{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:-4px 0 12px;font-size:12.5px;color:#8a91a0} .ser .ten{margin:0;display:inline-flex} .ser b{color:#c3cad6;font-weight:600} .ser .ten span.e{min-width:30px;text-align:center}
 table.mini{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
 table.mini th,table.mini td{padding:6px 7px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
 table.mini th{font:700 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#8a91a0}
@@ -335,6 +337,14 @@ function initRace(){
   function combo(base,target){for(let tot=0;tot<9;tot++){for(let z=0;z<=tot;z++){const y=tot-z;if(best10([...base,...Array(z).fill([TOP5,0]),...Array(y).fill([FIN,0])])>=target)return [z,y]}}return [9,9]}
   function words(z,y){const p=[];if(z)p.push(`топ-5 ×${z}`);if(y)p.push(`топ-10 ×${y}`);return p.length?p.join(' + '):'уже есть'}
   function baseWithFinals(r){return [...(r.base||r.ten.map(v=>[v,0])),...(r.finals||[]).map(f=>[f.min,1])]}
+  // десятка с учётом правила «не больше двух серийных»: какие записи реально в зачёте, сколько серийных слотов занято
+  function tenOf(base){const recs=[...base].sort((a,b)=>b[0]-a[0]);const ten=[];let ser=0,skipped=0;for(const rec of recs){if(ten.length>=10)break;if(rec[1]){if(ser>=2){skipped++;continue}ser++}ten.push(rec)}
+    return {ten,free:Math.max(0,10-ten.length),tail:ten.length>=10?ten.slice(5).reduce((a,x)=>a+x[0],0):0,ser,serPts:ten.filter(x=>x[1]).map(x=>x[0]),skipped}}
+  function slotsHtml(base){const t=tenOf(base);
+    const cells=t.ten.map((x,i)=>`<span class="${x[1]?'s':''}${!x[1]&&i>=5?' t':''}${x[1]&&i>=5?' t':''}">${fmt(x[0])}${x[1]?'<i>сер</i>':''}</span>`).join('')+Array.from({length:t.free},()=>'<span class="e">·</span>').join('');
+    const sl=t.serPts.map(p=>`<span class="s">${fmt(p)}<i>сер</i></span>`).join('')+Array.from({length:2-t.ser},()=>'<span class="e">·</span>').join('');
+    const note=t.ser===0?'оба серийных слота свободны — финал серийника ляжет целиком':t.ser===1?`один серийный слот занят (${fmt(t.serPts[0])}), второй свободен — ещё один финал ляжет целиком, третий поможет только если выше ${fmt(Math.min(...t.serPts))}`:`оба серийных слота заняты (${t.serPts.map(fmt).join(' и ')}) — новый финал серийника зачтётся, только если выше ${fmt(Math.min(...t.serPts))}${t.skipped?`; ${t.skipped} серийный результат уже за бортом`:''}`;
+    return `<div class="ten">${cells}</div><div class="ser"><b>Серийные ${t.ser} из 2</b><span class="ten">${sl}</span><span>${note}</span></div>`}
   let MODE='forecast';
   const PL={forecast:P.work, regs:P.regs};
   function needFor(r,t){const [z,y]=combo(baseWithFinals(r),t);return {z,y,n:z+y}}
@@ -374,7 +384,7 @@ function initRace(){
   renderTable();
   $('#modes').addEventListener('click',ev=>{const b=ev.target.closest('.mode');if(!b)return;MODE=b.dataset.mode;document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('on',x===b));renderTable()});
   function detail(r){
-    const ten=r.ten.map((v,i)=>`<span class="${i>=5?'t':''}">${fmt(v)}</span>`).join('')+Array.from({length:r.free},()=>'<span class="e">·</span>').join('');
+    const ten=slotsHtml(r.base||r.ten.map(v=>[v,0]));
     const one=r.one_result?`4★: победа +${fmt(r.one_result['4★']['1'])} · 3-е +${fmt(r.one_result['4★']['3'])} · 5-е +${fmt(r.one_result['4★']['5'])} · 10-е +${fmt(r.one_result['4★']['10'])} &nbsp;|&nbsp; 5★: победа +${fmt(r.one_result['5★']['1'])} · 5-е +${fmt(r.one_result['5★']['5'])} · 10-е +${fmt(r.one_result['5★']['10'])}`:'';
     let tbl='';
     if(r.table){
@@ -392,7 +402,7 @@ function initRace(){
       <div>
         <h4>Где ты</h4>
         <p>Σ <b>${fmt(r.sigma)}</b> · ${r.free?`в десятке ${10-r.free} турниров, ${r.free} слот${r.free>1?'а':''} пуст${r.free>1?'ы':''} — новый результат ложится целиком`:`десятка полная, хвост ${fmt(r.tail)} баллов — его и вытесняем`}</p>
-        <div class="ten">${ten}</div>
+        ${ten}
         <h4>Что должно случиться</h4>
         <p>${what}</p>
         <p style="color:#8a91a0;font-size:12.5px">Один результат чистыми: ${one}</p>
@@ -488,7 +498,7 @@ function initRace(){
       const rp=page.props.rating_points||[]; const nick=(page.props.user_data||{}).nickname||('#'+id);
       const year=new Date().getFullYear();
       const base=rp.filter(r=>r.year===year).map(r=>[parseFloat(r.points),r.tournament&&r.tournament.serial?1:0]);
-      const sigma=best10(base); const ten=[...base.map(x=>x[0])].sort((a,b)=>b-a).slice(0,10); const free=Math.max(0,10-ten.length); const tail=ten.length>=10?ten.slice(5).reduce((a,b)=>a+b,0):0;
+      const sigma=best10(base); const T10=tenOf(base); const free=T10.free, tail=T10.tail;
       const since=new Date(Date.now()-365*864e5).toISOString().slice(0,10);
       const last=rp.filter(r=>r.date_acquired>=since&&!(r.tournament&&r.tournament.serial)&&r.position&&r.position<1000);
       const n=last.length,t10=last.filter(r=>r.position<=10).length,t5=last.filter(r=>r.position<=5).length;
@@ -496,7 +506,7 @@ function initRace(){
       const parts=[PL[MODE][0],PL[MODE][1],P.beast].map(t=>{const [z,y]=combo(base,t);const need=z+y;const X=need?Math.ceil(Math.max(z/Math.max(p5,.05),need/Math.max(p10,.1))):0;return {t,z,y,need,X}});
       const known=R.rows.find(r=>String(r.uid)===String(id));
       res.innerHTML=`<div class="head"><b>${nick}</b><span>Σ ${fmt(sigma)} · ${free?`${free} свободных слота`:`хвост ${fmt(tail)}`} · за 12 месяцев ${n} турниров, топ-10 в ${t10}, топ-5 в ${t5}</span></div>
-        <div class="ten">${ten.map((v,i)=>`<span class="${i>=5?'t':''}">${fmt(v)}</span>`).join('')}${Array.from({length:free},()=>'<span class="e">·</span>').join('')}</div>
+        ${slotsHtml(base)}
         <table class="mini"><thead><tr><th>планка</th><th>нужно взять</th><th>в обычном ритме это</th><th>из 5 поездок</th></tr></thead><tbody>
         ${parts.map(p=>`<tr><td class="num">${p.t}</td><td><b>${words(p.z,p.y)}</b></td><td>${p.need?`${p.X} турниров при твоей частоте (топ-10 ${Math.round(p10*100)}%, топ-5 ${Math.round(p5*100)}%)`:'—'}</td><td>${p.need?`${Math.min(5,p.need)} с результатом${p.z?`, ${p.z} из них топ-5`:''}`:'—'}</td></tr>`).join('')}
         </tbody></table>
