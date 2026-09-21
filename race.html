@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v1.6 · 21.09.2026 · слоты десятки: серийные помечены, строка «Серийные k из 2» (Валерий) · v1.5 · явка топ-20 5–6 (Валерий), 21–30 ≈4 · v1.4 · явка топ-30 ≈4, планы игроков; финалы серийников: баллы у 10 мест, поле 20 · v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
+<!-- race.html v1.7 · 21.09.2026 · фикс логики «что должно случиться»: вывод зависит от сравнения нужных турниров с ожидаемыми поездками · v1.6 · слоты десятки: серийные помечены, строка «Серийные k из 2» (Валерий) · v1.5 · явка топ-20 5–6 (Валерий), 21–30 ≈4 · v1.4 · явка топ-30 ≈4, планы игроков; финалы серийников: баллы у 10 мест, поле 20 · v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
 <meta name="description" content="Рейтинг MAFGAME 2026: планка топ-12, кому сколько турниров и результатов нужно до конца года, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -396,8 +396,11 @@ function initRace(){
     const likely=evs.map(e=>`<li><i>${e.date.slice(5).split('-').reverse().join('.')}</i><b>${e.name}${e.tag?` <small style="color:#7e8595">· ${e.tag}</small>`:''}</b><em>${e.stars}★</em></li>`).join('');
     const fins=(r.finals||[]).map(f=>`<li><i>финал</i><b>${f.name}</b><em>${f.min}–${f.mid}+ баллов</em></li>`).join('');
     const nA=needFor(r,PL[MODE][0]), nB=needFor(r,PL[MODE][1]);
-    const X=nA.n&&r.p5!=null?Math.ceil(Math.max(nA.z/Math.max(r.p5,.05),nA.n/Math.max(r.p10,.1))):0;
-    const what=`До ${PL[MODE][0]} — <b>${words(nA.z,nA.y)}</b>${nA.n?`; до ${PL[MODE][1]} — <b>${words(nB.z,nB.y)}</b>`:''}. ${X?`Твоя частота за год: топ-10 в ${Math.round(r.p10*100)}% турниров, топ-5 в ${Math.round(r.p5*100)}%. В таком ритме на это ушло бы ${X} турниров, а поездок реально 4–6 — значит, бить надо чаще обычного.`:''}`;
+    // сколько турниров нужно при своей частоте результатов, чтобы набрать нужное число топ-5 / топ-10 — до каждой планки
+    const tripsFor=nd=>nd.n&&r.p5!=null?Math.ceil(Math.max(nd.z/Math.max(r.p5,.05),nd.n/Math.max(r.p10,.1))):0;
+    const XA=tripsFor(nA), XB=tripsFor(nB), K=r.expected_k||4;
+    const verdict=!XA?'':XB<=K?`поездок у тебя ~${K} — всё ок, обычного ритма хватает даже до ${PL[MODE][1]}.`:XA<=K?`поездок у тебя ~${K} — до ${PL[MODE][0]} обычного ритма хватает, до ${PL[MODE][1]} нужно выигрывать чаще обычного.`:`а поездок у тебя ~${K} — значит, нужно выигрывать чаще обычного.`;
+    const what=`До ${PL[MODE][0]} — <b>${words(nA.z,nA.y)}</b>${nA.n?`; до ${PL[MODE][1]} — <b>${words(nB.z,nB.y)}</b>`:''}. ${XA?`Твоя частота за год: топ-10 в ${Math.round(r.p10*100)}% турниров, топ-5 в ${Math.round(r.p5*100)}%. В таком ритме до ${PL[MODE][0]} это ~${XA} турнир${XA===1?'':XA<5?'а':'ов'}${XB>XA?`, до ${PL[MODE][1]} — ~${XB}`:''}; ${verdict}`:''}`;
     return `<tr class="det"><td colspan="8"><div class="plan">
       <div>
         <h4>Где ты</h4>
