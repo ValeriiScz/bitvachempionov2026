@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl-standings.html · v1.2 · 2026-09-21 · MCL Europe 2026, зачёт трёх конференций: полные таблицы, фильтр нормы, калькулятор прохода. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-standings.html · v1.3 · 2026-09-21 · MCL Europe 2026, зачёт трёх регионов: полные таблицы, фильтр нормы, калькулятор прохода. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -10,7 +10,7 @@
 <link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="assets/icons/icon-180.png">
 
-<meta name="description" content="Зачёт MCL Europe 2026 по конференциям: средний балл, норма двух серий, калькулятор прохода в финал.">
+<meta name="description" content="Зачёт MCL Europe 2026 по трём регионам: средний балл за серию, норма двух серий, полуфиналы Израиля и Кипра, калькулятор прохода в финал.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,400;0,600;0,700;1,700;1,800&family=Fira+Sans+Extra+Condensed:ital,wght@0,800;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -132,7 +132,7 @@ section{padding:56px 0 8px;position:relative}
   letter-spacing:.14em;text-transform:uppercase;color:var(--pur-hi);border-bottom:1px solid rgba(198,90,180,.4);padding-bottom:3px}
 .more:hover{color:#fff;border-color:#fff}
 
-/* KPI и конференции */
+/* KPI и регионы */
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
 .kpi{background:var(--panel);border:1px solid var(--line);padding:16px 16px 14px;position:relative;overflow:hidden}
 .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur)}
@@ -473,7 +473,7 @@ a:hover .sithumb{filter:brightness(1.12)}
 
 <div class="phead"><div class="bg" style="background-image:url(assets/mcl/hero.jpg)"></div>
   <div class="wrap in">
-    <div class="eyebrow">IX season · зачёт конференций</div>
+    <div class="eyebrow">IX season · зачёт регионов</div>
     <h1 class="h">Зачёт</h1>
     <div class="sub">Средний балл за серию, норма — <b>минимум две сыгранные</b>. Дальше маршруты расходятся: Central Europe отдаёт <b>шесть путёвок в финал напрямую</b>, Israel и Cyprus играют <b>полуфинал</b>, куда выходят по десять человек.</div>
   </div></div>
@@ -517,7 +517,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20260921"></script>
+<script src="data/mcl2026.js?v=20260921b"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -571,9 +571,9 @@ function needFor(k,r){ /* сколько нужно в следующей сер
 }
 function stand(){
   var k=D.conf[CONF], q=k.quota, placed=0, out=[];
-  var done=k.played>=k.total;                    /* все серии конференции сыграны */
+  var done=k.played>=k.total;                    /* все серии региона сыграны */
   var semi=k.route==='semi', slots=semi?(k.semiSlots||10):q;
-  /* маршрут конференции: он у всех трёх разный, поэтому пишем его прямо над таблицей */
+  /* маршрут региона: он у всех трёх разный, поэтому пишем его прямо над таблицей */
   var head1, head2;
   if(semi){
     head1=(done?'Серии сыграны':'Идёт отбор в полуфинал');
@@ -625,13 +625,13 @@ function stand(){
       'затем добором те, у кого одна серия. Первые <b style="color:#fff">'+slots+'</b> играют полуфинал'+
       (k.semiDate?' '+dm(k.semiDate):'')+'. '+
       (q===1 ? 'Единственную путёвку в финал даёт победа в полуфинале'+(k.semiPrize?', призовые получают первые трое: '+esc(k.semiPrize):'')+'.'
-             : 'Путёвки в финал получают трое лучших полуфинала'+(k.semiNote?'; '+esc(k.semiNote):'')+'.');
+             : 'Путёвки в финал получают трое лучших'+(k.semiNote?'; '+esc(k.semiNote):'')+'.');
     return;
   }
   $('#stleg').innerHTML = done
-    ? ('В зачёте <b style="color:#fff">'+k.played2+'</b> из '+k.rows.length+' игроков конференции · все '+k.total+' '+SER(k.total)+
+    ? ('В зачёте <b style="color:#fff">'+k.played2+'</b> из '+k.rows.length+' игроков региона · все '+k.total+' '+SER(k.total)+
        ' сыграны, догнать зону уже нельзя. <em>Приглушённые строки</em> — сыграна одна серия: норма «минимум две» не выполнена, поэтому в зачёт такие результаты не идут, каким бы высоким ни был балл.')
-    : ('В зачёте <b style="color:#fff">'+k.played2+'</b> из '+k.rows.length+' игроков конференции · осталось <b style="color:#fff">'+
+    : ('В зачёте <b style="color:#fff">'+k.played2+'</b> из '+k.rows.length+' игроков региона · осталось <b style="color:#fff">'+
        (k.total-k.played)+'</b> '+((k.total-k.played)===1?'серия':'серий')+' · <em>приглушённые строки</em> — одна серия, норма не выполнена. Колонка «нужно» считается от текущего порога зоны.');
 }
 function fillCalc(){
@@ -644,7 +644,7 @@ function simulate(){
   var k=D.conf[CONF], uid=+$('#cpl').value, sc=parseFloat(($('#csc').value||'').replace(',','.'));
   var me=k.rows.filter(function(r){return r.u===uid;})[0]; if(!me) return;
   if(k.played>=k.total){
-    $('#cout').innerHTML='<div class="big">—</div>Отбор в этой конференции завершён: все '+k.total+' '+SER(k.total)+
+    $('#cout').innerHTML='<div class="big">—</div>Отбор в этом регионе завершён: все '+k.total+' '+SER(k.total)+
       ' сыграны, считать нечего. Итог — в таблице выше.';
     return;
   }

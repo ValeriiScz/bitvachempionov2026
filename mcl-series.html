@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl-series.html · v1.1 · 2026-09-10 · MCL Europe 2026, серии и календарь: сетка выходных с раскрытием, список серий с фото и деталями. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-series.html · v1.2 · 2026-09-21 · MCL Europe 2026, серии и календарь: сетка выходных с раскрытием, список серий с фото и деталями. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -132,7 +132,7 @@ section{padding:56px 0 8px;position:relative}
   letter-spacing:.14em;text-transform:uppercase;color:var(--pur-hi);border-bottom:1px solid rgba(198,90,180,.4);padding-bottom:3px}
 .more:hover{color:#fff;border-color:#fff}
 
-/* KPI и конференции */
+/* KPI и регионы */
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
 .kpi{background:var(--panel);border:1px solid var(--line);padding:16px 16px 14px;position:relative;overflow:hidden}
 .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur)}
@@ -536,7 +536,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20260921"></script>
+<script src="data/mcl2026.js?v=20260921b"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -609,7 +609,7 @@ if($('#snap')) $('#snap').textContent=D.snap;
       '<div class="ed">'+dm(u.date)+' · '+(u.semi?'<span class="semib">полуфинал</span>':scode(u))+'</div>'+
       '<div class="et">'+(FL[u.fl]||'')+' '+esc(u.city)+'</div>'+
       '<div class="em">'+
-        '<div><div class="k">Конференция</div><div class="v">'+esc(D.conf[u.c].name)+'</div></div>'+
+        '<div><div class="k">Регион</div><div class="v">'+esc(D.conf[u.c].name)+'</div></div>'+
         '<div><div class="k">Судья</div><div class="v">'+esc(u.j||'не объявлен')+'</div></div>'+
         '<div><div class="k">Взнос</div><div class="v">'+esc(u.fee||'—')+'</div></div>'+
         (u.time?'<div><div class="k">Старт</div><div class="v">'+esc(u.time)+'</div></div>':'')+

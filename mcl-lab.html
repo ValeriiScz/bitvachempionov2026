@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl-lab.html · v1.1 · 2026-09-10 · MCL Europe 2026, разбор данных: находки по допам, квоты и сила конференций, судьи, метод. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-lab.html · v1.2 · 2026-09-21 · MCL Europe 2026, разбор данных: находки по допам, квоты и сила регионов, судьи, метод. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -132,7 +132,7 @@ section{padding:56px 0 8px;position:relative}
   letter-spacing:.14em;text-transform:uppercase;color:var(--pur-hi);border-bottom:1px solid rgba(198,90,180,.4);padding-bottom:3px}
 .more:hover{color:#fff;border-color:#fff}
 
-/* KPI и конференции */
+/* KPI и регионы */
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
 .kpi{background:var(--panel);border:1px solid var(--line);padding:16px 16px 14px;position:relative;overflow:hidden}
 .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur)}
@@ -471,7 +471,7 @@ a:hover .sithumb{filter:brightness(1.12)}
     <div class="blocks" id="blocks"></div>
   </section>
   <section>
-    <div class="sechead"><div class="no">02</div><h2 class="h">Конференции и квоты</h2><div class="line"></div></div>
+    <div class="sechead"><div class="no">02</div><h2 class="h">Регионы и квоты</h2><div class="line"></div></div>
     <p class="lead">По числу серий деление неровное: у Israel 1.67 серии на место в финале, у Central Europe 2.0, у Cyprus — 3.0 на единственное место. Разница ещё и в силе полей.</p>
     <div class="tw" id="qtbl"></div>
     <div class="legend">Рейтинговые позиции — снимок рейтинга mafgame на 03.08.2026 (459 игроков). В финале-2025 израильская квота дала 5-е, 9-е и 10-е места.</div>
@@ -505,7 +505,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20260921"></script>
+<script src="data/mcl2026.js?v=20260921b"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -545,10 +545,10 @@ $('#blocks').innerHTML=[
  ['+0.115','KEX · самый большой остаток','Больше нормы собственных серий на <b>0.115 допа за игру</b> (p=0.0002 — единственный значимый результат сезона из 24 проверенных). Доп в 15 посадках из 20 при средней по лиге 45%; в Дортмунде собрал 30% всех допов серии. Обе его серии судил один судья.'],
  ['31.5%','Контур играет «в чёрных»','Город выиграл лишь 41 игру из 130: Central Europe 21/60, Israel 15/50, Cyprus 5/20. Cologne и Haifa-04 — по одной победе города за серию. Причина — либо малые закрытые составы по 10 человек, либо дисперсия.'],
  ['×1.5','Рука судьи различается','Самая сдержанная — Рыба-мОя (0.083 допа на посадку, проигравшим почти не платит), самые щедрые — Кирпич (0.126) и Dogfather (0.116, проигравшим 0.079). YeS раздаёт чаще всех — 55% посадок, но малыми порциями.'],
- ['6+3+1','Квоты и сила конференций','В Central Europe играют <b>14 игроков из топ-50</b> рейтинга mafgame и 21 из топ-100 (лучшие — №2 и №3). В Israel и Cyprus игроков топ-50 <b>нет ни одного</b> (лучшие — №94 и №83). Обратная сторона: финалист из этих конференций проходит 46 игр против 36 у Central Europe.'],
+ ['6+3+1','Квоты и сила регионов','В Central Europe играют <b>14 игроков из топ-50</b> рейтинга mafgame и 21 из топ-100 (лучшие — №2 и №3). В Israel и Cyprus игроков топ-50 <b>нет ни одного</b> (лучшие — №94 и №83). Обратная сторона: финалист из этих регионов проходит 46 игр против 36 у Central Europe.'],
 ].map(function(x){return '<div class="blk"><div class="big">'+x[0]+'</div><div class="bt">'+x[1]+'</div><div class="bb">'+x[2]+'</div></div>';}).join('');
 
-$('#qtbl').innerHTML='<table><thead><tr><th>Конференция</th><th>Игроков</th><th>Прогноз</th><th>Топ-50</th><th>Топ-100</th><th>Лучший</th><th>Мест</th><th>На место</th></tr></thead><tbody>'+
+$('#qtbl').innerHTML='<table><thead><tr><th>Регион</th><th>Игроков</th><th>Прогноз</th><th>Топ-50</th><th>Топ-100</th><th>Лучший</th><th>Мест</th><th>На место</th></tr></thead><tbody>'+
  D.quotas.map(function(r){return '<tr><td class="nm">'+esc(r[0])+'</td><td>'+r[1]+'</td><td>'+esc(r[2])+'</td>'+
   '<td class="'+(r[3]===0?'zero':'')+'">'+r[3]+'</td><td>'+r[4]+'</td><td>'+esc(r[5])+'</td><td>'+r[6]+'</td><td>'+esc(r[7])+'</td></tr>';}).join('')+'</tbody></table>';
 

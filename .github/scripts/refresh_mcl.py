@@ -12,12 +12,12 @@ refresh_mcl.py · v1.1 · 2026-09-21 · версия для сайта DOVOD
   3)  реестр серии: все этапы турнира-серии 757
   4)  протоколы этапов: баллы, победители, метрики судейства
   5)  Telegram: фото победителей по хештегу + ссылка на пост + судья из анонса
-  6)  сборка зачёта конференций, состава финала, KPI и тикера
+  6)  сборка зачёта регионов, состава финала, KPI и тикера
   7)  предохранители и запись файла
   8)  сводка прогона
 
 Что робот НЕ трогает (задаётся руками в файле): quota, total, mode, route, semiSlots,
-semiDate, semiPrize, semiNote у конференций,
+semiDate, semiPrize, semiNote у регионов,
 prize, finalISO, contacts, quotas, judges — таблица судейства из отдельного разбора.
 """
 
@@ -326,7 +326,7 @@ def main():
         if os.path.exists(target):
             s['img'] = 'assets/mcl/' + local
 
-    # 6b) зачёт конференций
+    # 6b) зачёт регионов
     for c in CONF_ORDER:
         k = D['conf'][c]
         agg = {}
@@ -363,7 +363,7 @@ def main():
     for c in CONF_ORDER:
         k = D['conf'][c]
         if k.get('route') == 'semi':
-            # места этих конференций разыгрываются в полуфинале, зачёт их не определяет
+            # места этих регионов разыгрываются в полуфинале, зачёт их не определяет
             for i in range(k['quota']):
                 squad.append(dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n='', a=0, s=0, p='', semi=1))
             continue

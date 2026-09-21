@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl2026.html · v3.2 · 2026-09-21 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
+<!-- MafgameStat · mcl2026.html · v3.3 · 2026-09-21 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -132,7 +132,7 @@ section{padding:56px 0 8px;position:relative}
   letter-spacing:.14em;text-transform:uppercase;color:var(--pur-hi);border-bottom:1px solid rgba(198,90,180,.4);padding-bottom:3px}
 .more:hover{color:#fff;border-color:#fff}
 
-/* KPI и конференции */
+/* KPI и регионы */
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
 .kpi{background:var(--panel);border:1px solid var(--line);padding:16px 16px 14px;position:relative;overflow:hidden}
 .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--pur)}
@@ -520,7 +520,7 @@ a:hover .sithumb{filter:brightness(1.12)}
 <main>
 <section id="season"><div class="wrap">
   <div class="sechead"><div class="no">01</div><h2 class="h">Сезон</h2><div class="line"></div></div>
-  <p class="lead">Зачёт — <b>средний балл за серию</b>, в зачёт идут только те, кто сыграл <b>минимум две</b>. Очки не сгорают, поэтому таблица переворачивается до последней серии.</p>
+  <p class="lead">Сезон идёт в трёх регионах — Central Europe, Israel и Cyprus. Серия — это один игровой день. Зачёт — <b>средний балл за серию</b>, и попадают в него только те, кто сыграл <b>минимум две</b>. Результаты не сгорают, поэтому таблица переворачивается до последней серии.</p>
   <div class="kpis" id="kpis"></div>
   <div class="confs" id="confs"></div>
 </div></section>
@@ -537,14 +537,14 @@ a:hover .sithumb{filter:brightness(1.12)}
 
 <section id="squad"><div class="wrap">
   <div class="sechead"><div class="no">03</div><h2 class="h">Состав финала</h2><div class="line"></div></div>
-  <p class="lead">В финале 10 мест. <b>6</b> Central Europe отбирает зачётом серий — это срез на дату, а не итог. <b>3</b> места Israel и <b>1</b> место Cyprus разыгрываются в полуфиналах, поэтому пока стоят пустыми.</p>
+  <p class="lead">В финале 10 мест, и три региона идут к ним разными дорогами. Central Europe отдаёт свои <b>6</b> прямо по зачёту серий — таблица ниже это срез на дату, а не итог. Israel и Cyprus сначала играют полуфинал: оттуда в Прагу едут <b>3</b> и <b>1</b>. Эти слоты пока стоят пустыми.</p>
   <div class="routes" id="routes"></div>
   <div class="squad" id="squadgrid"></div>
 </div></section>
 
 <section id="top"><div class="wrap">
   <div class="sechead"><div class="no">04</div><h2 class="h">Зона прохода</h2><div class="line"></div></div>
-  <p class="lead">Кто сейчас в квоте по каждой конференции. Полные таблицы со всеми игроками, фильтром и калькулятором — на странице зачёта.</p>
+  <p class="lead">Кто сейчас в квоте по каждому региону. Полные таблицы со всеми игроками, фильтром и калькулятором — на странице зачёта.</p>
   <div class="confs" id="minis"></div>
   <a class="more" href="mcl-standings.html">Весь зачёт и калькулятор прохода &rarr;</a>
 </div></section>
@@ -585,7 +585,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20260921"></script>
+<script src="data/mcl2026.js?v=20260921b"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -685,7 +685,7 @@ $('#confs').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
   start();
 })();
 
-/* 03 маршруты отбора: у трёх конференций они разные */
+/* 03 маршруты отбора: у трёх регионов они разные */
 $('#routes').innerHTML=['CE','IL','CY'].map(function(c){
   var k=D.conf[c], semi=k.route==='semi', slots=semi?(k.semiSlots||10):k.quota;
   var steps=[['серий в сезоне', k.total+' '+SER(k.total)]];
@@ -699,7 +699,7 @@ $('#routes').innerHTML=['CE','IL','CY'].map(function(c){
     ? (k.semiPrize ? 'Призовые полуфинала: <b>'+esc(k.semiPrize)+'</b>' : '')
       + (k.semiPrize && k.semiNote ? '. ' : '')
       + (k.semiNote ? esc(k.semiNote.charAt(0).toUpperCase()+k.semiNote.slice(1)) : '')
-    : 'Никакого полуфинала: зачёт серий сразу отправляет шестерых в Прагу';
+    : 'Без полуфинала: '+k.quota+' лучших по зачёту серий едут в Прагу напрямую';
   return '<div class="route'+(semi?' semi':'')+'">'+
     '<div class="rh"><b>'+esc(k.name)+'</b><s>'+(semi?'через полуфинал':'напрямую')+'</s></div>'+
     '<div class="rsteps">'+steps.map(function(st,i){
