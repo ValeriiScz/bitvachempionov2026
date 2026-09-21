@@ -1,7 +1,8 @@
-"""build_series.py · v1.1 · 2026-09-21 (T из gd_cfg, не сегодня) · v1.0 · 2026-09-15 — data/series2026.js для раздела «Серийники»: по каждому рейтинговому серийнику 2026 —
+"""build_series.py · v1.2 · 2026-09-21 (сетка финала из gd_sim: призовых мест / поле / база) · v1.1 (T из gd_cfg) · v1.0 · 2026-09-15 — data/series2026.js для раздела «Серийники»: по каждому рейтинговому серийнику 2026 —
 описание/правило прохода, финал, серии (сыграно/впереди), кто уже прошёл (с местом в гонке), ближайшие серии всех контуров."""
-import json, datetime, collections, gd_data as g, gd_sim
+import json, datetime, collections, gd_data as g, gd_sim, players_expert
 from gd_sim import Season
+gd_sim.PLAYER_TARGET=players_expert.TARGET
 from gd_cfg import T, out as OUTP
 Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
@@ -19,7 +20,7 @@ META={
  670:{'short':'Васлуйская Битва 2026','tag':'mafia.md','rule':'топ-2 каждой серии','rule_src':'ГИПОТЕЗА: описание пустое; в 2025 — 1-е и 2-е места серий','final':'5.12, Кишинёв','final_size':'10 человек','prize':'—','planned':'7 серий'},
  579:{'short':'Cyprus Mafia Series 2026','tag':'Limassol','rule':'правило не опубликовано; в 2025 (Limassol Cup) топ-2 серий совпал с финалом лишь наполовину — вероятно, зачёт по сумме или среднему','rule_src':'ГИПОТЕЗА','final':'11.10, Лимассол','final_size':'10 человек','prize':'—','planned':'9 серий'},
 }
-GRID2=[30,27,25,22,20,18,16,14,12,10,8,6]; GRID4=[42,39,37,34,32,30,28,26,24,22,20,16,14,10,8]
+# сетки — из gd_sim (FACT по финалам 2025): 2★ баллы у 10 мест (PSP 12), дальше база 2; GMC 17 мест
 out=[]; upcoming=[]
 horizon=(datetime.date.fromisoformat(T)+datetime.timedelta(days=16)).isoformat()
 for c in se.events:
@@ -32,12 +33,12 @@ for c in se.events:
     nxt=[{'id':s['id'],'date':s['start_date'],'city':s['city'],'country':s['country'],'name':s['name'],'regs':len(s['regs']),'exp':s.get('expected') or 10} for s in ahead]
     for s in nxt:
         if s['date']<=horizon: upcoming.append(dict(s,contour=m.get('short',d['name']),pid=pid,stars=d['stars']))
-    grid=GRID4 if d['stars']>=4 else GRID2
+    grid=c['grid']
     out.append({'id':pid,'name':d['name'],'short':m.get('short',d['name']),'tag':m.get('tag',''),'stars':d['stars'],'city':g.TID[pid].get('city'),'country':g.TID[pid].get('country'),
                 'final_date':d['start_date'],'final':m.get('final',''),'final_size':m.get('final_size',''),'prize':m.get('prize',''),'planned':m.get('planned',''),
                 'rule':m.get('rule',''),'rule_src':m.get('rule_src',''),'page':m.get('page'),
                 'series_total':len(ser),'series_played':len(played),'series_ahead':len(ahead),'series_stale':[{'date':x['start_date'],'city':x['city']} for x in stale],'players':players,
-                'qualified':qual,'next':nxt,'points':{'max':grid[0],'min':grid[-1],'base':c['base']},
+                'qualified':qual,'next':nxt,'points':{'max':grid[0],'min':grid[-1],'places':len(grid),'field':c.get('size'),'base':c['base']},
                 'mafgame':f'https://mafgame.org/tournaments/{pid}/view'})
 out.sort(key=lambda x:(-x['stars'],x['final_date']))
 upcoming.sort(key=lambda s:s['date'])

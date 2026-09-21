@@ -1,11 +1,12 @@
-import numpy as np, json, gd_data as g, gd_sim, calendar_expert
+import numpy as np, json, gd_data as g, gd_sim, calendar_expert, players_expert
+gd_sim.PLAYER_TARGET=players_expert.TARGET
 from gd_cfg import T, out as OUTP
 from gd_sim import Season
 Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
 mid=g.standings(2026,T); top=[u for s,u in mid[:30]]
 out={}
-for name,k,shift in (('1 обычный ритм',3.5,0.0),('2 активно и стараются',5.0,0.35),('3 как звери',6.0,0.7)):
+for name,k,shift in (('1 обычный ритм',4.0,0.0),('2 активно и стараются',5.0,0.35),('3 как звери',6.0,0.7)):
     gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=k; gd_sim.RACE_BETA_SHIFT=shift
     se=Season(2026,T,cal_future=fut,verbose=False); res=se.run(S=2500,seed=5,frailty=None); thr=res['thr']*1.07; pool=res['pool']
     # средняя доля топ-10 у топ-30 при таком сдвиге (для описания сценария)

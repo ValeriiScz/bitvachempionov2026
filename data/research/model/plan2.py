@@ -1,5 +1,6 @@
 """plan2.py · v2 — «план игрока» для топ-30: перцентили мест (со сглаживанием к пулу) × сетка его вероятных турниров × хвост десятки; серийники — диапазоном; планка — из Монте-Карло."""
-import numpy as np, json, sys, collections, gd_data as g, gd_sim, calendar_expert
+import numpy as np, json, sys, collections, gd_data as g, gd_sim, calendar_expert, players_expert
+gd_sim.PLAYER_TARGET=players_expert.TARGET
 from gd_cfg import T, out as OUTP
 from gd_sim import Season
 gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=4.0

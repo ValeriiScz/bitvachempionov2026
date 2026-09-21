@@ -1,5 +1,6 @@
 """tickets.py — «поеду X, нужно Y финалов и Z топ-5»: минимальные комбинации результатов до планок сценариев. Финал 4★ (6–10 место) ≈ 12 баллов, топ-5 4★ ≈ 24, 3★: финал ≈ 7, топ-5 ≈ 17."""
-import numpy as np, json, itertools, gd_data as g, gd_sim
+import numpy as np, json, itertools, gd_data as g, gd_sim, players_expert
+gd_sim.PLAYER_TARGET=players_expert.TARGET
 from gd_cfg import T, out as OUTP
 from gd_sim import Season
 Season.FINALISTS_PLAY=True
@@ -12,7 +13,8 @@ def finals_min(u):
     out=[]
     for c in se.events:
         if c['type']=='contour' and u in c['fin']:
-            n_fin=len(c['fin'])+int(sum(c['cand'].values())); grid=c['grid']
+            # поле финала: сколько уже прошло + ожидаемые с оставшихся серий, но не меньше объявленного размера (2★ — 20)
+            n_fin=max(len(c['fin'])+int(sum(c['cand'].values())), c.get('size',10)); grid=c['grid']
             out.append(((grid[min(n_fin,len(grid))-1] if n_fin<=len(grid) else c['base']), grid[min(len(grid)-1,max(0,n_fin//2-1))], c['name'][:10]))
     return out
 def combo(u, target, fin_mode='min'):

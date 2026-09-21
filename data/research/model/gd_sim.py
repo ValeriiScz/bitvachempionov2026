@@ -1,4 +1,4 @@
-"""gd_sim · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
+"""gd_sim · v1.1 · 2026-09-21 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
 import numpy as np, datetime, collections
 import gd_data as g
 from gd_strength import rankings_before, fit_pl
@@ -6,8 +6,15 @@ from gd_attend import Attend
 
 LAM, C = 0.1, 1.1
 RACE_BOOST = 1.0   # калибровочный множитель явки для мест 1–25 гонки (подбирается на бэктесте)
-GRID_2S=[30,27,25,22,20,18,16,14,12,10,8,6]
-GRID_4S=[42,39,37,34,32,30,28,26,24,22,20,16,14,10,8]
+# сетки финалов серийников — FACT по финалам 2025 (леджер): 2★ — баллы только у 10 мест (PSP-2025: 12 мест, 8 и 6), остальные финалисты — база 2;
+# 4★ GMC-2025: 17 мест 42…8, остальные база 4; MCL — 10 финалистов, все с баллами. Заменяющие (не прошедшие с серии) — только база.
+GRID_2S=[30,27,25,22,20,18,16,14,12,10]
+GRID_2S_12=[30,27,25,22,20,18,16,14,12,10,8,6]
+GRID_4S=[42,39,37,34,32,30,28,26,24,22,20,18,16,14,12,10,8]
+# размер поля финала (Валерий 21.09: у 2★ финалы на 20 человек, кроме польского (12) и MCL (10)); GMC 50–60
+FINAL_SIZE={664:55,277:30,757:10,259:10,639:12,251:12,740:10,279:10}
+FINAL_SIZE_2S=20
+PLAYER_TARGET={}   # uid → ожидаемое число обычных турниров до конца года (players_expert.py); поверх TARGET_TOP30_MEAN
 RULES={664:'top2',277:'top2',757:'mcl',259:'mcl',639:'top2',251:'top2',645:'top2',685:'top1mvp',478:'top1mvp',740:'sum2',279:'sum2',749:'top2',530:'top2',670:'top2',509:'top2',579:'top2',132:'top2',694:'top2'}
 IL={'Ramat Gan','Haifa'}; CY={'Limassol'}
 
@@ -87,6 +94,17 @@ class Season:
             for ev in regs:
                 for u in self.pool:
                     if ev['regs'].get(u) is None: ev['p'][u]=min(0.97,ev['p'][u]*k)
+        # планы конкретных игроков (players_expert): подгоняем сумму p по обычным турнирам к сказанному числу
+        poolset2=set(self.pool)
+        for u,target in PLAYER_TARGET.items():
+            if u not in poolset2: continue
+            for _ in range(4):
+                cur=sum(ev['p'][u] for ev in regs)
+                if cur<=0: break
+                k=target/cur
+                for ev in regs:
+                    f=ev['regs'].get(u); floor=0.9 if f==1 else 0.6 if f==0 else 0.0
+                    ev['p'][u]=max(floor,min(0.97,ev['p'][u]*k))
         for ev in regs: ev['pv']=np.array([ev['p'][u] for u in self.pool])
         if verbose:
             print(f'Season {year} T={T}: событий {len(self.events)} (контуров {sum(1 for e in self.events if e["type"]=="contour")}), пул {len(self.pool)}, сила из {len(self.beta)} игроков')
@@ -125,16 +143,16 @@ class Season:
             # кандидаты из будущих серий: заявленные (2026) или фактические участники (бэктест); шанс пройти ~2/10 × доехать
             for u in cand_from_future(future):
                 if u not in fin: cand[u]=0.2*(0.85 if self.race.get(u,999)<=40 else 0.45); part.add(u)
-        size = 30 if pid in (277,) else 10 if stars==2 or rule=='mcl' else 55 if pid==664 else 10
+        size = FINAL_SIZE.get(pid, FINAL_SIZE_2S if stars==2 else 10)
         # если кандидатов больше мест — ужимаем явку тех, кто НЕ в гонке
         exp_top=sum(p for u,p in fin.items() if self.race.get(u,999)<=40)+sum(p for u,p in cand.items() if self.race.get(u,999)<=40)
         exp_rest=sum(p for u,p in fin.items() if self.race.get(u,999)>40)+sum(p for u,p in cand.items() if self.race.get(u,999)>40)
         scale=min(1.0,(size-exp_top)/exp_rest) if exp_rest>0 and size>exp_top else (0.3 if exp_rest>0 else 1)
         sc=lambda u,p: p*(1 if self.race.get(u,999)<=40 else scale)
-        grid = GRID_4S if stars>=4 else GRID_2S if stars==2 else [round(x*0.75) for x in GRID_4S]
+        grid = GRID_4S if stars>=4 else (GRID_2S_12 if pid in (639,251) else GRID_2S) if stars==2 else [round(x*0.75) for x in GRID_4S]
         base = 4.0 if stars>=4 else 3.0 if stars==3 else 2.0
         return {'type':'contour','id':pid,'date':date,'stars':stars,'name':name,'fin':{u:sc(u,p) for u,p in fin.items()},
-                'cand':{u:sc(u,p) for u,p in cand.items()},'part':part,'grid':grid,'base':base}
+                'cand':{u:sc(u,p) for u,p in cand.items()},'part':part,'grid':grid,'base':base,'size':size}
 
     def grid_pts(self, stars, kind, n):
         cands=self.grids.get((stars,kind)) or self.grids.get((stars,'regular')) or self.grids.get((3,'regular'))
