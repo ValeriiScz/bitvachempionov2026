@@ -1,4 +1,4 @@
-"""gd_sim · v1.1 · 2026-09-21 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
+"""gd_sim · v1.2 · 2026-09-21 (TARGET_TOP20_MEAN: явка топ-20 отдельно) · v1.1 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
 import numpy as np, datetime, collections
 import gd_data as g
 from gd_strength import rankings_before, fit_pl
@@ -28,7 +28,8 @@ def cand_from_future(future):
 # экспертный календарь явки (Валерий, 14.09.2026): множитель привлекательности турнира поверх модели.
 # 1.5 = «все поедут», 1.0 = обычный, 0.5 = «маловероятно соберётся», 0.3 = «туда не едут»
 EVENT_WEIGHT={}
-TARGET_TOP30_MEAN=None
+TARGET_TOP30_MEAN=None   # среднее число обычных турниров до конца года у мест 21–30 гонки
+TARGET_TOP20_MEAN=None   # то же для мест 1–20 (Валерий 21.09: «у топ-20 явка будет под 5–6, реалистично»); None → как топ-30
 RACE_BETA_SHIFT=0.0   # сценарии «стараются»/«звери»: сдвиг силы топ-30 относительно фона   # если задано — явка масштабируется так, чтобы у топ-30 гонки среднее число обычных турниров = это
 
 class Season:
@@ -88,12 +89,24 @@ class Season:
                 f=ev['regs'].get(u)
                 if f is None: ev['p'][u]=min(0.97,ev['p'][u]*a)
         if TARGET_TOP30_MEAN:
-            top=[u for u,r in self.race.items() if r<=30 and u in set(self.pool)]
-            cur=sum(ev['p'][u] for ev in regs for u in top)/max(1,len(top))
-            k=TARGET_TOP30_MEAN/cur
+            ps=set(self.pool)
+            groups=[([u for u,r in self.race.items() if r<=20 and u in ps], TARGET_TOP20_MEAN or TARGET_TOP30_MEAN),
+                    ([u for u,r in self.race.items() if 20<r<=30 and u in ps], TARGET_TOP30_MEAN)]
+            # общий множитель считаем по топ-30, а для мест 1–20 — свой, если задан TARGET_TOP20_MEAN
+            top=[u for u,r in self.race.items() if r<=30 and u in ps]
+            k_all=TARGET_TOP30_MEAN/max(1e-9,sum(ev['p'][u] for ev in regs for u in top)/max(1,len(top)))
             for ev in regs:
                 for u in self.pool:
-                    if ev['regs'].get(u) is None: ev['p'][u]=min(0.97,ev['p'][u]*k)
+                    if ev['regs'].get(u) is None: ev['p'][u]=min(0.97,ev['p'][u]*k_all)
+            for grp,target in groups:
+                if not grp or not target: continue
+                for _ in range(4):
+                    cur=sum(ev['p'][u] for ev in regs for u in grp)/len(grp)
+                    if cur<=0: break
+                    k=target/cur
+                    for ev in regs:
+                        for u in grp:
+                            if ev['regs'].get(u) is None: ev['p'][u]=min(0.97,ev['p'][u]*k)
         # планы конкретных игроков (players_expert): подгоняем сумму p по обычным турнирам к сказанному числу
         poolset2=set(self.pool)
         for u,target in PLAYER_TARGET.items():

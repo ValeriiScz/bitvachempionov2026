@@ -31,6 +31,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Проверить секрет RACE_PASS
+        env:
+          RACE_PASS: ${{ secrets.RACE_PASS }}
+        run: |
+          if [ -z "$RACE_PASS" ]; then echo "::error::секрет RACE_PASS не задан — Settings → Secrets and variables → Actions → New repository secret (Name RACE_PASS)"; exit 1; fi
+          echo "секрет на месте"
       - name: Зависимости
         run: pip install --quiet numpy cryptography
       - name: Леджеры рейтинга

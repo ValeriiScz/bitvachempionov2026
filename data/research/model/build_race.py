@@ -7,7 +7,7 @@ from gd_cfg import T, out as OUTP
 Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
 import calendar_expert, players_expert
-gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=4.0; gd_sim.RACE_BETA_SHIFT=0; gd_sim.PLAYER_TARGET=players_expert.TARGET
+gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=4.0; gd_sim.TARGET_TOP20_MEAN=5.5; gd_sim.RACE_BETA_SHIFT=0; gd_sim.PLAYER_TARGET=players_expert.TARGET
 se=Season(2026,T,cal_future=fut,verbose=False)
 SHORT={'German Maf':'GMC','"Mafia Cha':'MCL','Poland Str':'PSP','White Mafi':'White Mafia','Arena Mold':'Arena Moldova','Васлуйская':'Васлуй','ЛЗГ Лига З':'ЛЗГ','Benelux Pl':'Benelux','Cyprus Maf':'Cyprus MS','Central Eu':'CEC'}
 TK=json.load(open(OUTP('tickets2026.json'))); F=json.load(open(OUTP('forecast2026.json')))
@@ -76,7 +76,7 @@ sim_cont=[{'id':c['id'],'name':SHORT.get(c['name'][:10],c['name']),'fin':{str(u)
                   'beta':round(float(np.mean([se.beta.get(u,se.default) for u in c['fin'] if u not in set(simpool)])) if any(u not in set(simpool) for u in c['fin']) else float(se.default),2),
                   'ncand':round(float(sum(p for u,p in c['cand'].items() if u not in set(simpool))),1)}} for c in cont_ev]
 rng=np.random.default_rng(0); bg=[round(float(x),2) for x in rng.choice(se.bg,200)]
-SIM={'players':players,'forms':{'all':'вся история (с 2024, свежее — весомее)','y12':'последние 12 месяцев','y26':'только 2026 год'},'events':sim_events,'contours':sim_cont,'bg':bg,'C':gd_sim.C,'top30_mean':4.0,'levels':{'обычно':[1.0,0.0],'стараются':[5/4.0,0.35],'максимум':[6/4.0,0.7]},
+SIM={'players':players,'forms':{'all':'вся история (с 2024, свежее — весомее)','y12':'последние 12 месяцев','y26':'только 2026 год'},'events':sim_events,'contours':sim_cont,'bg':bg,'C':gd_sim.C,'top30_mean':4.0,'top20_mean':5.5,'levels':{'обычно':[1.0,0.0],'стараются':[6/5.5,0.35],'максимум':[6.5/5.5,0.7]},
      'server':{'S':F.get('S',3000),'date':T,'p12':{str(r['uid']):round(r['p12'],3) for r in F['rows']}}}
 RACE={'snapshot':T,'sim':SIM,'thr12_now':mid[11][0],'planks':planks,'events':events,'rows':rows,'hist':hist,
       'method':'Σ = 10 лучших турниров года, не более 2 серийных. Финал = 6–10 место на 4★ ≈ 12 баллов, топ-5 на 4★ ≈ 24. Частоты — за последние 12 месяцев, сглажены к среднему топ-30.'}

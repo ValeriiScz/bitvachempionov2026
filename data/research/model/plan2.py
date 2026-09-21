@@ -3,7 +3,7 @@ import numpy as np, json, sys, collections, gd_data as g, gd_sim, calendar_exper
 gd_sim.PLAYER_TARGET=players_expert.TARGET
 from gd_cfg import T, out as OUTP
 from gd_sim import Season
-gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=4.0
+gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=4.0; gd_sim.TARGET_TOP20_MEAN=5.5
 rng=np.random.default_rng(0)
 F=json.load(open(OUTP('forecast2026.json'))); thr=np.array(F['thr'])*1.07   # +7%: бэктест-2025 занижал порог
 PL=(np.percentile(thr,25),np.percentile(thr,50),np.percentile(thr,75)); played_exp={r['uid']:r['played'] for r in F['rows']}

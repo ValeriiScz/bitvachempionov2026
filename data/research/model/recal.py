@@ -1,7 +1,7 @@
 import numpy as np, json, gd_data as g, gd_sim, calendar_expert, players_expert
 from gd_cfg import T, out as OUTP
 from gd_sim import Season
-gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=4.0; gd_sim.PLAYER_TARGET=players_expert.TARGET
+gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP30_MEAN=4.0; gd_sim.TARGET_TOP20_MEAN=5.5; gd_sim.PLAYER_TARGET=players_expert.TARGET
 Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
 se=Season(2026,T,cal_future=fut,verbose=False)
