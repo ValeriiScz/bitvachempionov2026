@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl-standings.html · v1.1 · 2026-09-10 · MCL Europe 2026, зачёт трёх конференций: полные таблицы, фильтр нормы, калькулятор прохода. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-standings.html · v1.2 · 2026-09-21 · MCL Europe 2026, зачёт трёх конференций: полные таблицы, фильтр нормы, калькулятор прохода. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -179,6 +179,12 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .nick{font-family:var(--ff-n);font-weight:700;font-size:16px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .det{font-size:11px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
 .needm{display:none}
+.donebar{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;margin-bottom:10px;padding:11px 14px;
+  border:1px solid rgba(198,90,180,.45);background:linear-gradient(120deg,rgba(74,18,67,.55),var(--panel) 65%);
+  font-size:13px;color:var(--mut)}
+.donebar b{font-family:var(--ff-n);font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pur-hi)}
+.donebar i{font-style:normal;color:#fff;font-weight:600}
+.nomore{color:var(--dim);font-weight:400}
 .avg{font-family:var(--ff-n);font-weight:700;font-size:19px;text-align:right;color:#fff}
 .srow.zone .avg{color:var(--pur-hi)}
 .pill{display:inline-block;min-width:76px;white-space:nowrap;text-align:center;font-family:var(--ff-n);font-weight:700;font-size:12px;
@@ -559,6 +565,18 @@ function needFor(k,r){ /* сколько нужно в следующей сер
 }
 function stand(){
   var k=D.conf[CONF], q=k.quota, placed=0, out=[];
+  var done=k.played>=k.total;                    /* все серии конференции сыграны */
+  if(done){
+    var win=k.rows.filter(function(r){return r.s>=2;}).slice(0,q).map(function(r){return esc(r.n);});
+    /* у конференций «через полуфинал» зачёт серий — это ещё не финальная путёвка */
+    var viaSemi=/полуфинал/i.test(k.mode||'');
+    var semiEv=(D.upcoming||[]).filter(function(u){return u.semi;})[0];
+    out.push('<div class="donebar"><b>'+(viaSemi?'Серии сыграны':'Отбор завершён')+'</b> · все '+k.total+' '+SER(k.total)+' позади · '+
+      (viaSemi ? 'дальше '+(q===1?'проходит':'проходят')+' <i>'+(win.join(', ')||'—')+'</i>'+
+                 (semiEv?' · полуфинал '+dm(semiEv.date):'')
+               : (q===1?'путёвка в финал: ':'путёвки в финал: ')+'<i>'+(win.join(', ')||'—')+'</i>')+
+      '</div>');
+  }
   out.push('<div class="stbl"><div class="sth"><div>#</div><div></div><div>Игрок</div><div class="r">Средний</div><div class="r">Серий</div><div class="r cneed">Нужно</div></div>');
   k.rows.forEach(function(r){
     var ok=r.s>=2; if(ok) placed++;
@@ -566,10 +584,15 @@ function stand(){
     if(FILT==='q'&&!ok) return;
     var det=r.d.map(function(d){return esc(d[0])+' — '+f2(d[1]);}).join('   ·   ');
     var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
-    var need=needFor(k,r), nd='';
-    if(!zone){ nd = need<=0 ? '<span style="color:var(--pur-hi)">любой</span><s>результат</s>'
-                            : need.toFixed(2)+'<s>в '+(r.s+1)+'-й серии</s>'; }
-    var ndm = zone ? '' : '<div class="needm">нужно '+(need<=0?'любой результат':need.toFixed(2))+' в '+(r.s+1)+'-й</div>';
+    var need=needFor(k,r), nd='', ndm='';
+    if(done){
+      if(!zone){ nd='<span class="nomore">—</span><s>серий больше нет</s>';
+                 ndm='<div class="needm nomore">серий больше нет</div>'; }
+    } else if(!zone){
+      nd = need<=0 ? '<span style="color:var(--pur-hi)">любой</span><s>результат</s>'
+                   : need.toFixed(2)+'<s>в '+(r.s+1)+'-й серии</s>';
+      ndm = '<div class="needm">нужно '+(need<=0?'любой результат':need.toFixed(2))+' в '+(r.s+1)+'-й</div>';
+    }
     out.push('<div class="srow'+(zone?' zone':'')+(ok?'':' one')+'">'+
       '<div class="rk">'+(ok?placed:'·')+'</div>'+ph+
       '<div><div class="nick">'+esc(r.n)+'</div><div class="det">'+det+'</div>'+ndm+'</div>'+
@@ -580,8 +603,11 @@ function stand(){
   });
   out.push('</div>');
   $('#stbl').innerHTML=out.join('');
-  $('#stleg').innerHTML='В зачёте <b style="color:#fff">'+k.played2+'</b> из '+k.rows.length+' игроков конференции · осталось <b style="color:#fff">'+
-    (k.total-k.played)+'</b> '+((k.total-k.played)===1?'серия':'серий')+' · <em>приглушённые строки</em> — одна серия, норма не выполнена. Колонка «нужно» считается от текущего порога зоны.';
+  $('#stleg').innerHTML = done
+    ? ('В зачёте <b style="color:#fff">'+k.played2+'</b> из '+k.rows.length+' игроков конференции · все '+k.total+' '+SER(k.total)+
+       ' сыграны, догнать зону уже нельзя. <em>Приглушённые строки</em> — сыграна одна серия: норма «минимум две» не выполнена, поэтому в зачёт такие результаты не идут, каким бы высоким ни был балл.')
+    : ('В зачёте <b style="color:#fff">'+k.played2+'</b> из '+k.rows.length+' игроков конференции · осталось <b style="color:#fff">'+
+       (k.total-k.played)+'</b> '+((k.total-k.played)===1?'серия':'серий')+' · <em>приглушённые строки</em> — одна серия, норма не выполнена. Колонка «нужно» считается от текущего порога зоны.');
 }
 function fillCalc(){
   var k=D.conf[CONF];
@@ -592,6 +618,11 @@ function fillCalc(){
 function simulate(){
   var k=D.conf[CONF], uid=+$('#cpl').value, sc=parseFloat(($('#csc').value||'').replace(',','.'));
   var me=k.rows.filter(function(r){return r.u===uid;})[0]; if(!me) return;
+  if(k.played>=k.total){
+    $('#cout').innerHTML='<div class="big">—</div>Отбор в этой конференции завершён: все '+k.total+' '+SER(k.total)+
+      ' сыграны, считать нечего. Итог — в таблице выше.';
+    return;
+  }
   var need=needFor(k,me);
   if(isNaN(sc)){
     $('#cout').innerHTML='<div class="big">'+(need<=0?'любой результат':need.toFixed(2))+'</div>'+

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl2026.html · v3.1 · 2026-09-10 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
+<!-- MafgameStat · mcl2026.html · v3.2 · 2026-09-21 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -346,6 +346,10 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .final:hover,.final:focus-visible{border-color:var(--pur-hi);box-shadow:0 0 0 1px rgba(198,90,180,.45),0 22px 46px -26px rgba(198,90,180,.7);transform:translateY(-2px);outline:none}
 .final:hover .t,.final:focus-visible .t{color:#fff}
 .final .row div .ks{font-size:11px;color:var(--mut);margin-top:3px;letter-spacing:.02em}
+.donetag{color:var(--gold-hi,#f0d488)!important}
+.mini.done{border-color:rgba(201,161,77,.45)}
+.mini.done .mh s{color:#f0d488}
+.mnote{padding:8px 12px 10px;font-size:11.5px;color:var(--mut);border-top:1px solid var(--line)}
 .semib{font-family:var(--ff-n);font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
   color:#1a1206;background:#c9a14d;padding:2px 6px;border-radius:2px}
 .final .fgo{position:absolute;right:14px;bottom:12px;font-family:var(--ff-n);font-weight:700;font-size:11px;letter-spacing:.16em;
@@ -626,7 +630,7 @@ $('#confs').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
   return '<a class="cbox" href="mcl-standings.html?c='+c+'"><div class="t">'+esc(k.name)+'</div>'+
    '<div class="q">квота '+k.quota+' · '+esc(k.mode)+'</div>'+
    '<div class="bar"><i style="width:'+Math.round(k.played/k.total*100)+'%"></i></div>'+
-   '<div class="n"><span>сыграно <b>'+k.played+'</b> из '+k.total+'</span><span>с нормой 2+ <b>'+k.played2+'</b> из '+k.rows.length+'</span></div></a>';}).join('');
+   '<div class="n"><span>'+(k.played>=k.total?'<b class="donetag">'+(/полуфинал/i.test(k.mode||'')?'серии сыграны':'отбор завершён')+'</b>':'сыграно <b>'+k.played+'</b> из '+k.total)+'</span><span>с нормой 2+ <b>'+k.played2+'</b> из '+k.rows.length+'</span></div></a>';}).join('');
 
 /* 02 карусель победителей */
 (function(){
@@ -673,7 +677,10 @@ $('#minis').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
     var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
     return '<div class="mrow"><div class="rk">'+(n+1)+'</div>'+ph+
       '<div class="nick">'+esc(r.n)+'</div><div class="avg">'+r.a.toFixed(3)+'</div></div>';}).join('');
-  return '<div class="mini"><div class="mh"><b>'+esc(k.name)+'</b><s>квота '+k.quota+'</s></div>'+rows+'</div>';}).join('');
+  var done=k.played>=k.total, viaSemi=/полуфинал/i.test(k.mode||'');
+  return '<div class="mini'+(done?' done':'')+'"><div class="mh"><b>'+esc(k.name)+'</b><s>'+
+    (done?(viaSemi?'серии сыграны':'путёвк'+(k.quota===1?'а определена':'и определены')):'квота '+k.quota)+'</s></div>'+rows+
+    (done?'<div class="mnote">все '+k.total+' '+SER(k.total)+' позади — '+(viaSemi?'дальше полуфинал':'это итог, а не срез')+'</div>':'')+'</div>';}).join('');
 
 /* 05 ближайшие серии */
 $('#nextlist').innerHTML=D.upcoming.slice(0,4).map(function(u){
