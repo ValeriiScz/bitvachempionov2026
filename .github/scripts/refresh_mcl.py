@@ -16,7 +16,8 @@ refresh_mcl.py · v1.1 · 2026-09-21 · версия для сайта DOVOD
   7)  предохранители и запись файла
   8)  сводка прогона
 
-Что робот НЕ трогает (задаётся руками в файле): quota, total, mode у конференций,
+Что робот НЕ трогает (задаётся руками в файле): quota, total, mode, route, semiSlots,
+semiDate, semiPrize, semiNote у конференций,
 prize, finalISO, contacts, quotas, judges — таблица судейства из отдельного разбора.
 """
 
@@ -342,18 +343,30 @@ def main():
             t = round(sum(x[1] for x in a['d']), 3)
             rows.append(dict(u=a['u'], n=a['n'], a=round(t / len(a['d']), 3), s=len(a['d']), t=t,
                              d=a['d'], p=avatars.get(a['u'], '')))
-        rows.sort(key=lambda r: (-r['a'], -r['s'], r['n'] or ''))
-        norm = [r for r in rows if r['s'] >= 2]
+        norm_sorted = sorted([r for r in rows if r['s'] >= 2], key=lambda r: (-r['a'], r['n'] or ''))
+        rest_sorted = sorted([r for r in rows if r['s'] <  2], key=lambda r: (-r['a'], r['n'] or ''))
+        if k.get('route') == 'semi':
+            # отбор в полуфинал: сначала выполнившие норму, потом добор из сыгравших одну серию
+            rows = norm_sorted + rest_sorted
+            slots = k.get('semiSlots') or 10
+            k['cut'] = rows[slots - 1]['a'] if len(rows) >= slots else None
+        else:
+            rows.sort(key=lambda r: (-r['a'], -r['s'], r['n'] or ''))
+            k['cut'] = norm_sorted[k['quota'] - 1]['a'] if len(norm_sorted) >= k['quota'] else None
         k['rows']    = rows
         k['played']  = sum(1 for s in series if s['c'] == c and s.get('r'))
-        k['played2'] = len(norm)
-        k['cut']     = norm[k['quota'] - 1]['a'] if len(norm) >= k['quota'] else None
+        k['played2'] = len(norm_sorted)
 
     # 6c) состав финала, KPI, тикер
     NAMES = {'CE': 'CENTRAL', 'IL': 'ISRAEL', 'CY': 'CYPRUS'}
     squad = []
     for c in CONF_ORDER:
         k = D['conf'][c]
+        if k.get('route') == 'semi':
+            # места этих конференций разыгрываются в полуфинале, зачёт их не определяет
+            for i in range(k['quota']):
+                squad.append(dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n='', a=0, s=0, p='', semi=1))
+            continue
         norm = [r for r in k['rows'] if r['s'] >= 2]
         for i in range(k['quota']):
             r = norm[i] if i < len(norm) else None
