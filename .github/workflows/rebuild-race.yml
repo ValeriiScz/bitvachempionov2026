@@ -50,11 +50,27 @@ jobs:
           if [ -z "$RACE_PASS" ]; then echo "::error::секрет RACE_PASS не задан — Settings → Secrets and variables → Actions → New repository secret"; exit 1; fi
           python data/research/model/run_all.py
       - name: Закоммитить
+        # Сгенерированные файлы — полная замена, поэтому конфликтов с параллельными роботами (refresh-data, MCL)
+        # не разбираем: откладываем свои файлы, встаём на свежий origin/main, кладём файлы обратно,
+        # CACHE_VERSION считаем от того, что уже в origin (+1), коммитим и пушим с одним повтором.
         run: |
           git config user.name  "dovod-bot"
           git config user.email "noreply@dovod-mafia.com"
-          git add data/research/ledger data/research/series vault/race.json data/series2026.js sw.js calendar.html data/meta.js
-          if git diff --cached --quiet; then echo "изменений нет"; exit 0; fi
-          git commit -m "гонка за дюжину: пересбор $(date -u +%d.%m.%Y) (леджеры, серии, модель, sw)"
-          git pull --rebase --autostash
-          git push
+          FILES="vault/race.json data/series2026.js calendar.html data/meta.js"
+          DIRS="data/research/ledger data/research/series"
+          rm -rf /tmp/gen && mkdir -p /tmp/gen
+          for f in $FILES; do mkdir -p /tmp/gen/$(dirname $f); cp $f /tmp/gen/$f; done
+          for d in $DIRS; do mkdir -p /tmp/gen/$d; cp -r $d/. /tmp/gen/$d/; done
+          for i in 1 2; do
+            git fetch origin main && git reset --hard origin/main
+            for f in $FILES; do cp /tmp/gen/$f $f; done
+            for d in $DIRS; do cp -r /tmp/gen/$d/. $d/; done
+            V=$(grep -o "dovod-v[0-9]*" sw.js | head -1 | sed 's/dovod-v//'); NEW=$((V+1))
+            sed -i "s/const CACHE_VERSION = 'dovod-v$V';/const CACHE_VERSION = 'dovod-v$NEW';/" sw.js
+            git add $FILES $DIRS sw.js
+            if git diff --cached --quiet; then echo "изменений нет"; exit 0; fi
+            git commit -m "гонка за дюжину: пересбор $(date -u +%d.%m.%Y) (леджеры, серии, модель, sw v$NEW)"
+            if git push origin main; then echo "запушено (попытка $i)"; exit 0; fi
+            echo "push отклонён — повтор"; git reset --hard HEAD~1 || true
+          done
+          echo "::error::не удалось запушить после 2 попыток"; exit 1
