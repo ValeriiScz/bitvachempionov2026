@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-09-21",
+ "snapshot": "2026-09-28",
  "parents": [
   {
    "file": "2025_478.json",
@@ -174,7 +174,7 @@
    "start_date": "2026-11-14",
    "stars": 4,
    "series": 26,
-   "played": 21,
+   "played": 22,
    "final": true
   },
   {
@@ -184,8 +184,8 @@
    "name": "\"Mafia Champions league\" Europe 2026",
    "start_date": "2026-11-21",
    "stars": 4,
-   "series": 17,
-   "played": 14,
+   "series": 19,
+   "played": 15,
    "final": true
   },
   {
@@ -228,7 +228,7 @@
    "name": "Benelux Plus 2026",
    "start_date": "2026-12-19",
    "stars": 2,
-   "series": 10,
+   "series": 11,
    "played": 6,
    "final": true
   }
