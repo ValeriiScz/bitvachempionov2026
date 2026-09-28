@@ -415,7 +415,7 @@ def main():
             if not os.path.exists(fp):
                 continue
             src = io.open(fp, encoding='utf-8').read()
-            upd = re.sub(r'<script src="data/mcl2026\.js(\?v=\d+)?"></script>',
+            upd = re.sub(r'<script src="data/mcl2026\.js(\?v=[^"]*)?"></script>',
                          '<script src="data/mcl2026.js?v=%s"></script>' % stamp, src)
             if upd != src:
                 io.open(fp, 'w', encoding='utf-8').write(upd)
