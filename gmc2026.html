@@ -88,6 +88,7 @@ if(!D){document.getElementById("content").innerHTML="<div class=\"disc\">Дан�
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const f2=v=>v==null?'—':v.toFixed(2);
 const f3=v=>v==null?'—':v.toFixed(3);
+const SER=n=>{const a=Math.abs(n)%100,b=a%10;return a>10&&a<20?'серий':b===1?'серия':b>1&&b<5?'серии':'серий';};
 // дата данных видна сразу — страницу собирает робот, но полезно знать, насколько свежо
 (function(){
   const p=D.snap.split('.'), iso=p[2]+'-'+p[1]+'-'+p[0];
@@ -96,7 +97,7 @@ const f3=v=>v==null?'—':v.toFixed(3);
   const warn=days>=4?' style="color:#e0b64a"':'';
   const total=D.series.length+D.upcoming.length+D.nores.length;
   document.getElementById('subline').innerHTML=
-    'Финалисты и статус · сыграно <b>'+D.series.length+'</b> серий из '+total+
+    'Финалисты и статус · сыграно <b>'+D.series.length+'</b> '+SER(D.series.length)+' из '+total+
     '<br>данные на <b'+warn+'>'+D.snap+'</b> · '+age+' · обновляются роботом каждый день';
 })();
 const SECTIONS=[['final','Финалисты'],['series','Серии'],['cal','Календарь'],['obs','Наблюдения'],['method','Метод']];
@@ -122,7 +123,7 @@ function series(){
   const rows=D.series.map(s=>`<tr><td>${s.num}</td><td class="l">${s.date.slice(5).replace('-','.')}</td><td class="l">${esc(s.city)}</td><td class="l">${s.judge?esc(s.judge):'—'}</td><td class="nick l">${esc(s.top2)}</td><td class="mut l">${esc(s.third)}</td><td>${s.town}/${s.games}</td><td>${f3(s.gb)}</td></tr>`);
   const tw=D.series.reduce((a,x)=>a+(x.town||0),0), gm=D.series.reduce((a,x)=>a+(x.games||0),0);
   const ex=D.series.filter(x=>x.games).slice().sort((a,b)=>a.town/a.games-b.town/b.games);
-  return `<div class="sec">${D.series.length} сыгранных серий</div>
+  return `<div class="sec">${D.series.length} ${SER(D.series.length)==="серия"?"сыгранная серия":SER(D.series.length)==="серии"?"сыгранные серии":"сыгранных серий"}</div>
   <div class="note">Судьи — из карточки серии на mafgame (первым везде числится KEX — главный судья и организатор турнира; реальный судья серии — второй в списке). «Доп/посадку» — сырая рука серии: сравнивать серии между собой напрямую нельзя.</div>
   ${tbl(['№','Дата','Город','Судья','Топ-2 → финал','3-е место','Город','Доп/пос.'],rows,[1,2,3,4,5])}
   <div class="legend">Город выиграл ${tw} из ${gm} игр (${(tw*100/(gm||1)).toFixed(1)}%).${ex.length>1?` Крайности: ${esc(ex[0].city)} ${ex[0].town}/${ex[0].games} за город, ${esc(ex[ex.length-1].city)} — ${ex[ex.length-1].town}/${ex[ex.length-1].games}.`:''} Ссылки на таблицы серий — mafgame.org/tournaments/{id}/results.</div>`;
@@ -135,7 +136,7 @@ function cal(){
   ${tbl(['Дата','Город',''],up,[1,2])}
   ${D.nores.length?`<div class="sec">Без протокола</div>
   <div class="note">Числятся с пустыми протоколами — не сыграны или не внесены на mafgame: ${D.nores.map(x=>esc(x.city)+' '+x.date.slice(5).split('-').reverse().join('.')).join(', ')}.</div>`:''}
-  <div class="note">По регламенту серий будет ${esc(D.meta.planned)} — ещё могут добавить. Дальше финал <b style="color:var(--ink)">${esc(D.meta.final)}</b>: ${esc(D.meta.final_size)}, ${esc(D.meta.entry)}, приз ${esc(D.meta.prize)}.</div>
+  <div class="note">По регламенту будет ${esc(D.meta.planned)} — ещё могут добавить. Дальше финал <b style="color:var(--ink)">${esc(D.meta.final)}</b>: ${esc(D.meta.final_size)}, ${esc(D.meta.entry)}, приз ${esc(D.meta.prize)}.</div>
   <div class="sec">Регламент — коротко</div>
   <div class="blk"><div class="b">Топ-2 каждой серии — в финал (пост канала от 05.02; описание турнира с «топ-1» устарело). План — 30 серий по 10 игроков × 9 игр, создано 25. Финал на 50–60 человек; если большинство согласится на полуфиналы — «2 по 30», и в финал выйдут 20. Замены — третьим местам по сумме допов. Низ таблицы наказывают: 10-е место серии выбывает из гонки до конца сезона, 8–9 места пропускают два месяца (пост 02.02). Главный судья и организатор — KEX. Баллы рейтинга mafgame серийник раздаст одним пакетом после финала (в 2025: 42…20 верхушке, остальным по 4).</div></div>`;
 }
