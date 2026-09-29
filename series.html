@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v7.0 · 2026-06-20 -->
-<!-- DOVOD · series.html · v1.1 · 2026-09-15 · + ближайшие серии (14 дней) и плашки остальных серийников из data/series2026.js (регламент, финал, кто прошёл, что осталось) -->
+<!-- DOVOD · series.html · v1.2 · 2026-09-29 · штамп актуальности данных в шапке и подвале (дата снимка серий и финалистов) · + ближайшие серии (14 дней) и плашки остальных серийников из data/series2026.js (регламент, финал, кто прошёл, что осталось) -->
 <!-- DOVOD · series.html · v1.0 · 2026-08-31 · раздел «Серийники»: промоблок MCL Europe 2026 (mcl2026.html) и плашка GMC Europa 2026 (gmc2026.html). Хаб выбора разделов — index.html -->
 <!-- v2.2 · 2026-06-12 · плашки турниров, лого федерации — оригинал с mafgame.org -->
 <meta charset="utf-8">
@@ -37,6 +37,16 @@
     background:linear-gradient(105deg,#f0d99a 0%,var(--gold) 45%,#8a6a2a 75%,#e8c87a 100%);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
   .tagline{color:var(--mut);font-size:13px;letter-spacing:.4px;margin:0 0 6px 71px;}
+
+  /* штамп актуальности: на какую дату серии, финалисты и ближайшие игры */
+  .asof{display:inline-flex;align-items:center;gap:9px;margin:2px 0 6px 71px;padding:6px 13px;
+    border:1px solid var(--hairline);border-radius:999px;background:rgba(201,161,77,.045);
+    font-size:12px;letter-spacing:.2px;color:var(--mut);}
+  .asof .dot{width:6px;height:6px;border-radius:50%;flex:none;background:#5fb772;
+    box-shadow:0 0 9px rgba(95,183,114,.65);}
+  .asof b{color:var(--gold-hi);font-weight:700;letter-spacing:.3px;}
+  .asof i{font-style:normal;color:var(--dim);}
+  .asof.stale .dot{background:var(--gold);box-shadow:0 0 9px rgba(201,161,77,.6);}
   .rule{height:1px;background:linear-gradient(90deg,transparent,var(--hairline) 18%,var(--hairline) 82%,transparent);margin:28px 0 36px;}
 
   .sec{font-size:11px;font-weight:800;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);
@@ -136,6 +146,7 @@
   @media(max-width:520px){
     .wrap{padding-top:34px;}
     .tagline{margin-left:0;margin-top:4px;}
+    .asof{margin-left:0;}
     .poster{height:150px;}
     .poster .big{font-size:24px;}
     .poster svg.palm{width:104px;height:120px;}
@@ -270,6 +281,9 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     <div class="wordmark">Серийники</div>
   </div>
   <p class="tagline">MCL, GMC и другие серии сезона — зачёт, финалисты, разбор</p>
+  <div class="asof" id="asof" title="MCL Europe обновляется роботом дважды в день; остальные серийники и список прошедших — раз в неделю, по воскресеньям">
+    <span class="dot"></span><span>Серии, финалисты и ближайшие игры — данные на <b id="asofd">—</b> <i id="asofa"></i></span>
+  </div>
 
   <div class="rule"></div>
 
@@ -353,7 +367,15 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     det.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
   document.getElementById('stiles').addEventListener('click',e=>{const b=e.target.closest('.stile');if(!b)return;const c=byId[b.dataset.id];if(det.classList.contains('on')&&b.classList.contains('on')){det.classList.remove('on');b.classList.remove('on');return}show(c)});
-  const f=document.querySelector('.foot'); if(f){const s=document.createElement('span');s.innerHTML=`<span class="fdia">◆</span> серии: снимок ${dd(S.snapshot)}`;f.appendChild(s)}
+  // дата данных: в шапке штампом и в подвале строкой — чтобы было видно, насколько цифры свежие
+  const full = S.snapshot.split('-').reverse().join('.');
+  const days = Math.round((Date.now() - Date.parse(S.snapshot + 'T12:00:00')) / 864e5);
+  const ad = document.getElementById('asofd'); if(ad) ad.textContent = full;
+  const aa = document.getElementById('asofa');
+  if(aa) aa.textContent = days <= 0 ? '· сегодня' : days === 1 ? '· вчера' : '· ' + days + ' дн. назад';
+  if(days >= 8) document.getElementById('asof').classList.add('stale');
+  const f=document.querySelector('.foot'); if(f){const s=document.createElement('span');
+    s.innerHTML=`<span class="fdia">◆</span> серии и финалисты обновлены <b>${full}</b>`;f.appendChild(s)}
 })();</script>
 <script src="data/meta.js"></script>
 <script>(function(){var e=document.getElementById("ratedate");if(e&&window.SITE&&SITE.ratingUpdated)e.textContent=SITE.ratingUpdated;})();</script>
