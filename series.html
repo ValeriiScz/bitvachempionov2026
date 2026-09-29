@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v7.0 · 2026-06-20 -->
-<!-- DOVOD · series.html · v1.2 · 2026-09-29 · штамп актуальности данных в шапке и подвале (дата снимка серий и финалистов) · + ближайшие серии (14 дней) и плашки остальных серийников из data/series2026.js (регламент, финал, кто прошёл, что осталось) -->
+<!-- DOVOD · series.html · v1.3 · 2026-09-29 · плашка GMC берёт цифры из своего датафайла · штамп актуальности данных в шапке и подвале (дата снимка серий и финалистов) · + ближайшие серии (14 дней) и плашки остальных серийников из data/series2026.js (регламент, финал, кто прошёл, что осталось) -->
 <!-- DOVOD · series.html · v1.0 · 2026-08-31 · раздел «Серийники»: промоблок MCL Europe 2026 (mcl2026.html) и плашка GMC Europa 2026 (gmc2026.html). Хаб выбора разделов — index.html -->
 <!-- v2.2 · 2026-06-12 · плашки турниров, лого федерации — оригинал с mafgame.org -->
 <meta charset="utf-8">
@@ -332,6 +332,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
  p.addEventListener('mouseleave',function(){v.pause();});})();
 </script>
 <script src="data/series2026.js"></script>
+<script src="data/gmc2026.js?v=20260929"></script>
 <script>(function(){
   const S=window.SERIES; if(!S) return;
   const dd=d=>d.slice(5).split('-').reverse().join('.');
@@ -340,7 +341,14 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   const mcl=byId[757], gmc=byId[664];
   if(mcl){const n=document.querySelector('.mclp-n'); if(n) n.textContent=`${mcl.series_played} / ${mcl.series_total} серий · прошли ${mcl.qualified.length}`;
     const m=document.querySelector('.mclp-m'); if(m) m.textContent=`Зачёт, состав финала, серии и разбор данных. Финал ${mcl.final} · ${mcl.prize}`;}
-  if(gmc){const t=document.querySelector('a.tile[href="gmc2026.html"] .tmeta'); if(t) t.innerHTML=`<b>${gmc.series_total} серий</b><span class="sep">·</span><b>${gmc.series_played} сыграно</b><span class="sep">·</span><b>${gmc.players} игроков</b><span class="sep">·</span><b>${gmc.qualified.length} прошли</b><br>${gmc.rule} — финал ${gmc.final}, ${gmc.prize}`;}
+  // у GMC свой датафайл от робота — он свежее общего снимка серийников, берём цифры оттуда
+  const G=window.GMC&&window.GMC.series&&window.GMC.series.length?window.GMC:null;
+  if(gmc){const t=document.querySelector('a.tile[href="gmc2026.html"] .tmeta');
+    const total=G?G.series.length+G.upcoming.length+G.nores.length:gmc.series_total;
+    const played=G?G.series.length:gmc.series_played;
+    const qual=G?G.qualified.length:gmc.qualified.length;
+    const players=G?new Set(G.series.flatMap(x=>(x.r||[]).map(y=>y[0]))).size:gmc.players;
+    if(t) t.innerHTML=`<b>${total} серий</b><span class="sep">·</span><b>${played} сыграно</b><span class="sep">·</span><b>${players} игроков</b><span class="sep">·</span><b>${qual} прошли</b><br>${gmc.rule} — финал ${gmc.final}, ${gmc.prize}`;}
   // ближайшие серии
   const up=S.upcoming;
   document.getElementById('upcList').innerHTML=up.length?up.map(u=>`<div class="upc-l"><span class="upc-d">${dd(u.date)}</span><span class="upc-c">${u.contour}</span><span class="upc-w">${u.city}${u.country?', '+u.country:''}</span><span class="upc-r ${u.regs>=u.exp?'full':''}"><b>${u.regs}</b>/${u.exp} записано</span></div>`).join('')
