@@ -279,7 +279,8 @@ def main():
 
         rec = dict(id=tid, c=conf, num=num, city=city, fl=fl, country=land or COUNTRY.get(fl, ''),
                    date=date, fee=feetx or prev.get('fee', ''), j=prev.get('j', ''),
-                   time=prev.get('time', ''), img=prev.get('img', ''), post=prev.get('post'))
+                   time=prev.get('time', ''), img=prev.get('img', ''), post=prev.get('post'),
+                   imgp=prev.get('imgp'))
         if semi:
             rec['semi'] = 1
 
