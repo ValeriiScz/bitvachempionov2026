@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-refresh_mcl.py · v1.1 · 2026-09-21 · версия для сайта DOVOD
+refresh_mcl.py · v1.2 · 2026-10-01 · версия для сайта DOVOD
 Назначение: обновить датафайл страниц MCL (data/mcl2026.js) по протоколам mafgame.org
 и постам канала лиги, без участия человека. Тот же робот работает у партнёров
 (ecosciug/mafiacl-kings) — там пути другие, здесь ещё поднимается CACHE_VERSION в sw.js.
@@ -21,7 +21,7 @@ semiDate, semiPrize, semiNote у регионов,
 prize, finalISO, contacts, quotas, judges — таблица судейства из отдельного разбора.
 """
 
-import os, re, io, json, html, time, urllib.request, urllib.error, datetime, hashlib
+import os, re, io, json, glob, html, time, urllib.request, urllib.error, datetime, hashlib
 
 # ── 1) настройки ─────────────────────────────────────────────────────────────
 SERIAL_ID   = 757                      # турнир-серия «Mafia Champions league» Europe 2026
@@ -44,6 +44,14 @@ FLAG = {'Prague':'CZ','Dortmund':'DE','Cologne':'DE','Chemnitz':'DE','Nürnberg'
         'Brussel':'BE','City of Brussels':'BE','Wroclaw':'PL','Ramat Gan':'IL','Haifa':'IL','Limassol':'CY'}
 COUNTRY = {'CZ':'Czechia','DE':'Germany','BE':'Belgium','PL':'Poland','IL':'Israel','CY':'Cyprus'}
 CITY_FIX = {'Nuremberg':'Nürnberg', 'City of Brussels':'Brussel'}
+# страна из карточки mafgame → код флага: города приходят новые (Torrevieja и т.п.),
+# и зашивать их в словарь по одному — тупик
+CC = {'Czechia':'CZ','Czech Republic':'CZ','Germany':'DE','Belgium':'BE','Poland':'PL','Israel':'IL',
+      'Cyprus':'CY','Spain':'ES','Netherlands':'NL','Switzerland':'CH','Portugal':'PT','Austria':'AT',
+      'Romania':'RO','France':'FR','Italy':'IT','Lithuania':'LT','Latvia':'LV','Estonia':'EE',
+      'United Kingdom':'GB','Ireland':'IE','Sweden':'SE','Norway':'NO','Denmark':'DK','Finland':'FI',
+      'Hungary':'HU','Slovakia':'SK','Slovenia':'SI','Croatia':'HR','Bulgaria':'BG','Greece':'GR',
+      'Turkey':'TR','Georgia':'GE','Armenia':'AM','Serbia':'RS','Moldova':'MD','Ukraine':'UA'}
 CURSIGN  = {'EUR':'€', 'USD':'$', 'GBP':'£', 'PLN':'zł', 'CZK':'Kč', 'ILS':'ILS'}
 
 log_lines = []
@@ -114,13 +122,13 @@ def city_of(t):
     return CITY_FIX.get(c, c)
 
 def details(tid):
-    """взнос, валюта и город со страницы турнира.
+    """взнос, валюта, город и страна со страницы турнира.
     В листинге взноса нет вовсе, а название города приходит локализованным
     («Хемниц» вместо «Chemnitz») — на страницах лиги города пишутся латиницей."""
     try:
         t = inertia('%s/tournaments/%d/view' % (MAFGAME, tid)).get('tournament') or {}
     except Exception:
-        return '', ''
+        return '', '', ''
     fee = t.get('participation_fee')
     cur = ((t.get('participation_currency') or {}).get('code') or '')
     try:
@@ -128,7 +136,9 @@ def details(tid):
     except (TypeError, ValueError):
         fee = 0
     feetx = ('%g %s' % (fee, CURSIGN.get(cur, cur))).strip() if fee > 0 else ''
-    return feetx, city_of(t)
+    c = t.get('city')
+    land = (c.get('country') or '') if isinstance(c, dict) else ''
+    return feetx, city_of(t), land
 
 def protocol(tid):
     """→ (rows, metrics) или (None, None), если протокола ещё нет"""
@@ -167,7 +177,9 @@ def protocol(tid):
 
 # ── 5) Telegram ──────────────────────────────────────────────────────────────
 def tg_posts(pages=4):
-    """посты канала: [{post, text, photos:[{u,w,h}]}] — свежие страницы через ?before="""
+    """посты канала: [{post, text, tids, photos, ratios}] — свежие страницы через ?before=.
+    tids — номера турниров mafgame из ссылок поста: по ним пост привязывается к серии
+    однозначно, тогда как ник победителя из текста совпадает не всегда."""
     out, before = [], None
     for _ in range(pages):
         url = 'https://t.me/s/%s' % TG_CHANNEL + (('?before=%d' % before) if before else '')
@@ -194,7 +206,8 @@ def tg_posts(pages=4):
                     photos.append(mu.group(2))
             # размеры из ссылки-обёртки альбома (padding-top даёт соотношение)
             ratios = [float(x) for x in re.findall(r'padding-top:\s*([\d.]+)%', b)]
-            out.append(dict(post=pid, text=txt, photos=photos, ratios=ratios))
+            tids = {int(x) for x in re.findall(r'mafgame\.org/tournaments/(\d+)', html.unescape(b))}
+            out.append(dict(post=pid, text=txt, tids=tids, photos=photos, ratios=ratios))
         if not ids:
             break
         before = min(ids)
@@ -254,13 +267,17 @@ def main():
         future = date > today
         city  = '' if future else (prev.get('city') or '')
         feetx = '' if future else prev.get('fee', '')
-        if not city or not feetx:
-            f2, c2 = details(tid); time.sleep(PAUSE)
+        land = '' if future else (prev.get('country') or '')
+        if not city or not feetx or not land:
+            f2, c2, l2 = details(tid); time.sleep(PAUSE)
             city  = c2 or city or city_of(t)
             feetx = feetx or f2
-        fl    = FLAG.get(city, '') or (prev.get('fl') if not future else '') or ''
+            land  = l2 or land
+        # флаг: сперва по стране из карточки, потом по словарю городов (он остаётся для старых
+        # записей), иначе — то, что уже стояло в файле
+        fl    = CC.get(land, '') or FLAG.get(city, '') or (prev.get('fl') if not future else '') or ''
 
-        rec = dict(id=tid, c=conf, num=num, city=city, fl=fl, country=COUNTRY.get(fl, ''),
+        rec = dict(id=tid, c=conf, num=num, city=city, fl=fl, country=land or COUNTRY.get(fl, ''),
                    date=date, fee=feetx or prev.get('fee', ''), j=prev.get('j', ''),
                    time=prev.get('time', ''), img=prev.get('img', ''), post=prev.get('post'))
         if semi:
@@ -292,37 +309,61 @@ def main():
         added.append('%s %s (%s %.2f)' % (city, date, rows[0]['n'], rows[0]['sc']))
         series.append(rec)
 
-    # 5b) фото и судьи из канала
+    # 5b) фото, судьи и время из канала.
+    # Пост привязываем к серии по номеру турнира из ССЫЛКИ в самом посте: ники и
+    # формулировки меняются, а ссылка на mafgame стоит в каждом посте и не врёт.
     posts = tg_posts()
-    win_post = {}
+    res_by_tid, ann_by_tid, win_post, orphan = {}, {}, {}, []
     for p in posts:
-        if TG_HASHTAG in p['text']:
-            m = re.search(r'Series Winner\s+([^\n]{1,40})', p['text'])
-            if m:
-                win_post.setdefault(m.group(1).strip().rstrip('.').strip(), p)
+        is_res = TG_HASHTAG in p['text']
+        m = re.search(r'Series Winner\s+([^\n]{1,40})', p['text'])
+        if is_res and m:
+            win_post.setdefault(m.group(1).strip().rstrip('.').strip(), p)
         m2 = re.search(r'Судья:\s*(?:г-н|г-жа)?\s*([^\n]{1,30})', p['text'])
         if m2:
-            p['judge'] = m2.group(1).strip()
-    for s in series:
-        if not s.get('top'):
+            p['judge'] = m2.group(1).strip().strip('.,; ')
+        m3 = re.search(r'((?:[A-Z]{3,4}\s*)?\d{1,2}:\d{2}(?:\s*[A-Z]{3,4})?)', p['text'])
+        if m3:
+            p['time'] = m3.group(1).strip()
+        for tid in (p.get('tids') or ()):
+            (res_by_tid if is_res else ann_by_tid).setdefault(tid, p)
+        if is_res and not p.get('tids'):
+            orphan.append(p['post'])
+
+    # судья и время — из анонса серии; не затираем то, что уже заполнено
+    for rec in series + upcoming:
+        a = ann_by_tid.get(rec['id']) or res_by_tid.get(rec['id'])
+        if not a:
             continue
-        winner = s['top'][0][0]
-        p = win_post.get(winner)
+        if not rec.get('j') and a.get('judge'):
+            rec['j'] = a['judge']
+        if not rec.get('time') and a.get('time'):
+            rec['time'] = a['time']
+
+    for s in series:
+        p = res_by_tid.get(s['id'])
+        if not p and s.get('top'):
+            p = win_post.get(s['top'][0][0])
         if not p:
             continue
         s['post'] = p['post']
-        import glob
         have = sorted(glob.glob(os.path.join(ASSETS, 'w-%d*.jpg' % s['id'])))
         local = os.path.basename(have[0]) if have else 'w-%d.jpg' % s['id']
         target = os.path.join(ASSETS, local)
-        if not have and p['photos']:
+        # ⚠ фото качаем заново, если его нет ИЛИ оно пришло из другого поста: раньше
+        # правило «файл есть — не трогаем» оставляло на карточке анонсную плашку серии
+        # («6 series · Nürnberg») вместо карточки победителя.
+        if p['photos'] and (not have or s.get('imgp') != p['post']):
             card = None
             for u, ratio in zip(p['photos'], (p['ratios'] + [0] * len(p['photos']))):
                 if 55 <= ratio <= 58:      # 16:9 — карточка победителя
                     card = u; break
             card = card or p['photos'][0]
             if download(card, target):
-                log('фото серии %s скачано из поста %d' % (s['id'], p['post']))
+                s['imgp'] = p['post']
+                log('фото серии %s взято из поста %d' % (s['id'], p['post']))
+            else:
+                log('⚠ фото поста %d недоступно (ссылки телеграма живут пару дней)' % p['post'])
         if os.path.exists(target):
             s['img'] = 'assets/mcl/' + local
 
@@ -437,6 +478,7 @@ def main():
         log('  %s: квота %s, сыграно %s/%s, порог %s' % (c, k['quota'], k['played'], k['total'], k['cut']))
     if added: log('новые протоколы: ' + '; '.join(added))
     if nores: log('без протокола: ' + '; '.join(nores))
+    if orphan: log('⚠ посты с результатами без ссылки на турнир: ' + ', '.join(map(str, orphan)))
     log('состав финала: ' + ' | '.join('%s %s' % (x['slot'], x['n'] or '—') for x in squad))
     log('файл ' + ('обновлён' if changed else 'без изменений'))
 
