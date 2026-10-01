@@ -322,9 +322,12 @@ def main():
         m2 = re.search(r'Судья:\s*(?:г-н|г-жа)?\s*([^\n]{1,30})', p['text'])
         if m2:
             p['judge'] = m2.group(1).strip().strip('.,; ')
-        m3 = re.search(r'((?:[A-Z]{3,4}\s*)?\d{1,2}:\d{2}(?:\s*[A-Z]{3,4})?)', p['text'])
+        # время старта берём ТОЛЬКО с таймзоной рядом — иначе в поле попадает любое
+        # «14:46» со страницы (время публикации, счётчики)
+        tz = r'(?:CET|CEST|EET|EEST|MSK|UTC|GMT|WET|WEST)'
+        m3 = re.search(tz + r'\s*\d{1,2}:\d{2}|\d{1,2}:\d{2}\s*' + tz, p['text'])
         if m3:
-            p['time'] = m3.group(1).strip()
+            p['time'] = m3.group(0).strip()
         for tid in (p.get('tids') or ()):
             (res_by_tid if is_res else ann_by_tid).setdefault(tid, p)
         if is_res and not p.get('tids'):
