@@ -63,7 +63,8 @@ jobs:
           fi
           git config user.name  "dovod-bot"
           git config user.email "noreply@dovod-mafia.com"
-          git add data/mcl2026.js assets/mcl sw.js
+          git add data/mcl2026.js assets/mcl sw.js \
+                  mcl2026.html mcl-standings.html mcl-series.html mcl-lab.html
           git commit -m "MCL: автообновление данных $(date +%d.%m.%Y)"
           git push
           echo "обновление выкачено"

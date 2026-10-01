@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-refresh_gmc.py · v1.0 · 2026-09-29
+refresh_gmc.py · v1.1 · 2026-10-01
 Назначение: обновить датафайл страницы GMC Europa 2026 (data/gmc2026.js) по протоколам
 mafgame.org — без участия человека. До этого страница жила вшитым снимком и протухала.
 Запускается GitHub Actions — см. .github/workflows/refresh-gmc.yml.
@@ -31,6 +31,7 @@ MIN_STAGES = 10                         # предохранитель: сери
 BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(BASE, 'data', 'gmc2026.js')
 PAGE = os.path.join(BASE, 'gmc2026.html')
+PAGES = [PAGE, os.path.join(BASE, 'series.html')]
 SW   = os.path.join(BASE, 'sw.js')
 
 CITY_FIX = {'Nuremberg': 'Nürnberg', 'City of Brussels': 'Brussel'}
@@ -290,12 +291,16 @@ def main():
         os.makedirs(os.path.dirname(DATA), exist_ok=True)
         io.open(DATA, 'w', encoding='utf-8').write(new)
         stamp = datetime.date.today().strftime('%Y%m%d')
-        if os.path.exists(PAGE):
-            src = io.open(PAGE, encoding='utf-8').read()
+        # штамп нужен каждой странице, которая грузит датафайл, а не только gmc2026.html:
+        # на series.html плитка GMC читает тот же window.GMC и без версии показывает вчерашние цифры
+        for page in PAGES:
+            if not os.path.exists(page):
+                continue
+            src = io.open(page, encoding='utf-8').read()
             upd = re.sub(r'<script src="data/gmc2026\.js(\?v=[^"]*)?"></script>',
                          '<script src="data/gmc2026.js?v=%s"></script>' % stamp, src)
             if upd != src:
-                io.open(PAGE, 'w', encoding='utf-8').write(upd)
+                io.open(page, 'w', encoding='utf-8').write(upd)
         if os.path.exists(SW):
             sw = io.open(SW, encoding='utf-8').read()
             mm = re.search(r"const CACHE_VERSION = 'dovod-v(\d+)';", sw)
