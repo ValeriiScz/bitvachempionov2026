@@ -1,0 +1,106 @@
+# Сторож сайтов: раз в сутки проверяет, что данные на обоих сайтах живые и свежие.
+# Смысл простой — не ходить и не проверять руками. Если что-то отвалилось (робот
+# не отработал, зеркало отстало, страница не отдаётся), прогон падает, и GitHub
+# присылает письмо о провале. Сам сторож ничего не чинит и ничего не пишет в репозиторий.
+#
+# Запустить вручную: Actions → «Сторож сайтов» → Run workflow.
+name: Сторож сайтов
+
+on:
+  schedule:
+    # 13:00 UTC: к этому часу утренние прогоны обоих сайтов обычно уже прошли
+    # (GitHub сдвигает расписание на часы, фактический старт роботов 10–12 UTC).
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/watch-sites.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Проверить оба сайта
+        run: |
+          python - <<'PY'
+          import datetime, json, re, sys, urllib.request
+
+          UA = 'Mozilla/5.0 (compatible; MCLWatchdog/1.0; +https://dovod-mafia.com)'
+          DOVOD = 'https://dovod-mafia.com'
+          MCLCL = 'https://mafiacl.com/mcl'
+          MAX_AGE = 2          # дней: снимок старше — робот не отработал
+          MAX_LAG = 2          # дней: настолько зеркалу позволено отставать от источника
+
+          problems, notes = [], []
+
+          def fetch(url, binary=False):
+              req = urllib.request.Request(url, headers={'User-Agent': UA})
+              with urllib.request.urlopen(req, timeout=45) as r:
+                  raw = r.read()
+              return raw if binary else raw.decode('utf-8')
+
+          def snap_of(text, var):
+              m = re.search(r'window\.%s=(\{.*\});' % var, text, re.S)
+              if not m:
+                  return None, 'в файле нет window.%s' % var
+              try:
+                  d = json.loads(m.group(1))
+              except Exception as e:
+                  return None, 'файл не разбирается как JSON (%s)' % e
+              s = d.get('snap') or ''
+              try:
+                  dd, mm, yy = s.split('.')
+                  return datetime.date(int(yy), int(mm), int(dd)), d
+              except Exception:
+                  return None, 'снимок «%s» не читается как дата' % s
+
+          today = datetime.date.today()
+
+          def check_data(url, var, label, limit):
+              try:
+                  txt = fetch(url + ('?cb=%d' % datetime.datetime.now().timestamp()))
+              except Exception as e:
+                  problems.append('%s: датафайл не отдаётся (%s)' % (label, e)); return None
+              day, rest = snap_of(txt, var)
+              if day is None:
+                  problems.append('%s: %s' % (label, rest)); return None
+              age = (today - day).days
+              notes.append('%s: снимок %s (%d дн. назад)' % (label, day.strftime('%d.%m.%Y'), age))
+              if age > limit:
+                  problems.append('%s: снимок устарел на %d дн. — робот не отработал' % (label, age))
+              return day
+
+          d_mcl = check_data(DOVOD + '/data/mcl2026.js', 'MCL', 'DOVOD · MCL', MAX_AGE)
+          check_data(DOVOD + '/data/gmc2026.js', 'GMC', 'DOVOD · GMC', MAX_AGE)
+          m_mcl = check_data(MCLCL + '/data/mcl2026.js', 'MCL', 'MAFIACL · MCL', MAX_AGE + MAX_LAG)
+
+          if d_mcl and m_mcl:
+              lag = (d_mcl - m_mcl).days
+              notes.append('отставание зеркала: %d дн.' % lag)
+              if lag > MAX_LAG:
+                  problems.append('MAFIACL отстал от DOVOD на %d дн. — зеркало не доезжает' % lag)
+
+          PAGES = [(DOVOD + '/' + p, 'DOVOD') for p in
+                   ('mcl2026.html', 'mcl-standings.html', 'mcl-series.html', 'mcl-lab.html', 'series.html')] + \
+                  [(MCLCL + '/' + p, 'MAFIACL') for p in
+                   ('index.html', 'standings.html', 'series.html', 'lab.html')]
+          for url, label in PAGES:
+              try:
+                  html = fetch(url)
+              except Exception as e:
+                  problems.append('%s: %s не открывается (%s)' % (label, url.rsplit('/', 1)[-1], e)); continue
+              if 'data/mcl2026.js' not in html and 'data/gmc2026.js' not in html:
+                  problems.append('%s: на %s нет подключения датафайла' % (label, url.rsplit('/', 1)[-1]))
+
+          print('\n'.join('· ' + n for n in notes))
+          if problems:
+              print('\nПРОБЛЕМЫ:')
+              for p in problems:
+                  print(' ✗ ' + p)
+              sys.exit(1)
+          print('\nоба сайта в порядке')
+          PY
