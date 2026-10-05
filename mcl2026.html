@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl2026.html · v3.4 · 2026-09-21 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
+<!-- MafgameStat · mcl2026.html · v3.5 · 2026-10-05 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. v3.5: слоты полуфинальных регионов заполняются итогом 50/50 (conf[c].semiResult), мини-таблица сыгранного полуфинала показывает итог. Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -218,6 +218,11 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .mrow .av{width:30px;height:30px}
 .mrow .nick{font-size:15px}
 .mrow .avg{font-size:17px;color:var(--pur-hi)}
+/* строка финалиста в мини-таблице сыгранного полуфинала */
+.mrow.fin{background:linear-gradient(90deg,rgba(201,161,77,.18),transparent 62%);position:relative}
+.mrow.fin::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold-hi,#f0d488)}
+.mrow.fin .rk,.mrow.fin .avg{color:var(--gold-hi,#f0d488)}
+.mrow .nick .semib{margin-left:8px;vertical-align:1px}
 
 /* состав */
 .squad{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px}
@@ -585,7 +590,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20261005"></script>
+<script src="data/mcl2026.js?v=20261005a"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -713,22 +718,31 @@ $('#squadgrid').innerHTML=D.squad.map(function(s,i){
     '<div class="q">?</div><div class="qn">определит полуфинал</div></div>';
   if(!s.n) return '<div class="sq empty"><div class="slot">'+esc(s.slot)+'</div><div class="q">?</div></div>';
   var ph=s.p?'<img class="ph" loading="lazy" src="'+esc(s.p)+'" alt=""><div class="duo"></div>':'';
+  /* слот из полуфинала: s.a — итог 50/50 (балл отборов + балл полуфинала пополам), не средний за серии */
+  var st=s.fin?'<b>'+s.a.toFixed(3)+'</b><s>итог 50/50</s>':'<b>'+s.a.toFixed(3)+'</b><s>'+s.s+' '+SER(s.s)+'</s>';
   return '<div class="sq">'+ph+'<div class="shade"></div><div class="ghost">'+(i+1)+'</div>'+
     '<div class="slot">'+esc(s.slot)+'</div><div class="body"><div class="nm">'+esc(s.n)+'</div>'+
-    '<div class="st"><b>'+s.a.toFixed(3)+'</b><s>'+s.s+' '+SER(s.s)+'</s></div></div></div>';
+    '<div class="st">'+st+'</div></div></div>';
 }).join('');
 
 /* 04 мини-таблицы зоны */
 $('#minis').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
   var semi=k.route==='semi', slots=semi?(k.semiSlots||10):k.quota;
-  var q=semi ? k.rows.slice(0,slots) : k.rows.filter(function(r){return r.s>=2;}).slice(0,k.quota);
+  var sr=semi&&k.semiResult&&k.semiResult.length?k.semiResult:null;
+  /* сыгранный полуфинал: мини-таблица показывает его итог 50/50, а не зачёт отбора */
+  var q=sr ? sr : (semi ? k.rows.slice(0,slots) : k.rows.filter(function(r){return r.s>=2;}).slice(0,k.quota));
   var rows=q.map(function(r,n){
     var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
-    return '<div class="mrow"><div class="rk">'+(n+1)+'</div>'+ph+
-      '<div class="nick">'+esc(r.n)+'</div><div class="avg">'+r.a.toFixed(3)+'</div></div>';}).join('');
+    var val=sr?r.fin:r.a;
+    return '<div class="mrow'+(sr&&n<k.quota?' fin':'')+'"><div class="rk">'+(n+1)+'</div>'+ph+
+      '<div class="nick">'+esc(r.n)+(sr&&n<k.quota?' <b class="semib">в финал</b>':'')+'</div><div class="avg">'+val.toFixed(3)+'</div></div>';}).join('');
   var done=k.played>=k.total;
-  var cap = semi ? slots+' в полуфинал' : k.quota+' в финал';
-  var note = semi
+  var cap = sr ? ('полуфинал сыгран · '+k.quota+' в финале') : (semi ? slots+' в полуфинал' : k.quota+' в финал');
+  var note = sr
+    ? ('Итог полуфинала'+(k.semiCity?' в '+esc(k.semiCity):'')+(k.semiDate?' '+dm(k.semiDate):'')+
+       ': 50% балла отборов + 50% балла полуфинала. В финал — '+(k.quota===1?'победитель':'трое лучших')+
+       (k.semiNote?'. '+esc(k.semiNote.charAt(0).toUpperCase()+k.semiNote.slice(1)):'')+'.')
+    : semi
     ? ('Полуфинал'+(k.semiDate?' '+dm(k.semiDate):'')+': в финал '+(k.quota===1?'едет победитель':'едут трое')+
        (k.semiPrize?', призовые '+esc(k.semiPrize):'')+(k.semiNote?'. '+esc(k.semiNote.charAt(0).toUpperCase()+k.semiNote.slice(1)):'')+'.')
     : (done?'Все '+k.total+' '+SER(k.total)+' позади — это итог, а не срез.':'Шесть лучших с нормой «две серии» едут в финал без полуфинала.');

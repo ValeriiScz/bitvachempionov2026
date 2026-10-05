@@ -240,7 +240,7 @@ body{
           <p class="tdesc">MCL Europe и GMC Europa: зачёт по сериям, кто уже в финале, разбор серий и судейства.</p>
         </div>
         <div class="tfoot">
-          <div class="tstat"><b>MCL Europe</b> · <b>GMC Europa</b></div>
+          <div class="tstat" id="tSer"><b>MCL Europe</b> · <b>GMC Europa</b></div>
           <span class="tgo">Открыть <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
         </div>
       </a>
@@ -368,6 +368,23 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 </script>
 <script src="data/season.js"></script>
 <script src="data/meta.js"></script>
+<script src="data/mcl2026.js?v=20261005a"></script>
+<script>(function(){
+/* плитка «Серийники»: когда сыгран полуфинал MCL, в подвале плитки — финалисты региона
+   (итог 50/50 считает робот refresh_mcl.py, таблица — в conf[c].semiResult) */
+try{
+  var M=window.MCL; if(!M||!M.conf) return;
+  var FLAG={IL:'🇮🇱',CY:'🇨🇾'}, RU={IL:'Израиль',CY:'Кипр'}, done=[];
+  ['IL','CY'].forEach(function(c){var k=M.conf[c];
+    if(k&&k.semiResult&&k.semiResult.length) done.push({c:c,fin:k.semiResult.slice(0,k.quota)});});
+  if(!done.length) return;
+  var el=document.getElementById('tSer'); if(!el) return;
+  el.innerHTML=done.map(function(d){
+    return (FLAG[d.c]||'')+' <b>MCL · '+RU[d.c]+' в финале:</b> '+d.fin.map(function(r){
+      return String(r.n).replace(/[&<>"]/g,'');}).join(' · ');
+  }).join('<br>');
+}catch(e){}
+})();</script>
 <script>(function(){
 var e=document.getElementById("ratedate");if(e&&window.SITE&&SITE.ratingUpdated)e.textContent=SITE.ratingUpdated;
 /* чипы считаем из данных: турнир — турнир, этап серийной лиги — этап (kind 1 = серия) */

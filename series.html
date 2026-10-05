@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v7.0 · 2026-06-20 -->
+<!-- DOVOD · series.html · v1.4 · 2026-10-05 · золотая строка на промоблоке MCL: сыгранные полуфиналы (итог 50/50, финалисты из conf[c].semiResult в data/mcl2026.js) и дата ближайшего полуфинала -->
 <!-- DOVOD · series.html · v1.3 · 2026-09-29 · плашка GMC берёт цифры из своего датафайла · штамп актуальности данных в шапке и подвале (дата снимка серий и финалистов) · + ближайшие серии (14 дней) и плашки остальных серийников из data/series2026.js (регламент, финал, кто прошёл, что осталось) -->
 <!-- DOVOD · series.html · v1.0 · 2026-08-31 · раздел «Серийники»: промоблок MCL Europe 2026 (mcl2026.html) и плашка GMC Europa 2026 (gmc2026.html). Хаб выбора разделов — index.html -->
 <!-- v2.2 · 2026-06-12 · плашки турниров, лого федерации — оригинал с mafgame.org -->
@@ -164,6 +165,10 @@
     line-height:1;color:#fff;margin-top:6px;letter-spacing:.01em}
   .mclp-t i{color:#c65ab4;font-style:italic}
   .mclp-m{margin-top:9px;font-size:13px;color:#b9b2c4;max-width:52ch;line-height:1.5}
+  .mclp-sf{margin-top:11px;padding:9px 12px;border:1px solid rgba(201,161,77,.5);background:rgba(201,161,77,.12);
+    font-size:12.5px;line-height:1.6;color:#e8dfc8;max-width:62ch;border-radius:2px}
+  .mclp-sf b{color:#f0d488;font-weight:800}
+  .mclp-sf .fn{color:#fff;font-weight:700}
   .mclp-r{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:14px}
   .mclp-go{background:#812276;color:#fff;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px}
   .mclp-n{font-size:12px;color:#db514e;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
@@ -295,6 +300,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
       <div class="mclp-e">IX season · 3 региона</div>
       <div class="mclp-t">MCL EUROPE <i>2026</i></div>
       <div class="mclp-m">Зачёт, состав финала, серии и разбор данных. Финал 21–22.11, Прага · 3000 €</div>
+      <div class="mclp-sf" id="mclsf" hidden></div>
       <div class="mclp-r"><span class="mclp-go">Открыть страницу лиги →</span><span class="mclp-n">12 / 26 серий</span></div>
     </div>
   </a>
@@ -333,6 +339,24 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 </script>
 <script src="data/series2026.js"></script>
 <script src="data/gmc2026.js?v=20261005"></script>
+<script src="data/mcl2026.js?v=20261005a"></script>
+<script>(function(){
+  /* золотая строка на промоблоке MCL: сыгранные полуфиналы и дата ближайшего.
+     Данные кладёт робот refresh_mcl.py: conf[c].semiResult — итог 50/50, upcoming[].semi — анонс. */
+  var M=window.MCL, el=document.getElementById('mclsf'); if(!M||!el) return;
+  var FLAG={IL:'🇮🇱',CY:'🇨🇾',CE:'🇨🇿'}, parts=[];
+  ['CE','IL','CY'].forEach(function(c){
+    var k=M.conf&&M.conf[c]; if(!k||!k.semiResult||!k.semiResult.length) return;
+    var fin=k.semiResult.slice(0,k.quota).map(function(r){return '<span class="fn">'+String(r.n).replace(/[&<>"]/g,'')+'</span>';});
+    parts.push((FLAG[c]||'')+' <b>Полуфинал '+(k.name==='ISRAEL'?'Израиля':k.name==='CYPRUS'?'Кипра':k.name)+' сыгран</b> — в финале: '+fin.join(' · '));
+  });
+  (M.upcoming||[]).forEach(function(u){
+    if(!u.semi) return;
+    var d=u.date?u.date.slice(8,10)+'.'+u.date.slice(5,7):'';
+    parts.push((FLAG[u.c]||'')+' полуфинал '+(u.c==='CY'?'Кипра':u.c==='IL'?'Израиля':'')+' — '+d+(u.city?', '+u.city:''));
+  });
+  if(parts.length){ el.innerHTML=parts.join('<br>'); el.hidden=false; }
+})();</script>
 <script>(function(){
   const S=window.SERIES; if(!S) return;
   const dd=d=>d.slice(5).split('-').reverse().join('.');

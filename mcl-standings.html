@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl-standings.html · v1.4 · 2026-09-21 · MCL Europe 2026, зачёт трёх регионов: полные таблицы, фильтр нормы, калькулятор прохода. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-standings.html · v1.5 · 2026-10-05 · MCL Europe 2026, зачёт трёх регионов: полные таблицы, фильтр нормы, калькулятор прохода. v1.5: блок «Итог полуфинала» (50% балла отборов + 50% балла полуфинала, conf[c].semiResult из data/mcl2026.js). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -206,6 +206,40 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .cutline i{flex:1;height:1px;background:rgba(198,90,180,.32)}
 .legend{font-size:11.5px;color:var(--dim);margin-top:10px;line-height:1.6}
 .legend em{color:var(--red);font-style:normal}
+
+/* итог полуфинала: 50% балла отборов + 50% балла полуфинала */
+.sf{border:1px solid rgba(201,161,77,.55);background:linear-gradient(135deg,rgba(96,72,20,.30),var(--panel) 58%);margin:0 0 24px}
+.sf .sfh{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;justify-content:space-between;padding:13px 16px;border-bottom:1px solid rgba(201,161,77,.35)}
+.sf .sfh b{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:23px;text-transform:uppercase;color:var(--gold-hi)}
+.sf .sfh s{text-decoration:none;font-family:var(--ff-n);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.sf .sfh a{color:var(--gold);font-family:var(--ff-n);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.sf .sfh a:hover{color:var(--gold-hi)}
+.sfth,.sfr{display:grid;grid-template-columns:40px 42px minmax(0,1fr) 88px 96px 96px;gap:10px;align-items:center;padding:9px 16px}
+.sfth{border-bottom:1px solid rgba(201,161,77,.3);background:rgba(20,15,8,.45)}
+.sfth div{font-family:var(--ff-n);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.sfth .r,.sfr .r{text-align:right}
+.sfr{border-bottom:1px solid rgba(255,255,255,.05);position:relative}
+.sfr:last-child{border-bottom:0}
+.sfr:hover{background:rgba(201,161,77,.08)}
+.sfr .rk{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:21px;color:var(--dim);text-align:center}
+.sfr .q50,.sfr .sp50{font-family:var(--ff-n);font-weight:700;font-size:15px;text-align:right;color:var(--mut)}
+.sfr .fin50{font-family:var(--ff-n);font-weight:700;font-size:19px;text-align:right;color:#fff}
+.sfr.fin{background:linear-gradient(90deg,rgba(201,161,77,.20),transparent 62%)}
+.sfr.fin::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold-hi)}
+.sfr.fin .rk,.sfr.fin .fin50{color:var(--gold-hi)}
+.sfr.fin .av{border-color:var(--gold-hi);box-shadow:0 0 0 2px rgba(201,161,77,.3)}
+.sftag{display:inline-block;margin-left:9px;vertical-align:2px;font-family:var(--ff-n);font-weight:700;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#1a1206;background:var(--gold-hi);padding:3px 7px}
+.sfcut{display:flex;align-items:center;gap:12px;padding:7px 16px;background:rgba(201,161,77,.10);border-top:1px dashed rgba(201,161,77,.55);border-bottom:1px dashed rgba(201,161,77,.55)}
+.sfcut b{font-family:var(--ff-n);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-hi)}
+.sfcut i{flex:1;height:1px;background:rgba(201,161,77,.35)}
+.sfnote{padding:11px 16px;font-size:12px;color:var(--mut);line-height:1.6;border-top:1px solid rgba(255,255,255,.05)}
+.sfnote b{color:var(--gold-hi)}
+@media (max-width:720px){
+  .sfth,.sfr{grid-template-columns:26px 32px minmax(0,1fr) 54px 58px 64px;gap:7px;padding:9px 10px}
+  .sf .sfh b{font-size:19px}
+  .sfr .rk{font-size:17px}.sfr .fin50{font-size:16px}.sfr .q50,.sfr .sp50{font-size:12.5px}
+  .sftag{display:block;margin:3px 0 0;width:max-content}
+}
 
 /* калькулятор */
 .calc{background:linear-gradient(120deg,rgba(74,18,67,.55),var(--panel) 60%);border:1px solid rgba(198,90,180,.4);padding:18px;margin:18px 0 6px}
@@ -517,7 +551,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20261005"></script>
+<script src="data/mcl2026.js?v=20261005a"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -574,8 +608,12 @@ function stand(){
   var done=k.played>=k.total;                    /* все серии региона сыграны */
   var semi=k.route==='semi', slots=semi?(k.semiSlots||10):q;
   /* маршрут региона: он у всех трёх разный, поэтому пишем его прямо над таблицей */
-  var head1, head2;
-  if(semi){
+  var head1, head2, sr=semi&&k.semiResult&&k.semiResult.length?k.semiResult:null;
+  if(sr){
+    head1='Полуфинал сыгран';
+    head2='итог — <i>50% балла отборов + 50% балла полуфинала</i> · в финале: <i>'+
+      sr.slice(0,q).map(function(r){return esc(r.n);}).join('</i> · <i>')+'</i>';
+  } else if(semi){
     head1=(done?'Серии сыграны':'Идёт отбор в полуфинал');
     head2='в полуфинал выходят <i>'+slots+'</i> · '+
       (k.semiDate?'полуфинал '+dm(k.semiDate)+' · ':'') +
@@ -585,6 +623,27 @@ function stand(){
   } else {
     head1=(done?'Отбор завершён':'Прямой отбор');
     head2='<i>'+q+'</i> лучших с нормой «две серии» едут в финал напрямую, без полуфинала';
+  }
+  /* сыгранный полуфинал: итоговая таблица 50/50 — над зачётом отбора */
+  if(sr){
+    out.push('<div class="sf"><div class="sfh"><b>Итог полуфинала'+
+      (k.semiCity?' · '+esc(k.semiCity):'')+(k.semiDate?' '+dm(k.semiDate):'')+'</b>'+
+      '<s>'+q+' '+(q===1?'место':'места')+' в финале</s>'+
+      (k.semiId?'<a href="https://mafgame.org/tournaments/'+k.semiId+'/view" target="_blank" rel="noopener">протокол &#8599;</a>':'')+'</div>');
+    out.push('<div class="sfth"><div>#</div><div></div><div>Игрок</div><div class="r">Отбор</div><div class="r">Полуфинал</div><div class="r">Итог 50/50</div></div>');
+    sr.forEach(function(r,i){
+      var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
+      var into=i<q;
+      out.push('<div class="sfr'+(into?' fin':'')+'">'+
+        '<div class="rk">'+(i+1)+'</div>'+ph+
+        '<div><span class="nick">'+esc(r.n)+'</span>'+(into?'<span class="sftag">в финал</span>':'')+'</div>'+
+        '<div class="q50 r">'+(r.qa==null?'—':r.qa.toFixed(2))+'</div>'+
+        '<div class="sp50 r">'+r.sp.toFixed(2)+'</div>'+
+        '<div class="fin50">'+r.fin.toFixed(3)+'</div></div>');
+      if(into&&i===q-1&&sr.length>q) out.push('<div class="sfcut"><b>линия финала · '+q+' '+(q===1?'место':'места')+'</b><i></i></div>');
+    });
+    out.push('<div class="sfnote">Формула регламента: итог = <b>50% балла отборов</b> (средний балл по отборочным сериям) + <b>50% балла полуфинала</b>.'+
+      (k.semiNote?' '+esc(k.semiNote.charAt(0).toUpperCase()+k.semiNote.slice(1))+'.':'')+'</div></div>');
   }
   out.push('<div class="donebar'+(semi?' semi':'')+(done?' done':'')+'"><b>'+head1+'</b> · '+head2+'</div>');
   out.push('<div class="stbl"><div class="sth"><div>#</div><div></div><div>Игрок</div><div class="r">Средний</div><div class="r">Серий</div><div class="r cneed">Нужно</div></div>');
@@ -621,11 +680,14 @@ function stand(){
   out.push('</div>');
   $('#stbl').innerHTML=out.join('');
   if(semi){
-    $('#stleg').innerHTML = 'Порядок такой: сначала все, кто сыграл <b style="color:#fff">две серии и больше</b> — по среднему баллу, '+
-      'затем добором те, у кого одна серия. Первые <b style="color:#fff">'+slots+'</b> играют полуфинал'+
-      (k.semiDate?' '+dm(k.semiDate):'')+'. '+
-      (q===1 ? 'Единственную путёвку в финал даёт победа в полуфинале'+(k.semiPrize?', призовые получают первые трое: '+esc(k.semiPrize):'')+'.'
-             : 'Путёвки в финал получают трое лучших'+(k.semiNote?'; '+esc(k.semiNote):'')+'.');
+    $('#stleg').innerHTML = sr
+      ? 'Выше — итог полуфинала по формуле регламента, ниже — <b style="color:#fff">зачёт отбора</b>, по которому в полуфинал выходили первые '+slots+'. '+
+        'Балл отборов в итоге — средний по отборочным сериям игрока; сам полуфинал в зачёт отбора не входит.'
+      : 'Порядок такой: сначала все, кто сыграл <b style="color:#fff">две серии и больше</b> — по среднему баллу, '+
+        'затем добором те, у кого одна серия. Первые <b style="color:#fff">'+slots+'</b> играют полуфинал'+
+        (k.semiDate?' '+dm(k.semiDate):'')+'. '+
+        (q===1 ? 'Единственную путёвку в финал даёт победа в полуфинале'+(k.semiPrize?', призовые получают первые трое: '+esc(k.semiPrize):'')+'.'
+               : 'Путёвки в финал получают трое лучших'+(k.semiNote?'; '+esc(k.semiNote):'')+'.');
     return;
   }
   $('#stleg').innerHTML = done

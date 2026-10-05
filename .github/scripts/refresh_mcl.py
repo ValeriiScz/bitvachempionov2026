@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-refresh_mcl.py · v1.2 · 2026-10-01 · версия для сайта DOVOD
+refresh_mcl.py · v1.3 · 2026-10-05 · версия для сайта DOVOD
 Назначение: обновить датафайл страниц MCL (data/mcl2026.js) по протоколам mafgame.org
 и постам канала лиги, без участия человека. Тот же робот работает у партнёров
 (ecosciug/mafiacl-kings) — там пути другие, здесь ещё поднимается CACHE_VERSION в sw.js.
 Запускается GitHub Actions ежедневно — см. .github/workflows/refresh-mcl.yml.
+
+v1.3: полуфинал больше не подмешивается в зачёт отбора как обычная серия.
+Сыгранный полуфинал считается по регламенту: итог = 50% балла отборов (средний
+по отборочным сериям) + 50% балла полуфинала; conf[c].semiResult хранит эту
+таблицу, а трое лучших заполняют слоты региона в составе финала (D.squad).
 
 Оглавление:
   1)  настройки и пути
@@ -232,6 +237,96 @@ def download(url, path):
         return False
 
 # ── 6) сборка датафайла ──────────────────────────────────────────────────────
+def rebuild_standings(D, series, avatars):
+    """6b) зачёт регионов + 6c) итог полуфиналов и состав финала.
+
+    Вынесено из main(), чтобы данные можно было пересобрать локально из уже
+    разобранных протоколов (series) без похода на mafgame.
+
+    Полуфинальные турниры (rec['semi']) в зачёт ОТБОРА не подмешиваются:
+    отбор — это только отборочные серии. Сыгранный полуфинал считается
+    по регламенту лиги: итог = 50% балла отборов + 50% балла полуфинала,
+    «балл отборов» — средний по отборочным сериям игрока. Таблица итога
+    лежит в conf[c].semiResult, трое лучших занимают слоты региона в squad."""
+    # 6b) зачёт регионов — без полуфиналов
+    for c in CONF_ORDER:
+        k = D['conf'][c]
+        agg = {}
+        for s in series:
+            if s['c'] != c or not s.get('r') or s.get('semi'):
+                continue
+            label = '%s %s' % (s['city'], s['date'][8:10] + '.' + s['date'][5:7])
+            for uid, nick, sc in s['r']:
+                a = agg.setdefault(uid, dict(u=uid, n=nick, d=[]))
+                a['n'] = nick
+                a['d'].append([label, sc])
+        rows = []
+        for a in agg.values():
+            t = round(sum(x[1] for x in a['d']), 3)
+            rows.append(dict(u=a['u'], n=a['n'], a=round(t / len(a['d']), 3), s=len(a['d']), t=t,
+                             d=a['d'], p=avatars.get(a['u'], '')))
+        norm_sorted = sorted([r for r in rows if r['s'] >= 2], key=lambda r: (-r['a'], r['n'] or ''))
+        rest_sorted = sorted([r for r in rows if r['s'] <  2], key=lambda r: (-r['a'], r['n'] or ''))
+        if k.get('route') == 'semi':
+            # отбор в полуфинал: сначала выполнившие норму, потом добор из сыгравших одну серию
+            rows = norm_sorted + rest_sorted
+            slots = k.get('semiSlots') or 10
+            k['cut'] = rows[slots - 1]['a'] if len(rows) >= slots else None
+        else:
+            rows.sort(key=lambda r: (-r['a'], -r['s'], r['n'] or ''))
+            k['cut'] = norm_sorted[k['quota'] - 1]['a'] if len(norm_sorted) >= k['quota'] else None
+        k['rows']    = rows
+        k['played']  = sum(1 for s in series if s['c'] == c and s.get('r') and not s.get('semi'))
+        k['played2'] = len(norm_sorted)
+
+    # 6c-1) итог полуфиналов: 50% балла отборов + 50% балла полуфинала
+    for c in CONF_ORDER:
+        k = D['conf'][c]
+        if k.get('route') != 'semi':
+            continue
+        semis = [s for s in series if s['c'] == c and s.get('semi') and s.get('r')]
+        if not semis:
+            k.pop('semiResult', None)
+            continue
+        sm = semis[-1]                      # сыгранный полуфинал региона
+        byu = {r['u']: r for r in k['rows']}
+        res = []
+        for uid, nick, sp in sm['r']:
+            qr = byu.get(uid)
+            qa = qr['a'] if qr else None    # балл отборов: средний по отборочным сериям
+            fin = round(((qa or 0) + sp) / 2, 3)
+            res.append(dict(u=uid, n=nick, qa=qa, sp=sp, fin=fin,
+                            p=(qr.get('p', '') if qr else avatars.get(uid, ''))))
+        res.sort(key=lambda r: (-r['fin'], r['n'] or ''))
+        k['semiResult'] = res
+        k['semiCity']   = sm['city']
+        k['semiId']     = sm['id']
+        if sm.get('post'):
+            k['semiPost'] = sm['post']
+
+    # 6c-2) состав финала
+    NAMES = {'CE': 'CENTRAL', 'IL': 'ISRAEL', 'CY': 'CYPRUS'}
+    squad = []
+    for c in CONF_ORDER:
+        k = D['conf'][c]
+        if k.get('route') == 'semi':
+            res = k.get('semiResult') or []
+            for i in range(k['quota']):
+                r = res[i] if i < len(res) else None
+                if r:   # полуфинал сыгран — слот занимает финалист, a = итог 50/50
+                    squad.append(dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n=r['n'],
+                                      a=r['fin'], s=0, p=r.get('p', ''), semi=1, fin=1))
+                else:   # полуфинал впереди — слот ждёт
+                    squad.append(dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n='', a=0, s=0, p='', semi=1))
+            continue
+        norm = [r for r in k['rows'] if r['s'] >= 2]
+        for i in range(k['quota']):
+            r = norm[i] if i < len(norm) else None
+            squad.append(dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n=(r['n'] if r else ''),
+                              a=(r['a'] if r else 0), s=(r['s'] if r else 0), p=(r['p'] if r else '')))
+    D['squad'] = squad
+    return D
+
 def load_data():
     s = io.open(DATA, encoding='utf-8').read()
     m = re.search(r'window\.MCL=(\{.*\});', s, re.S)
@@ -374,53 +469,9 @@ def main():
             # показывать старое фото — так на карточках висели анонсные плашки.
             s['img'] = 'assets/mcl/%s?p=%d' % (local, p['post'])
 
-    # 6b) зачёт регионов
-    for c in CONF_ORDER:
-        k = D['conf'][c]
-        agg = {}
-        for s in series:
-            if s['c'] != c or not s.get('r'):
-                continue
-            label = '%s %s' % (s['city'], s['date'][8:10] + '.' + s['date'][5:7])
-            for uid, nick, sc in s['r']:
-                a = agg.setdefault(uid, dict(u=uid, n=nick, d=[]))
-                a['n'] = nick
-                a['d'].append([label, sc])
-        rows = []
-        for a in agg.values():
-            t = round(sum(x[1] for x in a['d']), 3)
-            rows.append(dict(u=a['u'], n=a['n'], a=round(t / len(a['d']), 3), s=len(a['d']), t=t,
-                             d=a['d'], p=avatars.get(a['u'], '')))
-        norm_sorted = sorted([r for r in rows if r['s'] >= 2], key=lambda r: (-r['a'], r['n'] or ''))
-        rest_sorted = sorted([r for r in rows if r['s'] <  2], key=lambda r: (-r['a'], r['n'] or ''))
-        if k.get('route') == 'semi':
-            # отбор в полуфинал: сначала выполнившие норму, потом добор из сыгравших одну серию
-            rows = norm_sorted + rest_sorted
-            slots = k.get('semiSlots') or 10
-            k['cut'] = rows[slots - 1]['a'] if len(rows) >= slots else None
-        else:
-            rows.sort(key=lambda r: (-r['a'], -r['s'], r['n'] or ''))
-            k['cut'] = norm_sorted[k['quota'] - 1]['a'] if len(norm_sorted) >= k['quota'] else None
-        k['rows']    = rows
-        k['played']  = sum(1 for s in series if s['c'] == c and s.get('r'))
-        k['played2'] = len(norm_sorted)
-
-    # 6c) состав финала, KPI, тикер
-    NAMES = {'CE': 'CENTRAL', 'IL': 'ISRAEL', 'CY': 'CYPRUS'}
-    squad = []
-    for c in CONF_ORDER:
-        k = D['conf'][c]
-        if k.get('route') == 'semi':
-            # места этих регионов разыгрываются в полуфинале, зачёт их не определяет
-            for i in range(k['quota']):
-                squad.append(dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n='', a=0, s=0, p='', semi=1))
-            continue
-        norm = [r for r in k['rows'] if r['s'] >= 2]
-        for i in range(k['quota']):
-            r = norm[i] if i < len(norm) else None
-            squad.append(dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n=(r['n'] if r else ''),
-                              a=(r['a'] if r else 0), s=(r['s'] if r else 0), p=(r['p'] if r else '')))
-    D['squad'] = squad
+    # 6b–6c) зачёт регионов, итог полуфиналов и состав финала
+    rebuild_standings(D, series, avatars)
+    squad = D['squad']
 
     played  = sum(1 for s in series if s.get('r'))
     total   = sum(D['conf'][c]['total'] for c in CONF_ORDER)
