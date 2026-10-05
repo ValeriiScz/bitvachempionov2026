@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-refresh_gmc.py · v1.1 · 2026-10-01
+refresh_gmc.py · v1.2 · 2026-10-05
 Назначение: обновить датафайл страницы GMC Europa 2026 (data/gmc2026.js) по протоколам
 mafgame.org — без участия человека. До этого страница жила вшитым снимком и протухала.
 Запускается GitHub Actions — см. .github/workflows/refresh-gmc.yml.
@@ -241,14 +241,16 @@ def main():
             seen.add(x[0])
             qualified.append(dict(uid=x[0], nick=x[1], series=s['name'], date=s['date'],
                                   place=place, score=x[2], ok=bool(s.get('closed'))))
-    # 5b) резерв: третьи места, порядок — сумма допов; уже прошедшие из очереди выпадают
+    # 5b) очередь замен: третьи места всех серий, порядок — БАЛЛ ЗА СЕРИЮ (регламент,
+    # со слов организатора 05.10); допы остаются вторым ключом при равенстве баллов.
+    # Уже прошедшие в финал из очереди выпадают.
     reserve = []
     for s in series:
         r = s.get('r') or []
         if len(r) > 2 and r[2][0] not in seen:
             reserve.append(dict(uid=r[2][0], nick=r[2][1], series=s['name'],
                                 gb=r[2][3], score=r[2][2]))
-    reserve.sort(key=lambda x: (-(x['gb'] or 0), -(x['score'] or 0)))
+    reserve.sort(key=lambda x: (-(x['score'] or 0), -(x['gb'] or 0), x['nick'] or ''))
 
     # 5c) KPI
     played  = len(series)
