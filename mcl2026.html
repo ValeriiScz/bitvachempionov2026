@@ -590,7 +590,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20261005b"></script>
+<script src="data/mcl2026.js?v=20261005c"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -599,7 +599,14 @@ var MM=function(q){try{return !!(window.matchMedia&&window.matchMedia(q).matches
 var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
 var f2=function(v){return v==null?'—':v.toFixed(2);}, f3=function(v){return v==null?'—':v.toFixed(3);};
 var SER=function(n){return n===1?'серия':(n<5?'серии':'серий');};
-var FL={CZ:'🇨🇿',DE:'🇩🇪',BE:'🇧🇪',PL:'🇵🇱',IL:'🇮🇱',CY:'🇨🇾'};
+/* флаги строим из кода страны, а не списком: иначе новая страна в календаре
+   (так в октябре приехала Испания) остаётся без флага до правки руками */
+var FL=(function(){var m={};
+  var add=function(cc){ if(cc&&/^[A-Z]{2}$/.test(cc)&&!m[cc])
+    m[cc]=String.fromCodePoint(127397+cc.charCodeAt(0),127397+cc.charCodeAt(1)); };
+  (D.series||[]).forEach(function(s){add(s.fl);});
+  (D.upcoming||[]).forEach(function(s){add(s.fl);});
+  return m;})();
 var MON=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 var MONN=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 var dm=function(d){return d.slice(8,10)+'.'+d.slice(5,7);};

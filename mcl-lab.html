@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl-lab.html · v1.3 · 2026-09-21 · MCL Europe 2026, разбор данных: находки по допам, квоты и сила регионов, судьи, метод. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-lab.html · v1.4 · 2026-10-05 · MCL Europe 2026, разбор данных: находки, серии (рука судьи и победы города), судьи, квоты, метод. v1.4: находки, таблица серий, таблица судей и счётчики метода считаются из data/mcl2026.js на лету и обновляются вместе с данными; вшитым снимком остались только квоты и глубокий разбор допов (помечены датой). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -350,6 +350,8 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .final img{position:absolute;right:-30px;top:-30px;width:220px;opacity:.10;pointer-events:none}
 
 /* разбор */
+.jsubh{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase;
+  color:#fff;margin:26px 0 8px}
 .blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
 .blk{background:var(--panel);border:1px solid var(--line);padding:18px}
 .blk .bt{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:22px;text-transform:uppercase;color:#fff;line-height:1.05}
@@ -365,6 +367,15 @@ td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);text-align:rig
 tr:last-child td{border-bottom:0}
 td.nm{font-family:var(--ff-n);font-weight:700;color:#fff}
 .zero{color:var(--red);font-weight:700}
+/* пометка «вшитый снимок» — чтобы живое и замороженное не путались */
+.snapnote{display:inline-flex;align-items:center;gap:7px;font-family:var(--ff-n);font-weight:700;font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:#1a1206;background:var(--gold-hi,#f0d488);padding:3px 8px;margin-bottom:8px}
+.livenote{display:inline-flex;align-items:center;gap:7px;font-family:var(--ff-n);font-weight:700;font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:#0b0810;background:var(--pur-hi);padding:3px 8px;margin-bottom:8px}
+td.hi{color:#fff;font-weight:700}
+td.lo{color:var(--mut)}
+tr.semirow td:first-child::after{content:' · полуфинал';font-family:var(--ff-n);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold,#c9a14d);font-weight:700}
 
 /* модалка */
 #modal{position:fixed;inset:0;z-index:50;background:rgba(4,3,6,.94);display:none;place-items:center;padding:16px}
@@ -471,20 +482,32 @@ a:hover .sithumb{filter:brightness(1.12)}
     <div class="blocks" id="blocks"></div>
   </section>
   <section>
-    <div class="sechead"><div class="no">02</div><h2 class="h">Регионы и квоты</h2><div class="line"></div></div>
+    <div class="sechead"><div class="no">02</div><h2 class="h">Серии: рука судьи и победы города</h2><div class="line"></div></div>
+    <p class="lead">Каждая сыгранная серия сезона: сколько судья раздал допов на посадку, на сколько оштрафовал и сколько игр из десяти выиграл город. Считается из протоколов, обновляется вместе с данными.</p>
+    <div class="tw" id="sertbl"></div>
+    <div class="legend" id="serleg"></div>
+  </section>
+  <section>
+    <div class="sechead"><div class="no">03</div><h2 class="h">Регионы и квоты</h2><div class="line"></div></div>
     <p class="lead">По числу серий деление неровное: у Israel 1.67 серии на место в финале, у Central Europe 2.0, у Cyprus — 3.0 на единственное место. Разница ещё и в силе полей.</p>
+    <div class="snapnote">вшитый снимок · рейтинг 03.08.2026</div>
     <div class="tw" id="qtbl"></div>
-    <div class="legend">Рейтинговые позиции — снимок рейтинга mafgame на 03.08.2026 (459 игроков). В финале-2025 израильская квота дала 5-е, 9-е и 10-е места.</div>
+    <div class="legend">Рейтинговые позиции — снимок рейтинга mafgame на 03.08.2026 (459 игроков). В финале-2025 израильская квота дала 5-е, 9-е и 10-е места. Эта таблица считается отдельным исследованием и сама не пересчитывается.</div>
   </section>
   <section>
-    <div class="sechead"><div class="no">03</div><h2 class="h">Судьи</h2><div class="line"></div></div>
+    <div class="sechead"><div class="no">04</div><h2 class="h">Судьи</h2><div class="line"></div></div>
     <p class="lead">Рука судьи различается в полтора раза. Поэтому сырые баллы игроков из разных серий не сравниваются — только остатки против нормы своей серии.</p>
+    <div class="livenote">считается из протоколов</div>
     <div class="tw" id="jtbl"></div>
-    <div class="legend">ЛХ (0.25 и 0.4 за угаданных чёрных) и Ci (компенсация ранних смертей) — автоматика платформы, в «щедрость судьи» не входят.</div>
+    <div class="legend">ЛХ (0.25 и 0.4 за угаданных чёрных) и Ci (компенсация ранних смертей) — автоматика платформы, в «щедрость судьи» не входят: в допе учтены только судейские баллы.</div>
+    <h3 class="jsubh">Глубокий разбор допов</h3>
+    <div class="snapnote" id="jsnapnote">вшитый снимок</div>
+    <div class="tw" id="jdeep"></div>
+    <div class="legend">Эти три колонки считаются по каждой отдельной посадке, а не по итогу серии, поэтому роботом не пересчитываются — нужен отдельный проход по поигровым протоколам. Обновляются вручную вместе с исследованием допов.</div>
   </section>
   <section>
-    <div class="sechead"><div class="no">04</div><h2 class="h">Данные и метод</h2><div class="line"></div></div>
-    <p class="lead">Протоколы game_results всех 12 сыгранных серий контура 757 на mafgame.org — 120 игр, 1200 посадок. Сверено с официальными таблицами серий 1:1 (ноль расхождений) и с таблицей организаторов. Судьи, взносы, календарь и регламент — из канала лиги. Остатки: перестановочный тест 6000 итераций с поправкой Бенджамини-Хохберга на 24 игроков с 20+ играми. Страница обновляется вручную после новых серий.</p>
+    <div class="sechead"><div class="no">05</div><h2 class="h">Данные и метод</h2><div class="line"></div></div>
+    <p class="lead" id="method"></p>
     <a class="more" href="mcl-standings.html">Вернуться к зачёту &rarr;</a>
   </section>
 </div></main>
@@ -505,7 +528,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20261005b"></script>
+<script src="data/mcl2026.js?v=20261005c"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -514,7 +537,14 @@ var MM=function(q){try{return !!(window.matchMedia&&window.matchMedia(q).matches
 var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
 var f2=function(v){return v==null?'—':v.toFixed(2);}, f3=function(v){return v==null?'—':v.toFixed(3);};
 var SER=function(n){return n===1?'серия':(n<5?'серии':'серий');};
-var FL={CZ:'🇨🇿',DE:'🇩🇪',BE:'🇧🇪',PL:'🇵🇱',IL:'🇮🇱',CY:'🇨🇾'};
+/* флаги строим из кода страны, а не списком: иначе новая страна в календаре
+   (так в октябре приехала Испания) остаётся без флага до правки руками */
+var FL=(function(){var m={};
+  var add=function(cc){ if(cc&&/^[A-Z]{2}$/.test(cc)&&!m[cc])
+    m[cc]=String.fromCodePoint(127397+cc.charCodeAt(0),127397+cc.charCodeAt(1)); };
+  (D.series||[]).forEach(function(s){add(s.fl);});
+  (D.upcoming||[]).forEach(function(s){add(s.fl);});
+  return m;})();
 var MON=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 var MONN=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 var dm=function(d){return d.slice(8,10)+'.'+d.slice(5,7);};
@@ -541,20 +571,119 @@ if($('#snap')) $('#snap').textContent=D.snap;
 </script>
 <script>
 
-$('#blocks').innerHTML=[
- ['+0.115','KEX · самый большой остаток','Больше нормы собственных серий на <b>0.115 допа за игру</b> (p=0.0002 — единственный значимый результат сезона из 24 проверенных). Доп в 15 посадках из 20 при средней по лиге 45%; в Дортмунде собрал 30% всех допов серии. Обе его серии судил один судья.'],
- ['31.5%','Контур играет «в чёрных»','Город выиграл лишь 41 игру из 130: Central Europe 21/60, Israel 15/50, Cyprus 5/20. Cologne и Haifa-04 — по одной победе города за серию. Причина — либо малые закрытые составы по 10 человек, либо дисперсия.'],
- ['×1.5','Рука судьи различается','Самая сдержанная — Рыба-мОя (0.083 допа на посадку, проигравшим почти не платит), самые щедрые — Кирпич (0.126) и Dogfather (0.116, проигравшим 0.079). YeS раздаёт чаще всех — 55% посадок, но малыми порциями.'],
- ['6+3+1','Квоты и сила регионов','В Central Europe играют <b>14 игроков из топ-50</b> рейтинга mafgame и 21 из топ-100 (лучшие — №2 и №3). В Israel и Cyprus игроков топ-50 <b>нет ни одного</b> (лучшие — №94 и №83). Обратная сторона: финалист из этих регионов проходит 46 игр против 36 у Central Europe.'],
-].map(function(x){return '<div class="blk"><div class="big">'+x[0]+'</div><div class="bt">'+x[1]+'</div><div class="bb">'+x[2]+'</div></div>';}).join('');
+/* ── разбор считается из датафайла ──────────────────────────────────────────
+   Раньше находки, таблица судей и счётчики метода были вшиты числами от руки
+   и протухали после каждой новой серии. Теперь всё, что можно посчитать из
+   протоколов (они лежат в D.series), считается здесь при каждой загрузке. */
+var PL = (D.series||[]).filter(function(s){ return s.r && s.r.length; });
+var GAMES = PL.reduce(function(a,s){ return a + (s.games||0); }, 0);
+var SEATS = GAMES * 10;
+var TOWN  = PL.reduce(function(a,s){ return a + (s.town||0); }, 0);
+var pc    = function(v){ return Math.round(v*100) + '%'; };
+var NAMEC = {CE:'Central Europe', IL:'Israel', CY:'Cyprus'};
+var PLU   = function(n,a,b,c){ var m=n%10, h=n%100;
+  return n+' '+(m===1&&h!==11?a:(m>=2&&m<=4&&(h<10||h>=20)?b:c)); };
 
+/* по регионам */
+var byConf = ['CE','IL','CY'].map(function(c){
+  var r = PL.filter(function(s){ return s.c===c; });
+  var g = r.reduce(function(a,s){ return a+(s.games||0); },0);
+  var t = r.reduce(function(a,s){ return a+(s.town||0); },0);
+  return {c:c, n:r.length, g:g, t:t, share:(g?t/g:0)};
+});
+
+/* по судьям: доп и штраф — на посадку, взвешенно по числу игр */
+var byJudge = (function(){
+  var m = {};
+  PL.forEach(function(s){
+    var j = (s.j||'').trim() || '— не указан —';
+    var a = m[j] || (m[j] = {j:j, n:0, g:0, t:0, ab:0, pen:0, gseats:0});
+    a.n++; a.g += s.games||0; a.t += s.town||0; a.pen += s.pen||0;
+    if (s.gb != null) { a.ab += s.gb * (s.games||0) * 10; a.gseats += (s.games||0)*10; }
+  });
+  return Object.keys(m).map(function(k){
+    var a = m[k];
+    a.gb  = a.gseats ? a.ab/a.gseats : null;
+    a.pp  = a.g ? a.pen/(a.g*10) : null;
+    a.sh  = a.g ? a.t/a.g : null;
+    return a;
+  }).sort(function(x,y){ return (y.gb==null?-1:y.gb) - (x.gb==null?-1:x.gb); });
+})();
+var namedJ = byJudge.filter(function(a){ return a.j.charAt(0)!=='—' && a.gb!=null; });
+var jTop = namedJ[0], jBot = namedJ[namedJ.length-1];
+
+/* 01 находки */
+var blocks = [];
+if (GAMES) {
+  var parts = byConf.filter(function(x){ return x.g; }).map(function(x){
+    return NAMEC[x.c]+' <b>'+x.t+'/'+x.g+'</b>'; }).join(', ');
+  blocks.push([pc(TOWN/GAMES), 'Город выигрывает треть игр',
+    'За сезон город взял <b>'+TOWN+'</b> из <b>'+GAMES+'</b> игр. По регионам: '+parts+
+    '. Причина — либо малые закрытые составы по десять человек, либо обычная дисперсия.']);
+}
+if (jTop && jBot && jBot.gb) {
+  blocks.push(['×'+(jTop.gb/jBot.gb).toFixed(1), 'Рука судьи различается',
+    'Самый щедрый — <b>'+esc(jTop.j)+'</b> ('+f3(jTop.gb)+' допа на посадку), самый сдержанный — <b>'+
+    esc(jBot.j)+'</b> ('+f3(jBot.gb)+'). Поэтому сырые баллы игроков из разных серий не сравниваются — только остатки против нормы своей серии.']);
+}
+var fat = PL.filter(function(s){ return s.gb!=null; }).slice().sort(function(a,b){ return b.gb-a.gb; });
+if (fat.length) {
+  var hi=fat[0], lo=fat[fat.length-1];
+  blocks.push([f3(hi.gb), 'Самая щедрая серия',
+    '<b>'+esc(hi.city)+'</b> '+dm(hi.date)+(hi.j?' (судья '+esc(hi.j)+')':'')+' — '+f3(hi.gb)+' допа на посадку; самая сдержанная — <b>'+
+    esc(lo.city)+'</b> '+dm(lo.date)+(lo.j?' (судья '+esc(lo.j)+')':'')+', '+f3(lo.gb)+'. Разброс внутри сезона больше, чем между регионами.']);
+}
+blocks.push(['+0.115', 'KEX · самый большой остаток',
+  'Больше нормы собственных серий на <b>0.115 допа за игру</b> (p=0.0002 — единственный значимый результат из 24 проверенных). Доп в 15 посадках из 20 при средней по лиге 45%. <i>Снимок исследования 10.09, не пересчитывается.</i>']);
+$('#blocks').innerHTML = blocks.map(function(x){
+  return '<div class="blk"><div class="big">'+x[0]+'</div><div class="bt">'+x[1]+'</div><div class="bb">'+x[2]+'</div></div>';
+}).join('');
+
+/* 02 серии */
+$('#sertbl').innerHTML = '<table><thead><tr><th>Серия</th><th>Регион</th><th>Судья</th><th>Игр</th><th>Победы города</th><th>Доп/посадку</th><th>Штрафы</th></tr></thead><tbody>'+
+  PL.slice().sort(function(a,b){ return a.date < b.date ? 1 : -1; }).map(function(s){
+    var sh = s.games ? (s.town||0)/s.games : null;
+    return '<tr'+(s.semi?' class="semirow"':'')+'><td class="nm">'+(FL[s.fl]||'')+' '+esc(s.city)+' · '+dm(s.date)+'</td>'+
+      '<td class="lo">'+esc(NAMEC[s.c]||s.c)+'</td>'+
+      '<td class="lo">'+esc(s.j||'—')+'</td>'+
+      '<td>'+(s.games||'—')+'</td>'+
+      '<td class="'+(sh!=null&&sh<=0.2?'zero':'')+'">'+(s.town==null?'—':s.town+' из '+s.games+' · '+pc(sh))+'</td>'+
+      '<td class="hi">'+f3(s.gb)+'</td>'+
+      '<td class="lo">'+(s.pen==null?'—':s.pen.toFixed(1))+'</td></tr>';
+  }).join('')+'</tbody></table>';
+$('#serleg').innerHTML = 'Доп на посадку — судейские баллы «за качество игры», делённые на число посадок серии (в каждой серии '+
+  GAMES/PL.length+' игр по 10 человек). Штрафы — сумма снятых баллов за всю серию. По лиге сейчас: доп <b style="color:#fff">'+
+  f3(PL.reduce(function(a,s){ return a+(s.gb!=null?s.gb*(s.games||0)*10:0); },0)/SEATS)+'</b>, победы города <b style="color:#fff">'+
+  pc(TOWN/GAMES)+'</b>.';
+
+/* 03 квоты — вшитый снимок */
 $('#qtbl').innerHTML='<table><thead><tr><th>Регион</th><th>Игроков</th><th>Прогноз</th><th>Топ-50</th><th>Топ-100</th><th>Лучший</th><th>Мест</th><th>На место</th></tr></thead><tbody>'+
  D.quotas.map(function(r){return '<tr><td class="nm">'+esc(r[0])+'</td><td>'+r[1]+'</td><td>'+esc(r[2])+'</td>'+
   '<td class="'+(r[3]===0?'zero':'')+'">'+r[3]+'</td><td>'+r[4]+'</td><td>'+esc(r[5])+'</td><td>'+r[6]+'</td><td>'+esc(r[7])+'</td></tr>';}).join('')+'</tbody></table>';
 
-$('#jtbl').innerHTML='<table><thead><tr><th>Судья</th><th>Серий</th><th>Доп/посадку</th><th>% с допом</th><th>При поражении</th><th>Жирных ≥0.3</th><th>Штраф/пос.</th></tr></thead><tbody>'+
- D.judges.map(function(j){return '<tr><td class="nm">'+esc(j.judge)+'</td><td>'+(j.seats/100)+'</td><td>'+f3(j.gb_per)+'</td>'+
-  '<td>'+Math.round(j.posShare*100)+'%</td><td>'+f3(j.gbL_per)+'</td><td>'+Math.round(j.fatShare*100)+'%</td><td>'+f3(j.pen_per)+'</td></tr>';}).join('')+'</tbody></table>';
+/* 04 судьи — живая таблица */
+$('#jtbl').innerHTML = '<table><thead><tr><th>Судья</th><th>Серий</th><th>Игр</th><th>Доп/посадку</th><th>Штраф/посадку</th><th>Победы города</th></tr></thead><tbody>'+
+  byJudge.map(function(a){
+    return '<tr><td class="nm">'+esc(a.j)+'</td><td>'+a.n+'</td><td>'+a.g+'</td>'+
+      '<td class="hi">'+f3(a.gb)+'</td><td class="lo">'+f3(a.pp)+'</td>'+
+      '<td>'+(a.sh==null?'—':a.t+' из '+a.g+' · '+pc(a.sh))+'</td></tr>';
+  }).join('')+'</tbody></table>';
+
+/* 04б глубокий разбор — вшитый снимок исследования */
+(function(){
+  var deep = D.judges||[];
+  var cover = deep.reduce(function(a,j){ return a + ((j.series||[]).length); }, 0);
+  $('#jsnapnote').textContent = 'вшитый снимок · ' + PLU(cover,'серия','серии','серий') + ' из ' + PL.length;
+  $('#jdeep').innerHTML = '<table><thead><tr><th>Судья</th><th>Серий</th><th>Доп/посадку</th><th>% с допом</th><th>При поражении</th><th>Жирных ≥0.3</th><th>Штраф/пос.</th></tr></thead><tbody>'+
+    deep.map(function(j){ return '<tr><td class="nm">'+esc(j.judge)+'</td><td>'+(j.seats/100)+'</td><td>'+f3(j.gb_per)+'</td>'+
+      '<td>'+Math.round(j.posShare*100)+'%</td><td>'+f3(j.gbL_per)+'</td><td>'+Math.round(j.fatShare*100)+'%</td><td>'+f3(j.pen_per)+'</td></tr>';}).join('')+'</tbody></table>';
+})();
+
+/* 05 метод — счётчики из данных */
+$('#method').innerHTML = 'Протоколы <b>'+PLU(PL.length,'сыгранной серии','сыгранных серий','сыгранных серий')+
+  '</b> контура 757 на mafgame.org — '+GAMES+' игр, '+SEATS+' посадок. Таблица серий, таблица судей и находки выше считаются из этих протоколов при каждой загрузке страницы и обновляются вместе с данными (снимок '+esc(D.snap)+
+  '). Сверено с официальными таблицами серий 1:1. Судьи, взносы, календарь и регламент — из канала лиги. '+
+  'Вшитыми снимками остались две вещи, их считает отдельное исследование: квоты и сила регионов (рейтинг 03.08) и глубокий разбор допов по каждой посадке — остатки против нормы страты, перестановочный тест с поправкой Бенджамини-Хохберга.';
 
 </script>
 </body>
