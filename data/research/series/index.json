@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-09-28",
+ "snapshot": "2026-10-05",
  "parents": [
   {
    "file": "2025_478.json",
@@ -163,7 +163,7 @@
    "start_date": "2026-11-07",
    "stars": 2,
    "series": 5,
-   "played": 4,
+   "played": 5,
    "final": true
   },
   {
@@ -173,8 +173,8 @@
    "name": "German Mafia Cup Europa Edition 2026",
    "start_date": "2026-11-14",
    "stars": 4,
-   "series": 26,
-   "played": 22,
+   "series": 27,
+   "played": 25,
    "final": true
   },
   {
@@ -185,7 +185,7 @@
    "start_date": "2026-11-21",
    "stars": 4,
    "series": 19,
-   "played": 15,
+   "played": 17,
    "final": true
   },
   {
@@ -217,7 +217,7 @@
    "name": "ЛЗГ Лига Западной Германии 2026",
    "start_date": "2026-12-05",
    "stars": 2,
-   "series": 7,
+   "series": 6,
    "played": 5,
    "final": true
   },
@@ -229,7 +229,7 @@
    "start_date": "2026-12-19",
    "stars": 2,
    "series": 11,
-   "played": 6,
+   "played": 8,
    "final": true
   }
  ],
