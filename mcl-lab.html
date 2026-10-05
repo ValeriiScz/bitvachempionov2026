@@ -500,10 +500,10 @@ a:hover .sithumb{filter:brightness(1.12)}
     <div class="livenote">считается из протоколов</div>
     <div class="tw" id="jtbl"></div>
     <div class="legend">ЛХ (0.25 и 0.4 за угаданных чёрных) и Ci (компенсация ранних смертей) — автоматика платформы, в «щедрость судьи» не входят: в допе учтены только судейские баллы.</div>
-    <h3 class="jsubh">Глубокий разбор допов</h3>
+    <h3 class="jsubh">Разбор по каждой посадке</h3>
     <div class="snapnote" id="jsnapnote">вшитый снимок</div>
     <div class="tw" id="jdeep"></div>
-    <div class="legend">Эти три колонки считаются по каждой отдельной посадке, а не по итогу серии, поэтому роботом не пересчитываются — нужен отдельный проход по поигровым протоколам. Обновляются вручную вместе с исследованием допов.</div>
+    <div class="legend">Эти колонки считаются по каждой отдельной посадке, а не по итогу серии: «% с допом» — доля посадок, где судья что-то дал, «жирных» — где дал 0.3 и больше, «при поражении» — средний доп в проигранных играх. Роботом не пересчитываются — нужен отдельный проход по поигровым протоколам.</div>
   </section>
   <section>
     <div class="sechead"><div class="no">05</div><h2 class="h">Данные и метод</h2><div class="line"></div></div>
@@ -528,7 +528,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20261005c"></script>
+<script src="data/mcl2026.js?v=20261005d"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -673,7 +673,12 @@ $('#jtbl').innerHTML = '<table><thead><tr><th>Судья</th><th>Серий</th>
 (function(){
   var deep = D.judges||[];
   var cover = deep.reduce(function(a,j){ return a + ((j.series||[]).length); }, 0);
-  $('#jsnapnote').textContent = 'вшитый снимок · ' + PLU(cover,'серия','серии','серий') + ' из ' + PL.length;
+  var full  = cover >= PL.length;
+  var note  = $('#jsnapnote');
+  note.textContent = full
+    ? 'по посадкам · все ' + PLU(cover,'серия','серии','серий') + (D.judgesSnap ? ' · проход ' + D.judgesSnap : '')
+    : 'вшитый снимок · ' + PLU(cover,'серия','серии','серий') + ' из ' + PL.length;
+  if (full) note.className = 'livenote';
   $('#jdeep').innerHTML = '<table><thead><tr><th>Судья</th><th>Серий</th><th>Доп/посадку</th><th>% с допом</th><th>При поражении</th><th>Жирных ≥0.3</th><th>Штраф/пос.</th></tr></thead><tbody>'+
     deep.map(function(j){ return '<tr><td class="nm">'+esc(j.judge)+'</td><td>'+(j.seats/100)+'</td><td>'+f3(j.gb_per)+'</td>'+
       '<td>'+Math.round(j.posShare*100)+'%</td><td>'+f3(j.gbL_per)+'</td><td>'+Math.round(j.fatShare*100)+'%</td><td>'+f3(j.pen_per)+'</td></tr>';}).join('')+'</tbody></table>';
