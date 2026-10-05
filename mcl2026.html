@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl2026.html · v3.5 · 2026-10-05 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. v3.5: слоты полуфинальных регионов заполняются итогом 50/50 (conf[c].semiResult), мини-таблица сыгранного полуфинала показывает итог. Генератор: build_site.py -->
+<!-- MafgameStat · mcl2026.html · v3.6 · 2026-10-05 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. v3.5: слоты полуфинальных регионов заполняются итогом 50/50 (conf[c].semiResult), мини-таблица сыгранного полуфинала показывает итог. v3.6: полуфинал в карусели подписан полуфиналом, подводка к составу считается от данных. Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -542,7 +542,7 @@ a:hover .sithumb{filter:brightness(1.12)}
 
 <section id="squad"><div class="wrap">
   <div class="sechead"><div class="no">03</div><h2 class="h">Состав финала</h2><div class="line"></div></div>
-  <p class="lead">В финале 10 мест, и три региона идут к ним разными дорогами. Central Europe отдаёт свои <b>6</b> прямо по зачёту серий — таблица ниже это срез на дату, а не итог. Israel и Cyprus сначала играют полуфинал: оттуда в Прагу едут <b>3</b> и <b>1</b>. Эти слоты пока стоят пустыми.</p>
+  <p class="lead">В финале 10 мест, и три региона идут к ним разными дорогами. Central Europe отдаёт свои <b>6</b> прямо по зачёту серий — таблица ниже это срез на дату, а не итог. Israel и Cyprus сначала играют полуфинал: оттуда в Прагу едут <b>3</b> и <b>1</b>. <span id="squadtail">Эти слоты пока стоят пустыми.</span></p>
   <div class="routes" id="routes"></div>
   <div class="squad" id="squadgrid"></div>
 </div></section>
@@ -590,7 +590,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20261005a"></script>
+<script src="data/mcl2026.js?v=20261005b"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -604,6 +604,8 @@ var MON=['января','февраля','марта','апреля','мая','�
 var MONN=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 var dm=function(d){return d.slice(8,10)+'.'+d.slice(5,7);};
 var scode=function(s){return s.c+'/'+String(s.num<10?'0'+s.num:s.num);};
+/* у полуфинала нет номера серии: подписываем его полуфиналом, иначе выходит «серия IL/00» */
+var slabel=function(s){return s.semi?'полуфинал':'серия '+scode(s);};
 if($('#snap')) $('#snap').textContent=D.snap;
 /* плавающая кнопка «наверх» */
 (function(){var f=$('#upfab'); if(!f) return;
@@ -671,7 +673,7 @@ $('#confs').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
     if(tg) im='<a class="carlink" href="'+tg+'" target="_blank" rel="noopener" title="открыть пост в канале">'+im+'<span class="tgb">пост в канале &#8599;</span></a>';
     return '<div class="carslide">'+im+
       '<div class="cap"><div class="t">'+esc(s.top[0][0])+' <b>'+f2(s.top[0][1])+'</b></div>'+
-      '<div class="s">'+(FL[s.fl]||'')+' '+esc(s.city)+' · серия '+scode(s)+' · судья '+esc(s.j)+' · '+dm(s.date)+'</div></div></div>';
+      '<div class="s">'+(FL[s.fl]||'')+' '+esc(s.city)+' · '+slabel(s)+' · судья '+esc(s.j)+' · '+dm(s.date)+'</div></div></div>';
   }).join('');
   dots.innerHTML=list.map(function(s,n){return '<button class="cardot'+(n===0?' on':'')+'" data-i="'+n+'" aria-label="'+esc(s.city)+'"></button>';}).join('');
   var go=function(n){ i=(n+list.length)%list.length; track.style.transform='translateX(-'+(i*100)+'%)';
@@ -724,6 +726,23 @@ $('#squadgrid').innerHTML=D.squad.map(function(s,i){
     '<div class="slot">'+esc(s.slot)+'</div><div class="body"><div class="nm">'+esc(s.n)+'</div>'+
     '<div class="st">'+st+'</div></div></div>';
 }).join('');
+
+/* хвост подводки к составу: текст про «пустые слоты» врал, как только полуфинал
+   сыгран. Считаем его от данных — conf[c].semiResult, — чтобы не протухал. */
+(function(){
+  var done=[],wait=[];
+  ['IL','CY'].forEach(function(c){
+    var k=D.conf[c]; if(!k||k.route!=='semi') return;
+    var nm=(c==='IL'?'Israel':'Cyprus');
+    if(k.semiResult&&k.semiResult.length) done.push(nm);
+    else wait.push(nm+(k.semiDate?' '+dm(k.semiDate):''));
+  });
+  var t=[];
+  if(done.length) t.push(done.join(' и ')+(done.length>1?' свои полуфиналы уже сыграли':' свой полуфинал уже сыграл')+', эти места заняты');
+  if(wait.length) t.push(wait.join(' и ')+(wait.length>1?' ждут свои полуфиналы':' ждёт свой полуфинал'));
+  var el=$('#squadtail');
+  if(el&&t.length) el.textContent=t.join('; ').replace(/^./,function(m){return m.toUpperCase();})+'.';
+})();
 
 /* 04 мини-таблицы зоны */
 $('#minis').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];

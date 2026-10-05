@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl-series.html · v1.3 · 2026-09-21 · MCL Europe 2026, серии и календарь: сетка выходных с раскрытием, список серий с фото и деталями. Данные: data/mcl2026.js (снимок 10.09). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-series.html · v1.4 · 2026-10-05 · MCL Europe 2026, серии и календарь: сетка выходных с раскрытием, список серий с фото и деталями. v1.4: в «Таблице и деталях» раскрывается полная таблица серии из data/mcl2026.js (поле r), полуфинал подписан полуфиналом, а не номером серии. Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -288,6 +288,28 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .dg .v{font-family:var(--ff-n);font-weight:700;font-size:19px;color:#fff;margin-top:3px}
 .dg .h2n{font-size:11.5px;color:var(--dim);margin-top:4px;line-height:1.5}
 
+/* таблица серии: полный протокол прямо на странице, без ухода на mafgame */
+.srt{border:1px solid rgba(255,255,255,.08);background:var(--panel);margin:0 0 12px}
+.srtcap{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;justify-content:space-between;
+  padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+.srtcap b{font-family:var(--ff-n);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--pur-hi)}
+.srtcap s{text-decoration:none;font-size:11.5px;color:var(--dim)}
+.srth,.srtr{display:grid;grid-template-columns:34px minmax(0,1fr) 78px;gap:10px;align-items:center;padding:7px 12px}
+.srth{background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.06)}
+.srth div{font-family:var(--ff-n);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.srth .r,.srtr .r{text-align:right}
+.srtr{border-bottom:1px solid rgba(255,255,255,.04)}
+.srtr:last-child{border-bottom:0}
+.srtr:hover{background:rgba(255,255,255,.03)}
+.srtr .rk{font-family:var(--ff-n);font-weight:700;font-size:13px;color:var(--dim);text-align:center}
+.srtr .nk{font-size:14px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.srtr .sc{font-family:var(--ff-n);font-weight:700;font-size:15px;color:var(--mut)}
+.srtr.top .rk{color:var(--pur-hi)}
+.srtr.top .sc{color:#fff}
+.srtr.win{background:linear-gradient(90deg,rgba(129,34,118,.22),transparent 60%)}
+.srtr.win .nk{font-weight:700}
+@media (max-width:560px){.srth,.srtr{grid-template-columns:26px minmax(0,1fr) 62px;gap:7px;padding:7px 9px}}
+
 /* календарь */
 .cal{display:grid;gap:14px}
 .month{border:1px solid var(--line);background:var(--panel);padding:14px}
@@ -489,7 +511,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <div class="wrap in">
     <div class="eyebrow">IX season · серии и календарь</div>
     <h1 class="h">Серии</h1>
-    <div class="sub">Двенадцать сыгранных серий и всё, что впереди. Календарь показывает только выходные — в будни серий не бывает. Клик по дню открывает детали, клик по <b>«Таблица»</b> — официальный протокол на mafgame.</div>
+    <div class="sub">Двенадцать сыгранных серий и всё, что впереди. Календарь показывает только выходные — в будни серий не бывает. Клик по дню открывает детали, <b>«Таблица и детали»</b> раскрывает полную таблицу серии и метрики судейства, <b>«Протокол»</b> ведёт на mafgame.</div>
   </div></div>
 <main><div class="wrap">
   <section style="padding-top:34px">
@@ -536,7 +558,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20261005a"></script>
+<script src="data/mcl2026.js?v=20261005b"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -550,6 +572,8 @@ var MON=['января','февраля','марта','апреля','мая','�
 var MONN=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 var dm=function(d){return d.slice(8,10)+'.'+d.slice(5,7);};
 var scode=function(s){return s.c+'/'+String(s.num<10?'0'+s.num:s.num);};
+/* у полуфинала нет номера серии: подписываем его полуфиналом, иначе выходит «серия IL/00» */
+var slabel=function(s){return s.semi?'полуфинал':'серия '+scode(s);};
 if($('#snap')) $('#snap').textContent=D.snap;
 /* плавающая кнопка «наверх» */
 (function(){var f=$('#upfab'); if(!f) return;
@@ -649,6 +673,22 @@ if($('#snap')) $('#snap').textContent=D.snap;
   });
 })();
 
+/* таблица серии: s.r — полный протокол этапа (uid, ник, балл), отсортирован по убыванию.
+   Раньше её можно было увидеть только на mafgame, теперь она раскрывается на месте. */
+function srtable(s){
+  var r=s.r||[]; if(!r.length) return '';
+  var out=['<div class="srt"><div class="srtcap"><b>Таблица '+(s.semi?'полуфинала':'серии')+'</b>'+
+    '<s>'+r.length+' '+(r.length%10===1&&r.length%100!==11?'игрок':(r.length%10>=2&&r.length%10<=4&&(r.length%100<10||r.length%100>=20)?'игрока':'игроков'))+
+    ' · 10 игр</s></div>'+
+    '<div class="srth"><div>#</div><div>Игрок</div><div class="r">Балл</div></div>'];
+  r.forEach(function(x,i){
+    out.push('<div class="srtr'+(i<3?' top':'')+(i===0?' win':'')+'">'+
+      '<div class="rk">'+(i+1)+'</div><div class="nk">'+esc(x[1])+'</div>'+
+      '<div class="sc r">'+f2(x[2])+'</div></div>');
+  });
+  return out.join('')+'</div>';
+}
+
 /* ── список серий ── */
 $('#slist').innerHTML=D.series.slice().reverse().map(function(s){
   var medal=['🥇','🥈','🥉'];
@@ -658,15 +698,15 @@ $('#slist').innerHTML=D.series.slice().reverse().map(function(s){
   if(s.img&&s.post) thumb='<a href="https://t.me/mafiamcl/'+s.post+'" target="_blank" rel="noopener" title="открыть пост в канале">'+thumb+'</a>';
   return '<div class="sitem'+(s.nores?' nod':'')+'" data-id="'+s.id+'">'+
     '<div class="sihead">'+thumb+
-      '<div><div class="simeta">'+dm(s.date)+' · '+(FL[s.fl]||'')+' <b>'+esc(s.city)+'</b> · '+esc(D.conf[s.c].name)+' · серия '+scode(s)+(s.j?' · судья '+esc(s.j):'')+'</div>'+
+      '<div><div class="simeta">'+dm(s.date)+' · '+(FL[s.fl]||'')+' <b>'+esc(s.city)+'</b> · '+esc(D.conf[s.c].name)+' · '+slabel(s)+(s.j?' · судья '+esc(s.j):'')+'</div>'+
       '<div class="pod">'+pod+'</div></div>'+
       '<div class="siact">'+
-        '<a class="tblink" href="https://mafgame.org/tournaments/'+s.id+'/results" target="_blank" rel="noopener">Таблица &#8599;</a>'+
+        '<a class="tblink" href="https://mafgame.org/tournaments/'+s.id+'/results" target="_blank" rel="noopener">Протокол &#8599;</a>'+
         (s.post?'<a class="tblink tgl" href="https://t.me/mafiamcl/'+s.post+'" target="_blank" rel="noopener">Пост &#8599;</a>':'')+
-        (s.nores?'':'<button class="ibtn" data-t="'+s.id+'"><i>i</i> Детали</button>')+
+        (s.nores?'':'<button class="ibtn" data-t="'+s.id+'"><i>i</i> Таблица и детали</button>')+
       '</div>'+
     '</div>'+
-    (s.nores?'':'<div class="sidet"><div class="dgrid">'+
+    (s.nores?'':'<div class="sidet">'+srtable(s)+'<div class="dgrid">'+
       '<div class="dg"><div class="k">Побед города</div><div class="v">'+(s.town==null?'—':s.town+' из 10')+'</div><div class="h2n">Сколько игр из десяти выиграла красная команда. По всем сериям сезона — 32%.</div></div>'+
       '<div class="dg"><div class="k">Средний доп судьи</div><div class="v">'+f3(s.gb)+'</div><div class="h2n">Дополнительные баллы «за качество игры» в среднем на одну посадку. По лиге сезона — 0.106.</div></div>'+
       '<div class="dg"><div class="k">Доп при поражении</div><div class="v">'+f3(s.gbl)+'</div><div class="h2n">Тот же доп, но только в проигранных играх — показывает, платит ли судья за игру без результата.</div></div>'+
