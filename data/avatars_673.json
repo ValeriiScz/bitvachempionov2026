@@ -30,7 +30,21 @@
   "Mermaid": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1063/69cfe81d666c583bea5148278d07fb3f07e09aff.png",
   "Vito": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2394/2c0ff14c4f6a136f4595b700263817fb2a725671.png"
  },
- "judges": {},
+ "judges": {
+  "1": {
+   "name": "YeS",
+   "role": "Главный судья",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_101/07fc4320b90a9dde889cabc002d1cec60c7a5583.png"
+  },
+  "2": {
+   "name": "Г-жа Кот",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2249/24559f189d42915df543dfc3851b26a01cc60132.png"
+  },
+  "3": {
+   "name": "Весная",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2241/30ff2d3d73b10ff630dee6fa64dff21e936489d3.png"
+  }
+ },
  "duty": null,
  "commentator": null,
  "referees": [

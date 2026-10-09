@@ -519,13 +519,14 @@
    "country": "",
    "flag": "",
    "markery_id": null,
-   "r_elo_cur": null,
+   "r_elo_cur": 1000,
    "r_tier": null,
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 27,
-   "mk_match": "нет в markery"
+   "mk_match": "новичок: стартовый ELO 1000 (в markery пока нет игр)",
+   "elo_start": true
   },
   {
    "nick": "Vivа",
@@ -598,6 +599,7 @@
    "D": 12,
    "—": 1
   },
-  "snapshot": "2026-10-09"
+  "snapshot": "2026-10-09",
+  "start_elo_note": "VVS — новый игрок без истории в markery: в расчётах силы столов стоит стартовый ELO 1000 (с ним начинают все новички), тира нет."
  }
 }

@@ -115,6 +115,11 @@
   "Vito": {
    "global": 975,
    "tier": "D"
+  },
+  "VVS": {
+   "global": 1000,
+   "tier": null,
+   "start": true
   }
  },
  "snapshot": "2026-10-09"

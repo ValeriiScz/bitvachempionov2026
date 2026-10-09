@@ -959,7 +959,7 @@ const RENDER={
       <div class="segwrap" id="rTop"></div>
       <div class="tfilter" id="tfil"></div>
       <div class="panel scrollT" style="padding:0"><table class="tbl" id="rtable"><thead><tr id="rhr"></tr></thead><tbody id="rtb"></tbody></table></div>
-      <div class="note">Рейтинг markery — снимок ${esc(D.stats.snapshot||'2026-09-06')}. «ELO тек» — текущий ELO; «Ранг» — тир L/S…F (L — 1600+). Тап по «Ранг» группирует по тирам. «—» — нет данных markery (новые игроки без истории игр). Составы и аватарки — с mafgame.org. <b>Тап по игроку</b> — его страница: столы, рассадка, соперники, статистика.</div></div>`;},
+      <div class="note">Рейтинг markery — снимок ${esc(D.stats.snapshot||'2026-09-06')}. «ELO тек» — текущий ELO; «Ранг» — тир L/S…F (L — 1600+). Тап по «Ранг» группирует по тирам. VVS — новичок без истории в markery: стоит стартовый ELO 1000 (с ним начинают все), ранга нет. Составы и аватарки — с mafgame.org. <b>Тап по игроку</b> — его страница: столы, рассадка, соперники, статистика.</div></div>`;},
   together(){return `<div class="view"><div class="secttl">&#8644; Кто с кем за столом</div><div id="togTop"></div><div id="togArea"></div></div>`;},
   stages(){
     if(!D.gp)return statsEmpty('&#9873; Таблица');

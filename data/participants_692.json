@@ -439,14 +439,14 @@
    "cc": "",
    "country": "",
    "flag": "",
-   "markery_id": null,
-   "r_elo_cur": null,
-   "r_tier": null,
+   "markery_id": 21387,
+   "r_elo_cur": 997,
+   "r_tier": "C",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 23,
-   "mk_match": "нет"
+   "mk_match": "Валерий: markery 21387"
   },
   {
    "nick": "Jerry Hurper",
@@ -622,18 +622,17 @@
  ],
  "stats": {
   "n_conf": 32,
-  "mk_avg": 1101.3,
-  "mk_n": 31,
-  "mk_median": 1016,
+  "mk_avg": 1098.1,
+  "mk_n": 32,
+  "mk_median": 1016.0,
   "tiers": {
    "L": 1,
    "A": 5,
    "B": 3,
    "D": 8,
-   "C": 8,
+   "C": 9,
    "E": 3,
-   "S": 3,
-   "—": 1
+   "S": 3
   },
   "snapshot": "2026-10-09"
  }
