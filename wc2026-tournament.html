@@ -1590,7 +1590,8 @@ function stub(id){const s=SECTIONS.find(x=>x.id===id)||{};
    ══════════════════════════════════════════════════════════════════════════ */
 const CAT=[null,{n:'Элитный',k:'k1',d:'самые сильные составы турнира'},{n:'Сильный',k:'k2',d:'выше среднего'},{n:'Средний',k:'k3',d:'типичный стол ЧМ'},{n:'Ровный',k:'k4',d:'чуть спокойнее среднего'},{n:'Мягкий',k:'k5',d:'самые спокойные составы'}];
 /* Рассадка (сила соперников без самого игрока) — названия Валерия, 1 = самые сильные соперники */
-const CATO=[null,{n:'Экстремальная',k:'k1'},{n:'Плотная',k:'k2'},{n:'Ровная',k:'k3'},{n:'Помягче',k:'k4'},{n:'Спокойная',k:'k5'}];
+/* n — к слову «рассадка» (ж.р.), p — к слову «соперники» (мн.ч.): в колонках и метках про соперников берём p */
+const CATO=[null,{n:'Экстремальная',p:'Экстремальные',k:'k1'},{n:'Плотная',p:'Плотные',k:'k2'},{n:'Ровная',p:'Ровные',k:'k3'},{n:'Помягче',p:'Помягче',k:'k4'},{n:'Спокойная',p:'Спокойные',k:'k5'}];
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
 function median(a){const q=a.slice().sort((x,y)=>x-y);const m=q.length>>1;return q.length?(q.length%2?q[m]:(q[m-1]+q[m])/2):0;}
 /* Сила столов: две линейки. TS — весь стол (10 ELO), категория по рангу среди всех столов квалификации равными долями (55 → по 11).
@@ -1620,7 +1621,7 @@ function computeStrength(){
 }
 function catBadge(g,t,withElo){const T=D.TS&&D.TS[g+'-'+t];if(!T)return '';const c=CAT[T.cat];
   return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${t}" title="${c.n} стол · средний ELO ${Math.round(T.avg)} · #${T.rank} из ${D.tblN} столов квалификации">${c.n}${withElo?` <small>Ø ${Math.round(T.avg)}</small>`:''}</span>`;}
-function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const c=CATO[o.cat];return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${o.t}" data-p="${esc(nick)}" title="соперники без вас: средний ELO ${Math.round(o.avg)}">${c.n}</span>`;}
+function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const c=CATO[o.cat];return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${o.t}" data-p="${esc(nick)}" title="соперники без вас: средний ELO ${Math.round(o.avg)}">${c.p}</span>`;}
 function luckVerdict(L){const d=L.d;const ad=Math.abs(Math.round(d));
   if(d>=22)return {t:'экстремальная рассадка',s:`соперники в среднем на ${ad} ELO сильнее, чем ждали бы при случайном жребии`,k:'k1'};
   if(d>=10)return {t:'плотная рассадка',s:`соперники на ${ad} ELO сильнее ожидания`,k:'k2'};
@@ -1629,12 +1630,12 @@ function luckVerdict(L){const d=L.d;const ad=Math.abs(Math.round(d));
   return {t:'ровная рассадка',s:`соперники практически как ждали (${d>=0?'+':''}${Math.round(d)} ELO к ожиданию)`,k:'k3'};}
 function luckSquares(L,big){return `<span class="lsq${big?' big':''}">`+L.list.map(x=>`<i class="pk ${CATO[x.cat].k}" data-g="${x.g}" data-t="${x.t}" data-p="${esc(x.n)}" title="игра ${x.g} · стол ${ROMAN[x.t]} · ${CATO[x.cat].n.toLowerCase()} рассадка (соперники Ø ${Math.round(x.avg)})"><b>${big?x.g:''}</b></i>`).join('')+'</span>';}
 function luckPanel(name){const L=D.LUCK&&D.LUCK[name];if(!L)return '';const v=luckVerdict(L);
-  const dist=[5,4,3,2,1].map(c=>`<span class="kb ${CATO[c].k}">${CATO[c].n} <b>${L.cnt[c]}</b></span>`).join('');
+  const dist=[5,4,3,2,1].map(c=>`<span class="kb ${CATO[c].k}">${CATO[c].p} <b>${L.cnt[c]}</b></span>`).join('');
   return `<div class="panel"><h3>Рассадка · сила соперников</h3>
     <div class="luckhead"><span class="kb big ${v.k}">${v.t}</span><span class="jbig">${Math.round(L.avg)}<small> средний ELO девяти соперников · ждали ${Math.round(L.exp)} · #${L.rank} из ${D.luckOrder.length} по плотности</small></span></div>
     <div class="note" style="margin:6px 0 10px">${v.s}. Считаем без самого игрока, а «ждали» — это его личное ожидание при случайном жребии: (сумма ELO всех − свой)/54. Так топы не выглядят «в мягкой рассадке» только потому, что не могут сидеть против самих себя.</div>
     <div class="nk" style="margin-bottom:6px">По играм (тап — кто за столом)</div>${luckSquares(L,true)}
-    <div class="nk" style="margin:12px 0 6px">Сколько раз в какой категории</div><div class="kbrow">${dist}</div>
+    <div class="nk" style="margin:12px 0 6px">Соперники по играм — сколько раз какие</div><div class="kbrow">${dist}</div>
     <div class="note" style="margin-top:8px"><span class="lnk" style="cursor:pointer" onclick="show('luck')">Все 55 игроков по рассадке →</span></div></div>`;}
 function chooserPanel(){return `<div class="chooser"><div class="chs on"><span class="chk">вы здесь</span><b>Страница турнира</b><small>рассадка и сила столов · карточки · live-результаты · судьи</small></div><a class="chs" href="wc2026-cards.html"><span class="chk">v1 · 08.09</span><b>Карточки по странам →</b><small>13 сборных, перевёртыши, «12 месяцев / карьера» — та самая страница, как была</small></a></div>`;}
 function strengthTeaser(){if(!D.TS||!D.tblN)return '';
