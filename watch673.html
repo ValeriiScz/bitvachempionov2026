@@ -191,6 +191,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){addEvent
 </div>
 <div class="toast" id="toast"></div>
 <script src="data/streams.js"></script>
+<script src="data/gsheet.js"></script>
 <script src="data/live.js"></script>
 <script>
 /* ── 3. CFG ── */
@@ -216,6 +217,11 @@ async function load(first){
     D.players=(P&&P.players)||[];D.players.forEach(p=>D.P[p.nick]=p);D.tour=T||{};D.av=(A&&A.avatars)||{};D.refs=(A&&A.referees)||[];
   }
   try{const sj=await fetch('data/streams_'+CFG.id+'.json?cb='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null);if(sj&&sj.days){window.STREAMS_DB=window.STREAMS_DB||{};window.STREAMS_DB[CFG.id]=sj;}}catch(e){}
+  if(window.DOVOD_SHEET){ /* правки из Google-таблицы: эфиры и ELO игроков, без выкладки */
+    try{const [ov,ss]=await Promise.all([DOVOD_SHEET.players(CFG.id),DOVOD_SHEET.streams(CFG.id)]);
+      if(ov)DOVOD_SHEET.applyPlayers(D.players,ov);
+      if(ss&&ss.n){const b=Object.assign({gamesDay1:6,days:{}},(window.STREAMS_DB||{})[CFG.id]||{});b.days=JSON.parse(JSON.stringify(b.days||{}));Object.keys(ss.days).forEach(d=>{b.days[d]=Object.assign(b.days[d]||{},ss.days[d]);});if(ss.final)b.final=ss.final;b.test=false;window.STREAMS_DB[CFG.id]=b;}
+    }catch(e){}}
   let G=null;try{G=window.loadGames?await window.loadGames(CFG.id):null;}catch(e){}
   if(G&&G.games){D.games=G.games;D.live=!!G.live;}
   D.updated=new Date();
@@ -245,10 +251,11 @@ function gDay(gi){const st=SDB();const q=D.games.slice(0,gi+1).filter(x=>x.stage
 function streamId(table,gi){const st=SDB();if(!st)return null;if(isFinal(gi))return st.final||null;return ((st.days||{})[gDay(gi)]||{})[String(table)]||null;}
 function embedURL(id,muted){const base=/^live:/.test(id)?'https://www.youtube.com/embed/live_stream?channel='+encodeURIComponent(id.slice(5))+'&':'https://www.youtube.com/embed/'+encodeURIComponent(id)+'?';
   return base+'autoplay=1&mute='+(muted?1:0)+'&playsinline=1&rel=0&modestbranding=1&enablejsapi=1&origin='+encodeURIComponent(location.origin);}
-function watchURL(id){return /^live:/.test(id)?'https://www.youtube.com/channel/'+id.slice(5)+'/live':'https://www.youtube.com/watch?v='+id;}
+function watchURL(id){return window.ytWatchURL(id);}
 function playerHTML(table,gi,opts){
   const id=streamId(table,gi),fin=isFinal(gi);const j=judgeOf(table);
   const lab=`<div class="lab"><span>${fin?'Финал':'Стол '+ROMAN[table]}</span>${S.follow&&tableOf(S.follow,gi)===table?`<span class="mf">★ ${esc(S.follow)}</span>`:''}${j&&!opts.multi?`<span>${esc(j)}</span>`:''}</div>`;
+  if(id&&/^url:/.test(id))return `<div class="pl" data-t="${table}">${lab}<div class="ph"><b>${fin?'Эфир финала':'Эфир стола '+ROMAN[table]}</b>Этот эфир нельзя встроить на страницу — откройте его на YouTube.<a href="${esc(id.slice(4))}" target="_blank" rel="noopener">Смотреть на YouTube ↗</a></div></div>`;
   if(!id)return `<div class="pl" data-t="${table}">${lab}<div class="ph"><b>${fin?'Эфир финала':'Эфир стола '+ROMAN[table]}</b>Ссылка появится, когда организаторы запустят трансляцию — окно включится само.<a href="${CFG.yt}" target="_blank" rel="noopener">YouTube-канал ↗</a></div></div>`;
   const muted=opts.multi?(S.sound!==table):false;
   return `<div class="pl${opts.multi&&S.sound===table?' act':''}" data-t="${table}" data-id="${esc(id)}">${lab}${opts.multi?`<button class="snd${muted?'':' on'}" data-snd="${table}">${muted?'🔇 звук':'🔊 звук'}</button>`:''}<iframe src="${embedURL(id,muted)}" title="${fin?'Финал':'Стол '+table}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`;
