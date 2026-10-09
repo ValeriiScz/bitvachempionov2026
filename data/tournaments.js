@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v3.2 | 2026-10-09 | +673 Чемпионат Молдовы (theme dovod, t673/watch673, live 10–11.10) + 692 Four Seasons Central Cup и 687 Mediterranean GP (собираются, участники + ELO)
 // MafgameStat | tournaments.js | v3.1 | 2026-08-23 | 694 -> finished: чемпион Lюц 13.065 (Магнат 12.98, aptah 12.17); официальные таблицы вставлены, финал с коэффициентом x1.3
 // MafgameStat | tournaments.js | v3.0 | 2026-08-22 | +694 Central Euro Cup (Прага, финал серийника, live 22-23.08): 12 квал x 3 стола + финал 5, постер prague694, accent #c9a227, ce694; 634 -> finished (чемпион Европы YeS 15.205, RAMZES 15.195, разрыв 0.01)
 // MafgameStat | tournaments.js | v2.9 | 2026-07-16 | ЧЕ-634 -> upcoming(Скоро) премиум: постер Бонна, золотой accent, приз 3000€/5★, разлочены seating634/cards634/standings/results/roles/player; судьи столов
@@ -10,6 +11,94 @@
 // MafgameStat | tournaments.js | v2.5 | 2026-06-25 | 766->upcoming(Скоро)+разлок seating/cards/stat+live(in_progress)+store; fix player.html?t=693
 window.TOURNAMENTS_DB = {
   "tournaments": [
+    {
+      "id": "673",
+      "theme": "dovod",
+      "page": "t673.html",
+      "watch": "watch673.html",
+      "name": "Чемпионат Молдовы 2026",
+      "posterTitle": "Чемпионат|Молдовы",
+      "dates": "10–11 октября 2026",
+      "city": "Кишинёв",
+      "country": "Молдова",
+      "players": 30,
+      "days": 2,
+      "stars": 3,
+      "status": "upcoming",
+      "phase": 2,
+      "statusLabel": "Скоро · старт 10 октября",
+      "liveFrom": "2026-10-10",
+      "liveTo": "2026-10-11",
+      "eloAvg": 1020,
+      "eloN": 29,
+      "eloTotal": 30,
+      "organizer": "mafia.md · орг Весная, Г-жа Кот · главный судья YeS",
+      "format": "12 игр квалификации × 3 стола → финал 5 игр (топ-10, ×1.3)",
+      "mafgame": "https://mafgame.org/tournaments/673/view",
+      "note": "Рассадка квалификации опубликована. Результаты подтягиваются с mafgame вживую в дни турнира.",
+      "sections": [
+        {"href": "t673.html", "title": "Страница турнира", "desc": "Обзор · Моё · Игроки · Столы · Результаты — рассадка, сила столов, live-таблица"},
+        {"href": "watch673.html", "title": "▶ Смотровая · все эфиры", "desc": "Три стола в одном окне, «следить за игроком»"},
+        {"href": "participants.html?t=673", "title": "Участники и рейтинг", "desc": "30 игроков + ELO markery (снимок 09.10)"}
+      ],
+      "start": "2026-10-10"
+    },
+    {
+      "id": "692",
+      "theme": "dovod",
+      "name": "Four Seasons: Central Cup 2026",
+      "posterTitle": "Four Seasons|Central Cup",
+      "dates": "17–18 октября 2026",
+      "city": "Прага",
+      "country": "Чехия",
+      "players": 32,
+      "days": 2,
+      "stars": 4,
+      "prize": "750€",
+      "status": "gathering",
+      "phase": 3,
+      "statusLabel": "Собирается · 32 подтверждены",
+      "eloAvg": 1101,
+      "eloN": 31,
+      "eloTotal": 32,
+      "organizer": "Mafia club «Champions League» Prague · судьи YeS, Гармония и др.",
+      "mafgame": "https://mafgame.org/tournaments/692/view",
+      "note": "Страница турнира и смотровая откроются, когда mafgame опубликует рассадку.",
+      "sections": [
+        {"href": "participants.html?t=692", "title": "Участники и рейтинг", "desc": "32 игрока + ELO markery (снимок 09.10)"},
+        {"soon": true, "title": "Страница турнира", "desc": "рассадка, сила столов, live-результаты"},
+        {"soon": true, "title": "Смотровая · эфиры", "desc": "все столы в одном окне"}
+      ],
+      "start": "2026-10-17"
+    },
+    {
+      "id": "687",
+      "theme": "dovod",
+      "name": "Mediterranean Grand-Prix 2026",
+      "posterTitle": "Mediterranean|Grand-Prix",
+      "dates": "31 октября – 1 ноября 2026",
+      "city": "Лимасол",
+      "country": "Кипр",
+      "players": 46,
+      "days": 2,
+      "stars": 5,
+      "prize": "3000€",
+      "status": "gathering",
+      "phase": 3,
+      "statusLabel": "Собирается · 25 подтв. + 21 заявка",
+      "eloAvg": 1134,
+      "eloN": 42,
+      "eloTotal": 46,
+      "organizer": "Mafia Club Cyprus",
+      "mafgame": "https://mafgame.org/tournaments/687/view",
+      "note": "Ожидается 40 участников; в списке подтверждённые и заявки. Страница турнира откроется после рассадки.",
+      "sections": [
+        {"href": "participants.html?t=687", "title": "Участники и рейтинг", "desc": "подтверждённые и заявки + ELO markery (снимок 09.10)"},
+        {"soon": true, "title": "Страница турнира", "desc": "рассадка, сила столов, live-результаты"},
+        {"soon": true, "title": "Смотровая · эфиры", "desc": "все столы в одном окне"}
+      ],
+      "start": "2026-10-31"
+    },
     {
           "id": "694",
           "theme": "poster",

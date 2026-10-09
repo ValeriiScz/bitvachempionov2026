@@ -1,0 +1,121 @@
+{
+ "players": {
+  "Магнат": {
+   "global": 1162,
+   "tier": "B"
+  },
+  "KRASNII": {
+   "global": 1029,
+   "tier": "C"
+  },
+  "Urs": {
+   "global": 812,
+   "tier": "F"
+  },
+  "adapt": {
+   "global": 1022,
+   "tier": "C"
+  },
+  "TOPS": {
+   "global": 1016,
+   "tier": "C"
+  },
+  "Tripok": {
+   "global": 1222,
+   "tier": "A"
+  },
+  "DK": {
+   "global": 1020,
+   "tier": "C"
+  },
+  "Док": {
+   "global": 979,
+   "tier": "D"
+  },
+  "Арбуз": {
+   "global": 954,
+   "tier": "D"
+  },
+  "Repetitor": {
+   "global": 978,
+   "tier": "D"
+  },
+  "Goodman": {
+   "global": 955,
+   "tier": "D"
+  },
+  "DOVOD": {
+   "global": 1205,
+   "tier": "A"
+  },
+  "Akteur": {
+   "global": 992,
+   "tier": "D"
+  },
+  "Chudo": {
+   "global": 969,
+   "tier": "D"
+  },
+  "Север": {
+   "global": 996,
+   "tier": "C"
+  },
+  "Luca": {
+   "global": 1047,
+   "tier": "C"
+  },
+  "Xenon": {
+   "global": 980,
+   "tier": "D"
+  },
+  "Зима ❄️": {
+   "global": 1001,
+   "tier": "C"
+  },
+  "Rivierra": {
+   "global": 1016,
+   "tier": "C"
+  },
+  "Dron": {
+   "global": 1002,
+   "tier": "C"
+  },
+  "Maverick": {
+   "global": 1016,
+   "tier": "C"
+  },
+  "Grinch": {
+   "global": 974,
+   "tier": "D"
+  },
+  "КуКуСиК": {
+   "global": 962,
+   "tier": "D"
+  },
+  "Bard": {
+   "global": 1268,
+   "tier": "A"
+  },
+  "Annvie": {
+   "global": 1045,
+   "tier": "C"
+  },
+  "OdИn": {
+   "global": 987,
+   "tier": "D"
+  },
+  "Vivа": {
+   "global": 943,
+   "tier": "D"
+  },
+  "Mermaid": {
+   "global": 1048,
+   "tier": "C"
+  },
+  "Vito": {
+   "global": 975,
+   "tier": "D"
+  }
+ },
+ "snapshot": "2026-10-09"
+}

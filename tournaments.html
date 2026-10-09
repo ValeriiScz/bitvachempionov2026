@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v7.0 · 2026-06-20 -->
-<!-- DOVOD · tournaments.html · v3.0 · 2026-08-31 · раздел «Турниры» (бывшая главная MafgameStat): актуальные турниры + архив сезона из data/tournaments.js. Календарь, серийники и исследования вынесены в свои разделы; хаб выбора — index.html -->
+<!-- DOVOD · tournaments.html · v3.1 · 2026-10-09 · +плашка theme:"dovod" (неон, кнопки «страница» / «смотровая», live по датам liveFrom/liveTo) · v3.0 · 2026-08-31 · раздел «Турниры» (бывшая главная MafgameStat): актуальные турниры + архив сезона из data/tournaments.js. Календарь, серийники и исследования вынесены в свои разделы; хаб выбора — index.html -->
 <!-- v2.2 · 2026-06-12 · плашки турниров, лого федерации — оригинал с mafgame.org -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&family=Unbounded:wght@900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0b0b0e; --panel:#131318; --panel2:#17171d;
@@ -163,6 +163,33 @@
 .backlnk{display:inline-flex;align-items:center;gap:8px;font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
  color:#8b8f9a;text-decoration:none;border:1px solid rgba(255,255,255,.14);padding:9px 13px;border-radius:2px;transition:.18s}
 .backlnk:hover{color:#eaf6ff;border-color:#26e0ff;box-shadow:0 0 0 1px rgba(38,224,255,.25)}
+
+  /* ── v3.1 (2026-10-09): плашка в стиле DOVOD (theme:"dovod") — неон, CSS-постер, кнопки «страница» и «смотровая» ── */
+  .dvt{position:relative;display:block;margin-bottom:20px;text-decoration:none;color:#eef3fb;background:linear-gradient(160deg,#11141d,#0b0d14);
+    border:1px solid rgba(38,224,255,.28);clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));box-shadow:0 18px 44px rgba(0,0,0,.5);}
+  .dvt.gath{border-color:rgba(255,255,255,.14)}
+  .dvt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(#26e0ff,transparent);z-index:2}
+  .dvt.gath::before{background:linear-gradient(#c14bbd,transparent)}
+  .dvt .dvp{position:relative;padding:18px 18px 16px;overflow:hidden;background:radial-gradient(120% 120% at 100% 0%,rgba(38,224,255,.16),transparent 55%),radial-gradient(80% 90% at 0% 100%,rgba(193,75,189,.14),transparent 60%);
+    border-bottom:1px solid rgba(255,255,255,.08)}
+  .dvt.gath .dvp{background:radial-gradient(120% 120% at 100% 0%,rgba(193,75,189,.14),transparent 55%)}
+  .dvt .dvp::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px) 0 0/100% 4px;pointer-events:none}
+  .dvt .dk{font:700 10px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#26e0ff;margin-bottom:10px;display:flex;gap:10px;align-items:center}
+  .dvt.gath .dk{color:#c14bbd}
+  .dvt .dk .st{color:#f5ff35;letter-spacing:.12em}
+  .dvt .dn{font:900 25px/1.04 Unbounded,'Manrope',sans-serif;text-transform:uppercase;letter-spacing:-.01em}
+  .dvt .dn b{display:block;color:#f5ff35;font-weight:900}
+  .dvt.gath .dn b{color:#eef3fb}
+  .dvt .dy{position:absolute;right:14px;bottom:4px;font:900 58px/1 Unbounded,sans-serif;color:transparent;-webkit-text-stroke:1px rgba(38,224,255,.35)}
+  .dvt .dm{margin-top:10px;font:700 11px/1.4 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#79808f}
+  .dvt .dm b{color:#eef3fb}
+  .dvt .db{padding:14px 18px 16px}
+  .dvt .dfmt{font-size:12.5px;color:#9aa3b2;margin-bottom:10px}
+  .dvt .drow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .dvt .dbtn{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border-radius:9px;border:1px solid rgba(38,224,255,.45);color:#26e0ff;font:800 12.5px/1 'Manrope',sans-serif;text-decoration:none;background:rgba(38,224,255,.06)}
+  .dvt .dbtn.w{border-color:rgba(245,255,53,.45);color:#f5ff35;background:rgba(245,255,53,.06)}
+  .dvt .dbtn.g{border-color:rgba(255,255,255,.18);color:#cfd5df;background:none}
+  .dvt .elochip{position:static;margin:0 0 10px;display:inline-flex}
 </style>
 <!-- PWA · 2026-07-16 · v12: манифест + iOS-меты + регистрация sw.js + промо-плашка установки (iPhone/Android). Стратегии кэша — в sw.js; live /mafgame/* кэш обходит -->
 <link rel="manifest" href="manifest.json">
@@ -345,11 +372,31 @@ function plainTile(t){
     </div>
   </a>`;
 }
+function dovodTile(t){
+  const today=new Date(Date.now()+2*3600e3).toISOString().slice(0,10);
+  const live=t.liveFrom&&today>=t.liveFrom&&today<=(t.liveTo||t.liveFrom);
+  const gath=t.status==='gathering';
+  const st=live?'live':t.status, lab=live?'Идёт · live с mafgame':t.statusLabel;
+  const [a,b]=String(t.posterTitle||t.name).split('|');
+  const href=t.page||('tournament.html?t='+t.id);
+  const y=(String(t.start||'').slice(0,4))||'';
+  return `
+  <div class="dvt${gath?' gath':''}">
+    <a href="${href}" style="display:block;color:inherit;text-decoration:none">
+    <div class="dvp"><div class="dk">${gath?'скоро · сбор состава':'турнир'}<span class="st">${'★'.repeat(t.stars||0)}</span></div>
+      <div class="dn">${esc(a)}${b?`<b>${esc(b)}</b>`:''}</div><div class="dy">${esc(y)}</div>
+      <div class="dm"><b>${esc(t.dates)}</b> · ${esc(t.city)} · ${t.players} игроков${t.prize?' · '+esc(t.prize):''}</div></div></a>
+    <div class="db">${t.format?`<div class="dfmt">${esc(t.format)}</div>`:''}${eloChip(t,false)}
+      <div class="drow"><span class="badge ${st}">${esc(lab)}</span></div>
+      <div class="drow" style="margin-top:12px">${t.page?`<a class="dbtn" href="${t.page}">Страница турнира →</a>`:`<a class="dbtn g" href="participants.html?t=${t.id}">Участники и ELO →</a>`}${t.watch?`<a class="dbtn w" href="${t.watch}">▶ Смотровая</a>`:''}<a class="dbtn g" href="${t.mafgame||'#'}" target="_blank" rel="noopener">mafgame ↗</a></div>
+      <div class="torg" style="margin-top:10px">${esc(t.organizer||'')}</div></div>
+  </div>`;
+}
 (d=>{
   const ts=d.tournaments;
   const act=ts.filter(t=>t.status!=='finished').sort((a,b)=>(a.phase||9)-(b.phase||9)||String(a.start||'').localeCompare(String(b.start||'')));
   const arc=ts.filter(t=>t.status==='finished').sort((a,b)=>String(b.start||'').localeCompare(String(a.start||'')));
-  document.getElementById('actual').innerHTML=act.map(t=>t.theme==='cyprus'?posterTile(t):t.theme==='protocol'?protocolTile(t):t.theme==='poster'?posterArtTile(t):(t.status==='gathering'?gatheringTile(t):plainTile(t))).join('')||'<div class="tmeta">Сейчас активных турниров нет.</div>';
+  document.getElementById('actual').innerHTML=act.map(t=>t.theme==='dovod'?dovodTile(t):t.theme==='cyprus'?posterTile(t):t.theme==='protocol'?protocolTile(t):t.theme==='poster'?posterArtTile(t):(t.status==='gathering'?gatheringTile(t):plainTile(t))).join('')||'<div class="tmeta">Сейчас активных турниров нет.</div>';
   document.getElementById('archive').innerHTML=arc.map(t=>`
     <a class="arc" href="tournament.html?t=${t.id}">
       <div class="arc-date">${esc(t.dates)}<br>${esc(t.city)}</div>

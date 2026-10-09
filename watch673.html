@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- DOVOD · watch673.html · v1.0 · 2026-10-09 · «Смотровая» Чемпионата Молдовы 2026 (mafgame 673): все трансляции столов в одном окне.
+     Назначение: зрителю с телефона — один эфир + переключатель столов + «кто за столом сейчас»; режим «Все столы» (на телефоне стопкой,
+     повёрнутый телефон и комп — в ряд / «большой + два»); «Следить за игроком» — эфир сам переходит на его стол в каждой новой игре.
+     Оглавление: 1) CSS · 2) разметка · 3) CFG · 4) данные (participants/tournament/avatars + loadGames, тихий опрос раз в 60 с без перезагрузки — видео не рвётся)
+                 5) эфиры (YouTube iframe, mute/unmute через postMessage, ловим onError 101/150 = встраивание запрещено → кнопка «смотреть на YouTube»)
+                 6) рендер: шапка · плеер(ы) · вкладки столов · «за столом» · слежка · топ-10.
+     Новый турнир = копия файла + правка CFG + STREAMS_DB[id] в data/streams.js. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Смотровая · Чемпионат Молдовы 2026 — DOVOD</title>
+<meta name="description" content="Все трансляции Чемпионата Молдовы по мафии 2026 в одном окне: столы, кто играет, следить за игроком.">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#05060a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="DOVOD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05060a;--panel:#0b0d14;--panel2:#11141d;--ink:#eef3fb;--mut:#79808f;--dim:#4c5260;--line:rgba(255,255,255,.10);
+  --cyan:#26e0ff;--yel:#f5ff35;--lil:#c14bbd;--red:#db514e;--grn:#5ee08a;
+  --disp:Unbounded,Inter,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{max-width:100%;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 Inter,-apple-system,system-ui,sans-serif;min-height:100vh;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),radial-gradient(900px 500px at 80% -10%,rgba(38,224,255,.10),transparent 60%),radial-gradient(700px 400px at -10% 110%,rgba(193,75,189,.10),transparent 60%);
+  background-size:44px 44px,44px 44px,auto,auto;background-attachment:fixed}
+a{color:var(--cyan)}
+button{font:inherit;color:inherit}
+#__refbtn{display:none!important}
+.wrap{max-width:1280px;margin:0 auto;padding:0 0 40px}
+/* шапка */
+.hd{display:flex;align-items:center;gap:10px;padding:12px 14px 10px}
+.hd .back{width:34px;height:34px;flex:none;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;color:var(--ink);text-decoration:none;font-size:17px}
+.hd .tt{flex:1;min-width:0}
+.hd .k{font:700 9.5px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:5px}
+.hd h1{margin:0;font:900 17px/1.1 var(--disp);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd h1 b{color:var(--yel)}
+.hd .share{width:34px;height:34px;flex:none;border:1px solid var(--line);border-radius:9px;background:none;cursor:pointer}
+.status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:0 14px 10px;font:700 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.status .live{color:var(--red)} .status .live::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:6px;box-shadow:0 0 8px var(--red);animation:pl 1.4s infinite}
+@keyframes pl{50%{opacity:.35}}
+.status b{color:var(--ink)}
+.testbar{margin:0 14px 10px;padding:8px 11px;border:1px dashed rgba(245,255,53,.45);border-radius:9px;color:var(--yel);font-size:12px;background:rgba(245,255,53,.05)}
+/* режим */
+.modes{display:flex;gap:6px;padding:0 14px 10px}
+.modes button{flex:1;padding:10px 8px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);font:800 12.5px/1 Inter;cursor:pointer;color:var(--mut)}
+.modes button.on{border-color:var(--cyan);color:var(--cyan);background:rgba(38,224,255,.10);box-shadow:0 0 0 1px rgba(38,224,255,.25) inset}
+/* сцена */
+.stage{position:sticky;top:0;z-index:30;background:var(--bg);padding:0 0 8px}
+@media (min-width:1025px){.stage{position:static}}
+.stage.mm{position:static}
+.pl{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden}
+.pl iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.pl .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px;
+  background:radial-gradient(80% 80% at 50% 0%,rgba(38,224,255,.12),transparent 70%),#06080e;color:var(--mut);font-size:13px}
+.pl .ph b{font:900 15px/1.2 var(--disp);color:var(--ink);text-transform:uppercase}
+.pl .ph a{display:inline-block;padding:9px 14px;border-radius:9px;border:1px solid var(--cyan);color:var(--cyan);text-decoration:none;font-weight:800}
+.pl .lab{position:absolute;left:8px;top:8px;z-index:2;display:flex;gap:6px;align-items:center;pointer-events:none}
+.pl .lab span{font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;background:rgba(5,6,10,.78);border:1px solid var(--line);padding:5px 7px;border-radius:6px;color:var(--ink)}
+.pl .lab span.mf{color:var(--yel);border-color:rgba(245,255,53,.4)}
+.pl .snd{position:absolute;right:8px;top:8px;z-index:3;border:1px solid var(--line);background:rgba(5,6,10,.78);border-radius:8px;padding:6px 9px;font:800 12px/1 Inter;cursor:pointer}
+.pl .snd.on{border-color:var(--cyan);color:var(--cyan)}
+.pl.act{outline:2px solid var(--cyan);outline-offset:-2px}
+/* вкладки столов */
+.tabs{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;padding:8px 14px 0}
+.tabs button{position:relative;padding:9px 4px 8px;border-radius:10px;border:1px solid var(--line);background:var(--panel);cursor:pointer;text-align:center;min-width:0}
+.tabs button .n{display:block;font:900 14px/1 var(--disp)}
+.tabs button .s{display:block;margin-top:4px;font:600 10px/1.2 var(--mono);color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs button.on{border-color:var(--cyan);background:rgba(38,224,255,.12)} .tabs button.on .n{color:var(--cyan)}
+.tabs button .me{position:absolute;top:-6px;right:-4px;font:800 9px/1 Inter;background:var(--yel);color:#05060a;border-radius:6px;padding:3px 5px}
+.tabs button .dot{position:absolute;top:6px;left:6px;width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 6px var(--red)}
+.tabs button.off{opacity:.45}
+/* мульти */
+.multi{display:grid;grid-template-columns:1fr;gap:8px}
+.multi .pl{border-radius:0}
+@media (orientation:landscape) and (max-width:1024px){.multi{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}.stage.mm{position:static}}
+@media (min-width:1025px){
+  .wrap{padding:0 18px 40px}
+  .multi.focus{grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:8px}
+  .multi.focus .pl:first-child{grid-row:span 2}
+  .multi.row{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pl{border-radius:12px}
+}
+.rotate{display:none;margin:6px 14px 0;font-size:12px;color:var(--mut)}
+@media (orientation:portrait) and (max-width:1024px){.rotate.show{display:block}}
+.layout{display:none;gap:6px;padding:0 14px 8px;justify-content:flex-end}
+@media (min-width:1025px){.layout.show{display:flex}}
+.layout button{padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:none;font:700 11px/1 var(--mono);color:var(--mut);cursor:pointer}
+.layout button.on{color:var(--cyan);border-color:var(--cyan)}
+/* панели */
+.body{display:block}
+@media (min-width:1025px){.body{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start}.body .side{position:sticky;top:12px}}
+.panel{position:relative;margin:12px 14px 0;padding:13px 14px;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px}
+@media (min-width:1025px){.panel{margin:12px 0 0}}
+.panel::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:2px;background:linear-gradient(var(--cyan),transparent);opacity:.7}
+.panel h3{margin:0 0 10px;font:700 10.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:8px}
+.panel h3 small{margin-left:auto;color:var(--mut);letter-spacing:.06em}
+.gnav{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.gnav button{width:34px;height:30px;border-radius:8px;border:1px solid var(--line);background:none;cursor:pointer;font-weight:800}
+.gnav button:disabled{opacity:.3}
+.gnav .gl{flex:1;text-align:center;font:800 13px/1.2 Inter}
+.gnav .gl small{display:block;font:600 10.5px/1.3 var(--mono);color:var(--mut);letter-spacing:.06em}
+.seats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.st{min-width:0;border:1px solid var(--line);border-radius:10px;padding:6px 3px 5px;text-align:center;background:rgba(255,255,255,.025);cursor:pointer;position:relative}
+.st img,.st .mono{width:34px;height:34px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 4px;background:#151925;border:1px solid var(--line)}
+.st .mono{display:grid;place-items:center;font:800 11px/1 Inter;color:var(--mut)}
+.st .sn{font:700 9px/1 var(--mono);color:var(--dim);position:absolute;left:5px;top:4px}
+.st .nk{font:700 11px/1.2 Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st .tr{font:700 9.5px/1.2 var(--mono);color:var(--mut);margin-top:2px}
+.st .rl{display:inline-block;margin-top:3px;font:800 9.5px/1 Inter;padding:3px 5px;border-radius:5px}
+.rl.Citizen{background:rgba(219,81,78,.18);color:#ff8a86}.rl.Sheriff{background:rgba(245,255,53,.16);color:var(--yel)}
+.rl.Mafia{background:rgba(255,255,255,.10);color:#cfd5df}.rl.Don{background:rgba(193,75,189,.22);color:#e79be3}
+.st.w{border-color:rgba(94,224,138,.55)} .st.fk::after{content:'✝';position:absolute;right:5px;top:3px;font-size:10px;color:var(--red)}
+.st.me{box-shadow:0 0 0 2px var(--yel);border-color:var(--yel)}
+.res{margin-top:9px;font:700 11.5px/1.3 Inter;color:var(--mut);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.res .wr{padding:4px 8px;border-radius:6px;font-weight:800} .wr.red{background:rgba(219,81,78,.18);color:#ff8a86} .wr.black{background:rgba(255,255,255,.10);color:#e6eaf0}
+.fl{display:flex;gap:8px;align-items:center}
+.fl select{flex:1;min-width:0;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0d1018;color:var(--ink);font:600 14px Inter}
+.fl button{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:none;cursor:pointer;font-weight:800;color:var(--mut)}
+.fwho{margin-top:10px;display:flex;gap:10px;align-items:center}
+.fwho img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--yel);flex:none;background:#151925}
+.fwho .t{min-width:0;flex:1}.fwho b{font:800 15px/1.2 Inter}.fwho small{display:block;color:var(--mut);font-size:12.5px}
+.fwho .go{padding:8px 11px;border-radius:9px;border:1px solid var(--cyan);color:var(--cyan);background:none;font-weight:800;cursor:pointer;white-space:nowrap}
+.tgl{display:flex;align-items:center;gap:9px;margin-top:10px;font-size:13px;color:var(--mut);cursor:pointer}
+.tgl input{width:18px;height:18px;accent-color:var(--cyan)}
+.sch{display:flex;gap:4px;flex-wrap:wrap;margin-top:10px}
+.sch span{font:700 10.5px/1 var(--mono);padding:5px 6px;border-radius:6px;border:1px solid var(--line);color:var(--mut)}
+.sch span.cur{border-color:var(--yel);color:var(--yel)} .sch span.done{opacity:.5}
+.top{width:100%;border-collapse:collapse;font-size:13px}
+.top td{padding:6px 4px;border-top:1px solid var(--line)} .top td.n{font:700 11px var(--mono);color:var(--mut);width:24px}
+.top td.v{text-align:right;font:800 13px var(--mono)} .top tr.cut td{border-top:1px dashed var(--cyan)} .top tr.me td{color:var(--yel)}
+.links{display:grid;gap:8px}
+.links a{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);font-weight:700;background:rgba(255,255,255,.02)}
+.links a small{display:block;color:var(--mut);font-weight:500;font-size:12px}
+.note{font-size:12px;color:var(--mut);margin-top:8px}
+.foot{margin:22px 14px 0;font-size:11.5px;color:var(--dim)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#11141d;border:1px solid var(--cyan);color:var(--ink);padding:10px 14px;border-radius:10px;font-size:13px;z-index:99;opacity:0;transition:opacity .2s;pointer-events:none;max-width:92vw}
+.toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){.status .live::before{animation:none}}
+</style>
+<style id="dvcrumbcss">
+.dv-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;margin:0;
+ font:700 10px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
+ background:#05060a;border-bottom:1px solid rgba(255,255,255,.10);position:relative;z-index:60}
+.dv-crumb a{color:#8a91a0;text-decoration:none;border:0;transition:color .15s}
+.dv-crumb a.dv-home{color:#f5ff35;font-weight:800}
+.dv-crumb a:hover{color:#eef3fb}
+.dv-crumb i{color:#39404c;font-style:normal}
+.dv-crumb span{color:#5f6675}
+</style>
+<script>
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});}
+</script>
+</head>
+<body>
+<nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><a href="t673.html">ЧМД 2026</a><i>/</i><span>Смотровая</span></nav>
+<div class="wrap">
+  <div class="hd"><a class="back" href="t673.html" aria-label="К странице турнира">&#8592;</a>
+    <div class="tt"><div class="k">Смотровая · все эфиры</div><h1>Чемпионат <b>Молдовы</b> 2026</h1></div>
+    <button class="share" type="button" onclick="share()" aria-label="Поделиться">⤴</button></div>
+  <div class="status" id="status">Загрузка…</div>
+  <div id="testbar"></div>
+  <div class="modes" id="modes"><button data-m="one">▶ Один стол</button><button data-m="all">⊞ Все столы</button></div>
+  <div class="layout" id="layout"><button data-l="focus">большой + два</button><button data-l="row">три в ряд</button></div>
+  <div class="body">
+    <div class="mainc">
+      <div class="stage" id="stage"></div>
+      <div class="rotate" id="rotate">↻ Поверните телефон — три эфира встанут в ряд. Звук — у одного окна, кнопка 🔈 на нужном.</div>
+      <div id="tabs" class="tabs"></div>
+      <div id="seatP"></div>
+    </div>
+    <div class="side">
+      <div id="followP"></div>
+      <div id="topP"></div>
+      <div class="panel"><h3>Ещё по турниру</h3><div class="links">
+        <a href="t673.html"><span>Страница турнира<small>рассадка, сила столов, таблица, роли</small></span>›</a>
+        <a href="t673.html#stages"><span>Турнирная таблица<small>линия выхода в финал (топ‑10)</small></span>›</a>
+        <a href="https://mafgame.org/tournaments/673/view" target="_blank" rel="noopener"><span>Турнир на mafgame.org<small>официальные протоколы</small></span>↗</a>
+      </div></div>
+    </div>
+  </div>
+  <div class="foot">Эфиры — YouTube-плеер организаторов, встроенный на страницу. Состав и результаты — mafgame.org, обновляются сами раз в минуту. ELO — markery.online. DOVOD — некоммерческий проект.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="data/streams.js"></script>
+<script src="data/live.js"></script>
+<script>
+/* ── 3. CFG ── */
+const CFG={id:'673',ls:'t673_',tables:3,quals:12,finalN:10,name:'Чемпионат Молдовы 2026',page:'t673.html',yt:'https://www.youtube.com/@mafgameorg'};
+window._autoref=1; /* live.js сам перезагружает страницу раз в 2 мин — здесь это порвало бы видео; опрашиваем тихо */
+const ROMAN=['','I','II','III','IV','V','VI'];
+const DEF_AV='https://mafgame.org/build/assets/avatar-default2-33e44bae.png';
+const RL={Citizen:'Мир',Sheriff:'Шер',Mafia:'Маф',Don:'Дон'};
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const mono=n=>((n||'?').replace(/[^A-Za-zА-Яа-яЁё0-9]/g,'').slice(0,2).toUpperCase())||'·';
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:v}catch(e){return d}},set(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}};
+
+let D={players:[],P:{},games:[],tour:{},judges:{}};
+let S={mode:LS.get('w673_mode','one'),layout:LS.get('w673_layout','focus'),table:null,view:null,follow:LS.get('w673_follow',null)||LS.get(CFG.ls+'my',null),auto:LS.get('w673_auto','1')==='1',sound:1};
+
+/* ── 4. данные ── */
+async function load(first){
+  if(first){
+    const [P,T,A]=await Promise.all([
+      fetch('data/participants_'+CFG.id+'.json').then(r=>r.ok?r.json():null).catch(()=>null),
+      fetch('data/tournament_'+CFG.id+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})),
+      fetch('data/avatars_'+CFG.id+'.json').then(r=>r.ok?r.json():{}).catch(()=>({}))]);
+    D.players=(P&&P.players)||[];D.players.forEach(p=>D.P[p.nick]=p);D.tour=T||{};D.av=(A&&A.avatars)||{};D.refs=(A&&A.referees)||[];
+  }
+  try{const sj=await fetch('data/streams_'+CFG.id+'.json?cb='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null);if(sj&&sj.days){window.STREAMS_DB=window.STREAMS_DB||{};window.STREAMS_DB[CFG.id]=sj;}}catch(e){}
+  let G=null;try{G=window.loadGames?await window.loadGames(CFG.id):null;}catch(e){}
+  if(G&&G.games){D.games=G.games;D.live=!!G.live;}
+  D.updated=new Date();
+  compute();
+}
+function compute(){
+  const gs=D.games;D.played=0;
+  gs.forEach((g,i)=>{if(g.tables.length&&g.tables.every(t=>t.winner!=='unknown'))D.played=i+1;});
+  /* текущая игра = первая, где хоть один стол не доигран; все доиграны — последняя */
+  let cur=gs.findIndex(g=>g.tables.some(t=>t.winner==='unknown'));if(cur<0)cur=Math.max(0,gs.length-1);D.cur=cur;
+  if(S.view==null||S.view>=gs.length)S.view=cur;
+  /* стол слежки */
+  if(S.follow&&S.auto){const t=tableOf(S.follow,cur);if(t)S.table=t;}
+  if(!S.table)S.table=1;
+  /* таблица */
+  const agg={};gs.forEach(g=>g.tables.forEach(t=>{if(t.winner==='unknown')return;t.seats.forEach(x=>{if(!x||!x.name)return;const a=agg[x.name]=agg[x.name]||{n:x.name,s:0,g:0,w:0};a.s+=x.sigma||0;a.g++;if(x.result==='W')a.w++;});}));
+  D.rows=Object.values(agg).sort((a,b)=>b.s-a.s);
+}
+function tableOf(nick,gi){const g=D.games[gi];if(!g)return null;const t=g.tables.find(t=>t.seats.some(x=>x&&x.name===nick));return t?t.table_num:null;}
+function seatOf(nick,gi){const g=D.games[gi];if(!g)return null;for(const t of g.tables){const x=t.seats.find(x=>x&&x.name===nick);if(x)return {t:t.table_num,seat:x.seat};}return null;}
+function isFinal(gi){const g=D.games[gi];return !!g&&g.stage==='Финал';}
+function gLabel(gi){const g=D.games[gi];if(!g)return '';if(g.stage==='Финал'){const k=D.games.slice(0,gi+1).filter(x=>x.stage==='Финал').length;return 'Финал · игра '+k;}const q=D.games.slice(0,gi+1).filter(x=>x.stage!=='Финал').length;return 'Игра '+q+' из '+CFG.quals;}
+
+/* ── 5. эфиры ── */
+function SDB(){return (window.STREAMS_DB&&window.STREAMS_DB[CFG.id])||null;}
+function gDay(gi){const st=SDB();const q=D.games.slice(0,gi+1).filter(x=>x.stage!=='Финал').length;return q<=((st&&st.gamesDay1)||6)?'1':'2';}
+function streamId(table,gi){const st=SDB();if(!st)return null;if(isFinal(gi))return st.final||null;return ((st.days||{})[gDay(gi)]||{})[String(table)]||null;}
+function embedURL(id,muted){const base=/^live:/.test(id)?'https://www.youtube.com/embed/live_stream?channel='+encodeURIComponent(id.slice(5))+'&':'https://www.youtube.com/embed/'+encodeURIComponent(id)+'?';
+  return base+'autoplay=1&mute='+(muted?1:0)+'&playsinline=1&rel=0&modestbranding=1&enablejsapi=1&origin='+encodeURIComponent(location.origin);}
+function watchURL(id){return /^live:/.test(id)?'https://www.youtube.com/channel/'+id.slice(5)+'/live':'https://www.youtube.com/watch?v='+id;}
+function playerHTML(table,gi,opts){
+  const id=streamId(table,gi),fin=isFinal(gi);const j=judgeOf(table);
+  const lab=`<div class="lab"><span>${fin?'Финал':'Стол '+ROMAN[table]}</span>${S.follow&&tableOf(S.follow,gi)===table?`<span class="mf">★ ${esc(S.follow)}</span>`:''}${j&&!opts.multi?`<span>${esc(j)}</span>`:''}</div>`;
+  if(!id)return `<div class="pl" data-t="${table}">${lab}<div class="ph"><b>${fin?'Эфир финала':'Эфир стола '+ROMAN[table]}</b>Ссылка появится, когда организаторы запустят трансляцию — окно включится само.<a href="${CFG.yt}" target="_blank" rel="noopener">YouTube-канал ↗</a></div></div>`;
+  const muted=opts.multi?(S.sound!==table):false;
+  return `<div class="pl${opts.multi&&S.sound===table?' act':''}" data-t="${table}" data-id="${esc(id)}">${lab}${opts.multi?`<button class="snd${muted?'':' on'}" data-snd="${table}">${muted?'🔇 звук':'🔊 звук'}</button>`:''}<iframe src="${embedURL(id,muted)}" title="${fin?'Финал':'Стол '+table}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`;
+}
+function ytCmd(fr,func){try{fr.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}),'*');}catch(e){}}
+/* onError 101/150 = владелец запретил встраивание → показываем кнопку «смотреть на YouTube» */
+window.addEventListener('message',e=>{if(!/youtube\.com$/.test((()=>{try{return new URL(e.origin).hostname}catch(_){return ''}})()))return;let d;try{d=typeof e.data==='string'?JSON.parse(e.data):e.data;}catch(_){return;}
+  if(d&&d.event==='onError'&&[100,101,150,153].includes(+d.info)){document.querySelectorAll('.pl iframe').forEach(fr=>{if(fr.contentWindow===e.source){const pl=fr.closest('.pl');const id=pl.dataset.id;fr.remove();pl.insertAdjacentHTML('beforeend',`<div class="ph"><b>Встраивание выключено</b>Организатор запретил показ эфира на других сайтах.<a href="${watchURL(id)}" target="_blank" rel="noopener">Смотреть на YouTube ↗</a></div>`);}});}});
+function hookFrames(){document.querySelectorAll('.pl iframe').forEach(fr=>fr.addEventListener('load',()=>{try{fr.contentWindow.postMessage(JSON.stringify({event:'listening',id:fr.title}),'*');}catch(e){}},{once:true}));}
+
+/* ── 6. рендер ── */
+let stageSig='';
+function judgeOf(t){const r=D.tour.referees_by_table||{};return r[t]||r[String(t)]||'';}
+function renderStage(force){
+  const gi=D.cur,el=document.getElementById('stage');
+  const fin=isFinal(gi);const tables=fin?[1]:Array.from({length:CFG.tables},(_,i)=>i+1);
+  const sig=[S.mode,S.layout,gi,fin,S.mode==='one'?S.table:'',tables.map(t=>streamId(t,gi)).join(',')].join('|');
+  if(!force&&sig===stageSig){/* только подписи */return;}
+  stageSig=sig;
+  el.classList.toggle('mm',S.mode==='all');
+  if(S.mode==='all'&&!fin){
+    if(!tables.includes(S.sound))S.sound=tables.includes(S.table)?S.table:tables[0];
+    el.innerHTML=`<div class="multi ${S.layout}">${orderMulti(tables).map(t=>playerHTML(t,gi,{multi:true})).join('')}</div>`;
+    el.querySelectorAll('[data-snd]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();setSound(+b.dataset.snd);renderTabs();renderSeats();});
+    el.querySelectorAll('.pl[data-t]').forEach(p=>p.onclick=()=>{if(S.layout==='focus'&&window.matchMedia('(min-width:1025px)').matches){S.focus=+p.dataset.t;setSound(+p.dataset.t);renderStage(true);}});
+  } else {
+    const t=fin?1:S.table;el.innerHTML=playerHTML(t,gi,{multi:false});
+  }
+  hookFrames();
+  document.getElementById('rotate').classList.toggle('show',S.mode==='all'&&!fin);
+  document.getElementById('layout').classList.toggle('show',S.mode==='all'&&!fin);
+}
+function orderMulti(ts){const f=S.focus&&ts.includes(S.focus)?S.focus:(S.follow&&tableOf(S.follow,D.cur))||ts[0];return [f].concat(ts.filter(t=>t!==f));}
+function setSound(t){S.sound=t;S.table=t;document.querySelectorAll('.multi .pl').forEach(p=>{const fr=p.querySelector('iframe');const on=+p.dataset.t===t;p.classList.toggle('act',on);const b=p.querySelector('.snd');if(b){b.classList.toggle('on',on);b.textContent=on?'🔊 звук':'🔇 звук';}if(fr){ytCmd(fr,on?'unMute':'mute');if(on)ytCmd(fr,'playVideo');}});}
+function renderTabs(){
+  const el=document.getElementById('tabs');const gi=D.cur;
+  if(isFinal(gi)){el.innerHTML='';el.style.display='none';return;}el.style.display='';
+  el.innerHTML=Array.from({length:CFG.tables},(_,i)=>i+1).map(t=>{const has=!!streamId(t,gi);const me=S.follow&&tableOf(S.follow,gi)===t;const tb=(D.games[gi]&&D.games[gi].tables.find(x=>x.table_num===t))||null;const live=tb&&tb.winner==='unknown'&&D.live;
+    return `<button class="${t===S.table?'on':''}${has?'':' off'}" data-t="${t}">${live?'<i class="dot"></i>':''}${me?'<span class="me">★</span>':''}<span class="n">Стол ${ROMAN[t]}</span><span class="s">${esc(judgeOf(t)||avgElo(tb)||'')}</span></button>`;}).join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{S.table=+b.dataset.t;S.view=D.cur;if(S.mode==='all'){setSound(S.table);renderTabs();renderSeats();return;}if(S.follow&&S.auto&&tableOf(S.follow,D.cur)!==S.table){S.auto=false;LS.set('w673_auto','0');}renderStage();renderTabs();renderSeats();renderFollow();});
+}
+function avgElo(tb){if(!tb)return '';const v=tb.seats.map(x=>x&&D.P[x.name]&&D.P[x.name].r_elo_cur).filter(Boolean);return v.length?'Ø ELO '+Math.round(v.reduce((a,b)=>a+b,0)/v.length):'';}
+function avatar(n){const p=D.P[n];const u=D.av[n]||(p&&p.av)||'';return u?`<img src="${esc(u)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span class=&quot;mono&quot;>${esc(mono(n))}</span>'">`:`<span class="mono">${esc(mono(n))}</span>`;}
+function renderSeats(){
+  const el=document.getElementById('seatP');const gi=S.view;const g=D.games[gi];
+  if(!g){el.innerHTML=`<div class="panel"><h3>За столом</h3><div class="note">Рассадка появится, когда mafgame опубликует посадку.</div></div>`;return;}
+  const fin=g.stage==='Финал';const t=fin?1:S.table;
+  const tb=g.tables.find(x=>x.table_num===t)||g.tables[0];if(!tb){el.innerHTML='';return;}
+  const by={};tb.seats.forEach(x=>{if(x)by[x.seat]=x;});
+  const order=[1,2,3,4,5,10,9,8,7,6];
+  const cells=order.map(n=>{const x=by[n];if(!x)return '<div class="st" style="opacity:.3"><span class="sn">'+n+'</span>—</div>';const p=D.P[x.name]||{};
+    const cls=['st'];if(x.result==='W')cls.push('w');if(x.kf)cls.push('fk');if(x.name===S.follow)cls.push('me');
+    return `<div class="${cls.join(' ')}" data-p="${esc(x.name)}"><span class="sn">${n}</span>${avatar(x.name)}<div class="nk">${esc(x.name)}</div><div class="tr">${p.r_tier?p.r_tier+' · ':''}${p.r_elo_cur||'—'}</div>${x.role?`<span class="rl ${x.role}">${RL[x.role]}</span>`:''}</div>`;}).join('');
+  const res=tb.winner==='red_win'?'<span class="wr red">победа красных</span>':tb.winner==='black_win'?'<span class="wr black">победа чёрных</span>':(gi===D.cur?'<span>идёт игра — роли и результат появятся после ввода протокола</span>':'<span>ещё не сыграна</span>');
+  const j=judgeOf(t);
+  el.innerHTML=`<div class="panel"><h3>За столом ${fin?'финала':ROMAN[t]}<small>${esc(avgElo(tb))}</small></h3>
+    <div class="gnav"><button id="gp" ${gi<=0?'disabled':''} aria-label="Предыдущая игра">‹</button><div class="gl">${gLabel(gi)}${gi===D.cur?' · сейчас':''}<small>${fin?'один стол':'стол '+ROMAN[t]}${j?' · судья '+esc(j):''}</small></div><button id="gn" ${gi>=D.games.length-1?'disabled':''} aria-label="Следующая игра">›</button></div>
+    <div class="seats">${cells}</div><div class="res">${res}${gi!==D.cur?' <button class="fl" style="border:1px solid var(--line);background:none;border-radius:8px;padding:5px 9px;cursor:pointer;color:var(--cyan);font-weight:800" id="gnow">к текущей игре</button>':''}</div>
+    <div class="note">Места: 1–5 сверху, 10–6 снизу — как за реальным столом. Тап по игроку — следить за ним.</div></div>`;
+  const gp=document.getElementById('gp'),gn=document.getElementById('gn'),gw=document.getElementById('gnow');
+  if(gp)gp.onclick=()=>{S.view=Math.max(0,S.view-1);renderSeats();};if(gn)gn.onclick=()=>{S.view=Math.min(D.games.length-1,S.view+1);renderSeats();};if(gw)gw.onclick=()=>{S.view=D.cur;renderSeats();};
+  el.querySelectorAll('.st[data-p]').forEach(c=>c.onclick=()=>setFollow(c.dataset.p));
+}
+function renderFollow(){
+  const el=document.getElementById('followP');const names=D.players.map(p=>p.nick).sort((a,b)=>a.localeCompare(b,'ru'));
+  let who='';
+  if(S.follow){const p=D.P[S.follow]||{};const s=seatOf(S.follow,D.cur);const nx=D.games.findIndex((g,i)=>i>D.cur&&g.tables.some(t=>t.seats.some(x=>x&&x.name===S.follow)));
+    const line=s?`${gLabel(D.cur)} · ${isFinal(D.cur)?'финал':'стол '+ROMAN[s.t]}, место ${s.seat}`:(D.games.length&&D.cur>=D.games.length-1?'турнир сыгран':'в этой игре не играет');
+    const sch=D.games.map((g,i)=>{if(g.stage==='Финал')return '';const t=tableOf(S.follow,i);return `<span class="${i===D.cur?'cur':i<D.cur?'done':''}">${i+1}:${t?ROMAN[t]:'—'}</span>`;}).join('');
+    const sum=(D.rows||[]).findIndex(r=>r.n===S.follow);
+    who=`<div class="fwho">${avatar(S.follow).replace('<img','<img style="width:44px;height:44px"')}<div class="t"><b>${esc(S.follow)}</b><small>${esc(line)}${sum>=0?' · в таблице #'+(sum+1):''}</small></div>${s&&!isFinal(D.cur)?`<button class="go" id="fgo">смотреть</button>`:''}</div>
+      <label class="tgl"><input type="checkbox" id="fauto" ${S.auto?'checked':''}> Переключать эфир на его стол в каждой новой игре</label>
+      <div class="sch">${sch}</div><div class="note">Игра:стол по всей квалификации. <a href="${CFG.page}#my" id="fmy">его страница на турнире →</a></div>`;}
+  el.innerHTML=`<div class="panel"><h3>Следить за игроком</h3><div class="fl"><select id="fsel"><option value="">— выберите игрока —</option>${names.map(n=>`<option ${n===S.follow?'selected':''}>${esc(n)}</option>`).join('')}</select>${S.follow?'<button id="fclr" aria-label="Сбросить">✕</button>':''}</div>${who}</div>`;
+  document.getElementById('fsel').onchange=e=>setFollow(e.target.value||null);
+  const c=document.getElementById('fclr');if(c)c.onclick=()=>setFollow(null);
+  const a=document.getElementById('fauto');if(a)a.onchange=e=>{S.auto=e.target.checked;LS.set('w673_auto',S.auto?'1':'0');if(S.auto){const t=tableOf(S.follow,D.cur);if(t)S.table=t;}renderAll();};
+  const fm=document.getElementById('fmy');if(fm)fm.onclick=()=>LS.set(CFG.ls+'my',S.follow);
+  const g=document.getElementById('fgo');if(g)g.onclick=()=>{const t=tableOf(S.follow,D.cur);if(t){S.table=t;S.mode='one';LS.set('w673_mode','one');S.view=D.cur;renderAll();window.scrollTo({top:0,behavior:'smooth'});}};
+}
+function setFollow(n){S.follow=n||null;LS.set('w673_follow',S.follow);if(S.follow){S.auto=true;LS.set('w673_auto','1');const t=tableOf(S.follow,D.cur);if(t){S.table=t;S.view=D.cur;}toast('Следим за '+S.follow+(t?' — стол '+ROMAN[t]:''));}renderAll();}
+function renderTop(){
+  const el=document.getElementById('topP');const R=D.rows||[];
+  if(!R.length){el.innerHTML=`<div class="panel"><h3>Таблица</h3><div class="note" style="margin:0">Появится после первого сыгранного стола.</div></div>`;return;}
+  el.innerHTML=`<div class="panel"><h3>Таблица · топ‑12<small>Σ · сыграно игр: ${D.played}</small></h3><table class="top">${R.slice(0,12).map((r,i)=>`<tr class="${i===CFG.finalN?'cut':''}${r.n===S.follow?' me':''}"><td class="n">${i+1}</td><td>${esc(r.n)}</td><td class="v">${r.s.toFixed(2)}</td></tr>`).join('')}</table><div class="note">Пунктир — линия выхода в финал (топ‑${CFG.finalN}). Неофициальный пересчёт по протоколам; полная таблица — <a href="${CFG.page}#stages">на странице турнира</a>.</div></div>`;
+}
+function renderStatus(){
+  const st=SDB();const gi=D.cur;const t=D.tour;
+  const started=D.games.some(g=>g.tables.some(x=>x.winner!=='unknown'));
+  const live=D.live&&!t.closed;
+  document.getElementById('status').innerHTML=`${live?'<span class="live">live</span>':started?'':'<span>скоро · старт 10.10</span>'}<span><b>${esc(gLabel(gi))}</b></span><span>${D.games[gi]&&D.games[gi].stage==='Финал'?'финал':'квалификация'}</span><span>обновлено ${D.updated?D.updated.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):'—'}</span>`;
+  document.getElementById('testbar').innerHTML=st&&st.test?`<div class="testbar">Тест: сейчас в окнах записи прошлого турнира — проверьте, как это выглядит. Настоящие эфиры Молдовы встанут сюда перед стартом.</div>`:'';
+  document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));
+  document.querySelectorAll('#layout button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.layout));
+  const fin=isFinal(gi);document.getElementById('modes').style.display=fin?'none':'';
+}
+function renderAll(force){renderStatus();renderStage(force);renderTabs();renderSeats();renderFollow();renderTop();}
+document.querySelectorAll('#modes button').forEach(b=>b.onclick=()=>{S.mode=b.dataset.m;LS.set('w673_mode',S.mode);renderAll();});
+document.querySelectorAll('#layout button').forEach(b=>b.onclick=()=>{S.layout=b.dataset.l;LS.set('w673_layout',S.layout);renderAll();});
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('on'),2400);}
+function share(){const url=location.origin+location.pathname;const title='Смотровая · '+CFG.name;if(navigator.share){navigator.share({title,url}).catch(()=>{});return;}
+  if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Ссылка скопирована'),()=>toast(url));else toast(url);}
+load(true).then(()=>renderAll(true)).catch(()=>{document.getElementById('status').textContent='Не удалось загрузить данные турнира';});
+/* тихий опрос: новые протоколы и переход к следующей игре — без перезагрузки страницы (видео не рвётся) */
+setInterval(()=>{if(document.hidden)return;const before=D.cur;load(false).then(()=>{renderStatus();renderTabs();if(S.view===before)S.view=D.cur;renderSeats();renderFollow();renderTop();renderStage();}).catch(()=>{});},60000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)load(false).then(()=>renderAll()).catch(()=>{});});
+</script>
+</body>
+</html>
