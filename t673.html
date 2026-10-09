@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t673.html · v1.0 · 2026-10-09 · Чемпионат Молдовы 2026 (mafgame 673). Движок страницы ЧМ-2026 (wc2026-tournament v2.3, эталон ce634) вынесен в конфиг CFG: новый турнир = копия файла + правка CFG + data/*_{id}*.
+<!-- DOVOD · t673.html · v1.1 · 2026-10-09 · категории столов и рассадки — от разброса случайного жребия (σ), а не равными долями · v1.0 · 2026-10-09 · Чемпионат Молдовы 2026 (mafgame 673). Движок страницы ЧМ-2026 (wc2026-tournament v2.3, эталон ce634) вынесен в конфиг CFG: новый турнир = копия файла + правка CFG + data/*_{id}*.
      Отличия от ЧМ: 2 стадии (12 квал × 3 стола → финал 5 игр топ-10, ×1.3), без карточек по странам и без робота-аудита; эфиры — отдельная «Смотровая» watch673.html.
      Стиль: DOVOD-неон, акцент cyan раздела «Турниры». -->
 <meta charset="utf-8">
@@ -1597,7 +1597,7 @@ function stub(id){const s=SECTIONS.find(x=>x.id===id)||{};
 /* ══════════════════════════════════════════════════════════════════════════
    ЧМ-2026 · надстройка v2.0 (2026-09-10): сила столов, жребий, карточки, share
    ══════════════════════════════════════════════════════════════════════════ */
-const CAT=[null,{n:'Элитный',k:'k1',d:'самые сильные составы турнира'},{n:'Сильный',k:'k2',d:'выше среднего'},{n:'Средний',k:'k3',d:'типичный стол турнира'},{n:'Ровный',k:'k4',d:'чуть спокойнее среднего'},{n:'Мягкий',k:'k5',d:'самые спокойные составы'}];
+const CAT=[null,{n:'Элитный',k:'k1',d:'сильнее среднего больше чем на 2 обычных разброса — редкость'},{n:'Сильный',k:'k2',d:'заметно сильнее среднего (1–2 разброса)'},{n:'Ровный',k:'k3',d:'в пределах обычного разброса жребия'},{n:'Мягкий',k:'k4',d:'заметно слабее среднего (1–2 разброса)'},{n:'Спокойный',k:'k5',d:'слабее среднего больше чем на 2 разброса — редкость'}];
 /* Рассадка (сила соперников без самого игрока) — названия Валерия, 1 = самые сильные соперники */
 /* n — к слову «рассадка» (ж.р.), p — к слову «соперники» (мн.ч.): в колонках и метках про соперников берём p */
 const CATO=[null,{n:'Экстремальная',p:'Экстремальные',k:'k1'},{n:'Плотная',p:'Плотные',k:'k2'},{n:'Ровная',p:'Ровные',k:'k3'},{n:'Помягче',p:'Помягче',k:'k4'},{n:'Спокойная',p:'Спокойные',k:'k5'}];
@@ -1614,9 +1614,19 @@ function computeStrength(){
     const e=names.map(eloOf);const avg=mean(e);tabs.push({g:gi+1,t:t.table_num,avg,names});
     names.forEach((n,i)=>{const o=e.filter((_,j)=>j!==i);seats.push({n,g:gi+1,t:t.table_num,avg:mean(o)});});});});
   if(!tabs.length)return;
-  tabs.sort((a,b)=>b.avg-a.avg);tabs.forEach((x,i)=>{x.cat=Math.min(5,Math.floor(i*5/tabs.length)+1);x.rank=i+1;D.TS[x.g+'-'+x.t]=x;});
-  seats.sort((a,b)=>b.avg-a.avg);seats.forEach((x,i)=>{x.cat=Math.min(5,Math.floor(i*5/seats.length)+1);D.OS[x.n+'|'+x.g]=x;});
-  D.tblMean=mean(tabs.map(x=>x.avg));D.oppMean=mean(seats.map(x=>x.avg));D.tblN=tabs.length;
+  /* v1.1 (09.10.2026, решение Валерия): категории — не равные доли, а «насколько необычно против случайного жребия».
+     σ — разброс, который дал бы случайный жребий в ЭТОМ турнире (считается сам из ELO состава):
+     стол из k игроков: σT = sd/√k·√((N−k)/(N−1)); соперники игрока (k−1): σO = sd/√(k−1)·√((N−k)/(N−2)).
+     |z|<1 — ровный (≈2 стола из 3 при честном жребии), 1–2 — сильный/мягкий, ≥2 — элитный/спокойный (≈1 из 20).
+     Число категорий подстраивается само: ровный турнир → почти все «ровные», один перекошенный стол → один «элитный». */
+  const allN=[...new Set(seats.map(x=>x.n))];const NN=allN.length;const allE=allN.map(eloOf);const mE=mean(allE);
+  const sdE=Math.sqrt(mean(allE.map(x=>(x-mE)*(x-mE))))||1;const K=Math.round(mean(tabs.map(x=>x.names.length)))||10;
+  D.sigT=sdE/Math.sqrt(K)*Math.sqrt(Math.max(0,NN-K)/Math.max(1,NN-1))||1;D.sigO=sdE/Math.sqrt(K-1)*Math.sqrt(Math.max(0,NN-K)/Math.max(1,NN-2))||1;
+  const zcat=z=>z>=2?1:z>=1?2:z>-1?3:z>-2?4:5;const totE=allE.reduce((a,b)=>a+b,0);
+  D.tblMean=mean(tabs.map(x=>x.avg));
+  tabs.sort((a,b)=>b.avg-a.avg);tabs.forEach((x,i)=>{x.z=(x.avg-D.tblMean)/D.sigT;x.cat=zcat(x.z);x.rank=i+1;D.TS[x.g+'-'+x.t]=x;});
+  seats.sort((a,b)=>b.avg-a.avg);seats.forEach(x=>{const ex=(totE-eloOf(x.n))/Math.max(1,NN-1);x.z=(x.avg-ex)/D.sigO;x.cat=zcat(x.z);D.OS[x.n+'|'+x.g]=x;});
+  D.oppMean=mean(seats.map(x=>x.avg));D.tblN=tabs.length;
   const byN={};seats.forEach(x=>(byN[x.n]=byN[x.n]||[]).push(x));
   Object.keys(byN).forEach(n=>{const L=byN[n].slice().sort((a,b)=>a.g-b.g);const cnt=[0,0,0,0,0,0];L.forEach(x=>cnt[x.cat]++);
     const tc=[0,0,0,0,0,0];L.forEach(x=>{const T=D.TS[x.g+'-'+x.t];if(T)tc[T.cat]++;});
@@ -1624,22 +1634,22 @@ function computeStrength(){
   /* личное ожидание: соперник не может быть самим собой → у сильного ожидаемый средний соперник чуть ниже, у слабого чуть выше.
      Считаем «удачу» как отклонение от СВОЕГО ожидания (Σ всех − свой ELO)/(N−1), иначе топы автоматически выглядели бы «в мягкой рассадке». */
   const names=Object.keys(D.LUCK);const tot=names.reduce((a,n)=>a+eloOf(n),0);
-  names.forEach(n=>{const L=D.LUCK[n];L.exp=(tot-eloOf(n))/(names.length-1);L.d=L.avg-L.exp;});
+  names.forEach(n=>{const L=D.LUCK[n];L.exp=(tot-eloOf(n))/(names.length-1);L.d=L.avg-L.exp;L.sig=D.sigO/Math.sqrt(Math.max(1,L.n));L.z=L.d/L.sig;});
   const order=names.slice().sort((a,b)=>D.LUCK[b].d-D.LUCK[a].d);order.forEach((n,i)=>D.LUCK[n].rank=i+1);D.luckOrder=order;
   D.catRange=[null,1,2,3,4,5].map(c=>{if(!c)return null;const v=tabs.filter(x=>x.cat===c).map(x=>x.avg);return v.length?{min:Math.min(...v),max:Math.max(...v),n:v.length}:null;});
 }
 function catBadge(g,t,withElo){const T=D.TS&&D.TS[g+'-'+t];if(!T)return '';const c=CAT[T.cat];
   return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${t}" title="${c.n} стол · средний ELO ${Math.round(T.avg)} · #${T.rank} из ${D.tblN} столов квалификации">${c.n}${withElo?` <small>Ø ${Math.round(T.avg)}</small>`:''}</span>`;}
 function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const c=CATO[o.cat];return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${o.t}" data-p="${esc(nick)}" title="соперники без вас: средний ELO ${Math.round(o.avg)}">${c.p}</span>`;}
-function luckVerdict(L){const d=L.d;const ad=Math.abs(Math.round(d));
-  if(d>=22)return {t:'экстремальная рассадка',s:`соперники в среднем на ${ad} ELO сильнее, чем ждали бы при случайном жребии`,k:'k1'};
-  if(d>=10)return {t:'плотная рассадка',s:`соперники на ${ad} ELO сильнее ожидания`,k:'k2'};
-  if(d<=-22)return {t:'спокойная рассадка',s:`соперники на ${ad} ELO спокойнее, чем ждали бы при случайном жребии`,k:'k5'};
-  if(d<=-10)return {t:'рассадка помягче',s:`соперники на ${ad} ELO спокойнее ожидания`,k:'k4'};
-  return {t:'ровная рассадка',s:`соперники практически как ждали (${d>=0?'+':''}${Math.round(d)} ELO к ожиданию)`,k:'k3'};}
+function luckVerdict(L){const d=L.d;const ad=Math.abs(Math.round(d));const z=L.z||0;const sg=Math.round(L.sig||0);
+  if(z>=2)return {t:'экстремальная рассадка',s:`соперники в среднем на ${ad} ELO сильнее, чем при случайном жребии, — при обычном разбросе ±${sg} это редкость`,k:'k1'};
+  if(z>=1)return {t:'плотная рассадка',s:`соперники на ${ad} ELO сильнее ожидания (обычный разброс жребия ±${sg})`,k:'k2'};
+  if(z<=-2)return {t:'спокойная рассадка',s:`соперники на ${ad} ELO слабее, чем при случайном жребии, — при обычном разбросе ±${sg} это редкость`,k:'k5'};
+  if(z<=-1)return {t:'рассадка помягче',s:`соперники на ${ad} ELO слабее ожидания (обычный разброс жребия ±${sg})`,k:'k4'};
+  return {t:'ровная рассадка',s:`соперники практически как при случайном жребии (${d>=0?'+':''}${Math.round(d)} ELO при обычном разбросе ±${sg})`,k:'k3'};}
 function luckSquares(L,big){return `<span class="lsq${big?' big':''}">`+L.list.map(x=>`<i class="pk ${CATO[x.cat].k}" data-g="${x.g}" data-t="${x.t}" data-p="${esc(x.n)}" title="игра ${x.g} · стол ${ROMAN[x.t]} · ${CATO[x.cat].n.toLowerCase()} рассадка (соперники Ø ${Math.round(x.avg)})"><b>${big?x.g:''}</b></i>`).join('')+'</span>';}
 function luckPanel(name){const L=D.LUCK&&D.LUCK[name];if(!L)return '';const v=luckVerdict(L);
-  const dist=[5,4,3,2,1].map(c=>`<span class="kb ${CATO[c].k}">${CATO[c].p} <b>${L.cnt[c]}</b></span>`).join('');
+  const dist=[5,4,3,2,1].filter(c=>L.cnt[c]).map(c=>`<span class="kb ${CATO[c].k}">${CATO[c].p} <b>${L.cnt[c]}</b></span>`).join('');
   return `<div class="panel"><h3>Рассадка · сила соперников</h3>
     <div class="luckhead"><span class="kb big ${v.k}">${v.t}</span><span class="jbig">${Math.round(L.avg)}<small> средний ELO девяти соперников · ждали ${Math.round(L.exp)} · #${L.rank} из ${D.luckOrder.length} по плотности</small></span></div>
     <div class="note" style="margin:6px 0 10px">${v.s}. Считаем без самого игрока, а «ждали» — это его личное ожидание при случайном жребии: (сумма ELO всех − свой)/${D.players.length-1}. Так топы не выглядят «в мягкой рассадке» только потому, что не могут сидеть против самих себя.</div>
@@ -1648,10 +1658,10 @@ function luckPanel(name){const L=D.LUCK&&D.LUCK[name];if(!L)return '';const v=lu
     <div class="note" style="margin-top:8px"><span class="lnk" style="cursor:pointer" onclick="show('luck')">Все ${D.players.length} игроков по рассадке →</span></div></div>`;}
 function chooserPanel(){return `<div class="chooser"><div class="chs on"><span class="chk">вы здесь</span><b>Страница турнира</b><small>рассадка и сила столов · live-результаты · судьи</small></div><a class="chs" href="${CFG.watch}"><span class="chk">эфиры</span><b>Смотровая →</b><small>три стола в одном окне, «следить за игроком»</small></a></div>`;}
 function strengthTeaser(){if(!D.TS||!D.tblN)return '';
-  const hot=Object.values(D.TS).filter(x=>x.cat===1).sort((a,b)=>a.g-b.g).slice(0,4);
+  const el=Object.values(D.TS).filter(x=>x.cat===1).sort((a,b)=>a.g-b.g);const hot=(el.length?el:Object.values(D.TS).sort((a,b)=>b.avg-a.avg)).slice(0,4);const cnt=[0,0,0,0,0,0];Object.values(D.TS).forEach(x=>cnt[x.cat]++);
   const chips=hot.map(x=>`<button class="tf" data-g="${x.g}" data-t="${x.t}" onclick="seatJump=+this.dataset.g;show('seating')">игра ${x.g} · стол ${ROMAN[x.t]} <small>Ø ${Math.round(x.avg)}</small></button>`).join('');
-  return `<div class="panel"><h3>Сила столов</h3><div class="kbrow" style="margin-bottom:8px">${[1,2,3,4,5].map(c=>`<span class="kb ${CAT[c].k}">${CAT[c].n}</span>`).join('')}</div>
-    <div class="note" style="margin:0 0 8px">${D.tblN} столов квалификации поделены на пять равных корзин по среднему ELO состава. Первые элитные столы:</div><div class="tfilter" style="margin:0">${chips}</div>
+  return `<div class="panel"><h3>Сила столов</h3><div class="kbrow" style="margin-bottom:8px">${[1,2,3,4,5].filter(c=>cnt[c]).map(c=>`<span class="kb ${CAT[c].k}">${CAT[c].n} <b>${cnt[c]}</b></span>`).join('')}</div>
+    <div class="note" style="margin:0 0 8px">${D.tblN} столов квалификации сравнены со случайным жребием: обычный разброс среднего ELO стола в этом турнире — ±${Math.round(D.sigT)}. ${el.length?'Элитные столы:':'Элитных столов нет — самые сильные:'}</div><div class="tfilter" style="margin:0">${chips}</div>
     <div class="note" style="margin-top:8px"><span class="lnk" style="cursor:pointer" onclick="show('strength')">Карта всех столов →</span> · <span class="lnk" style="cursor:pointer" onclick="show('luck')">Кому какая рассадка →</span></div></div>`;}
 /* ── Сила столов: карта ── */
 RENDER.strength=function(){return `<div class="view"><div class="secttl">&#9741; Сила столов</div><div id="strArea"></div></div>`;};
@@ -1665,11 +1675,11 @@ function paintStrength(){const area=document.getElementById('strArea');if(!area)
   games.forEach(g=>{grid+=`<div class="smg${g===gd1?' dayend':''}${g<=(D.played||0)?' done':''}${g===(D.played||0)+1?' nextg':''}"><b>${g}</b><small>${g<=gd1?'Д1':'Д2'}</small></div>`+tbls.map(t=>{const T=D.TS[g+'-'+t];if(!T)return '<div class="smc empty"></div>';const c=CAT[T.cat];
     const mine=myPlayer&&T.names.includes(myPlayer);return `<button class="smc ${c.k}${mine?' mine':''}" data-g="${g}" data-t="${t}" title="${c.n} · Ø ${Math.round(T.avg)} · ${T.names.join(', ')}"><span class="ce">${Math.round(T.avg)}</span><span class="cn">${c.n}</span>${mine?'<span class="youb">вы</span>':''}</button>`;}).join('');});
   grid+='</div>';
-  const legend=[1,2,3,4,5].map(c=>{const r=D.catRange[c];return `<div class="lgi"><span class="kb ${CAT[c].k}">${CAT[c].n}</span><span class="lgt">${r?`${r.n} столов · Ø ${Math.round(r.min)}–${Math.round(r.max)}`:'—'}</span><span class="lgd">${CAT[c].d}</span></div>`;}).join('');
+  const legend=[1,2,3,4,5].filter(c=>D.catRange[c]).map(c=>{const r=D.catRange[c];return `<div class="lgi"><span class="kb ${CAT[c].k}">${CAT[c].n}</span><span class="lgt">${r?`${r.n} столов · Ø ${Math.round(r.min)}–${Math.round(r.max)}`:'—'}</span><span class="lgd">${CAT[c].d}</span></div>`;}).join('');
   const hot=Object.values(D.TS).sort((a,b)=>b.avg-a.avg).slice(0,5).map(x=>`<div class="hotrowx"><span class="kb pk ${CAT[x.cat].k}" data-g="${x.g}" data-t="${x.t}">#${x.rank}</span><b>игра ${x.g} · стол ${ROMAN[x.t]}</b><span class="na">Ø ${Math.round(x.avg)}</span><div class="hotn">${x.names.slice().sort((a,b)=>(D.RATE[b]&&D.RATE[b].elo||0)-(D.RATE[a]&&D.RATE[a].elo||0)).map(n=>{const tr=D.RATE[n]&&D.RATE[n].tier;return `<span class="plink" data-p="${esc(n)}" onclick="goPlayer(this.dataset.p)">${esc(n)}${tr?` <span class="tpill tp-${tr}" style="font-size:9px;padding:0 5px">${tr}</span>`:''}</span>`;}).join(' · ')}</div></div>`).join('');
-  area.innerHTML=`<div class="note" style="margin:0 0 12px">Каждый стол квалификации оценён по среднему ELO десяти игроков (markery, снимок ${esc(D.stats.snapshot||'2026-09-06')}) и попал в одну из пяти корзин — <b>равными долями, по ${Math.round(D.tblN/5)} столов</b>. Средний стол турнира — ${Math.round(D.tblMean)}. Тап по клетке — рассадка этого стола.</div>
+  area.innerHTML=`<div class="note" style="margin:0 0 12px">Каждый стол квалификации оценён по среднему ELO десяти игроков (markery, снимок ${esc(D.stats.snapshot||'2026-09-06')}) и сравнён со случайным жребием. Средний стол турнира — ${Math.round(D.tblMean)}, обычный разброс жребия — <b>±${Math.round(D.sigT)} ELO</b>: всё, что в его пределах, — «ровный» стол. Тап по клетке — рассадка этого стола.</div>
     <div class="panel" style="padding:10px">${grid}<div class="note" style="margin-top:8px">Строки — игры (Д1/Д2 — день по плану трансляций, уточним по факту), столбцы — столы с судьями. Золотая рамка — ваш стол, если выбран «мой игрок».</div></div>
-    <div class="panel"><h3>Пять корзин</h3><div class="lgl">${legend}</div><div class="note" style="margin-top:8px">Почему равными долями, а не «сигмой»: разброс средних по столам небольшой (${Math.round(Math.min(...Object.values(D.TS).map(x=>x.avg)))}–${Math.round(Math.max(...Object.values(D.TS).map(x=>x.avg)))}), и любая абсолютная граница либо сваливала бы все столы в середину, либо зависела бы от одного-двух топов. Ранг честнее: «элитный» — это буквально 11 самых сильных составов турнира.</div></div>
+    <div class="panel"><h3>Категории столов</h3><div class="lgl">${legend}</div><div class="note" style="margin-top:8px">Как считаем: случайный жребий тоже даёт разброс — какие-то столы сильнее, какие-то слабее. Для этого турнира он около ±${Math.round(D.sigT)} ELO (зависит от разброса рейтингов состава). В пределах — «ровный», 1–2 таких разброса — «сильный»/«мягкий», больше двух — «элитный»/«спокойный». Поэтому категорий может быть не пять: если жребий ровный, почти все столы будут «ровными».</div></div>
     <div class="panel"><h3>Пять самых жарких столов</h3>${hot}</div>
     <div class="panel"><h3>А кому как рассадило?</h3><div class="note" style="margin:0">Сильный игрок сам утяжеляет свой стол — поэтому у топов чаще «элитные» столы, и это не про жребий. Честный вопрос «кому достались сильные соперники» считаем без самого игрока — в разделе <span class="lnk" style="cursor:pointer" onclick="show('luck')">«Рассадка» →</span></div></div>`;
   area.querySelectorAll('.smc[data-g]').forEach(b=>b.onclick=()=>openPeek(+b.dataset.g,+b.dataset.t,myPlayer||null));
@@ -1682,11 +1692,11 @@ function paintLuck(){const area=document.getElementById('luckArea');if(!area)ret
   else if(luckSort==='soft')order.reverse();
   const rows=order.map(n=>{const L=D.LUCK[n],R=D.RATE[n]||{},I=D.INFO[n]||{};const d=Math.round(L.d);const v=luckVerdict(L);
     return `<button class="lrow${n===myPlayer?' me':''}" data-p="${esc(n)}" onclick="goPlayer(this.dataset.p)"><span class="lr">${L.rank}</span><img class="lav${R.tier?' f-'+R.tier:''}" src="${esc(avOf(n)||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'"><span class="lmain"><span class="ln">${I.flag||''} ${esc(n)}${R.tier?` <span class="tpill tp-${R.tier}" style="font-size:9px;padding:0 5px">${R.tier}</span>`:''}</span><span class="ls"><b>${Math.round(L.avg)}</b><span class="na">/${Math.round(L.exp)}</span> <span class="dlt ${v.k}">${d>0?'+':''}${d}</span></span></span>${luckSquares(L,false)}</button>`;}).join('');
-  area.innerHTML=`<div class="note" style="margin:0 0 10px">Для каждого игрока — средний ELO его <b>девяти соперников</b> в каждой игре квалификации, без него самого. Δ — отклонение от <b>личного ожидания</b> при случайном жребии (ты не можешь сидеть против себя, поэтому у сильного ожидаемый соперник чуть слабее, у слабого — чуть сильнее). В строке: <b>средний соперник</b>/ожидание и Δ. Квадратики — категория каждой посадки среди всех 550, от <b>спокойной</b> до <b>экстремальной</b>. Тап — страница игрока.</div>
+  area.innerHTML=`<div class="note" style="margin:0 0 10px">Для каждого игрока — средний ELO его <b>девяти соперников</b> в каждой игре квалификации, без него самого. Δ — отклонение от <b>личного ожидания</b> при случайном жребии (ты не можешь сидеть против себя, поэтому у сильного ожидаемый соперник чуть слабее, у слабого — чуть сильнее). В строке: <b>средний соперник</b>/ожидание и Δ. Квадратики — каждая игра: насколько её соперники сильнее или слабее случайного жребия. Тап — страница игрока.</div>
     <div class="segwrap"><span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Сначала:</span><span class="seg"><button class="${luckSort==='opp'?'on':''}" onclick="luckSort='opp';paintLuck()">экстремальные</button><button class="${luckSort==='soft'?'on':''}" onclick="luckSort='soft';paintLuck()">спокойные</button><button class="${luckSort==='elo'?'on':''}" onclick="luckSort='elo';paintLuck()">по ELO</button></span></div>
     <div class="kbrow" style="margin:6px 0 10px">${[5,4,3,2,1].map(c=>`<span class="kb ${CATO[c].k}">${CATO[c].n}</span>`).join('')}</div>
     <div class="llist">${rows}</div>
-    <div class="note">Средний соперник по турниру — ${Math.round(D.oppMean)} ELO. Разброс Δ между игроками — около ±15, так что ±10 — шум, ±22 и больше — уже заметно. Проверили перестановками: наблюдаемый разброс средних по столам не отличается от случайной посадки — жребий выглядит честным, столы никто специально не выравнивал. Nostradamus без профиля markery: для него и для его соседей взята медиана состава.</div>`;
+    <div class="note">Средний соперник по турниру — ${Math.round(D.oppMean)} ELO. Обычный разброс Δ при случайном жребии в этом турнире — около ±${Math.round(D.sigO/Math.sqrt(Math.max(1,(D.games||[]).filter(g=>!/Финал/.test(g.stage||'')).length)))} ELO: в его пределах рассадка «ровная», больше одного разброса — «плотная»/«помягче», больше двух — «экстремальная»/«спокойная». Квадратики по играм — то же правило для каждой отдельной игры.</div>`;
 }
 /* ── Карточки игроков (мобайл: список → полноэкранный просмотр со свайпом; десктоп: сетка) ── */
 const RK=['C','S','M','D'],RN={C:'Мирный',S:'Шериф',M:'Мафия',D:'Дон'},RC={C:'#EF4444',S:'#FBBF24',M:'#9CA3AF',D:'#A78BFA'};
