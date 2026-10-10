@@ -1,18 +1,11 @@
 {
  "_note": "Эфиры турнира 673 — источник правды для t673/watch673 (network-first, страницы перечитывают его раз в минуту: новые ссылки появляются у зрителей без перезагрузки). ID видео YouTube или live:UC… (канал). test:true — пока стоят записи 826.",
  "test": true,
- "gamesDay1": 6,
+ {
+ "gamesDay1": 8,
  "days": {
-  "1": {
-   "1": "RnH2wJjOtMg",
-   "2": "4P8KorUGPTI",
-   "3": "UvmSIF4FFv8"
-  },
-  "2": {
-   "1": "nO0ezdxl94E",
-   "2": "8_C4rOaTA_M",
-   "3": "nUskeCf4in8"
-  }
+  "1": {"1": "SG_v6VI1Sc4", "2": "_7oHG1Ko2Po", "3": "r5mbciaHffM"},
+  "2": {"1": "MjUZUj741gM", "2": "X5VJooddRvc", "3": "rx4T7-uN5YY"}
  },
- "final": "-Erzky4iGgk"
+ "final": "U_bTxYgswjU"
 }
