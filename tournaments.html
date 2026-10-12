@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v7.0 · 2026-06-20 -->
-<!-- DOVOD · tournaments.html · v3.1 · 2026-10-09 · +плашка theme:"dovod" (неон, кнопки «страница» / «смотровая», live по датам liveFrom/liveTo) · v3.0 · 2026-08-31 · раздел «Турниры» (бывшая главная MafgameStat): актуальные турниры + архив сезона из data/tournaments.js. Календарь, серийники и исследования вынесены в свои разделы; хаб выбора — index.html -->
+<!-- DOVOD · tournaments.html · v3.2 · 2026-10-13 · архив ведёт на собственную страницу турнира (t.page), если она есть · v3.1 · 2026-10-09 · +плашка theme:"dovod" (неон, кнопки «страница» / «смотровая», live по датам liveFrom/liveTo) · v3.0 · 2026-08-31 · раздел «Турниры» (бывшая главная MafgameStat): актуальные турниры + архив сезона из data/tournaments.js. Календарь, серийники и исследования вынесены в свои разделы; хаб выбора — index.html -->
 <!-- v2.2 · 2026-06-12 · плашки турниров, лого федерации — оригинал с mafgame.org -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -398,7 +398,7 @@ function dovodTile(t){
   const arc=ts.filter(t=>t.status==='finished').sort((a,b)=>String(b.start||'').localeCompare(String(a.start||'')));
   document.getElementById('actual').innerHTML=act.map(t=>t.theme==='dovod'?dovodTile(t):t.theme==='cyprus'?posterTile(t):t.theme==='protocol'?protocolTile(t):t.theme==='poster'?posterArtTile(t):(t.status==='gathering'?gatheringTile(t):plainTile(t))).join('')||'<div class="tmeta">Сейчас активных турниров нет.</div>';
   document.getElementById('archive').innerHTML=arc.map(t=>`
-    <a class="arc" href="tournament.html?t=${t.id}">
+    <a class="arc" href="${t.page||('tournament.html?t='+t.id)}">
       <div class="arc-date">${esc(t.dates)}<br>${esc(t.city)}</div>
       <div>
         <div class="arc-name">${esc(t.name)}</div>

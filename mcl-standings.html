@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl-standings.html · v1.7 · 2026-10-13 · ×1.5 к отбору только на Кипре, Израиль 50/50 · v1.6 · итог полуфинала: отбор ×1.5 при 2+ сериях, колонка «Итог», пометка ×1.5 · v1.5 · 2026-10-05 · MCL Europe 2026, зачёт трёх регионов: полные таблицы, фильтр нормы, калькулятор прохода. v1.5: блок «Итог полуфинала» (50% балла отборов + 50% балла полуфинала, conf[c].semiResult из data/mcl2026.js). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-standings.html · v1.8 · 2026-10-13 · блок «Сверка для организатора»: серии (контрольные суммы), зачёт и итог полуфинала по шагам с пересчётом из протоколов и CSV; шапка маршрута с формулой по региону · v1.7 · 2026-10-13 · ×1.5 к отбору только на Кипре, Израиль 50/50 · v1.6 · итог полуфинала: отбор ×1.5 при 2+ сериях, колонка «Итог», пометка ×1.5 · v1.5 · 2026-10-05 · MCL Europe 2026, зачёт трёх регионов: полные таблицы, фильтр нормы, калькулятор прохода. v1.5: блок «Итог полуфинала» (50% балла отборов + 50% балла полуфинала, conf[c].semiResult из data/mcl2026.js). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -242,6 +242,28 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 }
 
 /* калькулятор */
+.rc{margin:30px 0 8px;border:1px solid rgba(201,161,77,.45);background:linear-gradient(135deg,rgba(96,72,20,.18),var(--panel) 55%)}
+.rc>summary{cursor:pointer;list-style:none;padding:15px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.rc>summary::-webkit-details-marker{display:none}
+.rc>summary b{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:21px;text-transform:uppercase;color:var(--gold-hi)}
+.rc>summary s{text-decoration:none;color:var(--mut);font-size:13px}
+.rc>summary:after{content:'▾';margin-left:auto;color:var(--gold-hi)}
+.rc[open]>summary:after{content:'▴'}
+.rc .rcb{padding:0 18px 18px}
+.rc h4{margin:20px 0 6px;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.rc .rcn{font-size:12.5px;color:var(--mut);margin:0 0 8px;line-height:1.55}
+.rc .rcw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line)}
+.rc table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:640px}
+.rc th,.rc td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.rc th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;background:rgba(0,0,0,.25);position:sticky;top:0}
+.rc td.l,.rc th.l{text-align:left}
+.rc td.w{white-space:normal;min-width:170px;color:var(--mut)}
+.rc tr.fin td{background:rgba(201,161,77,.10)}
+.rc tr.tot td{font-weight:700;color:#fff;background:rgba(0,0,0,.25)}
+.rc .ok{color:#67e08f;font-weight:700}.rc .bad{color:var(--red);font-weight:800}
+.rc .rcbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 2px}
+.rc .rcbar button{background:transparent;border:1px solid rgba(201,161,77,.55);color:var(--gold-hi);padding:7px 12px;font-size:12px;cursor:pointer}
+.rc .rcsum{margin-top:14px;padding:10px 12px;border:1px dashed rgba(201,161,77,.45);font-size:13px;line-height:1.6}
 .calc{background:linear-gradient(120deg,rgba(74,18,67,.55),var(--panel) 60%);border:1px solid rgba(198,90,180,.4);padding:18px;margin:18px 0 6px}
 .calc .t{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:24px;text-transform:uppercase}
 .calc .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
@@ -531,6 +553,7 @@ a:hover .sithumb{filter:brightness(1.12)}
       <div class="out" id="cout"></div>
       <div class="hint">Порог — балл игрока, который сейчас занимает последнее место в квоте. По ходу сезона он растёт: чем больше людей выполнит норму, тем выше планка. Медиана результата серии в этом сезоне — 4.43.</div>
     </div>
+    <details class="rc" id="recon"></details>
     <a class="more" href="mcl-series.html">Серии и календарь &rarr;</a>
   </section>
 </div></main>
@@ -601,7 +624,7 @@ $('#tabs').innerHTML=['CE','IL','CY'].map(function(c){
   return '<div class="tab'+(c===CONF?' on':'')+'" data-c="'+c+'"><span>'+esc(D.conf[c].name)+'</span></div>';}).join('');
 $('#tabs').addEventListener('click',function(e){var t=e.target.closest('.tab'); if(!t)return;
   CONF=t.dataset.c; $$('#tabs .tab').forEach(function(x){x.classList.toggle('on',x.dataset.c===CONF);});
-  stand(); fillCalc();});
+  stand(); fillCalc(); recon();});
 $$('#filt button').forEach(function(b){ b.classList.toggle('on', b.dataset.f===FILT);
   b.addEventListener('click',function(){ FILT=b.dataset.f;
     try{localStorage.setItem('mclFilt',FILT);}catch(e){}
@@ -618,7 +641,7 @@ function stand(){
   var head1, head2, sr=semi&&k.semiResult&&k.semiResult.length?k.semiResult:null;
   if(sr){
     head1='Полуфинал сыгран';
-    head2='итог — <i>50% балла отборов + 50% балла полуфинала</i> · в финале: <i>'+
+    head2='итог — <i>'+(sr.some(function(r){return r.qk>1;})?'(балл отборов × 1.5 + балл полуфинала) / 2':'50% балла отборов + 50% балла полуфинала')+'</i> · в финале: <i>'+
       sr.slice(0,q).map(function(r){return esc(r.n);}).join('</i> · <i>')+'</i>';
   } else if(semi){
     head1=(done?'Серии сыграны':'Идёт отбор в полуфинал');
@@ -734,10 +757,83 @@ function simulate(){
     '<b>'+esc(me.n)+'</b> с результатом '+sc.toFixed(2)+' в '+(me.s+1)+'-й серии получит средний <b>'+newAvg.toFixed(3)+'</b> — это '+pos+
     '-е место среди выполнивших норму'+(into?' и <b style="color:var(--pur-hi)">попадание в квоту</b> ('+k.quota+' мест).':' — квота '+k.quota+', пока мимо. Нужно <b>'+needFor(k,me).toFixed(2)+'</b> и выше.');
 }
+
+/* ── Сверка для организатора (v1.8, 13.10.2026) ─────────────────────────────
+   Каждая цифра зачёта раскладывается на шаги, которые организатор может пересчитать
+   руками или в Excel (кнопка CSV): баллы по сериям → Σ → средний → (×k) → + полуфинал → /2.
+   Пересчёт делается здесь же, в браузере, из сырых протоколов серий (D.series[].r),
+   и сравнивается с тем, что показывает таблица (D.conf[c].rows / semiResult): ✓ — совпало. */
+var RC_CSV={};
+function rcDl(key){var t=RC_CSV[key];if(!t)return;
+  var b=new Blob(['﻿'+t.rows.map(function(r){return r.map(function(v){v=v==null?'':String(v);return /[;"\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}).join(';');}).join('\r\n')],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=t.name;document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
+function rcNum(v,d){return v==null||isNaN(v)?'—':(+v).toFixed(d==null?3:d).replace('.',',');}
+function recon(){
+  var el=$('#recon'); if(!el) return;
+  var c=CONF, k=D.conf[c], q=k.quota, semi=k.route==='semi';
+  var sr=semi&&k.semiResult&&k.semiResult.length?k.semiResult:null;
+  var ser=(D.series||[]).filter(function(s){return s.c===c&&s.r&&s.r.length;});
+  var qs=ser.filter(function(s){return !s.semi;}), ss=ser.filter(function(s){return s.semi;});
+  var lab=function(s){return s.city+' '+dm(s.date);};
+  /* пересчёт из протоколов: uid → [[серия, балл]] */
+  var by={}; qs.forEach(function(s){s.r.forEach(function(x){(by[x[0]]=by[x[0]]||{n:x[1],d:[]}).d.push([lab(s),x[2]]);});});
+  var html=[], bad=0, chk=0, mark=function(ok){chk++;if(!ok)bad++;return ok?'<span class="ok">✓</span>':'<span class="bad">✗</span>';};
+  var e3=function(a,b){return a!=null&&b!=null&&Math.abs(a-b)<0.0015;};
+  /* 1 · серии региона: контрольные суммы протоколов */
+  var t1=[['Серия','Дата','Город','Судья','Игроков','Игр','Σ баллов всех игроков','1-е место','Балл 1-го','mafgame id']];
+  var h1=ser.map(function(s){var sum=s.r.reduce(function(a,x){return a+x[2];},0);
+    t1.push([s.semi?'полуфинал':scode(s),s.date,s.city,s.j||'',s.players||s.r.length,s.games||'',sum.toFixed(2),s.r[0][1],s.r[0][2],s.id]);
+    return '<tr'+(s.semi?' class="fin"':'')+'><td class="l">'+(s.semi?'<b>полуфинал</b>':esc(scode(s)))+'</td><td>'+dm(s.date)+'</td><td class="l">'+esc(s.city)+'</td><td class="l">'+esc(s.j||'—')+'</td><td>'+(s.players||s.r.length)+'</td><td>'+(s.games||'—')+'</td><td>'+rcNum(sum,2)+'</td><td class="l">'+esc(s.r[0][1])+' · '+rcNum(s.r[0][2],2)+'</td><td><a href="https://mafgame.org/tournaments/'+s.id+'/results" target="_blank" rel="noopener">'+s.id+' ↗</a></td></tr>';}).join('');
+  RC_CSV[c+'1']={name:'MCL-'+c+'-1-serii.csv',rows:t1};
+  html.push('<h4>1 · Серии региона — контрольные суммы</h4><p class="rcn">Сверка с протоколами mafgame: число игроков и игр, сумма баллов всех игроков серии и победитель. Если сумма совпала с таблицей серии на mafgame — протокол перенесён без потерь.</p>'+
+    '<div class="rcw"><table><tr><th class="l">Серия</th><th>Дата</th><th class="l">Город</th><th class="l">Судья</th><th>Игроков</th><th>Игр</th><th>Σ баллов</th><th class="l">1-е место</th><th>Протокол</th></tr>'+h1+'</table></div>'+
+    '<div class="rcbar"><button onclick="rcDl(\''+c+'1\')">⬇ CSV · серии</button></div>');
+  /* 2 · зачёт отбора: средний = Σ / серий */
+  var t2=[['Место','Игрок','Баллы по сериям','Σ','Серий','Средний = Σ / серий','Норма 2+','На сайте','Совпало']];
+  var pl=0;
+  var h2=k.rows.map(function(r){var o=by[r.u]||{d:[]};var sum=o.d.reduce(function(a,x){return a+x[1];},0),n=o.d.length,avg=n?sum/n:null;
+    var ok2=r.s>=2; if(semi||ok2) pl++; var ok=e3(avg,r.a)&&n===r.s; var m=mark(ok);
+    var zone=semi?pl<=(k.semiSlots||10):(ok2&&pl<=q);
+    t2.push([(semi||ok2)?pl:'',r.n,o.d.map(function(x){return x[0]+' '+x[1];}).join(' | '),sum.toFixed(3),n,avg==null?'':avg.toFixed(3),ok2?'да':'нет',r.a.toFixed(3),ok?'да':'НЕТ']);
+    return '<tr'+(zone?' class="fin"':'')+'><td>'+((semi||ok2)?pl:'·')+'</td><td class="l">'+esc(r.n)+'</td><td class="l w">'+o.d.map(function(x){return esc(x[0])+' — <b style="color:#fff">'+rcNum(x[1],2)+'</b>';}).join('<br>')+'</td><td>'+rcNum(sum)+'</td><td>'+n+'</td><td><b>'+rcNum(avg)+'</b></td><td>'+(ok2?'да':'<span style="color:var(--dim)">нет</span>')+'</td><td>'+m+'</td></tr>';}).join('');
+  RC_CSV[c+'2']={name:'MCL-'+c+'-2-zachet.csv',rows:t2};
+  html.push('<h4>2 · Зачёт отбора — пошагово</h4><p class="rcn">Средний = сумма баллов за отборочные серии / число серий. '+(semi?'Порядок: сначала все с нормой «две серии и больше» по среднему, затем добором — с одной серией. Подсвечены '+(k.semiSlots||10)+' мест полуфинала.':'В зачёт идут только выполнившие норму «две серии и больше». Подсвечены '+q+' мест прямого прохода в финал.')+' Последняя колонка: ✓ — пересчёт из протоколов совпал с таблицей на сайте.</p>'+
+    '<div class="rcw"><table><tr><th>#</th><th class="l">Игрок</th><th class="l">Баллы по сериям</th><th>Σ</th><th>Серий</th><th>Средний</th><th>Норма 2+</th><th>✓</th></tr>'+h2+'</table></div>'+
+    '<div class="rcbar"><button onclick="rcDl(\''+c+'2\')">⬇ CSV · зачёт отбора</button></div>');
+  /* 3 · итог полуфинала */
+  if(sr){
+    var bon=sr.some(function(r){return r.qk>1;});
+    var semiS=ss[ss.length-1], sp={}; if(semiS) semiS.r.forEach(function(x){sp[x[0]]=x[2];});
+    var t3=[['Место','Игрок','Серий отбора','Средний отбора','Коэф.','Средний × коэф.','Балл полуфинала','Сумма','Итог = сумма / 2','На сайте','Совпало','Финал']];
+    var h3=sr.map(function(r,i){var o=by[r.u]||{d:[]};var n=o.d.length,avg=n?o.d.reduce(function(a,x){return a+x[1];},0)/n:0;
+      var kk=(bon&&n>=2)?1.5:1, adj=avg*kk, p=sp[r.u], sum=adj+(p||0), fin=sum/2;
+      var ok=e3(fin,r.fin)&&e3(p,r.sp); var m=mark(ok); var into=i<q;
+      t3.push([i+1,r.n,n,avg.toFixed(3),kk,adj.toFixed(4),p,sum.toFixed(4),fin.toFixed(4),r.fin.toFixed(3),ok?'да':'НЕТ',into?'да':'']);
+      return '<tr'+(into?' class="fin"':'')+'><td>'+(i+1)+'</td><td class="l">'+esc(r.n)+(into?' <b style="color:var(--gold-hi)">→ финал</b>':'')+'</td><td>'+n+'</td><td>'+rcNum(avg)+'</td><td>×'+String(kk).replace('.',',')+'</td><td>'+rcNum(adj,4)+'</td><td>'+rcNum(p,2)+'</td><td>'+rcNum(sum,4)+'</td><td><b>'+rcNum(fin,4)+'</b></td><td>'+m+'</td></tr>';}).join('');
+    RC_CSV[c+'3']={name:'MCL-'+c+'-3-polufinal.csv',rows:t3};
+    html.push('<h4>3 · Итог полуфинала — пошагово</h4><p class="rcn">'+(bon
+        ?'Регламент Кипра: итог = (средний отборов × коэффициент + балл полуфинала) / 2. Коэффициент <b style="color:#fff">1,5</b> — у сыгравших в отборе две серии и больше, <b style="color:#fff">1</b> — у добора с одной серией.'
+        :'Итог = (средний отборов + балл полуфинала) / 2 — половина на половину, без коэффициентов.')+
+      ' Балл полуфинала — из протокола полуфинала'+(semiS?' ('+esc(lab(semiS))+', mafgame '+semiS.id+')':'')+'. В финал: '+(q===1?'первое место':'первые '+q+' места')+'.</p>'+
+      '<div class="rcw"><table><tr><th>#</th><th class="l">Игрок</th><th>Серий</th><th>Средний отборов</th><th>Коэф.</th><th>× коэф.</th><th>Полуфинал</th><th>Сумма</th><th>Итог</th><th>✓</th></tr>'+h3+'</table></div>'+
+      '<div class="rcbar"><button onclick="rcDl(\''+c+'3\')">⬇ CSV · полуфинал</button></div>');
+  }
+  /* 4 · сводка проверок */
+  var sq=(D.squad||[]).filter(function(x){return x.c===c&&x.n;});
+  var players=Object.keys(by).length;
+  html.push('<div class="rcsum">'+(bad?'<span class="bad">✗ Расхождений: '+bad+' из '+chk+'</span> — строки с ✗ надо сверить с протоколом.':'<span class="ok">✓ Все '+chk+' проверок сошлись</span>: пересчёт из протоколов совпал с таблицами на сайте.')+
+    '<br>Сыграно серий отбора: <b>'+qs.length+'</b> из '+k.total+(ss.length?' · полуфинал сыгран':'')+' · игроков в протоколах региона: <b>'+players+'</b> (в таблице зачёта — '+k.rows.length+')'+
+    (sq.length?'<br>Путёвки в финал сейчас: <b>'+sq.map(function(x){return esc(x.slot)+' — '+esc(x.n);}).join(' · ')+'</b>':'')+
+    '<br><span style="color:var(--mut)">Данные — снимок '+esc(D.snap)+', протоколы mafgame. Если в протоколе на mafgame правили баллы после снимка, цифры обновятся при следующем прогоне робота.</span></div>');
+  var open=el.open;
+  el.innerHTML='<summary><b>Сверка для организатора</b><s>'+esc(k.name)+' · каждая цифра по шагам · CSV для Excel</s></summary><div class="rcb">'+html.join('')+'</div>';
+  el.open=open;
+}
 $('#cgo').addEventListener('click',simulate);
 $('#cpl').addEventListener('change',simulate);
 $('#csc').addEventListener('keydown',function(e){if(e.key==='Enter')simulate();});
-stand(); fillCalc(); simulate();
+stand(); fillCalc(); simulate(); recon();
 
 </script>
 </body>

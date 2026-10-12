@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t673.html · v1.1 · 2026-10-09 · категории столов и рассадки — от разброса случайного жребия (σ), а не равными долями · v1.0 · 2026-10-09 · Чемпионат Молдовы 2026 (mafgame 673). Движок страницы ЧМ-2026 (wc2026-tournament v2.3, эталон ce634) вынесен в конфиг CFG: новый турнир = копия файла + правка CFG + data/*_{id}*.
+<!-- DOVOD · t673.html · v1.2 · 2026-10-13 · турнир закрыт: протоколы 16 игр заморожены (games_673_current.json), итоги/чемпион в resultsPanel, финал 4 игры (CFG.finals 4) · v1.1 · 2026-10-09 · категории столов и рассадки — от разброса случайного жребия (σ), а не равными долями · v1.0 · 2026-10-09 · Чемпионат Молдовы 2026 (mafgame 673). Движок страницы ЧМ-2026 (wc2026-tournament v2.3, эталон ce634) вынесен в конфиг CFG: новый турнир = копия файла + правка CFG + data/*_{id}*.
      Отличия от ЧМ: 2 стадии (12 квал × 3 стола → финал 5 игр топ-10, ×1.3), без карточек по странам и без робота-аудита; эфиры — отдельная «Смотровая» watch673.html.
      Стиль: DOVOD-неон, акцент cyan раздела «Турниры». -->
 <meta charset="utf-8">
@@ -774,8 +774,8 @@ const TIER_ORD={L:-1,S:0,A:1,B:2,C:3,D:4,E:5,F:6};
 /* ── КОНФИГ ТУРНИРА: новый турнир = копия файла + правка этого блока + data/*_{id}* ── */
 const CFG={id:'673',ls:'t673_',name:'Чемпионат Молдовы 2026',short:'ЧМД 2026',kick:'Чемпионат Молдовы · 3★',h1:'Чемпионат <b>Молдовы</b> 2026',
   dates:'10–11 октября 2026',place:'Кишинёв',startLab:'старт 10 октября',startShort:'10.10',
-  quals:12,tables:3,finalN:10,finals:5,fmt:'12+5',
-  intro:'Национальный чемпионат: 30 игроков, 12 игр квалификации на трёх столах — играют все, без отдыха. Десятка лучших выходит в финал из пяти игр, баллы финала идут с коэффициентом ×1.3. Результаты подтягиваются с mafgame вживую в дни турнира — статистика включится сама после первого стола.',
+  quals:12,tables:3,finalN:10,finals:4,fmt:'12+4',
+  intro:'Национальный чемпионат завершён 11 октября: 30 игроков, 12 игр квалификации на трёх столах — играли все, без отдыха. Десятка лучших сыграла финал из четырёх игр (анонсировали пять), баллы финала — с коэффициентом ×1.3. Чемпион Молдовы — Tripok. Все протоколы и итоговая таблица заморожены после закрытия турнира на mafgame и сверены с официальной таблицей',
   watch:'watch673.html',mafgame:'https://mafgame.org/tournaments/673/view'};
 const START='2026-10-10T11:00:00+03:00'; /* ГИПОТЕЗА: время старта на mafgame не указано */
 const DEF_AV='https://mafgame.org/build/assets/avatar-default2-33e44bae.png';
@@ -1172,17 +1172,19 @@ return `<div class="panel"><h3>Разделы — тапайте</h3><div class=
 function resultsPanel(){
   const t=D.tour; if(!t||!t.closed) return '';
   const med=['🥇','🥈','🥉'];
-  const wins=(t.winners||[]).map((n,i)=>`<div style="display:flex;align-items:center;gap:9px;padding:5px 0;font-size:${i?'14px':'16.5px'};font-weight:${i?'700':'800'}"><span>${med[i]||''}</span>${plink(n)}${i===0?'<span class="chip live" style="margin-left:6px">чемпион</span>':''}</div>`).join('');
+  const SR={};(t.standings||[]).forEach(r=>SR[r.name]=r);
+  const wins=(t.winners||[]).map((n,i)=>`<div style="display:flex;align-items:center;gap:9px;padding:5px 0;font-size:${i?'14px':'16.5px'};font-weight:${i?'700':'800'}"><span>${med[i]||''}</span>${plink(n)}${i===0?'<span class="chip live" style="margin-left:6px">чемпион</span>':''}<span style="margin-left:auto;color:var(--dim);font-weight:700;font-size:13px">${SR[n]?'Σ '+(+SR[n].sigma).toFixed(3):''}${t.prizes&&t.prizes[i+1]?' · '+t.prizes[i+1]+' €':''}</span></div>`).join('');
+  const top=(t.standings||[]).slice(3,10).map(r=>`<div style="display:flex;gap:8px;font-size:12.5px;padding:2px 0"><span style="width:20px;color:var(--dim)">${r.place}</span>${plink(r.name)}<span style="margin-left:auto;color:var(--dim)">${(+r.sigma).toFixed(3)}</span></div>`).join('');
   const AWL={most_valuable_players:'MVP турнира',most_valuable_mafia:'Лучшая мафия',most_valuable_citizen:'Лучший мирный',best_don:'Лучший дон',best_sheriff:'Лучший шериф',most_killed:'Чаще всех убит 1-й ночью'};
   const aw=t.awards&&Object.keys(t.awards).length?Object.entries(t.awards).map(([k,list])=>{
     const items=list.map((it,i)=>{const m=it.match(/^(.+?)\s*\((.+)\)\s*$/);const nm=m?m[1].trim():it;const val=m?m[2]:'';
       return `<div style="display:flex;align-items:center;gap:7px;font-size:12.5px;padding:2px 0"><span style="width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;background:${['var(--gold)','#c5cad8','#d18a4a'][i]||'rgba(255,255,255,.1)'};color:#0b0d14">${i+1}</span>${plink(nm)}<span style="color:var(--dim);margin-left:auto">${esc(val)}</span></div>`;}).join('');
     return `<div style="padding:7px 0;border-top:1px solid rgba(38,224,255,.12)"><div style="font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:4px">${AWL[k]||k}</div>${items}</div>`;}).join(''):'';
-  return `<div class="panel"><h3>🏆 Итоги турнира</h3>${wins}${aw?`<div style="margin-top:8px">${aw}</div>`:''}${t.awards_note?`<div class="note" style="margin-top:8px">${esc(t.awards_note)}</div>`:''}</div>`;
+  return `<div class="panel"><h3>🏆 Итоги турнира</h3>${wins}${top?`<div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(38,224,255,.12)">${top}</div>`:''}${t.reconciliation?`<div class="note" style="margin-top:8px">✓ ${esc(t.reconciliation)}</div>`:''}${aw?`<div style="margin-top:8px">${aw}</div>`:''}${t.awards_note?`<div class="note" style="margin-top:8px">${esc(t.awards_note)}</div>`:''}</div>`;
 }
 function stagesPanel(){return `<div class="panel"><h3>Формат: 2 стадии</h3><div class="stages">
     <div class="stage"><span class="sbadge">${CFG.startLab}</span><div class="sn">Квалификация</div><div class="sg">${CFG.quals} игр · ${CFG.tables} стола · играют все</div><div class="sd">Все ${D.players.length} игроков играют каждую игру. По сумме баллов — топ‑${CFG.finalN} в финал.</div></div>
-    <div class="stage"><span class="sbadge">×1.3</span><div class="sn">Финал</div><div class="sg">${CFG.finals} игр · топ‑${CFG.finalN} · один стол</div><div class="sd">Баллы квалификации сохраняются, все баллы финала идут с коэффициентом 1.3. Победитель — чемпион Молдовы.</div></div></div></div>`;}
+    <div class="stage"><span class="sbadge">×1.3</span><div class="sn">Финал</div><div class="sg">${CFG.finals} игр · топ‑${CFG.finalN} · один стол</div><div class="sd">Баллы квалификации сохраняются, все баллы финала идут с коэффициентом 1.3. Победитель — чемпион Молдовы. Сыграли 4 игры финала (анонсировали 5).</div></div></div></div>`;}
 
 const JD_HASH='2ff1e3f51de1d12a2ec8f86fe71b135c817c77956160e7ee8d703e56a7788ae3'; /* sha256 пароля раздела «Судьи» (выдаёт Валерий) */
 function jdUnlocked(){try{return localStorage.getItem(CFG.ls+'jd')==='ok';}catch(e){return false}}

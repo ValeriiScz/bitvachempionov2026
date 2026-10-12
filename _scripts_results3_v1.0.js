@@ -1,4 +1,4 @@
-/* results3 · v1.0 · 2026-09-01
+/* results3 · v1.1 · 2026-10-13 (+673, +710; ники чистятся от «1. … — балл») · v1.0 · 2026-09-01
    Назначение: собрать data/results3.js — топ-3 призёров прошедших турниров для карточек календаря.
    Запуск: node _scripts_results3_v1.0.js   (из корня репозитория сайта)
 
@@ -21,7 +21,7 @@
 const fs = require('fs');
 
 /* 1 · источники */
-const MANUAL_TOURNAMENTS = [622, 634, 667, 693, 694, 702, 766, 826];
+const MANUAL_TOURNAMENTS = [622, 634, 667, 673, 693, 694, 702, 710, 766, 826];
 const TEAM_TOURNAMENTS   = [693];
 
 /* 2 · сборка */
@@ -33,7 +33,7 @@ eval(fs.readFileSync('data/mcl2026.js', 'utf8').replace(/window\./g, 'global.'))
 });
 for (const id of MANUAL_TOURNAMENTS) {
   const j = JSON.parse(fs.readFileSync('data/tournament_' + id + '.json', 'utf8'));
-  if (j.winners && j.winners.length) R[id] = j.winners.slice(0, 3);
+  if (j.winners && j.winners.length) R[id] = j.winners.slice(0, 3).map(w => String(w).replace(/^\s*\d+\.\s*/, '').replace(/\s+—\s+[\d.,]+\s*$/, ''));  // v1.1: у 710 «1. Призрак — 13.185»
 }
 TEAM_TOURNAMENTS.forEach(id => { if (R[id]) T[id] = 1; });
 

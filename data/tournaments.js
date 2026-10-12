@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v3.3 | 2026-10-13 | 673 -> finished (чемпион Tripok 13.33, Bard 12.275, TOPS 11.0; финал 4 игры); +710 ЧМ-2026 в архив (page wc2026-tournament.html); архив ведёт на t.page
 // MafgameStat | tournaments.js | v3.2 | 2026-10-09 | +673 Чемпионат Молдовы (theme dovod, t673/watch673, live 10–11.10) + 692 Four Seasons Central Cup и 687 Mediterranean GP (собираются, участники + ELO)
 // MafgameStat | tournaments.js | v3.1 | 2026-08-23 | 694 -> finished: чемпион Lюц 13.065 (Магнат 12.98, aptah 12.17); официальные таблицы вставлены, финал с коэффициентом x1.3
 // MafgameStat | tournaments.js | v3.0 | 2026-08-22 | +694 Central Euro Cup (Прага, финал серийника, live 22-23.08): 12 квал x 3 стола + финал 5, постер prague694, accent #c9a227, ce694; 634 -> finished (чемпион Европы YeS 15.205, RAMZES 15.195, разрыв 0.01)
@@ -24,24 +25,36 @@ window.TOURNAMENTS_DB = {
       "players": 30,
       "days": 2,
       "stars": 3,
-      "status": "upcoming",
-      "phase": 2,
-      "statusLabel": "Скоро · старт 10 октября",
-      "liveFrom": "2026-10-10",
-      "liveTo": "2026-10-11",
+      "status": "finished",
+      "phase": 1,
+      "statusLabel": "Завершён · 16 игр (12 квал + 4 финала) · чемпион Tripok",
       "eloAvg": 1020,
       "eloN": 29,
       "eloTotal": 30,
       "organizer": "mafia.md · орг Весная, Г-жа Кот · главный судья YeS",
-      "format": "12 игр квалификации × 3 стола → финал 5 игр (топ-10, ×1.3)",
+      "format": "12 игр квалификации × 3 стола → финал 4 игры (топ-10, ×1.3)",
       "mafgame": "https://mafgame.org/tournaments/673/view",
-      "note": "Рассадка квалификации опубликована. Результаты подтягиваются с mafgame вживую в дни турнира.",
+      "note": "Чемпион Молдовы — Tripok (13.33), 2-е Bard (12.275), 3-е TOPS (11.0). Протоколы 16 игр заморожены и сверены с официальной таблицей mafgame.",
       "sections": [
-        {"href": "t673.html", "title": "Страница турнира", "desc": "Обзор · Моё · Игроки · Столы · Результаты — рассадка, сила столов, live-таблица"},
-        {"href": "watch673.html", "title": "▶ Смотровая · все эфиры", "desc": "Три стола в одном окне, «следить за игроком»"},
-        {"href": "participants.html?t=673", "title": "Участники и рейтинг", "desc": "30 игроков + ELO markery (снимок 09.10)"}
+        {
+          "href": "t673.html",
+          "title": "Страница турнира",
+          "desc": "Итоги, таблица, протоколы 16 игр, сила столов и рассадка"
+        },
+        {
+          "href": "watch673.html",
+          "title": "▶ Смотровая · все эфиры",
+          "desc": "Записи трансляций трёх столов и финала"
+        },
+        {
+          "href": "participants.html?t=673",
+          "title": "Участники и рейтинг",
+          "desc": "30 игроков + ELO markery (снимок 09.10)"
+        }
       ],
-      "start": "2026-10-10"
+      "start": "2026-10-10",
+      "prize": "700€",
+      "champion": "Tripok"
     },
     {
       "id": "692",
@@ -65,9 +78,21 @@ window.TOURNAMENTS_DB = {
       "mafgame": "https://mafgame.org/tournaments/692/view",
       "note": "Страница турнира и смотровая откроются, когда mafgame опубликует рассадку.",
       "sections": [
-        {"href": "participants.html?t=692", "title": "Участники и рейтинг", "desc": "32 игрока + ELO markery (снимок 09.10)"},
-        {"soon": true, "title": "Страница турнира", "desc": "рассадка, сила столов, live-результаты"},
-        {"soon": true, "title": "Смотровая · эфиры", "desc": "все столы в одном окне"}
+        {
+          "href": "participants.html?t=692",
+          "title": "Участники и рейтинг",
+          "desc": "32 игрока + ELO markery (снимок 09.10)"
+        },
+        {
+          "soon": true,
+          "title": "Страница турнира",
+          "desc": "рассадка, сила столов, live-результаты"
+        },
+        {
+          "soon": true,
+          "title": "Смотровая · эфиры",
+          "desc": "все столы в одном окне"
+        }
       ],
       "start": "2026-10-17"
     },
@@ -93,86 +118,112 @@ window.TOURNAMENTS_DB = {
       "mafgame": "https://mafgame.org/tournaments/687/view",
       "note": "Ожидается 40 участников; в списке подтверждённые и заявки. Страница турнира откроется после рассадки.",
       "sections": [
-        {"href": "participants.html?t=687", "title": "Участники и рейтинг", "desc": "подтверждённые и заявки + ELO markery (снимок 09.10)"},
-        {"soon": true, "title": "Страница турнира", "desc": "рассадка, сила столов, live-результаты"},
-        {"soon": true, "title": "Смотровая · эфиры", "desc": "все столы в одном окне"}
+        {
+          "href": "participants.html?t=687",
+          "title": "Участники и рейтинг",
+          "desc": "подтверждённые и заявки + ELO markery (снимок 09.10)"
+        },
+        {
+          "soon": true,
+          "title": "Страница турнира",
+          "desc": "рассадка, сила столов, live-результаты"
+        },
+        {
+          "soon": true,
+          "title": "Смотровая · эфиры",
+          "desc": "все столы в одном окне"
+        }
       ],
       "start": "2026-10-31"
     },
     {
-          "id": "694",
-          "theme": "poster",
-          "art": "assets/prague694_card.jpg",
-          "artRatio": "16 / 9",
-          "posterScript": "Praha",
-          "posterTitle": "CENTRAL EURO CUP",
-          "posterSub": "AUG 22–23 · PRAGUE",
-          "accent": "#c9a227",
-          "name": "Central Euro Cup 2026",
-          "dates": "22–23 августа 2026",
-          "city": "Прага",
-          "country": "Чехия",
-          "players": 30,
-          "days": 2,
-          "stars": 3,
-          "prize": "2000€",
-          "status": "finished",
-          "phase": 1,
-          "statusLabel": "Завершён · 17 игр · чемпион Lюц",
-          "eloAvg": 1088,
-          "eloN": 28,
-          "eloTotal": 30,
-          "organizer": "Mafia club «Champions League» Prague · орг YeS · судьи Кирпич, Trinity, Broniak",
-          "mafgame": "https://mafgame.org/tournaments/694/view",
-          "note": "Завершён 23.08.2026. Чемпион — Lюц (Σ 13.065); 2-е Магнат (12.98), 3-е aptah (12.17). Финал серийного турнира: 12 игр квалификации (3 стола, играли все 30) + финал 5 игр (топ-10). Официальные таблицы (Итоговая / Финал / Квалификация) и протоколы всех 17 игр — по ссылкам ниже. Данные mafgame, сверено 1:1 (финал — с офиц. коэффициентом ×1.3).",
-          "sections": [
-                {
-                      "href": "ce694.html",
-                      "title": "✦ Мобильная версия · beta",
-                      "desc": "Всё в одном: Обзор · Моё · Игроки · Результаты — открывайте с телефона"
-                },
-                {
-                      "href": "participants.html?t=694",
-                      "title": "Участники и рейтинг",
-                      "desc": "30 игроков + ELO markery (свежий снимок 22.08), средний рейтинг состава"
-                },
-                {
-                      "href": "seating694.html",
-                      "title": "Интерактивная рассадка",
-                      "desc": "Квалификация 12 игр × 3 стола: клик по игроку — весь его маршрут"
-                },
-                {
-                      "href": "cards694.html",
-                      "title": "Карточки игроков",
-                      "desc": "30 карточек: фото, ранг/ELO, столы, места за столом, соперники, маршрут"
-                },
-                {
-                      "href": "markers.html?t=694",
-                      "title": "Совместные посадки",
-                      "desc": "Матрица: кто с кем сколько раз за одним столом"
-                },
-                {
-                      "href": "results.html?t=694",
-                      "title": "Игры с результатами",
-                      "desc": "Все 17 игр: роли, допы, победители"
-                },
-                {
-                      "href": "standings.html?t=694",
-                      "title": "Сводная таблица",
-                      "desc": "Официальный итог + стадии Квалификация/Финал"
-                },
-                {
-                      "href": "roles.html?t=694",
-                      "title": "Статистика по ролям",
-                      "desc": "Σ по ролям: мирный, шериф, мафия, дон"
-                },
-                {
-                      "href": "player.html?t=694",
-                      "title": "Статистика игрока",
-                      "desc": "Маршруты, роли, соперники и зачёт каждого игрока"
-                }
-          ],
-          "start": "2026-08-22"
+      "id": "710",
+      "page": "wc2026-tournament.html",
+      "name": "Mafia World Championship 2026",
+      "dates": "12–13 сентября 2026",
+      "city": "Прага",
+      "country": "Чехия",
+      "players": 55,
+      "days": 2,
+      "stars": 5,
+      "status": "finished",
+      "statusLabel": "Завершён · 17 игр (11 квал + 2 полуфинала + 4 финала) · чемпион Призрак",
+      "start": "2026-09-12"
+    },
+    {
+      "id": "694",
+      "theme": "poster",
+      "art": "assets/prague694_card.jpg",
+      "artRatio": "16 / 9",
+      "posterScript": "Praha",
+      "posterTitle": "CENTRAL EURO CUP",
+      "posterSub": "AUG 22–23 · PRAGUE",
+      "accent": "#c9a227",
+      "name": "Central Euro Cup 2026",
+      "dates": "22–23 августа 2026",
+      "city": "Прага",
+      "country": "Чехия",
+      "players": 30,
+      "days": 2,
+      "stars": 3,
+      "prize": "2000€",
+      "status": "finished",
+      "phase": 1,
+      "statusLabel": "Завершён · 17 игр · чемпион Lюц",
+      "eloAvg": 1088,
+      "eloN": 28,
+      "eloTotal": 30,
+      "organizer": "Mafia club «Champions League» Prague · орг YeS · судьи Кирпич, Trinity, Broniak",
+      "mafgame": "https://mafgame.org/tournaments/694/view",
+      "note": "Завершён 23.08.2026. Чемпион — Lюц (Σ 13.065); 2-е Магнат (12.98), 3-е aptah (12.17). Финал серийного турнира: 12 игр квалификации (3 стола, играли все 30) + финал 5 игр (топ-10). Официальные таблицы (Итоговая / Финал / Квалификация) и протоколы всех 17 игр — по ссылкам ниже. Данные mafgame, сверено 1:1 (финал — с офиц. коэффициентом ×1.3).",
+      "sections": [
+        {
+          "href": "ce694.html",
+          "title": "✦ Мобильная версия · beta",
+          "desc": "Всё в одном: Обзор · Моё · Игроки · Результаты — открывайте с телефона"
+        },
+        {
+          "href": "participants.html?t=694",
+          "title": "Участники и рейтинг",
+          "desc": "30 игроков + ELO markery (свежий снимок 22.08), средний рейтинг состава"
+        },
+        {
+          "href": "seating694.html",
+          "title": "Интерактивная рассадка",
+          "desc": "Квалификация 12 игр × 3 стола: клик по игроку — весь его маршрут"
+        },
+        {
+          "href": "cards694.html",
+          "title": "Карточки игроков",
+          "desc": "30 карточек: фото, ранг/ELO, столы, места за столом, соперники, маршрут"
+        },
+        {
+          "href": "markers.html?t=694",
+          "title": "Совместные посадки",
+          "desc": "Матрица: кто с кем сколько раз за одним столом"
+        },
+        {
+          "href": "results.html?t=694",
+          "title": "Игры с результатами",
+          "desc": "Все 17 игр: роли, допы, победители"
+        },
+        {
+          "href": "standings.html?t=694",
+          "title": "Сводная таблица",
+          "desc": "Официальный итог + стадии Квалификация/Финал"
+        },
+        {
+          "href": "roles.html?t=694",
+          "title": "Статистика по ролям",
+          "desc": "Σ по ролям: мирный, шериф, мафия, дон"
+        },
+        {
+          "href": "player.html?t=694",
+          "title": "Статистика игрока",
+          "desc": "Маршруты, роли, соперники и зачёт каждого игрока"
+        }
+      ],
+      "start": "2026-08-22"
     },
     {
       "id": "693",

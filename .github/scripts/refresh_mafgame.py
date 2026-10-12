@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-refresh_mafgame · v1.1 · 2026-09-06
+refresh_mafgame · v1.2 · 2026-10-13 (played пересчитывается каждый прогон: start < TODAY и не отменён) · v1.1 · 2026-09-06
 Назначение: каждую ночь обновить данные сайта DOVOD из mafgame.org без участия человека.
 Запускается GitHub Actions (.github/workflows/refresh-data.yml), работает на серверах GitHub —
 ни мак Валерия, ни Claude для этого не нужны.
@@ -153,6 +153,8 @@ def patch(D, new, fresh):
                     rep['fields'] += 1
             t['kind'] = kind_of(n)
             t['serialKey'] = n.get('parent_tournament_id')
+            # «сыгран» пересчитываем каждый прогон (раньше ставился только при добавлении и навсегда оставался false)
+            t['played'] = nd < TODAY and not t.get('cancelled')
         else:
             par = n.get('parent_tournament_id')
             sn = (old.get(par) or {}).get('serialName') \
@@ -163,7 +165,7 @@ def patch(D, new, fresh):
                  'exp': num(n.get('expected_participants'), int), 'fee': None, 'feeCur': None,
                  'prize': num(n.get('total_prize'), float), 'prizeCur': n.get('prize_currency') or 'EUR',
                  'club': None, 'regOpen': 1 if nd >= TODAY else 0, 'pts': 0, 'plab': 'без баллов',
-                 'played': nd < TODAY, 'cancelled': '[ОТМЕНЁН]' in n['name'],
+                 'played': nd < TODAY and '[ОТМЕНЁН]' not in n['name'], 'cancelled': '[ОТМЕНЁН]' in n['name'],
                  'moved': '[ПЕРЕНОС]' in n['name'], 'regs': []}
             rep['added'].append('%s %s %s★ — %s' % (nd, t['city'], t['stars'], n['name'][:40]))
         if tid in fresh:
