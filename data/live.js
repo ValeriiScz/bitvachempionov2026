@@ -14,7 +14,7 @@
    winner стола берётся из официального поля results mafgame (red_win/black_win), НЕ из очков.
    НЕ ломать защиту снимка — это ключевая гарантия «ничего не терять».
    ============================================================================ */
-// MafgameStat · data/live.js · v2.6 · 2026-10-09 · имя стадии и коэф. финала из part_data платформы (МД-673) · v2.2 · 2026-09-10 · окно live по датам: tournament_{id}.json live_from/live_to (Прага) включают подтяжку с mafgame автоматически в дни турнира (ЧМ-710: 12–13.09), без ручного in_progress; window.__forceLocal — отладочный выключатель · v2.1 · 2026-08-23 · коэффициент финала (tournament_{id}.json final_coef, напр. 1.3): в протоколах mafgame сырые баллы, в офиц. таблицу баллы финальных игр входят с коэффициентом — live-таблица финала занижала Σ (урок 694; уточнение урока 702: коэффициент действует на ВСЕ баллы финала — WPTS/допы/штрафы/ЛХ/Ci) · v2.0 · 2026-08-22 · CEC-694 (финал серийника, Прага): стадия 1 всегда «Квалификация», стадия 2 — «Финал»; стадии 3+ (пустые заглушки 15 серий в данных mafgame) игнорируются · v1.9 · 2026-07-18 · фикс дня 1 ЧЕ: пока в снимке одна стадия, она звалась «Игры» и ce634 группировал её как «Финал» — для 634 стадия 1 всегда «Квалификация» · v1.8 · 2026-07-16 · ЧЕ-634: стадии Квалификация/Полуфинал/Финал (3 стадии) + ЗАЩИТА «держим последний топ-снимок» (localStorage): не затираем хорошие данные пустыми/обнулёнными/пропавшими (snapScore/notRegression); live-фейл → отдаём сохранённый снимок. · v1.7 · 2026-07-04 · кнопка «Обновить» перенесена в левый нижний угол (не налезает на «Наверх»);  · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
+// MafgameStat · data/live.js · v2.7 · 2026-10-11 · скрытые результаты: исход из game_outcomes + плашка «таблица по победам, неофициально» · v2.6 · 2026-10-09 · имя стадии и коэф. финала из part_data платформы (МД-673) · v2.2 · 2026-09-10 · окно live по датам: tournament_{id}.json live_from/live_to (Прага) включают подтяжку с mafgame автоматически в дни турнира (ЧМ-710: 12–13.09), без ручного in_progress; window.__forceLocal — отладочный выключатель · v2.1 · 2026-08-23 · коэффициент финала (tournament_{id}.json final_coef, напр. 1.3): в протоколах mafgame сырые баллы, в офиц. таблицу баллы финальных игр входят с коэффициентом — live-таблица финала занижала Σ (урок 694; уточнение урока 702: коэффициент действует на ВСЕ баллы финала — WPTS/допы/штрафы/ЛХ/Ci) · v2.0 · 2026-08-22 · CEC-694 (финал серийника, Прага): стадия 1 всегда «Квалификация», стадия 2 — «Финал»; стадии 3+ (пустые заглушки 15 серий в данных mafgame) игнорируются · v1.9 · 2026-07-18 · фикс дня 1 ЧЕ: пока в снимке одна стадия, она звалась «Игры» и ce634 группировал её как «Финал» — для 634 стадия 1 всегда «Квалификация» · v1.8 · 2026-07-16 · ЧЕ-634: стадии Квалификация/Полуфинал/Финал (3 стадии) + ЗАЩИТА «держим последний топ-снимок» (localStorage): не затираем хорошие данные пустыми/обнулёнными/пропавшими (snapScore/notRegression); live-фейл → отдаём сохранённый снимок. · v1.7 · 2026-07-04 · кнопка «Обновить» перенесена в левый нижний угол (не налезает на «Наверх»);  · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
 window.normRole = function(r){
   if(r==null) return null;
   const map={'citizen':'Citizen','sheriff':'Sheriff','mafia':'Mafia','don':'Don',
@@ -89,7 +89,7 @@ window.convertInertia = function(g, t, fc){
         if(!seats.length) return; // пустой стол не показываем
         const hasRoles=seats.length>=6&&seats.every(x=>x.role);
         let winner='unknown';
-        const _rv=g.results&&g.results[st+'-'+gm+'-'+tb];
+        const _k=st+'-'+gm+'-'+tb;const _rv=(g.results&&/^(red|black)$/.test(g.results[_k]))?g.results[_k]:(g.game_outcomes&&g.game_outcomes[_k]); /* v2.7: организаторы скрыли результаты (results='hidden') — исход берём из game_outcomes */
         if(_rv==='black'||_rv==='red'){ winner=_rv==='black'?'black_win':'red_win'; }
         else if(hasRoles){
           const blackW=seats.some(x=>(x.role==='Mafia'||x.role==='Don')&&x.wpts>0);
@@ -158,11 +158,22 @@ window.convertInertia = function(g, t, fc){
     });
   })();
   if(ciSelf) window.__ciSelf = true;
+  /* v2.7: скрытые результаты — допов и штрафов в данных нет, таблица только по победам; показываем плашку */
+  if(PD&&Object.values(PD).some(p=>+p.hide_results===1)) window.__hiddenPts = true;
+  if(window.__hiddenPts) injectHiddenNote();
   if(!out.length) return null;
   const played=out.filter(x=>x.tables.length&&x.tables.every(t=>t.winner!=='unknown')).length;
   if(winSelf) window.__winSelf = true;
   return {tournament_id:+t,games_played:played,games_total:out.length,games:out,live:true,win_self:winSelf};
 };
+function injectHiddenNote(){
+  const add=()=>{ if(document.getElementById('__hidnote')||!document.body) return;
+    const d=document.createElement('div'); d.id='__hidnote';
+    d.textContent='Организаторы скрыли допы и штрафы на mafgame — таблица здесь считается только по победам и бонусу первого убитого, она неофициальная.';
+    d.style.cssText='position:relative;z-index:61;margin:0;padding:8px 14px;font:600 12px/1.4 Inter,system-ui,sans-serif;color:#f5ff35;background:#14140a;border-bottom:1px solid rgba(245,255,53,.35)';
+    const c=document.querySelector('.dv-crumb'); if(c&&c.parentNode) c.parentNode.insertBefore(d,c.nextSibling); else document.body.insertBefore(d,document.body.firstChild); };
+  if(document.body) add(); else document.addEventListener('DOMContentLoaded',add);
+}
 function injectRefresh(){
   if(document.getElementById('__refbtn')) return;
   const add=()=>{

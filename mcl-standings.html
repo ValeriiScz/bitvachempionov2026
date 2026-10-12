@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl-standings.html · v1.5 · 2026-10-05 · MCL Europe 2026, зачёт трёх регионов: полные таблицы, фильтр нормы, калькулятор прохода. v1.5: блок «Итог полуфинала» (50% балла отборов + 50% балла полуфинала, conf[c].semiResult из data/mcl2026.js). Генератор: build_site.py -->
+<!-- MafgameStat · mcl-standings.html · v1.6 · 2026-10-13 · итог полуфинала: отбор ×1.5 при 2+ сериях, колонка «Итог», пометка ×1.5 · v1.5 · 2026-10-05 · MCL Europe 2026, зачёт трёх регионов: полные таблицы, фильтр нормы, калькулятор прохода. v1.5: блок «Итог полуфинала» (50% балла отборов + 50% балла полуфинала, conf[c].semiResult из data/mcl2026.js). Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -551,7 +551,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20261012"></script>
+<script src="data/mcl2026.js?v=20261013"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -631,25 +631,25 @@ function stand(){
     head1=(done?'Отбор завершён':'Прямой отбор');
     head2='<i>'+q+'</i> лучших с нормой «две серии» едут в финал напрямую, без полуфинала';
   }
-  /* сыгранный полуфинал: итоговая таблица 50/50 — над зачётом отбора */
+  /* сыгранный полуфинал: итоговая таблица (отбор ×1.5 при 2+ сериях) — над зачётом отбора */
   if(sr){
     out.push('<div class="sf"><div class="sfh"><b>Итог полуфинала'+
       (k.semiCity?' · '+esc(k.semiCity):'')+(k.semiDate?' '+dm(k.semiDate):'')+'</b>'+
       '<s>'+q+' '+(q===1?'место':'места')+' в финале</s>'+
       (k.semiId?'<a href="https://mafgame.org/tournaments/'+k.semiId+'/view" target="_blank" rel="noopener">протокол &#8599;</a>':'')+'</div>');
-    out.push('<div class="sfth"><div>#</div><div></div><div>Игрок</div><div class="r">Отбор</div><div class="r">Полуфинал</div><div class="r">Итог 50/50</div></div>');
+    out.push('<div class="sfth"><div>#</div><div></div><div>Игрок</div><div class="r">Отбор</div><div class="r">Полуфинал</div><div class="r">Итог</div></div>');
     sr.forEach(function(r,i){
       var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
       var into=i<q;
       out.push('<div class="sfr'+(into?' fin':'')+'">'+
         '<div class="rk">'+(i+1)+'</div>'+ph+
         '<div><span class="nick">'+esc(r.n)+'</span>'+(into?'<span class="sftag">в финал</span>':'')+'</div>'+
-        '<div class="q50 r">'+(r.qa==null?'—':r.qa.toFixed(2))+'</div>'+
+        '<div class="q50 r">'+(r.qa==null?'—':r.qa.toFixed(2)+(r.qk>1?'<small style="display:block;opacity:.7;font-size:.78em">×1.5</small>':''))+'</div>'+
         '<div class="sp50 r">'+r.sp.toFixed(2)+'</div>'+
         '<div class="fin50">'+r.fin.toFixed(3)+'</div></div>');
       if(into&&i===q-1&&sr.length>q) out.push('<div class="sfcut"><b>линия финала · '+q+' '+(q===1?'место':'места')+'</b><i></i></div>');
     });
-    out.push('<div class="sfnote">Формула регламента: итог = <b>50% балла отборов</b> (средний балл по отборочным сериям) + <b>50% балла полуфинала</b>.'+
+    out.push('<div class="sfnote">Формула регламента: итог = (<b>балл отборов × 1.5</b> + <b>балл полуфинала</b>) / 2. Балл отборов — средний по отборочным сериям; коэффициент 1.5 — у выполнивших норму «две серии и больше», у добора с одной серией — 1.'+
       (k.semiNote?' '+esc(k.semiNote.charAt(0).toUpperCase()+k.semiNote.slice(1))+'.':'')+'</div></div>');
   }
   out.push('<div class="donebar'+(semi?' semi':'')+(done?' done':'')+'"><b>'+head1+'</b> · '+head2+'</div>');

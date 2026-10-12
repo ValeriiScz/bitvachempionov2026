@@ -245,7 +245,8 @@ def rebuild_standings(D, series, avatars):
 
     Полуфинальные турниры (rec['semi']) в зачёт ОТБОРА не подмешиваются:
     отбор — это только отборочные серии. Сыгранный полуфинал считается
-    по регламенту лиги: итог = 50% балла отборов + 50% балла полуфинала,
+    по регламенту лиги: итог = (балл отборов × k + балл полуфинала) / 2, где k = 1.5
+    для сыгравших 2+ отборочные серии и 1 для добора с одной серией;
     «балл отборов» — средний по отборочным сериям игрока. Таблица итога
     лежит в conf[c].semiResult, трое лучших занимают слоты региона в squad."""
     # 6b) зачёт регионов — без полуфиналов
@@ -279,7 +280,7 @@ def rebuild_standings(D, series, avatars):
         k['played']  = sum(1 for s in series if s['c'] == c and s.get('r') and not s.get('semi'))
         k['played2'] = len(norm_sorted)
 
-    # 6c-1) итог полуфиналов: 50% балла отборов + 50% балла полуфинала
+    # 6c-1) итог полуфиналов: (отбор × k + полуфинал) / 2, k = 1.5 при 2+ сериях, иначе 1
     for c in CONF_ORDER:
         k = D['conf'][c]
         if k.get('route') != 'semi':
@@ -294,8 +295,10 @@ def rebuild_standings(D, series, avatars):
         for uid, nick, sp in sm['r']:
             qr = byu.get(uid)
             qa = qr['a'] if qr else None    # балл отборов: средний по отборочным сериям
-            fin = round(((qa or 0) + sp) / 2, 3)
-            res.append(dict(u=uid, n=nick, qa=qa, sp=sp, fin=fin,
+            ns = qr['s'] if qr else 0
+            qk = 1.5 if ns >= 2 else 1.0    # регламент (Валерий, 13.10): выполнившие норму «2+ серии» стартуют с коэффициентом 1.5 к своему баллу отборов
+            fin = round(((qa or 0) * qk + sp) / 2, 3)
+            res.append(dict(u=uid, n=nick, qa=qa, s=ns, qk=qk, sp=sp, fin=fin,
                             p=(qr.get('p', '') if qr else avatars.get(uid, ''))))
         res.sort(key=lambda r: (-r['fin'], r['n'] or ''))
         k['semiResult'] = res
@@ -313,7 +316,7 @@ def rebuild_standings(D, series, avatars):
             res = k.get('semiResult') or []
             for i in range(k['quota']):
                 r = res[i] if i < len(res) else None
-                if r:   # полуфинал сыгран — слот занимает финалист, a = итог 50/50
+                if r:   # полуфинал сыгран — слот занимает финалист, a = итог полуфинала
                     squad.append(dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n=r['n'],
                                       a=r['fin'], s=0, p=r.get('p', ''), semi=1, fin=1))
                 else:   # полуфинал впереди — слот ждёт
