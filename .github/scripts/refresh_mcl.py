@@ -280,7 +280,7 @@ def rebuild_standings(D, series, avatars):
         k['played']  = sum(1 for s in series if s['c'] == c and s.get('r') and not s.get('semi'))
         k['played2'] = len(norm_sorted)
 
-    # 6c-1) итог полуфиналов: (отбор × k + полуфинал) / 2, k = 1.5 при 2+ сериях, иначе 1
+    # 6c-1) итог полуфиналов: (отбор × k + полуфинал) / 2; k = 1.5 только на Кипре при 2+ сериях, иначе 1 (Израиль 50/50)
     for c in CONF_ORDER:
         k = D['conf'][c]
         if k.get('route') != 'semi':
@@ -296,7 +296,7 @@ def rebuild_standings(D, series, avatars):
             qr = byu.get(uid)
             qa = qr['a'] if qr else None    # балл отборов: средний по отборочным сериям
             ns = qr['s'] if qr else 0
-            qk = 1.5 if ns >= 2 else 1.0    # регламент (Валерий, 13.10): выполнившие норму «2+ серии» стартуют с коэффициентом 1.5 к своему баллу отборов
+            qk = 1.5 if (c == 'CY' and ns >= 2) else 1.0    # регламент (Валерий, 13.10): ТОЛЬКО Кипр — выполнившие норму «2+ серии» стартуют с ×1.5 к баллу отборов; Израиль — 50/50 как было
             fin = round(((qa or 0) * qk + sp) / 2, 3)
             res.append(dict(u=uid, n=nick, qa=qa, s=ns, qk=qk, sp=sp, fin=fin,
                             p=(qr.get('p', '') if qr else avatars.get(uid, ''))))

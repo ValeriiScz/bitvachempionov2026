@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · mcl2026.html · v3.7 · 2026-10-13 · итог полуфинала: (отбор×1.5 при 2+ сериях + полуфинал)/2 · v3.6 · 2026-10-05 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. v3.5: слоты полуфинальных регионов заполняются итогом 50/50 (conf[c].semiResult), мини-таблица сыгранного полуфинала показывает итог. v3.6: полуфинал в карусели подписан полуфиналом, подводка к составу считается от данных. Генератор: build_site.py -->
+<!-- MafgameStat · mcl2026.html · v3.8 · 2026-10-13 · ×1.5 только Кипр, Израиль 50/50 · v3.7 · итог полуфинала: (отбор×1.5 при 2+ сериях + полуфинал)/2 · v3.6 · 2026-10-05 · MCL Europe 2026, обзор сезона: герой, статус, карусель победителей, состав финала, зона прохода, ближайшие серии. v3.5: слоты полуфинальных регионов заполняются итогом 50/50 (conf[c].semiResult), мини-таблица сыгранного полуфинала показывает итог. v3.6: полуфинал в карусели подписан полуфиналом, подводка к составу считается от данных. Генератор: build_site.py -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08070b">
@@ -727,7 +727,7 @@ $('#squadgrid').innerHTML=D.squad.map(function(s,i){
     '<div class="q">?</div><div class="qn">определит полуфинал</div></div>';
   if(!s.n) return '<div class="sq empty"><div class="slot">'+esc(s.slot)+'</div><div class="q">?</div></div>';
   var ph=s.p?'<img class="ph" loading="lazy" src="'+esc(s.p)+'" alt=""><div class="duo"></div>':'';
-  /* слот из полуфинала: s.a — итог полуфинала ((отбор×k + полуфинал)/2, k=1.5 при 2+ сериях), не средний за серии */
+  /* слот из полуфинала: s.a — итог полуфинала ((отбор×k + полуфинал)/2, k=1.5 только Кипр при 2+ сериях), не средний за серии */
   var st=s.fin?'<b>'+s.a.toFixed(3)+'</b><s>итог полуфинала</s>':'<b>'+s.a.toFixed(3)+'</b><s>'+s.s+' '+SER(s.s)+'</s>';
   return '<div class="sq">'+ph+'<div class="shade"></div><div class="ghost">'+(i+1)+'</div>'+
     '<div class="slot">'+esc(s.slot)+'</div><div class="body"><div class="nm">'+esc(s.n)+'</div>'+
@@ -766,7 +766,7 @@ $('#minis').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
   var cap = sr ? ('полуфинал сыгран · '+k.quota+' в финале') : (semi ? slots+' в полуфинал' : k.quota+' в финал');
   var note = sr
     ? ('Итог полуфинала'+(k.semiCity?' в '+esc(k.semiCity):'')+(k.semiDate?' '+dm(k.semiDate):'')+
-       ': (балл отборов × 1.5 у сыгравших 2+ серии + балл полуфинала) / 2. В финал — '+(k.quota===1?'победитель':'трое лучших')+
+       (sr.some(function(r){return r.qk>1;})?': (балл отборов × 1.5 у сыгравших 2+ серии + балл полуфинала) / 2. В финал — ':': (балл отборов + балл полуфинала) / 2. В финал — ')+(k.quota===1?'победитель':'трое лучших')+
        (k.semiNote?'. '+esc(k.semiNote.charAt(0).toUpperCase()+k.semiNote.slice(1)):'')+'.')
     : semi
     ? ('Полуфинал'+(k.semiDate?' '+dm(k.semiDate):'')+': в финал '+(k.quota===1?'едет победитель':'едут трое')+
