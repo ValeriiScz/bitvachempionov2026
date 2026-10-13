@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v1.8 · 21.09.2026 · таблица «сколько ездить»: подсвечена строка ожидаемого числа турниров; генератор: столбец «турниров» и пояснение · v1.7 · фикс логики «что должно случиться»: вывод зависит от сравнения нужных турниров с ожидаемыми поездками · v1.6 · слоты десятки: серийные помечены, строка «Серийные k из 2» (Валерий) · v1.5 · явка топ-20 5–6 (Валерий), 21–30 ≈4 · v1.4 · явка топ-30 ≈4, планы игроков; финалы серийников: баллы у 10 мест, поле 20 · v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
+<!-- race.html v1.9 · 13.10.2026 · мобильная таблица генератора (скрытые колонки вместе с заголовками, полоска без переноса) · v1.8 · 21.09.2026 · таблица «сколько ездить»: подсвечена строка ожидаемого числа турниров; генератор: столбец «турниров» и пояснение · v1.7 · фикс логики «что должно случиться»: вывод зависит от сравнения нужных турниров с ожидаемыми поездками · v1.6 · слоты десятки: серийные помечены, строка «Серийные k из 2» (Валерий) · v1.5 · явка топ-20 5–6 (Валерий), 21–30 ≈4 · v1.4 · явка топ-30 ≈4, планы игроков; финалы серийников: баллы у 10 мест, поле 20 · v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
 <meta name="description" content="Рейтинг MAFGAME 2026: планка топ-12, кому сколько турниров и результатов нужно до конца года, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -138,7 +138,15 @@ table.gen td.bar{width:38%}
 .gbar em{position:absolute;right:8px;top:0;bottom:0;display:flex;align-items:center;font:700 11px/1 var(--mono);color:var(--ink);font-style:normal;text-shadow:0 0 4px #000,0 0 8px #000}
 table.gen td.s{font:700 12px/1 var(--mono);color:#a7aebb;white-space:nowrap}
 table.gen tr.me td{background:rgba(245,255,53,.06)}
-@media (max-width:720px){table.gen td.bar{width:30%} table.gen td.s{display:none}}
+@media (max-width:720px){
+  /* v1.9 (13.10): на телефоне прятались только ячейки «Σ в среднем» и «сейчас», а их заголовки оставались и уезжали за экран;
+     в полоске «331 из 500» не влезало и ломалось на две строки. Теперь: заголовки тоже скрыты, полоска шире, текст в один ряд. */
+  table.gen th:nth-child(5),table.gen td:nth-child(5){display:none} /* «Σ в среднем» прячем, «сейчас» оставляем — это и есть точка отсчёта игрока */
+  table.gen{font-size:13px} table.gen th,table.gen td{padding:7px 5px}
+  table.gen td.n{width:24px} table.gen td.nk small{margin-left:4px;font-size:11px}
+  table.gen td.bar{width:40%;min-width:112px}
+  .gbar em{right:5px;font-size:10px;white-space:nowrap;letter-spacing:0}
+}
 /* калькулятор */
 .calc{border:1px solid var(--line);padding:18px;background:linear-gradient(150deg,rgba(38,224,255,.07),rgba(0,0,0,.3));clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px))}
 .calc .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
@@ -479,7 +487,7 @@ function initRace(){
         const formTxt={all:'сила по всей истории',y12:'сила по последним 12 месяцам',y26:'сила только по 2026 году'}[st.form];
         $('#genOut').innerHTML=`<div class="genhead"><b>${N} сезонов</b><span>${attTxt}</span><span>${lvlTxt}</span><span>${formTxt}</span><span>12-е место в среднем: <b>${fmt(med(thr))}</b></span></div>
           <table class="gen"><thead><tr><th>#</th><th>игрок</th><th>в дюжине</th><th title="сколько обычных турниров игрок сыграет в среднем при выбранной явке; финалы серийников — сверх этого">турниров</th><th>Σ в среднем</th><th>сейчас</th></tr></thead><tbody>
-          ${rows.map((r,k)=>`<tr class="${r.p.uid===1493?'me':''}"><td class="n">${k+1}</td><td class="nk">${r.p.nick}<small>#${r.p.rank||'—'}</small></td><td class="bar"><div class="gbar"><i class="${r.c/N<0.5?'low':''}" style="width:${Math.round(r.c/N*100)}%"></i><em>${r.c} из ${N}</em></div></td><td class="k">≈${r.k<1?r.k.toFixed(1):Math.round(r.k)}</td><td class="s">Σ≈${fmt(r.med)}</td><td class="s">${fmt(sigmaOf(r.p))}</td></tr>`).join('')}
+          ${rows.map((r,k)=>`<tr class="${r.p.uid===1493?'me':''}"><td class="n">${k+1}</td><td class="nk">${r.p.nick}<small>#${r.p.rank||'—'}</small></td><td class="bar"><div class="gbar"><i class="${r.c/N<0.5?'low':''}" style="width:${Math.round(r.c/N*100)}%"></i><em>${r.c}&nbsp;из&nbsp;${N}</em></div></td><td class="k">≈${r.k<1?r.k.toFixed(1):Math.round(r.k)}</td><td class="s">Σ≈${fmt(r.med)}</td><td class="s">${fmt(sigmaOf(r.p))}</td></tr>`).join('')}
           </tbody></table>`;
         $('#genNote').textContent=`«В дюжине k из N» сильнее всего зависит от столбца «турниров» — сколько игрок реально сыграет: сильный игрок с двумя стартами проходит редко, средний с семью — часто. Каждый запуск — новые случайные сезоны, цифры немного гуляют: при 500 сезонах ±2–3 на сотню. Наш большой прогон (${SIM.server.S} сезонов от ${SIM.server.date.split('-').reverse().join('.')}, прогноз посещений, как обычно): ${Object.entries(SIM.server.p12).sort((a,b)=>b[1]-a[1]).slice(0,14).map(([u,v])=>{const p=P.find(x=>String(x.uid)===u);return p?`${p.nick} ${Math.round(v*100)}`:''}).filter(Boolean).join(' · ')} — из 100.`;
         btn.disabled=false; btn.textContent='Сгенерировать ещё';
