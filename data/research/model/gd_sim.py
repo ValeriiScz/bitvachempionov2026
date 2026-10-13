@@ -1,4 +1,4 @@
-"""gd_sim · v1.3 · 2026-10-13 (калибровка C=1.4, RACE_BOOST=1.5 по бэктесту 2024+2025; явка со «свежим темпом» gd_attend v1.1) · v1.2 · 2026-09-21 (TARGET_TOP20_MEAN: явка топ-20 отдельно) · v1.1 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
+"""gd_sim · v1.4 · 2026-10-13 (финалы серийников 2026 — сетка федерации) · v1.3 · 2026-10-13 (калибровка C=1.4, RACE_BOOST=1.5 по бэктесту 2024+2025; явка со «свежим темпом» gd_attend v1.1) · v1.2 · 2026-09-21 (TARGET_TOP20_MEAN: явка топ-20 отдельно) · v1.1 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
 import numpy as np, datetime, collections
 import gd_data as g
 from gd_strength import rankings_before, fit_pl
@@ -15,6 +15,8 @@ RACE_BOOST = 1.5   # калибровочный множитель явки дл
 GRID_2S=[30,27,25,22,20,18,16,14,12,10]
 GRID_2S_12=[30,27,25,22,20,18,16,14,12,10,8,6]
 GRID_4S=[42,39,37,34,32,30,28,26,24,22,20,18,16,14,12,10,8]
+# v1.4 (13.10.2026): сезон 2026 — официальная сетка финалов серийников от федерации (gd_data.SERIAL_GRID_2026); сетки выше — для бэктестов 2024/2025
+GRID26={k:v for k,v in g.SERIAL_GRID_2026.items()}
 # размер поля финала (Валерий 21.09: у 2★ финалы на 20 человек, кроме польского (12) и MCL (10)); GMC 50–60
 FINAL_SIZE={664:55,277:30,757:10,259:10,639:12,251:12,740:10,279:10}
 FINAL_SIZE_2S=20
@@ -166,8 +168,13 @@ class Season:
         exp_rest=sum(p for u,p in fin.items() if self.race.get(u,999)>40)+sum(p for u,p in cand.items() if self.race.get(u,999)>40)
         scale=min(1.0,(size-exp_top)/exp_rest) if exp_rest>0 and size>exp_top else (0.3 if exp_rest>0 else 1)
         sc=lambda u,p: p*(1 if self.race.get(u,999)<=40 else scale)
-        grid = GRID_4S if stars>=4 else (GRID_2S_12 if pid in (639,251) else GRID_2S) if stars==2 else [round(x*0.75) for x in GRID_4S]
-        base = 4.0 if stars>=4 else 3.0 if stars==3 else 2.0
+        if self.year>=2026 and int(stars) in GRID26:
+            full=GRID26[int(stars)]; base=float(full[-1])
+            # баллы выше базы — только у мест, где сетка ещё не дошла до базы (2★: 9 мест, 3★: 13, 4★: 18)
+            grid=[x for x in full if x>base] or full[:1]
+        else:
+            grid = GRID_4S if stars>=4 else (GRID_2S_12 if pid in (639,251) else GRID_2S) if stars==2 else [round(x*0.75) for x in GRID_4S]
+            base = 4.0 if stars>=4 else 3.0 if stars==3 else 2.0
         return {'type':'contour','id':pid,'date':date,'stars':stars,'name':name,'fin':{u:sc(u,p) for u,p in fin.items()},
                 'cand':{u:sc(u,p) for u,p in cand.items()},'part':part,'grid':grid,'base':base,'size':size}
 

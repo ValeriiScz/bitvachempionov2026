@@ -1,4 +1,4 @@
-"""gd_data · v1.1 · 2026-09-21 (путь репо: GD_REPO или относительно файла) · v1.0 · 2026-09-14 — загрузка данных «золотой дюжины»: леджеры, таблицы, листинги, серийники, календарь."""
+"""gd_data · v1.2 · 2026-10-13 (финалы серийников 2026 — баллы по сетке федерации SERIAL_GRID_2026, а не как начислил сайт mafgame) · v1.1 · 2026-09-21 (путь репо: GD_REPO или относительно файла) · v1.0 · 2026-09-14 — загрузка данных «золотой дюжины»: леджеры, таблицы, листинги, серийники, календарь."""
 import json, collections, datetime, os
 _here=os.path.dirname(os.path.abspath(__file__))
 _guess=os.path.abspath(os.path.join(_here,'..','..','..'))  # data/research/model → корень репо
@@ -10,6 +10,29 @@ SER={p['id']:json.load(open(R+'data/research/series/'+p['file'])) for p in SER_I
 _s=open(R+'calendar.html',encoding='utf-8').read(); _i=_s.find('const D=');_j=_s.find('};',_i); CAL=json.loads(_s[_i+8:_j+1])
 
 TID={int(t['id']):dict(t,year=int(y)) for y in T for t in T[y]}
+# v1.2 (13.10.2026): сетка баллов за ФИНАЛЫ СЕРИЙНИКОВ сезона 2026 — официально от главы федерации (сообщение, переслано Валерием 13.10):
+#   «в прошлом сезоне 2★ были ошибочно внесены с повышенными баллами, в этом сезоне понерфены, сайт mafgame это не отразил;
+#    за эту серию (как и за все другие серии) баллы в рейтинг гонки за Дюжину начисляются так, а не как на сайте».
+#   Места 1–20; дальше и у не-финалистов (место 65535) — последнее значение сетки.
+SERIAL_GRID_2026={1:[14,11,9,6,4,2]+[1]*14,
+                  2:[22,19,17,14,12,10,8,6,4]+[2]*11,
+                  3:[30,27,25,22,20,18,16,14,12,10,8,6,4]+[3]*7,
+                  4:[40,37,35,32,30,28,26,24,22,20,18,16,14,12,10,8,6,4,4,4]}
+def serial_pts_2026(stars,pos):
+    g=SERIAL_GRID_2026.get(int(stars or 0))
+    if not g: return None
+    return float(g[min(int(pos),len(g))-1]) if pos and int(pos)>0 else float(g[-1])
+_SER26={int(t['id']):int(t['no_of_stars'] or 0) for y in T for t in T[y] if int(y)==2026 and t.get('serial') and t.get('parent_tournament_id') in (None,0) and 1<=int(t['no_of_stars'] or 0)<=5}
+SER_FIX={}   # tid → [(uid, было, стало)] для отчёта
+for _u,_v in L.items():
+    for _r in _v['rp']:
+        if _r[0]==2026 and _r[1] in _SER26:
+            _n=serial_pts_2026(_SER26[_r[1]],_r[3])
+            if _n is not None and _n!=_r[4]: SER_FIX.setdefault(_r[1],[]).append((int(_u),_r[4],_n)); _r[4]=_n
+for _tid,_rows in list(P.items()):
+    if int(_tid) in _SER26:
+        P[_tid]=[[r[0],r[1],r[2],serial_pts_2026(_SER26[int(_tid)],r[2])]+list(r[4:]) for r in _rows]
+
 def is_rating(t): return (t['parent_tournament_id'] in (None,0)) and 1<=int(t['no_of_stars'] or 0)<=5
 def kind(t):
     if t.get('teams'): return 'teams'
