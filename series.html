@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v7.0 · 2026-06-20 -->
+<!-- DOVOD · series.html · v1.5 · 2026-10-13 · сыгранные серийники не пропадают (плашка «завершён» с подиумом); «Ближайшие серии» → расписание до конца года: серии и финалы разными рамками, разбивка по месяцам -->
 <!-- DOVOD · series.html · v1.4 · 2026-10-05 · золотая строка на промоблоке MCL: сыгранные полуфиналы (итог 50/50, финалисты из conf[c].semiResult в data/mcl2026.js) и дата ближайшего полуфинала -->
 <!-- DOVOD · series.html · v1.3 · 2026-09-29 · плашка GMC берёт цифры из своего датафайла · штамп актуальности данных в шапке и подвале (дата снимка серий и финалистов) · + ближайшие серии (14 дней) и плашки остальных серийников из data/series2026.js (регламент, финал, кто прошёл, что осталось) -->
 <!-- DOVOD · series.html · v1.0 · 2026-08-31 · раздел «Серийники»: промоблок MCL Europe 2026 (mcl2026.html) и плашка GMC Europa 2026 (gmc2026.html). Хаб выбора разделов — index.html -->
@@ -188,6 +189,16 @@
   .upc-w{flex:1;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .upc-r{flex:none;font-size:11.5px;color:var(--dim)} .upc-r b{color:var(--ink);font-weight:700}
   .upc-r.full b{color:#67e08f}
+  /* v1.5: расписание до конца года — серии обычной рамкой, финалы золотой; месяцы разделителем */
+  .upc-m{padding:9px 16px 7px;font-size:10px;font-weight:800;letter-spacing:2.4px;text-transform:uppercase;color:var(--dim);background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.05)}
+  .upc-l.fin{margin:8px 10px;border:1px solid rgba(232,200,122,.6);border-radius:10px;background:linear-gradient(120deg,rgba(232,200,122,.12),rgba(232,200,122,.02) 70%)}
+  .upc-l.fin+.upc-l.fin{margin-top:0}
+  .upc-t{flex:none;font-size:9.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;padding:2px 6px;border-radius:4px;border:1px solid rgba(255,255,255,.18);color:var(--mut)}
+  .upc-l.fin .upc-t{border-color:rgba(232,200,122,.7);color:var(--gold-hi);background:rgba(232,200,122,.1)}
+  .upc-leg{display:flex;gap:14px;flex-wrap:wrap;padding:8px 16px;font-size:11.5px;color:var(--dim);border-bottom:1px solid rgba(255,255,255,.05)}
+  .stile.done{opacity:.92;background:linear-gradient(160deg,rgba(103,224,143,.06),var(--panel) 70%)}
+  .stile .pod{margin-top:8px;font-size:12px;color:var(--mut);line-height:1.6} .stile .pod b{color:var(--ink)}
+  .sdet .podium{display:flex;gap:8px;flex-wrap:wrap} .sdet .podium span{padding:6px 10px;border:1px solid rgba(232,200,122,.4);border-radius:8px;font-size:13px} .sdet .podium small{color:var(--dim);margin-left:5px}
   .stiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px}
   .stile{cursor:pointer;border:1px solid var(--hairline);border-radius:14px;padding:14px 15px 12px;background:linear-gradient(160deg,var(--panel2),var(--panel) 70%);transition:.18s;text-align:left;color:var(--ink);font:inherit}
   .stile:hover,.stile.on{border-color:rgba(232,200,122,.5);transform:translateY(-2px)}
@@ -315,8 +326,8 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     </div>
   </a>
 
-  <div class="sec"><span class="dia">◆</span> Ближайшие серии</div>
-  <div class="upc" id="upc"><div class="upc-h"><b>на 2 недели · все серийники</b><a href="calendar.html?preset=1&type=ser&view=feed">все серии в календаре →</a></div><div id="upcList"></div></div>
+  <div class="sec"><span class="dia">◆</span> Расписание до конца года</div>
+  <div class="upc" id="upc"><div class="upc-h"><b>серии и финалы · все серийники</b><a href="calendar.html?preset=1&type=ser&view=feed">все серии в календаре →</a></div><div id="upcList"></div></div>
 
   <div class="sec"><span class="dia">◆</span> Остальные серийники</div>
   <p class="tagline" style="margin:0 0 14px">Двухзвёздочные лиги, чей финал платит как регулярная четвёрка: победителю 30 баллов. Нажми на плашку — регламент, кто уже прошёл, что осталось.</p>
@@ -373,19 +384,33 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     const qual=G?G.qualified.length:gmc.qualified.length;
     const players=G?new Set(G.series.flatMap(x=>(x.r||[]).map(y=>y[0]))).size:gmc.players;
     if(t) t.innerHTML=`<b>${total} серий</b><span class="sep">·</span><b>${played} сыграно</b><span class="sep">·</span><b>${players} игроков</b><span class="sep">·</span><b>${qual} прошли</b><br>${gmc.rule} — финал ${gmc.final}, ${gmc.prize}`;}
-  // ближайшие серии
-  const up=S.upcoming;
-  document.getElementById('upcList').innerHTML=up.length?up.map(u=>`<div class="upc-l"><span class="upc-d">${dd(u.date)}</span><span class="upc-c">${u.contour}</span><span class="upc-w">${u.city}${u.country?', '+u.country:''}</span><span class="upc-r ${u.regs>=u.exp?'full':''}"><b>${u.regs}</b>/${u.exp} записано</span></div>`).join('')
-    :'<div class="upc-l"><span class="upc-w">В ближайшие две недели серий нет.</span></div>';
+  // расписание до конца года: серии и финалы (v1.5)
+  const MN=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+  const today=new Date().toISOString().slice(0,10);
+  const up=(S.upcoming||[]).filter(u=>u.date>=today);
+  let html='<div class="upc-leg"><span><span class="upc-t">серия</span> отбор в финал</span><span><span class="upc-t" style="border-color:rgba(232,200,122,.7);color:var(--gold-hi)">финал</span> баллы в рейтинг</span></div>', mon='';
+  up.forEach(u=>{const m=u.date.slice(5,7); if(m!==mon){mon=m; html+=`<div class="upc-m">${MN[+m-1]}</div>`;}
+    const fin=u.kind==='final';
+    html+=`<div class="upc-l${fin?' fin':''}"><span class="upc-d">${dd(u.date)}</span><span class="upc-t">${fin?'финал '+'★'.repeat(u.stars||0):'серия'}</span><span class="upc-c">${u.contour}</span><span class="upc-w">${u.city||''}${u.country?', '+u.country:''}</span>`+
+      (fin?`<span class="upc-r"><b>${u.qualified||0}</b>${u.size?'/'+u.size:''} прошли</span>`:`<span class="upc-r ${u.regs>=u.exp?'full':''}"><b>${u.regs}</b>/${u.exp} записано</span>`)+`</div>`;});
+  document.getElementById('upcList').innerHTML=up.length?html:'<div class="upc-l"><span class="upc-w">До конца года серий и финалов больше нет.</span></div>';
   // плашки остальных
   const rest=S.contours.filter(c=>!c.page);
-  document.getElementById('stiles').innerHTML=rest.map(c=>`<button class="stile" data-id="${c.id}">
+  document.getElementById('stiles').innerHTML=rest.map(c=>c.done?`<button class="stile done" data-id="${c.id}">
+    <div class="st">${'★'.repeat(c.stars)} · финал ${dd(c.final_date)} · завершён</div>
+    <div class="sn">${c.short}</div>
+    <div class="pod">${c.podium&&c.podium.length?c.podium.map((p,i)=>`${['🥇','🥈','🥉'][i]} <b>${p.nick}</b> ${p.pts}`).join('<br>'):'итоги на mafgame ещё не опубликованы'}</div></button>`:`<button class="stile" data-id="${c.id}">
     <div class="st">${'★'.repeat(c.stars)} · финал ${dd(c.final_date)}</div>
     <div class="sn">${c.short}</div>
     <div class="sm">серий <b>${c.series_played}</b> из ${c.series_total}${c.series_ahead?` · впереди ${c.series_ahead}`:' · все сыграны'}<br>прошли <b>${c.qualified.length}</b> · ${c.city}</div>
     <div class="bar"><i style="width:${Math.round(c.series_played/Math.max(1,c.series_total)*100)}%"></i></div></button>`).join('');
   const det=document.getElementById('sdet');
   function show(c){
+    if(c.done){det.innerHTML=`<h3>${c.name}</h3><p style="color:var(--mut);font-size:12.5px">${c.tag?c.tag+' · ':''}${'★'.repeat(c.stars)} · финал ${dd(c.final_date)} · ${c.city||''} · завершён</p>
+      <div class="k">Итог финала</div>${c.podium&&c.podium.length?`<div class="podium">${c.podium.map((p,i)=>`<span>${['🥇','🥈','🥉'][i]} ${p.nick}<small>${p.pts} баллов${p.rank?' · #'+p.rank+' гонки':''}</small></span>`).join('')}</div><p style="margin-top:8px">В финале с баллами — ${c.final_players} игроков.</p>`:'<p>Финал сыгран, итоги на mafgame ещё не опубликованы — появятся после закрытия турнира.</p>'}
+      <div class="k">Сезон</div><p>Серий сыграно ${c.series_played} из ${c.series_total}, в сериях играли ${c.players} человек. ${c.rule}</p>
+      <div class="links"><a href="${c.mafgame}" target="_blank" rel="noopener">страница на mafgame ↗</a><a href="race.html">гонка за дюжину</a></div>`;
+      det.classList.add('on'); document.querySelectorAll('.stile').forEach(b=>b.classList.toggle('on',b.dataset.id==String(c.id))); det.scrollIntoView({behavior:'smooth',block:'nearest'}); return;}
     const q=c.qualified.map(x=>`<span class="${x.rank&&x.rank<=30?'top':''}">${x.nick}${x.rank?`<small>#${x.rank}</small>`:''}</span>`).join('')||'<span>пока никого</span>';
     const nx=c.next.map(s=>`<li><i>${dd(s.date)}</i>${s.city}${s.country?', '+s.country:''}<em>${s.regs}/${s.exp} записано</em></li>`).join('');
     const st=c.series_stale&&c.series_stale.length?`<div class="stale">Без протокола на mafgame: ${c.series_stale.map(x=>dd(x.date)+' '+x.city).join(', ')} — состоялись ли, неизвестно.</div>`:'';

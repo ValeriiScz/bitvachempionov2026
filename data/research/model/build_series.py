@@ -1,4 +1,4 @@
-"""build_series.py · v1.2 · 2026-09-21 (сетка финала из gd_sim: призовых мест / поле / база) · v1.1 (T из gd_cfg) · v1.0 · 2026-09-15 — data/series2026.js для раздела «Серийники»: по каждому рейтинговому серийнику 2026 —
+"""build_series.py · v1.3 · 2026-10-13 (сыгранные финалы не пропадают — блок done с подиумом; расписание до конца года: серии и финалы с полем kind) · v1.2 · 2026-09-21 (сетка финала из gd_sim: призовых мест / поле / база) · v1.1 (T из gd_cfg) · v1.0 · 2026-09-15 — data/series2026.js для раздела «Серийники»: по каждому рейтинговому серийнику 2026 —
 описание/правило прохода, финал, серии (сыграно/впереди), кто уже прошёл (с местом в гонке), ближайшие серии всех контуров."""
 import json, datetime, collections, gd_data as g, gd_sim, players_expert
 from gd_sim import Season
@@ -22,7 +22,7 @@ META={
 }
 # сетки — из gd_sim (FACT по финалам 2025): 2★ баллы у 10 мест (PSP 12), дальше база 2; GMC 17 мест
 out=[]; upcoming=[]
-horizon=(datetime.date.fromisoformat(T)+datetime.timedelta(days=16)).isoformat()
+horizon=f'{T[:4]}-12-31'   # v1.3: расписание до конца года (было 16 дней)
 for c in se.events:
     if c['type']!='contour': continue
     pid=c['id']; d=g.SER[pid]; m=META.get(pid,{})
@@ -32,7 +32,8 @@ for c in se.events:
     qual=sorted([{'uid':u,'nick':g.NICK.get(u,'?'),'rank':race.get(u)} for u in c['fin']],key=lambda x:(x['rank'] or 999))
     nxt=[{'id':s['id'],'date':s['start_date'],'city':s['city'],'country':s['country'],'name':s['name'],'regs':len(s['regs']),'exp':s.get('expected') or 10} for s in ahead]
     for s in nxt:
-        if s['date']<=horizon: upcoming.append(dict(s,contour=m.get('short',d['name']),pid=pid,stars=d['stars']))
+        if s['date']<=horizon: upcoming.append(dict(s,kind='series',contour=m.get('short',d['name']),pid=pid,stars=d['stars']))
+    if d['start_date']<=horizon: upcoming.append({'id':pid,'date':d['start_date'],'kind':'final','contour':m.get('short',d['name']),'pid':pid,'stars':d['stars'],'city':g.TID[pid].get('city'),'country':g.TID[pid].get('country'),'name':d['name'],'qualified':len(c['fin']),'size':c.get('size')})
     grid=c['grid']
     out.append({'id':pid,'name':d['name'],'short':m.get('short',d['name']),'tag':m.get('tag',''),'stars':d['stars'],'city':g.TID[pid].get('city'),'country':g.TID[pid].get('country'),
                 'final_date':d['start_date'],'final':m.get('final',''),'final_size':m.get('final_size',''),'prize':m.get('prize',''),'planned':m.get('planned',''),
@@ -40,10 +41,24 @@ for c in se.events:
                 'series_total':len(ser),'series_played':len(played),'series_ahead':len(ahead),'series_stale':[{'date':x['start_date'],'city':x['city']} for x in stale],'players':players,
                 'qualified':qual,'next':nxt,'points':{'max':grid[0],'min':grid[-1],'places':len(grid),'field':c.get('size'),'base':c['base']},
                 'mafgame':f'https://mafgame.org/tournaments/{pid}/view'})
-out.sort(key=lambda x:(-x['stars'],x['final_date']))
+# v1.3: финалы, которые уже сыграны, раньше исчезали (контуры строятся из будущего календаря). Теперь — отдельные плашки «завершён».
+done_ids={x['id'] for x in out}
+for pid,m in META.items():
+    if pid in done_ids or pid not in g.SER: continue
+    d=g.SER[pid]
+    if d['start_date']>T: continue
+    ser=sorted(d['series'],key=lambda s:s['start_date']); played=[s for s in ser if s['rows']]
+    e=g.EV.get(pid) or {}; rows=sorted([r for r in (e.get('rows') or []) if r[2] and r[2]<1000],key=lambda r:r[2])
+    podium=[{'nick':r[1],'place':r[2],'pts':r[3],'rank':race.get(r[0])} for r in rows[:3]]
+    out.append({'id':pid,'name':d['name'],'short':m.get('short',d['name']),'tag':m.get('tag',''),'stars':d['stars'],'city':g.TID[pid].get('city'),'country':g.TID[pid].get('country'),
+                'final_date':d['start_date'],'final':m.get('final',''),'final_size':m.get('final_size',''),'prize':m.get('prize',''),'planned':m.get('planned',''),
+                'rule':m.get('rule',''),'rule_src':m.get('rule_src',''),'page':m.get('page'),'done':True,'podium':podium,'final_players':len(rows),
+                'series_total':len(ser),'series_played':len(played),'series_ahead':0,'series_stale':[],'players':len({r[0] for s in played for r in s['rows']}),
+                'qualified':[],'next':[],'points':None,'mafgame':f'https://mafgame.org/tournaments/{pid}/view'})
+out.sort(key=lambda x:(1 if x.get('done') else 0,-x['stars'],x['final_date']))
 upcoming.sort(key=lambda s:s['date'])
-S={'snapshot':T,'contours':out,'upcoming':upcoming,'horizon_days':16}
+S={'snapshot':T,'contours':out,'upcoming':upcoming,'horizon':horizon}
 open(OUTP('series2026.js'),'w',encoding='utf-8').write('/* series2026.js — данные раздела «Серийники». Генератор: _scripts_golden_dozen_v0.9/build_series.py (снимки серий — робот fetch_series). Руками не править. */\nwindow.SERIES='+json.dumps(S,ensure_ascii=False,separators=(',',':'))+';\n')
 import os; print(os.path.getsize(OUTP('series2026.js'))//1024,'КБ; контуров',len(out),'; ближайших серий',len(upcoming))
 for c in out: print(f"  {c['short']:28s} {c['stars']}★ серий {c['series_played']}/{c['series_total']} впереди {c['series_ahead']} прошли {len(c['qualified'])} игроков {c['players']}")
-for u in upcoming: print('   ',u['date'],u['contour'][:20],u['city'],'заявок',u['regs'])
+for u in upcoming: print('   ',u['date'],u['kind'],u['contour'][:20],u['city'],'заявок',u.get('regs','—'))
