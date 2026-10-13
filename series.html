@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v7.0 · 2026-06-20 -->
+<!-- DOVOD · series.html · v1.6 · 2026-10-13 · мобильная строка расписания: сетка «дата | название | счётчик», метка серия/финал под названием — счётчик больше не уезжает за край -->
 <!-- DOVOD · series.html · v1.5 · 2026-10-13 · сыгранные серийники не пропадают (плашка «завершён» с подиумом); «Ближайшие серии» → расписание до конца года: серии и финалы разными рамками, разбивка по месяцам -->
 <!-- DOVOD · series.html · v1.4 · 2026-10-05 · золотая строка на промоблоке MCL: сыгранные полуфиналы (итог 50/50, финалисты из conf[c].semiResult в data/mcl2026.js) и дата ближайшего полуфинала -->
 <!-- DOVOD · series.html · v1.3 · 2026-09-29 · плашка GMC берёт цифры из своего датафайла · штамп актуальности данных в шапке и подвале (дата снимка серий и финалистов) · + ближайшие серии (14 дней) и плашки остальных серийников из data/series2026.js (регламент, финал, кто прошёл, что осталось) -->
@@ -223,7 +224,12 @@
   .sdet li i{font-style:normal;color:var(--gold-hi);font-weight:700;flex:none;width:44px} .sdet li em{font-style:normal;color:var(--dim);margin-left:auto;white-space:nowrap}
   .sdet .links{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px} .sdet .links a{font-size:12px;color:var(--gold);text-decoration:none;border:1px solid var(--gold-dim);padding:7px 11px;border-radius:9px} .sdet .links a:hover{border-color:var(--gold)}
   .stale{font-size:12px;color:#c98a5a;margin-top:6px}
-  @media(max-width:520px){.upc-c{width:40%} .upc-w{display:none}}
+  @media(max-width:520px){.upc-c{width:40%} .upc-w{display:none}
+    /* v1.6: на телефоне строка расписания — сетка: дата | название | счётчик, под названием метка серия/финал (раньше всё в одну строку и счётчик уезжал за край) */
+    .upc-l{display:grid;grid-template-columns:42px minmax(0,1fr) auto;grid-template-areas:"d c r" "d t t";gap:4px 10px;padding:9px 12px}
+    .upc-l.fin{margin:6px 8px}
+    .upc-d{grid-area:d;width:auto;align-self:center} .upc-c{grid-area:c;width:auto} .upc-r{grid-area:r;text-align:right;white-space:nowrap}
+    .upc-t{grid-area:t;justify-self:start;font-size:9px;padding:1px 5px}}
 
 .backbar{max-width:var(--w,900px);margin:0 auto 10px;padding:14px 0 0}
 .backlnk{display:inline-flex;align-items:center;gap:8px;font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
