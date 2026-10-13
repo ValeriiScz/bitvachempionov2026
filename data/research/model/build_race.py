@@ -1,4 +1,4 @@
-"""build_race.py · v1.3 · 2026-09-21 (TARGET 4.0, планы игроков players_expert, финалы 2★ на 10 мест) · v1.2 (T/OUT из gd_cfg) · v1.1 · 2026-09-17 (v1.0 — 2026-09-14) — собирает data/race2026.js для страницы «Гонка за золотую дюжину» из результатов модели.
+"""build_race.py · v1.4 · 2026-10-13 (планки считаются из сценариев 0–3; уровни генератора — только явка) · v1.3 · 2026-09-21 (TARGET 4.0, планы игроков players_expert, финалы 2★ на 10 мест) · v1.2 (T/OUT из gd_cfg) · v1.1 · 2026-09-17 (v1.0 — 2026-09-14) — собирает data/race2026.js для страницы «Гонка за золотую дюжину» из результатов модели.
 Вход: tickets2026.json, plan2026.json, scenarios3.json, леджеры. Выход: window.RACE = {...}
 v1.1: у игроков sim три оценки силы — beta (вся история с 2024, веса 1/.5/.25), b12 (12 месяцев), b26 (только 2026) — для переключателя «Форма» в генераторе."""
 import json, numpy as np, gd_data as g, gd_sim
@@ -16,8 +16,12 @@ for r in TK['rows']:
 plan={r['uid']:r for r in PL['rows']}; tick={r['uid']:r for r in TK['rows']}
 mid=g.standings(2026,T)
 # планки
-planks={'floor':115,'usual':round(SC['1 обычный ритм']['thr_med']),'usual_lo':round(SC['1 обычный ритм']['thr10']),'usual_hi':round(SC['1 обычный ритм']['thr90']),
-        'active':round(SC['2 активно и стараются']['thr_med']),'beast':round(SC['3 как звери']['thr_med']),'work':[140,150],'regs':[120,130],'regs_note':'только уже записанные + финалы серийников'}
+r5=lambda x:int(5*round(x/5))
+S0,S1,S2,S3=SC['0 только заявки'],SC['1 обычный ритм'],SC['2 ездят активно'],SC['3 ездят по максимуму']
+# v1.4 (13.10.2026): все планки считаются, а не вписаны руками (раньше floor 115, work 140–150, regs 120–130 стояли константами с 21.09)
+planks={'floor':round(S0['thr10']),'usual':round(S1['thr_med']),'usual_lo':round(S1['thr10']),'usual_hi':round(S1['thr90']),
+        'active':round(S2['thr_med']),'beast':round(S3['thr_med']),'work':[r5(S1['thr_med']),r5(S2['thr_med'])],'regs':[r5(S0['thr25']),r5(S0['thr75'])],
+        'regs_note':'только уже записанные + финалы серийников'}
 # турниры впереди
 events=[]
 for e in sorted(se.events,key=lambda e:e['date']):
@@ -76,7 +80,7 @@ sim_cont=[{'id':c['id'],'name':SHORT.get(c['name'][:10],c['name']),'fin':{str(u)
                   'beta':round(float(np.mean([se.beta.get(u,se.default) for u in c['fin'] if u not in set(simpool)])) if any(u not in set(simpool) for u in c['fin']) else float(se.default),2),
                   'ncand':round(float(sum(p for u,p in c['cand'].items() if u not in set(simpool))),1)}} for c in cont_ev]
 rng=np.random.default_rng(0); bg=[round(float(x),2) for x in rng.choice(se.bg,200)]
-SIM={'players':players,'forms':{'all':'вся история (с 2024, свежее — весомее)','y12':'последние 12 месяцев','y26':'только 2026 год'},'events':sim_events,'contours':sim_cont,'bg':bg,'C':gd_sim.C,'top30_mean':4.0,'top20_mean':5.5,'levels':{'обычно':[1.0,0.0],'стараются':[6/5.5,0.35],'максимум':[6.5/5.5,0.7]},
+SIM={'players':players,'forms':{'all':'вся история (с 2024, свежее — весомее)','y12':'последние 12 месяцев','y26':'только 2026 год'},'events':sim_events,'contours':sim_cont,'bg':bg,'C':gd_sim.C,'top30_mean':4.0,'top20_mean':5.5,'levels':{'обычно':[1.0,0.0],'стараются':[6.5/5.5,0.0],'максимум':[7.5/5.5,0.0]},
      'server':{'S':F.get('S',3000),'date':T,'p12':{str(r['uid']):round(r['p12'],3) for r in F['rows']}}}
 RACE={'snapshot':T,'sim':SIM,'thr12_now':mid[11][0],'planks':planks,'events':events,'rows':rows,'hist':hist,
       'method':'Σ = 10 лучших турниров года, не более 2 серийных. Финал = 6–10 место на 4★ ≈ 12 баллов, топ-5 на 4★ ≈ 24. Частоты — за последние 12 месяцев, сглажены к среднему топ-30.'}

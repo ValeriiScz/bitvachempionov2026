@@ -1,6 +1,7 @@
-"""gd_attend · v1.0 — модель явки: P(игрок i сыграет турнир t) без заявки. Логит по темпу игрока, стране, звёздам, типу."""
+"""gd_attend · v1.1 · 2026-10-13 (+признак «свежий темп»: старты за 105 дней до даты — летняя активность предсказывает осеннюю лучше годового темпа: корреляция 0.47/0.72 против 0.18/0.59 на 2024/2025; переключатель RECENT) · v1.0 — модель явки: P(игрок i сыграет турнир t) без заявки. Логит по темпу игрока, стране, звёздам, типу."""
 import numpy as np, datetime, collections
 import gd_data as g
+RECENT=True; RECENT_DAYS=105   # v1.1: «свежий темп» — старты за последние ~3,5 месяца
 
 def shift(T, days):
     return (datetime.date.fromisoformat(T)+datetime.timedelta(days=days)).isoformat()
@@ -14,7 +15,12 @@ def player_rates(pool, T):
     for e in evs:
         for uid,_,_,_ in e['rows']:
             played[uid]+=1; byc[uid][e['country']]+=1
-    return {u:(played[u]+0.5, n_ev) for u in pool}, n_ev, byc
+    T1=shift(T,-RECENT_DAYS)
+    rec=collections.Counter()
+    for e in evs:
+        if e['date']>=T1:
+            for uid,_,_,_ in e['rows']: rec[uid]+=1
+    return {u:(played[u]+0.5, n_ev, rec[u]+0.5) for u in pool}, n_ev, byc
 
 _RACE={}
 def race_rank(uid, e):
@@ -28,9 +34,10 @@ def features(uid, e, rate, byc, home):
     b1=1.0 if rk<=6 else 0.0; b2=1.0 if 6<rk<=12 else 0.0; b3=1.0 if 12<rk<=25 else 0.0; b4=1.0 if 25<rk<=40 else 0.0
     hm=1.0 if (home.get(uid) and home[uid]==e['country']) else 0.0
     been=1.0 if byc.get(uid,{}).get(e['country'],0)>0 else 0.0
-    cnt,n_ev=rate
+    cnt,n_ev,rc=rate
     x=[1.0, np.log(cnt), np.log(max(n_ev,1)), hm, (e['stars']-3)/1.0, 1.0 if e['kind']=='teams' else 0.0, been,
        b1,b2,b3,b4, (b1+b2+b3+b4)*q4, q4, 1.0 if (hm==0 and been==0) else 0.0, 1.0 if e['stars']<=1 else 0.0]
+    if RECENT: x.append(np.log(rc))
     return x
 
 _RATES={}

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v1.9 · 13.10.2026 · мобильная таблица генератора (скрытые колонки вместе с заголовками, полоска без переноса) · v1.8 · 21.09.2026 · таблица «сколько ездить»: подсвечена строка ожидаемого числа турниров; генератор: столбец «турниров» и пояснение · v1.7 · фикс логики «что должно случиться»: вывод зависит от сравнения нужных турниров с ожидаемыми поездками · v1.6 · слоты десятки: серийные помечены, строка «Серийные k из 2» (Валерий) · v1.5 · явка топ-20 5–6 (Валерий), 21–30 ≈4 · v1.4 · явка топ-30 ≈4, планы игроков; финалы серийников: баллы у 10 мест, поле 20 · v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
+<!-- race.html v2.0 · 13.10.2026 · таблица гонки без «нужно до 140/150»: до планки, заявки игрока чипами, статус; новый блок «Турниры впереди — где рубка» (сколько топ-30 записано на каждый турнир и финал); планки и подписи из данных, сценарии — только явка · v1.9 · 13.10.2026 · мобильная таблица генератора (скрытые колонки вместе с заголовками, полоска без переноса) · v1.8 · 21.09.2026 · таблица «сколько ездить»: подсвечена строка ожидаемого числа турниров; генератор: столбец «турниров» и пояснение · v1.7 · фикс логики «что должно случиться»: вывод зависит от сравнения нужных турниров с ожидаемыми поездками · v1.6 · слоты десятки: серийные помечены, строка «Серийные k из 2» (Валерий) · v1.5 · явка топ-20 5–6 (Валерий), 21–30 ≈4 · v1.4 · явка топ-30 ≈4, планы игроков; финалы серийников: баллы у 10 мест, поле 20 · v1.3 · 17.09.2026 · закрытый раздел: данные в vault/race.json (AES-GCM), гейт по паролю; генератор: переключатель «Форма» (вся история / 12 мес / 2026) вместо числа сезонов, N=500 -->
 <meta name="description" content="Рейтинг MAFGAME 2026: планка топ-12, кому сколько турниров и результатов нужно до конца года, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -91,6 +91,21 @@ td.sig small{display:block;font:700 9.5px/1.4 var(--mono);color:#7e8595;letter-s
 td.need b{display:block;font-weight:600;color:var(--ink)}
 td.need small{display:block;color:#8a91a0;font-size:11.5px;margin-top:2px}
 td.fin{color:#c9a3c8;font-size:12.5px}
+td.gap b{font:700 14px/1 var(--mono)} td.gap .up{color:var(--gn)} td.gap .dn{color:#e7a0a0} td.gap small{display:block;color:#7e8595;font-size:11.5px;margin-top:3px}
+td.regs b{font:700 14px/1 var(--mono);color:var(--ink);margin-right:6px} td.regs .chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.chip{display:inline-block;padding:2px 6px;border:1px solid rgba(255,255,255,.14);font:600 10.5px/1.4 var(--mono);color:#c3cad6;white-space:nowrap}
+.chip.ok{border-color:rgba(94,224,138,.45);color:var(--gn)} .chip.big{border-color:rgba(245,255,53,.45)}
+td.regs .none{color:#7e8595;font-size:12px}
+/* турниры впереди */
+.evs{display:grid;gap:8px}
+.evc{display:grid;grid-template-columns:62px 1fr auto;gap:4px 12px;align-items:start;padding:10px 12px;border:1px solid var(--line);background:rgba(0,0,0,.25)}
+.evc.hot{border-color:rgba(245,255,53,.45);background:linear-gradient(120deg,rgba(245,255,53,.07),rgba(0,0,0,.25) 60%)}
+.evc .d{font:700 12px/1.3 var(--mono);color:#a7aebb} .evc .d small{display:block;color:var(--ye);font-size:11px}
+.evc .n{font-weight:600} .evc .n small{display:block;color:#8a91a0;font-weight:400;font-size:12px;margin-top:2px}
+.evc .who{grid-column:2/4;display:flex;flex-wrap:wrap;gap:4px}
+.evc .k{text-align:right;font:700 18px/1 var(--mono);color:var(--ye)} .evc .k small{display:block;font:600 9.5px/1.3 var(--mono);color:#7e8595;letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+.evc.fn .k{color:#c9a3c8}
+.evfil{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
 td.fin small{color:#7e8595}
 .tag{display:inline-block;padding:3px 7px;border-radius:2px;font:700 9.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
 .tag.in{background:rgba(94,224,138,.15);color:var(--gn)} .tag.near{background:rgba(245,255,53,.15);color:var(--ye)} .tag.fight{background:rgba(38,224,255,.13);color:var(--cy)} .tag.far{background:rgba(255,255,255,.08);color:#a7aebb}
@@ -176,10 +191,10 @@ details.m p{margin:8px 0 0}
   table.race{min-width:0;table-layout:auto;display:block}
   table.race thead{display:none}
   table.race tbody{display:block}
-  table.race tr.r{display:grid;grid-template-columns:34px 1fr auto;grid-template-areas:"num nick sig" "fin fin fin" "n140 n140 n140" "n150 n150 n150" "freq freq st";gap:4px 8px;padding:12px 12px;margin-bottom:8px;border:1px solid var(--line);background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3))}
+  table.race tr.r{display:grid;grid-template-columns:34px 1fr auto;grid-template-areas:"num nick sig" "gap gap st" "regs regs regs" "fin fin fin";gap:4px 8px;padding:12px 12px;margin-bottom:8px;border:1px solid var(--line);background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3))}
   table.race>tbody>tr.r>td{display:block;padding:0;border:0}
   td.num{grid-area:num;padding-top:3px!important} td.nick{grid-area:nick;white-space:normal} td.sig{grid-area:sig;text-align:right}
-  td.fin{grid-area:fin;margin-top:6px} td.need:nth-of-type(5){grid-area:n140} td.need:nth-of-type(6){grid-area:n150} td.freq{grid-area:freq;font-size:12.5px} td.st{grid-area:st;text-align:right}
+  td.fin{grid-area:fin;margin-top:6px} td.gap{grid-area:gap;margin-top:4px} td.regs{grid-area:regs} td.st{grid-area:st;text-align:right;align-self:end}
   table.race td[data-l]::before{content:attr(data-l);display:block;font:700 9px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7e8595;margin-top:6px}
   td.need b{display:inline;margin-right:6px} td.need small{display:inline} td.need small::before{content:'· '}
   td.fin br{display:none} td.fin small{margin-left:2px;margin-right:8px}
@@ -247,7 +262,7 @@ details.m p{margin:8px 0 0}
   <section class="sec">
     <div class="sh"><span>01 · планка</span><s></s><em id="snapDate"></em></div>
     <h2 class="big">Сколько будет стоить 12-е место</h2>
-    <p class="lead">Четыре сценария того, как остаток года сыграют те, кто в борьбе. Пол — чтобы понимать, ниже чего быть не может. Рабочие планки — <b>140 и 150</b>.</p>
+    <p class="lead">Четыре сценария того, как остаток года сыграют те, кто в борьбе. Пол — если играют только уже записанные. Рабочая планка — <b id="workTxt"></b>. Сценарии отличаются только тем, <b>сколько ездят</b>: по 2024–2025 осенью топ-30 играли не лучше, чем весной, — порог растёт от числа стартов и финалов серийников.</p>
     <div class="planks" id="planks"></div>
     <div class="hist" id="hist"></div>
     <details class="m"><summary>Как считаем</summary>
@@ -257,23 +272,27 @@ details.m p{margin:8px 0 0}
   </section>
 
   <section class="sec">
-    <div class="sh"><span>02 · кому что нужно</span><s></s><em>топ-30 на дату снимка</em></div>
-    <h2 class="big">Сколько раз взять топ-5 и топ-10</h2>
-    <div class="modes" id="modes">
-      <button class="mode on" data-mode="forecast">Прогноз<small>все играют как обычно · планка 140–150</small></button>
-      <button class="mode" data-mode="regs">Только заявки<small>кто уже записан + финалы серийников · планка 120–130</small></button>
-    </div>
+    <div class="sh"><span>02 · таблица гонки</span><s></s><em>топ-30 на дату снимка</em></div>
+    <h2 class="big">Кто где и куда едет</h2>
     <p class="lead" id="modeLead"></p>
     <div class="tabwrap">
       <table class="race" id="race">
-        <colgroup><col style="width:36px"><col style="width:150px"><col style="width:86px"><col style="width:150px"><col><col><col style="width:120px"><col style="width:110px"></colgroup>
+        <colgroup><col style="width:36px"><col style="width:150px"><col style="width:96px"><col style="width:120px"><col><col style="width:150px"><col style="width:110px"></colgroup>
         <thead><tr>
-          <th>#</th><th>Игрок</th><th>Σ сейчас</th><th>Финалы серийников<br>(уже прошёл)</th><th id="thA">Нужно до 140</th><th id="thB">Нужно до 150</th><th>Частота за год<br>топ-10 · топ-5</th><th>Статус</th>
+          <th>#</th><th>Игрок</th><th>Σ сейчас</th><th id="thGap">До планки</th><th>Заявки на турниры</th><th>Финалы серийников<br>(уже прошёл)</th><th>Статус</th>
         </tr></thead>
         <tbody id="tb"></tbody>
       </table>
     </div>
-    <p class="hint" style="color:#8a91a0;font-size:12.5px;margin-top:10px"><b>Топ-10</b> на четвёрке — 6–10-е место, около 12 баллов; <b>топ-5</b> — около 24 (на пятёрке больше). Новый результат вытесняет худший из десятки — это учтено. Финалы серийников, куда игрок уже прошёл, посчитаны по гарантированному минимуму: в финалах 2★ баллы получают только 10 мест (в польском — 12), а поле там около 20, так что минимум — 2 балла за участие, не место в сетке; в GMC — 17 мест из 50–60. В зачёт идут не больше двух серийных — третий поможет, только если он лучше уже стоящих. Частота — доля турниров за последние 12 месяцев с топ-10 и топ-5; при малом числе турниров подтянута к среднему топ-30.</p>
+    <p class="hint" style="color:#8a91a0;font-size:12.5px;margin-top:10px"><b>До планки</b> — сколько не хватает до рабочей планки (зелёным — уже выше). <b>Заявки</b> — турниры, куда игрок записан в календаре mafgame: <span class="chip ok">дата</span> подтверждён, <span class="chip">дата</span> заявка, <span class="chip big">дата</span> 4–5★. Нажми на строку — его десятка, что даст один результат и куда он едет.</p>
+  </section>
+
+  <section class="sec" id="evsec">
+    <div class="sh"><span>02a · турниры впереди</span><s></s><em>где соберётся гонка</em></div>
+    <h2 class="big">Где будет рубка</h2>
+    <p class="lead">Каждый рейтинговый турнир до конца года и финалы серийников: сколько из топ-30 уже записались и кто. Чем больше гонки на турнире, тем дороже там каждое место — и тем полезнее туда попасть самому или, наоборот, выбрать турнир, где конкурентов нет.</p>
+    <div class="evfil" id="evfil"><button class="gb on" data-v="race">с игроками гонки</button><button class="gb" data-v="all">все</button><button class="gb" data-v="big">4–5★</button><button class="gb" data-v="fin">финалы</button></div>
+    <div class="evs" id="evs"></div>
   </section>
 
   <section class="sec" id="gen">
@@ -282,7 +301,7 @@ details.m p{margin:8px 0 0}
     <p class="lead">Одна генерация — это один случайно разыгранный остаток года: кто поехал, какое место взял, что вытеснил из десятки, как сыграли финалы серийников. Запускаем 500 раз и смотрим, <b>сколько раз из 500 игрок оказался в дюжине</b>. На выбор — явка, уровень игры и по какому периоду оцениваем силу игрока: вся история с 2024 (свежее весомее), последние 12 месяцев или только 2026 год.</p>
     <div class="genctl">
       <div class="gengrp"><span>Явка</span><button class="gb on" data-k="att" data-v="regs">только заявки</button><button class="gb" data-k="att" data-v="forecast">прогноз посещений</button></div>
-      <div class="gengrp"><span>Игра</span><button class="gb on" data-k="lvl" data-v="обычно">как обычно</button><button class="gb" data-k="lvl" data-v="стараются">стараются</button><button class="gb" data-k="lvl" data-v="максимум">максимум</button></div>
+      <div class="gengrp"><span>Ритм</span><button class="gb on" data-k="lvl" data-v="обычно">как обычно</button><button class="gb" data-k="lvl" data-v="стараются">ездят активно</button><button class="gb" data-k="lvl" data-v="максимум">по максимуму</button></div>
       <div class="gengrp"><span>Форма</span><button class="gb on" data-k="form" data-v="all">вся история</button><button class="gb" data-k="form" data-v="y12">12 месяцев</button><button class="gb" data-k="form" data-v="y26">только 2026</button></div>
       <button class="btn" id="genGo">Сгенерировать</button>
     </div>
@@ -335,10 +354,10 @@ function initRace(){
     <div class="kpi c"><b>${regAhead}</b><span>турниров впереди · ${big} на 4–5★</span></div>
     <div class="kpi d"><b>${finalsAhead}</b><span>финалов серийников</span></div>`;
   $('#planks').innerHTML=`
-    <div class="plank f"><div class="k">0 · пол</div><div class="v">${P.floor}</div><div class="d">Никто из гонки не выигрывает ничего, только участие и финалы серийников по минимуму. Ниже — не бывает.</div></div>
+    <div class="plank f"><div class="k">0 · только заявки</div><div class="v">${P.floor}<small>${P.regs[0]}–${P.regs[1]}</small></div><div class="d">Играют только те, кто уже записан, плюс финалы серийников. Регистрации докатятся — реальная планка выше.</div></div>
     <div class="plank u"><div class="k">1 · обычный ритм</div><div class="v">${P.usual}<small>${P.usual_lo}–${P.usual_hi}</small></div><div class="d">Топ-20 играют 5–6 турниров до конца года, места 21–30 — около 4, в своей обычной силе — как в прошлом сезоне.</div></div>
-    <div class="plank a"><div class="k">2 · стараются</div><div class="v">${P.active}</div><div class="d">Пять турниров на человека, играют выше своего среднего.</div></div>
-    <div class="plank b"><div class="k">3 · как звери</div><div class="v">${P.beast}</div><div class="d">Шесть турниров, лучшее, что могут. Разрыв со сценарием 1 всего ${P.beast-P.usual} баллов — гонка не резиновая.</div></div>`;
+    <div class="plank a"><div class="k">2 · ездят активно</div><div class="v">${P.active}</div><div class="d">Топ-20 — 6–7 турниров, места 21–30 — около 5. Сила та же, что обычно.</div></div>
+    <div class="plank b"><div class="k">3 · по максимуму</div><div class="v">${P.beast}</div><div class="d">Топ-20 — 7–8 турниров, места 21–30 — 6. Разрыв со сценарием 1 всего ${P.beast-P.usual} баллов: в зачёт идёт десятка, лишние старты съедают друг друга.</div></div>`;
   $('#hist').innerHTML=`<b>Проверка на прошлых сезонах.</b> ${R.hist.note}:<div class="bands">${R.hist.bands.map(b=>`<span>${b.band}: <i>${b.k} из ${b.n}</i></span>`).join('')}</div><div style="margin-top:8px">Сейчас 12-е место — ${fmt(R.thr12_now)}. «Выше на 15–35%» — это ${fmt(R.thr12_now*1.15)}–${fmt(R.thr12_now*1.35)}, «около порога» — ${fmt(R.thr12_now*0.95)}–${fmt(R.thr12_now*1.15)}.</div>`;
 
   // ---------- расчёт «сколько раз взять» на клиенте (зависит от режима) ----------
@@ -357,6 +376,7 @@ function initRace(){
     return `<div class="ten">${cells}</div><div class="ser"><b>Серийные ${t.ser} из 2</b><span class="ten">${sl}</span><span>${note}</span></div>`}
   let MODE='forecast';
   const PL={forecast:P.work, regs:P.regs};
+  if($('#workTxt')) $('#workTxt').textContent=P.work[0]+'–'+P.work[1];
   function needFor(r,t){const [z,y]=combo(baseWithFinals(r),t);return {z,y,n:z+y}}
   function status(r){
     const a=needFor(r,PL[MODE][0]);
@@ -367,32 +387,55 @@ function initRace(){
     return ['far','нужен подвиг'];
   }
   const wordCls={'мимо':'w-miss','на грани':'w-edge','проходишь':'w-pass','уверенно':'w-sure'};
-  function of5(r,nd){ if(!nd.n) return ''; const k=Math.min(5,nd.n); const tail=nd.z&&nd.y?` (${nd.z} — топ-5)`:nd.z?' — топ-5':' — топ-10'; return `<small>${k} из 5 поездок${tail}</small>`}
+  const dd=d=>d.slice(8,10)+'.'+d.slice(5,7);
+  const TODAY=new Date().toISOString().slice(0,10);
+  function regChips(r,max){const ev=(r.regs||[]).filter(e=>e.date>=TODAY).sort((a,b)=>a.date.localeCompare(b.date));
+    if(!ev.length) return '<span class="none">заявок нет</span>';
+    return `<div class="chips">${ev.slice(0,max).map(e=>`<span class="chip${e.c===1?' ok':''}${e.stars>=4?' big':''}" title="${e.name} · ${e.stars}★">${dd(e.date)} · ${e.stars}★</span>`).join('')}${ev.length>max?`<span class="chip">+${ev.length-max}</span>`:''}</div>`}
   function row(r){
-    const [cls,txt]=status(r); const nA=needFor(r,PL[MODE][0]), nB=needFor(r,PL[MODE][1]);
+    const [cls,txt]=status(r);
     const fin=(r.finals&&r.finals.length)?r.finals.map(f=>`${f.name} <small>${f.min}–${f.mid}+</small>`).join('<br>'):'<small>—</small>';
-    const freq=r.p10!=null?`${Math.round(r.p10*100)}% · ${Math.round(r.p5*100)}%<br><small style="color:#7e8595">${r.n12m} турн. за год</small>`:'—';
-    const regs=MODE==='regs'?`<small style="color:#7e8595">записан на ${r.regs?r.regs.length:0}</small>`:'';
+    const ev=(r.regs||[]).filter(e=>e.date>=TODAY), big=ev.filter(e=>e.stars>=4).length;
+    const gap=Math.round(PL[MODE][0]-r.sigma);
     return `<tr class="r" data-uid="${r.uid}">
       <td class="num">${r.rank}</td>
-      <td class="nick">${r.nick}<small>${r.country||''}</small>${regs}</td>
+      <td class="nick">${r.nick}<small>${r.country||''}</small></td>
       <td class="sig">${fmt(r.sigma)}<small>${r.free?`${r.free} слот${r.free>1?'а':''} свободн${r.free>1?'ы':''}`:`хвост ${fmt(r.tail)}`}</small></td>
+      <td class="gap" data-l="до планки ${PL[MODE][0]}">${gap>0?`<b class="dn">−${gap}</b>`:`<b class="up">+${-gap}</b>`}<small>${gap>0?'не хватает':'уже выше'}</small></td>
+      <td class="regs" data-l="заявки"><b>${ev.length}</b><small style="color:#7e8595">${big?`из них ${big} на 4–5★`:''}</small>${regChips(r,6)}</td>
       <td class="fin" data-l="финалы серийников">${fin}</td>
-      <td class="need" data-l="нужно до ${PL[MODE][0]}"><b>${words(nA.z,nA.y)}</b>${of5(r,nA)}</td>
-      <td class="need" data-l="нужно до ${PL[MODE][1]}"><b>${words(nB.z,nB.y)}</b>${of5(r,nB)}</td>
-      <td class="freq" data-l="топ-10 · топ-5">${freq}</td>
       <td class="st"><span class="tag ${cls}">${txt}</span></td>
     </tr>`;
   }
   function renderTable(){
     $('#tb').innerHTML=R.rows.slice(0,30).map(row).join('');
-    $('#thA').textContent='Нужно до '+PL[MODE][0]; $('#thB').textContent='Нужно до '+PL[MODE][1];
-    $('#modeLead').innerHTML=MODE==='forecast'
-      ?`Планка <b>${PL[MODE][0]}–${PL[MODE][1]}</b>: все в гонке доигрывают год в обычном ритме: топ-20 — 5–6 турниров, дальше — около 4. Нажми на строку — откроется план игрока.`
-      :`Планка <b>${PL[MODE][0]}–${PL[MODE][1]}</b>: считаем, что играют только те, кто уже записан на турниры в календаре, плюс финалы серийников. Регистрации обычно появляются за 1–2 недели до турнира, у гонки приоритет записи — так что это нижняя картина, не прогноз. Нажми на строку — откроется план игрока.`;
+    $('#thGap').textContent='До '+PL[MODE][0];
+    $('#modeLead').innerHTML=`Рабочая планка <b>${P.work[0]}–${P.work[1]}</b> (сценарии 1–2). Рядом с каждым — сколько не хватает, куда он уже записан и в какие финалы серийников прошёл. Статус — сколько хороших результатов (топ-5 или топ-10) нужно, чтобы дотянуть до ${P.work[0]}, с учётом того, что новый результат вытесняет худший из десятки.`;
   }
   renderTable();
-  $('#modes').addEventListener('click',ev=>{const b=ev.target.closest('.mode');if(!b)return;MODE=b.dataset.mode;document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('on',x===b));renderTable()});
+  // ---------- турниры впереди ----------
+  (function(){
+    let F='race';
+    const top=new Set(R.rows.slice(0,30).map(r=>r.nick));
+    function card(e){
+      const fin=e.kind==='final'; const who=(fin?(e.fin||[]):(e.regs||[])).filter(n=>top.has(n));
+      const pts=fin?`${e.grid_max}…${e.grid_min}`:`${e.g1} · ${e.g5} · ${e.g10}`;
+      const hot=!fin&&who.length>=5;
+      return `<div class="evc${hot?' hot':''}${fin?' fn':''}"><div class="d">${dd(e.date)}<small>${'★'.repeat(e.stars||0)}</small></div>
+        <div class="n">${fin?'Финал · ':''}${e.short||e.name}<small>${fin?`финалистов ${e.n_fin}${e.field?' из ~'+e.field:''} · баллы ${pts}`:`${e.country||''} · поле ~${e.N} · за 1-е / 5-е / 10-е: ${pts}`}</small></div>
+        <div class="k">${who.length}<small>из топ-30</small></div>
+        <div class="who">${who.map(n=>`<span class="chip${n==='DOVOD'?' ok':''}">${n}</span>`).join('')||`<span class="none" style="color:#7e8595;font-size:12px">${fin?'из топ-30 пока никто не прошёл':'из топ-30 пока никто не записан'}</span>`}</div></div>`;
+    }
+    function draw(){
+      let ev=R.events.filter(e=>e.date>=TODAY);
+      if(F==='race') ev=ev.filter(e=>((e.kind==='final'?e.fin:e.regs)||[]).some(n=>top.has(n)));
+      if(F==='big') ev=ev.filter(e=>e.kind!=='final'&&e.stars>=4);
+      if(F==='fin') ev=ev.filter(e=>e.kind==='final');
+      $('#evs').innerHTML=ev.map(card).join('')||'<p class="lead">Нет турниров под этот фильтр.</p>';
+    }
+    $('#evfil').addEventListener('click',x=>{const b=x.target.closest('.gb');if(!b)return;F=b.dataset.v;document.querySelectorAll('#evfil .gb').forEach(y=>y.classList.toggle('on',y===b));draw()});
+    draw();
+  })();
   function detail(r){
     const ten=slotsHtml(r.base||r.ten.map(v=>[v,0]));
     const one=r.one_result?`4★: победа +${fmt(r.one_result['4★']['1'])} · 3-е +${fmt(r.one_result['4★']['3'])} · 5-е +${fmt(r.one_result['4★']['5'])} · 10-е +${fmt(r.one_result['4★']['10'])} &nbsp;|&nbsp; 5★: победа +${fmt(r.one_result['5★']['1'])} · 5-е +${fmt(r.one_result['5★']['5'])} · 10-е +${fmt(r.one_result['5★']['10'])}`:'';
@@ -403,7 +446,7 @@ function initRace(){
       tbl=`<p style="margin:0 0 6px;color:#a7aebb;font-size:12.5px">Каждая строка — «если сыграешь столько турниров». Модель ждёт от тебя <b>~${EK||'?'}</b> (история за год${(r.regs||[]).length?`, заявок сейчас ${(r.regs||[]).length}`:', заявок пока нет'}${EK&&!ekIn?` — это ${EK<2?'меньше двух, в таблице такой строки нет: без поездок ничего не случится':'больше шести, смотри нижнюю строку'}`:''}).</p><table class="mini"><thead><tr><th>турниров</th><th>как обычно</th><th>хороший сезон</th><th>сезон мечты</th></tr></thead><tbody>${ks.map(k=>{const t=r.table[k];const c=l=>t[l]?`<td>Σ≈${fmt(t[l].sigma)} <span class="w ${wordCls[t[l].word]||''}">${t[l].word}</span></td>`:'<td>—</td>';const isE=String(EK)===k;return `<tr class="${isE?'exp':''}"><td class="num">${k}${isE?'<small>ожидаем</small>':''}</td>${c('обычно')}${c('хороший')}${c('мечта')}</tr>`}).join('')}</tbody></table>
       <p style="margin-top:8px;color:#8a91a0;font-size:12px">«Как обычно» — места из твоих последних 12 месяцев; «хороший сезон» — верхняя половина твоих результатов; «сезон мечты» — верхняя четверть. Слово — где ты относительно планки ${PL[MODE][0]}–${PL[MODE][1]}.</p>`;
     }
-    const evs=MODE==='regs'?(r.regs||[]).map(e=>({...e,tag:e.c===1?'подтверждён':'заявка'})):(r.likely||[]);
+    const evs=[...(r.regs||[]).filter(e=>e.date>=TODAY).map(e=>({...e,tag:e.c===1?'подтверждён':'заявка'})),...(r.likely||[]).filter(e=>!(r.regs||[]).some(x=>x.id===e.id)).map(e=>({...e,tag:'по прогнозу'}))];
     const likely=evs.map(e=>`<li><i>${e.date.slice(5).split('-').reverse().join('.')}</i><b>${e.name}${e.tag?` <small style="color:#7e8595">· ${e.tag}</small>`:''}</b><em>${e.stars}★</em></li>`).join('');
     const fins=(r.finals||[]).map(f=>`<li><i>финал</i><b>${f.name}</b><em>${f.min}–${f.mid}+ баллов</em></li>`).join('');
     const nA=needFor(r,PL[MODE][0]), nB=needFor(r,PL[MODE][1]);
@@ -424,7 +467,7 @@ function initRace(){
       </div>
       <div>
         <h4>Сколько ездить</h4>${tbl}
-        <h4 style="margin-top:12px">${MODE==='regs'?'Куда записан сейчас':'Куда, скорее всего, поедешь'}</h4><ul class="ev">${likely||'<li><b>— пока никуда</b></li>'}</ul>
+        <h4 style="margin-top:12px">Куда записан и куда, скорее всего, поедет</h4><ul class="ev">${likely||'<li><b>— пока никуда</b></li>'}</ul>
       </div>
     </div></td></tr>`;
   }
@@ -483,7 +526,7 @@ function initRace(){
         const expK=p=>{let k=0;for(let e=0;e<EV.length;e++){let pr;if(st.att==='regs'){pr=p.reg[e]===1?0.95:p.reg[e]===0?0.7:0}else{pr=Math.min(0.97,p.p[e]*attMult);if(p.reg[e]===1)pr=Math.max(pr,0.9);else if(p.reg[e]===0)pr=Math.max(pr,0.6)}k+=pr}return k};
         const rows=P.map((p,i)=>({p,i,c:cnt[i],med:med(sums[i]),k:expK(p)})).sort((a,b)=>b.c-a.c||b.med-a.med).slice(0,24);
         const attTxt=st.att==='regs'?'только уже записанные + финалы серийников':'прогноз посещений (топ-20 — 5–6 турниров, места 21–30 — около 4)';
-        const lvlTxt={'обычно':'играют как обычно','стараются':'играют выше своего среднего, ~6 турниров','максимум':'лучшее, что могут, 6–7 турниров'}[st.lvl];
+        const lvlTxt={'обычно':'ездят как обычно','стараются':'ездят активно: топ-20 ~6–7 турниров','максимум':'по максимуму: топ-20 ~7–8 турниров'}[st.lvl];
         const formTxt={all:'сила по всей истории',y12:'сила по последним 12 месяцам',y26:'сила только по 2026 году'}[st.form];
         $('#genOut').innerHTML=`<div class="genhead"><b>${N} сезонов</b><span>${attTxt}</span><span>${lvlTxt}</span><span>${formTxt}</span><span>12-е место в среднем: <b>${fmt(med(thr))}</b></span></div>
           <table class="gen"><thead><tr><th>#</th><th>игрок</th><th>в дюжине</th><th title="сколько обычных турниров игрок сыграет в среднем при выбранной явке; финалы серийников — сверх этого">турниров</th><th>Σ в среднем</th><th>сейчас</th></tr></thead><tbody>
