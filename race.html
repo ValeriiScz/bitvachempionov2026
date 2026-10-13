@@ -388,6 +388,7 @@ function initRace(){
   }
   const wordCls={'мимо':'w-miss','на грани':'w-edge','проходишь':'w-pass','уверенно':'w-sure'};
   const dd=d=>d.slice(8,10)+'.'+d.slice(5,7);
+  const slotW=n=>n===1?'1 слот свободен':(n<5?`${n} слота свободны`:`${n} слотов свободны`);
   const TODAY=new Date().toISOString().slice(0,10);
   function regChips(r,max){const ev=(r.regs||[]).filter(e=>e.date>=TODAY).sort((a,b)=>a.date.localeCompare(b.date));
     if(!ev.length) return '<span class="none">заявок нет</span>';
@@ -400,7 +401,7 @@ function initRace(){
     return `<tr class="r" data-uid="${r.uid}">
       <td class="num">${r.rank}</td>
       <td class="nick">${r.nick}<small>${r.country||''}</small></td>
-      <td class="sig">${fmt(r.sigma)}<small>${r.free?`${r.free} слот${r.free>1?'а':''} свободн${r.free>1?'ы':''}`:`хвост ${fmt(r.tail)}`}</small></td>
+      <td class="sig">${fmt(r.sigma)}<small>${r.free?slotW(r.free):`хвост ${fmt(r.tail)}`}</small></td>
       <td class="gap" data-l="до планки ${PL[MODE][0]}">${gap>0?`<b class="dn">−${gap}</b>`:`<b class="up">+${-gap}</b>`}<small>${gap>0?'не хватает':'уже выше'}</small></td>
       <td class="regs" data-l="заявки"><b>${ev.length}</b><small style="color:#7e8595">${big?`из них ${big} на 4–5★`:''}</small>${regChips(r,6)}</td>
       <td class="fin" data-l="финалы серийников">${fin}</td>
