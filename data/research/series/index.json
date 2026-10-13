@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-10-12",
+ "snapshot": "2026-10-13",
  "parents": [
   {
    "file": "2025_478.json",
@@ -162,7 +162,7 @@
    "name": "White Mafia Best Player",
    "start_date": "2026-11-07",
    "stars": 2,
-   "series": 5,
+   "series": 6,
    "played": 5,
    "final": true
   },
@@ -195,7 +195,7 @@
    "name": "Arena Moldova Cup",
    "start_date": "2026-11-28",
    "stars": 2,
-   "series": 9,
+   "series": 10,
    "played": 6,
    "final": true
   },
@@ -206,7 +206,7 @@
    "name": "Васлуйская Битва 2026. Реванш.",
    "start_date": "2026-12-05",
    "stars": 2,
-   "series": 7,
+   "series": 8,
    "played": 6,
    "final": true
   },
