@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-10-13",
+ "snapshot": "2026-10-14",
  "parents": [
   {
    "file": "2025_478.json",
@@ -173,7 +173,7 @@
    "name": "German Mafia Cup Europa Edition 2026",
    "start_date": "2026-11-14",
    "stars": 4,
-   "series": 27,
+   "series": 28,
    "played": 26,
    "final": true
   },
@@ -217,7 +217,7 @@
    "name": "ЛЗГ Лига Западной Германии 2026",
    "start_date": "2026-12-05",
    "stars": 2,
-   "series": 6,
+   "series": 7,
    "played": 5,
    "final": true
   },
