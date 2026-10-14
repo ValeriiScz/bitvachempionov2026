@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- DOVOD · watch673.html · v1.1 · 2026-10-14 · подписи «Стол I / ★ игрок / звук» вынесены из картинки в полоску над эфиром — больше не закрывают игровую инфу трансляции (верхняя строка оверлея) -->
 <!-- DOVOD · watch673.html · v1.0 · 2026-10-09 · «Смотровая» Чемпионата Молдовы 2026 (mafgame 673): все трансляции столов в одном окне.
      Назначение: зрителю с телефона — один эфир + переключатель столов + «кто за столом сейчас»; режим «Все столы» (на телефоне стопкой,
      повёрнутый телефон и комп — в ряд / «большой + два»); «Следить за игроком» — эфир сам переходит на его стол в каждой новой игре.
@@ -57,16 +58,16 @@ button{font:inherit;color:inherit}
 .stage{position:sticky;top:0;z-index:30;background:var(--bg);padding:0 0 8px}
 @media (min-width:1025px){.stage{position:static}}
 .stage.mm{position:static}
-.pl{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden}
-.pl iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.pl .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px;
+.pl{--hd:28px;position:relative;width:100%;height:0;padding-top:calc(56.25% + var(--hd));background:#05060a;overflow:hidden}
+.pl iframe{position:absolute;left:0;right:0;bottom:0;top:var(--hd);width:100%;height:calc(100% - var(--hd));border:0}
+.pl .ph{position:absolute;inset:var(--hd) 0 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px;
   background:radial-gradient(80% 80% at 50% 0%,rgba(38,224,255,.12),transparent 70%),#06080e;color:var(--mut);font-size:13px}
 .pl .ph b{font:900 15px/1.2 var(--disp);color:var(--ink);text-transform:uppercase}
 .pl .ph a{display:inline-block;padding:9px 14px;border-radius:9px;border:1px solid var(--cyan);color:var(--cyan);text-decoration:none;font-weight:800}
-.pl .lab{position:absolute;left:8px;top:8px;z-index:2;display:flex;gap:6px;align-items:center;pointer-events:none}
+.pl .lab{position:absolute;left:6px;top:3px;z-index:2;display:flex;gap:6px;align-items:center;pointer-events:none}
 .pl .lab span{font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;background:rgba(5,6,10,.78);border:1px solid var(--line);padding:5px 7px;border-radius:6px;color:var(--ink)}
 .pl .lab span.mf{color:var(--yel);border-color:rgba(245,255,53,.4)}
-.pl .snd{position:absolute;right:8px;top:8px;z-index:3;border:1px solid var(--line);background:rgba(5,6,10,.78);border-radius:8px;padding:6px 9px;font:800 12px/1 Inter;cursor:pointer}
+.pl .snd{position:absolute;right:6px;top:2px;z-index:3;border:1px solid var(--line);background:rgba(5,6,10,.78);border-radius:8px;padding:5px 9px;font:800 12px/1 Inter;cursor:pointer}
 .pl .snd.on{border-color:var(--cyan);color:var(--cyan)}
 .pl.act{outline:2px solid var(--cyan);outline-offset:-2px}
 /* вкладки столов */
@@ -85,7 +86,7 @@ button{font:inherit;color:inherit}
 @media (min-width:1025px){
   .wrap{padding:0 18px 40px}
   .multi.focus{grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:8px}
-  .multi.focus .pl:first-child{grid-row:span 2}
+  .multi.focus .pl:first-child{grid-row:span 2;height:auto}
   .multi.row{grid-template-columns:repeat(3,minmax(0,1fr))}
   .pl{border-radius:12px}
 }
