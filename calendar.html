@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- DOVOD · calendar.html · v1.4.1 · 2026-10-14 · подвал: финалы серийников 2026 — по сетке федерации (2★ 22 · 3★ 30 · 4★ 40); таблица серийников на /pages/mafgame_points пока старая -->
 <!-- MafgameStat · calendar.html · v1.4 · 2026-08-26 · Календарь турниров mafgame 2026: три вида (лента уикендов / месяц-грид СБ-ВС / обзор года), MECE-фильтры (показ/тип/серии/звёзды/страны/игроки), «свой вид» (скрытия в localStorage), лобби с записанными и тирами гонки (топ-12/30/50), «еду» + экспорт .ics. v1.1: лобби = заявки+подтверждённые, составы прошедших турниров (фильтр игрока видит сыгранное), пресет «все 1★+», сброс фильтров сверху. v1.2: тип «Командные» (7 турниров; kind=teams). v1.3: у командных полноценный состав, если он есть (693 — 20 игроков + пары команд из локального снимка сайта); где состава нет — ссылка «составы по командам → mafgame». v1.4: составы командных собраны из mafgame Inertia /participants (у kind=teams props.players = объекты КОМАНД, игроки внутри team.players; заявленные команды — в props.applications, одиночки — в props.no_team_applications). Закрыты 607 (10 пар / 20 игроков), 672 (10 троек / 30), 767 (3 команды / 8 заявок, по 4), 725 (4 заявки, по 2); 693 пересобран из API и сверен с локальным снимком — совпал бит-в-бит. У 914 Balkan Team Cup команд и результатов на платформе нет (players_confirmed=0) → состав неизвестен, ссылка на mafgame. Данные вшиты снимком 26.08 (пайплайн build_calendar3.py + calendar_2026.json в корне проекта); живая подтяжка через /mafgame/ — следующая версия -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -298,7 +299,7 @@
     <div class="btn" onclick="exportICS()">📅 Мои → в календарь (.ics)</div>
     <div class="btn" onclick="resetAll()">↺ Сбросить фильтры</div>
   </div>
-  <div class="foot"><b>DOVOD</b> · календарь турниров MAFGAME · снимок данных <span id="fsnap"></span> · рейтинг игроков обновлён <b id="ratedate">—</b> · баллы победителю — <a href="https://mafgame.org/pages/mafgame_points">официальная сетка MAFGAME</a><br>«в гонке» = топ-30 рейтинга-2026: <span style="color:var(--gold-hi)">золото топ-12</span> · <span style="color:var(--silver)">серебро 13–30</span>; <span style="color:var(--bronze)">бронза 31–50</span> — претенденты · «✓ еду» и «свой вид» хранятся в этом браузере<br>некоммерческий проект · автор — господин DOVOD, <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a></div>
+  <div class="foot"><b>DOVOD</b> · календарь турниров MAFGAME · снимок данных <span id="fsnap"></span> · рейтинг игроков обновлён <b id="ratedate">—</b> · баллы победителю — <a href="https://mafgame.org/pages/mafgame_points">официальная сетка MAFGAME</a> (финалы серийников 2026 — по сетке федерации: 2★ 22, 3★ 30, 4★ 40; таблица серийников на той странице пока старая)<br>«в гонке» = топ-30 рейтинга-2026: <span style="color:var(--gold-hi)">золото топ-12</span> · <span style="color:var(--silver)">серебро 13–30</span>; <span style="color:var(--bronze)">бронза 31–50</span> — претенденты · «✓ еду» и «свой вид» хранятся в этом браузере<br>некоммерческий проект · автор — господин DOVOD, <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a></div>
 </div>
 
 <script src="data/results3.js"></script>
