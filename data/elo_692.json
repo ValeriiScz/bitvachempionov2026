@@ -1,0 +1,137 @@
+{
+ "players": {
+  "DOVOD": {
+   "global": 1211,
+   "tier": "A"
+  },
+  "ParadoXx": {
+   "global": 1163,
+   "tier": "B"
+  },
+  "Malvina": {
+   "global": 943,
+   "tier": "D"
+  },
+  "Maverick": {
+   "global": 1033,
+   "tier": "C"
+  },
+  "TOPS": {
+   "global": 1038,
+   "tier": "C"
+  },
+  "aptah": {
+   "global": 1085,
+   "tier": "B"
+  },
+  "Kleo": {
+   "global": 936,
+   "tier": "E"
+  },
+  "Буржуй": {
+   "global": 1218,
+   "tier": "A"
+  },
+  "KEX": {
+   "global": 1454,
+   "tier": "S"
+  },
+  "Tripok": {
+   "global": 1244,
+   "tier": "A"
+  },
+  "qUAest0r": {
+   "global": 991,
+   "tier": "D"
+  },
+  "Funt": {
+   "global": 1001,
+   "tier": "C"
+  },
+  "Kramola": {
+   "global": 959,
+   "tier": "D"
+  },
+  "Blackout": {
+   "global": 1063,
+   "tier": "C"
+  },
+  "Сью": {
+   "global": 1238,
+   "tier": "A"
+  },
+  "Golubchik": {
+   "global": 966,
+   "tier": "D"
+  },
+  "Advokat": {
+   "global": 975,
+   "tier": "D"
+  },
+  "Светлый": {
+   "global": 977,
+   "tier": "D"
+  },
+  "Sever": {
+   "global": 949,
+   "tier": "D"
+  },
+  "Link": {
+   "global": 932,
+   "tier": "E"
+  },
+  "mobi.": {
+   "global": 997,
+   "tier": "C"
+  },
+  "Jerry Hurper": {
+   "global": 1093,
+   "tier": "B"
+  },
+  "Stimorol": {
+   "global": 919,
+   "tier": "E"
+  },
+  "Antonio": {
+   "global": 1016,
+   "tier": "C"
+  },
+  "sometimes": {
+   "global": 1051,
+   "tier": "C"
+  },
+  "Korolevich": {
+   "global": 1296,
+   "tier": "A"
+  },
+  "Gangster": {
+   "global": 1280,
+   "tier": "A"
+  },
+  "Саботаж": {
+   "global": 1330,
+   "tier": "S"
+  },
+  "yesterday": {
+   "global": 991,
+   "tier": "D"
+  },
+  "Берлин": {
+   "global": 1055,
+   "tier": "C"
+  },
+  "Магнат": {
+   "global": 1132,
+   "tier": "B"
+  },
+  "Lюц": {
+   "global": 1374,
+   "tier": "S"
+  },
+  "Miss Belle": {
+   "global": 930,
+   "tier": "E"
+  }
+ },
+ "snapshot": "2026-10-15"
+}

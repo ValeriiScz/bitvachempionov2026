@@ -137,6 +137,9 @@ body{
   .tile.soon,.tile.race{grid-column:1 / -1;min-height:150px}
   .tile.wc{grid-column:1 / -1;min-height:170px}
   .wcstream{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:12px 16px;border:1px solid rgba(227,176,75,.35);background:rgba(227,176,75,.06);font:600 13px/1.4 Inter,system-ui,sans-serif;color:#eef3fb;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+  .wcstream[hidden]{display:none}
+  .wcstream .wb{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#f5ff35;color:#05060a!important;font-weight:800}
+  .wcstream .wb.g{background:none;border:1px solid rgba(227,176,75,.5);color:#f6d27a!important}
   .wcstream b{color:#f6d27a}.wcstream .soon{color:#79808f;font-weight:500}.wcstream a{color:#f6d27a;font-weight:800;text-decoration:none}
   .ttl{font-size:clamp(28px,2.9vw,40px)}
   .tile.soon .ttl{font-size:28px}
@@ -175,6 +178,15 @@ body{
   *{animation:none!important;transition:none!important}
 }
 </style>
+<style>
+/* 15.10.2026: плашка эфира турнира — стили и на телефоне (раньше .wcstream жила только в десктопном @media) */
+#tstream{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;padding:13px 15px;margin:0 0 4px;border:1px solid rgba(245,255,53,.45);background:rgba(245,255,53,.06);font:600 13px/1.45 Inter,system-ui,sans-serif;color:#eef3fb;border-radius:4px}
+#tstream[hidden]{display:none}
+#tstream b{color:#f5ff35}
+#tstream .wb{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;background:#f5ff35;color:#05060a;font-weight:800;text-decoration:none}
+#tstream .wb.g{background:none;border:1px solid rgba(245,255,53,.5);color:#f5ff35}
+@media (min-width:900px){#tstream{grid-column:1 / -1}}
+</style>
 </head>
 <body>
 
@@ -205,6 +217,8 @@ body{
     <div class="ghead"><span>Разделы</span><s></s><span>06</span></div>
 
     <div class="tiles">
+
+      <div class="wcstream" id="tstream" hidden></div>
 
       <a class="tile" href="tournaments.html" style="--c:var(--cy)">
         <span class="tnum">01</span>
@@ -274,7 +288,6 @@ body{
           <span class="tgo">Открыть <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
         </div>
       </a>
-      <div class="wcstream" id="wcstream">▶ <b>Главный эфир ЧМ-2026</b> · комментирует Walle · <a href="https://www.youtube.com/watch?v=vu-6aK_tdN4" target="_blank" rel="noopener" id="wcair">смотреть день 1 ↗</a> · <a href="https://www.youtube.com/playlist?list=PLXdDgdvp5aJs" target="_blank" rel="noopener">все столы — плейлист ↗</a> · <a href="wc2026-fans.html">режим для зрителей →</a></div>
 
       <a class="tile race lock" href="race.html" style="--c:var(--ye)">
         <span class="tnum">05</span>
@@ -412,6 +425,24 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
   var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'}));
   var d2=new Date(2026,8,13,0,0,0); /* 13.09.2026 */
   if(now>=d2){ a.href='https://www.youtube.com/watch?v=HsyqZA_6V0k'; a.textContent='смотреть день 2 ↗'; }
+}catch(e){}})();
+</script>
+<script src="data/tournaments.js"></script>
+<script>
+/* v (15.10.2026): плашка «эфир турнира» на главной — сама берёт ближайший DOVOD-турнир со смотровой (data/tournaments.js):
+   за 3 дня до старта — «скоро», в дни турнира — «идёт», после liveTo — пропадает. Заменила устаревшую плашку эфира ЧМ-2026. */
+(function(){try{
+  var el=document.getElementById('tstream'); var db=window.TOURNAMENTS_DB; if(!el||!db) return;
+  var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'}));
+  var today=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  var soon=new Date(now.getTime()+3*864e5); var lim=soon.getFullYear()+'-'+String(soon.getMonth()+1).padStart(2,'0')+'-'+String(soon.getDate()).padStart(2,'0');
+  var c=db.tournaments.filter(function(t){return t.watch&&t.liveFrom&&t.status!=='finished'&&today<=(t.liveTo||t.liveFrom)&&t.liveFrom<=lim;})
+    .sort(function(a,b){return a.liveFrom.localeCompare(b.liveFrom);})[0];
+  if(!c) return;
+  var live=today>=c.liveFrom;
+  el.innerHTML='<span>'+(live?'● <b>Идёт</b>':'▶ <b>Скоро</b>')+' · '+c.name+' · '+c.dates+' · '+c.city+'</span>'+
+    '<a class="wb" href="'+c.watch+'">▶ Смотровая — все эфиры</a><a class="wb g" href="'+(c.page||'tournaments.html')+'">Страница турнира →</a>';
+  el.hidden=false;
 }catch(e){}})();
 </script>
 </body>

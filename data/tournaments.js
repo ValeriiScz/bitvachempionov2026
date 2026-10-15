@@ -10,6 +10,7 @@
 // MafgameStat · data/tournaments.js · v2.3 · 2026-06-20 · 4 статуса (live/soon/gathering/finished) + поле phase для порядка главной (2→3→4→1);
 //   +702 Кубок Кёльна, +634 Чемпионат Европы (оба «собирается»); счётчик ожид. ELO (markery) на плашках; участники+двойной рейтинг; accent per-турнир.
 // MafgameStat | tournaments.js | v2.5 | 2026-06-25 | 766->upcoming(Скоро)+разлок seating/cards/stat+live(in_progress)+store; fix player.html?t=693
+// MafgameStat | tournaments.js | v3.4 | 2026-10-15 | 692 Central Cup -> upcoming (Скоро): страница t692 + смотровая watch692, рассадка 15.10, 33 игрока, ELO markery 15.10 (Ø 1086), live 17–18.10
 window.TOURNAMENTS_DB = {
   "tournaments": [
     {
@@ -59,40 +60,33 @@ window.TOURNAMENTS_DB = {
     {
       "id": "692",
       "theme": "dovod",
+      "page": "t692.html",
+      "watch": "watch692.html",
       "name": "Four Seasons: Central Cup 2026",
       "posterTitle": "Four Seasons|Central Cup",
       "dates": "17–18 октября 2026",
       "city": "Прага",
       "country": "Чехия",
-      "players": 32,
+      "players": 33,
       "days": 2,
       "stars": 4,
       "prize": "750€",
-      "status": "gathering",
-      "phase": 3,
-      "statusLabel": "Собирается · 32 подтверждены",
-      "eloAvg": 1098,
-      "eloN": 32,
-      "eloTotal": 32,
-      "organizer": "Mafia club «Champions League» Prague · судьи YeS, Гармония и др.",
+      "status": "upcoming",
+      "phase": 2,
+      "statusLabel": "Скоро · старт 17 октября, 10:15",
+      "liveFrom": "2026-10-17",
+      "liveTo": "2026-10-18",
+      "eloAvg": 1086,
+      "eloN": 33,
+      "eloTotal": 33,
+      "organizer": "Mafia club «Champions League» Prague · судьи YeS (главный), Гармония, Trinity",
+      "format": "11 игр квалификации × 3 стола (у каждого 10) → полуфинал 2 игры (топ-30) → финал 4 игры (топ-10, ×1.3)",
       "mafgame": "https://mafgame.org/tournaments/692/view",
-      "note": "Страница турнира и смотровая откроются, когда mafgame опубликует рассадку.",
+      "note": "Рассадка квалификации опубликована 15.10. Результаты подтягиваются с mafgame вживую в дни турнира.",
       "sections": [
-        {
-          "href": "participants.html?t=692",
-          "title": "Участники и рейтинг",
-          "desc": "32 игрока + ELO markery (снимок 09.10)"
-        },
-        {
-          "soon": true,
-          "title": "Страница турнира",
-          "desc": "рассадка, сила столов, live-результаты"
-        },
-        {
-          "soon": true,
-          "title": "Смотровая · эфиры",
-          "desc": "все столы в одном окне"
-        }
+        {"href": "t692.html", "title": "Страница турнира", "desc": "Обзор · Моё · Игроки · Столы · Результаты — рассадка, сила столов, live-таблица"},
+        {"href": "watch692.html", "title": "▶ Смотровая · все эфиры", "desc": "Три стола в одном окне, «следить за игроком»"},
+        {"href": "participants.html?t=692", "title": "Участники и рейтинг", "desc": "33 игрока + ELO markery (снимок 15.10)"}
       ],
       "start": "2026-10-17"
     },
