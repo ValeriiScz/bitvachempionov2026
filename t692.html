@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t692.html · v1.0 · 2026-10-15 · Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия канона t673 v1.3: формат 11+2+4 (33 игрока, в каждой квал-игре трое отдыхают → полуфинал топ-30 2 игры на 3 столах → финал топ-10 4 игры ×1.3), линия полуфинала в таблице квалификации, крупная кнопка «Смотровая» в шапке и плавающая на телефоне.
+<!-- DOVOD · t692.html · v1.1 · 2026-10-16 · ссылка «🎙 Студия аналитики» (для зрителей) под кнопкой смотровой и в «Трансляциях» · v1.0 · 2026-10-15 · Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия канона t673 v1.3: формат 11+2+4 (33 игрока, в каждой квал-игре трое отдыхают → полуфинал топ-30 2 игры на 3 столах → финал топ-10 4 игры ×1.3), линия полуфинала в таблице квалификации, крупная кнопка «Смотровая» в шапке и плавающая на телефоне.
      Данные: data/*_692* (рассадка с mafgame 15.10, ELO markery 15.10). Эфиры — watch692.html. Стиль: DOVOD-неон, акцент cyan раздела «Турниры». -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -624,6 +624,7 @@
   .wbig{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;padding:13px 18px;border-radius:12px;text-decoration:none;
     font:800 14.5px/1.1 'Inter',sans-serif;color:#05060a;background:linear-gradient(135deg,#f5ff35,#d8e62a);box-shadow:0 0 0 1px rgba(245,255,53,.5),0 8px 26px rgba(245,255,53,.18);max-width:440px}
   .wbig .wi{font-size:17px}.wbig small{font-weight:700;opacity:.75;font-size:11.5px}
+  .wstu{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:8px 13px;border-radius:999px;border:1px solid rgba(193,75,189,.55);color:#e7a6e3;background:rgba(193,75,189,.08);font:700 12.5px/1.2 'Inter',sans-serif;text-decoration:none}
   .wfab{position:fixed;right:16px;bottom:18px;z-index:80;display:flex;align-items:center;gap:7px;padding:12px 17px;border-radius:26px;text-decoration:none;
     font:800 13.5px/1 'Inter',sans-serif;color:#05060a;background:#f5ff35;box-shadow:0 6px 22px rgba(0,0,0,.55),0 0 0 1px rgba(245,255,53,.6)}
   .wfab .dot{width:8px;height:8px;border-radius:50%;background:#db514e;box-shadow:0 0 0 3px rgba(219,81,78,.25)}
@@ -825,7 +826,7 @@ Promise.all([
   (window.DOVOD_SHEET?Promise.all([DOVOD_SHEET.players(CFG.id),DOVOD_SHEET.streams(CFG.id)]).catch(()=>[null,null]):Promise.resolve([null,null]))
 ]).then(([P,T,A,E,S,G,C,SH])=>{
   D.cards=C||null;
-  if(SH&&window.DOVOD_SHEET){try{if(P&&P.players)DOVOD_SHEET.applyPlayers(P.players,SH[0]);const ss=SH[1];if(ss&&ss.n){const b=Object.assign({gamesDay1:6,days:{}},(window.STREAMS_DB||{})[CFG.id]||{});b.days=JSON.parse(JSON.stringify(b.days||{}));Object.keys(ss.days).forEach(d=>{b.days[d]=Object.assign(b.days[d]||{},ss.days[d]);});if(ss.final)b.final=ss.final;b.test=false;window.STREAMS_DB=window.STREAMS_DB||{};window.STREAMS_DB[CFG.id]=b;}}catch(e){}} /* правки из Google-таблицы (data/gsheet.js) поверх данных сайта */
+  if(SH&&window.DOVOD_SHEET){try{if(P&&P.players)DOVOD_SHEET.applyPlayers(P.players,SH[0]);const ss=SH[1];if(ss&&ss.n){const b=Object.assign({gamesDay1:6,days:{}},(window.STREAMS_DB||{})[CFG.id]||{});b.days=JSON.parse(JSON.stringify(b.days||{}));Object.keys(ss.days).forEach(d=>{b.days[d]=Object.assign(b.days[d]||{},ss.days[d]);});if(ss.final)b.final=ss.final;if(ss.studio)b.studio=Object.assign({},b.studio||{},ss.studio);b.test=false;window.STREAMS_DB=window.STREAMS_DB||{};window.STREAMS_DB[CFG.id]=b;}}catch(e){}} /* правки из Google-таблицы (data/gsheet.js) поверх данных сайта */
   D.players=(P&&P.players)||[];D.meta=(P&&P.meta)||{};D.stats=(P&&P.stats)||{};D.tour=T||{};
   D.judges=(A&&A.judges)||{};D.refs=(A&&A.referees)||[];D.duty=A&&A.duty;D.commentator=A&&A.commentator;D.avatars=(A&&A.avatars)||{};D.elo=(E&&E.players)||{};D.skip=S||{};D.games=(G&&G.games)||[];
   D.realGames=D.games;D.realPlayed=(T.games_played||0);D.demo=false;
@@ -896,7 +897,7 @@ function renderTop(){
         <span class="chip">Формат <b>${CFG.fmt}</b></span>
         <span class="chip">Ср. ELO <b>${eloAvg!=null?eloAvg:'—'}</b> · markery</span>
         <span class="chip ${started&&!t.closed?'live':''}">${t.closed?'завершён · '+t.games_total+' игр':started?'● идёт · игра '+(D.gp||t.games_played)+'/'+t.games_total:CFG.startLab}</span>
-      </div><a class="wbig" href="${CFG.watch}"><span class="wi">▶</span><span>Смотровая — все эфиры столов<br><small>три стола в одном окне · следить за игроком</small></span></a>${started?'':'<div class="cdown" id="cdown"></div>'}</div>`;
+      </div><a class="wbig" href="${CFG.watch}"><span class="wi">▶</span><span>Смотровая — все эфиры столов<br><small>три стола в одном окне · следить за игроком</small></span></a><a class="wstu" href="${CFG.watch}#studio">🎙 Студия аналитики — разбор с комментаторами, для зрителей</a>${started?'':'<div class="cdown" id="cdown"></div>'}</div>`;
   if(!started)tick();
 }
 function tick(){const el=document.getElementById('cdown');if(!el)return;
@@ -1297,7 +1298,7 @@ function streamsPanel(){
   const yt=id=>window.ytWatchURL?window.ytWatchURL(id):'https://www.youtube.com/watch?v='+id;
   let tbl='';for(let t=1;t<=CFG.tables;t++){const id=st&&st.days&&(st.days[day]||{})[String(t)];tbl+=id?`<a class="btn strm" href="${yt(id)}" target="_blank" rel="noopener">&#9654; Стол ${ROMAN[t]}</a>`:`<span class="btn strm off">&#9654; Стол ${ROMAN[t]}</span>`;}
   if(st&&st.final&&(D.played||0)>=CFG.quals)tbl+=`<a class="btn strm" href="${yt(st.final)}" target="_blank" rel="noopener">&#9654; Финал</a>`;
-  return `<div class="panel"><h3>Трансляции</h3><div class="strms" style="margin-bottom:8px"><a class="btn strm main" href="${CFG.watch}">&#9654; Смотровая — все столы в одном окне</a></div><div class="strms">${tbl}</div>
+  return `<div class="panel"><h3>Трансляции</h3><div class="strms" style="margin-bottom:8px"><a class="btn strm main" href="${CFG.watch}">&#9654; Смотровая — все столы в одном окне</a><a class="btn strm" href="${CFG.watch}#studio" style="background:rgba(193,75,189,.18);color:#f0c4ee;border:1px solid rgba(193,75,189,.55)">🎙 Студия аналитики</a></div><div class="strms">${tbl}</div>
     <div class="note" style="margin:8px 0 0">День ${day}. В смотровой можно выбрать игрока — эфир сам переключится на его стол. Кнопки столов открывают YouTube.${st&&st.test?' <b style="color:var(--gold-hi)">Сейчас стоят тестовые записи — настоящие ссылки появятся перед стартом.</b>':''}</div></div>`;
 }
 function nextGamePanel(nick,compact){

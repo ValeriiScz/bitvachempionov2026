@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · watch692.html · v1.0 · 2026-10-15 · «Смотровая» Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия watch673 v1.1 (подписи над эфиром): формат 11+2+4, подпись «Полуфинал · игра N», «отдыхает» вместо «не играет», ключи localStorage w692_. Эфиры — data/streams_692.json + Google-таблица. -->
+<!-- DOVOD · watch692.html · v1.1 · 2026-10-16 · 🎙 «Студия аналитики» (для зрителей) — отдельный режим рядом с «Один стол / Все столы»: не грузится и не звучит в режимах столов, день по дате (17/18.10), после турнира — выбор дня; ссылка watch692.html#studio · v1.0 · 2026-10-15 · «Смотровая» Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия watch673 v1.1 (подписи над эфиром): формат 11+2+4, подпись «Полуфинал · игра N», «отдыхает» вместо «не играет», ключи localStorage w692_. Эфиры — data/streams_692.json + Google-таблица. -->
 <!-- DOVOD · watch673.html (канон) · v1.0 · 2026-10-09 · «Смотровая» Чемпионата Молдовы 2026 (mafgame 673): все трансляции столов в одном окне.
      Назначение: зрителю с телефона — один эфир + переключатель столов + «кто за столом сейчас»; режим «Все столы» (на телефоне стопкой,
      повёрнутый телефон и комп — в ряд / «большой + два»); «Следить за игроком» — эфир сам переходит на его стол в каждой новой игре.
@@ -53,6 +53,13 @@ button{font:inherit;color:inherit}
 /* режим */
 .modes{display:flex;gap:6px;padding:0 14px 10px}
 .modes button{flex:1;padding:10px 8px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);font:800 12.5px/1 Inter;cursor:pointer;color:var(--mut)}
+.modes button.stu{flex:0 0 auto;padding:10px 12px;border-color:rgba(193,75,189,.55);color:#e7a6e3;background:rgba(193,75,189,.08)}
+.modes button.stu.on{border-color:#c14bbd;color:#fff;background:rgba(193,75,189,.32);box-shadow:0 0 0 1px rgba(193,75,189,.4) inset}
+.sday{display:flex;gap:6px;align-items:center;padding:8px 14px 0;font:600 12px/1.3 Inter;color:var(--mut)}
+.sday button{white-space:nowrap;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--mut);font:800 11.5px/1 Inter;cursor:pointer}
+.sday .sh{margin-left:auto;font-size:11px}@media(max-width:520px){.sday .sh{display:none}}
+.sday button.on{border-color:#c14bbd;color:#fff;background:rgba(193,75,189,.25)}
+.pl.studio .lab span:first-child{border-color:rgba(193,75,189,.6);color:#f0c4ee}
 .modes button.on{border-color:var(--cyan);color:var(--cyan);background:rgba(38,224,255,.10);box-shadow:0 0 0 1px rgba(38,224,255,.25) inset}
 /* сцена */
 .stage{position:sticky;top:0;z-index:30;background:var(--bg);padding:0 0 8px}
@@ -169,7 +176,8 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){addEvent
     <button class="share" type="button" onclick="share()" aria-label="Поделиться">⤴</button></div>
   <div class="status" id="status">Загрузка…</div>
   <div id="testbar"></div>
-  <div class="modes" id="modes"><button data-m="one">▶ Один стол</button><button data-m="all">⊞ Все столы</button></div>
+  <div class="modes" id="modes"><button data-m="one">▶ Один стол</button><button data-m="all">⊞ Все столы</button><button data-m="studio" class="stu" title="Студия аналитики — разбор игр с комментаторами, для зрителей">🎙 Студия</button></div>
+  <div class="sday" id="sday" hidden></div>
   <div class="layout" id="layout"><button data-l="focus">большой + два</button><button data-l="row">три в ряд</button></div>
   <div class="body">
     <div class="mainc">
@@ -206,7 +214,7 @@ const mono=n=>((n||'?').replace(/[^A-Za-zА-Яа-яЁё0-9]/g,'').slice(0,2).toU
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:v}catch(e){return d}},set(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}};
 
 let D={players:[],P:{},games:[],tour:{},judges:{}};
-let S={mode:LS.get('w692_mode','one'),layout:LS.get('w692_layout','focus'),table:null,view:null,follow:LS.get('w692_follow',null)||LS.get(CFG.ls+'my',null),auto:LS.get('w692_auto','1')==='1',sound:1};
+let S={mode:(location.hash==='#studio')?'studio':(LS.get('w692_mode','one')==='all'?'all':'one'),sday:null,layout:LS.get('w692_layout','focus'),table:null,view:null,follow:LS.get('w692_follow',null)||LS.get(CFG.ls+'my',null),auto:LS.get('w692_auto','1')==='1',sound:1};
 
 /* ── 4. данные ── */
 async function load(first){
@@ -221,7 +229,7 @@ async function load(first){
   if(window.DOVOD_SHEET){ /* правки из Google-таблицы: эфиры и ELO игроков, без выкладки */
     try{const [ov,ss]=await Promise.all([DOVOD_SHEET.players(CFG.id),DOVOD_SHEET.streams(CFG.id)]);
       if(ov)DOVOD_SHEET.applyPlayers(D.players,ov);
-      if(ss&&ss.n){const b=Object.assign({gamesDay1:6,days:{}},(window.STREAMS_DB||{})[CFG.id]||{});b.days=JSON.parse(JSON.stringify(b.days||{}));Object.keys(ss.days).forEach(d=>{b.days[d]=Object.assign(b.days[d]||{},ss.days[d]);});if(ss.final)b.final=ss.final;b.test=false;window.STREAMS_DB[CFG.id]=b;}
+      if(ss&&ss.n){const b=Object.assign({gamesDay1:6,days:{}},(window.STREAMS_DB||{})[CFG.id]||{});b.days=JSON.parse(JSON.stringify(b.days||{}));Object.keys(ss.days).forEach(d=>{b.days[d]=Object.assign(b.days[d]||{},ss.days[d]);});if(ss.final)b.final=ss.final;if(ss.studio)b.studio=Object.assign({},b.studio||{},ss.studio);b.test=false;window.STREAMS_DB[CFG.id]=b;}
     }catch(e){}}
   let G=null;try{G=window.loadGames?await window.loadGames(CFG.id):null;}catch(e){}
   if(G&&G.games){D.games=G.games;D.live=!!G.live;}
@@ -253,6 +261,20 @@ function streamId(table,gi){const st=SDB();if(!st)return null;if(isFinal(gi))ret
 function embedURL(id,muted){const base=/^live:/.test(id)?'https://www.youtube.com/embed/live_stream?channel='+encodeURIComponent(id.slice(5))+'&':'https://www.youtube.com/embed/'+encodeURIComponent(id)+'?';
   return base+'autoplay=1&mute='+(muted?1:0)+'&playsinline=1&rel=0&modestbranding=1&enablejsapi=1&origin='+encodeURIComponent(location.origin);}
 function watchURL(id){return window.ytWatchURL(id);}
+/* v1.1 (16.10): «Студия аналитики» — отдельный эфир для зрителей (комментаторы, разбор). Не мешает столам:
+   свой режим 🎙, звук и видео включаются только в нём; в «Все столы» не грузится. День — по дате в Праге
+   (streams_{id}.json studioDates), после турнира — переключатель «день 1 / день 2» (записи). */
+function studioDays(){const st=SDB();return Object.keys((st&&st.studio)||{}).sort();}
+function studioDayAuto(){const st=SDB();const ds=(st&&st.studioDates)||{};const keys=studioDays();if(!keys.length)return null;
+  const now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'}));const today=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  let d=keys[0];keys.forEach(k=>{if(ds[k]&&today>=ds[k])d=k;});return d;}
+function studioHTML(){const st=SDB();const d=S.sday||studioDayAuto();const id=d&&st&&st.studio?st.studio[d]:null;
+  const lab=`<div class="lab"><span>🎙 Студия аналитики${d?' · день '+d:''}</span></div>`;
+  if(!id)return `<div class="pl studio">${lab}<div class="ph"><b>Студия аналитики</b>Ссылка появится перед стартом.<a href="${CFG.yt}" target="_blank" rel="noopener">YouTube-канал ↗</a></div></div>`;
+  return `<div class="pl studio" data-id="${esc(id)}">${lab}<iframe src="${embedURL(id,false)}" title="Студия аналитики" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`;}
+function renderSday(){const el=document.getElementById('sday');const ks=studioDays();if(S.mode!=='studio'||ks.length<2){el.hidden=true;return;}
+  const cur=S.sday||studioDayAuto();el.hidden=false;el.innerHTML='<span>Студия:</span>'+ks.map(k=>`<button data-d="${k}" class="${k===cur?'on':''}">день ${k}</button>`).join('')+'<span class="sh">игрокам — «Один стол» / «Все столы»</span>';
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{S.sday=b.dataset.d;renderStage(true);renderSday();});}
 function playerHTML(table,gi,opts){
   const id=streamId(table,gi),fin=isFinal(gi);const j=judgeOf(table);
   const lab=`<div class="lab"><span>${fin?'Финал':'Стол '+ROMAN[table]}</span>${S.follow&&tableOf(S.follow,gi)===table?`<span class="mf">★ ${esc(S.follow)}</span>`:''}${j&&!opts.multi?`<span>${esc(j)}</span>`:''}</div>`;
@@ -273,11 +295,12 @@ function judgeOf(t){const r=D.tour.referees_by_table||{};return r[t]||r[String(t
 function renderStage(force){
   const gi=D.cur,el=document.getElementById('stage');
   const fin=isFinal(gi);const tables=fin?[1]:Array.from({length:CFG.tables},(_,i)=>i+1);
-  const sig=[S.mode,S.layout,gi,fin,S.mode==='one'?S.table:'',tables.map(t=>streamId(t,gi)).join(',')].join('|');
+  const sig=[S.mode,S.layout,gi,fin,S.mode==='one'?S.table:'',S.mode==='studio'?(S.sday||studioDayAuto()):'',tables.map(t=>streamId(t,gi)).join(',')].join('|');
   if(!force&&sig===stageSig){/* только подписи */return;}
   stageSig=sig;
   el.classList.toggle('mm',S.mode==='all');
-  if(S.mode==='all'&&!fin){
+  if(S.mode==='studio'){el.innerHTML=studioHTML();}
+  else if(S.mode==='all'&&!fin){
     if(!tables.includes(S.sound))S.sound=tables.includes(S.table)?S.table:tables[0];
     el.innerHTML=`<div class="multi ${S.layout}">${orderMulti(tables).map(t=>playerHTML(t,gi,{multi:true})).join('')}</div>`;
     el.querySelectorAll('[data-snd]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();setSound(+b.dataset.snd);renderTabs();renderSeats();});
@@ -296,7 +319,7 @@ function renderTabs(){
   if(isFinal(gi)){el.innerHTML='';el.style.display='none';return;}el.style.display='';
   el.innerHTML=Array.from({length:CFG.tables},(_,i)=>i+1).map(t=>{const has=!!streamId(t,gi);const me=S.follow&&tableOf(S.follow,gi)===t;const tb=(D.games[gi]&&D.games[gi].tables.find(x=>x.table_num===t))||null;const live=tb&&tb.winner==='unknown'&&D.live;
     return `<button class="${t===S.table?'on':''}${has?'':' off'}" data-t="${t}">${live?'<i class="dot"></i>':''}${me?'<span class="me">★</span>':''}<span class="n">Стол ${ROMAN[t]}</span><span class="s">${esc(judgeOf(t)||avgElo(tb)||'')}</span></button>`;}).join('');
-  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{S.table=+b.dataset.t;S.view=D.cur;if(S.mode==='all'){setSound(S.table);renderTabs();renderSeats();return;}if(S.follow&&S.auto&&tableOf(S.follow,D.cur)!==S.table){S.auto=false;LS.set('w692_auto','0');}renderStage();renderTabs();renderSeats();renderFollow();});
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{S.table=+b.dataset.t;S.view=D.cur;if(S.mode==='studio'){S.mode=LS.get('w692_mode','one')==='all'?'all':'one';history.replaceState(null,'',location.pathname);if(S.mode==='all')setSound(S.table);renderAll(true);return;}if(S.mode==='all'){setSound(S.table);renderTabs();renderSeats();return;}if(S.follow&&S.auto&&tableOf(S.follow,D.cur)!==S.table){S.auto=false;LS.set('w692_auto','0');}renderStage();renderTabs();renderSeats();renderFollow();});
 }
 function avgElo(tb){if(!tb)return '';const v=tb.seats.map(x=>x&&D.P[x.name]&&D.P[x.name].r_elo_cur).filter(Boolean);return v.length?'Ø ELO '+Math.round(v.reduce((a,b)=>a+b,0)/v.length):'';}
 function avatar(n){const p=D.P[n];const u=D.av[n]||(p&&p.av)||'';return u?`<img src="${esc(u)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span class=&quot;mono&quot;>${esc(mono(n))}</span>'">`:`<span class="mono">${esc(mono(n))}</span>`;}
@@ -351,10 +374,10 @@ function renderStatus(){
   document.getElementById('testbar').innerHTML=st&&st.test?`<div class="testbar">Тест: сейчас в окнах записи прошлого турнира — проверьте, как это выглядит. Настоящие эфиры Central Cup встанут сюда перед стартом.</div>`:'';
   document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));
   document.querySelectorAll('#layout button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.layout));
-  const fin=isFinal(gi);document.getElementById('modes').style.display=fin?'none':'';
+  const fin=isFinal(gi);document.querySelector('#modes [data-m="all"]').style.display=fin?'none':'';renderSday();
 }
 function renderAll(force){renderStatus();renderStage(force);renderTabs();renderSeats();renderFollow();renderTop();}
-document.querySelectorAll('#modes button').forEach(b=>b.onclick=()=>{S.mode=b.dataset.m;LS.set('w692_mode',S.mode);renderAll();});
+document.querySelectorAll('#modes button').forEach(b=>b.onclick=()=>{S.mode=b.dataset.m;if(S.mode!=='studio')LS.set('w692_mode',S.mode);history.replaceState(null,'',S.mode==='studio'?'#studio':location.pathname);renderAll();});
 document.querySelectorAll('#layout button').forEach(b=>b.onclick=()=>{S.layout=b.dataset.l;LS.set('w692_layout',S.layout);renderAll();});
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('on'),2400);}
 function share(){const url=location.origin+location.pathname;const title='Смотровая · '+CFG.name;if(navigator.share){navigator.share({title,url}).catch(()=>{});return;}

@@ -1,4 +1,4 @@
-/* DOVOD · data/gsheet.js · v1.0 · 2026-10-09
+/* DOVOD · data/gsheet.js · v1.1 · 2026-10-16 · «Эфиры»: строка «студия · день N» → студия аналитики (смотровая, режим 🎙) · v1.0 · 2026-10-09
    Назначение: живые правки сайта из Google-таблицы «DOVOD · правки сайта (эфиры, игроки)» —
    без выкладки и без мака. Таблицу можно править с телефона, страницы перечитывают её сами.
    Оглавление: 1) ID таблицы · 2) чтение вкладки (gviz CSV) · 3) парсер CSV · 4) ссылка YouTube → id
@@ -29,6 +29,7 @@
     return null;}
   async function streams(tid){const rows=await tab('Эфиры');if(!rows)return null;const out={days:{},n:0};
     rows.filter(r=>String(r['турнир']).replace(/\.0+$/,'')===String(tid)).forEach(r=>{const id=ytId(r['ссылка']);if(!id)return;const e=(r['эфир']||'').toLowerCase();
+      if(/студи/.test(e)){const sd=(e.match(/день\s*(\d)/)||[])[1]||'1';(out.studio=out.studio||{})[sd]=id;out.n++;return;} /* 16.10: «студия · день 1» — студия аналитики */
       if(/финал/.test(e)){out.final=id;out.n++;return;}
       const d=(e.match(/день\s*(\d)/)||[])[1],t=(e.match(/стол\s*(\d)/)||[])[1];if(!d||!t)return;(out.days[d]=out.days[d]||{})[t]=id;out.n++;});
     return out;}
