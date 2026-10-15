@@ -179,13 +179,47 @@ body{
 }
 </style>
 <style>
-/* 15.10.2026: плашка эфира турнира — стили и на телефоне (раньше .wcstream жила только в десктопном @media) */
-#tstream{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;padding:13px 15px;margin:0 0 4px;border:1px solid rgba(245,255,53,.45);background:rgba(245,255,53,.06);font:600 13px/1.45 Inter,system-ui,sans-serif;color:#eef3fb;border-radius:4px}
-#tstream[hidden]{display:none}
-#tstream b{color:#f5ff35}
-#tstream .wb{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;background:#f5ff35;color:#05060a;font-weight:800;text-decoration:none}
-#tstream .wb.g{background:none;border:1px solid rgba(245,255,53,.5);color:#f5ff35}
-@media (min-width:900px){#tstream{grid-column:1 / -1}}
+/* 15.10.2026 · «Сейчас на турнирах» — живая плашка вместо плитки ЧМ-2026 (ЧМ — в архиве «Турниров»).
+   Данные: data/tournaments.js (активные DOVOD-турниры) + data/games_{id}_current.json + data/elo_{id}.json → превью столов ближайшей игры. */
+.lt{grid-column:1 / -1;position:relative;padding:0;border:1px solid rgba(245,255,53,.42);isolation:isolate;overflow:hidden;
+  background:linear-gradient(135deg,rgba(245,255,53,.07),rgba(38,224,255,.04) 45%,rgba(0,0,0,.35));
+  clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px))}
+.lt[hidden]{display:none}
+.lt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#f5ff35;box-shadow:0 0 18px #f5ff35}
+.lt .lth{display:flex;align-items:center;gap:10px;padding:14px 18px 0;font:700 10px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:#f5ff35}
+.lt .lth s{flex:1;height:1px;background:rgba(245,255,53,.25);text-decoration:none}
+.lt .ltb{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;padding:14px 18px 18px}
+.lt .pst{position:relative;aspect-ratio:4/3;padding:14px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:#eef3fb;
+  background:radial-gradient(120% 90% at 100% 0%,rgba(38,224,255,.22),transparent 60%),radial-gradient(100% 80% at 0% 100%,rgba(193,75,189,.22),transparent 60%),#0b0d14;
+  border:1px solid rgba(38,224,255,.35);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.lt .pst .pk{font:700 9px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#26e0ff}
+.lt .pst .pn{font:900 26px/1 var(--disp);text-transform:uppercase;letter-spacing:-.01em}
+.lt .pst .pn b{display:block;color:#f5ff35}
+.lt .pst .py{position:absolute;right:10px;bottom:6px;font:900 46px/1 var(--disp);color:transparent;-webkit-text-stroke:1px rgba(38,224,255,.45)}
+.lt .pst .pm{font:700 9.5px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#a4adbd;position:relative;z-index:1}
+.lt .st{display:inline-flex;align-items:center;gap:7px;font:800 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#f5ff35}
+.lt .st.on{color:#ff5a5a}.lt .st.on i{width:8px;height:8px;border-radius:50%;background:#ff5a5a;box-shadow:0 0 0 4px rgba(255,90,90,.2);animation:blink 1.4s infinite}
+.lt h3{margin:8px 0 4px;font:900 clamp(20px,2.6vw,28px)/1.08 var(--disp);letter-spacing:-.01em}
+.lt h3 b{color:#26e0ff;font-weight:900}
+.lt .mt{font-size:13px;color:#a4adbd}
+.lt .cd{display:flex;gap:6px;margin-top:10px}.lt .cd div{min-width:52px;padding:6px 8px;border:1px solid rgba(255,255,255,.12);text-align:center;background:rgba(0,0,0,.25)}
+.lt .cd b{display:block;font:900 18px/1 var(--disp)}.lt .cd small{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#79808f}
+.lt .pv{margin-top:12px}
+.lt .pv .pvh{font:700 9.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#79808f;margin-bottom:7px}
+.lt .tbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.lt .tb{display:block;padding:9px 10px;border:1px solid rgba(38,224,255,.25);background:rgba(5,6,10,.55);text-decoration:none;color:inherit;position:relative}
+.lt .tb .tn{font:900 13px/1 var(--disp)}.lt .tb .te{font:700 10px/1 var(--mono);color:#26e0ff;margin-left:6px}
+@media (max-width:899px){.lt .tb .te{display:block;margin:5px 0 0}.lt .tb .play{width:18px;height:18px;font-size:8px;right:6px;top:6px}.lt .tb .tn{font-size:12px}}
+.lt .tb .tp{margin-top:6px;font-size:11.5px;color:#cfd5df;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lt .tb .play{position:absolute;right:8px;top:8px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#f5ff35;color:#05060a;font-size:10px}
+.lt .bt{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.lt .bt a{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;font:800 14px/1 Inter,system-ui,sans-serif;text-decoration:none;border-radius:999px}
+.lt .bt .w{background:#f5ff35;color:#05060a;box-shadow:0 8px 26px rgba(245,255,53,.18)}
+.lt .bt .p{border:1px solid rgba(38,224,255,.5);color:#26e0ff}
+.lt .nx{border-top:1px solid rgba(255,255,255,.08);padding:10px 18px 14px;font-size:12.5px;color:#a4adbd;display:flex;flex-wrap:wrap;gap:6px 16px}
+.lt .nx a{color:#eef3fb;text-decoration:none;font-weight:700}.lt .nx a:hover{color:#26e0ff}
+@media (max-width:899px){.lt .ltb{grid-template-columns:1fr;gap:14px;padding:12px 14px 16px}.lt .pst{aspect-ratio:auto;min-height:130px}
+  .lt .bt a{flex:1;justify-content:center}.lt .tbs{gap:6px}.lt .tb{padding:8px}.lt .lth{padding:13px 14px 0}.lt .nx{padding:10px 14px 14px}}
 </style>
 </head>
 <body>
@@ -214,11 +248,12 @@ body{
   </header>
 
   <section class="gridsec">
-    <div class="ghead"><span>Разделы</span><s></s><span>06</span></div>
+    <div class="ghead"><span>Разделы</span><s></s><span>05</span></div>
 
     <div class="tiles">
 
-      <div class="wcstream" id="tstream" hidden></div>
+      <section class="lt" id="liveTile" hidden aria-label="Сейчас на турнирах"></section>
+
 
       <a class="tile" href="tournaments.html" style="--c:var(--cy)">
         <span class="tnum">01</span>
@@ -275,19 +310,6 @@ body{
       </a>
 
 
-
-      <a class="tile wc" href="wc2026.html" style="--c:#d7dde6">
-        <span class="tnum">06</span>
-        <div>
-          <div class="tkick"><i></i>12–13 сентября · 55 игроков · 13 сборных</div>
-          <h2 class="ttl">Чемпионат мира 2026</h2>
-          <p class="tdesc">Три входа: режим для зрителей (за кем следить, какой стрим, таблица после каждого раунда), полная страница турнира и карточки 55 игроков по странам.</p>
-        </div>
-        <div class="tfoot">
-          <div class="tstat"><b>5</b> столов · <b>11+2+4</b> игр · чемпион <b>Призрак</b></div>
-          <span class="tgo">Открыть <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
-        </div>
-      </a>
 
       <a class="tile race lock" href="race.html" style="--c:var(--ye)">
         <span class="tnum">05</span>
@@ -417,33 +439,54 @@ var fT=fut.filter(function(r){return r[1]!==1;}).length, fS=fut.length-fT;
 var tc=document.getElementById('tCal');
 if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','турниров')+' · <b>'+fS+'</b> '+pl(fS,'этап','этапа','этапов')+' впереди';
 })();</script>
-<script>
-/* Главный эфир ЧМ: со второго дня (13.09, Прага) ссылка сама ведёт на комментаторскую дня 2 —
-   чтобы не править главную руками посреди турнира. */
-(function(){try{
-  var a=document.getElementById('wcair'); if(!a) return;
-  var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'}));
-  var d2=new Date(2026,8,13,0,0,0); /* 13.09.2026 */
-  if(now>=d2){ a.href='https://www.youtube.com/watch?v=HsyqZA_6V0k'; a.textContent='смотреть день 2 ↗'; }
-}catch(e){}})();
-</script>
+<script src="data/tournaments.js"></script>
 <script src="data/tournaments.js"></script>
 <script>
-/* v (15.10.2026): плашка «эфир турнира» на главной — сама берёт ближайший DOVOD-турнир со смотровой (data/tournaments.js):
-   за 3 дня до старта — «скоро», в дни турнира — «идёт», после liveTo — пропадает. Заменила устаревшую плашку эфира ЧМ-2026. */
-(function(){try{
-  var el=document.getElementById('tstream'); var db=window.TOURNAMENTS_DB; if(!el||!db) return;
-  var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'}));
-  var today=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
-  var soon=new Date(now.getTime()+3*864e5); var lim=soon.getFullYear()+'-'+String(soon.getMonth()+1).padStart(2,'0')+'-'+String(soon.getDate()).padStart(2,'0');
-  var c=db.tournaments.filter(function(t){return t.watch&&t.liveFrom&&t.status!=='finished'&&today<=(t.liveTo||t.liveFrom)&&t.liveFrom<=lim;})
-    .sort(function(a,b){return a.liveFrom.localeCompare(b.liveFrom);})[0];
-  if(!c) return;
-  var live=today>=c.liveFrom;
-  el.innerHTML='<span>'+(live?'● <b>Идёт</b>':'▶ <b>Скоро</b>')+' · '+c.name+' · '+c.dates+' · '+c.city+'</span>'+
-    '<a class="wb" href="'+c.watch+'">▶ Смотровая — все эфиры</a><a class="wb g" href="'+(c.page||'tournaments.html')+'">Страница турнира →</a>';
-  el.hidden=false;
-}catch(e){}})();
+/* «Сейчас на турнирах» (15.10.2026): ближайший DOVOD-турнир со страницей/смотровой — постер, статус (идёт / обратный отсчёт),
+   превью столов текущей (или первой) игры: средний ELO стола и сильнейший игрок, кнопки «Смотровая» и «Страница турнира».
+   Показ: от 10 дней до старта по liveTo включительно. Ниже — «дальше в календаре» (собираются). Нечего показать — плашка скрыта. */
+(function(){
+  var db=window.TOURNAMENTS_DB, el=document.getElementById('liveTile'); if(!db||!el) return;
+  function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'})), today=ymd(now), lim=ymd(new Date(now.getTime()+10*864e5));
+  var act=db.tournaments.filter(function(t){return t.status!=='finished'&&t.page&&t.start&&today<=(t.liveTo||t.start)&&t.start<=lim;})
+    .sort(function(a,b){return String(a.start).localeCompare(String(b.start));});
+  var nxt=db.tournaments.filter(function(t){return t.status!=='finished'&&act.indexOf(t)<0&&t.start&&t.start>=today;})
+    .sort(function(a,b){return String(a.start).localeCompare(String(b.start));}).slice(0,3);
+  if(!act.length&&!nxt.length) return;
+  function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  var R=['','I','II','III','IV','V','VI'];
+  var t=act[0], live=t&&t.liveFrom&&today>=t.liveFrom&&today<=(t.liveTo||t.liveFrom);
+  var nx=nxt.length?'<div class="nx"><span>Дальше:</span>'+nxt.map(function(x){return '<a href="'+(x.page||('participants.html?t='+x.id))+'">'+esc(x.name)+'</a> <span>'+esc(x.dates)+' · '+esc(x.city)+(x.status==='gathering'?' · собирается':'')+'</span>';}).join('')+'<a href="tournaments.html" style="margin-left:auto">все турниры →</a></div>':'';
+  if(!t){el.innerHTML='<div class="lth">Ближайшие турниры<s></s></div>'+nx;el.hidden=false;return;}
+  var pt=String(t.posterTitle||t.name).split('|');
+  var head='<div class="lth">'+(live?'Сейчас на турнире':'Скоро на турнире')+'<s></s>'+(act.length>1?act.length+' турнира':'')+'</div>';
+  var poster='<a class="pst" href="'+t.page+'"><span class="pk">'+esc(pt.length>1?pt[0]:'DOVOD · турнир')+' · '+'★'.repeat(t.stars||0)+'</span><span class="pn">'+(pt.length>1?esc(pt[1]).replace(/ /,'<b>').replace(/$/,'</b>'):esc(pt[0]))+'</span><span class="pm">'+esc(t.city)+' · '+esc(String(t.dates).replace(/\s*\d{4}$/,''))+'</span><span class="py">'+String(t.start).slice(0,4)+'</span></a>';
+  var st=live?'<span class="st on"><i></i>Идёт · live с mafgame</span>':'<span class="st">Скоро · '+esc(String(t.statusLabel||'').replace(/^Скоро\s*·\s*/,''))+'</span>';
+  var nm=esc(t.name).replace(/: (.*)$/,': <b>$1</b>');
+  var info='<div>'+st+'<h3>'+nm+'</h3><div class="mt">'+esc(t.dates)+' · '+esc(t.city)+' · '+t.players+' '+(t.players%10>=2&&t.players%10<=4&&(t.players%100<12||t.players%100>14)?'игрока':(t.players%10===1&&t.players%100!==11?'игрок':'игроков'))+(t.prize?' · приз '+esc(t.prize):'')+(t.eloAvg?' · Ø ELO '+t.eloAvg:'')+'</div>'+
+    (live?'':'<div class="cd" id="ltcd"></div>')+'<div class="pv" id="ltpv"></div>'+
+    '<div class="bt">'+(t.watch?'<a class="w" href="'+t.watch+'">▶ Смотровая — все эфиры</a>':'')+'<a class="p" href="'+t.page+'">Страница турнира →</a></div></div>';
+  el.innerHTML=head+'<div class="ltb">'+poster+info+'</div>'+nx; el.hidden=false;
+  /* обратный отсчёт до старта (время — из tournament_{id}.json start_iso) */
+  fetch('data/tournament_'+t.id+'.json').then(function(r){return r.ok?r.json():null;}).then(function(tj){
+    var cd=document.getElementById('ltcd'); if(!cd||!tj||!tj.start_iso) return;
+    (function tick(){var s=Math.max(0,(new Date(tj.start_iso)-new Date())/1000);
+      cd.innerHTML=[[Math.floor(s/86400),'дн'],[Math.floor(s%86400/3600),'ч'],[Math.floor(s%3600/60),'мин']].map(function(x){return '<div><b>'+x[0]+'</b><small>'+x[1]+'</small></div>';}).join('');
+      if(s>0) setTimeout(tick,30000);})();
+  }).catch(function(){});
+  /* превью столов: текущая (первая незавершённая) игра — средний ELO стола и сильнейший за ним */
+  Promise.all([fetch('data/games_'+t.id+'_current.json').then(function(r){return r.ok?r.json():null;}),fetch('data/elo_'+t.id+'.json').then(function(r){return r.ok?r.json():null;})]).then(function(a){
+    var G=a[0],E=(a[1]&&a[1].players)||{},pv=document.getElementById('ltpv'); if(!pv||!G||!G.games||!G.games.length) return;
+    var gi=G.games.findIndex(function(g){return g.tables.some(function(x){return x.winner==='unknown';});}); if(gi<0) gi=G.games.length-1;
+    var g=G.games[gi], q=G.games.slice(0,gi+1).filter(function(x){return x.stage===g.stage;}).length;
+    var cards=g.tables.map(function(tb){var el=tb.seats.map(function(x){return E[x.name]?E[x.name].global:null;}).filter(function(v){return v!=null;});
+      var avg=el.length?Math.round(el.reduce(function(s,v){return s+v;},0)/el.length):null;
+      var top=tb.seats.slice().sort(function(x,y){return ((E[y.name]||{}).global||0)-((E[x.name]||{}).global||0);}).slice(0,3).map(function(x){return esc(x.name);}).join(', ');
+      return '<a class="tb" href="'+(t.watch||t.page)+'"><span class="play">▶</span><span class="tn">Стол '+(R[tb.table_num]||tb.table_num)+'</span>'+(avg?'<span class="te">Ø '+avg+'</span>':'')+'<div class="tp">'+top+'</div></a>';}).join('');
+    pv.innerHTML='<div class="pvh">'+(live?'Сейчас':'Первым')+': '+esc(g.stage||'Игра')+' · игра '+q+' · кто за столами</div><div class="tbs">'+cards+'</div>';
+  }).catch(function(){});
+})();
 </script>
 </body>
 </html>

@@ -11,6 +11,7 @@
 //   +702 Кубок Кёльна, +634 Чемпионат Европы (оба «собирается»); счётчик ожид. ELO (markery) на плашках; участники+двойной рейтинг; accent per-турнир.
 // MafgameStat | tournaments.js | v2.5 | 2026-06-25 | 766->upcoming(Скоро)+разлок seating/cards/stat+live(in_progress)+store; fix player.html?t=693
 // MafgameStat | tournaments.js | v3.4 | 2026-10-15 | 692 Central Cup -> upcoming (Скоро): страница t692 + смотровая watch692, рассадка 15.10, 33 игрока, ELO markery 15.10 (Ø 1086), live 17–18.10
+// MafgameStat | tournaments.js | v3.5 | 2026-10-15 | 710 ЧМ-2026 в архиве ведёт на хаб wc2026.html (страница турнира · режим зрителя · карточки) — плитка ЧМ убрана с главной
 window.TOURNAMENTS_DB = {
   "tournaments": [
     {
@@ -132,7 +133,7 @@ window.TOURNAMENTS_DB = {
     },
     {
       "id": "710",
-      "page": "wc2026-tournament.html",
+      "page": "wc2026.html",
       "name": "Mafia World Championship 2026",
       "dates": "12–13 сентября 2026",
       "city": "Прага",
