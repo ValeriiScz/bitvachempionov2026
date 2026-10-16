@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t692.html · v1.1 · 2026-10-16 · ссылка «🎙 Студия аналитики» (для зрителей) под кнопкой смотровой и в «Трансляциях» · v1.0 · 2026-10-15 · Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия канона t673 v1.3: формат 11+2+4 (33 игрока, в каждой квал-игре трое отдыхают → полуфинал топ-30 2 игры на 3 столах → финал топ-10 4 игры ×1.3), линия полуфинала в таблице квалификации, крупная кнопка «Смотровая» в шапке и плавающая на телефоне.
+<!-- DOVOD · t692.html · v1.2 · 2026-10-16 · телефон: «▶ Эфиры» в верхней панели вместо плавающей кнопки (налезала на меню нижней панели) · v1.1 · 2026-10-16 · ссылка «🎙 Студия аналитики» (для зрителей) под кнопкой смотровой и в «Трансляциях» · v1.0 · 2026-10-15 · Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия канона t673 v1.3: формат 11+2+4 (33 игрока, в каждой квал-игре трое отдыхают → полуфинал топ-30 2 игры на 3 столах → финал топ-10 4 игры ×1.3), линия полуфинала в таблице квалификации, крупная кнопка «Смотровая» в шапке и плавающая на телефоне.
      Данные: data/*_692* (рассадка с mafgame 15.10, ELO markery 15.10). Эфиры — watch692.html. Стиль: DOVOD-неон, акцент cyan раздела «Турниры». -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -628,7 +628,13 @@
   .wfab{position:fixed;right:16px;bottom:18px;z-index:80;display:flex;align-items:center;gap:7px;padding:12px 17px;border-radius:26px;text-decoration:none;
     font:800 13.5px/1 'Inter',sans-serif;color:#05060a;background:#f5ff35;box-shadow:0 6px 22px rgba(0,0,0,.55),0 0 0 1px rgba(245,255,53,.6)}
   .wfab .dot{width:8px;height:8px;border-radius:50%;background:#db514e;box-shadow:0 0 0 3px rgba(219,81,78,.25)}
-  @media (max-width:900px){.wbig{max-width:none}.wfab{bottom:calc(84px + env(safe-area-inset-bottom))}}
+  .mwatch{display:none}
+  /* v1.2: на телефоне кнопка эфиров — в верхней панели, а не плавающая: плавающая налезала на меню нижней панели (особенно в установленном приложении) */
+  @media (max-width:900px){.wbig{max-width:none}.wfab{display:none}
+    .mwatch{display:inline-flex;align-items:center;gap:6px;margin-left:auto;padding:7px 11px;border-radius:999px;background:#f5ff35;color:#05060a;font:800 12.5px/1 'Inter',sans-serif;text-decoration:none;white-space:nowrap;flex:none}
+    .mwatch i{width:7px;height:7px;border-radius:50%;background:#db514e}
+    .mtop .mt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .mtop .mshare{margin-left:0}}
   /* ── t692 (канон t673): акцент cyan раздела «Турниры» + CSS-постер вместо картинки ── */
   :root{--gold:#26e0ff;--gold-hi:#8ff3ff;--line:rgba(38,224,255,.26);}
   .poster.dvposter{background:radial-gradient(120% 90% at 85% 10%,rgba(38,224,255,.22),transparent 60%),radial-gradient(80% 80% at 0% 100%,rgba(193,75,189,.20),transparent 60%),#070a12;
@@ -723,7 +729,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     <a class="toclassic" href="tournaments.html" style="margin-top:0;border-top:none;padding-top:2px">← все турниры</a>
   </nav>
   <div style="flex:1;min-width:0;">
-    <div class="mtop"><a class="mback" href="tournaments.html" aria-label="Все турниры">&#8592;</a><span class="mcr">&#9819;</span><span class="mt"><span style="color:var(--gold-hi)">Central Cup</span> · <span id="mtitle">Обзор</span></span><button class="mshare" type="button" onclick="sharePage()" aria-label="Поделиться ссылкой">⤴</button></div>
+    <div class="mtop"><a class="mback" href="tournaments.html" aria-label="Все турниры">&#8592;</a><span class="mcr">&#9819;</span><span class="mt"><span style="color:var(--gold-hi)">Central Cup</span> · <span id="mtitle">Обзор</span></span><a class="mwatch" href="watch692.html" aria-label="Смотровая — все эфиры"><i></i>▶ Эфиры</a><button class="mshare" type="button" onclick="sharePage()" aria-label="Поделиться ссылкой">⤴</button></div>
     <main class="main">
       <div class="topband" id="topband"><div class="info"><p class="note">Загрузка…</p></div></div>
       <div class="subtabs" id="subtabs"></div>
