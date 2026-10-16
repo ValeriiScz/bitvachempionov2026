@@ -1,0 +1,36 @@
+# «Расписание план/факт» Central Cup 2026 (mafgame 692): каждые 5 минут ловим, когда закрылся каждый стол.
+# Работает только 17–18.10.2026 (скрипт сам выходит вне окна). Вручную: Actions → «Расписание 692» → Run workflow.
+name: Расписание 692
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 7-21 17,18 10 *'   # UTC: 09:00–23:55 по Праге
+
+permissions:
+  contents: write
+
+concurrency:
+  group: timing-692
+  cancel-in-progress: false
+
+jobs:
+  timing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Какие столы закрылись
+        run: python .github/scripts/timing_692.py
+      - name: Закоммитить, если появились новые столы
+        run: |
+          if git diff --quiet; then echo "изменений нет"; exit 0; fi
+          git config user.name  "dovod-bot"
+          git config user.email "noreply@dovod-mafia.com"
+          git add data/timing_692.json
+          git commit -m "692: время столов $(date -u +%H:%M) UTC"
+          for i in 1 2 3; do git pull --rebase --autostash && git push && exit 0; sleep 5; done
+          exit 1
