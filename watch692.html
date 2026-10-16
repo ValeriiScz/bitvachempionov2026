@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · watch692.html · v1.1 · 2026-10-16 · 🎙 «Студия аналитики» (для зрителей) — отдельный режим рядом с «Один стол / Все столы»: не грузится и не звучит в режимах столов, день по дате (17/18.10), после турнира — выбор дня; ссылка watch692.html#studio · v1.0 · 2026-10-15 · «Смотровая» Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия watch673 v1.1 (подписи над эфиром): формат 11+2+4, подпись «Полуфинал · игра N», «отдыхает» вместо «не играет», ключи localStorage w692_. Эфиры — data/streams_692.json + Google-таблица. -->
+<!-- DOVOD · watch692.html · v1.2 · 2026-10-17 · эфиры столов и финала (пост t.me/mafses/713); в дни турнира день эфира — по дате · v1.1 · 2026-10-16 · 🎙 «Студия аналитики» (для зрителей) — отдельный режим рядом с «Один стол / Все столы»: не грузится и не звучит в режимах столов, день по дате (17/18.10), после турнира — выбор дня; ссылка watch692.html#studio · v1.0 · 2026-10-15 · «Смотровая» Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия watch673 v1.1 (подписи над эфиром): формат 11+2+4, подпись «Полуфинал · игра N», «отдыхает» вместо «не играет», ключи localStorage w692_. Эфиры — data/streams_692.json + Google-таблица. -->
 <!-- DOVOD · watch673.html (канон) · v1.0 · 2026-10-09 · «Смотровая» Чемпионата Молдовы 2026 (mafgame 673): все трансляции столов в одном окне.
      Назначение: зрителю с телефона — один эфир + переключатель столов + «кто за столом сейчас»; режим «Все столы» (на телефоне стопкой,
      повёрнутый телефон и комп — в ряд / «большой + два»); «Следить за игроком» — эфир сам переходит на его стол в каждой новой игре.
@@ -256,7 +256,10 @@ function gLabel(gi){const g=D.games[gi];if(!g)return '';if(g.stage==='Финал
 
 /* ── 5. эфиры ── */
 function SDB(){return (window.STREAMS_DB&&window.STREAMS_DB[CFG.id])||null;}
-function gDay(gi){const st=SDB();const q=D.games.slice(0,gi+1).filter(x=>x.stage!=='Финал').length;return q<=((st&&st.gamesDay1)||6)?'1':'2';}
+function todayPrg(){const n=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'}));return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
+/* v1.2 (17.10): в дни турнира текущая игра берёт эфир дня по ДАТЕ (dayDates) — сколько игр сыграют в 1-й день, заранее неизвестно; записи — по gamesDay1 */
+function gDay(gi){const st=SDB();const dd=(st&&st.dayDates)||null;if(dd&&gi>=D.cur){const t=todayPrg();let d=null;Object.keys(dd).forEach(k=>{if(t>=dd[k])d=k;});if(d&&t<=dd[Object.keys(dd).sort().pop()])return d;}
+  const q=D.games.slice(0,gi+1).filter(x=>x.stage!=='Финал').length;return q<=((st&&st.gamesDay1)||6)?'1':'2';}
 function streamId(table,gi){const st=SDB();if(!st)return null;if(isFinal(gi))return st.final||null;return ((st.days||{})[gDay(gi)]||{})[String(table)]||null;}
 function embedURL(id,muted){const base=/^live:/.test(id)?'https://www.youtube.com/embed/live_stream?channel='+encodeURIComponent(id.slice(5))+'&':'https://www.youtube.com/embed/'+encodeURIComponent(id)+'?';
   return base+'autoplay=1&mute='+(muted?1:0)+'&playsinline=1&rel=0&modestbranding=1&enablejsapi=1&origin='+encodeURIComponent(location.origin);}

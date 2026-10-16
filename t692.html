@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t692.html · v1.2 · 2026-10-16 · телефон: «▶ Эфиры» в верхней панели вместо плавающей кнопки (налезала на меню нижней панели) · v1.1 · 2026-10-16 · ссылка «🎙 Студия аналитики» (для зрителей) под кнопкой смотровой и в «Трансляциях» · v1.0 · 2026-10-15 · Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия канона t673 v1.3: формат 11+2+4 (33 игрока, в каждой квал-игре трое отдыхают → полуфинал топ-30 2 игры на 3 столах → финал топ-10 4 игры ×1.3), линия полуфинала в таблице квалификации, крупная кнопка «Смотровая» в шапке и плавающая на телефоне.
+<!-- DOVOD · t692.html · v1.3 · 2026-10-17 · «Трансляции»: день эфира по дате · v1.2 · 2026-10-16 · телефон: «▶ Эфиры» в верхней панели вместо плавающей кнопки (налезала на меню нижней панели) · v1.1 · 2026-10-16 · ссылка «🎙 Студия аналитики» (для зрителей) под кнопкой смотровой и в «Трансляциях» · v1.0 · 2026-10-15 · Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия канона t673 v1.3: формат 11+2+4 (33 игрока, в каждой квал-игре трое отдыхают → полуфинал топ-30 2 игры на 3 столах → финал топ-10 4 игры ×1.3), линия полуфинала в таблице квалификации, крупная кнопка «Смотровая» в шапке и плавающая на телефоне.
      Данные: data/*_692* (рассадка с mafgame 15.10, ELO markery 15.10). Эфиры — watch692.html. Стиль: DOVOD-неон, акцент cyan раздела «Турниры». -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1300,7 +1300,7 @@ function chURL(){return (window.STREAMS_DB&&window.STREAMS_DB.channel)||'https:/
 function gamesDay1(){const st=window.STREAMS_DB&&window.STREAMS_DB[CFG.id];return (st&&st.gamesDay1)||8;}
 function streamsPanel(){
   const st=window.STREAMS_DB&&window.STREAMS_DB[CFG.id];
-  const day=((D.played||0)>=gamesDay1())?'2':'1';
+  const day=(()=>{const dd=st&&st.dayDates;if(dd){const n=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'}));const t=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');let d=null;Object.keys(dd).forEach(k=>{if(t>=dd[k])d=k;});if(d)return d;}return ((D.played||0)>=gamesDay1())?'2':'1';})(); /* v1.3: в дни турнира — по дате */
   const yt=id=>window.ytWatchURL?window.ytWatchURL(id):'https://www.youtube.com/watch?v='+id;
   let tbl='';for(let t=1;t<=CFG.tables;t++){const id=st&&st.days&&(st.days[day]||{})[String(t)];tbl+=id?`<a class="btn strm" href="${yt(id)}" target="_blank" rel="noopener">&#9654; Стол ${ROMAN[t]}</a>`:`<span class="btn strm off">&#9654; Стол ${ROMAN[t]}</span>`;}
   if(st&&st.final&&(D.played||0)>=CFG.quals)tbl+=`<a class="btn strm" href="${yt(st.final)}" target="_blank" rel="noopener">&#9654; Финал</a>`;
