@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · gmc2026.html · v2.1 · 2026-10-05 · данные вынесены в data/gmc2026.js и обновляются роботом refresh_gmc.py (серии, финалисты, резерв, KPI); разбор допов остаётся снимком · GMC Europa Edition 2026 (серийник 664): слотовый зачёт (топ-2 серии → финал), финалисты и очередь замен, наблюдения (остатки против страт). Данные тянутся из data/gmc2026.js и обновляются роботом; вшитым снимком остались только разбор допов и таблица судей. v2.1: очередь замен строится по баллу за серию (регламент), а не по сумме допов; счётчики в подвале и в разделе «Метод» считаются из данных. -->
+<!-- MafgameStat · gmc2026.html · v2.2 · 2026-10-16 · очередь замен — только по допам (без учёта побед), балл за серию — второй ключ; колонки поменяны местами · v2.1 · 2026-10-05 · данные вынесены в data/gmc2026.js и обновляются роботом refresh_gmc.py (серии, финалисты, резерв, KPI); разбор допов остаётся снимком · GMC Europa Edition 2026 (серийник 664): слотовый зачёт (топ-2 серии → финал), финалисты и очередь замен, наблюдения (остатки против страт). Данные тянутся из data/gmc2026.js и обновляются роботом; вшитым снимком остались только разбор допов и таблица судей. v2.1: очередь замен строится по баллу за серию (регламент), а не по сумме допов; счётчики в подвале и в разделе «Метод» считаются из данных. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GMC Europa 2026 · MafgameStat</title>
@@ -109,15 +109,16 @@ function tbl(headers,rows,left){
 }
 function final(){
   const rows=D.qualified.map((q,i)=>`<tr class="zone"><td>${i+1}</td><td class="nick l">${esc(q.nick)}</td><td class="l">${esc(q.series)}</td><td>${q.place}</td><td class="pos">${f2(q.score)}</td><td class="mut l">${q.ok?'подтверждён':'серия не закрыта'}</td></tr>`);
-  const rrows=D.reserve.map((q,i)=>`<tr><td>${i+1}</td><td class="nick l">${esc(q.nick)}</td><td class="l">${esc(q.series)}</td><td class="pos">${f2(q.score)}</td><td class="mut">${f2(q.gb)}</td></tr>`);
+  const rv=D.reserve.slice().sort((a,b)=>(b.gb||0)-(a.gb||0)||(b.score||0)-(a.score||0)); /* v2.2: только по допам */
+  const rrows=rv.map((q,i)=>`<tr><td>${i+1}</td><td class="nick l">${esc(q.nick)}</td><td class="l">${esc(q.series)}</td><td class="pos">${f2(q.gb)}</td><td class="mut">${f2(q.score)}</td></tr>`);
   const open=[...new Set(D.qualified.filter(q=>!q.ok).map(q=>q.series))];
   return `<div class="sec">Прошли в финал · ${D.qualified.length} слотов</div>
   <div class="note">Топ-2 каждой серии, повторов нет — ${D.qualified.length} разных игроков из ${D.series.length} сыгранных серий.${open.length?` «Серия не закрыта» — ${open.map(esc).join(', ')}: сыграна, но на mafgame ещё не закрыта.`:''}</div>
   ${tbl(['#','Игрок','Серия','Место','Балл','Статус'],rows,[1,2,5])}
   <div class="sec">Очередь замен · ${D.reserve.length} ${SER(D.reserve.length)==='серия'?'игрок':'игроков'}</div>
-  <div class="note">Если прошедший в финал отказывается, его место уходит игроку, занявшему <b style="color:var(--ink)">третье место</b> в своей серии. Приглашают по <b style="color:var(--ink)">баллу за серию</b> — от большего к меньшему; очередь ниже построена именно так. В 2025 по ней в финал зашли 6 человек из 30.</div>
-  ${tbl(['#','Игрок','Серия','Балл за серию','Допы'],rrows,[1,2])}
-  <div class="legend">Третьи места, которые уже прошли в финал через другую серию, из очереди выпадают — поэтому строк ${D.reserve.length}, а не ${D.series.length}. Колонка «допы» — судейские баллы того же игрока в той же серии, на порядок очереди не влияет.</div>`;
+  <div class="note">Если прошедший в финал отказывается, его место уходит игроку, занявшему <b style="color:var(--ink)">третье место</b> в своей серии. Очередь ниже — <b style="color:var(--ink)">только по допам</b>: кто набрал больше дополнительных баллов в своей серии, без учёта побед. В 2025 через замены в финал зашли 6 человек из 30.</div>
+  ${tbl(['#','Игрок','Серия','Допы','Балл за серию'],rrows,[1,2])}
+  <div class="legend">Третьи места, которые уже прошли в финал через другую серию, из очереди выпадают — поэтому строк ${D.reserve.length}, а не ${D.series.length}. «Допы» — дополнительные баллы игрока в его серии, по ним строится очередь; при равенстве выше тот, у кого больше балл за серию.</div>`;
 }
 function series(){
   const rows=D.series.map(s=>`<tr><td>${s.num}</td><td class="l">${s.date.slice(5).replace('-','.')}</td><td class="l">${esc(s.city)}</td><td class="l">${s.judge?esc(s.judge):'—'}</td><td class="nick l">${esc(s.top2)}</td><td class="mut l">${esc(s.third)}</td><td>${s.town}/${s.games}</td><td>${f3(s.gb)}</td></tr>`);

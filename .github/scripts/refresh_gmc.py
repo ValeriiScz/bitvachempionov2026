@@ -241,8 +241,9 @@ def main():
             seen.add(x[0])
             qualified.append(dict(uid=x[0], nick=x[1], series=s['name'], date=s['date'],
                                   place=place, score=x[2], ok=bool(s.get('closed'))))
-    # 5b) очередь замен: третьи места всех серий, порядок — БАЛЛ ЗА СЕРИЮ (регламент,
-    # со слов организатора 05.10); допы остаются вторым ключом при равенстве баллов.
+    # 5b) очередь замен: третьи места всех серий. 16.10.2026 (решение Валерия): порядок — ТОЛЬКО ПО ДОПАМ
+    # (доп. баллы игрока в его серии, победы не учитываются); балл за серию — второй ключ при равенстве допов.
+    # Было (05.10, со слов организатора): по баллу за серию.
     # Уже прошедшие в финал из очереди выпадают.
     reserve = []
     for s in series:
@@ -250,7 +251,7 @@ def main():
         if len(r) > 2 and r[2][0] not in seen:
             reserve.append(dict(uid=r[2][0], nick=r[2][1], series=s['name'],
                                 gb=r[2][3], score=r[2][2]))
-    reserve.sort(key=lambda x: (-(x['score'] or 0), -(x['gb'] or 0), x['nick'] or ''))
+    reserve.sort(key=lambda x: (-(x['gb'] or 0), -(x['score'] or 0), x['nick'] or ''))
 
     # 5c) KPI
     played  = len(series)
