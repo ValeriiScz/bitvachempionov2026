@@ -471,6 +471,8 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
   el.innerHTML=head+'<div class="ltb">'+poster+info+'</div>'+nx; el.hidden=false;
   /* обратный отсчёт до старта (время — из tournament_{id}.json start_iso) */
   fetch('data/tournament_'+t.id+'.json').then(function(r){return r.ok?r.json():null;}).then(function(tj){
+    if(tj&&tj.start_iso&&Date.now()<new Date(tj.start_iso).getTime()){var so=el.querySelector('.st.on');if(so){so.className='st';so.innerHTML='Сегодня · старт '+new Date(tj.start_iso).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Prague'});}
+      var pv0=document.getElementById('ltpv');if(pv0&&!document.getElementById('ltcd')){var c0=document.createElement('div');c0.className='cd';c0.id='ltcd';pv0.parentNode.insertBefore(c0,pv0);}}
     var cd=document.getElementById('ltcd'); if(!cd||!tj||!tj.start_iso) return;
     (function tick(){var s=Math.max(0,(new Date(tj.start_iso)-new Date())/1000);
       cd.innerHTML=[[Math.floor(s/86400),'дн'],[Math.floor(s%86400/3600),'ч'],[Math.floor(s%3600/60),'мин']].map(function(x){return '<div><b>'+x[0]+'</b><small>'+x[1]+'</small></div>';}).join('');

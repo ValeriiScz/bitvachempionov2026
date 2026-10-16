@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · watch692.html · v1.2 · 2026-10-17 · эфиры столов и финала (пост t.me/mafses/713); в дни турнира день эфира — по дате · v1.1 · 2026-10-16 · 🎙 «Студия аналитики» (для зрителей) — отдельный режим рядом с «Один стол / Все столы»: не грузится и не звучит в режимах столов, день по дате (17/18.10), после турнира — выбор дня; ссылка watch692.html#studio · v1.0 · 2026-10-15 · «Смотровая» Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия watch673 v1.1 (подписи над эфиром): формат 11+2+4, подпись «Полуфинал · игра N», «отдыхает» вместо «не играет», ключи localStorage w692_. Эфиры — data/streams_692.json + Google-таблица. -->
+<!-- DOVOD · watch692.html · v1.3 · 2026-10-17 · до старта (10:15) не показываем LIVE · v1.2 · 2026-10-17 · эфиры столов и финала (пост t.me/mafses/713); в дни турнира день эфира — по дате · v1.1 · 2026-10-16 · 🎙 «Студия аналитики» (для зрителей) — отдельный режим рядом с «Один стол / Все столы»: не грузится и не звучит в режимах столов, день по дате (17/18.10), после турнира — выбор дня; ссылка watch692.html#studio · v1.0 · 2026-10-15 · «Смотровая» Four Seasons: Central Cup 2026 (mafgame 692, Прага, 17–18.10) — копия watch673 v1.1 (подписи над эфиром): формат 11+2+4, подпись «Полуфинал · игра N», «отдыхает» вместо «не играет», ключи localStorage w692_. Эфиры — data/streams_692.json + Google-таблица. -->
 <!-- DOVOD · watch673.html (канон) · v1.0 · 2026-10-09 · «Смотровая» Чемпионата Молдовы 2026 (mafgame 673): все трансляции столов в одном окне.
      Назначение: зрителю с телефона — один эфир + переключатель столов + «кто за столом сейчас»; режим «Все столы» (на телефоне стопкой,
      повёрнутый телефон и комп — в ряд / «большой + два»); «Следить за игроком» — эфир сам переходит на его стол в каждой новой игре.
@@ -372,8 +372,9 @@ function renderTop(){
 function renderStatus(){
   const st=SDB();const gi=D.cur;const t=D.tour;
   const started=D.games.some(g=>g.tables.some(x=>x.winner!=='unknown'));
-  const live=D.live&&!t.closed;
-  document.getElementById('status').innerHTML=`${live?'<span class="live">live</span>':started?'':'<span>скоро · старт 17.10, 10:15</span>'}<span><b>${esc(gLabel(gi))}</b></span><span>${D.games[gi]&&D.games[gi].stage==='Финал'?'финал':D.games[gi]&&D.games[gi].stage==='Полуфинал'?'полуфинал':'квалификация'}</span><span>обновлено ${D.updated?D.updated.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):'—'}</span>`;
+  const pre=t.start_iso&&Date.now()<new Date(t.start_iso).getTime(); /* v1.3: в день старта до 10:15 — не LIVE */
+  const live=D.live&&!t.closed&&!pre;
+  document.getElementById('status').innerHTML=`${live?'<span class="live">live</span>':started?'':(pre&&new Date().toDateString()===new Date(t.start_iso).toDateString()?'<span>сегодня · старт 10:15</span>':'<span>скоро · старт 17.10, 10:15</span>')}<span><b>${esc(gLabel(gi))}</b></span><span>${D.games[gi]&&D.games[gi].stage==='Финал'?'финал':D.games[gi]&&D.games[gi].stage==='Полуфинал'?'полуфинал':'квалификация'}</span><span>обновлено ${D.updated?D.updated.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):'—'}</span>`;
   document.getElementById('testbar').innerHTML=st&&st.test?`<div class="testbar">Тест: сейчас в окнах записи прошлого турнира — проверьте, как это выглядит. Настоящие эфиры Central Cup встанут сюда перед стартом.</div>`:'';
   document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));
   document.querySelectorAll('#layout button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.layout));
