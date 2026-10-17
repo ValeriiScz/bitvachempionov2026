@@ -56,15 +56,19 @@ jobs:
           PY
 
       - name: Закоммитить, если что-то изменилось
+        # 17.10.2026: при отказе push (main ушёл вперёд) — пересчёт на свежем origin/main, до 3 попыток
         run: |
-          if git diff --quiet; then
-            echo "изменений нет — коммит не нужен"
-            exit 0
-          fi
           git config user.name  "dovod-bot"
           git config user.email "noreply@dovod-mafia.com"
-          git add data/mcl2026.js assets/mcl sw.js \
-                  mcl2026.html mcl-standings.html mcl-series.html mcl-lab.html
-          git commit -m "MCL: автообновление данных $(date +%d.%m.%Y)"
-          git push
-          echo "обновление выкачено"
+          for i in 1 2 3; do
+            if [ $i -gt 1 ]; then
+              git fetch origin main && git reset --hard origin/main
+              python .github/scripts/refresh_mcl.py || exit 1
+            fi
+            if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then echo "изменений нет — коммит не нужен"; exit 0; fi
+            git add data/mcl2026.js assets/mcl sw.js mcl2026.html mcl-standings.html mcl-series.html mcl-lab.html
+            git commit -m "MCL: автообновление данных $(date +%d.%m.%Y)"
+            if git push origin HEAD:main; then echo "обновление выкачено (попытка $i)"; exit 0; fi
+            echo "push отклонён — пересчитываю на свежем"; sleep 5
+          done
+          echo "::error::не удалось запушить после 3 попыток"; exit 1
