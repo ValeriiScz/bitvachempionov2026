@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-refresh_mafgame · v1.2 · 2026-10-13 (played пересчитывается каждый прогон: start < TODAY и не отменён) · v1.1 · 2026-09-06
+refresh_mafgame · v1.2.1 · 2026-10-19 (ручной перезапуск — ночной cron задержан GitHub) · v1.2 · 2026-10-13 (played пересчитывается каждый прогон: start < TODAY и не отменён) · v1.1 · 2026-09-06
 Назначение: каждую ночь обновить данные сайта DOVOD из mafgame.org без участия человека.
 Запускается GitHub Actions (.github/workflows/refresh-data.yml), работает на серверах GitHub —
 ни мак Валерия, ни Claude для этого не нужны.

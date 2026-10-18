@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-refresh_gmc.py · v1.2 · 2026-10-05
+refresh_gmc.py · v1.2.1 · 2026-10-19 (ручной перезапуск) · v1.2 · 2026-10-05
 Назначение: обновить датафайл страницы GMC Europa 2026 (data/gmc2026.js) по протоколам
 mafgame.org — без участия человека. До этого страница жила вшитым снимком и протухала.
 Запускается GitHub Actions — см. .github/workflows/refresh-gmc.yml.
