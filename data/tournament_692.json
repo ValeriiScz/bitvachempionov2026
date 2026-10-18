@@ -12,12 +12,12 @@
  "stars": 4,
  "prize_eur": 750,
  "format": "Квалификация 11 игр (3 стола; 33 игрока — в каждой игре трое отдыхают, у каждого 10 игр) → полуфинал 2 игры (топ-30, 3 стола) → финал 4 игры (топ-10, один стол, баллы финала ×1.3)",
- "closed": false,
+ "closed": true,
  "in_progress": false,
  "live_from": "2026-10-17",
  "live_to": "2026-10-18",
- "upcoming": true,
- "games_played": 0,
+ "upcoming": false,
+ "games_played": 17,
  "games_total": 17,
  "final_coef": 1.3,
  "accent": "#26e0ff",
@@ -28,5 +28,287 @@
   "Trinity"
  ],
  "start_iso": "2026-10-17T10:15:00+02:00",
- "note": "Рассадка квалификации опубликована на mafgame 15.10. Судьи турнира: YeS (главный), Гармония, Trinity — по каким столам, mafgame не публикует. Открытие — 17.10 в 10:15, Marriott, 2-й этаж (conference floor)."
+ "note": "Турнир завершён 18.10. Чемпион — Korolevich (13.59), 2-е aptah (13.32), 3-е TOPS (12.74), 4-е DOVOD (12.64). Баллы рейтинга MAFGAME начислены: 27 / 24 / 22 / 19 …",
+ "champion": "Korolevich",
+ "winners": [
+  "Korolevich",
+  "aptah",
+  "TOPS"
+ ],
+ "standings": [
+  {
+   "place": 1,
+   "name": "Korolevich",
+   "sigma": 13.59,
+   "stage": "финал",
+   "wins": 11,
+   "games": 4
+  },
+  {
+   "place": 2,
+   "name": "aptah",
+   "sigma": 13.32,
+   "stage": "финал",
+   "wins": 11,
+   "games": 4
+  },
+  {
+   "place": 3,
+   "name": "TOPS",
+   "sigma": 12.74,
+   "stage": "финал",
+   "wins": 12,
+   "games": 4
+  },
+  {
+   "place": 4,
+   "name": "DOVOD",
+   "sigma": 12.64,
+   "stage": "финал",
+   "wins": 11,
+   "games": 4
+  },
+  {
+   "place": 5,
+   "name": "Lюц",
+   "sigma": 12.575,
+   "stage": "финал",
+   "wins": 10,
+   "games": 4
+  },
+  {
+   "place": 6,
+   "name": "Tripok",
+   "sigma": 10.865,
+   "stage": "финал",
+   "wins": 9,
+   "games": 4
+  },
+  {
+   "place": 7,
+   "name": "Магнат",
+   "sigma": 10.31,
+   "stage": "финал",
+   "wins": 8,
+   "games": 4
+  },
+  {
+   "place": 8,
+   "name": "Берлин",
+   "sigma": 9.63,
+   "stage": "финал",
+   "wins": 8,
+   "games": 4
+  },
+  {
+   "place": 9,
+   "name": "Golubchik",
+   "sigma": 9.475,
+   "stage": "финал",
+   "wins": 10,
+   "games": 4
+  },
+  {
+   "place": 10,
+   "name": "Gangster",
+   "sigma": 9.075,
+   "stage": "финал",
+   "wins": 9,
+   "games": 4
+  },
+  {
+   "place": 11,
+   "name": "KEX",
+   "sigma": 6.74,
+   "stage": "полуфинал",
+   "wins": 6,
+   "games": 2
+  },
+  {
+   "place": 12,
+   "name": "Link",
+   "sigma": 6.35,
+   "stage": "полуфинал",
+   "wins": 7,
+   "games": 2
+  },
+  {
+   "place": 13,
+   "name": "ParadoXx",
+   "sigma": 6.35,
+   "stage": "полуфинал",
+   "wins": 7,
+   "games": 2
+  },
+  {
+   "place": 14,
+   "name": "Светлый",
+   "sigma": 6.1,
+   "stage": "полуфинал",
+   "wins": 7,
+   "games": 2
+  },
+  {
+   "place": 15,
+   "name": "Funt",
+   "sigma": 6.05,
+   "stage": "полуфинал",
+   "wins": 7,
+   "games": 2
+  },
+  {
+   "place": 16,
+   "name": "qUAest0r",
+   "sigma": 5.7,
+   "stage": "полуфинал",
+   "wins": 6,
+   "games": 2
+  },
+  {
+   "place": 17,
+   "name": "Саботаж",
+   "sigma": 5.4,
+   "stage": "полуфинал",
+   "wins": 4,
+   "games": 2
+  },
+  {
+   "place": 18,
+   "name": "Сью",
+   "sigma": 5.29,
+   "stage": "полуфинал",
+   "wins": 4,
+   "games": 2
+  },
+  {
+   "place": 19,
+   "name": "Sever",
+   "sigma": 5.07,
+   "stage": "полуфинал",
+   "wins": 5,
+   "games": 2
+  },
+  {
+   "place": 20,
+   "name": "sometimes",
+   "sigma": 5.05,
+   "stage": "полуфинал",
+   "wins": 5,
+   "games": 2
+  },
+  {
+   "place": 21,
+   "name": "mobi.",
+   "sigma": 5,
+   "stage": "полуфинал",
+   "wins": 6,
+   "games": 2
+  },
+  {
+   "place": 22,
+   "name": "Jerry Hurper",
+   "sigma": 4.93,
+   "stage": "полуфинал",
+   "wins": 5,
+   "games": 2
+  },
+  {
+   "place": 23,
+   "name": "Antonio",
+   "sigma": 4.93,
+   "stage": "полуфинал",
+   "wins": 5,
+   "games": 2
+  },
+  {
+   "place": 24,
+   "name": "Advokat",
+   "sigma": 4.83,
+   "stage": "полуфинал",
+   "wins": 5,
+   "games": 2
+  },
+  {
+   "place": 25,
+   "name": "Maverick",
+   "sigma": 4.67,
+   "stage": "полуфинал",
+   "wins": 5,
+   "games": 2
+  },
+  {
+   "place": 26,
+   "name": "Kleo",
+   "sigma": 4.55,
+   "stage": "полуфинал",
+   "wins": 5,
+   "games": 2
+  },
+  {
+   "place": 27,
+   "name": "Stimorol",
+   "sigma": 4.45,
+   "stage": "полуфинал",
+   "wins": 5,
+   "games": 2
+  },
+  {
+   "place": 28,
+   "name": "Буржуй",
+   "sigma": 4.4,
+   "stage": "полуфинал",
+   "wins": 4,
+   "games": 2
+  },
+  {
+   "place": 29,
+   "name": "Kramola",
+   "sigma": 3.6,
+   "stage": "полуфинал",
+   "wins": 4,
+   "games": 2
+  },
+  {
+   "place": 30,
+   "name": "Malvina",
+   "sigma": 2.7,
+   "stage": "полуфинал",
+   "wins": 4,
+   "games": 2
+  },
+  {
+   "place": 31,
+   "name": "Blackout",
+   "sigma": 2.55,
+   "stage": "квалификация",
+   "wins": 3,
+   "games": 10
+  },
+  {
+   "place": 32,
+   "name": "Miss Belle",
+   "sigma": 2.55,
+   "stage": "квалификация",
+   "wins": 3,
+   "games": 10
+  },
+  {
+   "place": 33,
+   "name": "yesterday",
+   "sigma": 1.8,
+   "stage": "квалификация",
+   "wins": 2,
+   "games": 10
+  },
+  {
+   "place": 34,
+   "name": "Yokai",
+   "sigma": 0.3,
+   "stage": "квалификация",
+   "wins": 0,
+   "games": 1
+  }
+ ],
+ "reconciliation": "Сверено с официальной таблицей mafgame: финал 10/10, полуфинал 30/30 (нарастающим итогом). В квалификации у 10 игроков расхождение 0.02–0.18 — это Ci, который платформа досчитывает в конце стадии.",
+ "substitution": "Yokai сыграл одну игру квалификации вместо Буржуя (у Буржуя 9 игр из 10)."
 }

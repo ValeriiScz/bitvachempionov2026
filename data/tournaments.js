@@ -13,6 +13,7 @@
 // MafgameStat | tournaments.js | v3.4 | 2026-10-15 | 692 Central Cup -> upcoming (Скоро): страница t692 + смотровая watch692, рассадка 15.10, 33 игрока, ELO markery 15.10 (Ø 1086), live 17–18.10
 // MafgameStat | tournaments.js | v3.5 | 2026-10-15 | 710 ЧМ-2026 в архиве ведёт на хаб wc2026.html (страница турнира · режим зрителя · карточки) — плитка ЧМ убрана с главной
 // MafgameStat | tournaments.js | v3.6 | 2026-10-16 | 692: studio:true — студия аналитики (для зрителей) в смотровой watch692.html#studio
+// MafgameStat | tournaments.js | v3.7 | 2026-10-18 | 692 Central Cup -> finished (чемпион Korolevich 13.59, aptah 13.32, TOPS 12.74, DOVOD 12.64)
 window.TOURNAMENTS_DB = {
   "tournaments": [
     {
@@ -74,9 +75,9 @@ window.TOURNAMENTS_DB = {
       "days": 2,
       "stars": 4,
       "prize": "750€",
-      "status": "upcoming",
-      "phase": 2,
-      "statusLabel": "Скоро · старт 17 октября, 10:15",
+      "status": "finished",
+      "phase": 1,
+      "statusLabel": "Завершён · 17 игр (11 квал + 2 полуфинала + 4 финала) · чемпион Korolevich",
       "liveFrom": "2026-10-17",
       "liveTo": "2026-10-18",
       "eloAvg": 1086,
@@ -85,7 +86,8 @@ window.TOURNAMENTS_DB = {
       "organizer": "Mafia club «Champions League» Prague · судьи YeS (главный), Гармония, Trinity",
       "format": "11 игр квалификации × 3 стола (у каждого 10) → полуфинал 2 игры (топ-30) → финал 4 игры (топ-10, ×1.3)",
       "mafgame": "https://mafgame.org/tournaments/692/view",
-      "note": "Рассадка квалификации опубликована 15.10. Результаты подтягиваются с mafgame вживую в дни турнира.",
+      "note": "Чемпион — Korolevich (13.59), 2-е aptah (13.32), 3-е TOPS (12.74), 4-е DOVOD (12.64). Протоколы 17 игр заморожены и сверены с официальной таблицей mafgame.",
+      "champion": "Korolevich",
       "sections": [
         {"href": "t692.html", "title": "Страница турнира", "desc": "Обзор · Моё · Игроки · Столы · Результаты — рассадка, сила столов, live-таблица"},
         {"href": "watch692.html", "title": "▶ Смотровая · все эфиры", "desc": "Три стола в одном окне, «следить за игроком»"},
