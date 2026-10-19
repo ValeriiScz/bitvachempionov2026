@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
+<!-- race.html v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
 <meta name="description" content="Рейтинг MAFGAME 2026: сколько и каких турниров нужно до золотой дюжины, пул баллов по выходным, модель расчёта, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -301,6 +301,9 @@ details.m .mono{font-family:var(--mono);font-size:12px;color:#c8cfdb}
   .route li{grid-template-columns:46px 1fr} .route li .g{grid-column:2;text-align:left;display:flex;gap:10px}
   .tab{padding:9px 10px;font-size:9.5px}
 }
+
+/* v3.1: незаписанные */
+table.race tr.nr td{opacity:.55} table.race tr.nr:hover td{opacity:.85} table.cmp tr.nr td{opacity:.55} .pick .pc.nr{opacity:.5;border-style:dashed}
 </style>
 <style id="dvcrumbcss">.dv-crumb{position:relative;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;max-width:1080px;margin:0 auto;padding:12px 15px 0;font:700 10px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#79808f}.dv-crumb a{color:#c3cad6;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}.dv-crumb a:hover{color:#f5ff35;border-color:#f5ff35}.dv-crumb i{font-style:normal;opacity:.5}
 /* ── закрытый раздел: гейт ── */
@@ -421,14 +424,14 @@ details.m .mono{font-family:var(--mono);font-size:12px;color:#c8cfdb}
         <p><b>Явка</b> — не обещания, а темп: сколько ездил за год и за последние 3,5 месяца, своя ли страна, звёзды, место в гонке. Заявка поднимает шанс, слова игрока — задают число.</p></div>
       <div class="layer l3"><div class="k">слой 3 · смотрим вперёд</div><h4>Динамика</h4>
         <p>Сезон разыгрывается тысячи раз: в каждом розыгрыше у игрока своя сила из коридора, он едет или нет, берёт место, баллы ложатся в десятку, вытесняя хвост.</p>
-        <p><b>Петли.</b> Близость к планке поднимает явку (×1,5 у мест 1–25). Хвост растёт — каждый новый результат даёт меньше чистыми. Календарь тает. Конкуренты набирают — планка ползёт вверх.</p>
+        <p><b>Петли.</b> Близость к планке по ходу сезона поднимает шанс дозаписаться на дальние турниры (хорошо сыграл на Кипре — поехал дальше). Хвост растёт — каждый новый результат даёт меньше чистыми. Календарь тает. Конкуренты набирают — планка ползёт вверх.</p>
         <p>Итог — не «экстраполяция статистики», а распределение Σ каждого и порога 12-го места, из которого берём планки и слова.</p></div>
     </div>
     <div class="sdwrap"><div id="sdsvg"></div></div>
     <div class="legend"><span>поток баллов</span><span class="r">усиливающая связь (R)</span><span class="b">уравновешивающая (B)</span><span class="c">информация</span></div>
     <div class="sdnote" id="sdnote"><h4>Схема</h4>Нажми на блок — покажу, откуда он и что на него влияет.</div>
     <div class="loops">
-      <div class="r"><b>R1 · ГОНКА ТЯНЕТ</b>Чем ближе к планке и чем выше место, тем чаще игрок едет: у мест 1–25 явка ×1,5 (подобрано на осени 2024–25). Больше стартов → больше баллов → ещё ближе.</div>
+      <div class="r"><b>R1 · ГОНКА ТЯНЕТ</b>Хорошо сыграл — оказался в досягаемости планки — дозаписался на следующий турнир. В розыгрыше: незаписанный турнир через 15+ дней, игрок в 25 баллах от планки → шанс поехать ×1,6; дальше 55 → ×0,6. Больше стартов → больше баллов → ещё ближе.</div>
       <div class="b"><b>B1 · ХВОСТ НАСЫЩАЕТ</b>Десятка полна — новый результат вытесняет худший. Чем выше хвост, тем меньше чистыми даёт то же место. Лишние старты съедают друг друга: сценарий «по максимуму» выше «обычного» всего на несколько баллов.</div>
       <div class="b"><b>B2 · КАЛЕНДАРЬ ТАЕТ</b>Каждый выходной — минус один шанс. Два турнира в один день — играешь один. Пул баллов впереди конечен и считается на вкладке 03.</div>
       <div class="r"><b>R2 · ПЛАНКА ПОЛЗЁТ</b>Те же петли работают у всех 30. Пока ты набираешь, набирают и конкуренты — порог 12-го растёт от числа стартов и финалов серийников, а не от «заиграли выше головы».</div>
@@ -447,7 +450,7 @@ details.m .mono{font-family:var(--mono);font-size:12px;color:#c8cfdb}
     <div class="hist" id="hist"></div>
     <details class="m"><summary>Как считаем</summary>
       <p>По каждому игроку — его леджер mafgame и места с 2023 года, ELO маркеров как опора, если турниров мало. По каждому турниру впереди — звёзды, ожидаемое поле и сетка баллов такого же турнира в прошлом. Финалы серийников — по регламентам контуров и текущему зачёту серий: кто уже прошёл, тот играет. Дальше сезон разыгрывается несколько тысяч раз: кто поедет, какое место возьмёт, что вытеснит из своей десятки, — и в каждом розыгрыше смотрим сумму 12-го места. На прошлом сезоне такой пересчёт с 14 сентября угадал 11 из 12 итоговой дюжины, но занизил порог примерно на 7% — поправка учтена.</p>
-      <p>Сценарии отличаются тем, сколько турниров играет топ-20 (5–6 · 6 · 6–7; места 21–30 — 4 · 5 · 6; у тех, кто сказал о своих планах, — их число). «Пол» — никто из гонки не берёт ничего сверх участия, финалы серийников по минимуму сетки.</p>
+      <p>Сценарии отличаются тем, как часто дозаписываются те, кто пока не записан (как в истории · в 1,5 раза чаще · в 2,5 раза чаще); записанные во всех сценариях едут по срокам. «Пол» — только записанные, никто не добавляется.</p>
     </details>
     <div class="cta" style="margin-top:16px"><div class="txt"><b>Турниры до конца года</b><span id="ctaText"></span></div><a class="btn" href="calendar.html?preset=1&type=reg,fin,team&stars=3,4&view=feed">Открыть календарь &#8594;</a></div>
   </section>
@@ -456,7 +459,7 @@ details.m .mono{font-family:var(--mono);font-size:12px;color:#c8cfdb}
   <section class="sec pane" id="pane-gen">
     <div class="sh"><span>06 · генератор сезонов</span><s></s><em>случайные составы дюжины</em></div>
     <h2 class="big">Сгенерировать остаток сезона</h2>
-    <p class="lead">Одна генерация — это один случайно разыгранный остаток года: кто поехал, какое место взял, что вытеснил из десятки, как сыграли финалы серийников. Запускаем 500 раз и смотрим, <b>сколько раз из 500 игрок оказался в дюжине</b>. На выбор — явка, ритм и по какому периоду оцениваем силу игрока.</p>
+    <p class="lead">Одна генерация — это один случайно разыгранный остаток года: кто поехал, какое место взял, что вытеснил из десятки, как сыграли финалы серийников. Запускаем 500 раз и смотрим, <b>сколько раз из 500 игрок оказался в дюжине</b>. На выбор — явка (только заявки или с дозаписью как в истории), ритм дозаписи и по какому периоду оцениваем силу. Упрощённая копия серверной модели: без петли «близко к планке → едет чаще».</p>
     <div class="genctl">
       <div class="gengrp"><span>Явка</span><button class="gb on" data-k="att" data-v="regs">только заявки</button><button class="gb" data-k="att" data-v="forecast">прогноз посещений</button></div>
       <div class="gengrp"><span>Ритм</span><button class="gb on" data-k="lvl" data-v="обычно">как обычно</button><button class="gb" data-k="lvl" data-v="стараются">ездят активно</button><button class="gb" data-k="lvl" data-v="максимум">по максимуму</button></div>
@@ -527,10 +530,10 @@ function initRace(){
 
   // ---------- планки ----------
   $('#planks').innerHTML=`
-    <div class="plank f"><div class="k">0 · только заявки</div><div class="v">${P.floor}<small>${P.regs[0]}–${P.regs[1]}</small></div><div class="d">Играют только те, кто уже записан, плюс финалы серийников. Регистрации докатятся — реальная планка выше.</div></div>
-    <div class="plank u"><div class="k">1 · обычный ритм</div><div class="v">${P.usual}<small>${P.usual_lo}–${P.usual_hi}</small></div><div class="d">Топ-20 играют 5–6 турниров до конца года, места 21–30 — около 4, в своей обычной силе.</div></div>
-    <div class="plank a"><div class="k">2 · ездят активно</div><div class="v">${P.active}</div><div class="d">Топ-20 — 6–7 турниров, места 21–30 — около 5. Сила та же, что обычно.</div></div>
-    <div class="plank b"><div class="k">3 · по максимуму</div><div class="v">${P.beast}</div><div class="d">Топ-20 — 7–8 турниров, места 21–30 — 6. Разрыв со сценарием 1 всего ${P.beast-P.usual} баллов: в зачёт идёт десятка, лишние старты съедают друг друга.</div></div>`;
+    <div class="plank f"><div class="k">0 · только заявки</div><div class="v">${P.floor}<small>${P.regs[0]}–${P.regs[1]}</small></div><div class="d">Играют только те, кто уже записан (с поправкой на срок), плюс финалы серийников. Никто больше не записывается.</div></div>
+    <div class="plank u"><div class="k">1 · обычный ритм</div><div class="v">${P.usual}<small>${P.usual_lo}–${P.usual_hi}</small></div><div class="d">Записанные едут как обычно по срокам; незаписанные добавляются так, как это бывало в истории: 1% за две недели, 4% за месяц, 10% дальше. Топ-30 в среднем ≈2,5 старта — как после 20 октября в 2024–25.</div></div>
+    <div class="plank a"><div class="k">2 · ездят активно</div><div class="v">${P.active}</div><div class="d">Незаписанные дозаписываются в полтора раза чаще обычного. Сила та же.</div></div>
+    <div class="plank b"><div class="k">3 · по максимуму</div><div class="v">${P.beast}</div><div class="d">Незаписанные дозаписываются в два с половиной раза чаще обычного. Разрыв со сценарием 1 всего ${P.beast-P.usual} баллов: в зачёт идёт десятка, лишние старты съедают друг друга.</div></div>`;
   $('#hist').innerHTML=`<b>Проверка на прошлых сезонах.</b> ${R.hist.note}:<div class="bands">${R.hist.bands.map(b=>`<span>${b.band}: <i>${b.k} из ${b.n}</i></span>`).join('')}</div><div style="margin-top:8px">Сейчас 12-е место — ${fmt(R.thr12_now)}. «Выше на 15–35%» — это ${fmt(R.thr12_now*1.15)}–${fmt(R.thr12_now*1.35)}, «около порога» — ${fmt(R.thr12_now*0.95)}–${fmt(R.thr12_now*1.15)}.</div>`;
 
   // ---------- общие расчёты ----------
@@ -571,9 +574,10 @@ function initRace(){
     const fin=(r.finals&&r.finals.length)?r.finals.map(f=>`${f.name} <small>${f.min}–${f.mid}+</small>`).join('<br>')+finNote:'<small>—</small>';
     const ev=(r.regs||[]).filter(e=>e.date>=TODAY), bigN=ev.filter(e=>e.stars>=4).length;
     const gap=Math.round(PL[MODE][0]-r.sigma);
-    return `<tr class="r" data-uid="${r.uid}">
+    const nr=r.sd&&r.sd.no_regs;
+    return `<tr class="r${nr?' nr':''}" data-uid="${r.uid}">
       <td class="num">${r.rank}</td>
-      <td class="nick">${r.nick}<small>${r.country||''}</small></td>
+      <td class="nick">${r.nick}<small>${r.country||''}${nr?' · <i style="color:#e7a0a0;font-style:normal">никуда не записан</i>':''}</small></td>
       <td class="sig">${fmt(r.sigma)}<small>${r.free?slotW(r.free):`хвост ${fmt(r.tail)}`}</small></td>
       <td class="gap" data-l="до планки ${PL[MODE][0]}">${gap>0?`<b class="dn">−${gap}</b>`:`<b class="up">+${-gap}</b>`}<small>${gap>0?'не хватает':'уже выше'}</small></td>
       <td class="regs" data-l="заявки"><b>${ev.length}</b><small style="color:#7e8595">${bigN?`из них ${bigN} на 4–5★`:''}</small>${regChips(r,6)}</td>
@@ -643,13 +647,15 @@ function initRace(){
   function rowOf(u){return R.rows.find(x=>x.uid===u)}
   const sel=$('#pickSel');
   sel.innerHTML='<option value="">— выбери игрока —</option>'+R.rows.map(r=>`<option value="${r.uid}">${r.rank}. ${r.nick} · Σ${fmt(r.sigma)}</option>`).join('');
-  $('#pickChips').innerHTML=R.rows.slice(0,16).map(r=>`<button class="pc" data-u="${r.uid}">${r.nick}</button>`).join('');
+  $('#pickChips').innerHTML=R.rows.slice(0,16).map(r=>`<button class="pc${r.sd&&r.sd.no_regs?' nr':''}" data-u="${r.uid}" title="${r.sd&&r.sd.no_regs?'никуда не записан':''}">${r.nick}</button>`).join('');
   sel.addEventListener('change',()=>selectPlayer(sel.value?+sel.value:null));
   $('#pickChips').addEventListener('click',e=>{const b=e.target.closest('.pc');if(b)selectPlayer(+b.dataset.u)});
   function selectPlayer(u){CUR=u; try{if(u)localStorage.setItem('dovod_race_me',String(u));else localStorage.removeItem('dovod_race_me')}catch(e){}
     sel.value=u||''; document.querySelectorAll('#pickChips .pc').forEach(b=>b.classList.toggle('on',+b.dataset.u===u));
     drawDash(); if($('#pane-pool').classList.contains('on')) drawPool(); if($('#pane-model').classList.contains('on')) drawModel(); if(window.__drawEvents) window.__drawEvents();}
-  const tripsFor=(r,nd)=>nd.n&&r.p5!=null?Math.ceil(Math.max(nd.z/Math.max(r.p5,.05),nd.n/Math.max(r.p10,.1))):0;
+  // частоты для «сколько турниров»: модельные q5/q10 (сила с ELO-опорой, 4★ поле 40), иначе — частоты за 12 месяцев
+  const q5of=r=>r.sd&&r.sd.q5!=null?r.sd.q5:r.p5, q10of=r=>r.sd&&r.sd.q10!=null?r.sd.q10:r.p10;
+  const tripsFor=(r,nd)=>nd.n&&q5of(r)!=null?Math.ceil(Math.max(nd.z/Math.max(q5of(r),.05),nd.n/Math.max(q10of(r),.1))):0;
   function netOf(T0,g,free){return free?g:Math.max(0,g-T0.worst)}
   function routeOf(r){
     // маршрут игрока: заявки + вероятные по прогнозу + финалы, по датам
@@ -677,8 +683,21 @@ function initRace(){
     const r=rowOf(CUR), sd=r.sd||{}; const {items,T0,free}=routeOf(r);
     const [wc,wt]=pword(sd.p12||0); const gapA=Math.round(P.work[0]-r.sigma), gapB=Math.round(P.work[1]-r.sigma);
     const nA=needFor(r,P.work[0]), nB=needFor(r,P.work[1]); const XA=tripsFor(r,nA), XB=tripsFor(r,nB); const K=sd.played_exp!=null?Math.round(sd.played_exp*10)/10:(r.expected_k||0);
-    const verdict=!nA.n?`Σ уже выше рабочей планки. Главный риск — не играть: планка ползёт, пока другие набирают.`:XB<=Math.ceil(K)?`При твоей частоте результатов обычного ритма (~${K} стартов) хватает даже до ${P.work[1]}.`:XA<=Math.ceil(K)?`До ${P.work[0]} обычного ритма (~${K} стартов) хватает; до ${P.work[1]} нужно выигрывать чаще обычного или добавить поездку.`:`Ожидаемых стартов ~${K}, а нужно ~${XA} при твоей частоте: либо ездить больше, либо выигрывать чаще обычного.`;
+    const verdict=!nA.n?`Σ уже выше рабочей планки. Главный риск — не играть: планка ползёт, пока другие набирают.`:XB<=Math.ceil(K)?`При твоей силе ожидаемых стартов (~${K}) хватает даже до ${P.work[1]}.`:XA<=Math.ceil(K)?`До ${P.work[0]} ожидаемых стартов (~${K}) хватает; до ${P.work[1]} нужно выигрывать чаще обычного или добавить поездку.`:`Ожидаемых стартов ~${K}, а при твоей силе нужно ~${XA}: либо ездить больше, либо выигрывать чаще обычного.`;
     const corr=sd.low_n&&sd.p12_prior!=null?`<div class="corr">Мало данных: у тебя всего ${fmt(sd.n_eff)} турниров в оценке силы. По результатам на mafgame модель верит в тебя сильнее (<b>${pword(sd.p12)[1]}</b>, Σ≈${fmt(sd.sum_exp)}), по маркерам (ELO ${sd.elo||'—'}${sd.tier?' · тир '+sd.tier:''}) — осторожнее (<b>${pword(sd.p12_prior)[1]}</b>, Σ≈${fmt(sd.sum_prior)}). Правду покажут ближайшие два старта.</div>`:'';
+    // рычаг: что держит прогноз — сила или поездки
+    const byB=[...R.rows].filter(x=>x.sd).sort((a,b)=>b.sd.beta_fwd-a.sd.beta_fwd); const bRank=byB.findIndex(x=>x.uid===CUR)+1;
+    const byK=[...R.rows].filter(x=>x.sd).sort((a,b)=>b.sd.played_exp-a.sd.played_exp); const kRank=byK.findIndex(x=>x.uid===CUR)+1;
+    const bigRegs=(r.regs||[]).filter(e=>e.date>=TODAY&&e.stars>=4).length;
+    let lever='';
+    if(sd.no_regs) lever=`<p style="margin-top:10px"><b style="color:#e7a0a0">Никуда не записан.</b> По истории календаря незаписанный за две недели до турнира играет в 1 случае из 100, за месяц — в 4, дальше — в 10. Модель ждёт от тебя ≈${K} стартов только за счёт «а вдруг запишется». Запишись — и прогноз пересчитается в ночь на понедельник${(r.finals||[]).length?`; финалы серийников (${(r.finals||[]).map(f=>f.name).join(', ')}) учтены`:''}.</p>`;
+    else if(sd.p12<0.6&&bRank<=10) lever=`<p style="margin-top:10px"><b>Что держит прогноз — поездки, не игра.</b> По силе ты №${bRank} среди топ-40 гонки (топ-5 на 4★ в ${Math.round(sd.q5*100)}% стартов), а по ожидаемым поездкам — №${kRank}: записан на ${(r.regs||[]).filter(e=>e.date>=TODAY).length} турнир${bigRegs?` (${bigRegs} на 4–5★)`:''}, модель ждёт ≈${K} стартов${sd.plan!=null?` (план по твоим словам — ${sd.plan})`:''}. Смотри строки «если сыграть N» ниже — там видно, сколько 4★ стартов закрывают вопрос.</p>`;
+    else if(sd.p12<0.6&&kRank<=12&&bRank>20) lever=`<p style="margin-top:10px"><b>Что держит прогноз — результат, не поездки.</b> По ожидаемым поездкам ты №${kRank} в гонке (≈${K} стартов), по силе — №${bRank}: в больших полях 4–5★ твои места были ниже, чем на 3★, а впереди как раз они.</p>`;
+    else if(sd.p12<0.6&&sd.low_n) lever=`<p style="margin-top:10px"><b>Мало данных.</b> В оценке силы всего ${fmt(sd.n_eff)} турниров — модель опирается на ELO маркеров (${sd.elo||'—'}). Два ближайших результата сдвинут прогноз сильнее любой настройки.</p>`;
+    // «если сыграть N» — из плана игрока (его собственные места за 12 месяцев, сглажено)
+    let ktab='';
+    if(r.table){const ks=Object.keys(r.table).filter(k=>['2','3','4','5','6'].includes(k)); const EK=Math.round(K);
+      ktab=`<table class="mini" style="margin-top:10px"><thead><tr><th>если сыграть</th><th>как обычно</th><th>хороший сезон</th><th>сезон мечты</th></tr></thead><tbody>${ks.map(k=>{const t=r.table[k];const c=l=>t[l]?`<td>Σ≈${fmt(t[l].sigma)} <span class="w ${wordCls[t[l].word]||''}">${t[l].word}</span></td>`:'<td>—</td>';const isE=String(EK)===k;return `<tr class="${isE?'exp':''}"><td class="num">${k} турн.${isE?'<small>ожидаем</small>':''}</td>${c('обычно')}${c('хороший')}${c('мечта')}</tr>`}).join('')}</tbody></table><p style="color:#8a91a0;font-size:12px;margin-top:6px">«Как обычно» — твои места за 12 месяцев на твоих вероятных турнирах; «хороший сезон» — верхняя половина твоих результатов; «мечта» — верхняя четверть. Слово — относительно планки.</p>`}
     // маршрут
     const li=items.map(it=>{
       if(it.kind==='fin'){const sfree=2-T0.ser; const net=sfree>0?[it.lo,it.mid]:[Math.max(0,it.lo-Math.min(...T0.serPts)),Math.max(0,it.mid-Math.min(...T0.serPts))];
@@ -693,7 +712,7 @@ function initRace(){
     const lo=Math.max(0,Math.min(myI-4,byExp.length-9)), slice=byExp.slice(lo,lo+9);
     const myEv=new Set((r.regs||[]).filter(e=>e.date>=TODAY).map(e=>e.id).concat((r.likely||[]).filter(e=>e.p>=0.3).map(e=>e.id)));
     const cmp=slice.map(x=>{const common=(x.regs||[]).filter(e=>e.date>=TODAY&&myEv.has(e.id)).length; const [c,w]=pword(x.sd.p12); const sameFin=(x.finals||[]).filter(f=>(r.finals||[]).some(g=>g.name===f.name)).map(f=>f.name);
-      return `<tr class="${x.uid===CUR?'me':''}"><td class="n">${byExp.indexOf(x)+1}</td><td><b>${x.nick}</b> <small style="color:#7e8595">#${x.rank}</small></td><td class="s">${fmt(x.sigma)}</td><td class="s">≈${fmt(x.sd.sum_exp)}<small style="color:#7e8595"> · ${fmt(x.sd.sum_p10)}–${fmt(x.sd.sum_p90)}</small></td><td class="s">${x.sd.played_exp.toFixed(1)}</td><td><span class="w ${c}">${w}</span></td><td style="font-size:12px;color:#a7aebb">${x.uid===CUR?'—':(common?`${common} ${common===1?'общий':common<5?'общих':'общих'}`:'')}${sameFin.length?`${common?', ':''}финал ${sameFin.join(', ')}`:''}${!common&&!sameFin.length&&x.uid!==CUR?'<span style="color:#5f6675">нет</span>':''}</td></tr>`}).join('');
+      return `<tr class="${x.uid===CUR?'me':''}${x.sd.no_regs?' nr':''}"><td class="n">${byExp.indexOf(x)+1}</td><td><b>${x.nick}</b> <small style="color:#7e8595">#${x.rank}${x.sd.no_regs?' · не записан':''}</small></td><td class="s">${fmt(x.sigma)}</td><td class="s">≈${fmt(x.sd.sum_exp)}<small style="color:#7e8595"> · ${fmt(x.sd.sum_p10)}–${fmt(x.sd.sum_p90)}</small></td><td class="s">${x.sd.played_exp.toFixed(1)}</td><td><span class="w ${c}">${w}</span></td><td style="font-size:12px;color:#a7aebb">${x.uid===CUR?'—':(common?`${common} ${common===1?'общий':common<5?'общих':'общих'}`:'')}${sameFin.length?`${common?', ':''}финал ${sameFin.join(', ')}`:''}${!common&&!sameFin.length&&x.uid!==CUR?'<span style="color:#5f6675">нет</span>':''}</td></tr>`}).join('');
     box.innerHTML=`
       <div class="card"><h3>Вердикт<em>рабочая планка ${P.work[0]}–${P.work[1]}</em></h3>
         <div class="verdict"><div class="big">${fmt(r.sigma)}<small>Σ сейчас · #${r.rank}</small></div><div class="w ${wc}">${wt}${sd.low_n&&sd.p12_prior!=null&&pword(sd.p12_prior)[1]!==wt?`<span style="opacity:.55;font-size:.6em"> · по маркерам: ${pword(sd.p12_prior)[1]}</span>`:''}<small>${gapA>0?`До ${P.work[0]} не хватает <b>${gapA}</b>${gapB>gapA?`, до ${P.work[1]} — <b>${gapB}</b>`:''}.`:`Уже выше ${P.work[0]} на ${-gapA}.`} Ожидаемая Σ на 31.12 — <b>${fmt(sd.sum_exp)}</b> (коридор ${fmt(sd.sum_p10)}–${fmt(sd.sum_p90)}), планка обычного ритма — ${P.usual}.</small></div></div>
@@ -703,13 +722,14 @@ function initRace(){
           <div><b>${K}</b><span>ожидаемых стартов${sd.plan!=null?' · план '+sd.plan:''}</span></div>
           <div><b class="cy">${sd.pts_per_start!=null?fmt(sd.pts_per_start):'—'}</b><span>баллов за старт на 4★ · топ-5 в ${Math.round((sd.q5||0)*100)}%</span></div>
           <div><b>${sd.elo||'—'}</b><span>ELO маркеров${sd.tier?' · тир '+sd.tier:''}</span></div>
-        </div></div>
+        </div>
+        ${lever}</div>
       <div class="card"><h3>Что должно случиться</h3>
-        <div class="need"><div class="a"><div class="t">до ${P.work[0]}</div><div class="v">${words(nA.z,nA.y)}</div><div class="x">${XA?`при твоей частоте (топ-10 в ${Math.round(r.p10*100)}%, топ-5 в ${Math.round(r.p5*100)}%) это ~${XA} турнир${XA===1?'':XA<5?'а':'ов'}`:'ничего сверх участия'}</div></div>
+        <div class="need"><div class="a"><div class="t">до ${P.work[0]}</div><div class="v">${words(nA.z,nA.y)}</div><div class="x">${XA?`по модели (топ-10 на 4★ в ${Math.round(q10of(r)*100)}%, топ-5 в ${Math.round(q5of(r)*100)}%) это ~${XA} турнир${XA===1?'':XA<5?'а':'ов'}`:'ничего сверх участия'}</div></div>
           <div><div class="t">до ${P.work[1]}</div><div class="v">${words(nB.z,nB.y)}</div><div class="x">${XB?`~${XB} турнир${XB===1?'':XB<5?'а':'ов'} в твоём ритме`:'ничего сверх участия'}</div></div></div>
         <p style="margin-top:10px">${verdict}</p>
         <p style="color:#8a91a0;font-size:12.5px">Топ-5 на 4★ ≈ 24 балла, финал (6–10 место) ≈ 12; «чистыми» — за вычетом худшего результата в десятке. Финалы серийников, куда уже прошёл, в расчёте учтены по минимуму сетки.</p>
-        ${slotsHtml(r.base||r.ten.map(v=>[v,0]))}</div>
+        ${slotsHtml(r.base||r.ten.map(v=>[v,0]))}${ktab}</div>
       <div class="card full"><h3>Маршрут<em>куда записан, куда поедет по прогнозу, финалы</em></h3>
         <ul class="route">${li}</ul>
         <p style="margin-top:10px;color:#a7aebb;font-size:12.5px">Если на каждом из этих ${regItems.length} турниров взять топ-5 — это <b>+${fmt(maxTop5)}</b> чистыми, топ-10 везде — <b>+${fmt(maxTop10)}</b>. Полный пул по всем выходным — на вкладке «Пул баллов».</p></div>
@@ -756,7 +776,7 @@ function initRace(){
     const S={
       beta:{t:'Сила (долгая)',v:v(sd&&`β ${sd.beta_long.toFixed(2)} ± ${sd.sigma.toFixed(2)}`,'β ± σ'),s:v(sd&&`${fmt(sd.n_eff)} турн. · ELO ${sd.elo||'—'}`,'места 2023–26 + ELO маркеров')},
       form:{t:'Форма сезона',v:v(sd&&`${sd.form>=0?'+':''}${sd.form.toFixed(2)}`,'Δ 2026'),s:v(sd&&`${fmt(sd.n_season)} турн. в 2026 · ×${M.rho||0.5} вперёд`,'отклонение 2026 от долгой силы')},
-      att:{t:'Желание ездить',v:v(sd&&`${sd.played_exp.toFixed(1)} стартов`,'темп → P(явки)'),s:v(sd&&`за год ${sd.starts_365} · 3,5 мес ${sd.starts_105}${sd.plan!=null?' · план '+sd.plan:''}${sd.race_boost?' · ×1,5 гонка':''}`,'темп за год и за 3,5 месяца, страна, звёзды')},
+      att:{t:'Явка: заявки и сроки',v:v(sd&&`${sd.played_exp.toFixed(1)} стартов · заявок ${sd.n_regs}`,'заявка × дни до старта'),s:v(sd&&`за год ${sd.starts_365} · 3,5 мес ${sd.starts_105}${sd.plan!=null?' · план '+sd.plan:''}`,'не записан: 1% / 4% / 10% по горизонту')},
       cal:{t:'Календарь впереди',v:`${R.events.filter(e=>e.kind!=='final'&&e.date>=TODAY).length} турниров`,s:`${R.events.filter(e=>e.kind!=='final'&&e.stars>=4&&e.date>=TODAY).length} на 4–5★ · ${R.events.filter(e=>e.kind==='final'&&e.date>=TODAY).length} финалов`},
       ser:{t:'Серийный конвейер',v:v(sd&&(sd.finals_q.length?`в финале: ${sd.finals_q.join(', ')}`:'финалов нет'),'серии → финал'),s:v(sd&&(sd.finals_c.length?`кандидат: ${sd.finals_c.join(', ')}`:'серийных слотов занято '+T0.ser+' из 2'),'топ-2 серии / сумма двух / средний балл')},
       bank:{t:'Банк Σ (десятка)',v:v(r&&`Σ ${fmt(r.sigma)} → ≈${fmt(sd.sum_exp)}`,'Σ = 10 лучших, ≤2 серийных'),s:v(r&&`коридор ${fmt(sd.sum_p10)}–${fmt(sd.sum_p90)} · #${r.rank}`,'что лежит в зачёте сейчас')},
@@ -811,7 +831,7 @@ function initRace(){
     const NOTE={
       beta:`<h4>Сила (долгая)</h4>Место игрока среди соперников по всем турнирам с 2023 (свежее весомее: 1 / 0,5 / 0,25 по годам), модель Plackett-Luce. Опора — ELO маркеров: β ≈ ${(M.elo_fit&&M.elo_fit.a||0).toFixed(2)} + ${(M.elo_fit&&M.elo_fit.b_per100||0).toFixed(2)} на каждые 100 ELO (объясняет ${Math.round((M.elo_fit&&M.elo_fit.r2||0)*100)}% разброса у игроков с 10+ турнирами). Чем меньше турниров, тем сильнее оценка прижата к ELO и тем шире σ. ${sd?`<b>${r.nick}:</b> β ${sd.beta_long.toFixed(2)} ± ${sd.sigma.toFixed(2)} при ${fmt(sd.n_eff)} турнирах; опора по ELO ${sd.elo||'—'} была бы ${sd.mu.toFixed(2)}.`:''}`,
       form:`<h4>Форма сезона</h4>Та же оценка, но только по турнирам 2026 — насколько игрок в этом году выше или ниже своей долгой силы. Вперёд переносится половина (ρ = ${M.rho||0.5}): на осени 2024 и 2025 так предсказывалось лучше, чем «забыть сезон» или «верить ему целиком». Это петля B3 — возврат к уровню. ${sd?`<b>${r.nick}:</b> форма ${sd.form>=0?'+':''}${sd.form.toFixed(2)} по ${fmt(sd.n_season)} турнирам 2026 → в расчёт идёт β ${sd.beta_fwd.toFixed(2)}.`:''}`,
-      att:`<h4>Желание ездить (явка)</h4>Вероятность сыграть каждый турнир впереди: логит по темпу за год и за последние 3,5 месяца, своя ли страна, бывал ли там, звёзды, тип, место в гонке и квартал. Поверх — экспертный вес турнира, нормировка (топ-20 ≈ ${M.target&&M.target.top20||5.5} стартов, места 21–30 ≈ ${M.target&&M.target.top30||4}), слова игрока о планах и заявки (подтверждён ≥ 0,9, заявка ≥ 0,6). Петля R1: у мест 1–25 явка ×${M.race_boost||1.5}. ${sd?`<b>${r.nick}:</b> за год ${sd.starts_365} стартов из ${sd.n_ev_365} турниров, за 3,5 месяца ${sd.starts_105}; заявок ${sd.n_regs}${sd.plan!=null?`, план по словам — ${sd.plan}`:''}; модель ждёт ≈${sd.played_exp.toFixed(1)}.`:''}`,
+      att:`<h4>Желание ездить (явка)</h4>Вероятность сыграть каждый турнир впереди: логит по темпу за год и за последние 3,5 месяца, своя ли страна, бывал ли там, звёзды, тип, место в гонке и квартал. Поверх — экспертный вес турнира и слова игрока о планах. Главное — заявка и срок: по истории календаря (26.08–19.10, 11 турниров) подтверждённый играет в 97/92/82/62% случаев за ≤7/≤14/≤28/29+ дней, заявка — 100/100/88/75%, <b>не записанный — 0/1/4/10%</b>. Незаписанных модель сжимает к этим уровням; в розыгрыше работает петля R1: кто по ходу сезона в 25 баллах от планки, дозаписывается в 1,6 раза чаще, кто дальше 55 — в 0,6 (ГИПОТЕЗА, снимков календаря для проверки пока два месяца). Петля R1: у мест 1–25 явка ×${M.race_boost||1.5}. ${sd?`<b>${r.nick}:</b> за год ${sd.starts_365} стартов из ${sd.n_ev_365} турниров, за 3,5 месяца ${sd.starts_105}; заявок ${sd.n_regs}${sd.plan!=null?`, план по словам — ${sd.plan}`:''}; модель ждёт ≈${sd.played_exp.toFixed(1)}.`:''}`,
       cal:`<h4>Календарь впереди</h4>Запас, который только тает (B2). Каждый турнир — звёзды, ожидаемое поле и сетка баллов такого же турнира в прошлом. В один день играется один турнир. Полный пул — вкладка 03.`,
       ser:`<h4>Серийный конвейер</h4>Серии → квалификация по регламенту контура (топ-2 серии, сумма двух лучших, средний балл) → финал. Кто прошёл — играет почти наверняка; кандидаты с оставшихся серий — с шансом ≈ 0,2 × явка. Финал ложится в один из двух серийных слотов десятки (R3). ${sd?`<b>${r.nick}:</b> ${sd.finals_q.length?'прошёл в '+sd.finals_q.join(', '):'в финалы пока не прошёл'}${sd.finals_c.length?'; кандидат в '+sd.finals_c.join(', '):''}; серийных слотов занято ${T0.ser} из 2.`:''}`,
       res:`<h4>Результат старта</h4>В каждом розыгрыше: сила игрока (из коридора β ± σ) плюс случайный шум против всех, кто приехал, и фона → место → баллы по сетке. ${sd?`<b>${r.nick}:</b> на 4★ при поле 40 — топ-5 в ${Math.round(sd.q5*100)}% розыгрышей, топ-10 в ${Math.round(sd.q10*100)}%, в среднем ${fmt(sd.pts_per_start)} баллов за старт (до вытеснения хвоста).`:''}`,
@@ -869,8 +889,8 @@ function initRace(){
         const med=a=>{const b=[...a].sort((x,y)=>x-y);return b[Math.floor(b.length/2)]};
         const expK=p=>{let k=0;for(let e=0;e<EV.length;e++){let pr;if(st.att==='regs'){pr=p.reg[e]===1?0.95:p.reg[e]===0?0.7:0}else{pr=Math.min(0.97,p.p[e]*attMult);if(p.reg[e]===1)pr=Math.max(pr,0.9);else if(p.reg[e]===0)pr=Math.max(pr,0.6)}k+=pr}return k};
         const rows=P.map((p,i)=>({p,i,c:cnt[i],med:med(sums[i]),k:expK(p)})).sort((a,b)=>b.c-a.c||b.med-a.med).slice(0,24);
-        const attTxt=st.att==='regs'?'только уже записанные + финалы серийников':'прогноз посещений (топ-20 — 5–6 турниров, места 21–30 — около 4)';
-        const lvlTxt={'обычно':'ездят как обычно','стараются':'ездят активно: топ-20 ~6–7 турниров','максимум':'по максимуму: топ-20 ~7–8 турниров'}[st.lvl];
+        const attTxt=st.att==='regs'?'только уже записанные + финалы серийников':'записанные по срокам + дозапись как в истории (1–10%)';
+        const lvlTxt={'обычно':'дозапись как обычно','стараются':'дозапись в 1,5 раза чаще','максимум':'дозапись в 2,5 раза чаще'}[st.lvl];
         const formTxt={all:'сила по модели (ELO-опора + форма сезона)',y12:'сила по последним 12 месяцам',y26:'сила только по 2026 году'}[st.form];
         $('#genOut').innerHTML=`<div class="genhead"><b>${N} сезонов</b><span>${attTxt}</span><span>${lvlTxt}</span><span>${formTxt}</span><span>12-е место в среднем: <b>${fmt(med(thr))}</b></span></div>
           <table class="gen"><thead><tr><th>#</th><th>игрок</th><th>в дюжине</th><th title="сколько обычных турниров игрок сыграет в среднем при выбранной явке; финалы серийников — сверх этого">турниров</th><th>Σ в среднем</th><th>сейчас</th></tr></thead><tbody>

@@ -1,4 +1,4 @@
-"""gd_sim · v2.1 · 2026-10-20 (C 1.4→1.0 по калибровке верха: модель завышала долю топ-5 у топ-40 в 1,5 раза — calib_top5.py) · v2.0 · 2026-10-19 (сила v2: gd_strength2 — ELO-prior, усадка по числу турниров, σ силы тянется в каждом розыгрыше, форма сезона; один турнир в день на игрока; фильтр «Отмена» в названии; переключатель STRENGTH) · v1.4 · 2026-10-13 (финалы серийников 2026 — сетка федерации) · v1.3 · 2026-10-13 (калибровка C=1.4, RACE_BOOST=1.5 по бэктесту 2024+2025; явка со «свежим темпом» gd_attend v1.1) · v1.2 · 2026-09-21 (TARGET_TOP20_MEAN: явка топ-20 отдельно) · v1.1 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
+"""gd_sim · v2.2 · 2026-10-20 (явка v2: статус заявки × дни до старта по истории календаря 26.08–19.10 (подтверждён 0.97/0.92/0.82/0.62, заявка 1.0/1.0/0.88/0.75, НЕ записан 0.00/0.01/0.04/0.10 по горизонтам ≤7/≤14/≤28/29+ дней); для незаписанных — модельная p, сжатая к этим уровням; петля R1 внутри розыгрыша: незаписанный турнир с горизонтом 15+ дней — p ×1.6 если игрок по ходу сезона в 25 баллах от планки, ×0.6 если дальше 55 (ГИПОТЕЗА); нормировка TARGET_* отключается при LEAD_RULE) · v2.1 · 2026-10-20 (C 1.4→1.0 по калибровке верха: модель завышала долю топ-5 у топ-40 в 1,5 раза — calib_top5.py) · v2.0 · 2026-10-19 (сила v2: gd_strength2 — ELO-prior, усадка по числу турниров, σ силы тянется в каждом розыгрыше, форма сезона; один турнир в день на игрока; фильтр «Отмена» в названии; переключатель STRENGTH) · v1.4 · 2026-10-13 (финалы серийников 2026 — сетка федерации) · v1.3 · 2026-10-13 (калибровка C=1.4, RACE_BOOST=1.5 по бэктесту 2024+2025; явка со «свежим темпом» gd_attend v1.1) · v1.2 · 2026-09-21 (TARGET_TOP20_MEAN: явка топ-20 отдельно) · v1.1 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
 import numpy as np, datetime, collections
 import gd_data as g
 from gd_strength import rankings_before, fit_pl
@@ -38,6 +38,11 @@ def cand_from_future(future):
 EVENT_WEIGHT={}
 TARGET_TOP30_MEAN=None   # среднее число обычных турниров до конца года у мест 21–30 гонки
 TARGET_TOP20_MEAN=None   # то же для мест 1–20 (Валерий 21.09: «у топ-20 явка будет под 5–6, реалистично»); None → как топ-30
+LEAD_RULE=True   # v2.2: явка по заявкам и срокам (см. шапку); False — старая нормировка TARGET_*
+LEAD_CONF={7:0.97,14:0.92,28:0.82,999:0.62}; LEAD_APP={7:1.0,14:1.0,28:0.88,999:0.75}; LEAD_NONE={14:0.01,28:0.04,999:0.10}   # FACT: история календаря, 11 турниров, топ-40
+LEAD_NONE_MULT=1.0   # сценарии планки: множитель к уровню явки незаписанных (1 / 1.5 / 2.5)
+R1_NEAR,R1_FAR,R1_UP,R1_DOWN,R1_MINLEAD=25,55,1.6,0.6,15   # ГИПОТЕЗА: петля «близко к планке → едет чаще» для незаписанных турниров
+THR_REF=None   # ориентир планки для петли R1 (баллы); None → 1.3 × текущая Σ 12-го
 RACE_BETA_SHIFT=0.0   # сценарии «стараются»/«звери»: сдвиг силы топ-30 относительно фона   # если задано — явка масштабируется так, чтобы у топ-30 гонки среднее число обычных турниров = это
 
 class Season:
@@ -103,7 +108,7 @@ class Season:
             for u in self.pool:
                 f=ev['regs'].get(u)
                 if f is None: ev['p'][u]=min(0.97,ev['p'][u]*a)
-        if TARGET_TOP30_MEAN:
+        if TARGET_TOP30_MEAN and not (LEAD_RULE and cal_future is not None):
             ps=set(self.pool)
             groups=[([u for u,r in self.race.items() if r<=20 and u in ps], TARGET_TOP20_MEAN or TARGET_TOP30_MEAN),
                     ([u for u,r in self.race.items() if 20<r<=30 and u in ps], TARGET_TOP30_MEAN)]
@@ -133,7 +138,28 @@ class Season:
                 for ev in regs:
                     f=ev['regs'].get(u); floor=0.9 if f==1 else 0.6 if f==0 else 0.0
                     ev['p'][u]=max(floor,min(0.97,ev['p'][u]*k))
-        for ev in regs: ev['pv']=np.array([ev['p'][u] for u in self.pool])
+        if LEAD_RULE and cal_future is not None:
+            import datetime as _dt
+            Td=_dt.date.fromisoformat(T); top40=set(u for u,r in self.race.items() if r<=40)
+            def _lv(tab,lead):
+                for k in sorted(tab):
+                    if lead<=k: return tab[k]
+                return tab[max(tab)]
+            for ev in regs:
+                lead=(_dt.date.fromisoformat(ev['date'])-Td).days; ev['lead']=lead
+                # записанные — по статусу и сроку
+                for u in self.pool:
+                    f=ev['regs'].get(u)
+                    if f==1: ev['p'][u]=_lv(LEAD_CONF,lead)
+                    elif f==0: ev['p'][u]=_lv(LEAD_APP,lead)
+                # незаписанные: сжимаем модельную p так, чтобы среднее по незаписанным из топ-40 = эмпирический уровень горизонта
+                un=[u for u in top40 if ev['regs'].get(u) is None and u in self.pool]
+                tgt=_lv(LEAD_NONE,lead)*LEAD_NONE_MULT; cur=np.mean([ev['p'][u] for u in un]) if un else 0
+                k=(tgt/cur) if cur>0 else 0
+                for u in self.pool:
+                    if ev['regs'].get(u) is None: ev['p'][u]=min(0.6,ev['p'][u]*k)
+        for ev in regs: ev['pv']=np.array([ev['p'][u] for u in self.pool]); ev['unreg']=np.array([ev['regs'].get(u) is None for u in self.pool])
+        self.thr_ref=THR_REF or 1.3*(g.standings(year,T)[11][0] if len(g.standings(year,T))>11 else 100)
         if verbose:
             print(f'Season {year} T={T}: событий {len(self.events)} (контуров {sum(1 for e in self.events if e["type"]=="contour")}), пул {len(self.pool)}, сила из {len(self.beta)} игроков')
 
@@ -221,7 +247,11 @@ class Season:
                     for u in ev['part']:
                         if u in idx and u not in got: recs[idx[u]].append((ev['base'],1)); new_ser[idx[u]]+=ev['base']
                     continue
-                pv=ev['pv']*gam; ids=[pool[i] for i in np.nonzero(rng.random(n)<pv)[0]]
+                pv=ev['pv']*gam
+                if LEAD_RULE and ev.get('lead',0)>=R1_MINLEAD and ev.get('unreg') is not None:
+                    cur=np.array([g.best10(r) for r in recs]); gap=self.thr_ref-cur
+                    m=np.where(gap<=R1_NEAR,R1_UP,np.where(gap<=R1_FAR,1.0,R1_DOWN)); pv=np.where(ev['unreg'],np.minimum(0.6,pv*m),pv)
+                ids=[pool[i] for i in np.nonzero(rng.random(n)<pv)[0]]
                 if force:
                     for u,evs in force.items():
                         if ev['id'] in evs and u not in ids: ids.append(u)
