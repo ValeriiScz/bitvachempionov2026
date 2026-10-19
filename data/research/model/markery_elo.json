@@ -1,0 +1,997 @@
+{
+"snapshot": "2026-10-19",
+"note": "сборка из data/elo_*.json: markery global ELO + тир (свежайший снимок по игроку: ЧМ 08.09, ЧМД 09.10, Central Cup 15.10); elo_year — ELO за 2026, снят только 03.07 для 40 игроков (устарел, в prior не идёт, пока не пересняли)",
+"dates": {
+"634": "2026-06-19",
+"667": "2026-06-13",
+"673": "2026-10-09",
+"692": "2026-10-15",
+"694": "2026-08-24",
+"702": "2026-07-03",
+"710": "2026-09-08",
+"766": "2026-06-25"
+},
+"players": {
+"44": {
+"nick": "KEX",
+"elo_all": 1454,
+"date_all": "2026-10-15",
+"mk_tournaments": 139,
+"tier": "S"
+},
+"480": {
+"nick": "Jerry Hurper",
+"elo_all": 1093,
+"date_all": "2026-10-15",
+"mk_tournaments": 43,
+"elo_year": 1013,
+"date_year": "2026-07-03",
+"tier": "B"
+},
+"101": {
+"nick": "YeS",
+"elo_all": 1458,
+"date_all": "2026-09-08",
+"mk_tournaments": 105,
+"tier": "S"
+},
+"833": {
+"nick": "Kokocik",
+"elo_all": 1002,
+"date_all": "2026-09-08",
+"mk_tournaments": 38,
+"tier": "C"
+},
+"527": {
+"nick": "Katusha",
+"elo_all": 1004,
+"date_all": "2026-07-03",
+"mk_tournaments": 8,
+"elo_year": 1024,
+"date_year": "2026-07-03"
+},
+"263": {
+"nick": "Tripok",
+"elo_all": 1244,
+"date_all": "2026-10-15",
+"mk_tournaments": 28,
+"elo_year": 1047,
+"date_year": "2026-07-03",
+"tier": "A"
+},
+"3090": {
+"nick": "Ксюша",
+"elo_all": 1123,
+"date_all": "2026-06-19",
+"mk_tournaments": 67
+},
+"499": {
+"nick": "RAMZES",
+"elo_all": 1219,
+"date_all": "2026-09-08",
+"mk_tournaments": 40,
+"elo_year": 993,
+"date_year": "2026-07-03",
+"tier": "A"
+},
+"825": {
+"nick": "Niko",
+"elo_all": 1426,
+"date_all": "2026-09-08",
+"mk_tournaments": 46,
+"tier": "S"
+},
+"709": {
+"nick": "ParadoXx",
+"elo_all": 1163,
+"date_all": "2026-10-15",
+"mk_tournaments": 26,
+"elo_year": 1093,
+"date_year": "2026-07-03",
+"tier": "B"
+},
+"1493": {
+"nick": "DOVOD",
+"elo_all": 1211,
+"date_all": "2026-10-15",
+"mk_tournaments": 31,
+"elo_year": 1090,
+"date_year": "2026-07-03",
+"tier": "A"
+},
+"1495": {
+"nick": "TOPS",
+"elo_all": 1038,
+"date_all": "2026-10-15",
+"mk_tournaments": 17,
+"tier": "C"
+},
+"704": {
+"nick": "qUAest0r",
+"elo_all": 991,
+"date_all": "2026-10-15",
+"mk_tournaments": 31,
+"tier": "D"
+},
+"961": {
+"nick": "Putnik",
+"elo_all": 1000,
+"date_all": "2026-06-19",
+"mk_tournaments": 11
+},
+"702": {
+"nick": "AquaMarine",
+"elo_all": 987,
+"date_all": "2026-07-03",
+"mk_tournaments": 11,
+"elo_year": 989,
+"date_year": "2026-07-03"
+},
+"1307": {
+"nick": "Link",
+"elo_all": 932,
+"date_all": "2026-10-15",
+"mk_tournaments": 11,
+"tier": "E"
+},
+"471": {
+"nick": "sometimes",
+"elo_all": 1051,
+"date_all": "2026-10-15",
+"mk_tournaments": 13,
+"tier": "C"
+},
+"792": {
+"nick": "ШТО?",
+"elo_all": 1067,
+"date_all": "2026-09-08",
+"mk_tournaments": 36,
+"elo_year": 1056,
+"date_year": "2026-07-03",
+"tier": "C"
+},
+"3019": {
+"nick": "Designer",
+"elo_all": 939,
+"date_all": "2026-06-19",
+"mk_tournaments": 8
+},
+"573": {
+"nick": "Funt",
+"elo_all": 1001,
+"date_all": "2026-10-15",
+"mk_tournaments": 15,
+"tier": "C"
+},
+"1400": {
+"nick": "Donna",
+"elo_all": 830,
+"date_all": "2026-09-08",
+"mk_tournaments": 25,
+"elo_year": 903,
+"date_year": "2026-07-03",
+"tier": "F"
+},
+"199": {
+"nick": "Клото",
+"elo_all": 1109,
+"date_all": "2026-09-08",
+"mk_tournaments": 105,
+"elo_year": 1050,
+"date_year": "2026-07-03",
+"tier": "B"
+},
+"408": {
+"nick": "Провокатор",
+"elo_all": 867,
+"date_all": "2026-07-03",
+"mk_tournaments": 10,
+"elo_year": 947,
+"date_year": "2026-07-03"
+},
+"765": {
+"nick": "Specchio",
+"elo_all": 970,
+"date_all": "2026-06-25",
+"mk_tournaments": 10
+},
+"2602": {
+"nick": "Магнат",
+"elo_all": 1132,
+"date_all": "2026-10-15",
+"mk_tournaments": 17,
+"elo_year": 1144,
+"date_year": "2026-07-03",
+"tier": "B"
+},
+"2844": {
+"nick": "Sarcazi.!",
+"elo_all": 985,
+"date_all": "2026-07-03",
+"mk_tournaments": 3,
+"elo_year": 985,
+"date_year": "2026-07-03"
+},
+"2871": {
+"nick": "yesterday",
+"elo_all": 991,
+"date_all": "2026-10-15",
+"mk_tournaments": 2,
+"elo_year": 1024,
+"date_year": "2026-07-03",
+"tier": "D"
+},
+"689": {
+"nick": "Akteur",
+"elo_all": 992,
+"date_all": "2026-10-09",
+"mk_tournaments": 15,
+"elo_year": 1007,
+"date_year": "2026-07-03",
+"tier": "D"
+},
+"659": {
+"nick": "Ириска",
+"elo_all": 1023,
+"date_all": "2026-09-08",
+"mk_tournaments": 19,
+"elo_year": 1021,
+"date_year": "2026-07-03",
+"tier": "C"
+},
+"604": {
+"nick": "Царь",
+"elo_all": 1007,
+"date_all": "2026-06-19",
+"mk_tournaments": 13
+},
+"68": {
+"nick": "Саботаж",
+"elo_all": 1330,
+"date_all": "2026-10-15",
+"mk_tournaments": 65,
+"tier": "S"
+},
+"2606": {
+"nick": "Малышка Мю",
+"elo_all": 783,
+"date_all": "2026-09-08",
+"mk_tournaments": 32,
+"tier": "F"
+},
+"201": {
+"nick": "LogisticPro",
+"elo_all": 1173,
+"date_all": "2026-09-08",
+"mk_tournaments": 26,
+"tier": "B"
+},
+"3103": {
+"nick": "Джоук",
+"elo_all": 987,
+"date_all": "2026-07-03",
+"mk_tournaments": 3,
+"elo_year": 987,
+"date_year": "2026-07-03"
+},
+"1263": {
+"nick": "Живи",
+"elo_all": 1011,
+"date_all": "2026-06-19",
+"mk_tournaments": 5
+},
+"264": {
+"nick": "Призрак",
+"elo_all": 1189,
+"date_all": "2026-09-08",
+"mk_tournaments": 97,
+"elo_year": 1009,
+"date_year": "2026-07-03",
+"tier": "B"
+},
+"470": {
+"nick": "Скорбный",
+"elo_all": 973,
+"date_all": "2026-07-03",
+"mk_tournaments": 5,
+"elo_year": 998,
+"date_year": "2026-07-03"
+},
+"1942": {
+"nick": "Zorro",
+"elo_all": 974,
+"date_all": "2026-06-19",
+"mk_tournaments": 9
+},
+"1198": {
+"nick": "Zico",
+"elo_all": 922,
+"date_all": "2026-07-03",
+"mk_tournaments": 29,
+"elo_year": 990,
+"date_year": "2026-07-03"
+},
+"2139": {
+"nick": "Гіппократ",
+"elo_all": 975,
+"date_all": "2026-07-03",
+"mk_tournaments": 10,
+"elo_year": 1002,
+"date_year": "2026-07-03"
+},
+"1333": {
+"nick": "Licht",
+"elo_all": 1189,
+"date_all": "2026-07-03",
+"mk_tournaments": 45,
+"elo_year": 1098,
+"date_year": "2026-07-03"
+},
+"2979": {
+"nick": "Haski",
+"elo_all": 994,
+"date_all": "2026-07-03",
+"mk_tournaments": 2,
+"elo_year": 994,
+"date_year": "2026-07-03"
+},
+"711": {
+"nick": "Sancho",
+"elo_all": 1066,
+"date_all": "2026-09-08",
+"mk_tournaments": 8,
+"tier": "C"
+},
+"1413": {
+"nick": "Гамбитик",
+"elo_all": 945,
+"date_all": "2026-06-19",
+"mk_tournaments": 14
+},
+"532": {
+"nick": "Нико",
+"elo_all": 909,
+"date_all": "2026-08-24",
+"mk_tournaments": 10
+},
+"288": {
+"nick": "Jane",
+"elo_all": 1182,
+"date_all": "2026-06-25",
+"mk_tournaments": 45
+},
+"272": {
+"nick": "Сакура",
+"elo_all": 999,
+"date_all": "2026-06-25",
+"mk_tournaments": 15
+},
+"143": {
+"nick": "Добрейший",
+"elo_all": 914,
+"date_all": "2026-06-25",
+"mk_tournaments": 24
+},
+"1598": {
+"nick": "Mjata",
+"elo_all": 1024,
+"date_all": "2026-06-25",
+"mk_tournaments": 12
+},
+"1599": {
+"nick": "Mulder",
+"elo_all": 967,
+"date_all": "2026-06-25",
+"mk_tournaments": 9
+},
+"227": {
+"nick": "Sever",
+"elo_all": 949,
+"date_all": "2026-10-15",
+"mk_tournaments": 21,
+"tier": "D"
+},
+"1398": {
+"nick": "Сью",
+"elo_all": 1238,
+"date_all": "2026-10-15",
+"mk_tournaments": 34,
+"tier": "A"
+},
+"2588": {
+"nick": "Tykva",
+"elo_all": 971,
+"date_all": "2026-06-25",
+"mk_tournaments": 5
+},
+"3044": {
+"nick": "Golubchik",
+"elo_all": 966,
+"date_all": "2026-10-15",
+"mk_tournaments": 2,
+"tier": "D"
+},
+"1657": {
+"nick": "Maverick",
+"elo_all": 1033,
+"date_all": "2026-10-15",
+"mk_tournaments": 19,
+"elo_year": 1017,
+"date_year": "2026-07-03",
+"tier": "C"
+},
+"863": {
+"nick": "Phoenix",
+"elo_all": 1283,
+"date_all": "2026-06-25",
+"mk_tournaments": 67
+},
+"2508": {
+"nick": "Konark",
+"elo_all": 976,
+"date_all": "2026-06-25",
+"mk_tournaments": 3
+},
+"1054": {
+"nick": "Котяра",
+"elo_all": 970,
+"date_all": "2026-06-25",
+"mk_tournaments": 6
+},
+"1992": {
+"nick": "Legion 🇺🇦",
+"elo_all": 963,
+"date_all": "2026-06-25",
+"mk_tournaments": 5
+},
+"2862": {
+"nick": "Afina",
+"elo_all": 949,
+"date_all": "2026-06-25",
+"mk_tournaments": 12
+},
+"561": {
+"nick": "Tapok",
+"elo_all": 947,
+"date_all": "2026-06-25",
+"mk_tournaments": 13
+},
+"2399": {
+"nick": "Ёжик",
+"elo_all": 915,
+"date_all": "2026-06-25",
+"mk_tournaments": 7
+},
+"1358": {
+"nick": "aptah",
+"elo_all": 1085,
+"date_all": "2026-10-15",
+"mk_tournaments": 51,
+"tier": "B"
+},
+"1417": {
+"nick": "Ru",
+"elo_all": 909,
+"date_all": "2026-09-08",
+"mk_tournaments": 21,
+"tier": "E"
+},
+"1050": {
+"nick": "Lюц",
+"elo_all": 1374,
+"date_all": "2026-10-15",
+"mk_tournaments": 37,
+"tier": "S"
+},
+"2134": {
+"nick": "Raise 📈",
+"elo_all": 1080,
+"date_all": "2026-06-25",
+"mk_tournaments": 36
+},
+"2400": {
+"nick": "Malvina",
+"elo_all": 943,
+"date_all": "2026-10-15",
+"mk_tournaments": 2,
+"tier": "D"
+},
+"1799": {
+"nick": "Светлый",
+"elo_all": 977,
+"date_all": "2026-10-15",
+"mk_tournaments": 11,
+"tier": "D"
+},
+"1481": {
+"nick": "Landing",
+"elo_all": 1028,
+"date_all": "2026-09-08",
+"mk_tournaments": 12,
+"tier": "C"
+},
+"2329": {
+"nick": "Судья",
+"elo_all": 978,
+"date_all": "2026-06-25",
+"mk_tournaments": 8
+},
+"2966": {
+"nick": "Jinn",
+"elo_all": 986,
+"date_all": "2026-06-25",
+"mk_tournaments": 1
+},
+"472": {
+"nick": "Абрам",
+"elo_all": 922,
+"date_all": "2026-07-03",
+"mk_tournaments": 79
+},
+"980": {
+"nick": "El_professor",
+"elo_all": 997,
+"date_all": "2026-07-03",
+"elo_year": 997,
+"date_year": "2026-07-03"
+},
+"255": {
+"nick": "Стикс",
+"elo_all": 930,
+"date_all": "2026-07-03",
+"mk_tournaments": 22
+},
+"274": {
+"nick": "Гагарин",
+"elo_all": 995,
+"date_all": "2026-07-03",
+"elo_year": 989,
+"date_year": "2026-07-03",
+"mk_tournaments": 45
+},
+"2378": {
+"nick": "Amor",
+"elo_all": 927,
+"date_all": "2026-07-03",
+"elo_year": 933,
+"date_year": "2026-07-03",
+"mk_tournaments": 10
+},
+"214": {
+"nick": "Леди Luz",
+"elo_all": 883,
+"date_all": "2026-09-08",
+"elo_year": 887,
+"date_year": "2026-07-03",
+"mk_tournaments": 57,
+"tier": "F"
+},
+"376": {
+"nick": "Sova",
+"elo_all": 974,
+"date_all": "2026-07-03",
+"mk_tournaments": 4
+},
+"327": {
+"nick": "Eskimo.",
+"elo_all": 1464,
+"date_all": "2026-09-08",
+"elo_year": 1071,
+"date_year": "2026-07-03",
+"tier": "S"
+},
+"729": {
+"nick": "ShakAl",
+"elo_all": 1027,
+"date_all": "2026-07-03",
+"mk_tournaments": 8
+},
+"224": {
+"nick": "Sэм",
+"elo_all": 928,
+"date_all": "2026-07-03",
+"elo_year": 947,
+"date_year": "2026-07-03",
+"mk_tournaments": 50
+},
+"1079": {
+"nick": "Armia",
+"elo_all": 869,
+"date_all": "2026-07-03",
+"elo_year": 952,
+"date_year": "2026-07-03",
+"mk_tournaments": 16
+},
+"600": {
+"nick": "August",
+"elo_all": 1013,
+"date_all": "2026-07-03",
+"elo_year": 1013,
+"date_year": "2026-07-03",
+"mk_tournaments": 34
+},
+"517": {
+"nick": "FaYcT",
+"elo_all": 975,
+"date_all": "2026-07-03",
+"mk_tournaments": 11
+},
+"661": {
+"nick": "Onegog",
+"elo_all": 933,
+"date_all": "2026-07-03",
+"mk_tournaments": 14
+},
+"920": {
+"nick": "Lady in Black",
+"elo_all": 973,
+"date_all": "2026-07-03",
+"mk_tournaments": 10
+},
+"2616": {
+"nick": "Viper_sh",
+"elo_all": 993,
+"date_all": "2026-07-03",
+"mk_tournaments": 1
+},
+"1642": {
+"nick": "Kleo",
+"elo_all": 936,
+"date_all": "2026-10-15",
+"tier": "E"
+},
+"2928": {
+"nick": "Badwin",
+"elo_all": 988,
+"date_all": "2026-08-24"
+},
+"280": {
+"nick": "Season's",
+"elo_all": 1109,
+"date_all": "2026-08-24"
+},
+"282": {
+"nick": "Марселия",
+"elo_all": 833,
+"date_all": "2026-08-24"
+},
+"187": {
+"nick": "Комар",
+"elo_all": 1540,
+"date_all": "2026-08-24"
+},
+"2014": {
+"nick": "КуКуСиК",
+"elo_all": 962,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"2612": {
+"nick": "Дийкстра",
+"elo_all": 1106,
+"date_all": "2026-08-24"
+},
+"287": {
+"nick": "Буржуй",
+"elo_all": 1218,
+"date_all": "2026-10-15",
+"tier": "A"
+},
+"317": {
+"nick": "Мини",
+"elo_all": 1098,
+"date_all": "2026-08-24"
+},
+"623": {
+"nick": "Skywalker",
+"elo_all": 992,
+"date_all": "2026-08-24"
+},
+"185": {
+"nick": "Blackout",
+"elo_all": 1063,
+"date_all": "2026-10-15",
+"tier": "C"
+},
+"378": {
+"nick": "Yokai",
+"elo_all": 1227,
+"date_all": "2026-08-24"
+},
+"379": {
+"nick": "Mr. Trust",
+"elo_all": 964,
+"date_all": "2026-08-24"
+},
+"273": {
+"nick": "Urs",
+"elo_all": 812,
+"date_all": "2026-10-09",
+"tier": "F"
+},
+"140": {
+"nick": "Panda Kung-Fu",
+"elo_all": 959,
+"date_all": "2026-08-24"
+},
+"3035": {
+"nick": "Sura",
+"elo_all": 1009,
+"date_all": "2026-08-24"
+},
+"257": {
+"nick": "JadeYogg",
+"elo_all": 1031,
+"date_all": "2026-08-24"
+},
+"569": {
+"nick": "Flash",
+"elo_all": 1719,
+"date_all": "2026-09-08",
+"tier": "L"
+},
+"118": {
+"nick": "f5",
+"elo_all": 1717,
+"date_all": "2026-09-08",
+"tier": "L"
+},
+"650": {
+"nick": "Tommy",
+"elo_all": 1573,
+"date_all": "2026-09-08",
+"tier": "S"
+},
+"1049": {
+"nick": "Фортуна",
+"elo_all": 1236,
+"date_all": "2026-09-08",
+"tier": "A"
+},
+"1031": {
+"nick": "Bard",
+"elo_all": 1268,
+"date_all": "2026-10-09",
+"tier": "A"
+},
+"2547": {
+"nick": "Gangster",
+"elo_all": 1280,
+"date_all": "2026-10-15",
+"tier": "A"
+},
+"2589": {
+"nick": "Flame",
+"elo_all": 1216,
+"date_all": "2026-09-08",
+"tier": "A"
+},
+"890": {
+"nick": "Грешник",
+"elo_all": 1187,
+"date_all": "2026-09-08",
+"tier": "B"
+},
+"891": {
+"nick": "Blessed",
+"elo_all": 1142,
+"date_all": "2026-09-08",
+"tier": "B"
+},
+"152": {
+"nick": "Не Злая",
+"elo_all": 1124,
+"date_all": "2026-09-08",
+"tier": "B"
+},
+"168": {
+"nick": "***Алиса***",
+"elo_all": 1062,
+"date_all": "2026-09-08",
+"tier": "C"
+},
+"2164": {
+"nick": "MadMax",
+"elo_all": 1051,
+"date_all": "2026-09-08",
+"tier": "C"
+},
+"13": {
+"nick": "Xenon",
+"elo_all": 980,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"2337": {
+"nick": "KRASNII",
+"elo_all": 1029,
+"date_all": "2026-10-09",
+"tier": "C"
+},
+"2935": {
+"nick": "Катанчик",
+"elo_all": 996,
+"date_all": "2026-09-08",
+"tier": "D"
+},
+"1440": {
+"nick": "Batman",
+"elo_all": 954,
+"date_all": "2026-09-08",
+"tier": "D"
+},
+"3348": {
+"nick": "Зима ❄️",
+"elo_all": 1001,
+"date_all": "2026-10-09",
+"tier": "C"
+},
+"43": {
+"nick": "Джошуа",
+"elo_all": 910,
+"date_all": "2026-09-08",
+"tier": "E"
+},
+"1575": {
+"nick": "Мартовский котик",
+"elo_all": 832,
+"date_all": "2026-09-08",
+"tier": "F"
+},
+"1596": {
+"nick": "adapt",
+"elo_all": 1022,
+"date_all": "2026-10-09",
+"tier": "C"
+},
+"787": {
+"nick": "DK",
+"elo_all": 1020,
+"date_all": "2026-10-09",
+"tier": "C"
+},
+"2425": {
+"nick": "Док",
+"elo_all": 979,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"2325": {
+"nick": "Арбуз",
+"elo_all": 954,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"3351": {
+"nick": "Repetitor",
+"elo_all": 978,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"922": {
+"nick": "Goodman",
+"elo_all": 955,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"2413": {
+"nick": "Chudo",
+"elo_all": 969,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"10": {
+"nick": "Север",
+"elo_all": 996,
+"date_all": "2026-10-09",
+"tier": "C"
+},
+"14": {
+"nick": "Luca",
+"elo_all": 1047,
+"date_all": "2026-10-09",
+"tier": "C"
+},
+"2397": {
+"nick": "Rivierra",
+"elo_all": 1016,
+"date_all": "2026-10-09",
+"tier": "C"
+},
+"1552": {
+"nick": "Dron",
+"elo_all": 1002,
+"date_all": "2026-10-09",
+"tier": "C"
+},
+"713": {
+"nick": "Grinch",
+"elo_all": 974,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"2211": {
+"nick": "Annvie",
+"elo_all": 1045,
+"date_all": "2026-10-09",
+"tier": "C"
+},
+"2456": {
+"nick": "OdИn",
+"elo_all": 987,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"2279": {
+"nick": "Vivа",
+"elo_all": 943,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"1063": {
+"nick": "Mermaid",
+"elo_all": 1048,
+"date_all": "2026-10-09",
+"tier": "C"
+},
+"2394": {
+"nick": "Vito",
+"elo_all": 975,
+"date_all": "2026-10-09",
+"tier": "D"
+},
+"3394": {
+"nick": "VVS",
+"elo_all": 1000,
+"date_all": "2026-10-09"
+},
+"2261": {
+"nick": "Kramola",
+"elo_all": 959,
+"date_all": "2026-10-15",
+"tier": "D"
+},
+"1351": {
+"nick": "Advokat",
+"elo_all": 975,
+"date_all": "2026-10-15",
+"tier": "D"
+},
+"1281": {
+"nick": "mobi.",
+"elo_all": 997,
+"date_all": "2026-10-15",
+"tier": "C"
+},
+"2870": {
+"nick": "Stimorol",
+"elo_all": 919,
+"date_all": "2026-10-15",
+"tier": "E"
+},
+"519": {
+"nick": "Antonio",
+"elo_all": 1016,
+"date_all": "2026-10-15",
+"tier": "C"
+},
+"461": {
+"nick": "Korolevich",
+"elo_all": 1296,
+"date_all": "2026-10-15",
+"tier": "A"
+},
+"245": {
+"nick": "Берлин",
+"elo_all": 1055,
+"date_all": "2026-10-15",
+"tier": "C"
+},
+"2522": {
+"nick": "Miss Belle",
+"elo_all": 930,
+"date_all": "2026-10-15",
+"tier": "E"
+}
+}
+}

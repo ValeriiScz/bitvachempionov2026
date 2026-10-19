@@ -1,10 +1,12 @@
-"""gd_sim · v1.4 · 2026-10-13 (финалы серийников 2026 — сетка федерации) · v1.3 · 2026-10-13 (калибровка C=1.4, RACE_BOOST=1.5 по бэктесту 2024+2025; явка со «свежим темпом» gd_attend v1.1) · v1.2 · 2026-09-21 (TARGET_TOP20_MEAN: явка топ-20 отдельно) · v1.1 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
+"""gd_sim · v2.0 · 2026-10-19 (сила v2: gd_strength2 — ELO-prior, усадка по числу турниров, σ силы тянется в каждом розыгрыше, форма сезона; один турнир в день на игрока; фильтр «Отмена» в названии; переключатель STRENGTH) · v1.4 · 2026-10-13 (финалы серийников 2026 — сетка федерации) · v1.3 · 2026-10-13 (калибровка C=1.4, RACE_BOOST=1.5 по бэктесту 2024+2025; явка со «свежим темпом» gd_attend v1.1) · v1.2 · 2026-09-21 (TARGET_TOP20_MEAN: явка топ-20 отдельно) · v1.1 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
 import numpy as np, datetime, collections
 import gd_data as g
 from gd_strength import rankings_before, fit_pl
 from gd_attend import Attend
 
 LAM, C = 0.1, 1.4
+STRENGTH='v2'     # 'v1' — старый PL с L2 к нулю; 'v2' — gd_strength2 (ELO-prior + σ + форма)
+STRENGTH_SIGMA=True   # v2: тянуть силу из N(β,σ²) в каждом розыгрыше (неопределённость оценки)
 # v1.3 (13.10.2026): C 1.1→1.4 и RACE_BOOST 1.0→1.5 — подобраны бэктестом с 14.09 на 2024 и 2025 (bt_calibrate.py):
 #   явка топ-30 осенью у модели была 2.8/3.4 старта против факта 4.0/4.2 (−30/−20 %), порог 12-го занижен на 15/10 %.
 #   После калибровки: старты 3.9/4.1, порог 106/134 при факте 113/144 (остаток ≈7 % закрывает поправка ×1.07 в сценариях),
@@ -44,8 +46,14 @@ class Season:
         # пул: игроки леджера, у которых есть хоть одна запись до T (иначе на дату T их в гонке не существовало)
         self.pool=[int(u) for u in g.L if any(r[2]<T for r in g.L[u]['rp'])]
         # сила
-        self.beta=fit_pl(rankings_before(T), lam=LAM)
-        vals=np.array(list(self.beta.values())); self.default=float(np.percentile(vals,30))
+        if STRENGTH=='v2':
+            import gd_strength2 as s2
+            self.strength=s2.Strength(T,year)
+            self.beta={u:self.strength.fwd(u) for u in self.strength.beta}; self.sigma={u:self.strength.sd(u) for u in self.strength.beta}
+            self.default=self.strength.default; self.default_sigma=self.strength.default_sigma
+        else:
+            self.beta=fit_pl(rankings_before(T), lam=LAM); self.sigma={}; self.default_sigma=0.0
+            vals=np.array(list(self.beta.values())); self.default=float(np.percentile(vals,30))
         poolset=set(self.pool)
         self.bg=np.array([b for u,b in self.beta.items() if u not in poolset]+[self.default]*int(0.6*len(self.beta)))
         # явка
@@ -69,11 +77,12 @@ class Season:
                     elif e['N']: self.events.append({'type':e['kind'],'id':e['id'],'date':e['date'],'stars':e['stars'],'country':e['country'],'N':e['N'],'name':e['name'],'regs':{}})
         else:
             for t in cal_future:
+                if t['name'].strip().lower().startswith('отмена'): continue   # v2.0: календарь иногда пишет «Отмена …» в названии без флага cancelled
                 if t['kind']=='serial_final': self.events.append(self.contour(t['id'],t['stars'],t['start'],t['name']))
                 else:
                     regs={u:f for u,n,f in t['regs']}
                     self.events.append({'type':t['kind'],'id':t['id'],'date':t['start'],'stars':t['stars'],'country':t['country'],'N':t['exp'] or 30,'name':t['name'],'regs':regs})
-        self.events.sort(key=lambda e:e['date'])
+        self.events.sort(key=lambda e:(e['date'],-e['stars']))   # в один день — сначала крупнее: игрок играет один турнир в день
         # p явки для regular/teams
         for ev in self.events:
             if ev['type']=='contour': continue
@@ -187,19 +196,23 @@ class Season:
         """force: {uid: set(event ids)} — принудительная явка. Возвращает результаты."""
         rng=np.random.default_rng(seed)
         pool=self.pool; idx={u:i for i,u in enumerate(pool)}; n=len(pool)
-        beta=np.array([self.beta.get(u,self.default)+(RACE_BETA_SHIFT if self.race.get(u,999)<=30 else 0) for u in pool])*C
+        beta0=np.array([self.beta.get(u,self.default)+(RACE_BETA_SHIFT if self.race.get(u,999)<=30 else 0) for u in pool])*C
+        sig0=np.array([self.sigma.get(u,self.default_sigma) for u in pool])*C if (STRENGTH=='v2' and STRENGTH_SIGMA) else np.zeros(n)
         top12=np.zeros(n); top30=np.zeros(n); sums=np.zeros((S,n)); thr=np.zeros(S); played=np.zeros(n); new_reg=np.zeros(n); new_ser=np.zeros(n)
         base_recs=[list(self.base[u]) for u in pool]
         for s in range(S):
             recs=[list(b) for b in base_recs]
             gam=rng.gamma(frailty,1/frailty,size=n) if frailty else np.ones(n)   # индивидуальная 'форма явки' сезона
+            beta=beta0+sig0*rng.standard_normal(n)   # v2: сила этого розыгрыша — из апостериора; у игрока с 7 стартами разброс широкий
+            bmap=dict(zip(pool,beta)); busy=set()
             for ev in self.events:
                 if ev['type']=='contour':
                     ids=[u for u,p in ev['fin'].items() if rng.random()<p]+[u for u,p in ev['cand'].items() if rng.random()<p]
                     ids=list(dict.fromkeys(ids))
                     if not ids: continue
-                    b=np.array([self.beta.get(u,self.default)*C for u in ids])
+                    b=np.array([bmap.get(u,self.beta.get(u,self.default)*C) for u in ids])
                     perf=b+rng.gumbel(size=len(b)); order=np.argsort(-perf)
+                    for u in ids: busy.add((u,ev['date']))
                     got=set()
                     for rank,i in enumerate(order):
                         u=ids[i]
@@ -212,6 +225,8 @@ class Season:
                 if force:
                     for u,evs in force.items():
                         if ev['id'] in evs and u not in ids: ids.append(u)
+                ids=[u for u in ids if (u,ev['date']) not in busy]   # один турнир в день
+                for u in ids: busy.add((u,ev['date']))
                 k=len(ids); nbg=max(0,ev['N']-k)
                 b=np.concatenate([beta[[idx[u] for u in ids]], rng.choice(self.bg,nbg)*C]) if nbg else beta[[idx[u] for u in ids]]
                 perf=b+rng.gumbel(size=len(b)); ranks=np.empty(len(b),int); ranks[np.argsort(-perf)]=np.arange(1,len(b)+1)
