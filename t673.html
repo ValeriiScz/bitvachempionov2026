@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t673.html · v1.3 · 2026-10-13 · допы по ролям — средний за игру в роли (доп ÷ игр в роли), а не сумма · v1.2 · 2026-10-13 · турнир закрыт: протоколы 16 игр заморожены (games_673_current.json), итоги/чемпион в resultsPanel, финал 4 игры (CFG.finals 4) · v1.1 · 2026-10-09 · категории столов и рассадки — от разброса случайного жребия (σ), а не равными долями · v1.0 · 2026-10-09 · Чемпионат Молдовы 2026 (mafgame 673). Движок страницы ЧМ-2026 (wc2026-tournament v2.3, эталон ce634) вынесен в конфиг CFG: новый турнир = копия файла + правка CFG + data/*_{id}*.
+<!-- DOVOD · t673.html · v1.4 · 2026-10-19 · итоги: номинации сеткой карточек (посчитаны из протоколов) · v1.3 · 2026-10-13 · допы по ролям — средний за игру в роли (доп ÷ игр в роли), а не сумма · v1.2 · 2026-10-13 · турнир закрыт: протоколы 16 игр заморожены (games_673_current.json), итоги/чемпион в resultsPanel, финал 4 игры (CFG.finals 4) · v1.1 · 2026-10-09 · категории столов и рассадки — от разброса случайного жребия (σ), а не равными долями · v1.0 · 2026-10-09 · Чемпионат Молдовы 2026 (mafgame 673). Движок страницы ЧМ-2026 (wc2026-tournament v2.3, эталон ce634) вынесен в конфиг CFG: новый турнир = копия файла + правка CFG + data/*_{id}*.
      Отличия от ЧМ: 2 стадии (12 квал × 3 стола → финал 5 игр топ-10, ×1.3), без карточек по странам и без робота-аудита; эфиры — отдельная «Смотровая» watch673.html.
      Стиль: DOVOD-неон, акцент cyan раздела «Турниры». -->
 <meta charset="utf-8">
@@ -15,6 +15,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* v1.9: награды — сеткой карточек */
+  .awg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px}
+  .awc{background:rgba(5,6,10,.5);border:1px solid var(--line2);border-radius:12px;padding:10px 12px}
+  .awc .awh{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold-hi);margin-bottom:6px}
+  .awc .awh i{font-style:normal;font-size:15px;letter-spacing:0}
+  .awc.mvp{border-color:rgba(227,176,75,.45);background:linear-gradient(135deg,rgba(227,176,75,.10),rgba(5,6,10,.5))}
+
   :root{--gold:#e3b04b;--gold-hi:#f6d27a;--gold-dk:#a9771c;--sv:#d7dde6;--ink:#eef3fb;--mut:#a4adbd;--dim:#79808f;
     --bg:#05060a;--panel:#0b0d14;--panel2:#11141d;--line:rgba(38,224,255,.28);--line2:rgba(255,255,255,.10);--nav-w:246px;
     --cyan:#26e0ff;--yel:#f5ff35;--red:#db514e;--lilac:#c14bbd;
@@ -1175,12 +1182,13 @@ function resultsPanel(){
   const SR={};(t.standings||[]).forEach(r=>SR[r.name]=r);
   const wins=(t.winners||[]).map((n,i)=>`<div style="display:flex;align-items:center;gap:9px;padding:5px 0;font-size:${i?'14px':'16.5px'};font-weight:${i?'700':'800'}"><span>${med[i]||''}</span>${plink(n)}${i===0?'<span class="chip live" style="margin-left:6px">чемпион</span>':''}<span style="margin-left:auto;color:var(--dim);font-weight:700;font-size:13px">${SR[n]?'Σ '+(+SR[n].sigma).toFixed(3):''}${t.prizes&&t.prizes[i+1]?' · '+t.prizes[i+1]+' €':''}</span></div>`).join('');
   const top=(t.standings||[]).slice(3,10).map(r=>`<div style="display:flex;gap:8px;font-size:12.5px;padding:2px 0"><span style="width:20px;color:var(--dim)">${r.place}</span>${plink(r.name)}<span style="margin-left:auto;color:var(--dim)">${(+r.sigma).toFixed(3)}</span></div>`).join('');
+  const AWI={most_valuable_players:'👑',most_valuable_mafia:'🕶',most_valuable_citizen:'🛡',best_don:'🎩',best_sheriff:'⭐',most_killed:'🌙'};
   const AWL={most_valuable_players:'MVP турнира',most_valuable_mafia:'Лучшая мафия',most_valuable_citizen:'Лучший мирный',best_don:'Лучший дон',best_sheriff:'Лучший шериф',most_killed:'Чаще всех убит 1-й ночью'};
   const aw=t.awards&&Object.keys(t.awards).length?Object.entries(t.awards).map(([k,list])=>{
-    const items=list.map((it,i)=>{const m=it.match(/^(.+?)\s*\((.+)\)\s*$/);const nm=m?m[1].trim():it;const val=m?m[2]:'';
+    const items=list.map((it,i)=>{const m=it.match(/^(.+?)\s*\((.+)\)\s*$/);const nm=m?m[1].trim():it;let val=m?m[2]:'';if(/^(best_don|best_sheriff)$/.test(k))val=val.replace(/^(\d+)\/(.+)$/,'$1 поб · доп $2');else if(k==='most_killed')val=val+' раз';
       return `<div style="display:flex;align-items:center;gap:7px;font-size:12.5px;padding:2px 0"><span style="width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;background:${['var(--gold)','#c5cad8','#d18a4a'][i]||'rgba(255,255,255,.1)'};color:#0b0d14">${i+1}</span>${plink(nm)}<span style="color:var(--dim);margin-left:auto">${esc(val)}</span></div>`;}).join('');
-    return `<div style="padding:7px 0;border-top:1px solid rgba(38,224,255,.12)"><div style="font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:4px">${AWL[k]||k}</div>${items}</div>`;}).join(''):'';
-  return `<div class="panel"><h3>🏆 Итоги турнира</h3>${wins}${top?`<div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(38,224,255,.12)">${top}</div>`:''}${t.reconciliation?`<div class="note" style="margin-top:8px">✓ ${esc(t.reconciliation)}</div>`:''}${aw?`<div style="margin-top:8px">${aw}</div>`:''}${t.awards_note?`<div class="note" style="margin-top:8px">${esc(t.awards_note)}</div>`:''}</div>`;
+    return `<div class="awc${k==='most_valuable_players'?' mvp':''}"><div class="awh"><i>${AWI[k]||'★'}</i>${AWL[k]||k}</div>${items}</div>`;}).join(''):'';
+  return `<div class="panel"><h3>🏆 Итоги турнира</h3>${wins}${top?`<div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(38,224,255,.12)">${top}</div>`:''}${t.reconciliation?`<div class="note" style="margin-top:8px">✓ ${esc(t.reconciliation)}</div>`:''}${aw?`<div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(38,224,255,.12)"><div style="font-size:10.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim)">Номинации</div><div class="awg">${aw}</div></div>`:''}${t.awards_note?`<div class="note" style="margin-top:8px">${esc(t.awards_note)}</div>`:''}</div>`;
 }
 function stagesPanel(){return `<div class="panel"><h3>Формат: 2 стадии</h3><div class="stages">
     <div class="stage"><span class="sbadge">${CFG.startLab}</span><div class="sn">Квалификация</div><div class="sg">${CFG.quals} игр · ${CFG.tables} стола · играют все</div><div class="sd">Все ${D.players.length} игроков играют каждую игру. По сумме баллов — топ‑${CFG.finalN} в финал.</div></div>
