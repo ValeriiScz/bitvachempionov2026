@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-10-14",
+ "snapshot": "2026-10-18",
  "parents": [
   {
    "file": "2025_478.json",
@@ -185,7 +185,7 @@
    "start_date": "2026-11-21",
    "stars": 4,
    "series": 20,
-   "played": 18,
+   "played": 19,
    "final": true
   },
   {
@@ -195,8 +195,8 @@
    "name": "Arena Moldova Cup",
    "start_date": "2026-11-28",
    "stars": 2,
-   "series": 10,
-   "played": 6,
+   "series": 11,
+   "played": 7,
    "final": true
   },
   {
