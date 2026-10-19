@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-refresh_mafgame · v1.2.1 · 2026-10-19 (ручной перезапуск — ночной cron задержан GitHub) · v1.2 · 2026-10-13 (played пересчитывается каждый прогон: start < TODAY и не отменён) · v1.1 · 2026-09-06
+refresh_mafgame · v1.3 · 2026-10-19 (отмена/перенос пересчитываются каждый прогон по названию: «[ОТМЕНЁН]», «Отмена», «ОТМЕНА», «[ПЕРЕНОС]», «Перенос на …»; префикс срезается) · v1.2.1 · 2026-10-19 (ручной перезапуск — ночной cron задержан GitHub) · v1.2 · 2026-10-13 (played пересчитывается каждый прогон: start < TODAY и не отменён) · v1.1 · 2026-09-06
 Назначение: каждую ночь обновить данные сайта DOVOD из mafgame.org без участия человека.
 Запускается GitHub Actions (.github/workflows/refresh-data.yml), работает на серверах GitHub —
 ни мак Валерия, ни Claude для этого не нужны.
@@ -129,9 +129,24 @@ def load_dataset():
         fail('в calendar.html не найден блок const D={...}')
     return s, i, j, json.loads(s[i + 8:j + 1])
 
+# v1.3 (19.10.2026): статус «отменён / перенос» — из названия на mafgame, КАЖДЫЙ прогон и для уже известных турниров.
+# Раньше флаги ставились только при добавлении нового турнира и только по «[ОТМЕНЁН]»: #767 переименовали в
+# «Отмена 🏆Командный Чемпионат Польши 2026🏆» — у нас он висел живым будущим турниром и давал 26 баллов в гонку.
+CANCEL_RE = re.compile(r'^\s*(\[\s*(ОТМЕН[ЁЕ]Н|ОТМЕНА)\s*\]|(ОТМЕН[ЁЕ]Н|ОТМЕНА)\b)\s*[:\-–—·]?\s*', re.I)
+MOVED_RE  = re.compile(r'^\s*(\[\s*ПЕРЕНОС\s*\]|ПЕРЕНОС\b)\s*[:\-–—·]?\s*', re.I)
+def name_status(raw):
+    """→ (cancelled, moved, чистое имя). Префикс «[ОТМЕНЁН]», «Отмена», «ОТМЕНА» (в любом регистре) — отмена;
+    «[ПЕРЕНОС]» / «Перенос» в начале или «Перенос на …» в тексте — перенос. Префиксы из имени срезаются."""
+    raw = (raw or '').strip()
+    cancelled = bool(CANCEL_RE.match(raw))
+    name = CANCEL_RE.sub('', raw, count=1) if cancelled else raw
+    moved = bool(MOVED_RE.match(name)) or bool(re.search(r'перенос\s+на\b', name, re.I))
+    name = MOVED_RE.sub('', name, count=1).strip()
+    return cancelled, moved, name
+
 def patch(D, new, fresh):
     old = {t['id']: t for t in D['tournaments']}
-    rep = {'moved': [], 'added': [], 'removed': [], 'fields': 0, 'regs': 0}
+    rep = {'moved': [], 'added': [], 'removed': [], 'status': [], 'fields': 0, 'regs': 0}
     out = []
     for tid, n in new.items():
         nd = n['start_date'][:10]
@@ -153,6 +168,10 @@ def patch(D, new, fresh):
                     rep['fields'] += 1
             t['kind'] = kind_of(n)
             t['serialKey'] = n.get('parent_tournament_id')
+            c, mv, _ = name_status(n.get('name'))
+            if c != bool(t.get('cancelled')) or mv != bool(t.get('moved')):
+                rep['status'].append('%s %s: %s' % (t.get('start'), (n.get('name') or '')[:40], 'отменён' if c else ('перенос' if mv else 'снова в силе')))
+            t['cancelled'], t['moved'] = c, mv
             # «сыгран» пересчитываем каждый прогон (раньше ставился только при добавлении и навсегда оставался false)
             t['played'] = nd < TODAY and not t.get('cancelled')
         else:
@@ -165,14 +184,14 @@ def patch(D, new, fresh):
                  'exp': num(n.get('expected_participants'), int), 'fee': None, 'feeCur': None,
                  'prize': num(n.get('total_prize'), float), 'prizeCur': n.get('prize_currency') or 'EUR',
                  'club': None, 'regOpen': 1 if nd >= TODAY else 0, 'pts': 0, 'plab': 'без баллов',
-                 'played': nd < TODAY and '[ОТМЕНЁН]' not in n['name'], 'cancelled': '[ОТМЕНЁН]' in n['name'],
-                 'moved': '[ПЕРЕНОС]' in n['name'], 'regs': []}
+                 'played': nd < TODAY and not name_status(n['name'])[0], 'cancelled': name_status(n['name'])[0],
+                 'moved': name_status(n['name'])[1], 'regs': []}
             rep['added'].append('%s %s %s★ — %s' % (nd, t['city'], t['stars'], n['name'][:40]))
         if tid in fresh:
             if (t.get('regs') or []) != fresh[tid]:
                 rep['regs'] += 1
             t['regs'] = fresh[tid]
-        t['name'] = re.sub(r'^\s*\[(ОТМЕНЁН|ПЕРЕНОС)\]\s*', '', t['name']).strip()
+        t['name'] = name_status(t['name'])[2]
         out.append(t)
     for tid, t in old.items():
         if tid not in new:
@@ -255,7 +274,7 @@ def main():
     # переносы дат, правки полей. Ежедневное движение заявок доедет само
     # (service worker отдаёт кэш и тут же обновляет его в фоне) — иначе приложение
     # каждую ночь перекачивало бы страницу целиком без причины.
-    material = bool(rep['added'] or rep['moved'] or rep['removed'] or rep['fields'])
+    material = bool(rep['added'] or rep['moved'] or rep['removed'] or rep['status'] or rep['fields'])
     ver = bump_meta_and_sw(bump_sw=material)
 
     lines = ['## Обновление данных mafgame · %s' % TODAY, '',
@@ -272,6 +291,7 @@ def main():
     block('Новые турниры', rep['added'])
     block('Переносы дат', rep['moved'])
     block('Снято с календаря', rep['removed'])
+    block('Статус отмена/перенос', rep['status'])
     lines.append('Обновлено полей: %d · составов: %d' % (rep['fields'], rep['regs']))
     summary = '\n'.join(lines)
     log('')
