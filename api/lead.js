@@ -3,7 +3,7 @@
 // и, если заданы TG_BOT_TOKEN и TG_CHAT_ID, шлёт сообщение в Telegram. Без базы: хранилище Blob в проекте недоступно (403).
 // Ответ: {ok:true, n:<номер заявки за этот запуск функции>}.
 let seq = 0;
-const PNAME = { dossier: 'Досье на игрока', series: 'Подготовка к серии', tourn: 'Подготовка к турниру', final: 'Финалы и ELO-гонка', agent: 'База + ИИ-агент', demo: 'Демо-досье' };
+const PNAME = { dossier: 'Досье на игрока', series: 'Подготовка к серии', tourn: 'Подготовка к турниру', final: 'Финалы и ELO-гонка', agent: 'База + ИИ-агент', demo: 'Демо-досье', wait: 'Лист ожидания' };
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 'no-store');
@@ -30,7 +30,7 @@ module.exports = async function handler(req, res) {
   const tok = process.env.TG_BOT_TOKEN, chat = process.env.TG_CHAT_ID;
   let tgOk = false;
   if (tok && chat) {
-    const kind = lead.k === 'demo' ? '🎁 ДЕМО-ДОСЬЕ' : lead.k === 'buy' ? '💰 ЗАПРОС' : lead.k === 'more' ? '👀 подробнее' : '•';
+    const kind = lead.k === 'demo' ? '🎁 ДЕМО-ДОСЬЕ' : lead.k === 'buy' ? '💰 ЗАПРОС' : lead.k === 'more' ? '👀 подробнее' : lead.k === 'wait' ? '⏳ лист ожидания' : '•';
     const text = [`${kind} · ${PNAME[lead.p] || lead.p}`, lead.player ? `на кого: ${lead.player}` : '', lead.nick ? `ник: ${lead.nick}` : '', lead.tg ? `tg: ${lead.tg}` : '', lead.note ? `— ${lead.note}` : '', `${lead.country || '??'} · ${lead.t.slice(0, 16).replace('T', ' ')}`].filter(Boolean).join('\n');
     try {
       const r = await fetch(`https://api.telegram.org/bot${tok}/sendMessage`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ chat_id: chat, text, disable_web_page_preview: true }) });
