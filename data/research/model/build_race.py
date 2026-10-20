@@ -1,4 +1,4 @@
-"""build_race.py · v2.0 · 2026-10-19 (сила v2 из gd_strength2: ELO/σ/форма в RACE.rows[].sd; коридор «по результатам ↔ по маркерам» для n_eff<10; пул баллов по выходным RACE.pool; ожидаемые баллы за старт; p12/Σ сервера v2) · v1.5 · 2026-10-13 (рабочая планка: нижняя граница вниз до 5, верхняя вверх, ширина ≥5) · v1.4 · 2026-10-13 (планки считаются из сценариев 0–3; уровни генератора — только явка) · v1.3 · 2026-09-21 (TARGET 4.0, планы игроков players_expert, финалы 2★ на 10 мест) · v1.2 (T/OUT из gd_cfg) · v1.1 · 2026-09-17 (v1.0 — 2026-09-14) — собирает data/race2026.js для страницы «Гонка за золотую дюжину» из результатов модели.
+"""build_race.py · v2.3 · 2026-10-20 (вклад финалов серийников чистыми: sum_noser = тот же сезон без финалов; finals_detail — средний результат в каждом финале; small_field в model) · v2.0 · 2026-10-19 (сила v2 из gd_strength2: ELO/σ/форма в RACE.rows[].sd; коридор «по результатам ↔ по маркерам» для n_eff<10; пул баллов по выходным RACE.pool; ожидаемые баллы за старт; p12/Σ сервера v2) · v1.5 · 2026-10-13 (рабочая планка: нижняя граница вниз до 5, верхняя вверх, ширина ≥5) · v1.4 · 2026-10-13 (планки считаются из сценариев 0–3; уровни генератора — только явка) · v1.3 · 2026-09-21 (TARGET 4.0, планы игроков players_expert, финалы 2★ на 10 мест) · v1.2 (T/OUT из gd_cfg) · v1.1 · 2026-09-17 (v1.0 — 2026-09-14) — собирает data/race2026.js для страницы «Гонка за золотую дюжину» из результатов модели.
 Вход: tickets2026.json, plan2026.json, scenarios3.json, леджеры. Выход: window.RACE = {...}
 v1.1: у игроков sim три оценки силы — beta (вся история с 2024, веса 1/.5/.25), b12 (12 месяцев), b26 (только 2026) — для переключателя «Форма» в генераторе."""
 import json, collections, numpy as np, gd_data as g, gd_sim, gd_strength2
@@ -53,6 +53,9 @@ for i,(s,u) in enumerate(mid[:40]):
 # ---- v2.0: сила v2, коридор, пул баллов, запасы/потоки ----
 ST=se.strength; rank={u:i+1 for i,(s_,u) in enumerate(mid)}
 res_main=se.run(S=2000,seed=11,frailty=None); pool_=res_main['pool']; ix={u:i for i,u in enumerate(pool_)}
+# v2.3: вклад финалов серийников ЧИСТЫМИ — тот же сезон без финалов (разница ожидаемой Σ)
+_ev_all=se.events; se.events=[e for e in _ev_all if e['type']!='contour']; res_noser=se.run(S=1200,seed=11,frailty=None); se.events=_ev_all
+CONT={c['id']:c for c in _ev_all if c['type']=='contour'}
 low=[u for s_,u in mid[:40] if ST.neff.get(u,0)<10]
 import copy
 se_pr=copy.copy(se); se_pr.beta=dict(se.beta)
@@ -76,6 +79,8 @@ for rec in rows:
         'mu':t['mu'],'beta_long':t['beta_long'],'sigma':t['sigma'],'n_eff':t['n_eff'],'form':t['form'],'n_season':t['n_season'],'beta_fwd':t['beta_fwd'],
         'low_n':u in low,'p12':round(float(res_main['p12'][i]),3),'sum_exp':round(float(res_main['sums'][:,i].mean()),1),'sum_p10':round(float(np.percentile(res_main['sums'][:,i],10)),1),'sum_p90':round(float(np.percentile(res_main['sums'][:,i],90)),1),
         'played_exp':round(float(res_main['played'][i]),2),'new_reg':round(float(res_main['new_reg'][i]),1),'new_ser':round(float(res_main['new_ser'][i]),1),
+        'sum_noser':round(float(res_noser['sums'][:,i].mean()),1),'p12_noser':round(float(res_noser['p12'][i]),3),
+        'finals_detail':[{'name':SHORT.get(CONT[cid]['name'][:10],CONT[cid]['name']),'date':CONT[cid]['date'],'stars':CONT[cid]['stars'],'play':round(float(res_main['ser_play'][cid][i]),2),'avg':round(float(res_main['ser_by'][cid][i]/max(1e-9,res_main['ser_play'][cid][i])),1),'grid_top':CONT[cid]['grid'][0],'base':CONT[cid]['base'],'field':CONT[cid].get('size'),'q':u in CONT[cid]['fin']} for cid in CONT if res_main['ser_play'][cid][i]>0.05],
         'p12_prior':round(float(res_pr['p12'][i]),3) if u in low else None,'sum_prior':round(float(res_pr['sums'][:,i].mean()),1) if u in low else None,
         'pts_per_start':round(ep,1),'q5':round(q5,2),'q10':round(q10,2),
         'starts_365':int(round(rates[u][0]-0.5)),'starts_105':int(round(rates[u][2]-0.5)),'n_ev_365':n_ev,'plan':gd_sim.PLAYER_TARGET.get(u),
@@ -124,7 +129,7 @@ for u in simpool:
                     'p':[round(float(e['p'][u]),3) for e in regs_ev],'reg':[e['regs'].get(u) if e['regs'].get(u) is not None else -1 for e in regs_ev]})
 sim_events=[{'id':e['id'],'date':e['date'],'stars':e['stars'],'N':e['N'],'grid':[float(x) for x in se.grid_pts(e['stars'],e['type'],e['N'])]} for e in regs_ev]
 sim_cont=[{'id':c['id'],'name':SHORT.get(c['name'][:10],c['name']),'fin':{str(u):round(p,2) for u,p in c['fin'].items() if u in set(simpool)},'cand':{str(u):round(p,2) for u,p in c['cand'].items() if u in set(simpool)},
-           'part':[u for u in c['part'] if u in set(simpool)],'grid':c['grid'],'base':c['base'],'nfin_all':len(c['fin']),'ncand_all':round(sum(c['cand'].values()),1),
+           'part':[u for u in c['part'] if u in set(simpool)],'grid':c['grid'],'base':c['base'],'size':c.get('size'),'nrep':len([u for u in c['part'] if u not in c['fin'] and u not in set(simpool)]),'nfin_all':len(c['fin']),'ncand_all':round(sum(c['cand'].values()),1),
            'ext':{'n':len([u for u in c['fin'] if u not in set(simpool)]),'p':round(float(np.mean([p for u,p in c['fin'].items() if u not in set(simpool)])) if any(u not in set(simpool) for u in c['fin']) else 0,2),
                   'beta':round(float(np.mean([se.beta.get(u,se.default) for u in c['fin'] if u not in set(simpool)])) if any(u not in set(simpool) for u in c['fin']) else float(se.default),2),
                   'ncand':round(float(sum(p for u,p in c['cand'].items() if u not in set(simpool))),1)}} for c in cont_ev]
@@ -132,7 +137,7 @@ rng=np.random.default_rng(0); bg=[round(float(x),2) for x in rng.choice(se.bg,20
 SIM={'players':players,'forms':{'all':'вся история (с 2024, свежее — весомее)','y12':'последние 12 месяцев','y26':'только 2026 год'},'events':sim_events,'contours':sim_cont,'bg':bg,'C':gd_sim.C,'top30_mean':2.5,'top20_mean':2.5,'levels':{'обычно':[1.0,0.0],'стараются':[1.5,0.0],'максимум':[2.5,0.0]},
      'server':{'S':F.get('S',3000),'date':T,'p12':{str(r['uid']):round(r['p12'],3) for r in F['rows']}}}
 RACE={'snapshot':T,'sim':SIM,'thr12_now':mid[11][0],'planks':planks,'events':events,'rows':rows,'hist':hist,'pool':RACE_POOL,
-      'model':{'version':'v2.2 · 20.10.2026','attendance':'заявки × дни до старта (история календаря 26.08–19.10) + петля R1 в розыгрыше','lead_none':gd_sim.LEAD_NONE,'lead_conf':gd_sim.LEAD_CONF,'r1':[gd_sim.R1_NEAR,gd_sim.R1_FAR,gd_sim.R1_UP,gd_sim.R1_DOWN],'strength':'gd_strength2','tau':gd_strength2.TAU,'rho':gd_strength2.RHO_FORM,'C':gd_sim.C,'race_boost':gd_sim.RACE_BOOST,'elo_fit':ST.info,'thr_v2':{'med':float(np.median(thr_main)),'p10':float(np.percentile(thr_main,10)),'p90':float(np.percentile(thr_main,90))},'target':{'top20':5.5,'top30':4.0},'S':2000},
+      'model':{'version':'v2.3 · 20.10.2026','small_field':[gd_strength2.SMALL_FIELD,gd_strength2.SMALL_TOPK],'attendance':'заявки × дни до старта (история календаря 26.08–19.10) + петля R1 в розыгрыше','lead_none':gd_sim.LEAD_NONE,'lead_conf':gd_sim.LEAD_CONF,'r1':[gd_sim.R1_NEAR,gd_sim.R1_FAR,gd_sim.R1_UP,gd_sim.R1_DOWN],'strength':'gd_strength2','tau':gd_strength2.TAU,'rho':gd_strength2.RHO_FORM,'C':gd_sim.C,'race_boost':gd_sim.RACE_BOOST,'elo_fit':ST.info,'thr_v2':{'med':float(np.median(thr_main)),'p10':float(np.percentile(thr_main,10)),'p90':float(np.percentile(thr_main,90))},'target':{'top20':5.5,'top30':4.0},'S':2000},
       'method':'Σ = 10 лучших турниров года, не более 2 серийных. Финал = 6–10 место на 4★ ≈ 12 баллов, топ-5 на 4★ ≈ 24. Частоты — за последние 12 месяцев, сглажены к среднему топ-30.'}
 open(OUTP('race2026.js'),'w',encoding='utf-8').write('/* race2026.js — данные страницы «Гонка за золотую дюжину». Генератор: _scripts_golden_dozen_v0.9/build_race.py. Руками не править. */\nwindow.RACE='+json.dumps(RACE,ensure_ascii=False,separators=(',',':'))+';\n')
 import os; print('race2026.js', os.path.getsize(OUTP('race2026.js'))//1024,'КБ; планки',planks,'; игроков',len(rows),'; событий',len(events))

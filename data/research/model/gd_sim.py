@@ -1,4 +1,4 @@
-"""gd_sim · v2.2 · 2026-10-20 (явка v2: статус заявки × дни до старта по истории календаря 26.08–19.10 (подтверждён 0.97/0.92/0.82/0.62, заявка 1.0/1.0/0.88/0.75, НЕ записан 0.00/0.01/0.04/0.10 по горизонтам ≤7/≤14/≤28/29+ дней); для незаписанных — модельная p, сжатая к этим уровням; петля R1 внутри розыгрыша: незаписанный турнир с горизонтом 15+ дней — p ×1.6 если игрок по ходу сезона в 25 баллах от планки, ×0.6 если дальше 55 (ГИПОТЕЗА); нормировка TARGET_* отключается при LEAD_RULE) · v2.1 · 2026-10-20 (C 1.4→1.0 по калибровке верха: модель завышала долю топ-5 у топ-40 в 1,5 раза — calib_top5.py) · v2.0 · 2026-10-19 (сила v2: gd_strength2 — ELO-prior, усадка по числу турниров, σ силы тянется в каждом розыгрыше, форма сезона; один турнир в день на игрока; фильтр «Отмена» в названии; переключатель STRENGTH) · v1.4 · 2026-10-13 (финалы серийников 2026 — сетка федерации) · v1.3 · 2026-10-13 (калибровка C=1.4, RACE_BOOST=1.5 по бэктесту 2024+2025; явка со «свежим темпом» gd_attend v1.1) · v1.2 · 2026-09-21 (TARGET_TOP20_MEAN: явка топ-20 отдельно) · v1.1 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
+"""gd_sim · v2.4 · 2026-10-20 (финалы серийников: поле добирается до объявленного размера заменяющими из серий/фоном; GMC-финал 40 человек; заменяющие получают баллы по месту) · v2.2 · 2026-10-20 (явка v2: статус заявки × дни до старта по истории календаря 26.08–19.10 (подтверждён 0.97/0.92/0.82/0.62, заявка 1.0/1.0/0.88/0.75, НЕ записан 0.00/0.01/0.04/0.10 по горизонтам ≤7/≤14/≤28/29+ дней); для незаписанных — модельная p, сжатая к этим уровням; петля R1 внутри розыгрыша: незаписанный турнир с горизонтом 15+ дней — p ×1.6 если игрок по ходу сезона в 25 баллах от планки, ×0.6 если дальше 55 (ГИПОТЕЗА); нормировка TARGET_* отключается при LEAD_RULE) · v2.1 · 2026-10-20 (C 1.4→1.0 по калибровке верха: модель завышала долю топ-5 у топ-40 в 1,5 раза — calib_top5.py) · v2.0 · 2026-10-19 (сила v2: gd_strength2 — ELO-prior, усадка по числу турниров, σ силы тянется в каждом розыгрыше, форма сезона; один турнир в день на игрока; фильтр «Отмена» в названии; переключатель STRENGTH) · v1.4 · 2026-10-13 (финалы серийников 2026 — сетка федерации) · v1.3 · 2026-10-13 (калибровка C=1.4, RACE_BOOST=1.5 по бэктесту 2024+2025; явка со «свежим темпом» gd_attend v1.1) · v1.2 · 2026-09-21 (TARGET_TOP20_MEAN: явка топ-20 отдельно) · v1.1 (финалы серийников: 10 призовых мест у 2★, поле финала 20, GMC 17 мест; PLAYER_TARGET — планы игроков) · v1.0 · 2026-09-14 — Монте-Карло остатка сезона mafgame: явка × сила (Plackett-Luce) × сетка баллов × серийники → Σ=best10(≤2 serial) → топ-12."""
 import numpy as np, datetime, collections
 import gd_data as g
 from gd_strength import rankings_before, fit_pl
@@ -20,7 +20,7 @@ GRID_4S=[42,39,37,34,32,30,28,26,24,22,20,18,16,14,12,10,8]
 # v1.4 (13.10.2026): сезон 2026 — официальная сетка финалов серийников от федерации (gd_data.SERIAL_GRID_2026); сетки выше — для бэктестов 2024/2025
 GRID26={k:v for k,v in g.SERIAL_GRID_2026.items()}
 # размер поля финала (Валерий 21.09: у 2★ финалы на 20 человек, кроме польского (12) и MCL (10)); GMC 50–60
-FINAL_SIZE={664:55,277:30,757:10,259:10,639:12,251:12,740:10,279:10}
+FINAL_SIZE={664:40,277:30,757:10,259:10,639:12,251:12,740:10,279:10}
 FINAL_SIZE_2S=20
 PLAYER_TARGET={}   # uid → ожидаемое число обычных турниров до конца года (players_expert.py); поверх TARGET_TOP30_MEAN
 RULES={664:'top2',277:'top2',757:'mcl',259:'mcl',639:'top2',251:'top2',645:'top2',685:'top1mvp',478:'top1mvp',740:'sum2',279:'sum2',749:'top2',530:'top2',670:'top2',509:'top2',579:'top2',132:'top2',694:'top2'}
@@ -224,7 +224,7 @@ class Season:
         pool=self.pool; idx={u:i for i,u in enumerate(pool)}; n=len(pool)
         beta0=np.array([self.beta.get(u,self.default)+(RACE_BETA_SHIFT if self.race.get(u,999)<=30 else 0) for u in pool])*C
         sig0=np.array([self.sigma.get(u,self.default_sigma) for u in pool])*C if (STRENGTH=='v2' and STRENGTH_SIGMA) else np.zeros(n)
-        top12=np.zeros(n); top30=np.zeros(n); sums=np.zeros((S,n)); thr=np.zeros(S); played=np.zeros(n); new_reg=np.zeros(n); new_ser=np.zeros(n)
+        top12=np.zeros(n); top30=np.zeros(n); sums=np.zeros((S,n)); ser_by=collections.defaultdict(lambda: np.zeros(n)); ser_play=collections.defaultdict(lambda: np.zeros(n)); thr=np.zeros(S); played=np.zeros(n); new_reg=np.zeros(n); new_ser=np.zeros(n)
         base_recs=[list(self.base[u]) for u in pool]
         for s in range(S):
             recs=[list(b) for b in base_recs]
@@ -236,14 +236,23 @@ class Season:
                     ids=[u for u,p in ev['fin'].items() if rng.random()<p]+[u for u,p in ev['cand'].items() if rng.random()<p]
                     ids=list(dict.fromkeys(ids))
                     if not ids: continue
+                    # v2.4: поле финала добирается до объявленного размера заменяющими — игроками серий этого контура
+                    # (не прошедшими), а если их не хватает — фоном. Раньше финал играли только прошедшие (10–14 человек
+                    # на 2★ при поле 20) → у сильных выходили почти гарантированные топ-5 и раздутые баллы.
+                    fill=max(0,int(ev.get('size') or 0)-len(ids))
+                    if fill:
+                        pool_rep=[u for u in ev['part'] if u not in set(ids)]
+                        rng.shuffle(pool_rep); rep=pool_rep[:fill]; ids=ids+rep; fill-=len(rep)
                     b=np.array([bmap.get(u,self.beta.get(u,self.default)*C) for u in ids])
+                    if fill: b=np.concatenate([b,rng.choice(self.bg,fill)*C])
                     perf=b+rng.gumbel(size=len(b)); order=np.argsort(-perf)
                     for u in ids: busy.add((u,ev['date']))
                     got=set()
                     for rank,i in enumerate(order):
+                        if i>=len(ids): continue
                         u=ids[i]
-                        if rank<len(ev['grid']) and u in idx: recs[idx[u]].append((ev['grid'][rank],1)); got.add(u); new_ser[idx[u]]+=ev['grid'][rank]
-                        elif u in idx: recs[idx[u]].append((ev['base'],1)); got.add(u); new_ser[idx[u]]+=ev['base']
+                        if rank<len(ev['grid']) and u in idx: recs[idx[u]].append((ev['grid'][rank],1)); got.add(u); new_ser[idx[u]]+=ev['grid'][rank]; ser_by[ev['id']][idx[u]]+=ev['grid'][rank]; ser_play[ev['id']][idx[u]]+=1
+                        elif u in idx: recs[idx[u]].append((ev['base'],1)); got.add(u); new_ser[idx[u]]+=ev['base']; ser_by[ev['id']][idx[u]]+=ev['base']; ser_play[ev['id']][idx[u]]+=1
                     for u in ev['part']:
                         if u in idx and u not in got: recs[idx[u]].append((ev['base'],1)); new_ser[idx[u]]+=ev['base']
                     continue
@@ -265,4 +274,4 @@ class Season:
                     r=ranks[j]; recs[idx[u]].append((pts[min(r,len(pts))-1],0)); played[idx[u]]+=1; new_reg[idx[u]]+=pts[min(r,len(pts))-1]
             tot=np.array([g.best10(r) for r in recs]); sums[s]=tot
             order=np.argsort(-tot); top12[order[:12]]+=1; top30[order[:30]]+=1; thr[s]=tot[order[11]]
-        return {'pool':pool,'p12':top12/S,'p30':top30/S,'sums':sums,'thr':thr,'played':played/S,'new_reg':new_reg/S,'new_ser':new_ser/S}
+        return {'pool':pool,'p12':top12/S,'p30':top30/S,'sums':sums,'thr':thr,'played':played/S,'new_reg':new_reg/S,'new_ser':new_ser/S,'ser_by':{k:v/S for k,v in ser_by.items()},'ser_play':{k:v/S for k,v in ser_play.items()}}

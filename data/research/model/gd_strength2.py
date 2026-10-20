@@ -1,4 +1,4 @@
-"""gd_strength2 · v2.1 · 2026-10-20 (τ 0.4→0.26 = остаточное sd β относительно ELO у игроков с 15+ турнирами (эмпирический Байес; данные перевешивают prior с ~15 турниров); калибровка верха, см. calib_top5.py; серия «6 топ-5 из 7» за 3 сезона встречалась дважды, после горячего окна доля топ-5 падает до 0.29) · v2.0 · 2026-10-19 — сила игрока как ЗАПАС с неопределённостью: Plackett-Luce по местам + априорная сила из ELO маркеров
+"""gd_strength2 · v2.2 · 2026-10-20 (малые поля: в турнирах < 25 участников порядок значим только для топ-5, места 6+ — один неупорядоченный хвост; hold-out tune_field.py: +0.020 к ll мест топ-40 и в 2024, и в 2025; вес по размеру поля (N/30)^A — шум (2024 +, 2025 −), вес по силе поля — хуже в оба года: PL уже учитывает соперников) · v2.1 · 2026-10-20 (τ 0.4→0.26 = остаточное sd β относительно ELO у игроков с 15+ турнирами (эмпирический Байес; данные перевешивают prior с ~15 турниров); калибровка верха, см. calib_top5.py; серия «6 топ-5 из 7» за 3 сезона встречалась дважды, после горячего окна доля топ-5 падает до 0.29) · v2.0 · 2026-10-19 — сила игрока как ЗАПАС с неопределённостью: Plackett-Luce по местам + априорная сила из ELO маркеров
 (markery_elo.json) + усадка по числу турниров (байесовский MAP) + апостериорная дисперсия (Лаплас) + «форма» сезона как отдельное
 медленное отклонение с затуханием ρ. Заменяет gd_strength.fit_pl в gd_sim (переключатель gd_sim.STRENGTH='v2').
 
@@ -38,6 +38,10 @@ def elo_of(u, year_blend=None):
         if age<=YEAR_MAX_AGE: return (1-yb)*v['elo_all']+yb*v['elo_year']
     return v['elo_all']
 
+SMALL_FIELD=25; SMALL_TOPK=5   # v2.2: в полях < 25 различаем только топ-5
+class Cut(list):
+    """рейтинг, в котором порядок значим только для первых k мест (остальные — «не попал в топ-k»)"""
+    k=SMALL_TOPK
 def rankings_before(T, since=None, flat=False):
     """(вес, [uid по местам]) по турнирам с датой < T (и ≥ since). Веса по давности 1/0.5/0.25, flat → 1."""
     out=[]; Td=datetime.date.fromisoformat(T)
@@ -47,7 +51,8 @@ def rankings_before(T, since=None, flat=False):
         w=1.0 if flat else (1.0 if age<=365 else 0.5 if age<=730 else 0.25)
         rows=[r for r in e['rows'] if r[2] is not None and r[2]<1000]; rows.sort(key=lambda r:r[2])
         if len(rows)<6: continue
-        out.append((w,[r[0] for r in rows]))
+        r=[x[0] for x in rows]
+        out.append((w,Cut(r) if (SMALL_FIELD and len(r)<SMALL_FIELD) else r))
     return out
 
 def fit_map(rankings, mu, tau, iters=400, lr=0.5):
@@ -56,24 +61,27 @@ def fit_map(rankings, mu, tau, iters=400, lr=0.5):
     uids=sorted({u for w,r in rankings for u in r}); idx={u:i for i,u in enumerate(uids)}; n=len(uids)
     MU=np.array([mu[u] if isinstance(mu,dict) else mu for u in uids]); TAU=np.array([tau[u] if isinstance(tau,dict) else tau for u in uids])
     prec=1.0/TAU**2
-    R=[(w,np.array([idx[u] for u in r])) for w,r in rankings]
+    R=[(w,np.array([idx[u] for u in r]),(r.k if isinstance(r,Cut) else len(r))) for w,r in rankings]
     beta=MU.copy(); neff=np.zeros(n)
-    for w,r in R: neff[r]+=w
+    for w,r,k in R: neff[r]+=w
     pre=prec+0.5*neff+0.5   # диагональное предобуславливание: шаг ~ grad/H, устойчиво при любом τ
     for it in range(iters):
         grad=np.zeros(n)
-        for w,r in R:
+        for w,r,k in R:
             b=beta[r]; m=b.max(); ex=np.exp(b-m); cs=np.cumsum(ex[::-1])[::-1]
-            cum_inv=np.cumsum(1.0/cs)
-            grad[r]+=w*(1.0-ex*cum_inv)
+            inv=1.0/cs
+            if k<len(r): inv[k:]=0
+            gr=-ex*np.cumsum(inv); gr[:k]+=1.0
+            grad[r]+=w*gr
         grad-=(beta-MU)*prec
         beta+=lr*grad/pre
     # Лаплас: диагональ наблюдённой информации
     H=prec.copy()
-    for w,r in R:
+    for w,r,k in R:
         b=beta[r]; m=b.max(); ex=np.exp(b-m); cs=np.cumsum(ex[::-1])[::-1]
-        cum_inv=np.cumsum(1.0/cs); cum_inv2=np.cumsum(1.0/cs**2)
-        H[r]+=w*(ex*cum_inv-ex**2*cum_inv2)
+        inv=1.0/cs; inv2=1.0/cs**2
+        if k<len(r): inv[k:]=0; inv2[k:]=0
+        H[r]+=w*(ex*np.cumsum(inv)-ex**2*np.cumsum(inv2))
     sigma=1.0/np.sqrt(np.maximum(H,1e-6))
     return dict(zip(uids,beta)), dict(zip(uids,sigma)), dict(zip(uids,neff))
 
