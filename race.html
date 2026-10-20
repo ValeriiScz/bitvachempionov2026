@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
+<!-- race.html v3.2 · 20.10.2026 · гейт: пароль без учёта регистра; ошибка страницы после верного пароля больше не выдаётся за «пароль не подошёл» (показывает причину, сбрасывает выбранного игрока) · v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
 <meta name="description" content="Рейтинг MAFGAME 2026: сколько и каких турниров нужно до золотой дюжины, пул баллов по выходным, модель расчёта, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -962,16 +962,28 @@ function initRace(){
   async function unlock(pass,silent){
     if(!CRYPTO){err.textContent='Браузер не поддерживает расшифровку (нужен https).';err.classList.add('on');return false;}
     btn.disabled=true; btn.textContent='…';
+    var js=null, used=pass;
     try{
-      var js=await fetchDec('vault/race.json',pass);
+      // v3.2: пароль без учёта регистра (телефон любит делать первую букву заглавной)
+      try{ js=await fetchDec('vault/race.json',pass); }
+      catch(e1){ if(e1&&/^http/.test(e1.message)) throw e1; used=pass.toUpperCase(); js=await fetchDec('vault/race.json',used); }
+    }catch(e){
+      if(!silent){err.textContent=(e&&/^http/.test(e.message))?'Не удалось загрузить данные ('+e.message+'). Проверь интернет и обнови страницу.':'Пароль не подошёл.';err.classList.add('on');gate.classList.remove('shake');void gate.offsetWidth;gate.classList.add('shake');pw.value='';pw.focus();}
+      if(!(e&&/^http/.test(e.message))){try{localStorage.removeItem(KEY);}catch(e2){}}
+      btn.disabled=false; btn.textContent='Войти';
+      return false;
+    }
+    // пароль верный — дальше ошибки страницы, а не пароля
+    try{ if(rem.checked) localStorage.setItem(KEY,used); else localStorage.removeItem(KEY); }catch(e){}
+    try{
       (new Function(js))();
-      if(!window.RACE) throw new Error('no data');
-      try{ if(rem.checked) localStorage.setItem(KEY,pass); else localStorage.removeItem(KEY); }catch(e){}
+      if(!window.RACE) throw new Error('данные пустые');
       gate.hidden=true; shell.classList.remove('locked'); initRace();
       return true;
     }catch(e){
-      if(!silent){err.classList.add('on');gate.classList.remove('shake');void gate.offsetWidth;gate.classList.add('shake');pw.value='';pw.focus();}
-      try{localStorage.removeItem(KEY);}catch(e2){}
+      console.error('[race] ошибка страницы после входа',e);
+      gate.hidden=false; err.textContent='Пароль верный, но страница не открылась: '+(e&&e.message||e)+'. Обнови страницу (если не поможет — напиши @SivValerii).';err.classList.add('on');
+      try{localStorage.removeItem('dovod_race_me')}catch(e3){}
       return false;
     }finally{btn.disabled=false; btn.textContent='Войти';}
   }

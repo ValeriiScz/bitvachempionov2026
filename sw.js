@@ -1,5 +1,5 @@
 /* ============================================================================
-   MafgameStat · sw.js (Service Worker для PWA) · v1.14 · 2026-08-27 (кэш v19.3: ФИКС — медиа и Range-запросы мимо воркера (из-за 206 не открывался ролик-анонс); v19.2: календарь с городами в клетках и карточками серий, кнопка «наверх»; v19.1: карточки победителей 9 серий из канала, финал золотым в календаре; MCL разрезан на 4 страницы — mcl2026/mcl-standings/mcl-series/mcl-lab + data/mcl2026.js в прекэше; видео не кэшируем)
+   MafgameStat · sw.js (Service Worker для PWA) · v1.15 · 2026-10-20 (HTML network-first — фикс «пароль не подошёл» на закрытых страницах после деплоя) · v1.14 · 2026-08-27 (кэш v19.3: ФИКС — медиа и Range-запросы мимо воркера (из-за 206 не открывался ролик-анонс); v19.2: календарь с городами в клетках и карточками серий, кнопка «наверх»; v19.1: карточки победителей 9 серий из канала, финал золотым в календаре; MCL разрезан на 4 страницы — mcl2026/mcl-standings/mcl-series/mcl-lab + data/mcl2026.js в прекэше; видео не кэшируем)
    Назначение: офлайн-кэш ОБОЛОЧКИ сайта (html/js/иконки) + установка как
    приложение. Данные турниров НЕ замораживаются кэшем.
 
@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'dovod-v265';
+const CACHE_VERSION = 'dovod-v266';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -104,6 +104,19 @@ self.addEventListener('fetch', (e) => {
         }
         return res;
       }).catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  /* 2.5) v1.15 (20.10.2026): HTML-страницы — network-first. Раньше html шёл stale-while-revalidate:
+     после деплоя первый заход отдавал СТАРУЮ страницу из кэша вместе с НОВЫМИ данными (vault/race.json —
+     network-first) → закрытая страница падала и гейт писал «пароль не подошёл». */
+  if (url.origin === location.origin && (req.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/')) {
+    e.respondWith(
+      fetch(req).then(res => {
+        if (res && res.status === 200) { const copy = res.clone(); caches.open(SHELL_CACHE).then(c => c.put(req, copy)).catch(() => {}); }
+        return res;
+      }).catch(() => caches.match(req).then(c => c || caches.match('index.html')))
     );
     return;
   }
