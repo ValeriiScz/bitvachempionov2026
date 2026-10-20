@@ -134,7 +134,7 @@ body{
 @media (min-width:900px){
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .tile{min-height:238px;padding:24px 24px 20px}
-  .tile.soon,.tile.race{grid-column:1 / -1;min-height:150px}
+  .tile.soon,.tile.race,.tile.spy{grid-column:1 / -1;min-height:150px}
   .tile.wc{grid-column:1 / -1;min-height:170px}
   .wcstream{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:12px 16px;border:1px solid rgba(227,176,75,.35);background:rgba(227,176,75,.06);font:600 13px/1.4 Inter,system-ui,sans-serif;color:#eef3fb;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
   .wcstream[hidden]{display:none}
@@ -249,7 +249,7 @@ body{
   </header>
 
   <section class="gridsec">
-    <div class="ghead"><span>Разделы</span><s></s><span>05</span></div>
+    <div class="ghead"><span>Разделы</span><s></s><span>06</span></div>
 
     <div class="tiles">
 
@@ -324,6 +324,18 @@ body{
         <div class="tfoot">
           <div class="tstat"><b>Планка</b> · топ-30: что нужно · генератор · калькулятор</div>
           <span class="tgo">Войти <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        </div>
+      </a>
+      <a class="tile spy" href="spy.html" style="--c:var(--rd)">
+        <span class="tnum">06</span>
+        <div>
+          <div class="tkick"><i></i>DOVOD·X · ранний доступ</div>
+          <h2 class="ttl">Шпионаж</h2>
+          <p class="tdesc">Разведданные по игрокам: досье с теллами и связками, подготовка к серии, турниру и финалу, база с ИИ-агентом. Каждая партия, каждый жест, каждый доп за два сезона — прочитаны машиной.</p>
+        </div>
+        <div class="tfoot">
+          <div class="tstat"><b>Досье</b> · серия · турнир · финал · агент</div>
+          <span class="tgo">Открыть <svg viewBox="0 0 16 10" fill="none"><path d="M0 5h13M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span>
         </div>
       </a>
     </div>

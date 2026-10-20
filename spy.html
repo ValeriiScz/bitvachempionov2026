@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Шпионаж · DOVOD</title>
+<!-- spy.html v1.0 · 20.10.2026 · раздел «Шпионаж»: движок DOVOD·X (описание «модели будущего» + схема переменных), шесть продуктов с ценами, «Подробнее» (окно) и «Запросить доступ» (Telegram с готовым сообщением — так ловим интерес). Валерий: раздел-эксперимент, продаж нет, смотрим, кто напишет. -->
+<meta name="description" content="DOVOD·X — разведданные по игрокам спортивной мафии: досье, подготовка к серии, турниру и финалу, доступ к базе и ИИ-агенту.">
+<meta name="theme-color" content="#05060a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05060a;--ink:#eef3fb;--dim:#79808f;--line:rgba(255,255,255,.10);--cy:#26e0ff;--ye:#f5ff35;--li:#c14bbd;--rd:#db514e;--gn:#5ee08a;--c:var(--rd);
+  --disp:'Unbounded',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.55 Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none} .bgfx i{position:absolute;display:block}
+.bgfx .grid{inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(120% 90% at 50% 0%,#000 30%,transparent 78%)}
+.bgfx .g1{width:70vw;height:70vw;max-width:860px;max-height:860px;top:-26vw;left:-18vw;background:radial-gradient(circle,rgba(219,81,78,.14),transparent 62%);filter:blur(22px)}
+.bgfx .g2{width:70vw;height:70vw;max-width:860px;max-height:860px;bottom:-30vw;right:-20vw;background:radial-gradient(circle,rgba(38,224,255,.12),transparent 62%);filter:blur(22px)}
+.bgfx .scan{inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);opacity:.5}
+.bgfx .vig{inset:0;background:radial-gradient(120% 80% at 50% 40%,transparent 40%,rgba(0,0,0,.76) 100%)}
+.dv-crumb{position:relative;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;max-width:1080px;margin:0 auto;padding:12px 15px 0;font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#79808f}
+.dv-crumb a{color:#c3cad6;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)} .dv-crumb a:hover{color:var(--ye);border-color:var(--ye)} .dv-crumb i{font-style:normal;opacity:.5}
+.shell{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:20px 15px 40px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.nb{display:inline-flex;align-items:center;gap:8px;font:700 10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);text-decoration:none;border:1px solid var(--line);padding:9px 12px;border-radius:2px;transition:.18s}
+.nb:hover{color:var(--ink);border-color:var(--rd)} .nb.pri{color:#0c0d10;background:var(--rd);border-color:var(--rd)}
+.hd{margin:28px 0 6px}
+.hline{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.hline s{flex:0 0 34px;height:2px;background:var(--rd);text-decoration:none;box-shadow:0 0 12px rgba(219,81,78,.6)}
+.hline span{font:700 10px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--rd)}
+h1{margin:0;font:900 clamp(30px,8.5vw,64px)/0.94 var(--disp);letter-spacing:-.035em;text-transform:uppercase}
+h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.32)}
+.sub{margin:16px 0 0;max-width:66ch;color:#b6bdc9;font-size:15.5px}
+.sub b{color:var(--ink);font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:24px 0 0}
+.kpi{border:1px solid var(--line);padding:15px 14px;background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3));clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.kpi b{display:block;font:900 clamp(22px,5vw,32px)/1 var(--disp);letter-spacing:-.03em}
+.kpi span{display:block;margin-top:7px;font:700 9px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#8a91a0}
+.kpi.a b{color:var(--rd)} .kpi.b b{color:var(--cy)} .kpi.c b{color:var(--ye)} .kpi.d b{color:var(--gn)}
+.sec{margin:40px 0 0}
+.sh{display:flex;align-items:center;gap:12px;margin:0 0 14px;font:700 10px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.sh s{flex:1;height:1px;background:var(--line);text-decoration:none} .sh em{font-style:normal;color:#5f6675}
+h2.big{margin:0 0 10px;font:900 clamp(22px,4.8vw,34px)/1.08 var(--disp);letter-spacing:-.03em;text-transform:uppercase}
+p.lead{margin:0 0 14px;color:#b6bdc9;max-width:74ch;font-size:15px} p.lead b{color:var(--ink);font-weight:600}
+/* движок */
+.eng{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;margin-top:16px}
+.card{position:relative;border:1px solid var(--line);padding:18px 18px 16px;background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3));clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);box-shadow:0 0 16px var(--c);opacity:.7}
+.card h3{margin:0 0 10px;font:700 10px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--c)}
+.card p{margin:0 0 9px;color:#c3cad6;font-size:13.5px} .card p b{color:var(--ink);font-weight:600}
+.card.cy{--c:var(--cy)} .card.ye{--c:var(--ye)} .card.gn{--c:var(--gn)} .card.li{--c:var(--li)}
+.src{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:8px}
+.src div{border:1px solid rgba(255,255,255,.08);padding:10px 11px;background:rgba(0,0,0,.25)}
+.src b{display:block;font:900 18px/1.1 var(--disp);letter-spacing:-.02em;color:var(--ink)} .src span{display:block;margin-top:5px;font:700 8.5px/1.35 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#8a91a0}
+.sigs{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+.sigs li{font-size:13px;color:#c3cad6;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)} .sigs li::before{content:'▸ ';color:var(--c)}
+.sdwrap{border:1px solid var(--line);background:rgba(0,0,0,.3);padding:8px;margin-top:14px;overflow:hidden}
+.sd{width:100%;height:auto;display:block;font-family:Inter,system-ui,sans-serif}
+.sd .stock rect{fill:rgba(255,255,255,.04);stroke:#c3cad6;stroke-width:1.3} .sd .stock.hi rect{stroke:var(--rd);fill:rgba(219,81,78,.08)} .sd .stock.cy rect{stroke:var(--cy);fill:rgba(38,224,255,.06)} .sd .stock.ye rect{stroke:var(--ye);fill:rgba(245,255,53,.06)}
+.sd .t{fill:#eef3fb;font-size:11.5px;font-weight:600} .sd .v{fill:var(--rd);font-size:10.5px;font-weight:700;font-family:var(--mono)} .sd .stock.cy .v{fill:var(--cy)} .sd .stock.ye .v{fill:var(--ye)} .sd .s{fill:#8a91a0;font-size:9.5px}
+.sd .flow{stroke:#c3cad6;stroke-width:2;fill:none;marker-end:url(#arrF)} .sd .flow.rd{stroke:var(--rd)} .sd .inf{stroke:#79808f;stroke-width:1.1;fill:none;stroke-dasharray:4 3;marker-end:url(#arrI)} .sd .inf.c{stroke:var(--cy)}
+.sd .lab{fill:#a7aebb;font-size:10px} .sd .band{fill:none;stroke:rgba(255,255,255,.06);stroke-dasharray:2 4} .sd .bandt{fill:#5f6675;font-size:9px;letter-spacing:.2em;font-weight:700;font-family:var(--mono)}
+.sd .pulse{animation:pulse 2.4s ease-in-out infinite} @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+/* продукты */
+.prods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+.prod{position:relative;border:1px solid var(--line);padding:20px 20px 18px;background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.32));clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px));display:flex;flex-direction:column;gap:10px;transition:transform .2s,border-color .2s}
+.prod:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--c) 55%,transparent)}
+.prod::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);box-shadow:0 0 16px var(--c);opacity:.8}
+.prod .num{position:absolute;right:16px;top:12px;font:900 40px/1 var(--disp);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.13)}
+.prod .kick{font:700 9.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--c)}
+.prod h3{margin:0;font:900 clamp(20px,3.4vw,26px)/1.05 var(--disp);letter-spacing:-.03em;text-transform:uppercase}
+.prod .d{margin:0;color:#b6bdc9;font-size:13.5px;line-height:1.5}
+.prod .price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:4px}
+.prod .price b{font:900 clamp(26px,5vw,36px)/1 var(--disp);letter-spacing:-.03em;color:var(--ink)} .prod .price small{font:700 10px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#8a91a0}
+.tiers{display:flex;flex-wrap:wrap;gap:5px}
+.tier{font:700 10.5px/1.4 var(--mono);padding:4px 8px;border:1px solid rgba(255,255,255,.14);color:#c3cad6;white-space:nowrap} .tier b{color:var(--ye);font-weight:700}
+.prod .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:1px solid var(--rd);background:var(--rd);color:#0c0d10;padding:12px 16px;font:700 10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;border-radius:2px;transition:.18s;text-decoration:none}
+.btn:hover{filter:brightness(1.1)} .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)} .btn.ghost:hover{border-color:var(--ink)}
+.prod.big{grid-column:1/-1;--c:var(--ye)} .prod.big h3{font-size:clamp(24px,4.4vw,34px)}
+.prod.a{--c:var(--rd)} .prod.b{--c:var(--cy)} .prod.c{--c:var(--li)} .prod.d{--c:var(--gn)} .prod.e{--c:#e3b04b}
+.note{margin-top:16px;border:1px dashed var(--line);padding:12px 14px;color:#8a91a0;font-size:12.5px}
+/* модалка */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(5,6,10,.82);backdrop-filter:blur(6px)}
+.modal.on{display:flex}
+.mbox{position:relative;width:min(640px,100%);max-height:90vh;overflow:auto;border:1px solid var(--line);background:#0b0d13;padding:24px 22px 20px;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px))}
+.mbox::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);box-shadow:0 0 16px var(--c)}
+.mbox .kick{font:700 9.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--c)}
+.mbox h3{margin:8px 0 10px;font:900 clamp(20px,4vw,28px)/1.05 var(--disp);letter-spacing:-.03em;text-transform:uppercase}
+.mbox p{margin:0 0 10px;color:#c3cad6;font-size:13.5px} .mbox p b{color:var(--ink);font-weight:600}
+.mbox ul{margin:0 0 12px;padding-left:18px;color:#c3cad6;font-size:13.5px} .mbox li{margin:4px 0}
+.mbox .x{position:absolute;right:12px;top:10px;cursor:pointer;border:0;background:none;color:#8a91a0;font:700 18px/1 var(--mono)} .mbox .x:hover{color:var(--ink)}
+.mbox .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.mbox .pr{font:900 24px/1 var(--disp);letter-spacing:-.03em;margin:4px 0 10px} .mbox .pr small{font:700 10px/1.4 var(--mono);color:#8a91a0;letter-spacing:.1em;text-transform:uppercase;margin-left:8px}
+.mbox textarea,.mbox input{width:100%;background:#05060a;border:1px solid var(--line);color:var(--ink);padding:10px 12px;font:500 13.5px/1.4 Inter,sans-serif;border-radius:2px} .mbox textarea{min-height:80px;resize:vertical} .mbox input:focus,.mbox textarea:focus{outline:none;border-color:var(--c)}
+.mbox .lab{display:block;margin:10px 0 4px;font:700 9px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#8a91a0}
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font:400 12px/1.6 Inter,sans-serif;color:#6f7684}
+.foot a{color:#9aa2b0;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)} .foot b{color:#9aa2b0;font-weight:600}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.eng,.prods{grid-template-columns:1fr}.sigs{grid-template-columns:1fr}.prod.big{grid-column:auto}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav class="dv-crumb"><a href="/">DOVOD</a><i>/</i><span>Шпионаж</span></nav>
+<div class="bgfx" aria-hidden="true"><i class="grid"></i><i class="g1"></i><i class="g2"></i><i class="scan"></i><i class="vig"></i></div>
+
+<div class="shell">
+  <div class="nav">
+    <a class="nb" href="/">&#8592; Разделы</a>
+    <a class="nb" href="#engine">Как работает &#8594;</a>
+    <a class="nb pri" href="#offers">Что можно получить &#8594;</a>
+  </div>
+
+  <header class="hd">
+    <div class="hline"><s></s><span>DOVOD·X · разведданные по игрокам · ранний доступ</span></div>
+    <h1>ШПИО<em>НАЖ</em></h1>
+    <p class="sub">За столом нет случайностей — есть паттерны, которых ты не видишь. <b>DOVOD·X</b> видит. Каждая партия, каждый жест, каждая пауза перед голосованием, каждый доп от каждого судьи за два сезона — собраны, прочитаны и сведены в одно: <b>как играет этот человек и как с ним играть</b>. Ниже — что умеет движок и что из этого можно получить на руки.</p>
+    <div class="kpis">
+      <div class="kpi a"><b>3</b><span>федерации · MafGame · EmotionGames · iMafia</span></div>
+      <div class="kpi b"><b>679</b><span>турниров 2025–26 с протоколами · десятки тысяч партий</span></div>
+      <div class="kpi c"><b>100+</b><span>мастер-классов 2024–25 в обучении</span></div>
+      <div class="kpi d"><b>500+</b><span>игр с разбором топ-игроков</span></div>
+    </div>
+  </header>
+
+  <section class="sec" id="engine">
+    <div class="sh"><span>01 · движок</span><s></s><em>DOVOD·X</em></div>
+    <h2 class="big">Машина, которая читает игрока</h2>
+    <p class="lead">Обычная статистика говорит, <b>что</b> случилось: место, баллы, винрейт. DOVOD·X отвечает, <b>почему</b> — и что случится в следующей партии. Для этого он берёт не таблицу, а всё: протоколы, видео, звук, судейские решения и то, как игрок говорит, когда прав, и как — когда блефует.</p>
+    <div class="eng">
+      <div class="card"><h3>Что берём</h3>
+        <p><b>Все рейтинговые партии</b> игрока за сезоны 2025 и 2026 по трём федерациям — с протоколом, рассадкой, ролями, ходом голосований и допами.</p>
+        <p><b>Видео каждой игры</b>: жесты, мимика, направление взгляда, поза на столе, паузы перед словом и перед голосованием.</p>
+        <p><b>Звук</b>: тембр, темп речи, громкость, срывы и ускорения — отдельно в красной и в чёрной роли.</p>
+        <p><b>Судейские протоколы</b>: кто ставил доп, за что ставил, за что не ставил, кто снимал — и как это зависит от судьи.</p>
+        <div class="src"><div><b>2025 → 2026</b><span>турнирный год + текущий</span></div><div><b>10 ролей</b><span>каждая карта отдельно</span></div><div><b>все судьи</b><span>кто и за что ставил</span></div><div><b>все партнёры</b><span>с кем сидел и как</span></div></div>
+      </div>
+      <div class="card cy"><h3>Что считаем</h3>
+        <ul class="sigs">
+          <li>ролевая карта: как играет мирным, шерифом, мафией, доном</li>
+          <li>речевой отпечаток: словарь, темп, паузы, «слова-маркеры»</li>
+          <li>невербальный профиль: жесты и мимика под давлением</li>
+          <li>связки: с кем выигрывает, кого тянет, кого сливает</li>
+          <li>как часто выставляет, кого, на каком круге</li>
+          <li>как часто «пилит» и чем это заканчивается</li>
+          <li>форма: сезон, последние 3 месяца, последний турнир</li>
+          <li>частоты мест по звёздам и по размеру поля</li>
+          <li>допы: за какие ходы, от каких судей, как часто</li>
+          <li>первые ночи, первый убитый, лучший ход — статистика и привычки</li>
+        </ul>
+      </div>
+      <div class="card ye" style="grid-column:1/-1"><h3>На чём училась</h3>
+        <p>Модель не придумывает мафию заново — она знает, <b>как играть надо и как не надо</b>: в обучении более <b>100 полных транскриптов мастер-классов 2024–2025</b> и более <b>500 партий с разбором топ-игроков</b> — с объяснением каждого хода, каждой ошибки и каждого правильного выставления. Поверх этого — сами игры: десятки тысяч партий трёх федераций с протоколами и видео. Поэтому в досье не «игрок часто выставляет на 2-м круге», а «игрок выставляет на 2-м круге того, кто перебил его в первой речи, и в 70% случаев ошибается — ставь ему в ответ, судьи это замечают и платят допом».</p>
+      </div>
+    </div>
+
+    <div class="sdwrap"><svg class="sd" viewBox="0 0 1000 560" role="img" aria-label="Схема движка DOVOD·X">
+      <defs><marker id="arrF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5 0 10z" fill="#c3cad6"/></marker><marker id="arrI" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5 0 10z" fill="#79808f"/></marker></defs>
+      <rect class="band" x="8" y="8" width="984" height="150" rx="4"/><text class="bandt" x="18" y="24">СЛОЙ 1 · СЫРЬЁ</text>
+      <rect class="band" x="8" y="170" width="984" height="200" rx="4"/><text class="bandt" x="18" y="186">СЛОЙ 2 · ЧТЕНИЕ ИГРОКА (ЗАПАСЫ, КОТОРЫЕ КОПЯТСЯ С КАЖДОЙ ПАРТИЕЙ)</text>
+      <rect class="band" x="8" y="382" width="984" height="170" rx="4"/><text class="bandt" x="18" y="398">СЛОЙ 3 · ПРОГНОЗ И ИНСТРУКЦИЯ</text>
+      <g class="stock" transform="translate(30,40)"><rect width="175" height="100" rx="2"/><text class="t" x="10" y="18">Протоколы</text><text class="v" x="10" y="36">3 федерации · 2025–26</text><text class="s" x="10" y="54">рассадка, роли, голосования,</text><text class="s" x="10" y="68">допы, первый убитый, лучший ход</text><text class="s" x="10" y="90">обновление: после каждого турнира</text></g>
+      <g class="stock" transform="translate(225,40)"><rect width="175" height="100" rx="2"/><text class="t" x="10" y="18">Видео</text><text class="v" x="10" y="36">каждая партия</text><text class="s" x="10" y="54">жесты · мимика · взгляд</text><text class="s" x="10" y="68">поза · паузы · руки</text><text class="s" x="10" y="90">покадрово, по кругам</text></g>
+      <g class="stock" transform="translate(420,40)"><rect width="175" height="100" rx="2"/><text class="t" x="10" y="18">Звук</text><text class="v" x="10" y="36">речь по ролям</text><text class="s" x="10" y="54">тембр · темп · громкость</text><text class="s" x="10" y="68">срывы · ускорения · словарь</text><text class="s" x="10" y="90">красный против чёрного</text></g>
+      <g class="stock" transform="translate(615,40)"><rect width="175" height="100" rx="2"/><text class="t" x="10" y="18">Судьи</text><text class="v" x="10" y="36">кто · за что · когда</text><text class="s" x="10" y="54">допы поставленные и снятые</text><text class="s" x="10" y="68">стиль каждого судьи</text><text class="s" x="10" y="90">перекрёстно с игроком</text></g>
+      <g class="stock ye" transform="translate(810,40)"><rect width="175" height="100" rx="2"/><text class="t" x="10" y="18">Школа</text><text class="v" x="10" y="36">100+ МК · 500+ разборов</text><text class="s" x="10" y="54">как надо и как не надо</text><text class="s" x="10" y="68">эталоны ходов и ошибок</text><text class="s" x="10" y="90">2024–2025</text></g>
+      <path class="flow rd" d="M117 140 L117 200"/><path class="flow rd" d="M312 140 L312 200"/><path class="flow rd" d="M507 140 L507 200"/><path class="flow rd" d="M702 140 L702 200"/><path class="inf" d="M897 140 L897 455 L800 455"/>
+      <g class="stock hi" transform="translate(30,200)"><rect width="175" height="150" rx="2"/><text class="t" x="10" y="18">Ролевая карта</text><text class="v" x="10" y="36">10 карт × все круги</text><text class="s" x="10" y="56">кого выставляет и когда</text><text class="s" x="10" y="70">как голосует, как «пилит»</text><text class="s" x="10" y="84">первые ночи · лучший ход</text><text class="s" x="10" y="98">частоты мест по полю</text><text class="s" x="10" y="124">форма: сезон · 3 мес · турнир</text><text class="s" x="10" y="138">тренд ↑ или ↓</text></g>
+      <g class="stock hi" transform="translate(225,200)"><rect width="175" height="150" rx="2"/><text class="t" x="10" y="18">Невербальный профиль</text><text class="v" x="10" y="36">под давлением</text><text class="s" x="10" y="56">что делает руками, когда чёрный</text><text class="s" x="10" y="70">куда смотрит перед выставлением</text><text class="s" x="10" y="84">пауза перед правдой и перед блефом</text><text class="s" x="10" y="98">«теллы» с вероятностью</text><text class="s" x="10" y="124">стабильность: меняются ли</text><text class="s" x="10" y="138">от турнира к турниру</text></g>
+      <g class="stock hi" transform="translate(420,200)"><rect width="175" height="150" rx="2"/><text class="t" x="10" y="18">Речевой отпечаток</text><text class="v" x="10" y="36">красный ≠ чёрный</text><text class="s" x="10" y="56">слова-маркеры роли</text><text class="s" x="10" y="70">темп и срывы по кругам</text><text class="s" x="10" y="84">как оправдывается, как давит</text><text class="s" x="10" y="98">реакция на перебивание</text><text class="s" x="10" y="124">что говорит другим игрокам</text><text class="s" x="10" y="138">и что говорят о нём</text></g>
+      <g class="stock hi" transform="translate(615,200)"><rect width="175" height="150" rx="2"/><text class="t" x="10" y="18">Связки и судьи</text><text class="v" x="10" y="36">с кем · против кого</text><text class="s" x="10" y="56">с кем выигрывает чаще</text><text class="s" x="10" y="70">кого тянет, кого сливает</text><text class="s" x="10" y="84">с кем конфликтует за столом</text><text class="s" x="10" y="98">какие судьи ему платят допами</text><text class="s" x="10" y="124">за что именно ставят</text><text class="s" x="10" y="138">и за что никогда не ставят</text></g>
+      <g class="stock cy" transform="translate(810,200)"><rect width="175" height="150" rx="2"/><text class="t" x="10" y="18">Память стола</text><text class="v" x="10" y="36">10 × 10 × все партии</text><text class="s" x="10" y="56">как эти десять играют</text><text class="s" x="10" y="70">друг против друга</text><text class="s" x="10" y="84">кто кого читает, кто кого нет</text><text class="s" x="10" y="98">история каждой пары</text><text class="s" x="10" y="124">обновляется каждую</text><text class="s" x="10" y="138">сыгранную партию</text></g>
+      <path class="flow rd" d="M117 350 L117 420"/><path class="flow rd" d="M312 350 L312 420"/><path class="flow rd" d="M507 350 L507 420"/><path class="flow rd" d="M702 350 L702 420"/><path class="inf c" d="M897 350 L897 420"/>
+      <g class="stock ye" transform="translate(30,420)"><rect width="462" height="110" rx="2"/><text class="t" x="10" y="20">Досье · подготовка к серии · подготовка к турниру</text><text class="v" x="10" y="40">кто он · как с ним играть · чего ждать завтра</text><text class="s" x="10" y="62">не «часто выставляет», а «выставит того, кто перебил его в первой речи, и ошибётся»</text><text class="s" x="10" y="78">с чем идти к столу против каждого, какие судьи в зале и что они платят</text><text class="s" x="10" y="98" class="pulse">обновляется после каждого сыгранного турнира</text></g>
+      <g class="stock cy" transform="translate(512,420)"><rect width="463" height="110" rx="2"/><text class="t" x="10" y="20">ИИ-агент</text><text class="v" x="10" y="40">любой вопрос по любому игроку · ответ за секунды</text><text class="s" x="10" y="62">«как он играет дона против шерифа, который вскрылся на втором круге?»</text><text class="s" x="10" y="78">«кто из моего стола завтра чаще всего сливает партнёра на третьем круге?»</text><text class="s" x="10" y="98">доступ на год · полная база · обновления</text></g>
+      <text class="lab" x="30" y="166">поток данных → запасы знания об игроке → инструкция к столу</text>
+    </svg></div>
+  </section>
+
+  <section class="sec" id="offers">
+    <div class="sh"><span>02 · что можно получить</span><s></s><em>цены в евро</em></div>
+    <h2 class="big">Разведданные на руки</h2>
+    <p class="lead">Шесть форматов — от одного игрока до целой базы с агентом. Везде одно и то же правило: <b>не статистика, а инструкция</b>: что он сделает и что делать тебе.</p>
+    <div class="prods">
+      <div class="prod a" data-p="dossier"><span class="num">01</span><div class="kick">один игрок · полный разбор</div><h3>Досье на игрока</h3>
+        <p class="d">Всё, что DOVOD·X знает об одном человеке: ролевая карта по десяти картам, речевой и невербальный отпечаток, теллы с вероятностями, связки, судьи и допы, форма на сегодня — и главное, <b>как с ним играть</b>: когда давить, когда верить, когда выставлять первым.</p>
+        <div class="price"><b>1 500 €</b><small>за игрока</small></div>
+        <div class="tiers"><span class="tier">3 игрока · <b>3 900 €</b></span><span class="tier">5 · <b>5 900 €</b></span><span class="tier">10 · <b>9 900 €</b></span><span class="tier">12 · <b>10 900 €</b></span></div>
+        <div class="btns"><button class="btn ghost" data-more="dossier">Подробнее</button><button class="btn" data-buy="dossier">Запросить доступ</button></div></div>
+      <div class="prod b" data-p="series"><span class="num">02</span><div class="kick">10 игроков · одна серия</div><h3>Подготовка к серии</h3>
+        <p class="d">Не десять досье, а <b>один стол</b>: как эти десять играют друг против друга. Кто с кем в связке, кто кого читает, кто кого сливает на третьем круге, с кем ты сядешь в чёрной и кто тебя потянет. Плюс судьи серии: что они платят и за что снимают.</p>
+        <div class="price"><b>3 500 €</b><small>за серию · 10 игроков</small></div>
+        <div class="btns"><button class="btn ghost" data-more="series">Подробнее</button><button class="btn" data-buy="series">Запросить доступ</button></div></div>
+      <div class="prod c" data-p="tourn"><span class="num">03</span><div class="kick">весь состав · весь турнир</div><h3>Подготовка к турниру</h3>
+        <p class="d">Разбор всего поля: каждый соперник коротко, опасные связки, кто в форме и кто нет, судейская бригада и её привычки. Плюс <b>сценарии рассадки</b>: с кем ты скорее всего сядешь и что делать за каждым из этих столов.</p>
+        <div class="price"><b>5 000 €</b><small>до 30 игроков</small></div>
+        <div class="tiers"><span class="tier">40 · <b>5 700 €</b></span><span class="tier">50 · <b>6 400 €</b></span><span class="tier">60+ · <b>7 000 €</b></span></div>
+        <div class="btns"><button class="btn ghost" data-more="tourn">Подробнее</button><button class="btn" data-buy="tourn">Запросить доступ</button></div></div>
+      <div class="prod d" data-p="final"><span class="num">04</span><div class="kick">12 игроков · финал сезона</div><h3>Подготовка к итоговому турниру</h3>
+        <p class="d">Дюжина — самый плотный стол года. Двенадцать полных досье и <b>полная карта взаимосвязей</b>: стили, пары, конфликты, кто кого никогда не выставит и кто кого сольёт первым. С кем ты сядешь в любом раскладе и как играется каждый из этих столов.</p>
+        <div class="price"><b>15 000 €</b><small>12 досье + карта связей</small></div>
+        <div class="btns"><button class="btn ghost" data-more="final">Подробнее</button><button class="btn" data-buy="final">Запросить доступ</button></div></div>
+      <div class="prod big e" data-p="agent"><span class="num">05</span><div class="kick">полная база · ИИ-агент · 12 месяцев</div><h3>Доступ ко всему</h3>
+        <p class="d">Вся база DOVOD·X по всем игрокам трёх федераций и агент, который отвечает на любой вопрос за секунды: «как он играет дона против вскрывшегося шерифа?», «кто из моего стола завтра чаще всех сливает партнёра?», «что ставит этот судья за выставление на первом круге?». Обновления после каждого турнира, год без ограничений.</p>
+        <div class="price"><b>35 000 €</b><small>на год</small></div>
+        <div class="btns"><button class="btn ghost" data-more="agent">Подробнее</button><button class="btn" data-buy="agent">Запросить доступ</button></div></div>
+    </div>
+    <div class="note">Доступ выдаётся по запросу: после нажатия «Запросить доступ» откроется Telegram с готовым сообщением автору — с него и начинается разговор. Количество досье в работе одновременно ограничено.</div>
+  </section>
+
+  <footer class="foot">
+    <div><b>DOVOD·X</b> · ранний доступ · данные трёх федераций</div>
+    <div>вопросы — <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a></div>
+  </footer>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="mbox" id="mbox"></div></div>
+
+<script>
+(function(){
+  var P={
+    dossier:{c:'var(--rd)',kick:'досье на игрока',t:'Досье на игрока',price:'1 500 €',sub:'3 — 3 900 · 5 — 5 900 · 10 — 9 900 · 12 — 10 900',
+      body:'<p><b>Что внутри.</b> 20–30 страниц по одному человеку, собранные из всех его партий 2025–2026 в трёх федерациях, видео и судейских протоколов.</p><ul><li><b>Ролевая карта</b> — как играет каждую из десяти карт: когда и кого выставляет, как голосует, как часто «пилит» и чем это заканчивается, первые ночи и лучший ход.</li><li><b>Речевой отпечаток</b> — слова-маркеры роли, темп и срывы по кругам, как оправдывается, как давит, как реагирует на перебивание.</li><li><b>Невербальный профиль</b> — теллы с вероятностями: что делает руками, когда чёрный; куда смотрит перед выставлением; пауза перед правдой и перед блефом.</li><li><b>Связки</b> — с кем выигрывает, кого тянет, кого сливает, с кем конфликтует.</li><li><b>Судьи и допы</b> — какие судьи ему платят, за что именно, за что никогда.</li><li><b>Форма</b> — сезон, последние три месяца, последний турнир, тренд.</li><li><b>Инструкция</b> — как с ним играть в красной и в чёрной: когда верить, когда давить, когда выставлять первым.</li></ul><p>Обновление досье после следующего его турнира — бесплатно в течение месяца.</p>'},
+    series:{c:'var(--cy)',kick:'подготовка к серии',t:'Подготовка к серии',price:'3 500 €',sub:'10 игроков · судьи серии',
+      body:'<p><b>Это не десять досье.</b> Это разбор одного стола как системы: как эти десять играют друг против друга.</p><ul><li>Карта связок: кто с кем в паре, кто кого читает, кто кого никогда не выставит.</li><li>Кто кого сливает и на каком круге — по истории каждой пары.</li><li>Опасные для тебя сочетания: с кем ты садишься в чёрной и кто тебя потянет, кто тебя сдаст.</li><li>Судьи серии: что платят допами, за что снимают, как относятся к «пилам».</li><li>Короткая памятка на каждого из десяти — одна страница, читается за минуту перед игрой.</li></ul><p>Срок — 5 дней с момента, когда известен состав серии.</p>'},
+    tourn:{c:'var(--li)',kick:'подготовка к турниру',t:'Подготовка к турниру',price:'от 5 000 €',sub:'до 30 — 5 000 · 40 — 5 700 · 50 — 6 400 · 60+ — 7 000',
+      body:'<p><b>Весь состав, вся бригада, все столы.</b></p><ul><li>Каждый соперник коротко: сила, форма, роль-сигнатура, один главный телл, одна главная слабость.</li><li>Опасные связки в поле: кто приехал с кем и кто будет играть на кого.</li><li>Судейская бригада: привычки каждого судьи по допам и снятиям.</li><li>Сценарии рассадки: с кем ты с наибольшей вероятностью сядешь по дням, и инструкция к каждому из этих столов.</li><li>Обновление после каждого игрового дня: кто вышел в форму, кто посыпался, кого выставлять первым завтра.</li></ul><p>Готово за 3 дня до старта, обновления — каждое утро турнира.</p>'},
+    final:{c:'var(--gn)',kick:'подготовка к итоговому турниру',t:'Подготовка к итоговому турниру',price:'15 000 €',sub:'12 полных досье + карта взаимосвязей',
+      body:'<p><b>Самый плотный стол года — и самая глубокая подготовка.</b></p><ul><li>Двенадцать полных досье (см. «Досье на игрока») по каждому участнику финала.</li><li>Полная карта взаимосвязей 12 × 12: стили, пары, конфликты, история каждой пары за два сезона.</li><li>Кто кого никогда не выставит, кто кого сольёт первым, кто с кем договорится взглядом.</li><li>Все возможные столы: инструкция к каждому раскладу, в котором ты можешь оказаться.</li><li>Судьи финала и их привычки.</li><li>Разбор после каждого игрового дня и корректировка плана на следующий.</li></ul><p>Работа начинается в день, когда дюжина становится известна.</p>'},
+    agent:{c:'#e3b04b',kick:'полный доступ на год',t:'База + ИИ-агент',price:'35 000 €',sub:'12 месяцев · все игроки · все федерации',
+      body:'<p><b>Весь DOVOD·X у тебя в телефоне.</b></p><ul><li>Полная база по всем игрокам трёх федераций: досье, связки, судьи, форма — обновляется после каждого турнира.</li><li>ИИ-агент, который отвечает на любой вопрос за секунды: по игроку, по паре, по столу, по судье, по себе.</li><li>Подготовка к любому турниру и серии в течение года — без доплат.</li><li>Разбор твоих собственных партий: твои теллы, твои ошибки, что видят в тебе другие.</li><li>Приоритетные обновления: новые сигналы и новые разборы — первым.</li></ul><p>Число мест на год ограничено.</p>'}
+  };
+  var modal=document.getElementById('modal'), box=document.getElementById('mbox');
+  function open(html,c){box.style.setProperty('--c',c);box.innerHTML='<button class="x" aria-label="Закрыть">×</button>'+html;modal.classList.add('on');document.body.style.overflow='hidden';box.querySelector('.x').addEventListener('click',close)}
+  function close(){modal.classList.remove('on');document.body.style.overflow=''}
+  modal.addEventListener('click',function(e){if(e.target===modal)close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  function track(k,p){try{var a=JSON.parse(localStorage.getItem('dovod_spy')||'[]');a.push([k,p,Date.now()]);localStorage.setItem('dovod_spy',JSON.stringify(a.slice(-50)))}catch(e){} try{if(navigator.sendBeacon)navigator.sendBeacon('/spy-'+k+'-'+p+'.gif','')}catch(e){}}
+  function more(k){var p=P[k];track('more',k);open('<div class="kick">'+p.kick+'</div><h3>'+p.t+'</h3><div class="pr">'+p.price+'<small>'+p.sub+'</small></div>'+p.body+'<div class="row"><button class="btn" data-buy="'+k+'">Запросить доступ</button><button class="btn ghost" data-close>Закрыть</button></div>',p.c)}
+  function buy(k){var p=P[k];track('buy',k);
+    open('<div class="kick">запрос доступа</div><h3>'+p.t+'</h3><div class="pr">'+p.price+'<small>'+p.sub+'</small></div><p>Доступ выдаётся по запросу. Нажми кнопку — откроется Telegram с готовым сообщением автору; допиши, по кому и к чему готовишься, если хочешь. Ответ — в течение дня.</p><label class="lab">Ник на mafgame (необязательно)</label><input id="qn" placeholder="твой ник"><label class="lab">Комментарий (необязательно)</label><textarea id="qc" placeholder="по кому досье · к какому турниру · что важно"></textarea><div class="row"><a class="btn" id="qgo" href="#" target="_blank" rel="noopener">Открыть Telegram &#8594;</a><button class="btn ghost" data-close>Позже</button></div>',p.c);
+    var go=document.getElementById('qgo'); function upd(){var n=(document.getElementById('qn').value||'').trim(),c=(document.getElementById('qc').value||'').trim();var text='DOVOD·X · запрос: '+p.t+' ('+p.price+')'+(n?'\nник: '+n:'')+(c?'\n'+c:'');go.href='https://t.me/SivValerii?text='+encodeURIComponent(text)}
+    upd(); box.addEventListener('input',upd); go.addEventListener('click',function(){track('tg',k)})}
+  document.addEventListener('click',function(e){var m=e.target.closest('[data-more]'),b=e.target.closest('[data-buy]'),c=e.target.closest('[data-close]');if(m)more(m.dataset.more);else if(b)buy(b.dataset.buy);else if(c)close()});
+})();
+</script>
+</body>
+</html>
