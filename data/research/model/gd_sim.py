@@ -218,13 +218,13 @@ class Season:
         N,pts=min(cands,key=lambda c:abs(c[0]-n))
         return pts
 
-    def run(self, S=3000, seed=0, force=None, frailty=2.0):
+    def run(self, S=3000, seed=0, force=None, frailty=2.0, track=None):
         """force: {uid: set(event ids)} — принудительная явка. Возвращает результаты."""
         rng=np.random.default_rng(seed)
         pool=self.pool; idx={u:i for i,u in enumerate(pool)}; n=len(pool)
         beta0=np.array([self.beta.get(u,self.default)+(RACE_BETA_SHIFT if self.race.get(u,999)<=30 else 0) for u in pool])*C
         sig0=np.array([self.sigma.get(u,self.default_sigma) for u in pool])*C if (STRENGTH=='v2' and STRENGTH_SIGMA) else np.zeros(n)
-        top12=np.zeros(n); top30=np.zeros(n); sums=np.zeros((S,n)); ser_by=collections.defaultdict(lambda: np.zeros(n)); ser_play=collections.defaultdict(lambda: np.zeros(n)); thr=np.zeros(S); played=np.zeros(n); new_reg=np.zeros(n); new_ser=np.zeros(n)
+        top12=np.zeros(n); top30=np.zeros(n); sums=np.zeros((S,n)); ser_by=collections.defaultdict(lambda: np.zeros(n)); ser_play=collections.defaultdict(lambda: np.zeros(n)); thr=np.zeros(S); trk=np.full((S,n),-1.0) if track else None; trkr=np.zeros((S,n),int) if track else None; played=np.zeros(n); new_reg=np.zeros(n); new_ser=np.zeros(n)
         base_recs=[list(self.base[u]) for u in pool]
         for s in range(S):
             recs=[list(b) for b in base_recs]
@@ -275,6 +275,7 @@ class Season:
                 pts=self.grid_pts(ev['stars'],ev['type'],k+nbg)
                 for j,u in enumerate(ids):
                     r=ranks[j]; recs[idx[u]].append((pts[min(r,len(pts))-1],0)); played[idx[u]]+=1; new_reg[idx[u]]+=pts[min(r,len(pts))-1]
+                    if track and ev['id']==track: trk[s,idx[u]]=pts[min(r,len(pts))-1]; trkr[s,idx[u]]=r   # whatif/статья: результат на отслеживаемом турнире в каждом розыгрыше
             tot=np.array([g.best10(r) for r in recs]); sums[s]=tot
             order=np.argsort(-tot); top12[order[:12]]+=1; top30[order[:30]]+=1; thr[s]=tot[order[11]]
-        return {'pool':pool,'p12':top12/S,'p30':top30/S,'sums':sums,'thr':thr,'played':played/S,'new_reg':new_reg/S,'new_ser':new_ser/S,'ser_by':{k:v/S for k,v in ser_by.items()},'ser_play':{k:v/S for k,v in ser_play.items()}}
+        return {'pool':pool,'p12':top12/S,'p30':top30/S,'sums':sums,'thr':thr,'played':played/S,'new_reg':new_reg/S,'new_ser':new_ser/S,'ser_by':{k:v/S for k,v in ser_by.items()},'ser_play':{k:v/S for k,v in ser_play.items()},'trk':trk,'trkr':trkr}
