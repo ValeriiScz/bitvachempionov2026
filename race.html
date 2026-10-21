@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v3.4 · 21.10.2026 · вкладка «Сценарии» (12 «что если» из whatif.py: планка, дюжина, кто двигается — словами); на «Планке» — поправка ×1.07 с объяснением курсивом и сырые цифры · v3.3 · 20.10.2026 · «Откуда ≈Σ»: обычные турниры + финалы серийников чистыми; колонка «финалы» в генераторе; описание финалов и малых полей в модели · v3.2 · 20.10.2026 · гейт: пароль без учёта регистра; ошибка страницы после верного пароля больше не выдаётся за «пароль не подошёл» (показывает причину, сбрасывает выбранного игрока) · v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
+<!-- race.html v3.5 · 21.10.2026 · «Сценарии»: в каждой карточке «X мест заняты» и «за оставшиеся Y — Z игроков», черта между проходящими и догоняющими, у борющихся — шанс «≈ k из 10» и полоска; в заголовке карточки — короткая сводка · v3.4 · 21.10.2026 · вкладка «Сценарии» (12 «что если» из whatif.py: планка, дюжина, кто двигается — словами); на «Планке» — поправка ×1.07 с объяснением курсивом и сырые цифры · v3.3 · 20.10.2026 · «Откуда ≈Σ»: обычные турниры + финалы серийников чистыми; колонка «финалы» в генераторе; описание финалов и малых полей в модели · v3.2 · 20.10.2026 · гейт: пароль без учёта регистра; ошибка страницы после верного пароля больше не выдаётся за «пароль не подошёл» (показывает причину, сбрасывает выбранного игрока) · v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
 <meta name="description" content="Рейтинг MAFGAME 2026: сколько и каких турниров нужно до золотой дюжины, пул баллов по выходным, модель расчёта, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -322,6 +322,15 @@ p.coef{margin:12px 0 0;color:#a7aebb;font-size:13px;max-width:80ch} p.coef b{col
 .wchip.new{border-color:rgba(94,224,138,.6);background:rgba(94,224,138,.07)} .wchip.out{opacity:.5;border-style:dashed} .wchip.me{border-color:var(--ye)}
 .wm{margin-top:6px!important;font:700 9.5px/1 var(--mono)!important;letter-spacing:.14em;text-transform:uppercase;color:#8a91a0!important}
 ul.wml{margin:6px 0 0;padding-left:18px;color:#c3cad6;font-size:13px} ul.wml li{margin:3px 0}
+
+.wi .wtt{display:flex;flex-direction:column;gap:3px;min-width:0} .wi .wtt small{font:700 10px/1.2 var(--mono);letter-spacing:.06em;color:#8a91a0;text-transform:uppercase}
+.wgrp{margin:10px 0 4px} .wgl{font:700 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#a7aebb} .wgl b{color:var(--ink);font-size:12px}
+.wchip.w-lock{border-color:rgba(94,224,138,.45);background:rgba(94,224,138,.06)}
+.wchip.w-above{border-color:rgba(245,255,53,.55);background:rgba(245,255,53,.06)}
+.wchip.w-below{opacity:.6;border-style:dashed}
+.wcut{align-self:stretch;display:inline-flex;align-items:center;padding:0 6px;border-left:2px solid #e7a0a0;font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#e7a0a0}
+.wi .wb p.wnote{font-size:12px;color:#7e8595;font-style:italic;margin-top:2px}
+.wbar{display:block;height:3px;background:rgba(255,255,255,.08);margin-top:3px} .wbar i{display:block;height:100%;background:var(--ye)} .wchip.w-below .wbar i{background:#a7aebb}
 </style>
 <style id="dvcrumbcss">.dv-crumb{position:relative;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;max-width:1080px;margin:0 auto;padding:12px 15px 0;font:700 10px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#79808f}.dv-crumb a{color:#c3cad6;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}.dv-crumb a:hover{color:#f5ff35;border-color:#f5ff35}.dv-crumb i{font-style:normal;opacity:.5}
 /* ── закрытый раздел: гейт ── */
@@ -886,6 +895,7 @@ function initRace(){
 
   // ======================= 06 · СЦЕНАРИИ =======================
   let WI_OPEN=null;
+  function plural(n,a,b,c){n=Math.abs(n)%100;const m=n%10;return n>10&&n<20?c:m===1?a:m>=2&&m<=4?b:c}
   function drawWhatif(){
     const W=R.whatif, box=$('#wiList'); if(!W||!W.scen){box.innerHTML='<p class="lead">Сценарии появятся после следующего пересчёта.</p>';return}
     const k=(R.model&&R.model.thr_coef)||1.07, base=W.scen[0], baseSet=new Set(base.dozen.slice(0,12).map(d=>d.nick));
@@ -893,13 +903,20 @@ function initRace(){
       const d12=sc.dozen.slice(0,12), set=new Set(d12.map(d=>d.nick));
       const ins=d12.filter(d=>!baseSet.has(d.nick)).map(d=>d.nick), outs=[...baseSet].filter(n=>!set.has(n));
       const dthr=Math.round(sc.thr-base.thr);
-      const chips=sc.dozen.slice(0,14).map((d,j)=>{const [c,w]=pword(d.p12);const me=CUR&&d.uid===CUR;return `<span class="wchip${j>=12?' out':''}${!baseSet.has(d.nick)&&j<12?' new':''}${me?' me':''}"><b>${d.nick}</b><small class="${c}">${w}</small></span>`}).join('');
+      const LOCK=0.85, MINP=0.1;
+      const locked=sc.dozen.filter(d=>d.p12>=LOCK), fight=sc.dozen.filter(d=>d.p12<LOCK&&d.p12>=MINP), free=Math.max(0,12-locked.length);
+      const odds=p=>{const k=Math.max(1,Math.min(9,Math.round(p*10)));return `≈ ${k} из 10`};
+      const chip=(d,cls)=>{const [c,w]=pword(d.p12);const me=CUR&&d.uid===CUR;const fightC=cls!=='w-lock';return `<span class="wchip ${cls}${!baseSet.has(d.nick)&&cls!=='w-below'?' new':''}${me?' me':''}"><b>${d.nick}</b><small class="${c}">${fightC?odds(d.p12):w}</small>${fightC?`<i class="wbar"><i style="width:${Math.round(d.p12*100)}%"></i></i>`:''}</span>`};
+      const fightChips=fight.map((d,j)=>(j===free&&j>0?'<span class="wcut">черта</span>':'')+chip(d,j<free?'w-above':'w-below')).join('');
+      const chips=`<div class="wgrp"><div class="wgl"><b>${locked.length}</b> ${plural(locked.length,'место занято','места заняты','мест заняты')}</div><div class="wchips">${locked.map(d=>chip(d,'w-lock')).join('')}</div></div>`+
+        (free?`<div class="wgrp"><div class="wgl">за оставшиеся <b>${free}</b> ${plural(free,'место','места','мест')} — <b>${fight.length}</b> ${plural(fight.length,'игрок','игрока','игроков')}</div><div class="wchips">${fightChips}</div><p class="wnote">Шанс — в скольких исходах из 10 игрок заканчивает год в дюжине. Слева от черты — кто проходит чаще остальных, справа — кто догоняет. Сумма шансов борющихся ≈ число свободных мест.</p></div>`:'');
+      const headSum=`${locked.length} точно · ${free} ${plural(free,'место','места','мест')} на ${fight.length}`;
       const moves=(sc.moves||[]).map(m=>{const a=pword(m.p0)[1],b=pword(m.p12);return `<li><b>${m.nick}</b>: `+(a===b[1]?`<span class="${b[0]}">${b[1]}</span>, но ${m.d>0?'шансы заметно выше':'шансы заметно ниже'}`:`${a} → <span class="${b[0]}">${b[1]}</span>`)+`</li>`}).join('');
       const open=WI_OPEN===sc.key||(WI_OPEN==null&&i===0);
-      return `<div class="wi${open?' open':''}" data-k="${sc.key}"><div class="wh"><span class="wn">${String(i).padStart(2,'0')}</span><b>${sc.title}</b><span class="wt">${Math.round(sc.thr)}<small>(${Math.round(sc.thr*k)})</small>${i?`<em class="${dthr>0?'up':dthr<0?'dn':''}">${dthr>0?'+':''}${dthr}</em>`:''}</span></div>
+      return `<div class="wi${open?' open':''}" data-k="${sc.key}"><div class="wh"><span class="wn">${String(i).padStart(2,'0')}</span><span class="wtt"><b>${sc.title}</b><small>${headSum}</small></span><span class="wt">${Math.round(sc.thr)}<small>(${Math.round(sc.thr*k)})</small>${i?`<em class="${dthr>0?'up':dthr<0?'dn':''}">${dthr>0?'+':''}${dthr}</em>`:''}</span></div>
         <div class="wb"><p>${sc.desc}</p>
           <p class="wsum">12-е место ≈ <b>${Math.round(sc.thr)}</b> (коридор ${Math.round(sc.thr10)}–${Math.round(sc.thr90)}; с поправкой ×${k} — ${Math.round(sc.thr*k)})${i?` · ${dthr===0?'планка не меняется':dthr>0?'планка выше на '+dthr:'планка ниже на '+(-dthr)}`:''}${i&&(ins.length||outs.length)?` · ${ins.length?'заходят: <b>'+ins.join(', ')+'</b>':''}${ins.length&&outs.length?'; ':''}${outs.length?'выпадают: <b>'+outs.join(', ')+'</b>':''}`:i?' · состав дюжины тот же':''}</p>
-          <div class="wchips">${chips}</div>
+          ${chips}
           ${i&&moves?`<p class="wm">Кого это двигает сильнее всего:</p><ul class="wml">${moves}</ul>`:''}
         </div></div>`}).join('');
     box.querySelectorAll('.wh').forEach(h=>h.addEventListener('click',()=>{const el=h.parentElement;WI_OPEN=el.classList.contains('open')?'':el.dataset.k;drawWhatif()}));
