@@ -245,6 +245,9 @@ class Season:
                         rng.shuffle(pool_rep); rep=pool_rep[:fill]; ids=ids+rep; fill-=len(rep)
                     b=np.array([bmap.get(u,self.beta.get(u,self.default)*C) for u in ids])
                     if fill: b=np.concatenate([b,rng.choice(self.bg,fill)*C])
+                    if ev.get('race_pen'):   # сценарий «в топ-10 финала — все, кто не в гонке»: штраф силы игрокам топ-40 гонки
+                        for j,u in enumerate(ids):
+                            if self.race.get(u,999)<=40: b[j]-=ev['race_pen']
                     perf=b+rng.gumbel(size=len(b)); order=np.argsort(-perf)
                     for u in ids: busy.add((u,ev['date']))
                     got=set()

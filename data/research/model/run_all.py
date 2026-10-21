@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""run_all.py · v1.1 · 2026-09-21 (+ update_top50: D.top50 календаря и ratingUpdated в meta.js) · v1.0 — весь конвейер «Гонки за золотую дюжину» одной командой.
+"""run_all.py · v1.2 · 2026-10-21 (+ whatif: 12 сценариев «что если» → RACE.whatif) · v1.1 · 2026-09-21 (+ update_top50: D.top50 календаря и ratingUpdated в meta.js) · v1.0 — весь конвейер «Гонки за золотую дюжину» одной командой.
 Шаги: recal (прогноз 3000 сезонов) → scenarios3 (планки 1/2/3) → tickets → plan2 → build_race (race2026.js)
       → encrypt_race (vault/race.json, пароль из RACE_PASS) → build_series (data/series2026.js) → update_top50 (calendar.html D.top50, data/meta.js) → bump CACHE_VERSION в sw.js.
 Окружение: GD_REPO (корень репо; по умолчанию — три уровня вверх от этого файла), GD_T (дата снимка, по умолчанию сегодня),
@@ -27,6 +27,7 @@ step('recal',      'recal.py')
 step('scenarios3', 'scenarios3.py')
 step('tickets',    'tickets.py')
 step('plan2',      'plan2.py')
+step('whatif',     'whatif.py')
 step('build_race', 'build_race.py')
 plain=os.path.join(OUT,'race2026.js'); vault=os.path.join(REPO,'vault','race.json')
 step('encrypt',    'encrypt_race.py', plain, vault, '--pass', PASS)

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v3.3 · 20.10.2026 · «Откуда ≈Σ»: обычные турниры + финалы серийников чистыми; колонка «финалы» в генераторе; описание финалов и малых полей в модели · v3.2 · 20.10.2026 · гейт: пароль без учёта регистра; ошибка страницы после верного пароля больше не выдаётся за «пароль не подошёл» (показывает причину, сбрасывает выбранного игрока) · v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
+<!-- race.html v3.4 · 21.10.2026 · вкладка «Сценарии» (12 «что если» из whatif.py: планка, дюжина, кто двигается — словами); на «Планке» — поправка ×1.07 с объяснением курсивом и сырые цифры · v3.3 · 20.10.2026 · «Откуда ≈Σ»: обычные турниры + финалы серийников чистыми; колонка «финалы» в генераторе; описание финалов и малых полей в модели · v3.2 · 20.10.2026 · гейт: пароль без учёта регистра; ошибка страницы после верного пароля больше не выдаётся за «пароль не подошёл» (показывает причину, сбрасывает выбранного игрока) · v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
 <meta name="description" content="Рейтинг MAFGAME 2026: сколько и каких турниров нужно до золотой дюжины, пул баллов по выходным, модель расчёта, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -306,6 +306,22 @@ details.m .mono{font-family:var(--mono);font-size:12px;color:#c8cfdb}
 table.race tr.nr td{opacity:.55} table.race tr.nr:hover td{opacity:.85} table.cmp tr.nr td{opacity:.55} .pick .pc.nr{opacity:.5;border-style:dashed}
 
 table.gen td.f{font-size:11.5px;color:#c9a3c8;white-space:normal;max-width:140px}
+
+/* v3.4: сценарии и поправка планки */
+p.coef{margin:12px 0 0;color:#a7aebb;font-size:13px;max-width:80ch} p.coef b{color:var(--ink)} p.coef i{color:#8a91a0}
+.wi{border:1px solid var(--line);background:rgba(0,0,0,.25);margin-bottom:8px}
+.wi .wh{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:12px 14px;cursor:pointer}
+.wi .wh:hover{background:rgba(245,255,53,.04)} .wi.open .wh{border-bottom:1px solid var(--line)}
+.wi .wn{font:700 11px/1 var(--mono);color:#5f6675} .wi .wh b{font-weight:600}
+.wi .wt{font:900 20px/1 var(--disp);letter-spacing:-.02em;color:var(--ye);white-space:nowrap} .wi .wt small{font:700 11px/1 var(--mono);color:#7e8595;margin-left:5px} .wi .wt em{font:700 12px/1 var(--mono);font-style:normal;margin-left:8px;color:#a7aebb} .wi .wt em.up{color:#e7a0a0} .wi .wt em.dn{color:var(--gn)}
+.wi .wb{display:none;padding:12px 14px 14px} .wi.open .wb{display:block}
+.wi .wb p{margin:0 0 8px;color:#c3cad6;font-size:13.5px} .wi .wsum b{color:var(--ink)}
+.wchips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.wchip{display:inline-flex;flex-direction:column;gap:2px;padding:6px 9px;border:1px solid rgba(255,255,255,.14);min-width:92px}
+.wchip b{font-size:13px;font-weight:600} .wchip small{font:700 9px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.wchip.new{border-color:rgba(94,224,138,.6);background:rgba(94,224,138,.07)} .wchip.out{opacity:.5;border-style:dashed} .wchip.me{border-color:var(--ye)}
+.wm{margin-top:6px!important;font:700 9.5px/1 var(--mono)!important;letter-spacing:.14em;text-transform:uppercase;color:#8a91a0!important}
+ul.wml{margin:6px 0 0;padding-left:18px;color:#c3cad6;font-size:13px} ul.wml li{margin:3px 0}
 </style>
 <style id="dvcrumbcss">.dv-crumb{position:relative;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;max-width:1080px;margin:0 auto;padding:12px 15px 0;font:700 10px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#79808f}.dv-crumb a{color:#c3cad6;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}.dv-crumb a:hover{color:#f5ff35;border-color:#f5ff35}.dv-crumb i{font-style:normal;opacity:.5}
 /* ── закрытый раздел: гейт ── */
@@ -366,8 +382,9 @@ table.gen td.f{font-size:11.5px;color:#c9a3c8;white-space:normal;max-width:140px
     <button class="tab" data-t="pool"><i>03</i>Пул баллов</button>
     <button class="tab" data-t="model"><i>04</i>Модель</button>
     <button class="tab" data-t="plank"><i>05</i>Планка</button>
-    <button class="tab" data-t="gen"><i>06</i>Генератор</button>
-    <button class="tab" data-t="calc"><i>07</i>Посчитать себя</button>
+    <button class="tab" data-t="whatif"><i>06</i>Сценарии</button>
+    <button class="tab" data-t="gen"><i>07</i>Генератор</button>
+    <button class="tab" data-t="calc"><i>08</i>Посчитать себя</button>
   </div>
 
   <!-- 01 · я в гонке -->
@@ -450,17 +467,27 @@ table.gen td.f{font-size:11.5px;color:#c9a3c8;white-space:normal;max-width:140px
     <h2 class="big">Сколько будет стоить 12-е место</h2>
     <p class="lead">Четыре сценария того, как остаток года сыграют те, кто в борьбе. Пол — если играют только уже записанные. Рабочая планка — <b id="workTxt"></b>. Сценарии отличаются только тем, <b>сколько ездят</b>: по 2024–2025 осенью топ-30 играли не лучше, чем весной, — порог растёт от числа стартов и финалов серийников.</p>
     <div class="planks" id="planks"></div>
+    <p class="coef" id="coefNote"></p>
     <div class="hist" id="hist"></div>
     <details class="m"><summary>Как считаем</summary>
       <p>По каждому игроку — его леджер mafgame и места с 2023 года, ELO маркеров как опора, если турниров мало. По каждому турниру впереди — звёзды, ожидаемое поле и сетка баллов такого же турнира в прошлом. Финалы серийников — по регламентам контуров и текущему зачёту серий: кто уже прошёл, тот играет. Дальше сезон разыгрывается несколько тысяч раз: кто поедет, какое место возьмёт, что вытеснит из своей десятки, — и в каждом розыгрыше смотрим сумму 12-го места. На прошлом сезоне такой пересчёт с 14 сентября угадал 11 из 12 итоговой дюжины, но занизил порог примерно на 7% — поправка учтена.</p>
       <p>Сценарии отличаются тем, как часто дозаписываются те, кто пока не записан (как в истории · в 1,5 раза чаще · в 2,5 раза чаще); записанные во всех сценариях едут по срокам. «Пол» — только записанные, никто не добавляется.</p>
     </details>
-    <div class="cta" style="margin-top:16px"><div class="txt"><b>Турниры до конца года</b><span id="ctaText"></span></div><a class="btn" href="calendar.html?preset=1&type=reg,fin,team&stars=3,4&view=feed">Открыть календарь &#8594;</a></div>
+    <div class="cta" style="margin-top:16px"><div class="txt"><b>Турниры до конца года.</b> <span id="ctaText"></span></div><a class="btn" href="calendar.html?preset=1&type=reg,fin,team&stars=3,4&view=feed">Открыть календарь &#8594;</a></div>
   </section>
 
   <!-- 06 · генератор -->
+  <!-- 06 · сценарии -->
+  <section class="sec pane" id="pane-whatif">
+    <div class="sh"><span>06 · сценарии</span><s></s><em>что если</em></div>
+    <h2 class="big">Что если</h2>
+    <p class="lead">Та же модель, но с одним изменённым условием: отменился турнир, все поехали на Кипр, финал GMC забрали те, кто не в гонке. Для каждого — сколько будет стоить 12-е место и как изменится дюжина по сравнению с тем, что есть сейчас. Нажми на сценарий, чтобы раскрыть.</p>
+    <div id="wiList"></div>
+    <p class="coef"><i>Планки в сценариях — сырые, без поправки ×1.07; рядом в скобках — с поправкой, как на вкладке «Планка».</i></p>
+  </section>
+
   <section class="sec pane" id="pane-gen">
-    <div class="sh"><span>06 · генератор сезонов</span><s></s><em>случайные составы дюжины</em></div>
+    <div class="sh"><span>07 · генератор сезонов</span><s></s><em>случайные составы дюжины</em></div>
     <h2 class="big">Сгенерировать остаток сезона</h2>
     <p class="lead">Одна генерация — это один случайно разыгранный остаток года: кто поехал, какое место взял, что вытеснил из десятки, как сыграли финалы серийников. Запускаем 500 раз и смотрим, <b>сколько раз из 500 игрок оказался в дюжине</b>. На выбор — явка (только заявки или с дозаписью как в истории), ритм дозаписи и по какому периоду оцениваем силу. Упрощённая копия серверной модели: без петли «близко к планке → едет чаще».</p>
     <div class="genctl">
@@ -475,7 +502,7 @@ table.gen td.f{font-size:11.5px;color:#c9a3c8;white-space:normal;max-width:140px
 
   <!-- 07 · калькулятор -->
   <section class="sec pane" id="pane-calc">
-    <div class="sh"><span>07 · калькулятор</span><s></s><em>любой игрок mafgame</em></div>
+    <div class="sh"><span>08 · калькулятор</span><s></s><em>любой игрок mafgame</em></div>
     <h2 class="big">Посчитать себя</h2>
     <div class="calc">
       <p class="lead" style="margin:0">Две ссылки — на свой профиль на mafgame и на markery.online. В ответ: своя десятка и хвост, сколько раз нужно взять топ-5 и топ-10 до планок и что это значит при твоей частоте результатов. Маркеры нужны обязательно: по 4–6 турнирам за год силу не оценить, а ELO с маркеров считается по сотням игр — модель уже опирается на него.</p>
@@ -519,13 +546,13 @@ function initRace(){
     <div class="kpi d"><b>${finalsAhead}</b><span>финалов серийников</span></div>`;
 
   // ---------- вкладки ----------
-  const TABS=['me','tab','pool','model','plank','gen','calc'];
+  const TABS=['me','tab','pool','model','plank','whatif','gen','calc'];
   function showTab(t,push){
     if(!TABS.includes(t)) t='me';
     document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
     document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',p.id==='pane-'+t));
     if(push!==false){try{history.replaceState(null,'','#'+t)}catch(e){}}
-    if(t==='pool') drawPool(); if(t==='model') drawModel();
+    if(t==='pool') drawPool(); if(t==='model') drawModel(); if(t==='whatif') drawWhatif();
   }
   $('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab'); if(b) {showTab(b.dataset.t); window.scrollTo({top:Math.max(0,$('#tabs').offsetTop-8),behavior:'smooth'})}});
   document.querySelector('.nav .pri').addEventListener('click',e=>{e.preventDefault();showTab('calc');$('#pane-calc').scrollIntoView({behavior:'smooth'})});
@@ -537,6 +564,7 @@ function initRace(){
     <div class="plank u"><div class="k">1 · обычный ритм</div><div class="v">${P.usual}<small>${P.usual_lo}–${P.usual_hi}</small></div><div class="d">Записанные едут как обычно по срокам; незаписанные добавляются так, как это бывало в истории: 1% за две недели, 4% за месяц, 10% дальше. Топ-30 в среднем ≈2,5 старта — как после 20 октября в 2024–25.</div></div>
     <div class="plank a"><div class="k">2 · ездят активно</div><div class="v">${P.active}</div><div class="d">Незаписанные дозаписываются в полтора раза чаще обычного. Сила та же.</div></div>
     <div class="plank b"><div class="k">3 · по максимуму</div><div class="v">${P.beast}</div><div class="d">Незаписанные дозаписываются в два с половиной раза чаще обычного. Разрыв со сценарием 1 всего ${P.beast-P.usual} баллов: в зачёт идёт десятка, лишние старты съедают друг друга.</div></div>`;
+  { const k=(R.model&&R.model.thr_coef)||1.07; $('#coefNote').innerHTML=`Все планки включают поправку <b>×${k}</b>: без неё обычный ритм — <b>${Math.round(P.usual/k)}</b>, рабочая — ${Math.round(P.work[0]/k)}–${Math.round(P.work[1]/k)}.<br><i>Зачем поправка: на прошлом сезоне такой пересчёт с середины сентября угадал состав дюжины, но занизил её порог примерно на 7% — люди в итоге ездили больше, чем показывала их история. С тех пор явка в модели считается по заявкам и срокам, и часть этого занижения уже закрыта, поэтому сырую цифру тоже показываем: истина, скорее всего, между ними.</i>`; }
   $('#hist').innerHTML=`<b>Проверка на прошлых сезонах.</b> ${R.hist.note}:<div class="bands">${R.hist.bands.map(b=>`<span>${b.band}: <i>${b.k} из ${b.n}</i></span>`).join('')}</div><div style="margin-top:8px">Сейчас 12-е место — ${fmt(R.thr12_now)}. «Выше на 15–35%» — это ${fmt(R.thr12_now*1.15)}–${fmt(R.thr12_now*1.35)}, «около порога» — ${fmt(R.thr12_now*0.95)}–${fmt(R.thr12_now*1.15)}.</div>`;
 
   // ---------- общие расчёты ----------
@@ -854,6 +882,27 @@ function initRace(){
     $('#modelParams').innerHTML=`<p class="mono">версия ${M.version||'—'} · сила: ${M.strength||'—'}, τ = ${M.tau} (ширина опоры на ELO), ρ = ${M.rho} (перенос формы), C = ${M.C} (масштаб силы), явка гонки ×${M.race_boost}; розыгрышей ${M.S}; планка v2 медиана ${M.thr_v2?fmt(M.thr_v2.med):'—'} (${M.thr_v2?fmt(M.thr_v2.p10)+'–'+fmt(M.thr_v2.p90):''}).</p>
       <p>Проверка: срез 14 сентября → факт 31 декабря. 2025: дюжина 11 из 12, порог 134 при факте 144. 2024: 9 из 12, порог 107 при факте 113. Сила v2 против v1 на составе дюжины — ничья (состав держится на явке и текущей Σ); выигрыш v2 — в оценке отдельных игроков с малым числом турниров и честный коридор вместо точки. ELO маркеров объясняет ${Math.round((M.elo_fit&&M.elo_fit.r2||0)*100)}% разброса силы по ${M.elo_fit&&M.elo_fit.n_fit||0} игрокам с 10+ турнирами.</p>
       <p>Чего модель не знает: игр вне mafgame (клубные, другие федерации) — только через ELO маркеров; травм, визы и денег; кто с кем в одной команде. Слова игроков учтены как число турниров, не как обещание результата.</p>`;
+  }
+
+  // ======================= 06 · СЦЕНАРИИ =======================
+  let WI_OPEN=null;
+  function drawWhatif(){
+    const W=R.whatif, box=$('#wiList'); if(!W||!W.scen){box.innerHTML='<p class="lead">Сценарии появятся после следующего пересчёта.</p>';return}
+    const k=(R.model&&R.model.thr_coef)||1.07, base=W.scen[0], baseSet=new Set(base.dozen.slice(0,12).map(d=>d.nick));
+    box.innerHTML=W.scen.map((sc,i)=>{
+      const d12=sc.dozen.slice(0,12), set=new Set(d12.map(d=>d.nick));
+      const ins=d12.filter(d=>!baseSet.has(d.nick)).map(d=>d.nick), outs=[...baseSet].filter(n=>!set.has(n));
+      const dthr=Math.round(sc.thr-base.thr);
+      const chips=sc.dozen.slice(0,14).map((d,j)=>{const [c,w]=pword(d.p12);const me=CUR&&d.uid===CUR;return `<span class="wchip${j>=12?' out':''}${!baseSet.has(d.nick)&&j<12?' new':''}${me?' me':''}"><b>${d.nick}</b><small class="${c}">${w}</small></span>`}).join('');
+      const moves=(sc.moves||[]).map(m=>{const a=pword(m.p0)[1],b=pword(m.p12);return `<li><b>${m.nick}</b>: `+(a===b[1]?`<span class="${b[0]}">${b[1]}</span>, но ${m.d>0?'шансы заметно выше':'шансы заметно ниже'}`:`${a} → <span class="${b[0]}">${b[1]}</span>`)+`</li>`}).join('');
+      const open=WI_OPEN===sc.key||(WI_OPEN==null&&i===0);
+      return `<div class="wi${open?' open':''}" data-k="${sc.key}"><div class="wh"><span class="wn">${String(i).padStart(2,'0')}</span><b>${sc.title}</b><span class="wt">${Math.round(sc.thr)}<small>(${Math.round(sc.thr*k)})</small>${i?`<em class="${dthr>0?'up':dthr<0?'dn':''}">${dthr>0?'+':''}${dthr}</em>`:''}</span></div>
+        <div class="wb"><p>${sc.desc}</p>
+          <p class="wsum">12-е место ≈ <b>${Math.round(sc.thr)}</b> (коридор ${Math.round(sc.thr10)}–${Math.round(sc.thr90)}; с поправкой ×${k} — ${Math.round(sc.thr*k)})${i?` · ${dthr===0?'планка не меняется':dthr>0?'планка выше на '+dthr:'планка ниже на '+(-dthr)}`:''}${i&&(ins.length||outs.length)?` · ${ins.length?'заходят: <b>'+ins.join(', ')+'</b>':''}${ins.length&&outs.length?'; ':''}${outs.length?'выпадают: <b>'+outs.join(', ')+'</b>':''}`:i?' · состав дюжины тот же':''}</p>
+          <div class="wchips">${chips}</div>
+          ${i&&moves?`<p class="wm">Кого это двигает сильнее всего:</p><ul class="wml">${moves}</ul>`:''}
+        </div></div>`}).join('');
+    box.querySelectorAll('.wh').forEach(h=>h.addEventListener('click',()=>{const el=h.parentElement;WI_OPEN=el.classList.contains('open')?'':el.dataset.k;drawWhatif()}));
   }
   // ---------- генератор сезонов (клиентская симуляция) ----------
   (function(){
