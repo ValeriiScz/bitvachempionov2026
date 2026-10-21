@@ -99,6 +99,12 @@ button.go:disabled{opacity:.5;cursor:default}
 .vbtn{background:transparent;border:1px solid var(--line);color:#a7aebb;font:700 10px/1 var(--mono);
   letter-spacing:.16em;text-transform:uppercase;padding:10px 12px;border-radius:2px;cursor:pointer}
 .vbtn:hover{color:var(--ink);border-color:var(--rd)}
+.vurl{flex:1 1 220px;min-width:0;background:#0d0f15;border:1px solid var(--line);color:var(--ink);font:400 12px/1 var(--mono);padding:8px 10px;border-radius:2px}
+.dsh{position:relative;z-index:2;background:transparent;border:1px solid var(--line);color:#a7aebb;font:700 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;padding:7px 9px;border-radius:2px;cursor:pointer}
+.dsh:hover{color:var(--ink);border-color:var(--rd)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#12151d;border:1px solid var(--rd);color:var(--ink);font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:12px 16px;border-radius:2px;opacity:0;pointer-events:none;transition:.2s;z-index:10001}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.view.solo #vclose{display:none}
 .view iframe{flex:1;width:100%;border:0;background:#fff}
 .load{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;
   background:rgba(5,6,10,.86);font:700 11px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--rd)}
@@ -147,12 +153,15 @@ button.go:disabled{opacity:.5;cursor:default}
 </div>
 
 <div class="load" id="load">расшифровываю…</div>
+<div class="toast" id="toast"></div>
 
 <div class="view" id="view">
   <div class="vbar">
     <button class="vbtn" id="vclose">&#8592; Назад</button>
     <div class="vttl" id="vttl"></div>
+    <button class="vbtn" id="vshare" hidden>Ссылка на документ</button>
     <button class="vbtn" id="vtab">В новой вкладке</button>
+    <input class="vurl" id="vurl" readonly hidden aria-label="Ссылка на документ">
   </div>
   <iframe id="vframe" title="Документ"></iframe>
 </div>
@@ -165,7 +174,7 @@ var $=function(s){return document.querySelector(s);};
 var gate=$('#gate'), form=$('#form'), pw=$('#pw'), btn=$('#btn'), err=$('#err'), rem=$('#rem');
 var list=$('#list'), load=$('#load'), view=$('#view'), vframe=$('#vframe'), vttl=$('#vttl');
 var CRYPTO = window.crypto && window.crypto.subtle;
-var cache={}, KEYOBJ=null, PASS='', blobUrl=null;
+var cache={}, KEYOBJ=null, PASS='', blobUrl=null, SK={}, CUR=null;
 
 function b2a(b64){var s=atob(b64),u=new Uint8Array(s.length);for(var i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u;}
 
@@ -187,28 +196,49 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp
 
 function render(items){
   list.innerHTML=items.map(function(d){
-    return '<button class="doc" data-id="'+esc(d.id)+'" data-t="'+esc(d.t)+'">'+
+    SK[d.id]=d.sk||'';
+    return '<div class="doc" role="button" tabindex="0" data-id="'+esc(d.id)+'" data-t="'+esc(d.t)+'">'+
       '<div><div class="dk">'+esc(d.k)+'</div>'+
       '<div class="dt">'+esc(d.t)+'</div>'+
       '<p class="dd">'+esc(d.d)+'</p></div>'+
-      '<div class="df"><span class="dn">'+esc(d.n)+'</span><span class="dgo">Открыть &#8599;</span></div>'+
-    '</button>';
+      '<div class="df"><span class="dn">'+esc(d.n)+'</span><span>'+(d.sk?'<button class="dsh" type="button" data-sh="'+esc(d.id)+'">Ссылка</button> ':'')+'<span class="dgo">Открыть &#8599;</span></span></div>'+
+    '</div>';
   }).join('');
   list.hidden=false;
   gate.style.display='none';
 }
 
-async function openDoc(id, title){
-  load.classList.add('on');
-  try{
-    var html=cache[id] || (cache[id]=await fetchDec('vault/'+id+'.json', PASS));
-    // база для относительных путей внутри документа
+function shareUrl(id){ return location.origin+location.pathname+'#doc='+id+'.'+SK[id]; }
+function toast(t){ var el=$('#toast'); el.textContent=t; el.classList.add('on'); clearTimeout(toast.t); toast.t=setTimeout(function(){el.classList.remove('on');},2200); }
+async function copyLink(id){
+  var u=shareUrl(id), inp=$('#vurl');
+  try{ await navigator.clipboard.writeText(u); toast('Ссылка скопирована'); }
+  catch(e){ inp.value=u; inp.hidden=false; inp.focus(); inp.select(); toast('Скопируй ссылку из поля'); }
+}
+function showHtml(html,title){
     var withBase=html.replace(/<head([^>]*)>/i, '<head$1><base href="'+location.origin+'/">');
     if(blobUrl) URL.revokeObjectURL(blobUrl);
     blobUrl=URL.createObjectURL(new Blob([withBase],{type:'text/html;charset=utf-8'}));
     vframe.src=blobUrl; vttl.textContent=title; view.classList.add('on');
     document.body.style.overflow='hidden';
-  }catch(e){ alert('Не удалось открыть документ: '+e.message); }
+}
+/* документ по отдельной ссылке: #doc=<id>.<ключ> — открывает только его, без пароля и без списка */
+async function openShared(id, key){
+  gate.style.display='none'; load.classList.add('on'); view.classList.add('solo');
+  try{
+    var html=await fetchDec('vault/s/'+id+'.json', key);
+    var m=html.match(/<title>([^<]*)<\/title>/i); var t=m?m[1]:'Документ';
+    document.title=t+' · DOVOD'; showHtml(html,t);
+  }catch(e){ view.classList.remove('solo'); gate.style.display=''; err.textContent='Ссылка устарела или повреждена. Войди по паролю.'; err.classList.add('on'); }
+  load.classList.remove('on');
+}
+async function openDoc(id, title){
+  load.classList.add('on'); CUR=id;
+  try{
+    var html=cache[id] || (cache[id]=await fetchDec('vault/'+id+'.json', PASS));
+    $('#vshare').hidden=!SK[id]; $('#vurl').hidden=true;
+    showHtml(html,title);
+  }catch(e){ toast('Не удалось открыть: '+e.message); }
   load.classList.remove('on');
 }
 
@@ -216,7 +246,9 @@ async function unlock(pass, silent){
   if(!CRYPTO){ err.textContent='Браузер не поддерживает расшифровку (нужен https).'; err.classList.add('on'); return false; }
   btn.disabled=true; load.classList.add('on');
   try{
-    var txt=await fetchDec('vault/idx.json', pass);
+    var txt=null, cands=[pass, pass.toUpperCase(), pass.toLowerCase()].filter(function(v,i,a){return v&&a.indexOf(v)===i;});
+    for(var ci=0;ci<cands.length&&txt===null;ci++){ try{ txt=await fetchDec('vault/idx.json', cands[ci]); pass=cands[ci]; }catch(e1){} }
+    if(txt===null) throw new Error('bad');
     PASS=pass; render(JSON.parse(txt));
     try{ if(rem.checked) localStorage.setItem(KEY, pass); else localStorage.removeItem(KEY); }catch(e){}
     return true;
@@ -229,17 +261,20 @@ async function unlock(pass, silent){
 
 form.addEventListener('submit', function(e){ e.preventDefault(); err.classList.remove('on'); unlock(pw.value.trim(), false); });
 list.addEventListener('click', function(e){
+  var sh=e.target.closest('.dsh'); if(sh){ e.stopPropagation(); copyLink(sh.getAttribute('data-sh')); return; }
   var b=e.target.closest('.doc'); if(!b) return;
   openDoc(b.getAttribute('data-id'), b.getAttribute('data-t'));
 });
 $('#vclose').addEventListener('click', function(){
   view.classList.remove('on'); vframe.src='about:blank'; document.body.style.overflow='';
 });
+list.addEventListener('keydown', function(e){ if(e.key==='Enter'){ var b=e.target.closest('.doc'); if(b) openDoc(b.getAttribute('data-id'), b.getAttribute('data-t')); } });
+$('#vshare').addEventListener('click', function(){ if(CUR) copyLink(CUR); });
 $('#vtab').addEventListener('click', function(){ if(blobUrl) window.open(blobUrl,'_blank','noopener'); });
 addEventListener('keydown', function(e){ if(e.key==='Escape' && view.classList.contains('on')) $('#vclose').click(); });
 
-/* автовход, если пароль сохранён */
-(function(){ var p=null; try{ p=localStorage.getItem(KEY); }catch(e){} if(p) unlock(p, true); else pw.focus(); })();
+/* автовход, если пароль сохранён; ссылка на один документ — в обход списка */
+(function(){ var mh=location.hash.match(/^#doc=([a-z0-9_-]+)\.([A-Za-z0-9_-]{16,})$/i); if(mh){ openShared(mh[1], mh[2]); return; } var p=null; try{ p=localStorage.getItem(KEY); }catch(e){} if(p) unlock(p, true); else pw.focus(); })();
 
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
