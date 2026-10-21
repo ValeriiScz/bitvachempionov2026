@@ -1,4 +1,4 @@
-"""whatif.py · v1.0 · 2026-10-21 — «Сценарии»: 10 «что если» для гонки за дюжину (Валерий, 21.10).
+"""whatif.py · v1.2 · 2026-10-21 (+2 сценария с TOPS; убраны нереалистичные: MGP-отмена, MCL-перенос, 2★ не в зачёт — Валерий) — «Сценарии»: 10 «что если» для гонки за дюжину (Валерий, 21.10).
 Каждый сценарий — та же модель (gd_sim + gd_strength2), в которой меняется одно условие: отменён турнир, все записались,
 финал сыгран без игроков гонки и т. п. На выходе для каждого: планка 12-го (сырая и ×1.07), состав дюжины словами,
 кто заходит/выпадает по сравнению с базой. Пишет OUTP('whatif.json'); build_race.py кладёт его в RACE.whatif.
@@ -44,6 +44,23 @@ def scen_only_regs():
     refresh(se); return se
 def scen_all_cyprus():
     se=copy.deepcopy(BASE); force(se,top30,ev_ids={CYPRUS_W}); return se
+bubble=[u for s_,u in mid[8:16]]
+def scen_bubble():
+    se=copy.deepcopy(BASE); force(se,bubble,stars_min=4); return se
+def scen_all_on(eid):
+    def f():
+        se=copy.deepcopy(BASE); force(se,top30,ev_ids={eid}); return se
+    return f
+TOPS=uid.get('TOPS')
+def scen_tops():
+    se=copy.deepcopy(BASE); force(se,[TOPS],stars_min=3); return se
+def scen_tops_rivals():
+    se=scen_tops(); R=[uid.get(n) for n in ('Tommy','ParadoXx','Сью')]
+    for ev in se.events:
+        if ev['type']=='contour': continue
+        for u in R:
+            if u in ev['p'] and ev['regs'].get(u) is None: ev['p'][u]=0.0
+    refresh(se); return se
 def scen_drop(ids):
     def f():
         se=copy.deepcopy(BASE); drop(se,ids); return se
@@ -72,12 +89,14 @@ SCEN=[
  ('base','Как сейчас','Обычный ритм: записанные едут по срокам, остальные дозаписываются как в 2024–25; финалы серийников играют все, кто прошёл.',lambda: copy.deepcopy(BASE)),
  ('regs','Никто больше не записывается','Играют только те, кто уже записан (с поправкой на срок), плюс финалы серийников.',scen_only_regs),
  ('cyp','Весь топ-30 едет на Кипр 12.12','Four Seasons Cyprus Open: Winter (4★) — все из топ-30 гонки записываются и едут.',scen_all_cyprus),
+ ('bru_all','Весь топ-30 едет в Брюссель 07.11','Four Seasons: Black circle (4★) — все из топ-30 гонки записываются и едут.',scen_all_on(BRUSSELS)),
+ ('mgp_all','Весь топ-30 едет на MGP 31.10','Mediterranean Grand-Prix (5★) — все из топ-30 гонки там.',scen_all_on(MGP)),
  ('bru','Брюссель 07.11 отменён','Four Seasons: Black circle (4★, Бельгия) не состоялся.',scen_drop([BRUSSELS])),
- ('mgp','Mediterranean 31.10 отменён','Mediterranean Grand-Prix (5★, Кипр) — самый крупный турнир осени — не состоялся.',scen_drop([MGP])),
  ('cypx','Кипр-зима 12.12 отменён','Four Seasons Cyprus Open: Winter (4★) не состоялся.',scen_drop([CYPRUS_W])),
  ('gmc','GMC: топ-10 — все не из гонки','В финале GMC (14.11) первые места забирают игроки вне топ-40 гонки; игрокам гонки остаются места с 11-го.',scen_gmc_outsiders),
- ('mcl','MCL-финал перенесён на 2027','Финал MCL Europe (21.11, 4★, 10 финалистов) в сезон 2026 не идёт.',scen_drop([MCL])),
- ('fin2','Финалы 2★ не в зачёт','White Mafia, Arena Moldova, Васлуй, ЛЗГ и Benelux не дают баллов в 2026.',scen_drop(FIN2)),
+ ('bubble','Пузырь едет на всё','Игроки с 9-го по 16-е место гонки записываются на каждый оставшийся турнир 4–5★ — рубка за последние места дюжины.',scen_bubble),
+ ('tops','TOPS едет на всё','TOPS записывается на каждый оставшийся турнир 3★ и выше. Он 7-й по баллам, но у него мало результатов в десятке — ему нужны именно старты.',scen_tops),
+ ('tops2','TOPS едет на всё, соседи — нет','TOPS играет каждый 3★+, а Tommy, ParadoXx и Сью едут только туда, куда уже записаны.',scen_tops_rivals),
  ('ft','Flash и Tommy едут на все 4–5★','Оба записываются на каждый оставшийся турнир 4–5★.',scen_flash_tommy),
  ('rest','Лидеры отдыхают','YeS, Tripok и LogisticPro больше не играют обычные турниры (финалы серийников — играют).',scen_leaders_rest),
  ('form','Форма важнее истории','Сезон 2026 переносится вперёд целиком (а не наполовину): кто в форме — сильнее, кто просел — слабее.',scen_form),
