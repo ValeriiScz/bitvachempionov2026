@@ -192,7 +192,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){addEvent
       <div id="followP"></div>
       <div id="topP"></div>
       <div class="panel"><h3>Ещё по турниру</h3><div class="links">
-        <a href="t645.html"><span>Страница турнира<small>рассадка, сила столов, таблица, роли</small></span>›</a>
+        <a href="t645.html"><span>Страница турнира<small>рассадка, отбор и резерв, таблица, роли</small></span>›</a>
         <a href="t645.html#stages"><span>Турнирная таблица<small>сумма за 18 игр, линия призов (топ‑3)</small></span>›</a>
         <a href="https://mafgame.org/tournaments/645/view" target="_blank" rel="noopener"><span>Турнир на mafgame.org<small>официальные протоколы</small></span>↗</a>
       </div></div>
@@ -369,7 +369,7 @@ function setFollow(n){S.follow=n||null;LS.set('w645_follow',S.follow);if(S.follo
 function renderTop(){
   const el=document.getElementById('topP');const R=D.rows||[];
   if(!R.length){el.innerHTML=`<div class="panel"><h3>Таблица</h3><div class="note" style="margin:0">Появится после первого сыгранного стола.</div></div>`;return;}
-  el.innerHTML=`<div class="panel"><h3>Таблица · топ‑12<small>Σ · сыграно игр: ${D.played}</small></h3><table class="top">${R.slice(0,12).map((r,i)=>`<tr class="${i===CFG.finalN?'cut':''}${r.n===S.follow?' me':''}"><td class="n">${i+1}</td><td>${esc(r.n)}</td><td class="v">${r.s.toFixed(2)}</td></tr>`).join('')}</table><div class="note">Пунктир — линия выхода в финал (топ‑${CFG.finalN}). Неофициальный пересчёт по протоколам; полная таблица — <a href="${CFG.page}#stages">на странице турнира</a>.</div></div>`;
+  el.innerHTML=`<div class="panel"><h3>Таблица · топ‑12<small>Σ · сыграно игр: ${D.played}</small></h3><table class="top">${R.slice(0,12).map((r,i)=>`<tr class="${i===CFG.finalN?'cut':''}${r.n===S.follow?' me':''}"><td class="n">${i+1}</td><td>${esc(r.n)}</td><td class="v">${r.s.toFixed(2)}</td></tr>`).join('')}</table><div class="note">Пунктир — призовые места (топ‑${CFG.finalN}). Неофициальный пересчёт по протоколам; полная таблица — <a href="${CFG.page}#stages">на странице турнира</a>.</div></div>`;
 }
 function renderStatus(){
   const st=SDB();const gi=D.cur;const t=D.tour;
@@ -377,7 +377,7 @@ function renderStatus(){
   const pre=t.start_iso&&Date.now()<new Date(t.start_iso).getTime(); /* v1.3: в день старта до 10:15 — не LIVE */
   const live=D.live&&!t.closed&&!pre;
   document.getElementById('status').innerHTML=`${live?'<span class="live">live</span>':started?'':(pre&&new Date().toDateString()===new Date(t.start_iso).toDateString()?'<span>сегодня · старт '+new Date(t.start_iso).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Warsaw'})+'</span>':'<span>скоро · старт 7.11</span>')}<span><b>${esc(gLabel(gi))}</b></span><span>${D.games[gi]&&D.games[gi].stage==='Финал'?'финал':D.games[gi]&&D.games[gi].stage==='Полуфинал'?'полуфинал':'финал серийника'}</span><span>обновлено ${D.updated?D.updated.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):'—'}</span>`;
-  document.getElementById('testbar').innerHTML=st&&st.test?`<div class="testbar">Тест: сейчас в окнах записи прошлого турнира — проверьте, как это выглядит. Настоящие эфиры Central Cup встанут сюда перед стартом.</div>`:'';
+  document.getElementById('testbar').innerHTML=st&&st.test?`<div class="testbar">Тест: сейчас в окнах записи прошлого турнира — проверьте, как это выглядит. Настоящий эфир финала встанет сюда перед стартом.</div>`:'';
   document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));
   document.querySelectorAll('#layout button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.layout));
   const fin=isFinal(gi);document.querySelector('#modes [data-m="all"]').style.display='none';renderSday();
