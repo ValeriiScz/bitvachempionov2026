@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · tournaments.html · v4.1 · 2026-10-26 · звёзды крупно с расшифровкой (вес турнира в рейтинге) + легенда; архив: звёзды, игроки, ср. ELO, топ-3 и MVP · v4.0 · переезд в новый стиль DOVOD (как страницы турниров t692/t645): неон, Unbounded + JetBrains Mono + Inter, хлебные крошки сверху.
+<!-- DOVOD · tournaments.html · v4.1 · 2026-10-26 · звёзды крупно (вес турнира в рейтинге) + легенда без оценок уровней; архив: звёзды, игроки, ср. ELO, топ-3 и MVP · v4.0 · переезд в новый стиль DOVOD (как страницы турниров t692/t645): неон, Unbounded + JetBrains Mono + Inter, хлебные крошки сверху.
      Все актуальные турниры — одной карточкой DOVOD: постер (картинка турнира, если есть, иначе CSS-постер), акцент — цвет турнира (t.accent), кнопки «страница / смотровая / участники / mafgame».
      Ссылка карточки — на собственную страницу турнира (t.page), иначе — на участников. Архив — строками в том же стиле. Старая версия v3.2 — в _Архив проекта. -->
 <meta charset="utf-8">
@@ -193,9 +193,8 @@ function accOf(t){const a=ACC[t.theme]||ACC.dovod;return [t.accent||a[0],t.accen
 function isLive(t){const now=new Date(Date.now()+1*3600e3).toISOString().slice(0,10);return t.status==='live'||(t.liveFrom&&now>=t.liveFrom&&now<=(t.liveTo||t.liveFrom));}
 function mainHref(t){return t.page||('participants.html?t='+t.id);}
 const ART={667:'assets/cyprus667.jpg',713:'assets/protocol4.jpg'};
-const STARS={1:['разминка','почти не даёт баллов'],2:['локальный','для новичков — баллов почти нет'],3:['с гостями','приезжают гости, к концу года бывает жарко'],4:['плотный','сильный состав, хорошие баллы'],5:['топ федерации','максимум баллов рейтинга']};
-function starsBox(n,mini){n=+n||0;if(!n)return '';const L=STARS[n]||['',''];return `<span class="stars s${n}${mini?' mini':''}" title="${n}★ — ${esc(L[0])}: ${esc(L[1])}"><span class="sg"><i>${'★'.repeat(n)}</i><u>${'★'.repeat(5-n)}</u></span><span class="sl"><b>${n} ${n===1?'звезда':n<5?'звезды':'звёзд'} · ${esc(L[0])}</b>${mini?'':`<small>${esc(L[1])}</small>`}</span></span>`;}
-function starsLegend(){return `<div class="slegend"><span class="lt">★ Звёзды = вес турнира в рейтинге mafgame</span>`+[1,2,3,4,5].map(n=>`<span><i>${'★'.repeat(n)}</i> ${esc(STARS[n][0])}</span>`).join('')+`</div>`;}
+function starsBox(n,mini){n=+n||0;if(!n)return '';return `<span class="stars s${n}${mini?' mini':''}" title="${n}★ — вес турнира в рейтинге mafgame"><span class="sg"><i>${'★'.repeat(n)}</i><u>${'★'.repeat(5-n)}</u></span><span class="sl"><b>${n} ${n===1?'звезда':n<5?'звезды':'звёзд'}</b></span></span>`;}
+function starsLegend(){return `<div class="slegend"><span class="lt">★ Звёзды — вес турнира в рейтинге mafgame</span><span>больше звёзд — больше баллов за места</span></div>`;}
 function card(t,big){
   const [a1,a2]=accOf(t);const live=isLive(t);const st=live?'live':t.status;
   const lab=live?'идёт · live':t.status==='gathering'?'сбор состава':t.status==='upcoming'?'скоро':esc(t.status);
