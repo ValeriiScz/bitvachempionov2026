@@ -114,6 +114,7 @@
   th.grp{border-left:1px solid rgba(232,200,122,.10);}
   /* ── тиры (ранги markery) ── */
   .tier{display:inline-block;min-width:24px;padding:2px 8px;border-radius:7px;font-weight:800;font-size:12.5px;text-align:center;letter-spacing:.5px;}
+  .t-L{background:linear-gradient(135deg,#fff3b0,#ffd700);color:#0b0b0e;box-shadow:0 0 10px rgba(255,215,0,.45);}
   .t-S{background:linear-gradient(135deg,#e8c87a,#c9a14d);color:#0b0b0e;box-shadow:0 0 10px rgba(232,200,122,.35);}
   .t-A{background:rgba(103,224,143,.16);color:#67e08f;border:1px solid rgba(103,224,143,.45);}
   .t-B{background:rgba(122,167,214,.16);color:#9cc0e6;border:1px solid rgba(122,167,214,.45);}
@@ -244,14 +245,15 @@ fetch('data/participants_'+T+'.json').then(r=>{if(!r.ok)throw 0;return r.json()}
   .catch(()=>{document.getElementById('app').innerHTML='<h1 class="err">Нет данных</h1><p class="note">Снапшот участников для этого турнира ещё не собран.</p>';});
 
 let DATA=null;
-const TIERS=['S','A','B','C','D','E','F'];
-const TIER_ORD={S:0,A:1,B:2,C:3,D:4,E:5,F:6};
-const TIER_LAB={S:'S — топ',A:'A',B:'B',C:'C',D:'D',E:'E',F:'F'};
+const TIERS=['L','S','A','B','C','D','E','F'];
+const TIER_ORD={L:-1,S:0,A:1,B:2,C:3,D:4,E:5,F:6};
+const TIER_LAB={L:'L — легенды',S:'S — топ',A:'A',B:'B',C:'C',D:'D',E:'E',F:'F'};
 const COLS=[
   {key:'tier',     lab:'Ранг',       hint:'ранг markery (S/A/B/C/D/E/F) по текущему ELO',  dir:1,  fmt:'tier', get:p=>p.r_tier},
-  {key:'elo_cur',  lab:'ELO тек',    hint:'markery — текущий ELO (глобально, всё время)',  dir:-1, fmt:'elo',  get:p=>p.r_elo_cur},
-  {key:'elo_2026', lab:'ELO 2026',   hint:'markery — ELO за сезон 2026',                   dir:-1, fmt:'elo',  get:p=>p.r_elo_2026},
-  {key:'eu26',     lab:'Европа 2026',hint:'markery — место в рейтинге Европа за 2026',      dir:1,  fmt:'rank', get:p=>p.r_rank_eu_2026},
+  {key:'elo_cur',  lab:'ELO',        hint:'markery — ELO за всё время',                     dir:-1, fmt:'elo',  get:p=>p.r_elo_cur},
+  {key:'rank',     lab:'Место',      hint:'markery — место в глобальном рейтинге (всё время)', dir:1,  fmt:'rank', get:p=>p.r_rank},
+  {key:'elo_2026', lab:'ELO 2026',   hint:'markery — ELO за сезон 2026',                     dir:-1, fmt:'elo',  get:p=>p.r_elo_2026},
+  {key:'rank26',   lab:'Место 2026', hint:'markery — место в рейтинге сезона 2026',          dir:1,  fmt:'rank', get:p=>p.r_rank_2026},
 ];
 let sortKey='tier', sortDir=1;
 
@@ -376,8 +378,9 @@ function paint(){
       <td class="l anchor"><div class="pl"><span class="num">${i+1}</span>${avatar(p)}<span><span class="pl-nick">${esc(p.nick)}</span>${club}</span></div></td>
       <td class="tcell grp">${cellTier(p.r_tier)}</td>
       <td>${cellElo(p.r_elo_cur)}</td>
-      <td>${cellElo(p.r_elo_2026)}</td>
-      <td class="grp">${cellRank(p.r_rank_eu_2026)}</td>
+      <td>${cellRank(p.r_rank)}</td>
+      <td class="grp">${cellElo(p.r_elo_2026)}</td>
+      <td>${cellRank(p.r_rank_2026)}</td>
       <td class="l">${links.join(' ')||'<span class="na">—</span>'}</td>
     </tr>`;
   });
@@ -391,7 +394,7 @@ function paint(){
         const cls=(key in TIER_ORD)?('t-'+key):'';
         const badge=(key in TIER_ORD)?`<span class="tier ${cls}">${key}</span>`:'<span class="na">—</span>';
         const cnt=(key in TIER_ORD)?counts[key]:DATA.players.filter(p=>!(p.r_tier in TIER_ORD)).length;
-        html+=`<tr class="tsep"><td colspan="6">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;
+        html+=`<tr class="tsep"><td colspan="7">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;
         prevTier=key;
       }
     }

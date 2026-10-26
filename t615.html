@@ -1200,7 +1200,7 @@ async function jdTry(){const v=(document.getElementById('jdPw')||{}).value||'';c
 function afterRender(id){if(id==='cards')initCards();else if(id==='strength')paintStrength();else if(id==='luck')paintLuck();else if(id==='roster')paintRoster();else if(id==='seating')initSeating();else if(id==='my')initMy();else if(id==='together')initTogether();else if(id==='judges'){if(jdUnlocked())paintJudges();else{const i=document.getElementById('jdPw');if(i)i.onkeydown=e=>{if(e.key==='Enter')jdTry();};}}else if(id==='stages'||id==='games'||id==='roles')afterStats(id);}
 
 /* roster */
-const RCOLS=[{key:'tier',lab:'Ранг',dir:1,get:p=>p.r_tier,fmt:'tier'},{key:'elo_cur',lab:'ELO тек',dir:-1,get:p=>p.r_elo_cur,fmt:'elo'},{key:'elo_2026',lab:'ELO 12 мес',dir:-1,get:p=>p.r_elo_ly,fmt:'elo'},{key:'eu26',lab:'mafgame топ',dir:1,get:p=>p.mg_rank,fmt:'rank'}];
+const RCOLS=[{key:'tier',lab:'Ранг',dir:1,get:p=>p.r_tier,fmt:'tier'},{key:'elo_cur',lab:'ELO',dir:-1,get:p=>p.r_elo_cur,fmt:'elo'},{key:'rank',lab:'Место',dir:1,get:p=>p.r_rank,fmt:'rank'},{key:'elo_2026',lab:'ELO 2026',dir:-1,get:p=>p.r_elo_2026,fmt:'elo'},{key:'eu26',lab:'Место 2026',dir:1,get:p=>p.r_rank_2026,fmt:'rank'}];
 let rSortKey='tier',rSortDir=1,rFilter=null;
 function colVal(c,p){const v=c.get(p);if(c.fmt==='tier')return (v in TIER_ORD)?TIER_ORD[v]:null;return num(v);}
 function avatarCell(p){const f=(p.r_tier in TIER_ORD)?(' f-'+p.r_tier):'';
@@ -1215,7 +1215,7 @@ function paintRoster(){
     TIERS.filter(x=>tc[x]).map(x=>`<span class="tf ${rFilter===x?'on':''}" data-t="${x}"><span class="tpill tp-${x}">${x}</span><small>${tc[x]}</small></span>`).join('');
     fil.querySelectorAll('.tf').forEach(b=>b.onclick=()=>{rFilter=b.dataset.t||null;paintRoster();});}
   const hr=document.getElementById('rhr');
-  hr.innerHTML='<th class="l" data-k="player">Игрок<span class="ar"></span></th>'+RCOLS.map(c=>`<th data-k="${c.key}" class="${(c.key==='elo_2026'||c.key==='eu26')?'x':''}">${esc(c.lab)}<span class="ar"></span></th>`).join('')+'<th class="l x" style="cursor:default">Профиль</th>';
+  hr.innerHTML='<th class="l" data-k="player">Игрок<span class="ar"></span></th>'+RCOLS.map(c=>`<th data-k="${c.key}" class="">${esc(c.lab)}<span class="ar"></span></th>`).join('')+'<th class="l x" style="cursor:default">Профиль</th>';
   hr.querySelectorAll('th[data-k]').forEach(el=>el.onclick=()=>{const k=el.dataset.k;
     if(k==='player')rSortKey='player';else if(rSortKey===k)rSortDir=-rSortDir;else{rSortKey=k;rSortDir=(RCOLS.find(c=>c.key===k)||{}).dir||-1;}paintRoster();});
   let list=D.players.slice();if(rFilter)list=list.filter(p=>p.r_tier===rFilter);
@@ -1228,17 +1228,18 @@ function paintRoster(){
   list.forEach((p,i)=>{
     if(grouping){const key=(p.r_tier in TIER_ORD)?p.r_tier:'—';if(key!==prev){const badge=(key in TIER_ORD)?`<span class="tpill tp-${key}">${key}</span>`:'<span class="na">—</span>';
       const cnt=list.filter(x=>((x.r_tier in TIER_ORD)?x.r_tier:'—')===key).length;
-      html+=`<tr class="tsep"><td colspan="6">${badge} &nbsp;ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;prev=key;}}
+      html+=`<tr class="tsep"><td colspan="7">${badge} &nbsp;ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;prev=key;}}
     const links=[];
     if(p.uid)links.push(`<a class="lnk" href="https://mafgame.org/user/${p.uid}/view" target="_blank" rel="noopener">mafgame</a>`);
     if(p.markery_id)links.push(`<a class="lnk" href="https://markery.online/playerStatistics?eloType=101&playerId=${p.markery_id}&tab=EloHistory" target="_blank" rel="noopener">markery</a>`);
     if(p.ms&&p.ms.id)links.push(`<a class="lnk" href="https://mafiastats.com/players/${p.ms.id}" target="_blank" rel="noopener">mafiastats</a>`);
-    const e26x=1;const sub=(p.real||p.country)?`<div class="pl-real">${esc(p.real||'')}${p.country?(p.real?' · ':'')+esc(p.country):''}</div>`:'';const et=num(p.r_elo_cur),e26=num(p.r_elo_ly),eu=num(p.mg_rank);
+    const e26x=1;const sub=(p.real||p.country)?`<div class="pl-real">${esc(p.real||'')}${p.country?(p.real?' · ':'')+esc(p.country):''}</div>`:'';const et=num(p.r_elo_cur),e26=num(p.r_elo_2026),eu=num(p.r_rank_2026),gr=num(p.r_rank);
     html+=`<tr class="rrow ${p.status==='confirmed'?'':'applied'}" data-p="${esc(p.nick)}"><td class="l"><div class="pl"><span class="num">${i+1}</span>${avatarCell(p)}<span><span class="pl-nick">${p.flag?p.flag+' ':''}${esc(p.nick)}</span>${sub}</span></div></td>
       <td>${(p.r_tier in TIER_ORD)?`<span class="tpill tp-${p.r_tier}">${p.r_tier}</span>`:'<span class="na">—</span>'}</td>
       <td>${et!=null?`<span class="rnum">${Math.round(et)}</span>`:'<span class="na">—</span>'}</td>
-      <td class="x">${e26!=null?`<span class="rnum">${Math.round(e26)}</span>`:'<span class="na">—</span>'}</td>
-      <td class="x">${eu!=null?`<span class="rrank"><span class="h">#</span>${eu}</span>`:'<span class="na">—</span>'}</td>
+      <td>${gr!=null?`<span class="rrank"><span class="h">#</span>${gr}</span>`:'<span class="na">—</span>'}</td>
+      <td>${e26!=null?`<span class="rnum">${Math.round(e26)}</span>`:'<span class="na">—</span>'}</td>
+      <td>${eu!=null?`<span class="rrank"><span class="h">#</span>${eu}</span>`:'<span class="na">—</span>'}</td>
       <td class="l x">${links.join(' ')||'<span class="na">—</span>'}</td></tr>`;});
   document.getElementById('rtb').innerHTML=html;
   document.querySelectorAll('#rtb tr.rrow').forEach(tr=>tr.onclick=e=>{if(e.target.closest('a'))return;goPlayer(tr.dataset.p);});
