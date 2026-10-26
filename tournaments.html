@@ -83,7 +83,6 @@
   .stars .sl{display:flex;flex-direction:column;gap:2px;min-width:0}
   .stars .sl b{font:800 12.5px/1.1 'Inter';color:var(--ink)}
   .stars .sl small{font-size:11px;color:var(--mut);line-height:1.25}
-  .stars.s5{border-color:rgba(245,255,53,.6);box-shadow:0 0 18px rgba(245,255,53,.12)}
   .stars.s1,.stars.s2{border-color:var(--line2);background:rgba(255,255,255,.02)}
   .stars.mini{padding:4px 9px;gap:7px;border-radius:7px}.stars.mini .sg{font-size:12.5px;letter-spacing:1px}.stars.mini .sl b{font-size:11.5px}
   .slegend{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:-4px 0 14px;padding:10px 12px;border:1px dashed rgba(245,255,53,.22);border-radius:10px;font-size:11.5px;color:var(--mut)}
@@ -94,6 +93,19 @@
   .ar .pod{font-size:12px;color:var(--mut);margin-top:6px;line-height:1.5}
   .ar .pod b{color:var(--ink)}.ar .pod .g1{color:var(--acc)}
   .ar .pod .mvp{display:inline-block;margin-left:4px;padding:1px 6px;border-radius:5px;font:800 10px/1.4 var(--mono);letter-spacing:.08em;color:#05060a;background:var(--yel)}
+  /* градация по звёздам: 5 — акцент, 4 — жирно, 3 — обычно, 1–2 — приглушённо */
+  .stars.s5{padding:9px 14px 9px 12px;border:1.5px solid var(--yel);background:linear-gradient(90deg,rgba(245,255,53,.16),rgba(245,255,53,.03));box-shadow:0 0 22px rgba(245,255,53,.18)}
+  .stars.s5 .sg{font-size:21px}.stars.s5 .sl b{font:900 13px/1 var(--disp);text-transform:uppercase;letter-spacing:.04em;color:var(--yel)}
+  .stars.s4 .sl b{font-weight:900}
+  .stars.s3{border-color:var(--line2);background:rgba(255,255,255,.02)}.stars.s3 .sg i{text-shadow:none}.stars.s3 .sl b{font-weight:600;color:var(--mut)}
+  .stars.s1,.stars.s2{opacity:.6}.stars.s1 .sg i,.stars.s2 .sg i{color:#9aa07a;text-shadow:none}.stars.s1 .sl b,.stars.s2 .sl b{font-weight:500;color:var(--dim)}
+  .stars.mini.s5{padding:5px 10px}.stars.mini.s5 .sg{font-size:15px}.stars.mini.s5 .sl b{font-size:11px}
+  .tc.st5{border:1.5px solid rgba(245,255,53,.6)}.tc.st5 .nm{font-weight:900}
+  .ar.st5{border-color:rgba(245,255,53,.4);border-left-color:var(--yel);background:linear-gradient(90deg,rgba(245,255,53,.07),rgba(11,13,20,.7) 45%)}
+  .ar.st5 .an{font-size:16px;font-weight:900}
+  .ar.st4 .an{font-weight:900}
+  .ar.st3 .an{font-weight:700}
+  .ar.st1 .an,.ar.st2 .an{font-weight:600;color:var(--mut)}.ar.st1,.ar.st2{opacity:.85}
   /* архив */
   .arc{display:flex;flex-direction:column;gap:6px}
   .ar{--acc:var(--cyan);display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 14px;border:1px solid var(--line2);border-left:3px solid color-mix(in srgb,var(--acc) 70%,transparent);
@@ -204,7 +216,7 @@ function card(t,big){
     :`<a class="vis" href="${mainHref(t)}"><div class="cp"><div class="ck">DOVOD · ${'★'.repeat(t.stars||0)} · ${esc(t.city)}</div><div class="ct">${esc(p1)}${p2?`<b>${esc(p2)}</b>`:''}</div><div class="cy">${esc(y)}</div></div><span class="badge ${st}">${lab}</span></a>`;
   const btns=[t.page?`<a class="btn" href="${t.page}">Страница турнира →</a>`:'',t.watch?`<a class="btn w" href="${t.watch}">▶ Смотровая</a>`:'',
     `<a class="btn g" href="participants.html?t=${t.id}">Участники и ELO</a>`,t.mafgame?`<a class="btn g" href="${t.mafgame}" target="_blank" rel="noopener">mafgame ↗</a>`:''].join('');
-  return `<div class="tc${big?' big':''}" style="--acc:${a1};--acc2:${a2}">${vis}<div class="bd">
+  return `<div class="tc${big?' big':''} st${t.stars||0}" style="--acc:${a1};--acc2:${a2}">${vis}<div class="bd">
     <div class="meta">${esc(t.dates)} · ${esc(t.city)}${t.country?' · '+esc(t.country):''}</div>
     <a class="nm" href="${mainHref(t)}">${esc(t.name)}</a>
     ${starsBox(t.stars)}
@@ -225,7 +237,7 @@ function card(t,big){
       const pod=top.length?`<div class="pod">${t.paired?'🏆 <b class="g1">'+esc(top[0])+'</b>':top.map((n,i)=>`${['🥇','🥈','🥉'][i]} <b class="${i?'':'g1'}">${esc(n)}</b>`).join(' · ')}${t.mvp?` <span class="mvp">MVP</span> <b>${esc(t.mvp)}</b>`:''}</div>`:'';
       const elo=t.eloAvg!=null?`<span class="chip elo" title="средний ELO markery.online на момент турнира">ср. ELO <b>${t.eloAvg}</b></span>`:`<span class="chip" title="снимка ELO на момент турнира нет">ELO <b>—</b></span>`;
       const fmt=String(t.statusLabel||'').replace(/^Завершён\s*·\s*/,'').replace(/\s*·\s*чемпион.*$/,'').replace(/^\d+\s*игроков\s*·\s*/,'');
-      return `<a class="ar" style="--acc:${a1}" href="${t.page||('tournament.html?t='+t.id)}">
+      return `<a class="ar st${t.stars||0}" style="--acc:${a1}" href="${t.page||('tournament.html?t='+t.id)}">
       <div class="ad">${esc(t.dates)}<br>${esc(t.city)}</div>
       <div><div class="an">${esc(t.name)}</div>
         <div class="ax">${starsBox(t.stars,true)}<span class="chip"><b>${t.players}</b> игроков</span>${elo}</div>
