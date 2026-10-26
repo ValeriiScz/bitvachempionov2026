@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-refresh_mcl.py · v1.3.2 · 2026-10-25 (ручной перезапуск: протокол Prague/05 #874 вышел после утреннего прогона) · v1.3.1 · 2026-10-19 (ручной перезапуск после серий выходных) · v1.3 · 2026-10-05 · версия для сайта DOVOD
+refresh_mcl.py · v1.4 · 2026-10-27 (фото новых игроков: у кого в данных пустое фото — берём с профиля mafgame, stream_photo или аватар; раньше фото переносились только из прошлого снимка, и у новичков лиги их не было — Грешник, S1LveR) · v1.3.2 · 2026-10-25 (ручной перезапуск: протокол Prague/05 #874 вышел после утреннего прогона) · v1.3.1 · 2026-10-19 (ручной перезапуск после серий выходных) · v1.3 · 2026-10-05 · версия для сайта DOVOD
 Назначение: обновить датафайл страниц MCL (data/mcl2026.js) по протоколам mafgame.org
 и постам канала лиги, без участия человека. Тот же робот работает у партнёров
 (ecosciug/mafiacl-kings) — там пути другие, здесь ещё поднимается CACHE_VERSION в sw.js.
@@ -36,6 +36,7 @@ TG_CHANNEL  = os.environ.get('MCL_TG_CHANNEL', 'mafiamcl')
 TG_HASHTAG  = os.environ.get('MCL_TG_HASHTAG', '#mclрезультаты2026')
 UA          = os.environ.get('REQUEST_USER_AGENT', 'Mozilla/5.0 (compatible; MafiaCLKingsBot/1.0; +https://mafiacl.com)')
 PAUSE       = 0.4
+MAX_PHOTOS  = 60       # v1.4: сколько профилей без фото дочитывать за прогон
 MIN_STAGES  = 10                       # предохранитель: меньше — не пишем файл
 
 # .github/scripts/ → корень репозитория на два уровня выше
@@ -474,6 +475,30 @@ def main():
 
     # 6b–6c) зачёт регионов, итог полуфиналов и состав финала
     rebuild_standings(D, series, avatars)
+
+    # 6d) v1.4: фото тем, у кого его нет. rebuild_standings берёт фото только из прошлого
+    #     снимка, поэтому игроки, впервые сыгравшие серию, оставались без фото навсегда.
+    def walk(o, f):
+        if isinstance(o, dict):
+            f(o)
+            for v in o.values(): walk(v, f)
+        elif isinstance(o, list):
+            for v in o: walk(v, f)
+    missing = set()
+    walk(D, lambda o: missing.add(o['u']) if o.get('u') and 'p' in o and not o['p'] else None)
+    got = {}
+    for u in sorted(missing)[:MAX_PHOTOS]:
+        try:
+            ud = inertia('%s/user/%d/view' % (MAFGAME, u)).get('user_data') or {}
+            ph = ud.get('stream_photo') or ud.get('avatar') or ''
+            if ph and 'avatar-default' not in ph:
+                got[u] = ph
+        except Exception as e:
+            log('фото %s: %s' % (u, e))
+        time.sleep(PAUSE)
+    walk(D, lambda o: o.__setitem__('p', got[o['u']]) if o.get('u') in got and 'p' in o and not o['p'] else None)
+    if missing:
+        log('фото: без фото было %d, нашли %d' % (len(missing), len(got)))
     squad = D['squad']
 
     played  = sum(1 for s in series if s.get('r'))
