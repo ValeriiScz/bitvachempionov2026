@@ -1,0 +1,771 @@
+{
+ "snapshot": "2026-10-26",
+ "series": [
+  {
+   "id": 701,
+   "num": 1,
+   "city": "Вроцлав",
+   "date": "2026-03-01",
+   "top": [
+    {
+     "uid": 1481,
+     "nick": "Landing",
+     "place": 1,
+     "score": 6.55,
+     "dop": 1.3,
+     "wins": 7
+    },
+    {
+     "uid": 288,
+     "nick": "Jane",
+     "place": 2,
+     "score": 5.5,
+     "dop": 1,
+     "wins": 6
+    },
+    {
+     "uid": 30,
+     "nick": "Deid_Ara",
+     "place": 3,
+     "score": 5.4,
+     "dop": 1.0,
+     "wins": 6
+    },
+    {
+     "uid": 287,
+     "nick": "Буржуй",
+     "place": 4,
+     "score": 4.95,
+     "dop": 1.2,
+     "wins": 5
+    },
+    {
+     "uid": 280,
+     "nick": "Season's",
+     "place": 5,
+     "score": 4.7,
+     "dop": 0.9,
+     "wins": 5
+    },
+    {
+     "uid": 143,
+     "nick": "Добрейший",
+     "place": 6,
+     "score": 4.35,
+     "dop": 0.6,
+     "wins": 5
+    },
+    {
+     "uid": 1786,
+     "nick": "Barhat",
+     "place": 7,
+     "score": 4.25,
+     "dop": 0.7,
+     "wins": 5
+    },
+    {
+     "uid": 2297,
+     "nick": "Душнила",
+     "place": 8,
+     "score": 4.25,
+     "dop": 0.3,
+     "wins": 5
+    },
+    {
+     "uid": 2588,
+     "nick": "Tykva",
+     "place": 9,
+     "score": 2.9,
+     "dop": 0.5,
+     "wins": 4
+    },
+    {
+     "uid": 1599,
+     "nick": "Mulder",
+     "place": 10,
+     "score": 2.05,
+     "dop": 0,
+     "wins": 3
+    }
+   ]
+  },
+  {
+   "id": 844,
+   "num": 2,
+   "city": "Краков",
+   "date": "2026-05-16",
+   "top": [
+    {
+     "uid": 279,
+     "nick": "Sinful",
+     "place": 1,
+     "score": 7.75,
+     "dop": 2.25,
+     "wins": 7
+    },
+    {
+     "uid": 2756,
+     "nick": "POTAP",
+     "place": 2,
+     "score": 5.9,
+     "dop": 1.6,
+     "wins": 6
+    },
+    {
+     "uid": 2761,
+     "nick": "Foxy1",
+     "place": 3,
+     "score": 5.3,
+     "dop": 1.6,
+     "wins": 4
+    },
+    {
+     "uid": 2896,
+     "nick": "Assoчка",
+     "place": 4,
+     "score": 4.35,
+     "dop": 0.85,
+     "wins": 4
+    },
+    {
+     "uid": 3040,
+     "nick": "Эйрон",
+     "place": 5,
+     "score": 4.25,
+     "dop": 0.7,
+     "wins": 5
+    },
+    {
+     "uid": 2867,
+     "nick": "Alibi",
+     "place": 6,
+     "score": 3.8,
+     "dop": 0.9,
+     "wins": 4
+    },
+    {
+     "uid": 2854,
+     "nick": "2rbina",
+     "place": 7,
+     "score": 3.45,
+     "dop": 1.2,
+     "wins": 3
+    },
+    {
+     "uid": 2880,
+     "nick": "MoonBaboon",
+     "place": 8,
+     "score": 2.8,
+     "dop": 0.2,
+     "wins": 4
+    },
+    {
+     "uid": 2881,
+     "nick": "mniis",
+     "place": 9,
+     "score": 2.75,
+     "dop": 0.7,
+     "wins": 3
+    },
+    {
+     "uid": 2864,
+     "nick": "Norman",
+     "place": 10,
+     "score": 2.35,
+     "dop": 0.8,
+     "wins": 3
+    }
+   ]
+  },
+  {
+   "id": 915,
+   "num": 4,
+   "city": "Варшава",
+   "date": "2026-07-18",
+   "top": [
+    {
+     "uid": 1054,
+     "nick": "Котяра",
+     "place": 1,
+     "score": 7.55,
+     "dop": 0.8,
+     "wins": 9
+    },
+    {
+     "uid": 1358,
+     "nick": "aptah",
+     "place": 2,
+     "score": 6.9,
+     "dop": 2.4,
+     "wins": 6
+    },
+    {
+     "uid": 1050,
+     "nick": "Lюц",
+     "place": 3,
+     "score": 6.8,
+     "dop": 1.9,
+     "wins": 6
+    },
+    {
+     "uid": 1397,
+     "nick": "Рассвет",
+     "place": 4,
+     "score": 6.25,
+     "dop": 1,
+     "wins": 7
+    },
+    {
+     "uid": 1049,
+     "nick": "Фортуна",
+     "place": 5,
+     "score": 5.85,
+     "dop": 1.3,
+     "wins": 5
+    },
+    {
+     "uid": 2966,
+     "nick": "Jinn",
+     "place": 6,
+     "score": 4.45,
+     "dop": 0.7,
+     "wins": 5
+    },
+    {
+     "uid": 1799,
+     "nick": "Светлый",
+     "place": 7,
+     "score": 4.1,
+     "dop": 0.1,
+     "wins": 5
+    },
+    {
+     "uid": 2329,
+     "nick": "Судья",
+     "place": 8,
+     "score": 3.6,
+     "dop": 0.8,
+     "wins": 4
+    },
+    {
+     "uid": 151,
+     "nick": "Demba",
+     "place": 9,
+     "score": 3.4,
+     "dop": 0.5,
+     "wins": 4
+    },
+    {
+     "uid": 3044,
+     "nick": "Golubchik",
+     "place": 10,
+     "score": 2.5,
+     "dop": 0,
+     "wins": 4
+    }
+   ]
+  },
+  {
+   "id": 956,
+   "num": 3,
+   "city": "Краков",
+   "date": "2026-08-30",
+   "top": [
+    {
+     "uid": 2605,
+     "nick": "=Dракончик",
+     "place": 1,
+     "score": 5.85,
+     "dop": 1,
+     "wins": 6
+    },
+    {
+     "uid": 2812,
+     "nick": "Fistashka",
+     "place": 2,
+     "score": 5.1,
+     "dop": 1,
+     "wins": 6
+    },
+    {
+     "uid": 2881,
+     "nick": "mniis",
+     "place": 3,
+     "score": 4.4,
+     "dop": 1.1,
+     "wins": 4
+    },
+    {
+     "uid": 3195,
+     "nick": "007",
+     "place": 4,
+     "score": 4.35,
+     "dop": 1.2,
+     "wins": 5
+    },
+    {
+     "uid": 2866,
+     "nick": "Capybara",
+     "place": 5,
+     "score": 3.8,
+     "dop": 1.2,
+     "wins": 3
+    },
+    {
+     "uid": 2896,
+     "nick": "Assoчка",
+     "place": 6,
+     "score": 2.95,
+     "dop": 1.1,
+     "wins": 3
+    },
+    {
+     "uid": 787,
+     "nick": "DK",
+     "place": 7,
+     "score": 2.9,
+     "dop": 1.25,
+     "wins": 2
+    },
+    {
+     "uid": 2795,
+     "nick": "Фенікс",
+     "place": 8,
+     "score": 2.5,
+     "dop": 1.4,
+     "wins": 2
+    },
+    {
+     "uid": 3081,
+     "nick": "Франко",
+     "place": 9,
+     "score": 2.45,
+     "dop": 0.2,
+     "wins": 3
+    },
+    {
+     "uid": 2746,
+     "nick": "Кукуха",
+     "place": 10,
+     "score": -0.15,
+     "dop": 0.4,
+     "wins": 1
+    }
+   ]
+  },
+  {
+   "id": 1005,
+   "num": 5,
+   "city": "Вроцлав",
+   "date": "2026-10-04",
+   "top": [
+    {
+     "uid": 287,
+     "nick": "Буржуй",
+     "place": 1,
+     "score": 6.8,
+     "dop": 2.15,
+     "wins": 5
+    },
+    {
+     "uid": 1154,
+     "nick": "Дзю",
+     "place": 2,
+     "score": 6.55,
+     "dop": 1.3,
+     "wins": 7
+    },
+    {
+     "uid": 272,
+     "nick": "Сакура",
+     "place": 3,
+     "score": 6.1,
+     "dop": 1.4,
+     "wins": 6
+    },
+    {
+     "uid": 1493,
+     "nick": "DOVOD",
+     "place": 4,
+     "score": 4.65,
+     "dop": 1,
+     "wins": 4
+    },
+    {
+     "uid": 1160,
+     "nick": "Incognito",
+     "place": 5,
+     "score": 4.25,
+     "dop": 0.7,
+     "wins": 5
+    },
+    {
+     "uid": 1598,
+     "nick": "Mjata",
+     "place": 6,
+     "score": 4.15,
+     "dop": 0.6,
+     "wins": 5
+    },
+    {
+     "uid": 1495,
+     "nick": "TOPS",
+     "place": 7,
+     "score": 3.55,
+     "dop": 1.3,
+     "wins": 3
+    },
+    {
+     "uid": 2399,
+     "nick": "Ёжик",
+     "place": 8,
+     "score": 3.15,
+     "dop": 0.9,
+     "wins": 3
+    },
+    {
+     "uid": 1642,
+     "nick": "Kleo",
+     "place": 9,
+     "score": 3.0,
+     "dop": 0.9,
+     "wins": 3
+    },
+    {
+     "uid": 2588,
+     "nick": "Tykva",
+     "place": 10,
+     "score": 1.9,
+     "dop": 0.4,
+     "wins": 2
+    }
+   ]
+  },
+  {
+   "id": 1026,
+   "num": 6,
+   "city": "Вроцлав",
+   "date": "2026-10-25",
+   "top": [
+    {
+     "uid": 152,
+     "nick": "Не Злая",
+     "place": 1,
+     "score": 7.75,
+     "dop": 2.15,
+     "wins": 7
+    },
+    {
+     "uid": 561,
+     "nick": "Tapok",
+     "place": 2,
+     "score": 7.05,
+     "dop": 1.3,
+     "wins": 7
+    },
+    {
+     "uid": 2884,
+     "nick": "Shadow Black Rose",
+     "place": 3,
+     "score": 6.55,
+     "dop": 1.3,
+     "wins": 7
+    },
+    {
+     "uid": 140,
+     "nick": "Panda Kung-Fu",
+     "place": 4,
+     "score": 5.9,
+     "dop": 1.45,
+     "wins": 5
+    },
+    {
+     "uid": 2883,
+     "nick": "Шальна",
+     "place": 5,
+     "score": 5.6,
+     "dop": 1,
+     "wins": 6
+    },
+    {
+     "uid": 2888,
+     "nick": "UMAMI",
+     "place": 6,
+     "score": 3.1,
+     "dop": 0.7,
+     "wins": 3
+    },
+    {
+     "uid": 1599,
+     "nick": "Mulder",
+     "place": 7,
+     "score": 2.55,
+     "dop": 1,
+     "wins": 3
+    },
+    {
+     "uid": 2911,
+     "nick": "Локи",
+     "place": 8,
+     "score": 2.25,
+     "dop": 0.4,
+     "wins": 3
+    },
+    {
+     "uid": 3244,
+     "nick": "42",
+     "place": 9,
+     "score": 2.25,
+     "dop": 0.2,
+     "wins": 3
+    },
+    {
+     "uid": 2471,
+     "nick": "Арчі",
+     "place": 10,
+     "score": 2.05,
+     "dop": 0.5,
+     "wins": 3
+    }
+   ]
+  }
+ ],
+ "finalists": [
+  {
+   "uid": 1481,
+   "nick": "Landing",
+   "series": 1,
+   "place": 1,
+   "score": 6.55,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1481/b033e4506014e23586818760a88ede88a7b79d3d.png",
+   "real": "Дима",
+   "club": "White Mafia Club Wroclaw",
+   "r_elo_cur": 1028,
+   "r_tier": "C",
+   "mg_rank": 22
+  },
+  {
+   "uid": 288,
+   "nick": "Jane",
+   "series": 1,
+   "place": 2,
+   "score": 5.5,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_288/4082774cd0a41a2bd34928ce499bbdf88824bb66.png",
+   "real": "Tanya",
+   "club": "White Mafia Club Wroclaw",
+   "r_elo_cur": 1182,
+   "r_tier": "B",
+   "mg_rank": 28
+  },
+  {
+   "uid": 279,
+   "nick": "Sinful",
+   "series": 2,
+   "place": 1,
+   "score": 7.75,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_279/b369ef1106532fec5304617d42ec48ca4478639f.png",
+   "real": "Иван Пономаренко",
+   "club": "White Mafia Club Krakow",
+   "r_elo_cur": null,
+   "r_tier": null,
+   "mg_rank": 83
+  },
+  {
+   "uid": 2756,
+   "nick": "POTAP",
+   "series": 2,
+   "place": 2,
+   "score": 5.9,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2756/1ba7b2a5edd7a2d3a18eaddc763d10adfe42e757.png",
+   "real": "Yaroslav Potapenko",
+   "club": "White Mafia Club Krakow",
+   "r_elo_cur": null,
+   "r_tier": null,
+   "mg_rank": null
+  },
+  {
+   "uid": 1054,
+   "nick": "Котяра",
+   "series": 4,
+   "place": 1,
+   "score": 7.55,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1054/843cda596ff0716db4f8d34730ae406b90e64471.png",
+   "real": "Andrei Trukhan",
+   "club": "PUDRA mafia club",
+   "r_elo_cur": 970,
+   "r_tier": "D",
+   "mg_rank": null
+  },
+  {
+   "uid": 1358,
+   "nick": "aptah",
+   "series": 4,
+   "place": 2,
+   "score": 6.9,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1358/236f3274a9d37c8006c6d3e18edd9b8071d0ce48.png",
+   "real": "Volodymyr Hrychenko",
+   "club": "PUDRA mafia club",
+   "r_elo_cur": 1085,
+   "r_tier": "B",
+   "mg_rank": 12
+  },
+  {
+   "uid": 2605,
+   "nick": "=Dракончик",
+   "series": 3,
+   "place": 1,
+   "score": 5.85,
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2605/ad89f1d4ad8523e897d6e9036b36d25f99f4e1f4.png",
+   "real": "Елізі",
+   "club": "White Mafia Club Krakow",
+   "r_elo_cur": null,
+   "r_tier": null,
+   "mg_rank": null
+  },
+  {
+   "uid": 2812,
+   "nick": "Fistashka",
+   "series": 3,
+   "place": 2,
+   "score": 5.1,
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2812/8a8f7e9d6babf226ad583b587039724f0db35243.png",
+   "real": "Olga Zadvorna",
+   "club": "White Mafia Club Krakow",
+   "r_elo_cur": null,
+   "r_tier": null,
+   "mg_rank": null
+  },
+  {
+   "uid": 287,
+   "nick": "Буржуй",
+   "series": 5,
+   "place": 1,
+   "score": 6.8,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_287/3ddee352574f767cc2ee00cb7690d518c58915a2.png",
+   "real": "Bohdan",
+   "club": "White Mafia Club Wroclaw",
+   "r_elo_cur": 1218,
+   "r_tier": "A",
+   "mg_rank": 15
+  },
+  {
+   "uid": 1154,
+   "nick": "Дзю",
+   "series": 5,
+   "place": 2,
+   "score": 6.55,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1154/2ea1437974ebd88f51499a44661c155812c28327.png",
+   "real": "Viktor",
+   "club": "",
+   "r_elo_cur": null,
+   "r_tier": null,
+   "mg_rank": null
+  },
+  {
+   "uid": 152,
+   "nick": "Не Злая",
+   "series": 6,
+   "place": 1,
+   "score": 7.75,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_152/5ebb58af65c0e6171372d5a0391a6805c35a8a8b.png",
+   "real": "Karina Litvin",
+   "club": "Mafia Family Wroclaw",
+   "r_elo_cur": 1124,
+   "r_tier": "B",
+   "mg_rank": 29
+  },
+  {
+   "uid": 561,
+   "nick": "Tapok",
+   "series": 6,
+   "place": 2,
+   "score": 7.05,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_561/3b6199eba3053f42603cffa3d110a2a0a0a47d18.png",
+   "real": "Тимур",
+   "club": "White Mafia Club Wroclaw",
+   "r_elo_cur": 947,
+   "r_tier": "D",
+   "mg_rank": null
+  }
+ ],
+ "reserve": [
+  {
+   "uid": 1050,
+   "nick": "Lюц",
+   "series": 4,
+   "score": 6.8,
+   "dop": 1.9,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1050/05d587e41edd71e3a3dc89f2b04b75c964af8cfe.png",
+   "real": "Mykhailo",
+   "club": "PUDRA mafia club",
+   "r_elo_cur": 1374,
+   "r_tier": "S",
+   "mg_rank": 5
+  },
+  {
+   "uid": 2761,
+   "nick": "Foxy1",
+   "series": 2,
+   "score": 5.3,
+   "dop": 1.6,
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2761/f6d0e746274f7f1b94df4537f9963f851f693e1f.png",
+   "real": "Diana",
+   "club": "White Mafia Club Krakow",
+   "r_elo_cur": null,
+   "r_tier": null,
+   "mg_rank": null
+  },
+  {
+   "uid": 272,
+   "nick": "Сакура",
+   "series": 5,
+   "score": 6.1,
+   "dop": 1.4,
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_272/278737024063fc457acd5a16d744a763c53d6f4c.png",
+   "real": "Віта",
+   "club": "",
+   "r_elo_cur": 999,
+   "r_tier": "C",
+   "mg_rank": null
+  },
+  {
+   "uid": 2884,
+   "nick": "Shadow Black Rose",
+   "series": 6,
+   "score": 6.55,
+   "dop": 1.3,
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2884/11ce9bc5ba40876181dcf4ca68775628b249d2a0.png",
+   "real": "Dmytro",
+   "club": "Black Rose",
+   "r_elo_cur": null,
+   "r_tier": null,
+   "mg_rank": null
+  },
+  {
+   "uid": 2881,
+   "nick": "mniis",
+   "series": 3,
+   "score": 4.4,
+   "dop": 1.1,
+   "av": "",
+   "real": "Ivan",
+   "club": "",
+   "r_elo_cur": null,
+   "r_tier": null,
+   "mg_rank": null
+  },
+  {
+   "uid": 30,
+   "nick": "Deid_Ara",
+   "series": 1,
+   "score": 5.4,
+   "dop": 1.0,
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_30/8e108b3ef446cc984241490bcc097a99be4f752a.png",
+   "real": "Vladyslav",
+   "club": "",
+   "r_elo_cur": null,
+   "r_tier": null,
+   "mg_rank": null
+  }
+ ]
+}
