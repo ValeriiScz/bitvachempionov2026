@@ -16,8 +16,51 @@
 // MafgameStat | tournaments.js | v3.7 | 2026-10-18 | 692 Central Cup -> finished (чемпион Korolevich 13.59, aptah 13.32, TOPS 12.74, DOVOD 12.64)
 // MafgameStat | tournaments.js | v3.8 | 2026-10-26 | +645 White Mafia Best Player — финал серийника (Вроцлав 7–8.11, постер, t645, состав предварительный) + 643 Wroclaw Mafia Open (собирается, участники + ELO)
 // MafgameStat | tournaments.js | v3.9 | 2026-10-26 | 645 -> страница на движке DOVOD (t645 v2.0, один стол) + watch645; 645/643 theme dovod с акцентом White Mafia (accent/accent2/artPaper — новые поля для tournaments.html v4.0)
+// MafgameStat | tournaments.js | v4.0 | 2026-10-26 | +615 Four Seasons: Black Circle (Брюссель 7–8.11, 4★): t615 + watch615 на движке DOVOD (формат 12+4 — гипотеза), участники 30 + 1
 window.TOURNAMENTS_DB = {
   "tournaments": [
+    {
+      "id": "615",
+      "theme": "dovod",
+      "page": "t615.html",
+      "watch": "watch615.html",
+      "name": "Four Seasons: Black Circle 2026",
+      "posterTitle": "Four Seasons|Black Circle",
+      "dates": "7–8 ноября 2026",
+      "city": "Брюссель",
+      "country": "Бельгия",
+      "players": 30,
+      "days": 2,
+      "stars": 4,
+      "status": "upcoming",
+      "phase": 3,
+      "statusLabel": "Состав полный · 30 + 1 заявка (Korolevich)",
+      "eloAvg": 1148,
+      "eloN": 23,
+      "eloTotal": 30,
+      "organizer": "AtomNøir · орг Рыба-мÓя",
+      "format": "12 квал × 3 стола → финал топ-10 (ожидаемо, регламента ещё нет)",
+      "mafgame": "https://mafgame.org/tournaments/615/view",
+      "note": "Формат и время старта на mafgame не указаны — страница собрана по формату прошлых Four Seasons на 30 игроков.",
+      "sections": [
+        {
+          "href": "t615.html",
+          "title": "Страница турнира",
+          "desc": "Обзор · Моё · Игроки · Столы · Результаты"
+        },
+        {
+          "href": "watch615.html",
+          "title": "▶ Смотровая · эфиры",
+          "desc": "три стола в одном окне, следить за игроком"
+        },
+        {
+          "href": "participants.html?t=615",
+          "title": "Участники и рейтинг",
+          "desc": "30 игроков + ELO markery (снимок 26.10)"
+        }
+      ],
+      "start": "2026-11-07"
+    },
     {
       "id": "645",
       "theme": "dovod",
@@ -39,7 +82,7 @@ window.TOURNAMENTS_DB = {
       "eloN": 7,
       "eloTotal": 12,
       "organizer": "White Mafia Club Wroclaw · орг и главный судья Кирпич",
-            "mafgame": "https://mafgame.org/tournaments/645/view",
+      "mafgame": "https://mafgame.org/tournaments/645/view",
       "note": "Состав предварительный: топ-2 каждой из 6 отборочных серий по протоколам mafgame. Официально утвердит организатор; замены — 3-е место той же серии, затем 3-и места по сумме доп. баллов.",
       "sections": [
         {

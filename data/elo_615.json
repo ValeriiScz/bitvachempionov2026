@@ -1,0 +1,97 @@
+{
+ "players": {
+  "RAMZES": {
+   "global": 1262,
+   "tier": "A"
+  },
+  "Sova": {
+   "global": 974,
+   "tier": "D"
+  },
+  "Sarcazi.!": {
+   "global": 955,
+   "tier": "D"
+  },
+  "Zico": {
+   "global": 919,
+   "tier": "E"
+  },
+  "Леди Luz": {
+   "global": 883,
+   "tier": "F"
+  },
+  "Malvina": {
+   "global": 943,
+   "tier": "D"
+  },
+  "KEX": {
+   "global": 1454,
+   "tier": "S"
+  },
+  "Blessed": {
+   "global": 1108,
+   "tier": "B"
+  },
+  "Eskimo.": {
+   "global": 1413,
+   "tier": "S"
+  },
+  "Sэм": {
+   "global": 928,
+   "tier": "E"
+  },
+  "Tommy": {
+   "global": 1572,
+   "tier": "S"
+  },
+  "Клото": {
+   "global": 1109,
+   "tier": "B"
+  },
+  "DOVOD": {
+   "global": 1211,
+   "tier": "A"
+  },
+  "Jerry Hurper": {
+   "global": 1093,
+   "tier": "B"
+  },
+  "Катанчик": {
+   "global": 1021,
+   "tier": "C"
+  },
+  "Flash": {
+   "global": 1730,
+   "tier": "L"
+  },
+  "TOPS": {
+   "global": 1038,
+   "tier": "C"
+  },
+  "Грешник": {
+   "global": 1216,
+   "tier": "A"
+  },
+  "Магнат": {
+   "global": 1132,
+   "tier": "B"
+  },
+  "Tripok": {
+   "global": 1244,
+   "tier": "A"
+  },
+  "Urs": {
+   "global": 812,
+   "tier": "F"
+  },
+  "ParadoXx": {
+   "global": 1163,
+   "tier": "B"
+  },
+  "Flame": {
+   "global": 1216,
+   "tier": "A"
+  }
+ },
+ "snapshot": "2026-10-26"
+}
