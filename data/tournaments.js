@@ -35,8 +35,8 @@ window.TOURNAMENTS_DB = {
       "status": "upcoming",
       "phase": 3,
       "statusLabel": "Состав полный · 30 + 1 заявка (Korolevich)",
-      "eloAvg": 1148,
-      "eloN": 23,
+      "eloAvg": 1139,
+      "eloN": 30,
       "eloTotal": 30,
       "organizer": "AtomNøir · орг Рыба-мÓя",
       "format": "12 квал × 3 стола → финал топ-10 (ожидаемо, регламента ещё нет)",
@@ -56,7 +56,7 @@ window.TOURNAMENTS_DB = {
         {
           "href": "participants.html?t=615",
           "title": "Участники и рейтинг",
-          "desc": "30 игроков + ELO markery (снимок 26.10)"
+          "desc": "30 игроков + ELO markery у всех (снимок 26.10)"
         }
       ],
       "start": "2026-11-07"

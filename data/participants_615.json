@@ -9,7 +9,7 @@
   "stars": 4,
   "expected": 30,
   "players_confirmed": 30,
-  "rating_note": "ELO/тир — markery.online, последний снимок игрока из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026"
+  "rating_note": "ELO/тир — markery.online: 23 игрока — последний снимок из прошлых турниров DOVOD, 7 найдены вручную 26.10 (Медовая, Lee Don, Императрица, Ну погоди, Nick, Gemellia, sugar); место — рейтинг mafgame 2026"
  },
  "players": [
   {
@@ -98,14 +98,15 @@
    "cc": "",
    "country": "",
    "flag": "",
-   "markery_id": null,
-   "r_elo_cur": null,
-   "r_tier": null,
+   "markery_id": 10105,
+   "r_elo_cur": 924,
+   "r_tier": "E",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 5,
-   "mk_match": null
+   "mk_match": "manual",
+   "elo_snap": "2026-10-26"
   },
   {
    "nick": "Леди Luz",
@@ -136,14 +137,15 @@
    "cc": "",
    "country": "",
    "flag": "",
-   "markery_id": null,
-   "r_elo_cur": null,
-   "r_tier": null,
+   "markery_id": 17437,
+   "r_elo_cur": 955,
+   "r_tier": "D",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 7,
-   "mk_match": null
+   "mk_match": "manual",
+   "elo_snap": "2026-10-26"
   },
   {
    "nick": "Malvina",
@@ -288,14 +290,15 @@
    "cc": "",
    "country": "",
    "flag": "",
-   "markery_id": null,
-   "r_elo_cur": null,
-   "r_tier": null,
+   "markery_id": 18806,
+   "r_elo_cur": 972,
+   "r_tier": "D",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 15,
-   "mk_match": null
+   "mk_match": "manual",
+   "elo_snap": "2026-10-26"
   },
   {
    "nick": "DOVOD",
@@ -459,14 +462,15 @@
    "cc": "",
    "country": "",
    "flag": "",
-   "markery_id": null,
-   "r_elo_cur": null,
-   "r_tier": null,
+   "markery_id": 11059,
+   "r_elo_cur": 907,
+   "r_tier": "E",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 24,
-   "mk_match": null
+   "mk_match": "manual",
+   "elo_snap": "2026-10-26"
   },
   {
    "nick": "Nick",
@@ -478,14 +482,15 @@
    "cc": "",
    "country": "",
    "flag": "",
-   "markery_id": null,
-   "r_elo_cur": null,
-   "r_tier": null,
+   "markery_id": 15257,
+   "r_elo_cur": 1280,
+   "r_tier": "A",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 25,
-   "mk_match": null
+   "mk_match": "manual",
+   "elo_snap": "2026-10-26"
   },
   {
    "nick": "Gemellia",
@@ -497,14 +502,15 @@
    "cc": "",
    "country": "",
    "flag": "",
-   "markery_id": null,
-   "r_elo_cur": null,
-   "r_tier": null,
+   "markery_id": 19383,
+   "r_elo_cur": 961,
+   "r_tier": "D",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 26,
-   "mk_match": null
+   "mk_match": "manual",
+   "elo_snap": "2026-10-26"
   },
   {
    "nick": "Urs",
@@ -573,31 +579,31 @@
    "cc": "",
    "country": "",
    "flag": "",
-   "markery_id": null,
-   "r_elo_cur": null,
-   "r_tier": null,
+   "markery_id": 9740,
+   "r_elo_cur": 1776,
+   "r_tier": "L",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 30,
-   "mk_match": null
+   "mk_match": "manual",
+   "elo_snap": "2026-10-26"
   }
  ],
  "stats": {
   "n_conf": 30,
-  "mk_avg": 1147.7,
-  "mk_n": 23,
-  "mk_median": 1109,
+  "mk_avg": 1139.0,
+  "mk_n": 30,
+  "mk_median": 1100,
   "tiers": {
-   "A": 5,
-   "D": 3,
-   "E": 2,
-   "—": 7,
+   "A": 6,
+   "D": 6,
+   "E": 4,
    "F": 2,
    "S": 3,
    "B": 5,
    "C": 2,
-   "L": 1
+   "L": 2
   },
   "snapshot": "2026-10-26"
  }

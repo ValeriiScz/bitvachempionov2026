@@ -16,9 +16,17 @@
    "global": 919,
    "tier": "E"
   },
+  "Медовая": {
+   "global": 924,
+   "tier": "E"
+  },
   "Леди Luz": {
    "global": 883,
    "tier": "F"
+  },
+  "Lee Don": {
+   "global": 955,
+   "tier": "D"
   },
   "Malvina": {
    "global": 943,
@@ -47,6 +55,10 @@
   "Клото": {
    "global": 1109,
    "tier": "B"
+  },
+  "Императрица": {
+   "global": 972,
+   "tier": "D"
   },
   "DOVOD": {
    "global": 1211,
@@ -80,6 +92,18 @@
    "global": 1244,
    "tier": "A"
   },
+  "Ну погоди": {
+   "global": 907,
+   "tier": "E"
+  },
+  "Nick": {
+   "global": 1280,
+   "tier": "A"
+  },
+  "Gemellia": {
+   "global": 961,
+   "tier": "D"
+  },
   "Urs": {
    "global": 812,
    "tier": "F"
@@ -91,6 +115,10 @@
   "Flame": {
    "global": 1216,
    "tier": "A"
+  },
+  "sugar": {
+   "global": 1776,
+   "tier": "L"
   }
  },
  "snapshot": "2026-10-26"
