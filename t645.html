@@ -54,7 +54,17 @@
   .navbtn.active{background:linear-gradient(100deg,rgba(38,224,255,.20),rgba(38,224,255,.06));border-color:var(--line);color:var(--gold-hi);}
   .navbtn.active .ic{color:var(--gold-hi);}
   .navbtn.locked{opacity:.45;cursor:default;}
+  details.fold{margin:0 0 10px;border:1px solid var(--line2);border-radius:14px;background:rgba(5,6,10,.35);}
+  details.fold>summary{cursor:pointer;list-style:none;padding:11px 14px;font-weight:800;font-size:13.5px;display:flex;align-items:center;gap:8px;}
+  details.fold>summary::-webkit-details-marker{display:none}
+  details.fold>summary::after{content:'▾';margin-left:auto;opacity:.6;transition:transform .2s}
+  details.fold:not([open])>summary::after{transform:rotate(-90deg)}
+  details.fold>.panel{margin:0;border:none;border-top:1px solid var(--line2);border-radius:0 0 14px 14px}
+  .srcline{font-size:11.5px;color:var(--dim);margin:-4px 0 10px}.srcline a{color:var(--mut)}
+  .mymini{font-size:11.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--dim);margin:0 0 8px}
+  .wbig,.mwatch{display:none!important}
   .tabbar .tb.locked{opacity:.45;}
+
   .navbtn.locked:hover{background:transparent;border-color:transparent;}
   .side .toclassic{margin-top:auto;font-size:11.5px;color:var(--mut);text-decoration:none;padding:14px 10px 4px;border-top:1px solid var(--line2);}
   .side .toclassic:hover{color:var(--gold-hi);}
@@ -846,20 +856,22 @@ function gpp(){return Math.round(CFG.quals*10*CFG.tables/Math.max(1,(D.players||
 function players_w(n){return n+' '+plW(n,'игрок','игрока','игроков');}
 
 const NAV=[
-  {group:'Обзор',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Обзор'},{id:'qual',ic:'⚐',lab:'Отбор · серии'}]},
-  {group:'Моё',ic:'♟',items:[{id:'my',ic:'♟',lab:'Моё'}]},
-  {group:'Игроки',ic:'≡',items:[
-    {id:'roster',ic:'≡',lab:'Состав · рейтинг'},
-    {id:'together',ic:'⇄',lab:'Кто с кем'}]},
-  {group:'Столы',ic:'▦',items:[
+  {group:'Обзор',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Информация'},{id:'qual',ic:'⚐',lab:'Отбор · серии'},{id:'streams',ic:'▶',lab:'Трансляции'}]},
+  {group:'Игроки',ic:'♟',items:[
+    {id:'my',ic:'♟',lab:'Страница игрока'},
+    {id:'roster',ic:'≡',lab:'Состав по ELO'},
+    {id:'together',ic:'⇄',lab:'Пересечения'}]},
+  {group:'Рассадка',ic:'▦',items:[
     {id:'seating',ic:'▦',lab:'По играм'},
     {id:'strength',ic:'◍',lab:'Сила игр'},
-    {id:'luck',ic:'⚄',lab:'Рассадка'}]},
+    {id:'luck',ic:'⚄',lab:'По силе соперников'}]},
   {group:'Результаты',ic:'⚑',items:[
-    {id:'stages',ic:'⚑',lab:'Таблица'},
-    {id:'games',ic:'▶',lab:'Игры'},
-    {id:'roles',ic:'✦',lab:'По картам'},
-    {id:'judges',ic:'⚖',lab:'Судьи'}]},
+    {id:'stages',ic:'⚑',lab:'Сводная таблица'},
+    {id:'games',ic:'▶',lab:'Игры с результатами'}]},
+  {group:'Ещё',ic:'✦',items:[
+    {id:'roles',ic:'✦',lab:'Статистика по ролям'},
+    {id:'appeals',ic:'⚐',lab:'Апелляции',locked:1,perm:1,lockTag:'скоро'},
+    {id:'judges',ic:'🔒',lab:'Судейский раздел'}]},
 ];
 const SECTIONS=[]; NAV.forEach(g=>g.items.forEach(it=>SECTIONS.push(it)));
 
@@ -901,12 +913,12 @@ function computeSeating(){
 }
 function avOf(n){return D.avatars[n]||(D.RATE[n]&&D.RATE[n].av)||'';}
 
-function applyLocks(){ /* 26.10: до рассадки/старта разделы без данных — серые, с подписью */
+function applyLocks(){ /* 26.10: до рассадки/старта разделы без данных — серые, с подписью; perm — всегда закрыто */
   const g=D.realGames||[];
   const seat=g.some(x=>(x.tables||[]).some(t=>(t.seats||[]).length));
   const res=g.some(x=>(x.tables||[]).some(t=>t.winner&&t.winner!=='unknown'));
   const NEED_SEAT=['together','seating','strength','luck','stages','games','roles','judges'],NEED_RES=['games','roles'];
-  SECTIONS.forEach(s=>{delete s.locked;delete s.lockTag;
+  SECTIONS.forEach(s=>{if(s.perm)return;delete s.locked;delete s.lockTag;
     if(!seat&&NEED_SEAT.includes(s.id)){s.locked=1;s.lockTag='после рассадки';}
     else if(!res&&NEED_RES.includes(s.id)){s.locked=1;s.lockTag='после старта';}});
 }
@@ -955,7 +967,6 @@ function renderTop(){
     <div class="info"><div class="kick"><i></i>${CFG.kick}</div><h1>${CFG.h1}</h1>
       <div class="meta">${CFG.dates} · ${CFG.place} · ${D.players.length} игроков · ${tblW(CFG.tables)}${CFG.single?' · по '+gpp()+' игр из '+CFG.quals:''}</div>
       <div class="chips">
-        <a class="chip live" href="${CFG.watch}" style="text-decoration:none">▶ Смотровая · эфиры</a>
         <span class="chip">Формат <b>${CFG.fmt}</b></span>
         <span class="chip">Ср. ELO <b>${eloAvg!=null?eloAvg:'—'}</b> · markery</span>
         <span class="chip ${started&&!t.closed?'live':''}">${t.closed?'завершён · '+t.games_total+' игр':started?'● идёт · игра '+(D.gp||t.games_played)+'/'+t.games_total:CFG.startLab}</span>
@@ -987,7 +998,7 @@ function show(id,fromPop){
   const grp=NAV[gi],st=document.getElementById('subtabs');
   if(st){ if(grp&&grp.items.length>1){st.innerHTML=grp.items.map(it=>`<button class="st${it.id===id?' on':''}${it.locked?' locked':''}"${it.locked?` title="Доступно ${esc(it.lockTag||'позже')}"`:` data-id="${it.id}"`}>${esc(it.lab)}${it.locked?` <small style="opacity:.8">· ${esc(it.lockTag||'скоро')}</small>`:''}</button>`).join('');st.querySelectorAll('.st[data-id]').forEach(b=>b.onclick=()=>show(b.dataset.id));} else st.innerHTML=''; }
   const mob=window.matchMedia&&window.matchMedia('(max-width:1024px)').matches;
-  const tbp=document.getElementById('topband');if(tbp)tbp.style.display=(mob&&id!=='overview')?'none':'';
+  const tbp=document.getElementById('topband');if(tbp)tbp.style.display=(id!=='overview'&&(mob||id==='my'))?'none':'';
   document.getElementById('view').innerHTML=(RENDER[id]?RENDER[id]():stub(id));afterRender(id);
   const _rb=document.getElementById('__refbtn');if(_rb)_rb.style.display=(id==='overview')?'':'none';
   window.scrollTo({top:0,behavior:'smooth'});
@@ -1025,7 +1036,6 @@ const RENDER={
       ${myPanel()}
       ${myPlayer?nextGamePanel(myPlayer,true):''}
       <div class="panel">${stats}<div class="note">${CFG.intro}</div></div>
-      ${streamsPanel()}
       ${strengthTeaser()}
       ${secListPanel()}
       ${stagesPanel()}
@@ -1042,12 +1052,13 @@ const RENDER={
       <div class="note" style="margin:0 0 12px">${CFG.single?`${CFG.quals} игр за одним столом · в каждой игре двое отдыхают — у каждого ${gpp()} игр из ${CFG.quals} · тап по игроку — все его игры. Цветная метка — сила игры по ELO (кто за столом, кто отдыхает).`:`${CFG.quals} игр × ${CFG.tables} стола · каждый играет 10 из 11 (одну отдыхает) · тап по игроку — все его столы. Цветная метка у стола — его сила по ELO (см. «Сила столов»).`}</div>
       <div id="seatArea"></div></div>`;
   },
-  my(){return `<div class="view"><div class="secttl" id="myTtl">&#9823; Моё на турнире</div><div id="myTop"></div><div id="myArea"></div></div>`;},
-  roster(){return `<div class="view"><div class="secttl">&#8801; Участники · рейтинг</div>
+  streams(){return `<div class="view"><div class="secttl">&#9654; Трансляции</div>${streamsPanel()}</div>`;},
+  my(){return `<div class="view"><div class="mymini">${esc((D.tour&&(D.tour.short||D.tour.tournament_name))||'')}</div><div class="secttl" id="myTtl">&#9823; Страница игрока</div><div id="myTop"></div><div id="myArea"></div></div>`;},
+  roster(){return `<div class="view"><div class="secttl">&#8801; Состав по ELO</div><div class="srcline">ELO, места и ранги — <a href="https://markery.online" target="_blank" rel="noopener">markery.online</a> · составы и аватарки — <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a></div>
       <div class="segwrap" id="rTop"></div>
       <div class="tfilter" id="tfil"></div>
       <div class="panel scrollT" style="padding:0"><table class="tbl" id="rtable"><thead><tr id="rhr"></tr></thead><tbody id="rtb"></tbody></table></div>
-      <div class="note">Рейтинг markery — снимок ${esc(D.stats.snapshot||'2026-09-06')}. «ELO тек» — текущий ELO; «Ранг» — тир L/S…F (L — 1600+). Тап по «Ранг» группирует по тирам. VVS — новичок без истории в markery: стоит стартовый ELO 1000 (с ним начинают все), ранга нет. Составы и аватарки — с mafgame.org. <b>Тап по игроку</b> — его страница: столы, рассадка, соперники, статистика.</div></div>`;},
+      <div class="note">Рейтинг <a href="https://markery.online" target="_blank" rel="noopener">markery.online</a> — снимок ${esc(D.stats.snapshot||(D.meta&&D.meta.elo_snap)||'—')}. «ELO» — за всё время, «ELO 2026» — за сезон; «Ранг» — тир L/S…F (L — 1600+). Тап по «Ранг» группирует по тирам. VVS — новичок без истории в markery: стоит стартовый ELO 1000 (с ним начинают все), ранга нет. Составы и аватарки — с mafgame.org. <b>Тап по игроку</b> — его страница: столы, рассадка, соперники, статистика.</div></div>`;},
   together(){return `<div class="view"><div class="secttl">&#8644; Кто с кем за столом</div><div id="togTop"></div><div id="togArea"></div></div>`;},
   stages(){
     if(!D.gp)return statsEmpty('&#9873; Таблица');
@@ -1501,10 +1512,25 @@ function initMy(){
   srch.oninput=()=>{const q=srch.value.trim().toLowerCase();if(!q)return;const o=[...sel.options].find(x=>x.value&&x.value.toLowerCase().indexOf(q)>=0);if(o){sel.value=o.value;curPlayer=o.value;drawMy();}};
   drawMy();
 }
+/* v2 (26.10): страница игрока — блоки сворачиваются, состояние запоминаем */
+function foldMy(area){
+  const KEY=CFG.ls+'fold';let st={};try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+  const OPEN={'Результат':1,'Результаты по играм':1};
+  [...area.children].forEach(el=>{
+    if(!el.classList||!el.classList.contains('panel')||el.classList.contains('nextg'))return;
+    let h=el.querySelector(':scope > h3, :scope > div > h3');let title=h?h.textContent.trim():(el.classList.contains('scrollT')?'Результаты по играм':'');
+    if(!title)return;
+    const d=document.createElement('details');d.className='fold';d.open=(title in st)?!!st[title]:!!OPEN[title];
+    const sm=document.createElement('summary');sm.textContent=title;d.appendChild(sm);
+    if(h&&h.parentNode===el)h.remove();else if(h)h.style.display='none';
+    el.parentNode.insertBefore(d,el);d.appendChild(el);
+    d.addEventListener('toggle',()=>{st[title]=d.open?1:0;try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}});
+  });
+}
 function drawMy(){
   const area=document.getElementById('myArea');if(!area)return;
   const name=curPlayer;
-  const tt=document.getElementById('myTtl');if(tt)tt.innerHTML='&#9823; '+((myPlayer&&name===myPlayer)?'Моё на турнире':(name?'Игрок':'Моё на турнире'));
+  const tt=document.getElementById('myTtl');if(tt)tt.innerHTML='&#9823; '+((myPlayer&&name===myPlayer)?'Моя страница':'Страница игрока');
   if(!name){area.innerHTML=`<div class="panel"><div class="stub"><div class="si">&#9823;</div><h3>Выберите игрока</h3><p>Выберите себя в списке сверху — здесь соберётся всё ваше: следующая игра (стол, место, соперники, судья), столы на весь турнир, сила ваших соперников и статистика. Закрепить себя навсегда — на «Обзоре», блок «Мой игрок».</p></div></div>`;return;}
   const isMe=myPlayer&&name===myPlayer;
   const R=D.RATE[name]||{},info=D.INFO[name]||{};const tier=(R.tier in TIER_ORD)?R.tier:null;
@@ -1512,7 +1538,7 @@ function drawMy(){
   let html=`<div class="phdr"><img class="${tier?'f-'+tier:''}" src="${esc(avOf(name)||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'">
     <div><div class="pn">${info.flag?info.flag+' ':''}${esc(name)} ${tier?`<span class="tpill tp-${tier}">${tier}</span>`:''}${isMe?' <span class="mebadge">вы</span>':''}</div>
     ${info.real||info.country?`<div class="ps">${esc(info.real||'')}${info.country?(info.real?' · ':'')+esc(info.country):''}</div>`:''}
-    ${(p&&D.gp)?`<div class="pbig"><b class="win">${p.w}</b><span class="na">/${p.g}</span> <span class="pbl">побед / игр</span></div>`:`<div class="ps">ELO ${R.elo?Math.round(R.elo):'—'}${R.mg?' · mafgame топ-'+R.mg:''}</div>`}</div>
+    ${(p&&D.gp)?`<div class="pbig"><b class="win">${p.w}</b><span class="na">/${p.g}</span> <span class="pbl">побед / игр</span></div>`:`<div class="ps">ELO ${R.elo?Math.round(R.elo):'—'}${R.elo26?' · 2026: '+Math.round(R.elo26):''} <span class="na">· markery.online</span></div>`}</div>
     <div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">${D.cards&&D.cards.players.some(c=>c.nick===name)?`<button class="btn ghost" data-p="${esc(name)}" onclick="openCard(this.dataset.p)">карточка</button>`:''}${!isMe?`<button class="btn ghost" data-p="${esc(name)}" onclick="setMy(this.dataset.p)">сделать моим</button>`:''}</div></div>`;
   html+=nextGamePanel(name,false);
   if(p&&D.gp){
@@ -1549,7 +1575,7 @@ function drawMy(){
     ${never.length?`<div class="csec">0 игр — ни разу не встречает (${never.length})</div><div class="zero">${never.map(esc).join(', ')}</div>`:''}
     <div class="note" style="margin:8px 0 0"><span class="lnk" style="cursor:pointer" data-p="${esc(name)}" onclick="openTogether(this.dataset.p)">В каких именно играх пересекаетесь — в «Кто с кем» →</span></div></div>`;
   }
-  area.innerHTML=html;
+  area.innerHTML=html;foldMy(area);
 }
 /* «Кто с кем» */
 let togNick=null;

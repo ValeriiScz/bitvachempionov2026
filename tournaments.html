@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · tournaments.html · v4.0 · 2026-10-26 · переезд в новый стиль DOVOD (как страницы турниров t692/t645): неон, Unbounded + JetBrains Mono + Inter, хлебные крошки сверху.
+<!-- DOVOD · tournaments.html · v4.1 · 2026-10-26 · звёзды крупно с расшифровкой (вес турнира в рейтинге) + легенда; архив: звёзды, игроки, ср. ELO, топ-3 и MVP · v4.0 · переезд в новый стиль DOVOD (как страницы турниров t692/t645): неон, Unbounded + JetBrains Mono + Inter, хлебные крошки сверху.
      Все актуальные турниры — одной карточкой DOVOD: постер (картинка турнира, если есть, иначе CSS-постер), акцент — цвет турнира (t.accent), кнопки «страница / смотровая / участники / mafgame».
      Ссылка карточки — на собственную страницу турнира (t.page), иначе — на участников. Архив — строками в том же стиле. Старая версия v3.2 — в _Архив проекта. -->
 <meta charset="utf-8">
@@ -75,6 +75,25 @@
   .btn.g{border-color:var(--line2);color:#cfd5df;background:none}
   .btn:hover{filter:brightness(1.12)}
   .org{font-size:11.5px;color:var(--dim)}
+  /* звёзды — вес турнира в рейтинге mafgame */
+  .stars{display:inline-flex;align-items:center;gap:10px;padding:7px 12px 7px 10px;border-radius:10px;border:1px solid rgba(245,255,53,.28);background:linear-gradient(90deg,rgba(245,255,53,.08),rgba(245,255,53,.01));align-self:flex-start;max-width:100%}
+  .stars .sg{font-size:17px;letter-spacing:2px;line-height:1;white-space:nowrap}
+  .stars .sg i{font-style:normal;color:var(--yel);text-shadow:0 0 10px rgba(245,255,53,.55)}
+  .stars .sg u{text-decoration:none;color:#2a2e38}
+  .stars .sl{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .stars .sl b{font:800 12.5px/1.1 'Inter';color:var(--ink)}
+  .stars .sl small{font-size:11px;color:var(--mut);line-height:1.25}
+  .stars.s5{border-color:rgba(245,255,53,.6);box-shadow:0 0 18px rgba(245,255,53,.12)}
+  .stars.s1,.stars.s2{border-color:var(--line2);background:rgba(255,255,255,.02)}
+  .stars.mini{padding:4px 9px;gap:7px;border-radius:7px}.stars.mini .sg{font-size:12.5px;letter-spacing:1px}.stars.mini .sl b{font-size:11.5px}
+  .slegend{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:-4px 0 14px;padding:10px 12px;border:1px dashed rgba(245,255,53,.22);border-radius:10px;font-size:11.5px;color:var(--mut)}
+  .slegend .lt{font-weight:800;color:var(--ink)}
+  .slegend span i{font-style:normal;color:var(--yel)}
+  .ar .ax{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;align-items:center}
+  .ar .chip{padding:4px 8px;font-size:11.5px}
+  .ar .pod{font-size:12px;color:var(--mut);margin-top:6px;line-height:1.5}
+  .ar .pod b{color:var(--ink)}.ar .pod .g1{color:var(--acc)}
+  .ar .pod .mvp{display:inline-block;margin-left:4px;padding:1px 6px;border-radius:5px;font:800 10px/1.4 var(--mono);letter-spacing:.08em;color:#05060a;background:var(--yel)}
   /* архив */
   .arc{display:flex;flex-direction:column;gap:6px}
   .ar{--acc:var(--cyan);display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 14px;border:1px solid var(--line2);border-left:3px solid color-mix(in srgb,var(--acc) 70%,transparent);
@@ -162,7 +181,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   <div class="arc" id="archive"></div>
   <div class="foot">
     <b>DOVOD</b> — некоммерческий проект, делается для игроков и по любви к игре · автор — господин DOVOD, <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a><br>
-    рейтинг игроков обновлён <b id="ratedate">—</b> · данные: <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a>
+    рейтинг игроков обновлён <b id="ratedate">—</b> · ELO, места и ранги — <a href="https://markery.online" target="_blank" rel="noopener">markery.online</a> · турниры, составы и протоколы — <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a>
   </div>
 </div>
 <script src="data/tournaments.js"></script>
@@ -174,6 +193,9 @@ function accOf(t){const a=ACC[t.theme]||ACC.dovod;return [t.accent||a[0],t.accen
 function isLive(t){const now=new Date(Date.now()+1*3600e3).toISOString().slice(0,10);return t.status==='live'||(t.liveFrom&&now>=t.liveFrom&&now<=(t.liveTo||t.liveFrom));}
 function mainHref(t){return t.page||('participants.html?t='+t.id);}
 const ART={667:'assets/cyprus667.jpg',713:'assets/protocol4.jpg'};
+const STARS={1:['разминка','почти не даёт баллов'],2:['локальный','для новичков — баллов почти нет'],3:['с гостями','приезжают гости, к концу года бывает жарко'],4:['плотный','сильный состав, хорошие баллы'],5:['топ федерации','максимум баллов рейтинга']};
+function starsBox(n,mini){n=+n||0;if(!n)return '';const L=STARS[n]||['',''];return `<span class="stars s${n}${mini?' mini':''}" title="${n}★ — ${esc(L[0])}: ${esc(L[1])}"><span class="sg"><i>${'★'.repeat(n)}</i><u>${'★'.repeat(5-n)}</u></span><span class="sl"><b>${n} ${n===1?'звезда':n<5?'звезды':'звёзд'} · ${esc(L[0])}</b>${mini?'':`<small>${esc(L[1])}</small>`}</span></span>`;}
+function starsLegend(){return `<div class="slegend"><span class="lt">★ Звёзды = вес турнира в рейтинге mafgame</span>`+[1,2,3,4,5].map(n=>`<span><i>${'★'.repeat(n)}</i> ${esc(STARS[n][0])}</span>`).join('')+`</div>`;}
 function card(t,big){
   const [a1,a2]=accOf(t);const live=isLive(t);const st=live?'live':t.status;
   const lab=live?'идёт · live':t.status==='gathering'?'сбор состава':t.status==='upcoming'?'скоро':esc(t.status);
@@ -184,9 +206,10 @@ function card(t,big){
   const btns=[t.page?`<a class="btn" href="${t.page}">Страница турнира →</a>`:'',t.watch?`<a class="btn w" href="${t.watch}">▶ Смотровая</a>`:'',
     `<a class="btn g" href="participants.html?t=${t.id}">Участники и ELO</a>`,t.mafgame?`<a class="btn g" href="${t.mafgame}" target="_blank" rel="noopener">mafgame ↗</a>`:''].join('');
   return `<div class="tc${big?' big':''}" style="--acc:${a1};--acc2:${a2}">${vis}<div class="bd">
-    <div class="meta"><b>${'★'.repeat(t.stars||0)}</b> · ${esc(t.dates)} · ${esc(t.city)}${t.country?' · '+esc(t.country):''}</div>
+    <div class="meta">${esc(t.dates)} · ${esc(t.city)}${t.country?' · '+esc(t.country):''}</div>
     <a class="nm" href="${mainHref(t)}">${esc(t.name)}</a>
-    <div class="fx"><span class="chip"><b>${t.players}</b> игроков</span>${t.prize?`<span class="chip">приз <b>${esc(t.prize)}</b></span>`:''}${t.eloAvg!=null?`<span class="chip elo">ср. ELO <b>${t.eloAvg}</b> · ${t.eloN}/${t.eloTotal}</span>`:''}</div>
+    ${starsBox(t.stars)}
+    <div class="fx"><span class="chip"><b>${t.players}</b> игроков</span>${t.prize?`<span class="chip">приз <b>${esc(t.prize)}</b></span>`:''}${t.eloAvg!=null?`<span class="chip elo" title="средний ELO markery.online по ${t.eloN} из ${t.eloTotal} игроков с рейтингом">ср. ELO <b>${t.eloAvg}</b> · ${t.eloN}/${t.eloTotal}</span>`:''}</div>
     <div class="stl">${esc(t.statusLabel||'')}${t.format?' · '+esc(t.format):''}</div>
     <div class="btns">${btns}</div>
     ${t.organizer?`<div class="org">${esc(t.organizer)}</div>`:''}</div></div>`;
@@ -198,9 +221,16 @@ function card(t,big){
   document.getElementById('nact').textContent=act.length?act.length+' '+(act.length===1?'турнир':act.length<5?'турнира':'турниров'):'';
   document.getElementById('narc').textContent=arc.length+' турниров';
   document.getElementById('actual').innerHTML=act.map((t,i)=>card(t,i===0)).join('')||'<div class="stl">Сейчас активных турниров нет.</div>';
-  document.getElementById('archive').innerHTML=arc.map(t=>{const [a1]=accOf(t);return `<a class="ar" style="--acc:${a1}" href="${t.page||('tournament.html?t='+t.id)}">
+  document.getElementById('actual').insertAdjacentHTML('beforebegin',starsLegend());
+  document.getElementById('archive').innerHTML=arc.map(t=>{const [a1]=accOf(t);const top=t.top3||(t.champion?[t.champion]:[]);
+      const pod=top.length?`<div class="pod">${t.paired?'🏆 <b class="g1">'+esc(top[0])+'</b>':top.map((n,i)=>`${['🥇','🥈','🥉'][i]} <b class="${i?'':'g1'}">${esc(n)}</b>`).join(' · ')}${t.mvp?` <span class="mvp">MVP</span> <b>${esc(t.mvp)}</b>`:''}</div>`:'';
+      const elo=t.eloAvg!=null?`<span class="chip elo" title="средний ELO markery.online на момент турнира">ср. ELO <b>${t.eloAvg}</b></span>`:`<span class="chip" title="снимка ELO на момент турнира нет">ELO <b>—</b></span>`;
+      const fmt=String(t.statusLabel||'').replace(/^Завершён\s*·\s*/,'').replace(/\s*·\s*чемпион.*$/,'').replace(/^\d+\s*игроков\s*·\s*/,'');
+      return `<a class="ar" style="--acc:${a1}" href="${t.page||('tournament.html?t='+t.id)}">
       <div class="ad">${esc(t.dates)}<br>${esc(t.city)}</div>
-      <div><div class="an">${esc(t.name)}</div><div class="am">${t.players} игроков${t.champion&&!/чемпион/.test(t.statusLabel||'')?' · чемпион <b>'+esc(t.champion)+'</b>':''} · ${esc(String(t.statusLabel||'').replace(/^Завершён\s*·\s*/,'')).replace(/(чемпион(?: Европы —)?) (.+)$/,'$1 <b>$2</b>')}</div></div>
+      <div><div class="an">${esc(t.name)}</div>
+        <div class="ax">${starsBox(t.stars,true)}<span class="chip"><b>${t.players}</b> игроков</span>${elo}</div>
+        ${pod}${fmt?`<div class="am">${esc(fmt)}</div>`:''}</div>
       <span class="ago">→</span></a>`;}).join('');
 })(window.TOURNAMENTS_DB);
 </script>
