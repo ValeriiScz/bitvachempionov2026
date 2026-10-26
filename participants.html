@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v9.3 · 2026-07-15 · ЧЕ-634: свежий markery-снапшот (после Польши/Кёльна), ростер 44 подтв.; колонки Ранг(тир) / ELO тек / ELO 2026 / Европа 2026; тиры с цветом и группировкой + распределение -->
-<!-- MafgameStat · participants.html · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
+<!-- DOVOD · participants.html · v2.0 · 2026-10-26 · новый стиль DOVOD (как страницы турниров): Unbounded/JetBrains Mono/Inter, неон-сетка, акцент турнира из реестра (t.accent) · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
      заявки mafgame (подтв./заявки/лист ожидания) + ДВОЙНОЙ рейтинг markery(основной)+mafiastats(сверка),
      счётчик «ожидаемый средний ELO» (markery) на постере, ссылки на профили, флаги неоднозначных матчей.
      Данные: data/participants_{t}.json (снапшот), реестр data/tournaments.js. -->
@@ -10,7 +10,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Участники и рейтинг — MafgameStat</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0b0b0e; --panel:#131318; --panel2:#17171d;
@@ -197,6 +197,18 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 .dv-crumb i{color:#39404c;font-style:normal}
 .dv-crumb span{color:#5f6675}
 </style>
+<style id="dv2">
+  /* v2.0 (26.10.2026): переезд в стиль DOVOD поверх старой разметки */
+  :root{--bg:#05060a;--panel:#0b0d14;--panel2:#11141d;--accent:#26e0ff;--gold:#26e0ff;--gold-hi:#8ff3ff;--ink:#eef3fb;--mut:#a4adbd;--dim:#79808f;--hairline:rgba(255,255,255,.10)}
+  body{font-family:'Inter',-apple-system,system-ui,sans-serif!important;background:var(--bg)}
+  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(700px 420px at 0% 10%,color-mix(in srgb,var(--accent) 9%,transparent),transparent 60%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px) 0 0/100% 46px,linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) 0 0/46px 100%}
+  [style*="Playfair"],.meter .val,.ttl .nm,h1,h2{font-family:'Unbounded',sans-serif!important;letter-spacing:-.01em}
+  .ttl .nm{text-transform:uppercase;font-weight:900}
+  .hero,.scard,.panel,.card,table{border-radius:4px!important}
+  .hero{clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));border-color:color-mix(in srgb,var(--accent) 32%,transparent)!important}
+  .scard{border-left:3px solid color-mix(in srgb,var(--accent) 70%,transparent)}
+  .scard .k,.legend,th{font-family:'JetBrains Mono',monospace!important;letter-spacing:.12em}
+</style>
 </head>
 <body>
 <nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><span>Участники</span></nav>
@@ -214,8 +226,9 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 <script>
 const qs=new URLSearchParams(location.search);
 const T=qs.get('t')||'766';
-document.getElementById('back').href='tournament.html?t='+T;
 const REG=(window.TOURNAMENTS_DB?.tournaments||[]).find(x=>x.id===T)||{};
+if(REG.accent||REG.theme==='dovod'){document.documentElement.style.setProperty('--accent',REG.accent||'#26e0ff');document.documentElement.style.setProperty('--gold',REG.accent||'#26e0ff');document.documentElement.style.setProperty('--gold-hi',REG.accent2||REG.accent||'#8ff3ff');}
+document.getElementById('back').href=REG.page||(REG.theme==='dovod'?'tournaments.html':'tournament.html?t='+T);if(!REG.page&&REG.theme==='dovod')document.getElementById('back').textContent='← все турниры';
 if(REG.accent)document.documentElement.style.setProperty('--accent',REG.accent);
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}

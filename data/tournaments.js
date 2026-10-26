@@ -15,10 +15,93 @@
 // MafgameStat | tournaments.js | v3.6 | 2026-10-16 | 692: studio:true — студия аналитики (для зрителей) в смотровой watch692.html#studio
 // MafgameStat | tournaments.js | v3.7 | 2026-10-18 | 692 Central Cup -> finished (чемпион Korolevich 13.59, aptah 13.32, TOPS 12.74, DOVOD 12.64)
 // MafgameStat | tournaments.js | v3.8 | 2026-10-26 | +645 White Mafia Best Player — финал серийника (Вроцлав 7–8.11, постер, t645, состав предварительный) + 643 Wroclaw Mafia Open (собирается, участники + ELO)
+// MafgameStat | tournaments.js | v3.9 | 2026-10-26 | 645 -> страница на движке DOVOD (t645 v2.0, один стол) + watch645; 645/643 theme dovod с акцентом White Mafia (accent/accent2/artPaper — новые поля для tournaments.html v4.0)
 window.TOURNAMENTS_DB = {
   "tournaments": [
-{"id": "645", "theme": "poster", "art": "assets/wroclaw645_card.jpg", "artRatio": "16 / 9", "page": "t645.html", "name": "White Mafia Best Player 2026 — финал", "dates": "7–8 ноября 2026", "city": "Вроцлав", "country": "Польша", "players": 12, "days": 2, "stars": 2, "prize": "600€", "status": "upcoming", "phase": 3, "statusLabel": "Финал серийника · 12 финалистов (состав предварительный)", "eloAvg": 1079, "eloN": 7, "eloTotal": 12, "organizer": "White Mafia Club Wroclaw · орг и главный судья Кирпич", "format": "18 игр, 12 финалистов с пропусками; отбор — топ-2 из 6 серий", "mafgame": "https://mafgame.org/tournaments/645/view", "note": "Состав предварительный: топ-2 каждой из 6 отборочных серий по протоколам mafgame. Официально утвердит организатор; замены — 3-е место той же серии, затем 3-и места по сумме доп. баллов.", "sections": [{"href": "t645.html", "title": "Страница финала", "desc": "12 финалистов, резерв, результаты 6 серий, регламент и призы"}, {"href": "participants.html?t=645", "title": "Финалисты и рейтинг", "desc": "ELO markery и место в рейтинге mafgame 2026"}], "start": "2026-11-07"},
-{"id": "643", "name": "Wroclaw Mafia Open 2026", "dates": "21–22 ноября 2026", "city": "Вроцлав", "country": "Польша", "players": 30, "days": 2, "stars": 3, "prize": "", "status": "gathering", "phase": 3, "statusLabel": "Собирается · 12 в списке + 1 заявка", "eloAvg": 1082, "eloN": 9, "eloTotal": 13, "organizer": "White Mafia Club Wroclaw · орг Кирпич", "mafgame": "https://mafgame.org/tournaments/643/view", "note": "Ожидается 30 участников, взнос 110 €. В списке — записанные и заявки (снимок 26.10). Страница турнира откроется после рассадки.", "sections": [{"href": "participants.html?t=643", "title": "Участники и рейтинг", "desc": "записанные и заявки + ELO markery (снимок 26.10)"}, {"soon": true, "title": "Страница турнира", "desc": "рассадка, сила столов, live-результаты"}], "start": "2026-11-21"},
+    {
+      "id": "645",
+      "theme": "dovod",
+      "art": "assets/wroclaw645_card.jpg",
+      "artRatio": "16 / 9",
+      "page": "t645.html",
+      "name": "White Mafia Best Player 2026 — финал",
+      "dates": "7–8 ноября 2026",
+      "city": "Вроцлав",
+      "country": "Польша",
+      "players": 12,
+      "days": 2,
+      "stars": 2,
+      "prize": "600€",
+      "status": "upcoming",
+      "phase": 3,
+      "statusLabel": "Финал серийника · 12 финалистов (состав предварительный) · 18 игр, один стол",
+      "eloAvg": 1079,
+      "eloN": 7,
+      "eloTotal": 12,
+      "organizer": "White Mafia Club Wroclaw · орг и главный судья Кирпич",
+            "mafgame": "https://mafgame.org/tournaments/645/view",
+      "note": "Состав предварительный: топ-2 каждой из 6 отборочных серий по протоколам mafgame. Официально утвердит организатор; замены — 3-е место той же серии, затем 3-и места по сумме доп. баллов.",
+      "sections": [
+        {
+          "href": "t645.html",
+          "title": "Страница финала",
+          "desc": "обзор, отбор и резерв, рассадка, таблица, игры, роли"
+        },
+        {
+          "href": "watch645.html",
+          "title": "▶ Смотровая · эфир",
+          "desc": "стол крупно, live-таблица, следить за игроком"
+        },
+        {
+          "href": "participants.html?t=645",
+          "title": "Финалисты и рейтинг",
+          "desc": "ELO markery и место в рейтинге mafgame 2026"
+        }
+      ],
+      "start": "2026-11-07",
+      "watch": "watch645.html",
+      "accent": "#ece7dd",
+      "accent2": "#f4f1ea",
+      "artPaper": "#efeeec",
+      "posterTitle": "White Mafia|Best Player"
+    },
+    {
+      "id": "643",
+      "name": "Wroclaw Mafia Open 2026",
+      "dates": "21–22 ноября 2026",
+      "city": "Вроцлав",
+      "country": "Польша",
+      "players": 30,
+      "days": 2,
+      "stars": 3,
+      "prize": "",
+      "status": "gathering",
+      "phase": 3,
+      "statusLabel": "Собирается · 12 в списке + 1 заявка",
+      "eloAvg": 1082,
+      "eloN": 9,
+      "eloTotal": 13,
+      "organizer": "White Mafia Club Wroclaw · орг Кирпич",
+      "mafgame": "https://mafgame.org/tournaments/643/view",
+      "note": "Ожидается 30 участников, взнос 110 €. В списке — записанные и заявки (снимок 26.10). Страница турнира откроется после рассадки.",
+      "sections": [
+        {
+          "href": "participants.html?t=643",
+          "title": "Участники и рейтинг",
+          "desc": "записанные и заявки + ELO markery (снимок 26.10)"
+        },
+        {
+          "soon": true,
+          "title": "Страница турнира",
+          "desc": "рассадка, сила столов, live-результаты"
+        }
+      ],
+      "start": "2026-11-21",
+      "accent": "#ece7dd",
+      "accent2": "#f4f1ea",
+      "posterTitle": "Wroclaw|Mafia Open",
+      "theme": "dovod"
+    },
     {
       "id": "673",
       "theme": "dovod",
@@ -92,9 +175,21 @@ window.TOURNAMENTS_DB = {
       "note": "Чемпион — Korolevich (13.59), 2-е aptah (13.32), 3-е TOPS (12.74), 4-е DOVOD (12.64). Протоколы 17 игр заморожены и сверены с официальной таблицей mafgame.",
       "champion": "Korolevich",
       "sections": [
-        {"href": "t692.html", "title": "Страница турнира", "desc": "Обзор · Моё · Игроки · Столы · Результаты — рассадка, сила столов, live-таблица"},
-        {"href": "watch692.html", "title": "▶ Смотровая · все эфиры", "desc": "Три стола в одном окне, «следить за игроком»"},
-        {"href": "participants.html?t=692", "title": "Участники и рейтинг", "desc": "33 игрока + ELO markery (снимок 15.10)"}
+        {
+          "href": "t692.html",
+          "title": "Страница турнира",
+          "desc": "Обзор · Моё · Игроки · Столы · Результаты — рассадка, сила столов, live-таблица"
+        },
+        {
+          "href": "watch692.html",
+          "title": "▶ Смотровая · все эфиры",
+          "desc": "Три стола в одном окне, «следить за игроком»"
+        },
+        {
+          "href": "participants.html?t=692",
+          "title": "Участники и рейтинг",
+          "desc": "33 игрока + ELO markery (снимок 15.10)"
+        }
       ],
       "start": "2026-10-17"
     },

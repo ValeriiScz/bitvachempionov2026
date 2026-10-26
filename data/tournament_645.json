@@ -1,0 +1,35 @@
+{
+ "tournament_id": "645",
+ "tournament_name": "White Mafia Best Player 2026 — финал",
+ "short": "WMBP финал 2026",
+ "date": "2026-11-07 — 2026-11-08",
+ "location": "Вроцлав, Польша",
+ "club": "White Mafia Club Wroclaw",
+ "organizer": "White Mafia Club Wroclaw · орг и главный судья Кирпич",
+ "players_total": 12,
+ "days": 2,
+ "fee_eur": 80,
+ "stars": 2,
+ "prize_eur": 600,
+ "prizes": {
+  "1": 250,
+  "2": 150,
+  "3": 100
+ },
+ "format": "Финал серийника: 18 игр за одним столом, 12 финалистов (в каждой игре двое отдыхают), одна стадия; призы 250/150/100 € + MVP 100 €",
+ "closed": false,
+ "in_progress": false,
+ "live_from": "2026-11-07",
+ "live_to": "2026-11-08",
+ "upcoming": true,
+ "games_played": 0,
+ "games_total": 18,
+ "final_coef": 1,
+ "accent": "#ece7dd",
+ "chief_referee": "Кирпич",
+ "referees": [
+  "Кирпич"
+ ],
+ "start_iso": "2026-11-07T10:00:00+01:00",
+ "note": "Состав предварительный (топ-2 шести серий); время старта на mafgame не указано."
+}

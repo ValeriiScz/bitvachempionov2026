@@ -1,0 +1,33 @@
+{
+ "players": {
+  "Landing": {
+   "global": 1028,
+   "tier": "C"
+  },
+  "Jane": {
+   "global": 1182,
+   "tier": "B"
+  },
+  "Котяра": {
+   "global": 970,
+   "tier": "D"
+  },
+  "aptah": {
+   "global": 1085,
+   "tier": "B"
+  },
+  "Буржуй": {
+   "global": 1218,
+   "tier": "A"
+  },
+  "Не Злая": {
+   "global": 1124,
+   "tier": "B"
+  },
+  "Tapok": {
+   "global": 947,
+   "tier": "D"
+  }
+ },
+ "snapshot": "2026-10-26"
+}

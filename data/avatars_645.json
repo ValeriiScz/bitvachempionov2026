@@ -1,0 +1,27 @@
+{
+ "avatars": {
+  "Landing": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1481/b033e4506014e23586818760a88ede88a7b79d3d.png",
+  "Jane": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_288/4082774cd0a41a2bd34928ce499bbdf88824bb66.png",
+  "Sinful": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_279/b369ef1106532fec5304617d42ec48ca4478639f.png",
+  "POTAP": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2756/1ba7b2a5edd7a2d3a18eaddc763d10adfe42e757.png",
+  "Котяра": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1054/843cda596ff0716db4f8d34730ae406b90e64471.png",
+  "aptah": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1358/236f3274a9d37c8006c6d3e18edd9b8071d0ce48.png",
+  "=Dракончик": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2605/ad89f1d4ad8523e897d6e9036b36d25f99f4e1f4.png",
+  "Fistashka": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2812/8a8f7e9d6babf226ad583b587039724f0db35243.png",
+  "Буржуй": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_287/3ddee352574f767cc2ee00cb7690d518c58915a2.png",
+  "Дзю": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1154/2ea1437974ebd88f51499a44661c155812c28327.png",
+  "Не Злая": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_152/5ebb58af65c0e6171372d5a0391a6805c35a8a8b.png",
+  "Tapok": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_561/3b6199eba3053f42603cffa3d110a2a0a0a47d18.png"
+ },
+ "judges": {},
+ "duty": null,
+ "commentator": null,
+ "referees": [
+  {
+   "name": "Кирпич",
+   "real": "Aliaksandra",
+   "avatar": "",
+   "main": true
+  }
+ ]
+}
