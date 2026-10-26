@@ -14,7 +14,7 @@
    winner стола берётся из официального поля results mafgame (red_win/black_win), НЕ из очков.
    НЕ ломать защиту снимка — это ключевая гарантия «ничего не терять».
    ============================================================================ */
-// MafgameStat · data/live.js · v2.7 · 2026-10-11 · скрытые результаты: исход из game_outcomes + плашка «таблица по победам, неофициально» · v2.6 · 2026-10-09 · имя стадии и коэф. финала из part_data платформы (МД-673) · v2.2 · 2026-09-10 · окно live по датам: tournament_{id}.json live_from/live_to (Прага) включают подтяжку с mafgame автоматически в дни турнира (ЧМ-710: 12–13.09), без ручного in_progress; window.__forceLocal — отладочный выключатель · v2.1 · 2026-08-23 · коэффициент финала (tournament_{id}.json final_coef, напр. 1.3): в протоколах mafgame сырые баллы, в офиц. таблицу баллы финальных игр входят с коэффициентом — live-таблица финала занижала Σ (урок 694; уточнение урока 702: коэффициент действует на ВСЕ баллы финала — WPTS/допы/штрафы/ЛХ/Ci) · v2.0 · 2026-08-22 · CEC-694 (финал серийника, Прага): стадия 1 всегда «Квалификация», стадия 2 — «Финал»; стадии 3+ (пустые заглушки 15 серий в данных mafgame) игнорируются · v1.9 · 2026-07-18 · фикс дня 1 ЧЕ: пока в снимке одна стадия, она звалась «Игры» и ce634 группировал её как «Финал» — для 634 стадия 1 всегда «Квалификация» · v1.8 · 2026-07-16 · ЧЕ-634: стадии Квалификация/Полуфинал/Финал (3 стадии) + ЗАЩИТА «держим последний топ-снимок» (localStorage): не затираем хорошие данные пустыми/обнулёнными/пропавшими (snapScore/notRegression); live-фейл → отдаём сохранённый снимок. · v1.7 · 2026-07-04 · кнопка «Обновить» перенесена в левый нижний угол (не налезает на «Наверх»);  · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
+// MafgameStat · data/live.js · v3.0 · 2026-10-26 · тихий live: liveWatch(id,cb) опрашивает результаты каждые 15 с без перезагрузки страницы (страница ставит window.__liveSoft=1); запрос идёт через кэширующий прокси /api/mg (CDN 10 с), при сбое — старый rewrite /mafgame/ · v2.7 · 2026-10-11 · скрытые результаты: исход из game_outcomes + плашка «таблица по победам, неофициально» · v2.6 · 2026-10-09 · имя стадии и коэф. финала из part_data платформы (МД-673) · v2.2 · 2026-09-10 · окно live по датам: tournament_{id}.json live_from/live_to (Прага) включают подтяжку с mafgame автоматически в дни турнира (ЧМ-710: 12–13.09), без ручного in_progress; window.__forceLocal — отладочный выключатель · v2.1 · 2026-08-23 · коэффициент финала (tournament_{id}.json final_coef, напр. 1.3): в протоколах mafgame сырые баллы, в офиц. таблицу баллы финальных игр входят с коэффициентом — live-таблица финала занижала Σ (урок 694; уточнение урока 702: коэффициент действует на ВСЕ баллы финала — WPTS/допы/штрафы/ЛХ/Ci) · v2.0 · 2026-08-22 · CEC-694 (финал серийника, Прага): стадия 1 всегда «Квалификация», стадия 2 — «Финал»; стадии 3+ (пустые заглушки 15 серий в данных mafgame) игнорируются · v1.9 · 2026-07-18 · фикс дня 1 ЧЕ: пока в снимке одна стадия, она звалась «Игры» и ce634 группировал её как «Финал» — для 634 стадия 1 всегда «Квалификация» · v1.8 · 2026-07-16 · ЧЕ-634: стадии Квалификация/Полуфинал/Финал (3 стадии) + ЗАЩИТА «держим последний топ-снимок» (localStorage): не затираем хорошие данные пустыми/обнулёнными/пропавшими (snapScore/notRegression); live-фейл → отдаём сохранённый снимок. · v1.7 · 2026-07-04 · кнопка «Обновить» перенесена в левый нижний угол (не налезает на «Наверх»);  · 2026-06-25 · пропуск пустых слотов/столов/игр (финал до посева не плодит «null»-игрока, ломавшего карточки); winner стола берётся из g.results (стадия-игра-стол → black/red); фикс парных турниров, где у победителей game_points=0 → раньше winner оставался unknown и таблицы не считались. v1.4 · 2026-06-19 · LIVE для идущих турниров (tournament_{t}.json in_progress:true): подтяжка game_results с mafgame через прокси /mafgame/* при каждом открытии + авто-reload 10 мин + плавающая кнопка «Обновить». Завершённые/скоро — из локальных JSON (заморожены). Generic-парсер: стадия 2 = Финал.
 window.normRole = function(r){
   if(r==null) return null;
   const map={'citizen':'Citizen','sheriff':'Sheriff','mafia':'Mafia','don':'Don',
@@ -182,7 +182,7 @@ function injectRefresh(){
     b.id='__refbtn'; b.textContent='⟳ Обновить';
     b.title='Подтянуть свежие результаты с mafgame';
     b.style.cssText='position:fixed;left:16px;bottom:16px;z-index:9999;padding:11px 16px;border-radius:24px;border:1px solid #ffb84d;background:#1a1d2e;color:#ffb84d;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);';
-    b.onclick=()=>{b.textContent='Обновляю…';location.reload();};
+    b.onclick=()=>{ b.textContent='Обновляю…'; if(window.__liveTick) window.__liveTick(true); else location.reload(); };
     document.body.appendChild(b);
   };
   if(document.body) add(); else document.addEventListener('DOMContentLoaded',add);
@@ -211,20 +211,20 @@ window.loadGames = async function(t){
     /* v2.2: окно live по датам (live_from/live_to, Прага) — включается само в дни турнира, не держим in_progress заранее */
     if(!inprog&&tj.live_from&&!tj.closed){const now=Date.now(),a=new Date(tj.live_from+'T00:00:00+02:00').getTime(),b=new Date((tj.live_to||tj.live_from)+'T23:59:59+02:00').getTime();if(now>=a&&now<=b)inprog=true;}
     if(inprog&&window.__forceLocal)inprog=false;}}catch(e){}
+  window.__liveOn=inprog;
   const LSK='mgs_lastgood_'+t;
   let saved=null;
   try{ const raw=localStorage.getItem(LSK); if(raw) saved=JSON.parse(raw); }catch(e){}
   if(inprog){
     try{
-      const r=await fetch('/mafgame/tournaments/'+t+'/game_results',{cache:'no-store'});
-      if(r.ok){
-        const html=await r.text();
+      const html=await mgFetch('tournaments/'+t+'/game_results');
+      if(html){
         const m=html.match(/data-page="([^"]+)"/);
         if(m){
           const dp=JSON.parse(m[1].replace(/&quot;/g,'"').replace(/&amp;/g,'&').replace(/&#039;/g,"'"));
           const conv=convertInertia(dp.props&&dp.props.games, t, fcoef);
           if(conv){
-            injectRefresh(); if(!window._autoref){window._autoref=1;setTimeout(()=>location.reload(),120000);/* v2.3: было 10 мин — на ЧМ игроки ждали результат слишком долго */}
+            injectRefresh(); if(!window._autoref&&!window.__liveSoft){window._autoref=1;setTimeout(()=>location.reload(),120000);/* v2.3: старые страницы без liveWatch — перезагрузка раз в 2 мин */}
             // защита: принимаем свежий снимок только если он НЕ регресс относительно последнего хорошего
             if(notRegression(conv, saved)){
               try{ localStorage.setItem(LSK, JSON.stringify(conv)); }catch(e){}
@@ -251,4 +251,30 @@ window.loadGames = async function(t){
     }
   }catch(e){console.warn('нет локального файла игр для '+t,e);}
   return saved||null;
+};
+
+/* v3.0: запрос к mafgame — сначала кэширующий прокси /api/mg (CDN 10 с), при сбое — прямой rewrite /mafgame/ */
+async function mgFetch(path){
+  try{const r=await fetch('/api/mg?p='+encodeURIComponent(path));if(r.ok){const h=await r.text();if(h.indexOf('data-page=')>=0)return h;}}catch(e){}
+  try{const r=await fetch('/mafgame/'+path,{cache:'no-store'});if(r.ok)return await r.text();}catch(e){}
+  return null;
+}
+window.mgFetch=mgFetch;
+/* v3.0: тихий live. Страница вызывает liveWatch(id, cb) после первой загрузки. Пока идёт окно турнира
+   (window.__liveOn), раз в ms (по умолчанию 15 с) перечитываем игры; изменилось — cb(games).
+   Вкладка в фоне не опрашивает. Кнопка «⟳» внизу слева — опрос сразу. */
+window.liveWatch=function(t,cb,ms,init){
+  ms=ms||15000;let last=null,busy=false;
+  const sig=g=>!g||!g.games?'':g.games.map(x=>x.tables.map(tb=>tb.winner+':'+tb.seats.length+':'+tb.seats.reduce((a,s)=>a+(+s.sigma||0),0).toFixed(2)).join(',')).join('|');
+  const mark=()=>{const b=document.getElementById('__refbtn');if(b){const d=new Date();b.textContent='⟳ live · '+d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});}};
+  const tick=async(force)=>{
+    if(busy||(!force&&document.hidden)||!window.__liveOn)return;busy=true;
+    try{const g=await window.loadGames(t);const s=sig(g);if(g&&s&&s!==last){last=s;cb(g);}mark();}catch(e){}
+    busy=false;
+  };
+  if(init&&init.games)last=sig(init);
+  window.__liveTick=tick;
+  tick(false);
+  setInterval(()=>tick(false),ms);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick(false);});
 };

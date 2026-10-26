@@ -7,13 +7,24 @@
 # Вручную: Actions → «Пересбор гонки за дюжину» → Run workflow. Правка этого файла или любого скрипта модели тоже запускает прогон.
 # Без секрета RACE_PASS шаг модели останавливается (пароль в публичный репозиторий не кладём).
 # Отменённые турниры (cancelled=true в calendar.html, ставит refresh_mafgame v1.3 каждый прогон) модель в будущее не берёт; токен деплоя без actions:write — внеплановый пересбор запускается правкой этого файла (19.10.2026: отмена #767; 25.10.2026: после MCL Prague/05).
+# 26.10.2026 · ТРИ РЕЖИМА (раньше любой прогон качал всё заново и шёл 25–29 мин; модель сама — ~4 мин):
+#   быстрый  — без скачивания, модель на уже лежащих в репо данных (~5 мин): правка файлов модели/этого файла (ручные вводные), Run workflow с mode=fast;
+#   добор    — качаем только новое (новые закрытые турниры, изменившиеся рейтинги, свежие серии) + модель (~8–10 мин): каждый день 04:30 UTC и пн 15:00 UTC;
+#   полный   — всё заново (FULL=1) + модель (~25 мин): вс 23:00 UTC и Run workflow с mode=full.
 name: Пересбор гонки за дюжину
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'fast — только модель; incremental — добор новых данных; full — скачать всё заново'
+        type: choice
+        options: [fast, incremental, full]
+        default: fast
   schedule:
     - cron: '0 23 * * 0'
     - cron: '0 15 * * 1'
+    - cron: '30 4 * * *'
   push:
     paths:
       - '.github/workflows/rebuild-race.yml'
@@ -43,9 +54,23 @@ jobs:
           echo "секрет на месте"
       - name: Зависимости
         run: pip install --quiet numpy cryptography
+      - name: Режим
+        id: mode
+        run: |
+          M=fast
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            if [ "${{ github.event.schedule }}" = "0 23 * * 0" ]; then M=full; else M=incremental; fi
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then M="${{ github.event.inputs.mode }}"; fi
+          echo "mode=$M" >> $GITHUB_OUTPUT; echo "режим: $M"; echo "### режим: $M" >> $GITHUB_STEP_SUMMARY
       - name: Леджеры рейтинга
+        if: steps.mode.outputs.mode != 'fast'
+        env:
+          FULL: ${{ steps.mode.outputs.mode == 'full' && '1' || '0' }}
         run: python .github/scripts/fetch_ledgers.py
       - name: Серийники
+        if: steps.mode.outputs.mode != 'fast'
+        env:
+          FULL: ${{ steps.mode.outputs.mode == 'full' && '1' || '0' }}
         run: python .github/scripts/fetch_series.py
       - name: Модель → vault/race.json, data/series2026.js, sw.js
         env:
@@ -74,7 +99,7 @@ jobs:
             sed -i "s/const CACHE_VERSION = 'dovod-v$V';/const CACHE_VERSION = 'dovod-v$NEW';/" sw.js
             git add $FILES $DIRS sw.js calendar.html data/meta.js
             if git diff --cached --quiet; then echo "изменений нет"; exit 0; fi
-            git commit -m "гонка за дюжину: пересбор $(date -u +%d.%m.%Y) (леджеры, серии, модель, sw v$NEW)"
+            git commit -m "гонка за дюжину: пересбор $(date -u +%d.%m.%Y) · ${{ steps.mode.outputs.mode }} (sw v$NEW)"
             if git push origin main; then echo "запушено (попытка $i)"; exit 0; fi
             echo "push отклонён — повтор"; git reset --hard HEAD~1 || true
           done

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-fetch_series · v1.0 · 2026-09-14
+fetch_series · v1.1 · 2026-10-26 (ИНКРЕМЕНТАЛЬНО по умолчанию: листинг берём у fetch_ledgers, если он свежий; завершённые серийники и серии старше 14 дн. с результатами — из прошлого снимка; FULL=1 — всё заново) · v1.0 · 2026-09-14
 Назначение: снимки серийников mafgame для исследования «Гонка за золотую дюжину» —
 регламент из описания родителя + результаты всех серий (или составы будущих серий).
 Работает в GitHub Actions (прямой доступ к mafgame.org).
@@ -24,6 +24,8 @@ OUT    = 'data/research/series'
 TODAY  = datetime.date.today().isoformat()
 UA     = 'dovod-mafia.com research fetch (github actions)'
 errors = []
+FULL   = os.environ.get('FULL') == '1'
+OLDCUT = (datetime.date.today() - datetime.timedelta(days=14)).isoformat()
 def log(m): print(m, flush=True)
 
 def fetch_page(path):
@@ -55,7 +57,16 @@ def strip(h):
 
 # ── 3 · листинги → серийники ─────────────────────────────────────────────────
 listing = {}
-for y in YEARS:
+_lm = None
+try:
+    _lm = json.load(open('data/research/ledger/meta.json', encoding='utf-8'))
+except Exception: pass
+if _lm and _lm.get('snapshot') == TODAY:
+    _lt = json.load(open('data/research/ledger/tournaments.json', encoding='utf-8'))
+    for y in YEARS:
+        for t in _lt.get(str(y)) or []: listing[int(t['id'])] = dict(t, _year=y)
+    log('листинг: взят у fetch_ledgers (снимок %s)' % TODAY)
+for y in ([] if listing else YEARS):
     page = 1
     while True:
         p = safe('/tournaments?s=all&y=%d&page=%d' % (y, page))
@@ -90,8 +101,19 @@ def rows_from_results(p):
 
 os.makedirs(OUT, exist_ok=True)
 index = []
+def _prev(year, pid):
+    if FULL: return None
+    try: return json.load(open(os.path.join(OUT, '%d_%d.json' % (year, pid)), encoding='utf-8'))
+    except Exception: return None
 for par in sorted(parents, key=lambda t: (t['_year'], t['start_date'])):
     pid = int(par['id'])
+    old = _prev(par['_year'], pid)
+    if old and old.get('final_rows') and all(x.get('rows') for x in old.get('series') or []) and (old.get('series') or [{}])[-1].get('start_date', '9999') < OLDCUT:
+        played = sum(1 for x in old['series'] if x['rows'])
+        index.append({'file': '%d_%d.json' % (par['_year'], pid), 'id': pid, 'year': par['_year'], 'name': par['name'], 'start_date': par['start_date'],
+                      'stars': par.get('no_of_stars'), 'series': len(old['series']), 'played': played, 'final': True})
+        log('серийник %d — завершён, из прошлого снимка' % pid); continue
+    oldk = {x['id']: x for x in (old or {}).get('series') or []}
     log('серийник %d %s (%s)' % (pid, par['name'], par['start_date']))
     pv = safe('/tournaments/%d/results' % pid) or {}
     tour = pv.get('tournament') or {}
@@ -106,6 +128,8 @@ for par in sorted(parents, key=lambda t: (t['_year'], t['start_date'])):
         kid = int(k['id'])
         s = {'id': kid, 'name': k['name'], 'start_date': k['start_date'], 'city': k.get('city'), 'country': k.get('country'),
              'stars': k.get('no_of_stars'), 'expected': k.get('expected_participants'), 'played': None, 'rows': [], 'regs': []}
+        if kid in oldk and oldk[kid].get('rows') and k['start_date'] < OLDCUT:
+            rec['series'].append(oldk[kid]); continue
         if k['start_date'] <= TODAY:
             p = safe('/tournaments/%d/results' % kid) or {}
             rows, calc = rows_from_results(p)

@@ -855,6 +855,7 @@ const SECTIONS=[]; NAV.forEach(g=>g.items.forEach(it=>SECTIONS.push(it)));
 
 let D={}, cur='overview';
 
+window.__liveSoft=1;
 Promise.all([
   fetch('data/participants_'+CFG.id+'.json').then(r=>r.ok?r.json():null).catch(()=>null),
   fetch('data/tournament_'+CFG.id+'.json').then(r=>r.ok?r.json():{}).catch(()=>({})),
@@ -872,6 +873,9 @@ Promise.all([
   D.judges=(A&&A.judges)||{};D.refs=(A&&A.referees)||[];D.duty=A&&A.duty;D.commentator=A&&A.commentator;D.avatars=(A&&A.avatars)||{};D.elo=(E&&E.players)||{};D.skip=S||{};D.games=(G&&G.games)||[];
   D.realGames=D.games;D.realPlayed=(T.games_played||0);D.demo=false;
   computeSeating();computeStats();applyLocks();buildNav();buildTabbar();renderTop();
+  /* v3 (26.10): тихий live — результаты каждые 15 с без перезагрузки страницы */
+  if(window.liveWatch)liveWatch(CFG.id,g=>{D.realGames=g.games||[];if(!D.demo)D.games=D.realGames;D.realPlayed=g.games_played||D.realPlayed;
+    computeSeating();computeStats();applyLocks();buildNav();buildTabbar();renderTop();softRender();},15000,{games:D.realGames});
   show((location.hash||'').replace('#','')||'overview');
   const _sb=document.getElementById('shareBtnTop');if(_sb)_sb.onclick=sharePage;
 }).catch(()=>{document.getElementById('view').innerHTML='<div class="stub"><div class="si">&#9888;</div><h3>Нет данных</h3><p>Не удалось загрузить данные турнира.</p></div>';});
@@ -1327,6 +1331,10 @@ async function paintSched(){
 const JD_HASH='2ff1e3f51de1d12a2ec8f86fe71b135c817c77956160e7ee8d703e56a7788ae3'; /* sha256 пароля раздела «Судьи» (выдаёт Валерий) */
 function jdUnlocked(){try{return localStorage.getItem(CFG.ls+'jd')==='ok';}catch(e){return false}}
 async function jdTry(){const v=(document.getElementById('jdPw')||{}).value||'';const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v.trim()));const hex=[...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');if(hex===JD_HASH){try{localStorage.setItem(CFG.ls+'jd','ok');}catch(e){}show('judges');}else{const m=document.getElementById('jdMsg');if(m)m.textContent='Не подошло. Пароль знает главный судья и организаторы.';}}
+/* v3 (26.10): перерисовать текущий раздел на месте (без прокрутки наверх); если человек печатает/выбирает — не мешаем */
+function softRender(){const a=document.activeElement;if(a&&/^(INPUT|SELECT|TEXTAREA)$/.test(a.tagName))return;
+  const s=SECTIONS.find(x=>x.id===cur);if(!s||s.locked){show('overview');return;}
+  const v=document.getElementById('view');if(!v)return;const y=window.scrollY;v.innerHTML=(RENDER[cur]?RENDER[cur]():stub(cur));afterRender(cur);window.scrollTo(0,y);}
 function afterRender(id){if(id==='sched')paintSched();else if(id==='cards')initCards();else if(id==='strength')paintStrength();else if(id==='luck')paintLuck();else if(id==='roster')paintRoster();else if(id==='seating')initSeating();else if(id==='my')initMy();else if(id==='together')initTogether();else if(id==='judges'){if(jdUnlocked())paintJudges();else{const i=document.getElementById('jdPw');if(i)i.onkeydown=e=>{if(e.key==='Enter')jdTry();};}}else if(id==='stages'||id==='games'||id==='roles')afterStats(id);}
 
 /* roster */

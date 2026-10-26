@@ -361,7 +361,7 @@ function share(){const url=location.origin+location.pathname;const title='Смо
   if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Ссылка скопирована'),()=>toast(url));else toast(url);}
 load(true).then(()=>renderAll(true)).catch(()=>{document.getElementById('status').textContent='Не удалось загрузить данные турнира';});
 /* тихий опрос: новые протоколы и переход к следующей игре — без перезагрузки страницы (видео не рвётся) */
-setInterval(()=>{if(document.hidden)return;const before=D.cur;load(false).then(()=>{renderStatus();renderTabs();if(S.view===before)S.view=D.cur;renderSeats();renderFollow();renderTop();renderStage();}).catch(()=>{});},60000);
+setInterval(()=>{if(document.hidden)return;const before=D.cur;load(false).then(()=>{renderStatus();renderTabs();if(S.view===before)S.view=D.cur;renderSeats();renderFollow();renderTop();renderStage();}).catch(()=>{});},15000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)load(false).then(()=>renderAll()).catch(()=>{});});
 </script>
 </body>

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-fetch_ledgers · v1.0 · 2026-09-14
+fetch_ledgers · v1.1 · 2026-10-26 (ИНКРЕМЕНТАЛЬНО по умолчанию: прошлые годы листинга, старые таблицы баллов и леджеры без изменений берём из прошлого снимка; FULL=1 — всё заново) · v1.0 · 2026-09-14
 Назначение: разовая (и повторяемая) выкачка данных рейтинга mafgame для исследования
 «Гонка за золотую дюжину»: рейтинги по годам, листинги турниров, леджеры баллов игроков,
 таблицы баллов рейтинговых турниров. Работает в GitHub Actions (прямой доступ к mafgame.org).
@@ -33,6 +33,17 @@ OUT        = 'data/research/ledger'
 TODAY      = datetime.date.today().isoformat()
 UA         = 'dovod-mafia.com research fetch (github actions)'
 errors     = []
+FULL       = os.environ.get('FULL') == '1'
+CUR_YEAR   = datetime.date.today().year
+RECENT     = (datetime.date.today() - datetime.timedelta(days=30)).isoformat()   # таблицы баллов турниров моложе 30 дн. перечитываем всегда
+def _old(name):
+    try:
+        with open(os.path.join(OUT, name), encoding='utf-8') as f: return json.load(f)
+    except Exception: return None
+OLD = {} if FULL else {n: _old(n + '.json') for n in ('ratings', 'tournaments', 'ledgers', 'points')}
+if not FULL and not all(OLD.values()):
+    OLD = {}; FULL = True
+print('режим: %s' % ('ПОЛНЫЙ' if FULL else 'инкрементальный'), flush=True)
 
 def log(m): print(m, flush=True)
 
@@ -94,6 +105,8 @@ for y in YEARS:
 # ── 4 · листинги турниров ─────────────────────────────────────────────────────
 tournaments = {}
 for y in YEARS:
+    if not FULL and y < CUR_YEAR and OLD['tournaments'].get(str(y)):
+        tournaments[str(y)] = OLD['tournaments'][str(y)]; log('турниры %d: из прошлого снимка (%d)' % (y, len(tournaments[str(y)]))); continue
     rows, page = {}, 1
     while True:
         p = safe('/tournaments?s=all&y=%d&page=%d' % (y, page))
@@ -114,7 +127,17 @@ for y in YEARS:
         if r['uid'] and r['uid'] not in uids: uids.append(r['uid'])
 log('леджеры: уникальных игроков %d' % len(uids))
 ledgers = {}
+# инкремент: леджер перечитываем, только если игрок новый или у него изменился рейтинг хоть в одном году
+def _rsig(src, uid):
+    out = []
+    for y in YEARS:
+        for r in (src or {}).get(str(y)) or []:
+            if r.get('uid') == uid: out.append((y, r.get('rating'), r.get('points'), r.get('total_points')))
+    return out
+skip = 0
 for i, uid in enumerate(uids, 1):
+    if not FULL and str(uid) in OLD['ledgers'] and _rsig(ratings, uid) == _rsig(OLD['ratings'], uid):
+        ledgers[str(uid)] = OLD['ledgers'][str(uid)]; skip += 1; continue
     p = safe('/user/%d/view' % uid)
     if not p: continue
     ud = p.get('user_data') or {}
@@ -127,6 +150,7 @@ for i, uid in enumerate(uids, 1):
     city = ud.get('user_city') or {}
     ledgers[str(uid)] = {'nick': ud.get('nickname'), 'country': city.get('country'), 'city': city.get('city'), 'rp': rp}
     if i % 25 == 0: log('  леджеры %d/%d' % (i, len(uids)))
+log('леджеры: из прошлого снимка %d, перечитано %d' % (skip, len(ledgers) - skip))
 
 # ── 6 · таблицы баллов рейтинговых турниров ───────────────────────────────────
 def gives_points(t):
@@ -139,7 +163,11 @@ for y in YEARS:
             tids.append(int(t['id']))
 log('таблицы баллов: турниров %d' % len(tids))
 points = {}
+start_of = {int(t['id']): (t.get('start_date') or '') for y in YEARS for t in tournaments[str(y)]}
+pskip = 0
 for i, tid in enumerate(tids, 1):
+    if not FULL and str(tid) in OLD['points'] and OLD['points'][str(tid)] and start_of.get(tid, '9999') < RECENT:
+        points[str(tid)] = OLD['points'][str(tid)]; pskip += 1; continue
     p = safe('/tournaments/%d/points' % tid)
     if not p: continue
     rows = []
@@ -148,6 +176,7 @@ for i, tid in enumerate(tids, 1):
         rows.append([r.get('user_id'), u.get('nickname'), r.get('position'), float(r.get('points') or 0), r.get('date_acquired')])
     points[str(tid)] = rows
     if i % 25 == 0: log('  таблицы %d/%d' % (i, len(tids)))
+log('таблицы: из прошлого снимка %d, перечитано %d' % (pskip, len(points) - pskip))
 
 # ── 7 · запись ────────────────────────────────────────────────────────────────
 os.makedirs(OUT, exist_ok=True)
@@ -159,7 +188,7 @@ dump('ratings.json', ratings)
 dump('tournaments.json', tournaments)
 dump('ledgers.json', ledgers)
 dump('points.json', points)
-dump('meta.json', {'snapshot': TODAY, 'top_n': TOP_N, 'players': len(ledgers), 'tournaments_points': len(points),
+dump('meta.json', {'snapshot': TODAY, 'mode': 'full' if FULL else 'incremental', 'top_n': TOP_N, 'players': len(ledgers), 'tournaments_points': len(points),
                    'listing': {y: len(tournaments[str(y)]) for y in YEARS}, 'errors': errors})
 if len(ledgers) < 50 or len(points) < 30:
     log('СТОП: данных подозрительно мало'); sys.exit(1)
