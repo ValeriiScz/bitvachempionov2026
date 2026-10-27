@@ -1,0 +1,141 @@
+{
+ "players": {
+  "RAMZES": {
+   "global": 1262,
+   "tier": "A"
+  },
+  "Gangster": {
+   "global": 1289,
+   "tier": "A"
+  },
+  "aptah": {
+   "global": 1111,
+   "tier": "B"
+  },
+  "Сью": {
+   "global": 1233,
+   "tier": "A"
+  },
+  "Olgierd": {
+   "global": 994,
+   "tier": "C"
+  },
+  "DOVOD": {
+   "global": 1223,
+   "tier": "A"
+  },
+  "Mr. Smith": {
+   "global": 1023,
+   "tier": "C"
+  },
+  "Lansky": {
+   "global": 1225,
+   "tier": "A"
+  },
+  "Matilda": {
+   "global": 877,
+   "tier": "F"
+  },
+  "Зима ❄️": {
+   "global": 997,
+   "tier": "C"
+  },
+  "Tommy": {
+   "global": 1563,
+   "tier": "S"
+  },
+  "Korolevich": {
+   "global": 1313,
+   "tier": "S"
+  },
+  "Вольный": {
+   "global": 977,
+   "tier": "D"
+  },
+  "Vitamin": {
+   "global": 971,
+   "tier": "D"
+  },
+  "Сабай": {
+   "global": 966,
+   "tier": "D"
+  },
+  "Шарлотка": {
+   "global": 1008,
+   "tier": "C"
+  },
+  "ParadoXx": {
+   "global": 1180,
+   "tier": "B"
+  },
+  "Talash": {
+   "global": 971,
+   "tier": "D"
+  },
+  "Rivierra": {
+   "global": 999,
+   "tier": "C"
+  },
+  "Джошуа": {
+   "global": 893,
+   "tier": "E"
+  },
+  "Катанчик": {
+   "global": 1033,
+   "tier": "C"
+  },
+  "Lюц": {
+   "global": 1389,
+   "tier": "S"
+  },
+  "Tripok": {
+   "global": 1279,
+   "tier": "A"
+  },
+  "S1LveR": {
+   "global": 1017,
+   "tier": "C"
+  },
+  "Xenon": {
+   "global": 989,
+   "tier": "D"
+  },
+  "Luca": {
+   "global": 1038,
+   "tier": "C"
+  },
+  "Монтгомери": {
+   "global": 809,
+   "tier": "F"
+  },
+  "YeS": {
+   "global": 1429,
+   "tier": "S"
+  },
+  "TOPS": {
+   "global": 1075,
+   "tier": "B"
+  },
+  "Саботаж": {
+   "global": 1336,
+   "tier": "S"
+  },
+  "Буржуй": {
+   "global": 1191,
+   "tier": "A"
+  },
+  "Магнат": {
+   "global": 1152,
+   "tier": "B"
+  },
+  "Миф": {
+   "global": 1333,
+   "tier": "S"
+  },
+  "Chucha": {
+   "global": 1058,
+   "tier": "C"
+  }
+ },
+ "snapshot": "2026-10-26"
+}

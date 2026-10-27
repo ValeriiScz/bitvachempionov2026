@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.2 | 2026-10-27 | 687: страница t687 + смотровая watch687 (4 стола)
 // MafgameStat | tournaments.js | v4.1 | 2026-10-26 | архив: top3, mvp из data/tournament_*.json; 710 ср. ELO 1132 (54/55, снимок elo_710); 615/687 ELO markery 26.10
 // MafgameStat | tournaments.js | v3.3 | 2026-10-13 | 673 -> finished (чемпион Tripok 13.33, Bard 12.275, TOPS 11.0; финал 4 игры); +710 ЧМ-2026 в архив (page wc2026-tournament.html); архив ведёт на t.page
 // MafgameStat | tournaments.js | v3.2 | 2026-10-09 | +673 Чемпионат Молдовы (theme dovod, t673/watch673, live 10–11.10) + 692 Four Seasons Central Cup и 687 Mediterranean GP (собираются, участники + ELO)
@@ -269,25 +270,30 @@ window.TOURNAMENTS_DB = {
     "eloTotal": 46,
     "organizer": "Mafia Club Cyprus",
     "mafgame": "https://mafgame.org/tournaments/687/view",
-    "note": "Ожидается 40 участников; в списке подтверждённые и заявки. Страница турнира откроется после рассадки.",
+    "note": "Регламент: на 40 игроков — 12 отборочных туров и 4 финальные игры; на 44 — 11 туров, 2 полуфинала и финал. Рассадка — жеребьёвкой накануне.",
     "sections": [
       {
-        "href": "participants.html?t=687",
-        "title": "Участники и рейтинг",
-        "desc": "подтверждённые и заявки + ELO markery (снимок 09.10)"
-      },
-      {
-        "soon": true,
+        "href": "t687.html",
         "title": "Страница турнира",
         "desc": "рассадка, сила столов, live-результаты"
       },
       {
-        "soon": true,
+        "href": "watch687.html",
         "title": "Смотровая · эфиры",
-        "desc": "все столы в одном окне"
+        "desc": "4 стола в одном окне, режим экономии"
+      },
+      {
+        "href": "participants.html?t=687",
+        "title": "Участники и рейтинг",
+        "desc": "подтверждённые и заявки + ELO markery (снимок 26.10)"
       }
     ],
-    "start": "2026-10-31"
+    "start": "2026-10-31",
+    "page": "t687.html",
+    "watch": "watch687.html",
+    "liveFrom": "2026-10-31",
+    "liveTo": "2026-11-01",
+    "format": "12 квал × 4 стола → финал топ-10"
   },
   {
     "id": "710",
