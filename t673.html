@@ -1875,5 +1875,6 @@ function sharePage(hash){const h=hash!=null?hash:(location.hash||'');const url=l
 let _toastT=null;
 function toast(html,ms){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t);}t.innerHTML=html;t.classList.add('on');clearTimeout(_toastT);_toastT=setTimeout(()=>t.classList.remove('on'),ms||2600);}
 </script>
+<script src="/assets/share.js?v=1" defer></script>
 </body>
 </html>

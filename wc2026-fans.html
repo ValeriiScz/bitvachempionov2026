@@ -291,5 +291,6 @@ function sharePage(){const url=location.origin+location.pathname;const title='Ч
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>toast('Ссылка скопирована'),()=>toast(url,6000));return;}toast(url,6000);}
 let _tt=null;function toast(h,ms){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t);}t.textContent=h;t.classList.add('on');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('on'),ms||2400);}
 </script>
+<script src="/assets/share.js?v=1" defer></script>
 </body>
 </html>

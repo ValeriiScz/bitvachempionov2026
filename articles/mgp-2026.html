@@ -103,6 +103,7 @@ details{margin:6px 0 18px}summary{cursor:pointer;font:700 13px/1 var(--mono);col
 .w{position:relative;padding:14px 14px 14px 54px;background:var(--panel2);border:1px solid var(--line);border-radius:14px;font-size:15px}
 .w::before{counter-increment:w;content:counter(w);position:absolute;left:14px;top:12px;width:28px;height:28px;border-radius:8px;background:var(--cyan);color:#05060a;font:900 15px/28px var(--disp);text-align:center}
 .fed{display:flex;align-items:center;gap:12px;margin:0 0 22px;padding:10px 14px;border:1px solid var(--line,rgba(255,255,255,.12));border-radius:12px;text-decoration:none;color:#c9d1de;font-size:13.5px;line-height:1.35;max-width:420px}.fed img{width:34px;height:34px;border-radius:8px;background:#fff;object-fit:contain;padding:3px;flex:none}.fed b{color:#fff}.fed span span,.fed:hover{color:var(--cyan)}
+.shr{display:inline-flex;align-items:center;gap:6px;margin:-10px 0 22px;padding:9px 14px;border-radius:999px;border:1px solid var(--cyan);background:none;color:var(--cyan);font:700 13.5px/1 Inter,system-ui,sans-serif;cursor:pointer}
 .cta{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;font:800 14px/1 Inter;text-decoration:none;border:1px solid var(--cyan);color:var(--cyan)}
 .btn.y{background:var(--yel);color:#05060a;border-color:var(--yel)}
@@ -124,6 +125,7 @@ details{margin:6px 0 18px}summary{cursor:pointer;font:700 13px/1 var(--mono);col
 </div>
 <div class="meta">DOVOD · 29.10.2026 · данные Mafgame на 28.10 · ≈ 7 минут чтения</div>
 <a class="fed" href="https://mafgame.org/tournaments/687/view" target="_blank" rel="noopener"><img src="https://mafgame.org/logo-without-text.png" alt="Mafgame" width="34" height="34" onerror="this.style.display='none'"><span><b>Турнир и гонка — федерации Mafgame</b><br>MGP на сайте федерации ›</span></a>
+<button type="button" class="shr" data-share>↗ Поделиться статьёй</button>
 
 <h2><span class="n">00</span>За 30 секунд</h2>
 <div class="tldr">
@@ -216,11 +218,13 @@ details{margin:6px 0 18px}summary{cursor:pointer;font:700 13px/1 var(--mono);col
  <div class="w"><b>Вход в финал.</b> Десятое место — 10 баллов, пятое — 20, первое — 30. Для половины гонки разница между 9-м и 11-м местом весит больше, чем между 1-м и 3-м.</div>
  <div class="w"><b>Где Flash?</b> Победитель MGP-2024 и бронзовый призёр MGP-2025 на Кипр в этот раз не записан. Появится в последний момент — главный поворот турнира.</div>
 </div>
+<button type="button" class="shr" data-share style="margin:18px 0 0">↗ Поделиться статьёй</button>
 <div id="dv-social" data-a="mgp-2026"></div>
 <div class="cta"><a class="btn y" href="../watch687.html">▶ Смотровая · 4 стола</a><a class="btn" href="../t687.html">Страница турнира</a><a class="btn" href="https://mafgame.org/tournaments/687/view" target="_blank" rel="noopener">MGP на Mafgame</a><a class="btn" href="../participants.html?t=687">Участники и ELO</a></div>
 
 <div class="foot">DOVOD — некоммерческий проект о спортивной мафии · данные <a href="https://mafgame.org" target="_blank" rel="noopener">Mafgame</a> на 28.10.2026 · все статьи — <a href="../articles.html">в разделе «Статьи»</a></div>
 </div>
 <script src="../assets/social.js?v=1" defer></script>
+<script src="/assets/share.js?v=1" defer></script>
 </body>
 </html>

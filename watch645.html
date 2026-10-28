@@ -393,5 +393,6 @@ load(true).then(()=>renderAll(true)).catch(()=>{document.getElementById('status'
 setInterval(()=>{if(document.hidden)return;const before=D.cur;load(false).then(()=>{renderStatus();renderTabs();if(S.view===before)S.view=D.cur;renderSeats();renderFollow();renderTop();renderStage();}).catch(()=>{});},15000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)load(false).then(()=>renderAll()).catch(()=>{});});
 </script>
+<script src="/assets/share.js?v=1" defer></script>
 </body>
 </html>
