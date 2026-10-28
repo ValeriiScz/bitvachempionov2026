@@ -47,6 +47,6 @@ const ARTICLES=[
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 document.getElementById('list').innerHTML=ARTICLES.map(a=>`<a class="a" href="${a.href}"><img src="${a.img}" alt="" loading="lazy"><div class="b"><div class="m">${esc(a.date)} · ${esc(a.tag)}</div><div class="t">${esc(a.title)}</div><div class="d">${esc(a.desc)}</div><div class="go">Читать →</div></div></a>`).join('');
 </script>
-<script src="/assets/share.js?v=1" defer></script>
+<script src="/assets/share.js?v=2" defer></script>
 </body>
 </html>

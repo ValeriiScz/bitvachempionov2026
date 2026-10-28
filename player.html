@@ -578,6 +578,6 @@ function fmtNum(v) { const n = Number(v); if (isNaN(n)) return '—'; if (n === 
 function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 load().catch(e => { document.getElementById('content').innerHTML = `<div class="card empty" style="color:#e8716b;">Ошибка: ${e.message}</div>`; console.error(e); });
 </script>
-<script src="/assets/share.js?v=1" defer></script>
+<script src="/assets/share.js?v=2" defer></script>
 </body>
 </html>

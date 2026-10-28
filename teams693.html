@@ -139,6 +139,6 @@ Promise.all([
   document.getElementById('judges').innerHTML=Object.keys(jb).length?`Судьи: ${Object.entries(jb).map(([tbl,j])=>`стол ${tbl==='1'?'I':tbl==='2'?'II':tbl} — <b>${esc(j)}</b>`).join(' · ')}`:'';
 }).catch(e=>{document.getElementById('sub').textContent='Ошибка: '+e.message;document.getElementById('grid').innerHTML='';});
 </script>
-<script src="/assets/share.js?v=1" defer></script>
+<script src="/assets/share.js?v=2" defer></script>
 </body>
 </html>

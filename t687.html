@@ -696,7 +696,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
       '#mgsPwaGo{display:none;background:linear-gradient(100deg,#e3b04b,#a9771c);border:0;color:#0b0d14;}'+
       '#mgsPwaLater{background:transparent;border:1px solid rgba(38,224,255,.35);color:#9fb2cc;}</style>'+
       '<div class="t">📲 DOVOD можно установить как приложение</div>'+
-      '<div class="h">Иконка на экране, полноэкранный режим, live-результаты турнира под рукой. Поделиться ссылкой из приложения — кнопка ⤴ сверху.<br>'+how+'</div>'+
+      '<div class="h">Иконка на экране, полноэкранный режим, live-результаты турнира под рукой. Поделиться ссылкой из приложения — кнопка со стрелкой вверху справа.<br>'+how+'</div>'+
       '<div class="r"><button id="mgsPwaGo">Установить</button><button id="mgsPwaLater">Позже</button></div>';
     document.body.appendChild(d);
     var go=document.getElementById('mgsPwaGo');
@@ -733,7 +733,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     <a class="toclassic" href="tournaments.html" style="margin-top:0;border-top:none;padding-top:2px">← все турниры</a>
   </nav>
   <div style="flex:1;min-width:0;">
-    <div class="mtop"><a class="mback" href="tournaments.html" aria-label="Все турниры">&#8592;</a><span class="mcr">&#9819;</span><span class="mt"><span style="color:var(--gold-hi)">MGP</span> · <span id="mtitle">Обзор</span></span><button class="mshare" type="button" onclick="sharePage()" aria-label="Поделиться ссылкой">⤴</button></div>
+    <div class="mtop"><a class="mback" href="tournaments.html" aria-label="Все турниры">&#8592;</a><span class="mcr">&#9819;</span><span class="mt"><span style="color:var(--gold-hi)">MGP</span> · <span id="mtitle">Обзор</span></span><button class="mshare" type="button" onclick="sharePage()" aria-label="Поделиться ссылкой"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:block"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M12 3v13"/><path d="M7 8l5-5 5 5"/></svg></button></div>
     <main class="main">
       <div class="topband" id="topband"><div class="info"><p class="note">Загрузка…</p></div></div>
       <div class="subtabs" id="subtabs"></div>
@@ -793,7 +793,7 @@ const TIER_ORD={L:-1,S:0,A:1,B:2,C:3,D:4,E:5,F:6};
 const CFG={id:'687',ls:'t687_',name:'Mediterranean Grand-Prix 2026',short:'MGP',kick:'DOVOD · 5★ · Лимасол',h1:'Mediterranean <b>Grand-Prix</b> 2026',
   dates:'31 октября – 1 ноября 2026',place:'Лимасол',startLab:'старт 31 октября',startShort:'31.10',
   quals:12,tables:4,finalN:10,finals:4,fmt:'12+4',
-  intro:'Пятизвёздочный Mediterranean Grand-Prix в Лимасоле (отель St.Raphael), 31 октября – 1 ноября, призовой фонд 3000 €. По регламенту на 40 игроков — 12 отборочных туров на четырёх столах (играют все) и финал топ‑10 из четырёх игр; если соберётся 44 — 11 туров с одним пропуском у каждого, 2 полуфинала и финал. Рассадка — жеребьёвкой накануне турнира.',
+  intro:'Пятизвёздочный Mediterranean Grand-Prix в Лимасоле (отель St.Raphael), 31 октября – 1 ноября, призовой фонд 3000 €. По регламенту на 40 игроков — 12 отборочных туров на четырёх столах (играют все) и финал топ‑10 из четырёх игр; если соберётся 44 — 11 туров с одним пропуском у каждого, 2 полуфинала и финал.',
   watch:'watch687.html',mafgame:'https://mafgame.org/tournaments/687/view'};
 const START='2026-10-31T10:00:00+02:00'; /* ГИПОТЕЗА: время старта на mafgame не указано */
 const DEF_AV='https://mafgame.org/build/assets/avatar-default2-33e44bae.png';
@@ -1876,6 +1876,6 @@ function sharePage(hash){const h=hash!=null?hash:(location.hash||'');const url=l
 let _toastT=null;
 function toast(html,ms){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t);}t.innerHTML=html;t.classList.add('on');clearTimeout(_toastT);_toastT=setTimeout(()=>t.classList.remove('on'),ms||2600);}
 </script>
-<script src="/assets/share.js?v=1" defer></script>
+<script src="/assets/share.js?v=2" defer></script>
 </body>
 </html>
