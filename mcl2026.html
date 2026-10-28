@@ -238,6 +238,9 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .sq .nm{font-family:var(--ff-h);font-style:italic;font-weight:800;font-size:26px;text-transform:uppercase;line-height:.95;
   color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.6);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sq .st{display:flex;gap:10px;margin-top:6px;align-items:baseline}
+.sq .rep{display:inline-block;margin-bottom:7px;font-family:var(--ff-n);font-weight:700;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:999px;background:rgba(8,7,11,.78);border:1px solid var(--pur-hi);color:#fff}
+.sq.isrep{border-color:var(--pur-hi)}
+.sqout{margin-top:12px;font-size:13px;color:var(--mut);line-height:1.5}.sqout s{text-decoration:line-through;color:#fff;opacity:.6}
 .sq .st b{font-family:var(--ff-n);font-weight:700;font-size:20px;color:var(--pur-hi)}
 .sq .st s{text-decoration:none;font-size:11px;color:var(--mut);letter-spacing:.04em}
 .sq.empty{display:grid;place-items:center}
@@ -545,6 +548,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <p class="lead">В финале 10 мест, и три региона идут к ним разными дорогами. Central Europe отдаёт свои <b>6</b> прямо по зачёту серий — таблица ниже это срез на дату, а не итог. Israel и Cyprus сначала играют полуфинал: оттуда в Прагу едут <b>3</b> и <b>1</b>. <span id="squadtail">Эти слоты пока стоят пустыми.</span></p>
   <div class="routes" id="routes"></div>
   <div class="squad" id="squadgrid"></div>
+  <div class="sqout" id="sqout"></div>
 </div></section>
 
 <section id="top"><div class="wrap">
@@ -590,7 +594,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20261028"></script>
+<script src="data/mcl2026.js?v=20261028a"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -729,11 +733,16 @@ $('#squadgrid').innerHTML=D.squad.map(function(s,i){
   var ph=s.p?'<img class="ph" loading="lazy" src="'+esc(s.p)+'" alt=""><div class="duo"></div>':'';
   /* слот из полуфинала: s.a — итог полуфинала ((отбор×k + полуфинал)/2, k=1.5 только Кипр при 2+ сериях), не средний за серии */
   var st=s.fin?'<b>'+s.a.toFixed(3)+'</b><s>итог полуфинала</s>':'<b>'+s.a.toFixed(3)+'</b><s>'+s.s+' '+SER(s.s)+'</s>';
-  return '<div class="sq">'+ph+'<div class="shade"></div><div class="ghost">'+(i+1)+'</div>'+
-    '<div class="slot">'+esc(s.slot)+'</div><div class="body"><div class="nm">'+esc(s.n)+'</div>'+
+  return '<div class="sq'+(s.rep?' isrep':'')+'">'+ph+'<div class="shade"></div><div class="ghost">'+(i+1)+'</div>'+
+    '<div class="slot">'+esc(s.slot)+'</div><div class="body">'+(s.rep?'<div class="rep">вместо '+esc(s.rep)+'</div>':'')+'<div class="nm">'+esc(s.n)+'</div>'+
     '<div class="st">'+st+'</div></div></div>';
 }).join('');
 
+/* снявшиеся (D.withdrawn): их место по регламенту занимает следующий по зачёту региона */
+(function(){var w=D.withdrawn||[];var el=$('#sqout');if(!el||!w.length)return;
+  var reps=(D.squad||[]).filter(function(s){return s.rep;});
+  el.innerHTML='Снялись с финала: '+w.map(function(x){return '<s>'+esc(x.n)+'</s>';}).join(', ')+'. Их места по регламенту заняли следующие в зачёте Central Europe — '+
+    reps.map(function(s){return '<b style="color:#fff">'+esc(s.n)+'</b>';}).join(' и ')+'.';})();
 /* хвост подводки к составу: текст про «пустые слоты» врал, как только полуфинал
    сыгран. Считаем его от данных — conf[c].semiResult, — чтобы не протухал. */
 (function(){
@@ -756,7 +765,7 @@ $('#minis').innerHTML=['CE','IL','CY'].map(function(c){var k=D.conf[c];
   var semi=k.route==='semi', slots=semi?(k.semiSlots||10):k.quota;
   var sr=semi&&k.semiResult&&k.semiResult.length?k.semiResult:null;
   /* сыгранный полуфинал: мини-таблица показывает его итог, а не зачёт отбора */
-  var q=sr ? sr : (semi ? k.rows.slice(0,slots) : k.rows.filter(function(r){return r.s>=2;}).slice(0,k.quota));
+  var q=sr ? sr : (semi ? k.rows.slice(0,slots) : k.rows.filter(function(r){return r.s>=2&&!r.wd;}).slice(0,k.quota));
   var rows=q.map(function(r,n){
     var ph=r.p?'<img class="av" loading="lazy" src="'+esc(r.p)+'" alt="">':'<div class="av"></div>';
     var val=sr?r.fin:r.a;

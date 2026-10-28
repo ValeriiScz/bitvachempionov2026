@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-refresh_mcl.py · v1.4 · 2026-10-27 (фото новых игроков: у кого в данных пустое фото — берём с профиля mafgame, stream_photo или аватар; раньше фото переносились только из прошлого снимка, и у новичков лиги их не было — Грешник, S1LveR) · v1.3.2 · 2026-10-25 (ручной перезапуск: протокол Prague/05 #874 вышел после утреннего прогона) · v1.3.1 · 2026-10-19 (ручной перезапуск после серий выходных) · v1.3 · 2026-10-05 · версия для сайта DOVOD
+refresh_mcl.py · v1.5 · 2026-10-28 (снявшиеся: ручное поле D.withdrawn [{u,n,note}] — робот его не трогает; в зачёте строка с wd=1 не занимает место, квоту добирает следующий по зачёту, в составе у него rep — кого заменил) · v1.4 · 2026-10-27 (фото новых игроков: у кого в данных пустое фото — берём с профиля mafgame, stream_photo или аватар; раньше фото переносились только из прошлого снимка, и у новичков лиги их не было — Грешник, S1LveR) · v1.3.2 · 2026-10-25 (ручной перезапуск: протокол Prague/05 #874 вышел после утреннего прогона) · v1.3.1 · 2026-10-19 (ручной перезапуск после серий выходных) · v1.3 · 2026-10-05 · версия для сайта DOVOD
 Назначение: обновить датафайл страниц MCL (data/mcl2026.js) по протоколам mafgame.org
 и постам канала лиги, без участия человека. Тот же робот работает у партнёров
 (ecosciug/mafiacl-kings) — там пути другие, здесь ещё поднимается CACHE_VERSION в sw.js.
@@ -251,6 +251,7 @@ def rebuild_standings(D, series, avatars):
     «балл отборов» — средний по отборочным сериям игрока. Таблица итога
     лежит в conf[c].semiResult, трое лучших занимают слоты региона в squad."""
     # 6b) зачёт регионов — без полуфиналов
+    WD = {w['u'] for w in (D.get('withdrawn') or [])}     # v1.5: снявшиеся (ручное поле)
     for c in CONF_ORDER:
         k = D['conf'][c]
         agg = {}
@@ -267,7 +268,8 @@ def rebuild_standings(D, series, avatars):
             t = round(sum(x[1] for x in a['d']), 3)
             rows.append(dict(u=a['u'], n=a['n'], a=round(t / len(a['d']), 3), s=len(a['d']), t=t,
                              d=a['d'], p=avatars.get(a['u'], '')))
-        norm_sorted = sorted([r for r in rows if r['s'] >= 2], key=lambda r: (-r['a'], r['n'] or ''))
+            if a['u'] in WD: rows[-1]['wd'] = 1
+        norm_sorted = sorted([r for r in rows if r['s'] >= 2 and not r.get('wd')], key=lambda r: (-r['a'], r['n'] or ''))
         rest_sorted = sorted([r for r in rows if r['s'] <  2], key=lambda r: (-r['a'], r['n'] or ''))
         if k.get('route') == 'semi':
             # отбор в полуфинал: сначала выполнившие норму, потом добор из сыгравших одну серию
@@ -323,11 +325,16 @@ def rebuild_standings(D, series, avatars):
                 else:   # полуфинал впереди — слот ждёт
                     squad.append(dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n='', a=0, s=0, p='', semi=1))
             continue
-        norm = [r for r in k['rows'] if r['s'] >= 2]
+        full = [r for r in k['rows'] if r['s'] >= 2]
+        norm = [r for r in full if not r.get('wd')]
+        out_ = [r for r in full[:k['quota']] if r.get('wd')]          # снявшиеся из квоты — по порядку зачёта
         for i in range(k['quota']):
             r = norm[i] if i < len(norm) else None
-            squad.append(dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n=(r['n'] if r else ''),
-                              a=(r['a'] if r else 0), s=(r['s'] if r else 0), p=(r['p'] if r else '')))
+            e = dict(c=c, slot='%s·%d' % (NAMES[c], i + 1), n=(r['n'] if r else ''),
+                     a=(r['a'] if r else 0), s=(r['s'] if r else 0), p=(r['p'] if r else ''))
+            if r and r not in full[:k['quota']] and out_:
+                e['rep'] = out_.pop(0)['n']                          # прошёл вместо снявшегося
+            squad.append(e)
     D['squad'] = squad
     return D
 

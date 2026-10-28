@@ -199,6 +199,8 @@ a.cbox:hover{border-color:rgba(198,90,180,.5);background:var(--panel2)}
 .need{font-family:var(--ff-n);font-weight:700;font-size:13px;text-align:right;color:var(--red);white-space:nowrap}
 .need s{text-decoration:none;color:var(--dim);font-weight:400;font-size:10.5px;display:block;letter-spacing:.06em}
 .srow.one{opacity:.74}
+.srow.wd .nick{text-decoration:line-through}.srow.wd{opacity:.55}
+.wdtag{display:inline-block;margin-left:6px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:999px;border:1px solid rgba(255,255,255,.3);text-decoration:none;vertical-align:middle}
 .srow.one .nick,.srow.one .avg{color:var(--mut)}
 .srow.one .pill{color:var(--red);border-color:rgba(219,81,78,.4);background:rgba(219,81,78,.10)}
 .cutline{display:flex;align-items:center;gap:12px;padding:7px 14px;background:rgba(198,90,180,.10);border-top:1px dashed rgba(198,90,180,.5);border-bottom:1px dashed rgba(198,90,180,.5)}
@@ -574,7 +576,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   <video id="tv" controls playsinline poster="assets/mcl/teaser-poster.jpg" preload="none" src="assets/mcl/anons.mp4"></video>
   <button class="x" id="close">закрыть</button>
 </div></div>
-<script src="data/mcl2026.js?v=20261028"></script>
+<script src="data/mcl2026.js?v=20261028a"></script>
 <script>
 'use strict';
 var D=window.MCL;
@@ -678,7 +680,7 @@ function stand(){
   out.push('<div class="donebar'+(semi?' semi':'')+(done?' done':'')+'"><b>'+head1+'</b> · '+head2+'</div>');
   out.push('<div class="stbl"><div class="sth"><div>#</div><div></div><div>Игрок</div><div class="r">Средний</div><div class="r">Серий</div><div class="r cneed">Нужно</div></div>');
   k.rows.forEach(function(r){
-    var ok=r.s>=2;
+    var ok=r.s>=2&&!r.wd;   /* снявшийся (D.withdrawn) места не занимает */
     if(semi){ placed++; } else if(ok){ placed++; }
     var zone=semi ? placed<=slots : (ok&&placed<=q);
     if(FILT==='q'&&!ok) return;
@@ -696,9 +698,9 @@ function stand(){
                    : need.toFixed(2)+'<s>в '+(r.s+1)+'-й серии</s>';
       ndm = '<div class="needm">нужно '+(need<=0?'любой результат':need.toFixed(2))+' в '+(r.s+1)+'-й</div>';
     }
-    out.push('<div class="srow'+(zone?' zone':'')+((ok||zone)?'':' one')+'">'+
+    out.push('<div class="srow'+(zone?' zone':'')+((ok||zone)?'':' one')+(r.wd?' wd':'')+'">'+
       '<div class="rk">'+((ok||semi)?placed:'·')+'</div>'+ph+
-      '<div><div class="nick">'+esc(r.n)+'</div><div class="det">'+det+'</div>'+ndm+'</div>'+
+      '<div><div class="nick">'+esc(r.n)+(r.wd?' <span class="wdtag">снялся с финала</span>':'')+'</div><div class="det">'+det+'</div>'+ndm+'</div>'+
       '<div class="avg">'+r.a.toFixed(3)+'</div>'+
       '<div class="r"><span class="pill">'+r.s+'<em>&nbsp;'+SER(r.s)+'</em></span></div>'+
       '<div class="need cneed">'+nd+'</div></div>');
