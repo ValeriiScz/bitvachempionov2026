@@ -1,5 +1,5 @@
 /* ============================================================================
-   MafgameStat · sw.js (Service Worker для PWA) · v1.15 · 2026-10-20 (HTML network-first — фикс «пароль не подошёл» на закрытых страницах после деплоя) · v1.14 · 2026-08-27 (кэш v19.3: ФИКС — медиа и Range-запросы мимо воркера (из-за 206 не открывался ролик-анонс); v19.2: календарь с городами в клетках и карточками серий, кнопка «наверх»; v19.1: карточки победителей 9 серий из канала, финал золотым в календаре; MCL разрезан на 4 страницы — mcl2026/mcl-standings/mcl-series/mcl-lab + data/mcl2026.js в прекэше; видео не кэшируем)
+   MafgameStat · sw.js (Service Worker для PWA) · v1.16 · 2026-10-29 (data/*.js — network-first: свежие цифры с первого захода) · v1.15 · 2026-10-20 (HTML network-first — фикс «пароль не подошёл» на закрытых страницах после деплоя) · v1.14 · 2026-08-27 (кэш v19.3: ФИКС — медиа и Range-запросы мимо воркера (из-за 206 не открывался ролик-анонс); v19.2: календарь с городами в клетках и карточками серий, кнопка «наверх»; v19.1: карточки победителей 9 серий из канала, финал золотым в календаре; MCL разрезан на 4 страницы — mcl2026/mcl-standings/mcl-series/mcl-lab + data/mcl2026.js в прекэше; видео не кэшируем)
    Назначение: офлайн-кэш ОБОЛОЧКИ сайта (html/js/иконки) + установка как
    приложение. Данные турниров НЕ замораживаются кэшем.
 
@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'dovod-v339';
+const CACHE_VERSION = 'dovod-v340';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -95,7 +95,9 @@ self.addEventListener('fetch', (e) => {
   if (url.pathname.startsWith('/mafgame/')) return;
 
   /* 2) данные турниров (*.json) — network-first с кэш-фолбэком */
-  if (url.origin === location.origin && url.pathname.endsWith('.json') && url.pathname !== '/manifest.json') {
+  /* v1.16 (29.10.2026): data/*.js (календарь, MCL, турниры) — тоже network-first: раньше шли как оболочка
+     (stale-while-revalidate) и первый заход после обновления показывал вчерашние цифры */
+  if (url.origin === location.origin && ((url.pathname.endsWith('.json') && url.pathname !== '/manifest.json') || (url.pathname.startsWith('/data/') && url.pathname.endsWith('.js')))) {
     e.respondWith(
       fetch(req).then(res => {
         if (res && res.ok) {

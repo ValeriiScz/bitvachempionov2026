@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- DOVOD · articles.html · v1.0 · 2026-10-29 · раздел «Статьи»: открытые материалы (без пароля). Список — массив ARTICLES ниже; новая статья = файл в articles/ + строка в массиве. Закрытые разборы — в Лаборатории (lab.html). -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Статьи — DOVOD</title>
+<meta name="description" content="Открытые статьи DOVOD о спортивной мафии: анонсы турниров, гонка за дюжину, истории сезона.">
+<link rel="icon" href="assets/icons/icon-32.png?v=3" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05060a;--panel:#0b0d14;--panel2:#11141d;--ink:#eef3fb;--mut:#a4adbd;--dim:#79808f;--line:rgba(255,255,255,.10);--cyan:#26e0ff;--yel:#f5ff35;--disp:'Unbounded',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.dv-crumb{display:flex;gap:9px;padding:11px 14px;font:700 10px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+.dv-crumb a{color:var(--yel);text-decoration:none}.dv-crumb i{color:#39404c;font-style:normal}.dv-crumb span{color:#5f6675}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 16px 70px}
+.kick{display:flex;align-items:center;gap:10px;font:700 10.5px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}.kick i{width:26px;height:2px;background:var(--cyan)}
+h1{margin:0;font:900 clamp(34px,7vw,64px)/.95 var(--disp);text-transform:uppercase;background:linear-gradient(180deg,#fff,#aeb6c4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--mut);font-size:14px;margin:10px 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.a{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:border-color .15s,transform .15s}
+.a:hover{border-color:rgba(38,224,255,.5);transform:translateY(-2px)}
+.a img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-bottom:1px solid var(--line)}
+.a .b{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px}
+.a .m{font:700 10.5px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.a .t{font:800 19px/1.25 Inter}.a .d{font-size:13.5px;color:var(--mut);line-height:1.5}
+.a .go{font:800 13px/1 Inter;color:var(--cyan);margin-top:4px}
+.note{margin-top:30px;font-size:12.5px;color:var(--dim);border-top:1px solid var(--line);padding-top:14px}.note a{color:var(--mut)}
+</style>
+</head>
+<body>
+<nav class="dv-crumb"><a href="index.html">DOVOD</a><i>/</i><span>Статьи</span></nav>
+<div class="wrap">
+ <div class="kick"><i></i>DOVOD · открытые материалы</div>
+ <h1>Статьи</h1>
+ <div class="sub">Анонсы турниров, гонка за дюжину и истории сезона — для всех, без пароля.</div>
+ <div class="grid" id="list"></div>
+ <div class="note">Закрытые исследования по данным платформы — в <a href="lab.html">Лаборатории</a>. DOVOD — некоммерческий проект о спортивной мафии.</div>
+</div>
+<script>
+const ARTICLES=[
+ {href:'articles/mgp-2026.html',img:'assets/articles/mgp-2026-card.jpg',date:'29.10.2026',tag:'Анонс · гонка за дюжину',title:'Финишная прямая начинается на Кипре',desc:'Mediterranean Grand-Prix: пять звёзд, день рождения федерации и почти вся гонка за дюжину за одними столами. Кто уже внутри, кто борется за три места, кто догоняет.'}
+];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.getElementById('list').innerHTML=ARTICLES.map(a=>`<a class="a" href="${a.href}"><img src="${a.img}" alt="" loading="lazy"><div class="b"><div class="m">${esc(a.date)} · ${esc(a.tag)}</div><div class="t">${esc(a.title)}</div><div class="d">${esc(a.desc)}</div><div class="go">Читать →</div></div></a>`).join('');
+</script>
+</body>
+</html>

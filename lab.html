@@ -235,7 +235,8 @@ async function openShared(id, key){
 async function openDoc(id, title){
   load.classList.add('on'); CUR=id;
   try{
-    var html=cache[id] || (cache[id]=await fetchDec('vault/'+id+'.json', PASS));
+    /* 29.10.2026: если у документа есть общая ссылка — читаем её копию (vault/s/), она всегда свежая; копия под паролем могла отставать */
+    var html=cache[id] || (cache[id]=(SK[id] ? await fetchDec('vault/s/'+id+'.json', SK[id]).catch(function(){ return fetchDec('vault/'+id+'.json', PASS); }) : await fetchDec('vault/'+id+'.json', PASS)));
     $('#vshare').hidden=!SK[id]; $('#vurl').hidden=true;
     showHtml(html,title);
   }catch(e){ toast('Не удалось открыть: '+e.message); }
