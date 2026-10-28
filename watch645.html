@@ -330,7 +330,7 @@ function avgElo(tb){if(!tb)return '';const v=tb.seats.map(x=>x&&D.P[x.name]&&D.P
 function avatar(n){const p=D.P[n];const u=D.av[n]||(p&&p.av)||'';return u?`<img src="${esc(u)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span class=&quot;mono&quot;>${esc(mono(n))}</span>'">`:`<span class="mono">${esc(mono(n))}</span>`;}
 function renderSeats(){
   const el=document.getElementById('seatP');const gi=S.view;const g=D.games[gi];
-  if(!g){el.innerHTML=`<div class="panel"><h3>За столом</h3><div class="note">Рассадка появится, когда mafgame опубликует посадку.</div></div>`;return;}
+  if(!g){el.innerHTML=`<div class="panel"><h3>За столом</h3><div class="note">Рассадка появится, когда mafgame опубликует рассадку.</div></div>`;return;}
   const fin=g.stage==='Финал';const t=fin?1:S.table;
   const tb=g.tables.find(x=>x.table_num===t)||g.tables[0];if(!tb){el.innerHTML='';return;}
   const by={};tb.seats.forEach(x=>{if(x)by[x.seat]=x;});

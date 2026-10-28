@@ -249,7 +249,7 @@ async function load() {
 
 function renderTeamsRoster(){
   const teams=DATA.teams||[];
-  const note=`<div class="progress-note">Парный турнир · <strong>${teams.length} команд</strong> по ${DATA.team_size||2}. Результаты и зачёт (по командам и игрокам) появятся после старта. Рассадка уже доступна — см. «Игры» и «Совместные посадки».</div>`;
+  const note=`<div class="progress-note">Парный турнир · <strong>${teams.length} команд</strong> по ${DATA.team_size||2}. Результаты и зачёт (по командам и игрокам) появятся после старта. Рассадка уже доступна — см. «Игры» и «Совместные игры».</div>`;
   const cards=teams.map((t,i)=>`<tr${i<3?'':''}>
     <td class="left place">${i+1}</td>
     <td class="left player-cell"><b style="color:#fff;font-size:14px">${escapeHtml(t.team)}</b></td>

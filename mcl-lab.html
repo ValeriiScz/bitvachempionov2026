@@ -483,7 +483,7 @@ a:hover .sithumb{filter:brightness(1.12)}
   </section>
   <section>
     <div class="sechead"><div class="no">02</div><h2 class="h">Серии: рука судьи и победы города</h2><div class="line"></div></div>
-    <p class="lead">Каждая сыгранная серия сезона: сколько судья раздал допов на посадку, на сколько оштрафовал и сколько игр из десяти выиграл город. Считается из протоколов, обновляется вместе с данными.</p>
+    <p class="lead">Каждая сыгранная серия сезона: сколько судья раздал допов за игру, на сколько оштрафовал и сколько игр из десяти выиграл город. Считается из протоколов, обновляется вместе с данными.</p>
     <div class="tw" id="sertbl"></div>
     <div class="legend" id="serleg"></div>
   </section>
@@ -500,10 +500,10 @@ a:hover .sithumb{filter:brightness(1.12)}
     <div class="livenote">считается из протоколов</div>
     <div class="tw" id="jtbl"></div>
     <div class="legend">ЛХ (0.25 и 0.4 за угаданных чёрных) и Ci (компенсация ранних смертей) — автоматика платформы, в «щедрость судьи» не входят: в допе учтены только судейские баллы.</div>
-    <h3 class="jsubh">Разбор по каждой посадке</h3>
+    <h3 class="jsubh">Разбор по каждой игре</h3>
     <div class="snapnote" id="jsnapnote">вшитый снимок</div>
     <div class="tw" id="jdeep"></div>
-    <div class="legend">Эти колонки считаются по каждой отдельной посадке, а не по итогу серии: «% с допом» — доля посадок, где судья что-то дал, «жирных» — где дал 0.3 и больше, «при поражении» — средний доп в проигранных играх. Роботом не пересчитываются — нужен отдельный проход по поигровым протоколам.</div>
+    <div class="legend">Эти колонки считаются по каждой отдельной игре, а не по итогу серии: «% с допом» — доля игровых мест, где судья что-то дал, «жирных» — где дал 0.3 и больше, «при поражении» — средний доп в проигранных играх. Роботом не пересчитываются — нужен отдельный проход по поигровым протоколам.</div>
   </section>
   <section>
     <div class="sechead"><div class="no">05</div><h2 class="h">Данные и метод</h2><div class="line"></div></div>
@@ -592,7 +592,7 @@ var byConf = ['CE','IL','CY'].map(function(c){
   return {c:c, n:r.length, g:g, t:t, share:(g?t/g:0)};
 });
 
-/* по судьям: доп и штраф — на посадку, взвешенно по числу игр */
+/* по судьям: доп и штраф — за игру, взвешенно по числу игр */
 var byJudge = (function(){
   var m = {};
   PL.forEach(function(s){
@@ -623,24 +623,24 @@ if (GAMES) {
 }
 if (jTop && jBot && jBot.gb) {
   blocks.push(['×'+(jTop.gb/jBot.gb).toFixed(1), 'Рука судьи различается',
-    'Самый щедрый — <b>'+esc(jTop.j)+'</b> ('+f3(jTop.gb)+' допа на посадку), самый сдержанный — <b>'+
+    'Самый щедрый — <b>'+esc(jTop.j)+'</b> ('+f3(jTop.gb)+' допа за игру), самый сдержанный — <b>'+
     esc(jBot.j)+'</b> ('+f3(jBot.gb)+'). Поэтому сырые баллы игроков из разных серий не сравниваются — только остатки против нормы своей серии.']);
 }
 var fat = PL.filter(function(s){ return s.gb!=null; }).slice().sort(function(a,b){ return b.gb-a.gb; });
 if (fat.length) {
   var hi=fat[0], lo=fat[fat.length-1];
   blocks.push([f3(hi.gb), 'Самая щедрая серия',
-    '<b>'+esc(hi.city)+'</b> '+dm(hi.date)+(hi.j?' (судья '+esc(hi.j)+')':'')+' — '+f3(hi.gb)+' допа на посадку; самая сдержанная — <b>'+
+    '<b>'+esc(hi.city)+'</b> '+dm(hi.date)+(hi.j?' (судья '+esc(hi.j)+')':'')+' — '+f3(hi.gb)+' допа за игру; самая сдержанная — <b>'+
     esc(lo.city)+'</b> '+dm(lo.date)+(lo.j?' (судья '+esc(lo.j)+')':'')+', '+f3(lo.gb)+'. Разброс внутри сезона больше, чем между регионами.']);
 }
 blocks.push(['+0.115', 'KEX · самый большой остаток',
-  'Больше нормы собственных серий на <b>0.115 допа за игру</b> (p=0.0002 — единственный значимый результат из 24 проверенных). Доп в 15 посадках из 20 при средней по лиге 45%. <i>Снимок исследования 10.09, не пересчитывается.</i>']);
+  'Больше нормы собственных серий на <b>0.115 допа за игру</b> (p=0.0002 — единственный значимый результат из 24 проверенных). Доп в 15 играх из 20 при средней по лиге 45%. <i>Снимок исследования 10.09, не пересчитывается.</i>']);
 $('#blocks').innerHTML = blocks.map(function(x){
   return '<div class="blk"><div class="big">'+x[0]+'</div><div class="bt">'+x[1]+'</div><div class="bb">'+x[2]+'</div></div>';
 }).join('');
 
 /* 02 серии */
-$('#sertbl').innerHTML = '<table><thead><tr><th>Серия</th><th>Регион</th><th>Судья</th><th>Игр</th><th>Победы города</th><th>Доп/посадку</th><th>Штрафы</th></tr></thead><tbody>'+
+$('#sertbl').innerHTML = '<table><thead><tr><th>Серия</th><th>Регион</th><th>Судья</th><th>Игр</th><th>Победы города</th><th>Доп/игру</th><th>Штрафы</th></tr></thead><tbody>'+
   PL.slice().sort(function(a,b){ return a.date < b.date ? 1 : -1; }).map(function(s){
     var sh = s.games ? (s.town||0)/s.games : null;
     return '<tr'+(s.semi?' class="semirow"':'')+'><td class="nm">'+(FL[s.fl]||'')+' '+esc(s.city)+' · '+dm(s.date)+'</td>'+
@@ -651,7 +651,7 @@ $('#sertbl').innerHTML = '<table><thead><tr><th>Серия</th><th>Регион<
       '<td class="hi">'+f3(s.gb)+'</td>'+
       '<td class="lo">'+(s.pen==null?'—':s.pen.toFixed(1))+'</td></tr>';
   }).join('')+'</tbody></table>';
-$('#serleg').innerHTML = 'Доп на посадку — судейские баллы «за качество игры», делённые на число посадок серии (в каждой серии '+
+$('#serleg').innerHTML = 'Доп за игру — судейские баллы «за качество игры», делённые на число игровых мест серии (в каждой серии '+
   GAMES/PL.length+' игр по 10 человек). Штрафы — сумма снятых баллов за всю серию. По лиге сейчас: доп <b style="color:#fff">'+
   f3(PL.reduce(function(a,s){ return a+(s.gb!=null?s.gb*(s.games||0)*10:0); },0)/SEATS)+'</b>, победы города <b style="color:#fff">'+
   pc(TOWN/GAMES)+'</b>.';
@@ -662,7 +662,7 @@ $('#qtbl').innerHTML='<table><thead><tr><th>Регион</th><th>Игроков<
   '<td class="'+(r[3]===0?'zero':'')+'">'+r[3]+'</td><td>'+r[4]+'</td><td>'+esc(r[5])+'</td><td>'+r[6]+'</td><td>'+esc(r[7])+'</td></tr>';}).join('')+'</tbody></table>';
 
 /* 04 судьи — живая таблица */
-$('#jtbl').innerHTML = '<table><thead><tr><th>Судья</th><th>Серий</th><th>Игр</th><th>Доп/посадку</th><th>Штраф/посадку</th><th>Победы города</th></tr></thead><tbody>'+
+$('#jtbl').innerHTML = '<table><thead><tr><th>Судья</th><th>Серий</th><th>Игр</th><th>Доп/игру</th><th>Штраф/игру</th><th>Победы города</th></tr></thead><tbody>'+
   byJudge.map(function(a){
     return '<tr><td class="nm">'+esc(a.j)+'</td><td>'+a.n+'</td><td>'+a.g+'</td>'+
       '<td class="hi">'+f3(a.gb)+'</td><td class="lo">'+f3(a.pp)+'</td>'+
@@ -676,20 +676,20 @@ $('#jtbl').innerHTML = '<table><thead><tr><th>Судья</th><th>Серий</th>
   var full  = cover >= PL.length;
   var note  = $('#jsnapnote');
   note.textContent = full
-    ? 'по посадкам · все ' + PLU(cover,'серия','серии','серий') + (D.judgesSnap ? ' · проход ' + D.judgesSnap : '')
+    ? 'по играм · все ' + PLU(cover,'серия','серии','серий') + (D.judgesSnap ? ' · проход ' + D.judgesSnap : '')
     : 'вшитый снимок · ' + PLU(cover,'серия','серии','серий') + ' из ' + PL.length;
   if (full) note.className = 'livenote';
-  $('#jdeep').innerHTML = '<table><thead><tr><th>Судья</th><th>Серий</th><th>Доп/посадку</th><th>% с допом</th><th>При поражении</th><th>Жирных ≥0.3</th><th>Штраф/пос.</th></tr></thead><tbody>'+
+  $('#jdeep').innerHTML = '<table><thead><tr><th>Судья</th><th>Серий</th><th>Доп/игру</th><th>% с допом</th><th>При поражении</th><th>Жирных ≥0.3</th><th>Штраф/пос.</th></tr></thead><tbody>'+
     deep.map(function(j){ return '<tr><td class="nm">'+esc(j.judge)+'</td><td>'+(j.seats/100)+'</td><td>'+f3(j.gb_per)+'</td>'+
       '<td>'+Math.round(j.posShare*100)+'%</td><td>'+f3(j.gbL_per)+'</td><td>'+Math.round(j.fatShare*100)+'%</td><td>'+f3(j.pen_per)+'</td></tr>';}).join('')+'</tbody></table>';
 })();
 
 /* 05 метод — счётчики из данных */
 $('#method').innerHTML = 'Протоколы <b>'+PLU(PL.length,'сыгранной серии','сыгранных серий','сыгранных серий')+
-  '</b> контура 757 на mafgame.org — '+GAMES+' игр, '+SEATS+' посадок. Таблица серий, таблица судей и находки выше считаются из этих протоколов при каждой загрузке страницы и обновляются вместе с данными (снимок '+esc(D.snap)+
+  '</b> контура 757 на mafgame.org — '+GAMES+' игр, '+SEATS+' игровых мест. Таблица серий, таблица судей и находки выше считаются из этих протоколов при каждой загрузке страницы и обновляются вместе с данными (снимок '+esc(D.snap)+
   '). Сверено с официальными таблицами серий 1:1. Судьи, взносы, календарь и регламент — из канала лиги. '+
   'Роботом не считаются две вещи. Квоты и сила регионов — снимок рейтинга 03.08. Анализ значимости остатков (перестановочный тест с поправкой Бенджамини-Хохберга) — отдельное исследование. '+
-  'Таблица судей по посадкам тоже собирается отдельным проходом по поигровым протоколам' + (D.judgesSnap ? ', последний — ' + esc(D.judgesSnap) : '') + '.';
+  'Таблица судей по играм тоже собирается отдельным проходом по поигровым протоколам' + (D.judgesSnap ? ', последний — ' + esc(D.judgesSnap) : '') + '.';
 
 </script>
 </body>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- MafgameStat · markers.html · v1.0 · 2026-06-19 · матрица совместных посадок (кто с кем сколько раз за одним столом) из рассадки турнира -->
+<!-- MafgameStat · markers.html · v1.0 · 2026-06-19 · матрица совместных игр (кто с кем сколько раз за одним столом) из рассадки турнира -->
 <meta charset="utf-8">
 <link rel="icon" href="assets/icons/icon-32.png?v=3" sizes="32x32">
 <link rel="icon" href="assets/icons/icon-192.png?v=3" sizes="192x192">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Совместные посадки — DOVOD</title>
+<title>Совместные игры — DOVOD</title>
 <style>
   :root{--accent:#ffb84d;--gold:var(--accent);--mut:#a0a4b8;}
   *{box-sizing:border-box;}
@@ -108,10 +108,10 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 </style>
 </head>
 <body>
-<nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><span>Совместные посадки</span></nav>
+<nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><span>Совместные игры</span></nav>
 <div class="wrap">
   <div class="topbar" id="nav"></div>
-  <h1>Совместные посадки</h1>
+  <h1>Совместные игры</h1>
   <div class="sub" id="sub">загрузка…</div>
   <div class="tabs" id="stage-tabs"></div>
   <div class="legend">
@@ -170,7 +170,7 @@ function draw(){
   }));
   let max=0;M.forEach(r=>r.forEach(v=>{if(v>max)max=v;}));
   const scope=hasFinal()?(mStage==='all'?'с финалом':'только квалификация'):'';
-  document.getElementById('sub').innerHTML=`Турнир ${T} · ${games.length} игр${scope?' ('+scope+')':''} · ${n} игроков · максимум совместных посадок: <b style="color:#ffd24a">${max}</b>`;
+  document.getElementById('sub').innerHTML=`Турнир ${T} · ${games.length} игр${scope?' ('+scope+')':''} · ${n} игроков · максимум совместных игр: <b style="color:#ffd24a">${max}</b>`;
   let h='<table><thead><tr><th class="corner"></th>';
   players.forEach(p=>h+=`<th><span class="vname">${esc(p.length>12?p.slice(0,11)+'…':p)}</span></th>`);
   h+='</tr></thead><tbody>';

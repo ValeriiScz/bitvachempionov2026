@@ -756,7 +756,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
    - «Сайт мелкий на телефоне, а локальный HTML ок» = в Chrome включён режим «Версия для ПК» для домена (грабля браузера, не кода).
    - Таблицы: залипшие первые колонки (.hasnum → #+ник; иначе ник). На .me-строке залипшие ячейки делаем НЕПРОЗРАЧНЫМИ (#2a2412), иначе цифры просвечивают при скролле.
    - .seatgrid: repeat(5,minmax(0,1fr)) — minmax(0,..) обязателен, иначе min-content колонок вылезает.
-   - Порядок мест за столом: 1-5 сверху, 10-9-8-7-6 снизу (реальная посадка).
+   - Порядок мест за столом: 1-5 сверху, 10-9-8-7-6 снизу (реальная рассадка).
    - Демо-режим (setDemo): случайный ПОЛНЫЙ бракет (11 квал → топ40 ×2 → топ10 ×5) для проверки статы ДО старта; НЕ трогает реальный localStorage-снимок live.js.
    - live.js грузится только на проде (в превью вырезан + данные зашиты). Кнопка «Обновить» (#__refbtn) — только на «Обзоре».
    ============================================================================ */
@@ -1595,7 +1595,7 @@ const CATO=[null,{n:'Экстремальная',p:'Экстремальные',
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
 function median(a){const q=a.slice().sort((x,y)=>x-y);const m=q.length>>1;return q.length?(q.length%2?q[m]:(q[m-1]+q[m])/2):0;}
 /* Сила столов: две линейки. TS — весь стол (10 ELO), категория по рангу среди всех столов квалификации равными долями (55 → по 11).
-   OS — соперники игрока без него самого (9 ELO), категория по рангу среди всех 550 посадок. Без профиля markery (Nostradamus) → медиана состава. */
+   OS — соперники игрока без него самого (9 ELO), категория по рангу среди всех 550 игровых мест. Без профиля markery (Nostradamus) → медиана состава. */
 function computeStrength(){
   D.TS={};D.OS={};D.LUCK={};
   const elos=Object.values(D.RATE).map(r=>r.elo).filter(Boolean);const med=median(elos)||1100;
@@ -1649,7 +1649,7 @@ RENDER.strength=function(){return `<div class="view"><div class="secttl">&#9741;
 RENDER.luck=function(){return `<div class="view"><div class="secttl">&#9860; Рассадка · сила соперников</div><div id="luckArea"></div></div>`;};
 RENDER.cards=function(){return `<div class="view"><div class="secttl">&#9646; Карточки игроков</div><div id="cardTop"></div><div id="cardArea"></div></div>`;};
 function paintStrength(){const area=document.getElementById('strArea');if(!area)return;
-  if(!D.TS||!D.tblN){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9741;</div><h3>Рассадки пока нет</h3><p>Карта столов появится, когда mafgame опубликует посадку квалификации.</p></div></div>';return;}
+  if(!D.TS||!D.tblN){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9741;</div><h3>Рассадки пока нет</h3><p>Карта столов появится, когда mafgame опубликует рассадку квалификации.</p></div></div>';return;}
   const games=[...new Set(Object.values(D.TS).map(x=>x.g))].sort((a,b)=>a-b);const tbls=[...new Set(Object.values(D.TS).map(x=>x.t))].sort((a,b)=>a-b);
   const gd1=gamesDay1();
   let grid=`<div class="smx" style="grid-template-columns:44px repeat(${tbls.length},minmax(0,1fr))"><div class="smh"></div>`+tbls.map(t=>`<div class="smh">Стол ${ROMAN[t]}<small>${D.judges[t]?esc(D.judges[t].name):''}</small></div>`).join('');
@@ -1667,17 +1667,17 @@ function paintStrength(){const area=document.getElementById('strArea');if(!area)
 }
 let luckSort='opp';
 function paintLuck(){const area=document.getElementById('luckArea');if(!area)return;
-  if(!D.LUCK||!D.luckOrder){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9860;</div><h3>Посадки пока нет</h3><p>Силу соперников посчитаем, когда появится посадка квалификации.</p></div></div>';return;}
+  if(!D.LUCK||!D.luckOrder){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9860;</div><h3>Рассадки пока нет</h3><p>Силу соперников посчитаем, когда появится рассадка квалификации.</p></div></div>';return;}
   let order=D.luckOrder.slice();
   if(luckSort==='elo')order.sort((a,b)=>((D.RATE[b]&&D.RATE[b].elo)||0)-((D.RATE[a]&&D.RATE[a].elo)||0));
   else if(luckSort==='soft')order.reverse();
   const rows=order.map(n=>{const L=D.LUCK[n],R=D.RATE[n]||{},I=D.INFO[n]||{};const d=Math.round(L.d);const v=luckVerdict(L);
     return `<button class="lrow${n===myPlayer?' me':''}" data-p="${esc(n)}" onclick="goPlayer(this.dataset.p)"><span class="lr">${L.rank}</span><img class="lav${R.tier?' f-'+R.tier:''}" src="${esc(avOf(n)||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'"><span class="lmain"><span class="ln">${I.flag||''} ${esc(n)}${R.tier?` <span class="tpill tp-${R.tier}" style="font-size:9px;padding:0 5px">${R.tier}</span>`:''}</span><span class="ls"><b>${Math.round(L.avg)}</b><span class="na">/${Math.round(L.exp)}</span> <span class="dlt ${v.k}">${d>0?'+':''}${d}</span></span></span>${luckSquares(L,false)}</button>`;}).join('');
-  area.innerHTML=`<div class="note" style="margin:0 0 10px">Для каждого игрока — средний ELO его <b>девяти соперников</b> в каждой из десяти игр, без него самого. Δ — отклонение от <b>личного ожидания</b> при случайном жребии (ты не можешь сидеть против себя, поэтому у сильного ожидаемый соперник чуть слабее, у слабого — чуть сильнее). В строке: <b>средний соперник</b>/ожидание и Δ. Квадратики — категория каждой посадки среди всех 550, от <b>спокойной</b> до <b>экстремальной</b>. Тап — страница игрока.</div>
+  area.innerHTML=`<div class="note" style="margin:0 0 10px">Для каждого игрока — средний ELO его <b>девяти соперников</b> в каждой из десяти игр, без него самого. Δ — отклонение от <b>личного ожидания</b> при случайном жребии (ты не можешь сидеть против себя, поэтому у сильного ожидаемый соперник чуть слабее, у слабого — чуть сильнее). В строке: <b>средний соперник</b>/ожидание и Δ. Квадратики — категория каждого игрового места среди всех 550, от <b>спокойной</b> до <b>экстремальной</b>. Тап — страница игрока.</div>
     <div class="segwrap"><span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Сначала:</span><span class="seg"><button class="${luckSort==='opp'?'on':''}" onclick="luckSort='opp';paintLuck()">экстремальные</button><button class="${luckSort==='soft'?'on':''}" onclick="luckSort='soft';paintLuck()">спокойные</button><button class="${luckSort==='elo'?'on':''}" onclick="luckSort='elo';paintLuck()">по ELO</button></span></div>
     <div class="kbrow" style="margin:6px 0 10px">${[5,4,3,2,1].map(c=>`<span class="kb ${CATO[c].k}">${CATO[c].n}</span>`).join('')}</div>
     <div class="llist">${rows}</div>
-    <div class="note">Средний соперник по турниру — ${Math.round(D.oppMean)} ELO. Разброс Δ между игроками — около ±15, так что ±10 — шум, ±22 и больше — уже заметно. Проверили перестановками: наблюдаемый разброс средних по столам не отличается от случайной посадки — жребий выглядит честным, столы никто специально не выравнивал. Nostradamus без профиля markery: для него и для его соседей взята медиана состава.</div>`;
+    <div class="note">Средний соперник по турниру — ${Math.round(D.oppMean)} ELO. Разброс Δ между игроками — около ±15, так что ±10 — шум, ±22 и больше — уже заметно. Проверили перестановками: наблюдаемый разброс средних по столам не отличается от случайной рассадки — жребий выглядит честным, столы никто специально не выравнивал. Nostradamus без профиля markery: для него и для его соседей взята медиана состава.</div>`;
 }
 /* ── Карточки игроков (мобайл: список → полноэкранный просмотр со свайпом; десктоп: сетка) ── */
 const RK=['C','S','M','D'],RN={C:'Мирный',S:'Шериф',M:'Мафия',D:'Дон'},RC={C:'#EF4444',S:'#FBBF24',M:'#9CA3AF',D:'#A78BFA'};

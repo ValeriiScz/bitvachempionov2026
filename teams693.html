@@ -119,7 +119,7 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 document.getElementById('nav').innerHTML=
   `<a class="nav-btn muted" href="tournament.html?t=${T}">← Турнир</a>`+
   `<a class="nav-btn muted" href="results.html?t=${T}">Рассадка</a>`+
-  `<a class="nav-btn muted" href="markers.html?t=${T}">Совместные посадки</a>`+
+  `<a class="nav-btn muted" href="markers.html?t=${T}">Совместные игры</a>`+
   `<a class="nav-btn muted" href="standings.html?t=${T}">Сводная</a>`;
 Promise.all([
   fetch('data/tournament_693.json').then(r=>r.json()),

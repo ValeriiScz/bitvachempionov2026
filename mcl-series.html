@@ -715,7 +715,7 @@ $('#slist').innerHTML=D.series.slice().reverse().map(function(s){
     '</div>'+
     (s.nores?'':'<div class="sidet">'+srtable(s)+'<div class="dgrid">'+
       '<div class="dg"><div class="k">Побед города</div><div class="v">'+(s.town==null?'—':s.town+' из 10')+'</div><div class="h2n">Сколько игр из десяти выиграла красная команда. По всем сериям сезона — 32%.</div></div>'+
-      '<div class="dg"><div class="k">Средний доп судьи</div><div class="v">'+f3(s.gb)+'</div><div class="h2n">Дополнительные баллы «за качество игры» в среднем на одну посадку. По лиге сезона — 0.106.</div></div>'+
+      '<div class="dg"><div class="k">Средний доп судьи</div><div class="v">'+f3(s.gb)+'</div><div class="h2n">Дополнительные баллы «за качество игры» в среднем за одну игру. По лиге сезона — 0.106.</div></div>'+
       '<div class="dg"><div class="k">Доп при поражении</div><div class="v">'+f3(s.gbl)+'</div><div class="h2n">Тот же доп, но только в проигранных играх — показывает, платит ли судья за игру без результата.</div></div>'+
       '<div class="dg"><div class="k">Штрафы за серию</div><div class="v">'+s.pen.toFixed(1)+'</div><div class="h2n">Сумма всех снятых баллов за нарушения.</div></div>'+
       '<div class="dg"><div class="k">Взнос</div><div class="v">'+esc(s.fee||'—')+'</div>'+(s.time?'<div class="h2n">Старт '+esc(s.time)+'</div>':'')+'</div>'+

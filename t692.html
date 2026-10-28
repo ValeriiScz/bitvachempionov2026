@@ -811,7 +811,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
    - «Сайт мелкий на телефоне, а локальный HTML ок» = в Chrome включён режим «Версия для ПК» для домена (грабля браузера, не кода).
    - Таблицы: залипшие первые колонки (.hasnum → #+ник; иначе ник). На .me-строке залипшие ячейки делаем НЕПРОЗРАЧНЫМИ (#2a2412), иначе цифры просвечивают при скролле.
    - .seatgrid: repeat(5,minmax(0,1fr)) — minmax(0,..) обязателен, иначе min-content колонок вылезает.
-   - Порядок мест за столом: 1-5 сверху, 10-9-8-7-6 снизу (реальная посадка).
+   - Порядок мест за столом: 1-5 сверху, 10-9-8-7-6 снизу (реальная рассадка).
    - Демо-режим (setDemo): случайный ПОЛНЫЙ бракет (11 квал → топ40 ×2 → топ10 ×5) для проверки статы ДО старта; НЕ трогает реальный localStorage-снимок live.js.
    - live.js грузится только на проде (в превью вырезан + данные зашиты). Кнопка «Обновить» (#__refbtn) — только на «Обзоре».
    ============================================================================ */
@@ -1767,7 +1767,7 @@ const CATO=[null,{n:'Экстремальная',p:'Экстремальные',
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
 function median(a){const q=a.slice().sort((x,y)=>x-y);const m=q.length>>1;return q.length?(q.length%2?q[m]:(q[m-1]+q[m])/2):0;}
 /* Сила столов: две линейки. TS — весь стол (10 ELO), категория по рангу среди всех столов квалификации равными долями (55 → по 11).
-   OS — соперники игрока без него самого (9 ELO), категория по рангу среди всех 550 посадок. Без профиля markery (Nostradamus) → медиана состава. */
+   OS — соперники игрока без него самого (9 ELO), категория по рангу среди всех 550 игровых мест. Без профиля markery (Nostradamus) → медиана состава. */
 function computeStrength(){
   D.TS={};D.OS={};D.LUCK={};
   const elos=Object.values(D.RATE).map(r=>r.elo).filter(Boolean);const med=median(elos)||1100;
@@ -1831,7 +1831,7 @@ RENDER.strength=function(){return `<div class="view"><div class="secttl">&#9741;
 RENDER.luck=function(){return `<div class="view"><div class="secttl">&#9860; Рассадка · сила соперников</div><div id="luckArea"></div></div>`;};
 RENDER.cards=function(){return `<div class="view"><div class="secttl">&#9646; Карточки игроков</div><div id="cardTop"></div><div id="cardArea"></div></div>`;};
 function paintStrength(){const area=document.getElementById('strArea');if(!area)return;
-  if(!D.TS||!D.tblN){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9741;</div><h3>Рассадки пока нет</h3><p>Карта столов появится, когда mafgame опубликует посадку квалификации.</p></div></div>';return;}
+  if(!D.TS||!D.tblN){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9741;</div><h3>Рассадки пока нет</h3><p>Карта столов появится, когда mafgame опубликует рассадку квалификации.</p></div></div>';return;}
   const games=[...new Set(Object.values(D.TS).map(x=>x.g))].sort((a,b)=>a-b);const tbls=[...new Set(Object.values(D.TS).map(x=>x.t))].sort((a,b)=>a-b);
   const gd1=gamesDay1();
   let grid=`<div class="smx" style="grid-template-columns:44px repeat(${tbls.length},minmax(0,1fr))"><div class="smh"></div>`+tbls.map(t=>`<div class="smh">Стол ${ROMAN[t]}<small>${D.judges[t]?esc(D.judges[t].name):''}</small></div>`).join('');
@@ -1849,7 +1849,7 @@ function paintStrength(){const area=document.getElementById('strArea');if(!area)
 }
 let luckSort='opp';
 function paintLuck(){const area=document.getElementById('luckArea');if(!area)return;
-  if(!D.LUCK||!D.luckOrder){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9860;</div><h3>Посадки пока нет</h3><p>Силу соперников посчитаем, когда появится посадка квалификации.</p></div></div>';return;}
+  if(!D.LUCK||!D.luckOrder){area.innerHTML='<div class="panel"><div class="stub"><div class="si">&#9860;</div><h3>Рассадки пока нет</h3><p>Силу соперников посчитаем, когда появится рассадка квалификации.</p></div></div>';return;}
   let order=D.luckOrder.slice();
   if(luckSort==='elo')order.sort((a,b)=>((D.RATE[b]&&D.RATE[b].elo)||0)-((D.RATE[a]&&D.RATE[a].elo)||0));
   else if(luckSort==='soft')order.reverse();

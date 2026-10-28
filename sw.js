@@ -91,6 +91,9 @@ self.addEventListener('fetch', (e) => {
   if (req.headers.has('range') ||
       /\.(mp4|webm|m4v|mov|ogv|mp3|m4a|ogg|wav)$/i.test(url.pathname)) return;
 
+  /* 0.5) v1.17 (29.10.2026): /api/* (прокси mafgame, реакции и комментарии) — только сеть, мимо кэша */
+  if (url.pathname.startsWith('/api/')) return;
+
   /* 1) live-прокси mafgame — только сеть, никакого кэша */
   if (url.pathname.startsWith('/mafgame/')) return;
 
