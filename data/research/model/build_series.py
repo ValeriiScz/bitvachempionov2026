@@ -7,7 +7,7 @@ from gd_cfg import T, out as OUTP
 Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
 gd_sim.EVENT_WEIGHT={}; gd_sim.TARGET_TOP30_MEAN=None; gd_sim.RACE_BETA_SHIFT=0
-# 28.10.2026: замены в финале MCL стали официальными — страница серий тоже учитывает gd_sim.FINAL_OVERRIDES (раньше здесь обнулялось)
+gd_sim.FINAL_OVERRIDES={}   # 28.10.2026: на странице серий только официальный состав финалов; замены MCL публично не показываем (решение Валерия) — они учитываются только в гонке
 se=Season(2026,T,cal_future=fut,verbose=False)
 race=se.race
 META={
