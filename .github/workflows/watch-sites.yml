@@ -4,6 +4,7 @@
 # присылает письмо о провале. Сам сторож ничего не чинит и ничего не пишет в репозиторий.
 #
 # Запустить вручную: Actions → «Сторож сайтов» → Run workflow.
+# v1.2 · 2026-10-29: 3 попытки по 20 с вместо одной на 45 с; в сводке видно, какой адрес тормозит.
 # v1.1 · 2026-10-25: причина провала — аннотацией ::error:: и в Summary (раньше видна была только в логе).
 name: Сторож сайтов
 
@@ -38,11 +39,24 @@ jobs:
 
           problems, notes = [], []
 
+          import time
           def fetch(url, binary=False):
-              req = urllib.request.Request(url, headers={'User-Agent': UA})
-              with urllib.request.urlopen(req, timeout=45) as r:
-                  raw = r.read()
-              return raw if binary else raw.decode('utf-8')
+              # v1.2: 3 попытки по 20 с с паузой — разовый «не ответил» хостинга больше не роняет прогон
+              last = None
+              for i in range(3):
+                  try:
+                      req = urllib.request.Request(url, headers={'User-Agent': UA})
+                      t0 = time.time()
+                      with urllib.request.urlopen(req, timeout=20) as r:
+                          raw = r.read()
+                      slow = time.time() - t0
+                      if slow > 10: notes.append('медленно: %s — %.0f с' % (url.split('?')[0], slow))
+                      return raw if binary else raw.decode('utf-8')
+                  except Exception as e:
+                      last = e
+                      notes.append('попытка %d не удалась: %s (%s)' % (i + 1, url.split('?')[0], e))
+                      time.sleep(15)
+              raise last
 
           def snap_of(text, var):
               m = re.search(r'window\.%s=(\{.*\});' % var, text, re.S)
