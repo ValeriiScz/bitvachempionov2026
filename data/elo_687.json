@@ -36,10 +36,6 @@
    "global": 877,
    "tier": "F"
   },
-  "Зима ❄️": {
-   "global": 997,
-   "tier": "C"
-  },
   "Tommy": {
    "global": 1563,
    "tier": "S"
@@ -53,7 +49,7 @@
    "tier": "D"
   },
   "Vitamin": {
-   "global": 971,
+   "global": 970,
    "tier": "D"
   },
   "Сабай": {
@@ -64,9 +60,17 @@
    "global": 1008,
    "tier": "C"
   },
+  "Стрелец": {
+   "global": 994,
+   "tier": "C"
+  },
   "ParadoXx": {
    "global": 1180,
    "tier": "B"
+  },
+  "Monte": {
+   "global": 988,
+   "tier": "D"
   },
   "Talash": {
    "global": 971,
@@ -93,7 +97,7 @@
    "tier": "A"
   },
   "S1LveR": {
-   "global": 1017,
+   "global": 1018,
    "tier": "C"
   },
   "Xenon": {
@@ -108,13 +112,17 @@
    "global": 809,
    "tier": "F"
   },
+  "Mik": {
+   "global": 994,
+   "tier": "D"
+  },
   "YeS": {
    "global": 1429,
    "tier": "S"
   },
   "TOPS": {
    "global": 1075,
-   "tier": "B"
+   "tier": "C"
   },
   "Саботаж": {
    "global": 1336,
@@ -128,14 +136,26 @@
    "global": 1152,
    "tier": "B"
   },
-  "Миф": {
-   "global": 1333,
-   "tier": "S"
+  "Twix": {
+   "global": 962,
+   "tier": "D"
   },
-  "Chucha": {
-   "global": 1058,
+  "Спирит": {
+   "global": 1006,
    "tier": "C"
+  },
+  "Руанда": {
+   "global": 927,
+   "tier": "E"
+  },
+  "Нуар": {
+   "global": 978,
+   "tier": "D"
+  },
+  "Rustam": {
+   "global": 980,
+   "tier": "D"
   }
  },
- "snapshot": "2026-10-26"
+ "snapshot": "2026-10-30"
 }
