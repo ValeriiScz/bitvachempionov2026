@@ -267,7 +267,7 @@ window.TOURNAMENTS_DB = {
     "statusLabel": "Собирается · 36 подтв. + 1 заявка",
     "eloAvg": 1093,
     "eloN": 39,
-    "eloTotal": 39,
+    "eloTotal": 40,
     "organizer": "Mafia Club Cyprus",
     "mafgame": "https://mafgame.org/tournaments/687/view",
     "note": "Регламент: на 40 игроков — 12 отборочных туров и 4 финальные игры; на 44 — 11 туров, 2 полуфинала и финал.",

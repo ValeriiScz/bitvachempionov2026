@@ -7,7 +7,7 @@
   "expected": 40,
   "id": 687,
   "days": 2,
-  "players_confirmed": 39,
+  "players_confirmed": 40,
   "rating_note": "markery.online, снимок 30.10.2026 (ELO; места в рейтингах — снимок 26.10): ELO и место в глобальном рейтинге (всё время) и в рейтинге сезона 2026; ранг L/S/A/B/C/D/E/F — по общему ELO (L 1600+, S 1300+, A 1190+, B 1075+, C 994+, D 937+, E 880+)"
  },
  "players": [
@@ -1024,10 +1024,36 @@
    "r_tour_2026": null,
    "r_elo_ly": null,
    "elo_snap": "2026-10-30"
+  },
+  {
+   "nick": "Terpsichore",
+   "uid": 2076,
+   "real": "Вера",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2076/eca8bfcafdc15c4cbc3286a736e870834f8cc860.png",
+   "status": "confirmed",
+   "club": "",
+   "cc": "",
+   "country": "",
+   "flag": "",
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": 40,
+   "mk_match": null,
+   "markery_id": null,
+   "r_elo_cur": null,
+   "r_rank": null,
+   "r_tour": null,
+   "r_inactive": null,
+   "r_tier": null,
+   "r_elo_2026": null,
+   "r_rank_2026": null,
+   "r_tour_2026": null,
+   "r_elo_ly": null,
+   "elo_snap": null
   }
  ],
  "stats": {
-  "n_conf": 39,
+  "n_conf": 40,
   "mk_avg": 1093.5,
   "mk_n": 39,
   "mk_median": 1018,
@@ -1040,7 +1066,8 @@
    "C": 10,
    "B": 3,
    "A": 7,
-   "S": 5
+   "S": 5,
+   "—": 1
   },
   "snapshot": "2026-10-30"
  }
