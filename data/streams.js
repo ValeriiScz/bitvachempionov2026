@@ -24,13 +24,13 @@ window.STREAMS_DB = {
   },
   "692": {"gamesDay1": 6, "days": {"1": {}, "2": {}}},
   "687": {
-    "test": true,
-    "testNote": "ТЕСТ: пока стоят записи 4 столов Чемпионата Европы (634) — чтобы проверить раскладку на 4 стола. Настоящие эфиры MGP встанут сюда перед стартом (вкладка «Эфиры» в Google-таблице).",
-    "gamesDay1": 6,
+    "gamesDay1": 8,
+    "playlist": "https://www.youtube.com/playlist?list=PLECplviWRfPg",
     "days": {
-      "1": {"1":"mJLwDJ2z4Xs","2":"e5YdLN0HO28","3":"JJcE1Jmt8Jw","4":"sNYDxPQUuMQ"},
-      "2": {"1":"SZgXjykMG80","2":"ruQbp0jYZfA","3":"YFu-hx5Deps","4":"1m4DoxJLTUo"}
-    }
+      "1": {"1":"tj6xLnd2igI","3":"u8QyYM8ygsk","4":"0SP5fLlYXKg"},
+      "2": {"1":"CRgce4UfnOI","2":"ti1zuwnThGA","3":"jcbFc5u-HO4","4":"Bej6yASZOBE"}
+    },
+    "final": "clBcKNN_lik"
   },
   "694": {
     "gamesDay1": 6,

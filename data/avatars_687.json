@@ -44,7 +44,29 @@
   "Rustam": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_756/a174175cd5aa3d52ee2e8a73bb2a978dbf35ea67.png",
   "Terpsichore": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2076/eca8bfcafdc15c4cbc3286a736e870834f8cc860.png"
  },
- "judges": {},
+ "judges": {
+  "1": {
+   "name": "KEX",
+   "role": "Главный судья",
+   "tg": "@KEX1911",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_44/a6bfae05ca17bcfaa2961020a9b44f5860c2f4fe.png"
+  },
+  "2": {
+   "name": "Рыба-мÓя",
+   "tg": "@yanadovh",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_247/608e827555f51ee98a1d7474e61d3a0fc10042d0.png"
+  },
+  "3": {
+   "name": "Aragil",
+   "tg": "@aragil69",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_6/808fd686e7a1aed1b75b135ad703bd1d32cee6a0.png"
+  },
+  "4": {
+   "name": "Кирпич",
+   "tg": "@alexgrod",
+   "avatar": ""
+  }
+ },
  "duty": null,
  "commentator": null,
  "referees": []

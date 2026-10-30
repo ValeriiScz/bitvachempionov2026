@@ -169,6 +169,21 @@
   .tbl.full .co{display:none;}
   .rcx-red{border-color:#f0906f!important;background:rgba(224,101,77,.13)!important;}
   .rcx-blk{border-color:#9cc0e6!important;background:rgba(122,167,214,.13)!important;}
+  .qkrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+  .qk{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:12px 12px 11px;border-radius:12px;border:1px solid var(--line);background:rgba(38,224,255,.07);color:var(--gold-hi);cursor:pointer;text-align:left;font:inherit;}
+  .qk:hover{background:rgba(38,224,255,.13);}
+  .qk .qi{font-size:18px;color:var(--gold);}
+  .qk b{font-size:14px;font-weight:800;}
+  .qk small{font-size:11.5px;color:var(--mut);line-height:1.3;}
+  .sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px 14px;}
+  .sgt{font:700 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 6px;}
+  .sgc{display:flex;flex-wrap:wrap;gap:6px;}
+  .sgb{padding:7px 10px;border-radius:9px;border:1px solid var(--line2);background:none;color:#dfe5ef;font:600 12.5px/1.2 inherit;font-family:inherit;cursor:pointer;text-align:left;}
+  .sgb:hover{border-color:var(--line);color:var(--gold-hi);}
+  .sgb.lk{opacity:.45;cursor:default;}
+  .sgb small{display:block;font-size:9.5px;color:var(--dim);margin-top:2px;}
+  @media(max-width:480px){.qkrow{gap:6px;}.qk{padding:10px 8px;}.qk b{font-size:13px;}.qk small{font-size:10.5px;}}
+  .schl{display:flex;flex-direction:column;gap:2px;} .schr{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--line2);font-size:14px;} .schr:last-child{border-bottom:0;} .scht{font:800 13px/1.4 var(--mono);color:var(--gold-hi);min-width:48px;}
   .seclist{display:flex;flex-direction:column;gap:9px;}
   .seci{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;cursor:pointer;
     background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:11px;padding:10px 12px;
@@ -796,7 +811,11 @@ const CFG={id:'687',ls:'t687_',name:'Mediterranean Grand-Prix 2026',short:'MGP',
   quals:12,tables:4,finalN:10,finals:4,fmt:'12+4',
   intro:'Пятизвёздочный Mediterranean Grand-Prix в Лимасоле (отель St.Raphael), 31 октября – 1 ноября, призовой фонд 3000 €. По регламенту на 40 игроков — 12 отборочных туров на четырёх столах (играют все) и финал топ‑10 из четырёх игр; если соберётся 44 — 11 туров с одним пропуском у каждого, 2 полуфинала и финал.',
   watch:'watch687.html',mafgame:'https://mafgame.org/tournaments/687/view'};
-const START='2026-10-31T10:00:00+02:00'; /* ГИПОТЕЗА: время старта на mafgame не указано */
+const START='2026-10-31T11:00:00+02:00'; /* 30.10: открытие 11:00, первая игра 11:30 (расписание организатора) */
+CFG.schedule=[
+ {day:'31 октября, суббота',items:[['10:30','Сбор игроков в St.Raphael Resort'],['11:00','Открытие турнира'],['11:30','Первая отборочная игра'],['15:40','Обед для всех участников, фотосессия'],['16:20','Пятая отборочная игра'],['21:00','Завершение игрового дня']]},
+ {day:'1 ноября, воскресенье',items:[['10:30','Сбор игроков в St.Raphael Resort'],['11:00','Девятая отборочная игра'],['15:40','Обед для всех участников'],['17:00','Первая игра финала'],['22:00','Церемония награждения']]}];
+CFG.schedNote='Время местное (Кипр). 📸 Фотосессия — в субботу после обеда, приходите красивые! Вопросы — <a class="lnk" style="margin:0" href="https://t.me/annapavlovacy" target="_blank" rel="noopener">@annapavlovacy</a>.';
 const DEF_AV='https://mafgame.org/build/assets/avatar-default2-33e44bae.png';
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function mono(nick){return ((nick||'?').replace(/[^A-Za-zА-Яа-яЁё0-9]/g,'').slice(0,2).toUpperCase())||'·';}
@@ -805,7 +824,7 @@ function plW(n,a,b,c){const m=Math.abs(n)%100,m1=m%10;if(m>10&&m<20)return c;if(
 function players_w(n){return n+' '+plW(n,'игрок','игрока','игроков');}
 
 const NAV=[
-  {group:'Обзор',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Информация'},{id:'streams',ic:'▶',lab:'Трансляции'}]},
+  {group:'Обзор',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Информация'},{id:'streams',ic:'▶',lab:'Трансляции'},{id:'schedule',ic:'◷',lab:'Расписание'}]},
   {group:'Игроки',ic:'♟',items:[
     {id:'my',ic:'♟',lab:'Страница игрока'},
     {id:'roster',ic:'≡',lab:'Состав по ELO'},
@@ -991,6 +1010,7 @@ const RENDER={
       <div id="seatArea"></div></div>`;
   },
   streams(){return `<div class="view"><div class="secttl">&#9654; Трансляции</div>${streamsPanel()}</div>`;},
+  schedule(){const S=CFG.schedule||[];return `<div class="view"><div class="secttl">&#9719; Расписание</div>`+S.map(d=>`<div class="panel"><h3>${esc(d.day)}</h3><div class="schl">`+d.items.map(([t,x])=>`<div class="schr"><span class="scht">${esc(t)}</span><span>${esc(x)}</span></div>`).join('')+`</div></div>`).join('')+(CFG.schedNote?`<div class="note">${CFG.schedNote}</div>`:'')+`</div>`;},
   my(){return `<div class="view"><div class="mymini">${esc((D.tour&&(D.tour.short||D.tour.tournament_name))||'')}</div><div class="secttl" id="myTtl">&#9823; Страница игрока</div><div id="myTop"></div><div id="myArea"></div></div>`;},
   roster(){return `<div class="view"><div class="secttl">&#8801; Состав по ELO</div><div class="srcline">ELO, места и ранги — <a href="https://markery.online" target="_blank" rel="noopener">markery.online</a> · составы и аватарки — <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a></div>
       <div class="segwrap" id="rTop"></div>
@@ -1190,18 +1210,21 @@ function paintRolesN(){
   }
 }
 /* ── (v13) «Игрок» переехал в раздел «Моё» (initMy/drawMy ниже) ── */
-function secListPanel(){const items=[
- ['my','♟','Моё','следующая игра — стол, место, соперники, судья; вся ваша рассадка и статистика'],
- ['roster','≡','Игроки · Состав','рейтинг ELO и тиры; тап по игроку — его страница'],
- ['together','⇄','Игроки · Кто с кем','с кем сидите за одним столом: сколько раз и в каких играх'],
- ['seating','▦','Столы · По играм','все столы по каждой игре с меткой силы'],
- ['strength','◍','Столы · Сила столов','карта '+CFG.quals+' игр × '+CFG.tables+' стола: где самые жаркие партии'],
- ['luck','⚄','Столы · Рассадка','кому достались экстремальные соперники, а кому — спокойные'],
- ['stages','⚑','Результаты · Таблица','турнирная таблица (Σ) с линией выхода в финал (топ‑'+CFG.finalN+')'],
- ['games','▶','Результаты · Игры','протоколы по столам: роли, победа команды, допы, стрим'],
- ['roles','✦','Результаты · По картам','кто как играет мирным / шерифом / мафией / доном'],
- ['judges','⚖','Результаты · Судьи','ровно ли столы ставят допы — по паролю, для судейской коллегии']];
-return `<div class="panel"><h3>Разделы — тапайте</h3><div class="seclist">`+items.map(([id,ic,t,d])=>`<button class="seci" data-id="${id}" onclick="show(this.dataset.id)"><span class="sicon">${ic}</span><div><b>${esc(t)}</b><div class="sid">${esc(d)}</div></div><span class="go">›</span></button>`).join('')+`</div></div>`;}
+function secListPanel(){
+  /* v2 (30.10.2026): было 10 длинных карточек со старыми названиями — люди терялись. Теперь: 3 главные кнопки по фазе турнира
+     + компактная карта всех разделов, названия берутся прямо из меню (NAV) — расходиться не могут; закрытые — серые с подписью. */
+  const g=D.realGames||[];const seat=g.some(x=>(x.tables||[]).some(t=>(t.seats||[]).length));
+  const live=(D.played||0)>0,done=!!(D.tour&&D.tour.closed);
+  const SEC=id=>SECTIONS.find(x=>x.id===id)||{};
+  const top=done?[['stages','⚑','Итоги','места и баллы'],['games','▶','Все игры','кто как сыграл'],['roles','✦','По ролям','лучшие в каждой роли']]
+    :live?[['stages','⚑','Таблица','кто идёт в финал'],['streams','▶','Трансляции','все столы в эфире'],['my','♟','Мой игрок','следующая игра и стол']]
+    :seat?[['my','♟','Найти себя','ваш стол в каждой игре'],['seating','▦','Рассадка','все столы по играм'],['streams','▶','Трансляции','ссылки на эфиры']]
+    :[['roster','≡','Кто играет','состав и ELO'],['schedule','◷','Расписание','когда и во сколько'],['streams','▶','Трансляции','ссылки на эфиры']];
+  const big=top.map(([id,ic,t,d])=>`<button class="qk" onclick="show('${id}')"><span class="qi">${ic}</span><b>${t}</b><small>${d}</small></button>`).join('');
+  const groups=NAV.map(gr=>`<div class="sg"><div class="sgt">${gr.group}</div><div class="sgc">`+gr.items.map(it=>{const L=SEC(it.id);const lk=L.locked;
+      return `<button class="sgb${lk?' lk':''}" ${lk?'disabled':`onclick="show('${it.id}')"`}>${it.lab}${lk?`<small>${esc(L.lockTag||'')}</small>`:''}</button>`;}).join('')+`</div></div>`).join('');
+  return `<div class="panel"><h3>Главное сейчас</h3><div class="qkrow">${big}</div><div class="sgrid">${groups}</div><div class="note" style="margin-top:8px">То же меню — внизу экрана на телефоне и слева на компьютере.</div></div>`;
+}
 function resultsPanel(){
   const t=D.tour; if(!t||!t.closed) return '';
   const med=['🥇','🥈','🥉'];
