@@ -262,7 +262,7 @@ def main():
     town    = sum(s.get('town') or 0 for s in series)
     D['kpi'] = [
         ['%d / %d' % (played, total), 'серий сыграно (по регламенту %s)' % D['meta'].get('planned', '25–30 серий')],
-        ['%d' % games, 'игр · %d посадок · %d игроков' % (seats, players)],
+        ['%d' % games, 'игр · %d игровых мест · %d игроков' % (seats, players)],
         ['%d' % len(qualified), 'слотов в финал занято'],
         ['%.1f%%' % (town * 100.0 / games if games else 0), 'игр выиграл город (%d из %d)' % (town, games)],
     ]

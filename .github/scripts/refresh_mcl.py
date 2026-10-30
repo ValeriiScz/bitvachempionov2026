@@ -513,7 +513,7 @@ def main():
     games   = sum(s.get('games') or 10 for s in series if s.get('r'))
     players = len({r['u'] for c in D['conf'].values() for r in c['rows']})
     D['kpi'] = [['%d/%d' % (played, total), 'серий сыграно'],
-                ['%d' % games, 'игр · %d посадок' % (games * 10)],
+                ['%d' % games, 'игр · %d игровых мест' % (games * 10)],
                 ['%d' % players, 'игрока в контуре'],
                 [D.get('prize', {}).get('total', ''), 'призовой фонд финала']]
     D['ticker'] = ['%s — %s %.2f' % (s['city'].upper(), s['top'][0][0], s['top'][0][1])
