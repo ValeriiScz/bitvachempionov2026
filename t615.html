@@ -474,7 +474,9 @@
   @media(max-width:480px){.chooser{grid-template-columns:1fr;}}
 
   .pk{cursor:pointer;}
-  .oppt{display:inline-flex;gap:2px;flex-wrap:wrap;justify-content:center;max-width:150px;} .oppt .opt{font-size:9px;padding:0 4px;line-height:15px;}
+  .oppt{display:inline-flex;align-items:center;justify-content:center;padding-left:6px;} .oppt .opt{font-size:9px;padding:0 4px;line-height:15px;margin-left:-3px;}
+  .oppt .oav{width:22px;height:22px;border-radius:50%;object-fit:cover;border:2px solid var(--line2);margin-left:-6px;background:#11141c;box-shadow:0 0 0 1px #0b0d14;}
+  .opleg{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:11px;color:var(--mut);margin:0 0 8px;} .opleg i{display:inline-block;width:11px;height:11px;border-radius:50%;border:2px solid;margin-right:4px;vertical-align:-1px;}
   .peek{visibility:hidden;pointer-events:none;} .peek.open{visibility:visible;pointer-events:auto;} /* 31.10: закрытый peek на компьютере был невидимым (opacity 0), но ловил клики — открывались страницы игроков */
   .peekbd{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99980;}
   .peekbd.on{display:block;}
@@ -1423,7 +1425,7 @@ function drawMy(){
     if(stg!==curStage){curStage=stg;rows+=`<tr class="stgrow"><td colspan="6">${esc(stg)}</td></tr>`;}
     if(g===skip)rows+=`<tr class="rest${done?' dim':''}"><td class="gn">${stNum}</td><td colspan="5">— отдых —</td></tr>`;
     else if(bySlot[g])rows+=`<tr class="${done?'dim':''}${nxt?' hotrow':''}"><td class="gn">${stNum}</td><td>${ROMAN[bySlot[g].t]}</td><td>${bySlot[g].slot}</td><td>${catBadge(g,bySlot[g].t,false)}</td><td>${oppBadge(name,g)}</td><td>${(u=>u?`<a class="ytm" href="${esc(u)}" target="_blank" rel="noopener">&#9654;</a>`:'<span class="na">·</span>')(streamOf(g,bySlot[g].t,null))}</td></tr>`;}
-  if(rows)html+=`<div class="panel"><h3>Рассадка по играм</h3>${skip?`<div class="skipband">&#9208; Пропуск игры ${skip} — отдыхает</div>`:''}<table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th><th>Сила стола</th><th title="сильные соперники за столом: тир L/S/A/B">Сильные соперники</th><th title="трансляция стола в этот день">&#9654;</th></tr></thead><tbody>${rows}</tbody></table><div class="note" style="margin-top:6px">Серым — сыгранные, золотой рамкой — следующая. «Сила стола» — категория всего стола по ELO, «Соперники» — рассадка: категория девяти соперников без вас, от спокойной до экстремальной (см. «Столы»).</div></div>`;
+  if(rows)html+=`<div class="panel"><h3>Рассадка по играм</h3>${skip?`<div class="skipband">&#9208; Пропуск игры ${skip} — отдыхает</div>`:''}<div class="opleg">Сильные соперники — обводка по тиру: <span><i class="f-S"></i>S</span><span><i class="f-A"></i>A</span><span><i class="f-B"></i>B</span><span class="na">· тап — кто за столом</span></div><table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th><th>Сила стола</th><th title="сильные соперники за столом: тир L/S/A/B">Сильные соперники</th><th title="трансляция стола в этот день">&#9654;</th></tr></thead><tbody>${rows}</tbody></table><div class="note" style="margin-top:6px">Серым — сыгранные, золотой рамкой — следующая. «Сила стола» — категория всего стола по ELO, «Соперники» — рассадка: категория девяти соперников без вас, от спокойной до экстремальной (см. «Столы»).</div></div>`;
   html+=luckPanel(name);
   const opp=D.opp[name]||{};const topOpp=Object.entries(opp).sort((a,b)=>b[1]-a[1]).slice(0,6);
   if(topOpp.length){
@@ -1712,7 +1714,8 @@ function catBadge(g,t,withElo){const T=D.TS&&D.TS[g+'-'+t];if(!T)return '';const
   return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${t}" title="${c.n} стол · ${T.pts} очк. (${T.comp}) · средний ELO ${Math.round(T.avg)} · #${T.rank} из ${D.tblN} столов квалификации">${c.n}${withElo?` <small>${T.comp}</small>`:''}</span>`;}
 function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const RK={L:0,S:1,A:2,B:3};
   const top=(o.opp||[]).map(m=>({m,t:(D.RATE[m]&&D.RATE[m].tier)||''})).filter(x=>x.t in RK).sort((a,b)=>RK[a.t]-RK[b.t]);
-  const pills=top.length?top.map(x=>`<span class="tpill tp-${x.t} opt">${x.t}</span>`).join(''):'<span class="na">без сильных</span>';
+  /* v2.1 (31.10): фото сильных соперников внахлёст, обводка — цвет тира; без фото — буква тира */
+  const pills=top.length?top.map(x=>{const av=avOf(x.m);return av?`<img class="oav f-${x.t}" src="${esc(av)}" alt="${esc(x.m)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'tpill tp-${x.t} opt',textContent:'${x.t}'}))">`:`<span class="tpill tp-${x.t} opt">${x.t}</span>`;}).join(''):'<span class="na">без сильных</span>';
   return `<span class="pk oppt" data-g="${g}" data-t="${o.t}" data-p="${esc(nick)}" title="сильные соперники: ${esc(top.map(x=>x.m+' ('+x.t+')').join(', ')||'нет')} · средний ELO соперников ${Math.round(o.avg)}">${pills}</span>`;}
 function luckVerdict(L){const p=Math.round(L.pct);const z=L.z||0;const ps=(p>0?'+':'')+p+'%';
   if(z>=2)return {t:'самый тяжёлый путь',s:`сильных соперников на ${ps} больше среднего — один из самых трудных путей турнира`,k:'k1'};
