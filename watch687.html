@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · watch687.html · v3.0 · 2026-11-01 · плееры не пересоздаются при смене стола (loadVideoById) — картинка не пропадает, в т.ч. в экономии на iPhone; все окна стартуют без звука, звук — кнопкой 🔊 и переезжает вместе с главным столом; переключатель «Главный экран и звук — стол» под видео; быстрые ссылки на страницу турнира (путь игрока, таблица, рассадка); «следить за игроком» общий со страницей турнира; судьи столов из avatars_687 · v2.0 · 2026-10-27 · смотровая Mediterranean Grand-Prix 2026 (Лимасол, 31.10–1.11, 4 стола). НОВОЕ (канон для 3–5 столов): раскладка «Все столы» под число столов — телефон вертикально: большой эфир + ряд мини, тап по мини делает его главным; телефон повёрнут: сетка (2×2 для 4, 3+2 для 5) под высоту экрана; комп: «большой + остальные» / «сетка». Режим ⚡ Экономия (по умолчанию на телефоне): вживую только главный эфир, у остальных — кадр со стола раз в 45 с; ● Все вживую — все эфиры сразу (звук у одного). База — watch615 v1.0.
+<!-- DOVOD · watch687.html · v3.1 · 2026-11-01 · кнопка «⏭ все в лайв» над столами: все эфиры на самый свежий момент · v3.0 · 2026-11-01 · плееры не пересоздаются при смене стола (loadVideoById) — картинка не пропадает, в т.ч. в экономии на iPhone; все окна стартуют без звука, звук — кнопкой 🔊 и переезжает вместе с главным столом; переключатель «Главный экран и звук — стол» под видео; быстрые ссылки на страницу турнира (путь игрока, таблица, рассадка); «следить за игроком» общий со страницей турнира; судьи столов из avatars_687 · v2.0 · 2026-10-27 · смотровая Mediterranean Grand-Prix 2026 (Лимасол, 31.10–1.11, 4 стола). НОВОЕ (канон для 3–5 столов): раскладка «Все столы» под число столов — телефон вертикально: большой эфир + ряд мини, тап по мини делает его главным; телефон повёрнут: сетка (2×2 для 4, 3+2 для 5) под высоту экрана; комп: «большой + остальные» / «сетка». Режим ⚡ Экономия (по умолчанию на телефоне): вживую только главный эфир, у остальных — кадр со стола раз в 45 с; ● Все вживую — все эфиры сразу (звук у одного). База — watch615 v1.0.
 <!-- DOVOD · watch673.html (канон) · v1.0 · 2026-10-09 · «Смотровая» Чемпионата Молдовы 2026 (mafgame 673): все трансляции столов в одном окне.
      Назначение: зрителю с телефона — один эфир + переключатель столов + «кто за столом сейчас»; режим «Все столы» (на телефоне стопкой,
      повёрнутый телефон и комп — в ряд / «большой + два»); «Следить за игроком» — эфир сам переходит на его стол в каждой новой игре.
@@ -78,7 +78,8 @@ button{font:inherit;color:inherit}
 .pl .snd.on{border-color:var(--cyan);color:var(--cyan)}
 .pl.act{outline:2px solid var(--cyan);outline-offset:-2px}
 /* вкладки столов */
-.tabs{padding:8px 14px 0}.tabs .tcap{font:700 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:0 0 6px}
+.tabs{padding:8px 14px 0}.tabs .tcap{display:flex;align-items:center;justify-content:space-between;gap:8px;font:700 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:0 0 6px}
+.tabs .golive{flex:none;padding:5px 9px;border-radius:999px;border:1px solid rgba(219,81,78,.55);background:rgba(219,81,78,.10);color:#ff8a86;font:800 11px/1 Inter;letter-spacing:0;text-transform:none;cursor:pointer}
 .tabs .tg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px}.tabs .sp{font-style:normal;font-size:11px;margin-left:4px}
 .pl .snd{font-size:12px}.pl.main .snd:not(.on){border-color:var(--yel);color:var(--yel)}
 .qnav{display:flex;gap:6px;padding:0 14px 10px;overflow-x:auto;scrollbar-width:none}.qnav::-webkit-scrollbar{display:none}
@@ -337,7 +338,7 @@ const FST=new WeakMap();
 function ytCmd(fr,func,args){try{fr.contentWindow.postMessage(JSON.stringify({event:'command',func,args:args||[]}),'*');}catch(e){}}
 window.addEventListener('message',e=>{let host='';try{host=new URL(e.origin).hostname}catch(_){}if(!/(^|\.)youtube(-nocookie)?\.com$/.test(host))return;let d;try{d=typeof e.data==='string'?JSON.parse(e.data):e.data;}catch(_){return;}if(!d)return;
   const fr=[...document.querySelectorAll('.pl iframe')].find(f=>f.contentWindow===e.source);if(!fr)return;
-  const st=FST.get(fr)||{};st.ready=true;if(d.info&&d.info.videoData&&d.info.videoData.video_id)st.vid=d.info.videoData.video_id;FST.set(fr,st);
+  const st=FST.get(fr)||{};st.ready=true;if(d.info&&d.info.videoData&&d.info.videoData.video_id)st.vid=d.info.videoData.video_id;if(d.info&&typeof d.info.duration==='number'&&d.info.duration>0)st.dur=d.info.duration;if(d.info&&typeof d.info.currentTime==='number')st.ct=d.info.currentTime;FST.set(fr,st);
   /* onError 101/150 = владелец запретил встраивание → кнопка «смотреть на YouTube» */
   if(d.event==='onError'&&[100,101,150,153].includes(+d.info)){const pl=fr.closest('.pl');const id=pl.dataset.id;fr.remove();const b=pl.querySelector('.snd');if(b)b.remove();pl.insertAdjacentHTML('beforeend',`<div class="ph"><b>Встраивание выключено</b>Организатор запретил показ эфира на других сайтах.<a href="${watchURL(id)}" target="_blank" rel="noopener">Смотреть на YouTube ↗</a></div>`);}});
 function hookFrames(root){(root||document).querySelectorAll('.pl iframe').forEach(fr=>{if(fr._hk)return;fr._hk=1;fr.addEventListener('load',()=>{FST.set(fr,{});try{fr.contentWindow.postMessage(JSON.stringify({event:'listening',id:fr.title}),'*');}catch(e){}});});}
@@ -410,12 +411,19 @@ window.matchMedia('(orientation:landscape) and (max-width:1024px)').addEventList
 function setEco(on){S.eco=!!on;LS.set('w687_eco',S.eco?'1':'0');S.soundOn=false;renderStage(true);renderEco();}
 function renderEco(){document.querySelectorAll('#eco button').forEach(b=>b.classList.toggle('on',(b.dataset.e==='1')===S.eco));}
 function renderTabsSoundMark(){document.querySelectorAll('#tabs button[data-t]').forEach(b=>{const i=b.querySelector('.sp');if(i)i.textContent=(S.mode==='all'&&+b.dataset.t===S.sound)?(S.soundOn?'🔊':'▣'):'';});}
+/* v3.1: «в лайв» — все живые окна на самый свежий момент эфира и play. Перемотка за конец записи у live-эфира
+   YouTube ставит на live-край. Плеер ещё не отдал длительность — перезагружаем окно (без звука, старт сразу с live). */
+function goLive(){let n=0;document.querySelectorAll('#stage .pl iframe').forEach(fr=>{const st=FST.get(fr)||{};
+  if(st.ready&&st.dur){ytCmd(fr,'seekTo',[st.dur+3600,true]);ytCmd(fr,'playVideo');n++;}
+  else{const pl=fr.closest('.pl');if(pl&&pl.dataset.id){if(pl.classList.contains('main')&&S.soundOn){S.soundOn=false;}fr.src=embedURL(pl.dataset.id);fr._hk=0;hookFrames(pl);n++;}}});
+  paintSound();toast(n?(n>1?'Все эфиры — на самый свежий момент':'Эфир — на самый свежий момент'):'Нет запущенных эфиров');}
 function renderTabs(){
   const el=document.getElementById('tabs');const gi=D.cur;
   if(isFinal(gi)||S.mode==='studio'){el.innerHTML='';el.style.display='none';return;}el.style.display='';
   const cap=S.mode==='all'?'Главный экран и звук — стол:':'Смотреть стол:';
-  el.innerHTML=`<div class="tcap">${cap}</div><div class="tg">`+Array.from({length:CFG.tables},(_,i)=>i+1).map(t=>{const has=!!streamId(t,gi);const me=S.follow&&tableOf(S.follow,gi)===t;const tb=(D.games[gi]&&D.games[gi].tables.find(x=>x.table_num===t))||null;const live=tb&&tb.winner==='unknown'&&D.live;
+  el.innerHTML=`<div class="tcap"><span>${cap}</span><button class="golive" id="golive" title="Перемотать ${S.mode==='all'?'все эфиры':'эфир'} на самый свежий момент и запустить">⏭ ${S.mode==='all'?'все в лайв':'в лайв'}</button></div><div class="tg">`+Array.from({length:CFG.tables},(_,i)=>i+1).map(t=>{const has=!!streamId(t,gi);const me=S.follow&&tableOf(S.follow,gi)===t;const tb=(D.games[gi]&&D.games[gi].tables.find(x=>x.table_num===t))||null;const live=tb&&tb.winner==='unknown'&&D.live;
     return `<button class="${t===mainTable()?'on':''}${has?'':' off'}" data-t="${t}">${live?'<i class="dot"></i>':''}${me?'<span class="me">★</span>':''}<span class="n">${ROMAN[t]}<i class="sp"></i></span><span class="s">${esc(judgeOf(t)||avgElo(tb)||'')}</span></button>`;}).join('')+'</div>';
+  document.getElementById('golive').onclick=goLive;
   el.querySelectorAll('button[data-t]').forEach(b=>b.onclick=()=>{const t=+b.dataset.t;
     if(S.mode==='all'){pickMain(t);return;}
     if(S.follow&&S.auto&&tableOf(S.follow,D.cur)!==t){S.auto=false;LS.set('w687_auto','0');}
