@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t687.html · v1.0 · 2026-10-27 · Mediterranean Grand-Prix 2026 (mafgame 687, Лимасол, 31.10–1.11, 5★) — движок турнирной страницы DOVOD (канон t615: меню v2, тихий live 15 с). Формат по регламенту mafgame: 40 игроков — 12 квал × 4 стола → финал 4 игры топ-10 (при 44 — 11 квал + 2 полуфинала: поправить CFG).
+<!-- DOVOD · t687.html · турнир закрыт 02.11.2026: 17 игр заморожены (games_687_current.json), чемпион YeS, итоги и номинации mafgame в tournament_687.json · v1.0 · 2026-10-27 · Mediterranean Grand-Prix 2026 (mafgame 687, Лимасол, 31.10–1.11, 5★) — движок турнирной страницы DOVOD (канон t615: меню v2, тихий live 15 с). Формат по регламенту mafgame: 40 игроков — 12 квал × 4 стола → финал 4 игры топ-10 (при 44 — 11 квал + 2 полуфинала: поправить CFG).
      Данные: data/*_687* (участники и ELO markery 26.10; игры — live с mafgame в дни турнира). Эфиры — watch687.html (раскладка на 4 стола, режим экономии). -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -812,8 +812,8 @@ const TIER_ORD={L:-1,S:0,A:1,B:2,C:3,D:4,E:5,F:6};
 /* ── КОНФИГ ТУРНИРА: новый турнир = копия файла + правка этого блока + data/*_{id}* ── */
 const CFG={id:'687',ls:'t687_',name:'Mediterranean Grand-Prix 2026',short:'MGP',kick:'DOVOD · 5★ · Лимасол',h1:'Mediterranean <b>Grand-Prix</b> 2026',
   dates:'31 октября – 1 ноября 2026',place:'Лимасол',startLab:'старт 31 октября',startShort:'31.10',
-  quals:12,tables:4,finalN:10,finals:4,finalsTxt:'4–5 игр',fmt:'12+4(5)',
-  intro:'Пятизвёздочный Mediterranean Grand-Prix в Лимасоле (отель St.Raphael), 31 октября – 1 ноября, призовой фонд 3000 €. По регламенту на 40 игроков — 12 отборочных туров на четырёх столах (играют все) и финал топ‑10 из четырёх игр; если соберётся 44 — 11 туров с одним пропуском у каждого, 2 полуфинала и финал.',
+  quals:12,tables:4,finalN:10,finals:5,finalsTxt:'5 игр',fmt:'12+5',
+  intro:'Пятизвёздочный Mediterranean Grand-Prix в Лимасоле (отель St.Raphael) завершён 1 ноября: 40 игроков, 12 отборочных игр на четырёх столах и финал топ‑10 из пяти игр, призовой фонд 3000 €. Чемпион — YeS (14.03), второе место — ParadoXx (12.80), третье — Xenon (12.54). Все 17 игр заморожены и сверены с официальной таблицей mafgame.',
   watch:'watch687.html',mafgame:'https://mafgame.org/tournaments/687/view'};
 const START='2026-10-31T11:00:00+02:00'; /* 30.10: открытие 11:00, первая игра 11:30 (расписание организатора) */
 CFG.schedule=[

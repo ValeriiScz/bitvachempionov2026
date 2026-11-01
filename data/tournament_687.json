@@ -6,20 +6,396 @@
  "location": "Лимасол, Кипр · St.Raphael Resort",
  "club": "Mafia Club Cyprus",
  "organizer": "Mafia Club Cyprus",
- "players_total": 37,
+ "players_total": 40,
  "days": 2,
  "fee_eur": 130,
  "stars": 5,
  "prize_eur": 3000,
- "format": "Регламент mafgame: на 40 игроков — 12 отборочных туров на 4 столах и 4 финальные игры; на 44 — 11 туров (каждый пропускает одну) + 2 полуфинала + 4 финала. Расписание — после приёма заявок.",
- "closed": false,
+ "format": "40 игроков: 12 отборочных игр на 4 столах и финал топ-10 из 5 игр.",
+ "closed": true,
  "in_progress": false,
  "live_from": "2026-10-30",
  "live_to": "2026-11-01",
- "upcoming": true,
- "games_played": 0,
- "games_total": 16,
+ "upcoming": false,
+ "games_played": 17,
+ "games_total": 17,
  "accent": "#26e0ff",
  "start_iso": "2026-10-31T11:00:00+02:00",
- "note": "Расписание организатора: сбор 10:30, открытие 11:00, первая игра 11:30 (Кипр)."
+ "chief_referee": "KEX",
+ "referees": [
+  "KEX",
+  "Кирпич",
+  "Aragil",
+  "Рыба-мÓя"
+ ],
+ "champion": "YeS",
+ "winners": [
+  "YeS",
+  "ParadoXx",
+  "Xenon"
+ ],
+ "standings": [
+  {
+   "place": 1,
+   "name": "YeS",
+   "sigma": 14.025,
+   "stage": "финал",
+   "wins": 11,
+   "games": 17
+  },
+  {
+   "place": 2,
+   "name": "ParadoXx",
+   "sigma": 12.795,
+   "stage": "финал",
+   "wins": 11,
+   "games": 17
+  },
+  {
+   "place": 3,
+   "name": "Xenon",
+   "sigma": 12.535,
+   "stage": "финал",
+   "wins": 10,
+   "games": 17
+  },
+  {
+   "place": 4,
+   "name": "Tommy",
+   "sigma": 12.51,
+   "stage": "финал",
+   "wins": 10,
+   "games": 17
+  },
+  {
+   "place": 5,
+   "name": "Gangster",
+   "sigma": 12.44,
+   "stage": "финал",
+   "wins": 11,
+   "games": 17
+  },
+  {
+   "place": 6,
+   "name": "DOVOD",
+   "sigma": 12.07,
+   "stage": "финал",
+   "wins": 11,
+   "games": 17
+  },
+  {
+   "place": 7,
+   "name": "Matilda",
+   "sigma": 11.575,
+   "stage": "финал",
+   "wins": 12,
+   "games": 17
+  },
+  {
+   "place": 8,
+   "name": "Саботаж",
+   "sigma": 11.21,
+   "stage": "финал",
+   "wins": 9,
+   "games": 17
+  },
+  {
+   "place": 9,
+   "name": "Mik",
+   "sigma": 11.03,
+   "stage": "финал",
+   "wins": 10,
+   "games": 17
+  },
+  {
+   "place": 10,
+   "name": "RAMZES",
+   "sigma": 10.26,
+   "stage": "финал",
+   "wins": 9,
+   "games": 17
+  },
+  {
+   "place": 11,
+   "name": "Руанда",
+   "sigma": 7.56,
+   "stage": "квалификация",
+   "wins": 8,
+   "games": 12
+  },
+  {
+   "place": 12,
+   "name": "Rivierra",
+   "sigma": 7.1,
+   "stage": "квалификация",
+   "wins": 8,
+   "games": 12
+  },
+  {
+   "place": 13,
+   "name": "Mr. Smith",
+   "sigma": 7.05,
+   "stage": "квалификация",
+   "wins": 6,
+   "games": 12
+  },
+  {
+   "place": 14,
+   "name": "Rustam",
+   "sigma": 6.85,
+   "stage": "квалификация",
+   "wins": 7,
+   "games": 12
+  },
+  {
+   "place": 15,
+   "name": "TOPS",
+   "sigma": 6.83,
+   "stage": "квалификация",
+   "wins": 7,
+   "games": 12
+  },
+  {
+   "place": 16,
+   "name": "Нуар",
+   "sigma": 6.5,
+   "stage": "квалификация",
+   "wins": 8,
+   "games": 12
+  },
+  {
+   "place": 17,
+   "name": "Магнат",
+   "sigma": 6.4,
+   "stage": "квалификация",
+   "wins": 6,
+   "games": 12
+  },
+  {
+   "place": 18,
+   "name": "Буржуй",
+   "sigma": 6.33,
+   "stage": "квалификация",
+   "wins": 5,
+   "games": 12
+  },
+  {
+   "place": 19,
+   "name": "Lюц",
+   "sigma": 6.01,
+   "stage": "квалификация",
+   "wins": 5,
+   "games": 12
+  },
+  {
+   "place": 20,
+   "name": "aptah",
+   "sigma": 5.84,
+   "stage": "квалификация",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 21,
+   "name": "Tripok",
+   "sigma": 5.56,
+   "stage": "квалификация",
+   "wins": 5,
+   "games": 12
+  },
+  {
+   "place": 22,
+   "name": "Стрелец",
+   "sigma": 5.55,
+   "stage": "квалификация",
+   "wins": 5,
+   "games": 12
+  },
+  {
+   "place": 23,
+   "name": "Шарлотка",
+   "sigma": 5.3,
+   "stage": "квалификация",
+   "wins": 6,
+   "games": 12
+  },
+  {
+   "place": 24,
+   "name": "Монтгомери",
+   "sigma": 5.26,
+   "stage": "квалификация",
+   "wins": 6,
+   "games": 12
+  },
+  {
+   "place": 25,
+   "name": "Luca",
+   "sigma": 4.98,
+   "stage": "квалификация",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 26,
+   "name": "Сью",
+   "sigma": 4.73,
+   "stage": "квалификация",
+   "wins": 3,
+   "games": 12
+  },
+  {
+   "place": 27,
+   "name": "Monte",
+   "sigma": 4.68,
+   "stage": "квалификация",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 28,
+   "name": "Катанчик",
+   "sigma": 4.58,
+   "stage": "квалификация",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 29,
+   "name": "S1LveR",
+   "sigma": 4.47,
+   "stage": "квалификация",
+   "wins": 3,
+   "games": 12
+  },
+  {
+   "place": 30,
+   "name": "Korolevich",
+   "sigma": 4.26,
+   "stage": "квалификация",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 31,
+   "name": "Сабай",
+   "sigma": 4.12,
+   "stage": "квалификация",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 32,
+   "name": "Спирит",
+   "sigma": 4,
+   "stage": "квалификация",
+   "wins": 5,
+   "games": 12
+  },
+  {
+   "place": 33,
+   "name": "Вольный",
+   "sigma": 3.7,
+   "stage": "квалификация",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 34,
+   "name": "Olgierd",
+   "sigma": 3.53,
+   "stage": "квалификация",
+   "wins": 3,
+   "games": 12
+  },
+  {
+   "place": 35,
+   "name": "Джошуа",
+   "sigma": 3.35,
+   "stage": "квалификация",
+   "wins": 3,
+   "games": 12
+  },
+  {
+   "place": 36,
+   "name": "Lansky",
+   "sigma": 3.13,
+   "stage": "квалификация",
+   "wins": 3,
+   "games": 12
+  },
+  {
+   "place": 37,
+   "name": "Twix",
+   "sigma": 2.75,
+   "stage": "квалификация",
+   "wins": 3,
+   "games": 12
+  },
+  {
+   "place": 38,
+   "name": "Vitamin",
+   "sigma": 2.7,
+   "stage": "квалификация",
+   "wins": 2,
+   "games": 12
+  },
+  {
+   "place": 39,
+   "name": "Talash",
+   "sigma": 2.35,
+   "stage": "квалификация",
+   "wins": 3,
+   "games": 12
+  },
+  {
+   "place": 40,
+   "name": "Terpsichore",
+   "sigma": 2.25,
+   "stage": "квалификация",
+   "wins": 3,
+   "games": 8
+  },
+  {
+   "place": 41,
+   "name": "Солнце",
+   "sigma": 2.2,
+   "stage": "квалификация",
+   "wins": 2,
+   "games": 4
+  }
+ ],
+ "reconciliation": "Сверено с официальной таблицей mafgame 02.11.2026: квалификация 41/41 и финал 10/10 совпадают до сотых (финал — нарастающим итогом: квал + 5 игр финала).",
+ "substitution": "Солнце сыграла 4 игры квалификации вместо Terpsichore (у Terpsichore 8 из 12).",
+ "final_note": "Финал — 5 игр (по регламенту 4–5). Руанда (9-я в квалификации) в финале не играла — в финал прошёл 11-й, Mik.",
+ "awards": {
+  "most_valuable_players": [
+   "Xenon (4.10)",
+   "Tommy (3.98)",
+   "Саботаж (3.85)"
+  ],
+  "most_valuable_mafia": [
+   "ParadoXx (2.80)",
+   "Gangster (2.30)",
+   "Tommy (2.20)"
+  ],
+  "most_valuable_citizen": [
+   "Саботаж (3.35)",
+   "YeS (2.99)",
+   "aptah (2.20)"
+  ],
+  "best_don": [
+   "Rustam (5/0.14)",
+   "Tommy (4/0.28)",
+   "Mik (2/0.35)"
+  ],
+  "best_sheriff": [
+   "Matilda (4/0.03)",
+   "YeS (2/0.50)",
+   "aptah (2/0.10)"
+  ],
+  "most_killed": [
+   "YeS (6)"
+  ]
+ },
+ "awards_note": "Номинации — официальная статистика mafgame (MVP, лучшая мафия/мирный — сумма доп. баллов; дон и шериф — победы в роли / средний доп; «убит 1-й ночью» — сколько раз)."
 }

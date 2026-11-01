@@ -1,10 +1,24 @@
-"""gd_data · v1.3.1 · 2026-10-19 (ручной перезапуск пересбора после Central Cup 692: GitHub задержал воскресный cron) · v1.3 · 2026-10-14 (сверка: mafgame 13.10 пересчитал финалы PSP-639 и CEC-694 ровно по SERIAL_GRID_2026 — леджеры/рейтинг/страницы турниров; страница /pages/mafgame_points ещё со старой таблицей серийников. Поправка оставлена страховкой для будущих финалов: при совпадении ничего не меняет) · v1.2 · 2026-10-13 (финалы серийников 2026 — баллы по сетке федерации SERIAL_GRID_2026, а не как начислил сайт mafgame) · v1.1 · 2026-09-21 (путь репо: GD_REPO или относительно файла) · v1.0 · 2026-09-14 — загрузка данных «золотой дюжины»: леджеры, таблицы, листинги, серийники, календарь."""
+"""gd_data · v1.4 · 2026-11-02 (provisional.json: места доигранного, но не закрытого на mafgame турнира — до начисления баллов) · v1.3.1 · 2026-10-19 (ручной перезапуск пересбора после Central Cup 692: GitHub задержал воскресный cron) · v1.3 · 2026-10-14 (сверка: mafgame 13.10 пересчитал финалы PSP-639 и CEC-694 ровно по SERIAL_GRID_2026 — леджеры/рейтинг/страницы турниров; страница /pages/mafgame_points ещё со старой таблицей серийников. Поправка оставлена страховкой для будущих финалов: при совпадении ничего не меняет) · v1.2 · 2026-10-13 (финалы серийников 2026 — баллы по сетке федерации SERIAL_GRID_2026, а не как начислил сайт mafgame) · v1.1 · 2026-09-21 (путь репо: GD_REPO или относительно файла) · v1.0 · 2026-09-14 — загрузка данных «золотой дюжины»: леджеры, таблицы, листинги, серийники, календарь."""
 import json, collections, datetime, os
 _here=os.path.dirname(os.path.abspath(__file__))
 _guess=os.path.abspath(os.path.join(_here,'..','..','..'))  # data/research/model → корень репо
 R=(os.environ.get('GD_REPO') or (_guess if os.path.exists(os.path.join(_guess,'calendar.html')) else '/tmp/claude-0/-home-claude/a54b72ce-f72e-5c02-98ee-5f25f1671c21/scratchpad/repo')).rstrip('/')+'/'
 D=R+'data/research/ledger/'
 L=json.load(open(D+'ledgers.json')); P=json.load(open(D+'points.json')); T=json.load(open(D+'tournaments.json')); RT=json.load(open(D+'ratings.json'))
+# v1.4 (02.11.2026): ПРЕДВАРИТЕЛЬНЫЕ результаты — турнир доигран, места известны, но mafgame ещё не закрыл его и не начислил баллы
+#   (MGP-687: доигран 01.11, закрытие организатором обычно через 1–3 дня). provisional.json: {tid:{date,rows:[[uid,nick,pos,pts]]}}.
+#   Берём, ТОЛЬКО если в points.json по турниру пусто; как только баллы пришли с mafgame — запись не используется.
+PROV={}
+try: PROV=json.load(open(D+'provisional.json'))
+except FileNotFoundError: pass
+PROV_USED=[]
+for _tid,_pv in PROV.items():
+    if P.get(_tid): continue
+    P[_tid]=[[r[0],r[1],r[2],float(r[3]),_pv['date']] for r in _pv['rows']]; PROV_USED.append(int(_tid))
+    _yr=int(_pv['date'][:4])
+    for r in _pv['rows']:
+        v=L.setdefault(str(r[0]),{'nick':r[1],'country':None,'city':None,'rp':[]})
+        if not any(x[1]==int(_tid) for x in v['rp']): v['rp'].append([_yr,int(_tid),_pv['date'],r[2],float(r[3]),0,0])
 SER_IX=json.load(open(R+'data/research/series/index.json'))
 SER={p['id']:json.load(open(R+'data/research/series/'+p['file'])) for p in SER_IX['parents']}
 _s=open(R+'calendar.html',encoding='utf-8').read(); _i=_s.find('const D=');_j=_s.find('};',_i); CAL=json.loads(_s[_i+8:_j+1])

@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.3 | 2026-11-02 | 687 MGP -> finished (чемпион YeS 14.03, ParadoXx 12.80, Xenon 12.54; 12 квал + 5 финала)
 // MafgameStat | tournaments.js | v4.2 | 2026-10-27 | 687: страница t687 + смотровая watch687 (4 стола)
 // MafgameStat | tournaments.js | v4.1 | 2026-10-26 | архив: top3, mvp из data/tournament_*.json; 710 ср. ELO 1132 (54/55, снимок elo_710); 615/687 ELO markery 26.10
 // MafgameStat | tournaments.js | v3.3 | 2026-10-13 | 673 -> finished (чемпион Tripok 13.33, Bard 12.275, TOPS 11.0; финал 4 игры); +710 ЧМ-2026 в архив (page wc2026-tournament.html); архив ведёт на t.page
@@ -258,19 +259,19 @@ window.TOURNAMENTS_DB = {
     "dates": "31 октября – 1 ноября 2026",
     "city": "Лимасол",
     "country": "Кипр",
-    "players": 46,
+    "players": 40,
     "days": 2,
     "stars": 5,
     "prize": "3000€",
-    "status": "gathering",
-    "phase": 3,
-    "statusLabel": "Собирается · 36 подтв. + 1 заявка",
+    "status": "finished",
+    "phase": 1,
+    "statusLabel": "Завершён · 17 игр (12 квал + 5 финала) · чемпион YeS",
     "eloAvg": 1093,
     "eloN": 39,
     "eloTotal": 40,
     "organizer": "Mafia Club Cyprus",
     "mafgame": "https://mafgame.org/tournaments/687/view",
-    "note": "Регламент: на 40 игроков — 12 отборочных туров и 4 финальные игры; на 44 — 11 туров, 2 полуфинала и финал.",
+    "note": "40 игроков: 12 отборочных игр на 4 столах и финал топ-10 из 5 игр. Чемпион YeS (14.03), ParadoXx (12.80), Xenon (12.54).",
     "sections": [
       {
         "href": "t687.html",
@@ -293,7 +294,7 @@ window.TOURNAMENTS_DB = {
     "watch": "watch687.html",
     "liveFrom": "2026-10-31",
     "liveTo": "2026-11-01",
-    "format": "12 квал × 4 стола → финал топ-10"
+    "format": "12 квал × 4 стола → финал топ-10 (5 игр)"
   },
   {
     "id": "710",
