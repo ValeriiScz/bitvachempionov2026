@@ -1004,7 +1004,7 @@ const RENDER={
       <div class="panel"><h3>Ранги состава (markery)</h3><div class="tfilter">`+
         TIERS.filter(x=>tc[x]).map(x=>`<span class="tf on" style="cursor:default"><span class="tpill tp-${x}">${x}</span><small>${tc[x]}</small></span>`).join('')+
       `</div><div class="note">Ранг L/S…F по границам markery (L — ELO 1600+), снимок ${esc(D.stats.snapshot||'2026-09-06')}. Полный список — «Состав · рейтинг».</div></div>${jud}
-      <div class="panel"><h3>Что ещё</h3><div class="seclist"><a class="seci" href="${CFG.watch}"><span class="sicon">▶</span><div><b>Смотровая · все трансляции</b><div class="sid">три стола в одном окне, «следить за игроком» — эфир сам переключается на его стол</div></div><span class="go">›</span></a>
+      <div class="panel"><h3>Что ещё</h3><div class="seclist"><a class="seci" href="${CFG.watch}"><span class="sicon">▶</span><div><b>Смотровая · все трансляции</b><div class="sid">все 4 стола в одном окне, «следить за игроком» — эфир сам переключается на его стол</div></div><span class="go">›</span></a>
       <a class="seci" href="${CFG.mafgame}" target="_blank" rel="noopener"><span class="sicon">↗</span><div><b>Турнир на mafgame.org</b><div class="sid">официальные протоколы, регламент, таблица</div></div><span class="go">›</span></a></div></div></div>`;
   },
   seating(){
@@ -1753,7 +1753,7 @@ function luckPanel(name){const L=D.LUCK&&D.LUCK[name];if(!L)return '';const v=lu
     <div class="note" style="margin:6px 0 10px">${v.s}. Считаем всех соперников по тирам markery: S — 3 очка, A — 2, B — 1. Квадратики — ваши игры: чем краснее, тем больше сильных за столом. Тап — кто за столом.</div>
     ${luckSquares(L,true)}
     <div class="note" style="margin-top:8px"><span class="lnk" style="cursor:pointer" onclick="show('luck')">У кого самый тяжёлый путь →</span></div></div>`;}
-function chooserPanel(){return `<div class="chooser"><div class="chs on"><span class="chk">вы здесь</span><b>Страница турнира</b><small>рассадка и сила столов · live-результаты · судьи</small></div><a class="chs" href="${CFG.watch}"><span class="chk">эфиры</span><b>Смотровая →</b><small>три стола в одном окне, «следить за игроком»</small></a></div>`;}
+function chooserPanel(){return `<div class="chooser"><div class="chs on"><span class="chk">вы здесь</span><b>Страница турнира</b><small>рассадка и сила столов · live-результаты · судьи</small></div><a class="chs" href="${CFG.watch}"><span class="chk">эфиры</span><b>Смотровая →</b><small>все 4 стола в одном окне, «следить за игроком»</small></a></div>`;}
 function strengthTeaser(){if(!D.TS||!D.tblN)return '';
   const el=Object.values(D.TS).filter(x=>x.cat===1).sort((a,b)=>a.g-b.g);const hot=(el.length?el:Object.values(D.TS).sort((a,b)=>b.pts-a.pts||b.avg-a.avg)).slice(0,4);const cnt=[0,0,0,0,0,0];Object.values(D.TS).forEach(x=>cnt[x.cat]++);
   const chips=hot.map(x=>`<button class="tf" data-g="${x.g}" data-t="${x.t}" onclick="seatJump=+this.dataset.g;show('seating')">игра ${x.g} · стол ${ROMAN[x.t]} <small>${x.comp}</small></button>`).join('');

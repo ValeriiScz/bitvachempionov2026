@@ -25,6 +25,7 @@ window.STREAMS_DB = {
   "692": {"gamesDay1": 6, "days": {"1": {}, "2": {}}},
   "687": {
     "gamesDay1": 8,
+    "dayDates": {"1":"2026-10-31","2":"2026-11-01"},
     "playlist": "https://www.youtube.com/playlist?list=PLECplviWRfPg",
     "days": {
       "1": {"1":"tj6xLnd2igI","3":"u8QyYM8ygsk","4":"0SP5fLlYXKg"},
