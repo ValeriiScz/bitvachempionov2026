@@ -1,4 +1,4 @@
-"""gd_strength2 · v2.2 · 2026-10-20 (малые поля: в турнирах < 25 участников порядок значим только для топ-5, места 6+ — один неупорядоченный хвост; hold-out tune_field.py: +0.020 к ll мест топ-40 и в 2024, и в 2025; вес по размеру поля (N/30)^A — шум (2024 +, 2025 −), вес по силе поля — хуже в оба года: PL уже учитывает соперников) · v2.1 · 2026-10-20 (τ 0.4→0.26 = остаточное sd β относительно ELO у игроков с 15+ турнирами (эмпирический Байес; данные перевешивают prior с ~15 турниров); калибровка верха, см. calib_top5.py; серия «6 топ-5 из 7» за 3 сезона встречалась дважды, после горячего окна доля топ-5 падает до 0.29) · v2.0 · 2026-10-19 — сила игрока как ЗАПАС с неопределённостью: Plackett-Luce по местам + априорная сила из ELO маркеров
+"""gd_strength2 · v2.3 · 2026-11-02 (EXPERT_CAP: RAMZES не сильнее Korolevich — Валерий) · v2.2 · 2026-10-20 (малые поля: в турнирах < 25 участников порядок значим только для топ-5, места 6+ — один неупорядоченный хвост; hold-out tune_field.py: +0.020 к ll мест топ-40 и в 2024, и в 2025; вес по размеру поля (N/30)^A — шум (2024 +, 2025 −), вес по силе поля — хуже в оба года: PL уже учитывает соперников) · v2.1 · 2026-10-20 (τ 0.4→0.26 = остаточное sd β относительно ELO у игроков с 15+ турнирами (эмпирический Байес; данные перевешивают prior с ~15 турниров); калибровка верха, см. calib_top5.py; серия «6 топ-5 из 7» за 3 сезона встречалась дважды, после горячего окна доля топ-5 падает до 0.29) · v2.0 · 2026-10-19 — сила игрока как ЗАПАС с неопределённостью: Plackett-Luce по местам + априорная сила из ELO маркеров
 (markery_elo.json) + усадка по числу турниров (байесовский MAP) + апостериорная дисперсия (Лаплас) + «форма» сезона как отдельное
 медленное отклонение с затуханием ρ. Заменяет gd_strength.fit_pl в gd_sim (переключатель gd_sim.STRENGTH='v2').
 
@@ -20,6 +20,10 @@ B_ELO=None      # наклон β на 100 ELO; None → оценить регр
 TAU_FORM=0.45   # ширина prior «формы» сезона вокруг долгой силы
 RHO_FORM=0.5    # какая доля отклонения сезона переносится на остаток года
 ELO_CENTER=1200.0
+# v2.3 (02.11.2026) ЭКСПЕРТНЫЙ ПОТОЛОК силы (Валерий): «RAMZES играет хуже Korolevich — сравнять хотя бы с ним, везде».
+#   uid → uid эталона: если прогнозная сила игрока выше эталона, все оценки (μ, β_long, σ, β_season, форма) берутся как у эталона.
+#   ГИПОТЕЗА эксперта поверх данных: по одним результатам модель ставила RAMZES 6-м по силе в гонке (2-е на ЧЕ и ЧМ, 5 турниров).
+EXPERT_CAP={499:461}   # RAMZES ≤ Korolevich
 
 def load_elo():
     if not os.path.exists(ELO_FILE): return {}
@@ -125,6 +129,11 @@ class Strength:
         self.beta_season=bs; self.n_season=ns
         self.form={u:bs[u]-self.beta[u] for u in bs if u in self.beta}
         vals=np.array(list(self.beta.values())); self.default=float(np.percentile(vals,30)); self.default_sigma=float(tau_noelo or TAU_NOELO)
+        for u,ref in EXPERT_CAP.items():
+            if u in self.beta and ref in self.beta and self.fwd(u)>self.fwd(ref):
+                self.mu[u]=self.mu.get(ref,self.mu.get(u)); self.beta[u]=self.beta[ref]; self.sigma[u]=self.sigma[ref]
+                self.form[u]=self.form.get(ref,0.0)
+                if ref in self.beta_season: self.beta_season[u]=self.beta_season[ref]
     def fwd(self,u):
         return self.beta.get(u,self.default)+self.rho*self.form.get(u,0.0)
     def sd(self,u):
