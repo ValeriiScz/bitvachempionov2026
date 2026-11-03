@@ -1234,7 +1234,7 @@ function softRender(){const a=document.activeElement;if(a&&/^(INPUT|SELECT|TEXTA
 function afterRender(id){if(id==='cards')initCards();else if(id==='strength')paintStrength();else if(id==='luck')paintLuck();else if(id==='roster')paintRoster();else if(id==='seating')initSeating();else if(id==='my')initMy();else if(id==='together')initTogether();else if(id==='judges'){if(jdUnlocked())paintJudges();else{const i=document.getElementById('jdPw');if(i)i.onkeydown=e=>{if(e.key==='Enter')jdTry();};}}else if(id==='stages'||id==='games'||id==='roles')afterStats(id);}
 
 /* roster */
-const RCOLS=[{key:'tier',lab:'Ранг',dir:1,get:p=>p.r_tier,fmt:'tier'},{key:'elo_cur',lab:'ELO',dir:-1,get:p=>p.r_elo_cur,fmt:'elo'},{key:'rank',lab:'Место',dir:1,get:p=>p.r_rank,fmt:'rank'},{key:'elo_2026',lab:'ELO 2026',dir:-1,get:p=>p.r_elo_2026,fmt:'elo'},{key:'eu26',lab:'Место 2026',dir:1,get:p=>p.r_rank_2026,fmt:'rank'},{key:'mmr',lab:'MMR',dir:-1,get:p=>p.r_ms_mmr,fmt:'elo'},{key:'mstier',lab:'Тир MMR',dir:1,get:p=>p.r_ms_tier,fmt:'tier'}];
+const RCOLS=[{key:'tier',lab:'Ранг',dir:1,get:p=>p.r_tier,fmt:'tier'},{key:'elo_cur',lab:'ELO',dir:-1,get:p=>p.r_elo_cur,fmt:'elo'},{key:'rank',lab:'Место',dir:1,get:p=>p.r_rank,fmt:'rank',x:1},{key:'elo_2026',lab:'ELO 2026',dir:-1,get:p=>p.r_elo_2026,fmt:'elo',x:1},{key:'eu26',lab:'Место 2026',dir:1,get:p=>p.r_rank_2026,fmt:'rank'},{key:'mmr',lab:'MMR',dir:-1,get:p=>p.r_ms_mmr,fmt:'elo',x:1},{key:'mstier',lab:'Тир MMR',dir:1,get:p=>p.r_ms_tier,fmt:'tier',x:1}];
 let rSortKey='tier',rSortDir=1,rFilter=null;
 function colVal(c,p){const v=c.get(p);if(c.fmt==='tier')return (v in TIER_ORD)?TIER_ORD[v]:null;return num(v);}
 function avatarCell(p){const f=(p.r_tier in TIER_ORD)?(' f-'+p.r_tier):'';
@@ -1249,7 +1249,7 @@ function paintRoster(){
     TIERS.filter(x=>tc[x]).map(x=>`<span class="tf ${rFilter===x?'on':''}" data-t="${x}"><span class="tpill tp-${x}">${x}</span><small>${tc[x]}</small></span>`).join('');
     fil.querySelectorAll('.tf').forEach(b=>b.onclick=()=>{rFilter=b.dataset.t||null;paintRoster();});}
   const hr=document.getElementById('rhr');
-  hr.innerHTML='<th class="l" data-k="player">Игрок<span class="ar"></span></th>'+RCOLS.map(c=>`<th data-k="${c.key}" class="">${esc(c.lab)}<span class="ar"></span></th>`).join('')+'<th class="l x" style="cursor:default">Профиль</th>';
+  hr.innerHTML='<th class="l" data-k="player">Игрок<span class="ar"></span></th>'+RCOLS.map(c=>`<th data-k="${c.key}" class="${c.x?'x':''}">${esc(c.lab)}<span class="ar"></span></th>`).join('')+'<th class="l x" style="cursor:default">Профиль</th>';
   hr.querySelectorAll('th[data-k]').forEach(el=>el.onclick=()=>{const k=el.dataset.k;
     if(k==='player')rSortKey='player';else if(rSortKey===k)rSortDir=-rSortDir;else{rSortKey=k;rSortDir=(RCOLS.find(c=>c.key===k)||{}).dir||-1;}paintRoster();});
   let list=D.players.slice();if(rFilter)list=list.filter(p=>p.r_tier===rFilter);
@@ -1271,11 +1271,11 @@ function paintRoster(){
     html+=`<tr class="rrow ${p.status==='confirmed'?'':'applied'}" data-p="${esc(p.nick)}"><td class="l"><div class="pl"><span class="num">${i+1}</span>${avatarCell(p)}<span><span class="pl-nick">${p.flag?p.flag+' ':''}${esc(p.nick)}</span>${sub}</span></div></td>
       <td>${(p.r_tier in TIER_ORD)?`<span class="tpill tp-${p.r_tier}">${p.r_tier}</span>`:'<span class="na">—</span>'}</td>
       <td>${et!=null?`<span class="rnum">${Math.round(et)}</span>`:'<span class="na">—</span>'}</td>
-      <td>${gr!=null?`<span class="rrank"><span class="h">#</span>${gr}</span>`:'<span class="na">—</span>'}</td>
-      <td>${e26!=null?`<span class="rnum">${Math.round(e26)}</span>`:'<span class="na">—</span>'}</td>
+      <td class="x">${gr!=null?`<span class="rrank"><span class="h">#</span>${gr}</span>`:'<span class="na">—</span>'}</td>
+      <td class="x">${e26!=null?`<span class="rnum">${Math.round(e26)}</span>`:'<span class="na">—</span>'}</td>
       <td>${eu!=null?`<span class="rrank"><span class="h">#</span>${eu}</span>`:'<span class="na">—</span>'}</td>
-      <td>${num(p.r_ms_mmr)!=null?`<span class="rnum">${Math.round(p.r_ms_mmr)}</span>`:'<span class="na">—</span>'}</td>
-      <td>${(p.r_ms_tier in TIER_ORD)?`<span class="tpill tp-${p.r_ms_tier}">${p.r_ms_tier}</span>`:'<span class="na">—</span>'}</td>
+      <td class="x">${num(p.r_ms_mmr)!=null?`<span class="rnum">${Math.round(p.r_ms_mmr)}</span>`:'<span class="na">—</span>'}</td>
+      <td class="x">${(p.r_ms_tier in TIER_ORD)?`<span class="tpill tp-${p.r_ms_tier}">${p.r_ms_tier}</span>`:'<span class="na">—</span>'}</td>
       <td class="l x">${links.join(' ')||'<span class="na">—</span>'}</td></tr>`;});
   document.getElementById('rtb').innerHTML=html;
   document.querySelectorAll('#rtb tr.rrow').forEach(tr=>tr.onclick=e=>{if(e.target.closest('a'))return;goPlayer(tr.dataset.p);});
