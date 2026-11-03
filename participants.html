@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- build v9.3 · 2026-07-15 · ЧЕ-634: свежий markery-снапшот (после Польши/Кёльна), ростер 44 подтв.; колонки Ранг(тир) / ELO тек / ELO 2026 / Европа 2026; тиры с цветом и группировкой + распределение -->
+<!-- build v9.4 · 2026-11-03 · колонка MMR (mafiastats, робот refresh-mafiastats 2×/нед) + ср. MMR · v9.3 · 2026-07-15 · ЧЕ-634: свежий markery-снапшот, колонки Ранг/ELO/ELO 2026 -->
 <!-- DOVOD · participants.html · v2.0 · 2026-10-26 · новый стиль DOVOD (как страницы турниров): Unbounded/JetBrains Mono/Inter, неон-сетка, акцент турнира из реестра (t.accent) · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
      заявки mafgame (подтв./заявки/лист ожидания) + ДВОЙНОЙ рейтинг markery(основной)+mafiastats(сверка),
      счётчик «ожидаемый средний ELO» (markery) на постере, ссылки на профили, флаги неоднозначных матчей.
@@ -255,6 +255,7 @@ const COLS=[
   {key:'rank',     lab:'Место',      hint:'markery — место в глобальном рейтинге (всё время)', dir:1,  fmt:'rank', get:p=>p.r_rank},
   {key:'elo_2026', lab:'ELO 2026',   hint:'markery — ELO за сезон 2026',                     dir:-1, fmt:'elo',  get:p=>p.r_elo_2026},
   {key:'rank26',   lab:'Место 2026', hint:'markery — место в рейтинге сезона 2026',          dir:1,  fmt:'rank', get:p=>p.r_rank_2026},
+  {key:'mmr',      lab:'MMR',        hint:'mafiastats — MMR, единый рейтинг по играм всех федераций (сверка; робот обновляет 2 раза в неделю)', dir:-1, fmt:'elo', get:p=>p.r_ms_mmr},
 ];
 let sortKey='tier', sortDir=1;
 
@@ -285,7 +286,8 @@ function render(D){
   // статистика считается из игроков (без отдельного stats-объекта)
   const eloVals=players.map(p=>num(p.r_elo_cur)).filter(v=>v!=null);
   const eloAvg=eloVals.length?Math.round(eloVals.reduce((a,b)=>a+b,0)/eloVals.length):null;
-  const msVals=players.map(p=>num(p.r_ms_rank)).filter(v=>v!=null);
+  const msVals=players.map(p=>num(p.r_ms_mmr)).filter(v=>v!=null);
+  const msAvg=msVals.length?Math.round(msVals.reduce((a,b)=>a+b,0)/msVals.length):null;
   const nConf=players.filter(p=>p.status==='confirmed').length;
   const mkUp=eloVals.length>0, msUp=msVals.length>0;
 
@@ -312,12 +314,13 @@ function render(D){
       <div class="scard"><div class="k">Участников</div><div class="v">${players.length}<small>${(meta.expected&&players.length>=meta.expected)?(' из '+meta.expected):(' / '+(meta.expected||'—')+' ожид.')}</small></div></div>
       <div class="scard"><div class="k">markery · ср. ELO</div><div class="v">${eloAvg!=null?eloAvg:'—'}<small> n${eloVals.length}</small></div></div>
       <div class="scard"><div class="k">с рейтингом markery</div><div class="v">${eloVals.length}<small> / ${players.length}</small></div></div>
+      <div class="scard"><div class="k">mafiastats · ср. MMR</div><div class="v">${msAvg!=null?msAvg:'—'}<small> n${msVals.length}</small></div></div>
     </div>`;
 
   const legend = `
     <div class="legend">
       <span><span class="dot" style="background:var(--accent)"></span>markery — основной: <span class="conn ${mkUp?'up':'down'}">${mkUp?'подключён':'нет данных'}</span></span>
-      <span><span class="dot" style="background:#7aa7d6"></span>mafiastats — сверка: <span class="conn ${msUp?'up':'down'}">${msUp?'подключён':'нет данных'}</span></span>
+      <span><span class="dot" style="background:#7aa7d6"></span>mafiastats — сверка: <span class="conn ${msUp?'up':'down'}">${msUp?('подключён'+(meta.ms_snap?' · '+meta.ms_snap:'')):'нет данных'}</span></span>
       <span>↕ клик по заголовку колонки — сортировка</span>
     </div>`;
 
@@ -347,7 +350,7 @@ function noteHtml(){
 function buildHead(){
   const hr=document.getElementById('hr');
   let th='<th class="l anchor sortable" data-k="player">Игрок<span class="ar"></span></th>';
-  th+=COLS.map((c,i)=>`<th class="sortable${i===0?' grp':''}${i===2?' grp':''}" data-k="${c.key}" title="${esc(c.hint)}">${esc(c.lab)}<span class="ar"></span></th>`).join('');
+  th+=COLS.map((c,i)=>`<th class="sortable${i===0?' grp':''}${i===2?' grp':''}${i===5?' grp':''}" data-k="${c.key}" title="${esc(c.hint)}">${esc(c.lab)}<span class="ar"></span></th>`).join('');
   th+='<th class="l">профиль</th>';
   hr.innerHTML=th;
   hr.querySelectorAll('th.sortable').forEach(el=>el.onclick=()=>{
@@ -382,6 +385,7 @@ function paint(){
       <td>${cellRank(p.r_rank)}</td>
       <td class="grp">${cellElo(p.r_elo_2026)}</td>
       <td>${cellRank(p.r_rank_2026)}</td>
+      <td class="grp">${cellElo(p.r_ms_mmr)}</td>
       <td class="l">${links.join(' ')||'<span class="na">—</span>'}</td>
     </tr>`;
   });
@@ -395,7 +399,7 @@ function paint(){
         const cls=(key in TIER_ORD)?('t-'+key):'';
         const badge=(key in TIER_ORD)?`<span class="tier ${cls}">${key}</span>`:'<span class="na">—</span>';
         const cnt=(key in TIER_ORD)?counts[key]:DATA.players.filter(p=>!(p.r_tier in TIER_ORD)).length;
-        html+=`<tr class="tsep"><td colspan="7">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;
+        html+=`<tr class="tsep"><td colspan="8">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;
         prevTier=key;
       }
     }

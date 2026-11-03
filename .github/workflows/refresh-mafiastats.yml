@@ -1,0 +1,64 @@
+# Обновление MMR с mafiastats.com (открытый API, без ключей) — для колонок MMR на сайте
+# и сравнения федераций. mafiastats пересчитывает рейтинг несколько раз в неделю,
+# поэтому ходим 2 раза в неделю. Запустить вручную: Actions → «MMR mafiastats» → Run workflow.
+name: MMR mafiastats
+
+on:
+  schedule:
+    # пн и чт, 06:23 UTC (GitHub всё равно сдвигает запуск на часы)
+    - cron: '23 6 * * 1,4'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/refresh-mafiastats.yml'
+      - '.github/scripts/refresh_mafiastats.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-mafiastats
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Снять MMR
+        run: python .github/scripts/refresh_mafiastats.py
+
+      - name: Проверить датафайл
+        run: |
+          python - <<'PY'
+          import json, os
+          if not os.path.exists('data/mmr.json'):
+              raise SystemExit('нет data/mmr.json')
+          d = json.load(open('data/mmr.json', encoding='utf-8'))
+          assert len(d['players']) >= 100, 'игроков с MMR всего %d' % len(d['players'])
+          assert d['tops']['now']['mafgame']['rows'], 'пустой топ mafgame'
+          print('mmr.json в порядке: игроков', len(d['players']), '· снимок', d['snap'])
+          PY
+
+      - name: Закоммитить изменения
+        run: |
+          git config user.name  "dovod-bot"
+          git config user.email "noreply@dovod-mafia.com"
+          for i in 1 2 3; do
+            if [ $i -gt 1 ]; then
+              git fetch origin main && git reset --hard origin/main
+              python .github/scripts/refresh_mafiastats.py || exit 1
+            fi
+            if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then echo "изменений нет — коммит не нужен"; exit 0; fi
+            git add -A
+            git commit -m "MMR mafiastats: автообновление $(date +%d.%m.%Y)"
+            if git push origin HEAD:main; then echo "обновление выкачено (попытка $i)"; exit 0; fi
+            echo "push отклонён — пересчитываю на свежем"; sleep 5
+          done
+          echo "::error::не удалось запушить после 3 попыток"; exit 1
