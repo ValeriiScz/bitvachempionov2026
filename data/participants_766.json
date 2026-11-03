@@ -10,7 +10,16 @@
   "expected": 40,
   "roster_source": "mafgame participants 2026-06-25 (актуальный, 40 confirmed)",
   "rating_note": "markery snapshot 2026-06-25 (API). r_elo_cur=ELO глоб/всё время, r_tier=ранг S..F, r_place_global=место глоб/всё время, r_rank_eu_2026=место Европа-2026, r_place_2026=место глоб-2026. ELO 2026 (число) и место оффлайн-2026 — markery отдаёт только премиум/лидербордом, отдельно.",
-  "ms_snap": "2026-11-03"
+  "ms_snap": "2026-11-03",
+  "ms_ladder": {
+   "L": 2116,
+   "S": 2022,
+   "A": 1716,
+   "B": 1567,
+   "C": 1401,
+   "D": 1222,
+   "E": 1091
+  }
  },
  "players": [
   {
@@ -47,7 +56,8 @@
    "r_tier": "B",
    "r_place_global": 433,
    "r_place_2026": 71,
-   "r_ms_mmr": 1542.0
+   "r_ms_mmr": 1542.0,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Нико",
@@ -83,7 +93,8 @@
    "r_tier": "E",
    "r_place_global": 7917,
    "r_place_2026": null,
-   "r_ms_mmr": 1148.4
+   "r_ms_mmr": 1148.4,
+   "r_ms_tier": "E"
   },
   {
    "nick": "LogisticPro",
@@ -119,7 +130,8 @@
    "r_tier": "A",
    "r_place_global": 190,
    "r_place_2026": 6,
-   "r_ms_mmr": 1727.3
+   "r_ms_mmr": 1727.3,
+   "r_ms_tier": "A"
   },
   {
    "nick": "Jane",
@@ -169,7 +181,8 @@
    "r_tier": "B",
    "r_place_global": 220,
    "r_place_2026": 126,
-   "r_ms_mmr": 1678.4
+   "r_ms_mmr": 1678.4,
+   "r_ms_tier": "B"
   },
   {
    "nick": "Сакура",
@@ -207,7 +220,8 @@
    "r_tier": "C",
    "r_place_global": 3053,
    "r_place_2026": 1775,
-   "r_ms_mmr": 1396.0
+   "r_ms_mmr": 1396.0,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Добрейший",
@@ -243,7 +257,8 @@
    "r_tier": "E",
    "r_place_global": 7737,
    "r_place_2026": 1612,
-   "r_ms_mmr": 1240.0
+   "r_ms_mmr": 1240.0,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Mjata",
@@ -279,7 +294,8 @@
    "r_tier": "C",
    "r_place_global": 1216,
    "r_place_2026": 632,
-   "r_ms_mmr": 1464.4
+   "r_ms_mmr": 1464.4,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Mulder",
@@ -315,7 +331,8 @@
    "r_tier": "D",
    "r_place_global": 6487,
    "r_place_2026": 1740,
-   "r_ms_mmr": 1297.6
+   "r_ms_mmr": 1297.6,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Sever",
@@ -355,7 +372,8 @@
    "r_tier": "D",
    "r_place_global": 7306,
    "r_place_2026": 1823,
-   "r_ms_mmr": 1261.6
+   "r_ms_mmr": 1261.6,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Link",
@@ -391,7 +409,8 @@
    "r_tier": "D",
    "r_place_global": 6146,
    "r_place_2026": 1718,
-   "r_ms_mmr": 1179.1
+   "r_ms_mmr": 1179.1,
+   "r_ms_tier": "E"
   },
   {
    "nick": "qUAest0r",
@@ -431,7 +450,8 @@
    "r_tier": "C",
    "r_place_global": 3862,
    "r_place_2026": 1466,
-   "r_ms_mmr": 1240.1
+   "r_ms_mmr": 1240.1,
+   "r_ms_tier": "D"
   },
   {
    "nick": "TOPS",
@@ -467,7 +487,8 @@
    "r_tier": "C",
    "r_place_global": 663,
    "r_place_2026": 44,
-   "r_ms_mmr": 1529.0
+   "r_ms_mmr": 1529.0,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Сью",
@@ -522,7 +543,8 @@
    "r_tier": "A",
    "r_place_global": 116,
    "r_place_2026": 28,
-   "r_ms_mmr": 1688.0
+   "r_ms_mmr": 1688.0,
+   "r_ms_tier": "B"
   },
   {
    "nick": "DOVOD",
@@ -571,7 +593,8 @@
    "r_tier": "B",
    "r_place_global": 277,
    "r_place_2026": 17,
-   "r_ms_mmr": 1832.7
+   "r_ms_mmr": 1832.7,
+   "r_ms_tier": "A"
   },
   {
    "nick": "Tykva",
@@ -607,7 +630,8 @@
    "r_tier": "D",
    "r_place_global": 6294,
    "r_place_2026": 1751,
-   "r_ms_mmr": 1219.5
+   "r_ms_mmr": 1219.5,
+   "r_ms_tier": "E"
   },
   {
    "nick": "Golubchik",
@@ -643,7 +667,8 @@
    "r_tier": "D",
    "r_place_global": 6186,
    "r_place_2026": 1734,
-   "r_ms_mmr": 1335.1
+   "r_ms_mmr": 1335.1,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Maverick",
@@ -690,7 +715,8 @@
    "r_tier": "C",
    "r_place_global": 1336,
    "r_place_2026": 317,
-   "r_ms_mmr": 1559.6
+   "r_ms_mmr": 1559.6,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Phoenix",
@@ -746,7 +772,8 @@
    "r_tier": "A",
    "r_place_global": 115,
    "r_place_2026": 111,
-   "r_ms_mmr": 1493.0
+   "r_ms_mmr": 1493.0,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Konark",
@@ -782,7 +809,8 @@
    "r_tier": "D",
    "r_place_global": 5934,
    "r_place_2026": 1655,
-   "r_ms_mmr": 1386.2
+   "r_ms_mmr": 1386.2,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Котяра",
@@ -818,7 +846,8 @@
    "r_tier": "D",
    "r_place_global": 6330,
    "r_place_2026": 722,
-   "r_ms_mmr": 1410.5
+   "r_ms_mmr": 1410.5,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Legion 🇺🇦",
@@ -854,7 +883,8 @@
    "r_tier": "C",
    "r_place_global": 802,
    "r_place_2026": 1035,
-   "r_ms_mmr": 1455.6
+   "r_ms_mmr": 1455.6,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Specchio",
@@ -890,7 +920,8 @@
    "r_tier": "D",
    "r_place_global": 6346,
    "r_place_2026": 934,
-   "r_ms_mmr": 1128.2
+   "r_ms_mmr": 1128.2,
+   "r_ms_tier": "E"
   },
   {
    "nick": "Afina",
@@ -929,7 +960,8 @@
    "r_tier": "D",
    "r_place_global": 7203,
    "r_place_2026": 1874,
-   "r_ms_mmr": 1254.5
+   "r_ms_mmr": 1254.5,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Магнат",
@@ -965,7 +997,8 @@
    "r_tier": "B",
    "r_place_global": 274,
    "r_place_2026": 3,
-   "r_ms_mmr": 1693.5
+   "r_ms_mmr": 1693.5,
+   "r_ms_tier": "B"
   },
   {
    "nick": "Tapok",
@@ -1001,7 +1034,8 @@
    "r_tier": "D",
    "r_place_global": 7231,
    "r_place_2026": 1134,
-   "r_ms_mmr": 1221.2
+   "r_ms_mmr": 1221.2,
+   "r_ms_tier": "E"
   },
   {
    "nick": "Ёжик",
@@ -1055,7 +1089,8 @@
    "r_tier": "C",
    "r_place_global": 1254,
    "r_place_2026": 825,
-   "r_ms_mmr": 1461.5
+   "r_ms_mmr": 1461.5,
+   "r_ms_tier": "C"
   },
   {
    "nick": "aptah",
@@ -1095,7 +1130,8 @@
    "r_tier": "C",
    "r_place_global": 820,
    "r_place_2026": 517,
-   "r_ms_mmr": 1541.8
+   "r_ms_mmr": 1541.8,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Ru",
@@ -1134,7 +1170,8 @@
    "r_tier": "E",
    "r_place_global": 7694,
    "r_place_2026": 1665,
-   "r_ms_mmr": 1024.8
+   "r_ms_mmr": 1024.8,
+   "r_ms_tier": "F"
   },
   {
    "nick": "SANYURIK",
@@ -1170,7 +1207,8 @@
    "r_tier": "A",
    "r_place_global": 147,
    "r_place_2026": 329,
-   "r_ms_mmr": 1623.4
+   "r_ms_mmr": 1623.4,
+   "r_ms_tier": "B"
   },
   {
    "nick": "Lюц",
@@ -1211,7 +1249,8 @@
    "r_tier": "A",
    "r_place_global": 175,
    "r_place_2026": 23,
-   "r_ms_mmr": 2027.9
+   "r_ms_mmr": 2027.9,
+   "r_ms_tier": "S"
   },
   {
    "nick": "Raise 📈",
@@ -1250,7 +1289,8 @@
    "r_tier": "B",
    "r_place_global": 491,
    "r_place_2026": 1489,
-   "r_ms_mmr": 1355.0
+   "r_ms_mmr": 1355.0,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Malvina",
@@ -1286,7 +1326,8 @@
    "r_tier": "D",
    "r_place_global": 6068,
    "r_place_2026": 1373,
-   "r_ms_mmr": 1219.7
+   "r_ms_mmr": 1219.7,
+   "r_ms_tier": "E"
   },
   {
    "nick": "Donna",
@@ -1336,7 +1377,8 @@
    "r_tier": "F",
    "r_place_global": 7964,
    "r_place_2026": 1898,
-   "r_ms_mmr": 921.6
+   "r_ms_mmr": 921.6,
+   "r_ms_tier": "F"
   },
   {
    "nick": "Светлый",
@@ -1377,7 +1419,8 @@
    "r_tier": "D",
    "r_place_global": 6477,
    "r_place_2026": 497,
-   "r_ms_mmr": 1308.9
+   "r_ms_mmr": 1308.9,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Landing",
@@ -1413,7 +1456,8 @@
    "r_tier": "C",
    "r_place_global": 627,
    "r_place_2026": 45,
-   "r_ms_mmr": 1616.4
+   "r_ms_mmr": 1616.4,
+   "r_ms_tier": "B"
   },
   {
    "nick": "Судья",
@@ -1449,7 +1493,8 @@
    "r_tier": "D",
    "r_place_global": 5740,
    "r_place_2026": 1046,
-   "r_ms_mmr": 1233.5
+   "r_ms_mmr": 1233.5,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Jinn",
@@ -1485,7 +1530,8 @@
    "r_tier": "D",
    "r_place_global": 5044,
    "r_place_2026": 1491,
-   "r_ms_mmr": 1338.3
+   "r_ms_mmr": 1338.3,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Blackout",
@@ -1521,7 +1567,8 @@
    "r_tier": "C",
    "r_place_global": 705,
    "r_place_2026": 114,
-   "r_ms_mmr": 1480.1
+   "r_ms_mmr": 1480.1,
+   "r_ms_tier": "C"
   },
   {
    "nick": "ParadoXx",
@@ -1559,7 +1606,8 @@
    "r_tier": "B",
    "r_place_global": 410,
    "r_place_2026": 20,
-   "r_ms_mmr": 1732.4
+   "r_ms_mmr": 1732.4,
+   "r_ms_tier": "A"
   },
   {
    "nick": "new_katenok",
@@ -1595,7 +1643,8 @@
    "r_tier": "C",
    "r_place_global": 1487,
    "r_place_2026": 338,
-   "r_ms_mmr": 1580.3
+   "r_ms_mmr": 1580.3,
+   "r_ms_tier": "B"
   }
  ]
 }

@@ -5,7 +5,16 @@
   "snapshot": "2026-08-22",
   "source": "mafgame.org roster + markery.online currentElo (свежий на 2026-08-22); ELO-2026/Европа-2026 — из снапшота 2026-07-15 где есть",
   "note": "тиры производные от ELO по границам рангов (полосы из снапшотов 634/702/766); Люсі и Mr. Smith🚀 — markery-матч не подтверждён, без рейтинга",
-  "ms_snap": "2026-11-03"
+  "ms_snap": "2026-11-03",
+  "ms_ladder": {
+   "L": 2116,
+   "S": 2022,
+   "A": 1716,
+   "B": 1567,
+   "C": 1401,
+   "D": 1222,
+   "E": 1091
+  }
  },
  "players": [
   {
@@ -35,7 +44,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 2292.9,
-   "r_ms_rank": 5
+   "r_ms_rank": 5,
+   "r_ms_tier": "L"
   },
   {
    "nick": "Kleo",
@@ -62,7 +72,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1218.9,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "E"
   },
   {
    "nick": "DOVOD",
@@ -91,7 +102,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1832.7,
-   "r_ms_rank": 65
+   "r_ms_rank": 65,
+   "r_ms_tier": "A"
   },
   {
    "nick": "Maverick",
@@ -120,7 +132,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1559.6,
-   "r_ms_rank": 233
+   "r_ms_rank": 233,
+   "r_ms_tier": "C"
   },
   {
    "nick": "qUAest0r",
@@ -149,7 +162,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1240.1,
-   "r_ms_rank": 680
+   "r_ms_rank": 680,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Niko",
@@ -178,7 +192,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 2108.3,
-   "r_ms_rank": 18
+   "r_ms_rank": 18,
+   "r_ms_tier": "S"
   },
   {
    "nick": "Badwin",
@@ -205,7 +220,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1492.2,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "C"
   },
   {
    "nick": "LogisticPro",
@@ -234,7 +250,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1727.3,
-   "r_ms_rank": 102
+   "r_ms_rank": 102,
+   "r_ms_tier": "A"
   },
   {
    "nick": "Season's",
@@ -263,7 +280,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1542.0,
-   "r_ms_rank": 254
+   "r_ms_rank": 254,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Марселия",
@@ -291,7 +309,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 965.1,
-   "r_ms_rank": 764
+   "r_ms_rank": 764,
+   "r_ms_tier": "F"
   },
   {
    "nick": "Комар",
@@ -318,7 +337,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 2057.3,
-   "r_ms_rank": 26
+   "r_ms_rank": 26,
+   "r_ms_tier": "S"
   },
   {
    "nick": "КуКуСиК",
@@ -345,7 +365,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1247.3,
-   "r_ms_rank": 672
+   "r_ms_rank": 672,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Магнат",
@@ -374,7 +395,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1693.5,
-   "r_ms_rank": 117
+   "r_ms_rank": 117,
+   "r_ms_tier": "B"
   },
   {
    "nick": "Дийкстра",
@@ -401,7 +423,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1515.3,
-   "r_ms_rank": 291
+   "r_ms_rank": 291,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Буржуй",
@@ -428,7 +451,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1940.6,
-   "r_ms_rank": 41
+   "r_ms_rank": 41,
+   "r_ms_tier": "A"
   },
   {
    "nick": "Lюц",
@@ -457,7 +481,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 2027.9,
-   "r_ms_rank": 29
+   "r_ms_rank": 29,
+   "r_ms_tier": "S"
   },
   {
    "nick": "Люсі",
@@ -479,7 +504,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1528.4,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Мини",
@@ -506,7 +532,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1709.5,
-   "r_ms_rank": 111
+   "r_ms_rank": 111,
+   "r_ms_tier": "B"
   },
   {
    "nick": "Skywalker",
@@ -533,7 +560,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1291.9,
-   "r_ms_rank": 622
+   "r_ms_rank": 622,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Blackout",
@@ -563,7 +591,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1480.1,
-   "r_ms_rank": 343
+   "r_ms_rank": 343,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Yokai",
@@ -590,7 +619,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1568.8,
-   "r_ms_rank": 222
+   "r_ms_rank": 222,
+   "r_ms_tier": "B"
   },
   {
    "nick": "aptah",
@@ -619,7 +649,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1541.8,
-   "r_ms_rank": 255
+   "r_ms_rank": 255,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Mr. Trust",
@@ -647,7 +678,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1310.4,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Нико",
@@ -674,7 +706,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1148.4,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "E"
   },
   {
    "nick": "Urs",
@@ -702,7 +735,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 889.9,
-   "r_ms_rank": 768
+   "r_ms_rank": 768,
+   "r_ms_tier": "F"
   },
   {
    "nick": "Panda Kung-Fu",
@@ -729,7 +763,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1401.8,
-   "r_ms_rank": 469
+   "r_ms_rank": 469,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Ru",
@@ -759,7 +794,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1024.8,
-   "r_ms_rank": 753
+   "r_ms_rank": 753,
+   "r_ms_tier": "F"
   },
   {
    "nick": "Sura",
@@ -787,7 +823,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1491.6,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Mr. Smith🚀",
@@ -809,7 +846,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1329.7,
-   "r_ms_rank": 579
+   "r_ms_rank": 579,
+   "r_ms_tier": "D"
   },
   {
    "nick": "JadeYogg",
@@ -836,7 +874,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1399.0,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "D"
   }
  ],
  "stats": {

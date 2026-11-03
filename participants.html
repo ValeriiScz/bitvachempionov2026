@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- build v9.4 · 2026-11-03 · колонка MMR (mafiastats, робот refresh-mafiastats 2×/нед) + ср. MMR · v9.3 · 2026-07-15 · ЧЕ-634: свежий markery-снапшот, колонки Ранг/ELO/ELO 2026 -->
+<!-- build v9.5 · 2026-11-03 · колонка «Тир MMR» (линейка markery по долям) · v9.4 · 2026-11-03 · колонка MMR (mafiastats, робот refresh-mafiastats 2×/нед) + ср. MMR · v9.3 · 2026-07-15 · ЧЕ-634: свежий markery-снапшот, колонки Ранг/ELO/ELO 2026 -->
 <!-- DOVOD · participants.html · v2.0 · 2026-10-26 · новый стиль DOVOD (как страницы турниров): Unbounded/JetBrains Mono/Inter, неон-сетка, акцент турнира из реестра (t.accent) · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
      заявки mafgame (подтв./заявки/лист ожидания) + ДВОЙНОЙ рейтинг markery(основной)+mafiastats(сверка),
      счётчик «ожидаемый средний ELO» (markery) на постере, ссылки на профили, флаги неоднозначных матчей.
@@ -256,6 +256,7 @@ const COLS=[
   {key:'elo_2026', lab:'ELO 2026',   hint:'markery — ELO за сезон 2026',                     dir:-1, fmt:'elo',  get:p=>p.r_elo_2026},
   {key:'rank26',   lab:'Место 2026', hint:'markery — место в рейтинге сезона 2026',          dir:1,  fmt:'rank', get:p=>p.r_rank_2026},
   {key:'mmr',      lab:'MMR',        hint:'mafiastats — MMR, единый рейтинг по играм всех федераций (сверка; робот обновляет 2 раза в неделю)', dir:-1, fmt:'elo', get:p=>p.r_ms_mmr},
+  {key:'mstier',   lab:'Тир MMR',    hint:'тир по MMR: пороги подобраны так, чтобы доли тиров L…F совпадали с тирами markery у тех же игроков (эксперимент)', dir:1, fmt:'tier', get:p=>p.r_ms_tier},
 ];
 let sortKey='tier', sortDir=1;
 
@@ -386,6 +387,7 @@ function paint(){
       <td class="grp">${cellElo(p.r_elo_2026)}</td>
       <td>${cellRank(p.r_rank_2026)}</td>
       <td class="grp">${cellElo(p.r_ms_mmr)}</td>
+      <td class="tcell">${cellTier(p.r_ms_tier)}</td>
       <td class="l">${links.join(' ')||'<span class="na">—</span>'}</td>
     </tr>`;
   });
@@ -399,7 +401,7 @@ function paint(){
         const cls=(key in TIER_ORD)?('t-'+key):'';
         const badge=(key in TIER_ORD)?`<span class="tier ${cls}">${key}</span>`:'<span class="na">—</span>';
         const cnt=(key in TIER_ORD)?counts[key]:DATA.players.filter(p=>!(p.r_tier in TIER_ORD)).length;
-        html+=`<tr class="tsep"><td colspan="8">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;
+        html+=`<tr class="tsep"><td colspan="9">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;
         prevTier=key;
       }
     }

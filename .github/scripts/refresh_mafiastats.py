@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_mafiastats · v1.0 · 2026-11-03
+refresh_mafiastats · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
 Назначение: подтянуть единый рейтинг MMR с mafiastats.com (открытый API, без ключей)
 для игроков сайта DOVOD — без участия человека. Запускается GitHub Actions
 (.github/workflows/refresh-mafiastats.yml).
@@ -13,6 +13,8 @@ refresh_mafiastats · v1.0 · 2026-11-03
   4  MMR по mafgame-id: /rating/mafgame/{id}
   5  топы федераций: сейчас и на конец 2024/2025
   6  запись data/mmr.json, патч data/participants_*.json, версия кэша sw.js
+  7  тир по MMR: пороги подбираются так, чтобы доли тиров L…F среди игроков
+     с обоими рейтингами совпадали с долями тиров markery (квантильная линейка)
 
 Правила mafiastats (fair use): кэшировать, ходить спокойно, ставить ссылку на профиль
 игрока на mafiastats.com. Рейтинг пересчитывается несколько раз в неделю — чаще 2 раз
@@ -146,6 +148,55 @@ def bump_sw():
     io.open(SW, 'w', encoding='utf-8').write(s.replace(m.group(0), "CACHE_VERSION = 'dovod-v%d'" % v))
     return v
 
+# ── 7) тир по MMR (линейка markery) ──────────────────────────────────────────
+TIERS = 'LSABCDEF'
+
+def mmr_ladder():
+    """Пороги MMR по долям тиров markery среди игроков, у которых есть оба рейтинга."""
+    pairs = {}
+    for f in glob.glob(os.path.join(BASE, 'data', 'participants_*.json')):
+        try: d = json.load(io.open(f, encoding='utf-8'))
+        except Exception: continue
+        for p in d.get('players') or []:
+            if p.get('uid') and (p.get('r_tier') or '') in list(TIERS) and p.get('r_ms_mmr'):
+                pairs[str(p['uid'])] = (p['r_tier'], float(p['r_ms_mmr']))
+    if len(pairs) < 50: return None
+    cnt = {t: sum(1 for x in pairs.values() if x[0] == t) for t in TIERS}
+    mm = sorted((m for _, m in pairs.values()), reverse=True)
+    th, k = {}, 0
+    for t in TIERS[:-1]:
+        k += cnt[t]
+        th[t] = round((mm[k - 1] + mm[min(k, len(mm) - 1)]) / 2) if 0 < k < len(mm) else (round(mm[0]) + 1 if k == 0 else 0)
+    def tier(m):
+        for t in TIERS[:-1]:
+            if m >= th[t]: return t
+        return 'F'
+    exact = sum(1 for t, m in pairs.values() if tier(m) == t)
+    near = sum(1 for t, m in pairs.values() if abs(TIERS.index(tier(m)) - TIERS.index(t)) <= 1)
+    return {'thresholds': th, 'sample': len(pairs), 'shares': cnt, 'exact': exact, 'within1': near}
+
+def mmr_tier(m, th):
+    if m is None: return None
+    for t in TIERS[:-1]:
+        if m >= th[t]: return t
+    return 'F'
+
+def apply_mmr_tiers():
+    lad = mmr_ladder()
+    if not lad: log('тир MMR: мало пар markery+MMR — пропускаю'); return None
+    th = lad['thresholds']
+    for f in sorted(glob.glob(os.path.join(BASE, 'data', 'participants_*.json'))):
+        raw = io.open(f, encoding='utf-8').read()
+        try: d = json.loads(raw)
+        except Exception: continue
+        for p in d.get('players') or []:
+            p['r_ms_tier'] = mmr_tier(p.get('r_ms_mmr'), th)
+        d.setdefault('meta', {})['ms_ladder'] = th
+        new = json.dumps(d, ensure_ascii=False, indent=1)
+        if new.strip() != raw.strip(): io.open(f, 'w', encoding='utf-8').write(new + '\n')
+    log('тир MMR: пороги %s · выборка %d · совпало с markery %d, ±1 тир %d' % (th, lad['sample'], lad['exact'], lad['within1']))
+    return lad
+
 def main():
     ping = api('/rating', limit=1)
     if not ping: fail('mafiastats API не отвечает — ничего не пишу')
@@ -173,8 +224,18 @@ def main():
         log('MMR не изменился с прошлого снимка (%s) — ничего не пишу' % old.get('snap')); return
     io.open(OUT, 'w', encoding='utf-8').write(json.dumps(out, ensure_ascii=False, separators=(',', ':')) + '\n')
     ch = patch_participants(players, snap)
+    lad = apply_mmr_tiers()
+    if lad:
+        out['tier_ladder'] = lad
+        io.open(OUT, 'w', encoding='utf-8').write(json.dumps(out, ensure_ascii=False, separators=(',', ':')) + '\n')
     v = bump_sw()
     log('готово: data/mmr.json (%d игроков), составов обновлено: %d, sw v%s' % (len(players), ch, v))
 
 if __name__ == '__main__':
-    main()
+    if '--tiers-only' in sys.argv:
+        lad = apply_mmr_tiers()
+        if lad:
+            d = json.load(io.open(OUT, encoding='utf-8')); d['tier_ladder'] = lad
+            io.open(OUT, 'w', encoding='utf-8').write(json.dumps(d, ensure_ascii=False, separators=(',', ':')) + '\n')
+    else:
+        main()

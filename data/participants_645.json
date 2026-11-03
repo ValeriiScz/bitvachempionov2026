@@ -10,7 +10,16 @@
   "expected": 12,
   "players_confirmed": 12,
   "rating_note": "Состав предварительный: топ-2 каждой из 6 серий по протоколам mafgame (утвердится, когда организатор закроет серии). ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026",
-  "ms_snap": "2026-11-03"
+  "ms_snap": "2026-11-03",
+  "ms_ladder": {
+   "L": 2116,
+   "S": 2022,
+   "A": 1716,
+   "B": 1567,
+   "C": 1401,
+   "D": 1222,
+   "E": 1091
+  }
  },
  "players": [
   {
@@ -44,7 +53,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1616.4,
-   "r_ms_rank": 170
+   "r_ms_rank": 170,
+   "r_ms_tier": "B"
   },
   {
    "nick": "Jane",
@@ -77,7 +87,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1678.4,
-   "r_ms_rank": 125
+   "r_ms_rank": 125,
+   "r_ms_tier": "B"
   },
   {
    "nick": "Sinful",
@@ -110,7 +121,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1691.4,
-   "r_ms_rank": 118
+   "r_ms_rank": 118,
+   "r_ms_tier": "B"
   },
   {
    "nick": "POTAP",
@@ -143,7 +155,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1422.3,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Котяра",
@@ -176,7 +189,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1410.5,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "C"
   },
   {
    "nick": "aptah",
@@ -209,7 +223,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1541.8,
-   "r_ms_rank": 255
+   "r_ms_rank": 255,
+   "r_ms_tier": "C"
   },
   {
    "nick": "=Dракончик",
@@ -242,7 +257,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1517.0,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Fistashka",
@@ -275,7 +291,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1417.1,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Буржуй",
@@ -308,7 +325,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1940.6,
-   "r_ms_rank": 41
+   "r_ms_rank": 41,
+   "r_ms_tier": "A"
   },
   {
    "nick": "Дзю",
@@ -341,7 +359,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1466.9,
-   "r_ms_rank": null
+   "r_ms_rank": null,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Не Злая",
@@ -374,7 +393,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1786.5,
-   "r_ms_rank": 80
+   "r_ms_rank": 80,
+   "r_ms_tier": "A"
   },
   {
    "nick": "Tapok",
@@ -407,7 +427,8 @@
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1221.2,
-   "r_ms_rank": 694
+   "r_ms_rank": 694,
+   "r_ms_tier": "E"
   }
  ],
  "stats": {
