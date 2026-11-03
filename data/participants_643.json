@@ -9,7 +9,8 @@
   "stars": 3,
   "expected": 30,
   "players_confirmed": 12,
-  "rating_note": "ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026"
+  "rating_note": "ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026",
+  "ms_snap": "2026-11-03"
  },
  "players": [
   {
@@ -30,7 +31,17 @@
    "m_rank": null,
    "player_number": 1,
    "mk_match": "id",
-   "elo_snap": "2026-09-06"
+   "elo_snap": "2026-09-06",
+   "ms": {
+    "id": 1476,
+    "rating": 1616.4,
+    "rank": 170,
+    "games": 206,
+    "wr": 47.57,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1616.4,
+   "r_ms_rank": 170
   },
   {
    "nick": "Буржуй",
@@ -50,7 +61,17 @@
    "m_rank": null,
    "player_number": 2,
    "mk_match": "id",
-   "elo_snap": "2026-10-15"
+   "elo_snap": "2026-10-15",
+   "ms": {
+    "id": 63563,
+    "rating": 1940.6,
+    "rank": 41,
+    "games": 656,
+    "wr": 50.76,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1940.6,
+   "r_ms_rank": 41
   },
   {
    "nick": "Kravec",
@@ -70,7 +91,17 @@
    "m_rank": null,
    "player_number": 3,
    "mk_match": null,
-   "elo_snap": null
+   "elo_snap": null,
+   "ms": {
+    "id": 1454,
+    "rating": 1444.9,
+    "rank": null,
+    "games": 42,
+    "wr": 52.38,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1444.9,
+   "r_ms_rank": null
   },
   {
    "nick": "aptah",
@@ -90,7 +121,17 @@
    "m_rank": null,
    "player_number": 4,
    "mk_match": "id",
-   "elo_snap": "2026-10-15"
+   "elo_snap": "2026-10-15",
+   "ms": {
+    "id": 983,
+    "rating": 1541.8,
+    "rank": 255,
+    "games": 593,
+    "wr": 46.04,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1541.8,
+   "r_ms_rank": 255
   },
   {
    "nick": "Не Злая",
@@ -110,7 +151,17 @@
    "m_rank": null,
    "player_number": 5,
    "mk_match": "id",
-   "elo_snap": "2026-09-06"
+   "elo_snap": "2026-09-06",
+   "ms": {
+    "id": 60010,
+    "rating": 1786.5,
+    "rank": 80,
+    "games": 405,
+    "wr": 54.32,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1786.5,
+   "r_ms_rank": 80
   },
   {
    "nick": "Capybara",
@@ -130,7 +181,17 @@
    "m_rank": null,
    "player_number": 6,
    "mk_match": null,
-   "elo_snap": null
+   "elo_snap": null,
+   "ms": {
+    "id": 65858,
+    "rating": 1513.5,
+    "rank": null,
+    "games": 37,
+    "wr": 51.35,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1513.5,
+   "r_ms_rank": null
   },
   {
    "nick": "Кассандра",
@@ -150,7 +211,17 @@
    "m_rank": null,
    "player_number": 7,
    "mk_match": null,
-   "elo_snap": null
+   "elo_snap": null,
+   "ms": {
+    "id": 46030,
+    "rating": 1616.5,
+    "rank": 169,
+    "games": 263,
+    "wr": 56.27,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1616.5,
+   "r_ms_rank": 169
   },
   {
    "nick": "Lюц",
@@ -170,7 +241,17 @@
    "m_rank": null,
    "player_number": 8,
    "mk_match": "id",
-   "elo_snap": "2026-10-15"
+   "elo_snap": "2026-10-15",
+   "ms": {
+    "id": 63564,
+    "rating": 2027.9,
+    "rank": 29,
+    "games": 487,
+    "wr": 51.95,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 2027.9,
+   "r_ms_rank": 29
   },
   {
    "nick": "Mulder",
@@ -190,7 +271,17 @@
    "m_rank": null,
    "player_number": 9,
    "mk_match": "id",
-   "elo_snap": "2026-06-27"
+   "elo_snap": "2026-06-27",
+   "ms": {
+    "id": 1457,
+    "rating": 1297.6,
+    "rank": null,
+    "games": 105,
+    "wr": 44.76,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1297.6,
+   "r_ms_rank": null
   },
   {
    "nick": "Mjata",
@@ -210,7 +301,17 @@
    "m_rank": null,
    "player_number": 10,
    "mk_match": "id",
-   "elo_snap": "2026-06-27"
+   "elo_snap": "2026-06-27",
+   "ms": {
+    "id": 1458,
+    "rating": 1464.4,
+    "rank": null,
+    "games": 127,
+    "wr": 53.54,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1464.4,
+   "r_ms_rank": null
   },
   {
    "nick": "Afina",
@@ -230,7 +331,17 @@
    "m_rank": null,
    "player_number": 11,
    "mk_match": "id",
-   "elo_snap": "2026-06-27"
+   "elo_snap": "2026-06-27",
+   "ms": {
+    "id": 63185,
+    "rating": 1254.5,
+    "rank": 665,
+    "games": 159,
+    "wr": 46.54,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1254.5,
+   "r_ms_rank": 665
   },
   {
    "nick": "Golubchik",
@@ -250,7 +361,17 @@
    "m_rank": null,
    "player_number": 12,
    "mk_match": "id",
-   "elo_snap": "2026-10-15"
+   "elo_snap": "2026-10-15",
+   "ms": {
+    "id": 65540,
+    "rating": 1335.1,
+    "rank": null,
+    "games": 85,
+    "wr": 44.71,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1335.1,
+   "r_ms_rank": null
   },
   {
    "nick": "Асе",
@@ -270,7 +391,17 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": null,
-   "elo_snap": null
+   "elo_snap": null,
+   "ms": {
+    "id": 66423,
+    "rating": 1503.0,
+    "rank": null,
+    "games": 9,
+    "wr": 44.44,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1503.0,
+   "r_ms_rank": null
   }
  ],
  "stats": {

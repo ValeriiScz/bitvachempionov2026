@@ -9,7 +9,8 @@
   "stars": 4,
   "expected": 30,
   "players_confirmed": 30,
-  "rating_note": "markery.online, снимок 26.10.2026: ELO и место в глобальном рейтинге (всё время) и в рейтинге сезона 2026; ранг L/S/A/B/C/D/E/F — по общему ELO (L 1600+, S 1300+, A 1190+, B 1075+, C 994+, D 937+, E 880+)"
+  "rating_note": "markery.online, снимок 26.10.2026: ELO и место в глобальном рейтинге (всё время) и в рейтинге сезона 2026; ранг L/S/A/B/C/D/E/F — по общему ELO (L 1600+, S 1300+, A 1190+, B 1075+, C 994+, D 937+, E 880+)",
+  "ms_snap": "2026-11-03"
  },
  "players": [
   {
@@ -36,7 +37,17 @@
    "r_elo_2026": 1155,
    "r_rank_2026": 37,
    "r_tour_2026": 13,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 383,
+    "rating": 1858.4,
+    "rank": 62,
+    "games": 466,
+    "wr": 50.64,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1858.4,
+   "r_ms_rank": 62
   },
   {
    "nick": "Sova",
@@ -62,7 +73,17 @@
    "r_elo_2026": null,
    "r_rank_2026": null,
    "r_tour_2026": null,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 282,
+    "rating": 1287.4,
+    "rank": 629,
+    "games": 260,
+    "wr": 47.69,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1287.4,
+   "r_ms_rank": 629
   },
   {
    "nick": "Sarcazi.!",
@@ -88,7 +109,17 @@
    "r_elo_2026": 924,
    "r_rank_2026": 2446,
    "r_tour_2026": 5,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 1639,
+    "rating": 1182.4,
+    "rank": null,
+    "games": 53,
+    "wr": 37.74,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1182.4,
+   "r_ms_rank": null
   },
   {
    "nick": "Zico",
@@ -114,7 +145,17 @@
    "r_elo_2026": 991,
    "r_rank_2026": 1583,
    "r_tour_2026": 28,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 65181,
+    "rating": 1087.8,
+    "rank": 740,
+    "games": 282,
+    "wr": 43.26,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1087.8,
+   "r_ms_rank": 740
   },
   {
    "nick": "Медовая",
@@ -140,7 +181,17 @@
    "r_inactive": true,
    "r_elo_2026": 980,
    "r_rank_2026": 1966,
-   "r_tour_2026": 4
+   "r_tour_2026": 4,
+   "ms": {
+    "id": 64449,
+    "rating": 1243.9,
+    "rank": 674,
+    "games": 200,
+    "wr": 46,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1243.9,
+   "r_ms_rank": 674
   },
   {
    "nick": "Леди Luz",
@@ -166,7 +217,17 @@
    "r_elo_2026": 941,
    "r_rank_2026": 2390,
    "r_tour_2026": 26,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 58508,
+    "rating": 1094.2,
+    "rank": 737,
+    "games": 639,
+    "wr": 48.83,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1094.2,
+   "r_ms_rank": 737
   },
   {
    "nick": "Lee Don",
@@ -192,7 +253,17 @@
    "r_inactive": true,
    "r_elo_2026": 963,
    "r_rank_2026": 2245,
-   "r_tour_2026": 12
+   "r_tour_2026": 12,
+   "ms": {
+    "id": 1544,
+    "rating": 1358.2,
+    "rank": null,
+    "games": 69,
+    "wr": 40.58,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1358.2,
+   "r_ms_rank": null
   },
   {
    "nick": "Malvina",
@@ -218,7 +289,17 @@
    "r_elo_2026": 936,
    "r_rank_2026": 2409,
    "r_tour_2026": 3,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 65545,
+    "rating": 1219.7,
+    "rank": null,
+    "games": 36,
+    "wr": 30.56,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1219.7,
+   "r_ms_rank": null
   },
   {
    "nick": "KEX",
@@ -244,7 +325,17 @@
    "r_elo_2026": 1126,
    "r_rank_2026": 58,
    "r_tour_2026": 15,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 3848,
+    "rating": 2123.5,
+    "rank": 16,
+    "games": 1154,
+    "wr": 48.44,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 2123.5,
+   "r_ms_rank": 16
   },
   {
    "nick": "Blessed",
@@ -270,7 +361,17 @@
    "r_elo_2026": 992,
    "r_rank_2026": 1489,
    "r_tour_2026": 6,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 519,
+    "rating": 1627.3,
+    "rank": 155,
+    "games": 262,
+    "wr": 50.76,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1627.3,
+   "r_ms_rank": 155
   },
   {
    "nick": "Eskimo.",
@@ -296,7 +397,17 @@
    "r_elo_2026": 1060,
    "r_rank_2026": 163,
    "r_tour_2026": 9,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 226,
+    "rating": 1841.1,
+    "rank": 64,
+    "games": 698,
+    "wr": 53.15,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1841.1,
+   "r_ms_rank": 64
   },
   {
    "nick": "Sэм",
@@ -322,7 +433,17 @@
    "r_elo_2026": 918,
    "r_rank_2026": 2456,
    "r_tour_2026": 7,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 145,
+    "rating": 1012.0,
+    "rank": 756,
+    "games": 603,
+    "wr": 46.77,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1012.0,
+   "r_ms_rank": 756
   },
   {
    "nick": "Tommy",
@@ -348,7 +469,17 @@
    "r_elo_2026": 1221,
    "r_rank_2026": 14,
    "r_tour_2026": 24,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 61480,
+    "rating": 2016.3,
+    "rank": 31,
+    "games": 797,
+    "wr": 46.05,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 2016.3,
+   "r_ms_rank": 31
   },
   {
    "nick": "Клото",
@@ -374,7 +505,17 @@
    "r_elo_2026": 1030,
    "r_rank_2026": 291,
    "r_tour_2026": 16,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 64326,
+    "rating": 1342.5,
+    "rank": 561,
+    "games": 982,
+    "wr": 49.9,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1342.5,
+   "r_ms_rank": 561
   },
   {
    "nick": "Императрица",
@@ -400,7 +541,17 @@
    "r_inactive": false,
    "r_elo_2026": 985,
    "r_rank_2026": 1823,
-   "r_tour_2026": 2
+   "r_tour_2026": 2,
+   "ms": {
+    "id": 1352,
+    "rating": 1379.9,
+    "rank": null,
+    "games": 47,
+    "wr": 44.68,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1379.9,
+   "r_ms_rank": null
   },
   {
    "nick": "DOVOD",
@@ -426,7 +577,17 @@
    "r_elo_2026": 1170,
    "r_rank_2026": 25,
    "r_tour_2026": 25,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 808,
+    "rating": 1832.7,
+    "rank": 65,
+    "games": 496,
+    "wr": 47.18,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1832.7,
+   "r_ms_rank": 65
   },
   {
    "nick": "Jerry Hurper",
@@ -452,7 +613,17 @@
    "r_elo_2026": 1034,
    "r_rank_2026": 260,
    "r_tour_2026": 15,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 414,
+    "rating": 1560.1,
+    "rank": 230,
+    "games": 524,
+    "wr": 48.09,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1560.1,
+   "r_ms_rank": 230
   },
   {
    "nick": "Катанчик",
@@ -478,7 +649,17 @@
    "r_elo_2026": 1031,
    "r_rank_2026": 277,
    "r_tour_2026": 7,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 65459,
+    "rating": 1609.2,
+    "rank": null,
+    "games": 111,
+    "wr": 50.45,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1609.2,
+   "r_ms_rank": null
   },
   {
    "nick": "Flash",
@@ -504,7 +685,17 @@
    "r_elo_2026": 1310,
    "r_rank_2026": 4,
    "r_tour_2026": 18,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 2139,
+    "rating": 2161.7,
+    "rank": 11,
+    "games": 594,
+    "wr": 51.01,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 2161.7,
+   "r_ms_rank": 11
   },
   {
    "nick": "TOPS",
@@ -530,7 +721,17 @@
    "r_elo_2026": 1080,
    "r_rank_2026": 123,
    "r_tour_2026": 22,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 809,
+    "rating": 1529.0,
+    "rank": 268,
+    "games": 340,
+    "wr": 49.71,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1529.0,
+   "r_ms_rank": 268
   },
   {
    "nick": "Грешник",
@@ -556,7 +757,17 @@
    "r_elo_2026": 1119,
    "r_rank_2026": 62,
    "r_tour_2026": 14,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 518,
+    "rating": 1825.3,
+    "rank": 68,
+    "games": 430,
+    "wr": 48.84,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1825.3,
+   "r_ms_rank": 68
   },
   {
    "nick": "Магнат",
@@ -582,7 +793,17 @@
    "r_elo_2026": 1141,
    "r_rank_2026": 49,
    "r_tour_2026": 18,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 1492,
+    "rating": 1693.5,
+    "rank": 117,
+    "games": 277,
+    "wr": 53.07,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1693.5,
+   "r_ms_rank": 117
   },
   {
    "nick": "Tripok",
@@ -608,7 +829,17 @@
    "r_elo_2026": 1172,
    "r_rank_2026": 24,
    "r_tour_2026": 29,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 63705,
+    "rating": 1831.5,
+    "rank": 66,
+    "games": 394,
+    "wr": 47.46,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1831.5,
+   "r_ms_rank": 66
   },
   {
    "nick": "Ну погоди",
@@ -634,7 +865,17 @@
    "r_inactive": true,
    "r_elo_2026": 931,
    "r_rank_2026": 2426,
-   "r_tour_2026": 19
+   "r_tour_2026": 19,
+   "ms": {
+    "id": 63157,
+    "rating": 1472.3,
+    "rank": 359,
+    "games": 408,
+    "wr": 47.79,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1472.3,
+   "r_ms_rank": 359
   },
   {
    "nick": "Nick",
@@ -660,7 +901,17 @@
    "r_inactive": false,
    "r_elo_2026": 1173,
    "r_rank_2026": 23,
-   "r_tour_2026": 13
+   "r_tour_2026": 13,
+   "ms": {
+    "id": 723,
+    "rating": 1903.6,
+    "rank": 52,
+    "games": 419,
+    "wr": 52.51,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1903.6,
+   "r_ms_rank": 52
   },
   {
    "nick": "Gemellia",
@@ -686,7 +937,17 @@
    "r_inactive": false,
    "r_elo_2026": 977,
    "r_rank_2026": 2043,
-   "r_tour_2026": 7
+   "r_tour_2026": 7,
+   "ms": {
+    "id": 1490,
+    "rating": 1321.6,
+    "rank": null,
+    "games": 109,
+    "wr": 44.04,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1321.6,
+   "r_ms_rank": null
   },
   {
    "nick": "Urs",
@@ -712,7 +973,17 @@
    "r_elo_2026": 910,
    "r_rank_2026": 2470,
    "r_tour_2026": 13,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 222,
+    "rating": 889.9,
+    "rank": 768,
+    "games": 359,
+    "wr": 45.4,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 889.9,
+   "r_ms_rank": 768
   },
   {
    "nick": "ParadoXx",
@@ -738,7 +1009,17 @@
    "r_elo_2026": 1156,
    "r_rank_2026": 35,
    "r_tour_2026": 23,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 654,
+    "rating": 1732.4,
+    "rank": 99,
+    "games": 336,
+    "wr": 52.38,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1732.4,
+   "r_ms_rank": 99
   },
   {
    "nick": "Flame",
@@ -764,7 +1045,17 @@
    "r_elo_2026": 1113,
    "r_rank_2026": 72,
    "r_tour_2026": 8,
-   "elo_snap": "2026-10-26"
+   "elo_snap": "2026-10-26",
+   "ms": {
+    "id": 63471,
+    "rating": 2087.4,
+    "rank": 22,
+    "games": 279,
+    "wr": 50.54,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 2087.4,
+   "r_ms_rank": 22
   },
   {
    "nick": "sugar",
@@ -790,7 +1081,17 @@
    "r_inactive": false,
    "r_elo_2026": 1222,
    "r_rank_2026": 13,
-   "r_tour_2026": 20
+   "r_tour_2026": 20,
+   "ms": {
+    "id": 247,
+    "rating": 1971.2,
+    "rank": 35,
+    "games": 605,
+    "wr": 47.77,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1971.2,
+   "r_ms_rank": 35
   }
  ],
  "stats": {

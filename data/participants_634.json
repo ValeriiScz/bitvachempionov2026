@@ -13,7 +13,8 @@
   "players_confirmed": 44,
   "teams": 0,
   "team_size": 0,
-  "rating_note": "markery снапшот 2026-07-15 (API, после Польши 766 и Кёльна 702). r_elo_cur=текущий ELO глоб/всё время; r_tier=ранг S..F по границам markery; r_place_global=место глоб/всё время; r_rank_eu_2026=место Европа-2026; r_elo_2026=ELO глоб-2026. Ростер mafgame 44 подтв. на 2026-07-15."
+  "rating_note": "markery снапшот 2026-07-15 (API, после Польши 766 и Кёльна 702). r_elo_cur=текущий ELO глоб/всё время; r_tier=ранг S..F по границам markery; r_place_global=место глоб/всё время; r_rank_eu_2026=место Европа-2026; r_elo_2026=ELO глоб-2026. Ростер mafgame 44 подтв. на 2026-07-15.",
+  "ms_snap": "2026-11-03"
  },
  "players": [
   {
@@ -29,11 +30,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1436.2366,
-    "rank": 2029,
-    "games": 389,
-    "wr": 44.47,
-    "conf": "mafgame",
+    "rating": 2123.5,
+    "rank": 16,
+    "games": 1154,
+    "wr": 48.44,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "mwt",
@@ -47,7 +48,9 @@
    "r_tier": "S",
    "r_place_global": 37,
    "r_rank_eu_2026": 8,
-   "r_elo_2026": 1140.43
+   "r_elo_2026": 1140.43,
+   "r_ms_mmr": 2123.5,
+   "r_ms_rank": 16
   },
   {
    "nick": "Jerry Hurper",
@@ -62,11 +65,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": null,
-    "rank": null,
-    "games": 0,
-    "wr": null,
-    "conf": "mafgame",
+    "rating": 1560.1,
+    "rank": 230,
+    "games": 524,
+    "wr": 48.09,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "imafia"
@@ -78,7 +81,9 @@
    "r_tier": "B",
    "r_place_global": 506,
    "r_rank_eu_2026": 119,
-   "r_elo_2026": 1027.85
+   "r_elo_2026": 1027.85,
+   "r_ms_mmr": 1560.1,
+   "r_ms_rank": 230
   },
   {
    "nick": "YeS",
@@ -93,11 +98,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1520.8229,
-    "rank": 905,
-    "games": 250,
-    "wr": 46.8,
-    "conf": "mafgame",
+    "rating": 2292.9,
+    "rank": 5,
+    "games": 1038,
+    "wr": 49.42,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "mwt",
@@ -111,7 +116,9 @@
    "r_tier": "S",
    "r_place_global": 59,
    "r_rank_eu_2026": 27,
-   "r_elo_2026": 1087.39
+   "r_elo_2026": 1087.39,
+   "r_ms_mmr": 2292.9,
+   "r_ms_rank": 5
   },
   {
    "nick": "Kokocik",
@@ -126,11 +133,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1315.1342,
-    "rank": 3091,
-    "games": 38,
-    "wr": 42.11,
-    "conf": "mafgame",
+    "rating": 1342.5,
+    "rank": 560,
+    "games": 365,
+    "wr": 50.96,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "mwt",
@@ -144,7 +151,9 @@
    "r_tier": "C",
    "r_place_global": 2961,
    "r_rank_eu_2026": 299,
-   "r_elo_2026": 1003.7
+   "r_elo_2026": 1003.7,
+   "r_ms_mmr": 1342.5,
+   "r_ms_rank": 560
   },
   {
    "nick": "Katusha",
@@ -159,23 +168,25 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1510.1035,
-    "rank": 1007,
-    "games": 16,
-    "wr": 68.75,
-    "conf": "exact_nomaf",
+    "rating": 1332.7,
+    "rank": null,
+    "games": 67,
+    "wr": 41.79,
+    "conf": "mafgame-id",
     "feds": [
      "mwt",
      "emotion"
     ],
-    "id": 62609
+    "id": 65807
    },
    "markery_id": 12188,
    "r_elo_cur": 1002.25,
    "r_tier": "C",
    "r_place_global": 2666,
    "r_rank_eu_2026": 145,
-   "r_elo_2026": 1021.1
+   "r_elo_2026": 1021.1,
+   "r_ms_mmr": 1332.7,
+   "r_ms_rank": null
   },
   {
    "nick": "Tripok",
@@ -190,11 +201,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1671.2709,
-    "rank": 303,
-    "games": 48,
-    "wr": 60.42,
-    "conf": "mafgame",
+    "rating": 1831.5,
+    "rank": 66,
+    "games": 394,
+    "wr": 47.46,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "mwt",
@@ -208,7 +219,9 @@
    "r_tier": "B",
    "r_place_global": 226,
    "r_rank_eu_2026": 56,
-   "r_elo_2026": 1054.2
+   "r_elo_2026": 1054.2,
+   "r_ms_mmr": 1831.5,
+   "r_ms_rank": 66
   },
   {
    "nick": "Ксюша",
@@ -223,24 +236,26 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1479.0342,
-    "rank": 1419,
-    "games": 404,
-    "wr": 48.27,
-    "conf": "exact_nomaf",
+    "rating": 1387.2,
+    "rank": null,
+    "games": 28,
+    "wr": 39.29,
+    "conf": "mafgame-id",
     "feds": [
      "mwt",
      "emotion",
      "imafia"
     ],
-    "id": 64987
+    "id": 65631
    },
    "markery_id": 10867,
    "r_elo_cur": 1123.17,
    "r_tier": "B",
    "r_place_global": 330,
    "r_rank_eu_2026": 188,
-   "r_elo_2026": 1013.45
+   "r_elo_2026": 1013.45,
+   "r_ms_mmr": 1387.2,
+   "r_ms_rank": null
   },
   {
    "nick": "RAMZES",
@@ -255,11 +270,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1287.8551,
-    "rank": 3232,
-    "games": 32,
-    "wr": 40.62,
-    "conf": "mafgame",
+    "rating": 1858.4,
+    "rank": 62,
+    "games": 466,
+    "wr": 50.64,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "emotion",
@@ -273,7 +288,9 @@
    "r_tier": "B",
    "r_place_global": 281,
    "r_rank_eu_2026": 114,
-   "r_elo_2026": 1030.43
+   "r_elo_2026": 1030.43,
+   "r_ms_mmr": 1858.4,
+   "r_ms_rank": 62
   },
   {
    "nick": "Niko",
@@ -288,11 +305,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1851.4477,
-    "rank": 126,
-    "games": 233,
-    "wr": 49.36,
-    "conf": "mafgame",
+    "rating": 2108.3,
+    "rank": 18,
+    "games": 498,
+    "wr": 50.4,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "mwt",
@@ -305,7 +322,9 @@
    "r_tier": "S",
    "r_place_global": 75,
    "r_rank_eu_2026": 52,
-   "r_elo_2026": 1057.6
+   "r_elo_2026": 1057.6,
+   "r_ms_mmr": 2108.3,
+   "r_ms_rank": 18
   },
   {
    "nick": "ParadoXx",
@@ -320,22 +339,24 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1822.2161,
-    "rank": 141,
-    "games": 16,
-    "wr": 75,
-    "conf": "exact_nomaf",
+    "rating": 1732.4,
+    "rank": 99,
+    "games": 336,
+    "wr": 52.38,
+    "conf": "mafgame-id",
     "feds": [
      "imafia"
     ],
-    "id": 65399
+    "id": 654
    },
    "markery_id": 16374,
    "r_elo_cur": 1146.86,
    "r_tier": "B",
    "r_place_global": 277,
    "r_rank_eu_2026": 7,
-   "r_elo_2026": 1140.71
+   "r_elo_2026": 1140.71,
+   "r_ms_mmr": 1732.4,
+   "r_ms_rank": 99
   },
   {
    "nick": "DOVOD",
@@ -350,22 +371,24 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1543.6754,
-    "rank": 706,
-    "games": 16,
-    "wr": 62.5,
-    "conf": "exact_nomaf",
+    "rating": 1832.7,
+    "rank": 65,
+    "games": 496,
+    "wr": 47.18,
+    "conf": "mafgame-id",
     "feds": [
      "mwt"
     ],
-    "id": 59039
+    "id": 808
    },
    "markery_id": 17342,
    "r_elo_cur": 1126.0,
    "r_tier": "B",
    "r_place_global": 324,
    "r_rank_eu_2026": 41,
-   "r_elo_2026": 1071.29
+   "r_elo_2026": 1071.29,
+   "r_ms_mmr": 1832.7,
+   "r_ms_rank": 65
   },
   {
    "nick": "TOPS",
@@ -380,20 +403,22 @@
     "match": "id"
    },
    "ms": {
-    "rating": null,
-    "rank": null,
-    "games": null,
-    "wr": null,
-    "conf": "none",
+    "rating": 1529.0,
+    "rank": 268,
+    "games": 340,
+    "wr": 49.71,
+    "conf": "mafgame-id",
     "feds": null,
-    "id": null
+    "id": 809
    },
    "markery_id": 17343,
    "r_elo_cur": 1057.04,
    "r_tier": "C",
    "r_place_global": 659,
    "r_rank_eu_2026": 43,
-   "r_elo_2026": 1070.2
+   "r_elo_2026": 1070.2,
+   "r_ms_mmr": 1529.0,
+   "r_ms_rank": 268
   },
   {
    "nick": "qUAest0r",
@@ -408,11 +433,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1431.9755,
-    "rank": 2078,
-    "games": 12,
-    "wr": 41.67,
-    "conf": "mafgame",
+    "rating": 1240.1,
+    "rank": 680,
+    "games": 396,
+    "wr": 44.44,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "emotion",
@@ -425,7 +450,9 @@
    "r_tier": "D",
    "r_place_global": 4731,
    "r_rank_eu_2026": 656,
-   "r_elo_2026": 981.51
+   "r_elo_2026": 981.51,
+   "r_ms_mmr": 1240.1,
+   "r_ms_rank": 680
   },
   {
    "nick": "Putnik",
@@ -440,20 +467,22 @@
     "match": "id"
    },
    "ms": {
-    "rating": null,
+    "rating": 1387.5,
     "rank": null,
-    "games": null,
-    "wr": null,
-    "conf": "none",
+    "games": 61,
+    "wr": 49.18,
+    "conf": "mafgame-id",
     "feds": null,
-    "id": null
+    "id": 660
    },
    "markery_id": 16380,
    "r_elo_cur": 1000.3,
    "r_tier": "C",
    "r_place_global": 2922,
    "r_rank_eu_2026": 281,
-   "r_elo_2026": 1004.74
+   "r_elo_2026": 1004.74,
+   "r_ms_mmr": 1387.5,
+   "r_ms_rank": null
   },
   {
    "nick": "AquaMarine",
@@ -468,20 +497,22 @@
     "match": "id"
    },
    "ms": {
-    "rating": null,
+    "rating": 1300.4,
     "rank": null,
-    "games": null,
-    "wr": null,
-    "conf": "none",
+    "games": 98,
+    "wr": 43.88,
+    "conf": "mafgame-id",
     "feds": null,
-    "id": null
+    "id": 657
    },
    "markery_id": 16377,
    "r_elo_cur": 976.16,
    "r_tier": "D",
    "r_place_global": 5980,
    "r_rank_eu_2026": 683,
-   "r_elo_2026": 977.83
+   "r_elo_2026": 977.83,
+   "r_ms_mmr": 1300.4,
+   "r_ms_rank": null
   },
   {
    "nick": "Link",
@@ -496,20 +527,22 @@
     "match": "id"
    },
    "ms": {
-    "rating": null,
-    "rank": null,
-    "games": null,
-    "wr": null,
-    "conf": "none",
+    "rating": 1179.1,
+    "rank": 709,
+    "games": 199,
+    "wr": 46.73,
+    "conf": "mafgame-id",
     "feds": null,
-    "id": null
+    "id": 1429
    },
    "markery_id": 19345,
    "r_elo_cur": 962.36,
    "r_tier": "D",
    "r_place_global": 6772,
    "r_rank_eu_2026": 762,
-   "r_elo_2026": 962.2
+   "r_elo_2026": 962.2,
+   "r_ms_mmr": 1179.1,
+   "r_ms_rank": 709
   },
   {
    "nick": "sometimes",
@@ -524,20 +557,22 @@
     "match": "id"
    },
    "ms": {
-    "rating": null,
-    "rank": null,
-    "games": null,
-    "wr": null,
-    "conf": "none",
+    "rating": 1355.4,
+    "rank": 537,
+    "games": 164,
+    "wr": 45.12,
+    "conf": "mafgame-id",
     "feds": null,
-    "id": null
+    "id": 912
    },
    "markery_id": 17415,
    "r_elo_cur": 1034.54,
    "r_tier": "C",
    "r_place_global": 931,
    "r_rank_eu_2026": 167,
-   "r_elo_2026": 1016.75
+   "r_elo_2026": 1016.75,
+   "r_ms_mmr": 1355.4,
+   "r_ms_rank": 537
   },
   {
    "nick": "ШТО?",
@@ -552,11 +587,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1369.4247,
-    "rank": 2717,
-    "games": 61,
-    "wr": 52.46,
-    "conf": "mafgame",
+    "rating": 1483.9,
+    "rank": 335,
+    "games": 342,
+    "wr": 52.63,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "imafia"
@@ -568,7 +603,9 @@
    "r_tier": "B",
    "r_place_global": 527,
    "r_rank_eu_2026": 38,
-   "r_elo_2026": 1075.41
+   "r_elo_2026": 1075.41,
+   "r_ms_mmr": 1483.9,
+   "r_ms_rank": 335
   },
   {
    "nick": "Designer",
@@ -583,22 +620,24 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1349.6882,
-    "rank": 2869,
-    "games": 24,
-    "wr": 45.83,
-    "conf": "exact_nomaf",
+    "rating": 1219.9,
+    "rank": null,
+    "games": 40,
+    "wr": 27.5,
+    "conf": "mafgame-id",
     "feds": [
      "imafia"
     ],
-    "id": 63180
+    "id": 65386
    },
    "markery_id": 19600,
    "r_elo_cur": 939.46,
    "r_tier": "D",
    "r_place_global": 7443,
    "r_rank_eu_2026": 813,
-   "r_elo_2026": 940.31
+   "r_elo_2026": 940.31,
+   "r_ms_mmr": 1219.9,
+   "r_ms_rank": null
   },
   {
    "nick": "Funt",
@@ -613,11 +652,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1543.0738,
-    "rank": 711,
-    "games": 8,
-    "wr": 62.5,
-    "conf": "mafgame",
+    "rating": 1389.1,
+    "rank": 490,
+    "games": 150,
+    "wr": 53.33,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "mwt"
@@ -629,7 +668,9 @@
    "r_tier": "D",
    "r_place_global": 5340,
    "r_rank_eu_2026": 152,
-   "r_elo_2026": 1019.85
+   "r_elo_2026": 1019.85,
+   "r_ms_mmr": 1389.1,
+   "r_ms_rank": 490
   },
   {
    "nick": "Donna",
@@ -644,23 +685,25 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1390.7039,
-    "rank": 2519,
-    "games": 35,
-    "wr": 42.86,
-    "conf": "exact_nomaf",
+    "rating": 921.6,
+    "rank": 766,
+    "games": 266,
+    "wr": 37.22,
+    "conf": "mafgame-id",
     "feds": [
      "emotion",
      "imafia"
     ],
-    "id": 64831
+    "id": 773
    },
    "markery_id": 19168,
    "r_elo_cur": 837.27,
    "r_tier": "F",
    "r_place_global": 8145,
    "r_rank_eu_2026": 845,
-   "r_elo_2026": 862.46
+   "r_elo_2026": 862.46,
+   "r_ms_mmr": 921.6,
+   "r_ms_rank": 766
   },
   {
    "nick": "Клото",
@@ -675,11 +718,11 @@
     "match": "id"
    },
    "ms": {
-    "rating": 1142.2086,
-    "rank": 3634,
-    "games": 422,
-    "wr": 49.29,
-    "conf": "mafgame",
+    "rating": 1342.5,
+    "rank": 561,
+    "games": 982,
+    "wr": 49.9,
+    "conf": "mafgame-id",
     "feds": [
      "mafgame",
      "mwt",
@@ -693,7 +736,9 @@
    "r_tier": "B",
    "r_place_global": 380,
    "r_rank_eu_2026": 46,
-   "r_elo_2026": 1063.47
+   "r_elo_2026": 1063.47,
+   "r_ms_mmr": 1342.5,
+   "r_ms_rank": 561
   },
   {
    "nick": "Провокатор",
@@ -708,20 +753,22 @@
     "match": "id"
    },
    "ms": {
-    "rating": null,
+    "rating": 1012.6,
     "rank": null,
-    "games": null,
-    "wr": null,
-    "conf": "none",
+    "games": 139,
+    "wr": 38.13,
+    "conf": "mafgame-id",
     "feds": null,
-    "id": null
+    "id": 64783
    },
    "markery_id": 11115,
    "r_elo_cur": 847.08,
    "r_tier": "F",
    "r_place_global": 8127,
    "r_rank_eu_2026": 834,
-   "r_elo_2026": 923.83
+   "r_elo_2026": 923.83,
+   "r_ms_mmr": 1012.6,
+   "r_ms_rank": null
   },
   {
    "nick": "Specchio",
@@ -736,20 +783,22 @@
     "match": "id"
    },
    "ms": {
-    "rating": null,
+    "rating": 1128.2,
     "rank": null,
-    "games": null,
-    "wr": null,
-    "conf": "none",
+    "games": 115,
+    "wr": 39.13,
+    "conf": "mafgame-id",
     "feds": null,
-    "id": null
+    "id": 918
    },
    "markery_id": 17374,
    "r_elo_cur": 946.76,
    "r_tier": "D",
    "r_place_global": 7291,
    "r_rank_eu_2026": 708,
-   "r_elo_2026": 973.56
+   "r_elo_2026": 973.56,
+   "r_ms_mmr": 1128.2,
+   "r_ms_rank": null
   },
   {
    "nick": "Магнат",
@@ -764,20 +813,22 @@
     "match": "id"
    },
    "ms": {
-    "rating": null,
-    "rank": null,
-    "games": null,
-    "wr": null,
-    "conf": "none",
+    "rating": 1693.5,
+    "rank": 117,
+    "games": 277,
+    "wr": 53.07,
+    "conf": "mafgame-id",
     "feds": null,
-    "id": null
+    "id": 1492
    },
    "markery_id": 15321,
    "r_elo_cur": 1138.08,
    "r_tier": "B",
    "r_place_global": 294,
    "r_rank_eu_2026": 11,
-   "r_elo_2026": 1134.06
+   "r_elo_2026": 1134.06,
+   "r_ms_mmr": 1693.5,
+   "r_ms_rank": 117
   },
   {
    "nick": "Sarcazi.!",
@@ -792,20 +843,22 @@
     "match": "id"
    },
    "ms": {
-    "rating": null,
+    "rating": 1182.4,
     "rank": null,
-    "games": null,
-    "wr": null,
-    "conf": "none",
+    "games": 53,
+    "wr": 37.74,
+    "conf": "mafgame-id",
     "feds": null,
-    "id": null
+    "id": 1639
    },
    "markery_id": 19995,
    "r_elo_cur": 955.24,
    "r_tier": "D",
    "r_place_global": 7043,
    "r_rank_eu_2026": 791,
-   "r_elo_2026": 955.08
+   "r_elo_2026": 955.08,
+   "r_ms_mmr": 1182.4,
+   "r_ms_rank": null
   },
   {
    "nick": "yesterday",
@@ -819,13 +872,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 1626,
+    "rating": 1459.1,
+    "rank": null,
+    "games": 84,
+    "wr": 44.05,
+    "conf": "mafgame-id"
+   },
    "markery_id": 19954,
    "r_elo_cur": 1024.0,
    "r_tier": "C",
    "r_place_global": 1220,
    "r_rank_eu_2026": 131,
-   "r_elo_2026": 1024.16
+   "r_elo_2026": 1024.16,
+   "r_ms_mmr": 1459.1,
+   "r_ms_rank": null
   },
   {
    "nick": "Akteur",
@@ -839,13 +901,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 1222,
+    "rating": 1406.9,
+    "rank": 457,
+    "games": 182,
+    "wr": 43.96,
+    "conf": "mafgame-id"
+   },
    "markery_id": 18881,
    "r_elo_cur": 976.98,
    "r_tier": "D",
    "r_place_global": 5907,
    "r_rank_eu_2026": 394,
-   "r_elo_2026": 998.98
+   "r_elo_2026": 998.98,
+   "r_ms_mmr": 1406.9,
+   "r_ms_rank": 457
   },
   {
    "nick": "Ириска",
@@ -859,13 +930,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 522,
+    "rating": 1467.6,
+    "rank": 364,
+    "games": 285,
+    "wr": 47.72,
+    "conf": "mafgame-id"
+   },
    "markery_id": 10096,
    "r_elo_cur": 985.31,
    "r_tier": "D",
    "r_place_global": 5152,
    "r_rank_eu_2026": 611,
-   "r_elo_2026": 986.54
+   "r_elo_2026": 986.54,
+   "r_ms_mmr": 1467.6,
+   "r_ms_rank": 364
   },
   {
    "nick": "Царь",
@@ -879,13 +959,22 @@
     "conf": "multi",
     "match": "multi"
    },
-   "ms": null,
+   "ms": {
+    "id": 64075,
+    "rating": 1506.2,
+    "rank": null,
+    "games": 113,
+    "wr": 48.67,
+    "conf": "mafgame-id"
+   },
    "markery_id": 9505,
    "r_elo_cur": 1007.32,
    "r_tier": "C",
    "r_place_global": 2075,
    "r_rank_eu_2026": 199,
-   "r_elo_2026": 1011.98
+   "r_elo_2026": 1011.98,
+   "r_ms_mmr": 1506.2,
+   "r_ms_rank": null
   },
   {
    "nick": "Саботаж",
@@ -899,13 +988,22 @@
     "conf": "ok",
     "match": "nick"
    },
-   "ms": null,
+   "ms": {
+    "id": 55,
+    "rating": 1870.3,
+    "rank": 61,
+    "games": 742,
+    "wr": 49.73,
+    "conf": "mafgame-id"
+   },
    "markery_id": 9999,
    "r_elo_cur": 1259.89,
    "r_tier": "A",
    "r_place_global": 133,
    "r_rank_eu_2026": 21,
-   "r_elo_2026": 1098.12
+   "r_elo_2026": 1098.12,
+   "r_ms_mmr": 1870.3,
+   "r_ms_rank": 61
   },
   {
    "nick": "Малышка Мю",
@@ -919,13 +1017,22 @@
     "conf": "ok",
     "match": "nick"
    },
-   "ms": null,
+   "ms": {
+    "id": 1559,
+    "rating": 873.3,
+    "rank": 772,
+    "games": 371,
+    "wr": 42.86,
+    "conf": "mafgame-id"
+   },
    "markery_id": 11598,
    "r_elo_cur": 808.68,
    "r_tier": "F",
    "r_place_global": 8179,
    "r_rank_eu_2026": 810,
-   "r_elo_2026": 942.3
+   "r_elo_2026": 942.3,
+   "r_ms_mmr": 873.3,
+   "r_ms_rank": 772
   },
   {
    "nick": "LogisticPro",
@@ -939,13 +1046,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 105,
+    "rating": 1727.3,
+    "rank": 102,
+    "games": 383,
+    "wr": 50.39,
+    "conf": "mafgame-id"
+   },
    "markery_id": 10996,
    "r_elo_cur": 1174.82,
    "r_tier": "B",
    "r_place_global": 240,
    "r_rank_eu_2026": 16,
-   "r_elo_2026": 1117.21
+   "r_elo_2026": 1117.21,
+   "r_ms_mmr": 1727.3,
+   "r_ms_rank": 102
   },
   {
    "nick": "Джоук",
@@ -959,13 +1075,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 65791,
+    "rating": 1441.9,
+    "rank": null,
+    "games": 62,
+    "wr": 38.71,
+    "conf": "mafgame-id"
+   },
    "markery_id": 21513,
    "r_elo_cur": 991.86,
    "r_tier": "D",
    "r_place_global": 4292,
    "r_rank_eu_2026": 532,
-   "r_elo_2026": 991.76
+   "r_elo_2026": 991.76,
+   "r_ms_mmr": 1441.9,
+   "r_ms_rank": null
   },
   {
    "nick": "Живи",
@@ -979,13 +1104,22 @@
     "conf": "ok",
     "match": "nick"
    },
-   "ms": null,
+   "ms": {
+    "id": 1223,
+    "rating": 1490.2,
+    "rank": null,
+    "games": 33,
+    "wr": 42.42,
+    "conf": "mafgame-id"
+   },
    "markery_id": 12585,
    "r_elo_cur": 1011.13,
    "r_tier": "C",
    "r_place_global": 1778,
    "r_rank_eu_2026": null,
-   "r_elo_2026": null
+   "r_elo_2026": null,
+   "r_ms_mmr": 1490.2,
+   "r_ms_rank": null
   },
   {
    "nick": "Призрак",
@@ -999,13 +1133,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 23379,
+    "rating": 1722.6,
+    "rank": 104,
+    "games": 875,
+    "wr": 47.31,
+    "conf": "mafgame-id"
+   },
    "markery_id": 12408,
    "r_elo_cur": 1238.89,
    "r_tier": "A",
    "r_place_global": 155,
    "r_rank_eu_2026": 168,
-   "r_elo_2026": 1016.58
+   "r_elo_2026": 1016.58,
+   "r_ms_mmr": 1722.6,
+   "r_ms_rank": 104
   },
   {
    "nick": "Скорбный",
@@ -1019,13 +1162,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 349,
+    "rating": 1499.3,
+    "rank": null,
+    "games": 77,
+    "wr": 46.75,
+    "conf": "mafgame-id"
+   },
    "markery_id": 11101,
    "r_elo_cur": 969.55,
    "r_tier": "D",
    "r_place_global": 6416,
    "r_rank_eu_2026": 490,
-   "r_elo_2026": 994.05
+   "r_elo_2026": 994.05,
+   "r_ms_mmr": 1499.3,
+   "r_ms_rank": null
   },
   {
    "nick": "Zorro",
@@ -1039,13 +1191,22 @@
     "conf": "ok",
     "match": "nick"
    },
-   "ms": null,
+   "ms": {
+    "id": 1209,
+    "rating": 1490.5,
+    "rank": null,
+    "games": 69,
+    "wr": 47.83,
+    "conf": "mafgame-id"
+   },
    "markery_id": 18851,
    "r_elo_cur": 974.19,
    "r_tier": "D",
    "r_place_global": 6130,
    "r_rank_eu_2026": 349,
-   "r_elo_2026": 1000.98
+   "r_elo_2026": 1000.98,
+   "r_ms_mmr": 1490.5,
+   "r_ms_rank": null
   },
   {
    "nick": "Zico",
@@ -1059,13 +1220,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 65181,
+    "rating": 1087.8,
+    "rank": 740,
+    "games": 282,
+    "wr": 43.26,
+    "conf": "mafgame-id"
+   },
    "markery_id": 18914,
    "r_elo_cur": 919.43,
    "r_tier": "E",
    "r_place_global": 7747,
    "r_rank_eu_2026": 667,
-   "r_elo_2026": 979.9
+   "r_elo_2026": 979.9,
+   "r_ms_mmr": 1087.8,
+   "r_ms_rank": 740
   },
   {
    "nick": "Гіппократ",
@@ -1079,13 +1249,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 1212,
+    "rating": 1378.0,
+    "rank": null,
+    "games": 122,
+    "wr": 49.18,
+    "conf": "mafgame-id"
+   },
    "markery_id": 18767,
    "r_elo_cur": 992.17,
    "r_tier": "D",
    "r_place_global": 4257,
    "r_rank_eu_2026": 159,
-   "r_elo_2026": 1018.56
+   "r_elo_2026": 1018.56,
+   "r_ms_mmr": 1378.0,
+   "r_ms_rank": null
   },
   {
    "nick": "Licht",
@@ -1099,13 +1278,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 63280,
+    "rating": 1710.3,
+    "rank": 110,
+    "games": 349,
+    "wr": 50.72,
+    "conf": "mafgame-id"
+   },
    "markery_id": 17164,
    "r_elo_cur": 1205.91,
    "r_tier": "A",
    "r_place_global": 194,
    "r_rank_eu_2026": 15,
-   "r_elo_2026": 1118.25
+   "r_elo_2026": 1118.25,
+   "r_ms_mmr": 1710.3,
+   "r_ms_rank": 110
   },
   {
    "nick": "Haski",
@@ -1119,13 +1307,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 65458,
+    "rating": 1234.0,
+    "rank": null,
+    "games": 64,
+    "wr": 40.62,
+    "conf": "mafgame-id"
+   },
    "markery_id": 21198,
    "r_elo_cur": 962.44,
    "r_tier": "D",
    "r_place_global": 6767,
    "r_rank_eu_2026": 766,
-   "r_elo_2026": 961.95
+   "r_elo_2026": 961.95,
+   "r_ms_mmr": 1234.0,
+   "r_ms_rank": null
   },
   {
    "nick": "Sancho",
@@ -1139,13 +1336,22 @@
     "conf": "ok",
     "match": "nick"
    },
-   "ms": null,
+   "ms": {
+    "id": 658,
+    "rating": 1681.7,
+    "rank": null,
+    "games": 101,
+    "wr": 56.44,
+    "conf": "mafgame-id"
+   },
    "markery_id": 16378,
    "r_elo_cur": 1008.16,
    "r_tier": "C",
    "r_place_global": 2011,
    "r_rank_eu_2026": 233,
-   "r_elo_2026": 1008.53
+   "r_elo_2026": 1008.53,
+   "r_ms_mmr": 1681.7,
+   "r_ms_rank": null
   },
   {
    "nick": "Гамбитик",
@@ -1159,13 +1365,22 @@
     "conf": "ok",
     "match": "id"
    },
-   "ms": null,
+   "ms": {
+    "id": 791,
+    "rating": 1376.0,
+    "rank": null,
+    "games": 101,
+    "wr": 48.51,
+    "conf": "mafgame-id"
+   },
    "markery_id": 17006,
    "r_elo_cur": 944.93,
    "r_tier": "D",
    "r_place_global": 7336,
    "r_rank_eu_2026": 688,
-   "r_elo_2026": 976.93
+   "r_elo_2026": 976.93,
+   "r_ms_mmr": 1376.0,
+   "r_ms_rank": null
   }
  ],
  "stats": {

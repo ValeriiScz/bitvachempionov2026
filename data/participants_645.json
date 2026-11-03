@@ -9,7 +9,8 @@
   "stars": 2,
   "expected": 12,
   "players_confirmed": 12,
-  "rating_note": "Состав предварительный: топ-2 каждой из 6 серий по протоколам mafgame (утвердится, когда организатор закроет серии). ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026"
+  "rating_note": "Состав предварительный: топ-2 каждой из 6 серий по протоколам mafgame (утвердится, когда организатор закроет серии). ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026",
+  "ms_snap": "2026-11-03"
  },
  "players": [
   {
@@ -33,7 +34,17 @@
    "elo_snap": "2026-09-06",
    "series": 1,
    "series_place": 1,
-   "series_score": 6.55
+   "series_score": 6.55,
+   "ms": {
+    "id": 1476,
+    "rating": 1616.4,
+    "rank": 170,
+    "games": 206,
+    "wr": 47.57,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1616.4,
+   "r_ms_rank": 170
   },
   {
    "nick": "Jane",
@@ -56,7 +67,17 @@
    "elo_snap": "2026-06-27",
    "series": 1,
    "series_place": 2,
-   "series_score": 5.5
+   "series_score": 5.5,
+   "ms": {
+    "id": 64334,
+    "rating": 1678.4,
+    "rank": 125,
+    "games": 474,
+    "wr": 49.58,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1678.4,
+   "r_ms_rank": 125
   },
   {
    "nick": "Sinful",
@@ -79,7 +100,17 @@
    "elo_snap": null,
    "series": 2,
    "series_place": 1,
-   "series_score": 7.75
+   "series_score": 7.75,
+   "ms": {
+    "id": 295,
+    "rating": 1691.4,
+    "rank": 118,
+    "games": 320,
+    "wr": 50.31,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1691.4,
+   "r_ms_rank": 118
   },
   {
    "nick": "POTAP",
@@ -102,7 +133,17 @@
    "elo_snap": null,
    "series": 2,
    "series_place": 2,
-   "series_score": 5.9
+   "series_score": 5.9,
+   "ms": {
+    "id": 1609,
+    "rating": 1422.3,
+    "rank": null,
+    "games": 67,
+    "wr": 47.76,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1422.3,
+   "r_ms_rank": null
   },
   {
    "nick": "Котяра",
@@ -125,7 +166,17 @@
    "elo_snap": "2026-06-27",
    "series": 4,
    "series_place": 1,
-   "series_score": 7.55
+   "series_score": 7.55,
+   "ms": {
+    "id": 543,
+    "rating": 1410.5,
+    "rank": null,
+    "games": 99,
+    "wr": 57.58,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1410.5,
+   "r_ms_rank": null
   },
   {
    "nick": "aptah",
@@ -148,7 +199,17 @@
    "elo_snap": "2026-10-15",
    "series": 4,
    "series_place": 2,
-   "series_score": 6.9
+   "series_score": 6.9,
+   "ms": {
+    "id": 983,
+    "rating": 1541.8,
+    "rank": 255,
+    "games": 593,
+    "wr": 46.04,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1541.8,
+   "r_ms_rank": 255
   },
   {
    "nick": "=Dракончик",
@@ -171,7 +232,17 @@
    "elo_snap": null,
    "series": 3,
    "series_place": 1,
-   "series_score": 5.85
+   "series_score": 5.85,
+   "ms": {
+    "id": 66245,
+    "rating": 1517.0,
+    "rank": null,
+    "games": 9,
+    "wr": 66.67,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1517.0,
+   "r_ms_rank": null
   },
   {
    "nick": "Fistashka",
@@ -194,7 +265,17 @@
    "elo_snap": null,
    "series": 3,
    "series_place": 2,
-   "series_score": 5.1
+   "series_score": 5.1,
+   "ms": {
+    "id": 65452,
+    "rating": 1417.1,
+    "rank": null,
+    "games": 21,
+    "wr": 57.14,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1417.1,
+   "r_ms_rank": null
   },
   {
    "nick": "Буржуй",
@@ -217,7 +298,17 @@
    "elo_snap": "2026-10-15",
    "series": 5,
    "series_place": 1,
-   "series_score": 6.8
+   "series_score": 6.8,
+   "ms": {
+    "id": 63563,
+    "rating": 1940.6,
+    "rank": 41,
+    "games": 656,
+    "wr": 50.76,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1940.6,
+   "r_ms_rank": 41
   },
   {
    "nick": "Дзю",
@@ -240,7 +331,17 @@
    "elo_snap": null,
    "series": 5,
    "series_place": 2,
-   "series_score": 6.55
+   "series_score": 6.55,
+   "ms": {
+    "id": 65450,
+    "rating": 1466.9,
+    "rank": null,
+    "games": 102,
+    "wr": 46.08,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1466.9,
+   "r_ms_rank": null
   },
   {
    "nick": "Не Злая",
@@ -263,7 +364,17 @@
    "elo_snap": "2026-09-06",
    "series": 6,
    "series_place": 1,
-   "series_score": 7.75
+   "series_score": 7.75,
+   "ms": {
+    "id": 60010,
+    "rating": 1786.5,
+    "rank": 80,
+    "games": 405,
+    "wr": 54.32,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1786.5,
+   "r_ms_rank": 80
   },
   {
    "nick": "Tapok",
@@ -286,7 +397,17 @@
    "elo_snap": "2026-06-27",
    "series": 6,
    "series_place": 2,
-   "series_score": 7.05
+   "series_score": 7.05,
+   "ms": {
+    "id": 427,
+    "rating": 1221.2,
+    "rank": 694,
+    "games": 177,
+    "wr": 44.63,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1221.2,
+   "r_ms_rank": 694
   }
  ],
  "stats": {

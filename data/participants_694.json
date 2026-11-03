@@ -4,7 +4,8 @@
   "expected": 30,
   "snapshot": "2026-08-22",
   "source": "mafgame.org roster + markery.online currentElo (свежий на 2026-08-22); ELO-2026/Европа-2026 — из снапшота 2026-07-15 где есть",
-  "note": "тиры производные от ELO по границам рангов (полосы из снапшотов 634/702/766); Люсі и Mr. Smith🚀 — markery-матч не подтверждён, без рейтинга"
+  "note": "тиры производные от ELO по границам рангов (полосы из снапшотов 634/702/766); Люсі и Mr. Smith🚀 — markery-матч не подтверждён, без рейтинга",
+  "ms_snap": "2026-11-03"
  },
  "players": [
   {
@@ -24,7 +25,17 @@
     "conf": "ok",
     "match": "snapshot mkid",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 71,
+    "rating": 2292.9,
+    "rank": 5,
+    "games": 1038,
+    "wr": 49.42,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 2292.9,
+   "r_ms_rank": 5
   },
   {
    "nick": "Kleo",
@@ -41,7 +52,17 @@
     "conf": "ok",
     "match": "mafgame uid 1642",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 911,
+    "rating": 1218.9,
+    "rank": null,
+    "games": 132,
+    "wr": 42.42,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1218.9,
+   "r_ms_rank": null
   },
   {
    "nick": "DOVOD",
@@ -60,7 +81,17 @@
     "conf": "ok",
     "match": "mafgame uid 1493",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 808,
+    "rating": 1832.7,
+    "rank": 65,
+    "games": 496,
+    "wr": 47.18,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1832.7,
+   "r_ms_rank": 65
   },
   {
    "nick": "Maverick",
@@ -79,7 +110,17 @@
     "conf": "ok",
     "match": "mafgame uid 1657",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 927,
+    "rating": 1559.6,
+    "rank": 233,
+    "games": 315,
+    "wr": 50.48,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1559.6,
+   "r_ms_rank": 233
   },
   {
    "nick": "qUAest0r",
@@ -98,7 +139,17 @@
     "conf": "ok",
     "match": "mafgame uid 704",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 406,
+    "rating": 1240.1,
+    "rank": 680,
+    "games": 396,
+    "wr": 44.44,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1240.1,
+   "r_ms_rank": 680
   },
   {
    "nick": "Niko",
@@ -117,7 +168,17 @@
     "conf": "ok",
     "match": "snapshot mkid",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 61512,
+    "rating": 2108.3,
+    "rank": 18,
+    "games": 498,
+    "wr": 50.4,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 2108.3,
+   "r_ms_rank": 18
   },
   {
    "nick": "Badwin",
@@ -134,7 +195,17 @@
     "conf": "ok",
     "match": "unique exact nick",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 62901,
+    "rating": 1492.2,
+    "rank": null,
+    "games": 136,
+    "wr": 50,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1492.2,
+   "r_ms_rank": null
   },
   {
    "nick": "LogisticPro",
@@ -153,7 +224,17 @@
     "conf": "ok",
     "match": "mafgame uid 201",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 105,
+    "rating": 1727.3,
+    "rank": 102,
+    "games": 383,
+    "wr": 50.39,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1727.3,
+   "r_ms_rank": 102
   },
   {
    "nick": "Season's",
@@ -172,7 +253,17 @@
     "conf": "ok",
     "match": "mafgame uid 280",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 284,
+    "rating": 1542.0,
+    "rank": 254,
+    "games": 449,
+    "wr": 48.33,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1542.0,
+   "r_ms_rank": 254
   },
   {
    "nick": "Марселия",
@@ -190,7 +281,17 @@
     "conf": "ok",
     "match": "unique exact nick",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 63439,
+    "rating": 965.1,
+    "rank": 764,
+    "games": 354,
+    "wr": 42.66,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 965.1,
+   "r_ms_rank": 764
   },
   {
    "nick": "Комар",
@@ -207,7 +308,17 @@
     "conf": "ok",
     "match": "unique exact nick",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 123,
+    "rating": 2057.3,
+    "rank": 26,
+    "games": 1302,
+    "wr": 50.92,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 2057.3,
+   "r_ms_rank": 26
   },
   {
    "nick": "КуКуСиК",
@@ -224,7 +335,17 @@
     "conf": "ok",
     "match": "mafgame uid 2014",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 1116,
+    "rating": 1247.3,
+    "rank": 672,
+    "games": 217,
+    "wr": 44.7,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1247.3,
+   "r_ms_rank": 672
   },
   {
    "nick": "Магнат",
@@ -243,7 +364,17 @@
     "conf": "ok",
     "match": "snapshot mkid",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 1492,
+    "rating": 1693.5,
+    "rank": 117,
+    "games": 277,
+    "wr": 53.07,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1693.5,
+   "r_ms_rank": 117
   },
   {
    "nick": "Дийкстра",
@@ -260,7 +391,17 @@
     "conf": "ok",
     "match": "unique exact nick",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 1558,
+    "rating": 1515.3,
+    "rank": 291,
+    "games": 374,
+    "wr": 50,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1515.3,
+   "r_ms_rank": 291
   },
   {
    "nick": "Буржуй",
@@ -277,7 +418,17 @@
     "conf": "ok",
     "match": "unique exact nick",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 63563,
+    "rating": 1940.6,
+    "rank": 41,
+    "games": 656,
+    "wr": 50.76,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1940.6,
+   "r_ms_rank": 41
   },
   {
    "nick": "Lюц",
@@ -296,7 +447,17 @@
     "conf": "ok",
     "match": "snapshot mkid",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 63564,
+    "rating": 2027.9,
+    "rank": 29,
+    "games": 487,
+    "wr": 51.95,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 2027.9,
+   "r_ms_rank": 29
   },
   {
    "nick": "Люсі",
@@ -308,7 +469,17 @@
    "mk": {
     "conf": "none",
     "note": "нет уверенного матча на markery"
-   }
+   },
+   "ms": {
+    "id": 62442,
+    "rating": 1528.4,
+    "rank": null,
+    "games": 82,
+    "wr": 48.78,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1528.4,
+   "r_ms_rank": null
   },
   {
    "nick": "Мини",
@@ -325,7 +496,17 @@
     "conf": "ok",
     "match": "unique exact nick",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 59545,
+    "rating": 1709.5,
+    "rank": 111,
+    "games": 463,
+    "wr": 49.89,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1709.5,
+   "r_ms_rank": 111
   },
   {
    "nick": "Skywalker",
@@ -342,7 +523,17 @@
     "conf": "ok",
     "match": "mafgame uid 623",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 63117,
+    "rating": 1291.9,
+    "rank": 622,
+    "games": 203,
+    "wr": 41.38,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1291.9,
+   "r_ms_rank": 622
   },
   {
    "nick": "Blackout",
@@ -362,7 +553,17 @@
     "conf": "ok",
     "match": "snapshot mkid",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 63503,
+    "rating": 1480.1,
+    "rank": 343,
+    "games": 353,
+    "wr": 48.44,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1480.1,
+   "r_ms_rank": 343
   },
   {
    "nick": "Yokai",
@@ -379,7 +580,17 @@
     "conf": "ok",
     "match": "unique exact nick",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 57836,
+    "rating": 1568.8,
+    "rank": 222,
+    "games": 462,
+    "wr": 48.48,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1568.8,
+   "r_ms_rank": 222
   },
   {
    "nick": "aptah",
@@ -398,7 +609,17 @@
     "conf": "ok",
     "match": "snapshot mkid",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 983,
+    "rating": 1541.8,
+    "rank": 255,
+    "games": 593,
+    "wr": 46.04,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1541.8,
+   "r_ms_rank": 255
   },
   {
    "nick": "Mr. Trust",
@@ -416,7 +637,17 @@
     "conf": "ok",
     "match": "mafgame uid 379",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 275,
+    "rating": 1310.4,
+    "rank": null,
+    "games": 116,
+    "wr": 42.24,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1310.4,
+   "r_ms_rank": null
   },
   {
    "nick": "Нико",
@@ -433,7 +664,17 @@
     "conf": "ok",
     "match": "mafgame uid 532",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 424,
+    "rating": 1148.4,
+    "rank": null,
+    "games": 147,
+    "wr": 44.22,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1148.4,
+   "r_ms_rank": null
   },
   {
    "nick": "Urs",
@@ -451,7 +692,17 @@
     "conf": "ok",
     "match": "unique exact nick",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 222,
+    "rating": 889.9,
+    "rank": 768,
+    "games": 359,
+    "wr": 45.4,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 889.9,
+   "r_ms_rank": 768
   },
   {
    "nick": "Panda Kung-Fu",
@@ -468,7 +719,17 @@
     "conf": "ok",
     "match": "mafgame uid 140",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 76,
+    "rating": 1401.8,
+    "rank": 469,
+    "games": 158,
+    "wr": 50,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1401.8,
+   "r_ms_rank": 469
   },
   {
    "nick": "Ru",
@@ -488,7 +749,17 @@
     "conf": "ok",
     "match": "mafgame uid 1417",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 789,
+    "rating": 1024.8,
+    "rank": 753,
+    "games": 246,
+    "wr": 43.9,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1024.8,
+   "r_ms_rank": 753
   },
   {
    "nick": "Sura",
@@ -506,7 +777,17 @@
     "conf": "ok",
     "match": "mafgame uid 3035",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 65466,
+    "rating": 1491.6,
+    "rank": null,
+    "games": 51,
+    "wr": 49.02,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1491.6,
+   "r_ms_rank": null
   },
   {
    "nick": "Mr. Smith🚀",
@@ -518,7 +799,17 @@
    "mk": {
     "conf": "none",
     "note": "нет уверенного матча на markery"
-   }
+   },
+   "ms": {
+    "id": 63036,
+    "rating": 1329.7,
+    "rank": 579,
+    "games": 238,
+    "wr": 48.74,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1329.7,
+   "r_ms_rank": 579
   },
   {
    "nick": "JadeYogg",
@@ -535,7 +826,17 @@
     "conf": "ok",
     "match": "mafgame uid 257",
     "snapshot": "2026-08-22"
-   }
+   },
+   "ms": {
+    "id": 242,
+    "rating": 1399.0,
+    "rank": null,
+    "games": 99,
+    "wr": 53.54,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1399.0,
+   "r_ms_rank": null
   }
  ],
  "stats": {

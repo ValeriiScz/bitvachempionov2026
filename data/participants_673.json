@@ -11,7 +11,8 @@
   "expected": 40,
   "players_confirmed": 30,
   "countries": null,
-  "rating_note": "ELO/тир — markery.online, снимок 09.10.2026; тир по границам markery (L 1600+, S 1300+, A 1190+, B 1075+, C 994+, D 937+, E 880+)"
+  "rating_note": "ELO/тир — markery.online, снимок 09.10.2026; тир по границам markery (L 1600+, S 1300+, A 1190+, B 1075+, C 994+, D 937+, E 880+)",
+  "ms_snap": "2026-11-03"
  },
  "players": [
   {
@@ -31,7 +32,17 @@
    "mg_rank": 3,
    "m_rank": null,
    "player_number": 1,
-   "mk_match": "name"
+   "mk_match": "name",
+   "ms": {
+    "id": 1492,
+    "rating": 1693.5,
+    "rank": 117,
+    "games": 277,
+    "wr": 53.07,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1693.5,
+   "r_ms_rank": 117
   },
   {
    "nick": "KRASNII",
@@ -50,7 +61,17 @@
    "mg_rank": 35,
    "m_rank": null,
    "player_number": 2,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 1309,
+    "rating": 1427.4,
+    "rank": 423,
+    "games": 237,
+    "wr": 46.84,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1427.4,
+   "r_ms_rank": 423
   },
   {
    "nick": "Urs",
@@ -69,7 +90,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 3,
-   "mk_match": "name"
+   "mk_match": "name",
+   "ms": {
+    "id": 222,
+    "rating": 889.9,
+    "rank": 768,
+    "games": 359,
+    "wr": 45.4,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 889.9,
+   "r_ms_rank": 768
   },
   {
    "nick": "adapt",
@@ -88,7 +119,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 4,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 880,
+    "rating": 1526.0,
+    "rank": null,
+    "games": 98,
+    "wr": 56.12,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1526.0,
+   "r_ms_rank": null
   },
   {
    "nick": "TOPS",
@@ -107,7 +148,17 @@
    "mg_rank": 15,
    "m_rank": null,
    "player_number": 5,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 809,
+    "rating": 1529.0,
+    "rank": 268,
+    "games": 340,
+    "wr": 49.71,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1529.0,
+   "r_ms_rank": 268
   },
   {
    "nick": "Tripok",
@@ -126,7 +177,17 @@
    "mg_rank": 6,
    "m_rank": null,
    "player_number": 6,
-   "mk_match": "name"
+   "mk_match": "name",
+   "ms": {
+    "id": 63705,
+    "rating": 1831.5,
+    "rank": 66,
+    "games": 394,
+    "wr": 47.46,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1831.5,
+   "r_ms_rank": 66
   },
   {
    "nick": "DK",
@@ -145,7 +206,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 7,
-   "mk_match": "name?"
+   "mk_match": "name?",
+   "ms": {
+    "id": 6498,
+    "rating": 1447.3,
+    "rank": null,
+    "games": 52,
+    "wr": 44.23,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1447.3,
+   "r_ms_rank": null
   },
   {
    "nick": "Док",
@@ -164,7 +235,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 8,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 1378,
+    "rating": 1333.6,
+    "rank": null,
+    "games": 95,
+    "wr": 45.26,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1333.6,
+   "r_ms_rank": null
   },
   {
    "nick": "Арбуз",
@@ -183,7 +264,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 9,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 1353,
+    "rating": 1411.8,
+    "rank": null,
+    "games": 111,
+    "wr": 43.24,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1411.8,
+   "r_ms_rank": null
   },
   {
    "nick": "Repetitor",
@@ -202,7 +293,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 10,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 66374,
+    "rating": 1361.4,
+    "rank": null,
+    "games": 24,
+    "wr": 33.33,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1361.4,
+   "r_ms_rank": null
   },
   {
    "nick": "Goodman",
@@ -221,7 +322,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 11,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 65624,
+    "rating": 1335.3,
+    "rank": null,
+    "games": 38,
+    "wr": 36.84,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1335.3,
+   "r_ms_rank": null
   },
   {
    "nick": "DOVOD",
@@ -240,7 +351,17 @@
    "mg_rank": 9,
    "m_rank": null,
    "player_number": 12,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 808,
+    "rating": 1832.7,
+    "rank": 65,
+    "games": 496,
+    "wr": 47.18,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1832.7,
+   "r_ms_rank": 65
   },
   {
    "nick": "Akteur",
@@ -259,7 +380,17 @@
    "mg_rank": 50,
    "m_rank": null,
    "player_number": 13,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 1222,
+    "rating": 1406.9,
+    "rank": 457,
+    "games": 182,
+    "wr": 43.96,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1406.9,
+   "r_ms_rank": 457
   },
   {
    "nick": "Chudo",
@@ -278,7 +409,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 14,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 1369,
+    "rating": 1362.0,
+    "rank": null,
+    "games": 104,
+    "wr": 49.04,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1362.0,
+   "r_ms_rank": null
   },
   {
    "nick": "Север",
@@ -297,7 +438,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 15,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 62511,
+    "rating": 1401.0,
+    "rank": 471,
+    "games": 239,
+    "wr": 45.61,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1401.0,
+   "r_ms_rank": 471
   },
   {
    "nick": "Luca",
@@ -316,7 +467,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 16,
-   "mk_match": "name?"
+   "mk_match": "name?",
+   "ms": {
+    "id": 62891,
+    "rating": 1280.6,
+    "rank": 638,
+    "games": 410,
+    "wr": 46.83,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1280.6,
+   "r_ms_rank": 638
   },
   {
    "nick": "Xenon",
@@ -335,7 +496,17 @@
    "mg_rank": 39,
    "m_rank": null,
    "player_number": 17,
-   "mk_match": "name"
+   "mk_match": "name",
+   "ms": {
+    "id": 17,
+    "rating": 1465.4,
+    "rank": 368,
+    "games": 326,
+    "wr": 46.01,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1465.4,
+   "r_ms_rank": 368
   },
   {
    "nick": "Зима ❄️",
@@ -354,7 +525,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 18,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 66372,
+    "rating": 1422.0,
+    "rank": null,
+    "games": 24,
+    "wr": 41.67,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1422.0,
+   "r_ms_rank": null
   },
   {
    "nick": "Rivierra",
@@ -373,7 +554,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 19,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 1837,
+    "rating": 1498.0,
+    "rank": null,
+    "games": 100,
+    "wr": 52,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1498.0,
+   "r_ms_rank": null
   },
   {
    "nick": "Dron",
@@ -392,7 +583,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 20,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 827,
+    "rating": 1436.3,
+    "rank": null,
+    "games": 100,
+    "wr": 50,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1436.3,
+   "r_ms_rank": null
   },
   {
    "nick": "Maverick",
@@ -411,7 +612,17 @@
    "mg_rank": 20,
    "m_rank": null,
    "player_number": 21,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 927,
+    "rating": 1559.6,
+    "rank": 233,
+    "games": 315,
+    "wr": 50.48,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1559.6,
+   "r_ms_rank": 233
   },
   {
    "nick": "Grinch",
@@ -430,7 +641,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 22,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 416,
+    "rating": 1375.3,
+    "rank": null,
+    "games": 73,
+    "wr": 45.21,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1375.3,
+   "r_ms_rank": null
   },
   {
    "nick": "КуКуСиК",
@@ -449,7 +670,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 23,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 1116,
+    "rating": 1247.3,
+    "rank": 672,
+    "games": 217,
+    "wr": 44.7,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1247.3,
+   "r_ms_rank": 672
   },
   {
    "nick": "Bard",
@@ -468,7 +699,17 @@
    "mg_rank": 29,
    "m_rank": null,
    "player_number": 24,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 682,
+    "rating": 1871.9,
+    "rank": 59,
+    "games": 343,
+    "wr": 51.02,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1871.9,
+   "r_ms_rank": 59
   },
   {
    "nick": "Annvie",
@@ -487,7 +728,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 25,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 65871,
+    "rating": 1596.4,
+    "rank": null,
+    "games": 66,
+    "wr": 51.52,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1596.4,
+   "r_ms_rank": null
   },
   {
    "nick": "OdИn",
@@ -506,7 +757,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 26,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 1395,
+    "rating": 1410.7,
+    "rank": null,
+    "games": 74,
+    "wr": 40.54,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1410.7,
+   "r_ms_rank": null
   },
   {
    "nick": "VVS",
@@ -526,7 +787,17 @@
    "m_rank": null,
    "player_number": 27,
    "mk_match": "новичок: стартовый ELO 1000 (в markery пока нет игр)",
-   "elo_start": true
+   "elo_start": true,
+   "ms": {
+    "id": 66599,
+    "rating": 1606.6,
+    "rank": null,
+    "games": 7,
+    "wr": 85.71,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1606.6,
+   "r_ms_rank": null
   },
   {
    "nick": "Vivа",
@@ -545,7 +816,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 28,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 1289,
+    "rating": 1173.7,
+    "rank": null,
+    "games": 140,
+    "wr": 40,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1173.7,
+   "r_ms_rank": null
   },
   {
    "nick": "Mermaid",
@@ -564,7 +845,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 29,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 697,
+    "rating": 1573.1,
+    "rank": 216,
+    "games": 161,
+    "wr": 49.07,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1573.1,
+   "r_ms_rank": 216
   },
   {
    "nick": "Vito",
@@ -583,7 +874,17 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": 30,
-   "mk_match": "uid"
+   "mk_match": "uid",
+   "ms": {
+    "id": 1355,
+    "rating": 1364.0,
+    "rank": null,
+    "games": 90,
+    "wr": 33.33,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1364.0,
+   "r_ms_rank": null
   }
  ],
  "stats": {
