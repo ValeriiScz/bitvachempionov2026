@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-11-02",
+ "snapshot": "2026-11-03",
  "parents": [
   {
    "file": "2025_478.json",
@@ -206,7 +206,7 @@
    "name": "Васлуйская Битва 2026. Реванш.",
    "start_date": "2026-12-05",
    "stars": 2,
-   "series": 8,
+   "series": 7,
    "played": 7,
    "final": true
   },
