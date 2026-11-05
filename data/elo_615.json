@@ -92,10 +92,6 @@
    "global": 1279,
    "tier": "A"
   },
-  "Ну погоди": {
-   "global": 907,
-   "tier": "E"
-  },
   "Nick": {
    "global": 1280,
    "tier": "A"
@@ -119,6 +115,10 @@
   "sugar": {
    "global": 1776,
    "tier": "L"
+  },
+  "Саботаж": {
+   "global": 1336,
+   "tier": "S"
   }
  },
  "snapshot": "2026-10-26"

@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.4 | 2026-11-05 | 615 Black Circle: формат 12 (8+4) + финал 4 подтверждён, старт 10:15; состав +Саботаж −Ну погоди
 // MafgameStat | tournaments.js | v4.3 | 2026-11-02 | 687 MGP -> finished (чемпион YeS 14.03, ParadoXx 12.80, Xenon 12.54; 12 квал + 5 финала)
 // MafgameStat | tournaments.js | v4.2 | 2026-10-27 | 687: страница t687 + смотровая watch687 (4 стола)
 // MafgameStat | tournaments.js | v4.1 | 2026-10-26 | архив: top3, mvp из data/tournament_*.json; 710 ср. ELO 1132 (54/55, снимок elo_710); 615/687 ELO markery 26.10
@@ -37,12 +38,12 @@ window.TOURNAMENTS_DB = {
     "stars": 4,
     "status": "upcoming",
     "phase": 3,
-    "statusLabel": "Состав полный · 30 + 1 заявка (Korolevich)",
-    "eloAvg": 1143,
+    "statusLabel": "Скоро · старт 7 ноября, 10:15 · 30 игроков",
+    "eloAvg": 1157,
     "eloN": 30,
     "eloTotal": 30,
     "organizer": "AtomNøir · орг Рыба-мÓя",
-    "format": "12 квал × 3 стола → финал топ-10 (ожидаемо, регламента ещё нет)",
+    "format": "12 квал (8+4) × 3 стола → финал топ-10 (4 игры)",
     "mafgame": "https://mafgame.org/tournaments/615/view",
     "note": "Формат и время старта на mafgame не указаны — страница собрана по формату прошлых Four Seasons на 30 игроков.",
     "sections": [

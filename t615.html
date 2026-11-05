@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t615.html · v1.0 · 2026-10-26 · Four Seasons: Black Circle 2026 (mafgame 615, Брюссель, 7–8.11, 4★) — движок турнирной страницы DOVOD (канон t673 v1.4: 30 игроков, 12 квал × 3 стола → финал 4 игры топ-10 ×1.3). ⚠ Формат — ГИПОТЕЗА по прошлым Four Seasons на 30 игроков: регламента на mafgame нет; поправить CFG (quals/finals/finalN), когда опубликуют.
+<!-- DOVOD · t615.html · v1.1 · 2026-11-05 · формат 12 (8+4) + финал 4 подтверждён организатором; «Расписание» (день 1, место, еда, кальян); судьи столов; новые «Главное сейчас» из t687; состав: +Саботаж, −Ну погоди · v1.0 · 2026-10-26 · Four Seasons: Black Circle 2026 (mafgame 615, Брюссель, 7–8.11, 4★) — движок турнирной страницы DOVOD (канон t673 v1.4: 30 игроков, 12 квал × 3 стола → финал 4 игры топ-10 ×1.3). ⚠ Формат — ГИПОТЕЗА по прошлым Four Seasons на 30 игроков: регламента на mafgame нет; поправить CFG (quals/finals/finalN), когда опубликуют.
      Данные: data/*_615* (участники и ELO markery снимок 26.10; игры — live с mafgame в дни турнира через live.js). Эфиры — watch615.html. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -169,6 +169,21 @@
   .tbl.full .co{display:none;}
   .rcx-red{border-color:#f0906f!important;background:rgba(224,101,77,.13)!important;}
   .rcx-blk{border-color:#9cc0e6!important;background:rgba(122,167,214,.13)!important;}
+  .qkrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+  .qk{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:12px 12px 11px;border-radius:12px;border:1px solid var(--line);background:rgba(38,224,255,.07);color:var(--gold-hi);cursor:pointer;text-align:left;font:inherit;}
+  .qk:hover{background:rgba(38,224,255,.13);}
+  .qk .qi{font-size:18px;color:var(--gold);}
+  .qk b{font-size:14px;font-weight:800;}
+  .qk small{font-size:11.5px;color:var(--mut);line-height:1.3;}
+  .sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px 14px;}
+  .sgt{font:700 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 6px;}
+  .sgc{display:flex;flex-wrap:wrap;gap:6px;}
+  .sgb{padding:7px 10px;border-radius:9px;border:1px solid var(--line2);background:none;color:#dfe5ef;font:600 12.5px/1.2 inherit;font-family:inherit;cursor:pointer;text-align:left;}
+  .sgb:hover{border-color:var(--line);color:var(--gold-hi);}
+  .sgb.lk{opacity:.45;cursor:default;}
+  .sgb small{display:block;font-size:9.5px;color:var(--dim);margin-top:2px;}
+  @media(max-width:480px){.qkrow{gap:6px;}.qk{padding:10px 8px;}.qk b{font-size:13px;}.qk small{font-size:10.5px;}}
+  .schl{display:flex;flex-direction:column;gap:2px;} .schr{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--line2);font-size:14px;} .schr:last-child{border-bottom:0;} .scht{font:800 13px/1.4 var(--mono);color:var(--gold-hi);min-width:48px;}
   .seclist{display:flex;flex-direction:column;gap:9px;}
   .seci{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;cursor:pointer;
     background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:11px;padding:10px 12px;
@@ -797,10 +812,17 @@ const TIER_ORD={L:-1,S:0,A:1,B:2,C:3,D:4,E:5,F:6};
 /* ── КОНФИГ ТУРНИРА: новый турнир = копия файла + правка этого блока + data/*_{id}* ── */
 const CFG={id:'615',ls:'t615_',name:'Four Seasons: Black Circle 2026',short:'Black Circle',kick:'Four Seasons · 4★ · Брюссель',h1:'Four Seasons: <b>Black Circle</b> 2026',
   dates:'7–8 ноября 2026',place:'Брюссель',startLab:'старт 7 ноября',startShort:'07.11',
-  quals:12,tables:3,finalN:10,finals:4,fmt:'12+4',
-  intro:'Четырёхзвёздочный турнир серии Four Seasons в Брюсселе, 7–8 ноября: 30 игроков, состав полный (ещё одна заявка — Korolevich). Формат на mafgame пока не опубликован — по прошлым Four Seasons на 30 игроков ждём 12 игр квалификации на трёх столах (играют все) и финал топ‑10 из четырёх игр с коэффициентом ×1.3. Уточним, как только организатор (клуб AtomNøir, Рыба-мÓя) выложит регламент.',
+  quals:12,tables:3,finalN:10,finals:4,finalsTxt:'4 игры',fmt:'12+4',
+  intro:'Четырёхзвёздочный турнир серии Four Seasons в Брюсселе, 7–8 ноября: 30 игроков, классическая схема — 12 отборочных игр на трёх столах (8 в первый день, 4 во второй) и финал топ‑10 из четырёх игр. Победитель проходит в финал Всемирной лиги Four Seasons 2026 (Кипр, 19–20 декабря, призовой фонд 5000 €). Судьи: стол I — Рыба-мÓя (главный судья), стол II — Mermaid, стол III — Кура.',
   watch:'watch615.html',mafgame:'https://mafgame.org/tournaments/615/view'};
-const START='2026-11-07T10:00:00+01:00'; /* ГИПОТЕЗА: время старта на mafgame не указано */
+const START='2026-11-07T10:15:00+01:00'; /* 05.11: сбор 10:00, открытие 10:15, первая игра 10:30 (сообщение организатора) */
+CFG.schedule=[
+ {day:'7 ноября, суббота · 8 отборочных игр',items:[['10:00','Сбор участников'],['10:15','Открытие турнира'],['10:30','Первая отборочная игра (с 10:35 — минусы по п. 7.2.6)'],['','После 4-й игры — обед'],['','Игры 5–8']]},
+ {day:'8 ноября, воскресенье',items:[['','4 отборочные игры (9–12)'],['','Финал топ‑10 — 4 игры']]}];
+CFG.schedNote='Время местное (Брюссель). Время второго дня организатор пока не публиковал. <a class="lnk" style="margin:0" href="https://maps.app.goo.gl/9m8JGt9tBSYvB24D8" target="_blank" rel="noopener">📍 Место турнира на карте</a>. Огромная просьба организатора: следите за сообщениями в чате турнира!';
+CFG.info=[
+ {t:'🍔 Еда',h:'<div class="schl"><div class="schr"><span>В отеле — автомат с едой и напитками.</span></div><div class="schr"><span>Рядом <a class="lnk" style="margin:0" href="https://maps.app.goo.gl/aPzWZMkN8GMWa4pD7" target="_blank" rel="noopener">пешеходная улица</a> — много фастфуда.</span></div><div class="schr"><span>Вокруг рестораны и бары — смотрите по времени: могут быть закрыты с 14 до 18 и не работать в воскресенье.</span></div><div class="schr"><span><a class="lnk" style="margin:0" href="https://maps.app.goo.gl/Yr9bKKJPRMfiv32q6" target="_blank" rel="noopener">Кофе для ГСа ☕</a></span></div></div>'},
+ {t:'💨 Кальян',h:'<div class="note" style="margin:0">Coya lounge · Nuba · La monarque · Serenitea · Come back lounge · Vicci · D\'or Platine · Purple Rose</div>'}];
 const DEF_AV='https://mafgame.org/build/assets/avatar-default2-33e44bae.png';
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function mono(nick){return ((nick||'?').replace(/[^A-Za-zА-Яа-яЁё0-9]/g,'').slice(0,2).toUpperCase())||'·';}
@@ -809,7 +831,7 @@ function plW(n,a,b,c){const m=Math.abs(n)%100,m1=m%10;if(m>10&&m<20)return c;if(
 function players_w(n){return n+' '+plW(n,'игрок','игрока','игроков');}
 
 const NAV=[
-  {group:'Обзор',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Информация'},{id:'streams',ic:'▶',lab:'Трансляции'}]},
+  {group:'Обзор',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Информация'},{id:'streams',ic:'▶',lab:'Трансляции'},{id:'schedule',ic:'◷',lab:'Расписание'}]},
   {group:'Игроки',ic:'♟',items:[
     {id:'my',ic:'♟',lab:'Страница игрока'},
     {id:'roster',ic:'≡',lab:'Состав по ELO'},
@@ -996,6 +1018,7 @@ const RENDER={
   },
   streams(){return `<div class="view"><div class="secttl">&#9654; Трансляции</div>${streamsPanel()}</div>`;},
   my(){return `<div class="view"><div class="mymini">${esc((D.tour&&(D.tour.short||D.tour.tournament_name))||'')}</div><div class="secttl" id="myTtl">&#9823; Страница игрока</div><div id="myTop"></div><div id="myArea"></div></div>`;},
+  schedule(){const S=CFG.schedule||[];return `<div class="view"><div class="secttl">&#9719; Расписание</div>`+S.map(d=>`<div class="panel"><h3>${esc(d.day)}</h3><div class="schl">`+d.items.map(([t,x])=>`<div class="schr"><span class="scht">${esc(t)}</span><span>${esc(x)}</span></div>`).join('')+`</div></div>`).join('')+(CFG.schedNote?`<div class="note">${CFG.schedNote}</div>`:'')+(CFG.info||[]).map(b=>`<div class="panel"><h3>${b.t}</h3>${b.h}</div>`).join('')+`</div>`;},
   roster(){return `<div class="view"><div class="secttl">&#8801; Состав по ELO</div><div class="srcline">ELO, места и ранги — <a href="https://markery.online" target="_blank" rel="noopener">markery.online</a> · MMR — <a href="https://mafiastats.com" target="_blank" rel="noopener">mafiastats.com</a>, тир MMR — линейка markery по долям (эксперимент) · составы и аватарки — <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a></div>
       <div class="segwrap" id="rTop"></div>
       <div class="tfilter" id="tfil"></div>
@@ -1194,18 +1217,21 @@ function paintRolesN(){
   }
 }
 /* ── (v13) «Игрок» переехал в раздел «Моё» (initMy/drawMy ниже) ── */
-function secListPanel(){const items=[
- ['my','♟','Моё','следующая игра — стол, место, соперники, судья; вся ваша рассадка и статистика'],
- ['roster','≡','Игроки · Состав','рейтинг ELO и тиры; тап по игроку — его страница'],
- ['together','⇄','Игроки · Кто с кем','с кем сидите за одним столом: сколько раз и в каких играх'],
- ['seating','▦','Столы · По играм','все столы по каждой игре с меткой силы'],
- ['strength','◍','Столы · Сила столов','карта '+CFG.quals+' игр × '+CFG.tables+' стола: где самые жаркие партии'],
- ['luck','⚄','Столы · Рассадка','кому достались экстремальные соперники, а кому — спокойные'],
- ['stages','⚑','Результаты · Таблица','турнирная таблица (Σ) с линией выхода в финал (топ‑'+CFG.finalN+')'],
- ['games','▶','Результаты · Игры','протоколы по столам: роли, победа команды, допы, стрим'],
- ['roles','✦','Результаты · По картам','кто как играет мирным / шерифом / мафией / доном'],
- ['judges','⚖','Результаты · Судьи','ровно ли столы ставят допы — по паролю, для судейской коллегии']];
-return `<div class="panel"><h3>Разделы — тапайте</h3><div class="seclist">`+items.map(([id,ic,t,d])=>`<button class="seci" data-id="${id}" onclick="show(this.dataset.id)"><span class="sicon">${ic}</span><div><b>${esc(t)}</b><div class="sid">${esc(d)}</div></div><span class="go">›</span></button>`).join('')+`</div></div>`;}
+function secListPanel(){
+  /* v2 (30.10.2026): было 10 длинных карточек со старыми названиями — люди терялись. Теперь: 3 главные кнопки по фазе турнира
+     + компактная карта всех разделов, названия берутся прямо из меню (NAV) — расходиться не могут; закрытые — серые с подписью. */
+  const g=D.realGames||[];const seat=g.some(x=>(x.tables||[]).some(t=>(t.seats||[]).length));
+  const live=(D.played||0)>0,done=!!(D.tour&&D.tour.closed);
+  const SEC=id=>SECTIONS.find(x=>x.id===id)||{};
+  const top=done?[['stages','⚑','Итоги','места и баллы'],['games','▶','Все игры','кто как сыграл'],['roles','✦','По ролям','лучшие в каждой роли']]
+    :live?[['stages','⚑','Таблица','кто идёт в финал'],['streams','▶','Трансляции','все столы в эфире'],['my','♟','Мой игрок','следующая игра и стол']]
+    :seat?[['my','♟','Найти себя','ваш стол в каждой игре'],['seating','▦','Рассадка','все столы по играм'],['streams','▶','Трансляции','ссылки на эфиры']]
+    :[['roster','≡','Кто играет','состав и ELO'],['schedule','◷','Расписание','когда и во сколько'],['streams','▶','Трансляции','ссылки на эфиры']];
+  const big=top.map(([id,ic,t,d])=>`<button class="qk" onclick="show('${id}')"><span class="qi">${ic}</span><b>${t}</b><small>${d}</small></button>`).join('');
+  const groups=NAV.map(gr=>`<div class="sg"><div class="sgt">${gr.group}</div><div class="sgc">`+gr.items.map(it=>{const L=SEC(it.id);const lk=L.locked;
+      return `<button class="sgb${lk?' lk':''}" ${lk?'disabled':`onclick="show('${it.id}')"`}>${it.lab}${lk?`<small>${esc(L.lockTag||'')}</small>`:''}</button>`;}).join('')+`</div></div>`).join('');
+  return `<div class="panel"><h3>Главное сейчас</h3><div class="qkrow">${big}</div><div class="sgrid">${groups}</div><div class="note" style="margin-top:8px">То же меню — внизу экрана на телефоне и слева на компьютере.</div></div>`;
+}
 function resultsPanel(){
   const t=D.tour; if(!t||!t.closed) return '';
   const med=['🥇','🥈','🥉'];
@@ -1222,7 +1248,7 @@ function resultsPanel(){
 }
 function stagesPanel(){return `<div class="panel"><h3>Формат: 2 стадии</h3><div class="stages">
     <div class="stage"><span class="sbadge">${CFG.startLab}</span><div class="sn">Квалификация</div><div class="sg">${CFG.quals} игр · ${CFG.tables} стола · играют все</div><div class="sd">Все ${D.players.length} игроков играют каждую игру. По сумме баллов — топ‑${CFG.finalN} в финал.</div></div>
-    <div class="stage"><span class="sbadge">×1.3</span><div class="sn">Финал</div><div class="sg">${CFG.finals} игр · топ‑${CFG.finalN} · один стол</div><div class="sd">Баллы квалификации сохраняются, все баллы финала идут с коэффициентом 1.3. Победитель — чемпион Молдовы. Сыграли 4 игры финала (анонсировали 5).</div></div></div></div>`;}
+    <div class="stage"><span class="sbadge">×1.3</span><div class="sn">Финал</div><div class="sg">${CFG.finalsTxt||CFG.finals+' игр'} · топ‑${CFG.finalN} · один стол</div><div class="sd">Баллы квалификации сохраняются, все баллы финала идут с коэффициентом 1.3. Победитель — чемпион Молдовы. Сыграли 4 игры финала (анонсировали 5).</div></div></div></div>`;}
 
 const JD_HASH='2ff1e3f51de1d12a2ec8f86fe71b135c817c77956160e7ee8d703e56a7788ae3'; /* sha256 пароля раздела «Судьи» (выдаёт Валерий) */
 function jdUnlocked(){try{return localStorage.getItem(CFG.ls+'jd')==='ok';}catch(e){return false}}
