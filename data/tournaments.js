@@ -60,7 +60,7 @@ window.TOURNAMENTS_DB = {
       {
         "href": "participants.html?t=615",
         "title": "Участники и рейтинг",
-        "desc": "30 игроков + ELO markery у всех (снимок 26.10)"
+        "desc": "30 игроков · MMR и ELO markery (снимок 05.11)"
       }
     ],
     "start": "2026-11-07"
