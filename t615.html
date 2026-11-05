@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t615.html · v1.1 · 2026-11-05 · формат 12 (8+4) + финал 4 подтверждён организатором; «Расписание» (день 1, место, еда, кальян); судьи столов; новые «Главное сейчас» из t687; состав: +Саботаж, −Ну погоди · v1.0 · 2026-10-26 · Four Seasons: Black Circle 2026 (mafgame 615, Брюссель, 7–8.11, 4★) — движок турнирной страницы DOVOD (канон t673 v1.4: 30 игроков, 12 квал × 3 стола → финал 4 игры топ-10 ×1.3). ⚠ Формат — ГИПОТЕЗА по прошлым Four Seasons на 30 игроков: регламента на mafgame нет; поправить CFG (quals/finals/finalN), когда опубликуют.
+<!-- DOVOD · t615.html · v1.2 · 2026-11-05 · «Состав»: переключатель MMR / ELO вместо «компактно/подробно» (MMR — mafiastats, наш тир; ELO — markery с местом 2026), по умолчанию MMR · v1.1 · 2026-11-05 · формат 12 (8+4) + финал 4 подтверждён организатором; «Расписание» (день 1, место, еда, кальян); судьи столов; новые «Главное сейчас» из t687; состав: +Саботаж, −Ну погоди · v1.0 · 2026-10-26 · Four Seasons: Black Circle 2026 (mafgame 615, Брюссель, 7–8.11, 4★) — движок турнирной страницы DOVOD (канон t673 v1.4: 30 игроков, 12 квал × 3 стола → финал 4 игры топ-10 ×1.3). ⚠ Формат — ГИПОТЕЗА по прошлым Four Seasons на 30 игроков: регламента на mafgame нет; поправить CFG (quals/finals/finalN), когда опубликуют.
      Данные: data/*_615* (участники и ELO markery снимок 26.10; игры — live с mafgame в дни турнира через live.js). Эфиры — watch615.html. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -834,7 +834,7 @@ const NAV=[
   {group:'Обзор',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Информация'},{id:'streams',ic:'▶',lab:'Трансляции'},{id:'schedule',ic:'◷',lab:'Расписание'}]},
   {group:'Игроки',ic:'♟',items:[
     {id:'my',ic:'♟',lab:'Страница игрока'},
-    {id:'roster',ic:'≡',lab:'Состав по ELO'},
+    {id:'roster',ic:'≡',lab:'Состав · MMR / ELO'},
     {id:'together',ic:'⇄',lab:'Пересечения'}]},
   {group:'Рассадка',ic:'▦',items:[
     {id:'seating',ic:'▦',lab:'По играм'},
@@ -1019,7 +1019,7 @@ const RENDER={
   streams(){return `<div class="view"><div class="secttl">&#9654; Трансляции</div>${streamsPanel()}</div>`;},
   my(){return `<div class="view"><div class="mymini">${esc((D.tour&&(D.tour.short||D.tour.tournament_name))||'')}</div><div class="secttl" id="myTtl">&#9823; Страница игрока</div><div id="myTop"></div><div id="myArea"></div></div>`;},
   schedule(){const S=CFG.schedule||[];return `<div class="view"><div class="secttl">&#9719; Расписание</div>`+S.map(d=>`<div class="panel"><h3>${esc(d.day)}</h3><div class="schl">`+d.items.map(([t,x])=>`<div class="schr"><span class="scht">${esc(t)}</span><span>${esc(x)}</span></div>`).join('')+`</div></div>`).join('')+(CFG.schedNote?`<div class="note">${CFG.schedNote}</div>`:'')+(CFG.info||[]).map(b=>`<div class="panel"><h3>${b.t}</h3>${b.h}</div>`).join('')+`</div>`;},
-  roster(){return `<div class="view"><div class="secttl">&#8801; Состав по ELO</div><div class="srcline">ELO, места и ранги — <a href="https://markery.online" target="_blank" rel="noopener">markery.online</a> · MMR — <a href="https://mafiastats.com" target="_blank" rel="noopener">mafiastats.com</a>, тир MMR — линейка markery по долям (эксперимент) · составы и аватарки — <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a></div>
+  roster(){return `<div class="view"><div class="secttl">&#8801; Состав · MMR / ELO</div><div class="srcline">ELO, места и ранги — <a href="https://markery.online" target="_blank" rel="noopener">markery.online</a> · MMR — <a href="https://mafiastats.com" target="_blank" rel="noopener">mafiastats.com</a>, тир MMR — линейка markery по долям (эксперимент) · составы и аватарки — <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a></div>
       <div class="segwrap" id="rTop"></div>
       <div class="tfilter" id="tfil"></div>
       <div class="panel scrollT" style="padding:0"><table class="tbl" id="rtable"><thead><tr id="rhr"></tr></thead><tbody id="rtb"></tbody></table></div>
@@ -1259,50 +1259,57 @@ function softRender(){const a=document.activeElement;if(a&&/^(INPUT|SELECT|TEXTA
   const v=document.getElementById('view');if(!v)return;const y=window.scrollY;v.innerHTML=(RENDER[cur]?RENDER[cur]():stub(cur));afterRender(cur);window.scrollTo(0,y);}
 function afterRender(id){if(id==='cards')initCards();else if(id==='strength')paintStrength();else if(id==='luck')paintLuck();else if(id==='roster')paintRoster();else if(id==='seating')initSeating();else if(id==='my')initMy();else if(id==='together')initTogether();else if(id==='judges'){if(jdUnlocked())paintJudges();else{const i=document.getElementById('jdPw');if(i)i.onkeydown=e=>{if(e.key==='Enter')jdTry();};}}else if(id==='stages'||id==='games'||id==='roles')afterStats(id);}
 
-/* roster */
-const RCOLS=[{key:'tier',lab:'Ранг',dir:1,get:p=>p.r_tier,fmt:'tier'},{key:'elo_cur',lab:'ELO',dir:-1,get:p=>p.r_elo_cur,fmt:'elo'},{key:'rank',lab:'Место',dir:1,get:p=>p.r_rank,fmt:'rank',x:1},{key:'elo_2026',lab:'ELO 2026',dir:-1,get:p=>p.r_elo_2026,fmt:'elo',x:1},{key:'eu26',lab:'Место 2026',dir:1,get:p=>p.r_rank_2026,fmt:'rank'},{key:'mmr',lab:'MMR',dir:-1,get:p=>p.r_ms_mmr,fmt:'elo',x:1},{key:'mstier',lab:'Тир MMR',dir:1,get:p=>p.r_ms_tier,fmt:'tier',x:1}];
+/* roster · v2 (05.11.2026): переключатель MMR / ELO вместо «компактно/подробно». MMR — mafiastats.com, тир по нашей линейке (D.meta.ms_ladder);
+   ELO — markery.online как раньше, с местом в 2026. Выбор запоминаем; по умолчанию MMR (Валерий: «понемногу переходим на MMR»). */
+let rMode=(function(){try{return localStorage.getItem(CFG.ls+'rmode')||'mmr'}catch(e){return 'mmr'}})();
+const RMODES={
+  mmr:{lab:'MMR',tier:p=>p.r_ms_tier,cols:[{key:'tier',lab:'Тир',dir:1,get:p=>p.r_ms_tier,fmt:'tier'},{key:'mmr',lab:'MMR',dir:-1,get:p=>p.r_ms_mmr,fmt:'num'},{key:'mrank',lab:'Место',dir:1,get:p=>p.r_ms_rank!=null?p.r_ms_rank:(p.ms&&p.ms.rank),fmt:'rank'},{key:'games',lab:'Игр',dir:-1,get:p=>p.ms&&p.ms.games,fmt:'num'}]},
+  elo:{lab:'ELO',tier:p=>p.r_tier,cols:[{key:'tier',lab:'Ранг',dir:1,get:p=>p.r_tier,fmt:'tier'},{key:'elo_cur',lab:'ELO',dir:-1,get:p=>p.r_elo_cur,fmt:'num'},{key:'rank',lab:'Место',dir:1,get:p=>p.r_rank,fmt:'rank'},{key:'elo_2026',lab:'ELO 2026',dir:-1,get:p=>p.r_elo_2026,fmt:'num'},{key:'eu26',lab:'Место 2026',dir:1,get:p=>p.r_rank_2026,fmt:'rank'}]}};
 let rSortKey='tier',rSortDir=1,rFilter=null;
+function setRMode(m){rMode=m;try{localStorage.setItem(CFG.ls+'rmode',m)}catch(e){}rSortKey='tier';rSortDir=1;rFilter=null;paintRoster();}
 function colVal(c,p){const v=c.get(p);if(c.fmt==='tier')return (v in TIER_ORD)?TIER_ORD[v]:null;return num(v);}
-function avatarCell(p){const f=(p.r_tier in TIER_ORD)?(' f-'+p.r_tier):'';
+function avatarCell(p,t){const f=(t in TIER_ORD)?(' f-'+t):'';
   if(p.av)return `<img class="av${f}" src="${esc(p.av)}" referrerpolicy="no-referrer" loading="lazy" alt="" onerror="this.outerHTML='<span class=\\'mono\\'>'+this.dataset.m+'</span>'" data-m="${esc(mono(p.nick))}">`;
   return `<span class="mono">${esc(mono(p.nick))}</span>`;}
+function rCell(c,p){const v=c.get(p);
+  if(c.fmt==='tier')return (v in TIER_ORD)?`<span class="tpill tp-${v}">${v}</span>`:'<span class="na">—</span>';
+  const n=num(v);if(n==null)return '<span class="na">—</span>';
+  return c.fmt==='rank'?`<span class="rrank"><span class="h">#</span>${n}</span>`:`<span class="rnum">${Math.round(n)}</span>`;}
 function paintRoster(){
-  const tc=D.stats.tiers||{};const fil=document.getElementById('tfil');
-  const rt=document.getElementById('rTop');if(rt)rt.innerHTML=fullToggle();
-  const rtable=document.getElementById('rtable');if(rtable)rtable.classList.toggle('full',statFull);
-  if(fil){fil.innerHTML='<span class="lbl">Фильтр по рангу:</span>'+
+  const M=RMODES[rMode]||RMODES.mmr,RC=M.cols,TF=M.tier;
+  const tc={};D.players.forEach(p=>{const t=TF(p);if(t in TIER_ORD)tc[t]=(tc[t]||0)+1;});
+  const rt=document.getElementById('rTop');
+  if(rt)rt.innerHTML='<span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Рейтинг:</span><span class="seg">'+['mmr','elo'].map(k=>`<button class="${rMode===k?'on':''}" onclick="setRMode('${k}')">${RMODES[k].lab}</button>`).join('')+'</span>'
+    +`<span class="lbl" style="font-size:11.5px;color:var(--mut);margin-left:6px">${rMode==='mmr'?'MMR — <a class="lnk" style="margin:0" href="https://mafiastats.com" target="_blank" rel="noopener">mafiastats.com</a>, тир — наша линейка':'ELO — <a class="lnk" style="margin:0" href="https://markery.online" target="_blank" rel="noopener">markery.online</a>, место в 2026'}</span>`;
+  const rtable=document.getElementById('rtable');if(rtable)rtable.classList.add('full');
+  const fil=document.getElementById('tfil');
+  if(fil){fil.innerHTML=`<span class="lbl">Фильтр по ${rMode==='mmr'?'тиру':'рангу'}:</span>`+
     `<span class="tf ${rFilter?'':'on'}" data-t="">Все <small>${D.players.length}</small></span>`+
     TIERS.filter(x=>tc[x]).map(x=>`<span class="tf ${rFilter===x?'on':''}" data-t="${x}"><span class="tpill tp-${x}">${x}</span><small>${tc[x]}</small></span>`).join('');
     fil.querySelectorAll('.tf').forEach(b=>b.onclick=()=>{rFilter=b.dataset.t||null;paintRoster();});}
   const hr=document.getElementById('rhr');
-  hr.innerHTML='<th class="l" data-k="player">Игрок<span class="ar"></span></th>'+RCOLS.map(c=>`<th data-k="${c.key}" class="${c.x?'x':''}">${esc(c.lab)}<span class="ar"></span></th>`).join('')+'<th class="l x" style="cursor:default">Профиль</th>';
+  hr.innerHTML='<th class="l" data-k="player">Игрок<span class="ar"></span></th>'+RC.map(c=>`<th data-k="${c.key}">${esc(c.lab)}<span class="ar"></span></th>`).join('')+'<th class="l" style="cursor:default">Профиль</th>';
   hr.querySelectorAll('th[data-k]').forEach(el=>el.onclick=()=>{const k=el.dataset.k;
-    if(k==='player')rSortKey='player';else if(rSortKey===k)rSortDir=-rSortDir;else{rSortKey=k;rSortDir=(RCOLS.find(c=>c.key===k)||{}).dir||-1;}paintRoster();});
-  let list=D.players.slice();if(rFilter)list=list.filter(p=>p.r_tier===rFilter);
+    if(k==='player')rSortKey='player';else if(rSortKey===k)rSortDir=-rSortDir;else{rSortKey=k;rSortDir=(RC.find(c=>c.key===k)||{}).dir||-1;}paintRoster();});
+  let list=D.players.slice();if(rFilter)list=list.filter(p=>TF(p)===rFilter);
+  const mainNum=RC[1];
   if(rSortKey==='player')list.sort((a,b)=>a.nick.localeCompare(b.nick,'ru'));
-  else{const col=RCOLS.find(c=>c.key===rSortKey);list.sort((a,b)=>{const va=colVal(col,a),vb=colVal(col,b);
+  else{const col=RC.find(c=>c.key===rSortKey)||RC[0];list.sort((a,b)=>{const va=colVal(col,a),vb=colVal(col,b);
     if(va==null&&vb==null)return a.nick.localeCompare(b.nick,'ru');if(va==null)return 1;if(vb==null)return -1;
-    if(va===vb){const ea=num(a.r_elo_cur),eb=num(b.r_elo_cur);if(ea!=null&&eb!=null&&ea!==eb)return eb-ea;return a.nick.localeCompare(b.nick,'ru');}return (va-vb)*rSortDir;});}
+    if(va===vb){const ea=colVal(mainNum,a),eb=colVal(mainNum,b);if(ea!=null&&eb!=null&&ea!==eb)return eb-ea;return a.nick.localeCompare(b.nick,'ru');}return (va-vb)*rSortDir;});}
   document.querySelectorAll('#rhr th').forEach(th=>{const ar=th.querySelector('.ar');if(!ar)return;if(th.dataset.k===rSortKey)ar.textContent=(rSortKey!=='player'&&rSortDir<0)?'▼':'▲';else ar.textContent='';});
   const grouping=(rSortKey==='tier'&&!rFilter);let html='',prev=null;
-  list.forEach((p,i)=>{
-    if(grouping){const key=(p.r_tier in TIER_ORD)?p.r_tier:'—';if(key!==prev){const badge=(key in TIER_ORD)?`<span class="tpill tp-${key}">${key}</span>`:'<span class="na">—</span>';
-      const cnt=list.filter(x=>((x.r_tier in TIER_ORD)?x.r_tier:'—')===key).length;
-      html+=`<tr class="tsep"><td colspan="9">${badge} &nbsp;ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;prev=key;}}
+  list.forEach((p,i)=>{const t=TF(p);
+    if(grouping){const key=(t in TIER_ORD)?t:'—';if(key!==prev){const badge=(key in TIER_ORD)?`<span class="tpill tp-${key}">${key}</span>`:'<span class="na">—</span>';
+      const cnt=list.filter(x=>{const y=TF(x);return ((y in TIER_ORD)?y:'—')===key;}).length;
+      html+=`<tr class="tsep"><td colspan="${RC.length+2}">${badge} &nbsp;${rMode==='mmr'?'тир':'ранг'} ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;prev=key;}}
     const links=[];
     if(p.uid)links.push(`<a class="lnk" href="https://mafgame.org/user/${p.uid}/view" target="_blank" rel="noopener">mafgame</a>`);
-    if(p.markery_id)links.push(`<a class="lnk" href="https://markery.online/playerStatistics?eloType=101&playerId=${p.markery_id}&tab=EloHistory" target="_blank" rel="noopener">markery</a>`);
-    if(p.ms&&p.ms.id)links.push(`<a class="lnk" href="https://mafiastats.com/players/${p.ms.id}" target="_blank" rel="noopener">mafiastats</a>`);
-    const e26x=1;const sub=(p.real||p.country)?`<div class="pl-real">${esc(p.real||'')}${p.country?(p.real?' · ':'')+esc(p.country):''}</div>`:'';const et=num(p.r_elo_cur),e26=num(p.r_elo_2026),eu=num(p.r_rank_2026),gr=num(p.r_rank);
-    html+=`<tr class="rrow ${p.status==='confirmed'?'':'applied'}" data-p="${esc(p.nick)}"><td class="l"><div class="pl"><span class="num">${i+1}</span>${avatarCell(p)}<span><span class="pl-nick">${p.flag?p.flag+' ':''}${esc(p.nick)}</span>${sub}</span></div></td>
-      <td>${(p.r_tier in TIER_ORD)?`<span class="tpill tp-${p.r_tier}">${p.r_tier}</span>`:'<span class="na">—</span>'}</td>
-      <td>${et!=null?`<span class="rnum">${Math.round(et)}</span>`:'<span class="na">—</span>'}</td>
-      <td class="x">${gr!=null?`<span class="rrank"><span class="h">#</span>${gr}</span>`:'<span class="na">—</span>'}</td>
-      <td class="x">${e26!=null?`<span class="rnum">${Math.round(e26)}</span>`:'<span class="na">—</span>'}</td>
-      <td>${eu!=null?`<span class="rrank"><span class="h">#</span>${eu}</span>`:'<span class="na">—</span>'}</td>
-      <td class="x">${num(p.r_ms_mmr)!=null?`<span class="rnum">${Math.round(p.r_ms_mmr)}</span>`:'<span class="na">—</span>'}</td>
-      <td class="x">${(p.r_ms_tier in TIER_ORD)?`<span class="tpill tp-${p.r_ms_tier}">${p.r_ms_tier}</span>`:'<span class="na">—</span>'}</td>
-      <td class="l x">${links.join(' ')||'<span class="na">—</span>'}</td></tr>`;});
+    if(rMode==='elo'&&p.markery_id)links.push(`<a class="lnk" href="https://markery.online/playerStatistics?eloType=101&playerId=${p.markery_id}&tab=EloHistory" target="_blank" rel="noopener">markery</a>`);
+    if(rMode==='mmr'&&p.ms&&p.ms.id)links.push(`<a class="lnk" href="https://mafiastats.com/players/${p.ms.id}" target="_blank" rel="noopener">mafiastats</a>`);
+    const sub=(p.real||p.country)?`<div class="pl-real">${esc(p.real||'')}${p.country?(p.real?' · ':'')+esc(p.country):''}</div>`:'';
+    html+=`<tr class="rrow ${p.status==='confirmed'?'':'applied'}" data-p="${esc(p.nick)}"><td class="l"><div class="pl"><span class="num">${i+1}</span>${avatarCell(p,t)}<span><span class="pl-nick">${p.flag?p.flag+' ':''}${esc(p.nick)}</span>${sub}</span></div></td>`
+      +RC.map(c=>`<td>${rCell(c,p)}</td>`).join('')+`<td class="l">${links.join(' ')||'<span class="na">—</span>'}</td></tr>`;});
   document.getElementById('rtb').innerHTML=html;
   document.querySelectorAll('#rtb tr.rrow').forEach(tr=>tr.onclick=e=>{if(e.target.closest('a'))return;goPlayer(tr.dataset.p);});
   if(myPlayer)document.querySelectorAll('#rtb tr').forEach(tr=>{const n=tr.querySelector('.pl-nick');if(n&&n.textContent===myPlayer)tr.classList.add('me');});
