@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-fetch_series · v1.1 · 2026-10-26 (ИНКРЕМЕНТАЛЬНО по умолчанию: листинг берём у fetch_ledgers, если он свежий; завершённые серийники и серии старше 14 дн. с результатами — из прошлого снимка; FULL=1 — всё заново) · v1.0 · 2026-09-14
+fetch_series · v1.2 · 2026-11-05 (состав несыгранного финала серийника: final_regs) · v1.1 · 2026-10-26 (ИНКРЕМЕНТАЛЬНО по умолчанию: листинг берём у fetch_ledgers, если он свежий; завершённые серийники и серии старше 14 дн. с результатами — из прошлого снимка; FULL=1 — всё заново) · v1.0 · 2026-09-14
 Назначение: снимки серийников mafgame для исследования «Гонка за золотую дюжину» —
 регламент из описания родителя + результаты всех серий (или составы будущих серий).
 Работает в GitHub Actions (прямой доступ к mafgame.org).
@@ -123,6 +123,17 @@ for par in sorted(parents, key=lambda t: (t['_year'], t['start_date'])):
            'status': tour.get('status'), 'final_rows': None, 'series': []}
     fr, _ = rows_from_results(pv)
     if fr: rec['final_rows'] = fr
+    # v1.2 (05.11.2026): финал ещё не сыгран — снимаем его состав (кто подтверждён/заявлен). Модель берёт его вместо
+    # ручного снимка, как только состав заполнен (gd_sim FINAL_ROSTER/auto). Флаг 1 — подтверждён организатором, 0 — заявка.
+    if not fr and par['start_date'] >= TODAY:
+        p = safe('/tournaments/%d/participants' % pid) or {}
+        regs, seen = [], set()
+        for lst, flag in ((p.get('players'), 1), (p.get('applications'), 0)):
+            for x in lst or []:
+                if not isinstance(x, dict): continue
+                uid = x.get('user_id'); nick = x.get('nickname') or ((x.get('user') or {}).get('nickname'))
+                if uid and uid not in seen: seen.add(uid); regs.append([uid, nick, flag])
+        if regs: rec['final_regs'] = regs; rec['final_regs_at'] = TODAY
     kids = sorted([t for t in listing.values() if t.get('parent_tournament_id') == pid], key=lambda t: t['start_date'])
     for k in kids:
         kid = int(k['id'])
