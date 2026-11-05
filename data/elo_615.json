@@ -1,7 +1,8 @@
 {
+ "snapshot": "2026-11-05",
  "players": {
   "RAMZES": {
-   "global": 1262,
+   "global": 1275,
    "tier": "A"
   },
   "Sova": {
@@ -41,7 +42,7 @@
    "tier": "B"
   },
   "Eskimo.": {
-   "global": 1413,
+   "global": 1412,
    "tier": "S"
   },
   "Sэм": {
@@ -49,7 +50,7 @@
    "tier": "E"
   },
   "Tommy": {
-   "global": 1563,
+   "global": 1581,
    "tier": "S"
   },
   "Клото": {
@@ -61,7 +62,7 @@
    "tier": "D"
   },
   "DOVOD": {
-   "global": 1223,
+   "global": 1244,
    "tier": "A"
   },
   "Jerry Hurper": {
@@ -69,7 +70,7 @@
    "tier": "B"
   },
   "Катанчик": {
-   "global": 1033,
+   "global": 1021,
    "tier": "C"
   },
   "Flash": {
@@ -77,7 +78,7 @@
    "tier": "L"
   },
   "TOPS": {
-   "global": 1075,
+   "global": 1084,
    "tier": "B"
   },
   "Грешник": {
@@ -85,15 +86,15 @@
    "tier": "A"
   },
   "Магнат": {
-   "global": 1152,
+   "global": 1156,
    "tier": "B"
   },
   "Tripok": {
-   "global": 1279,
+   "global": 1273,
    "tier": "A"
   },
   "Nick": {
-   "global": 1280,
+   "global": 1277,
    "tier": "A"
   },
   "Gemellia": {
@@ -101,12 +102,12 @@
    "tier": "D"
   },
   "Urs": {
-   "global": 827,
+   "global": 826,
    "tier": "F"
   },
   "ParadoXx": {
-   "global": 1180,
-   "tier": "B"
+   "global": 1210,
+   "tier": "A"
   },
   "Flame": {
    "global": 1249,
@@ -117,9 +118,8 @@
    "tier": "L"
   },
   "Саботаж": {
-   "global": 1336,
+   "global": 1351,
    "tier": "S"
   }
- },
- "snapshot": "2026-10-26"
+ }
 }

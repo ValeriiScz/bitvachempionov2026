@@ -39,7 +39,7 @@ window.TOURNAMENTS_DB = {
     "status": "upcoming",
     "phase": 3,
     "statusLabel": "Скоро · старт 7 ноября, 10:15 · 30 игроков",
-    "eloAvg": 1157,
+    "eloAvg": 1160,
     "eloN": 30,
     "eloTotal": 30,
     "organizer": "AtomNøir · орг Рыба-мÓя",
