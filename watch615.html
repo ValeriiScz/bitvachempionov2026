@@ -189,6 +189,7 @@ button{font:inherit;color:inherit}
 body{background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px),radial-gradient(900px 500px at 80% -10%,rgba(120,60,230,.16),transparent 60%),radial-gradient(700px 400px at -10% 110%,rgba(90,40,200,.10),transparent 60%);background-size:44px 44px,44px 44px,auto,auto;}
 .hd h1{font-family:'Cinzel',Georgia,serif;font-weight:700;letter-spacing:.04em;}
 .hd h1 b{background:linear-gradient(180deg,#fff,#cfd3dc 45%,#7d8190 60%,#e9ecf2);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.mgw{flex:none;display:flex}.mgw img{width:34px;height:34px;filter:grayscale(1) brightness(1.55) drop-shadow(0 0 7px rgba(157,92,255,.75))}
 .layout .eco button.on{color:#0b0812;}
 </style>
 <style id="dvcrumbcss">
@@ -209,7 +210,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){addEvent
 <nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><a href="t615.html">Black Circle 2026</a><i>/</i><span>Смотровая</span></nav>
 <div class="wrap">
   <div class="hd"><a class="back" href="t615.html" aria-label="К странице турнира">&#8592;</a>
-    <div class="tt"><div class="k">Смотровая · все эфиры</div><h1>Four Seasons: <b>Black Circle</b> 2026</h1></div>
+    <a class="mgw" href="https://mafgame.org/tournaments/615/view" target="_blank" rel="noopener" title="Турнир федерации MAFGAME"><img src="https://mafgame.org/logo-without-text.png" alt="MAFGAME" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></a><div class="tt"><div class="k">Смотровая · все эфиры · MAFGAME</div><h1>Four Seasons: <b>Black Circle</b> 2026</h1></div>
     <button class="share" type="button" onclick="share()" aria-label="Поделиться">⤴</button></div>
   <div class="status" id="status">Загрузка…</div>
   <div class="qnav" id="qnav"></div>
