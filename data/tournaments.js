@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.7 | 2026-11-06 | 615: note по регламенту mafgame (формат подтверждён, победитель → финал Всемирной лиги)
 // MafgameStat | tournaments.js | v4.6 | 2026-11-06 | 687: champion/top3/mvp (Xenon, лучший игрок 4.10) — архивная карточка без победителей
 // MafgameStat | tournaments.js | v4.5 | 2026-11-06 | ср. MMR (mafiastats, снимок 03.11) у 11 турниров: mmrAvg/mmrN
 // MafgameStat | tournaments.js | v4.4 | 2026-11-05 | 615 Black Circle: формат 12 (8+4) + финал 4 подтверждён, старт 10:15; состав +Саботаж −Ну погоди
@@ -52,7 +53,7 @@ window.TOURNAMENTS_DB = {
     "organizer": "AtomNøir · орг Рыба-мÓя",
     "format": "12 квал (8+4) × 3 стола → финал топ-10 (4 игры)",
     "mafgame": "https://mafgame.org/tournaments/615/view",
-    "note": "Формат и время старта на mafgame не указаны — страница собрана по формату прошлых Four Seasons на 30 игроков.",
+    "note": "Регламент mafgame: 12 отборочных игр (8 в субботу, 4 в воскресенье) на трёх столах, финал топ-10 из 4 игр (×1.3). Победитель проходит в финал Всемирной лиги Four Seasons 2026 (Кипр, 19–20 декабря, призовой фонд 5000 €).",
     "sections": [
       {
         "href": "t615.html",

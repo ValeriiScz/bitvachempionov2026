@@ -1245,7 +1245,7 @@ function resultsPanel(){
 }
 function stagesPanel(){return `<div class="panel"><h3>Формат: 2 стадии</h3><div class="stages">
     <div class="stage"><span class="sbadge">${CFG.startLab}</span><div class="sn">Квалификация</div><div class="sg">${CFG.quals} игр · ${CFG.tables} стола · играют все</div><div class="sd">Все ${D.players.length} игроков играют каждую игру. По сумме баллов — топ‑${CFG.finalN} в финал.</div></div>
-    <div class="stage"><span class="sbadge">×1.3</span><div class="sn">Финал</div><div class="sg">${CFG.finalsTxt||CFG.finals+' игр'} · топ‑${CFG.finalN} · один стол</div><div class="sd">Баллы квалификации сохраняются, все баллы финала идут с коэффициентом 1.3. Победитель — чемпион Молдовы. Сыграли 4 игры финала (анонсировали 5).</div></div></div></div>`;}
+    <div class="stage"><span class="sbadge">×1.3</span><div class="sn">Финал</div><div class="sg">${CFG.finalsTxt||CFG.finals+' игр'} · топ‑${CFG.finalN} · один стол</div><div class="sd">Баллы квалификации сохраняются, все баллы финала идут с коэффициентом 1.3. Победитель — чемпион Mediterranean Grand-Prix 2026.</div></div></div></div>`;}
 
 const JD_HASH='2ff1e3f51de1d12a2ec8f86fe71b135c817c77956160e7ee8d703e56a7788ae3'; /* sha256 пароля раздела «Судьи» (выдаёт Валерий) */
 function jdUnlocked(){try{return localStorage.getItem(CFG.ls+'jd')==='ok';}catch(e){return false}}
