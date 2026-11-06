@@ -12,13 +12,13 @@
   "rating_note": "ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026",
   "ms_snap": "2026-11-03",
   "ms_ladder": {
-   "L": 2116,
-   "S": 1956,
-   "A": 1716,
-   "B": 1560,
-   "C": 1406,
-   "D": 1222,
-   "E": 1091
+   "L": 1950,
+   "S": 1800,
+   "A": 1650,
+   "B": 1500,
+   "C": 1350,
+   "D": 1125,
+   "E": 925
   }
  },
  "players": [
@@ -82,7 +82,7 @@
    },
    "r_ms_mmr": 1940.6,
    "r_ms_rank": 41,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "Kravec",
@@ -144,7 +144,7 @@
    },
    "r_ms_mmr": 1541.8,
    "r_ms_rank": 255,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "Не Злая",
@@ -206,7 +206,7 @@
    },
    "r_ms_mmr": 1513.5,
    "r_ms_rank": null,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "Кассандра",
@@ -268,7 +268,7 @@
    },
    "r_ms_mmr": 2027.9,
    "r_ms_rank": 29,
-   "r_ms_tier": "S"
+   "r_ms_tier": "L"
   },
   {
    "nick": "Mulder",
@@ -423,7 +423,7 @@
    },
    "r_ms_mmr": 1503.0,
    "r_ms_rank": null,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   }
  ],
  "stats": {

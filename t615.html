@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t615.html · v1.4 · 2026-11-06 · сила столов / соперники / путь — по MMR и тирам по MMR (решение Валерия); лого MAFGAME · v1.3 · 2026-11-06 · тема «Black Circle» по заставкам MAFGAME (фиолетовое свечение, серебро Cinzel, постер-Атомиум кодом) + Ср. MMR · v1.2 · 2026-11-05 · «Состав»: переключатель MMR / ELO вместо «компактно/подробно» (MMR — mafiastats, наш тир; ELO — markery с местом 2026), по умолчанию MMR · v1.1 · 2026-11-05 · формат 12 (8+4) + финал 4 подтверждён организатором; «Расписание» (день 1, место, еда, кальян); судьи столов; новые «Главное сейчас» из t687; состав: +Саботаж, −Ну погоди · v1.0 · 2026-10-26 · Four Seasons: Black Circle 2026 (mafgame 615, Брюссель, 7–8.11, 4★) — движок турнирной страницы DOVOD (канон t673 v1.4: 30 игроков, 12 квал × 3 стола → финал 4 игры топ-10 ×1.3). ⚠ Формат — ГИПОТЕЗА по прошлым Four Seasons на 30 игроков: регламента на mafgame нет; поправить CFG (quals/finals/finalN), когда опубликуют.
+<!-- DOVOD · t615.html · v1.5 · 2026-11-06 · «Прогноз · шансы» (финал/топ‑5/победа + коэффициент, модель по MMR) · v1.4 · 2026-11-06 · сила столов / соперники / путь — по MMR и тирам по MMR (решение Валерия); лого MAFGAME · v1.3 · 2026-11-06 · тема «Black Circle» по заставкам MAFGAME (фиолетовое свечение, серебро Cinzel, постер-Атомиум кодом) + Ср. MMR · v1.2 · 2026-11-05 · «Состав»: переключатель MMR / ELO вместо «компактно/подробно» (MMR — mafiastats, наш тир; ELO — markery с местом 2026), по умолчанию MMR · v1.1 · 2026-11-05 · формат 12 (8+4) + финал 4 подтверждён организатором; «Расписание» (день 1, место, еда, кальян); судьи столов; новые «Главное сейчас» из t687; состав: +Саботаж, −Ну погоди · v1.0 · 2026-10-26 · Four Seasons: Black Circle 2026 (mafgame 615, Брюссель, 7–8.11, 4★) — движок турнирной страницы DOVOD (канон t673 v1.4: 30 игроков, 12 квал × 3 стола → финал 4 игры топ-10 ×1.3). ⚠ Формат — ГИПОТЕЗА по прошлым Four Seasons на 30 игроков: регламента на mafgame нет; поправить CFG (quals/finals/finalN), когда опубликуют.
      Данные: data/*_615* (участники и ELO markery снимок 26.10; игры — live с mafgame в дни турнира через live.js). Эфиры — watch615.html. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -857,7 +857,7 @@ function plW(n,a,b,c){const m=Math.abs(n)%100,m1=m%10;if(m>10&&m<20)return c;if(
 function players_w(n){return n+' '+plW(n,'игрок','игрока','игроков');}
 
 const NAV=[
-  {group:'Обзор',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Информация'},{id:'streams',ic:'▶',lab:'Трансляции'},{id:'schedule',ic:'◷',lab:'Расписание'}]},
+  {group:'Обзор',ic:'◈',items:[{id:'overview',ic:'◆',lab:'Информация'},{id:'streams',ic:'▶',lab:'Трансляции'},{id:'schedule',ic:'◷',lab:'Расписание'},{id:'forecast',ic:'%',lab:'Прогноз · шансы',perm:1}]},
   {group:'Игроки',ic:'♟',items:[
     {id:'my',ic:'♟',lab:'Страница игрока'},
     {id:'roster',ic:'≡',lab:'Состав · MMR / ELO'},
@@ -1044,6 +1044,7 @@ const RENDER={
   },
   streams(){return `<div class="view"><div class="secttl">&#9654; Трансляции</div>${streamsPanel()}</div>`;},
   my(){return `<div class="view"><div class="mymini">${esc((D.tour&&(D.tour.short||D.tour.tournament_name))||'')}</div><div class="secttl" id="myTtl">&#9823; Страница игрока</div><div id="myTop"></div><div id="myArea"></div></div>`;},
+  forecast(){return `<div class="view"><div class="secttl">% Прогноз · шансы игроков</div><div class="panel" id="fcPanel"><div class="note" style="margin:0">Считаю…</div></div></div>`;},
   schedule(){const S=CFG.schedule||[];return `<div class="view"><div class="secttl">&#9719; Расписание</div>`+S.map(d=>`<div class="panel"><h3>${esc(d.day)}</h3><div class="schl">`+d.items.map(([t,x])=>`<div class="schr"><span class="scht">${esc(t)}</span><span>${esc(x)}</span></div>`).join('')+`</div></div>`).join('')+(CFG.schedNote?`<div class="note">${CFG.schedNote}</div>`:'')+(CFG.info||[]).map(b=>`<div class="panel"><h3>${b.t}</h3>${b.h}</div>`).join('')+`</div>`;},
   roster(){return `<div class="view"><div class="secttl">&#8801; Состав · MMR / ELO</div><div class="srcline">ELO, места и ранги — <a href="https://markery.online" target="_blank" rel="noopener">markery.online</a> · MMR — <a href="https://mafiastats.com" target="_blank" rel="noopener">mafiastats.com</a>, тир MMR — линейка markery по долям (эксперимент) · составы и аватарки — <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a></div>
       <div class="segwrap" id="rTop"></div>
@@ -1283,8 +1284,27 @@ async function jdTry(){const v=(document.getElementById('jdPw')||{}).value||'';c
 function softRender(){const a=document.activeElement;if(a&&/^(INPUT|SELECT|TEXTAREA)$/.test(a.tagName))return;
   const s=SECTIONS.find(x=>x.id===cur);if(!s||s.locked){show('overview');return;}
   const v=document.getElementById('view');if(!v)return;const y=window.scrollY;v.innerHTML=(RENDER[cur]?RENDER[cur]():stub(cur));afterRender(cur);window.scrollTo(0,y);}
-function afterRender(id){if(id==='cards')initCards();else if(id==='strength')paintStrength();else if(id==='luck')paintLuck();else if(id==='roster')paintRoster();else if(id==='seating')initSeating();else if(id==='my')initMy();else if(id==='together')initTogether();else if(id==='judges'){if(jdUnlocked())paintJudges();else{const i=document.getElementById('jdPw');if(i)i.onkeydown=e=>{if(e.key==='Enter')jdTry();};}}else if(id==='stages'||id==='games'||id==='roles')afterStats(id);}
+function afterRender(id){if(id==='cards')initCards();else if(id==='strength')paintStrength();else if(id==='luck')paintLuck();else if(id==='roster')paintRoster();else if(id==='forecast')paintForecast();else if(id==='seating')initSeating();else if(id==='my')initMy();else if(id==='together')initTogether();else if(id==='judges'){if(jdUnlocked())paintJudges();else{const i=document.getElementById('jdPw');if(i)i.onkeydown=e=>{if(e.key==='Enter')jdTry();};}}else if(id==='stages'||id==='games'||id==='roles')afterStats(id);}
 
+
+/* v1.5 (06.11.2026): «Прогноз · шансы» — модель по MMR (data/research/mmr_tiers.json, mmr_calibrate.py):
+   сила θ = β·(MMR−1500)/100, места = θ + шум Гумбеля (Plackett–Luce); 20 000 розыгрышей этого состава.
+   Шанс финала = попасть в топ‑10 по итогам; победа = 1‑е место. Коэффициент = 1/шанс (честный, без маржи). Рассадку пока не учитываем. */
+let FC=null;
+async function paintForecast(){const el=document.getElementById('fcPanel');if(!el)return;
+  try{if(!FC)FC=await fetch('data/research/mmr_tiers.json').then(r=>r.json());}catch(e){el.innerHTML='<div class="note">Модель не загрузилась.</div>';return;}
+  const b=FC.beta,miss=FC.miss||1350,ps=D.players.slice(),n=ps.length,S=20000;
+  const th=ps.map(p=>b*((num(p.r_ms_mmr)||miss)-1500)/100);const fin=new Float64Array(n),t5=new Float64Array(n),win=new Float64Array(n);
+  const perf=new Float64Array(n),idx=[...Array(n).keys()];
+  for(let s=0;s<S;s++){for(let i=0;i<n;i++)perf[i]=th[i]-Math.log(-Math.log(Math.random()));idx.sort((a,c)=>perf[c]-perf[a]);
+    for(let k=0;k<10;k++){fin[idx[k]]++;if(k<5)t5[idx[k]]++;}win[idx[0]]++;}
+  const rows=ps.map((p,i)=>({p,f:fin[i]/S,t:t5[i]/S,w:win[i]/S})).sort((a,c)=>c.w-a.w||c.f-a.f);
+  const pc=x=>x>=.995?'>99%':x<.005?'<1%':Math.round(x*100)+'%';const od=x=>x<=0?'—':(1/x>=100?'100+':(1/x).toFixed(2));
+  const bar=x=>`<span style="display:inline-block;width:${Math.round(x*60)}px;height:6px;border-radius:3px;background:var(--gold);vertical-align:middle;margin-right:6px;opacity:.85"></span>`;
+  el.innerHTML=`<div class="note" style="margin:0 0 10px">Шансы считаются по MMR (<a class="lnk" style="margin:0" href="https://mafiastats.com" target="_blank" rel="noopener">mafiastats</a>) — модель обучена на ${FC.sample.tournaments} рейтинговых турнирах mafgame с сентября 2025 (${FC.sample.entries} результатов). Проверка на отложенных ${FC.holdout.test} турнирах: прогноз точнее, чем «у всех равные шансы». <b>Коэффициент</b> — честный, 1/шанс, без маржи. Рассадку пока не учитываем; после турнира сравним прогноз с итогом.</div>
+  <div class="scrollT"><table class="tbl full"><thead><tr><th class="l">Игрок</th><th>Тир</th><th>MMR</th><th>Финал</th><th>Топ‑5</th><th>Победа</th><th>Коэф. на победу</th></tr></thead><tbody>${rows.map((r,i)=>`<tr class="rrow${r.p.nick===myPlayer?' me':''}" data-p="${esc(r.p.nick)}"><td class="l"><div class="pl"><span class="num">${i+1}</span>${avatarCell(r.p,r.p.r_ms_tier)}<span class="pl-nick">${esc(r.p.nick)}</span></div></td><td>${(r.p.r_ms_tier in TIER_ORD)?`<span class="tpill tp-${r.p.r_ms_tier}">${r.p.r_ms_tier}</span>`:'—'}</td><td><span class="rnum">${num(r.p.r_ms_mmr)!=null?Math.round(r.p.r_ms_mmr):'—'}</span></td><td style="text-align:left">${bar(r.f)}${pc(r.f)}</td><td>${pc(r.t)}</td><td>${pc(r.w)}</td><td><span class="rnum">${od(r.w)}</span></td></tr>`).join('')}</tbody></table></div>
+  <div class="note">Тиры по MMR = шанс выйти в финал на типичном турнире (30 игроков, соперники уровня обычного 4★): L ≥75% · S ≥60% · A ≥45% · B ≥33% · C ≥22% · D ≥13% · E ≥7% · F меньше. Пороги MMR: ${Object.entries(FC.thresholds).map(([t,v])=>t+' '+v).join(' · ')}.</div>`;
+  el.querySelectorAll('tr.rrow').forEach(tr=>tr.onclick=()=>goPlayer(tr.dataset.p));}
 /* roster · v2 (05.11.2026): переключатель MMR / ELO вместо «компактно/подробно». MMR — mafiastats.com, тир по нашей линейке (D.meta.ms_ladder);
    ELO — markery.online как раньше, с местом в 2026. Выбор запоминаем; по умолчанию MMR (Валерий: «понемногу переходим на MMR»). */
 let rMode=(function(){try{return localStorage.getItem(CFG.ls+'rmode')||'mmr'}catch(e){return 'mmr'}})();

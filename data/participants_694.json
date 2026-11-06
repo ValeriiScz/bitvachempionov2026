@@ -7,13 +7,13 @@
   "note": "тиры производные от ELO по границам рангов (полосы из снапшотов 634/702/766); Люсі и Mr. Smith🚀 — markery-матч не подтверждён, без рейтинга",
   "ms_snap": "2026-11-03",
   "ms_ladder": {
-   "L": 2116,
-   "S": 1956,
-   "A": 1716,
-   "B": 1560,
-   "C": 1406,
-   "D": 1222,
-   "E": 1091
+   "L": 1950,
+   "S": 1800,
+   "A": 1650,
+   "B": 1500,
+   "C": 1350,
+   "D": 1125,
+   "E": 925
   }
  },
  "players": [
@@ -73,7 +73,7 @@
    },
    "r_ms_mmr": 1218.9,
    "r_ms_rank": null,
-   "r_ms_tier": "E"
+   "r_ms_tier": "D"
   },
   {
    "nick": "DOVOD",
@@ -103,7 +103,7 @@
    },
    "r_ms_mmr": 1832.7,
    "r_ms_rank": 65,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "Maverick",
@@ -133,7 +133,7 @@
    },
    "r_ms_mmr": 1559.6,
    "r_ms_rank": 233,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "qUAest0r",
@@ -193,7 +193,7 @@
    },
    "r_ms_mmr": 2108.3,
    "r_ms_rank": 18,
-   "r_ms_tier": "S"
+   "r_ms_tier": "L"
   },
   {
    "nick": "Badwin",
@@ -281,7 +281,7 @@
    },
    "r_ms_mmr": 1542.0,
    "r_ms_rank": 254,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "Марселия",
@@ -310,7 +310,7 @@
    },
    "r_ms_mmr": 965.1,
    "r_ms_rank": 764,
-   "r_ms_tier": "F"
+   "r_ms_tier": "E"
   },
   {
    "nick": "Комар",
@@ -338,7 +338,7 @@
    },
    "r_ms_mmr": 2057.3,
    "r_ms_rank": 26,
-   "r_ms_tier": "S"
+   "r_ms_tier": "L"
   },
   {
    "nick": "КуКуСиК",
@@ -396,7 +396,7 @@
    },
    "r_ms_mmr": 1693.5,
    "r_ms_rank": 117,
-   "r_ms_tier": "B"
+   "r_ms_tier": "A"
   },
   {
    "nick": "Дийкстра",
@@ -424,7 +424,7 @@
    },
    "r_ms_mmr": 1515.3,
    "r_ms_rank": 291,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "Буржуй",
@@ -452,7 +452,7 @@
    },
    "r_ms_mmr": 1940.6,
    "r_ms_rank": 41,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "Lюц",
@@ -482,7 +482,7 @@
    },
    "r_ms_mmr": 2027.9,
    "r_ms_rank": 29,
-   "r_ms_tier": "S"
+   "r_ms_tier": "L"
   },
   {
    "nick": "Люсі",
@@ -505,7 +505,7 @@
    },
    "r_ms_mmr": 1528.4,
    "r_ms_rank": null,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "Мини",
@@ -533,7 +533,7 @@
    },
    "r_ms_mmr": 1709.5,
    "r_ms_rank": 111,
-   "r_ms_tier": "B"
+   "r_ms_tier": "A"
   },
   {
    "nick": "Skywalker",
@@ -650,7 +650,7 @@
    },
    "r_ms_mmr": 1541.8,
    "r_ms_rank": 255,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "Mr. Trust",
@@ -707,7 +707,7 @@
    },
    "r_ms_mmr": 1148.4,
    "r_ms_rank": null,
-   "r_ms_tier": "E"
+   "r_ms_tier": "D"
   },
   {
    "nick": "Urs",
@@ -764,7 +764,7 @@
    },
    "r_ms_mmr": 1401.8,
    "r_ms_rank": 469,
-   "r_ms_tier": "D"
+   "r_ms_tier": "C"
   },
   {
    "nick": "Ru",
@@ -795,7 +795,7 @@
    },
    "r_ms_mmr": 1024.8,
    "r_ms_rank": 753,
-   "r_ms_tier": "F"
+   "r_ms_tier": "E"
   },
   {
    "nick": "Sura",
@@ -875,7 +875,7 @@
    },
    "r_ms_mmr": 1399.0,
    "r_ms_rank": null,
-   "r_ms_tier": "D"
+   "r_ms_tier": "C"
   }
  ],
  "stats": {

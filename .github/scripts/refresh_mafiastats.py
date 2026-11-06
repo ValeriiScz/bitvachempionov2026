@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_mafiastats · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
+refresh_mafiastats · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
 Назначение: подтянуть единый рейтинг MMR с mafiastats.com (открытый API, без ключей)
 для игроков сайта DOVOD — без участия человека. Запускается GitHub Actions
 (.github/workflows/refresh-mafiastats.yml).
@@ -153,6 +153,14 @@ TIERS = 'LSABCDEF'
 
 def mmr_ladder():
     """Пороги MMR по долям тиров markery среди игроков, у которых есть оба рейтинга."""
+    # v1.2 (06.11.2026): если есть калибровка data/research/mmr_tiers.json (тир = шанс финала на типичном турнире,
+    # data/research/model/mmr_calibrate.py) — берём её пороги; линейка по долям markery — запасной вариант.
+    try:
+        cal = json.load(io.open(os.path.join(BASE, 'data', 'research', 'mmr_tiers.json'), encoding='utf-8'))
+        th = {t: int(v) for t, v in cal['thresholds'].items()}
+        return {'thresholds': th, 'sample': cal.get('sample', {}).get('entries'), 'shares': {}, 'exact': 0, 'within1': 0, 'method': 'final-chance v' + str(cal.get('version'))}
+    except Exception:
+        pass
     pairs = {}
     for f in glob.glob(os.path.join(BASE, 'data', 'participants_*.json')):
         try: d = json.load(io.open(f, encoding='utf-8'))

@@ -14,13 +14,13 @@
   "rating_note": "ELO/тир — markery.online, снимок 09.10.2026; тир по границам markery (L 1600+, S 1300+, A 1190+, B 1075+, C 994+, D 937+, E 880+)",
   "ms_snap": "2026-11-03",
   "ms_ladder": {
-   "L": 2116,
-   "S": 1956,
-   "A": 1716,
-   "B": 1560,
-   "C": 1406,
-   "D": 1222,
-   "E": 1091
+   "L": 1950,
+   "S": 1800,
+   "A": 1650,
+   "B": 1500,
+   "C": 1350,
+   "D": 1125,
+   "E": 925
   }
  },
  "players": [
@@ -52,7 +52,7 @@
    },
    "r_ms_mmr": 1693.5,
    "r_ms_rank": 117,
-   "r_ms_tier": "B"
+   "r_ms_tier": "A"
   },
   {
    "nick": "KRASNII",
@@ -142,7 +142,7 @@
    },
    "r_ms_mmr": 1526.0,
    "r_ms_rank": null,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "TOPS",
@@ -172,7 +172,7 @@
    },
    "r_ms_mmr": 1529.0,
    "r_ms_rank": 268,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "Tripok",
@@ -202,7 +202,7 @@
    },
    "r_ms_mmr": 1831.5,
    "r_ms_rank": 66,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "DK",
@@ -322,7 +322,7 @@
    },
    "r_ms_mmr": 1361.4,
    "r_ms_rank": null,
-   "r_ms_tier": "D"
+   "r_ms_tier": "C"
   },
   {
    "nick": "Goodman",
@@ -382,7 +382,7 @@
    },
    "r_ms_mmr": 1832.7,
    "r_ms_rank": 65,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "Akteur",
@@ -442,7 +442,7 @@
    },
    "r_ms_mmr": 1362.0,
    "r_ms_rank": null,
-   "r_ms_tier": "D"
+   "r_ms_tier": "C"
   },
   {
    "nick": "Север",
@@ -472,7 +472,7 @@
    },
    "r_ms_mmr": 1401.0,
    "r_ms_rank": 471,
-   "r_ms_tier": "D"
+   "r_ms_tier": "C"
   },
   {
    "nick": "Luca",
@@ -652,7 +652,7 @@
    },
    "r_ms_mmr": 1559.6,
    "r_ms_rank": 233,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "Grinch",
@@ -682,7 +682,7 @@
    },
    "r_ms_mmr": 1375.3,
    "r_ms_rank": null,
-   "r_ms_tier": "D"
+   "r_ms_tier": "C"
   },
   {
    "nick": "КуКуСиК",
@@ -742,7 +742,7 @@
    },
    "r_ms_mmr": 1871.9,
    "r_ms_rank": 59,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "Annvie",
@@ -863,7 +863,7 @@
    },
    "r_ms_mmr": 1173.7,
    "r_ms_rank": null,
-   "r_ms_tier": "E"
+   "r_ms_tier": "D"
   },
   {
    "nick": "Mermaid",
@@ -923,7 +923,7 @@
    },
    "r_ms_mmr": 1364.0,
    "r_ms_rank": null,
-   "r_ms_tier": "D"
+   "r_ms_tier": "C"
   }
  ],
  "stats": {

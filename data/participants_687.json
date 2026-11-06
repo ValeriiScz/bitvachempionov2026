@@ -11,13 +11,13 @@
   "rating_note": "markery.online, снимок 30.10.2026 (ELO; места в рейтингах — снимок 26.10): ELO и место в глобальном рейтинге (всё время) и в рейтинге сезона 2026; ранг L/S/A/B/C/D/E/F — по общему ELO (L 1600+, S 1300+, A 1190+, B 1075+, C 994+, D 937+, E 880+)",
   "ms_snap": "2026-11-03",
   "ms_ladder": {
-   "L": 2116,
-   "S": 1956,
-   "A": 1716,
-   "B": 1560,
-   "C": 1406,
-   "D": 1222,
-   "E": 1091
+   "L": 1950,
+   "S": 1800,
+   "A": 1650,
+   "B": 1500,
+   "C": 1350,
+   "D": 1125,
+   "E": 925
   }
  },
  "players": [
@@ -56,7 +56,7 @@
    },
    "r_ms_mmr": 1858.4,
    "r_ms_rank": 62,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "Gangster",
@@ -93,7 +93,7 @@
    },
    "r_ms_mmr": 2054.4,
    "r_ms_rank": 28,
-   "r_ms_tier": "S"
+   "r_ms_tier": "L"
   },
   {
    "nick": "aptah",
@@ -130,7 +130,7 @@
    },
    "r_ms_mmr": 1541.8,
    "r_ms_rank": 255,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "Сью",
@@ -167,7 +167,7 @@
    },
    "r_ms_mmr": 1688.0,
    "r_ms_rank": 120,
-   "r_ms_tier": "B"
+   "r_ms_tier": "A"
   },
   {
    "nick": "Olgierd",
@@ -241,7 +241,7 @@
    },
    "r_ms_mmr": 1832.7,
    "r_ms_rank": 65,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "Mr. Smith",
@@ -352,7 +352,7 @@
    },
    "r_ms_mmr": 1125.4,
    "r_ms_rank": 727,
-   "r_ms_tier": "E"
+   "r_ms_tier": "D"
   },
   {
    "nick": "Tommy",
@@ -389,7 +389,7 @@
    },
    "r_ms_mmr": 2016.3,
    "r_ms_rank": 31,
-   "r_ms_tier": "S"
+   "r_ms_tier": "L"
   },
   {
    "nick": "Korolevich",
@@ -426,7 +426,7 @@
    },
    "r_ms_mmr": 1894.7,
    "r_ms_rank": 56,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "Вольный",
@@ -611,7 +611,7 @@
    },
    "r_ms_mmr": 1505.9,
    "r_ms_rank": null,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "ParadoXx",
@@ -722,7 +722,7 @@
    },
    "r_ms_mmr": 1166.9,
    "r_ms_rank": null,
-   "r_ms_tier": "E"
+   "r_ms_tier": "D"
   },
   {
    "nick": "Rivierra",
@@ -796,7 +796,7 @@
    },
    "r_ms_mmr": 1061.1,
    "r_ms_rank": 746,
-   "r_ms_tier": "F"
+   "r_ms_tier": "E"
   },
   {
    "nick": "Катанчик",
@@ -870,7 +870,7 @@
    },
    "r_ms_mmr": 2027.9,
    "r_ms_rank": 29,
-   "r_ms_tier": "S"
+   "r_ms_tier": "L"
   },
   {
    "nick": "Tripok",
@@ -907,7 +907,7 @@
    },
    "r_ms_mmr": 1831.5,
    "r_ms_rank": 66,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "S1LveR",
@@ -1055,7 +1055,7 @@
    },
    "r_ms_mmr": 1175.2,
    "r_ms_rank": null,
-   "r_ms_tier": "E"
+   "r_ms_tier": "D"
   },
   {
    "nick": "Mik",
@@ -1166,7 +1166,7 @@
    },
    "r_ms_mmr": 1529.0,
    "r_ms_rank": 268,
-   "r_ms_tier": "C"
+   "r_ms_tier": "B"
   },
   {
    "nick": "Саботаж",
@@ -1203,7 +1203,7 @@
    },
    "r_ms_mmr": 1870.3,
    "r_ms_rank": 61,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "Буржуй",
@@ -1240,7 +1240,7 @@
    },
    "r_ms_mmr": 1940.6,
    "r_ms_rank": 41,
-   "r_ms_tier": "A"
+   "r_ms_tier": "S"
   },
   {
    "nick": "Магнат",
@@ -1277,7 +1277,7 @@
    },
    "r_ms_mmr": 1693.5,
    "r_ms_rank": 117,
-   "r_ms_tier": "B"
+   "r_ms_tier": "A"
   },
   {
    "nick": "Twix",
@@ -1351,7 +1351,7 @@
    },
    "r_ms_mmr": 1373.4,
    "r_ms_rank": null,
-   "r_ms_tier": "D"
+   "r_ms_tier": "C"
   },
   {
    "nick": "Руанда",
