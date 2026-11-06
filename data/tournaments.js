@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.6 | 2026-11-06 | 687: champion/top3/mvp (Xenon, лучший игрок 4.10) — архивная карточка без победителей
 // MafgameStat | tournaments.js | v4.5 | 2026-11-06 | ср. MMR (mafiastats, снимок 03.11) у 11 турниров: mmrAvg/mmrN
 // MafgameStat | tournaments.js | v4.4 | 2026-11-05 | 615 Black Circle: формат 12 (8+4) + финал 4 подтверждён, старт 10:15; состав +Саботаж −Ну погоди
 // MafgameStat | tournaments.js | v4.3 | 2026-11-02 | 687 MGP -> finished (чемпион YeS 14.03, ParadoXx 12.80, Xenon 12.54; 12 квал + 5 финала)
@@ -311,7 +312,14 @@ window.TOURNAMENTS_DB = {
     "watch": "watch687.html",
     "liveFrom": "2026-10-31",
     "liveTo": "2026-11-01",
-    "format": "12 квал × 4 стола → финал топ-10 (5 игр)"
+    "format": "12 квал × 4 стола → финал топ-10 (5 игр)",
+    "champion": "YeS",
+    "top3": [
+      "YeS",
+      "ParadoXx",
+      "Xenon"
+    ],
+    "mvp": "Xenon"
   },
   {
     "id": "710",
