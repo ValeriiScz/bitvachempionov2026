@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-11-05",
+ "snapshot": "2026-11-06",
  "parents": [
   {
    "file": "2025_478.json",
@@ -195,7 +195,7 @@
    "name": "Arena Moldova Cup",
    "start_date": "2026-11-28",
    "stars": 2,
-   "series": 12,
+   "series": 11,
    "played": 8,
    "final": true
   },
@@ -226,7 +226,7 @@
    "id": 740,
    "year": 2026,
    "name": "Benelux Plus 2026",
-   "start_date": "2026-12-19",
+   "start_date": "2026-12-12",
    "stars": 2,
    "series": 12,
    "played": 9,
