@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-11-05",
+ "snapshot": "2026-11-06",
  "players": {
   "RAMZES": {
    "global": 1275,
@@ -93,14 +93,6 @@
    "global": 1273,
    "tier": "A"
   },
-  "Nick": {
-   "global": 1277,
-   "tier": "A"
-  },
-  "Gemellia": {
-   "global": 961,
-   "tier": "D"
-  },
   "Urs": {
    "global": 826,
    "tier": "F"
@@ -119,6 +111,14 @@
   },
   "Саботаж": {
    "global": 1351,
+   "tier": "S"
+  },
+  "Кель'тас": {
+   "global": 1004,
+   "tier": "C"
+  },
+  "Malinity": {
+   "global": 1313,
    "tier": "S"
   }
  }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · tournaments.html · v4.2 · 2026-11-06 · ср. MMR рядом со ср. ELO (анонсы и архив) · v4.1 · 2026-10-26 · звёзды крупно (вес турнира в рейтинге) + легенда без оценок уровней; архив: звёзды, игроки, ср. ELO, топ-3 и MVP · v4.0 · переезд в новый стиль DOVOD (как страницы турниров t692/t645): неон, Unbounded + JetBrains Mono + Inter, хлебные крошки сверху.
+<!-- DOVOD · tournaments.html · v4.3 · 2026-11-06 · фирменная обложка кодом (assets/posters.js, поле poster) — Black Circle · v4.2 · 2026-11-06 · ср. MMR рядом со ср. ELO (анонсы и архив) · v4.1 · 2026-10-26 · звёзды крупно (вес турнира в рейтинге) + легенда без оценок уровней; архив: звёзды, игроки, ср. ELO, топ-3 и MVP · v4.0 · переезд в новый стиль DOVOD (как страницы турниров t692/t645): неон, Unbounded + JetBrains Mono + Inter, хлебные крошки сверху.
      Все актуальные турниры — одной карточкой DOVOD: постер (картинка турнира, если есть, иначе CSS-постер), акцент — цвет турнира (t.accent), кнопки «страница / смотровая / участники / mafgame».
      Ссылка карточки — на собственную страницу турнира (t.page), иначе — на участников. Архив — строками в том же стиле. Старая версия v3.2 — в _Архив проекта. -->
 <meta charset="utf-8">
@@ -197,6 +197,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   </div>
 </div>
 <script src="data/tournaments.js"></script>
+<script src="assets/posters.js"></script>
 <script>
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 /* акцент турнира: t.accent; иначе — по теме (dovod — cyan, кипрские — бирюза, protocol — сирень) */
@@ -212,7 +213,7 @@ function card(t,big){
   const lab=live?'идёт · live':t.status==='gathering'?'сбор состава':t.status==='upcoming'?'скоро':esc(t.status);
   const [p1,p2]=String(t.posterTitle||t.name).split('|');const y=String(t.start||'').slice(0,4);
   const art=t.art||(t.theme==='cyprus'?ART[667]:t.theme==='protocol'?ART[713]:'');
-  const vis=art?`<a class="vis${t.artPaper?' paper':''}" href="${mainHref(t)}" style="${t.artPaper?'background:'+t.artPaper:''}"><img src="${esc(art)}" alt="${esc(t.name)}" loading="lazy" onerror="this.remove()"><span class="badge ${st}">${lab}</span></a>`
+  const vis=(window.DV_POSTER&&DV_POSTER.has(t.poster))?`<a class="vis dvpo" href="${mainHref(t)}">${DV_POSTER.inner(t.poster,{sub:esc(t.dates)+' · '+esc(t.city)})}<span class="badge ${st}">${lab}</span></a>`:art?`<a class="vis${t.artPaper?' paper':''}" href="${mainHref(t)}" style="${t.artPaper?'background:'+t.artPaper:''}"><img src="${esc(art)}" alt="${esc(t.name)}" loading="lazy" onerror="this.remove()"><span class="badge ${st}">${lab}</span></a>`
     :`<a class="vis" href="${mainHref(t)}"><div class="cp"><div class="ck">DOVOD · ${'★'.repeat(t.stars||0)} · ${esc(t.city)}</div><div class="ct">${esc(p1)}${p2?`<b>${esc(p2)}</b>`:''}</div><div class="cy">${esc(y)}</div></div><span class="badge ${st}">${lab}</span></a>`;
   const btns=[t.page?`<a class="btn" href="${t.page}">Страница турнира →</a>`:'',t.watch?`<a class="btn w" href="${t.watch}">▶ Смотровая</a>`:'',
     `<a class="btn g" href="participants.html?t=${t.id}">Участники и ELO</a>`,t.mafgame?`<a class="btn g" href="${t.mafgame}" target="_blank" rel="noopener">mafgame ↗</a>`:''].join('');
