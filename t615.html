@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t615.html · v1.3 · 2026-11-06 · тема «Black Circle» по заставкам MAFGAME (фиолетовое свечение, серебро Cinzel, постер-Атомиум кодом) + Ср. MMR · v1.2 · 2026-11-05 · «Состав»: переключатель MMR / ELO вместо «компактно/подробно» (MMR — mafiastats, наш тир; ELO — markery с местом 2026), по умолчанию MMR · v1.1 · 2026-11-05 · формат 12 (8+4) + финал 4 подтверждён организатором; «Расписание» (день 1, место, еда, кальян); судьи столов; новые «Главное сейчас» из t687; состав: +Саботаж, −Ну погоди · v1.0 · 2026-10-26 · Four Seasons: Black Circle 2026 (mafgame 615, Брюссель, 7–8.11, 4★) — движок турнирной страницы DOVOD (канон t673 v1.4: 30 игроков, 12 квал × 3 стола → финал 4 игры топ-10 ×1.3). ⚠ Формат — ГИПОТЕЗА по прошлым Four Seasons на 30 игроков: регламента на mafgame нет; поправить CFG (quals/finals/finalN), когда опубликуют.
+<!-- DOVOD · t615.html · v1.4 · 2026-11-06 · сила столов / соперники / путь — по MMR и тирам по MMR (решение Валерия); лого MAFGAME · v1.3 · 2026-11-06 · тема «Black Circle» по заставкам MAFGAME (фиолетовое свечение, серебро Cinzel, постер-Атомиум кодом) + Ср. MMR · v1.2 · 2026-11-05 · «Состав»: переключатель MMR / ELO вместо «компактно/подробно» (MMR — mafiastats, наш тир; ELO — markery с местом 2026), по умолчанию MMR · v1.1 · 2026-11-05 · формат 12 (8+4) + финал 4 подтверждён организатором; «Расписание» (день 1, место, еда, кальян); судьи столов; новые «Главное сейчас» из t687; состав: +Саботаж, −Ну погоди · v1.0 · 2026-10-26 · Four Seasons: Black Circle 2026 (mafgame 615, Брюссель, 7–8.11, 4★) — движок турнирной страницы DOVOD (канон t673 v1.4: 30 игроков, 12 квал × 3 стола → финал 4 игры топ-10 ×1.3). ⚠ Формат — ГИПОТЕЗА по прошлым Four Seasons на 30 игроков: регламента на mafgame нет; поправить CFG (quals/finals/finalN), когда опубликуют.
      Данные: data/*_615* (участники и ELO markery снимок 26.10; игры — live с mafgame в дни турнира через live.js). Эфиры — watch615.html. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -911,7 +911,7 @@ function computeSeating(){
         names.forEach(m=>{if(m!==n){(D.opp[n]=D.opp[n]||{})[m]=(D.opp[n][m]||0)+1;}});});});
     if(done)D.played=gnum;});
   D.INFO={};D.RATE={};
-  D.players.forEach(p=>{D.INFO[p.nick]={real:p.real,cc:p.cc,flag:p.flag,country:p.country,club:p.club};D.RATE[p.nick]={tier:p.r_tier,elo:p.r_elo_cur,elo26:p.r_elo_ly,mg:p.mg_rank,mid:p.markery_id,uid:p.uid,msid:p.ms&&p.ms.id,av:p.av};});
+  D.players.forEach(p=>{D.INFO[p.nick]={real:p.real,cc:p.cc,flag:p.flag,country:p.country,club:p.club};D.RATE[p.nick]={tier:p.r_ms_tier||p.r_tier,etier:p.r_tier,mmr:p.r_ms_mmr,elo:p.r_elo_cur,elo26:p.r_elo_ly,mg:p.mg_rank,mid:p.markery_id,uid:p.uid,msid:p.ms&&p.ms.id,av:p.av};});
   computeStrength();
 }
 function avOf(n){return D.avatars[n]||(D.RATE[n]&&D.RATE[n].av)||'';}
@@ -1728,8 +1728,9 @@ function median(a){const q=a.slice().sort((x,y)=>x-y);const m=q.length>>1;return
    OS — соперники игрока без него самого (9 ELO), категория по рангу среди всех 550 игровых мест. Без профиля markery (Nostradamus) → медиана состава. */
 function computeStrength(){
   D.TS={};D.OS={};D.LUCK={};
-  const elos=Object.values(D.RATE).map(r=>r.elo).filter(Boolean);const med=median(elos)||1100;
-  const eloOf=n=>(D.RATE[n]&&D.RATE[n].elo)||med;
+  /* v3.0 (06.11.2026, решение Валерия): сила столов, соперники и «путь» — по MMR (mafiastats) и тирам по MMR; ELO — только в списке и средним по турниру */
+  const elos=Object.values(D.RATE).map(r=>r.mmr).filter(Boolean);const med=median(elos)||1500;
+  const eloOf=n=>(D.RATE[n]&&D.RATE[n].mmr)||med;
   const tabs=[],seats=[];
   (D.games||[]).forEach((g,gi)=>{if(/Полуфинал|Финал/i.test(String(g.stage||'')))return;/* v13.8: всё, что не полу/финал — квалификация; live мог назвать стадию «Игры» */g.tables.forEach(t=>{const names=t.seats.map(s=>s&&s.name).filter(Boolean);if(names.length<6)return;
     const e=names.map(eloOf);const avg=mean(e);tabs.push({g:gi+1,t:t.table_num,avg,names});
@@ -1772,12 +1773,12 @@ function computeStrength(){
   D.catRange=[null,1,2,3,4,5].map(c=>{if(!c)return null;const v=tabs.filter(x=>x.cat===c).map(x=>x.pts);return v.length?{min:Math.min(...v),max:Math.max(...v),n:v.length}:null;});
 }
 function catBadge(g,t,withElo){const T=D.TS&&D.TS[g+'-'+t];if(!T)return '';const c=CAT[T.cat];
-  return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${t}" title="${c.n} стол · ${T.pts} очк. (${T.comp}) · средний ELO ${Math.round(T.avg)} · #${T.rank} из ${D.tblN} столов квалификации">${c.n}${withElo?` <small>${T.comp}</small>`:''}</span>`;}
+  return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${t}" title="${c.n} стол · ${T.pts} очк. (${T.comp}) · средний MMR ${Math.round(T.avg)} · #${T.rank} из ${D.tblN} столов квалификации">${c.n}${withElo?` <small>${T.comp}</small>`:''}</span>`;}
 function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const RK={L:0,S:1,A:2,B:3};
   const top=(o.opp||[]).map(m=>({m,t:(D.RATE[m]&&D.RATE[m].tier)||''})).filter(x=>x.t in RK).sort((a,b)=>RK[a.t]-RK[b.t]);
   /* v2.1 (31.10): фото сильных соперников внахлёст, обводка — цвет тира; без фото — буква тира */
   const pills=top.length?top.map(x=>{const av=avOf(x.m);return av?`<img class="oav f-${x.t}" src="${esc(av)}" alt="${esc(x.m)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'tpill tp-${x.t} opt',textContent:'${x.t}'}))">`:`<span class="tpill tp-${x.t} opt">${x.t}</span>`;}).join(''):'<span class="na">без сильных</span>';
-  return `<span class="pk oppt" data-g="${g}" data-t="${o.t}" data-p="${esc(nick)}" title="сильные соперники: ${esc(top.map(x=>x.m+' ('+x.t+')').join(', ')||'нет')} · средний ELO соперников ${Math.round(o.avg)}">${pills}</span>`;}
+  return `<span class="pk oppt" data-g="${g}" data-t="${o.t}" data-p="${esc(nick)}" title="сильные соперники: ${esc(top.map(x=>x.m+' ('+x.t+')').join(', ')||'нет')} · средний MMR соперников ${Math.round(o.avg)}">${pills}</span>`;}
 function luckVerdict(L){const p=Math.round(L.pct);const z=L.z||0;const ps=(p>0?'+':'')+p+'%';
   if(z>=2)return {t:'самый тяжёлый путь',s:`сильных соперников на ${ps} больше среднего — один из самых трудных путей турнира`,k:'k1'};
   if(z>=1)return {t:'тяжёлый путь',s:`сильных соперников на ${ps} больше среднего`,k:'k2'};
@@ -1788,7 +1789,7 @@ function luckSquares(L,big){return `<span class="lsq${big?' big':''}">`+L.list.m
 function luckPanel(name){const L=D.LUCK&&D.LUCK[name];if(!L)return '';const v=luckVerdict(L);
   return `<div class="panel"><h3>Ваш путь · кто напротив</h3>
     <div class="luckhead"><span class="kb big ${v.k}">${v.t}</span><span class="jbig">${L.comp}<small> сильных соперников за ${L.n} игр · #${L.rank} из ${D.luckOrder.length} по тяжести пути</small></span></div>
-    <div class="note" style="margin:6px 0 10px">${v.s}. Считаем всех соперников по тирам markery: S — 3 очка, A — 2, B — 1. Квадратики — ваши игры: чем краснее, тем больше сильных за столом. Тап — кто за столом.</div>
+    <div class="note" style="margin:6px 0 10px">${v.s}. Считаем всех соперников по тирам MMR: S — 3 очка, A — 2, B — 1. Квадратики — ваши игры: чем краснее, тем больше сильных за столом. Тап — кто за столом.</div>
     ${luckSquares(L,true)}
     <div class="note" style="margin-top:8px"><span class="lnk" style="cursor:pointer" onclick="show('luck')">У кого самый тяжёлый путь →</span></div></div>`;}
 function chooserPanel(){return `<div class="chooser"><div class="chs on"><span class="chk">вы здесь</span><b>Страница турнира</b><small>рассадка и сила столов · live-результаты · судьи</small></div><a class="chs" href="${CFG.watch}"><span class="chk">эфиры</span><b>Смотровая →</b><small>три стола в одном окне, «следить за игроком»</small></a></div>`;}
@@ -1808,11 +1809,11 @@ function paintStrength(){const area=document.getElementById('strArea');if(!area)
   const gd1=gamesDay1();
   let grid=`<div class="smx" style="grid-template-columns:44px repeat(${tbls.length},minmax(0,1fr))"><div class="smh"></div>`+tbls.map(t=>`<div class="smh">Стол ${ROMAN[t]}<small>${D.judges[t]?esc(D.judges[t].name):''}</small></div>`).join('');
   games.forEach(g=>{grid+=`<div class="smg${g===gd1?' dayend':''}${g<=(D.played||0)?' done':''}${g===(D.played||0)+1?' nextg':''}"><b>${g}</b><small>${g<=gd1?'Д1':'Д2'}</small></div>`+tbls.map(t=>{const T=D.TS[g+'-'+t];if(!T)return '<div class="smc empty"></div>';const c=CAT[T.cat];
-    const mine=myPlayer&&T.names.includes(myPlayer);return `<button class="smc ${c.k}${mine?' mine':''}" data-g="${g}" data-t="${t}" title="${c.n} · ${T.pts} очк. (${T.comp}) · Ø ELO ${Math.round(T.avg)} · ${T.names.join(', ')}"><span class="ce">${T.pts}</span><span class="cn">${c.n}</span><span class="ceo">Ø ${Math.round(T.avg)}</span>${mine?'<span class="youb">вы</span>':''}</button>`;}).join('');});
+    const mine=myPlayer&&T.names.includes(myPlayer);return `<button class="smc ${c.k}${mine?' mine':''}" data-g="${g}" data-t="${t}" title="${c.n} · ${T.pts} очк. (${T.comp}) · Ø MMR ${Math.round(T.avg)} · ${T.names.join(', ')}"><span class="ce">${T.pts}</span><span class="cn">${c.n}</span><span class="ceo">Ø ${Math.round(T.avg)}</span>${mine?'<span class="youb">вы</span>':''}</button>`;}).join('');});
   grid+='</div>';
   const legend=[1,2,3,4,5].filter(c=>D.catRange[c]).map(c=>{const r=D.catRange[c];return `<div class="lgi"><span class="kb ${CAT[c].k}">${CAT[c].n}</span><span class="lgt">${r?`${r.n} столов · ${r.min===r.max?r.min:r.min+'–'+r.max} очк.`:'—'}</span><span class="lgd">${CAT[c].d}</span></div>`;}).join('');
   const hot=Object.values(D.TS).sort((a,b)=>b.pts-a.pts||b.avg-a.avg).slice(0,5).map(x=>`<div class="hotrowx"><span class="kb pk ${CAT[x.cat].k}" data-g="${x.g}" data-t="${x.t}">#${x.rank}</span><b>игра ${x.g} · стол ${ROMAN[x.t]}</b><span class="na">${x.pts} очк. · ${x.comp} · Ø ${Math.round(x.avg)}</span><div class="hotn">${x.names.slice().sort((a,b)=>(D.RATE[b]&&D.RATE[b].elo||0)-(D.RATE[a]&&D.RATE[a].elo||0)).map(n=>{const tr=D.RATE[n]&&D.RATE[n].tier;return `<span class="plink" data-p="${esc(n)}" onclick="goPlayer(this.dataset.p)">${esc(n)}${tr?` <span class="tpill tp-${tr}" style="font-size:9px;padding:0 5px">${tr}</span>`:''}</span>`;}).join(' · ')}</div></div>`).join('');
-  area.innerHTML=`<div class="note" style="margin:0 0 12px">Сила стола — по составу: сколько за ним сильных игроков (тиры markery, снимок ${esc(D.stats.snapshot||'2026-09-06')}). Очки: L — 4, S — 3, A — 2, B — 1, остальные — 0. В клетке — очки стола; средний стол этого турнира — <b>${D.ptsMean.toFixed(1)} очка</b>, категории считаются относительно него. Средний ELO стола — в подсказке. Тап по клетке — рассадка этого стола.</div>
+  area.innerHTML=`<div class="note" style="margin:0 0 12px">Сила стола — по составу: сколько за ним сильных игроков (тиры по MMR mafiastats — наша шкала, эксперимент). Очки: L — 4, S — 3, A — 2, B — 1, остальные — 0. В клетке — очки стола; средний стол этого турнира — <b>${D.ptsMean.toFixed(1)} очка</b>, категории считаются относительно него. Средний MMR стола — в подсказке. Тап по клетке — рассадка этого стола.</div>
     <div class="panel" style="padding:10px">${grid}<div class="note" style="margin-top:8px">Строки — игры (Д1/Д2 — день по плану трансляций, уточним по факту), столбцы — столы с судьями. Золотая рамка — ваш стол, если выбран «мой игрок».</div></div>
     <div class="panel"><h3>Категории столов</h3><div class="lgl">${legend}</div><div class="note" style="margin-top:8px">Как считаем: очки стола сравниваем со средним столом этого турнира (${D.ptsMean.toFixed(1)} очка, обычное отклонение ±${D.ptsSd.toFixed(1)}). Сильно выше — «элитный», выше — «сильный», около среднего — «ровный», ниже — «мягкий», сильно ниже — «спокойный». Шкала своя у каждого турнира: на очень сильном турнире «ровный» стол тоже сильный.</div></div>
     <div class="panel"><h3>Пять самых жарких столов</h3>${hot}</div>
@@ -1828,7 +1829,7 @@ function paintLuck(){const area=document.getElementById('luckArea');if(!area)ret
   const rows=order.map(n=>{const L=D.LUCK[n],R=D.RATE[n]||{},I=D.INFO[n]||{};const v=luckVerdict(L);const p=Math.round(L.pct);
     return `<button class="lrow${n===myPlayer?' me':''}" data-p="${esc(n)}" onclick="goPlayer(this.dataset.p)"><span class="lr">${L.rank}</span><img class="lav${R.tier?' f-'+R.tier:''}" src="${esc(avOf(n)||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'"><span class="lmain"><span class="ln">${I.flag||''} ${esc(n)}${R.tier?` <span class="tpill tp-${R.tier}" style="font-size:9px;padding:0 5px">${R.tier}</span>`:''}</span><span class="ls"><span class="dlt ${v.k}">${p>0?'+':''}${p}%</span> <span class="na">${L.comp}</span></span></span>${luckSquares(L,false)}</button>`;}).join('');
   const hard=D.luckOrder.slice(0,3).map(n=>`<b>${esc(n)}</b>`).join(', '),easy=D.luckOrder.slice(-3).reverse().map(n=>`<b>${esc(n)}</b>`).join(', ');
-  area.innerHTML=`<div class="panel"><h3>Кому досталась самая тяжёлая квалификация</h3><div class="note" style="margin:0">Самый тяжёлый путь — ${hard}. Самый спокойный — ${easy}.<br>Для каждого игрока считаем всех соперников за ${CFG.quals} игр по тирам markery (S — 3 очка, A — 2, B — 1, остальные — 0) и сравниваем со средним путём турнира. В строке: <b>насколько больше или меньше сильных соперников</b>, чем в среднем, и сколько раз игрок встретит S/A/B. Квадратики — игры: красные — стол, полный сильных, синие — спокойный. Тап по игроку — его страница, по квадратику — кто за столом.</div></div>
+  area.innerHTML=`<div class="panel"><h3>Кому досталась самая тяжёлая квалификация</h3><div class="note" style="margin:0">Самый тяжёлый путь — ${hard}. Самый спокойный — ${easy}.<br>Для каждого игрока считаем всех соперников за ${CFG.quals} игр по тирам MMR (S — 3 очка, A — 2, B — 1, остальные — 0) и сравниваем со средним путём турнира. В строке: <b>насколько больше или меньше сильных соперников</b>, чем в среднем, и сколько раз игрок встретит S/A/B. Квадратики — игры: красные — стол, полный сильных, синие — спокойный. Тап по игроку — его страница, по квадратику — кто за столом.</div></div>
     <div class="segwrap"><span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Сначала:</span><span class="seg"><button class="${luckSort==='opp'?'on':''}" onclick="luckSort='opp';paintLuck()">тяжёлый путь</button><button class="${luckSort==='soft'?'on':''}" onclick="luckSort='soft';paintLuck()">лёгкий путь</button><button class="${luckSort==='elo'?'on':''}" onclick="luckSort='elo';paintLuck()">по ELO</button></span></div>
     <div class="llist">${rows}</div>`;
 }
