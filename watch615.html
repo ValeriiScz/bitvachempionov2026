@@ -1,4 +1,4 @@
-<!-- DOVOD · watch615.html · v3.1 · 2026-11-05 · смотровая Four Seasons: Black Circle 2026 (Брюссель, 7–8.11, 3 стола) — копия канона watch687 v3.1: смена стола без пересоздания плеера, звук кнопкой, «⏭ все в лайв», ссылки на страницу турнира, общий «мой игрок». Предыдущая v1.0 (копия watch692) — в истории git. -->
+<!-- DOVOD · watch615.html · v3.2 · 2026-11-06 · тема Black Circle (фиолетовый, серебро Cinzel) · v3.1 · 2026-11-05 · смотровая Four Seasons: Black Circle 2026 (Брюссель, 7–8.11, 3 стола) — копия канона watch687 v3.1: смена стола без пересоздания плеера, звук кнопкой, «⏭ все в лайв», ссылки на страницу турнира, общий «мой игрок». Предыдущая v1.0 (копия watch692) — в истории git. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Смотровая · Black Circle 2026 — DOVOD</title>
@@ -6,14 +6,14 @@
 <link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/icons/icon-180.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#05060a">
+<meta name="theme-color" content="#040308">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="DOVOD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Unbounded:wght@700;900&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#05060a;--panel:#0b0d14;--panel2:#11141d;--ink:#eef3fb;--mut:#79808f;--dim:#4c5260;--line:rgba(255,255,255,.10);
   --cyan:#26e0ff;--yel:#f5ff35;--lil:#c14bbd;--red:#db514e;--grn:#5ee08a;
@@ -21,7 +21,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{max-width:100%;overflow-x:hidden}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 Inter,-apple-system,system-ui,sans-serif;min-height:100vh;
-  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),radial-gradient(900px 500px at 80% -10%,rgba(38,224,255,.10),transparent 60%),radial-gradient(700px 400px at -10% 110%,rgba(193,75,189,.10),transparent 60%);
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),radial-gradient(900px 500px at 80% -10%,rgba(157,92,255,.10),transparent 60%),radial-gradient(700px 400px at -10% 110%,rgba(193,75,189,.10),transparent 60%);
   background-size:44px 44px,44px 44px,auto,auto;background-attachment:fixed}
 a{color:var(--cyan)}
 button{font:inherit;color:inherit}
@@ -50,7 +50,7 @@ button{font:inherit;color:inherit}
 .sday .sh{margin-left:auto;font-size:11px}@media(max-width:520px){.sday .sh{display:none}}
 .sday button.on{border-color:#c14bbd;color:#fff;background:rgba(193,75,189,.25)}
 .pl.studio .lab span:first-child{border-color:rgba(193,75,189,.6);color:#f0c4ee}
-.modes button.on{border-color:var(--cyan);color:var(--cyan);background:rgba(38,224,255,.10);box-shadow:0 0 0 1px rgba(38,224,255,.25) inset}
+.modes button.on{border-color:var(--cyan);color:var(--cyan);background:rgba(157,92,255,.10);box-shadow:0 0 0 1px rgba(157,92,255,.25) inset}
 /* сцена */
 .stagebox{position:sticky;top:0;z-index:30;background:var(--bg);padding:0 0 8px}
 @media (min-width:1025px){.stagebox{position:static}}
@@ -58,7 +58,7 @@ button{font:inherit;color:inherit}
 .pl{--hd:28px;position:relative;width:100%;height:0;padding-top:calc(56.25% + var(--hd));background:#05060a;overflow:hidden}
 .pl iframe{position:absolute;left:0;right:0;bottom:0;top:var(--hd);width:100%;height:calc(100% - var(--hd));border:0}
 .pl .ph{position:absolute;inset:var(--hd) 0 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px;
-  background:radial-gradient(80% 80% at 50% 0%,rgba(38,224,255,.12),transparent 70%),#06080e;color:var(--mut);font-size:13px}
+  background:radial-gradient(80% 80% at 50% 0%,rgba(157,92,255,.12),transparent 70%),#06080e;color:var(--mut);font-size:13px}
 .pl .ph b{font:900 15px/1.2 var(--disp);color:var(--ink);text-transform:uppercase}
 .pl .ph a{display:inline-block;padding:9px 14px;border-radius:9px;border:1px solid var(--cyan);color:var(--cyan);text-decoration:none;font-weight:800}
 .pl .lab{position:absolute;left:6px;top:3px;z-index:2;display:flex;gap:6px;align-items:center;pointer-events:none}
@@ -78,7 +78,7 @@ button{font:inherit;color:inherit}
 .tabs button{position:relative;padding:9px 4px 8px;border-radius:10px;border:1px solid var(--line);background:var(--panel);cursor:pointer;text-align:center;min-width:0}
 .tabs button .n{display:block;font:900 14px/1 var(--disp)}
 .tabs button .s{display:block;margin-top:4px;font:600 10px/1.2 var(--mono);color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tabs button.on{border-color:var(--cyan);background:rgba(38,224,255,.12)} .tabs button.on .n{color:var(--cyan)}
+.tabs button.on{border-color:var(--cyan);background:rgba(157,92,255,.12)} .tabs button.on .n{color:var(--cyan)}
 .tabs button .me{position:absolute;top:-6px;right:-4px;font:800 9px/1 Inter;background:var(--yel);color:#05060a;border-radius:6px;padding:3px 5px}
 .tabs button .dot{position:absolute;top:6px;left:6px;width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 6px var(--red)}
 .tabs button.off{opacity:.45}
@@ -161,7 +161,7 @@ button{font:inherit;color:inherit}
 .pl .shot{position:absolute;left:0;right:0;bottom:0;top:var(--hd);background:#06080e center/cover no-repeat}
 .pl .shot .sh-i{position:absolute;left:6px;bottom:6px;font:700 9.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;background:rgba(5,6,10,.78);border:1px solid var(--line);padding:4px 6px;border-radius:6px;color:var(--mut)}
 .pl .shot .sh-p{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:26px;color:rgba(255,255,255,.85);text-shadow:0 2px 10px rgba(0,0,0,.7)}
-.pl .shot.none{display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-size:11px;color:var(--mut);background:radial-gradient(80% 80% at 50% 0%,rgba(38,224,255,.10),transparent 70%),#06080e}
+.pl .shot.none{display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-size:11px;color:var(--mut);background:radial-gradient(80% 80% at 50% 0%,rgba(157,92,255,.10),transparent 70%),#06080e}
 /* телефон вертикально: главный во всю ширину + ряд мини */
 @media (orientation:portrait) and (max-width:1024px){
   .multi.nn{grid-template-columns:repeat(var(--mini),minmax(0,1fr));gap:4px}
@@ -184,6 +184,12 @@ button{font:inherit;color:inherit}
   .multi.nn.row{grid-template-columns:repeat(var(--cols),minmax(0,1fr))}
   .multi.nn.row .pl.main{order:-1}
 }
+/* v3.2 (06.11.2026): тема «Black Circle» по заставкам MAFGAME — фиолетовый акцент, серебро Cinzel в заголовке */
+:root{--cyan:#a774ff;--bg:#040308;--panel:#0b0812;--panel2:#130d1f;--line:rgba(157,92,255,.18);}
+body{background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px),radial-gradient(900px 500px at 80% -10%,rgba(120,60,230,.16),transparent 60%),radial-gradient(700px 400px at -10% 110%,rgba(90,40,200,.10),transparent 60%);background-size:44px 44px,44px 44px,auto,auto;}
+.hd h1{font-family:'Cinzel',Georgia,serif;font-weight:700;letter-spacing:.04em;}
+.hd h1 b{background:linear-gradient(180deg,#fff,#cfd3dc 45%,#7d8190 60%,#e9ecf2);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.layout .eco button.on{color:#0b0812;}
 </style>
 <style id="dvcrumbcss">
 .dv-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;margin:0;
@@ -470,7 +476,7 @@ function renderStatus(){
   const started=D.games.some(g=>g.tables.some(x=>x.winner!=='unknown'));
   const pre=t.start_iso&&Date.now()<new Date(t.start_iso).getTime(); /* v1.3: в день старта до 10:15 — не LIVE */
   const live=D.live&&!t.closed&&!pre;
-  document.getElementById('status').innerHTML=`${live?'<span class="live">live</span>':started?'':(pre&&new Date().toDateString()===new Date(t.start_iso).toDateString()?'<span>сегодня · старт '+new Date(t.start_iso).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Nicosia'})+'</span>':'<span>скоро · старт 31.10</span>')}<span><b>${esc(gLabel(gi))}</b></span><span>${D.games[gi]&&D.games[gi].stage==='Финал'?'финал':D.games[gi]&&D.games[gi].stage==='Полуфинал'?'полуфинал':'квалификация'}</span><span>обновлено ${D.updated?D.updated.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):'—'}</span>`;
+  document.getElementById('status').innerHTML=`${live?'<span class="live">live</span>':started?'':(pre&&new Date().toDateString()===new Date(t.start_iso).toDateString()?'<span>сегодня · старт '+new Date(t.start_iso).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Brussels'})+'</span>':'<span>скоро · старт '+(t.start_iso?new Date(t.start_iso).toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',timeZone:'Europe/Brussels'}):'—')+'</span>')}<span><b>${esc(gLabel(gi))}</b></span><span>${D.games[gi]&&D.games[gi].stage==='Финал'?'финал':D.games[gi]&&D.games[gi].stage==='Полуфинал'?'полуфинал':'квалификация'}</span><span>обновлено ${D.updated?D.updated.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):'—'}</span>`;
   document.getElementById('testbar').innerHTML=st&&st.test?`<div class="testbar">Тест: сейчас в окнах записи прошлого турнира — проверьте, как это выглядит. Настоящие эфиры MGP встанут сюда перед стартом.</div>`:'';
   document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));
   document.querySelectorAll('#layout .lay button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.layout));

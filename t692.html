@@ -945,7 +945,7 @@ function closeSheet(){const pm=document.getElementById('sheet');if(pm)pm.classLi
 function renderTop(){
   const t=D.tour,m=D.meta;
   const eloVals=D.players.map(p=>num(p.r_elo_cur)).filter(v=>v!=null);
-  const eloAvg=eloVals.length?Math.round(eloVals.reduce((a,b)=>a+b,0)/eloVals.length):null;
+  const eloAvg=eloVals.length?Math.round(eloVals.reduce((a,b)=>a+b,0)/eloVals.length):null;const mmrVals=D.players.map(p=>num(p.r_ms_mmr)).filter(v=>v!=null);const mmrAvg=mmrVals.length?Math.round(mmrVals.reduce((a,b)=>a+b,0)/mmrVals.length):null;
   const started=(D.gp||t.games_played||0)>0;
   document.getElementById('topband').innerHTML=`
     <div class="poster dvposter"><div class="dvp"><div class="dvk">DOVOD · Four Seasons</div><div class="dvt">Central<br><b>Cup</b></div><div class="dvy">2026</div><div class="dvs">Прага · 17–18.10 · 4★</div></div></div>
@@ -953,7 +953,7 @@ function renderTop(){
       <div class="meta">${CFG.dates} · ${CFG.place} · ${D.players.length} игроков · ${CFG.tables} стола</div>
       <div class="chips">
         <span class="chip">Формат <b>${CFG.fmt}</b></span>
-        <span class="chip">Ср. ELO <b>${eloAvg!=null?eloAvg:'—'}</b> · markery</span>
+        <span class="chip">Ср. ELO <b>${eloAvg!=null?eloAvg:'—'}</b> · markery</span>${mmrAvg!=null?`<span class="chip">Ср. MMR <b>${mmrAvg}</b> · mafiastats</span>`:''}
         <span class="chip ${started&&!t.closed?'live':''}">${t.closed?'завершён · '+t.games_total+' игр':started?'● идёт · игра '+(D.gp||t.games_played)+'/'+t.games_total:CFG.startLab}</span>
       </div><a class="wbig" href="${CFG.watch}"><span class="wi">▶</span><span>Смотровая — все эфиры столов<br><small>три стола в одном окне · следить за игроком</small></span></a><a class="wstu" href="#sched" onclick="show('sched');return false" style="border-color:rgba(38,224,255,.45);color:#7fd8ff;background:rgba(38,224,255,.06);margin-right:6px">⏱ Расписание · план и факт</a><a class="wstu" href="${CFG.watch}#studio">🎙 Студия аналитики — разбор с комментаторами, для зрителей</a>${started?'':'<div class="cdown" id="cdown"></div>'}</div>`;
   if(!started)tick();
@@ -994,12 +994,12 @@ const RENDER={
   overview(){
     const t=D.tour,m=D.meta,tc=D.stats.tiers||{};
     const eloVals=D.players.map(p=>num(p.r_elo_cur)).filter(v=>v!=null);
-    const eloAvg=eloVals.length?Math.round(eloVals.reduce((a,b)=>a+b,0)/eloVals.length):null;
+    const eloAvg=eloVals.length?Math.round(eloVals.reduce((a,b)=>a+b,0)/eloVals.length):null;const mmrVals=D.players.map(p=>num(p.r_ms_mmr)).filter(v=>v!=null);const mmrAvg=mmrVals.length?Math.round(mmrVals.reduce((a,b)=>a+b,0)/mmrVals.length):null;
     const stats=`<div class="stats">
       <div class="stat"><div class="k">Формат</div><div class="v">${CFG.fmt}<small> игр</small></div></div>
       <div class="stat"><div class="k">Игроков</div><div class="v">${D.players.length}<small> · по 10 игр из 11</small></div></div>
       <div class="stat"><div class="k">Столов</div><div class="v">${CFG.tables}<small> · ${CFG.tables*10} мест</small></div></div>
-      <div class="stat"><div class="k">Ср. ELO</div><div class="v">${eloAvg!=null?eloAvg:'—'}<small> markery</small></div></div>
+      <div class="stat"><div class="k">Ср. ELO</div><div class="v">${eloAvg!=null?eloAvg:'—'}<small> markery</small></div></div>${mmrAvg!=null?`<div class="stat"><div class="k">Ср. MMR</div><div class="v">${mmrAvg}<small> mafiastats</small></div></div>`:''}
       <div class="stat"><div class="k">Звёзд</div><div class="v">${t.stars||4}<small> ★ mafgame</small></div></div></div>`;
     const jcard=(j,lab)=>`<div class="judge">${j.avatar?`<img src="${esc(j.avatar)}" referrerpolicy="no-referrer" onerror="this.style.display='none'">`:`<span class="jmono">${esc(mono(j.name))}</span>`}<div><div class="jn">${lab} · <b>${esc(j.name)}</b>${j.role?` <span class="jrole">${esc(j.role)}</span>`:''}</div>${j.tg?`<div class="jt"><a class="lnk" style="margin:0" href="https://t.me/${esc(j.tg.replace('@',''))}" target="_blank" rel="noopener">${esc(j.tg)}</a></div>`:''}</div></div>`;
     const jud=(!Object.keys(D.judges).length&&D.refs&&D.refs.length)?`<div class="panel"><h3>Судейская бригада</h3><div class="judges">`+D.refs.map(j=>jcard({name:j.name,avatar:j.avatar,role:j.main?'Главный судья':''},j.main?'ГС':'Судья')).join('')+`</div><div class="note" style="margin-top:8px">Кто судит какой стол — появится в протоколах mafgame в день турнира.</div></div>`:Object.keys(D.judges).length?`<div class="panel"><h3>Судейская бригада</h3><div class="judges">`+
