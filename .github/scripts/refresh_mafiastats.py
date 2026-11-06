@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_mafiastats · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
+refresh_mafiastats · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
 Назначение: подтянуть единый рейтинг MMR с mafiastats.com (открытый API, без ключей)
 для игроков сайта DOVOD — без участия человека. Запускается GitHub Actions
 (.github/workflows/refresh-mafiastats.yml).
@@ -158,7 +158,8 @@ def mmr_ladder():
     try:
         cal = json.load(io.open(os.path.join(BASE, 'data', 'research', 'mmr_tiers.json'), encoding='utf-8'))
         th = {t: int(v) for t, v in cal['thresholds'].items()}
-        return {'thresholds': th, 'sample': cal.get('sample', {}).get('entries'), 'shares': {}, 'exact': 0, 'within1': 0, 'method': 'final-chance v' + str(cal.get('version'))}
+        per = {tid: {t: int(v) for t, v in cal['variants'][var]['thresholds'].items()} for tid, var in (cal.get('apply') or {}).items() if var in (cal.get('variants') or {})}
+        return {'thresholds': th, 'per': per, 'sample': cal.get('sample', {}).get('entries'), 'shares': {}, 'exact': 0, 'within1': 0, 'method': 'final-chance v' + str(cal.get('version'))}
     except Exception:
         pass
     pairs = {}
@@ -197,9 +198,10 @@ def apply_mmr_tiers():
         raw = io.open(f, encoding='utf-8').read()
         try: d = json.loads(raw)
         except Exception: continue
+        tid = re.sub(r'\D', '', os.path.basename(f)); thf = (lad.get('per') or {}).get(tid, th)   # v1.3: тестовая шкала для отдельных турниров
         for p in d.get('players') or []:
-            p['r_ms_tier'] = mmr_tier(p.get('r_ms_mmr'), th)
-        d.setdefault('meta', {})['ms_ladder'] = th
+            p['r_ms_tier'] = mmr_tier(p.get('r_ms_mmr'), thf)
+        d.setdefault('meta', {})['ms_ladder'] = thf
         new = json.dumps(d, ensure_ascii=False, indent=1)
         if new.strip() != raw.strip(): io.open(f, 'w', encoding='utf-8').write(new + '\n')
     log('тир MMR: пороги %s · выборка %d · совпало с markery %d, ±1 тир %d' % (th, lad['sample'], lad['exact'], lad['within1']))
