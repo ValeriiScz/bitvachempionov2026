@@ -1,2 +1,2 @@
 /* meta.js — даты, которые показываются в подвалах. ratingUpdated и D.top50 календаря обновляет робот rebuild-race (update_top50.py) раз в неделю. */
-window.SITE = { ratingUpdated: '07.11.2026', calendarSnapshot: '07.11.2026' };
+window.SITE = { ratingUpdated: '07.11.2026', calendarSnapshot: '08.11.2026' };
