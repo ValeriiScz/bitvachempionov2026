@@ -1,4 +1,4 @@
-<!-- DOVOD · watch664.html · v1.0 · 2026-11-09 · смотровая финала GMC 2026 (Кёльн, 4 стола, 18 игр) — копия watch615 v3.2, тема GMC · основа: watch615 v3.2 · 2026-11-06 · тема Black Circle · v3.1 · 2026-11-05 · смотровая Four Seasons: Black Circle 2026 (Брюссель, 7–8.11, 3 стола) — копия канона watch687 v3.1: смена стола без пересоздания плеера, звук кнопкой, «⏭ все в лайв», ссылки на страницу турнира, общий «мой игрок». Предыдущая v1.0 (копия watch692) — в истории git. -->
+<!-- DOVOD · watch664.html · v1.1 · 2026-11-09 · без финального стола: нет линии топ‑N в таблице · v1.0 · 2026-11-09 · смотровая финала GMC 2026 (Кёльн, 4 стола, 18 игр) — копия watch615 v3.2, тема GMC · основа: watch615 v3.2 · 2026-11-06 · тема Black Circle · v3.1 · 2026-11-05 · смотровая Four Seasons: Black Circle 2026 (Брюссель, 7–8.11, 3 стола) — копия канона watch687 v3.1: смена стола без пересоздания плеера, звук кнопкой, «⏭ все в лайв», ссылки на страницу турнира, общий «мой игрок». Предыдущая v1.0 (копия watch692) — в истории git. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Смотровая · GMC 2026 финал — DOVOD</title>
@@ -470,7 +470,7 @@ function setFollow(n){S.follow=n||null;LS.set(CFG.ls+'my',S.follow);LS.set('w664
 function renderTop(){
   const el=document.getElementById('topP');const R=D.rows||[];
   if(!R.length){el.innerHTML=`<div class="panel"><h3>Таблица</h3><div class="note" style="margin:0">Появится после первого сыгранного стола.</div></div>`;return;}
-  el.innerHTML=`<div class="panel"><h3>Таблица · топ‑12<small>Σ · сыграно игр: ${D.played}</small></h3><table class="top">${R.slice(0,12).map((r,i)=>`<tr class="${i===CFG.finalN?'cut':''}${r.n===S.follow?' me':''}"><td class="n">${i+1}</td><td>${esc(r.n)}</td><td class="v">${r.s.toFixed(2)}</td></tr>`).join('')}</table><div class="note">Пунктир — линия выхода в финал (топ‑${CFG.finalN}). Неофициальный пересчёт по протоколам; полная таблица — <a href="${CFG.page}#stages">на странице турнира</a>.</div></div>`;
+  el.innerHTML=`<div class="panel"><h3>Таблица · топ‑12<small>Σ · сыграно игр: ${D.played}</small></h3><table class="top">${R.slice(0,12).map((r,i)=>`<tr class="${CFG.finalN&&i===CFG.finalN?'cut':''}${r.n===S.follow?' me':''}"><td class="n">${i+1}</td><td>${esc(r.n)}</td><td class="v">${r.s.toFixed(2)}</td></tr>`).join('')}</table><div class="note">${CFG.finalN?'Пунктир — линия выхода в финал (топ‑'+CFG.finalN+'). ':'Финального стола нет — место по сумме баллов за 18 игр. '}Неофициальный пересчёт по протоколам; полная таблица — <a href="${CFG.page}#stages">на странице турнира</a>.</div></div>`;
 }
 function renderStatus(){
   const st=SDB();const gi=D.cur;const t=D.tour;

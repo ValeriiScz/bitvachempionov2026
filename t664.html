@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t664.html · v1.0 · 2026-11-09 · финал German Mafia Cup Europa Edition 2026 (Кёльн, 14–15.11, 40 игроков, 18 игр, 4 стола): страница на движке t615 v1.11, тема GMC (чёрный/красный/золото), вкладка «Дорога в Кёльн» (gmc664.html?embed=1) в группе «Обзор»
+<!-- DOVOD · t664.html · v1.1 · 2026-11-09 · без финального стола: прогноз — шансы на места (победа/топ‑3/топ‑10/ср. место), формат «18 игр» · v1.0 · 2026-11-09 · финал German Mafia Cup Europa Edition 2026 (Кёльн, 14–15.11, 40 игроков, 18 игр, 4 стола): страница на движке t615 v1.11, тема GMC (чёрный/красный/золото), вкладка «Дорога в Кёльн» (gmc664.html?embed=1) в группе «Обзор»
      Данные: data/*_615* (участники и ELO markery снимок 26.10; игры — live с mafgame в дни турнира через live.js). Эфиры — watch664.html. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1071,11 +1071,11 @@ function plink(name){return `<span class="plink" data-p="${esc(name)}" onclick="
 function goPlayer(name){curPlayer=name;show('my');}
 function fullToggle(){return '<span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Таблица:</span><span class="seg"><button class="'+(statFull?'':'on')+'" onclick="setFull(0)">Компактно</button><button class="'+(statFull?'on':'')+'" onclick="setFull(1)">Подробно</button></span>';}
 function setFull(v){statFull=!!v;show(cur);}
-function statsEmpty(t){return `<div class="view"><div class="secttl">${t}</div><div class="panel"><div class="stub"><div class="si">&#9203;</div><h3>Результатов пока нет</h3><p>Появится после первого сыгранного стола (${CFG.startShort}). Чтобы проверить сейчас — включите режим <b>Демо</b> на вкладке «Обзор»: все игры заполнятся случайными результатами (полный турнир: квалификация → финал).</p><button class="btn" onclick="show('overview')">← К обзору</button></div></div></div>`;}
+function statsEmpty(t){return `<div class="view"><div class="secttl">${t}</div><div class="panel"><div class="stub"><div class="si">&#9203;</div><h3>Результатов пока нет</h3><p>Появится после первого сыгранного стола (${CFG.startShort}). Чтобы проверить сейчас — включите режим <b>Демо</b> на вкладке «Обзор»: все игры заполнятся случайными результатами (все 18 игр).</p><button class="btn" onclick="show('overview')">← К обзору</button></div></div></div>`;}
 function demoPanel(){return `<div class="panel"><div class="demobar">
     <span style="font-weight:800;font-size:12.5px;color:var(--gold-hi)">Данные:</span>
     <span class="seg"><button class="${D.demo?'':'on'}" onclick="setDemo(false)">Онлайн</button><button class="${D.demo?'on':''}" onclick="setDemo(true)">Демо</button></span>
-    ${D.demo?'<span class="demoflag">● демо: случайный полный турнир ('+CFG.quals+' квал → топ‑'+CFG.finalN+' финал ×'+CFG.finals+') — для проверки статистики</span>':'<span class="note" style="margin:0">Онлайн — только реальные данные с mafgame (сыграно игр: '+(D.gp||0)+').</span>'}
+    ${D.demo?'<span class="demoflag">● демо: случайный полный турнир ('+CFG.quals+' игр, без финального стола) — для проверки статистики</span>':'<span class="note" style="margin:0">Онлайн — только реальные данные с mafgame (сыграно игр: '+(D.gp||0)+').</span>'}
   </div></div>`;}
 function setDemo(on){D.demo=!!on;D.games=on?makeDemo():(D.realGames||[]);stStage='all';stGame=0;gmRound=0;curPlayer=null;computeSeating();computeStats();renderTop();show(cur);}
 function setMy(v){myPlayer=v||null;try{if(myPlayer)localStorage.setItem(CFG.ls+'my',myPlayer);else localStorage.removeItem(CFG.ls+'my');}catch(e){}if(myPlayer)curPlayer=myPlayer;show(cur);}
@@ -1137,6 +1137,7 @@ function afterStats(id){if(id==='stages')paintStages();else if(id==='games')init
 /* ── Таблица ── */
 function cutAfter(scope){
   const stgs=scope.map(g=>g.stage||'Квалификация');
+  if(!CFG.finalN)return null; /* t664: без финального стола — линии нет */
   if(stgs.includes('Финал'))return null;
   if(stgs.includes('Полуфинал'))return {n:CFG.finalN,lab:'выше линии — финал (топ‑'+CFG.finalN+')'};
   return {n:CFG.finalN,lab:'выше линии — финал (топ‑'+CFG.finalN+')'};
@@ -1237,7 +1238,7 @@ function secListPanel(){
   const live=(D.played||0)>0,done=!!(D.tour&&D.tour.closed);
   const SEC=id=>SECTIONS.find(x=>x.id===id)||{};
   const top=done?[['stages','⚑','Итоги','места и баллы'],['games','▶','Все игры','кто как сыграл'],['roles','✦','По ролям','лучшие в каждой роли']]
-    :live?[['stages','⚑','Таблица','кто идёт в финал'],['streams','▶','Трансляции','все столы в эфире'],['my','♟','Мой игрок','следующая игра и стол']]
+    :live?[['stages','⚑','Таблица','места по сумме баллов'],['streams','▶','Трансляции','все столы в эфире'],['my','♟','Мой игрок','следующая игра и стол']]
     :seat?[['my','♟','Найти себя','ваш стол в каждой игре'],['seating','▦','Рассадка','все столы по играм'],['streams','▶','Трансляции','ссылки на эфиры']]
     :[['roster','≡','Кто играет','состав и ELO'],['schedule','◷','Расписание','когда и во сколько'],['streams','▶','Трансляции','ссылки на эфиры']];
   const big=top.map(([id,ic,t,d])=>`<button class="qk" onclick="show('${id}')"><span class="qi">${ic}</span><b>${t}</b><small>${d}</small></button>`).join('');
@@ -1259,9 +1260,9 @@ function resultsPanel(){
     return `<div class="awc${k==='most_valuable_players'?' mvp':''}"><div class="awh"><i>${AWI[k]||'★'}</i>${AWL[k]||k}</div>${items}</div>`;}).join(''):'';
   return `<div class="panel"><h3>🏆 Итоги турнира</h3>${wins}${top?`<div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,206,0,.12)">${top}</div>`:''}${t.reconciliation?`<div class="note" style="margin-top:8px">✓ ${esc(t.reconciliation)}</div>`:''}${aw?`<div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,206,0,.12)"><div style="font-size:10.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim)">Номинации</div><div class="awg">${aw}</div></div>`:''}${t.awards_note?`<div class="note" style="margin-top:8px">${esc(t.awards_note)}</div>`:''}</div>`;
 }
-function stagesPanel(){ /* t664: финал GMC — одна стадия, 18 игр на каждого (регламент mafgame 664: «каждый участник принимает участие в 18 играх») */
-  return `<div class="panel"><h3>Формат: одна стадия</h3><div class="stages">
-    <div class="stage"><span class="sbadge">${CFG.startLab}</span><div class="sn">Финал</div><div class="sg">${CFG.quals} игр · ${CFG.tables} стола · играют все</div><div class="sd">Все ${D.players.length} финалистов играют каждую игру, за два дня по ${CFG.quals} игр на человека. Победитель — по сумме баллов. Точную схему рассадки опубликует mafgame.</div></div></div></div>`;}
+function stagesPanel(){ /* t664: финал GMC — одна стадия без финального стола, 18 игр на каждого (регламент mafgame 664; в 2025 финал 277 — тоже 18 игр у всех) */
+  return `<div class="panel"><h3>Формат: 18 игр, без финального стола</h3><div class="stages">
+    <div class="stage"><span class="sbadge">${CFG.startLab}</span><div class="sn">18 игр на каждого</div><div class="sg">${CFG.quals} игр · ${CFG.tables} стола · играют все</div><div class="sd">Все ${D.players.length} финалистов играют каждую игру, за два дня по ${CFG.quals} игр на человека. Финального стола нет: место и победитель — по сумме баллов за все 18 игр (так же играли финал GMC 2025). Точную схему рассадки опубликует mafgame.</div></div></div></div>`;}
 
 const JD_HASH='2ff1e3f51de1d12a2ec8f86fe71b135c817c77956160e7ee8d703e56a7788ae3'; /* sha256 пароля раздела «Судьи» (выдаёт Валерий) */
 function jdUnlocked(){try{return localStorage.getItem(CFG.ls+'jd')==='ok';}catch(e){return false}}
@@ -1275,20 +1276,20 @@ function afterRender(id){if(id==='cards')initCards();else if(id==='strength')pai
 
 /* v1.5 (06.11.2026): «Прогноз · шансы» — модель по MMR (data/research/mmr_tiers.json, mmr_calibrate.py):
    сила θ = β·(MMR−1500)/100, места = θ + шум Гумбеля (Plackett–Luce); 20 000 розыгрышей этого состава.
-   Шанс финала = попасть в топ‑10 по итогам; победа = 1‑е место. Коэффициент = 1/шанс (честный, без маржи). Рассадку пока не учитываем. */
+   t664 (09.11): у GMC нет финала — 18 игр, место по сумме; считаем шансы на места: победа, топ‑3, топ‑10 и среднее место. Коэффициент = 1/шанс (честный, без маржи). Рассадку пока не учитываем. */
 let FC=null;
 async function paintForecast(){const el=document.getElementById('fcPanel');if(!el)return;
   try{if(!FC)FC=await fetch('data/research/mmr_tiers.json').then(r=>r.json());}catch(e){el.innerHTML='<div class="note">Модель не загрузилась.</div>';return;}
   const b=FC.beta,miss=FC.miss||1350,ps=D.players.slice(),n=ps.length,S=20000;
-  const th=ps.map(p=>b*((num(p.r_ms_mmr)||miss)-1500)/100);const fin=new Float64Array(n),t5=new Float64Array(n),win=new Float64Array(n);
+  const th=ps.map(p=>b*((num(p.r_ms_mmr)||miss)-1500)/100);const fin=new Float64Array(n),t5=new Float64Array(n),win=new Float64Array(n),msum=new Float64Array(n);
   const perf=new Float64Array(n),idx=[...Array(n).keys()];
   for(let s=0;s<S;s++){for(let i=0;i<n;i++)perf[i]=th[i]-Math.log(-Math.log(Math.random()));idx.sort((a,c)=>perf[c]-perf[a]);
-    for(let k=0;k<10;k++){fin[idx[k]]++;if(k<5)t5[idx[k]]++;}win[idx[0]]++;}
-  const rows=ps.map((p,i)=>({p,f:fin[i]/S,t:t5[i]/S,w:win[i]/S})).sort((a,c)=>c.w-a.w||c.f-a.f);
+    for(let k=0;k<n;k++){msum[idx[k]]+=k+1;if(k<10)fin[idx[k]]++;if(k<3)t5[idx[k]]++;}win[idx[0]]++;}
+  const rows=ps.map((p,i)=>({p,f:fin[i]/S,t:t5[i]/S,w:win[i]/S,m:msum[i]/S})).sort((a,c)=>a.m-c.m);
   const pc=x=>x>=.995?'>99%':x<.005?'<1%':Math.round(x*100)+'%';const od=x=>x<=0?'—':(1/x>=100?'100+':(1/x).toFixed(2));
   const bar=x=>`<span style="display:inline-block;width:${Math.round(x*60)}px;height:6px;border-radius:3px;background:var(--gold);vertical-align:middle;margin-right:6px;opacity:.85"></span>`;
-  el.innerHTML=`<div class="note" style="margin:0 0 10px">Шансы считаются по MMR (<a class="lnk" style="margin:0" href="https://mafiastats.com" target="_blank" rel="noopener">mafiastats</a>) — модель обучена на ${FC.sample.tournaments} рейтинговых турнирах mafgame с сентября 2025 (${FC.sample.entries} результатов). Проверка на отложенных ${FC.holdout.test} турнирах: прогноз точнее, чем «у всех равные шансы». <b>Коэффициент</b> — честный, 1/шанс, без маржи. Рассадку пока не учитываем; после турнира сравним прогноз с итогом.</div>
-  <div class="scrollT"><table class="tbl full"><thead><tr><th class="l">Игрок</th><th>Тир</th><th>MMR</th><th>Финал</th><th>Топ‑5</th><th>Победа</th><th>Коэф. на победу</th></tr></thead><tbody>${rows.map((r,i)=>`<tr class="rrow${r.p.nick===myPlayer?' me':''}" data-p="${esc(r.p.nick)}"><td class="l"><div class="pl"><span class="num">${i+1}</span>${avatarCell(r.p,r.p.r_ms_tier)}<span class="pl-nick">${esc(r.p.nick)}</span></div></td><td>${(r.p.r_ms_tier in TIER_ORD)?`<span class="tpill tp-${r.p.r_ms_tier}">${r.p.r_ms_tier}</span>`:'—'}</td><td><span class="rnum">${num(r.p.r_ms_mmr)!=null?Math.round(r.p.r_ms_mmr):'—'}</span></td><td style="text-align:left">${bar(r.f)}${pc(r.f)}</td><td>${pc(r.t)}</td><td>${pc(r.w)}</td><td><span class="rnum">${od(r.w)}</span></td></tr>`).join('')}</tbody></table></div>
+  el.innerHTML=`<div class="note" style="margin:0 0 10px">Шансы считаются по MMR (<a class="lnk" style="margin:0" href="https://mafiastats.com" target="_blank" rel="noopener">mafiastats</a>) — модель обучена на ${FC.sample.tournaments} рейтинговых турнирах mafgame с сентября 2025 (${FC.sample.entries} результатов). Проверка на отложенных ${FC.holdout.test} турнирах: прогноз точнее, чем «у всех равные шансы». <b>Коэффициент</b> — честный, 1/шанс, без маржи. Финала у GMC нет: все играют по 18 игр, место — по сумме баллов, поэтому здесь шансы на место, а не на выход в финал. Рассадку пока не учитываем; после турнира сравним прогноз с итогом.</div>
+  <div class="scrollT"><table class="tbl full"><thead><tr><th class="l">Игрок</th><th>Тир</th><th>MMR</th><th>Ср. место</th><th>Топ‑10</th><th>Топ‑3</th><th>Победа</th><th>Коэф. на победу</th></tr></thead><tbody>${rows.map((r,i)=>`<tr class="rrow${r.p.nick===myPlayer?' me':''}" data-p="${esc(r.p.nick)}"><td class="l"><div class="pl"><span class="num">${i+1}</span>${avatarCell(r.p,r.p.r_ms_tier)}<span class="pl-nick">${esc(r.p.nick)}</span></div></td><td>${(r.p.r_ms_tier in TIER_ORD)?`<span class="tpill tp-${r.p.r_ms_tier}">${r.p.r_ms_tier}</span>`:'—'}</td><td><span class="rnum">${num(r.p.r_ms_mmr)!=null?Math.round(r.p.r_ms_mmr):'—'}</span></td><td><span class="rnum">${r.m.toFixed(1)}</span></td><td style="text-align:left">${bar(r.f)}${pc(r.f)}</td><td>${pc(r.t)}</td><td>${pc(r.w)}</td><td><span class="rnum">${od(r.w)}</span></td></tr>`).join('')}</tbody></table></div>
   <div class="note">${(()=>{const V=(FC.apply&&FC.apply[CFG.id]&&FC.variants)?FC.variants[FC.apply[CFG.id]]:null;const TH=V?V.thresholds:FC.thresholds,LV=V?V.levels:FC.levels;return `Тиры по MMR = шанс выйти в финал на типичном турнире (30 игроков, соперники уровня обычного 4★)${V?' — <b>тестовая строгая шкала</b>':''}: `+Object.entries(LV).map(([t,v])=>t+' ≥'+Math.round(v*100)+'%').join(' · ')+' · F меньше. Пороги MMR: '+Object.entries(TH).map(([t,v])=>t+' '+v).join(' · ')+'.';})()}</div>`;
   el.querySelectorAll('tr.rrow').forEach(tr=>tr.onclick=()=>goPlayer(tr.dataset.p));}
 /* roster · v2 (05.11.2026): переключатель MMR / ELO вместо «компактно/подробно». MMR — mafiastats.com, тир по нашей линейке (D.meta.ms_ladder);
@@ -1408,7 +1409,7 @@ function nextGamePanel(nick,compact){
   const nx=nextOccOf(nick);
   if(!nx){
     if(played<CFG.quals)return '';
-    return `<div class="panel nextg"><h3>${compact?'Ваша следующая игра':'Следующая игра'}</h3><div class="note" style="margin:0">Квалификация сыграна. Рассадка финала появится после посева стадии на mafgame.</div></div>`;
+    return `<div class="panel nextg"><h3>${compact?'Ваша следующая игра':'Следующая игра'}</h3><div class="note" style="margin:0">Все 18 игр сыграны.</div></div>`;
   }
   const names=((D.seatByGame[nx.g]||{})[nx.t])||[];
   const opp=names.filter(n=>n&&n!==nick);
