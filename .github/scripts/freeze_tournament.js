@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* DOVOD · .github/scripts/freeze_tournament.js · v1.0 · 2026-11-09
+/* DOVOD · .github/scripts/freeze_tournament.js · v1.1 · 2026-11-09 (Ci: допуск на округление протоколов mafgame) · v1.0 · 2026-11-09
    Назначение: закрытие турнира по регламенту README («Как ЗАКРЫВАТЬ турнир») одной командой в GitHub Actions
    (у раннера прямой доступ к mafgame.org; из облачной сессии Claude mafgame закрыт).
 
@@ -59,22 +59,29 @@ async function page(p) {
   const nick = {}; for (const k in G.seats) nick[G.seats[k].player_id] = G.seats[k].original_nickname;
   const stages = Object.keys(R.rating.results).filter(own).map(Number).sort((a, b) => a - b);
   const sumBy = (pred) => { const P = {}; conv.games.forEach(g => { if (!pred(g)) return; g.tables.forEach(t => t.seats.forEach(s => {
-    const p = P[s.name] || (P[s.name] = { s: 0, w: 0, n: 0 }); p.s += s.wpts + s.aps + s.ci; p.n++; if (s.result === 'W') p.w++; })); }); return P; };
+    const p = P[s.name] || (P[s.name] = { s: 0, c: 0, k: 0, w: 0, n: 0 }); p.s += s.wpts + s.aps + s.ci; p.c += s.ci; if (s.ci) p.k++; p.n++; if (s.result === 'W') p.w++; })); }); return P; };
   // стадия в conv — по порядку: игры стадий идут подряд; соотносим по числу сессий part_data
   let off = 0; const gamesOf = {};
   for (const st of stages) { const n = +(PD[st] || {}).sessions || 0; gamesOf[st] = conv.games.slice(off, off + n); off += n; }
-  const bad = []; const rowsOf = {};
+  const bad = [], ciRound = []; const rowsOf = {};
   for (const st of stages) {
     const inc = +(PD[st] || {}).sum_score_with === 1;
     const set = new Set(stages.filter(x => x === st || (inc && x < st)).flatMap(x => gamesOf[x]));
     const P = sumBy(g => set.has(g));
     rowsOf[st] = R.rating.results[st].rows.map((r, i) => {
-      const n = nick[r.player_id] || String(r.player_id), our = P[n] ? P[n].s : 0;
-      if (Math.abs(our - r.scores.total_score) > 0.006) bad.push(`стадия ${st} ${n}: mafgame ${r.scores.total_score}, у нас ${our.toFixed(4)}`);
+      const n = nick[r.player_id] || String(r.player_id), p = P[n] || { s: 0, c: 0, k: 0 }, tot = +r.scores.total_score, ci = +r.scores.Ci_sum || 0;
+      /* v1.1: Ci в протоколах игр mafgame хранит с двумя знаками (0.33), а в таблице считает точно (1/3) — расхождение до 0.005 на каждую
+         игру с Ci. Поэтому: всё, кроме Ci, обязано биться до сотых; Ci — в пределах округления. Иначе стоп. */
+      if (Math.abs(p.s - tot) > 0.006) {
+        const restOk = Math.abs(p.s - p.c + ci - tot) <= 0.006, ciOk = Math.abs(p.c - ci) <= 0.005 * p.k + 0.001;
+        if (restOk && ciOk) ciRound.push(`${n}: Ci по играм ${p.c.toFixed(2)}, в таблице ${ci.toFixed(4)}`);
+        else bad.push(`стадия ${st} ${n}: mafgame ${tot}, у нас ${p.s.toFixed(4)} (Ci у нас ${p.c.toFixed(4)}, у mafgame ${ci.toFixed(4)})`);
+      }
       return { place: i + 1, name: n, sigma: +(+r.scores.total_score).toFixed(4), wins: r.scores.wins, games: r.games_played, st };
     });
   }
   if (bad.length) { console.error('СВЕРКА НЕ СОШЛАСЬ — ничего не пишу:\n' + bad.join('\n')); process.exit(1); }
+  if (ciRound.length) console.log('Ci в пределах округления mafgame:\n  ' + ciRound.join('\n  '));
 
   // ── 4 · запись ─────────────────────────────────────────────────────────────
   const today = new Date().toISOString().slice(0, 10).split('-').reverse().join('.');
@@ -92,7 +99,7 @@ async function page(p) {
   }
   Object.assign(TJ, { closed: true, in_progress: false, upcoming: false, games_played: nGames, games_total: nGames,
     champion: standings[0].name, winners: standings.slice(0, 3).map(r => r.name), standings,
-    reconciliation: `Сверено с официальной таблицей mafgame ${today}: ` + stages.map(st => `${(PD[st] || {}).name || st} ${rowsOf[st].length}/${rowsOf[st].length}`).join(', ') + ' — совпадают до сотых.' });
+    reconciliation: `Сверено с официальной таблицей mafgame ${today}: ` + stages.map(st => `${(PD[st] || {}).name || st} ${rowsOf[st].length}/${rowsOf[st].length}`).join(', ') + ' — совпадают до сотых' + (ciRound.length ? ` (кроме округления Ci в протоколах mafgame: ${ciRound.join('; ')}; в таблице — официальные суммы)` : '') + '.' });
   fs.writeFileSync(tjPath, JSON.stringify(TJ, null, 1) + '\n');
   console.log(`заморожено: ${nGames} игр; чемпион ${standings[0].name}; топ-3 ${TJ.winners.join(', ')}; строк в таблице ${standings.length}`);
 })().catch(e => { console.error('ошибка: ' + e.message); process.exit(1); });
