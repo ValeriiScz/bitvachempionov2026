@@ -1,4 +1,4 @@
-"""gd_data · v1.4 · 2026-11-02 (provisional.json: места доигранного, но не закрытого на mafgame турнира — до начисления баллов) · v1.3.1 · 2026-10-19 (ручной перезапуск пересбора после Central Cup 692: GitHub задержал воскресный cron) · v1.3 · 2026-10-14 (сверка: mafgame 13.10 пересчитал финалы PSP-639 и CEC-694 ровно по SERIAL_GRID_2026 — леджеры/рейтинг/страницы турниров; страница /pages/mafgame_points ещё со старой таблицей серийников. Поправка оставлена страховкой для будущих финалов: при совпадении ничего не меняет) · v1.2 · 2026-10-13 (финалы серийников 2026 — баллы по сетке федерации SERIAL_GRID_2026, а не как начислил сайт mafgame) · v1.1 · 2026-09-21 (путь репо: GD_REPO или относительно файла) · v1.0 · 2026-09-14 — загрузка данных «золотой дюжины»: леджеры, таблицы, листинги, серийники, календарь."""
+"""gd_data · v1.5 · 2026-11-09 (дозаполнение леджеров из таблиц баллов турниров: страница игрока на mafgame отдаёт баллы с задержкой — Брюссель-615 не попал к Flame/Tommy/Саботажу) · v1.4 · 2026-11-02 (provisional.json: места доигранного, но не закрытого на mafgame турнира — до начисления баллов) · v1.3.1 · 2026-10-19 (ручной перезапуск пересбора после Central Cup 692: GitHub задержал воскресный cron) · v1.3 · 2026-10-14 (сверка: mafgame 13.10 пересчитал финалы PSP-639 и CEC-694 ровно по SERIAL_GRID_2026 — леджеры/рейтинг/страницы турниров; страница /pages/mafgame_points ещё со старой таблицей серийников. Поправка оставлена страховкой для будущих финалов: при совпадении ничего не меняет) · v1.2 · 2026-10-13 (финалы серийников 2026 — баллы по сетке федерации SERIAL_GRID_2026, а не как начислил сайт mafgame) · v1.1 · 2026-09-21 (путь репо: GD_REPO или относительно файла) · v1.0 · 2026-09-14 — загрузка данных «золотой дюжины»: леджеры, таблицы, листинги, серийники, календарь."""
 import json, collections, datetime, os
 _here=os.path.dirname(os.path.abspath(__file__))
 _guess=os.path.abspath(os.path.join(_here,'..','..','..'))  # data/research/model → корень репо
@@ -19,6 +19,23 @@ for _tid,_pv in PROV.items():
     for r in _pv['rows']:
         v=L.setdefault(str(r[0]),{'nick':r[1],'country':None,'city':None,'rp':[]})
         if not any(x[1]==int(_tid) for x in v['rp']): v['rp'].append([_yr,int(_tid),_pv['date'],r[2],float(r[3]),0,0])
+# v1.5 (09.11.2026): ДОЗАПОЛНЕНИЕ ЛЕДЖЕРОВ ИЗ ТАБЛИЦ БАЛЛОВ. Страница игрока /user/{id}/view на mafgame отдаёт новые баллы с задержкой:
+#   прогон 09.11 00:09 UTC перечитал Flame/Tommy/Саботажа (их рейтинг уже вырос), но в леджере Брюсселя-615 не было → модель
+#   считала их по старым Σ (Flame 114 вместо 141, Саботаж 124 вместо 142, Tommy 102 вместо 126), планка занижалась.
+#   Таблица баллов турнира (/tournaments/{id}/points) — официальный источник того же начисления. Если в ней у игрока есть баллы
+#   за обычный (не серийный) турнир 2026, а в его леджере этого турнира нет — дописываем. Старые пропуски (онлайн-турниры 2024–25,
+#   строки с нулём) не трогаем.
+_TINFO={str(t['id']):t for _y in T for t in T[_y]}
+LEDGER_FILL=[]
+for _tid,_rows in P.items():
+    _ti=_TINFO.get(_tid) or {}
+    if _ti.get('serial') or int(_tid) in PROV_USED: continue
+    for _r in _rows:
+        _uid,_nick,_pos,_pts,_d=_r[0],_r[1],_r[2],float(_r[3]),_r[4]
+        if not _d or _d[:4]!='2026' or _pts<=0: continue
+        _v=L.get(str(_uid))
+        if not _v or any(x[1]==int(_tid) for x in _v['rp']): continue
+        _v['rp'].append([2026,int(_tid),_d,_pos,_pts,0,0]); LEDGER_FILL.append((int(_tid),_nick,_pts))
 SER_IX=json.load(open(R+'data/research/series/index.json'))
 SER={p['id']:json.load(open(R+'data/research/series/'+p['file'])) for p in SER_IX['parents']}
 _s=open(R+'calendar.html',encoding='utf-8').read(); _i=_s.find('const D=');_j=_s.find('};',_i); CAL=json.loads(_s[_i+8:_j+1])
