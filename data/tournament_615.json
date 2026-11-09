@@ -11,12 +11,12 @@
  "fee_eur": 120,
  "stars": 4,
  "format": "Классическая схема (организатор, 05.11): 12 отборочных игр на 3 столах — 8 в первый день, 4 во второй — и финал топ-10 из 4 игр.",
- "closed": false,
+ "closed": true,
  "in_progress": false,
  "live_from": "2026-11-05",
  "live_to": "2026-11-09",
- "upcoming": true,
- "games_played": 0,
+ "upcoming": false,
+ "games_played": 16,
  "games_total": 16,
  "final_coef": 1.3,
  "accent": "#26e0ff",
@@ -27,5 +27,254 @@
   "Рыба-мÓя",
   "Mermaid",
   "Кура"
- ]
+ ],
+ "winners": [
+  "Flame",
+  "Tommy",
+  "Sэм"
+ ],
+ "champion": "Flame",
+ "standings": [
+  {
+   "place": 1,
+   "name": "Flame",
+   "sigma": 13.005,
+   "stage": "финал",
+   "wins": 11,
+   "games": 4
+  },
+  {
+   "place": 2,
+   "name": "Tommy",
+   "sigma": 12.26,
+   "stage": "финал",
+   "wins": 9,
+   "games": 4
+  },
+  {
+   "place": 3,
+   "name": "Sэм",
+   "sigma": 12.01,
+   "stage": "финал",
+   "wins": 11,
+   "games": 4
+  },
+  {
+   "place": 4,
+   "name": "Саботаж",
+   "sigma": 11.535,
+   "stage": "финал",
+   "wins": 10,
+   "games": 4
+  },
+  {
+   "place": 5,
+   "name": "Blessed",
+   "sigma": 10.9,
+   "stage": "финал",
+   "wins": 11,
+   "games": 4
+  },
+  {
+   "place": 6,
+   "name": "Магнат",
+   "sigma": 10.765,
+   "stage": "финал",
+   "wins": 10,
+   "games": 4
+  },
+  {
+   "place": 7,
+   "name": "Malinity",
+   "sigma": 10.7,
+   "stage": "финал",
+   "wins": 10,
+   "games": 4
+  },
+  {
+   "place": 8,
+   "name": "Flash",
+   "sigma": 10.405,
+   "stage": "финал",
+   "wins": 7,
+   "games": 4
+  },
+  {
+   "place": 9,
+   "name": "Грешник",
+   "sigma": 10.05,
+   "stage": "финал",
+   "wins": 9,
+   "games": 4
+  },
+  {
+   "place": 10,
+   "name": "RAMZES",
+   "sigma": 9.895,
+   "stage": "финал",
+   "wins": 9,
+   "games": 4
+  },
+  {
+   "place": 11,
+   "name": "Tripok",
+   "sigma": 7.45,
+   "stage": "квалификационные игры",
+   "wins": 7,
+   "games": 12
+  },
+  {
+   "place": 12,
+   "name": "ParadoXx",
+   "sigma": 7.31,
+   "stage": "квалификационные игры",
+   "wins": 7,
+   "games": 12
+  },
+  {
+   "place": 13,
+   "name": "Jerry Hurper",
+   "sigma": 7,
+   "stage": "квалификационные игры",
+   "wins": 6,
+   "games": 12
+  },
+  {
+   "place": 14,
+   "name": "DOVOD",
+   "sigma": 6.7,
+   "stage": "квалификационные игры",
+   "wins": 6,
+   "games": 12
+  },
+  {
+   "place": 15,
+   "name": "Urs",
+   "sigma": 6.45,
+   "stage": "квалификационные игры",
+   "wins": 7,
+   "games": 12
+  },
+  {
+   "place": 16,
+   "name": "KEX",
+   "sigma": 6.31,
+   "stage": "квалификационные игры",
+   "wins": 5,
+   "games": 12
+  },
+  {
+   "place": 17,
+   "name": "sugar",
+   "sigma": 5.86,
+   "stage": "квалификационные игры",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 18,
+   "name": "Sova",
+   "sigma": 5.8,
+   "stage": "квалификационные игры",
+   "wins": 6,
+   "games": 12
+  },
+  {
+   "place": 19,
+   "name": "TOPS",
+   "sigma": 5.78,
+   "stage": "квалификационные игры",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 20,
+   "name": "Катанчик",
+   "sigma": 5.5,
+   "stage": "квалификационные игры",
+   "wins": 6,
+   "games": 12
+  },
+  {
+   "place": 21,
+   "name": "Императрица",
+   "sigma": 5.45,
+   "stage": "квалификационные игры",
+   "wins": 7,
+   "games": 12
+  },
+  {
+   "place": 22,
+   "name": "Eskimo.",
+   "sigma": 5.32,
+   "stage": "квалификационные игры",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 23,
+   "name": "Леди Luz",
+   "sigma": 4.75,
+   "stage": "квалификационные игры",
+   "wins": 5,
+   "games": 12
+  },
+  {
+   "place": 24,
+   "name": "Sarcazi.!",
+   "sigma": 4.7,
+   "stage": "квалификационные игры",
+   "wins": 6,
+   "games": 12
+  },
+  {
+   "place": 25,
+   "name": "Медовая",
+   "sigma": 4.2,
+   "stage": "квалификационные игры",
+   "wins": 6,
+   "games": 12
+  },
+  {
+   "place": 26,
+   "name": "Zico",
+   "sigma": 3.7,
+   "stage": "квалификационные игры",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 27,
+   "name": "Кель'тас",
+   "sigma": 3.5,
+   "stage": "квалификационные игры",
+   "wins": 5,
+   "games": 12
+  },
+  {
+   "place": 28,
+   "name": "Lee Don",
+   "sigma": 3.3,
+   "stage": "квалификационные игры",
+   "wins": 4,
+   "games": 12
+  },
+  {
+   "place": 29,
+   "name": "Клото",
+   "sigma": 2.93,
+   "stage": "квалификационные игры",
+   "wins": 3,
+   "games": 12
+  },
+  {
+   "place": 30,
+   "name": "Malvina",
+   "sigma": 0.65,
+   "stage": "квалификационные игры",
+   "wins": 1,
+   "games": 12
+  }
+ ],
+ "reconciliation": "Сверено с официальной таблицей mafgame 09.11.2026: Квалификационные игры 30/30, Финал 10/10 — совпадают до сотых."
 }

@@ -1,0 +1,1618 @@
+{
+ "snap": "2026-11-09",
+ "id": 664,
+ "name": "German Mafia Cup Europa Edition 2026",
+ "final": {
+  "city": "Cologne",
+  "dates": "14–15 ноября 2026",
+  "games": 18,
+  "fee": "120 €",
+  "stars": 4
+ },
+ "kpi": [
+  [
+   "28 / 28",
+   "серий сыграно (по регламенту 25–30 серий)"
+  ],
+  [
+   "252",
+   "игр · 2520 игровых мест · 230 игроков"
+  ],
+  [
+   "56",
+   "слотов в финал занято"
+  ],
+  [
+   "42.1%",
+   "игр выиграл город (106 из 252)"
+  ]
+ ],
+ "series": [
+  {
+   "id": 732,
+   "name": "Кёльн 1",
+   "date": "2026-02-08",
+   "city": "Cologne",
+   "judge": "Кура",
+   "top2": [
+    "Ириска",
+    "Akteur"
+   ],
+   "n": 10
+  },
+  {
+   "id": 741,
+   "name": "Прага 1",
+   "date": "2026-03-01",
+   "city": "Prague",
+   "judge": "Ух-Ты",
+   "top2": [
+    "Берлин",
+    "qUAest0r"
+   ],
+   "n": 10
+  },
+  {
+   "id": 742,
+   "name": "Берлин 1",
+   "date": "2026-03-15",
+   "city": "Berlin",
+   "judge": "Broniak",
+   "top2": [
+    "Барон",
+    "Mr. Smith🚀"
+   ],
+   "n": 10
+  },
+  {
+   "id": 820,
+   "name": "Варшава",
+   "date": "2026-04-18",
+   "city": "Warsaw",
+   "judge": "Prometej",
+   "top2": [
+    "Calypso",
+    "Landing"
+   ],
+   "n": 10
+  },
+  {
+   "id": 848,
+   "name": "Утрехт",
+   "date": "2026-04-25",
+   "city": "Utrecht",
+   "judge": "Стикс",
+   "top2": [
+    "Licht",
+    "KEX"
+   ],
+   "n": 10
+  },
+  {
+   "id": 778,
+   "name": "Брюссель 1",
+   "date": "2026-05-09",
+   "city": "Brussel",
+   "judge": "Рыба-мÓя",
+   "top2": [
+    "Медовая",
+    "Sova"
+   ],
+   "n": 10
+  },
+  {
+   "id": 856,
+   "name": "Вроцлав 1",
+   "date": "2026-05-09",
+   "city": "Wroclaw",
+   "judge": "Кирпич",
+   "top2": [
+    "VVince",
+    "Mjata"
+   ],
+   "n": 10
+  },
+  {
+   "id": 743,
+   "name": "Краков 1",
+   "date": "2026-05-10",
+   "city": "Krakow",
+   "judge": "Loki",
+   "top2": [
+    "Capybara",
+    "Foxy1"
+   ],
+   "n": 10
+  },
+  {
+   "id": 746,
+   "name": "Франкфурт 1",
+   "date": "2026-05-10",
+   "city": "Frankfurt am Main",
+   "judge": "Мориарти",
+   "top2": [
+    "Agent",
+    "Работяга"
+   ],
+   "n": 10
+  },
+  {
+   "id": 754,
+   "name": "Берн",
+   "date": "2026-05-16",
+   "city": "Berne",
+   "judge": "KEX",
+   "top2": [
+    "ParadoXx",
+    "kser"
+   ],
+   "n": 10
+  },
+  {
+   "id": 859,
+   "name": "Штутгарт",
+   "date": "2026-05-17",
+   "city": "Stuttgart",
+   "judge": "Sensei",
+   "top2": [
+    "Мориарти",
+    "R.I.P."
+   ],
+   "n": 10
+  },
+  {
+   "id": 806,
+   "name": "Прага 2",
+   "date": "2026-06-13",
+   "city": "Prague",
+   "judge": "Ух-Ты",
+   "top2": [
+    "Сергеевна",
+    "Приезжий"
+   ],
+   "n": 10
+  },
+  {
+   "id": 852,
+   "name": "Прага 3",
+   "date": "2026-07-12",
+   "city": "Prague",
+   "judge": "Yokai",
+   "top2": [
+    "YeS",
+    "Blackout"
+   ],
+   "n": 11
+  },
+  {
+   "id": 936,
+   "name": "Амстердам 1",
+   "date": "2026-08-15",
+   "city": "Amsterdam",
+   "judge": "Zico",
+   "top2": [
+    "Tommy",
+    "RAMZES"
+   ],
+   "n": 10
+  },
+  {
+   "id": 744,
+   "name": "Брюссель 2",
+   "date": "2026-08-30",
+   "city": "Brussel",
+   "judge": "Sova",
+   "top2": [
+    "Zico",
+    "Sэм"
+   ],
+   "n": 10
+  },
+  {
+   "id": 945,
+   "name": "Торревьеха",
+   "date": "2026-09-05",
+   "city": "Torrevieja",
+   "judge": "Blessed",
+   "top2": [
+    "Niko",
+    "Грешник"
+   ],
+   "n": 10
+  },
+  {
+   "id": 977,
+   "name": "Хайфа",
+   "date": "2026-09-12",
+   "city": "Haifa",
+   "judge": "Фолдэм",
+   "top2": [
+    "Mauder",
+    "Эклектик"
+   ],
+   "n": 10
+  },
+  {
+   "id": 934,
+   "name": "Берлин 2",
+   "date": "2026-09-13",
+   "city": "Berlin",
+   "judge": "Broniak",
+   "top2": [
+    "Maridzaki",
+    "Skywalker"
+   ],
+   "n": 10
+  },
+  {
+   "id": 988,
+   "name": "Рамат-Ган",
+   "date": "2026-09-19",
+   "city": "Ramat Gan",
+   "judge": "Фолдэм",
+   "top2": [
+    "Дон Винченцо",
+    "Восьмеркин"
+   ],
+   "n": 10
+  },
+  {
+   "id": 779,
+   "name": "Эйндховен",
+   "date": "2026-09-20",
+   "city": "Eindhoven",
+   "judge": "Zico",
+   "top2": [
+    "El_professor",
+    "MiLady"
+   ],
+   "n": 11
+  },
+  {
+   "id": 995,
+   "name": "Цюрих",
+   "date": "2026-09-20",
+   "city": "Zurich",
+   "judge": "KEX",
+   "top2": [
+    "Kihot",
+    "Гіппократ"
+   ],
+   "n": 10
+  },
+  {
+   "id": 983,
+   "name": "Мюнхен",
+   "date": "2026-09-26",
+   "city": "Munich",
+   "judge": "Пуфик",
+   "top2": [
+    "TOMASSINO",
+    "Kokocik"
+   ],
+   "n": 10
+  },
+  {
+   "id": 953,
+   "name": "Лиссабон",
+   "date": "2026-09-27",
+   "city": "Lisbon",
+   "judge": "Гертруда",
+   "top2": [
+    "Классик",
+    "redfiim"
+   ],
+   "n": 10
+  },
+  {
+   "id": 1014,
+   "name": "Тбилиси 1",
+   "date": "2026-10-03",
+   "city": "Tbilisi",
+   "judge": "Гармония",
+   "top2": [
+    "Gangster",
+    "Cimes"
+   ],
+   "n": 10
+  },
+  {
+   "id": 1015,
+   "name": "Тбилиси 2",
+   "date": "2026-10-04",
+   "city": "Tbilisi",
+   "judge": "Aragil",
+   "top2": [
+    "iceBerg",
+    "S1LveR"
+   ],
+   "n": 11
+  },
+  {
+   "id": 1001,
+   "name": "Бухарест",
+   "date": "2026-10-11",
+   "city": "Bucharest",
+   "judge": "Luna",
+   "top2": [
+    "Ракета",
+    "404"
+   ],
+   "n": 10
+  },
+  {
+   "id": 747,
+   "name": "Франкфурт 2",
+   "date": "2026-10-24",
+   "city": "Frankfurt am Main",
+   "judge": "Мориарти",
+   "top2": [
+    "yesterday",
+    "Пуфик"
+   ],
+   "n": 10
+  },
+  {
+   "id": 1030,
+   "name": "Порту",
+   "date": "2026-10-25",
+   "city": "Porto",
+   "judge": "Vasilevs",
+   "top2": [
+    "Константа (Douro Dons)",
+    "Melodia"
+   ],
+   "n": 10
+  }
+ ],
+ "players": [
+  {
+   "uid": 44,
+   "nick": "KEX",
+   "real": "Евгений Любинин",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_44/a6bfae05ca17bcfaa2961020a9b44f5860c2f4fe.png",
+   "club": "Mafia Club Cologne",
+   "home": "Cologne",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Утрехт",
+   "seriesCity": "Utrecht",
+   "place": 2,
+   "score": 6.3,
+   "gb": null,
+   "played": [
+    "Кёльн 1",
+    "Утрехт"
+   ],
+   "mmr": 2123.5,
+   "mmrTier": "L",
+   "mmrRank": 16,
+   "elo": 1457,
+   "eloTier": "S",
+   "eloSnap": "2026-10-26"
+  },
+  {
+   "uid": 2057,
+   "nick": "Константа (Douro Dons)",
+   "real": "Anna Lisnevskaia",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2057/abc9ea7b80e4a86e8347b6485f69dc44f93cbf76.png",
+   "club": "Douro Dons",
+   "home": "Porto",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Порту",
+   "seriesCity": "Porto",
+   "place": 1,
+   "score": 6.1,
+   "gb": null,
+   "played": [
+    "Лиссабон",
+    "Порту"
+   ],
+   "mmr": 1482.2,
+   "mmrTier": "C",
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 1254,
+   "nick": "404",
+   "real": "Ruslan",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1254/d622f9132d371445176681c1cf3799ee4365c5c8.png",
+   "club": "Sector 7",
+   "home": "Bucharest",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Бухарест",
+   "seriesCity": "Bucharest",
+   "place": 2,
+   "score": 5.55,
+   "gb": null,
+   "played": [
+    "Бухарест"
+   ],
+   "mmr": 1369.3,
+   "mmrTier": "C",
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 689,
+   "nick": "Akteur",
+   "real": "Yegor",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_689/ee0935dd5ccf56eb6ade9a2300ed2a3be882a2a7.png",
+   "club": "MafiaClub „Hundert“ Dortmund",
+   "home": "Dortmund",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Кёльн 1",
+   "seriesCity": "Cologne",
+   "place": 2,
+   "score": 5.2,
+   "gb": null,
+   "played": [
+    "Кёльн 1"
+   ],
+   "mmr": 1406.9,
+   "mmrTier": "C",
+   "mmrRank": 457,
+   "elo": 992,
+   "eloTier": "D",
+   "eloSnap": "2026-10-09"
+  },
+  {
+   "uid": 650,
+   "nick": "Tommy",
+   "real": "Nikita",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_650/a71d5bc0efb9d54508be8de08ad3a4e3d362bf1c.png",
+   "club": "UMC",
+   "home": "Utrecht",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Амстердам 1",
+   "seriesCity": "Amsterdam",
+   "place": 1,
+   "score": 5.2,
+   "gb": null,
+   "played": [
+    "Утрехт",
+    "Амстердам 1"
+   ],
+   "mmr": 2016.3,
+   "mmrTier": "L",
+   "mmrRank": 31,
+   "elo": 1563,
+   "eloTier": "S",
+   "eloSnap": "2026-10-26"
+  },
+  {
+   "uid": 455,
+   "nick": "Carpe Diem",
+   "real": "Carpe Diem",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_455/fc536b39ea7879f2a4fc23322085742eebd6743e.png",
+   "club": "BDSM",
+   "home": "Munich",
+   "homeSrc": "club",
+   "via": "reserve",
+   "series": "Мюнхен",
+   "seriesCity": "Munich",
+   "place": null,
+   "score": 4.25,
+   "gb": 1.8,
+   "played": [
+    "Мюнхен"
+   ],
+   "mmr": 1494.2,
+   "mmrTier": "C",
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 1198,
+   "nick": "Zico",
+   "real": "Дария",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_1198/96cb7cae3bd193ed0d46469b6bd98ce366c26473.png",
+   "club": "UMC",
+   "home": "Utrecht",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Брюссель 2",
+   "seriesCity": "Brussel",
+   "place": 1,
+   "score": 6.35,
+   "gb": null,
+   "played": [
+    "Брюссель 1",
+    "Брюссель 2"
+   ],
+   "mmr": 1087.8,
+   "mmrTier": "E",
+   "mmrRank": 740,
+   "elo": 941,
+   "eloTier": "D",
+   "eloSnap": "2026-10-26"
+  },
+  {
+   "uid": 2282,
+   "nick": "Mauder",
+   "real": "Марк Неустроев",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2282/a2bb5d96573b80772e497dc06b50a430552ef835.png",
+   "club": "Wild Mafia Club",
+   "home": "Haifa",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Хайфа",
+   "seriesCity": "Haifa",
+   "place": 1,
+   "score": 5.6,
+   "gb": null,
+   "played": [
+    "Хайфа"
+   ],
+   "mmr": 1389.6,
+   "mmrTier": "C",
+   "mmrRank": 489,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 1441,
+   "nick": "Эклектик",
+   "real": "Vadim Mudrov",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_1441/73548b10cf05a598a854bc19ceaf978da6af60c8.png",
+   "club": "Wild Mafia Club",
+   "home": "Haifa",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Хайфа",
+   "seriesCity": "Haifa",
+   "place": 2,
+   "score": 4.95,
+   "gb": null,
+   "played": [
+    "Хайфа"
+   ],
+   "mmr": 1018.4,
+   "mmrTier": "E",
+   "mmrRank": 754,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 659,
+   "nick": "Ириска",
+   "real": "Ирина",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_659/45acab162953d022193c36296b5eab68873f8d5a.png",
+   "club": "DarKStadt",
+   "home": "Frankfurt am Main",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Кёльн 1",
+   "seriesCity": "Cologne",
+   "place": 1,
+   "score": 5.45,
+   "gb": null,
+   "played": [
+    "Кёльн 1"
+   ],
+   "mmr": 1467.6,
+   "mmrTier": "C",
+   "mmrRank": 364,
+   "elo": 1023,
+   "eloTier": "C",
+   "eloSnap": "2026-09-06"
+  },
+  {
+   "uid": 1253,
+   "nick": "Ракета",
+   "real": "Maksym Ivannikov",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1253/e5ed7b0455502b8ef43f3263483634b153c1a644.png",
+   "club": "Sector 7",
+   "home": "Bucharest",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Бухарест",
+   "seriesCity": "Bucharest",
+   "place": 1,
+   "score": 5.9,
+   "gb": null,
+   "played": [
+    "Бухарест"
+   ],
+   "mmr": 1352.6,
+   "mmrTier": "C",
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 833,
+   "nick": "Kokocik",
+   "real": "Iryna",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_833/49611ec38d274c9951c4652dc75c69f4bc4b9461.png",
+   "club": "DarKStadt",
+   "home": "Frankfurt am Main",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Мюнхен",
+   "seriesCity": "Munich",
+   "place": 2,
+   "score": 4.4,
+   "gb": null,
+   "played": [
+    "Кёльн 1",
+    "Франкфурт 1",
+    "Штутгарт",
+    "Мюнхен"
+   ],
+   "mmr": 1342.5,
+   "mmrTier": "D",
+   "mmrRank": 560,
+   "elo": 1002,
+   "eloTier": "C",
+   "eloSnap": "2026-09-06"
+  },
+  {
+   "uid": 2139,
+   "nick": "Гіппократ",
+   "real": "Богдан Вінокуров",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2139/fdf4385bf9274728515c055a3b95543774621da2.png",
+   "club": "Mafia Club Basel",
+   "home": "Basel",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Цюрих",
+   "seriesCity": "Zurich",
+   "place": 2,
+   "score": 5,
+   "gb": null,
+   "played": [
+    "Берн",
+    "Цюрих"
+   ],
+   "mmr": 1378.0,
+   "mmrTier": "C",
+   "mmrRank": null,
+   "elo": 992,
+   "eloTier": "D",
+   "eloSnap": "2026-07-15"
+  },
+  {
+   "uid": 226,
+   "nick": "Пуфик",
+   "real": "Ruslan",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_226/03d92fc683847ee2be17d601bbd60afd4d0bb43b.png",
+   "club": "BDSM",
+   "home": "Munich",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Франкфурт 2",
+   "seriesCity": "Frankfurt am Main",
+   "place": 2,
+   "score": 4.9,
+   "gb": null,
+   "played": [
+    "Франкфурт 2"
+   ],
+   "mmr": null,
+   "mmrTier": null,
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 3338,
+   "nick": "Maridzaki",
+   "real": "Марія Коваль",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3338/891ac28a53c9693c48ee4e770fc4cb90e9da3d18.png",
+   "club": "Lie or Die",
+   "home": "Berlin",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Берлин 2",
+   "seriesCity": "Berlin",
+   "place": 1,
+   "score": 6.45,
+   "gb": null,
+   "played": [
+    "Берлин 2"
+   ],
+   "mmr": null,
+   "mmrTier": null,
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 2904,
+   "nick": "Классик",
+   "real": "Ivan",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2904/ce9be5659f1c0e37bf6b821aa97615d59ba1f423.png",
+   "club": "the Originals",
+   "home": "Lisbon",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Лиссабон",
+   "seriesCity": "Lisbon",
+   "place": 1,
+   "score": 4.4,
+   "gb": null,
+   "played": [
+    "Лиссабон"
+   ],
+   "mmr": 1472.1,
+   "mmrTier": "C",
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 623,
+   "nick": "Skywalker",
+   "real": "Yulian Horobets",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_623/47f662e6c94199f5d6d1c6a38341b55d21cf7729.png",
+   "club": "Lie or Die",
+   "home": "Berlin",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Берлин 2",
+   "seriesCity": "Berlin",
+   "place": 2,
+   "score": 5.75,
+   "gb": null,
+   "played": [
+    "Берлин 1",
+    "Берлин 2"
+   ],
+   "mmr": 1291.9,
+   "mmrTier": "D",
+   "mmrRank": 622,
+   "elo": 992,
+   "eloTier": "D",
+   "eloSnap": "2026-08-22"
+  },
+  {
+   "uid": 499,
+   "nick": "RAMZES",
+   "real": "Roman Politov",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_499/a4d55d9d5fa815a6c00f4e29d18ab1fba282f6fe.png",
+   "club": "Stolen Bike Mafia Club",
+   "home": "Amsterdam",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Амстердам 1",
+   "seriesCity": "Amsterdam",
+   "place": 2,
+   "score": 4.65,
+   "gb": null,
+   "played": [
+    "Амстердам 1"
+   ],
+   "mmr": 1858.4,
+   "mmrTier": "S",
+   "mmrRank": 62,
+   "elo": 1262,
+   "eloTier": "A",
+   "eloSnap": "2026-10-26"
+  },
+  {
+   "uid": 2866,
+   "nick": "Capybara",
+   "real": "Vlad",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2866/34a5c3484ad9ba9fec299f15a147d8f72c78cc1a.png",
+   "club": "White Mafia Club Krakow",
+   "home": "Krakow",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Краков 1",
+   "seriesCity": "Krakow",
+   "place": 1,
+   "score": 7.75,
+   "gb": null,
+   "played": [
+    "Краков 1"
+   ],
+   "mmr": 1513.5,
+   "mmrTier": "B",
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 3155,
+   "nick": "iceBerg",
+   "real": "София Цапкина",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3155/19d0a1cba2ab392790822f57c9dc7e790021f4b8.png",
+   "club": null,
+   "home": "Tbilisi",
+   "homeSrc": "series",
+   "via": "slot",
+   "series": "Тбилиси 2",
+   "seriesCity": "Tbilisi",
+   "place": 1,
+   "score": 8.3,
+   "gb": null,
+   "played": [
+    "Тбилиси 2"
+   ],
+   "mmr": 1620.5,
+   "mmrTier": "B",
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 3328,
+   "nick": "TOMASSINO",
+   "real": "Артем",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3328/9a70c4e1b573c539ed21c184f733ad1d1226a048.png",
+   "club": "BDSM",
+   "home": "Munich",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Мюнхен",
+   "seriesCity": "Munich",
+   "place": 1,
+   "score": 4.5,
+   "gb": null,
+   "played": [
+    "Мюнхен"
+   ],
+   "mmr": null,
+   "mmrTier": null,
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 890,
+   "nick": "Грешник",
+   "real": "Dmytro",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_890/09e7e9eefe97e46996af0ae48c968ffea227ce33.png",
+   "club": "Mafia Academy Antalya",
+   "home": "Antalya",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Торревьеха",
+   "seriesCity": "Torrevieja",
+   "place": 2,
+   "score": 4.8,
+   "gb": null,
+   "played": [
+    "Торревьеха"
+   ],
+   "mmr": 1825.3,
+   "mmrTier": "S",
+   "mmrRank": 68,
+   "elo": 1215,
+   "eloTier": "A",
+   "eloSnap": "2026-10-26"
+  },
+  {
+   "uid": 376,
+   "nick": "Sova",
+   "real": "Валерия Кашина",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_376/1a6a547f9ca13cae5b515706c1b71fa9d3148b91.png",
+   "club": "AtomNøir",
+   "home": "City of Brussels",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Брюссель 1",
+   "seriesCity": "Brussel",
+   "place": 2,
+   "score": 5.1,
+   "gb": null,
+   "played": [
+    "Брюссель 1"
+   ],
+   "mmr": 1287.4,
+   "mmrTier": "D",
+   "mmrRank": 629,
+   "elo": 974,
+   "eloTier": "D",
+   "eloSnap": "2026-10-26"
+  },
+  {
+   "uid": 1333,
+   "nick": "Licht",
+   "real": "Антон",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1333/b9f25e2884743a6bfaa6478e135e76b5cc57529a.png",
+   "club": "UMC",
+   "home": "Utrecht",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Утрехт",
+   "seriesCity": "Utrecht",
+   "place": 1,
+   "score": 6.85,
+   "gb": null,
+   "played": [
+    "Утрехт"
+   ],
+   "mmr": 1710.3,
+   "mmrTier": "A",
+   "mmrRank": 110,
+   "elo": 1206,
+   "eloTier": "A",
+   "eloSnap": "2026-07-15"
+  },
+  {
+   "uid": 1013,
+   "nick": "Приезжий",
+   "real": "Марк",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1013/e3660050920dad5e1a4ef9df3485e0f663d1086b.png",
+   "club": "Mafia-Club \"Domino\"",
+   "home": "Chemnitz",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Прага 2",
+   "seriesCity": "Prague",
+   "place": 2,
+   "score": 6.35,
+   "gb": null,
+   "played": [
+    "Прага 2"
+   ],
+   "mmr": 1407.7,
+   "mmrTier": "C",
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 185,
+   "nick": "Blackout",
+   "real": "Vladimir",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_185/8824bc2d7416c4265395b8b1c5d143551e0d2097.png",
+   "club": "Mafia club \"Champions League\" Prague",
+   "home": "Prague",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Прага 3",
+   "seriesCity": "Prague",
+   "place": 2,
+   "score": 5.7,
+   "gb": null,
+   "played": [
+    "Прага 1",
+    "Прага 2",
+    "Прага 3"
+   ],
+   "mmr": 1480.1,
+   "mmrTier": "C",
+   "mmrRank": 343,
+   "elo": 1063,
+   "eloTier": "C",
+   "eloSnap": "2026-10-15"
+  },
+  {
+   "uid": 224,
+   "nick": "Sэм",
+   "real": "Татьяна Юрченко",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_224/6f2b83f1bd5ef20ebbcf85a370c8980c9761b1c2.png",
+   "club": "Mafia Club Cologne",
+   "home": "Cologne",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Брюссель 2",
+   "seriesCity": "Brussel",
+   "place": 2,
+   "score": 5.35,
+   "gb": null,
+   "played": [
+    "Брюссель 2"
+   ],
+   "mmr": 1012.0,
+   "mmrTier": "E",
+   "mmrRank": 756,
+   "elo": 901,
+   "eloTier": "E",
+   "eloSnap": "2026-10-26"
+  },
+  {
+   "uid": 980,
+   "nick": "El_professor",
+   "real": "Анна",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_980/bc87c74a6e4db978c06bc6881a2cd1f3ada417fc.png",
+   "club": "UMC",
+   "home": "Utrecht",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Эйндховен",
+   "seriesCity": "Eindhoven",
+   "place": 1,
+   "score": 6.45,
+   "gb": null,
+   "played": [
+    "Утрехт",
+    "Брюссель 1",
+    "Амстердам 1",
+    "Брюссель 2",
+    "Эйндховен"
+   ],
+   "mmr": 1093.6,
+   "mmrTier": "E",
+   "mmrRank": 738,
+   "elo": 997,
+   "eloTier": "C",
+   "eloSnap": "2026-07-03"
+  },
+  {
+   "uid": 830,
+   "nick": "Мориарти",
+   "real": "Илья",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_830/e559663804f52ca955ee7eb7e64e81528c8726ee.png",
+   "club": "DarKStadt",
+   "home": "Frankfurt am Main",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Штутгарт",
+   "seriesCity": "Stuttgart",
+   "place": 1,
+   "score": 6.7,
+   "gb": null,
+   "played": [
+    "Штутгарт"
+   ],
+   "mmr": 1684.8,
+   "mmrTier": "A",
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 709,
+   "nick": "ParadoXx",
+   "real": "Aleksandr",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png",
+   "club": "Swiss Mafia Club Zurich",
+   "home": "Zurich",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Берн",
+   "seriesCity": "Berne",
+   "place": 1,
+   "score": 6.35,
+   "gb": null,
+   "played": [
+    "Берн"
+   ],
+   "mmr": 1732.4,
+   "mmrTier": "A",
+   "mmrRank": 99,
+   "elo": 1180,
+   "eloTier": "B",
+   "eloSnap": "2026-10-26"
+  },
+  {
+   "uid": 101,
+   "nick": "YeS",
+   "real": "Ievgen Sokolskyi",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_101/07fc4320b90a9dde889cabc002d1cec60c7a5583.png",
+   "club": "Mafia club \"Champions League\" Prague",
+   "home": "Prague",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Прага 3",
+   "seriesCity": "Prague",
+   "place": 1,
+   "score": 7.25,
+   "gb": null,
+   "played": [
+    "Франкфурт 1",
+    "Прага 3"
+   ],
+   "mmr": 2292.9,
+   "mmrTier": "L",
+   "mmrRank": 5,
+   "elo": 1429,
+   "eloTier": "S",
+   "eloSnap": "2026-10-26"
+  },
+  {
+   "uid": 702,
+   "nick": "AquaMarine",
+   "real": "Viktorija",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_702/ee91c10d4518e35027d0f6b044f22a31d51e5190.png",
+   "club": "Mafia Club Bern",
+   "home": "Berne",
+   "homeSrc": "club",
+   "via": "reserve",
+   "series": "Цюрих",
+   "seriesCity": "Zurich",
+   "place": null,
+   "score": 4.7,
+   "gb": 1.6,
+   "played": [
+    "Берн",
+    "Цюрих"
+   ],
+   "mmr": 1300.4,
+   "mmrTier": "D",
+   "mmrRank": null,
+   "elo": 976,
+   "eloTier": "D",
+   "eloSnap": "2026-07-15"
+  },
+  {
+   "uid": 704,
+   "nick": "qUAest0r",
+   "real": "Serhii",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_704/cb992e7f4e61248af45ce2b424390cd9c20d1849.png",
+   "club": "Mafia club \"Champions League\" Prague",
+   "home": "Prague",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Прага 1",
+   "seriesCity": "Prague",
+   "place": 2,
+   "score": 6.5,
+   "gb": null,
+   "played": [
+    "Прага 1"
+   ],
+   "mmr": 1240.1,
+   "mmrTier": "D",
+   "mmrRank": 680,
+   "elo": 991,
+   "eloTier": "D",
+   "eloSnap": "2026-10-15"
+  },
+  {
+   "uid": 825,
+   "nick": "Niko",
+   "real": "Roman Krasiuk",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_825/c84248e1686c07eadb16b7331e04221936ba56ea.png",
+   "club": "Los Maffos",
+   "home": "Torrevieja",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Торревьеха",
+   "seriesCity": "Torrevieja",
+   "place": 1,
+   "score": 6.7,
+   "gb": null,
+   "played": [
+    "Торревьеха"
+   ],
+   "mmr": 2108.3,
+   "mmrTier": "L",
+   "mmrRank": 18,
+   "elo": 1426,
+   "eloTier": "S",
+   "eloSnap": "2026-09-06"
+  },
+  {
+   "uid": 2871,
+   "nick": "yesterday",
+   "real": "Michael",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2871/f31aaa7b425726b7781959d65adff40f25ed5dca.png",
+   "club": "DarKStadt",
+   "home": "Frankfurt am Main",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Франкфурт 2",
+   "seriesCity": "Frankfurt am Main",
+   "place": 1,
+   "score": 5.05,
+   "gb": null,
+   "played": [
+    "Франкфурт 2"
+   ],
+   "mmr": 1459.1,
+   "mmrTier": "C",
+   "mmrRank": null,
+   "elo": 991,
+   "eloTier": "D",
+   "eloSnap": "2026-10-15"
+  },
+  {
+   "uid": 1281,
+   "nick": "mobi.",
+   "real": "Ivan Hryshko",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1281/960ab7dc8267e632e25fc0116f4ee109395be241.png",
+   "club": "Mafia club \"Champions League\" Prague",
+   "home": "Prague",
+   "homeSrc": "club",
+   "via": "reserve",
+   "series": "Прага 1",
+   "seriesCity": "Prague",
+   "place": null,
+   "score": 6.2,
+   "gb": 1.7,
+   "played": [
+    "Прага 1",
+    "Прага 3"
+   ],
+   "mmr": 1223.7,
+   "mmrTier": "D",
+   "mmrRank": null,
+   "elo": 997,
+   "eloTier": "C",
+   "eloSnap": "2026-10-15"
+  },
+  {
+   "uid": 2002,
+   "nick": "Mr. Smith🚀",
+   "real": "Max",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2002/be9dbdebb8531804b92ac3cd751f3632716e3931.png",
+   "club": "Lie or Die",
+   "home": "Berlin",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Берлин 1",
+   "seriesCity": "Berlin",
+   "place": 2,
+   "score": 5.5,
+   "gb": null,
+   "played": [
+    "Берлин 1"
+   ],
+   "mmr": 1329.7,
+   "mmrTier": "D",
+   "mmrRank": 579,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 832,
+   "nick": "Agent",
+   "real": "Stanislav",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_832/1583c3d4c53568f351492607b37782ba8c3d71e0.png",
+   "club": "DarKStadt",
+   "home": "Frankfurt am Main",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Франкфурт 1",
+   "seriesCity": "Frankfurt am Main",
+   "place": 1,
+   "score": 5.9,
+   "gb": null,
+   "played": [
+    "Франкфурт 1"
+   ],
+   "mmr": null,
+   "mmrTier": null,
+   "mmrRank": null,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  },
+  {
+   "uid": 325,
+   "nick": "Медовая",
+   "real": "Балуева Ольга",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_325/1f2d8db237027add3809595f63a10e2a541c7351.png",
+   "club": "AtomNøir",
+   "home": "City of Brussels",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Брюссель 1",
+   "seriesCity": "Brussel",
+   "place": 1,
+   "score": 5.15,
+   "gb": null,
+   "played": [
+    "Брюссель 1"
+   ],
+   "mmr": 1243.9,
+   "mmrTier": "D",
+   "mmrRank": 674,
+   "elo": 924,
+   "eloTier": "E",
+   "eloSnap": "2026-10-26"
+  },
+  {
+   "uid": 2493,
+   "nick": "MiLady",
+   "real": "Oleksandra Tsyhanok",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2493/103b8e54c0f5e913af04658367d16e0c564748d5.png",
+   "club": "UMC",
+   "home": "Utrecht",
+   "homeSrc": "club",
+   "via": "slot",
+   "series": "Эйндховен",
+   "seriesCity": "Eindhoven",
+   "place": 2,
+   "score": 5.6,
+   "gb": null,
+   "played": [
+    "Утрехт",
+    "Эйндховен"
+   ],
+   "mmr": 994.1,
+   "mmrTier": "E",
+   "mmrRank": 761,
+   "elo": null,
+   "eloTier": null,
+   "eloSnap": null
+  }
+ ],
+ "cities": {
+  "Cologne": {
+   "lat": 50.9375,
+   "lon": 6.9603,
+   "ru": "Кёльн",
+   "cc": "DE"
+  },
+  "Prague": {
+   "lat": 50.0755,
+   "lon": 14.4378,
+   "ru": "Прага",
+   "cc": "CZ"
+  },
+  "Berlin": {
+   "lat": 52.52,
+   "lon": 13.405,
+   "ru": "Берлин",
+   "cc": "DE"
+  },
+  "Warsaw": {
+   "lat": 52.2297,
+   "lon": 21.0122,
+   "ru": "Варшава",
+   "cc": "PL"
+  },
+  "Utrecht": {
+   "lat": 52.0907,
+   "lon": 5.1214,
+   "ru": "Утрехт",
+   "cc": "NL"
+  },
+  "Brussel": {
+   "lat": 50.8503,
+   "lon": 4.3517,
+   "ru": "Брюссель",
+   "cc": "BE"
+  },
+  "City of Brussels": {
+   "lat": 50.8503,
+   "lon": 4.3517,
+   "ru": "Брюссель",
+   "cc": "BE"
+  },
+  "Wroclaw": {
+   "lat": 51.1079,
+   "lon": 17.0385,
+   "ru": "Вроцлав",
+   "cc": "PL"
+  },
+  "Krakow": {
+   "lat": 50.0647,
+   "lon": 19.945,
+   "ru": "Краков",
+   "cc": "PL"
+  },
+  "Frankfurt am Main": {
+   "lat": 50.1109,
+   "lon": 8.6821,
+   "ru": "Франкфурт",
+   "cc": "DE"
+  },
+  "Berne": {
+   "lat": 46.948,
+   "lon": 7.4474,
+   "ru": "Берн",
+   "cc": "CH"
+  },
+  "Stuttgart": {
+   "lat": 48.7758,
+   "lon": 9.1829,
+   "ru": "Штутгарт",
+   "cc": "DE"
+  },
+  "Amsterdam": {
+   "lat": 52.3676,
+   "lon": 4.9041,
+   "ru": "Амстердам",
+   "cc": "NL"
+  },
+  "Torrevieja": {
+   "lat": 37.9787,
+   "lon": -0.6822,
+   "ru": "Торревьеха",
+   "cc": "ES"
+  },
+  "Haifa": {
+   "lat": 32.794,
+   "lon": 34.9896,
+   "ru": "Хайфа",
+   "cc": "IL"
+  },
+  "Ramat Gan": {
+   "lat": 32.0684,
+   "lon": 34.8248,
+   "ru": "Рамат-Ган",
+   "cc": "IL"
+  },
+  "Eindhoven": {
+   "lat": 51.4416,
+   "lon": 5.4697,
+   "ru": "Эйндховен",
+   "cc": "NL"
+  },
+  "Zurich": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "ru": "Цюрих",
+   "cc": "CH"
+  },
+  "Munich": {
+   "lat": 48.1351,
+   "lon": 11.582,
+   "ru": "Мюнхен",
+   "cc": "DE"
+  },
+  "Lisbon": {
+   "lat": 38.7223,
+   "lon": -9.1393,
+   "ru": "Лиссабон",
+   "cc": "PT"
+  },
+  "Tbilisi": {
+   "lat": 41.7151,
+   "lon": 44.8271,
+   "ru": "Тбилиси",
+   "cc": "GE"
+  },
+  "Bucharest": {
+   "lat": 44.4268,
+   "lon": 26.1025,
+   "ru": "Бухарест",
+   "cc": "RO"
+  },
+  "Porto": {
+   "lat": 41.1579,
+   "lon": -8.6291,
+   "ru": "Порту",
+   "cc": "PT"
+  },
+  "Dortmund": {
+   "lat": 51.5136,
+   "lon": 7.4653,
+   "ru": "Дортмунд",
+   "cc": "DE"
+  },
+  "Basel": {
+   "lat": 47.5596,
+   "lon": 7.5886,
+   "ru": "Базель",
+   "cc": "CH"
+  },
+  "Antalya": {
+   "lat": 36.8969,
+   "lon": 30.7133,
+   "ru": "Анталья",
+   "cc": "TR"
+  },
+  "Chemnitz": {
+   "lat": 50.8278,
+   "lon": 12.9214,
+   "ru": "Хемниц",
+   "cc": "DE"
+  }
+ },
+ "countries": {
+  "DE": "Германия",
+  "CZ": "Чехия",
+  "PL": "Польша",
+  "NL": "Нидерланды",
+  "BE": "Бельгия",
+  "CH": "Швейцария",
+  "ES": "Испания",
+  "IL": "Израиль",
+  "PT": "Португалия",
+  "GE": "Грузия",
+  "RO": "Румыния",
+  "TR": "Турция"
+ },
+ "tiers": {
+  "L": 1950,
+  "S": 1800,
+  "A": 1650,
+  "B": 1500,
+  "C": 1350,
+  "D": 1125,
+  "E": 925
+ },
+ "compare": [
+  {
+   "id": 579,
+   "name": "Cyprus Mafia Series 2026",
+   "players": 29,
+   "series": 9,
+   "cities": 1,
+   "countries": 1
+  },
+  {
+   "id": 639,
+   "name": "Poland Strongest Player 2026",
+   "players": 43,
+   "series": 6,
+   "cities": 3,
+   "countries": 1
+  },
+  {
+   "id": 645,
+   "name": "White Mafia Best Player",
+   "players": 55,
+   "series": 6,
+   "cities": 3,
+   "countries": 1
+  },
+  {
+   "id": 664,
+   "name": "German Mafia Cup Europa Edition 2026",
+   "players": 230,
+   "series": 28,
+   "cities": 22,
+   "countries": 11
+  },
+  {
+   "id": 670,
+   "name": "Васлуйская Битва 2026. Реванш.",
+   "players": 40,
+   "series": 8,
+   "cities": 2,
+   "countries": 2
+  },
+  {
+   "id": 685,
+   "name": "Arena Moldova Cup",
+   "players": 74,
+   "series": 11,
+   "cities": 6,
+   "countries": 5
+  },
+  {
+   "id": 694,
+   "name": "Central Euro Cup 2026",
+   "players": 132,
+   "series": 15,
+   "cities": 11,
+   "countries": 8
+  },
+  {
+   "id": 740,
+   "name": "Benelux Plus 2026",
+   "players": 60,
+   "series": 12,
+   "cities": 8,
+   "countries": 4
+  },
+  {
+   "id": 749,
+   "name": "ЛЗГ Лига Западной Германии 2026",
+   "players": 59,
+   "series": 7,
+   "cities": 6,
+   "countries": 2
+  },
+  {
+   "id": 757,
+   "name": "\"Mafia Champions league\" Europe 2026",
+   "players": 121,
+   "series": 20,
+   "cities": 9,
+   "countries": 7
+  }
+ ]
+}

@@ -1,3 +1,5 @@
+// MafgameStat | tournaments.js | v4.9 | 2026-11-09 | +664 финал German Mafia Cup 2026 (Кёльн 14–15.11): карточка, страница gmc664.html «Дорога в Кёльн» (карта финалистов), participants_664
+// MafgameStat | tournaments.js | v4.8 | 2026-11-09 | 615 Black Circle (Брюссель) -> finished (чемпион Flame 13.005, Tommy 12.26, Sэм 12.01; 12 квал + 4 финала)
 // MafgameStat | tournaments.js | v4.7 | 2026-11-09 | 645 White Mafia Best Player -> finished (чемпион aptah 10.73, Deid_Ara 9.82, Season's 9.80; 10 финалистов, 15 игр)
 // MafgameStat | tournaments.js | v4.7 | 2026-11-06 | 615: note по регламенту mafgame (формат подтверждён, победитель → финал Всемирной лиги)
 // MafgameStat | tournaments.js | v4.6 | 2026-11-06 | 687: champion/top3/mvp (Xenon, лучший игрок 4.10) — архивная карточка без победителей
@@ -28,6 +30,59 @@
 window.TOURNAMENTS_DB = {
   "tournaments": [
   {
+    "id": "664",
+    "theme": "dovod",
+    "art": "assets/gmc664_card.jpg",
+    "artRatio": "16 / 9",
+    "page": "gmc664.html",
+    "name": "German Mafia Cup Europa Edition 2026 — финал",
+    "posterTitle": "German Mafia|Cup",
+    "dates": "14–15 ноября 2026",
+    "city": "Кёльн",
+    "country": "Германия",
+    "players": 40,
+    "days": 2,
+    "stars": 4,
+    "prize": "от 2500–3000 €",
+    "status": "upcoming",
+    "phase": 3,
+    "statusLabel": "Скоро · финал самого большого серийника 2026 · 40 финалистов из 12 стран",
+    "eloAvg": 1108,
+    "eloN": 23,
+    "eloTotal": 40,
+    "mmrAvg": 1475,
+    "mmrN": 36,
+    "organizer": "Mafia Club Cologne · орг и главный судья KEX",
+    "format": "18 игр на участника",
+    "mafgame": "https://mafgame.org/tournaments/664/view",
+    "note": "Финал German Mafia Cup Europa Edition 2026: 28 серий отбора в 22 городах 11 стран, 230 игроков. В финале 40 подтверждённых участников (mafgame, снимок 09.11). Страница турнира с рассадкой откроется, когда mafgame опубликует рассадку.",
+    "sections": [
+      {
+        "href": "gmc664.html",
+        "title": "Дорога в Кёльн · карта",
+        "desc": "откуда едут финалисты, путь через серию, MMR и ELO"
+      },
+      {
+        "href": "gmc2026.html",
+        "title": "Отбор · 28 серий",
+        "desc": "слоты, очередь замен, судейство"
+      },
+      {
+        "href": "participants.html?t=664",
+        "title": "Финалисты и рейтинг",
+        "desc": "40 игроков · MMR и ELO markery"
+      },
+      {
+        "soon": true,
+        "title": "Страница турнира",
+        "desc": "рассадка, сила столов, live-результаты"
+      }
+    ],
+    "start": "2026-11-14",
+    "accent": "#ffce00",
+    "accent2": "#dd0000"
+  },
+  {
     "id": "615",
     "theme": "dovod",
     "poster": "bc",
@@ -43,9 +98,9 @@ window.TOURNAMENTS_DB = {
     "players": 30,
     "days": 2,
     "stars": 4,
-    "status": "upcoming",
-    "phase": 3,
-    "statusLabel": "Скоро · старт 7 ноября, 10:15 · 30 игроков",
+    "status": "finished",
+    "phase": 1,
+    "statusLabel": "Завершён · 16 игр (12 квал + 4 финала) · чемпион Flame",
     "eloAvg": 1163,
     "mmrAvg": 1576,
     "mmrN": 30,
@@ -54,7 +109,13 @@ window.TOURNAMENTS_DB = {
     "organizer": "AtomNøir · орг Рыба-мÓя",
     "format": "12 квал (8+4) × 3 стола → финал топ-10 (4 игры)",
     "mafgame": "https://mafgame.org/tournaments/615/view",
-    "note": "Регламент mafgame: 12 отборочных игр (8 в субботу, 4 в воскресенье) на трёх столах, финал топ-10 из 4 игр (×1.3). Победитель проходит в финал Всемирной лиги Four Seasons 2026 (Кипр, 19–20 декабря, призовой фонд 5000 €).",
+    "note": "Завершён 08.11.2026. Чемпион — Flame (Σ 13.005), 2-е Tommy (12.26), 3-е Sэм (12.01). 12 отборочных игр на трёх столах + финал топ-10 из 4 игр (×1.3). Flame проходит в финал Всемирной лиги Four Seasons 2026 (Кипр, 19–20 декабря). Таблица 1:1 с официальной mafgame.",
+    "champion": "Flame",
+    "top3": [
+      "Flame",
+      "Tommy",
+      "Sэм"
+    ],
     "sections": [
       {
         "href": "t615.html",

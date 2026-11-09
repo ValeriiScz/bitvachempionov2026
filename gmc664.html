@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- DOVOD · gmc664.html · v1.0 · 2026-11-09 · финал German Mafia Cup Europa Edition 2026 (Кёльн, 14–15.11): «Дорога в Кёльн» — интерактивная карта, откуда едут 40 финалистов (город клуба на mafgame), путь через серию отбора, MMR/ELO, масштаб серийника
+     Оглавление: 1 стиль · 2 разметка (шапка, цифры, карта, дорога, масштаб, финалисты, серии, источники) · 3 данные и расчёты · 4 карта (слои, дуги, зум) · 5 списки и таблицы
+     Данные: data/gmc664_final.json (собран 09.11 из mafgame: состав финала /tournaments/664/participants, клубы /clubs; серии и слоты — data/gmc2026.js; MMR — data/mmr.json, ELO — data/registry/elo_history.csv; масштаб — data/research/series)
+             data/gmc664_map.json (контуры стран Natural Earth 50m → коническая проекция, заранее посчитанные координаты городов)
+     Дом игрока = город его клуба на mafgame (у iceBerg клуба нет — взят город серии, где он взял слот). Расстояния — по прямой (дуга большого круга). -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GMC 2026 · финал · дорога в Кёльн — DOVOD</title>
+<meta name="description" content="Финал German Mafia Cup Europa Edition 2026 в Кёльне: откуда едут 40 финалистов самого большого серийника федерации — карта, MMR и ELO.">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Unbounded:wght@500;700;800&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── 1 · стиль: DOVOD (тёмная база, Unbounded/Inter/Mono) × German Mafia Cup (чёрный · красный · золото · белый, антиква логотипа) ── */
+:root{
+  --bg:#07070a;--panel:#0d0d11;--panel2:#131318;--line:rgba(255,206,0,.22);--line2:rgba(255,255,255,.09);
+  --blk:#1b1b1f;--red:#dd0000;--red2:#ff2b2b;--gold:#ffce00;--gold2:#ffe27a;--wht:#f2efe8;--mut:#9a968c;--dim:#5e5b55;
+  --disp:'Unbounded',system-ui,sans-serif;--ser:'Cinzel','Times New Roman',serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+html,body{max-width:100%;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--wht);font-family:'Inter',-apple-system,system-ui,sans-serif;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 480px at 18% -140px,rgba(255,206,0,.09),transparent 70%),radial-gradient(700px 420px at 100% 30%,rgba(221,0,0,.06),transparent 70%),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 72px)}
+a{color:var(--gold2);text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px 80px;position:relative;z-index:1}
+.tri{height:6px;background:linear-gradient(90deg,#2a2a2e 0 33.33%,var(--red) 33.33% 66.66%,var(--gold) 66.66%)}
+/* шапка */
+.hero{display:grid;grid-template-columns:auto 10px 1fr;gap:0 26px;align-items:center;padding:34px 0 8px}
+.hero .eg{width:150px;height:auto;filter:drop-shadow(0 14px 30px rgba(0,0,0,.6))}
+.hero .bar{align-self:stretch;width:8px;background:linear-gradient(#2a2a2e 0 33.33%,var(--red) 33.33% 66.66%,var(--gold) 66.66%);box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.kick{font:700 11px/1.4 var(--mono);letter-spacing:.26em;text-transform:uppercase;color:var(--mut)}
+.kick b{color:var(--gold)}
+.hero h1{font-family:var(--ser);font-weight:700;font-size:58px;line-height:.98;margin:10px 0 8px;letter-spacing:.02em}
+.hero h1 span{display:block}.hero h1 .r{color:var(--red)}.hero h1 .g{color:var(--gold)}
+.hero .ed{font:600 12px/1.4 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--wht);opacity:.75}
+.crown{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:9px 14px 9px 10px;border:1px solid var(--line);background:linear-gradient(90deg,rgba(255,206,0,.12),rgba(255,206,0,.02));border-radius:4px;font-size:13px;line-height:1.35}
+.crown i{font-style:normal;font-family:var(--disp);font-weight:800;color:#07070a;background:var(--gold);border-radius:3px;padding:4px 7px;font-size:11px;letter-spacing:.06em}
+.crown b{color:var(--gold2)}
+.lead{color:var(--mut);font-size:14px;line-height:1.6;max-width:760px;margin:16px 0 0}
+.lead b{color:var(--wht)}
+/* цифры */
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;margin:26px 0 0;background:var(--line2);border:1px solid var(--line2)}
+.kpi{background:var(--panel);padding:14px 14px 13px;position:relative}
+.kpi .v{font-family:var(--disp);font-weight:800;font-size:28px;line-height:1;color:var(--wht)}
+.kpi .l{font-size:11px;color:var(--mut);margin-top:7px;line-height:1.35}
+.kpi.hl .v{color:var(--gold)} .kpi.rd .v{color:var(--red2)}
+.kpi::before{content:"";position:absolute;left:0;top:0;width:22px;height:2px;background:var(--dim)}
+.kpi.hl::before{background:var(--gold)} .kpi.rd::before{background:var(--red)}
+/* секции */
+.sec{display:flex;align-items:baseline;gap:14px;margin:46px 0 14px}
+.sec h2{font-family:var(--ser);font-weight:700;font-size:26px;margin:0;letter-spacing:.03em}
+.sec .n{font:700 11px var(--mono);color:var(--red2);letter-spacing:.2em}
+.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent);align-self:center}
+.note{font-size:12.5px;color:var(--mut);line-height:1.6;margin:0 0 12px;max-width:820px}
+.note b{color:var(--wht)}
+/* переключатели */
+.ctl{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 12px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:4px;overflow:hidden;background:var(--panel)}
+.seg button{all:unset;cursor:pointer;font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:10px 12px;white-space:nowrap}
+.seg button+button{border-left:1px solid var(--line2)}
+.seg button.on{background:var(--gold);color:#07070a}
+.seg.red button.on{background:var(--red);color:#fff}
+.seg button:focus-visible{outline:2px solid var(--gold2);outline-offset:-2px}
+.ctl .lb{font:700 10px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+/* карта */
+.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:12px}
+.mapbox{align-self:start;position:relative;border:1px solid var(--line2);background:#060609;overflow:hidden;border-radius:4px;touch-action:none}
+.mapbox svg{display:block;width:100%;height:auto;cursor:grab;user-select:none;-webkit-user-select:none}
+.mapbox svg.drag{cursor:grabbing}
+.zm{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:6px;z-index:3}
+.zm button{all:unset;cursor:pointer;width:32px;height:32px;display:grid;place-items:center;background:rgba(13,13,17,.9);border:1px solid var(--line2);color:var(--wht);font:700 16px var(--mono);border-radius:3px}
+.zm button:hover{border-color:var(--gold)}
+.mlegend{position:absolute;left:10px;bottom:10px;z-index:3;background:rgba(7,7,10,.86);border:1px solid var(--line2);padding:8px 10px;border-radius:3px;font:600 10px/1.5 var(--mono);color:var(--mut);letter-spacing:.06em;max-width:calc(100% - 20px)}
+.mlegend .row{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.mlegend .t{display:inline-flex;align-items:center;gap:4px}
+.mlegend .d{width:10px;height:10px;border-radius:50%;display:inline-block;border:1px solid rgba(255,255,255,.25)}
+.country{fill:#101014;stroke:#26262c;stroke-width:.6;vector-effect:non-scaling-stroke;transition:fill .25s}
+.country.on{fill:#18181d;stroke:rgba(255,206,0,.28)}
+.lab-off{display:none}
+.grat{fill:none;stroke:rgba(255,255,255,.035);stroke-width:.5;vector-effect:non-scaling-stroke}
+.arc{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;transition:opacity .25s,stroke-width .25s}
+.arc.flow{stroke-dasharray:3 9;animation:flow 1.6s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-24}}
+.arcbase{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;transition:opacity .25s}
+svg.hasSel .arc,svg.hasSel .arcbase{opacity:.08}
+svg.hasSel .arc.sel,svg.hasSel .arcbase.sel{opacity:1}
+.node{cursor:pointer}
+.node circle.b{stroke:#07070a;stroke-width:1.5;vector-effect:non-scaling-stroke;transition:r .25s}
+.node .ring{fill:none;stroke:var(--gold);stroke-width:1.4;vector-effect:non-scaling-stroke;opacity:0}
+.node.sel .ring{opacity:1}
+.node text,.lab{font:700 11px var(--mono);fill:var(--wht);paint-order:stroke;stroke:#07070a;stroke-width:3px;stroke-linejoin:round;letter-spacing:.04em;pointer-events:none}
+.node text.c{font-size:10px;fill:#07070a;stroke:none;font-weight:800}
+svg.hasSel .node:not(.sel){opacity:.45}
+.ser{fill:none;stroke:var(--gold);stroke-width:1.1;vector-effect:non-scaling-stroke;opacity:.75}
+.ser.f{fill:rgba(255,206,0,.18)}
+.koln .p{fill:none;stroke:var(--red);stroke-width:1.5;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;animation:pulse 2.4s ease-out infinite}
+.koln .p.b{animation-delay:1.2s}
+@keyframes pulse{0%{transform:scale(.4);opacity:.95}100%{transform:scale(2.6);opacity:0}}
+.koln text{font:800 13px var(--disp);fill:var(--gold);paint-order:stroke;stroke:#07070a;stroke-width:4px;letter-spacing:.08em}
+/* боковая панель */
+.side{border:1px solid var(--line2);background:var(--panel);border-radius:4px;padding:14px;display:flex;flex-direction:column;min-height:0;max-height:640px}
+.side h3{font-family:var(--ser);font-size:20px;margin:0;letter-spacing:.03em}
+.side .sub{font:600 10.5px/1.5 var(--mono);color:var(--mut);letter-spacing:.08em;text-transform:uppercase;margin:4px 0 10px}
+.side .list{overflow:auto;margin:0 -6px;padding:0 6px;flex:1;min-height:0}
+.pl{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line2)}
+.pl:last-child{border-bottom:0}
+.av{width:30px;height:30px;border-radius:50%;background:#1d1d22 center/cover no-repeat;border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;font:700 10px var(--mono);color:var(--mut)}
+.pl .nm{font-weight:700;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl .mt{font-size:11px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl .rv{text-align:right;font:700 13px var(--mono)}
+.pl .rv small{display:block;font:600 10px var(--mono);color:var(--dim);margin-top:2px}
+.tier{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border-radius:2px;font:800 10px var(--mono);margin-left:6px;vertical-align:1px}
+.hint{font-size:12px;color:var(--mut);line-height:1.6}
+.hint b{color:var(--wht)}
+.back{all:unset;cursor:pointer;font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+/* дорога */
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.rc{border:1px solid var(--line2);background:var(--panel);padding:13px 14px;border-radius:4px}
+.rc .k{font:700 10px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.rc .v{font-family:var(--disp);font-weight:800;font-size:22px;margin-top:7px;color:var(--wht)}
+.rc .v small{font:700 11px var(--mono);color:var(--mut);margin-left:4px}
+.rc .s{font-size:12px;color:var(--mut);margin-top:5px;line-height:1.45}
+.rc .s b{color:var(--wht)}
+/* бары */
+.bars{display:flex;flex-direction:column;gap:7px}
+.br{display:grid;grid-template-columns:200px minmax(0,1fr) 64px;gap:12px;align-items:center;font-size:12.5px}
+.br .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--mut)}
+.br .tr{height:14px;background:#141418;position:relative;border-radius:2px;overflow:hidden}
+.br .fl{position:absolute;inset:0 auto 0 0;background:#3a3a42;border-radius:2px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.br .vv{font:700 12px var(--mono);text-align:right}
+.br.me .nm{color:var(--gold);font-weight:700}
+.br.me .fl{background:linear-gradient(90deg,var(--red),var(--gold))}
+.cmpgrid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px}
+.box{border:1px solid var(--line2);background:var(--panel);padding:16px;border-radius:4px}
+.box h4{margin:0 0 12px;font:700 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.box h4 b{color:var(--gold)}
+.big{font-family:var(--ser);font-size:20px;line-height:1.35;margin:0}
+.big b{color:var(--gold)} .big em{font-style:normal;color:var(--red2)}
+/* таблица */
+.tbl{overflow-x:auto;border:1px solid var(--line2);background:var(--panel);border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:640px}
+th{font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:var(--panel2);text-align:left;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap;cursor:pointer}
+th.r,td.r{text-align:right}
+td{padding:8px 10px;border-bottom:1px solid var(--line2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.nk{font-weight:700}
+td .flag{margin-right:6px}
+td.mut{color:var(--mut)}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:rgba(255,206,0,.04)}
+/* серии */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.sc{border:1px solid var(--line2);border-left:3px solid var(--dim);background:var(--panel);padding:8px 10px;border-radius:2px;cursor:pointer}
+.sc:hover{border-left-color:var(--gold)}
+.sc .d{font:700 10px var(--mono);color:var(--dim);letter-spacing:.08em}
+.sc .c{font-weight:700;font-size:13px;margin-top:3px}
+.sc .w{font-size:11px;color:var(--mut);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc.m1{border-left-color:var(--red)} .sc.m2{border-left-color:var(--gold)}
+.src{margin-top:46px;font-size:11.5px;color:var(--dim);line-height:1.7;border-top:1px solid var(--line2);padding-top:16px}
+.src b{color:var(--mut)}
+@media (max-width:980px){.mapgrid{grid-template-columns:1fr}.side{max-height:none}.kpis{grid-template-columns:repeat(3,1fr)}.road{grid-template-columns:repeat(2,1fr)}.cmpgrid{grid-template-columns:1fr}}
+@media (max-width:640px){
+  .hero{grid-template-columns:auto 6px 1fr;gap:0 14px;padding-top:22px}.hero .eg{width:78px}.hero h1{font-size:34px}
+  .kpi .v{font-size:22px}.kpis{grid-template-columns:repeat(2,1fr)}
+  .sec h2{font-size:21px}.br{grid-template-columns:110px minmax(0,1fr) 46px;gap:8px;font-size:11.5px}
+  .seg button{padding:9px 9px;font-size:10px}.road{grid-template-columns:1fr 1fr;gap:8px}.rc .v{font-size:18px}
+  .mlegend{font-size:9px}
+}
+@media (prefers-reduced-motion:reduce){.arc.flow,.koln .p{animation:none}}
+</style>
+<style id="dvcrumbcss">
+.dv-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;margin:0;
+ font:700 10px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
+ background:#05060a;border-bottom:1px solid rgba(255,255,255,.10);position:relative;z-index:60}
+.dv-crumb a{color:#8a91a0;text-decoration:none;border:0;transition:color .15s}
+.dv-crumb a.dv-home{color:#f5ff35;font-weight:800}
+.dv-crumb a:hover{color:#eef3fb}
+.dv-crumb i{color:#39404c;font-style:normal}
+.dv-crumb span{color:#5f6675}
+</style>
+</head>
+<body>
+<nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><span>GMC 2026 · финал</span></nav>
+<div class="tri"></div>
+<div class="wrap">
+
+<!-- ── 2 · разметка ── -->
+<header class="hero">
+  <img class="eg" src="assets/gmc664_eagle.png" alt="">
+  <div class="bar"></div>
+  <div>
+    <div class="kick">Финал · <b>Кёльн</b> · 14–15 ноября 2026 · ★★★★</div>
+    <h1><span>German</span><span class="r">Mafia</span><span class="g">Cup</span></h1>
+    <div class="ed">Europa Edition 2026</div>
+    <div class="crown"><i>№1</i><span>Самый большой серийник федерации в 2026 году — <b id="crownTxt">28 серий в 22 городах 11 стран</b></span></div>
+  </div>
+</header>
+<p class="lead" id="lead">Девять месяцев отбора, от Лиссабона до Тбилиси. Каждая серия — 10 игроков и 9 игр, первые два места едут в Кёльн. Эта страница — про дорогу: откуда собираются финалисты, какой путь они прошли и с какой силой приезжают.</p>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="sec"><span class="n">01</span><h2>Дорога в Кёльн</h2></div>
+<p class="note">Точка на карте — город клуба игрока на mafgame, размер — сколько финалистов оттуда, цвет — средний рейтинг. Нажмите на город, чтобы увидеть игроков. В режиме «через серию» линия идёт из дома в город, где игрок взял слот, и оттуда в Кёльн; золотые ромбы — все 28 серий отбора.</p>
+<div class="ctl">
+  <span class="lb">путь</span><div class="seg" id="segMode"><button data-v="home" class="on">из дома</button><button data-v="path">через серию</button></div>
+  <span class="lb">точки</span><div class="seg" id="segGeo"><button data-v="city" class="on">города</button><button data-v="country">страны</button></div>
+  <span class="lb">рейтинг</span><div class="seg red" id="segMetric"><button data-v="mmr" class="on">MMR</button><button data-v="elo">ELO</button></div>
+</div>
+<div class="mapgrid">
+  <div class="mapbox" id="mapbox">
+    <div class="zm"><button id="zin" aria-label="Приблизить">+</button><button id="zout" aria-label="Отдалить">−</button><button id="zctr" aria-label="Центр Европы" title="Центр Европы крупно" style="font-size:13px">◎</button><button id="zre" aria-label="Вся карта" title="Вся карта" style="font-size:12px">⟲</button></div>
+    <svg id="map" viewBox="0 0 1000 700" aria-label="Карта: откуда едут финалисты GMC 2026"></svg>
+    <div class="mlegend" id="mleg"></div>
+  </div>
+  <aside class="side" id="side"></aside>
+</div>
+<div class="road" id="road"></div>
+
+<div class="sec"><span class="n">02</span><h2>Масштаб</h2></div>
+<div class="cmpgrid">
+  <div class="box">
+    <h4>Серийники федерации 2026 · <b id="cmpLab">серий</b></h4>
+    <div class="ctl" style="margin-bottom:14px"><div class="seg" id="segCmp"><button data-v="series" class="on">серии</button><button data-v="players">игроки</button><button data-v="cities">города</button><button data-v="countries">страны</button></div></div>
+    <div class="bars" id="cmp"></div>
+  </div>
+  <div class="box" id="scaleTxt"></div>
+</div>
+
+<div class="sec"><span class="n">03</span><h2>Финалисты</h2></div>
+<p class="note" id="rosterNote"></p>
+<div class="ctl"><span class="lb">рейтинг</span><div class="seg red" id="segMetric2"><button data-v="mmr" class="on">MMR</button><button data-v="elo">ELO</button></div></div>
+<div class="bars" id="ctryBars" style="margin:0 0 14px"></div>
+<div class="tbl"><table><thead><tr><th>#</th><th>Игрок</th><th>Клуб · город</th><th>Слот в финал</th><th class="r" id="thR">MMR</th><th class="r">км до Кёльна</th></tr></thead><tbody id="tb"></tbody></table></div>
+
+<div class="sec"><span class="n">04</span><h2>28 серий отбора</h2></div>
+<p class="note">По датам, с февраля по октябрь. В карточке — два игрока, взявших слоты. Нажмите — серия подсветится на карте. Полный разбор отбора, очередь замен и судейство — на странице <a href="gmc2026.html">GMC Europa 2026</a>.</p>
+<div class="sgrid" id="sgrid"></div>
+
+<div class="src" id="src"></div>
+</div>
+
+<script>
+/* ── 3 · данные и расчёты ── */
+const KOLN='Cologne';
+const TIERC={L:'#ffce00',S:'#dd0000',A:'#f2efe8',B:'#b8b3a7',C:'#7f7a71',D:'#55524c',E:'#3b3935',F:'#2a2a2e'};
+const TIERT={L:'#07070a',S:'#fff',A:'#07070a',B:'#07070a',C:'#fff',D:'#fff',E:'#fff',F:'#fff'};
+const S={mode:'home',geo:'city',metric:'mmr',sel:null,cmp:'series'};
+let D,M,P=[];
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function km(a,b){const R=6371,r=Math.PI/180,dl=(b.lat-a.lat)*r,dn=(b.lon-a.lon)*r,x=Math.sin(dl/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
+function fmt(n){return Math.round(n).toLocaleString('ru-RU').replace(/,/g,' ');}
+function plW(n,a,b,c){const m=Math.abs(n)%100,m1=m%10;if(m>10&&m<20)return c;if(m1>1&&m1<5)return b;if(m1===1)return a;return c;}
+/* границы тиров markery — по фактическим ELO/тирам в data/registry/elo_history.csv (L 1717+, S 1313+, A 1198+, B 1075+, C 994+, D 939+, E 887+) */
+const ELOT={L:1700,S:1300,A:1197,B:1075,C:995,D:938,E:885};
+function eloTier(v){if(v==null)return null;for(const k of ['L','S','A','B','C','D','E'])if(v>=ELOT[k])return k;return 'F';}
+function val(p){return S.metric==='mmr'?p.mmr:p.elo;}
+function tierOf(p){return S.metric==='mmr'?p.mmrTier:(p.eloTier||eloTier(p.elo));}
+function tierByVal(v){if(v==null)return null;if(S.metric==='mmr'){const t=D.tiers;for(const k of ['L','S','A','B','C','D','E'])if(v>=t[k])return k;return 'F';}return eloTier(v);}
+function chip(t){return t?`<span class="tier" style="background:${TIERC[t]};color:${TIERT[t]}">${t}</span>`:'';}
+function noVal(){return S.metric==='mmr'?'новичок':'нет ELO';}
+function cityRu(c){return (D.cities[c]||{}).ru||c;}
+function ctryRu(cc){return D.countries[cc]||cc;}
+const FLAG={DE:'🇩🇪',CZ:'🇨🇿',PL:'🇵🇱',NL:'🇳🇱',BE:'🇧🇪',CH:'🇨🇭',ES:'🇪🇸',IL:'🇮🇱',PT:'🇵🇹',GE:'🇬🇪',RO:'🇷🇴',TR:'🇹🇷'};
+
+Promise.all([fetch('data/gmc664_final.json').then(r=>r.json()),fetch('data/gmc664_map.json').then(r=>r.json())]).then(([d,m])=>{
+  D=d;M=m;
+  const K=D.cities[KOLN];
+  P=D.players.map(p=>{const h=D.cities[p.home];const sc=p.seriesCity?D.cities[p.seriesCity]:null;
+    return Object.assign({},p,{cc:h.cc,dist:km(h,K),pathKm:sc?km(h,sc)+km(sc,K):km(h,K)});});
+  renderHead();buildMap();renderAll();renderCmp();renderSeries();renderSrc();
+}).catch(e=>{document.getElementById('side').innerHTML='<div class="hint">Не удалось загрузить данные карты: '+esc(e.message)+'</div>';});
+
+function renderHead(){
+  const s=D.series.length,cities=new Set(D.series.map(x=>x.city)).size,ctr=new Set(D.series.map(x=>D.cities[x.city].cc)).size;
+  const me=D.compare.find(c=>c.id===664)||{};
+  const games=D.series.reduce((a,x)=>a+9,0);
+  document.getElementById('crownTxt').textContent=`${s} ${plW(s,'серия','серии','серий')} в ${cities} городах ${ctr} стран`;
+  const nC=new Set(P.map(p=>p.cc)).size;
+  document.getElementById('kpis').innerHTML=[
+    [s,'серий отбора · февраль — октябрь','hl'],[cities,'городов, где шёл отбор',''],[ctr,'стран','' ],
+    [me.players||'—','игроков прошли через серии',''],[games,'игр в отборе',''],[P.length,'финалистов из '+nC+' стран · 18 игр в финале','rd']]
+    .map(([v,l,c])=>`<div class="kpi ${c}"><div class="v">${v}</div><div class="l">${esc(l)}</div></div>`).join('');
+}
+
+/* ── 4 · карта ── */
+const NS='http://www.w3.org/2000/svg';
+let VB={x:0,y:0,w:1000,h:700},G={};
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function pt(c){return M.pts[c];}
+function buildMap(){
+  const svg=document.getElementById('map');svg.innerHTML='';
+  const defs=el('defs',{},svg);
+  const lg=el('linearGradient',{id:'gArc',gradientUnits:'userSpaceOnUse'},defs);
+  el('stop',{offset:'0',  'stop-color':'#ffce00'},lg);el('stop',{offset:'1','stop-color':'#dd0000'},lg);
+  const f=el('filter',{id:'glow',x:'-50%',y:'-50%',width:'200%',height:'200%'},defs);el('feGaussianBlur',{stdDeviation:'3',result:'b'},f);
+  const mg=el('feMerge',{},f);el('feMergeNode',{in:'b'},mg);el('feMergeNode',{in:'SourceGraphic'},mg);
+  G.root=el('g',{},svg);
+  el('path',{d:M.grat,class:'grat'},G.root);
+  const homeCC=new Set(P.map(p=>p.cc));
+  G.countries=el('g',{},G.root);
+  M.countries.forEach(c=>{const p=el('path',{d:c.d,class:'country'+(c.cc&&homeCC.has(c.cc)?' on':''),'data-cc':c.cc||''},G.countries);
+    const t=el('title',{},p);t.textContent=c.cc?ctryRu(c.cc):c.n;});
+  G.ser=el('g',{},G.root);G.arcs=el('g',{},G.root);G.nodes=el('g',{},G.root);G.koln=el('g',{class:'koln'},G.root);
+  /* серии отбора — ромбы */
+  const byCity={};D.series.forEach(s=>(byCity[s.city]=byCity[s.city]||[]).push(s));
+  Object.entries(byCity).forEach(([c,arr])=>{const [x,y]=pt(c);const r=3.2+arr.length*1.1;
+    const d=el('path',{d:`M${x} ${y-r}L${x+r} ${y}L${x} ${y+r}L${x-r} ${y}Z`,class:'ser','data-city':c},G.ser);
+    const t=el('title',{},d);t.textContent=`${cityRu(c)}: ${arr.length} ${plW(arr.length,'серия','серии','серий')} отбора`;});
+  /* Кёльн */
+  const [kx,ky]=pt(KOLN);
+  el('circle',{cx:kx,cy:ky,r:9,class:'p'},G.koln);el('circle',{cx:kx,cy:ky,r:9,class:'p b'},G.koln);
+  el('circle',{cx:kx,cy:ky,r:6.5,fill:'#dd0000',stroke:'#ffce00','stroke-width':2,filter:'url(#glow)'},G.koln);
+  const kt=el('text',{x:kx+12,y:ky-12},G.koln);kt.textContent='KÖLN · ФИНАЛ';
+  /* зум и перетаскивание */
+  const box=document.getElementById('mapbox');
+  const setVB=()=>svg.setAttribute('viewBox',`${VB.x} ${VB.y} ${VB.w} ${VB.h}`);
+  const clamp=()=>{VB.w=Math.max(160,Math.min(1000,VB.w));VB.h=VB.w*0.7;VB.x=Math.max(-100,Math.min(1100-VB.w,VB.x));VB.y=Math.max(-80,Math.min(780-VB.h,VB.y));};
+  const zoom=(k,cx,cy)=>{cx=cx==null?VB.x+VB.w/2:cx;cy=cy==null?VB.y+VB.h/2:cy;const nw=VB.w*k;VB.x=cx-(cx-VB.x)*k;VB.y=cy-(cy-VB.y)*k;VB.w=nw;VB.h=nw*.7;clamp();setVB();scaleLabels();};
+  document.getElementById('zin').onclick=()=>zoom(.7);document.getElementById('zout').onclick=()=>zoom(1/.7);
+  document.getElementById('zre').onclick=()=>{VB={x:0,y:0,w:1000,h:700};setVB();scaleLabels();};
+  document.getElementById('zctr').onclick=()=>{const k=pt(KOLN);VB.w=330;VB.h=231;VB.x=k[0]-VB.w*.42;VB.y=k[1]-VB.h*.42;clamp();setVB();scaleLabels();};
+  const toSvg=(e)=>{const r=svg.getBoundingClientRect();return [VB.x+(e.clientX-r.left)/r.width*VB.w,VB.y+(e.clientY-r.top)/r.height*VB.h];};
+  svg.addEventListener('wheel',e=>{if(!e.ctrlKey&&!e.metaKey&&Math.abs(e.deltaY)<40&&!e.deltaMode)return;e.preventDefault();const [x,y]=toSvg(e);zoom(e.deltaY>0?1.15:1/1.15,x,y);},{passive:false});
+  const ptrs=new Map();let start=null,moved=false;
+  svg.addEventListener('pointerdown',e=>{ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});moved=false;
+    if(ptrs.size===1)start={x:e.clientX,y:e.clientY,vx:VB.x,vy:VB.y};
+    if(ptrs.size===2){const [a,b]=[...ptrs.values()];start={pinch:Math.hypot(a.x-b.x,a.y-b.y),w:VB.w,vx:VB.x,vy:VB.y,cx:(a.x+b.x)/2,cy:(a.y+b.y)/2};}});
+  svg.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId)||!start)return;ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});const r=svg.getBoundingClientRect();
+    if(ptrs.size===1&&start.pinch==null){const dx=e.clientX-start.x,dy=e.clientY-start.y;if(Math.abs(dx)+Math.abs(dy)>4){moved=true;svg.classList.add('drag');try{svg.setPointerCapture(e.pointerId);}catch(_){}}
+      if(moved){VB.x=start.vx-dx/r.width*VB.w;VB.y=start.vy-dy/r.height*VB.h;clamp();setVB();}}
+    else if(ptrs.size===2&&start.pinch){moved=true;const [a,b]=[...ptrs.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);const k=start.pinch/d;
+      const cx=start.vx+(start.cx-r.left)/r.width*start.w,cy=start.vy+(start.cy-r.top)/r.height*start.w*.7;
+      VB.w=start.w*k;VB.h=VB.w*.7;VB.x=cx-(cx-start.vx)*k;VB.y=cy-(cy-start.vy)*k;clamp();setVB();scaleLabels();}});
+  const up=e=>{ptrs.delete(e.pointerId);svg.classList.remove('drag');if(!ptrs.size)start=null;};
+  svg.addEventListener('pointerup',e=>{const wasMoved=moved;up(e);if(!wasMoved&&e.target===svg||(!wasMoved&&e.target.closest&&!e.target.closest('.node')&&!e.target.closest('.ser'))){if(S.sel){S.sel=null;renderAll();}}});
+  svg.addEventListener('pointercancel',up);
+  G.svg=svg;G.moved=()=>moved;
+}
+function scaleLabels(){const k=VB.w/1000;G.svg.style.setProperty('--k',k);
+  G.svg.querySelectorAll('.node text,.koln text').forEach(t=>{const fs=+t.dataset.fs||(t.classList.contains('c')?10:t.closest('.koln')?13:11);t.dataset.fs=fs;t.style.fontSize=(fs*Math.max(.45,k))+'px';});
+  G.svg.querySelectorAll('.node circle.b,.node circle.ring').forEach(c=>{const r=+c.dataset.r;c.setAttribute('r',r*Math.max(.5,k));});
+  declutter(k);}
+/* подписи без наложений: сначала Кёльн и крупные узлы, подпись, которая налезает на уже поставленную, прячем (видна при зуме или выборе) */
+function declutter(k){const placed=[];const kk=G.koln.querySelector('text');if(kk){const x=+kk.getAttribute('x'),y=+kk.getAttribute('y');placed.push([x,y-13*Math.max(.45,k),x+120*Math.max(.45,k),y+3]);}
+  [...G.nodes.querySelectorAll('.node')].sort((a,b)=>(+b.dataset.n)-(+a.dataset.n)).forEach(g=>{const t=g.querySelector('text:not(.c)');if(!t)return;const fs=(+t.dataset.fs||11)*Math.max(.45,k);
+    const x0=+t.getAttribute('x'),y=+t.getAttribute('y'),w=t.textContent.length*fs*.66,x=t.getAttribute('text-anchor')==='end'?x0-w:x0,bb=[x,y-fs,x+w,y+2];
+    const hit=placed.some(p=>!(bb[2]<p[0]||bb[0]>p[2]||bb[3]<p[1]||bb[1]>p[3]));const show=!hit||g.classList.contains('sel');t.classList.toggle('lab-off',!show);if(show)placed.push(bb);});}
+
+/* узлы: город или страна */
+function groups(){
+  const key=p=>S.geo==='city'?p.home:p.cc;const g={};
+  P.forEach(p=>{const k=key(p);(g[k]=g[k]||{key:k,ps:[]}).ps.push(p);});
+  Object.values(g).forEach(o=>{
+    if(S.geo==='city'){o.xy=pt(o.key);o.lab=cityRu(o.key);o.cc=D.cities[o.key].cc;}
+    else{const cs=[...new Set(o.ps.map(p=>p.home))];const w=cs.map(c=>[pt(c),o.ps.filter(p=>p.home===c).length]);const n=w.reduce((a,x)=>a+x[1],0);
+      o.xy=[w.reduce((a,x)=>a+x[0][0]*x[1],0)/n,w.reduce((a,x)=>a+x[0][1]*x[1],0)/n];o.lab=ctryRu(o.key);o.cc=o.key;o.cities=cs;}
+    const vs=o.ps.map(val).filter(v=>v!=null);o.avg=vs.length?vs.reduce((a,b)=>a+b,0)/vs.length:null;o.nv=vs.length;o.tier=tierByVal(o.avg);
+    o.dist=Math.round(o.ps.reduce((a,p)=>a+p.dist,0)/o.ps.length);});
+  return Object.values(g).sort((a,b)=>b.ps.length-a.ps.length);
+}
+function curve(a,b,bend){const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy)||1,h=Math.min(90,L*(bend||.22));
+  return `M${a[0].toFixed(1)} ${a[1].toFixed(1)}Q${(mx-dy/L*h).toFixed(1)} ${(my+dx/L*h).toFixed(1)} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`;}
+function drawArcs(gs){
+  G.arcs.innerHTML='';const K=pt(KOLN);
+  const routes={};/* сворачиваем одинаковые маршруты: толщина = число игроков */
+  P.forEach(p=>{const nodeKey=S.geo==='city'?p.home:p.cc;const from=gs.find(o=>o.key===nodeKey).xy;
+    let segs=[];if(S.mode==='path'&&p.seriesCity){const sc=pt(p.seriesCity);if(Math.hypot(sc[0]-from[0],sc[1]-from[1])>2)segs.push([from,sc,'h:'+nodeKey+'>'+p.seriesCity]);if(p.seriesCity!==KOLN)segs.push([sc,K,'s:'+p.seriesCity]);}
+    else if(Math.hypot(K[0]-from[0],K[1]-from[1])>2)segs.push([from,K,'h:'+nodeKey]);
+    segs.forEach(([a,b,id])=>{const r=routes[id]||(routes[id]={a,b,n:0,keys:new Set()});r.n++;r.keys.add(nodeKey);});});
+  Object.entries(routes).sort((x,y)=>y[1].n-x[1].n).forEach(([id,r])=>{
+    const d=curve(r.a,r.b,id.startsWith('s:')?.18:.24);const w=1+Math.sqrt(r.n)*1.3;const sel=S.sel&&r.keys.has(S.sel);
+    const cls=sel?' sel':'';const keys=[...r.keys].join('|');
+    el('path',{d,class:'arcbase'+cls,stroke:'url(#gArc)','stroke-opacity':.28,'stroke-width':w+2,'data-k':keys},G.arcs);
+    const fp=el('path',{d,class:'arc flow'+cls,stroke:id.startsWith('s:')?'#ffce00':'#ff4d3a','stroke-width':Math.max(1.1,w*.55),'data-k':keys,style:`animation-duration:${(1.2+Math.random()*1.2).toFixed(2)}s`},G.arcs);
+  });
+}
+function drawNodes(gs){
+  G.nodes.innerHTML='';
+  gs.slice().reverse().forEach(o=>{const [x,y]=o.xy;const r=5+Math.sqrt(o.ps.length)*4.2;
+    const g=el('g',{class:'node'+(S.sel===o.key?' sel':''),'data-k':o.key,'data-n':o.ps.length,tabindex:0,role:'button','aria-label':o.lab+': '+o.ps.length},G.nodes);
+    const ring=el('circle',{cx:x,cy:y,r:r+5,class:'ring'},g);ring.dataset.r=r+5;
+    const c=el('circle',{cx:x,cy:y,r,class:'b',fill:o.tier?TIERC[o.tier]:'#2a2a2e'},g);c.dataset.r=r;
+    if(o.ps.length>1){const t=el('text',{x,y:y+3.5,'text-anchor':'middle',class:'c',fill:o.tier?TIERT[o.tier]:'#fff',style:`fill:${o.tier?TIERT[o.tier]:'#fff'}`},g);t.textContent=o.ps.length;}
+    const lt=x>880?el('text',{x:x-r-4,y:y-r+2,'text-anchor':'end'},g):el('text',{x:x+r+4,y:y-r+2},g);lt.textContent=o.lab;
+    const tt=el('title',{},g);tt.textContent=`${o.lab} — ${o.ps.length} ${plW(o.ps.length,'финалист','финалиста','финалистов')}`;
+    const pick=()=>{if(G.moved&&G.moved())return;S.sel=S.sel===o.key?null:o.key;renderAll();};
+    g.addEventListener('click',pick);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
+  });
+}
+function legend(){
+  const ks=['L','S','A','B','C','D','E'];
+  const th=S.metric==='mmr'?D.tiers:ELOT;
+  document.getElementById('mleg').innerHTML=`<div class="row"><span>${S.metric.toUpperCase()} ·</span>${ks.map(k=>`<span class="t"><span class="d" style="background:${TIERC[k]}"></span>${k}${th[k]?' '+th[k]+'+':''}</span>`).join('')}</div>
+    <div class="row" style="margin-top:3px"><span class="t"><span style="display:inline-block;width:16px;height:2px;background:#ff4d3a"></span>${S.mode==='path'?'дом → серия':'дом → Кёльн'}</span>${S.mode==='path'?'<span class="t"><span style="display:inline-block;width:16px;height:2px;background:#ffce00"></span>серия → Кёльн</span>':''}<span class="t"><span style="display:inline-block;width:8px;height:8px;border:1px solid #ffce00;transform:rotate(45deg)"></span>серия отбора</span></div>`;
+}
+function hilitSeries(){G.ser.querySelectorAll('.ser').forEach(s=>{const c=s.dataset.city;let on=false;
+  if(S.sel){const ps=P.filter(p=>(S.geo==='city'?p.home:p.cc)===S.sel);on=ps.some(p=>p.seriesCity===c);}
+  if(S.selSeries)on=c===S.selSeries;s.classList.toggle('f',on);});}
+
+/* ── 5 · списки и таблицы ── */
+function plRow(p){const v=val(p),t=tierOf(p);
+  return `<div class="pl"><div class="av" style="${p.av?`background-image:url('${esc(p.av)}')`:''}">${p.av?'':esc((p.nick||'?').slice(0,2))}</div>
+  <div style="min-width:0"><div class="nm">${esc(p.nick)}</div><div class="mt">${esc(p.club||'без клуба')} · слот: ${p.via==='reserve'?'замена, 3-е место':p.place+'-е место'}, ${esc(p.series||'—')}</div></div>
+  <div class="rv">${v!=null?fmt(v):'<span style="color:var(--dim)">'+noVal()+'</span>'}${chip(t)}<small>${fmt(p.dist)} км</small></div></div>`;}
+function renderSide(gs){
+  const side=document.getElementById('side');const byV=(a,b)=>(val(b)??-1)-(val(a)??-1);
+  if(S.sel){const o=gs.find(x=>x.key===S.sel);if(!o){S.sel=null;return renderSide(gs);}
+    const sub=S.geo==='city'?`${ctryRu(o.cc)} · ${fmt(o.dist)} км до Кёльна`:`${o.cities.map(cityRu).join(', ')}`;
+    side.innerHTML=`<button class="back" id="bk">← вся карта</button><h3>${FLAG[o.cc]||''} ${esc(o.lab)}</h3>
+      <div class="sub">${o.ps.length} ${plW(o.ps.length,'финалист','финалиста','финалистов')} · ${sub}${o.avg!=null?` · ср. ${S.metric.toUpperCase()} ${fmt(o.avg)}${o.nv<o.ps.length?` (${o.nv} из ${o.ps.length})`:''}`:''}</div>
+      <div class="list">${o.ps.slice().sort(byV).map(plRow).join('')}</div>`;
+    document.getElementById('bk').onclick=()=>{S.sel=null;renderAll();};return;}
+  const far=P.slice().sort((a,b)=>b.dist-a.dist);
+  side.innerHTML=`<h3>${P.length} финалистов</h3><div class="sub">${gs.length} ${S.geo==='city'?plW(gs.length,'город','города','городов'):plW(gs.length,'страна','страны','стран')} · по ${S.metric.toUpperCase()}</div>
+    <div class="hint" style="margin-bottom:10px">Нажмите на ${S.geo==='city'?'город':'страну'} на карте. Ниже — все, отсортированы по ${S.metric.toUpperCase()}.</div>
+    <div class="list">${P.slice().sort(byV).map(plRow).join('')}</div>`;
+}
+function renderRoad(){
+  const K=D.cities[KOLN];const tot=P.reduce((a,p)=>a+p.dist,0);const far=P.slice().sort((a,b)=>b.dist-a.dist);
+  const home=P.filter(p=>p.dist<1);const pathTot=P.reduce((a,p)=>a+p.pathKm,0);
+  const abroad=P.filter(p=>p.cc!=='DE').length;
+  const maxPath=P.slice().sort((a,b)=>b.pathKm-a.pathKm)[0];
+  document.getElementById('road').innerHTML=[
+    ['Вместе до Кёльна',`${fmt(tot)}<small>км</small>`,`по прямой из городов клубов — это <b>${(tot/40075).toFixed(2).replace('.',',')}</b> оборота вокруг Земли`],
+    ['Дальше всех',`${fmt(far[0].dist)}<small>км</small>`,`<b>${esc(far[0].nick)}</b> (${cityRu(far[0].home)}), затем <b>${esc(far[1].nick)}</b> и <b>${esc(far[2].nick)}</b> (${cityRu(far[1].home)})`],
+    ['Из-за границы',`${abroad}<small>из ${P.length}</small>`,`финалистов едут не из Германии; дома в Кёльне — <b>${home.map(p=>esc(p.nick)).join(', ')||'никого'}</b>`],
+    ['Самый длинный путь',`${fmt(maxPath.pathKm)}<small>км</small>`,`<b>${esc(maxPath.nick)}</b>: ${cityRu(maxPath.home)} → серия ${esc(maxPath.series)} → Кёльн`]]
+    .map(([k,v,s])=>`<div class="rc"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join('');
+}
+function renderTable(){
+  document.getElementById('thR').textContent=S.metric.toUpperCase();
+  const rows=P.slice().sort((a,b)=>(val(b)??-1)-(val(a)??-1));
+  document.getElementById('tb').innerHTML=rows.map((p,i)=>`<tr data-k="${esc(S.geo==='city'?p.home:p.cc)}"><td class="mut">${i+1}</td><td class="nk">${esc(p.nick)}</td>
+    <td class="mut"><span class="flag">${FLAG[p.cc]||''}</span>${esc(p.club||'—')} · ${cityRu(p.home)}${p.homeSrc==='series'?'*':''}</td>
+    <td class="mut">${p.via==='reserve'?'замена · 3-е':p.place+'-е'} · ${esc(p.series||'—')}</td>
+    <td class="r">${val(p)!=null?fmt(val(p))+chip(tierOf(p)):'<span style="color:var(--dim)">'+noVal()+'</span>'}</td><td class="r mut">${fmt(p.dist)}</td></tr>`).join('');
+  document.querySelectorAll('#tb tr').forEach(tr=>tr.onclick=()=>{S.sel=tr.dataset.k;renderAll();document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'});});
+  const nv=P.filter(p=>val(p)!=null);const avg=nv.reduce((a,p)=>a+val(p),0)/nv.length;
+  const tiers={};nv.forEach(p=>{const t=tierOf(p);tiers[t]=(tiers[t]||0)+1;});
+  const top=['L','S','A'].map(k=>tiers[k]?`${k} — ${tiers[k]}`:'').filter(Boolean).join(', ');
+  document.getElementById('rosterNote').innerHTML=`Подтверждённый состав на mafgame (снимок ${D.snap.split('-').reverse().join('.')}): <b>${P.length}</b> игроков. Средний ${S.metric.toUpperCase()} — <b>${fmt(avg)}</b> по ${nv.length} из ${P.length}${S.metric==='elo'?' (ELO markery есть не у всех: берём последний снимок из прошлых турниров DOVOD)':' (без MMR на mafiastats — «новичок»)'}. Верхние тиры: ${top||'—'}. * — у игрока нет клуба на mafgame, город взят по серии, где он взял слот.`;
+  /* страны: столбики */
+  const cs={};P.forEach(p=>{(cs[p.cc]=cs[p.cc]||[]).push(p);});const arr=Object.entries(cs).sort((a,b)=>b[1].length-a[1].length);const mx=arr[0][1].length;
+  document.getElementById('ctryBars').innerHTML=arr.map(([cc,ps])=>{const vs=ps.map(val).filter(v=>v!=null);const a=vs.length?vs.reduce((x,y)=>x+y,0)/vs.length:null;
+    return `<div class="br${cc==='DE'?' me':''}"><div class="nm">${FLAG[cc]||''} ${ctryRu(cc)}</div><div class="tr"><div class="fl" style="width:${ps.length/mx*100}%"></div></div><div class="vv">${ps.length}${a!=null?` <span style="color:var(--dim);font-size:10px">${fmt(a)}</span>`:''}</div></div>`;}).join('');
+}
+function renderAll(){
+  const gs=groups();
+  G.svg.classList.toggle('hasSel',!!S.sel);
+  const cnt={};P.forEach(p=>cnt[p.cc]=(cnt[p.cc]||0)+1);const mx=Math.max(...Object.values(cnt));
+  G.countries.querySelectorAll('.country').forEach(c=>{const n=cnt[c.dataset.cc];c.style.fill=(S.geo==='country'&&n)?`rgba(255,206,0,${(.06+.22*Math.sqrt(n/mx)).toFixed(3)})`:'';});
+  drawArcs(gs);drawNodes(gs);hilitSeries();legend();scaleLabels();renderSide(gs);renderRoad();renderTable();
+  G.arcs.querySelectorAll('path').forEach(p=>{if(S.sel&&p.dataset.k.split('|').includes(S.sel))p.classList.add('sel');});
+}
+function renderCmp(){
+  const lab={series:'серий',players:'игроков',cities:'городов',countries:'стран'};
+  document.getElementById('cmpLab').textContent=lab[S.cmp];
+  const arr=D.compare.slice().sort((a,b)=>b[S.cmp]-a[S.cmp]);const mx=arr[0][S.cmp];
+  const short=n=>n.replace(/^"Mafia Champions league" Europe 2026$/,'MCL Europe 2026').replace(/^German Mafia Cup Europa Edition 2026$/,'German Mafia Cup 2026').replace(/ 2026\.? ?Реванш\./,' — реванш');
+  document.getElementById('cmp').innerHTML=arr.map(c=>`<div class="br${c.id===664?' me':''}"><div class="nm" title="${esc(c.name)}">${esc(short(c.name))}</div><div class="tr"><div class="fl" style="width:0" data-w="${c[S.cmp]/mx*100}"></div></div><div class="vv">${c[S.cmp]}</div></div>`).join('');
+  requestAnimationFrame(()=>document.querySelectorAll('#cmp .fl').forEach(f=>f.style.width=f.dataset.w+'%'));
+  const me=D.compare.find(c=>c.id===664);const oth=D.compare.filter(c=>c.id!==664);
+  const nx=k=>oth.slice().sort((a,b)=>b[k]-a[k])[0];
+  const s2=nx('series'),p2=nx('players'),c2=nx('cities'),k2=nx('countries');
+  const r=(a,b)=>(a/b).toFixed(1).replace('.',',');
+  document.getElementById('scaleTxt').innerHTML=`<h4>Почему <b>№1</b></h4>
+   <p class="big">GMC — первый по всем четырём меркам среди ${D.compare.length} серийников 2026 года.</p>
+   <div class="hint" style="margin-top:14px;font-size:13px">
+   <b>${me.series}</b> серий — в ${r(me.series,s2.series)} раза больше, чем у второго (${esc(short(s2.name))}, ${s2.series}).<br>
+   <b>${me.players}</b> игроков прошли отбор — в ${r(me.players,p2.players)} раза больше, чем у ${esc(short(p2.name))} (${p2.players}).<br>
+   <b>${me.cities}</b> ${plW(me.cities,'город','города','городов')} — в ${r(me.cities,c2.cities)} раза больше, чем у ближайшего (${c2.cities}).<br>
+   <b>${me.countries}</b> стран: от Португалии до Грузии и Израиля (у следующего — ${k2.countries}).</div>
+   <div class="hint" style="margin-top:12px;font-size:11.5px;color:var(--dim)">Серийник — турнир, у которого на mafgame есть отборочные серии. Считаем сыгранные серии 2026 года по протоколам mafgame (снимок ${D.snap.split('-').reverse().join('.')}).</div>`;
+}
+function renderSeries(){
+  const fin=new Set(P.map(p=>p.uid));
+  document.getElementById('sgrid').innerHTML=D.series.map((s,i)=>{const d=s.date.split('-');
+    return `<div class="sc" data-c="${esc(s.city)}"><div class="d">${String(i+1).padStart(2,'0')} · ${d[2]}.${d[1]}</div><div class="c">${FLAG[D.cities[s.city].cc]||''} ${esc(s.name)}</div><div class="w">${s.top2.map(esc).join(' · ')}</div></div>`;}).join('');
+  document.querySelectorAll('.sc').forEach(c=>c.onclick=()=>{S.selSeries=S.selSeries===c.dataset.c?null:c.dataset.c;hilitSeries();
+    document.querySelectorAll('.sc').forEach(x=>x.classList.toggle('m2',x.dataset.c===S.selSeries));document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'});});
+}
+function renderSrc(){
+  document.getElementById('src').innerHTML=`<b>Источники.</b> Состав финала, клубы и города клубов — <a href="https://mafgame.org/tournaments/664/view" target="_blank" rel="noopener">mafgame.org</a> (снимок ${D.snap.split('-').reverse().join('.')}); серии и слоты — протоколы серий на mafgame (робот GMC, <a href="gmc2026.html">страница отбора</a>); MMR — mafiastats.com (снимок 03.11.2026); ELO и тиры — markery.online (последний снимок по игроку в прошлых турнирах DOVOD).
+  «Дом» — город клуба игрока на mafgame, а не место жительства: кто живёт в одном городе и играет за клуб в другом, на карте стоит в городе клуба. Расстояния — по прямой. Тиры MMR — шкала DOVOD (L ${D.tiers.L}+ … E ${D.tiers.E}+), тиры ELO — по шкале markery.<br>
+  Контуры стран — Natural Earth. Финал: 14–15 ноября 2026, Кёльн, 18 игр на участника, взнос 120 € (mafgame), призовой фонд от 2500–3000 € (организатор), главный судья — KEX.`;
+}
+/* переключатели */
+function seg(id,key,after){document.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{S[key]=b.dataset.v;
+  document.querySelectorAll('[id^="segMetric"] button').forEach(x=>x.classList.toggle('on',x.dataset.v===S.metric));
+  document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.toggle('on',x===b));if(key==='geo')S.sel=null;(after||renderAll)();});}
+seg('segMode','mode');seg('segGeo','geo');seg('segMetric','metric');seg('segMetric2','metric');seg('segCmp','cmp',renderCmp);
+</script>
+<script>if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});</script>
+</body>
+</html>
