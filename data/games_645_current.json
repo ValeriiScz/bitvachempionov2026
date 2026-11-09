@@ -273,11 +273,11 @@
        "marker": "first_killed",
        "aps": 0,
        "wpts": 0,
-       "ci": 0.33,
+       "ci": 0.333333,
        "kf": 1,
        "bm": 1,
        "bmb": 0,
-       "sigma": 0.33,
+       "sigma": 0.333333,
        "result": "L"
       },
       {
@@ -634,11 +634,11 @@
        "marker": "first_killed",
        "aps": 0,
        "wpts": 0,
-       "ci": 0.07,
+       "ci": 0.066667,
        "kf": 1,
        "bm": 1,
        "bmb": 0,
-       "sigma": 0.07,
+       "sigma": 0.066667,
        "result": "L"
       },
       {
@@ -940,11 +940,11 @@
        "marker": "first_killed",
        "aps": 0.3,
        "wpts": 0,
-       "ci": 0.07,
+       "ci": 0.066667,
        "kf": 1,
        "bm": 2,
        "bmb": 0.25,
-       "sigma": 0.37,
+       "sigma": 0.366667,
        "result": "L"
       },
       {
@@ -1219,11 +1219,11 @@
        "marker": "first_killed",
        "aps": 0.2,
        "wpts": 0,
-       "ci": 0.13,
+       "ci": 0.133333,
        "kf": 1,
        "bm": 1,
        "bmb": 0,
-       "sigma": 0.33,
+       "sigma": 0.333333,
        "result": "L"
       }
      ],
@@ -1511,11 +1511,11 @@
        "marker": "first_killed",
        "aps": 0,
        "wpts": 0,
-       "ci": 0.07,
+       "ci": 0.066667,
        "kf": 1,
        "bm": 1,
        "bmb": 0,
-       "sigma": 0.07,
+       "sigma": 0.066667,
        "result": "L"
       },
       {
@@ -1872,11 +1872,11 @@
        "marker": "first_killed",
        "aps": 0.2,
        "wpts": 0,
-       "ci": 0.13,
+       "ci": 0.133333,
        "kf": 1,
        "bm": 1,
        "bmb": 0,
-       "sigma": 0.33,
+       "sigma": 0.333333,
        "result": "L"
       },
       {
@@ -2025,11 +2025,11 @@
        "marker": "first_killed",
        "aps": 0,
        "wpts": 0,
-       "ci": 0.33,
+       "ci": 0.333333,
        "kf": 1,
        "bm": 1,
        "bmb": 0,
-       "sigma": 0.33,
+       "sigma": 0.333333,
        "result": "L"
       },
       {
@@ -2192,11 +2192,11 @@
        "marker": "first_killed",
        "aps": 0.25,
        "wpts": 0,
-       "ci": 0.33,
+       "ci": 0.333333,
        "kf": 1,
        "bm": 2,
        "bmb": 0.25,
-       "sigma": 0.58,
+       "sigma": 0.583333,
        "result": "L"
       },
       {
