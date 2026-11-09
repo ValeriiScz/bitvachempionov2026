@@ -10,7 +10,7 @@
   "expected": 30,
   "players_confirmed": 12,
   "rating_note": "ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026",
-  "ms_snap": "2026-11-03",
+  "ms_snap": "2026-11-09",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
@@ -43,15 +43,15 @@
    "elo_snap": "2026-09-06",
    "ms": {
     "id": 1476,
-    "rating": 1616.4,
-    "rank": 170,
-    "games": 206,
-    "wr": 47.57,
+    "rating": 1655.4,
+    "rank": 139,
+    "games": 221,
+    "wr": 47.51,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1616.4,
-   "r_ms_rank": 170,
-   "r_ms_tier": "B"
+   "r_ms_mmr": 1655.4,
+   "r_ms_rank": 139,
+   "r_ms_tier": "A"
   },
   {
    "nick": "Буржуй",
@@ -105,13 +105,13 @@
    "elo_snap": null,
    "ms": {
     "id": 1454,
-    "rating": 1444.9,
+    "rating": 1445.5,
     "rank": null,
     "games": 42,
     "wr": 52.38,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1444.9,
+   "r_ms_mmr": 1445.5,
    "r_ms_rank": null,
    "r_ms_tier": "C"
   },
@@ -136,14 +136,14 @@
    "elo_snap": "2026-10-15",
    "ms": {
     "id": 983,
-    "rating": 1541.8,
-    "rank": 255,
-    "games": 593,
-    "wr": 46.04,
+    "rating": 1600.3,
+    "rank": 186,
+    "games": 608,
+    "wr": 46.55,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1541.8,
-   "r_ms_rank": 255,
+   "r_ms_mmr": 1600.3,
+   "r_ms_rank": 186,
    "r_ms_tier": "B"
   },
   {
@@ -167,14 +167,14 @@
    "elo_snap": "2026-09-06",
    "ms": {
     "id": 60010,
-    "rating": 1786.5,
-    "rank": 80,
-    "games": 405,
-    "wr": 54.32,
+    "rating": 1778.8,
+    "rank": 85,
+    "games": 420,
+    "wr": 54.29,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1786.5,
-   "r_ms_rank": 80,
+   "r_ms_mmr": 1778.8,
+   "r_ms_rank": 85,
    "r_ms_tier": "A"
   },
   {
@@ -198,15 +198,15 @@
    "elo_snap": null,
    "ms": {
     "id": 65858,
-    "rating": 1513.5,
+    "rating": 1450.8,
     "rank": null,
-    "games": 37,
-    "wr": 51.35,
+    "games": 52,
+    "wr": 50,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1513.5,
+   "r_ms_mmr": 1450.8,
    "r_ms_rank": null,
-   "r_ms_tier": "B"
+   "r_ms_tier": "C"
   },
   {
    "nick": "Кассандра",
@@ -229,14 +229,14 @@
    "elo_snap": null,
    "ms": {
     "id": 46030,
-    "rating": 1616.5,
-    "rank": 169,
+    "rating": 1615.3,
+    "rank": 172,
     "games": 263,
     "wr": 56.27,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1616.5,
-   "r_ms_rank": 169,
+   "r_ms_mmr": 1615.3,
+   "r_ms_rank": 172,
    "r_ms_tier": "B"
   },
   {
@@ -260,14 +260,14 @@
    "elo_snap": "2026-10-15",
    "ms": {
     "id": 63564,
-    "rating": 2027.9,
-    "rank": 29,
-    "games": 487,
-    "wr": 51.95,
+    "rating": 2123.1,
+    "rank": 16,
+    "games": 503,
+    "wr": 53.08,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 2027.9,
-   "r_ms_rank": 29,
+   "r_ms_mmr": 2123.1,
+   "r_ms_rank": 16,
    "r_ms_tier": "L"
   },
   {
@@ -354,13 +354,13 @@
    "ms": {
     "id": 63185,
     "rating": 1254.5,
-    "rank": 665,
+    "rank": 673,
     "games": 159,
     "wr": 46.54,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1254.5,
-   "r_ms_rank": 665,
+   "r_ms_rank": 673,
    "r_ms_tier": "D"
   },
   {
@@ -384,13 +384,13 @@
    "elo_snap": "2026-10-15",
    "ms": {
     "id": 65540,
-    "rating": 1335.1,
+    "rating": 1312.1,
     "rank": null,
-    "games": 85,
-    "wr": 44.71,
+    "games": 97,
+    "wr": 43.3,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1335.1,
+   "r_ms_mmr": 1312.1,
    "r_ms_rank": null,
    "r_ms_tier": "D"
   },
@@ -415,13 +415,13 @@
    "elo_snap": null,
    "ms": {
     "id": 66423,
-    "rating": 1503.0,
+    "rating": 1530.5,
     "rank": null,
-    "games": 9,
-    "wr": 44.44,
+    "games": 25,
+    "wr": 60,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1503.0,
+   "r_ms_mmr": 1530.5,
    "r_ms_rank": null,
    "r_ms_tier": "B"
   }

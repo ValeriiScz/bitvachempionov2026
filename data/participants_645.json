@@ -10,7 +10,7 @@
   "expected": 12,
   "players_confirmed": 12,
   "rating_note": "Состав предварительный: топ-2 каждой из 6 серий по протоколам mafgame (утвердится, когда организатор закроет серии). ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026",
-  "ms_snap": "2026-11-03",
+  "ms_snap": "2026-11-09",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
@@ -46,15 +46,15 @@
    "series_score": 6.55,
    "ms": {
     "id": 1476,
-    "rating": 1616.4,
-    "rank": 170,
-    "games": 206,
-    "wr": 47.57,
+    "rating": 1655.4,
+    "rank": 139,
+    "games": 221,
+    "wr": 47.51,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1616.4,
-   "r_ms_rank": 170,
-   "r_ms_tier": "B"
+   "r_ms_mmr": 1655.4,
+   "r_ms_rank": 139,
+   "r_ms_tier": "A"
   },
   {
    "nick": "Jane",
@@ -81,13 +81,13 @@
    "ms": {
     "id": 64334,
     "rating": 1678.4,
-    "rank": 125,
+    "rank": 126,
     "games": 474,
     "wr": 49.58,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1678.4,
-   "r_ms_rank": 125,
+   "r_ms_rank": 126,
    "r_ms_tier": "A"
   },
   {
@@ -114,14 +114,14 @@
    "series_score": 7.75,
    "ms": {
     "id": 295,
-    "rating": 1691.4,
-    "rank": 118,
+    "rating": 1689.5,
+    "rank": 121,
     "games": 320,
     "wr": 50.31,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1691.4,
-   "r_ms_rank": 118,
+   "r_ms_mmr": 1689.5,
+   "r_ms_rank": 121,
    "r_ms_tier": "A"
   },
   {
@@ -148,13 +148,13 @@
    "series_score": 5.9,
    "ms": {
     "id": 1609,
-    "rating": 1422.3,
+    "rating": 1390.6,
     "rank": null,
-    "games": 67,
-    "wr": 47.76,
+    "games": 82,
+    "wr": 46.34,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1422.3,
+   "r_ms_mmr": 1390.6,
    "r_ms_rank": null,
    "r_ms_tier": "C"
   },
@@ -216,14 +216,14 @@
    "series_score": 6.9,
    "ms": {
     "id": 983,
-    "rating": 1541.8,
-    "rank": 255,
-    "games": 593,
-    "wr": 46.04,
+    "rating": 1600.3,
+    "rank": 186,
+    "games": 608,
+    "wr": 46.55,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1541.8,
-   "r_ms_rank": 255,
+   "r_ms_mmr": 1600.3,
+   "r_ms_rank": 186,
    "r_ms_tier": "B"
   },
   {
@@ -250,15 +250,15 @@
    "series_score": 5.85,
    "ms": {
     "id": 66245,
-    "rating": 1517.0,
+    "rating": 1406.5,
     "rank": null,
-    "games": 9,
-    "wr": 66.67,
+    "games": 24,
+    "wr": 45.83,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1517.0,
+   "r_ms_mmr": 1406.5,
    "r_ms_rank": null,
-   "r_ms_tier": "B"
+   "r_ms_tier": "C"
   },
   {
    "nick": "Fistashka",
@@ -352,13 +352,13 @@
    "series_score": 6.55,
    "ms": {
     "id": 65450,
-    "rating": 1466.9,
+    "rating": 1473.3,
     "rank": null,
-    "games": 102,
-    "wr": 46.08,
+    "games": 117,
+    "wr": 47.86,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1466.9,
+   "r_ms_mmr": 1473.3,
    "r_ms_rank": null,
    "r_ms_tier": "C"
   },
@@ -386,14 +386,14 @@
    "series_score": 7.75,
    "ms": {
     "id": 60010,
-    "rating": 1786.5,
-    "rank": 80,
-    "games": 405,
-    "wr": 54.32,
+    "rating": 1778.8,
+    "rank": 85,
+    "games": 420,
+    "wr": 54.29,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1786.5,
-   "r_ms_rank": 80,
+   "r_ms_mmr": 1778.8,
+   "r_ms_rank": 85,
    "r_ms_tier": "A"
   },
   {
@@ -421,13 +421,13 @@
    "ms": {
     "id": 427,
     "rating": 1221.2,
-    "rank": 694,
+    "rank": 702,
     "games": 177,
     "wr": 44.63,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1221.2,
-   "r_ms_rank": 694,
+   "r_ms_rank": 702,
    "r_ms_tier": "D"
   }
  ],
