@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.12 | 2026-11-09 | 664: страница t664 (движок DOVOD) + watch664, ГС финала Рыба-мÓя, приз 3000 € (mafgame)
 // MafgameStat | tournaments.js | v4.11 | 2026-11-09 | 643 Wroclaw Mafia Open (21–22.11) отменён — карточка убрана (вместо него возможен Краков, пока не подтверждён — на сайт не ставим); participants_643.json оставлен в data
 // MafgameStat | tournaments.js | v4.10 | 2026-11-09 | 664: ELO с карточки убран до перепроверки (только MMR)
 // MafgameStat | tournaments.js | v4.9 | 2026-11-09 | +664 финал German Mafia Cup 2026 (Кёльн 14–15.11): карточка, страница gmc664.html «Дорога в Кёльн» (карта финалистов), participants_664
@@ -36,7 +37,8 @@ window.TOURNAMENTS_DB = {
     "theme": "dovod",
     "art": "assets/gmc664_card.jpg",
     "artRatio": "16 / 9",
-    "page": "gmc664.html",
+    "page": "t664.html",
+    "watch": "watch664.html",
     "name": "German Mafia Cup Europa Edition 2026 — финал",
     "posterTitle": "German Mafia|Cup",
     "dates": "14–15 ноября 2026",
@@ -45,36 +47,31 @@ window.TOURNAMENTS_DB = {
     "players": 40,
     "days": 2,
     "stars": 4,
-    "prize": "от 2500–3000 €",
+    "prize": "3000 €",
     "status": "upcoming",
     "phase": 3,
-    "statusLabel": "Скоро · финал самого большого серийника 2026 · 40 финалистов из 12 стран",
+    "statusLabel": "Скоро · финал самого большого серийника 2026 · 40 финалистов",
     "mmrAvg": 1475,
     "mmrN": 36,
-    "organizer": "Mafia Club Cologne · орг и главный судья KEX",
+    "organizer": "Mafia Club Cologne · орг KEX · главный судья финала Рыба-мÓя",
     "format": "18 игр на участника",
     "mafgame": "https://mafgame.org/tournaments/664/view",
     "note": "Финал German Mafia Cup Europa Edition 2026: 28 серий отбора в 22 городах 11 стран, 230 игроков. В финале 40 подтверждённых участников (mafgame, снимок 09.11). Страница турнира с рассадкой откроется, когда mafgame опубликует рассадку.",
     "sections": [
       {
-        "href": "gmc664.html",
-        "title": "Дорога в Кёльн · карта",
-        "desc": "откуда едут финалисты, путь через серию, MMR"
+        "href": "t664.html",
+        "title": "Страница турнира",
+        "desc": "Информация · Дорога в Кёльн · Состав · Рассадка · Результаты"
+      },
+      {
+        "href": "watch664.html",
+        "title": "▶ Смотровая · эфиры",
+        "desc": "четыре стола в одном окне, следить за игроком"
       },
       {
         "href": "gmc2026.html",
         "title": "Отбор · 28 серий",
         "desc": "слоты, очередь замен, судейство"
-      },
-      {
-        "href": "participants.html?t=664",
-        "title": "Финалисты и рейтинг",
-        "desc": "40 игроков · MMR mafiastats"
-      },
-      {
-        "soon": true,
-        "title": "Страница турнира",
-        "desc": "рассадка, сила столов, live-результаты"
       }
     ],
     "start": "2026-11-14",

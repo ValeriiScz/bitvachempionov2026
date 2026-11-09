@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · gmc664.html · v1.1 · 2026-11-09 · ELO скрыт до перепроверки (решение Валерия), страница только по MMR; код переключателя оставлен · v1.0 · 2026-11-09 · финал German Mafia Cup Europa Edition 2026 (Кёльн, 14–15.11): «Дорога в Кёльн» — интерактивная карта, откуда едут 40 финалистов (город клуба на mafgame), путь через серию отбора, MMR/ELO, масштаб серийника
+<script>if(/[?&]embed=1/.test(location.search))document.documentElement.classList.add('embed');</script>
+<!-- DOVOD · gmc664.html · v1.2 · 2026-11-09 · режим ?embed=1 для вкладки t664 (без шапки, высота в родителя), Грешник → Валенсия (ручная поправка), ГС финала Рыба-мÓя, приз 3000 € · v1.1 · 2026-11-09 · ELO скрыт до перепроверки (решение Валерия), страница только по MMR; код переключателя оставлен · v1.0 · 2026-11-09 · финал German Mafia Cup Europa Edition 2026 (Кёльн, 14–15.11): «Дорога в Кёльн» — интерактивная карта, откуда едут 40 финалистов (город клуба на mafgame), путь через серию отбора, MMR/ELO, масштаб серийника
      Оглавление: 1 стиль · 2 разметка (шапка, цифры, карта, дорога, масштаб, финалисты, серии, источники) · 3 данные и расчёты · 4 карта (слои, дуги, зум) · 5 списки и таблицы
      Данные: data/gmc664_final.json (собран 09.11 из mafgame: состав финала /tournaments/664/participants, клубы /clubs; серии и слоты — data/gmc2026.js; MMR — data/mmr.json, ELO — data/registry/elo_history.csv; масштаб — data/research/series)
              data/gmc664_map.json (контуры стран Natural Earth 50m → коническая проекция, заранее посчитанные координаты городов)
@@ -176,6 +177,8 @@ tbody tr:hover td{background:rgba(255,206,0,.04)}
   .mlegend{font-size:9px}
 }
 @media (prefers-reduced-motion:reduce){.arc.flow,.koln .p{animation:none}}
+html.embed .dv-crumb,html.embed .tri,html.embed .hero,html.embed .lead{display:none}
+html.embed body::before{display:none}html.embed body{background:transparent}html.embed .wrap{padding:0 0 20px}html.embed .kpis{margin-top:0}
 </style>
 <style id="dvcrumbcss">
 .dv-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;margin:0;
@@ -440,14 +443,14 @@ function renderTable(){
   document.getElementById('thR').textContent=S.metric.toUpperCase();
   const rows=P.slice().sort((a,b)=>(val(b)??-1)-(val(a)??-1));
   document.getElementById('tb').innerHTML=rows.map((p,i)=>`<tr data-k="${esc(S.geo==='city'?p.home:p.cc)}"><td class="mut">${i+1}</td><td class="nk">${esc(p.nick)}</td>
-    <td class="mut"><span class="flag">${FLAG[p.cc]||''}</span>${esc(p.club||'—')} · ${cityRu(p.home)}${p.homeSrc==='series'?'*':''}</td>
+    <td class="mut"><span class="flag">${FLAG[p.cc]||''}</span>${esc(p.club||'—')} · ${cityRu(p.home)}${p.homeSrc==='series'?'*':p.homeSrc==='manual'?'†':''}</td>
     <td class="mut">${p.via==='reserve'?'замена · 3-е':p.place+'-е'} · ${esc(p.series||'—')}</td>
     <td class="r">${val(p)!=null?fmt(val(p))+chip(tierOf(p)):'<span style="color:var(--dim)">'+noVal()+'</span>'}</td><td class="r mut">${fmt(p.dist)}</td></tr>`).join('');
   document.querySelectorAll('#tb tr').forEach(tr=>tr.onclick=()=>{S.sel=tr.dataset.k;renderAll();document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'});});
   const nv=P.filter(p=>val(p)!=null);const avg=nv.reduce((a,p)=>a+val(p),0)/nv.length;
   const tiers={};nv.forEach(p=>{const t=tierOf(p);tiers[t]=(tiers[t]||0)+1;});
   const top=['L','S','A'].map(k=>tiers[k]?`${k} — ${tiers[k]}`:'').filter(Boolean).join(', ');
-  document.getElementById('rosterNote').innerHTML=`Подтверждённый состав на mafgame (снимок ${D.snap.split('-').reverse().join('.')}): <b>${P.length}</b> игроков. Средний ${S.metric.toUpperCase()} — <b>${fmt(avg)}</b> по ${nv.length} из ${P.length}${S.metric==='elo'?' (ELO markery есть не у всех: берём последний снимок из прошлых турниров DOVOD)':' (без MMR на mafiastats — «новичок»)'}. Верхние тиры: ${top||'—'}. * — у игрока нет клуба на mafgame, город взят по серии, где он взял слот.`;
+  document.getElementById('rosterNote').innerHTML=`Подтверждённый состав на mafgame (снимок ${D.snap.split('-').reverse().join('.')}): <b>${P.length}</b> игроков. Средний ${S.metric.toUpperCase()} — <b>${fmt(avg)}</b> по ${nv.length} из ${P.length}${S.metric==='elo'?' (ELO markery есть не у всех: берём последний снимок из прошлых турниров DOVOD)':' (без MMR на mafiastats — «новичок»)'}. Верхние тиры: ${top||'—'}. * — у игрока нет клуба на mafgame, город взят по серии, где он взял слот. † — город поправлен вручную: клуб на mafgame не обновлён (Грешник живёт в Валенсии, а клуб записан в Анталье).`;
   /* страны: столбики */
   const cs={};P.forEach(p=>{(cs[p.cc]=cs[p.cc]||[]).push(p);});const arr=Object.entries(cs).sort((a,b)=>b[1].length-a[1].length);const mx=arr[0][1].length;
   document.getElementById('ctryBars').innerHTML=arr.map(([cc,ps])=>{const vs=ps.map(val).filter(v=>v!=null);const a=vs.length?vs.reduce((x,y)=>x+y,0)/vs.length:null;
@@ -491,7 +494,7 @@ function renderSeries(){
 function renderSrc(){
   document.getElementById('src').innerHTML=`<b>Источники.</b> Состав финала, клубы и города клубов — <a href="https://mafgame.org/tournaments/664/view" target="_blank" rel="noopener">mafgame.org</a> (снимок ${D.snap.split('-').reverse().join('.')}); серии и слоты — протоколы серий на mafgame (робот GMC, <a href="gmc2026.html">страница отбора</a>); MMR — mafiastats.com (снимок 03.11.2026); ELO markery на этой странице пока скрыт — данные на перепроверке.
   «Дом» — город клуба игрока на mafgame, а не место жительства: кто живёт в одном городе и играет за клуб в другом, на карте стоит в городе клуба. Расстояния — по прямой. Тиры MMR — шкала DOVOD (L ${D.tiers.L}+ … E ${D.tiers.E}+).<br>
-  Контуры стран — Natural Earth. Финал: 14–15 ноября 2026, Кёльн, 18 игр на участника, взнос 120 € (mafgame), призовой фонд от 2500–3000 € (организатор), главный судья — KEX.`;
+  Контуры стран — Natural Earth. Финал: 14–15 ноября 2026, Кёльн, 18 игр на участника, взнос 120 € (mafgame), призовой фонд 3000 € (mafgame), главный судья финала — Рыба-мÓя, организатор кубка — KEX. Ручная поправка: Грешник — Валенсия (клуб на mafgame не обновлён).`;
 }
 /* переключатели */
 function seg(id,key,after){document.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{S[key]=b.dataset.v;
@@ -499,6 +502,7 @@ function seg(id,key,after){document.querySelectorAll('#'+id+' button').forEach(b
   document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.toggle('on',x===b));if(key==='geo')S.sel=null;(after||renderAll)();});}
 seg('segMode','mode');seg('segGeo','geo');seg('segMetric','metric');seg('segMetric2','metric');seg('segCmp','cmp',renderCmp);
 </script>
+<script>(function(){if(!document.documentElement.classList.contains('embed')||parent===window)return;let last=0;const send=()=>{const h=document.documentElement.scrollHeight;if(Math.abs(h-last)>4){last=h;parent.postMessage({gmcH:h},'*');}};new ResizeObserver(send).observe(document.body);setInterval(send,1500);send();})();</script>
 <script>if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});</script>
 </body>
 </html>

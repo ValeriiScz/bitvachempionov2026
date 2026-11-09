@@ -1,0 +1,33 @@
+{
+ "tournament_id": "664",
+ "tournament_name": "German Mafia Cup Europa Edition 2026 — финал",
+ "short": "GMC 2026 · финал",
+ "date": "2026-11-14 — 2026-11-15",
+ "location": "Кёльн, Германия",
+ "club": "Mafia Club Cologne",
+ "organizer": "Mafia Club Cologne · орг KEX · главный судья финала Рыба-мÓя",
+ "players_total": 40,
+ "days": 2,
+ "fee_eur": 120,
+ "stars": 4,
+ "format": "Регламент mafgame: каждый участник играет 18 игр за два дня; 40 финалистов — 1-е и 2-е места 28 серий отбора и замены из очереди третьих мест.",
+ "closed": false,
+ "in_progress": false,
+ "live_from": "2026-11-13",
+ "live_to": "2026-11-16",
+ "upcoming": true,
+ "games_played": 0,
+ "games_total": 18,
+ "final_coef": 1,
+ "accent": "#ffce00",
+ "start_iso": "2026-11-14T10:00:00+01:00",
+ "note": "Состав — подтверждённые на mafgame (снимок 09.11). Призовой фонд 3000 € (mafgame).",
+ "chief_referee": "Рыба-мÓя",
+ "referees": [
+  "Рыба-мÓя",
+  "Djan",
+  "Trinity",
+  "Кура"
+ ],
+ "prize_eur": 3000
+}

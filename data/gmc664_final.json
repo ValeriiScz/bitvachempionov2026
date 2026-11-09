@@ -885,8 +885,8 @@
    "real": "Dmytro",
    "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_890/09e7e9eefe97e46996af0ae48c968ffea227ce33.png",
    "club": "Mafia Academy Antalya",
-   "home": "Antalya",
-   "homeSrc": "club",
+   "home": "Valencia",
+   "homeSrc": "manual",
    "via": "slot",
    "series": "Торревьеха",
    "seriesCity": "Torrevieja",
@@ -1508,6 +1508,12 @@
    "lon": 12.9214,
    "ru": "Хемниц",
    "cc": "DE"
+  },
+  "Valencia": {
+   "lat": 39.4699,
+   "lon": -0.3763,
+   "ru": "Валенсия",
+   "cc": "ES"
   }
  },
  "countries": {
