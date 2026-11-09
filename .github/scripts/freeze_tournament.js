@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* DOVOD · .github/scripts/freeze_tournament.js · v1.1 · 2026-11-09 (Ci: допуск на округление протоколов mafgame) · v1.0 · 2026-11-09
+/* DOVOD · .github/scripts/freeze_tournament.js · v1.2 · 2026-11-09 (точный Ci в протоколах: Ci_sum/k вместо 0.33) · v1.1 · 2026-11-09 (Ci: допуск на округление протоколов mafgame) · v1.0 · 2026-11-09
    Назначение: закрытие турнира по регламенту README («Как ЗАКРЫВАТЬ турнир») одной командой в GitHub Actions
    (у раннера прямой доступ к mafgame.org; из облачной сессии Claude mafgame закрыт).
 
@@ -82,6 +82,17 @@ async function page(p) {
   }
   if (bad.length) { console.error('СВЕРКА НЕ СОШЛАСЬ — ничего не пишу:\n' + bad.join('\n')); process.exit(1); }
   if (ciRound.length) console.log('Ci в пределах округления mafgame:\n  ' + ciRound.join('\n  '));
+  /* v1.2: восстанавливаем точный Ci. По регламенту 7.5 величина Ci у игрока одна на все его отстрелы на дистанции, поэтому
+     при округлении в протоколах (0.33) ставим каждому его месту с Ci точное значение Ci_sum / k — тогда таблица страницы,
+     которая суммирует протоколы, бьётся с mafgame до сотых, а не «9.79 против 9.80». */
+  for (const st of stages) for (const r of R.rating.results[st].rows) {
+    const n = nick[r.player_id], ci = +r.scores.Ci_sum || 0; if (!n || !ci) continue;
+    const seatsCi = conv.games.filter(g => gamesOf[st].includes(g)).flatMap(g => g.tables.flatMap(t => t.seats.filter(s => s.name === n && s.ci)));
+    const sum = seatsCi.reduce((a, s) => a + s.ci, 0);
+    if (!seatsCi.length || Math.abs(sum - ci) < 1e-6 || Math.abs(sum - ci) > 0.005 * seatsCi.length + 0.001) continue;
+    if (seatsCi.some(s => Math.abs(s.ci - seatsCi[0].ci) > 0.011)) continue;           // разные величины — не трогаем
+    seatsCi.forEach(s => { s.ci = +(ci / seatsCi.length).toFixed(6); s.sigma = +(s.wpts + s.aps + s.ci).toFixed(6); });
+  }
 
   // ── 4 · запись ─────────────────────────────────────────────────────────────
   const today = new Date().toISOString().slice(0, 10).split('-').reverse().join('.');

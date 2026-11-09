@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.7 | 2026-11-09 | 645 White Mafia Best Player -> finished (чемпион aptah 10.73, Deid_Ara 9.82, Season's 9.80; 10 финалистов, 15 игр)
 // MafgameStat | tournaments.js | v4.7 | 2026-11-06 | 615: note по регламенту mafgame (формат подтверждён, победитель → финал Всемирной лиги)
 // MafgameStat | tournaments.js | v4.6 | 2026-11-06 | 687: champion/top3/mvp (Xenon, лучший игрок 4.10) — архивная карточка без победителей
 // MafgameStat | tournaments.js | v4.5 | 2026-11-06 | ср. MMR (mafiastats, снимок 03.11) у 11 турниров: mmrAvg/mmrN
@@ -83,13 +84,13 @@ window.TOURNAMENTS_DB = {
     "dates": "7–8 ноября 2026",
     "city": "Вроцлав",
     "country": "Польша",
-    "players": 12,
+    "players": 10,
     "days": 2,
     "stars": 2,
     "prize": "600€",
-    "status": "upcoming",
-    "phase": 3,
-    "statusLabel": "Финал серийника · 12 финалистов (состав предварительный) · 18 игр, один стол",
+    "status": "finished",
+    "phase": 1,
+    "statusLabel": "Завершён · 15 игр, один стол · чемпион aptah",
     "eloAvg": 1079,
     "mmrAvg": 1559,
     "mmrN": 12,
@@ -97,7 +98,13 @@ window.TOURNAMENTS_DB = {
     "eloTotal": 12,
     "organizer": "White Mafia Club Wroclaw · орг и главный судья Кирпич",
     "mafgame": "https://mafgame.org/tournaments/645/view",
-    "note": "Состав предварительный: топ-2 каждой из 6 отборочных серий по протоколам mafgame. Официально утвердит организатор; замены — 3-е место той же серии, затем 3-и места по сумме доп. баллов.",
+    "champion": "aptah",
+    "top3": [
+      "aptah",
+      "Deid_Ara",
+      "Season's"
+    ],
+    "note": "Завершён 08.11.2026. Чемпион — aptah (Σ 10.73), 2-е Deid_Ara (9.82), 3-е Season's (9.80). 10 финалистов, 15 игр за одним столом. Таблица 1:1 с официальной mafgame.",
     "sections": [
       {
         "href": "t645.html",

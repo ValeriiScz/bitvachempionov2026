@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t645.html · v2.0 · 2026-10-26 · White Mafia Best Player 2026 — финал серийника (mafgame 645, Вроцлав, 7–8.11). Движок турнирной страницы DOVOD (канон t692 v1.9) в режиме «один стол»: CFG.single — одна стадия (18 игр финала, 12 игроков, в каждой игре двое отдыхают), без полуфинала/финала-отсечки; таблица с линией призов (топ-3 + MVP); раздел «Отбор · серии» (data/t645.json: 6 серий, предварительные финалисты, резерв по регламенту). Тема — база DOVOD, акценты White Mafia (бумажный белый + красный, постер WMC). v1.0 (лендинг) → _Архив.
+<!-- DOVOD · t645.html · v2.1 · 2026-11-09 · турнир закрыт: протоколы 15 игр заморожены (только стадия «Финал», без отборочных серий), итоги и таблица mafgame 1:1, тексты по факту (10 финалистов, 15 игр) · v2.0 · 2026-10-26 · White Mafia Best Player 2026 — финал серийника (mafgame 645, Вроцлав, 7–8.11). Движок турнирной страницы DOVOD (канон t692 v1.9) в режиме «один стол»: CFG.single — одна стадия (18 игр финала, 12 игроков, в каждой игре двое отдыхают), без полуфинала/финала-отсечки; таблица с линией призов (топ-3 + MVP); раздел «Отбор · серии» (data/t645.json: 6 серий, предварительные финалисты, резерв по регламенту). Тема — база DOVOD, акценты White Mafia (бумажный белый + красный, постер WMC). v1.0 (лендинг) → _Архив.
      Данные: data/*_645* (participants, tournament, avatars; игры — live с mafgame в дни турнира через live.js). Эфир — watch645.html. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>White Mafia Best Player 2026 — финал · DOVOD</title>
-<meta name="description" content="Финал серийника White Mafia Best Player 2026, Вроцлав, 7–8 ноября, 2★: 12 финалистов, один стол, 18 игр — рассадка, live-таблица, эфир, итоги серий.">
+<meta name="description" content="Финал серийника White Mafia Best Player 2026, Вроцлав, 7–8 ноября, 2★: завершён — чемпион aptah; 10 финалистов, 15 игр за одним столом, таблица, протоколы, итоги серий.">
 <link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
 <link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="assets/icons/icon-180.png">
@@ -841,8 +841,8 @@ const TIER_ORD={L:-1,S:0,A:1,B:2,C:3,D:4,E:5,F:6};
 /* ── КОНФИГ ТУРНИРА: новый турнир = копия файла + правка этого блока + data/*_{id}* ── */
 const CFG={id:'645',ls:'t645_',name:'White Mafia Best Player 2026 — финал',short:'WMBP финал',kick:'White Mafia · финал серийника · 2★ · Вроцлав',h1:'White Mafia <b>Best Player</b> 2026',
   dates:'7–8 ноября 2026',place:'Вроцлав',startLab:'старт 7 ноября',startShort:'07.11',
-  quals:18,tables:1,semiN:0,semis:0,finalN:0,finals:0,fmt:'18',single:true,day1:9,prizeN:3,
-  intro:'Финал серийника White Mafia Best Player 2026 во Вроцлаве, 7–8 ноября: 12 финалистов — по двое лучших из шести отборочных серий — играют 18 игр за одним столом (в каждой игре двое отдыхают). Одна стадия, без отсечек: по сумме баллов — призы 250 / 150 / 100 € и MVP 100 €. Состав предварительный — утвердит организатор (г-жа Кирпич).',
+  quals:15,tables:1,semiN:0,semis:0,finalN:0,finals:0,fmt:'15',single:true,day1:9,prizeN:3,
+  intro:'Финал серийника White Mafia Best Player 2026 во Вроцлаве, 7–8 ноября, завершён: чемпион — aptah (Σ 10.73), 2-е Deid_Ara, 3-е Season’s. В финале сыграли 10 человек — 15 игр за одним столом, одна стадия по сумме баллов; призы 250 / 150 / 100 € и MVP 100 €. Таблица — 1:1 с официальной mafgame.',
   watch:'watch645.html',mafgame:'https://mafgame.org/tournaments/645/view'};
 const START='2026-11-07T10:00:00+01:00'; /* ГИПОТЕЗА: время старта на mafgame не указано — 10:00 CET; уточнить у организатора */ // /* FACT: открытие 10:15 CET 17.10 (описание турнира на mafgame) */
 const DEF_AV='https://mafgame.org/build/assets/avatar-default2-33e44bae.png';
@@ -1008,7 +1008,7 @@ function show(id,fromPop){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function qualTeaser(){const Q=D.qual;if(!Q)return '';return `<div class="panel"><h3>Отбор · кто и откуда</h3><div class="kbrow" style="margin-bottom:8px">`+Q.series.slice().sort((a,b)=>a.num-b.num).map(s=>`<span class="kb k3">Series ${s.num} · ${esc(s.city)} <b>${esc(s.top[0].nick)}, ${esc(s.top[1].nick)}</b></span>`).join('')+`</div><div class="note" style="margin:0"><b>Состав предварительный</b> (снимок ${esc(Q.snapshot.split('-').reverse().join('.'))}): топ‑2 каждой серии по протоколам mafgame. <span class="lnk" style="cursor:pointer" onclick="show('qual')">Серии и резерв →</span></div></div>`;}
+function qualTeaser(){const Q=D.qual;if(!Q)return '';return `<div class="panel"><h3>Отбор · кто и откуда</h3><div class="kbrow" style="margin-bottom:8px">`+Q.series.slice().sort((a,b)=>a.num-b.num).map(s=>`<span class="kb k3">Series ${s.num} · ${esc(s.city)} <b>${esc(s.top[0].nick)}, ${esc(s.top[1].nick)}</b></span>`).join('')+`</div><div class="note" style="margin:0"><b>Отбор</b>: топ‑2 каждой серии по протоколам mafgame (снимок ${esc(Q.snapshot.split('-').reverse().join('.'))}); в финале сыграли 10 человек. <span class="lnk" style="cursor:pointer" onclick="show('qual')">Серии и резерв →</span></div></div>`;}
 const RENDER={
   qual(){const Q=D.qual;if(!Q)return statsEmpty('⚐ Отбор · серии');
     const av=p=>`<img class="qav" src="${esc(p.av||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'">`;
@@ -1017,7 +1017,7 @@ const RENDER={
     const res=Q.reserve.map((p,i)=>`<tr><td class="num">${i+1}</td><td>${av(p)} ${esc(p.nick)}${tierP(p)}</td><td>Series ${p.series}</td><td class="num">${(+p.score).toFixed(2)}</td><td class="num">${(+p.dop).toFixed(2)}</td></tr>`).join('');
     const ser=Q.series.slice().sort((a,b)=>a.num-b.num).map(s=>`<a class="qsc" href="https://mafgame.org/tournaments/${s.id}/results" target="_blank" rel="noopener"><div class="qh"><b>Series ${s.num}</b><span>${esc(s.city)} · ${s.date.split('-').reverse().slice(0,2).join('.')}</span></div>`+s.top.slice(0,3).map((r,i)=>`<div class="qr${i<2?' q':''}"><span>${i<2?'→ ':''}${esc(r.nick)}</span><span>${(+r.score).toFixed(2)}</span></div>`).join('')+`</a>`).join('');
     return `<div class="view"><div class="secttl">⚐ Отбор · серии</div>
-      <div class="panel"><h3>Финалисты · предварительно</h3><div class="note" style="margin:0 0 10px">Топ‑2 каждой из шести серий по протоколам mafgame (снимок ${esc(Q.snapshot.split('-').reverse().join('.'))}). Официально состав утвердит организатор.</div><div class="qgrid">${fin}</div></div>
+      <div class="panel"><h3>Отобрались в финал · топ‑2 серий</h3><div class="note" style="margin:0 0 10px">Топ‑2 каждой из шести серий по протоколам mafgame (снимок ${esc(Q.snapshot.split('-').reverse().join('.'))}). В финале сыграли 10 человек (официальная таблица mafgame).</div><div class="qgrid">${fin}</div></div>
       <div class="panel scrollT"><h3>Резерв по регламенту</h3><div class="note" style="margin:0 0 8px">Если финалист не едет — его место занимает 3‑й из той же серии; дальше — 3‑и места всех серий по сумме доп. баллов. Заменяющие играют за призы, но без рейтинговых баллов mafgame.</div><table class="tbl hasnum"><thead><tr><th>#</th><th>Игрок</th><th>Серия</th><th>Балл</th><th>Доп.</th></tr></thead><tbody>${res}</tbody></table></div>
       <div class="panel"><h3>Шесть серий · топ‑3</h3><div class="qser">${ser}</div></div></div>`;},
   sched(){return `<div class="view"><div class="secttl">⏱ Расписание · план и факт</div><div id="schedArea"><div class="panel"><p class="note">Загрузка…</p></div></div></div>`;},
