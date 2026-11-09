@@ -38,6 +38,21 @@
     "Ириска",
     "Akteur"
    ],
+   "top2u": [
+    [
+     659,
+     "Ириска"
+    ],
+    [
+     689,
+     "Akteur"
+    ]
+   ],
+   "third": [
+    44,
+    "KEX",
+    1.15
+   ],
    "n": 10
   },
   {
@@ -49,6 +64,21 @@
    "top2": [
     "Берлин",
     "qUAest0r"
+   ],
+   "top2u": [
+    [
+     245,
+     "Берлин"
+    ],
+    [
+     704,
+     "qUAest0r"
+    ]
+   ],
+   "third": [
+    1281,
+    "mobi.",
+    1.7
    ],
    "n": 10
   },
@@ -62,6 +92,21 @@
     "Барон",
     "Mr. Smith🚀"
    ],
+   "top2u": [
+    [
+     629,
+     "Барон"
+    ],
+    [
+     2002,
+     "Mr. Smith🚀"
+    ]
+   ],
+   "third": [
+    1993,
+    "jaraxxus",
+    1.3
+   ],
    "n": 10
   },
   {
@@ -73,6 +118,21 @@
    "top2": [
     "Calypso",
     "Landing"
+   ],
+   "top2u": [
+    [
+     261,
+     "Calypso"
+    ],
+    [
+     1481,
+     "Landing"
+    ]
+   ],
+   "third": [
+    2533,
+    "Tихий",
+    0.8
    ],
    "n": 10
   },
@@ -86,6 +146,21 @@
     "Licht",
     "KEX"
    ],
+   "top2u": [
+    [
+     1333,
+     "Licht"
+    ],
+    [
+     44,
+     "KEX"
+    ]
+   ],
+   "third": [
+    573,
+    "Funt",
+    0.8
+   ],
    "n": 10
   },
   {
@@ -97,6 +172,21 @@
    "top2": [
     "Медовая",
     "Sova"
+   ],
+   "top2u": [
+    [
+     325,
+     "Медовая"
+    ],
+    [
+     376,
+     "Sova"
+    ]
+   ],
+   "third": [
+    980,
+    "El_professor",
+    1.2
    ],
    "n": 10
   },
@@ -110,6 +200,21 @@
     "VVince",
     "Mjata"
    ],
+   "top2u": [
+    [
+     171,
+     "VVince"
+    ],
+    [
+     1598,
+     "Mjata"
+    ]
+   ],
+   "third": [
+    1162,
+    "Кувер",
+    0.9
+   ],
    "n": 10
   },
   {
@@ -121,6 +226,21 @@
    "top2": [
     "Capybara",
     "Foxy1"
+   ],
+   "top2u": [
+    [
+     2866,
+     "Capybara"
+    ],
+    [
+     2761,
+     "Foxy1"
+    ]
+   ],
+   "third": [
+    2759,
+    "Sweet Malina",
+    0.7
    ],
    "n": 10
   },
@@ -134,6 +254,21 @@
     "Agent",
     "Работяга"
    ],
+   "top2u": [
+    [
+     832,
+     "Agent"
+    ],
+    [
+     916,
+     "Работяга"
+    ]
+   ],
+   "third": [
+    1592,
+    "Лео",
+    0.9
+   ],
    "n": 10
   },
   {
@@ -145,6 +280,21 @@
    "top2": [
     "ParadoXx",
     "kser"
+   ],
+   "top2u": [
+    [
+     709,
+     "ParadoXx"
+    ],
+    [
+     2272,
+     "kser"
+    ]
+   ],
+   "third": [
+    2139,
+    "Гіппократ",
+    1.1
    ],
    "n": 10
   },
@@ -158,6 +308,21 @@
     "Мориарти",
     "R.I.P."
    ],
+   "top2u": [
+    [
+     830,
+     "Мориарти"
+    ],
+    [
+     868,
+     "R.I.P."
+    ]
+   ],
+   "third": [
+    833,
+    "Kokocik",
+    1.6
+   ],
    "n": 10
   },
   {
@@ -169,6 +334,21 @@
    "top2": [
     "Сергеевна",
     "Приезжий"
+   ],
+   "top2u": [
+    [
+     2168,
+     "Сергеевна"
+    ],
+    [
+     1013,
+     "Приезжий"
+    ]
+   ],
+   "third": [
+    1307,
+    "Link",
+    1.9
    ],
    "n": 10
   },
@@ -182,6 +362,21 @@
     "YeS",
     "Blackout"
    ],
+   "top2u": [
+    [
+     101,
+     "YeS"
+    ],
+    [
+     185,
+     "Blackout"
+    ]
+   ],
+   "third": [
+    1495,
+    "TOPS",
+    0.8
+   ],
    "n": 11
   },
   {
@@ -193,6 +388,21 @@
    "top2": [
     "Tommy",
     "RAMZES"
+   ],
+   "top2u": [
+    [
+     650,
+     "Tommy"
+    ],
+    [
+     499,
+     "RAMZES"
+    ]
+   ],
+   "third": [
+    980,
+    "El_professor",
+    1.1
    ],
    "n": 10
   },
@@ -206,6 +416,21 @@
     "Zico",
     "Sэм"
    ],
+   "top2u": [
+    [
+     1198,
+     "Zico"
+    ],
+    [
+     224,
+     "Sэм"
+    ]
+   ],
+   "third": [
+    247,
+    "Рыба-мÓя",
+    0.4
+   ],
    "n": 10
   },
   {
@@ -217,6 +442,21 @@
    "top2": [
     "Niko",
     "Грешник"
+   ],
+   "top2u": [
+    [
+     825,
+     "Niko"
+    ],
+    [
+     890,
+     "Грешник"
+    ]
+   ],
+   "third": [
+    2900,
+    "uroxai",
+    0.7
    ],
    "n": 10
   },
@@ -230,6 +470,21 @@
     "Mauder",
     "Эклектик"
    ],
+   "top2u": [
+    [
+     2282,
+     "Mauder"
+    ],
+    [
+     1441,
+     "Эклектик"
+    ]
+   ],
+   "third": [
+    2695,
+    "Лил дождь",
+    1.4
+   ],
    "n": 10
   },
   {
@@ -241,6 +496,21 @@
    "top2": [
     "Maridzaki",
     "Skywalker"
+   ],
+   "top2u": [
+    [
+     3338,
+     "Maridzaki"
+    ],
+    [
+     623,
+     "Skywalker"
+    ]
+   ],
+   "third": [
+    2964,
+    "404_not_found",
+    1.1
    ],
    "n": 10
   },
@@ -254,6 +524,21 @@
     "Дон Винченцо",
     "Восьмеркин"
    ],
+   "top2u": [
+    [
+     1468,
+     "Дон Винченцо"
+    ],
+    [
+     70,
+     "Восьмеркин"
+    ]
+   ],
+   "third": [
+    375,
+    "Mike Isr",
+    1.5
+   ],
    "n": 10
   },
   {
@@ -265,6 +550,21 @@
    "top2": [
     "El_professor",
     "MiLady"
+   ],
+   "top2u": [
+    [
+     980,
+     "El_professor"
+    ],
+    [
+     2493,
+     "MiLady"
+    ]
+   ],
+   "third": [
+    1621,
+    "Лис 🦊",
+    1
    ],
    "n": 11
   },
@@ -278,6 +578,21 @@
     "Kihot",
     "Гіппократ"
    ],
+   "top2u": [
+    [
+     1435,
+     "Kihot"
+    ],
+    [
+     2139,
+     "Гіппократ"
+    ]
+   ],
+   "third": [
+    702,
+    "AquaMarine",
+    1.6
+   ],
    "n": 10
   },
   {
@@ -289,6 +604,21 @@
    "top2": [
     "TOMASSINO",
     "Kokocik"
+   ],
+   "top2u": [
+    [
+     3328,
+     "TOMASSINO"
+    ],
+    [
+     833,
+     "Kokocik"
+    ]
+   ],
+   "third": [
+    455,
+    "Carpe Diem",
+    1.8
    ],
    "n": 10
   },
@@ -302,6 +632,21 @@
     "Классик",
     "redfiim"
    ],
+   "top2u": [
+    [
+     2904,
+     "Классик"
+    ],
+    [
+     3374,
+     "redfiim"
+    ]
+   ],
+   "third": [
+    2919,
+    "Каин",
+    0.8
+   ],
    "n": 10
   },
   {
@@ -313,6 +658,21 @@
    "top2": [
     "Gangster",
     "Cimes"
+   ],
+   "top2u": [
+    [
+     2547,
+     "Gangster"
+    ],
+    [
+     3154,
+     "Cimes"
+    ]
+   ],
+   "third": [
+    3289,
+    "DAYAN",
+    1.8
    ],
    "n": 10
   },
@@ -326,6 +686,21 @@
     "iceBerg",
     "S1LveR"
    ],
+   "top2u": [
+    [
+     3155,
+     "iceBerg"
+    ],
+    [
+     590,
+     "S1LveR"
+    ]
+   ],
+   "third": [
+    3354,
+    "BluRay",
+    1.7
+   ],
    "n": 11
   },
   {
@@ -337,6 +712,21 @@
    "top2": [
     "Ракета",
     "404"
+   ],
+   "top2u": [
+    [
+     1253,
+     "Ракета"
+    ],
+    [
+     1254,
+     "404"
+    ]
+   ],
+   "third": [
+    1259,
+    "Suroviy",
+    1.05
    ],
    "n": 10
   },
@@ -350,6 +740,21 @@
     "yesterday",
     "Пуфик"
    ],
+   "top2u": [
+    [
+     2871,
+     "yesterday"
+    ],
+    [
+     226,
+     "Пуфик"
+    ]
+   ],
+   "third": [
+    2618,
+    "Queue",
+    1.1
+   ],
    "n": 10
   },
   {
@@ -361,6 +766,21 @@
    "top2": [
     "Константа (Douro Dons)",
     "Melodia"
+   ],
+   "top2u": [
+    [
+     2057,
+     "Константа (Douro Dons)"
+    ],
+    [
+     3407,
+     "Melodia"
+    ]
+   ],
+   "third": [
+    3340,
+    "Давно в Париже",
+    1.5
    ],
    "n": 10
   }
@@ -384,9 +804,9 @@
     "Кёльн 1",
     "Утрехт"
    ],
-   "mmr": 2123.5,
+   "mmr": 2118.2,
    "mmrTier": "L",
-   "mmrRank": 16,
+   "mmrRank": 17,
    "elo": 1457,
    "eloTier": "S",
    "eloSnap": "2026-10-26"
@@ -459,7 +879,7 @@
    ],
    "mmr": 1406.9,
    "mmrTier": "C",
-   "mmrRank": 457,
+   "mmrRank": 463,
    "elo": 992,
    "eloTier": "D",
    "eloSnap": "2026-10-09"
@@ -482,9 +902,9 @@
     "Утрехт",
     "Амстердам 1"
    ],
-   "mmr": 2016.3,
+   "mmr": 2040.6,
    "mmrTier": "L",
-   "mmrRank": 31,
+   "mmrRank": 30,
    "elo": 1563,
    "eloTier": "S",
    "eloSnap": "2026-10-26"
@@ -531,9 +951,9 @@
     "Брюссель 1",
     "Брюссель 2"
    ],
-   "mmr": 1087.8,
+   "mmr": 1043.9,
    "mmrTier": "E",
-   "mmrRank": 740,
+   "mmrRank": 758,
    "elo": 941,
    "eloTier": "D",
    "eloSnap": "2026-10-26"
@@ -557,7 +977,7 @@
    ],
    "mmr": 1389.6,
    "mmrTier": "C",
-   "mmrRank": 489,
+   "mmrRank": 492,
    "elo": null,
    "eloTier": null,
    "eloSnap": null
@@ -581,7 +1001,7 @@
    ],
    "mmr": 1018.4,
    "mmrTier": "E",
-   "mmrRank": 754,
+   "mmrRank": 763,
    "elo": null,
    "eloTier": null,
    "eloSnap": null
@@ -603,9 +1023,9 @@
    "played": [
     "Кёльн 1"
    ],
-   "mmr": 1467.6,
+   "mmr": 1485.6,
    "mmrTier": "C",
-   "mmrRank": 364,
+   "mmrRank": 339,
    "elo": 1023,
    "eloTier": "C",
    "eloSnap": "2026-09-06"
@@ -654,9 +1074,9 @@
     "Штутгарт",
     "Мюнхен"
    ],
-   "mmr": 1342.5,
-   "mmrTier": "D",
-   "mmrRank": 560,
+   "mmr": 1358.6,
+   "mmrTier": "C",
+   "mmrRank": 540,
    "elo": 1002,
    "eloTier": "C",
    "eloSnap": "2026-09-06"
@@ -703,8 +1123,8 @@
    "played": [
     "Франкфурт 2"
    ],
-   "mmr": null,
-   "mmrTier": null,
+   "mmr": 1597.0,
+   "mmrTier": "B",
    "mmrRank": null,
    "elo": null,
    "eloTier": null,
@@ -727,8 +1147,8 @@
    "played": [
     "Берлин 2"
    ],
-   "mmr": null,
-   "mmrTier": null,
+   "mmr": 1522.6,
+   "mmrTier": "B",
    "mmrRank": null,
    "elo": null,
    "eloTier": null,
@@ -778,7 +1198,7 @@
    ],
    "mmr": 1291.9,
    "mmrTier": "D",
-   "mmrRank": 622,
+   "mmrRank": 634,
    "elo": 992,
    "eloTier": "D",
    "eloSnap": "2026-08-22"
@@ -800,9 +1220,9 @@
    "played": [
     "Амстердам 1"
    ],
-   "mmr": 1858.4,
+   "mmr": 1857.0,
    "mmrTier": "S",
-   "mmrRank": 62,
+   "mmrRank": 63,
    "elo": 1262,
    "eloTier": "A",
    "eloSnap": "2026-10-26"
@@ -824,8 +1244,8 @@
    "played": [
     "Краков 1"
    ],
-   "mmr": 1513.5,
-   "mmrTier": "B",
+   "mmr": 1450.8,
+   "mmrTier": "C",
    "mmrRank": null,
    "elo": null,
    "eloTier": null,
@@ -872,8 +1292,8 @@
    "played": [
     "Мюнхен"
    ],
-   "mmr": null,
-   "mmrTier": null,
+   "mmr": 1492.5,
+   "mmrTier": "C",
    "mmrRank": null,
    "elo": null,
    "eloTier": null,
@@ -896,9 +1316,9 @@
    "played": [
     "Торревьеха"
    ],
-   "mmr": 1825.3,
+   "mmr": 1832.8,
    "mmrTier": "S",
-   "mmrRank": 68,
+   "mmrRank": 65,
    "elo": 1215,
    "eloTier": "A",
    "eloSnap": "2026-10-26"
@@ -920,9 +1340,9 @@
    "played": [
     "Брюссель 1"
    ],
-   "mmr": 1287.4,
+   "mmr": 1291.6,
    "mmrTier": "D",
-   "mmrRank": 629,
+   "mmrRank": 635,
    "elo": 974,
    "eloTier": "D",
    "eloSnap": "2026-10-26"
@@ -944,9 +1364,9 @@
    "played": [
     "Утрехт"
    ],
-   "mmr": 1710.3,
+   "mmr": 1708.2,
    "mmrTier": "A",
-   "mmrRank": 110,
+   "mmrRank": 114,
    "elo": 1206,
    "eloTier": "A",
    "eloSnap": "2026-07-15"
@@ -968,7 +1388,7 @@
    "played": [
     "Прага 2"
    ],
-   "mmr": 1407.7,
+   "mmr": 1408.7,
    "mmrTier": "C",
    "mmrRank": null,
    "elo": null,
@@ -996,7 +1416,7 @@
    ],
    "mmr": 1480.1,
    "mmrTier": "C",
-   "mmrRank": 343,
+   "mmrRank": 350,
    "elo": 1063,
    "eloTier": "C",
    "eloSnap": "2026-10-15"
@@ -1018,9 +1438,9 @@
    "played": [
     "Брюссель 2"
    ],
-   "mmr": 1012.0,
+   "mmr": 1090.4,
    "mmrTier": "E",
-   "mmrRank": 756,
+   "mmrRank": 746,
    "elo": 901,
    "eloTier": "E",
    "eloSnap": "2026-10-26"
@@ -1048,7 +1468,7 @@
    ],
    "mmr": 1093.6,
    "mmrTier": "E",
-   "mmrRank": 738,
+   "mmrRank": 745,
    "elo": 997,
    "eloTier": "C",
    "eloSnap": "2026-07-03"
@@ -1070,7 +1490,7 @@
    "played": [
     "Штутгарт"
    ],
-   "mmr": 1684.8,
+   "mmr": 1688.3,
    "mmrTier": "A",
    "mmrRank": null,
    "elo": null,
@@ -1094,9 +1514,9 @@
    "played": [
     "Берн"
    ],
-   "mmr": 1732.4,
+   "mmr": 1777.2,
    "mmrTier": "A",
-   "mmrRank": 99,
+   "mmrRank": 86,
    "elo": 1180,
    "eloTier": "B",
    "eloSnap": "2026-10-26"
@@ -1170,7 +1590,7 @@
    ],
    "mmr": 1240.1,
    "mmrTier": "D",
-   "mmrRank": 680,
+   "mmrRank": 689,
    "elo": 991,
    "eloTier": "D",
    "eloSnap": "2026-10-15"
@@ -1194,7 +1614,7 @@
    ],
    "mmr": 2108.3,
    "mmrTier": "L",
-   "mmrRank": 18,
+   "mmrRank": 19,
    "elo": 1426,
    "eloTier": "S",
    "eloSnap": "2026-09-06"
@@ -1267,7 +1687,7 @@
    ],
    "mmr": 1329.7,
    "mmrTier": "D",
-   "mmrRank": 579,
+   "mmrRank": 586,
    "elo": null,
    "eloTier": null,
    "eloSnap": null
@@ -1289,8 +1709,8 @@
    "played": [
     "Франкфурт 1"
    ],
-   "mmr": null,
-   "mmrTier": null,
+   "mmr": 1495.3,
+   "mmrTier": "C",
    "mmrRank": null,
    "elo": null,
    "eloTier": null,
@@ -1313,9 +1733,9 @@
    "played": [
     "Брюссель 1"
    ],
-   "mmr": 1243.9,
+   "mmr": 1213.7,
    "mmrTier": "D",
-   "mmrRank": 674,
+   "mmrRank": 706,
    "elo": 924,
    "eloTier": "E",
    "eloSnap": "2026-10-26"
@@ -1340,7 +1760,7 @@
    ],
    "mmr": 994.1,
    "mmrTier": "E",
-   "mmrRank": 761,
+   "mmrRank": 769,
    "elo": null,
    "eloTier": null,
    "eloSnap": null

@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <script>if(/[?&]embed=1/.test(location.search))document.documentElement.classList.add('embed');</script>
-<!-- DOVOD · gmc664.html · v1.2 · 2026-11-09 · режим ?embed=1 для вкладки t664 (без шапки, высота в родителя), Грешник → Валенсия (ручная поправка), ГС финала Рыба-мÓя, приз 3000 € · v1.1 · 2026-11-09 · ELO скрыт до перепроверки (решение Валерия), страница только по MMR; код переключателя оставлен · v1.0 · 2026-11-09 · финал German Mafia Cup Europa Edition 2026 (Кёльн, 14–15.11): «Дорога в Кёльн» — интерактивная карта, откуда едут 40 финалистов (город клуба на mafgame), путь через серию отбора, MMR/ELO, масштаб серийника
+<!-- DOVOD · gmc664.html · v1.3 · 2026-11-09 · серии отбора: кто едет (золото), снявшиеся (серым, зачёркнуто), замены из очереди третьих мест · v1.2 · 2026-11-09 · режим ?embed=1 для вкладки t664 (без шапки, высота в родителя), Грешник → Валенсия (ручная поправка), ГС финала Рыба-мÓя, приз 3000 € · v1.1 · 2026-11-09 · ELO скрыт до перепроверки (решение Валерия), страница только по MMR; код переключателя оставлен · v1.0 · 2026-11-09 · финал German Mafia Cup Europa Edition 2026 (Кёльн, 14–15.11): «Дорога в Кёльн» — интерактивная карта, откуда едут 40 финалистов (город клуба на mafgame), путь через серию отбора, MMR/ELO, масштаб серийника
      Оглавление: 1 стиль · 2 разметка (шапка, цифры, карта, дорога, масштаб, финалисты, серии, источники) · 3 данные и расчёты · 4 карта (слои, дуги, зум) · 5 списки и таблицы
      Данные: data/gmc664_final.json (собран 09.11 из mafgame: состав финала /tournaments/664/participants, клубы /clubs; серии и слоты — data/gmc2026.js; MMR — data/mmr.json, ELO — data/registry/elo_history.csv; масштаб — data/research/series)
              data/gmc664_map.json (контуры стран Natural Earth 50m → коническая проекция, заранее посчитанные координаты городов)
@@ -164,6 +164,11 @@ tbody tr:hover td{background:rgba(255,206,0,.04)}
 .sc:hover{border-left-color:var(--gold)}
 .sc .d{font:700 10px var(--mono);color:var(--dim);letter-spacing:.08em}
 .sc .c{font-weight:700;font-size:13px;margin-top:3px}
+.sc .q{font-size:12px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.sc .q.in{color:var(--gold2)}
+.sc .q.out{color:var(--dim);font-weight:500}.sc .q.out s{text-decoration-color:rgba(221,0,0,.7)}
+.sc .q small{font:600 9.5px var(--mono);letter-spacing:.04em;color:var(--dim);margin-left:3px}
+.sc .q.rp{white-space:normal;color:var(--wht);border-top:1px dashed var(--line2);padding-top:4px;margin-top:5px}.sc .q.rp small{color:var(--red2)}
 .sc .w{font-size:11px;color:var(--mut);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sc.m1{border-left-color:var(--red)} .sc.m2{border-left-color:var(--gold)}
 .src{margin-top:46px;font-size:11.5px;color:var(--dim);line-height:1.7;border-top:1px solid var(--line2);padding-top:16px}
@@ -245,7 +250,8 @@ html.embed body::before{display:none}html.embed body{background:transparent}html
 <div class="tbl"><table><thead><tr><th>#</th><th>Игрок</th><th>Клуб · город</th><th>Слот в финал</th><th class="r" id="thR">MMR</th><th class="r">км до Кёльна</th></tr></thead><tbody id="tb"></tbody></table></div>
 
 <div class="sec"><span class="n">04</span><h2>28 серий отбора</h2></div>
-<p class="note">По датам, с февраля по октябрь. В карточке — два игрока, взявших слоты. Нажмите — серия подсветится на карте. Полный разбор отбора, очередь замен и судейство — на странице <a href="gmc2026.html">GMC Europa 2026</a>.</p>
+<p class="note">По датам, с февраля по октябрь. Нажмите на серию — она подсветится на карте. Полный разбор отбора, очередь замен и судейство — на странице <a href="gmc2026.html">GMC Europa 2026</a>.</p>
+<p class="note" id="serNote"></p>
 <div class="sgrid" id="sgrid"></div>
 
 <div class="src" id="src"></div>
@@ -485,9 +491,15 @@ function renderCmp(){
    <div class="hint" style="margin-top:12px;font-size:11.5px;color:var(--dim)">Серийник — турнир, у которого на mafgame есть отборочные серии. Считаем сыгранные серии 2026 года по протоколам mafgame (снимок ${D.snap.split('-').reverse().join('.')}).</div>`;
 }
 function renderSeries(){
-  const fin=new Set(P.map(p=>p.uid));
+  /* v1.3: кто прошёл из серии; снявшийся (нет в подтверждённом составе mafgame) — серым и зачёркнут; замены — общая очередь третьих мест
+     по сумме допов (регламент п.4), за конкретным снявшимся не закреплены: под серией показываем, если её 3-е место прошло по замене */
+  const fin=new Set(P.map(p=>p.uid)),rep=new Set(P.filter(p=>p.via==='reserve').map(p=>p.uid));
+  const out=D.series.reduce((a,s)=>a+s.top2u.filter(([u])=>!fin.has(u)).length,0);
+  document.getElementById('serNote').innerHTML=`Золотом — едут в Кёльн, <s>серым</s> — взяли слот, но в подтверждённом составе mafgame их нет (снялись): таких <b>${out}</b> из ${D.series.reduce((a,s)=>a+s.top2u.length,0)}. Замены идут из общей очереди третьих мест по сумме допов, а не за конкретного снявшегося: по ней прошли <b>${rep.size}</b> — ${P.filter(p=>p.via==='reserve').map(p=>esc(p.nick)).join(', ')} (отмечены в карточке своей серии). Финал ограничен 40 местами, поэтому остальные слоты не заполнялись.`;
   document.getElementById('sgrid').innerHTML=D.series.map((s,i)=>{const d=s.date.split('-');
-    return `<div class="sc" data-c="${esc(s.city)}"><div class="d">${String(i+1).padStart(2,'0')} · ${d[2]}.${d[1]}</div><div class="c">${FLAG[D.cities[s.city].cc]||''} ${esc(s.name)}</div><div class="w">${s.top2.map(esc).join(' · ')}</div></div>`;}).join('');
+    const who=s.top2u.map(([u,n],k)=>fin.has(u)?`<div class="q in">${k+1}. ${esc(n)}</div>`:`<div class="q out" title="взял слот, в составе финала нет — снялся">${k+1}. <s>${esc(n)}</s> <small>снялся</small></div>`).join('');
+    const th=s.third&&rep.has(s.third[0])?`<div class="q rp" title="3-е место серии, прошёл по очереди замен (допы ${s.third[2]})">↳ ${esc(s.third[1])} <small>замена · 3-е, допы ${s.third[2]}</small></div>`:'';
+    return `<div class="sc" data-c="${esc(s.city)}"><div class="d">${String(i+1).padStart(2,'0')} · ${d[2]}.${d[1]}</div><div class="c">${FLAG[D.cities[s.city].cc]||''} ${esc(s.name)}</div>${who}${th}</div>`;}).join('');
   document.querySelectorAll('.sc').forEach(c=>c.onclick=()=>{S.selSeries=S.selSeries===c.dataset.c?null:c.dataset.c;hilitSeries();
     document.querySelectorAll('.sc').forEach(x=>x.classList.toggle('m2',x.dataset.c===S.selSeries));document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'});});
 }
