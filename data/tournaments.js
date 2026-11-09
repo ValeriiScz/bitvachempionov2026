@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.11 | 2026-11-09 | 643 Wroclaw Mafia Open (21–22.11) отменён — карточка убрана (вместо него возможен Краков, пока не подтверждён — на сайт не ставим); participants_643.json оставлен в data
 // MafgameStat | tournaments.js | v4.10 | 2026-11-09 | 664: ELO с карточки убран до перепроверки (только MMR)
 // MafgameStat | tournaments.js | v4.9 | 2026-11-09 | +664 финал German Mafia Cup 2026 (Кёльн 14–15.11): карточка, страница gmc664.html «Дорога в Кёльн» (карта финалистов), participants_664
 // MafgameStat | tournaments.js | v4.8 | 2026-11-09 | 615 Black Circle (Брюссель) -> finished (чемпион Flame 13.005, Tommy 12.26, Sэм 12.01; 12 квал + 4 финала)
@@ -187,45 +188,6 @@ window.TOURNAMENTS_DB = {
     "accent2": "#f4f1ea",
     "artPaper": "#efeeec",
     "posterTitle": "White Mafia|Best Player"
-  },
-  {
-    "id": "643",
-    "name": "Wroclaw Mafia Open 2026",
-    "dates": "21–22 ноября 2026",
-    "city": "Вроцлав",
-    "country": "Польша",
-    "players": 30,
-    "days": 2,
-    "stars": 3,
-    "prize": "",
-    "status": "gathering",
-    "phase": 3,
-    "statusLabel": "Собирается · 12 в списке + 1 заявка",
-    "eloAvg": 1082,
-    "mmrAvg": 1565,
-    "mmrN": 13,
-    "eloN": 9,
-    "eloTotal": 13,
-    "organizer": "White Mafia Club Wroclaw · орг Кирпич",
-    "mafgame": "https://mafgame.org/tournaments/643/view",
-    "note": "Ожидается 30 участников, взнос 110 €. В списке — записанные и заявки (снимок 26.10). Страница турнира откроется после рассадки.",
-    "sections": [
-      {
-        "href": "participants.html?t=643",
-        "title": "Участники и рейтинг",
-        "desc": "записанные и заявки + ELO markery (снимок 26.10)"
-      },
-      {
-        "soon": true,
-        "title": "Страница турнира",
-        "desc": "рассадка, сила столов, live-результаты"
-      }
-    ],
-    "start": "2026-11-21",
-    "accent": "#ece7dd",
-    "accent2": "#f4f1ea",
-    "posterTitle": "Wroclaw|Mafia Open",
-    "theme": "dovod"
   },
   {
     "id": "673",
