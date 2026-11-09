@@ -1,4 +1,4 @@
-"""gd_data · v1.5 · 2026-11-09 (дозаполнение леджеров из таблиц баллов турниров: страница игрока на mafgame отдаёт баллы с задержкой — Брюссель-615 не попал к Flame/Tommy/Саботажу) · v1.4 · 2026-11-02 (provisional.json: места доигранного, но не закрытого на mafgame турнира — до начисления баллов) · v1.3.1 · 2026-10-19 (ручной перезапуск пересбора после Central Cup 692: GitHub задержал воскресный cron) · v1.3 · 2026-10-14 (сверка: mafgame 13.10 пересчитал финалы PSP-639 и CEC-694 ровно по SERIAL_GRID_2026 — леджеры/рейтинг/страницы турниров; страница /pages/mafgame_points ещё со старой таблицей серийников. Поправка оставлена страховкой для будущих финалов: при совпадении ничего не меняет) · v1.2 · 2026-10-13 (финалы серийников 2026 — баллы по сетке федерации SERIAL_GRID_2026, а не как начислил сайт mafgame) · v1.1 · 2026-09-21 (путь репо: GD_REPO или относительно файла) · v1.0 · 2026-09-14 — загрузка данных «золотой дюжины»: леджеры, таблицы, листинги, серийники, календарь."""
+"""gd_data · v1.6 · 2026-11-09 (ручные поправки overrides.json: статусы заявок + возможные турниры для сценариев) · v1.5 · 2026-11-09 (дозаполнение леджеров из таблиц баллов турниров: страница игрока на mafgame отдаёт баллы с задержкой — Брюссель-615 не попал к Flame/Tommy/Саботажу) · v1.4 · 2026-11-02 (provisional.json: места доигранного, но не закрытого на mafgame турнира — до начисления баллов) · v1.3.1 · 2026-10-19 (ручной перезапуск пересбора после Central Cup 692: GitHub задержал воскресный cron) · v1.3 · 2026-10-14 (сверка: mafgame 13.10 пересчитал финалы PSP-639 и CEC-694 ровно по SERIAL_GRID_2026 — леджеры/рейтинг/страницы турниров; страница /pages/mafgame_points ещё со старой таблицей серийников. Поправка оставлена страховкой для будущих финалов: при совпадении ничего не меняет) · v1.2 · 2026-10-13 (финалы серийников 2026 — баллы по сетке федерации SERIAL_GRID_2026, а не как начислил сайт mafgame) · v1.1 · 2026-09-21 (путь репо: GD_REPO или относительно файла) · v1.0 · 2026-09-14 — загрузка данных «золотой дюжины»: леджеры, таблицы, листинги, серийники, календарь."""
 import json, collections, datetime, os
 _here=os.path.dirname(os.path.abspath(__file__))
 _guess=os.path.abspath(os.path.join(_here,'..','..','..'))  # data/research/model → корень репо
@@ -39,6 +39,28 @@ for _tid,_rows in P.items():
 SER_IX=json.load(open(R+'data/research/series/index.json'))
 SER={p['id']:json.load(open(R+'data/research/series/'+p['file'])) for p in SER_IX['parents']}
 _s=open(R+'calendar.html',encoding='utf-8').read(); _i=_s.find('const D=');_j=_s.find('};',_i); CAL=json.loads(_s[_i+8:_j+1])
+# v1.6 (09.11.2026): РУЧНЫЕ ПОПРАВКИ (data/research/model/overrides.json) — статусы заявок по словам Валерия и возможные турниры,
+#   которых ещё нет на mafgame. regs — переписывает статус заявки игрока на турнир (робот календаря их не затрёт: правка
+#   живёт отдельно и накладывается при каждом прогоне). extra с base=false в CAL не попадают — их берут сценарии (whatif) из EXTRA.
+OVR={}; EXTRA=[]
+try: OVR=json.load(open(os.path.join(_here,'overrides.json'),encoding='utf-8'))
+except FileNotFoundError: pass
+_nick2uid={}
+for _u,_v in L.items(): _nick2uid.setdefault(_v['nick'],int(_u))
+for _tid,_m in (OVR.get('regs') or {}).items():
+    for _t in CAL['tournaments']:
+        if str(_t['id'])!=str(_tid): continue
+        _rg={r[0]:r for r in _t['regs']}
+        for _n,_f in _m.items():
+            if _n.startswith('_') or _n not in _nick2uid: continue
+            _u=_nick2uid[_n]
+            if _f is None: _rg.pop(_u,None)
+            else: _rg[_u]=[_u,_n,int(_f)]
+        _t['regs']=list(_rg.values())
+for _e in (OVR.get('extra') or []):
+    _e=dict(_e); _e.setdefault('cancelled',False); _e.setdefault('played',False)
+    if _e.get('base'): CAL['tournaments'].append(_e)
+    else: EXTRA.append(_e)
 
 TID={int(t['id']):dict(t,year=int(y)) for y in T for t in T[y]}
 # v1.2 (13.10.2026): сетка баллов за ФИНАЛЫ СЕРИЙНИКОВ сезона 2026 — официально от главы федерации (сообщение, переслано Валерием 13.10):

@@ -1,4 +1,4 @@
-"""whatif.py · v2.0.1 · 2026-11-02 (сценарий Prague Cup: запрещённое слово заменено на «гонка» — правило Валерия 21.10, Глоссарий §5) · v2.0 · 2026-11-02 (после MGP: 13 сценариев по выбору Валерия — явка, Dutch/Кипр/Prague Cup, дуэль Tommy–Сью, исходы финалов GMC и MCL, MCL как 3★) · v1.3 · 2026-10-21 (дюжина: все с шансом ≥5%, до 24; +2 сценария с TOPS; убраны нереалистичные: MGP-отмена, MCL-перенос, 2★ не в зачёт — Валерий) — «Сценарии»: 10 «что если» для гонки за дюжину (Валерий, 21.10).
+"""whatif.py · v2.1 · 2026-11-09 (новые сценарии: DOVOD не едет на Dutch Open; возможный Краков 2★ 21.11 вместо отменённого Вроцлава; оба вместе; стресс — без прошедшего Брюсселя) · v2.0.1 · 2026-11-02 (сценарий Prague Cup: запрещённое слово заменено на «гонка» — правило Валерия 21.10, Глоссарий §5) · v2.0 · 2026-11-02 (после MGP: 13 сценариев по выбору Валерия — явка, Dutch/Кипр/Prague Cup, дуэль Tommy–Сью, исходы финалов GMC и MCL, MCL как 3★) · v1.3 · 2026-10-21 (дюжина: все с шансом ≥5%, до 24; +2 сценария с TOPS; убраны нереалистичные: MGP-отмена, MCL-перенос, 2★ не в зачёт — Валерий) — «Сценарии»: 10 «что если» для гонки за дюжину (Валерий, 21.10).
 Каждый сценарий — та же модель (gd_sim + gd_strength2), в которой меняется одно условие: отменён турнир, все записались,
 финал сыгран без игроков гонки и т. п. На выходе для каждого: планка 12-го (сырая и ×1.07), состав дюжины словами,
 кто заходит/выпадает по сравнению с базой. Пишет OUTP('whatif.json'); build_race.py кладёт его в RACE.whatif.
@@ -75,10 +75,39 @@ def scen_final_boost(pid,users,val):
 def scen_mcl3():
     se=copy.deepcopy(BASE); ev=contour_of(se,MCL); full=g.SERIAL_GRID_2026[3]; base=float(full[-1])
     ev['stars']=3; ev['grid']=[x for x in full if x>base]; ev['base']=base; return se
+def scen_skip(nicks, eid):
+    def f():
+        se=copy.deepcopy(BASE)
+        for ev in se.events:
+            if ev['type']!='contour' and ev['id']==eid:
+                for u in N(*nicks):
+                    ev['regs'].pop(u,None)
+                    if u in ev['p']: ev['p'][u]=0.0
+        refresh(se); return se
+    return f
+def scen_extra(extra_ids, then=None):
+    def f():
+        ex=[e for e in getattr(g,'EXTRA',[]) if e['id'] in extra_ids]
+        for e in ex: calendar_expert.W.setdefault(e['id'],0.7)
+        se=Season(2026,T,cal_future=fut+ex,verbose=False)
+        if then: then(se)
+        return se
+    return f
+def _no_dovod_dutch(se):
+    for ev in se.events:
+        if ev['type']!='contour' and ev['id']==DUTCH:
+            for u in N('DOVOD'):
+                ev['regs'].pop(u,None)
+                if u in ev['p']: ev['p'][u]=0.0
+    refresh(se)
+KRAKOW2=99021
 SCEN=[
  ('base','Как сейчас','Обычный ритм: записанные едут по срокам, остальные дозаписываются как в 2024–25. GMC — по фактическим заявкам (Gangster выписался).',base_season),
  ('regs','Никто больше не записывается','Играют только те, кто уже записан (с поправкой на срок), плюс финалы серийников.',scen_only_regs),
- ('stress','Топ-20 едут на все 4★','Стресс-тест планки: двадцать лучших гонки играют Брюссель, Dutch Open и Кипр-зиму.',scen_stress),
+ ('nodutch_dovod','DOVOD не едет на Dutch Open','Всё как сейчас, но DOVOD снимается с Four Seasons: Dutch Open (28.11, 4★).',scen_skip(['DOVOD'],DUTCH)),
+ ('krakow2','Краков 2★ 21.11 вместо Вроцлава','Вроцлав (3★) отменён; вместо него, возможно, будет турнир в Кракове на 2★. Явка — по обычной модели для Польши.',scen_extra({KRAKOW2})),
+ ('krakow2_nodutch','Краков 2★ + DOVOD без Dutch Open','Оба условия сразу: в календаре появляется Краков 2★ (21.11), DOVOD не едет в Амстердам.',scen_extra({KRAKOW2},_no_dovod_dutch)),
+ ('stress','Топ-20 едут на все 4★','Стресс-тест планки: двадцать лучших гонки играют Dutch Open и Кипр-зиму.',scen_stress),
  ('dutch','Весь топ-30 на Dutch Open 28.11','Four Seasons: Dutch Open (4★, Нидерланды) — все из топ-30 гонки едут.',scen_all_on(DUTCH)),
  ('cyp','Весь топ-30 на Кипр-зиму 12.12','Four Seasons Cyprus Open: Winter (4★) — все из топ-30 гонки едут.',scen_all_on(CYPRUS_W)),
  ('prague','Гонка едет на Prague Cup 5.12','Lюц, Магнат, Tommy, TOPS, Сью и Грешник — шестеро, кто бьётся за последние места дюжины, — играют Prague Cup (3★).',scen_group_prague),
