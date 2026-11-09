@@ -1,0 +1,56 @@
+# Закрытие турнира: заморозка протоколов + официальная таблица mafgame 1:1 (README «Как ЗАКРЫВАТЬ турнир», шаги 1–3).
+# v1.0 · 2026-11-09. Скрипт: .github/scripts/freeze_tournament.js — сверяет наши суммы с таблицей mafgame до сотых,
+# при расхождении падает и НИЧЕГО не пишет. Статус карточки (data/tournaments.js) и тексты страницы — руками.
+# Запуск: Actions → «Закрыть турнир» → Run workflow → id турнира.
+# Или правкой файла .github/freeze-queue.txt (в последней строке — id): так закрытие запускается и без кнопки.
+name: Закрыть турнир
+
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: 'id турнира на mafgame (например 645)'
+        required: true
+  push:
+    paths:
+      - '.github/freeze-queue.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: freeze-tournament
+  cancel-in-progress: false
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: id турнира
+        id: tid
+        run: |
+          T="${{ github.event.inputs.id }}"
+          if [ -z "$T" ]; then T=$(grep -oE '[0-9]+' .github/freeze-queue.txt | tail -1); fi
+          echo "id=$T" >> $GITHUB_OUTPUT; echo "турнир: $T"; echo "### турнир $T" >> $GITHUB_STEP_SUMMARY
+      - name: Заморозить и сверить
+        run: node .github/scripts/freeze_tournament.js "${{ steps.tid.outputs.id }}"
+      - name: Закоммитить
+        run: |
+          T="${{ steps.tid.outputs.id }}"
+          git config user.name  "dovod-bot"
+          git config user.email "noreply@dovod-mafia.com"
+          for i in 1 2 3; do
+            if [ $i -gt 1 ]; then git fetch origin main && git reset --hard origin/main && node .github/scripts/freeze_tournament.js "$T" || exit 1; fi
+            V=$(grep -o "dovod-v[0-9]*" sw.js | head -1 | sed 's/dovod-v//'); sed -i "s/const CACHE_VERSION = 'dovod-v$V';/const CACHE_VERSION = 'dovod-v$((V+1))';/" sw.js
+            git add "data/games_${T}_current.json" "data/tournament_${T}.json" sw.js
+            if git diff --cached --quiet; then echo "изменений нет"; exit 0; fi
+            git commit -m "турнир $T закрыт: протоколы заморожены, таблица mafgame 1:1 (sw v$((V+1)))"
+            if git push origin HEAD:main; then echo "запушено (попытка $i)"; exit 0; fi
+            echo "push отклонён — повтор на свежем main"; sleep 5
+          done
+          echo "::error::не удалось запушить"; exit 1
