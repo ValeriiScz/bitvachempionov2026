@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · gmc664.html · v1.0 · 2026-11-09 · финал German Mafia Cup Europa Edition 2026 (Кёльн, 14–15.11): «Дорога в Кёльн» — интерактивная карта, откуда едут 40 финалистов (город клуба на mafgame), путь через серию отбора, MMR/ELO, масштаб серийника
+<!-- DOVOD · gmc664.html · v1.1 · 2026-11-09 · ELO скрыт до перепроверки (решение Валерия), страница только по MMR; код переключателя оставлен · v1.0 · 2026-11-09 · финал German Mafia Cup Europa Edition 2026 (Кёльн, 14–15.11): «Дорога в Кёльн» — интерактивная карта, откуда едут 40 финалистов (город клуба на mafgame), путь через серию отбора, MMR/ELO, масштаб серийника
      Оглавление: 1 стиль · 2 разметка (шапка, цифры, карта, дорога, масштаб, финалисты, серии, источники) · 3 данные и расчёты · 4 карта (слои, дуги, зум) · 5 списки и таблицы
      Данные: data/gmc664_final.json (собран 09.11 из mafgame: состав финала /tournaments/664/participants, клубы /clubs; серии и слоты — data/gmc2026.js; MMR — data/mmr.json, ELO — data/registry/elo_history.csv; масштаб — data/research/series)
              data/gmc664_map.json (контуры стран Natural Earth 50m → коническая проекция, заранее посчитанные координаты городов)
@@ -66,6 +66,7 @@ a{color:var(--gold2);text-decoration:none}
 .seg{display:inline-flex;border:1px solid var(--line2);border-radius:4px;overflow:hidden;background:var(--panel)}
 .seg button{all:unset;cursor:pointer;font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:10px 12px;white-space:nowrap}
 .seg button+button{border-left:1px solid var(--line2)}
+.seg button[hidden],.ctl[hidden]{display:none}
 .seg button.on{background:var(--gold);color:#07070a}
 .seg.red button.on{background:var(--red);color:#fff}
 .seg button:focus-visible{outline:2px solid var(--gold2);outline-offset:-2px}
@@ -212,7 +213,7 @@ tbody tr:hover td{background:rgba(255,206,0,.04)}
 <div class="ctl">
   <span class="lb">путь</span><div class="seg" id="segMode"><button data-v="home" class="on">из дома</button><button data-v="path">через серию</button></div>
   <span class="lb">точки</span><div class="seg" id="segGeo"><button data-v="city" class="on">города</button><button data-v="country">страны</button></div>
-  <span class="lb">рейтинг</span><div class="seg red" id="segMetric"><button data-v="mmr" class="on">MMR</button><button data-v="elo">ELO</button></div>
+  <span class="lb">рейтинг</span><div class="seg red" id="segMetric"><button data-v="mmr" class="on">MMR</button><button data-v="elo" hidden>ELO</button></div>
 </div>
 <div class="mapgrid">
   <div class="mapbox" id="mapbox">
@@ -236,7 +237,7 @@ tbody tr:hover td{background:rgba(255,206,0,.04)}
 
 <div class="sec"><span class="n">03</span><h2>Финалисты</h2></div>
 <p class="note" id="rosterNote"></p>
-<div class="ctl"><span class="lb">рейтинг</span><div class="seg red" id="segMetric2"><button data-v="mmr" class="on">MMR</button><button data-v="elo">ELO</button></div></div>
+<div class="ctl" hidden><span class="lb">рейтинг</span><div class="seg red" id="segMetric2"><button data-v="mmr" class="on">MMR</button><button data-v="elo" hidden>ELO</button></div></div>
 <div class="bars" id="ctryBars" style="margin:0 0 14px"></div>
 <div class="tbl"><table><thead><tr><th>#</th><th>Игрок</th><th>Клуб · город</th><th>Слот в финал</th><th class="r" id="thR">MMR</th><th class="r">км до Кёльна</th></tr></thead><tbody id="tb"></tbody></table></div>
 
@@ -488,8 +489,8 @@ function renderSeries(){
     document.querySelectorAll('.sc').forEach(x=>x.classList.toggle('m2',x.dataset.c===S.selSeries));document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'});});
 }
 function renderSrc(){
-  document.getElementById('src').innerHTML=`<b>Источники.</b> Состав финала, клубы и города клубов — <a href="https://mafgame.org/tournaments/664/view" target="_blank" rel="noopener">mafgame.org</a> (снимок ${D.snap.split('-').reverse().join('.')}); серии и слоты — протоколы серий на mafgame (робот GMC, <a href="gmc2026.html">страница отбора</a>); MMR — mafiastats.com (снимок 03.11.2026); ELO и тиры — markery.online (последний снимок по игроку в прошлых турнирах DOVOD).
-  «Дом» — город клуба игрока на mafgame, а не место жительства: кто живёт в одном городе и играет за клуб в другом, на карте стоит в городе клуба. Расстояния — по прямой. Тиры MMR — шкала DOVOD (L ${D.tiers.L}+ … E ${D.tiers.E}+), тиры ELO — по шкале markery.<br>
+  document.getElementById('src').innerHTML=`<b>Источники.</b> Состав финала, клубы и города клубов — <a href="https://mafgame.org/tournaments/664/view" target="_blank" rel="noopener">mafgame.org</a> (снимок ${D.snap.split('-').reverse().join('.')}); серии и слоты — протоколы серий на mafgame (робот GMC, <a href="gmc2026.html">страница отбора</a>); MMR — mafiastats.com (снимок 03.11.2026); ELO markery на этой странице пока скрыт — данные на перепроверке.
+  «Дом» — город клуба игрока на mafgame, а не место жительства: кто живёт в одном городе и играет за клуб в другом, на карте стоит в городе клуба. Расстояния — по прямой. Тиры MMR — шкала DOVOD (L ${D.tiers.L}+ … E ${D.tiers.E}+).<br>
   Контуры стран — Natural Earth. Финал: 14–15 ноября 2026, Кёльн, 18 игр на участника, взнос 120 € (mafgame), призовой фонд от 2500–3000 € (организатор), главный судья — KEX.`;
 }
 /* переключатели */

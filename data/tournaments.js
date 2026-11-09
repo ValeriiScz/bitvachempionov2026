@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.10 | 2026-11-09 | 664: ELO с карточки убран до перепроверки (только MMR)
 // MafgameStat | tournaments.js | v4.9 | 2026-11-09 | +664 финал German Mafia Cup 2026 (Кёльн 14–15.11): карточка, страница gmc664.html «Дорога в Кёльн» (карта финалистов), participants_664
 // MafgameStat | tournaments.js | v4.8 | 2026-11-09 | 615 Black Circle (Брюссель) -> finished (чемпион Flame 13.005, Tommy 12.26, Sэм 12.01; 12 квал + 4 финала)
 // MafgameStat | tournaments.js | v4.7 | 2026-11-09 | 645 White Mafia Best Player -> finished (чемпион aptah 10.73, Deid_Ara 9.82, Season's 9.80; 10 финалистов, 15 игр)
@@ -47,9 +48,6 @@ window.TOURNAMENTS_DB = {
     "status": "upcoming",
     "phase": 3,
     "statusLabel": "Скоро · финал самого большого серийника 2026 · 40 финалистов из 12 стран",
-    "eloAvg": 1108,
-    "eloN": 23,
-    "eloTotal": 40,
     "mmrAvg": 1475,
     "mmrN": 36,
     "organizer": "Mafia Club Cologne · орг и главный судья KEX",
@@ -60,7 +58,7 @@ window.TOURNAMENTS_DB = {
       {
         "href": "gmc664.html",
         "title": "Дорога в Кёльн · карта",
-        "desc": "откуда едут финалисты, путь через серию, MMR и ELO"
+        "desc": "откуда едут финалисты, путь через серию, MMR"
       },
       {
         "href": "gmc2026.html",
@@ -70,7 +68,7 @@ window.TOURNAMENTS_DB = {
       {
         "href": "participants.html?t=664",
         "title": "Финалисты и рейтинг",
-        "desc": "40 игроков · MMR и ELO markery"
+        "desc": "40 игроков · MMR mafiastats"
       },
       {
         "soon": true,
