@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_mafiastats · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
+refresh_mafiastats · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
 Назначение: подтянуть единый рейтинг MMR с mafiastats.com (открытый API, без ключей)
 для игроков сайта DOVOD — без участия человека. Запускается GitHub Actions
 (.github/workflows/refresh-mafiastats.yml).
@@ -207,6 +207,29 @@ def apply_mmr_tiers():
     log('тир MMR: пороги %s · выборка %d · совпало с markery %d, ±1 тир %d' % (th, lad['sample'], lad['exact'], lad['within1']))
     return lad
 
+def update_cards():
+    """v1.4 (10.11.2026): ср. MMR на карточках data/tournaments.js (mmrAvg/mmrN) — из participants_{id}.json, только у незавершённых
+    турниров (у архива — снимок на момент турнира, не трогаем). Раньше правилось руками и отставало от состава."""
+    path = os.path.join(BASE, 'data', 'tournaments.js')
+    try: s = io.open(path, encoding='utf-8').read()
+    except Exception: return 0
+    n = 0
+    for m in re.finditer(r'\{\s*"id":\s*"(\d+)"', s):
+        tid = m.group(1); a = m.start(); b = s.find('\n  }', a)
+        if b < 0: continue
+        blk = s[a:b]
+        if '"status": "finished"' in blk or '"mmrAvg"' not in blk: continue
+        try: d = json.load(io.open(os.path.join(BASE, 'data', 'participants_%s.json' % tid), encoding='utf-8'))
+        except Exception: continue
+        v = [float(p['r_ms_mmr']) for p in d.get('players') or [] if p.get('r_ms_mmr') is not None]
+        if not v: continue
+        nb = re.sub(r'"mmrAvg":\s*[\d.]+', '"mmrAvg": %d' % round(sum(v) / len(v)), blk)
+        nb = re.sub(r'"mmrN":\s*\d+', '"mmrN": %d' % len(v), nb)
+        if nb != blk: s = s[:a] + nb + s[b:]; n += 1
+    if n: io.open(path, 'w', encoding='utf-8').write(s)
+    log('карточки турниров: ср. MMR обновлён у %d' % n)
+    return n
+
 def main():
     ping = api('/rating', limit=1)
     if not ping: fail('mafiastats API не отвечает — ничего не пишу')
@@ -238,6 +261,7 @@ def main():
     if lad:
         out['tier_ladder'] = lad
         io.open(OUT, 'w', encoding='utf-8').write(json.dumps(out, ensure_ascii=False, separators=(',', ':')) + '\n')
+    update_cards()
     v = bump_sw()
     log('готово: data/mmr.json (%d игроков), составов обновлено: %d, sw v%s' % (len(players), ch, v))
 
