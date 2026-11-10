@@ -10,7 +10,7 @@
   "expected": 33,
   "players_confirmed": 33,
   "rating_note": "Состав — подтверждённые на mafgame (снимок 10.11, 33 из 33). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (есть не у всех).",
-  "ms_snap": "2026-11-09",
+  "ms_snap": "2026-11-10",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
@@ -146,10 +146,17 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
-   "r_ms_mmr": null,
-   "r_ms_rank": null,
-   "r_ms_tier": null
+   "ms": {
+    "id": 61797,
+    "rating": 1281.0,
+    "rank": 647,
+    "games": 186,
+    "wr": 42.47,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1281.0,
+   "r_ms_rank": 647,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Клото",
@@ -377,10 +384,17 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
-   "r_ms_mmr": null,
+   "ms": {
+    "id": 59122,
+    "rating": 1498.9,
+    "rank": null,
+    "games": 86,
+    "wr": 47.67,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1498.9,
    "r_ms_rank": null,
-   "r_ms_tier": null
+   "r_ms_tier": "C"
   },
   {
    "nick": "Zico",
@@ -574,10 +588,17 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
-   "r_ms_mmr": null,
+   "ms": {
+    "id": 61810,
+    "rating": 1231.3,
+    "rank": null,
+    "games": 79,
+    "wr": 39.24,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1231.3,
    "r_ms_rank": null,
-   "r_ms_tier": null
+   "r_ms_tier": "D"
   },
   {
    "nick": "Day",
@@ -601,10 +622,17 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
-   "r_ms_mmr": null,
-   "r_ms_rank": null,
-   "r_ms_tier": null
+   "ms": {
+    "id": 61212,
+    "rating": 1378.7,
+    "rank": 512,
+    "games": 278,
+    "wr": 50,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1378.7,
+   "r_ms_rank": 512,
+   "r_ms_tier": "C"
   },
   {
    "nick": "Indigo",
@@ -757,10 +785,17 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
-   "r_ms_mmr": null,
+   "ms": {
+    "id": 63525,
+    "rating": 1236.8,
+    "rank": null,
+    "games": 119,
+    "wr": 43.7,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1236.8,
    "r_ms_rank": null,
-   "r_ms_tier": null
+   "r_ms_tier": "D"
   },
   {
    "nick": "Сью",
@@ -933,10 +968,17 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
-   "r_ms_mmr": null,
-   "r_ms_rank": null,
-   "r_ms_tier": null
+   "ms": {
+    "id": 58469,
+    "rating": 1196.7,
+    "rank": 712,
+    "games": 184,
+    "wr": 41.3,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1196.7,
+   "r_ms_rank": 712,
+   "r_ms_tier": "D"
   },
   {
    "nick": "Flame",
@@ -994,10 +1036,17 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
-   "r_ms_mmr": null,
+   "ms": {
+    "id": 62339,
+    "rating": 1528.1,
+    "rank": null,
+    "games": 71,
+    "wr": 52.11,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1528.1,
    "r_ms_rank": null,
-   "r_ms_tier": null
+   "r_ms_tier": "B"
   },
   {
    "nick": "LogisticPro",

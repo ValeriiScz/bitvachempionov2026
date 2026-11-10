@@ -10,7 +10,7 @@
   "expected": 40,
   "roster_source": "mafgame participants 2026-06-25 (актуальный, 40 confirmed)",
   "rating_note": "markery snapshot 2026-06-25 (API). r_elo_cur=ELO глоб/всё время, r_tier=ранг S..F, r_place_global=место глоб/всё время, r_rank_eu_2026=место Европа-2026, r_place_2026=место глоб-2026. ELO 2026 (число) и место оффлайн-2026 — markery отдаёт только премиум/лидербордом, отдельно.",
-  "ms_snap": "2026-11-09",
+  "ms_snap": "2026-11-10",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
