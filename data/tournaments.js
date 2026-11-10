@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.14 | 2026-11-10 | 801: полный постер организатора (dutch801_poster.jpg); поле thumb (миниатюра для «Дальше» на главной) у 664/801
 // MafgameStat | tournaments.js | v4.13 | 2026-11-10 | +801 Four Seasons: Dutch Open 2026 (Амстердам 28–29.11, 4★): состав 33/33, карточка с постером, participants_801
 // MafgameStat | tournaments.js | v4.12 | 2026-11-09 | 664: страница t664 (движок DOVOD) + watch664, ГС финала Рыба-мÓя, приз 3000 € (mafgame)
 // MafgameStat | tournaments.js | v4.11 | 2026-11-09 | 643 Wroclaw Mafia Open (21–22.11) отменён — карточка убрана (вместо него возможен Краков, пока не подтверждён — на сайт не ставим); participants_643.json оставлен в data
@@ -37,6 +38,7 @@ window.TOURNAMENTS_DB = {
     "id": "664",
     "theme": "dovod",
     "art": "assets/gmc664_card.jpg",
+    "thumb": "assets/gmc664_thumb.jpg",
     "artRatio": "16 / 9",
     "page": "t664.html",
     "watch": "watch664.html",
@@ -82,7 +84,8 @@ window.TOURNAMENTS_DB = {
   {
     "id": "801",
     "theme": "dovod",
-    "art": "assets/dutch801_card.jpg",
+    "art": "assets/dutch801_poster.jpg",
+    "thumb": "assets/dutch801_thumb.jpg",
     "artRatio": "16 / 9",
     "name": "Four Seasons: Dutch Open 2026",
     "posterTitle": "Dutch|Open",

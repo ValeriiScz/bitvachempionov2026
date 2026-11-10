@@ -221,6 +221,17 @@ body{
 .lt .nx a{color:#eef3fb;text-decoration:none;font-weight:700}.lt .nx a:hover{color:#26e0ff}
 @media (max-width:899px){.lt .ltb{grid-template-columns:1fr;gap:14px;padding:12px 14px 16px}.lt .pst{aspect-ratio:auto;min-height:130px}
   .lt .bt a{flex:1;justify-content:center}.lt .tbs{gap:6px}.lt .tb{padding:8px}.lt .lth{padding:13px 14px 0}.lt .nx{padding:10px 14px 14px}}
+.lt .pst.art{padding:0;aspect-ratio:16/9;background:#05060a center/cover no-repeat;align-self:start}
+.lt .nx{display:block}
+.lt .nxh{display:flex;align-items:center;gap:10px;font:700 9.5px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#79808f;margin-bottom:10px}
+.lt .nxh a{margin-left:auto;font:700 12px/1 Inter,system-ui,sans-serif;letter-spacing:0;text-transform:none}
+.lt .nxg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.lt .nxc{display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.10);background:rgba(5,6,10,.55);text-decoration:none;color:#eef3fb;transition:border-color .15s}
+.lt .nxc:hover{border-color:rgba(38,224,255,.55)}
+.lt .nxi{display:block;aspect-ratio:16/9;background:#0b0d14 center/cover no-repeat}
+.lt .nxe{display:grid;place-items:center;font:900 15px/1.1 var(--disp);text-transform:uppercase;color:#f5ff35;padding:10px;text-align:center}
+.lt .nxt{padding:9px 11px 11px}.lt .nxt b{display:block;font-size:13px;font-weight:800;line-height:1.25}.lt .nxt small{display:block;margin-top:4px;font:600 10.5px/1.3 var(--mono);color:#a4adbd;letter-spacing:.04em}
+@media (max-width:899px){.lt .nxg{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.lt .nxt b{font-size:12px}}
 </style>
 </head>
 <body>
@@ -466,17 +477,22 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
   var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'})), today=ymd(now), lim=ymd(new Date(now.getTime()+10*864e5));
   var act=db.tournaments.filter(function(t){return t.status!=='finished'&&t.page&&t.start&&today<=(t.liveTo||t.start)&&t.start<=lim;})
     .sort(function(a,b){return String(a.start).localeCompare(String(b.start));});
-  var nxt=db.tournaments.filter(function(t){return t.status!=='finished'&&act.indexOf(t)<0&&t.start&&t.start>=today;})
-    .sort(function(a,b){return String(a.start).localeCompare(String(b.start));}).slice(0,3);
+  /* v10.11: «Дальше» — все турниры на 3 недели вперёд карточками с картинками (t.thumb → t.art); + финал MCL (его нет в tournaments.js — страница лиги mcl2026.html) */
+  var lim3=ymd(new Date(now.getTime()+21*864e5));
+  var EXTRA=[{id:'mcl757',name:'MCL Europe 2026 — финал',dates:'21–22 ноября 2026',city:'Прага',start:'2026-11-21',page:'mcl2026.html',thumb:'assets/mcl/hero_thumb.jpg',stars:4,status:'upcoming',statusLabel:'финал лиги · 10 финалистов'}];
+  var nxt=db.tournaments.concat(EXTRA).filter(function(t){return t.status!=='finished'&&act.indexOf(t)<0&&t.start&&t.start>=today&&t.start<=lim3;})
+    .sort(function(a,b){return String(a.start).localeCompare(String(b.start));}).slice(0,4);
   if(!act.length&&!nxt.length) return;
   function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   var R=['','I','II','III','IV','V','VI'];
   var t=act[0], live=t&&t.liveFrom&&today>=t.liveFrom&&today<=(t.liveTo||t.liveFrom);
-  var nx=nxt.length?'<div class="nx"><span>Дальше:</span>'+nxt.map(function(x){return '<a href="'+(x.page||('participants.html?t='+x.id))+'">'+esc(x.name)+'</a> <span>'+esc(x.dates)+' · '+esc(x.city)+(x.status==='gathering'?' · собирается':'')+'</span>';}).join('')+'<a href="tournaments.html" style="margin-left:auto">все турниры →</a></div>':'';
+  var nx=nxt.length?'<div class="nx"><div class="nxh"><span>Дальше · три недели</span><a href="tournaments.html">все турниры →</a></div><div class="nxg">'+nxt.map(function(x){var img=x.thumb||x.art;
+      return '<a class="nxc" href="'+(x.page||('participants.html?t='+x.id))+'">'+(img?'<span class="nxi" style="background-image:url(\''+esc(img)+'\')"></span>':'<span class="nxi nxe">'+esc(String(x.posterTitle||x.name).replace('|',' '))+'</span>')+
+        '<span class="nxt"><b>'+esc(x.name)+'</b><small>'+esc(String(x.dates).replace(/\s*\d{4}$/,''))+' · '+esc(x.city)+(x.stars?' · '+'★'.repeat(x.stars):'')+(x.status==='gathering'?' · собирается':'')+'</small></span></a>';}).join('')+'</div></div>':'';
   if(!t){el.innerHTML='<div class="lth">Ближайшие турниры<s></s></div>'+nx;el.hidden=false;return;}
   var pt=String(t.posterTitle||t.name).split('|');
   var head='<div class="lth">'+(live?'Сейчас на турнире':'Скоро на турнире')+'<s></s>'+(act.length>1?act.length+' турнира':'')+'</div>';
-  var poster=(window.DV_POSTER&&DV_POSTER.has(t.poster))?'<a class="pst dvpo" href="'+t.page+'">'+DV_POSTER.inner(t.poster,{sub:esc(String(t.dates).replace(/\s*\d{4}$/,''))+' · '+esc(t.city)})+'</a>':'<a class="pst" href="'+t.page+'"><span class="pk">'+esc(pt.length>1?pt[0]:'DOVOD · турнир')+' · '+'★'.repeat(t.stars||0)+'</span><span class="pn">'+(pt.length>1?esc(pt[1]).replace(/ /,'<b>').replace(/$/,'</b>'):esc(pt[0]))+'</span><span class="pm">'+esc(t.city)+' · '+esc(String(t.dates).replace(/\s*\d{4}$/,''))+'</span><span class="py">'+String(t.start).slice(0,4)+'</span></a>';
+  var poster=t.art&&!(window.DV_POSTER&&DV_POSTER.has(t.poster))?'<a class="pst art" href="'+t.page+'" style="background-image:url(\''+esc(t.art)+'\')" aria-label="'+esc(t.name)+'"></a>':(window.DV_POSTER&&DV_POSTER.has(t.poster))?'<a class="pst dvpo" href="'+t.page+'">'+DV_POSTER.inner(t.poster,{sub:esc(String(t.dates).replace(/\s*\d{4}$/,''))+' · '+esc(t.city)})+'</a>':'<a class="pst" href="'+t.page+'"><span class="pk">'+esc(pt.length>1?pt[0]:'DOVOD · турнир')+' · '+'★'.repeat(t.stars||0)+'</span><span class="pn">'+(pt.length>1?esc(pt[1]).replace(/ /,'<b>').replace(/$/,'</b>'):esc(pt[0]))+'</span><span class="pm">'+esc(t.city)+' · '+esc(String(t.dates).replace(/\s*\d{4}$/,''))+'</span><span class="py">'+String(t.start).slice(0,4)+'</span></a>';
   var st=live?'<span class="st on"><i></i>Идёт · live с mafgame</span>':'<span class="st">Скоро · '+esc(String(t.statusLabel||'').replace(/^Скоро\s*·\s*/,''))+'</span>';
   var nm=esc(t.name).replace(/: (.*)$/,': <b>$1</b>');
   var info='<div>'+st+'<h3>'+nm+'</h3><div class="mt">'+esc(t.dates)+' · '+esc(t.city)+' · '+t.players+' '+(t.players%10>=2&&t.players%10<=4&&(t.players%100<12||t.players%100>14)?'игрока':(t.players%10===1&&t.players%100!==11?'игрок':'игроков'))+(t.prize?' · приз '+esc(t.prize):'')+(t.eloAvg?' · Ø ELO '+t.eloAvg:'')+(t.mmrAvg?' · Ø MMR '+t.mmrAvg:'')+'</div>'+
