@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v7.0 · 2026-06-20 -->
-<!-- DOVOD · series.html · v1.7 · 2026-10-14 · подпись о сетке финалов: mafgame с 13.10 начисляет по сетке федерации (PSP/CEC пересчитаны) -->
+<!-- DOVOD · series.html · v1.8 · 2026-11-10 · промоблок GMC: финал в Кёльне (t664), «Дорога в Кёльн», отбор; финал GMC в расписании — ссылка на страницу финала · v1.7 · 2026-10-14 · подпись о сетке финалов: mafgame с 13.10 начисляет по сетке федерации (PSP/CEC пересчитаны) -->
 <!-- DOVOD · series.html · v1.6 · 2026-10-13 · мобильная строка расписания: сетка «дата | название | счётчик», метка серия/финал под названием — счётчик больше не уезжает за край -->
 <!-- DOVOD · series.html · v1.5 · 2026-10-13 · сыгранные серийники не пропадают (плашка «завершён» с подиумом); «Ближайшие серии» → расписание до конца года: серии и финалы разными рамками, разбивка по месяцам -->
 <!-- DOVOD · series.html · v1.4 · 2026-10-05 · золотая строка на промоблоке MCL: сыгранные полуфиналы (итог 50/50, финалисты из conf[c].semiResult в data/mcl2026.js) и дата ближайшего полуфинала -->
@@ -157,6 +157,23 @@
   }
 
   /* промо серийника MCL (страница лиги в своём бренде) */
+  /* v1.8: промоблок GMC — финал в Кёльне */
+  .gmcp{position:relative;overflow:hidden;margin-top:14px;border:1px solid rgba(255,206,0,.35);background:#07070a url(assets/gmc664_eagle.png) right 22px center/auto 70% no-repeat;margin-bottom:18px}
+  .gmcp::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#2a2a2e 0 33.33%,#dd0000 33.33% 66.66%,#ffce00 66.66%)}
+  .gmcp-bg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,7,10,.98) 45%,rgba(7,7,10,.72) 75%,rgba(7,7,10,.55) 100%)}
+  .gmcp-b{position:relative;padding:20px 18px 22px;pointer-events:none}
+  .gmcp-b a{pointer-events:auto}
+  .gmcp-e{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#ffce00;font-weight:700}
+  .gmcp-t{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:clamp(26px,6.4vw,40px);letter-spacing:.04em;color:#f2efe8;margin-top:6px;line-height:1.05}
+  .gmcp-t i{font-style:normal;color:#dd0000}.gmcp-t u{text-decoration:none;color:#ffce00}
+  .gmcp-m{margin-top:9px;font-size:13px;color:#bdb8ad;max-width:54ch;line-height:1.5}
+  .gmcp-m b{color:#f2efe8}
+  .gmcp-r{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin-top:14px}
+  .gmcp-go{background:#ffce00;color:#07070a;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;text-decoration:none}
+  .gmcp-go:hover{background:#ffe27a}
+  .gmcp-l{font-size:12px;font-weight:700;color:#f2efe8;border:1px solid rgba(255,206,0,.4);padding:9px 12px;text-decoration:none;background:rgba(7,7,10,.6)}
+  .gmcp-l:hover{border-color:#ffce00;color:#ffce00}
+  @media (max-width:720px){.gmcp{background-image:none}}
   .mclp{position:relative;display:block;overflow:hidden;border:1px solid rgba(198,90,180,.35);background:#0a0810;
     margin:10px 0 10px;min-height:210px;text-decoration:none}
   .mclp-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
@@ -323,15 +340,20 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     </div>
   </a>
 
-  <a class="tile" href="gmc2026.html">
-    <div class="tbody">
-      <div class="stars">🏆 СЕРИЙНИК · СЕЗОН 2026</div>
-      <div class="tname">GMC Europa 2026 — финалисты и статус</div>
-      <div class="tmeta"><b>25 серий</b><span class="sep">·</span><b>14 сыграно</b><span class="sep">·</span><b>121 игрок</b><br>
-      топ-2 серии → финал, резерв замен по допам, календарь — финал 14.11 в Кёльне</div>
-      <div class="trow"><span class="badge upcoming">Новое</span><span class="go">Открыть</span></div>
+  <!-- v1.8 (10.11.2026): GMC — промоблок в стиле финала (чёрный/красный/золото), три входа: финал в Кёльне, карта «Дорога в Кёльн», отбор -->
+  <div class="gmcp" id="gmcp">
+    <a class="gmcp-bg" href="t664.html" aria-label="Финал German Mafia Cup 2026"></a>
+    <div class="gmcp-b">
+      <div class="gmcp-e">Финал · Кёльн · 14–15 ноября · ★★★★</div>
+      <div class="gmcp-t">GERMAN <i>MAFIA</i> <u>CUP</u> 2026</div>
+      <div class="gmcp-m tmeta">28 серий отбора в 22 городах — самый большой серийник федерации. В Кёльне 40 финалистов, 18 игр, 3000 €.</div>
+      <div class="gmcp-r">
+        <a class="gmcp-go" href="t664.html">Финал в Кёльне →</a>
+        <a class="gmcp-l" href="t664.html#road">✈ Дорога в Кёльн · карта</a>
+        <a class="gmcp-l" href="gmc2026.html">Отбор · серии и замены</a>
+      </div>
     </div>
-  </a>
+  </div>
 
   <div class="sec"><span class="dia">◆</span> Расписание до конца года</div>
   <div class="upc" id="upc"><div class="upc-h"><b>серии и финалы · все серийники</b><a href="calendar.html?preset=1&type=ser&view=feed">все серии в календаре →</a></div><div id="upcList"></div></div>
@@ -385,12 +407,12 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     const m=document.querySelector('.mclp-m'); if(m) m.textContent=`Зачёт, состав финала, серии и разбор данных. Финал ${mcl.final} · ${mcl.prize}`;}
   // у GMC свой датафайл от робота — он свежее общего снимка серийников, берём цифры оттуда
   const G=window.GMC&&window.GMC.series&&window.GMC.series.length?window.GMC:null;
-  if(gmc){const t=document.querySelector('a.tile[href="gmc2026.html"] .tmeta');
+  if(gmc){const t=document.querySelector('#gmcp .tmeta');
     const total=G?G.series.length+G.upcoming.length+G.nores.length:gmc.series_total;
     const played=G?G.series.length:gmc.series_played;
     const qual=G?G.qualified.length:gmc.qualified.length;
     const players=G?new Set(G.series.flatMap(x=>(x.r||[]).map(y=>y[0]))).size:gmc.players;
-    if(t) t.innerHTML=`<b>${total} серий</b><span class="sep">·</span><b>${played} сыграно</b><span class="sep">·</span><b>${players} игроков</b><span class="sep">·</span><b>${qual} прошли</b><br>${gmc.rule} — финал ${gmc.final}, ${gmc.prize}`;}
+    if(t) t.innerHTML=`<b>${played} серий</b> отбора · <b>${players} игроков</b> · <b>${qual}</b> взяли слоты — самый большой серийник федерации 2026. В Кёльне — 40 подтверждённых финалистов, 18 игр без финального стола, 3000 €.`;}
   // расписание до конца года: серии и финалы (v1.5)
   const MN=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
   const today=new Date().toISOString().slice(0,10);
@@ -398,8 +420,9 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   let html='<div class="upc-leg"><span><span class="upc-t">серия</span> отбор в финал</span><span><span class="upc-t" style="border-color:rgba(232,200,122,.7);color:var(--gold-hi)">финал</span> баллы в рейтинг</span></div>', mon='';
   up.forEach(u=>{const m=u.date.slice(5,7); if(m!==mon){mon=m; html+=`<div class="upc-m">${MN[+m-1]}</div>`;}
     const fin=u.kind==='final';
-    html+=`<div class="upc-l${fin?' fin':''}"><span class="upc-d">${dd(u.date)}</span><span class="upc-t">${fin?'финал '+'★'.repeat(u.stars||0):'серия'}</span><span class="upc-c">${u.contour}</span><span class="upc-w">${u.city||''}${u.country?', '+u.country:''}</span>`+
-      (fin?`<span class="upc-r"><b>${u.qualified||0}</b>${u.size?'/'+u.size:''} прошли</span>`:`<span class="upc-r ${u.regs>=u.exp?'full':''}"><b>${u.regs}</b>/${u.exp} записано</span>`)+`</div>`;});
+    const lnk=fin&&/GMC|German/i.test(u.contour||'')?'t664.html':''; /* v1.8: финал GMC в расписании ведёт на страницу финала */
+    html+=`<${lnk?'a href="'+lnk+'"':'div'} class="upc-l${fin?' fin':''}"${lnk?' style="text-decoration:none;color:inherit"':''}><span class="upc-d">${dd(u.date)}</span><span class="upc-t">${fin?'финал '+'★'.repeat(u.stars||0):'серия'}</span><span class="upc-c">${u.contour}</span><span class="upc-w">${u.city||''}${u.country?', '+u.country:''}</span>`+
+      (fin&&lnk?`<span class="upc-r"><b>40</b> финалистов · <span style="color:#ffce00">страница →</span></span>`:fin?`<span class="upc-r"><b>${u.qualified||0}</b>${u.size?'/'+u.size:''} прошли${lnk?' · <span style="color:#ffce00">страница →</span>':''}</span>`:`<span class="upc-r ${u.regs>=u.exp?'full':''}"><b>${u.regs}</b>/${u.exp} записано</span>`)+`</${lnk?'a':'div'}>`;});
   document.getElementById('upcList').innerHTML=up.length?html:'<div class="upc-l"><span class="upc-w">До конца года серий и финалов больше нет.</span></div>';
   // плашки остальных
   const rest=S.contours.filter(c=>!c.page);
