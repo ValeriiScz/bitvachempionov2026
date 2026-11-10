@@ -350,10 +350,17 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
-   "r_ms_mmr": null,
+   "ms": {
+    "id": 1408,
+    "rating": 1487.5,
+    "rank": null,
+    "games": 42,
+    "wr": 45.24,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1487.5,
    "r_ms_rank": null,
-   "r_ms_tier": null
+   "r_ms_tier": "C"
   }
  ],
  "stats": {
