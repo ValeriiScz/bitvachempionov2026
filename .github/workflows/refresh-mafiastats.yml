@@ -12,6 +12,7 @@ on:
     paths:
       - '.github/workflows/refresh-mafiastats.yml'
       - '.github/scripts/refresh_mafiastats.py'
+      - 'data/participants_*.json'   # 10.11: новый состав турнира → сразу подтянуть MMR (пуши самого робота workflow не перезапускают)
 
 permissions:
   contents: write

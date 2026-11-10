@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.13 | 2026-11-10 | +801 Four Seasons: Dutch Open 2026 (Амстердам 28–29.11, 4★): состав 33/33, карточка с постером, participants_801
 // MafgameStat | tournaments.js | v4.12 | 2026-11-09 | 664: страница t664 (движок DOVOD) + watch664, ГС финала Рыба-мÓя, приз 3000 € (mafgame)
 // MafgameStat | tournaments.js | v4.11 | 2026-11-09 | 643 Wroclaw Mafia Open (21–22.11) отменён — карточка убрана (вместо него возможен Краков, пока не подтверждён — на сайт не ставим); participants_643.json оставлен в data
 // MafgameStat | tournaments.js | v4.10 | 2026-11-09 | 664: ELO с карточки убран до перепроверки (только MMR)
@@ -77,6 +78,48 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-14",
     "accent": "#ffce00",
     "accent2": "#dd0000"
+  },
+  {
+    "id": "801",
+    "theme": "dovod",
+    "art": "assets/dutch801_card.jpg",
+    "artRatio": "16 / 9",
+    "name": "Four Seasons: Dutch Open 2026",
+    "posterTitle": "Dutch|Open",
+    "dates": "28–29 ноября 2026",
+    "city": "Амстердам",
+    "country": "Нидерланды",
+    "players": 33,
+    "days": 2,
+    "stars": 4,
+    "prize": "600 € + MVP 75 €",
+    "status": "upcoming",
+    "phase": 3,
+    "statusLabel": "Скоро · состав собран: 33 из 33 подтверждены · страница турнира откроется после рассадки",
+    "eloAvg": 1144,
+    "eloN": 20,
+    "eloTotal": 33,
+    "mmrAvg": 1606,
+    "mmrN": 21,
+    "organizer": "UMC · Q-Factory · главный судья Рыба-мÓя",
+    "format": "11 отборочных → полуфинал 30 (2 игры) → финал 10 (4 игры)",
+    "mafgame": "https://mafgame.org/tournaments/801/view",
+    "note": "Регламент mafgame: 33 игрока, 11 отборочных игр, полуфинал 30 человек (2 игры), финал 10 (4 игры). Призовые 300/200/100 €, MVP 75 €, взнос 100 €. Победитель проходит в финал Всемирной лиги Four Seasons 2026 (Кипр, 19–20 декабря, призовой фонд 5000 €).",
+    "sections": [
+      {
+        "href": "participants.html?t=801",
+        "title": "Участники и рейтинг",
+        "desc": "33 игрока · MMR и ELO markery"
+      },
+      {
+        "soon": true,
+        "title": "Страница турнира",
+        "desc": "рассадка, сила столов, live-результаты"
+      }
+    ],
+    "start": "2026-11-28",
+    "accent": "#f2c75c",
+    "accent2": "#ae1c28"
   },
   {
     "id": "615",
