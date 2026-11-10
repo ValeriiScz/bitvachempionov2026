@@ -479,7 +479,7 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
     .sort(function(a,b){return String(a.start).localeCompare(String(b.start));});
   /* v10.11: «Дальше» — все турниры на 3 недели вперёд карточками с картинками (t.thumb → t.art); + финал MCL (его нет в tournaments.js — страница лиги mcl2026.html) */
   var lim3=ymd(new Date(now.getTime()+21*864e5));
-  var EXTRA=[{id:'mcl757',name:'MCL Europe 2026 — финал',dates:'21–22 ноября 2026',city:'Прага',start:'2026-11-21',page:'mcl2026.html',thumb:'assets/mcl/hero_thumb.jpg',stars:4,status:'upcoming',statusLabel:'финал лиги · 10 финалистов'}];
+  var EXTRA=[]; /* 10.11: финал MCL теперь в tournaments.js (id 757, t757.html) — ручные карточки не нужны */
   var nxt=db.tournaments.concat(EXTRA).filter(function(t){return t.status!=='finished'&&act.indexOf(t)<0&&t.start&&t.start>=today&&t.start<=lim3;})
     .sort(function(a,b){return String(a.start).localeCompare(String(b.start));}).slice(0,4);
   if(!act.length&&!nxt.length) return;

@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.15 | 2026-11-10 | +757 финал MCL Europe 2026 (Прага 21–22.11): укороченная страница t757 + watch757, состав 10/10 с mafgame
 // MafgameStat | tournaments.js | v4.14 | 2026-11-10 | 801: полный постер организатора (dutch801_poster.jpg); поле thumb (миниатюра для «Дальше» на главной) у 664/801
 // MafgameStat | tournaments.js | v4.13 | 2026-11-10 | +801 Four Seasons: Dutch Open 2026 (Амстердам 28–29.11, 4★): состав 33/33, карточка с постером, participants_801
 // MafgameStat | tournaments.js | v4.12 | 2026-11-09 | 664: страница t664 (движок DOVOD) + watch664, ГС финала Рыба-мÓя, приз 3000 € (mafgame)
@@ -80,6 +81,56 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-14",
     "accent": "#ffce00",
     "accent2": "#dd0000"
+  },
+  {
+    "id": "757",
+    "theme": "dovod",
+    "art": "assets/mcl/hero.jpg",
+    "thumb": "assets/mcl/hero_thumb.jpg",
+    "artRatio": "16 / 9",
+    "page": "t757.html",
+    "watch": "watch757.html",
+    "name": "MCL Europe 2026 — финал",
+    "posterTitle": "MCL Europe|Final",
+    "dates": "21–22 ноября 2026",
+    "city": "Прага",
+    "country": "Чехия",
+    "players": 10,
+    "days": 2,
+    "stars": 4,
+    "prize": "2000 €",
+    "status": "upcoming",
+    "phase": 3,
+    "statusLabel": "Скоро · финал лиги: 10 финалистов из трёх регионов, 16 игр за одним столом",
+    "eloAvg": 1126,
+    "eloN": 8,
+    "eloTotal": 10,
+    "mmrAvg": 1599,
+    "mmrN": 9,
+    "organizer": "Mafia club «Champions League» Prague",
+    "format": "16 игр за одним столом, место по сумме",
+    "mafgame": "https://mafgame.org/tournaments/757/view",
+    "note": "Финал IX сезона Mafia Champions League. Состав — подтверждённые на mafgame (10 из 10). Отбор — на странице лиги mcl2026.html.",
+    "sections": [
+      {
+        "href": "t757.html",
+        "title": "Страница финала",
+        "desc": "Информация · Состав · Таблица · Игры · Роли"
+      },
+      {
+        "href": "watch757.html",
+        "title": "▶ Смотровая · эфир",
+        "desc": "стол крупно, live-таблица, следить за игроком"
+      },
+      {
+        "href": "mcl2026.html",
+        "title": "Лига MCL Europe 2026",
+        "desc": "зачёт регионов, серии, полуфиналы"
+      }
+    ],
+    "start": "2026-11-21",
+    "accent": "#c65ab4",
+    "accent2": "#db514e"
   },
   {
     "id": "801",
