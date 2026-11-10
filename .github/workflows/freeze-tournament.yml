@@ -47,7 +47,7 @@ jobs:
           for i in 1 2 3; do
             if [ $i -gt 1 ]; then git fetch origin main && git reset --hard origin/main && node .github/scripts/freeze_tournament.js "$T" || exit 1; fi
             V=$(grep -o "dovod-v[0-9]*" sw.js | head -1 | sed 's/dovod-v//'); sed -i "s/const CACHE_VERSION = 'dovod-v$V';/const CACHE_VERSION = 'dovod-v$((V+1))';/" sw.js
-            git add "data/games_${T}_current.json" "data/tournament_${T}.json" sw.js
+            git add "data/games_${T}_current.json" "data/tournament_${T}.json" data/tournaments.js sw.js
             if git diff --cached --quiet; then echo "изменений нет"; exit 0; fi
             git commit -m "турнир $T закрыт: протоколы заморожены, таблица mafgame 1:1 (sw v$((V+1)))"
             if git push origin HEAD:main; then echo "запушено (попытка $i)"; exit 0; fi

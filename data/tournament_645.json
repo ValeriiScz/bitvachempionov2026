@@ -120,5 +120,36 @@
    "games": 15
   }
  ],
- "reconciliation": "Сверено с официальной таблицей mafgame 09.11.2026: Финал 10/10 — совпадают до сотых (кроме округления Ci в протоколах mafgame: Season's: Ci по играм 0.99, в таблице 1.0000; в таблице — официальные суммы)."
+ "reconciliation": "Сверено с официальной таблицей mafgame 10.11.2026: Финал 10/10 — совпадают до сотых (кроме округления Ci в протоколах mafgame: Season's: Ci по играм 0.99, в таблице 1.0000; в таблице — официальные суммы).",
+ "awards": {
+  "most_valuable_players": [
+   "Landing (3.80)",
+   "aptah (3.10)",
+   "Deid_Ara (3.00)"
+  ],
+  "most_valuable_mafia": [
+   "aptah (1.30)",
+   "Deid_Ara (0.80)",
+   "Не Злая (0.80)"
+  ],
+  "most_valuable_citizen": [
+   "Landing (3.70)",
+   "Deid_Ara (2.20)",
+   "aptah (1.80)"
+  ],
+  "best_don": [
+   "aptah (2/0.45)",
+   "Season's (2/0.07)",
+   "Landing (1/0.40)"
+  ],
+  "best_sheriff": [
+   "aptah (2/0.15)",
+   "Deid_Ara (1/0.25)",
+   "Shadow Black Rose (1/0.20)"
+  ],
+  "most_killed": [
+   "Season's (5)"
+  ]
+ },
+ "mvp": "Landing"
 }

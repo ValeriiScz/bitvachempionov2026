@@ -276,5 +276,36 @@
    "games": 12
   }
  ],
- "reconciliation": "Сверено с официальной таблицей mafgame 09.11.2026: Квалификационные игры 30/30, Финал 10/10 — совпадают до сотых."
+ "reconciliation": "Сверено с официальной таблицей mafgame 10.11.2026: Квалификационные игры 30/30, Финал 10/10 — совпадают до сотых.",
+ "awards": {
+  "most_valuable_players": [
+   "Flash (3.73)",
+   "Flame (3.60)",
+   "Tommy (3.45)"
+  ],
+  "most_valuable_mafia": [
+   "Flame (2.02)",
+   "KEX (1.80)",
+   "RAMZES (1.24)"
+  ],
+  "most_valuable_citizen": [
+   "Sэм (2.91)",
+   "Flash (2.83)",
+   "TOPS (2.70)"
+  ],
+  "best_don": [
+   "Flame (5/0.28)",
+   "KEX (2/0.33)",
+   "Sэм (2/0.20)"
+  ],
+  "best_sheriff": [
+   "Blessed (3/0.33)",
+   "Sarcazi.! (3/0.03)",
+   "Flame (2/0.52)"
+  ],
+  "most_killed": [
+   "Tommy (7)"
+  ]
+ },
+ "mvp": "Flash"
 }

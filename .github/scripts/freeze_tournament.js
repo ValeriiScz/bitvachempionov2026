@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* DOVOD · .github/scripts/freeze_tournament.js · v1.2 · 2026-11-09 (точный Ci в протоколах: Ci_sum/k вместо 0.33) · v1.1 · 2026-11-09 (Ci: допуск на округление протоколов mafgame) · v1.0 · 2026-11-09
+/* DOVOD · .github/scripts/freeze_tournament.js · v1.3 · 2026-11-10 (награды mafgame: awards + MVP на карточку) · v1.2 · 2026-11-09 (точный Ci в протоколах: Ci_sum/k вместо 0.33) · v1.1 · 2026-11-09 (Ci: допуск на округление протоколов mafgame) · v1.0 · 2026-11-09
    Назначение: закрытие турнира по регламенту README («Как ЗАКРЫВАТЬ турнир») одной командой в GitHub Actions
    (у раннера прямой доступ к mafgame.org; из облачной сессии Claude mafgame закрыт).
 
@@ -10,7 +10,7 @@
      4  запись: data/games_{id}_current.json (заморозка) + data/tournament_{id}.json (standings/winners/champion/closed)
 
    Запуск:  node .github/scripts/freeze_tournament.js 645
-   Что НЕ делает: не трогает data/tournaments.js (статус/подпись карточки) и тексты страниц — это правится руками.
+   Что НЕ делает: статус/подпись карточки в data/tournaments.js и тексты страниц — руками. v1.3: MVP на карточку и награды (awards) в tournament_{id}.json пишет сам.
    Стадии-серии (part_data.serial_child_tournament > 0, у финалов серийников) в протоколы финала не попадают.
    Итоговая таблица: стадии от последней к первой; стадия с sum_score_with=1 — нарастающим итогом (как на mafgame). */
 const fs = require('fs'), path = require('path');
@@ -32,6 +32,33 @@ async function page(p) {
     } catch (e) { last = h + p + ': ' + e.message; await new Promise(r => setTimeout(r, 1500 * a)); }
   }
   throw new Error(last);
+}
+
+
+// ── 5 · награды mafgame (v1.3): props.tournament.stats из /results → awards + mvp ─────────────
+// Формат как у закрытых вручную 673/687/692: «Ник (балл)», дон/шериф — «Ник (победы/ср. доп)».
+function awardsFrom(R) {
+  const S = (R.tournament || {}).stats; if (!S) return null;
+  const nick = {}; for (const st in (R.players || {})) for (const pid in R.players[st]) { const x = R.players[st][pid]; nick[x.user_id] = x.nickname; }
+  const top = (pre, fmt) => [1, 2, 3].map(i => { const u = S[`${pre}_${i}_user_id`]; return u && nick[u] ? fmt(nick[u], i) : null; }).filter(Boolean);
+  const v = (pre) => (n, i) => `${n} (${S[`${pre}_${i}_value`]})`;
+  const ws = (pre) => (n, i) => `${n} (${parseInt(S[`${pre}_${i}_value`], 10)}/${S[`${pre}_${i}_value_avg`]})`;
+  const a = { most_valuable_players: top('mvp', v('mvp')), most_valuable_mafia: top('mv_black', v('mv_black')),
+    most_valuable_citizen: top('mv_red', v('mv_red')), best_don: top('mv_don', ws('mv_don')), best_sheriff: top('mv_sheriff', ws('mv_sheriff')),
+    most_killed: S.most_killed_user_id && nick[S.most_killed_user_id] ? [`${nick[S.most_killed_user_id]} (${S.most_killed_value})`] : [] };
+  for (const k in a) if (!a[k].length) delete a[k];
+  const mvp = S.mvp_1_user_id && nick[S.mvp_1_user_id] ? nick[S.mvp_1_user_id] : null;
+  return Object.keys(a).length ? { awards: a, mvp } : null;
+}
+// MVP на карточке архива (data/tournaments.js) — единственная правка карточки, которую делает скрипт
+function patchCardMvp(tid, mvp) {
+  const p = path.join(ROOT, 'data', 'tournaments.js'); let s = fs.readFileSync(p, 'utf8');
+  const a = s.indexOf(`"id": "${tid}"`); if (a < 0 || !mvp) return false;
+  const b = s.indexOf('\n  }', a); if (b < 0) return false;
+  let blk = s.slice(a, b); const val = JSON.stringify(mvp);
+  if (/"mvp":\s*"[^"]*"/.test(blk)) blk = blk.replace(/"mvp":\s*"[^"]*"/, `"mvp": ${val}`);
+  else blk = blk.replace(/\s*$/, '') + `,\n    "mvp": ${val}`;
+  const n = s.slice(0, a) + blk + s.slice(b); if (n === s) return false; fs.writeFileSync(p, n); return true;
 }
 
 (async () => {
@@ -111,6 +138,8 @@ async function page(p) {
   Object.assign(TJ, { closed: true, in_progress: false, upcoming: false, games_played: nGames, games_total: nGames,
     champion: standings[0].name, winners: standings.slice(0, 3).map(r => r.name), standings,
     reconciliation: `Сверено с официальной таблицей mafgame ${today}: ` + stages.map(st => `${(PD[st] || {}).name || st} ${rowsOf[st].length}/${rowsOf[st].length}`).join(', ') + ' — совпадают до сотых' + (ciRound.length ? ` (кроме округления Ci в протоколах mafgame: ${ciRound.join('; ')}; в таблице — официальные суммы)` : '') + '.' });
+  const AW = awardsFrom(R); if (AW) { TJ.awards = AW.awards; if (AW.mvp) TJ.mvp = AW.mvp; }
   fs.writeFileSync(tjPath, JSON.stringify(TJ, null, 1) + '\n');
+  if (AW && AW.mvp && patchCardMvp(TID, AW.mvp)) console.log('карточка: MVP ' + AW.mvp);
   console.log(`заморожено: ${nGames} игр; чемпион ${standings[0].name}; топ-3 ${TJ.winners.join(', ')}; строк в таблице ${standings.length}`);
 })().catch(e => { console.error('ошибка: ' + e.message); process.exit(1); });

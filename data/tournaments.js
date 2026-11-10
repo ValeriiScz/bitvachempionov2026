@@ -172,7 +172,8 @@ window.TOURNAMENTS_DB = {
         "desc": "30 игроков · MMR и ELO markery (снимок 05.11)"
       }
     ],
-    "start": "2026-11-07"
+    "start": "2026-11-07",
+    "mvp": "Flash"
   },
   {
     "id": "645",
@@ -227,7 +228,8 @@ window.TOURNAMENTS_DB = {
     "accent": "#ece7dd",
     "accent2": "#f4f1ea",
     "artPaper": "#efeeec",
-    "posterTitle": "White Mafia|Best Player"
+    "posterTitle": "White Mafia|Best Player",
+    "mvp": "Landing"
   },
   {
     "id": "673",
