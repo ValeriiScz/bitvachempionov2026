@@ -747,7 +747,8 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   .scrollT .tbl td.l .pl{min-width:0}
   .scrollT .tbl:not(.hasnum) th:nth-child(1),.scrollT .tbl:not(.hasnum) td:nth-child(1){max-width:46vw}
   .scrollT .tbl td.l .pl>span:last-child{min-width:0;overflow:hidden}
-  .scrollT .tbl .pl-nick,.scrollT .tbl .pl-real{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .scrollT .tbl .pl-nick{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .scrollT .tbl .pl-real{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;white-space:normal;line-height:1.25;word-break:break-word}
   .scrollT .tbl .pl .av,.scrollT .tbl .pl .mono{width:28px;height:28px;font-size:10.5px}
   .scrollT .tbl .pl{gap:7px}.scrollT .tbl .pl .num{width:16px}
 }

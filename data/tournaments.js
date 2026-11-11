@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.16 | 2026-11-11 | 801 Dutch Open: полная страница t801 + watch801 (разделы с рассадкой откроются после её публикации)
 // MafgameStat | tournaments.js | v4.15 | 2026-11-10 | +757 финал MCL Europe 2026 (Прага 21–22.11): укороченная страница t757 + watch757, состав 10/10 с mafgame
 // MafgameStat | tournaments.js | v4.14 | 2026-11-10 | 801: полный постер организатора (dutch801_poster.jpg); поле thumb (миниатюра для «Дальше» на главной) у 664/801
 // MafgameStat | tournaments.js | v4.13 | 2026-11-10 | +801 Four Seasons: Dutch Open 2026 (Амстердам 28–29.11, 4★): состав 33/33, карточка с постером, participants_801
@@ -138,6 +139,8 @@ window.TOURNAMENTS_DB = {
     "art": "assets/dutch801_poster.jpg",
     "thumb": "assets/dutch801_thumb.jpg",
     "artRatio": "16 / 9",
+    "page": "t801.html",
+    "watch": "watch801.html",
     "name": "Four Seasons: Dutch Open 2026",
     "posterTitle": "Dutch|Open",
     "dates": "28–29 ноября 2026",
@@ -149,7 +152,7 @@ window.TOURNAMENTS_DB = {
     "prize": "600 € + MVP 75 €",
     "status": "upcoming",
     "phase": 3,
-    "statusLabel": "Скоро · состав собран: 33 из 33 подтверждены · страница турнира откроется после рассадки",
+    "statusLabel": "Скоро · состав собран: 33 из 33 подтверждены · рассадка — когда опубликует mafgame",
     "eloAvg": 1144,
     "eloN": 20,
     "eloTotal": 33,
@@ -161,14 +164,19 @@ window.TOURNAMENTS_DB = {
     "note": "Регламент mafgame: 33 игрока, 11 отборочных игр, полуфинал 30 человек (2 игры), финал 10 (4 игры). Призовые 300/200/100 €, MVP 75 €, взнос 100 €. Победитель проходит в финал Всемирной лиги Four Seasons 2026 (Кипр, 19–20 декабря, призовой фонд 5000 €).",
     "sections": [
       {
+        "href": "t801.html",
+        "title": "Страница турнира",
+        "desc": "Обзор · Расписание · Прогноз · Состав · Рассадка · Результаты"
+      },
+      {
+        "href": "watch801.html",
+        "title": "▶ Смотровая · эфиры",
+        "desc": "три стола в одном окне, следить за игроком"
+      },
+      {
         "href": "participants.html?t=801",
         "title": "Участники и рейтинг",
         "desc": "33 игрока · MMR и ELO markery"
-      },
-      {
-        "soon": true,
-        "title": "Страница турнира",
-        "desc": "рассадка, сила столов, live-результаты"
       }
     ],
     "start": "2026-11-28",

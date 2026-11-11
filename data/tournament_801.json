@@ -1,0 +1,29 @@
+{
+ "tournament_id": "801",
+ "tournament_name": "Four Seasons: Dutch Open 2026",
+ "short": "Dutch Open 2026",
+ "date": "2026-11-28 — 2026-11-29",
+ "location": "Амстердам, Нидерланды",
+ "club": "UMC",
+ "organizer": "UMC · Q-Factory · главный судья Рыба-мÓя",
+ "players_total": 33,
+ "days": 2,
+ "fee_eur": 100,
+ "stars": 4,
+ "format": "Регламент mafgame: 33 игрока — 11 отборочных игр на 3 столах (у каждого 10), полуфинал 30 человек (2 игры), финал 10 человек (4 игры, ×1.3).",
+ "closed": false,
+ "in_progress": false,
+ "live_from": "2026-11-27",
+ "live_to": "2026-11-30",
+ "upcoming": true,
+ "games_played": 0,
+ "games_total": 17,
+ "final_coef": 1.3,
+ "accent": "#f2c75c",
+ "start_iso": "2026-11-28T10:00:00+01:00",
+ "note": "Место — Q-Factory, Амстердам. Призовые 300/200/100 €, MVP 75 €. Победитель → финал Всемирной лиги Four Seasons 2026 (Кипр, 19–20.12).",
+ "chief_referee": "Рыба-мÓя",
+ "referees": [
+  "Рыба-мÓя"
+ ]
+}
