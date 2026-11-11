@@ -34,7 +34,24 @@
   "LogisticPro": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_201/98c31a1573883b9daa1d7d4790032a6bbffa2ef0.png",
   "Лесник": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3405/927fe7c52a775b15b83acc55459dbc225ed90e85.png"
  },
- "judges": {},
+ "judges": {
+  "1": {
+   "name": "Рыба-мÓя",
+   "role": "Главный судья",
+   "tg": "@yanadovh",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_247/608e827555f51ee98a1d7474e61d3a0fc10042d0.png"
+  },
+  "2": {
+   "name": "Кура",
+   "tg": "@kyraleibiuk",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_416/13ca6c564cb7170459accf579e1441fb7de792d6.png"
+  },
+  "3": {
+   "name": "Кирпич",
+   "tg": "@alexgrod",
+   "avatar": ""
+  }
+ },
  "duty": null,
  "commentator": null,
  "referees": [
