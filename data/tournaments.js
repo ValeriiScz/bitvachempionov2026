@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.17 | 2026-11-11 | 801: +Саботаж (mafgame 11.11) — 34 подтверждены при ожидаемых 33; ср. ELO/MMR пересчитаны
 // MafgameStat | tournaments.js | v4.16 | 2026-11-11 | 801 Dutch Open: полная страница t801 + watch801 (разделы с рассадкой откроются после её публикации)
 // MafgameStat | tournaments.js | v4.15 | 2026-11-10 | +757 финал MCL Europe 2026 (Прага 21–22.11): укороченная страница t757 + watch757, состав 10/10 с mafgame
 // MafgameStat | tournaments.js | v4.14 | 2026-11-10 | 801: полный постер организатора (dutch801_poster.jpg); поле thumb (миниатюра для «Дальше» на главной) у 664/801
@@ -146,18 +147,18 @@ window.TOURNAMENTS_DB = {
     "dates": "28–29 ноября 2026",
     "city": "Амстердам",
     "country": "Нидерланды",
-    "players": 33,
+    "players": 34,
     "days": 2,
     "stars": 4,
     "prize": "600 € + MVP 75 €",
     "status": "upcoming",
     "phase": 3,
-    "statusLabel": "Скоро · состав собран: 33 из 33 подтверждены · рассадка — когда опубликует mafgame",
-    "eloAvg": 1144,
-    "eloN": 20,
-    "eloTotal": 33,
-    "mmrAvg": 1538,
-    "mmrN": 28,
+    "statusLabel": "Скоро · 34 подтверждены при ожидаемых 33 (+Саботаж 11.11) · рассадка — когда опубликует mafgame",
+    "eloAvg": 1154,
+    "eloN": 21,
+    "eloTotal": 34,
+    "mmrAvg": 1551,
+    "mmrN": 29,
     "organizer": "UMC · Q-Factory · главный судья Рыба-мÓя",
     "format": "11 отборочных → полуфинал 30 (2 игры) → финал 10 (4 игры)",
     "mafgame": "https://mafgame.org/tournaments/801/view",

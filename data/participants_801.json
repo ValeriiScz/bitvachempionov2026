@@ -8,8 +8,8 @@
   "fee": "100.00",
   "stars": 4,
   "expected": 33,
-  "players_confirmed": 33,
-  "rating_note": "Состав — подтверждённые на mafgame (снимок 10.11, 33 из 33). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (есть не у всех).",
+  "players_confirmed": 34,
+  "rating_note": "Состав — подтверждённые на mafgame (снимок 11.11, 34 подтверждены при ожидаемых 33; +Саботаж 11.11). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (есть не у всех).",
   "ms_snap": "2026-11-10",
   "ms_ladder": {
    "L": 1950,
@@ -1108,22 +1108,59 @@
    "r_ms_mmr": null,
    "r_ms_rank": null,
    "r_ms_tier": null
+  },
+  {
+   "nick": "Саботаж",
+   "uid": 68,
+   "real": "Александр Ботте",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_68/e5f69d0c89c3ecec9dee013970b56f8219c70d70.png",
+   "status": "confirmed",
+   "club": "Bengal Mafia Club",
+   "cc": "",
+   "country": "",
+   "flag": "",
+   "markery_id": 9999,
+   "r_elo_cur": 1351,
+   "r_tier": "S",
+   "r_elo_ly": 1191,
+   "mg_rank": 14,
+   "m_rank": null,
+   "player_number": null,
+   "mk_match": "name",
+   "elo_snap": "2026-11-05",
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": {
+    "id": 55,
+    "rating": 1914.6,
+    "rank": 49,
+    "games": 758,
+    "wr": 50,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1914.6,
+   "r_ms_rank": 49,
+   "r_ms_tier": "S",
+   "r_elo_2026": 1209,
+   "r_rank": 91,
+   "r_rank_2026": 18
   }
  ],
  "stats": {
-  "n_conf": 33,
-  "mk_avg": 1143.7,
-  "mk_n": 20,
+  "n_conf": 34,
+  "mk_avg": 1153.5,
+  "mk_n": 21,
   "mk_median": 1173,
   "tiers": {
    "A": 6,
    "E": 2,
    "—": 13,
    "C": 3,
-   "S": 2,
+   "S": 3,
    "D": 2,
    "B": 5
   },
-  "snapshot": "2026-11-10"
+  "snapshot": "2026-11-11"
  }
 }
