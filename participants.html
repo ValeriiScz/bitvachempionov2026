@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v9.5 · 2026-11-03 · колонка «Тир MMR» (линейка markery по долям) · v9.4 · 2026-11-03 · колонка MMR (mafiastats, робот refresh-mafiastats 2×/нед) + ср. MMR · v9.3 · 2026-07-15 · ЧЕ-634: свежий markery-снапшот, колонки Ранг/ELO/ELO 2026 -->
-<!-- DOVOD · participants.html · v2.0 · 2026-10-26 · новый стиль DOVOD (как страницы турниров): Unbounded/JetBrains Mono/Inter, неон-сетка, акцент турнира из реестра (t.accent) · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
+<!-- DOVOD · participants.html · v2.1 · 2026-11-11 · мобильная вёрстка: липкий «Игрок» ≤44% экрана, ник/клуб многоточием, подпись тира не уезжает · v2.0 · 2026-10-26 · новый стиль DOVOD (как страницы турниров): Unbounded/JetBrains Mono/Inter, неон-сетка, акцент турнира из реестра (t.accent) · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
      заявки mafgame (подтв./заявки/лист ожидания) + ДВОЙНОЙ рейтинг markery(основной)+mafiastats(сверка),
      счётчик «ожидаемый средний ELO» (markery) на постере, ссылки на профили, флаги неоднозначных матчей.
      Данные: data/participants_{t}.json (снапшот), реестр data/tournaments.js. -->
@@ -102,6 +102,19 @@
     .ttl .nm{font-size:17px;}
   }
 
+  /* 11.11.2026 · мобильная вёрстка (жалоба с Galaxy Z Fold4): липкий столбец «Игрок» занимал почти весь экран и закрывал рейтинг.
+     Теперь столбец не шире ~44% экрана, ник и клуб обрезаются многоточием, подпись группы тиров не уезжает при прокрутке вбок. */
+  .pl-t{display:block;min-width:0;overflow:hidden}
+  .pl-nick,.pl-real{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tsl{position:sticky;left:12px;display:inline-flex;align-items:center;gap:8px}
+  @media(max-width:600px){
+    th.anchor,td.anchor{width:44vw;max-width:44vw;min-width:0}
+    .pl{gap:6px}.pl .num{width:14px;font-size:10px}
+    .pl .av,.pl .mono{width:24px;height:24px;font-size:10px}
+    .pl-nick{font-size:13px}.pl-real{font-size:10.5px}
+    tbody td{padding:8px 7px}thead th{padding:9px 7px}
+    table{font-size:13px}
+  }
   /* ── сортируемые заголовки + рейтинговые ячейки ── */
   thead th.sortable{cursor:pointer;user-select:none;}
   thead th.sortable:hover{color:var(--gold-hi);}
@@ -378,9 +391,9 @@ function paint(){
     if(p.markery_id) links.push(`<a class="lnk" href="https://markery.online/playerStatistics?eloType=101&playerId=${p.markery_id}&tab=EloHistory" target="_blank" rel="noopener" title="ник на markery: ${esc(p.markery_nick||'')}">markery</a>`);
     if(p.ms&&p.ms.id) links.push(`<a class="lnk" href="https://mafiastats.com/players/${p.ms.id}" target="_blank" rel="noopener">mafiastats</a>`);
     // (матчинг markery подтверждён вручную — флаг неоднозначности снят)
-    const club=p.club?`<br><span class="pl-real">${esc(p.club)}</span>`:(p.real?`<br><span class="pl-real">${esc(p.real)}</span>`:'');
+    const club=p.club?`<span class="pl-real">${esc(p.club)}</span>`:(p.real?`<span class="pl-real">${esc(p.real)}</span>`:'');
     return `<tr class="${p.status}">
-      <td class="l anchor"><div class="pl"><span class="num">${i+1}</span>${avatar(p)}<span><span class="pl-nick">${esc(p.nick)}</span>${club}</span></div></td>
+      <td class="l anchor"><div class="pl"><span class="num">${i+1}</span>${avatar(p)}<span class="pl-t"><span class="pl-nick">${esc(p.nick)}</span>${club}</span></div></td>
       <td class="tcell grp">${cellTier(p.r_tier)}</td>
       <td>${cellElo(p.r_elo_cur)}</td>
       <td>${cellRank(p.r_rank)}</td>
@@ -401,7 +414,7 @@ function paint(){
         const cls=(key in TIER_ORD)?('t-'+key):'';
         const badge=(key in TIER_ORD)?`<span class="tier ${cls}">${key}</span>`:'<span class="na">—</span>';
         const cnt=(key in TIER_ORD)?counts[key]:DATA.players.filter(p=>!(p.r_tier in TIER_ORD)).length;
-        html+=`<tr class="tsep"><td colspan="9">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</td></tr>`;
+        html+=`<tr class="tsep"><td colspan="9"><span class="tsl">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</span></td></tr>`;
         prevTier=key;
       }
     }
