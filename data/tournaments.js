@@ -86,7 +86,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-14",
     "accent": "#ffce00",
     "accent2": "#dd0000",
-    "strength": {"lvl": "выше среднего", "rank": 5, "of": 14, "top10": 1904, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "средний", "rank": 8, "of": 14, "pts": 19, "cplus": 28, "win": "май 2026 – сейчас"}
   },
   {
     "id": "757",
@@ -139,7 +139,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-21",
     "accent": "#c65ab4",
     "accent2": "#db514e",
-    "strength": {"lvl": "мягкий", "rank": 14, "of": 14, "top10": 1588, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "мягкий", "rank": 12, "of": 14, "pts": 9, "cplus": 7, "win": "май 2026 – сейчас"}
   },
   {
     "id": "801",
@@ -192,7 +192,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-28",
     "accent": "#f2c75c",
     "accent2": "#ae1c28",
-    "strength": {"lvl": "средний", "rank": 7, "of": 14, "top10": 1898, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "выше среднего", "rank": 6, "of": 14, "pts": 21, "cplus": 20, "win": "май 2026 – сейчас"}
   },
   {
     "id": "726",
@@ -234,7 +234,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-12-05",
     "accent": "#2bb39a",
     "accent2": "#0c5c56",
-    "strength": {"lvl": "ниже среднего", "rank": 9, "of": 14, "top10": 1870, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "средний", "rank": 7, "of": 14, "pts": 20, "cplus": 25, "win": "май 2026 – сейчас"}
   },
   {
     "id": "644",
@@ -330,7 +330,7 @@ window.TOURNAMENTS_DB = {
     ],
     "start": "2026-11-07",
     "mvp": "Flash",
-    "strength": {"lvl": "экстремальный", "rank": 3, "of": 14, "top10": 1959, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "экстремальный", "rank": 2, "of": 14, "pts": 29, "cplus": 21, "win": "май 2026 – сейчас"}
   },
   {
     "id": "645",
@@ -387,7 +387,7 @@ window.TOURNAMENTS_DB = {
     "artPaper": "#efeeec",
     "posterTitle": "White Mafia|Best Player",
     "mvp": "Landing",
-    "strength": {"lvl": "мягкий", "rank": 13, "of": 14, "top10": 1608, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "мягкий", "rank": 14, "of": 14, "pts": 5, "cplus": 11, "win": "май 2026 – сейчас"}
   },
   {
     "id": "673",
@@ -440,7 +440,7 @@ window.TOURNAMENTS_DB = {
       "TOPS"
     ],
     "mvp": "Tripok",
-    "strength": {"lvl": "мягкий", "rank": 12, "of": 14, "top10": 1662, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "мягкий", "rank": 13, "of": 14, "pts": 7, "cplus": 24, "win": "май 2026 – сейчас"}
   },
   {
     "id": "692",
@@ -496,7 +496,7 @@ window.TOURNAMENTS_DB = {
       "TOPS"
     ],
     "mvp": "Korolevich",
-    "strength": {"lvl": "выше среднего", "rank": 6, "of": 14, "top10": 1900, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "выше среднего", "rank": 5, "of": 14, "pts": 22, "cplus": 23, "win": "май 2026 – сейчас"}
   },
   {
     "id": "687",
@@ -551,7 +551,7 @@ window.TOURNAMENTS_DB = {
       "Xenon"
     ],
     "mvp": "Xenon",
-    "strength": {"lvl": "экстремальный", "rank": 2, "of": 14, "top10": 1962, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "экстремальный", "rank": 3, "of": 14, "pts": 27, "cplus": 27, "win": "май 2026 – сейчас"}
   },
   {
     "id": "710",
@@ -577,7 +577,7 @@ window.TOURNAMENTS_DB = {
     "mmrN": 55,
     "eloN": 54,
     "eloTotal": 55,
-    "strength": {"lvl": "экстремальный", "rank": 1, "of": 14, "top10": 2087, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "экстремальный", "rank": 1, "of": 14, "pts": 53, "cplus": 43, "win": "май 2026 – сейчас"}
   },
   {
     "id": "694",
@@ -661,7 +661,7 @@ window.TOURNAMENTS_DB = {
       "aptah"
     ],
     "mvp": "Lюц",
-    "strength": {"lvl": "средний", "rank": 8, "of": 14, "top10": 1896, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "ниже среднего", "rank": 9, "of": 14, "pts": 19, "cplus": 20, "win": "май 2026 – сейчас"}
   },
   {
     "id": "693",
@@ -799,7 +799,7 @@ window.TOURNAMENTS_DB = {
       "SANYURIK"
     ],
     "mvp": "Lюц",
-    "strength": {"lvl": "ниже среднего", "rank": 11, "of": 14, "top10": 1720, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "ниже среднего", "rank": 11, "of": 14, "pts": 10, "cplus": 23, "win": "май 2026 – сейчас"}
   },
   {
     "id": "702",
@@ -876,7 +876,7 @@ window.TOURNAMENTS_DB = {
       "RAMZES"
     ],
     "mvp": "ParadoXx",
-    "strength": {"lvl": "ниже среднего", "rank": 10, "of": 14, "top10": 1742, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "ниже среднего", "rank": 10, "of": 14, "pts": 12, "cplus": 23, "win": "май 2026 – сейчас"}
   },
   {
     "id": "634",
@@ -956,7 +956,7 @@ window.TOURNAMENTS_DB = {
       "Саботаж"
     ],
     "mvp": "KEX",
-    "strength": {"lvl": "выше среднего", "rank": 4, "of": 14, "top10": 1910, "win": "май 2026 – сейчас"}
+    "strength": {"lvl": "выше среднего", "rank": 4, "of": 14, "pts": 23, "cplus": 30, "win": "май 2026 – сейчас"}
   },
   {
     "id": "667",

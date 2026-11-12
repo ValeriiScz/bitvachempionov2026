@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_mafiastats · v1.7 · 2026-11-12 (архив заморожен: составы завершённых турниров не обновляются, MMR на дату снимка; сила турнира strength — 5 уровней к турнирам сайта за 6 полных месяцев) · v1.6.1 · 2026-11-12 (mmrTop — топ-10 состава по MMR для кружков на плашке) · v1.5 · 2026-11-12 (распределение по тирам MMR mmrTiers на карточках незавершённых турниров) · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
+refresh_mafiastats · v1.8 · 2026-11-12 (сила турнира = очки L3/S2/A1, при равенстве — число C и выше) · v1.7 · 2026-11-12 (архив заморожен: составы завершённых турниров не обновляются, MMR на дату снимка; сила турнира strength — 5 уровней к турнирам сайта за 6 полных месяцев) · v1.6.1 · 2026-11-12 (mmrTop — топ-10 состава по MMR для кружков на плашке) · v1.5 · 2026-11-12 (распределение по тирам MMR mmrTiers на карточках незавершённых турниров) · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
 Назначение: подтянуть единый рейтинг MMR с mafiastats.com (открытый API, без ключей)
 для игроков сайта DOVOD — без участия человека. Запускается GitHub Actions
 (.github/workflows/refresh-mafiastats.yml).
@@ -260,18 +260,25 @@ def update_cards():
     return n
 
 # ── 8) сила турнира (v1.7, 12.11.2026) ──────────────────────────────────────
-# Метрика — средний MMR топ-10 состава (финал и деньги разыгрывает верх). Сравнение — с турнирами сайта
+# Метрика (v1.8) — очки состава L·3 + S·2 + A·1 по тирам MMR, при равенстве — число игроков C и выше. Сравнение — с турнирами сайта
 # за 6 полных календарных месяцев до текущего месяца и сыгранные в текущем + все незавершённые (мин. 5 турниров в сравнении). Пять уровней по доле турниров ниже:
 # <20% мягкий · <40% ниже среднего · <60% средний · <80% выше среднего · иначе экстремальный.
 # У завершённых сила заморожена (поле strength остаётся как было при закрытии).
 LEVELS = [(0.2, 'мягкий'), (0.4, 'ниже среднего'), (0.6, 'средний'), (0.8, 'выше среднего'), (9, 'экстремальный')]
 MONTHS = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек']
 
+PTS = {'L': 3, 'S': 2, 'A': 1}
+
 def top10(tid):
+    """v1.8: сила состава = очки L·3 + S·2 + A·1 (по тирам MMR), при равенстве — число игроков C и выше.
+    Возвращает кортеж (очки, C+) или None, если в составе меньше 5 игроков с MMR."""
     try: d = json.load(io.open(os.path.join(BASE, 'data', 'participants_%s.json' % tid), encoding='utf-8'))
     except Exception: return None
-    v = sorted((float(p['r_ms_mmr']) for p in d.get('players') or [] if p.get('r_ms_mmr') is not None), reverse=True)[:10]
-    return round(sum(v) / len(v)) if len(v) >= 5 else None
+    P = d.get('players') or []
+    if sum(1 for p in P if p.get('r_ms_mmr') is not None) < 5: return None
+    pts = sum(PTS.get(p.get('r_ms_tier'), 0) for p in P)
+    cp = sum(1 for p in P if p.get('r_ms_tier') in ('L', 'S', 'A', 'B', 'C'))
+    return (pts, cp)
 
 def window(today):
     y, m = today.year, today.month
@@ -292,7 +299,7 @@ def strength(today=None, only=None):
         below = sum(1 for v in vals if v < c['v']); share = below / (len(vals) - 1)
         rank = 1 + sum(1 for v in vals if v > c['v'])
         lvl = next(n for t, n in LEVELS if share < t)
-        return {'lvl': lvl, 'rank': rank, 'of': len(vals), 'top10': c['v'], 'win': label}
+        return {'lvl': lvl, 'rank': rank, 'of': len(vals), 'pts': c['v'][0], 'cplus': c['v'][1], 'win': label}
     a, b, label = window(today)
     # окно: 6 полных месяцев до текущего + уже сыгранные в текущем месяце; плюс все незавершённые
     pool = [x for x in cards if x['v'] is not None and ((x['fin'] and x['start'] and x['start'] >= a.isoformat()) or not x['fin'])]
@@ -349,7 +356,10 @@ def main():
 
 if __name__ == '__main__':
     FIN.update(finished_ids())
-    if '--strength-only' in sys.argv:
+    if '--strength-reset' in sys.argv:   # смена метрики: пересчитать и архивные (разово), затем снова заморожены
+        pth = os.path.join(BASE, 'data', 'tournaments.js'); t = io.open(pth, encoding='utf-8').read()
+        io.open(pth, 'w', encoding='utf-8').write(re.sub(r',\n    "strength": \{[^}]*\}', '', t)); strength()
+    elif '--strength-only' in sys.argv:
         update_cards(); strength()
     elif '--tiers-only' in sys.argv:
         lad = apply_mmr_tiers()
