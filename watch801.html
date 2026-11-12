@@ -372,9 +372,11 @@ function renderTop(){
 function renderStatus(){
   const st=SDB();const gi=D.cur;const t=D.tour;
   const started=D.games.some(g=>g.tables.some(x=>x.winner!=='unknown'));
+  const stT=x=>{const d=x.start_iso?new Date(x.start_iso):null;return d?d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Prague'}):'—';};
+  const stD=x=>{const d=x.start_iso?new Date(x.start_iso):null;return d?d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',timeZone:'Europe/Prague'}):'—';};
   const pre=t.start_iso&&Date.now()<new Date(t.start_iso).getTime(); /* v1.3: в день старта до 10:15 — не LIVE */
   const live=D.live&&!t.closed&&!pre;
-  document.getElementById('status').innerHTML=`${live?'<span class="live">live</span>':started?'':(pre&&new Date().toDateString()===new Date(t.start_iso).toDateString()?'<span>сегодня · старт 10:15</span>':'<span>скоро · старт 17.10, 10:15</span>')}<span><b>${esc(gLabel(gi))}</b></span><span>${D.games[gi]&&D.games[gi].stage==='Финал'?'финал':D.games[gi]&&D.games[gi].stage==='Полуфинал'?'полуфинал':'квалификация'}</span><span>обновлено ${D.updated?D.updated.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):'—'}</span>`;
+  document.getElementById('status').innerHTML=`${live?'<span class="live">live</span>':started?'':(pre&&new Date().toDateString()===new Date(t.start_iso).toDateString()?'<span>сегодня · старт '+stT(t)+'</span>':'<span>скоро · старт '+stD(t)+', '+stT(t)+'</span>')}<span><b>${esc(gLabel(gi))}</b></span><span>${D.games[gi]&&D.games[gi].stage==='Финал'?'финал':D.games[gi]&&D.games[gi].stage==='Полуфинал'?'полуфинал':'квалификация'}</span><span>обновлено ${D.updated?D.updated.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):'—'}</span>`;
   document.getElementById('testbar').innerHTML=st&&st.test?`<div class="testbar">Тест: сейчас в окнах записи прошлого турнира — проверьте, как это выглядит. Настоящие эфиры Dutch Open встанут сюда перед стартом.</div>`:'';
   document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));
   document.querySelectorAll('#layout button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.layout));
@@ -391,6 +393,6 @@ load(true).then(()=>renderAll(true)).catch(()=>{document.getElementById('status'
 setInterval(()=>{if(document.hidden)return;const before=D.cur;load(false).then(()=>{renderStatus();renderTabs();if(S.view===before)S.view=D.cur;renderSeats();renderFollow();renderTop();renderStage();}).catch(()=>{});},15000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)load(false).then(()=>renderAll()).catch(()=>{});});
 </script>
-<script src="/assets/share.js?v=3" defer></script>
+<script src="/assets/share.js?v=4" defer></script>
 </body>
 </html>

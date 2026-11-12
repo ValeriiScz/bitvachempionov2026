@@ -71,7 +71,8 @@
   function init() {
     if (document.body.hasAttribute('data-noshare')) return;
     // у страниц турниров своя кнопка (крошки на компьютере, верхняя плашка на телефоне) — не дублируем
-    var own = document.querySelector('.dv-share,.mshare');
+    if (/[?&]embed=1/.test(location.search)) return;   // v1.2: внутри вкладки турнира (iframe) кнопку не дублируем
+    var own = document.querySelector('.dv-share,.mshare,button.sh[onclick*="sharePage"]');
     document.addEventListener('click', function (ev) { var t = ev.target.closest('[data-share]'); if (t) { ev.preventDefault(); ev.stopPropagation(); open(t); } });
     if (own) return;
     // v1.1: без плавающей кнопки (мешала нижнему меню на телефоне). Аккуратная ссылка справа в «хлебных крошках»;
