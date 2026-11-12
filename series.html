@@ -18,7 +18,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0b0b0e; --panel:#131318; --panel2:#17171d;
@@ -37,7 +37,7 @@
   /* ── шапка бренда ── */
   .brand{display:flex;align-items:center;gap:15px;margin-bottom:8px;}
   .emblem{width:56px;height:56px;flex:none;filter:drop-shadow(0 2px 10px rgba(249,214,39,.25));}
-  .wordmark{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;letter-spacing:.5px;
+  .wordmark{font-family:'Unbounded',system-ui,sans-serif;font-size:26px;font-weight:900;letter-spacing:0;text-transform:uppercase;
     background:linear-gradient(105deg,#f0d99a 0%,var(--gold) 45%,#8a6a2a 75%,#e8c87a 100%);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
   .tagline{color:var(--mut);font-size:13px;letter-spacing:.4px;margin:0 0 6px 71px;}
@@ -67,7 +67,7 @@
   .tbody{padding:18px 20px 17px;}
   .stars{color:var(--gold);font-size:11px;letter-spacing:3px;margin-bottom:7px;}
   .stars .off{color:#3a3744;}
-  .tname{font-family:'Playfair Display',serif;font-size:21px;font-weight:600;line-height:1.22;margin-bottom:8px;}
+  .tname{font-family:'Unbounded',system-ui,sans-serif;font-size:18px;font-weight:700;line-height:1.22;margin-bottom:8px;}
   .tmeta{font-size:13px;color:var(--mut);line-height:1.65;}
   .tmeta b{color:var(--ink);font-weight:600;}
   .tmeta .sep{color:var(--dim);margin:0 7px;}
@@ -83,7 +83,7 @@
   .elochip{display:inline-flex;align-items:baseline;gap:8px;margin:11px 0 2px;padding:7px 12px;border-radius:12px;
     background:rgba(232,200,122,.07);border:1px solid var(--gold-dim);}
   .elochip .ec-lab{font-size:9.5px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:var(--mut);}
-  .elochip .ec-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold-hi);line-height:1;}
+  .elochip .ec-val{font-family:'Unbounded',system-ui,sans-serif;font-size:22px;font-weight:700;color:var(--gold-hi);line-height:1;}
   .elochip .ec-n{font-size:10.5px;color:var(--dim);}
   .poster .elochip.over{position:absolute;right:12px;top:12px;z-index:3;margin:0;background:rgba(8,8,11,.62);
     border-color:rgba(232,200,122,.5);backdrop-filter:blur(3px);flex-direction:column;align-items:flex-end;gap:1px;}
@@ -137,7 +137,7 @@
     transition:.18s;opacity:.78;}
   a.arc:hover{opacity:1;background:rgba(232,200,122,.035);border-color:rgba(232,200,122,.3);}
   .arc-date{flex:none;width:86px;font-size:11.5px;color:var(--dim);line-height:1.5;}
-  .arc-name{font-family:'Playfair Display',serif;font-size:15.5px;font-weight:600;color:var(--ink);}
+  .arc-name{font-family:'Inter','Manrope',system-ui,sans-serif;font-size:15px;font-weight:700;color:var(--ink);}
   .arc-meta{font-size:11.5px;color:var(--dim);margin-top:3px;}
   .arc-arrow{margin-left:auto;color:var(--dim);font-size:15px;transition:.18s;}
   a.arc:hover .arc-arrow{color:var(--gold);}
@@ -222,14 +222,14 @@
   .stile{cursor:pointer;border:1px solid var(--hairline);border-radius:14px;padding:14px 15px 12px;background:linear-gradient(160deg,var(--panel2),var(--panel) 70%);transition:.18s;text-align:left;color:var(--ink);font:inherit}
   .stile:hover,.stile.on{border-color:rgba(232,200,122,.5);transform:translateY(-2px)}
   .stile .st{font-size:10px;letter-spacing:2.4px;color:var(--gold);margin-bottom:6px}
-  .stile .sn{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;line-height:1.25}
+  .stile .sn{font-family:'Unbounded',system-ui,sans-serif;font-size:16px;font-weight:600;line-height:1.25}
   .stile .sm{font-size:12px;color:var(--mut);margin-top:7px;line-height:1.55}
   .stile .sm b{color:var(--ink)}
   .stile .bar{height:4px;background:rgba(255,255,255,.06);border-radius:3px;margin-top:10px;overflow:hidden}
   .stile .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-hi))}
   .sdet{display:none;border:1px solid rgba(232,200,122,.35);border-radius:14px;padding:18px 18px 16px;margin:-8px 0 22px;background:rgba(232,200,122,.03)}
   .sdet.on{display:block}
-  .sdet h3{margin:0 0 6px;font-family:'Playfair Display',serif;font-size:20px;font-weight:600}
+  .sdet h3{margin:0 0 6px;font-family:'Unbounded',system-ui,sans-serif;font-size:20px;font-weight:600}
   .sdet .k{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:800;margin:14px 0 6px}
   .sdet p{margin:0;font-size:13.5px;color:#cfcad6;line-height:1.6} .sdet p b{color:var(--ink)}
   .sdet .src{font-size:11px;color:var(--dim);margin-top:3px}
@@ -316,7 +316,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 <div class="backbar"><a class="backlnk" href="/">&#8592; Разделы</a></div>
 <div class="wrap">
   <div class="brand">
-    <img class="emblem" src="https://mafgame.org/build/assets/logo-without-text-4de79fbd.svg"
+    <img class="emblem" src="/assets/mafgame-logo.svg"
          onerror="this.onerror=null;this.src='https://mafgame.org/logo-without-text.png'" alt="MAFGAME">
     <div class="wordmark">Серийники</div>
   </div>
@@ -466,6 +466,6 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 })();</script>
 <script src="data/meta.js"></script>
 <script>(function(){var e=document.getElementById("ratedate");if(e&&window.SITE&&SITE.ratingUpdated)e.textContent=SITE.ratingUpdated;})();</script>
-<script src="/assets/share.js?v=2" defer></script>
+<script src="/assets/share.js?v=3" defer></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-/* DOVOD · assets/share.js · v1.1 · 2026-10-29 · без плавающей кнопки: ссылка «Поделиться» в крошках сверху (или кнопка в конце страницы) · v1.0 · 2026-10-29
+/* DOVOD · assets/share.js · v1.2 · 2026-11-13 · подключает assets/dv-ui.js; окно «установить приложение» со второго визита · v1.1 · 2026-10-29 · без плавающей кнопки: ссылка «Поделиться» в крошках сверху (или кнопка в конце страницы) · v1.0 · 2026-10-29
    Кнопка «Поделиться» на всех страницах — особенно для тех, кто открыл сайт как приложение (PWA):
    там нет адресной строки, и скопировать ссылку иначе нельзя.
    Телефон/планшет: системное меню «Поделиться» (navigator.share). Иначе — меню: скопировать ссылку, Telegram, WhatsApp.
@@ -6,6 +6,12 @@
    Любой элемент с атрибутом data-share тоже открывает меню (например, кнопка в шапке статьи). */
 (function () {
   if (window.__dvShare) return; window.__dvShare = 1;
+  // v1.2 (13.11.2026): общий слой интерфейса (нижнее меню на телефоне, читаемость) — assets/dv-ui.js
+  try { var ui = document.createElement('script'); ui.src = '/assets/dv-ui.js?v=1'; ui.defer = true; document.head.appendChild(ui); } catch (e) {}
+  // v1.2: окно «установите как приложение» — не на первом визите, а со второго
+  try { if (!localStorage.getItem('dv_seen')) { localStorage.setItem('dv_seen', '1'); var K = 'mgs_pwa_promo_hide_until'; if (!(+localStorage.getItem(K) > Date.now())) localStorage.setItem(K, String(Date.now() + 6 * 3600e3));
+    var kill = function () { var p = document.getElementById('mgsPwaPromo'); if (p) p.remove(); };
+    var mo = new MutationObserver(kill); mo.observe(document.documentElement, { childList: true, subtree: true }); setTimeout(function () { kill(); mo.disconnect(); }, 5000); } } catch (e) {}
   var css = document.createElement('style');
   css.textContent =
     '.dvsh-cr{margin-left:auto;display:inline-flex;align-items:center;gap:5px;padding:0;border:0;background:none;color:#22d3ee;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;white-space:nowrap}.dvsh-cr svg{width:12px;height:12px}' +

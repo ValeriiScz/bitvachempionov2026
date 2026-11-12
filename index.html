@@ -177,6 +177,9 @@ body{
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
+/* 13.11 дизайн-ревью: на телефоне первым экраном — что сейчас идёт, бренд компактнее */
+@media(max-width:600px){.hero{padding:18px 0 8px}.hero .sub{display:none}.hero .chips{display:none}.hero .hline{margin-bottom:6px}
+  .gridsec .ghead{margin-top:6px}}
 </style>
 <style>
 /* 15.10.2026 · «Сейчас на турнирах» — живая плашка вместо плитки ЧМ-2026 (ЧМ — в архиве «Турниров»).
@@ -522,6 +525,6 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
   }).catch(function(){});
 })();
 </script>
-<script src="/assets/share.js?v=2" defer></script>
+<script src="/assets/share.js?v=3" defer></script>
 </body>
 </html>
