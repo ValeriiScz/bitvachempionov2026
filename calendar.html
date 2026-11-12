@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · calendar.html · v1.4.1 · 2026-10-14 · подвал: финалы серийников 2026 — по сетке федерации (2★ 22 · 3★ 30 · 4★ 40); таблица серийников на /pages/mafgame_points пока старая -->
+<!-- DOVOD · calendar.html · v1.5 · 2026-11-12 · значок «сила состава» у турниров с составом на DOVOD (ряд — мини-столбики, карточка — столбики + слово) · v1.4.1 · 2026-10-14 · подвал: финалы серийников 2026 — по сетке федерации (2★ 22 · 3★ 30 · 4★ 40); таблица серийников на /pages/mafgame_points пока старая -->
 <!-- MafgameStat · calendar.html · v1.5 · 2026-10-19 · Календарь турниров mafgame 2026: три вида (лента уикендов / месяц-грид СБ-ВС / обзор года), MECE-фильтры (показ/тип/серии/звёзды/страны/игроки), «свой вид» (скрытия в localStorage), лобби с записанными и тирами гонки (топ-12/30/50), «еду» + экспорт .ics. v1.1: лобби = заявки+подтверждённые, составы прошедших турниров (фильтр игрока видит сыгранное), пресет «все 1★+», сброс фильтров сверху. v1.2: тип «Командные» (7 турниров; kind=teams). v1.3: у командных полноценный состав, если он есть (693 — 20 игроков + пары команд из локального снимка сайта); где состава нет — ссылка «составы по командам → mafgame». v1.4: составы командных собраны из mafgame Inertia /participants (у kind=teams props.players = объекты КОМАНД, игроки внутри team.players; заявленные команды — в props.applications, одиночки — в props.no_team_applications). Закрыты 607 (10 пар / 20 игроков), 672 (10 троек / 30), 767 (3 команды / 8 заявок, по 4), 725 (4 заявки, по 2); 693 пересобран из API и сверен с локальным снимком — совпал бит-в-бит. У 914 Balkan Team Cup команд и результатов на платформе нет (players_confirmed=0) → состав неизвестен, ссылка на mafgame. Данные вшиты снимком 26.08 (пайплайн build_calendar3.py + calendar_2026.json в корне проекта); живая подтяжка через /mafgame/ — следующая версия. v1.5 · 2026-10-19: сетка открывается на текущем месяце (DEF.month от TODAY, устаревший сохранённый месяц сбрасывается); #767 «Командный ЧП 2026» помечен отменённым (на mafgame префикс «Отмена»), робот refresh_mafgame v1.3 теперь пересчитывает cancelled/moved каждый прогон -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -302,6 +302,8 @@
   <div class="foot"><b>DOVOD</b> · календарь турниров MAFGAME · снимок данных <span id="fsnap"></span> · рейтинг игроков обновлён <b id="ratedate">—</b> · баллы победителю — <a href="https://mafgame.org/pages/mafgame_points">официальная сетка MAFGAME</a> (финалы серийников 2026 — по сетке федерации: 2★ 22, 3★ 30, 4★ 40; таблица серийников на той странице пока старая)<br>«в гонке» = топ-30 рейтинга-2026: <span style="color:var(--gold-hi)">золото топ-12</span> · <span style="color:var(--silver)">серебро 13–30</span>; <span style="color:var(--bronze)">бронза 31–50</span> — претенденты · «✓ еду» и «свой вид» хранятся в этом браузере<br>некоммерческий проект · автор — господин DOVOD, <a href="https://t.me/SivValerii" target="_blank" rel="noopener">@SivValerii</a></div>
 </div>
 
+<script src="data/tournaments.js"></script>
+<script src="assets/strength.js"></script>
 <script src="data/results3.js"></script>
 <script src="data/meta.js"></script>
 <script>
@@ -600,6 +602,7 @@ function card(t){
   if(t.online)tags.push('<span class="tag">онлайн</span>');
   tags.push(`<span class="tag stars">${t.stars?'✦'.repeat(Math.min(t.stars,6)):'0★'}</span>`);
   tags.push(`<span class="tag">${t.exp||'?'} чел</span>`);
+  const sx=window.DVS&&DVS.byId(t.id); if(sx) tags.push(DVS.html(sx));
   if(t.fee!=null&&t.fee>0)tags.push(`<span class="tag">${t.fee%1?t.fee:t.fee.toFixed(0)} ${CURSYM[t.feeCur]||t.feeCur||''}</span>`);
   if(t.prize)tags.push(`<span class="tag">приз ${t.prize.toFixed(0)} ${CURSYM[t.prizeCur]||t.prizeCur}</span>`);
   const pts = t.pts?`<div class="pts-big"><div class="p">+${t.pts}</div><div class="pl">баллов</div></div>`
@@ -751,7 +754,7 @@ function renderScan(list){
           <span class="d">${String(d.getDate()).padStart(2,'0')} <i>${DOW[wd]}</i></span>
           <span class="fl">${FLAGS[t.country]||'🌐'}</span>
           <span class="ct">${esc(t.city||'')}${t.kind==='serial_final'?' <b class="fin">ФИНАЛ '+esc(t.serialName)+'</b>':t.kind==='serial'?' <b class="ser">'+esc(t.serialName)+'</b>':''}</span>
-          <span class="st">${t.stars?'✦'.repeat(Math.min(t.stars,5)):'—'}</span>
+          <span class="st">${t.stars?'✦'.repeat(Math.min(t.stars,5)):'—'}${window.DVS&&DVS.byId(t.id)?' '+DVS.html(DVS.byId(t.id),true):''}</span>
           <span class="lb">${('regs' in t)&&regs.length?(t.start<TODAY?regs.length+' игр.':regs.length+'/'+(t.exp||10)):''}${race?' <b>⚔'+race+'</b>':''}</span>
           <span class="pp">${t.pts?'+'+t.pts:'·'}</span>
           <span class="mk">${MY[t.id]?'✓':''}</span>
