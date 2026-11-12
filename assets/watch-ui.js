@@ -1,4 +1,4 @@
-/* DOVOD · assets/watch-ui.js · v2.1 · 2026-11-13 (столы снова прежними карточками; «Все столы» — клавиша A в подсказке) · v2.0 · 2026-11-13 · смотровая: два разных интерфейса — телефон и компьютер (дизайн-ревью)
+/* DOVOD · assets/watch-ui.js · v2.2 · 2026-11-13 (режим «Все столы»: компьютер — сетка во весь экран под высоту окна, телефон боком — все столы на весь экран, мини-плеер только в «Один стол») · v2.1 · 2026-11-13 (столы снова прежними карточками; «Все столы» — клавиша A в подсказке) · v2.0 · 2026-11-13 · смотровая: два разных интерфейса — телефон и компьютер (дизайн-ревью)
    Работает с любой смотровой watchNNN.html по общим id (#stage, #tabs, #modes, #qnav, #seatP, #followP, #topP, #fsel) и
    глобальным S / D / tableOf / seatOf страницы. Ничего в логике страниц не меняет — только раскладка и удобство.
    ТЕЛЕФОН: эфир наверху; столы → режимы → ссылки под эфиром; мини-плеер в углу при прокрутке; телефон боком —
@@ -37,7 +37,10 @@
   '}'+
   /* телефон боком — эфир на весь экран (режим «один стол») */
   '@media(orientation:landscape) and (max-height:520px){body.dvw-one #stage{position:fixed!important;inset:0;z-index:9800;background:#000;width:100vw!important;max-width:none!important;border-radius:0!important}'+
-    'body.dvw-one #stage .pl{padding-top:0!important;height:100vh!important;--hd:0px}body.dvw-one #stage .pl .lab{top:6px}body.dvw-one .dvw-x{display:none}}'+
+    'body.dvw-one #stage .pl{padding-top:0!important;height:100vh!important;--hd:0px}body.dvw-one #stage .pl .lab{top:6px}body.dvw-one .dvw-x{display:none}'+
+    'body.dvw-all #stage{position:fixed!important;inset:0;z-index:9800;background:#000;overflow:auto;padding:4px;box-sizing:border-box;width:100vw!important;max-width:none!important}'+
+    'body.dvw-all #stage .multi.nn{--rows:2;grid-template-columns:repeat(var(--cols),min(calc((100vw - 12px) / var(--cols)),calc((100vh - 16px) / var(--rows) * 16 / 9 - 20px)))!important;justify-content:center;align-content:center;min-height:calc(100vh - 8px)}'+
+    'body.dvw-all #stage .pl.main{order:0}body.dvw-all .dvw-x,body.dvw-all .dvw-fb{display:none}}'+
   /* компьютер — трансляционный экран */
   '@media(min-width:1100px){'+
     '.wrap{max-width:none!important;width:100%;padding:0 22px 30px!important;box-sizing:border-box}'+
@@ -59,6 +62,9 @@
     '.dvw-keys{display:flex;gap:6px;align-items:center;color:#9aa3b2;font:600 12px Inter,sans-serif}.dvw-keys kbd{display:inline-block;min-width:20px;padding:2px 6px;border-radius:6px;border:1px solid rgba(255,255,255,.2);background:#0b0d14;color:#eef3fb;font:700 11px/1.4 "JetBrains Mono",monospace;text-align:center}'+
     '.dvw-btn{min-height:38px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.03);color:#eef3fb;font:700 13px Inter,sans-serif;cursor:pointer}.dvw-btn.on{border-color:#f5ff35;color:#f5ff35}'+
     'body.dvw-theater .body{grid-template-columns:minmax(0,1fr)!important}'+
+    'body.dvw-all .body{grid-template-columns:minmax(0,1fr) 320px!important}'+
+    'body.dvw-all #stage .multi.nn.row{grid-template-columns:repeat(var(--cols),min(calc((100% - 8px * (var(--cols) - 1)) / var(--cols)),calc((100vh - 230px) / 2 * 16 / 9)))!important;justify-content:center}'+
+    'body.dvw-all.dvw-theater #stage{max-width:none}'+
     'body.dvw-theater #stage{max-width:calc((100vh - 150px) * 16 / 9);margin:0 auto}'+
     '.dvw-help{position:fixed;inset:0;z-index:9900;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}'+
     '.dvw-help>div{background:#0f1320;border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:20px 24px;min-width:340px;color:#eef3fb;font:500 14px/1.9 Inter,sans-serif}'+
@@ -116,7 +122,7 @@
     if(!stage||!('IntersectionObserver' in window))return;
     var ph=document.createElement('div');ph.className='dvw-ph';stage.parentNode.insertBefore(ph,stage);ph.appendChild(stage);
     var closed=false,x=null;
-    function on(){if(closed||!stage.querySelector('iframe'))return;ph.style.height=ph.offsetHeight+'px';stage.classList.add('dvw-pip');
+    function on(){var S=g('S');if(closed||!stage.querySelector('iframe')||(S&&S.mode!=='one'))return;ph.style.height=ph.offsetHeight+'px';stage.classList.add('dvw-pip');
       if(!x){x=document.createElement('button');x.className='dvw-x';x.textContent='×';x.setAttribute('aria-label','Скрыть мини-плеер');
         x.onclick=function(e){e.stopPropagation();closed=true;off();};document.body.appendChild(x);}}
     function off(){stage.classList.remove('dvw-pip');ph.style.height='';if(x){x.remove();x=null;}}
@@ -153,7 +159,7 @@
     d.innerHTML='<div><h4>Горячие клавиши</h4><kbd>1–6</kbd>стол<br><kbd>←</kbd><kbd>→</kbd>предыдущая / следующая игра<br><kbd>M</kbd>звук главного эфира<br><kbd>A</kbd>все столы · <kbd>O</kbd>один стол<br><kbd>T</kbd>режим «Кино»<br><kbd>F</kbd>найти игрока<br><kbd>Esc</kbd>закрыть</div>';
     d.onclick=function(){d.remove();};document.body.appendChild(d);}
   /* ── запуск ── */
-  function tick(){enhanceFollow();followBar();var S=g('S');if(S)document.body.classList.toggle('dvw-one',S.mode==='one');}
+  function tick(){enhanceFollow();followBar();var S=g('S');if(S){document.body.classList.toggle('dvw-one',S.mode==='one');document.body.classList.toggle('dvw-all',S.mode==='all');}}
   function init(){
     if(PH.matches)phone();
     if(PC.matches)desktop();
