@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.18 | 2026-11-12 | +726 Prague Cup и +644 Lodz Mafia Open (оба 5–6.12, 3★): карточки и составы с mafgame
 // MafgameStat | tournaments.js | v4.17 | 2026-11-11 | 801: +Саботаж (mafgame 11.11) — 34 подтверждены при ожидаемых 33; ср. ELO/MMR пересчитаны
 // MafgameStat | tournaments.js | v4.16 | 2026-11-11 | 801 Dutch Open: полная страница t801 + watch801 (разделы с рассадкой откроются после её публикации)
 // MafgameStat | tournaments.js | v4.15 | 2026-11-10 | +757 финал MCL Europe 2026 (Прага 21–22.11): укороченная страница t757 + watch757, состав 10/10 с mafgame
@@ -183,6 +184,84 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-28",
     "accent": "#f2c75c",
     "accent2": "#ae1c28"
+  },
+  {
+    "id": "726",
+    "theme": "dovod",
+    "name": "Prague Cup 2026",
+    "posterTitle": "Prague|Cup",
+    "dates": "5–6 декабря 2026",
+    "city": "Прага",
+    "country": "Чехия",
+    "players": 40,
+    "days": 2,
+    "stars": 3,
+    "status": "upcoming",
+    "phase": 2,
+    "statusLabel": "Скоро · идёт набор: 34 из 40 подтверждены · в ту же дату — Лодзь (Lodz Mafia Open)",
+    "eloAvg": 1091,
+    "eloN": 25,
+    "eloTotal": 34,
+    "mmrAvg": 1526,
+    "mmrN": 30,
+    "organizer": "Adrenaline · главный судья YeS",
+    "page": "participants.html?t=726",
+    "mafgame": "https://mafgame.org/tournaments/726/view",
+    "note": "mafgame: 3★, ожидается 40 игроков, взнос 100 €, клуб-организатор Adrenaline, главный судья YeS. На 12.11 подтверждены 34 — в составе Lюц, Gangster, Буржуй, Korolevich, RAMZES, DOVOD. В те же 5–6 декабря — Lodz Mafia Open (3★): Сью, Landing и Afina подали заявки на оба турнира.",
+    "sections": [
+      {
+        "href": "participants.html?t=726",
+        "title": "Участники и рейтинг",
+        "desc": "34 из 40 · MMR и ELO markery"
+      },
+      {
+        "soon": true,
+        "title": "Страница турнира",
+        "desc": "рассадка, сила столов, live-результаты"
+      }
+    ],
+    "start": "2026-12-05",
+    "accent": "#2bb39a",
+    "accent2": "#0c5c56"
+  },
+  {
+    "id": "644",
+    "theme": "dovod",
+    "name": "Lodz Mafia Open: Harmony of Amaterasu",
+    "posterTitle": "Lodz Mafia Open|Amaterasu",
+    "dates": "5–6 декабря 2026",
+    "city": "Лодзь",
+    "country": "Польша",
+    "players": 30,
+    "days": 2,
+    "stars": 3,
+    "status": "upcoming",
+    "phase": 2,
+    "statusLabel": "Скоро · идёт набор: 3 заявки, подтверждённых пока нет · в ту же дату — Prague Cup",
+    "eloAvg": 1070,
+    "eloN": 3,
+    "eloTotal": 3,
+    "mmrAvg": 1544,
+    "mmrN": 3,
+    "organizer": "White Mafia Club Lodz · главный судья LiYu",
+    "page": "participants.html?t=644",
+    "mafgame": "https://mafgame.org/tournaments/644/view",
+    "note": "mafgame: 3★, ожидается 30 игроков, взнос 110 €, клуб-организатор White Mafia Club Lodz, главный судья LiYu. На 12.11 три заявки (Сью, Landing, Afina) — все трое уже подтверждены и на Prague Cup в те же даты, так что состав Лодзи ещё сложится.",
+    "sections": [
+      {
+        "href": "participants.html?t=644",
+        "title": "Участники и рейтинг",
+        "desc": "заявки · MMR и ELO markery"
+      },
+      {
+        "soon": true,
+        "title": "Страница турнира",
+        "desc": "рассадка, сила столов, live-результаты"
+      }
+    ],
+    "start": "2026-12-05",
+    "accent": "#e94560",
+    "accent2": "#f5e6c8"
   },
   {
     "id": "615",
