@@ -1,4 +1,4 @@
-/* DOVOD · assets/watch-ui.js · v2.0 · 2026-11-13 · смотровая: два разных интерфейса — телефон и компьютер (дизайн-ревью)
+/* DOVOD · assets/watch-ui.js · v2.1 · 2026-11-13 (столы снова прежними карточками; «Все столы» — клавиша A в подсказке) · v2.0 · 2026-11-13 · смотровая: два разных интерфейса — телефон и компьютер (дизайн-ревью)
    Работает с любой смотровой watchNNN.html по общим id (#stage, #tabs, #modes, #qnav, #seatP, #followP, #topP, #fsel) и
    глобальным S / D / tableOf / seatOf страницы. Ничего в логике страниц не меняет — только раскладка и удобство.
    ТЕЛЕФОН: эфир наверху; столы → режимы → ссылки под эфиром; мини-плеер в углу при прокрутке; телефон боком —
@@ -48,8 +48,8 @@
     '.body{grid-template-columns:minmax(0,1fr) 400px!important;gap:20px!important}'+
     '.body .side{position:sticky!important;top:12px;max-height:calc(100vh - 24px);overflow:auto;scrollbar-width:thin}'+
     '#stage .pl{border-radius:14px}'+
-    '.tabs{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;padding:10px 0 0!important}.tabs .tcap{grid-column:1/-1}'+
-    '.tabs button{min-height:58px;font-size:14px}'+
+    '.tabs{padding:10px 0 0!important}.tabs .tg{gap:8px!important}.tabs .tg button,.tabs>button{min-height:56px}'+
+    '.dvw-top .modes button{white-space:nowrap;padding-left:14px;padding-right:14px}'+
     '.dv-crumb{display:none!important}'+
     '.body .side #seatP .panel{margin-top:0}'+
     'body.dvw-theater .body .side{display:block!important;position:static!important;max-height:none}body.dvw-theater .body .side>*:not(#seatP){display:none}'+
@@ -132,7 +132,7 @@
     var side=$('.body .side'),seat=$('#seatP');if(side&&seat)side.insertBefore(seat,side.firstChild);
     var th=document.createElement('button');th.className='dvw-btn';th.type='button';th.innerHTML='🎬 Кино <span style="opacity:.6">T</span>';th.title='Эфир на всю ширину, без боковой колонки';
     th.onclick=function(){document.body.classList.toggle('dvw-theater');th.classList.toggle('on');try{localStorage.setItem('dvw_th',document.body.classList.contains('dvw-theater')?'1':'');}catch(e){}};
-    var keys=document.createElement('span');keys.className='dvw-keys';keys.innerHTML='<kbd>1</kbd>–<kbd>'+(($$('#tabs button[data-t]').length)||4)+'</kbd> столы · <kbd>←</kbd><kbd>→</kbd> игры · <kbd>M</kbd> звук · <kbd>?</kbd>';
+    var keys=document.createElement('span');keys.className='dvw-keys';keys.innerHTML='<kbd>1</kbd>–<kbd>'+(($$('#tabs button[data-t]').length)||4)+'</kbd> столы · <kbd>←</kbd><kbd>→</kbd> игры · <kbd>A</kbd> все столы · <kbd>M</kbd> звук · <kbd>?</kbd>';
     top.appendChild(th);top.appendChild(keys);
     try{if(localStorage.getItem('dvw_th')){document.body.classList.add('dvw-theater');th.classList.add('on');}}catch(e){}
     document.addEventListener('keydown',function(e){
