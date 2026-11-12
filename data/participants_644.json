@@ -19,7 +19,8 @@
    "C": 1350,
    "D": 1125,
    "E": 925
-  }
+  },
+  "elo_snap": "2026-11-12"
  },
  "players": [
   {
@@ -33,14 +34,14 @@
    "country": "Польша",
    "flag": "🇵🇱",
    "markery_id": 17529,
-   "r_elo_cur": 1233,
+   "r_elo_cur": 1238,
    "r_tier": "A",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-10-26",
+   "elo_snap": "2026-11-12",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -54,7 +55,9 @@
    },
    "r_ms_mmr": 1721.9,
    "r_ms_rank": 107,
-   "r_ms_tier": "A"
+   "r_ms_tier": "A",
+   "r_rank": 172,
+   "mk_last": "2026-11-07"
   },
   {
    "nick": "Afina",
@@ -67,14 +70,14 @@
    "country": null,
    "flag": null,
    "markery_id": 13946,
-   "r_elo_cur": 949,
-   "r_tier": "D",
+   "r_elo_cur": 893,
+   "r_tier": "E",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-10-26",
+   "elo_snap": "2026-11-12",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -88,7 +91,9 @@
    },
    "r_ms_mmr": 1254.5,
    "r_ms_rank": 673,
-   "r_ms_tier": "D"
+   "r_ms_tier": "D",
+   "r_rank": 8248,
+   "mk_last": "2026-10-10"
   },
   {
    "nick": "Landing",
@@ -101,14 +106,14 @@
    "country": "Польша",
    "flag": "🇵🇱",
    "markery_id": 19527,
-   "r_elo_cur": 1028,
+   "r_elo_cur": 1014,
    "r_tier": "C",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-10-26",
+   "elo_snap": "2026-11-12",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -122,7 +127,9 @@
    },
    "r_ms_mmr": 1655.4,
    "r_ms_rank": 139,
-   "r_ms_tier": "A"
+   "r_ms_tier": "A",
+   "r_rank": 1641,
+   "mk_last": "2026-11-07"
   }
  ]
 }

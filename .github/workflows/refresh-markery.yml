@@ -1,0 +1,49 @@
+# Обновление ELO markery.online (справочно; опора сайта — MMR) для составов незавершённых турниров.
+# Открытая таблица ELO, без входа. Запустить вручную: Actions → «ELO markery» → Run workflow.
+name: ELO markery
+
+on:
+  schedule:
+    # вт и пт, 05:41 UTC
+    - cron: '41 5 * * 2,5'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/refresh-markery.yml'
+      - '.github/scripts/refresh_markery.py'
+      - 'data/participants_*.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-markery
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Снять ELO
+        run: python .github/scripts/refresh_markery.py
+      - name: Закоммитить изменения
+        run: |
+          git config user.name  "dovod-bot"
+          git config user.email "noreply@dovod-mafia.com"
+          for i in 1 2 3; do
+            if [ $i -gt 1 ]; then
+              git fetch origin main && git reset --hard origin/main
+              python .github/scripts/refresh_markery.py || exit 1
+            fi
+            if git diff --quiet; then echo "изменений нет — коммит не нужен"; exit 0; fi
+            git add -A
+            git commit -m "ELO markery: автообновление $(date +%d.%m.%Y)"
+            if git push origin HEAD:main; then echo "обновление выкачено (попытка $i)"; exit 0; fi
+            echo "push отклонён — пересчитываю на свежем"; sleep 5
+          done
+          echo "::error::не удалось запушить после 3 попыток"; exit 1
