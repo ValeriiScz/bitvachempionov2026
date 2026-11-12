@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_mafiastats · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
+refresh_mafiastats · v1.5 · 2026-11-12 (распределение по тирам MMR mmrTiers на карточках незавершённых турниров) · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
 Назначение: подтянуть единый рейтинг MMR с mafiastats.com (открытый API, без ключей)
 для игроков сайта DOVOD — без участия человека. Запускается GitHub Actions
 (.github/workflows/refresh-mafiastats.yml).
@@ -214,8 +214,8 @@ def update_cards():
     try: s = io.open(path, encoding='utf-8').read()
     except Exception: return 0
     n = 0
-    for m in re.finditer(r'\{\s*"id":\s*"(\d+)"', s):
-        tid = m.group(1); a = m.start(); b = s.find('\n  }', a)
+    for tid in re.findall(r'\{\s*"id":\s*"(\d+)"', s):   # v1.5: позиции ищем заново — вставка mmrTiers сдвигает текст
+        m = re.search(r'\{\s*"id":\s*"%s"' % tid, s); a = m.start(); b = s.find('\n  }', a)
         if b < 0: continue
         blk = s[a:b]
         if '"status": "finished"' in blk or '"mmrAvg"' not in blk: continue
@@ -225,6 +225,13 @@ def update_cards():
         if not v: continue
         nb = re.sub(r'"mmrAvg":\s*[\d.]+', '"mmrAvg": %d' % round(sum(v) / len(v)), blk)
         nb = re.sub(r'"mmrN":\s*\d+', '"mmrN": %d' % len(v), nb)
+        # v1.5 (12.11.2026): распределение состава по тирам MMR для плашки (L/S/A/B/C/D/E/F + «-» без MMR)
+        tc = {}
+        for p in d.get('players') or []:
+            k = p.get('r_ms_tier') or '-'; tc[k] = tc.get(k, 0) + 1
+        tj = json.dumps({k: tc[k] for k in 'LSABCDEF-' if k in tc}, ensure_ascii=False)
+        if '"mmrTiers"' in nb: nb = re.sub(r'"mmrTiers":\s*\{[^}]*\}', '"mmrTiers": ' + tj, nb)
+        else: nb = re.sub(r'("mmrN":\s*\d+)', r'\1,\n    "mmrTiers": ' + tj.replace('\\', '\\\\'), nb, count=1)
         if nb != blk: s = s[:a] + nb + s[b:]; n += 1
     if n: io.open(path, 'w', encoding='utf-8').write(s)
     log('карточки турниров: ср. MMR обновлён у %d' % n)
