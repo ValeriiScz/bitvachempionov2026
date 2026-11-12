@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v9.5 · 2026-11-03 · колонка «Тир MMR» (линейка markery по долям) · v9.4 · 2026-11-03 · колонка MMR (mafiastats, робот refresh-mafiastats 2×/нед) + ср. MMR · v9.3 · 2026-07-15 · ЧЕ-634: свежий markery-снапшот, колонки Ранг/ELO/ELO 2026 -->
-<!-- DOVOD · participants.html · v2.2 · 2026-11-11 · клуб в две строки; на телефоне название и ср. ELO под постером · v2.1 · 2026-11-11 · мобильная вёрстка: липкий «Игрок» ≤44% экрана, ник/клуб многоточием, подпись тира не уезжает · v2.0 · 2026-10-26 · новый стиль DOVOD (как страницы турниров): Unbounded/JetBrains Mono/Inter, неон-сетка, акцент турнира из реестра (t.accent) · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
+<!-- DOVOD · participants.html · v2.3 · 2026-11-12 · опора — MMR: группировка и сортировка по тиру MMR, сначала колонки Тир MMR / MMR, ср. MMR на постере; markery ELO — сверка · v2.2 · 2026-11-11 · клуб в две строки; на телефоне название и ср. ELO под постером · v2.1 · 2026-11-11 · мобильная вёрстка: липкий «Игрок» ≤44% экрана, ник/клуб многоточием, подпись тира не уезжает · v2.0 · 2026-10-26 · новый стиль DOVOD (как страницы турниров): Unbounded/JetBrains Mono/Inter, неон-сетка, акцент турнира из реестра (t.accent) · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
      заявки mafgame (подтв./заявки/лист ожидания) + ДВОЙНОЙ рейтинг markery(основной)+mafiastats(сверка),
      счётчик «ожидаемый средний ELO» (markery) на постере, ссылки на профили, флаги неоднозначных матчей.
      Данные: data/participants_{t}.json (снапшот), реестр data/tournaments.js. -->
@@ -269,15 +269,15 @@ const TIERS=['L','S','A','B','C','D','E','F'];
 const TIER_ORD={L:-1,S:0,A:1,B:2,C:3,D:4,E:5,F:6};
 const TIER_LAB={L:'L — легенды',S:'S — топ',A:'A',B:'B',C:'C',D:'D',E:'E',F:'F'};
 const COLS=[
-  {key:'tier',     lab:'Ранг',       hint:'ранг markery (S/A/B/C/D/E/F) по текущему ELO',  dir:1,  fmt:'tier', get:p=>p.r_tier},
+  {key:'mstier',   lab:'Тир MMR',    hint:'тир DOVOD по MMR (L/S/A/B/C/D/E) — основная шкала сайта', dir:1, fmt:'tier', get:p=>p.r_ms_tier},
+  {key:'mmr',      lab:'MMR',        hint:'mafiastats — MMR, единый рейтинг по играм всех федераций (основной; робот обновляет сам)', dir:-1, fmt:'elo', get:p=>p.r_ms_mmr},
+  {key:'tier',     lab:'Ранг ELO',   hint:'ранг markery (S/A/B/C/D/E/F) по текущему ELO — для сверки',  dir:1,  fmt:'tier', get:p=>p.r_tier},
   {key:'elo_cur',  lab:'ELO',        hint:'markery — ELO за всё время',                     dir:-1, fmt:'elo',  get:p=>p.r_elo_cur},
   {key:'rank',     lab:'Место',      hint:'markery — место в глобальном рейтинге (всё время)', dir:1,  fmt:'rank', get:p=>p.r_rank},
   {key:'elo_2026', lab:'ELO 2026',   hint:'markery — ELO за сезон 2026',                     dir:-1, fmt:'elo',  get:p=>p.r_elo_2026},
   {key:'rank26',   lab:'Место 2026', hint:'markery — место в рейтинге сезона 2026',          dir:1,  fmt:'rank', get:p=>p.r_rank_2026},
-  {key:'mmr',      lab:'MMR',        hint:'mafiastats — MMR, единый рейтинг по играм всех федераций (сверка; робот обновляет 2 раза в неделю)', dir:-1, fmt:'elo', get:p=>p.r_ms_mmr},
-  {key:'mstier',   lab:'Тир MMR',    hint:'тир по MMR: пороги подобраны так, чтобы доли тиров L…F совпадали с тирами markery у тех же игроков (эксперимент)', dir:1, fmt:'tier', get:p=>p.r_ms_tier},
 ];
-let sortKey='tier', sortDir=1;
+let sortKey='mstier', sortDir=1;
 
 function num(v){return (v==null||v==='')?null:+v;}
 function colVal(col,p){ const v=col.get(p); if(col.fmt==='tier'){ return (v in TIER_ORD)?TIER_ORD[v]:null; } return num(v); }
@@ -288,7 +288,9 @@ function sortPlayers(){
     if(va==null&&vb==null) return a.nick.localeCompare(b.nick,'ru');
     if(va==null) return 1;
     if(vb==null) return -1;
-    if(va===vb){ // tie-break: внутри тира — по ELO убыв.
+    if(va===vb){ // tie-break: внутри тира — по MMR убыв., затем ELO
+      const ma=num(a.r_ms_mmr), mb=num(b.r_ms_mmr);
+      if(ma!=null&&mb!=null&&ma!==mb) return mb-ma;
       const ea=num(a.r_elo_cur), eb=num(b.r_elo_cur);
       if(ea!=null&&eb!=null&&ea!==eb) return eb-ea;
       return a.nick.localeCompare(b.nick,'ru');
@@ -310,12 +312,15 @@ function render(D){
   const msAvg=msVals.length?Math.round(msVals.reduce((a,b)=>a+b,0)/msVals.length):null;
   const nConf=players.filter(p=>p.status==='confirmed').length;
   const mkUp=eloVals.length>0, msUp=msVals.length>0;
+  const snaps=players.map(p=>p.elo_snap).filter(Boolean).sort();
+  const fd=d=>d?d.slice(8,10)+'.'+d.slice(5,7)+'.'+d.slice(0,4):'';
+  const eloSnap=snaps.length?(snaps[0]===snaps[snaps.length-1]?fd(snaps[0]):fd(snaps[0])+'–'+fd(snaps[snaps.length-1])):null;
 
   const meterHtml = `
     <div class="meter">
-      <div class="lab">Ожидаемый ср. ELO · markery</div>
-      <div class="val">${eloAvg!=null?eloAvg:'N/A'}</div>
-      <div class="sub">${eloAvg!=null?('по '+eloVals.length+' из '+players.length+' игроков'):'нет данных'}</div>
+      <div class="lab">Ожидаемый ср. MMR · mafiastats</div>
+      <div class="val">${msAvg!=null?msAvg:'N/A'}</div>
+      <div class="sub">${msAvg!=null?('по '+msVals.length+' из '+players.length+' игроков'):'нет данных'}</div>
     </div>`;
   const heroHtml = art ? `
     <div class="hero">
@@ -332,21 +337,21 @@ function render(D){
   const summary = `
     <div class="summary">
       <div class="scard"><div class="k">Участников</div><div class="v">${players.length}<small>${(meta.expected&&players.length>=meta.expected)?(' из '+meta.expected):(' / '+(meta.expected||'—')+' ожид.')}</small></div></div>
-      <div class="scard"><div class="k">markery · ср. ELO</div><div class="v">${eloAvg!=null?eloAvg:'—'}<small> n${eloVals.length}</small></div></div>
-      <div class="scard"><div class="k">с рейтингом markery</div><div class="v">${eloVals.length}<small> / ${players.length}</small></div></div>
       <div class="scard"><div class="k">mafiastats · ср. MMR</div><div class="v">${msAvg!=null?msAvg:'—'}<small> n${msVals.length}</small></div></div>
+      <div class="scard"><div class="k">с MMR</div><div class="v">${msVals.length}<small> / ${players.length}</small></div></div>
+      <div class="scard"><div class="k">markery · ср. ELO${eloSnap?' · снимок '+eloSnap:''}</div><div class="v">${eloAvg!=null?eloAvg:'—'}<small> n${eloVals.length}</small></div></div>
     </div>`;
 
   const legend = `
     <div class="legend">
-      <span><span class="dot" style="background:var(--accent)"></span>markery — основной: <span class="conn ${mkUp?'up':'down'}">${mkUp?'подключён':'нет данных'}</span></span>
-      <span><span class="dot" style="background:#7aa7d6"></span>mafiastats — сверка: <span class="conn ${msUp?'up':'down'}">${msUp?('подключён'+(meta.ms_snap?' · '+meta.ms_snap:'')):'нет данных'}</span></span>
+      <span><span class="dot" style="background:var(--accent)"></span>mafiastats (MMR) — основной: <span class="conn ${msUp?'up':'down'}">${msUp?('подключён'+(meta.ms_snap?' · '+meta.ms_snap:'')):'нет данных'}</span></span>
+      <span><span class="dot" style="background:#7aa7d6"></span>markery (ELO) — сверка: <span class="conn ${mkUp?'up':'down'}">${mkUp?'справочно'+(eloSnap?' · снимок '+eloSnap:''):'нет данных'}</span></span>
       <span>↕ клик по заголовку колонки — сортировка</span>
     </div>`;
 
   // распределение по тирам
-  const tcounts={}; players.forEach(p=>{ if(p.r_tier in TIER_ORD) tcounts[p.r_tier]=(tcounts[p.r_tier]||0)+1; });
-  const tdistHtml = `<div class="tdist"><span class="lbl">Тиры (markery):</span>` +
+  const tcounts={}; players.forEach(p=>{ if(p.r_ms_tier in TIER_ORD) tcounts[p.r_ms_tier]=(tcounts[p.r_ms_tier]||0)+1; });
+  const tdistHtml = `<div class="tdist"><span class="lbl">Тиры (MMR):</span>` +
     TIERS.filter(t=>tcounts[t]).map(t=>`<span class="tc"><span class="tier t-${t}">${t}</span><small>${tcounts[t]}</small></span>`).join('') +
     `</div>`;
 
@@ -360,10 +365,12 @@ function render(D){
 }
 
 function noteHtml(){
+  const snaps=DATA.players.map(p=>p.elo_snap).filter(Boolean).sort();
+  const fd=d=>d.slice(8,10)+'.'+d.slice(5,7)+'.'+d.slice(0,4);
   return `<p class="note">
-    Рейтинг markery — снимок через API на 2026-07-15 (после турниров Польша-766 и Кёльн-702, ELO пересчитан). «ELO тек» — текущий ELO (глобально, всё время); «Тир» — буквенный ранг markery (S/A/B/C/D/E/F) по этому ELO; «ELO 2026» — ELO за сезон 2026; «Европа 2026» — место в рейтинге Европа за 2026. Клик по «Тир» группирует игроков по рангам.
-    «—» — игрок ещё не сматчен с markery или без рейтинга. Все 44 сматчены (у части ник на markery отличается от mafgame: Гамбитик→«Гамбит», SANYURIK→«Sashko», Призрак→«The Призрак»). Ростер — 44 подтверждённых с mafgame.org на 2026-07-15.
-    У части игроков ник на markery отличается от mafgame (напр. Season's → «Spring») — ссылка ведёт на их профиль markery напрямую. Список и составы — с mafgame.org.
+    Опора сайта — <b>MMR</b> (mafiastats.com): тир MMR, сортировка и группы считаются по нему; робот обновляет MMR сам.
+    ELO и ранг markery — справочно${snaps.length?`, снимок ${fd(snaps[0])}${snaps[0]!==snaps[snaps.length-1]?' – '+fd(snaps[snaps.length-1]):''} (последний снимок по игроку из прошлых турниров DOVOD; свежий ELO может отличаться)`:''}.
+    «—» — нет данных по игроку. Состав — с mafgame.org.
   </p>`;
 }
 
@@ -400,27 +407,28 @@ function paint(){
     const club=p.club?`<span class="pl-real">${esc(p.club)}</span>`:(p.real?`<span class="pl-real">${esc(p.real)}</span>`:'');
     return `<tr class="${p.status}">
       <td class="l anchor"><div class="pl"><span class="num">${i+1}</span>${avatar(p)}<span class="pl-t"><span class="pl-nick">${esc(p.nick)}</span>${club}</span></div></td>
+      <td class="tcell grp">${cellTier(p.r_ms_tier)}</td>
+      <td>${cellElo(p.r_ms_mmr)}</td>
       <td class="tcell grp">${cellTier(p.r_tier)}</td>
       <td>${cellElo(p.r_elo_cur)}</td>
       <td>${cellRank(p.r_rank)}</td>
       <td class="grp">${cellElo(p.r_elo_2026)}</td>
       <td>${cellRank(p.r_rank_2026)}</td>
-      <td class="grp">${cellElo(p.r_ms_mmr)}</td>
-      <td class="tcell">${cellTier(p.r_ms_tier)}</td>
       <td class="l">${links.join(' ')||'<span class="na">—</span>'}</td>
     </tr>`;
   });
   let html='', prevTier=null;
-  const grouping=(sortKey==='tier');
-  const counts={}; DATA.players.forEach(p=>{ if(p.r_tier in TIER_ORD) counts[p.r_tier]=(counts[p.r_tier]||0)+1; });
+  const grouping=(sortKey==='mstier'||sortKey==='tier');
+  const TK=sortKey==='tier'?'r_tier':'r_ms_tier', TL=sortKey==='tier'?'ранг ELO':'тир MMR';
+  const counts={}; DATA.players.forEach(p=>{ if(p[TK] in TIER_ORD) counts[p[TK]]=(counts[p[TK]]||0)+1; });
   rows.forEach((rowHtml,idx)=>{
     if(grouping){
-      const t=DATA.players[idx].r_tier; const key=(t in TIER_ORD)?t:'—';
+      const t=DATA.players[idx][TK]; const key=(t in TIER_ORD)?t:'—';
       if(key!==prevTier){
         const cls=(key in TIER_ORD)?('t-'+key):'';
         const badge=(key in TIER_ORD)?`<span class="tier ${cls}">${key}</span>`:'<span class="na">—</span>';
-        const cnt=(key in TIER_ORD)?counts[key]:DATA.players.filter(p=>!(p.r_tier in TIER_ORD)).length;
-        html+=`<tr class="tsep"><td colspan="9"><span class="tsl">${badge} ранг ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</span></td></tr>`;
+        const cnt=(key in TIER_ORD)?counts[key]:DATA.players.filter(p=>!(p[TK] in TIER_ORD)).length;
+        html+=`<tr class="tsep"><td colspan="9"><span class="tsl">${badge} ${TL} ${key in TIER_ORD?key:'без данных'} · ${players_w(cnt)}</span></td></tr>`;
         prevTier=key;
       }
     }
