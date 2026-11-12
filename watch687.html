@@ -430,7 +430,7 @@ function renderTabs(){
     S.table=t;S.view=D.cur;renderStage();renderTabs();renderSeats();renderFollow();});
   renderTabsSoundMark();
 }
-function avgElo(tb){if(!tb)return '';const v=tb.seats.map(x=>x&&D.P[x.name]&&D.P[x.name].r_elo_cur).filter(Boolean);return v.length?'Ø ELO '+Math.round(v.reduce((a,b)=>a+b,0)/v.length):'';}
+function avgElo(tb){if(!tb)return '';const v=tb.seats.map(x=>x&&D.P[x.name]&&D.P[x.name].r_ms_mmr).filter(Boolean);return v.length?'Ø MMR '+Math.round(v.reduce((a,b)=>a+b,0)/v.length):'';}
 function avatar(n){const p=D.P[n];const u=D.av[n]||(p&&p.av)||'';return u?`<img src="${esc(u)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span class=&quot;mono&quot;>${esc(mono(n))}</span>'">`:`<span class="mono">${esc(mono(n))}</span>`;}
 function renderSeats(){
   const el=document.getElementById('seatP');const gi=S.view;const g=D.games[gi];
@@ -441,7 +441,7 @@ function renderSeats(){
   const order=[1,2,3,4,5,10,9,8,7,6];
   const cells=order.map(n=>{const x=by[n];if(!x)return '<div class="st" style="opacity:.3"><span class="sn">'+n+'</span>—</div>';const p=D.P[x.name]||{};
     const cls=['st'];if(x.result==='W')cls.push('w');if(x.kf)cls.push('fk');if(x.name===S.follow)cls.push('me');
-    return `<div class="${cls.join(' ')}" data-p="${esc(x.name)}"><span class="sn">${n}</span>${avatar(x.name)}<div class="nk">${esc(x.name)}</div><div class="tr">${p.r_tier?p.r_tier+' · ':''}${p.r_elo_cur||'—'}${p.elo_start?' · новичок':''}</div>${x.role?`<span class="rl ${x.role}">${RL[x.role]}</span>`:''}</div>`;}).join('');
+    return `<div class="${cls.join(' ')}" data-p="${esc(x.name)}"><span class="sn">${n}</span>${avatar(x.name)}<div class="nk">${esc(x.name)}</div><div class="tr">${p.r_ms_tier?p.r_ms_tier+' · ':''}${p.r_ms_mmr?Math.round(p.r_ms_mmr):'—'}${p.elo_start?' · новичок':''}</div>${x.role?`<span class="rl ${x.role}">${RL[x.role]}</span>`:''}</div>`;}).join('');
   const res=tb.winner==='red_win'?'<span class="wr red">победа красных</span>':tb.winner==='black_win'?'<span class="wr black">победа чёрных</span>':(gi===D.cur&&D.live?'<span>идёт игра — роли и результат появятся после ввода протокола</span>':'<span>ещё не сыграна</span>');
   const j=judgeOf(t);
   el.innerHTML=`<div class="panel"><h3>За столом ${fin?'финала':ROMAN[t]}<small>${esc(avgElo(tb))}</small></h3>
@@ -500,6 +500,7 @@ load(true).then(()=>renderAll(true)).catch(()=>{document.getElementById('status'
 setInterval(()=>{if(document.hidden)return;const before=D.cur;load(false).then(()=>{renderStatus();renderTabs();if(S.view===before)S.view=D.cur;renderSeats();renderFollow();renderTop();renderStage();}).catch(()=>{});},15000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)load(false).then(()=>renderAll()).catch(()=>{});});
 </script>
+<script src="/assets/watch-ui.js?v=1"></script>
 <script src="/assets/share.js?v=4" defer></script>
 </body>
 </html>
