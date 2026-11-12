@@ -76,7 +76,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 1,
@@ -92,7 +92,7 @@
    "r_ms_mmr": 1482.2,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 4687,
+   "r_rank": 4686,
    "mk_last": "2026-10-25"
   },
   {
@@ -112,7 +112,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 2,
@@ -128,7 +128,7 @@
    "r_ms_mmr": 1369.3,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 4766,
+   "r_rank": 4765,
    "mk_last": "2026-10-11"
   },
   {
@@ -164,7 +164,7 @@
    "r_ms_mmr": 1406.9,
    "r_ms_rank": 463,
    "r_ms_tier": "C",
-   "r_rank": 6503,
+   "r_rank": 6502,
    "mk_last": "2026-10-10"
   },
   {
@@ -220,7 +220,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": null,
@@ -236,7 +236,7 @@
    "r_ms_mmr": 1494.2,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 2261,
+   "r_rank": 2260,
    "mk_last": "2026-09-26"
   },
   {
@@ -272,7 +272,7 @@
    "r_ms_mmr": 1043.9,
    "r_ms_rank": 758,
    "r_ms_tier": "E",
-   "r_rank": 7925,
+   "r_rank": 7924,
    "mk_last": "2026-11-07"
   },
   {
@@ -292,7 +292,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 1,
@@ -398,7 +398,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 1,
@@ -414,7 +414,7 @@
    "r_ms_mmr": 1352.6,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 8157,
+   "r_rank": 8156,
    "mk_last": "2026-10-11"
   },
   {
@@ -486,7 +486,7 @@
    "r_ms_mmr": 1378.0,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 6953,
+   "r_rank": 6952,
    "mk_last": "2026-10-25"
   },
   {
@@ -506,7 +506,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 2,
@@ -542,7 +542,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 1,
@@ -558,7 +558,7 @@
    "r_ms_mmr": 1522.6,
    "r_ms_rank": null,
    "r_ms_tier": "B",
-   "r_rank": 3276,
+   "r_rank": 3275,
    "mk_last": "2026-09-13"
   },
   {
@@ -578,7 +578,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 1,
@@ -594,7 +594,7 @@
    "r_ms_mmr": 1472.1,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 6437,
+   "r_rank": 6436,
    "mk_last": "2026-09-27"
   },
   {
@@ -686,7 +686,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 1,
@@ -702,7 +702,7 @@
    "r_ms_mmr": 1450.8,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 2935,
+   "r_rank": 2931,
    "mk_last": "2026-11-07"
   },
   {
@@ -722,7 +722,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 1,
@@ -758,7 +758,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 1,
@@ -774,7 +774,7 @@
    "r_ms_mmr": 1492.5,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 5859,
+   "r_rank": 5858,
    "mk_last": "2026-09-26"
   },
   {
@@ -846,7 +846,7 @@
    "r_ms_mmr": 1291.6,
    "r_ms_rank": 635,
    "r_ms_tier": "D",
-   "r_rank": 6311,
+   "r_rank": 6309,
    "mk_last": "2024-10-26"
   },
   {
@@ -988,7 +988,7 @@
    "r_ms_mmr": 1090.4,
    "r_ms_rank": 746,
    "r_ms_tier": "E",
-   "r_rank": 7857,
+   "r_rank": 7856,
    "mk_last": "2026-11-07"
   },
   {
@@ -1042,7 +1042,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 1,
@@ -1166,7 +1166,7 @@
    "r_ms_mmr": 1300.4,
    "r_ms_rank": null,
    "r_ms_tier": "D",
-   "r_rank": 4893,
+   "r_rank": 4892,
    "mk_last": "2026-10-25"
   },
   {
@@ -1202,7 +1202,7 @@
    "r_ms_mmr": 1240.1,
    "r_ms_rank": 689,
    "r_ms_tier": "D",
-   "r_rank": 6848,
+   "r_rank": 6847,
    "mk_last": "2026-10-17"
   },
   {
@@ -1274,7 +1274,7 @@
    "r_ms_mmr": 1459.1,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 4702,
+   "r_rank": 4701,
    "mk_last": "2024-02-07"
   },
   {
@@ -1310,7 +1310,7 @@
    "r_ms_mmr": 1223.7,
    "r_ms_rank": null,
    "r_ms_tier": "D",
-   "r_rank": 3460,
+   "r_rank": 3458,
    "mk_last": "2026-05-17"
   },
   {
@@ -1364,7 +1364,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 1,
@@ -1380,7 +1380,7 @@
    "r_ms_mmr": 1495.3,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 2759,
+   "r_rank": 2757,
    "mk_last": "2026-05-10"
   },
   {
@@ -1416,7 +1416,7 @@
    "r_ms_mmr": 1213.7,
    "r_ms_rank": 706,
    "r_ms_tier": "D",
-   "r_rank": 8097,
+   "r_rank": 8096,
    "mk_last": "2026-11-07"
   },
   {
@@ -1436,7 +1436,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": 2,
@@ -1452,7 +1452,7 @@
    "r_ms_mmr": 994.1,
    "r_ms_rank": 769,
    "r_ms_tier": "E",
-   "r_rank": 8445,
+   "r_rank": 8444,
    "mk_last": "2026-10-03"
   }
  ],

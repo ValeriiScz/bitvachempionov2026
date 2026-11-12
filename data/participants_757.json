@@ -128,7 +128,7 @@
    "r_ms_mmr": 1175.2,
    "r_ms_rank": null,
    "r_ms_tier": "D",
-   "r_rank": 8463,
+   "r_rank": 8462,
    "mk_last": "2026-10-31"
   },
   {
@@ -184,7 +184,7 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
+   "mk_match": "id",
    "elo_snap": "2026-11-12",
    "series": null,
    "series_place": null,
@@ -272,7 +272,7 @@
    "r_ms_mmr": 1240.1,
    "r_ms_rank": 689,
    "r_ms_tier": "D",
-   "r_rank": 6848,
+   "r_rank": 6847,
    "mk_last": "2026-10-17"
   },
   {
