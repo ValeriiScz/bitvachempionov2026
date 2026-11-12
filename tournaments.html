@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · tournaments.html · v4.7 · 2026-11-12 · «Кто едет» — 10 маленьких аватаров без ников и цифр (обводка = тир) · v4.6 · 2026-11-12 · топ-5 кружками с никами + «A/B/C и выше» цифрами (mmrTop, mmrTiers) · v4.5 · 2026-11-12 · полоса тиров MMR (убрана) · v4.4 · 2026-11-12 · MMR первым, ELO правее и справочно · v4.3 · 2026-11-06 · фирменная обложка кодом (assets/posters.js, поле poster) — Black Circle · v4.2 · 2026-11-06 · ср. MMR рядом со ср. ELO (анонсы и архив) · v4.1 · 2026-10-26 · звёзды крупно (вес турнира в рейтинге) + легенда без оценок уровней; архив: звёзды, игроки, ср. ELO, топ-3 и MVP · v4.0 · переезд в новый стиль DOVOD (как страницы турниров t692/t645): неон, Unbounded + JetBrains Mono + Inter, хлебные крошки сверху.
+<!-- DOVOD · tournaments.html · v4.8 · 2026-11-12 · сила турнира одним словом (strength: мягкий / ниже среднего / средний / выше среднего / экстремальный) · v4.7 · 2026-11-12 · «Кто едет» — 10 маленьких аватаров без ников и цифр (обводка = тир) · v4.6 · 2026-11-12 · топ-5 кружками с никами + «A/B/C и выше» цифрами (mmrTop, mmrTiers) · v4.5 · 2026-11-12 · полоса тиров MMR (убрана) · v4.4 · 2026-11-12 · MMR первым, ELO правее и справочно · v4.3 · 2026-11-06 · фирменная обложка кодом (assets/posters.js, поле poster) — Black Circle · v4.2 · 2026-11-06 · ср. MMR рядом со ср. ELO (анонсы и архив) · v4.1 · 2026-10-26 · звёзды крупно (вес турнира в рейтинге) + легенда без оценок уровней; архив: звёзды, игроки, ср. ELO, топ-3 и MVP · v4.0 · переезд в новый стиль DOVOD (как страницы турниров t692/t645): неон, Unbounded + JetBrains Mono + Inter, хлебные крошки сверху.
      Все актуальные турниры — одной карточкой DOVOD: постер (картинка турнира, если есть, иначе CSS-постер), акцент — цвет турнира (t.accent), кнопки «страница / смотровая / участники / mafgame».
      Ссылка карточки — на собственную страницу турнира (t.page), иначе — на участников. Архив — строками в том же стиле. Старая версия v3.2 — в _Архив проекта. -->
 <meta charset="utf-8">
@@ -72,6 +72,7 @@
   .who .row{display:flex;gap:4px;flex-wrap:nowrap;text-decoration:none}
   .who .ph{position:relative;flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--rc,#4b5160);background:#1b1e27;display:grid;place-items:center;font:800 9px/1 'Inter';color:#cfd5e2;overflow:hidden}
   .who .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .chip.str{font-weight:800;border-color:var(--sc);color:var(--sc);background:color-mix(in srgb,var(--sc) 12%,transparent)}
   .lvl{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0 2px}.lvl div{border:1px solid var(--line2);border-radius:9px;padding:7px 9px;background:rgba(255,255,255,.02)}
   .lvl b{display:block;font:800 19px/1.1 'Inter';color:var(--tc)}.lvl b small{font:600 11px 'Inter';color:var(--dim,#7d8597);margin-left:3px}.lvl span{font:600 11px/1.2 'Inter';color:var(--mut)}
   .stl{font-size:12.5px;color:var(--mut);line-height:1.5}
@@ -215,6 +216,8 @@ const ART={667:'assets/cyprus667.jpg',713:'assets/protocol4.jpg'};
 function starsBox(n,mini){n=+n||0;if(!n)return '';return `<span class="stars s${n}${mini?' mini':''}" title="${n}★ — вес турнира в рейтинге mafgame"><span class="sg"><i>${'★'.repeat(n)}</i><u>${'★'.repeat(5-n)}</u></span><span class="sl"><b>${n} ${n===1?'звезда':n<5?'звезды':'звёзд'}</b></span></span>`;}
 function starsLegend(){return `<div class="slegend"><span class="lt">★ Звёзды — вес турнира в рейтинге mafgame</span><span>больше звёзд — больше баллов за места</span></div>`;}
 const TCOL={L:'#ffd700',S:'#e8c87a',A:'#67e08f',B:'#7aa7d6',C:'#b48cf0',D:'#8a919d',E:'#5c6470',F:'#3a3f4b'};
+const SCOL={'мягкий':'#5ec8c0','ниже среднего':'#7aa7d6','средний':'#b9c0cc','выше среднего':'#f0a64a','экстремальный':'#ff5a5a'};
+function strChip(t){const x=t.strength;if(!x)return '';return `<span class="chip str" style="--sc:${SCOL[x.lvl]||'#b9c0cc'}" title="Сила состава: ${x.rank}-й из ${x.of} турниров сайта (${esc(x.win)}) по среднему MMR топ-10 (${x.top10})">${esc(x.lvl)}</span>`;}
 function whoBlock(t){const top=(t.mmrTop||[]).slice(0,10),c=t.mmrTiers||{};if(!top.length)return '';
   const N=Object.values(c).reduce((a,b)=>a+b,0)||t.players||0;const up=ks=>ks.split('').reduce((a,k)=>a+(c[k]||0),0);
   const href='participants.html?t='+t.id;const ini=n=>esc(String(n).replace(/[^A-Za-zА-Яа-яЁёІіЇїЄє0-9]/g,'').slice(0,2).toUpperCase()||'?');
@@ -234,7 +237,7 @@ function card(t,big){
     <div class="meta">${esc(t.dates)} · ${esc(t.city)}${t.country?' · '+esc(t.country):''}</div>
     <a class="nm" href="${mainHref(t)}">${esc(t.name)}</a>
     ${starsBox(t.stars)}
-    <div class="fx"><span class="chip"><b>${t.players}</b> игроков</span>${t.prize?`<span class="chip">приз <b>${esc(t.prize)}</b></span>`:''}${t.mmrAvg!=null?`<span class="chip elo" title="средний MMR mafiastats.com по ${t.mmrN} игрокам">ср. MMR <b>${t.mmrAvg}</b></span>`:''}${t.eloAvg!=null?`<span class="chip elo" title="справочно: средний ELO markery.online (последний снимок по игроку) по ${t.eloN} из ${t.eloTotal} игроков с рейтингом">ср. ELO <b>${t.eloAvg}</b> · ${t.eloN}/${t.eloTotal}</span>`:''}</div>
+    <div class="fx">${strChip(t)}<span class="chip"><b>${t.players}</b> игроков</span>${t.prize?`<span class="chip">приз <b>${esc(t.prize)}</b></span>`:''}${t.mmrAvg!=null?`<span class="chip elo" title="средний MMR mafiastats.com по ${t.mmrN} игрокам">ср. MMR <b>${t.mmrAvg}</b></span>`:''}${t.eloAvg!=null?`<span class="chip elo" title="справочно: средний ELO markery.online (последний снимок по игроку) по ${t.eloN} из ${t.eloTotal} игроков с рейтингом">ср. ELO <b>${t.eloAvg}</b> · ${t.eloN}/${t.eloTotal}</span>`:''}</div>
     ${t.status!=='finished'?whoBlock(t):''}
     <div class="stl">${esc(t.statusLabel||'')}${t.format?' · '+esc(t.format):''}</div>
     <div class="btns">${btns}</div>
@@ -256,7 +259,7 @@ function card(t,big){
       return `<a class="ar st${t.stars||0}" style="--acc:${a1}" href="${t.page||('tournament.html?t='+t.id)}">
       <div class="ad">${esc(t.dates)}<br>${esc(t.city)}</div>
       <div><div class="an">${esc(t.name)}</div>
-        <div class="ax">${starsBox(t.stars,true)}<span class="chip"><b>${t.players}</b> игроков</span>${mmr}${elo}</div>
+        <div class="ax">${starsBox(t.stars,true)}${strChip(t)}<span class="chip"><b>${t.players}</b> игроков</span>${mmr}${elo}</div>
         ${pod}${fmt?`<div class="am">${esc(fmt)}</div>`:''}</div>
       <span class="ago">→</span></a>`;}).join('');
 })(window.TOURNAMENTS_DB);

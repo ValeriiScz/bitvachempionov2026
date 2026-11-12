@@ -9,7 +9,7 @@
   "days": 2,
   "players_confirmed": 40,
   "rating_note": "markery.online, снимок 30.10.2026 (ELO; места в рейтингах — снимок 26.10): ELO и место в глобальном рейтинге (всё время) и в рейтинге сезона 2026; ранг L/S/A/B/C/D/E/F — по общему ELO (L 1600+, S 1300+, A 1190+, B 1075+, C 994+, D 937+, E 880+)",
-  "ms_snap": "2026-11-12",
+  "ms_snap": "2026-11-03",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
@@ -18,7 +18,8 @@
    "C": 1350,
    "D": 1125,
    "E": 925
-  }
+  },
+  "ms_frozen": true
  },
  "players": [
   {
@@ -48,14 +49,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 383,
-    "rating": 1857.0,
-    "rank": 63,
-    "games": 482,
-    "wr": 50.83,
+    "rating": 1858.4,
+    "rank": 62,
+    "games": 466,
+    "wr": 50.64,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1857.0,
-   "r_ms_rank": 63,
+   "r_ms_mmr": 1858.4,
+   "r_ms_rank": 62,
    "r_ms_tier": "S"
   },
   {
@@ -86,13 +87,13 @@
    "ms": {
     "id": 59103,
     "rating": 2054.4,
-    "rank": 29,
+    "rank": 28,
     "games": 559,
     "wr": 53.85,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 2054.4,
-   "r_ms_rank": 29,
+   "r_ms_rank": 28,
    "r_ms_tier": "L"
   },
   {
@@ -122,14 +123,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 983,
-    "rating": 1600.3,
-    "rank": 186,
-    "games": 608,
-    "wr": 46.55,
+    "rating": 1541.8,
+    "rank": 255,
+    "games": 593,
+    "wr": 46.04,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1600.3,
-   "r_ms_rank": 186,
+   "r_ms_mmr": 1541.8,
+   "r_ms_rank": 255,
    "r_ms_tier": "B"
   },
   {
@@ -159,14 +160,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 63074,
-    "rating": 1721.9,
-    "rank": 107,
-    "games": 491,
-    "wr": 49.49,
+    "rating": 1688.0,
+    "rank": 120,
+    "games": 475,
+    "wr": 49.26,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1721.9,
-   "r_ms_rank": 107,
+   "r_ms_mmr": 1688.0,
+   "r_ms_rank": 120,
    "r_ms_tier": "A"
   },
   {
@@ -197,13 +198,13 @@
    "ms": {
     "id": 770,
     "rating": 1252.3,
-    "rank": 674,
+    "rank": 667,
     "games": 169,
     "wr": 42.6,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1252.3,
-   "r_ms_rank": 674,
+   "r_ms_rank": 667,
    "r_ms_tier": "D"
   },
   {
@@ -233,14 +234,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 808,
-    "rating": 1826.2,
-    "rank": 68,
-    "games": 508,
-    "wr": 47.24,
+    "rating": 1832.7,
+    "rank": 65,
+    "games": 496,
+    "wr": 47.18,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1826.2,
-   "r_ms_rank": 68,
+   "r_ms_mmr": 1832.7,
+   "r_ms_rank": 65,
    "r_ms_tier": "S"
   },
   {
@@ -271,13 +272,13 @@
    "ms": {
     "id": 3,
     "rating": 1337.6,
-    "rank": 579,
+    "rank": 569,
     "games": 352,
     "wr": 49.43,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1337.6,
-   "r_ms_rank": 579,
+   "r_ms_rank": 569,
    "r_ms_tier": "D"
   },
   {
@@ -345,13 +346,13 @@
    "ms": {
     "id": 8,
     "rating": 1125.4,
-    "rank": 734,
+    "rank": 727,
     "games": 292,
     "wr": 48.97,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1125.4,
-   "r_ms_rank": 734,
+   "r_ms_rank": 727,
    "r_ms_tier": "D"
   },
   {
@@ -381,14 +382,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 61480,
-    "rating": 2040.6,
-    "rank": 30,
-    "games": 813,
-    "wr": 46.25,
+    "rating": 2016.3,
+    "rank": 31,
+    "games": 797,
+    "wr": 46.05,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 2040.6,
-   "r_ms_rank": 30,
+   "r_ms_mmr": 2016.3,
+   "r_ms_rank": 31,
    "r_ms_tier": "L"
   },
   {
@@ -419,13 +420,13 @@
    "ms": {
     "id": 61626,
     "rating": 1894.7,
-    "rank": 57,
+    "rank": 56,
     "games": 557,
     "wr": 48.29,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1894.7,
-   "r_ms_rank": 57,
+   "r_ms_rank": 56,
    "r_ms_tier": "S"
   },
   {
@@ -456,13 +457,13 @@
    "ms": {
     "id": 472,
     "rating": 1276.6,
-    "rank": 654,
+    "rank": 643,
     "games": 224,
     "wr": 45.98,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1276.6,
-   "r_ms_rank": 654,
+   "r_ms_rank": 643,
    "r_ms_tier": "D"
   },
   {
@@ -492,13 +493,13 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 65795,
-    "rating": 1322.6,
+    "rating": 1303.9,
     "rank": null,
-    "games": 78,
-    "wr": 38.46,
+    "games": 66,
+    "wr": 37.88,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1322.6,
+   "r_ms_mmr": 1303.9,
    "r_ms_rank": null,
    "r_ms_tier": "D"
   },
@@ -530,13 +531,13 @@
    "ms": {
     "id": 16,
     "rating": 1320.6,
-    "rank": 599,
+    "rank": 590,
     "games": 288,
     "wr": 48.61,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1320.6,
-   "r_ms_rank": 599,
+   "r_ms_rank": 590,
    "r_ms_tier": "D"
   },
   {
@@ -640,14 +641,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 654,
-    "rating": 1777.2,
-    "rank": 86,
-    "games": 348,
-    "wr": 52.59,
+    "rating": 1732.4,
+    "rank": 99,
+    "games": 336,
+    "wr": 52.38,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1777.2,
-   "r_ms_rank": 86,
+   "r_ms_mmr": 1732.4,
+   "r_ms_rank": 99,
    "r_ms_tier": "A"
   },
   {
@@ -789,13 +790,13 @@
    "ms": {
     "id": 59162,
     "rating": 1061.1,
-    "rank": 753,
+    "rank": 746,
     "games": 438,
     "wr": 45.66,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1061.1,
-   "r_ms_rank": 753,
+   "r_ms_rank": 746,
    "r_ms_tier": "E"
   },
   {
@@ -825,13 +826,13 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 65459,
-    "rating": 1603.8,
+    "rating": 1609.2,
     "rank": null,
-    "games": 123,
-    "wr": 50.41,
+    "games": 111,
+    "wr": 50.45,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1603.8,
+   "r_ms_mmr": 1609.2,
    "r_ms_rank": null,
    "r_ms_tier": "B"
   },
@@ -862,14 +863,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 63564,
-    "rating": 2123.1,
-    "rank": 16,
-    "games": 503,
-    "wr": 53.08,
+    "rating": 2027.9,
+    "rank": 29,
+    "games": 487,
+    "wr": 51.95,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 2123.1,
-   "r_ms_rank": 16,
+   "r_ms_mmr": 2027.9,
+   "r_ms_rank": 29,
    "r_ms_tier": "L"
   },
   {
@@ -899,14 +900,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 63705,
-    "rating": 1850.1,
-    "rank": 64,
-    "games": 406,
-    "wr": 47.78,
+    "rating": 1831.5,
+    "rank": 66,
+    "games": 394,
+    "wr": 47.46,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1850.1,
-   "r_ms_rank": 64,
+   "r_ms_mmr": 1831.5,
+   "r_ms_rank": 66,
    "r_ms_tier": "S"
   },
   {
@@ -937,13 +938,13 @@
    "ms": {
     "id": 471,
     "rating": 1493.1,
-    "rank": 328,
+    "rank": 322,
     "games": 391,
     "wr": 46.8,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1493.1,
-   "r_ms_rank": 328,
+   "r_ms_rank": 322,
    "r_ms_tier": "C"
   },
   {
@@ -974,13 +975,13 @@
    "ms": {
     "id": 17,
     "rating": 1465.4,
-    "rank": 372,
+    "rank": 368,
     "games": 326,
     "wr": 46.01,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1465.4,
-   "r_ms_rank": 372,
+   "r_ms_rank": 368,
    "r_ms_tier": "C"
   },
   {
@@ -1011,13 +1012,13 @@
    "ms": {
     "id": 62891,
     "rating": 1280.6,
-    "rank": 648,
+    "rank": 638,
     "games": 410,
     "wr": 46.83,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1280.6,
-   "r_ms_rank": 648,
+   "r_ms_rank": 638,
    "r_ms_tier": "D"
   },
   {
@@ -1158,14 +1159,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 809,
-    "rating": 1522.9,
-    "rank": 284,
-    "games": 352,
-    "wr": 49.15,
+    "rating": 1529.0,
+    "rank": 268,
+    "games": 340,
+    "wr": 49.71,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1522.9,
-   "r_ms_rank": 284,
+   "r_ms_mmr": 1529.0,
+   "r_ms_rank": 268,
    "r_ms_tier": "B"
   },
   {
@@ -1195,14 +1196,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 55,
-    "rating": 1914.6,
-    "rank": 49,
-    "games": 758,
-    "wr": 50,
+    "rating": 1870.3,
+    "rank": 61,
+    "games": 742,
+    "wr": 49.73,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1914.6,
-   "r_ms_rank": 49,
+   "r_ms_mmr": 1870.3,
+   "r_ms_rank": 61,
    "r_ms_tier": "S"
   },
   {
@@ -1269,14 +1270,14 @@
    "elo_snap": "2026-10-30",
    "ms": {
     "id": 1492,
-    "rating": 1714.6,
-    "rank": 109,
-    "games": 293,
-    "wr": 53.58,
+    "rating": 1693.5,
+    "rank": 117,
+    "games": 277,
+    "wr": 53.07,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1714.6,
-   "r_ms_rank": 109,
+   "r_ms_mmr": 1693.5,
+   "r_ms_rank": 117,
    "r_ms_tier": "A"
   },
   {
@@ -1381,13 +1382,13 @@
    "ms": {
     "id": 140,
     "rating": 1290.8,
-    "rank": 637,
+    "rank": 624,
     "games": 245,
     "wr": 43.67,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1290.8,
-   "r_ms_rank": 637,
+   "r_ms_rank": 624,
    "r_ms_tier": "D"
   },
   {

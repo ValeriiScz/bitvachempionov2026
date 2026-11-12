@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_mafiastats · v1.6.1 · 2026-11-12 (mmrTop — топ-10 состава по MMR для кружков на плашке) · v1.5 · 2026-11-12 (распределение по тирам MMR mmrTiers на карточках незавершённых турниров) · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
+refresh_mafiastats · v1.7 · 2026-11-12 (архив заморожен: составы завершённых турниров не обновляются, MMR на дату снимка; сила турнира strength — 5 уровней к турнирам сайта за 6 полных месяцев) · v1.6.1 · 2026-11-12 (mmrTop — топ-10 состава по MMR для кружков на плашке) · v1.5 · 2026-11-12 (распределение по тирам MMR mmrTiers на карточках незавершённых турниров) · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
 Назначение: подтянуть единый рейтинг MMR с mafiastats.com (открытый API, без ключей)
 для игроков сайта DOVOD — без участия человека. Запускается GitHub Actions
 (.github/workflows/refresh-mafiastats.yml).
@@ -128,6 +128,7 @@ def patch_participants(players, snap):
         raw = io.open(f, encoding='utf-8').read()
         try: d = json.loads(raw)
         except Exception: continue
+        if frozen(f, d): continue   # v1.7: архив не обновляем — MMR на дату снимка (meta.ms_snap)
         for p in d.get('players') or []:
             m = players.get(str(p.get('uid')))
             if not m: continue
@@ -139,6 +140,21 @@ def patch_participants(players, snap):
         if new.strip() != raw.strip():
             io.open(f, 'w', encoding='utf-8').write(new + '\n'); changed += 1
     return changed
+
+def finished_ids():
+    """v1.7: id завершённых турниров из tournaments.js — их составы заморожены (MMR на дату снимка, не обновляем)."""
+    try: s = io.open(os.path.join(BASE, 'data', 'tournaments.js'), encoding='utf-8').read()
+    except Exception: return set()
+    out = set()
+    for tid in re.findall(r'\{\s*"id":\s*"(\d+)"', s):
+        m = re.search(r'\{\s*"id":\s*"%s"' % tid, s); b = s.find('\n  }', m.start())
+        if '"status": "finished"' in s[m.start():b]: out.add(tid)
+    return out
+
+def frozen(f, d):
+    return re.sub(r'\D', '', os.path.basename(f)) in FIN or (d.get('meta') or {}).get('ms_frozen')
+
+FIN = set()
 
 def bump_sw():
     s = io.open(SW, encoding='utf-8').read()
@@ -198,6 +214,7 @@ def apply_mmr_tiers():
         raw = io.open(f, encoding='utf-8').read()
         try: d = json.loads(raw)
         except Exception: continue
+        if frozen(f, d): continue   # v1.7: архив не трогаем
         tid = re.sub(r'\D', '', os.path.basename(f)); thf = (lad.get('per') or {}).get(tid, th)   # v1.3: тестовая шкала для отдельных турниров
         for p in d.get('players') or []:
             p['r_ms_tier'] = mmr_tier(p.get('r_ms_mmr'), thf)
@@ -242,7 +259,58 @@ def update_cards():
     log('карточки турниров: ср. MMR обновлён у %d' % n)
     return n
 
+# ── 8) сила турнира (v1.7, 12.11.2026) ──────────────────────────────────────
+# Метрика — средний MMR топ-10 состава (финал и деньги разыгрывает верх). Сравнение — с турнирами сайта
+# за 6 полных календарных месяцев до текущего месяца и сыгранные в текущем + все незавершённые (мин. 5 турниров в сравнении). Пять уровней по доле турниров ниже:
+# <20% мягкий · <40% ниже среднего · <60% средний · <80% выше среднего · иначе экстремальный.
+# У завершённых сила заморожена (поле strength остаётся как было при закрытии).
+LEVELS = [(0.2, 'мягкий'), (0.4, 'ниже среднего'), (0.6, 'средний'), (0.8, 'выше среднего'), (9, 'экстремальный')]
+MONTHS = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек']
+
+def top10(tid):
+    try: d = json.load(io.open(os.path.join(BASE, 'data', 'participants_%s.json' % tid), encoding='utf-8'))
+    except Exception: return None
+    v = sorted((float(p['r_ms_mmr']) for p in d.get('players') or [] if p.get('r_ms_mmr') is not None), reverse=True)[:10]
+    return round(sum(v) / len(v)) if len(v) >= 5 else None
+
+def window(today):
+    y, m = today.year, today.month
+    a_y, a_m = (y, m - 6) if m > 6 else (y - 1, m + 6)
+    return datetime.date(a_y, a_m, 1), today, '%s %d – сейчас' % (MONTHS[a_m - 1], a_y)
+
+def strength(today=None, only=None):
+    path = os.path.join(BASE, 'data', 'tournaments.js')
+    s = io.open(path, encoding='utf-8').read()
+    cards = []
+    for tid in re.findall(r'\{\s*"id":\s*"(\d+)"', s):
+        m = re.search(r'\{\s*"id":\s*"%s"' % tid, s); b = s.find('\n  }', m.start()); blk = s[m.start():b]
+        st = re.search(r'"start":\s*"([\d-]+)"', blk)
+        cards.append({'id': tid, 'fin': '"status": "finished"' in blk, 'start': st.group(1) if st else None, 'has': '"strength"' in blk, 'v': top10(tid)})
+    today = today or datetime.date.today()
+    def rate(c, pool, label):
+        vals = [x['v'] for x in pool if x['v'] is not None]
+        below = sum(1 for v in vals if v < c['v']); share = below / (len(vals) - 1)
+        rank = 1 + sum(1 for v in vals if v > c['v'])
+        lvl = next(n for t, n in LEVELS if share < t)
+        return {'lvl': lvl, 'rank': rank, 'of': len(vals), 'top10': c['v'], 'win': label}
+    a, b, label = window(today)
+    # окно: 6 полных месяцев до текущего + уже сыгранные в текущем месяце; плюс все незавершённые
+    pool = [x for x in cards if x['v'] is not None and ((x['fin'] and x['start'] and x['start'] >= a.isoformat()) or not x['fin'])]
+    n = 0
+    for c in cards:
+        if c['v'] is None or (only and c['id'] not in only): continue
+        if c['fin'] and c['has']: continue          # заморожено при закрытии
+        if c not in pool or len(pool) < 5: continue  # архив вне окна не размечаем; мало турниров — не размечаем
+        r = json.dumps(rate(c, pool, label), ensure_ascii=False)
+        m = re.search(r'\{\s*"id":\s*"%s"' % c['id'], s); a0 = m.start(); b0 = s.find('\n  }', a0); blk = s[a0:b0]
+        nb = re.sub(r'"strength":\s*\{[^}]*\}', lambda _: '"strength": ' + r, blk) if '"strength"' in blk else blk + ',\n    "strength": ' + r
+        if nb != blk: s = s[:a0] + nb + s[b0:]; n += 1
+    if n: io.open(path, 'w', encoding='utf-8').write(s)
+    log('сила турнира: обновлено карточек %d' % n)
+    return n
+
 def main():
+    FIN.update(finished_ids())
     ping = api('/rating', limit=1)
     if not ping: fail('mafiastats API не отвечает — ничего не пишу')
     ids = wanted_ids()
@@ -266,19 +334,24 @@ def main():
         old = None
     same = old and old.get('players') == json.loads(json.dumps(players)) and old.get('tops') == json.loads(json.dumps(out['tops']))
     if same:
-        log('MMR не изменился с прошлого снимка (%s) — ничего не пишу' % old.get('snap')); return
+        log('MMR не изменился с прошлого снимка (%s) — составы не трогаю' % old.get('snap'))
+        if update_cards() + strength(): bump_sw()
+        return
     io.open(OUT, 'w', encoding='utf-8').write(json.dumps(out, ensure_ascii=False, separators=(',', ':')) + '\n')
     ch = patch_participants(players, snap)
     lad = apply_mmr_tiers()
     if lad:
         out['tier_ladder'] = lad
         io.open(OUT, 'w', encoding='utf-8').write(json.dumps(out, ensure_ascii=False, separators=(',', ':')) + '\n')
-    update_cards()
+    update_cards(); strength()
     v = bump_sw()
     log('готово: data/mmr.json (%d игроков), составов обновлено: %d, sw v%s' % (len(players), ch, v))
 
 if __name__ == '__main__':
-    if '--tiers-only' in sys.argv:
+    FIN.update(finished_ids())
+    if '--strength-only' in sys.argv:
+        update_cards(); strength()
+    elif '--tiers-only' in sys.argv:
         lad = apply_mmr_tiers()
         if lad:
             d = json.load(io.open(OUT, encoding='utf-8')); d['tier_ladder'] = lad

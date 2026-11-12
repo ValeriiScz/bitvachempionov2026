@@ -14,7 +14,7 @@
   "teams": 0,
   "team_size": 0,
   "rating_note": "markery snapshot 2026-06-25 (API). r_elo_cur=ELO глоб/всё время, r_tier=ранг S..F, r_place_global=место глоб/всё время, r_rank_eu_2026=место Европа-2026, r_place_2026=место глоб-2026. ELO 2026 (число) и место оффлайн-2026 — markery отдаёт только премиум/лидербордом, отдельно. | Ростер актуализирован 2026-07-03: +6 (markery лидерборд 03.07: ELO тек+место глоб; тир/Европа-2026 — нет, нужен авторизованный API), −4 выбывших. | Тиры 6 новых — ВЫВОД по ELO-корзинам markery (границы из размеченных 85); сезон-2026 снят для Скорбного/Джоука (остальные в 2026 не играли).",
-  "ms_snap": "2026-11-12",
+  "ms_snap": "2026-11-03",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
@@ -23,7 +23,8 @@
    "C": 1350,
    "D": 1125,
    "E": 925
-  }
+  },
+  "ms_frozen": true
  },
  "players": [
   {
@@ -40,10 +41,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1564.7,
-    "rank": 232,
-    "games": 536,
-    "wr": 48.13,
+    "rating": 1560.1,
+    "rank": 230,
+    "games": 524,
+    "wr": 48.09,
     "conf": "mafgame-id",
     "feds": [
      "mafgame",
@@ -58,8 +59,8 @@
    "r_rank_eu_2026": 186,
    "r_place_2026": 190,
    "r_elo_2026": 1012.79,
-   "r_ms_mmr": 1564.7,
-   "r_ms_rank": 232,
+   "r_ms_mmr": 1560.1,
+   "r_ms_rank": 230,
    "r_ms_tier": "B"
   },
   {
@@ -76,8 +77,8 @@
     "alts": null
    },
    "ms": {
-    "rating": 1374.8,
-    "rank": 519,
+    "rating": 1373.6,
+    "rank": 517,
     "games": 167,
     "wr": 44.91,
     "conf": "mafgame-id",
@@ -95,8 +96,8 @@
    "r_rank_eu_2026": null,
    "r_place_2026": null,
    "r_elo_2026": null,
-   "r_ms_mmr": 1374.8,
-   "r_ms_rank": 519,
+   "r_ms_mmr": 1373.6,
+   "r_ms_rank": 517,
    "r_ms_tier": "C"
   },
   {
@@ -113,10 +114,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1777.2,
-    "rank": 86,
-    "games": 348,
-    "wr": 52.59,
+    "rating": 1732.4,
+    "rank": 99,
+    "games": 336,
+    "wr": 52.38,
     "conf": "mafgame-id",
     "feds": [
      "imafia"
@@ -130,8 +131,8 @@
    "r_rank_eu_2026": 21,
    "r_place_2026": 20,
    "r_elo_2026": 1092.8,
-   "r_ms_mmr": 1777.2,
-   "r_ms_rank": 86,
+   "r_ms_mmr": 1732.4,
+   "r_ms_rank": 99,
    "r_ms_tier": "A"
   },
   {
@@ -149,7 +150,7 @@
    },
    "ms": {
     "rating": 1093.6,
-    "rank": 745,
+    "rank": 738,
     "games": 374,
     "wr": 43.58,
     "conf": "mafgame-id",
@@ -166,7 +167,7 @@
    "r_place_2026": 966,
    "r_elo_2026": 997.22,
    "r_ms_mmr": 1093.6,
-   "r_ms_rank": 745,
+   "r_ms_rank": 738,
    "r_ms_tier": "E"
   },
   {
@@ -183,8 +184,8 @@
     "alts": null
    },
    "ms": {
-    "rating": 1369.2,
-    "rank": 525,
+    "rating": 1367.9,
+    "rank": 522,
     "games": 205,
     "wr": 48.29,
     "conf": "mafgame-id",
@@ -202,8 +203,8 @@
    "r_rank_eu_2026": null,
    "r_place_2026": null,
    "r_elo_2026": null,
-   "r_ms_mmr": 1369.2,
-   "r_ms_rank": 525,
+   "r_ms_mmr": 1367.9,
+   "r_ms_rank": 522,
    "r_ms_tier": "C"
   },
   {
@@ -236,8 +237,8 @@
     ]
    },
    "ms": {
-    "rating": 1295.9,
-    "rank": 629,
+    "rating": 1293.9,
+    "rank": 620,
     "games": 253,
     "wr": 42.69,
     "conf": "mafgame-id",
@@ -255,8 +256,8 @@
    "r_rank_eu_2026": 554,
    "r_place_2026": 1380,
    "r_elo_2026": 989.41,
-   "r_ms_mmr": 1295.9,
-   "r_ms_rank": 629,
+   "r_ms_mmr": 1293.9,
+   "r_ms_rank": 620,
    "r_ms_tier": "D"
   },
   {
@@ -273,10 +274,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1714.6,
-    "rank": 109,
-    "games": 293,
-    "wr": 53.58,
+    "rating": 1693.5,
+    "rank": 117,
+    "games": 277,
+    "wr": 53.07,
     "conf": "mafgame-id",
     "feds": null,
     "id": 1492
@@ -288,8 +289,8 @@
    "r_rank_eu_2026": 8,
    "r_place_2026": 3,
    "r_elo_2026": 1144.44,
-   "r_ms_mmr": 1714.6,
-   "r_ms_rank": 109,
+   "r_ms_mmr": 1693.5,
+   "r_ms_rank": 117,
    "r_ms_tier": "A"
   },
   {
@@ -307,7 +308,7 @@
    },
    "ms": {
     "rating": 1722.6,
-    "rank": 106,
+    "rank": 104,
     "games": 875,
     "wr": 47.31,
     "conf": "mafgame-id",
@@ -326,7 +327,7 @@
    "r_place_2026": 451,
    "r_elo_2026": 1008.87,
    "r_ms_mmr": 1722.6,
-   "r_ms_rank": 106,
+   "r_ms_rank": 104,
    "r_ms_tier": "A"
   },
   {
@@ -376,10 +377,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1043.9,
-    "rank": 758,
-    "games": 294,
-    "wr": 42.86,
+    "rating": 1087.8,
+    "rank": 740,
+    "games": 282,
+    "wr": 43.26,
     "conf": "mafgame-id",
     "feds": [
      "mafgame",
@@ -396,8 +397,8 @@
    "r_rank_eu_2026": 550,
    "r_place_2026": 341,
    "r_elo_2026": 989.54,
-   "r_ms_mmr": 1043.9,
-   "r_ms_rank": 758,
+   "r_ms_mmr": 1087.8,
+   "r_ms_rank": 740,
    "r_ms_tier": "E"
   },
   {
@@ -414,8 +415,8 @@
     "alts": null
    },
    "ms": {
-    "rating": 1708.2,
-    "rank": 114,
+    "rating": 1710.3,
+    "rank": 110,
     "games": 349,
     "wr": 50.72,
     "conf": "mafgame-id",
@@ -434,8 +435,8 @@
    "r_rank_eu_2026": 17,
    "r_place_2026": 72,
    "r_elo_2026": 1098.2,
-   "r_ms_mmr": 1708.2,
-   "r_ms_rank": 114,
+   "r_ms_mmr": 1710.3,
+   "r_ms_rank": 110,
    "r_ms_tier": "A"
   },
   {
@@ -453,7 +454,7 @@
    },
    "ms": {
     "rating": 1483.9,
-    "rank": 341,
+    "rank": 335,
     "games": 342,
     "wr": 52.63,
     "conf": "mafgame-id",
@@ -471,7 +472,7 @@
    "r_place_2026": 64,
    "r_elo_2026": 1056.14,
    "r_ms_mmr": 1483.9,
-   "r_ms_rank": 341,
+   "r_ms_rank": 335,
    "r_ms_tier": "C"
   },
   {
@@ -499,10 +500,10 @@
     ]
    },
    "ms": {
-    "rating": 1282.2,
-    "rank": 646,
-    "games": 994,
-    "wr": 49.6,
+    "rating": 1342.5,
+    "rank": 561,
+    "games": 982,
+    "wr": 49.9,
     "conf": "mafgame-id",
     "feds": [
      "mafgame",
@@ -519,8 +520,8 @@
    "r_rank_eu_2026": 58,
    "r_place_2026": 85,
    "r_elo_2026": 1050.07,
-   "r_ms_mmr": 1282.2,
-   "r_ms_rank": 646,
+   "r_ms_mmr": 1342.5,
+   "r_ms_rank": 561,
    "r_ms_tier": "D"
   },
   {
@@ -570,7 +571,7 @@
     "alts": null
    },
    "ms": {
-    "rating": 1235.2,
+    "rating": 1232.5,
     "rank": null,
     "games": 66,
     "wr": 39.39,
@@ -587,7 +588,7 @@
    "r_rank_eu_2026": 785,
    "r_place_2026": 1882,
    "r_elo_2026": 932.58,
-   "r_ms_mmr": 1235.2,
+   "r_ms_mmr": 1232.5,
    "r_ms_rank": null,
    "r_ms_tier": "D"
   },
@@ -605,10 +606,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1079.9,
-    "rank": 751,
-    "games": 651,
-    "wr": 48.69,
+    "rating": 1094.2,
+    "rank": 737,
+    "games": 639,
+    "wr": 48.83,
     "conf": "mafgame-id",
     "feds": [
      "mafgame",
@@ -625,8 +626,8 @@
    "r_rank_eu_2026": 801,
    "r_place_2026": 1895,
    "r_elo_2026": 886.7,
-   "r_ms_mmr": 1079.9,
-   "r_ms_rank": 751,
+   "r_ms_mmr": 1094.2,
+   "r_ms_rank": 737,
    "r_ms_tier": "E"
   },
   {
@@ -643,10 +644,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1291.6,
-    "rank": 635,
-    "games": 272,
-    "wr": 47.79,
+    "rating": 1287.4,
+    "rank": 629,
+    "games": 260,
+    "wr": 47.69,
     "conf": "mafgame-id",
     "feds": null,
     "id": 282
@@ -658,8 +659,8 @@
    "r_rank_eu_2026": null,
    "r_place_2026": null,
    "r_elo_2026": null,
-   "r_ms_mmr": 1291.6,
-   "r_ms_rank": 635,
+   "r_ms_mmr": 1287.4,
+   "r_ms_rank": 629,
    "r_ms_tier": "D"
   },
   {
@@ -709,10 +710,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1822.6,
-    "rank": 70,
-    "games": 710,
-    "wr": 52.82,
+    "rating": 1841.1,
+    "rank": 64,
+    "games": 698,
+    "wr": 53.15,
     "conf": "mafgame-id",
     "feds": null,
     "id": 226
@@ -724,8 +725,8 @@
    "r_rank_eu_2026": 33,
    "r_place_2026": 57,
    "r_elo_2026": 1070.87,
-   "r_ms_mmr": 1822.6,
-   "r_ms_rank": 70,
+   "r_ms_mmr": 1841.1,
+   "r_ms_rank": 64,
    "r_ms_tier": "S"
   },
   {
@@ -742,7 +743,7 @@
     "alts": null
    },
    "ms": {
-    "rating": 1634.2,
+    "rating": 1635.5,
     "rank": null,
     "games": 52,
     "wr": 63.46,
@@ -757,7 +758,7 @@
    "r_rank_eu_2026": null,
    "r_place_2026": null,
    "r_elo_2026": null,
-   "r_ms_mmr": 1634.2,
+   "r_ms_mmr": 1635.5,
    "r_ms_rank": null,
    "r_ms_tier": "B"
   },
@@ -775,10 +776,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1090.4,
-    "rank": 746,
-    "games": 619,
-    "wr": 47.33,
+    "rating": 1012.0,
+    "rank": 756,
+    "games": 603,
+    "wr": 46.77,
     "conf": "mafgame-id",
     "feds": [
      "mafgame",
@@ -793,8 +794,8 @@
    "r_rank_eu_2026": 768,
    "r_place_2026": 1863,
    "r_elo_2026": 946.95,
-   "r_ms_mmr": 1090.4,
-   "r_ms_rank": 746,
+   "r_ms_mmr": 1012.0,
+   "r_ms_rank": 756,
    "r_ms_tier": "E"
   },
   {
@@ -811,10 +812,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1857.0,
-    "rank": 63,
-    "games": 482,
-    "wr": 50.83,
+    "rating": 1858.4,
+    "rank": 62,
+    "games": 466,
+    "wr": 50.64,
     "conf": "mafgame-id",
     "feds": [
      "mafgame",
@@ -831,8 +832,8 @@
    "r_rank_eu_2026": 489,
    "r_place_2026": 1210,
    "r_elo_2026": 993.0,
-   "r_ms_mmr": 1857.0,
-   "r_ms_rank": 63,
+   "r_ms_mmr": 1858.4,
+   "r_ms_rank": 62,
    "r_ms_tier": "S"
   },
   {
@@ -850,7 +851,7 @@
    },
    "ms": {
     "rating": 1054.6,
-    "rank": 755,
+    "rank": 748,
     "games": 166,
     "wr": 42.77,
     "conf": "mafgame-id",
@@ -865,7 +866,7 @@
    "r_place_2026": 1855,
    "r_elo_2026": 952.5,
    "r_ms_mmr": 1054.6,
-   "r_ms_rank": 755,
+   "r_ms_rank": 748,
    "r_ms_tier": "E"
   },
   {
@@ -882,10 +883,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1162.0,
+    "rating": 1182.4,
     "rank": null,
-    "games": 65,
-    "wr": 40,
+    "games": 53,
+    "wr": 37.74,
     "conf": "mafgame-id",
     "feds": null,
     "id": 1639
@@ -897,7 +898,7 @@
    "r_rank_eu_2026": 607,
    "r_place_2026": 1519,
    "r_elo_2026": 984.76,
-   "r_ms_mmr": 1162.0,
+   "r_ms_mmr": 1182.4,
    "r_ms_rank": null,
    "r_ms_tier": "D"
   },
@@ -985,10 +986,10 @@
     ]
    },
    "ms": {
-    "rating": 1485.6,
-    "rank": 339,
-    "games": 293,
-    "wr": 48.12,
+    "rating": 1467.6,
+    "rank": 364,
+    "games": 285,
+    "wr": 47.72,
     "conf": "mafgame-id",
     "feds": null,
     "id": 522
@@ -1000,8 +1001,8 @@
    "r_rank_eu_2026": 132,
    "r_place_2026": 253,
    "r_elo_2026": 1020.93,
-   "r_ms_mmr": 1485.6,
-   "r_ms_rank": 339,
+   "r_ms_mmr": 1467.6,
+   "r_ms_rank": 364,
    "r_ms_tier": "C"
   },
   {
@@ -1018,10 +1019,10 @@
     "alts": null
    },
    "ms": {
-    "rating": 1850.1,
-    "rank": 64,
-    "games": 406,
-    "wr": 47.78,
+    "rating": 1831.5,
+    "rank": 66,
+    "games": 394,
+    "wr": 47.46,
     "conf": "mafgame-id",
     "feds": [
      "mafgame",
@@ -1038,8 +1039,8 @@
    "r_rank_eu_2026": 63,
    "r_place_2026": 74,
    "r_elo_2026": 1046.82,
-   "r_ms_mmr": 1850.1,
-   "r_ms_rank": 64,
+   "r_ms_mmr": 1831.5,
+   "r_ms_rank": 66,
    "r_ms_tier": "S"
   },
   {
@@ -1057,7 +1058,7 @@
    },
    "ms": {
     "rating": 1406.9,
-    "rank": 463,
+    "rank": 457,
     "games": 182,
     "wr": 43.96,
     "conf": "mafgame-id",
@@ -1072,7 +1073,7 @@
    "r_place_2026": 511,
    "r_elo_2026": 1006.79,
    "r_ms_mmr": 1406.9,
-   "r_ms_rank": 463,
+   "r_ms_rank": 457,
    "r_ms_tier": "C"
   },
   {
@@ -1100,10 +1101,10 @@
     ]
    },
    "ms": {
-    "rating": 962.2,
-    "rank": 773,
-    "games": 282,
-    "wr": 39.01,
+    "rating": 921.6,
+    "rank": 766,
+    "games": 266,
+    "wr": 37.22,
     "conf": "mafgame-id",
     "feds": [
      "emotion",
@@ -1118,9 +1119,9 @@
    "r_rank_eu_2026": 799,
    "r_place_2026": 1898,
    "r_elo_2026": 902.97,
-   "r_ms_mmr": 962.2,
-   "r_ms_rank": 773,
-   "r_ms_tier": "E"
+   "r_ms_mmr": 921.6,
+   "r_ms_rank": 766,
+   "r_ms_tier": "F"
   },
   {
    "nick": "DOVOD",
@@ -1147,10 +1148,10 @@
     ]
    },
    "ms": {
-    "rating": 1826.2,
-    "rank": 68,
-    "games": 508,
-    "wr": 47.24,
+    "rating": 1832.7,
+    "rank": 65,
+    "games": 496,
+    "wr": 47.18,
     "conf": "mafgame-id",
     "feds": [
      "mwt"
@@ -1164,8 +1165,8 @@
    "r_rank_eu_2026": 22,
    "r_place_2026": 17,
    "r_elo_2026": 1089.81,
-   "r_ms_mmr": 1826.2,
-   "r_ms_rank": 68,
+   "r_ms_mmr": 1832.7,
+   "r_ms_rank": 65,
    "r_ms_tier": "S"
   },
   {
@@ -1194,7 +1195,7 @@
    },
    "ms": {
     "rating": 1559.6,
-    "rank": 239,
+    "rank": 233,
     "games": 315,
     "wr": 50.48,
     "conf": "mafgame-id",
@@ -1209,7 +1210,7 @@
    "r_place_2026": 317,
    "r_elo_2026": 1016.53,
    "r_ms_mmr": 1559.6,
-   "r_ms_rank": 239,
+   "r_ms_rank": 233,
    "r_ms_tier": "B"
   },
   {
@@ -1242,7 +1243,7 @@
     ]
    },
    "ms": {
-    "rating": 1017.5,
+    "rating": 1012.6,
     "rank": null,
     "games": 139,
     "wr": 38.13,
@@ -1257,7 +1258,7 @@
    "r_rank_eu_2026": 767,
    "r_place_2026": 1862,
    "r_elo_2026": 947.05,
-   "r_ms_mmr": 1017.5,
+   "r_ms_mmr": 1012.6,
    "r_ms_rank": null,
    "r_ms_tier": "E"
   },
@@ -1275,8 +1276,8 @@
     "alts": null
    },
    "ms": {
-    "rating": 1338.9,
-    "rank": 576,
+    "rating": 1337.3,
+    "rank": 572,
     "games": 312,
     "wr": 47.12,
     "conf": "mafgame-id",
@@ -1294,8 +1295,8 @@
    "r_rank_eu_2026": 183,
    "r_place_2026": 372,
    "r_elo_2026": 1012.98,
-   "r_ms_mmr": 1338.9,
-   "r_ms_rank": 576,
+   "r_ms_mmr": 1337.3,
+   "r_ms_rank": 572,
    "r_ms_tier": "D"
   },
   {
@@ -1348,7 +1349,7 @@
     "alts": null
    },
    "ms": {
-    "rating": 1442.5,
+    "rating": 1441.9,
     "rank": null,
     "games": 62,
     "wr": 38.71,
@@ -1363,7 +1364,7 @@
    "r_rank_eu_2026": 599,
    "r_place_2026": 1517,
    "r_elo_2026": 986.83,
-   "r_ms_mmr": 1442.5,
+   "r_ms_mmr": 1441.9,
    "r_ms_rank": null,
    "r_ms_tier": "C"
   },
@@ -1381,7 +1382,7 @@
     "alts": null
    },
    "ms": {
-    "rating": 1367.2,
+    "rating": 1365.9,
     "rank": null,
     "games": 143,
     "wr": 45.45,
@@ -1400,7 +1401,7 @@
    "r_rank_eu_2026": null,
    "r_place_2026": null,
    "r_elo_2026": null,
-   "r_ms_mmr": 1367.2,
+   "r_ms_mmr": 1365.9,
    "r_ms_rank": null,
    "r_ms_tier": "C"
   },
@@ -1451,7 +1452,7 @@
     "alts": null
    },
    "ms": {
-    "rating": 1271.1,
+    "rating": 1268.8,
     "rank": null,
     "games": 126,
     "wr": 44.44,
@@ -1466,7 +1467,7 @@
    "r_rank_eu_2026": null,
    "r_place_2026": null,
    "r_elo_2026": null,
-   "r_ms_mmr": 1271.1,
+   "r_ms_mmr": 1268.8,
    "r_ms_rank": null,
    "r_ms_tier": "D"
   },
@@ -1484,7 +1485,7 @@
     "alts": null
    },
    "ms": {
-    "rating": 1405.9,
+    "rating": 1405.0,
     "rank": null,
     "games": 93,
     "wr": 48.39,
@@ -1499,7 +1500,7 @@
    "r_rank_eu_2026": null,
    "r_place_2026": null,
    "r_elo_2026": null,
-   "r_ms_mmr": 1405.9,
+   "r_ms_mmr": 1405.0,
    "r_ms_rank": null,
    "r_ms_tier": "C"
   },
@@ -1517,7 +1518,7 @@
     "alts": null
    },
    "ms": {
-    "rating": 1437.4,
+    "rating": 1436.7,
     "rank": null,
     "games": 12,
     "wr": 41.67,
@@ -1532,7 +1533,7 @@
    "r_rank_eu_2026": null,
    "r_place_2026": null,
    "r_elo_2026": null,
-   "r_ms_mmr": 1437.4,
+   "r_ms_mmr": 1436.7,
    "r_ms_rank": null,
    "r_ms_tier": "C"
   }

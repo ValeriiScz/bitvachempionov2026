@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- build v9.5 · 2026-11-03 · колонка «Тир MMR» (линейка markery по долям) · v9.4 · 2026-11-03 · колонка MMR (mafiastats, робот refresh-mafiastats 2×/нед) + ср. MMR · v9.3 · 2026-07-15 · ЧЕ-634: свежий markery-снапшот, колонки Ранг/ELO/ELO 2026 -->
-<!-- DOVOD · participants.html · v2.3 · 2026-11-12 · опора — MMR: группировка и сортировка по тиру MMR, сначала колонки Тир MMR / MMR, ср. MMR на постере; markery ELO — сверка · v2.2 · 2026-11-11 · клуб в две строки; на телефоне название и ср. ELO под постером · v2.1 · 2026-11-11 · мобильная вёрстка: липкий «Игрок» ≤44% экрана, ник/клуб многоточием, подпись тира не уезжает · v2.0 · 2026-10-26 · новый стиль DOVOD (как страницы турниров): Unbounded/JetBrains Mono/Inter, неон-сетка, акцент турнира из реестра (t.accent) · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
+<!-- DOVOD · participants.html · v2.4 · 2026-11-12 · дата снимка MMR; у архивных турниров «архив, не обновляется» · v2.3 · 2026-11-12 · опора — MMR: группировка и сортировка по тиру MMR, сначала колонки Тир MMR / MMR, ср. MMR на постере; markery ELO — сверка · v2.2 · 2026-11-11 · клуб в две строки; на телефоне название и ср. ELO под постером · v2.1 · 2026-11-11 · мобильная вёрстка: липкий «Игрок» ≤44% экрана, ник/клуб многоточием, подпись тира не уезжает · v2.0 · 2026-10-26 · новый стиль DOVOD (как страницы турниров): Unbounded/JetBrains Mono/Inter, неон-сетка, акцент турнира из реестра (t.accent) · v1.0 · 2026-06-20 · УНИВЕРСАЛЬНАЯ страница участников для турниров статуса «собирается»:
      заявки mafgame (подтв./заявки/лист ожидания) + ДВОЙНОЙ рейтинг markery(основной)+mafiastats(сверка),
      счётчик «ожидаемый средний ELO» (markery) на постере, ссылки на профили, флаги неоднозначных матчей.
      Данные: data/participants_{t}.json (снапшот), реестр data/tournaments.js. -->
@@ -344,7 +344,7 @@ function render(D){
 
   const legend = `
     <div class="legend">
-      <span><span class="dot" style="background:var(--accent)"></span>mafiastats (MMR) — основной: <span class="conn ${msUp?'up':'down'}">${msUp?('подключён'+(meta.ms_snap?' · '+meta.ms_snap:'')):'нет данных'}</span></span>
+      <span><span class="dot" style="background:var(--accent)"></span>mafiastats (MMR) — основной: <span class="conn ${msUp?'up':'down'}">${msUp?((meta.ms_frozen?'снимок ':'подключён · ')+(meta.ms_snap?fd(meta.ms_snap):'')+(meta.ms_frozen?' · архив, не обновляется':'')):'нет данных'}</span></span>
       <span><span class="dot" style="background:#7aa7d6"></span>markery (ELO) — сверка: <span class="conn ${mkUp?'up':'down'}">${mkUp?'справочно'+(eloSnap?' · снимок '+eloSnap:''):'нет данных'}</span></span>
       <span>↕ клик по заголовку колонки — сортировка</span>
     </div>`;

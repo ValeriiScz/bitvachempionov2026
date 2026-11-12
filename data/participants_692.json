@@ -12,7 +12,7 @@
   "players_confirmed": 33,
   "countries": null,
   "rating_note": "ELO/тир — markery.online, снимок 15.10.2026; тир по границам markery (L 1600+, S 1300+, A 1190+, B 1075+, C 994+, D 937+, E 880+)",
-  "ms_snap": "2026-11-12",
+  "ms_snap": "2026-11-03",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
@@ -21,7 +21,8 @@
    "C": 1350,
    "D": 1125,
    "E": 925
-  }
+  },
+  "ms_frozen": true
  },
  "players": [
   {
@@ -44,14 +45,14 @@
    "mk_match": "uid",
    "ms": {
     "id": 808,
-    "rating": 1826.2,
-    "rank": 68,
-    "games": 508,
-    "wr": 47.24,
+    "rating": 1832.7,
+    "rank": 65,
+    "games": 496,
+    "wr": 47.18,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1826.2,
-   "r_ms_rank": 68,
+   "r_ms_mmr": 1832.7,
+   "r_ms_rank": 65,
    "r_ms_tier": "S"
   },
   {
@@ -74,14 +75,14 @@
    "mk_match": "name",
    "ms": {
     "id": 654,
-    "rating": 1777.2,
-    "rank": 86,
-    "games": 348,
-    "wr": 52.59,
+    "rating": 1732.4,
+    "rank": 99,
+    "games": 336,
+    "wr": 52.38,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1777.2,
-   "r_ms_rank": 86,
+   "r_ms_mmr": 1732.4,
+   "r_ms_rank": 99,
    "r_ms_tier": "A"
   },
   {
@@ -104,15 +105,15 @@
    "mk_match": "name",
    "ms": {
     "id": 65545,
-    "rating": 1112.4,
+    "rating": 1219.7,
     "rank": null,
-    "games": 48,
-    "wr": 25,
+    "games": 36,
+    "wr": 30.56,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1112.4,
+   "r_ms_mmr": 1219.7,
    "r_ms_rank": null,
-   "r_ms_tier": "E"
+   "r_ms_tier": "D"
   },
   {
    "nick": "Maverick",
@@ -135,13 +136,13 @@
    "ms": {
     "id": 927,
     "rating": 1559.6,
-    "rank": 239,
+    "rank": 233,
     "games": 315,
     "wr": 50.48,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1559.6,
-   "r_ms_rank": 239,
+   "r_ms_rank": 233,
    "r_ms_tier": "B"
   },
   {
@@ -164,14 +165,14 @@
    "mk_match": "uid",
    "ms": {
     "id": 809,
-    "rating": 1522.9,
-    "rank": 284,
-    "games": 352,
-    "wr": 49.15,
+    "rating": 1529.0,
+    "rank": 268,
+    "games": 340,
+    "wr": 49.71,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1522.9,
-   "r_ms_rank": 284,
+   "r_ms_mmr": 1529.0,
+   "r_ms_rank": 268,
    "r_ms_tier": "B"
   },
   {
@@ -194,14 +195,14 @@
    "mk_match": "name",
    "ms": {
     "id": 983,
-    "rating": 1600.3,
-    "rank": 186,
-    "games": 608,
-    "wr": 46.55,
+    "rating": 1541.8,
+    "rank": 255,
+    "games": 593,
+    "wr": 46.04,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1600.3,
-   "r_ms_rank": 186,
+   "r_ms_mmr": 1541.8,
+   "r_ms_rank": 255,
    "r_ms_tier": "B"
   },
   {
@@ -284,14 +285,14 @@
    "mk_match": "name",
    "ms": {
     "id": 3848,
-    "rating": 2118.2,
-    "rank": 17,
-    "games": 1166,
-    "wr": 48.37,
+    "rating": 2123.5,
+    "rank": 16,
+    "games": 1154,
+    "wr": 48.44,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 2118.2,
-   "r_ms_rank": 17,
+   "r_ms_mmr": 2123.5,
+   "r_ms_rank": 16,
    "r_ms_tier": "L"
   },
   {
@@ -314,14 +315,14 @@
    "mk_match": "name",
    "ms": {
     "id": 63705,
-    "rating": 1850.1,
-    "rank": 64,
-    "games": 406,
-    "wr": 47.78,
+    "rating": 1831.5,
+    "rank": 66,
+    "games": 394,
+    "wr": 47.46,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1850.1,
-   "r_ms_rank": 64,
+   "r_ms_mmr": 1831.5,
+   "r_ms_rank": 66,
    "r_ms_tier": "S"
   },
   {
@@ -345,13 +346,13 @@
    "ms": {
     "id": 406,
     "rating": 1240.1,
-    "rank": 689,
+    "rank": 680,
     "games": 396,
     "wr": 44.44,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1240.1,
-   "r_ms_rank": 689,
+   "r_ms_rank": 680,
    "r_ms_tier": "D"
   },
   {
@@ -375,13 +376,13 @@
    "ms": {
     "id": 431,
     "rating": 1389.1,
-    "rank": 494,
+    "rank": 490,
     "games": 150,
     "wr": 53.33,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1389.1,
-   "r_ms_rank": 494,
+   "r_ms_rank": 490,
    "r_ms_tier": "C"
   },
   {
@@ -435,13 +436,13 @@
    "ms": {
     "id": 63503,
     "rating": 1480.1,
-    "rank": 350,
+    "rank": 343,
     "games": 353,
     "wr": 48.44,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1480.1,
-   "r_ms_rank": 350,
+   "r_ms_rank": 343,
    "r_ms_tier": "C"
   },
   {
@@ -464,14 +465,14 @@
    "mk_match": "known",
    "ms": {
     "id": 63074,
-    "rating": 1721.9,
-    "rank": 107,
-    "games": 491,
-    "wr": 49.49,
+    "rating": 1688.0,
+    "rank": 120,
+    "games": 475,
+    "wr": 49.26,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1721.9,
-   "r_ms_rank": 107,
+   "r_ms_mmr": 1688.0,
+   "r_ms_rank": 120,
    "r_ms_tier": "A"
   },
   {
@@ -494,13 +495,13 @@
    "mk_match": "uid",
    "ms": {
     "id": 65540,
-    "rating": 1312.1,
+    "rating": 1335.1,
     "rank": null,
-    "games": 97,
-    "wr": 43.3,
+    "games": 85,
+    "wr": 44.71,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1312.1,
+   "r_ms_mmr": 1335.1,
    "r_ms_rank": null,
    "r_ms_tier": "D"
   },
@@ -554,14 +555,14 @@
    "mk_match": "uid",
    "ms": {
     "id": 63226,
-    "rating": 1340.5,
-    "rank": 569,
-    "games": 196,
-    "wr": 53.57,
+    "rating": 1308.9,
+    "rank": 607,
+    "games": 180,
+    "wr": 51.67,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1340.5,
-   "r_ms_rank": 569,
+   "r_ms_mmr": 1308.9,
+   "r_ms_rank": 607,
    "r_ms_tier": "D"
   },
   {
@@ -585,13 +586,13 @@
    "ms": {
     "id": 57895,
     "rating": 1261.6,
-    "rank": 668,
+    "rank": 661,
     "games": 280,
     "wr": 45,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1261.6,
-   "r_ms_rank": 668,
+   "r_ms_rank": 661,
    "r_ms_tier": "D"
   },
   {
@@ -615,13 +616,13 @@
    "ms": {
     "id": 1429,
     "rating": 1179.1,
-    "rank": 716,
+    "rank": 709,
     "games": 199,
     "wr": 46.73,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1179.1,
-   "r_ms_rank": 716,
+   "r_ms_rank": 709,
    "r_ms_tier": "D"
   },
   {
@@ -674,14 +675,14 @@
    "mk_match": "uid",
    "ms": {
     "id": 414,
-    "rating": 1564.7,
-    "rank": 232,
-    "games": 536,
-    "wr": 48.13,
+    "rating": 1560.1,
+    "rank": 230,
+    "games": 524,
+    "wr": 48.09,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1564.7,
-   "r_ms_rank": 232,
+   "r_ms_mmr": 1560.1,
+   "r_ms_rank": 230,
    "r_ms_tier": "B"
   },
   {
@@ -765,13 +766,13 @@
    "ms": {
     "id": 912,
     "rating": 1355.4,
-    "rank": 546,
+    "rank": 537,
     "games": 164,
     "wr": 45.12,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1355.4,
-   "r_ms_rank": 546,
+   "r_ms_rank": 537,
    "r_ms_tier": "C"
   },
   {
@@ -795,13 +796,13 @@
    "ms": {
     "id": 61626,
     "rating": 1894.7,
-    "rank": 57,
+    "rank": 56,
     "games": 557,
     "wr": 48.29,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1894.7,
-   "r_ms_rank": 57,
+   "r_ms_rank": 56,
    "r_ms_tier": "S"
   },
   {
@@ -825,13 +826,13 @@
    "ms": {
     "id": 59103,
     "rating": 2054.4,
-    "rank": 29,
+    "rank": 28,
     "games": 559,
     "wr": 53.85,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 2054.4,
-   "r_ms_rank": 29,
+   "r_ms_rank": 28,
    "r_ms_tier": "L"
   },
   {
@@ -854,14 +855,14 @@
    "mk_match": "name",
    "ms": {
     "id": 55,
-    "rating": 1914.6,
-    "rank": 49,
-    "games": 758,
-    "wr": 50,
+    "rating": 1870.3,
+    "rank": 61,
+    "games": 742,
+    "wr": 49.73,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1914.6,
-   "r_ms_rank": 49,
+   "r_ms_mmr": 1870.3,
+   "r_ms_rank": 61,
    "r_ms_tier": "S"
   },
   {
@@ -915,13 +916,13 @@
    "ms": {
     "id": 63862,
     "rating": 1528.3,
-    "rank": 272,
+    "rank": 270,
     "games": 343,
     "wr": 51.31,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1528.3,
-   "r_ms_rank": 272,
+   "r_ms_rank": 270,
    "r_ms_tier": "B"
   },
   {
@@ -944,14 +945,14 @@
    "mk_match": "name",
    "ms": {
     "id": 1492,
-    "rating": 1714.6,
-    "rank": 109,
-    "games": 293,
-    "wr": 53.58,
+    "rating": 1693.5,
+    "rank": 117,
+    "games": 277,
+    "wr": 53.07,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1714.6,
-   "r_ms_rank": 109,
+   "r_ms_mmr": 1693.5,
+   "r_ms_rank": 117,
    "r_ms_tier": "A"
   },
   {
@@ -974,14 +975,14 @@
    "mk_match": "name",
    "ms": {
     "id": 63564,
-    "rating": 2123.1,
-    "rank": 16,
-    "games": 503,
-    "wr": 53.08,
+    "rating": 2027.9,
+    "rank": 29,
+    "games": 487,
+    "wr": 51.95,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 2123.1,
-   "r_ms_rank": 16,
+   "r_ms_mmr": 2027.9,
+   "r_ms_rank": 29,
    "r_ms_tier": "L"
   },
   {
