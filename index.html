@@ -482,10 +482,12 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
   var act=db.tournaments.filter(function(t){return t.status!=='finished'&&t.page&&t.start&&today<=(t.liveTo||t.start)&&t.start<=lim;})
     .sort(function(a,b){return String(a.start).localeCompare(String(b.start));});
   /* v10.11: «Дальше» — все турниры на 3 недели вперёд карточками с картинками (t.thumb → t.art); + финал MCL (его нет в tournaments.js — страница лиги mcl2026.html) */
-  var lim3=ymd(new Date(now.getTime()+21*864e5));
+  /* v10.12 (12.11): окно «три недели» доводим до воскресенья той недели — турниры идут по выходным */
+  var d3=new Date(now.getTime()+21*864e5); d3=new Date(d3.getTime()+((7-d3.getDay())%7)*864e5); var lim3=ymd(d3);
   var EXTRA=[]; /* 10.11: финал MCL теперь в tournaments.js (id 757, t757.html) — ручные карточки не нужны */
-  var nxt=db.tournaments.concat(EXTRA).filter(function(t){return t.status!=='finished'&&act.indexOf(t)<0&&t.start&&t.start>=today&&t.start<=lim3;})
-    .sort(function(a,b){return String(a.start).localeCompare(String(b.start));}).slice(0,4);
+  /* v10.12: в «Дальше» — все, кроме того, что крупно наверху (раньше выпадали остальные «скоро на турнире», напр. финал MCL) */
+  var nxt=db.tournaments.concat(EXTRA).filter(function(t){return t.status!=='finished'&&t!==act[0]&&t.start&&t.start>=today&&t.start<=lim3;})
+    .sort(function(a,b){return String(a.start).localeCompare(String(b.start));}).slice(0,6);
   if(!act.length&&!nxt.length) return;
   function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   var R=['','I','II','III','IV','V','VI'];
