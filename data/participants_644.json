@@ -44,7 +44,14 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 63074,
+    "rating": 1721.9,
+    "rank": 107,
+    "games": 491,
+    "wr": 49.49,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1721.9,
    "r_ms_rank": 107,
    "r_ms_tier": "A"
@@ -71,7 +78,14 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 63185,
+    "rating": 1254.5,
+    "rank": 673,
+    "games": 159,
+    "wr": 46.54,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1254.5,
    "r_ms_rank": 673,
    "r_ms_tier": "D"
@@ -98,7 +112,14 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 1476,
+    "rating": 1655.4,
+    "rank": 139,
+    "games": 221,
+    "wr": 47.51,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1655.4,
    "r_ms_rank": 139,
    "r_ms_tier": "A"
