@@ -36,6 +36,9 @@ jobs:
       - name: Выгрузить и обновить данные
         run: python .github/scripts/refresh_mafgame.py
 
+      - name: Пересчитать силу состава (составы календаря меняются каждую ночь)
+        run: python .github/scripts/refresh_mafiastats.py --strength-only
+
       - name: Проверить, что датасет цел
         run: |
           python - <<'PY'
@@ -64,9 +67,10 @@ jobs:
             if [ $i -gt 1 ]; then
               git fetch origin main && git reset --hard origin/main
               python .github/scripts/refresh_mafgame.py || exit 1
+              python .github/scripts/refresh_mafiastats.py --strength-only || exit 1
             fi
             if git diff --quiet; then echo "изменений нет — коммит не нужен"; exit 0; fi
-            git add calendar.html data/season.js data/meta.js sw.js
+            git add calendar.html data/season.js data/meta.js sw.js data/strength.json data/strength.js data/tournaments.js
             git commit -m "данные mafgame: автообновление $(date +%d.%m.%Y)"
             if git push origin HEAD:main; then echo "обновление выкачено (попытка $i)"; exit 0; fi
             echo "push отклонён — main ушёл вперёд, пересчитываю на свежем"; sleep 5

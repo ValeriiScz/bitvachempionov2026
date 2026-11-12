@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_mafiastats · v1.8 · 2026-11-12 (сила турнира = очки L3/S2/A1, при равенстве — число C и выше) · v1.7 · 2026-11-12 (архив заморожен: составы завершённых турниров не обновляются, MMR на дату снимка; сила турнира strength — 5 уровней к турнирам сайта за 6 полных месяцев) · v1.6.1 · 2026-11-12 (mmrTop — топ-10 состава по MMR для кружков на плашке) · v1.5 · 2026-11-12 (распределение по тирам MMR mmrTiers на карточках незавершённых турниров) · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
+refresh_mafiastats · v1.9 · 2026-11-12 (сила состава для всех рейтинговых турниров и серий календаря за 6 мес.: две группы, поправка на размер — шанс эталона A, data/strength.json/.js) · v1.8 · 2026-11-12 (сила турнира = очки L3/S2/A1, при равенстве — число C и выше) · v1.7 · 2026-11-12 (архив заморожен: составы завершённых турниров не обновляются, MMR на дату снимка; сила турнира strength — 5 уровней к турнирам сайта за 6 полных месяцев) · v1.6.1 · 2026-11-12 (mmrTop — топ-10 состава по MMR для кружков на плашке) · v1.5 · 2026-11-12 (распределение по тирам MMR mmrTiers на карточках незавершённых турниров) · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
 Назначение: подтянуть единый рейтинг MMR с mafiastats.com (открытый API, без ключей)
 для игроков сайта DOVOD — без участия человека. Запускается GitHub Actions
 (.github/workflows/refresh-mafiastats.yml).
@@ -80,6 +80,11 @@ def wanted_ids():
             continue
         for p in d.get('players') or []:
             if p.get('uid'): ids[str(p['uid'])] = p.get('nick')
+    # v1.9: игроки всех рейтинговых турниров и серий календаря за окно силы состава
+    wa = window(datetime.date.today())[0].isoformat()
+    for t in calendar_list():
+        if t.get('start', '') >= wa and (t.get('kind') == 'serial' or (t.get('stars') or 0) >= 1):
+            for r in t.get('regs') or []: ids.setdefault(str(r[0]), r[1] if len(r) > 1 else None)
     n_part = len(ids)
     page, last = 1, 1
     while page <= last:
@@ -259,62 +264,121 @@ def update_cards():
     log('карточки турниров: ср. MMR обновлён у %d' % n)
     return n
 
-# ── 8) сила турнира (v1.7, 12.11.2026) ──────────────────────────────────────
-# Метрика (v1.8) — очки состава L·3 + S·2 + A·1 по тирам MMR, при равенстве — число игроков C и выше. Сравнение — с турнирами сайта
-# за 6 полных календарных месяцев до текущего месяца и сыгранные в текущем + все незавершённые (мин. 5 турниров в сравнении). Пять уровней по доле турниров ниже:
+# ── 8) сила состава (v1.9, 12.11.2026) ─────────────────────────────────────
+# Для ВСЕХ турниров календаря за окно (6 полных месяцев до текущего + текущий + будущие), без онлайна/отмен/командных.
+# Две группы, сравниваются только внутри себя: «рейтинговые» (со звёздами, включая финалы серийников) и «серии».
+# Метрика с поправкой на размер: в состав мысленно добавляем эталонного игрока тира A (MMR 1700) и по откалиброванной
+# модели MMR (Plackett–Luce, beta и miss из data/research/mmr_tiers.json) считаем его шанс дойти до цели:
+# состав ≤12 — подиум (топ-3), больше — финал (топ-10). Коэффициент = шанс / шанс при равных (K/(N+1)).
+# Меньше коэффициент — жёстче состав. Пять уровней по доле турниров группы, у которых коэффициент выше:
 # <20% мягкий · <40% ниже среднего · <60% средний · <80% выше среднего · иначе экстремальный.
-# У завершённых сила заморожена (поле strength остаётся как было при закрытии).
+# Очки L3/S2/A1 и C+ — только в подсказке. Прошедшие турниры замораживаются (data/strength.json, frozen).
+# Составы: у турниров сайта — data/participants_{id}.json (архив — MMR на дату снимка), у остальных — заявки из календаря + текущий MMR.
 LEVELS = [(0.2, 'мягкий'), (0.4, 'ниже среднего'), (0.6, 'средний'), (0.8, 'выше среднего'), (9, 'экстремальный')]
 MONTHS = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек']
-
 PTS = {'L': 3, 'S': 2, 'A': 1}
-
-def top10(tid):
-    """v1.8: сила состава = очки L·3 + S·2 + A·1 (по тирам MMR), при равенстве — число игроков C и выше.
-    Возвращает кортеж (очки, C+) или None, если в составе меньше 5 игроков с MMR."""
-    try: d = json.load(io.open(os.path.join(BASE, 'data', 'participants_%s.json' % tid), encoding='utf-8'))
-    except Exception: return None
-    P = d.get('players') or []
-    if sum(1 for p in P if p.get('r_ms_mmr') is not None) < 5: return None
-    pts = sum(PTS.get(p.get('r_ms_tier'), 0) for p in P)
-    cp = sum(1 for p in P if p.get('r_ms_tier') in ('L', 'S', 'A', 'B', 'C'))
-    return (pts, cp)
+REF_MMR = 1700
+SPATH = os.path.join(BASE, 'data', 'strength.json')
 
 def window(today):
     y, m = today.year, today.month
     a_y, a_m = (y, m - 6) if m > 6 else (y - 1, m + 6)
-    return datetime.date(a_y, a_m, 1), today, '%s %d – сейчас' % (MONTHS[a_m - 1], a_y)
+    return datetime.date(a_y, a_m, 1), '%s %d – сейчас' % (MONTHS[a_m - 1], a_y)
 
-def strength(today=None, only=None):
-    path = os.path.join(BASE, 'data', 'tournaments.js')
-    s = io.open(path, encoding='utf-8').read()
-    cards = []
-    for tid in re.findall(r'\{\s*"id":\s*"(\d+)"', s):
-        m = re.search(r'\{\s*"id":\s*"%s"' % tid, s); b = s.find('\n  }', m.start()); blk = s[m.start():b]
-        st = re.search(r'"start":\s*"([\d-]+)"', blk)
-        cards.append({'id': tid, 'fin': '"status": "finished"' in blk, 'start': st.group(1) if st else None, 'has': '"strength"' in blk, 'v': top10(tid)})
+def calendar_list():
+    try:
+        s = io.open(os.path.join(BASE, 'calendar.html'), encoding='utf-8').read()
+        return json.loads(re.search(r'const D=(\{.*?\});\s*\n', s, re.S).group(1))['tournaments']
+    except Exception as e:
+        log('календарь не прочитан: %s' % e); return []
+
+def calib():
+    try: c = json.load(io.open(os.path.join(BASE, 'data', 'research', 'mmr_tiers.json'), encoding='utf-8'))
+    except Exception: c = {}
+    return float(c.get('beta', 0.3012)), float(c.get('miss', 1350.0)), {k: int(v) for k, v in (c.get('thresholds') or {}).items()}
+
+def ref_chance(mmrs, K, beta):
+    """Шанс эталона (REF_MMR) занять место < K среди соперников mmrs. Gumbel-модель (= Plackett–Luce), интеграл по шуму эталона."""
+    import math
+    r = beta * REF_MMR / 100.0; S = [beta * m / 100.0 for m in mmrs]
+    tot = 0.0; step = 0.05; x = -4.0
+    while x < 9.0:
+        w = math.exp(-(x + math.exp(-x))) * step; g = r + x
+        dp = [1.0] + [0.0] * K           # распределение числа соперников выше (обрезано на K)
+        for si in S:
+            q = 1.0 - math.exp(-math.exp(si - g))   # P(соперник выше эталона)
+            for j in range(K, 0, -1): dp[j] = dp[j] * (1 - q) + dp[j - 1] * q
+            dp[0] *= (1 - q)
+        tot += w * sum(dp[:K]); x += step
+    return tot
+
+def strength(today=None, only=None, reset=False):
     today = today or datetime.date.today()
-    def rate(c, pool, label):
-        vals = [x['v'] for x in pool if x['v'] is not None]
-        below = sum(1 for v in vals if v < c['v']); share = below / (len(vals) - 1)
-        rank = 1 + sum(1 for v in vals if v > c['v'])
-        lvl = next(n for t, n in LEVELS if share < t)
-        return {'lvl': lvl, 'rank': rank, 'of': len(vals), 'pts': c['v'][0], 'cplus': c['v'][1], 'win': label}
-    a, b, label = window(today)
-    # окно: 6 полных месяцев до текущего + уже сыгранные в текущем месяце; плюс все незавершённые
-    pool = [x for x in cards if x['v'] is not None and ((x['fin'] and x['start'] and x['start'] >= a.isoformat()) or not x['fin'])]
-    n = 0
-    for c in cards:
-        if c['v'] is None or (only and c['id'] not in only): continue
-        if c['fin'] and c['has']: continue          # заморожено при закрытии
-        if c not in pool or len(pool) < 5: continue  # архив вне окна не размечаем; мало турниров — не размечаем
-        r = json.dumps(rate(c, pool, label), ensure_ascii=False)
-        m = re.search(r'\{\s*"id":\s*"%s"' % c['id'], s); a0 = m.start(); b0 = s.find('\n  }', a0); blk = s[a0:b0]
-        nb = re.sub(r'"strength":\s*\{[^}]*\}', lambda _: '"strength": ' + r, blk) if '"strength"' in blk else blk + ',\n    "strength": ' + r
+    beta, miss, th = calib()
+    def tier(v):
+        if v is None: return None
+        for k in 'LSABCDE':
+            if k in th and v >= th[k]: return k
+        return 'F'
+    try: mm = json.load(io.open(OUT, encoding='utf-8'))['players']
+    except Exception: mm = {}
+    try: old = {} if reset else json.load(io.open(SPATH, encoding='utf-8')).get('t', {})
+    except Exception: old = {}
+    a, label = window(today); a = a.isoformat(); tday = today.isoformat()
+    T = {}
+    for t in calendar_list():
+        if t.get('start', '') < a or t.get('cancelled') or t.get('online') or t.get('kind') == 'teams': continue
+        grp = 'series' if t.get('kind') == 'serial' else ('rated' if (t.get('stars') or 0) >= 1 else None)
+        if not grp: continue
+        mm_list = []
+        for r in t.get('regs') or []:
+            v = (mm.get(str(r[0])) or {}).get('mmr'); mm_list.append(v)
+        end = (datetime.date.fromisoformat(t['start']) + datetime.timedelta(days=max(1, min(int(t.get('days') or 1), 7)) - 1)).isoformat()
+        T[str(t['id'])] = {'grp': grp, 'start': t['start'], 'end': end, 'mmr': mm_list, 'exp': int(t.get('exp') or 0)}
+    # составы сайта точнее (архив — снимок на дату)
+    for f in glob.glob(os.path.join(BASE, 'data', 'participants_*.json')):
+        tid = re.sub(r'\D', '', os.path.basename(f))
+        if tid not in T: continue
+        try: d = json.load(io.open(f, encoding='utf-8'))
+        except Exception: continue
+        T[tid]['mmr'] = [p.get('r_ms_mmr') for p in d.get('players') or []]
+    vals = {}
+    for tid, x in T.items():
+        if tid in old and old[tid].get('frozen'):
+            vals[tid] = old[tid]; continue
+        mmr = x['mmr']; known = [v for v in mmr if v is not None]
+        if len(mmr) < 5 or len(known) < 5: continue
+        if x['start'] > tday and x['exp'] and len(mmr) < 0.6 * x['exp']: continue   # состав ещё собирается (<60% ожидаемого)
+        full = [v if v is not None else miss for v in mmr]
+        N = len(full); K = 3 if N <= 12 else 10
+        ch = ref_chance(full, K, beta); eq = K / (N + 1.0)
+        tc = [tier(v) for v in known]
+        vals[tid] = {'grp': x['grp'], 'n': N, 'goal': 'подиум' if K == 3 else 'финал', 'ch': round(ch * 100, 1), 'eq': round(eq * 100, 1),
+                     'k': round(ch / eq, 3), 'pts': sum(PTS.get(z, 0) for z in tc), 'cplus': sum(1 for z in tc if z in 'LSABC'),
+                     'start': x['start'], 'end': x['end'], 'frozen': x['end'] < tday}
+    out = {}
+    for grp, gname in (('rated', 'рейтинговых турниров'), ('series', 'серий')):
+        pool = {k: v for k, v in vals.items() if v['grp'] == grp}
+        ks = [v['k'] for v in pool.values()]
+        for tid, v in pool.items():
+            if len(ks) < 5: continue
+            weaker = sum(1 for z in ks if z > v['k']); share = weaker / (len(ks) - 1)
+            v = dict(v, lvl=next(n for t_, n in LEVELS if share < t_), rank=1 + sum(1 for z in ks if z < v['k']), of=len(ks), win='%s, %s' % (gname, label))
+            out[tid] = v
+    io.open(SPATH, 'w', encoding='utf-8').write(json.dumps({'snap': tday, 'ref_mmr': REF_MMR, 'beta': beta, 't': out}, ensure_ascii=False, separators=(',', ':')) + '\n')
+    io.open(os.path.join(BASE, 'data', 'strength.js'), 'w', encoding='utf-8').write('/* сила состава — генерирует refresh_mafiastats.py; не править руками */\nwindow.DV_STRENGTH=' + json.dumps({k: {f: v[f] for f in ('lvl', 'rank', 'of', 'win', 'grp', 'goal', 'ch', 'eq', 'pts', 'cplus')} for k, v in out.items()}, ensure_ascii=False, separators=(',', ':')) + ';\n')
+    # карточки сайта
+    path = os.path.join(BASE, 'data', 'tournaments.js'); s = io.open(path, encoding='utf-8').read(); n = 0
+    for tid in re.findall(r'\{\s*"id":\s*"(\d+)"', s):
+        m = re.search(r'\{\s*"id":\s*"%s"' % tid, s); a0 = m.start(); b0 = s.find('\n  }', a0); blk = s[a0:b0]
+        v = out.get(tid)
+        if v: r = json.dumps({f: v[f] for f in ('lvl', 'rank', 'of', 'win', 'grp', 'goal', 'ch', 'eq', 'pts', 'cplus')}, ensure_ascii=False)
+        nb = re.sub(r',\n    "strength":\s*\{[^}]*\}', '', blk)
+        if v: nb = nb + ',\n    "strength": ' + r
         if nb != blk: s = s[:a0] + nb + s[b0:]; n += 1
     if n: io.open(path, 'w', encoding='utf-8').write(s)
-    log('сила турнира: обновлено карточек %d' % n)
-    return n
+    log('сила состава: размечено %d (рейтинговых %d, серий %d), карточек сайта %d' % (len(out), sum(1 for v in out.values() if v['grp'] == 'rated'), sum(1 for v in out.values() if v['grp'] == 'series'), n))
+    return n + 1
 
 def main():
     FIN.update(finished_ids())
@@ -358,7 +422,7 @@ if __name__ == '__main__':
     FIN.update(finished_ids())
     if '--strength-reset' in sys.argv:   # смена метрики: пересчитать и архивные (разово), затем снова заморожены
         pth = os.path.join(BASE, 'data', 'tournaments.js'); t = io.open(pth, encoding='utf-8').read()
-        io.open(pth, 'w', encoding='utf-8').write(re.sub(r',\n    "strength": \{[^}]*\}', '', t)); strength()
+        strength(reset=True)
     elif '--strength-only' in sys.argv:
         update_cards(); strength()
     elif '--tiers-only' in sys.argv:

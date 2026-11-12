@@ -1,6 +1,6 @@
-/* DOVOD · assets/strength.js · v1.0 · 2026-11-12
-   Значок «сила состава»: 5 столбиков (как сигнал связи) + слово. Данные — поле strength карточки в data/tournaments.js
-   (считает робот refresh_mafiastats). Используется на «Турниры», «Календарь», главной. */
+/* DOVOD · assets/strength.js · v1.1 · 2026-11-12 (данные — data/strength.js: все рейтинговые турниры и серии календаря; подсказка — шанс эталона A) · v1.0 · 2026-11-12
+   Значок «сила состава»: 5 столбиков (как сигнал связи) + слово. Считает робот refresh_mafiastats (две группы: рейтинговые и серии,
+   поправка на размер — шанс игрока уровня A, MMR 1700, дойти до финала/подиума против шанса при равных). Используется на «Турниры», «Календарь», главной. */
 (function(){
   var L=['мягкий','ниже среднего','средний','выше среднего','экстремальный'];
   var C={'мягкий':'#5ec8c0','ниже среднего':'#7aa7d6','средний':'#b9c0cc','выше среднего':'#f0a64a','экстремальный':'#ff5a5a'};
@@ -12,9 +12,11 @@
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   window.DVS={
     html:function(x,mini){if(!x||!x.lvl)return '';var k=L.indexOf(x.lvl)+1;if(!k)return '';
-      var tip='Сила состава: '+x.lvl+' — '+x.rank+'-й из '+x.of+' турниров сайта ('+x.win+')'+(x.pts!=null?' · очки '+x.pts+' (L=3, S=2, A=1) · C и выше: '+x.cplus:'');
+      var tip='Сила состава: '+x.lvl+' — '+x.rank+'-й из '+x.of+' ('+x.win+')'+
+        (x.ch!=null?'. Шанс игрока уровня A пройти в '+(x.goal==='подиум'?'тройку':'финал')+': '+Math.round(x.ch)+'% (если бы все были равны — '+Math.round(x.eq)+'%)':'')+
+        (x.pts!=null?'. Очки состава '+x.pts+' (L=3, S=2, A=1), C и выше: '+x.cplus:'');
       return mini?'<span class="dvs mini" style="--dvs:'+C[x.lvl]+'" title="'+esc(tip)+'">'+bars(k)+'</span>'
                  :'<span class="dvs" style="--dvs:'+C[x.lvl]+'" title="'+esc(tip)+'">'+bars(k)+'<span class="lb">сила состава:</span>'+esc(x.lvl)+'</span>';},
-    byId:function(id){var T=(window.TOURNAMENTS_DB&&window.TOURNAMENTS_DB.tournaments)||[];for(var i=0;i<T.length;i++)if(String(T[i].id)===String(id))return T[i].strength||null;return null;}
+    byId:function(id){var S=window.DV_STRENGTH;if(S&&S[String(id)])return S[String(id)];var T=(window.TOURNAMENTS_DB&&window.TOURNAMENTS_DB.tournaments)||[];for(var i=0;i<T.length;i++)if(String(T[i].id)===String(id))return T[i].strength||null;return null;}
   };
 })();
