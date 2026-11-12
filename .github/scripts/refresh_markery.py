@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_markery · v1.0.1 · 2026-11-12 (диагностика ответа markery в аннотациях Actions) · v1.0 · 2026-11-12
+refresh_markery · v1.0.2 · 2026-11-12 (ответ markery бывает JSON-в-строке — распаковка) · v1.0.1 · 2026-11-12 (диагностика ответа markery в аннотациях Actions) · v1.0 · 2026-11-12
 Назначение: свежий ELO markery.online (справочно, опора сайта — MMR) для составов
 незавершённых турниров DOVOD — без участия человека. Запускается GitHub Actions
 (.github/workflows/refresh-markery.yml), 2 раза в неделю и при новом составе.
@@ -43,7 +43,9 @@ def page(skip, count=1000, tries=3):
         try:
             req = urllib.request.Request(URL, data=body, method='POST', headers={'User-Agent': UA, 'Content-Type': 'application/json', 'Accept': 'application/json', 'Origin': 'https://markery.online', 'Referer': 'https://markery.online/eloRating'})
             with urllib.request.urlopen(req, timeout=60) as r: raw = r.read().decode('utf-8', 'replace'); st = r.status
-            try: a = json.loads(raw)
+            try:
+                a = json.loads(raw)
+                if isinstance(a, str): a = json.loads(a)   # с серверов markery отдаёт JSON, упакованный в строку
             except Exception: a = None
             if isinstance(a, list): return a
             print('::warning::markery skip=%d: HTTP %s, не список: %s' % (skip, st, raw[:300].replace('\n', ' ')), flush=True)
