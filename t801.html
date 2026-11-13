@@ -1862,7 +1862,7 @@ function computeStrength(){
   const names=Object.keys(D.LUCK);const tot=names.reduce((a,n)=>a+eloOf(n),0);
   const ptsOf=n=>TW[tierOf(n)]||0;const totP=names.reduce((a,n)=>a+ptsOf(n),0);
   names.forEach(n=>{const L=D.LUCK[n];L.pts=L.list.reduce((s,x)=>s+x.op,0);L.exp=(totP-ptsOf(n))/Math.max(1,names.length-1)*(K-1)*L.n;L.d=L.pts-L.exp;L.pct=L.exp?L.d/L.exp*100:0;L.sig=D.opSd*Math.sqrt(Math.max(1,L.n));L.z=L.d/L.sig;
-    const tc={};L.list.forEach(x=>x.opp.forEach(m=>{const t=tierOf(m);if(t&&D.STRONG.includes(t))tc[t]=(tc[t]||0)+1;}));L.tc=tc;L.comp=D.STRONG.split('').filter(t=>tc[t]).map(t=>t+'×'+tc[t]).join(' · ')||'без сильных';});
+    const tc={};L.list.forEach(x=>x.opp.forEach(m=>{const t=tierOf(m);if(t&&D.STRONG.includes(t))tc[t]=(tc[t]||0)+1;}));L.tc=tc;L.comp=D.STRONG.split('').filter(t=>tc[t]).map(t=>t+'×'+tc[t]).join(' · ')||'—';});
   const order=names.slice().sort((a,b)=>D.LUCK[b].d-D.LUCK[a].d);order.forEach((n,i)=>D.LUCK[n].rank=i+1);D.luckOrder=order;
   D.catRange=[null,1,2,3,4,5].map(c=>{if(!c)return null;const v=tabs.filter(x=>x.cat===c).map(x=>x.pts);return v.length?{min:Math.min(...v),max:Math.max(...v),n:v.length}:null;});
 }
@@ -1871,7 +1871,7 @@ function catBadge(g,t,withElo){const T=D.TS&&D.TS[g+'-'+t];if(!T)return '';const
 function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const RK={};D.STRONG.split('').forEach((t,i)=>RK[t]=i);
   const top=(o.opp||[]).map(m=>({m,t:(D.RATE[m]&&D.RATE[m].tier)||''})).filter(x=>x.t in RK).sort((a,b)=>RK[a.t]-RK[b.t]);
   /* v2.1 (31.10): фото сильных соперников внахлёст, обводка — цвет тира; без фото — буква тира */
-  const pills=top.length?top.map(x=>{const av=avOf(x.m);return av?`<img class="oav f-${x.t}" src="${esc(av)}" alt="${esc(x.m)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'tpill tp-${x.t} opt',textContent:'${x.t}'}))">`:`<span class="tpill tp-${x.t} opt">${x.t}</span>`;}).join(''):'<span class="na">без сильных</span>';
+  const pills=top.length?top.map(x=>{const av=avOf(x.m);return av?`<img class="oav f-${x.t}" src="${esc(av)}" alt="${esc(x.m)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'tpill tp-${x.t} opt',textContent:'${x.t}'}))">`:`<span class="tpill tp-${x.t} opt">${x.t}</span>`;}).join(''):'<span class="na" title="топ-игроков за столом нет">—</span>';
   return `<span class="pk oppt" data-g="${g}" data-t="${o.t}" data-p="${esc(nick)}" title="сильные соперники: ${esc(top.map(x=>x.m+' ('+x.t+')').join(', ')||'нет')} · средний ELO соперников ${Math.round(o.avg)}">${pills}</span>`;}
 function luckVerdict(L){const p=Math.round(L.pct);const z=L.z||0;const ps=(p>0?'+':'')+p+'%';
   if(z>=2)return {t:'самый тяжёлый путь',s:`сильных соперников на ${ps} больше среднего — один из самых трудных путей турнира`,k:'k1'};
@@ -1879,7 +1879,7 @@ function luckVerdict(L){const p=Math.round(L.pct);const z=L.z||0;const ps=(p>0?'
   if(z<=-2)return {t:'самый лёгкий путь',s:`сильных соперников на ${Math.abs(p)}% меньше среднего — один из самых спокойных путей`,k:'k5'};
   if(z<=-1)return {t:'путь полегче',s:`сильных соперников на ${Math.abs(p)}% меньше среднего`,k:'k4'};
   return {t:'обычный путь',s:`сильных соперников примерно как у всех (${ps})`,k:'k3'};}
-function luckSquares(L,big){return `<span class="lsq${big?' big':''}">`+L.list.map(x=>`<i class="pk ${CATO[x.cat].k}" data-g="${x.g}" data-t="${x.t}" data-p="${esc(x.n)}" title="игра ${x.g} · стол ${ROMAN[x.t]} · соперники: ${fp(x.op)} очк. (${esc(x.opp.filter(m=>D.RATE[m]&&D.STRONG.includes(D.RATE[m].tier||'-')).join(', ')||'без сильных')})"><b>${big?x.g:''}</b></i>`).join('')+'</span>';}
+function luckSquares(L,big){return `<span class="lsq${big?' big':''}">`+L.list.map(x=>`<i class="pk ${CATO[x.cat].k}" data-g="${x.g}" data-t="${x.t}" data-p="${esc(x.n)}" title="игра ${x.g} · стол ${ROMAN[x.t]} · соперники: ${fp(x.op)} очк. (${esc(x.opp.filter(m=>D.RATE[m]&&D.STRONG.includes(D.RATE[m].tier||'-')).join(', ')||'—')})"><b>${big?x.g:''}</b></i>`).join('')+'</span>';}
 function luckPanel(name){const L=D.LUCK&&D.LUCK[name];if(!L)return '';const v=luckVerdict(L);
   return `<div class="panel"><h3>Ваш путь · кто напротив</h3>
     <div class="luckhead"><span class="kb big ${v.k}">${v.t}</span><span class="jbig">${L.comp}<small> сильных соперников за ${L.n} игр · #${L.rank} из ${D.luckOrder.length} по тяжести пути</small></span></div>
