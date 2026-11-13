@@ -219,6 +219,7 @@ body{
 .lt .bt a{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;font:800 14px/1 Inter,system-ui,sans-serif;text-decoration:none;border-radius:999px}
 .lt .bt .w{background:#f5ff35;color:#05060a;box-shadow:0 8px 26px rgba(245,255,53,.18)}
 .lt .bt .p{border:1px solid rgba(38,224,255,.5);color:#26e0ff}
+.lt .bt .m{border:1px solid rgba(249,214,39,.5);color:#f9d627;background:rgba(249,214,39,.06)}.lt .bt .m img{width:15px;height:15px}
 .lt .bt .s{border:1px solid rgba(193,75,189,.55);color:#e7a6e3;background:rgba(193,75,189,.08);font-size:13px}
 .lt .nx{border-top:1px solid rgba(255,255,255,.08);padding:10px 18px 14px;font-size:12.5px;color:#a4adbd;display:flex;flex-wrap:wrap;gap:6px 16px}
 .lt .nx a{color:#eef3fb;text-decoration:none;font-weight:700}.lt .nx a:hover{color:#26e0ff}
@@ -231,6 +232,8 @@ body{
 .lt .nxg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
 .lt .nxc{display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.10);background:rgba(5,6,10,.55);text-decoration:none;color:#eef3fb;transition:border-color .15s}
 .lt .nxc:hover{border-color:rgba(38,224,255,.55)}
+.lt .nxa{display:flex;flex-direction:column;flex:1;text-decoration:none;color:inherit}
+.lt .nx a.nxr{display:flex;align-items:center;gap:7px;min-height:38px;padding:0 11px;border-top:1px solid rgba(255,255,255,.08);font:700 12px/1 Inter,system-ui,sans-serif;color:#f9d627}.lt .nx a.nxr:hover{color:#fff3a6;background:rgba(249,214,39,.06)}.lt .nxr img{width:14px;height:14px}.lt .nx a.nxr{white-space:nowrap}@media (max-width:899px){.lt .nxr .hm{display:none}}.lt .nxr s{margin-left:auto;text-decoration:none;opacity:.7}
 .lt .nxi{display:block;aspect-ratio:16/9;background:#0b0d14 center/cover no-repeat}
 .lt .nxe{display:grid;place-items:center;font:900 15px/1.1 var(--disp);text-transform:uppercase;color:#f5ff35;padding:10px;text-align:center}
 .lt .nxt{padding:9px 11px 11px}.lt .nxt b{display:block;font-size:13px;font-weight:800;line-height:1.25}.lt .nxt small{display:block;margin-top:4px;font:600 10.5px/1.3 var(--mono);color:#a4adbd;letter-spacing:.04em}
@@ -493,8 +496,8 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
   var R=['','I','II','III','IV','V','VI'];
   var t=act[0], live=t&&t.liveFrom&&today>=t.liveFrom&&today<=(t.liveTo||t.liveFrom);
   var nx=nxt.length?'<div class="nx"><div class="nxh"><span>Дальше · три недели</span><a href="tournaments.html">все турниры →</a></div><div class="nxg">'+nxt.map(function(x){var img=x.thumb||x.art;
-      return '<a class="nxc" href="'+(x.page||('participants.html?t='+x.id))+'">'+(img?'<span class="nxi" style="background-image:url(\''+esc(img)+'\')"></span>':'<span class="nxi nxe">'+esc(String(x.posterTitle||x.name).replace('|',' '))+'</span>')+
-        '<span class="nxt"><b>'+esc(x.name)+'</b><small>'+esc(String(x.dates).replace(/\s*\d{4}$/,''))+' · '+esc(x.city)+(x.stars?' · '+'★'.repeat(x.stars):'')+(x.status==='gathering'?' · собирается':'')+'</small></span></a>';}).join('')+'</div></div>':'';
+      return '<div class="nxc"><a class="nxa" href="'+(x.page||('participants.html?t='+x.id))+'">'+(img?'<span class="nxi" style="background-image:url(\''+esc(img)+'\')"></span>':'<span class="nxi nxe">'+esc(String(x.posterTitle||x.name).replace('|',' '))+'</span>')+
+        '<span class="nxt"><b>'+esc(x.name)+'</b><small>'+esc(String(x.dates).replace(/\s*\d{4}$/,''))+' · '+esc(x.city)+(x.stars?' · '+'★'.repeat(x.stars):'')+(x.status==='gathering'?' · собирается':'')+'</small></span></a><a class="nxr" href="'+esc(x.mafgame||('https://mafgame.org/tournaments/'+x.id+'/view'))+'" target="_blank" rel="noopener" title="записаться, выписаться, проверить заявку"><img src="assets/mafgame-logo.svg" alt="" width="15" height="15">Запись<span class="hm">&nbsp;на mafgame</span><s>↗</s></a></div>';}).join('')+'</div></div>':'';
   if(!t){el.innerHTML='<div class="lth">Ближайшие турниры<s></s></div>'+nx;el.hidden=false;return;}
   var pt=String(t.posterTitle||t.name).split('|');
   var head='<div class="lth">'+(live?'Сейчас на турнире':'Скоро на турнире')+'<s></s>'+(act.length>1?act.length+' турнира':'')+'</div>';
@@ -503,7 +506,7 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
   var nm=esc(t.name).replace(/: (.*)$/,': <b>$1</b>');
   var info='<div>'+st+'<h3>'+nm+'</h3><div class="mt">'+esc(t.dates)+' · '+esc(t.city)+' · '+t.players+' '+(t.players%10>=2&&t.players%10<=4&&(t.players%100<12||t.players%100>14)?'игрока':(t.players%10===1&&t.players%100!==11?'игрок':'игроков'))+(t.prize?' · приз '+esc(t.prize):'')+(t.mmrAvg?' · Ø MMR '+t.mmrAvg:'')+(t.strength&&window.DVS?' '+DVS.html(t.strength):'')+(t.eloAvg?' · Ø ELO '+t.eloAvg:'')+'</div>'+
     (live?'':'<div class="cd" id="ltcd"></div>')+'<div class="pv" id="ltpv"></div>'+
-    '<div class="bt">'+(t.watch?'<a class="w" href="'+t.watch+'">▶ Смотровая — все эфиры</a>':'')+'<a class="p" href="'+t.page+'">Страница турнира →</a>'+(t.studio&&t.watch?'<a class="s" href="'+t.watch+'#studio">🎙 Студия аналитики</a>':'')+'</div></div>';
+    '<div class="bt">'+(t.watch?'<a class="w" href="'+t.watch+'">▶ Смотровая — все эфиры</a>':'')+'<a class="p" href="'+t.page+'">Страница турнира →</a>'+'<a class="m" href="'+esc(t.mafgame||('https://mafgame.org/tournaments/'+t.id+'/view'))+'" target="_blank" rel="noopener" title="mafgame: запись, выписка, протоколы"><img src="assets/mafgame-logo.svg" alt="" width="15" height="15">'+(live?'mafgame':'Запись на mafgame')+' ↗</a>'+(t.studio&&t.watch?'<a class="s" href="'+t.watch+'#studio">🎙 Студия аналитики</a>':'')+'</div></div>';
   el.innerHTML=head+'<div class="ltb">'+poster+info+'</div>'+nx; el.hidden=false;
   /* обратный отсчёт до старта (время — из tournament_{id}.json start_iso) */
   fetch('data/tournament_'+t.id+'.json').then(function(r){return r.ok?r.json():null;}).then(function(tj){

@@ -79,6 +79,7 @@
   .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border-radius:9px;font:800 12.5px/1 'Inter';text-decoration:none;border:1px solid color-mix(in srgb,var(--acc) 50%,transparent);color:var(--acc);background:color-mix(in srgb,var(--acc) 7%,transparent)}
   .btn.w{background:var(--acc2);color:#05060a;border-color:transparent}
   .btn.g{border-color:var(--line2);color:#cfd5df;background:none}
+  .btn.mg{border-color:rgba(249,214,39,.45);color:#f9d627;background:rgba(249,214,39,.05)}.btn.mg img{width:15px;height:15px}
   .btn:hover{filter:brightness(1.12)}
   .org{font-size:11.5px;color:var(--dim)}
   /* звёзды — вес турнира в рейтинге mafgame */
@@ -249,7 +250,7 @@ function card(t,big){
     <a class="nm" href="${mainHref(t)}">${esc(t.name)}</a>
     <div class="fx">${strChip(t)}<span class="chip"><b>${t.players}</b> игроков</span>${t.mmrAvg!=null?`<span class="chip" title="средний MMR mafiastats.com по ${t.mmrN} игрокам">ср. MMR <b>${t.mmrAvg}</b></span>`:''}${t.prize?`<span class="chip">приз <b>${esc(t.prize)}</b></span>`:''}</div>
     ${t.status!=='finished'?whoBlock(t):''}
-    <div class="btns"><a class="btn pri" href="${mainHref(t)}">Открыть турнир</a>${watchNow?`<a class="btn w" href="${t.watch}">▶ Эфиры</a>`:''}<a class="btn g" href="participants.html?t=${t.id}">Состав</a></div>
+    <div class="btns"><a class="btn pri" href="${mainHref(t)}">Открыть турнир</a>${watchNow?`<a class="btn w" href="${t.watch}">▶ Эфиры</a>`:''}<a class="btn g" href="participants.html?t=${t.id}">Состав</a>${t.status!=='finished'?`<a class="btn mg" href="${esc(t.mafgame||'https://mafgame.org/tournaments/'+t.id+'/view')}" target="_blank" rel="noopener" title="mafgame: записаться, выписаться, проверить заявку"><img src="assets/mafgame-logo.svg" alt="" width="15" height="15">${live?'mafgame':'Запись'} ↗</a>`:''}</div>
   </div></div>`;
 }
 (d=>{

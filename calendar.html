@@ -112,6 +112,9 @@
   .pts-big .p{text-shadow:0 0 14px rgba(182,240,74,.45);}
   /* ЛОББИ */
   .lobby{margin-top:8px;border-top:1px solid var(--line);padding-top:7px;}
+  .mgr{display:flex;margin-top:8px}
+  .mgr a{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:0 13px;border-radius:9px;border:1px solid rgba(249,214,39,.45);background:rgba(249,214,39,.05);color:#f9d627;font:700 12px/1 Inter,system-ui,sans-serif;text-decoration:none;white-space:nowrap}
+  .mgr a:hover{background:rgba(249,214,39,.12)}.mgr img{width:14px;height:14px}
   .lb-head{display:flex;align-items:baseline;gap:8px;margin-bottom:5px;}
   .lb-head .lt{font-size:9px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);}
   .lb-head .cnt{font-family:'Unbounded',system-ui,sans-serif;font-weight:700;font-size:13px;color:var(--ink);}
@@ -639,6 +642,7 @@ function card(t){
       </div>
       <div class="tags">${tags.join('')}</div>
       ${regsBlock(t)}
+      ${t.start>=TODAY&&!t.cancelled&&!t.moved?`<div class="mgr"><a href="https://mafgame.org/tournaments/${t.id}/view" target="_blank" rel="noopener" title="mafgame: записаться, выписаться, проверить заявку"><img src="assets/mafgame-logo.svg" alt="" width="15" height="15">Записаться / выписаться на mafgame ↗</a></div>`:''}
     </div>
     ${pop}
   </div>`;
