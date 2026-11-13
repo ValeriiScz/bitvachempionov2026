@@ -796,6 +796,8 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 <div class="cardviewer" id="cardViewer" role="dialog" aria-modal="true"></div>
 <div class="peekbd" id="peekbd"></div><div class="peek" id="peek" role="dialog"></div>
 <script src="data/streams.js"></script>
+<script src="data/strength.js"></script>
+<script src="assets/strength.js?v=4"></script>
 <script src="assets/streams-tab.js?v=1"></script>
 <script src="data/gsheet.js"></script>
 <script src="data/live.js"></script>
@@ -973,7 +975,7 @@ function renderTop(){
     <div class="info"><div class="kick"><i></i>${CFG.kick}</div><h1>${CFG.h1}</h1>
       <div class="meta">${CFG.dates} · ${CFG.place} · ${D.players.length} игроков · ${CFG.tables} стола</div>
       <div class="chips">
-        <span class="chip">Формат <b>${CFG.fmt}</b></span>
+        ${window.DVS?DVS.html(DVS.byId(CFG.id)):''}<span class="chip">Формат <b>${CFG.fmt}</b></span>
         ${mmrAvg!=null?`<span class="chip">Ср. MMR <b>${mmrAvg}</b> · mafiastats</span>`:''}
         <span class="chip ${started&&!t.closed?'live':''}">${t.closed?'завершён · '+t.games_total+' игр':started?'● идёт · игра '+(D.gp||t.games_played)+'/'+t.games_total:CFG.startLab}</span>
       </div>${started?'':'<div class="cdown" id="cdown"></div>'}</div>`;

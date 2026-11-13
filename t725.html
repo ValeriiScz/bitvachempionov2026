@@ -676,6 +676,8 @@
   .poster.dvposter{background:radial-gradient(420px 260px at 85% 0%,rgba(31,59,143,.55),transparent 70%),radial-gradient(360px 220px at 0% 100%,rgba(255,204,51,.14),transparent 70%),#05060a;border:1px solid rgba(255,204,51,.4);clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px));aspect-ratio:16/9;position:relative;padding:22px;display:flex;align-items:flex-end}
   .dvk{font:800 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#ffcc33;text-transform:uppercase;margin-bottom:10px}
   .topband h1 b{color:#ffcc33}
+  .topband .poster.krug{width:420px;padding:0;align-self:center;aspect-ratio:16/9;margin-left:16px}
+  @media (max-width:1024px){.topband .poster.krug{width:100%;margin:0;align-self:stretch}}
   .dvt{font:900 clamp(22px,4.2vw,34px)/1.02 Unbounded,Inter,sans-serif;color:#eef3fb;text-transform:uppercase;}
   .dvt b{color:#f5ff35;font-weight:900;text-shadow:0 0 18px rgba(245,255,53,.35);}
   .dvposter{position:relative}.dvposter .dvp{position:static} /* v1.4: год — в правом нижнем углу постера, не поверх подписи */
@@ -794,6 +796,8 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 <div class="cardviewer" id="cardViewer" role="dialog" aria-modal="true"></div>
 <div class="peekbd" id="peekbd"></div><div class="peek" id="peek" role="dialog"></div>
 <script src="data/streams.js"></script>
+<script src="data/strength.js"></script>
+<script src="assets/strength.js?v=4"></script>
 <script src="assets/streams-tab.js?v=1"></script>
 <script src="data/gsheet.js"></script>
 <script src="data/live.js"></script>
@@ -961,12 +965,12 @@ function renderTop(){
   const eloAvg=eloVals.length?Math.round(eloVals.reduce((a,b)=>a+b,0)/eloVals.length):null;const mmrVals=D.players.map(p=>num(p.r_ms_mmr)).filter(v=>v!=null);const mmrAvg=mmrVals.length?Math.round(mmrVals.reduce((a,b)=>a+b,0)/mmrVals.length):null;
   const started=(D.gp||t.games_played||0)>0;
   document.getElementById('topband').innerHTML=`
-    <div class="poster dvposter" style="padding:0"><img src="assets/krug725_card.jpg" alt="Круг избранных" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"></div></div>
+    <div class="poster dvposter krug"><img src="assets/krug725_card.jpg" alt="Круг избранных" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"></div></div>
     <div class="info"><div class="kick"><i></i>${CFG.kick}</div><h1>${CFG.h1}</h1>
       <div class="meta">${CFG.dates} · ${CFG.place} · ${D.players.length} игроков · ${CFG.tables} стола</div>
       <div class="chips">
-        <span class="chip">Формат <b>${CFG.fmt}</b></span>
-        <span class="chip">Ср. ELO <b>${eloAvg!=null?eloAvg:'—'}</b> · markery</span>${mmrAvg!=null?`<span class="chip">Ср. MMR <b>${mmrAvg}</b> · mafiastats</span>`:''}
+        ${window.DVS?DVS.html(DVS.byId(CFG.id)):''}<span class="chip">Формат <b>${CFG.fmt}</b></span>
+        ${mmrAvg!=null?`<span class="chip">Ср. MMR <b>${mmrAvg}</b> · mafiastats</span>`:''}<span class="chip" style="opacity:.75">Ср. ELO <b>${eloAvg!=null?eloAvg:'—'}</b> · markery</span>
         <span class="chip ${started&&!t.closed?'live':''}">${t.closed?'завершён · '+t.games_total+' игр':started?'● идёт · игра '+(D.gp||t.games_played)+'/'+t.games_total:CFG.startLab}</span>
       </div><a class="wbig" href="${CFG.watch}"><span class="wi">▶</span><span>Смотровая — все эфиры столов<br><small>три стола в одном окне · следить за игроком</small></span></a><a class="wstu" href="#sched" onclick="show('sched');return false" style="border-color:rgba(38,224,255,.45);color:#7fd8ff;background:rgba(38,224,255,.06);margin-right:6px">⏱ Расписание · план и факт</a>${started?'':'<div class="cdown" id="cdown"></div>'}</div>`;
   if(!started)tick();
