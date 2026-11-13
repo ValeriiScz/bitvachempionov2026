@@ -165,9 +165,9 @@ window.TOURNAMENTS_DB = {
     "eloAvg": 1106,
     "eloN": 29,
     "eloTotal": 34,
-    "mmrAvg": 1551,
-    "mmrN": 29,
-    "mmrTiers": {"L": 3, "S": 4, "A": 4, "B": 4, "C": 5, "D": 7, "E": 2, "-": 5},
+    "mmrAvg": 1549,
+    "mmrN": 30,
+    "mmrTiers": {"L": 3, "S": 4, "A": 4, "B": 4, "C": 6, "D": 7, "E": 2, "-": 5},
     "mmrTop": [["Flame", 2143, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2589/0371b90e7ab581f2eb51a0d438b6b7d23cc20566.png"], ["KEX", 2118, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_44/a6bfae05ca17bcfaa2961020a9b44f5860c2f4fe.png"], ["Tommy", 2041, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_650/a71d5bc0efb9d54508be8de08ad3a4e3d362bf1c.png"], ["Саботаж", 1915, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_68/e5f69d0c89c3ecec9dee013970b56f8219c70d70.png"], ["RAMZES", 1857, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_499/a4d55d9d5fa815a6c00f4e29d18ab1fba282f6fe.png"], ["Tripok", 1850, "S", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_263/4281f453dafa967aa19b4f5e30653e3719a0d317.png"], ["DOVOD", 1826, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/1f30664fe58edefde9864af8e39d1508286597f7.png"], ["ParadoXx", 1777, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png"], ["LogisticPro", 1727, "A", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_201/98c31a1573883b9daa1d7d4790032a6bbffa2ef0.png"], ["Сью", 1722, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1398/269388ba5e06d783f8c16aae7bb0c84505ab9054.png"]],
     "organizer": "UMC · Q-Factory · главный судья Рыба-мÓя",
     "format": "11 отборочных → полуфинал 30 (2 игры) → финал 10 (4 игры)",
@@ -193,7 +193,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-28",
     "accent": "#f2c75c",
     "accent2": "#ae1c28",
-    "strength": {"lvl": "выше среднего", "rank": 14, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 36.8, "eq": 28.6, "pts": 21, "cplus": 20, "proj": false, "reg": 34, "exp": 33, "places": 10}
+    "strength": {"lvl": "выше среднего", "rank": 14, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 35.9, "eq": 27.8, "pts": 21, "cplus": 21, "proj": false, "reg": 35, "exp": 33, "places": 10}
   },
   {
     "id": "726",
@@ -212,9 +212,9 @@ window.TOURNAMENTS_DB = {
     "eloAvg": 1067,
     "eloN": 33,
     "eloTotal": 34,
-    "mmrAvg": 1517,
-    "mmrN": 34,
-    "mmrTiers": {"L": 2, "S": 4, "A": 6, "B": 5, "C": 8, "D": 6, "E": 3},
+    "mmrAvg": 1509,
+    "mmrN": 35,
+    "mmrTiers": {"L": 2, "S": 4, "A": 6, "B": 5, "C": 8, "D": 7, "E": 3},
     "mmrTop": [["Lюц", 2123, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1050/05d587e41edd71e3a3dc89f2b04b75c964af8cfe.png"], ["Gangster", 2054, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2547/eb53900c47fc03a2b681bbcbe62f994021e9f4d8.png"], ["Буржуй", 1941, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_287/3ddee352574f767cc2ee00cb7690d518c58915a2.png"], ["Korolevich", 1895, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_461/58bb4e89d26946125a2acc449c729d44547c1485.png"], ["RAMZES", 1857, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_499/a4d55d9d5fa815a6c00f4e29d18ab1fba282f6fe.png"], ["DOVOD", 1826, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/1f30664fe58edefde9864af8e39d1508286597f7.png"], ["Не Злая", 1779, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_152/5ebb58af65c0e6171372d5a0391a6805c35a8a8b.png"], ["ParadoXx", 1777, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png"], ["LogisticPro", 1727, "A", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_201/98c31a1573883b9daa1d7d4790032a6bbffa2ef0.png"], ["Сью", 1722, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1398/269388ba5e06d783f8c16aae7bb0c84505ab9054.png"]],
     "organizer": "Adrenaline · главный судья YeS",
     "page": "participants.html?t=726",
@@ -235,7 +235,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-12-05",
     "accent": "#2bb39a",
     "accent2": "#0c5c56",
-    "strength": {"lvl": "выше среднего", "rank": 13, "of": 44, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 29.2, "eq": 22.9, "pts": 20, "cplus": 25, "proj": true, "reg": 34, "exp": 40, "places": 8}
+    "strength": {"lvl": "выше среднего", "rank": 16, "of": 44, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 32.8, "eq": 25.0, "pts": 20, "cplus": 25, "proj": true, "reg": 35, "exp": 40, "places": 9}
   },
   {
     "id": "725",
@@ -256,75 +256,8 @@ window.TOURNAMENTS_DB = {
     "eloTotal": 20,
     "mmrAvg": 1482,
     "mmrN": 19,
-    "mmrTiers": {
-      "S": 2,
-      "A": 1,
-      "B": 3,
-      "C": 8,
-      "D": 5
-    },
-    "mmrTop": [
-      [
-        "Білий",
-        1909,
-        "S",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_21/3aef373a6b5b3d37237f963dd9006ebbaa583b04.png"
-      ],
-      [
-        "Bard",
-        1887,
-        "S",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1031/1fa426591383a408e84f609803cd3197c731dade.png"
-      ],
-      [
-        "Магнат",
-        1715,
-        "A",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png"
-      ],
-      [
-        "Гелиус",
-        1640,
-        "B",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1225/6909824e7e8ea37161592e938b3973869e0e5423.png"
-      ],
-      [
-        "Annvie",
-        1596,
-        "B",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2211/f38bc016b9690b3fce1e608211792492a9c7ef7b.png"
-      ],
-      [
-        "Mermaid",
-        1573,
-        "B",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1063/69cfe81d666c583bea5148278d07fb3f07e09aff.png"
-      ],
-      [
-        "Амфибия",
-        1489,
-        "C",
-        "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2942/994ab60d53813eb61dcdf6382a54421a415ac1b3.png"
-      ],
-      [
-        "Динозавр",
-        1454,
-        "C",
-        "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2137/448b5bea0111a717a0c7eb42e508ed5c360efb5d.png"
-      ],
-      [
-        "Dron",
-        1436,
-        "C",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1552/160339851587c86d3b4bac3786f96cf2988c76de.png"
-      ],
-      [
-        "KRASNII",
-        1427,
-        "C",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2337/58436cd9de6a9b8348c93e505db938f4fc267998.png"
-      ]
-    ],
+    "mmrTiers": {"S": 2, "A": 1, "B": 3, "C": 8, "D": 5, "-": 1},
+    "mmrTop": [["Білий", 1909, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_21/3aef373a6b5b3d37237f963dd9006ebbaa583b04.png"], ["Bard", 1887, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1031/1fa426591383a408e84f609803cd3197c731dade.png"], ["Магнат", 1715, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png"], ["Гелиус", 1640, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1225/6909824e7e8ea37161592e938b3973869e0e5423.png"], ["Annvie", 1596, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2211/f38bc016b9690b3fce1e608211792492a9c7ef7b.png"], ["Mermaid", 1573, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1063/69cfe81d666c583bea5148278d07fb3f07e09aff.png"], ["Амфибия", 1489, "C", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2942/994ab60d53813eb61dcdf6382a54421a415ac1b3.png"], ["Динозавр", 1454, "C", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2137/448b5bea0111a717a0c7eb42e508ed5c360efb5d.png"], ["Dron", 1436, "C", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1552/160339851587c86d3b4bac3786f96cf2988c76de.png"], ["KRASNII", 1427, "C", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2337/58436cd9de6a9b8348c93e505db938f4fc267998.png"]],
     "organizer": "клуб mafia.md",
     "page": "participants.html?t=725",
     "mafgame": "https://mafgame.org/tournaments/725/view",
@@ -343,7 +276,8 @@ window.TOURNAMENTS_DB = {
     ],
     "start": "2026-11-14",
     "accent": "#ffcc33",
-    "accent2": "#1f3b8f"
+    "accent2": "#1f3b8f",
+    "strength": {"lvl": "средний", "rank": 20, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 69.9, "eq": 47.6, "pts": 5, "cplus": 14, "proj": false, "reg": 20, "exp": 20, "places": 10}
   },
   {
     "id": "644",

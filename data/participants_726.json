@@ -8,7 +8,7 @@
   "fee": "100.00",
   "stars": 3,
   "expected": 40,
-  "players_confirmed": 34,
+  "players_confirmed": 35,
   "rating_note": "Состав — подтверждённые на mafgame (снимок 12.11: 34 из 40). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку.",
   "ms_snap": "2026-11-12",
   "ms_ladder": {
@@ -20,7 +20,8 @@
    "D": 1125,
    "E": 925
   },
-  "elo_snap": "2026-11-13"
+  "elo_snap": "2026-11-13",
+  "roster_snap": "2026-11-13"
  },
  "players": [
   {
@@ -1244,6 +1245,34 @@
    "r_ms_tier": "A",
    "r_rank": 99,
    "mk_last": "2026-11-06"
+  },
+  {
+   "nick": "qUAest0r",
+   "uid": 704,
+   "real": "Serhii",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_704/cb992e7f4e61248af45ce2b424390cd9c20d1849.png",
+   "status": "confirmed",
+   "club": "Mafia club \"Champions League\" Prague",
+   "cc": "CZ",
+   "country": "Чехия",
+   "flag": "🇨🇿",
+   "markery_id": 11148,
+   "r_elo_cur": 991,
+   "r_tier": "D",
+   "r_elo_ly": null,
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": 35,
+   "mk_match": "id",
+   "elo_snap": "2026-10-15",
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": null,
+   "r_ms_mmr": 1240.1,
+   "r_ms_rank": 689,
+   "r_ms_tier": "D",
+   "added": "2026-11-13"
   }
  ]
 }
