@@ -1,4 +1,4 @@
-/* DOVOD · assets/streams-tab.js · v1.0 · 2026-11-13
+/* DOVOD · assets/streams-tab.js · v1.1 · 2026-11-13 (цвет кнопок и плеера — акцент турнира var(--gold)) · v1.0 · 2026-11-13
    Вкладка «Трансляции» на странице турнира (t*.html): эфир прямо во вкладке, а не голые кнопки.
    · сверху — встроенный плеер YouTube: в дни турнира — текущая игра (день по дате, финал — эфир финала),
      после турнира — записи; переключатель «День · Стол / Финал / Студия»;
@@ -14,16 +14,16 @@
     '.dvst .pl iframe{position:absolute;inset:0;width:100%;height:100%;border:0}'+
     '.dvst .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:18px;'+
     'background:radial-gradient(500px 260px at 50% 0%,rgba(245,255,53,.08),transparent 70%),repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 12px,transparent 12px 24px)}'+
-    '.dvst .ph .pi{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(245,255,53,.12);color:#f5ff35;font-size:24px;border:1px solid rgba(245,255,53,.35)}'+
+    '.dvst .ph .pi{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--gold,#f5ff35) 14%,transparent);color:var(--gold,#f5ff35);font-size:24px;border:1px solid color-mix(in srgb,var(--gold,#f5ff35) 40%,transparent)}'+
     '.dvst .ph b{font:800 16px/1.25 Inter,system-ui,sans-serif;color:#eef3fb}.dvst .ph small{font:500 12.5px/1.45 Inter,system-ui,sans-serif;color:#a4adbd;max-width:420px}'+
-    '.dvst .cd{font:800 22px/1 "JetBrains Mono",monospace;color:#f5ff35;letter-spacing:.04em}'+
+    '.dvst .cd{font:800 22px/1 "JetBrains Mono",monospace;color:var(--gold,#f5ff35);letter-spacing:.04em}'+
     '.dvst .now{display:flex;align-items:center;gap:8px;margin:10px 0 0;font:700 12.5px/1.3 Inter,system-ui,sans-serif;color:#cfd5df}.dvst .now .lv{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;background:rgba(219,81,78,.16);color:#ff8a86;font:800 10.5px/1 "JetBrains Mono",monospace;letter-spacing:.08em}'+
     '.dvst .now .lv i{width:7px;height:7px;border-radius:50%;background:#db514e;animation:dvstp 1.4s infinite}@keyframes dvstp{50%{opacity:.3}}'+
     '.dvst .grp{margin-top:12px}.dvst .gl{font:800 10px/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#79808f;margin:0 0 6px}'+
     '.dvst .chips{display:flex;flex-wrap:wrap;gap:6px}.dvst .ch{min-height:40px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#cfd5df;font:700 13px/1 Inter,system-ui,sans-serif;cursor:pointer}'+
-    '.dvst .ch.on{background:#f5ff35;color:#05060a;border-color:transparent}.dvst .ch.st{border-color:rgba(193,75,189,.55);color:#e7a6e3}.dvst .ch.st.on{background:#c14bbd;color:#fff}'+
+    '.dvst .ch.on{background:var(--gold,#f5ff35);color:#05060a;border-color:transparent}.dvst .ch.st{border-color:rgba(193,75,189,.55);color:#e7a6e3}.dvst .ch.st.on{background:#c14bbd;color:#fff}'+
     '.dvst .acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}'+
-    '.dvst .big{flex:1 1 260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:52px;padding:8px 18px;text-align:center;border-radius:12px;background:#f5ff35;color:#05060a;font:800 14.5px/1.1 Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 8px 26px rgba(245,255,53,.16)}'+
+    '.dvst .big{flex:1 1 260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:52px;padding:8px 18px;text-align:center;border-radius:12px;background:var(--gold,#f5ff35);color:#05060a;font:800 14.5px/1.1 Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 8px 26px color-mix(in srgb,var(--gold,#f5ff35) 18%,transparent)}'+
     '.dvst .big small{font-weight:700;opacity:.7;font-size:11.5px}.dvst .yt{font:700 12.5px/1 Inter,system-ui,sans-serif;color:#a4adbd;text-decoration:none;padding:10px 4px}.dvst .yt:hover{color:#fff}';
   var stl=document.createElement('style');stl.textContent=css;document.head.appendChild(stl);
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
