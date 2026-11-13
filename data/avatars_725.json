@@ -1,0 +1,42 @@
+{
+ "avatars": {
+  "Крутой": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2603/8ffbcbf74c5b9079736e1b4cd6f63b03122cf4ce.png",
+  "Vivа": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2279/e70443df5c25e4172c017a64fed16c90ae141e03.png",
+  "Chudo": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2413/d5092bcb9e1e2dbf2662ed42fedc75f0e7f1946f.png",
+  "Магнат": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png",
+  "Арбуз": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2325/3a39169c996576622d4cef4c29ddf6d8e0f107d7.png",
+  "Stalker": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2219/0bcb784de03e3a9c8a921191ae77b91f274492c1.png",
+  "KRASNII": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2337/58436cd9de6a9b8348c93e505db938f4fc267998.png",
+  "Mosafir": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2370/72fd319793da274c54949226c83c6e9adaea7692.png",
+  "Зима ❄️": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3348/008e164bdb2dc7a072968131cfeb04f50684727c.png",
+  "Док": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2425/b486d9ec8cc1f7e2c843fb48ff1b7aad97acc428.png",
+  "Гелиус": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1225/6909824e7e8ea37161592e938b3973869e0e5423.png",
+  "Амфибия": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2942/994ab60d53813eb61dcdf6382a54421a415ac1b3.png",
+  "Jhin": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3111/0bdc335231fb6518750839801c1b93a3f2430dfb.png",
+  "Bard": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1031/1fa426591383a408e84f609803cd3197c731dade.png",
+  "Dron": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1552/160339851587c86d3b4bac3786f96cf2988c76de.png",
+  "Annvie": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2211/f38bc016b9690b3fce1e608211792492a9c7ef7b.png",
+  "Білий": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_21/3aef373a6b5b3d37237f963dd9006ebbaa583b04.png",
+  "Mermaid": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1063/69cfe81d666c583bea5148278d07fb3f07e09aff.png",
+  "Динозавр": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2137/448b5bea0111a717a0c7eb42e508ed5c360efb5d.png",
+  "Бабушка Хлоя": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2274/8e5d88f55bcc8955e66aae479780e3f6f334ca17.png"
+ },
+ "judges": {},
+ "duty": null,
+ "commentator": null,
+ "referees": [
+  {
+   "name": "Г-жа Кот",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2249/24559f189d42915df543dfc3851b26a01cc60132.png",
+   "main": true
+  },
+  {
+   "name": "Весная",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2241/30ff2d3d73b10ff630dee6fa64dff21e936489d3.png"
+  },
+  {
+   "name": "Shepard",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2387/903d464a11586a815ce31235977808ab916a15af.png"
+  }
+ ]
+}

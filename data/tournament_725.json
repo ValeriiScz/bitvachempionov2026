@@ -1,0 +1,30 @@
+{
+ "tournament_id": "725",
+ "tournament_name": "Круг избранных",
+ "short": "Круг избранных",
+ "date": "2026-11-14 — 2026-11-15",
+ "location": "Кишинёв, Молдова",
+ "club": "mafia.md",
+ "organizer": "клуб mafia.md · главный судья Г-жа Кот",
+ "players_total": 20,
+ "days": 2,
+ "stars": 2,
+ "format": "Регламент mafgame: 20 игроков — 12 игр квалификации на 2 столах (все играют каждую), финал 10 человек (4 игры, ×1.3).",
+ "closed": false,
+ "in_progress": false,
+ "live_from": "2026-11-14",
+ "live_to": "2026-11-15",
+ "upcoming": true,
+ "games_played": 0,
+ "games_total": 16,
+ "final_coef": 1.3,
+ "accent": "#ffcc33",
+ "start_iso": "2026-11-14T10:00:00+01:00",
+ "note": "Рассадка квалификации опубликована на mafgame 13.11. Время старта — ГИПОТЕЗА (10:00 по Праге), на mafgame не указано.",
+ "chief_referee": "Г-жа Кот",
+ "referees": [
+  "Г-жа Кот",
+  "Весная",
+  "Shepard"
+ ]
+}

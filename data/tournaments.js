@@ -1,4 +1,4 @@
-// MafgameStat | tournaments.js | v4.19 | 2026-11-13 | +725 Круг избранных (Кишинёв, 14–15.11, 2★): карточка и состав с mafgame
+// MafgameStat | tournaments.js | v4.19 | 2026-11-13 | +725 Круг избранных (Кишинёв, 14–15.11, 2★): карточка, состав, страница t725 и смотровая watch725 (рассадка с mafgame)
 // MafgameStat | tournaments.js | v4.18 | 2026-11-12 | +726 Prague Cup и +644 Lodz Mafia Open (оба 5–6.12, 3★): карточки и составы с mafgame
 // MafgameStat | tournaments.js | v4.17 | 2026-11-11 | 801: +Саботаж (mafgame 11.11) — 34 подтверждены при ожидаемых 33; ср. ELO/MMR пересчитаны
 // MafgameStat | tournaments.js | v4.16 | 2026-11-11 | 801 Dutch Open: полная страница t801 + watch801 (разделы с рассадкой откроются после её публикации)
@@ -47,6 +47,8 @@ window.TOURNAMENTS_DB = {
     "artRatio": "16 / 9",
     "page": "t664.html",
     "watch": "watch664.html",
+    "liveFrom": "2026-11-14",
+    "liveTo": "2026-11-15",
     "name": "German Mafia Cup Europa Edition 2026 — финал",
     "posterTitle": "German Mafia|Cup",
     "dates": "14–15 ноября 2026",
@@ -250,7 +252,7 @@ window.TOURNAMENTS_DB = {
     "stars": 2,
     "status": "upcoming",
     "phase": 2,
-    "statusLabel": "Скоро · состав собран: 20 из 20",
+    "statusLabel": "Скоро · 20 из 20 · рассадка квалификации опубликована",
     "eloAvg": 1044,
     "eloN": 19,
     "eloTotal": 20,
@@ -259,21 +261,18 @@ window.TOURNAMENTS_DB = {
     "mmrTiers": {"S": 2, "A": 1, "B": 3, "C": 8, "D": 5, "-": 1},
     "mmrTop": [["Білий", 1909, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_21/3aef373a6b5b3d37237f963dd9006ebbaa583b04.png"], ["Bard", 1887, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1031/1fa426591383a408e84f609803cd3197c731dade.png"], ["Магнат", 1715, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png"], ["Гелиус", 1640, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1225/6909824e7e8ea37161592e938b3973869e0e5423.png"], ["Annvie", 1596, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2211/f38bc016b9690b3fce1e608211792492a9c7ef7b.png"], ["Mermaid", 1573, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1063/69cfe81d666c583bea5148278d07fb3f07e09aff.png"], ["Амфибия", 1489, "C", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2942/994ab60d53813eb61dcdf6382a54421a415ac1b3.png"], ["Динозавр", 1454, "C", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2137/448b5bea0111a717a0c7eb42e508ed5c360efb5d.png"], ["Dron", 1436, "C", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1552/160339851587c86d3b4bac3786f96cf2988c76de.png"], ["KRASNII", 1427, "C", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2337/58436cd9de6a9b8348c93e505db938f4fc267998.png"]],
     "organizer": "клуб mafia.md",
-    "page": "participants.html?t=725",
+    "page": "t725.html",
+  "watch": "watch725.html",
+  "liveFrom": "2026-11-14",
+  "liveTo": "2026-11-15",
+  "format": "12 квал × 2 стола (все играют каждую) → финал топ-10 (4 игры, ×1.3)",
     "mafgame": "https://mafgame.org/tournaments/725/view",
     "note": "mafgame: 2★, 20 игроков (все подтверждены на 13.11), клуб-организатор mafia.md, Кишинёв. В те же даты — финал GMC в Кёльне.",
     "sections": [
-      {
-        "href": "participants.html?t=725",
-        "title": "Участники и рейтинг",
-        "desc": "20 из 20 · MMR и ELO markery"
-      },
-      {
-        "soon": true,
-        "title": "Страница турнира",
-        "desc": "рассадка, сила столов, live-результаты"
-      }
-    ],
+    {"href": "t725.html", "title": "Страница турнира", "desc": "рассадка, пересечения, сила столов, live-таблица"},
+    {"href": "watch725.html", "title": "▶ Смотровая · эфиры", "desc": "два стола в одном окне, следить за игроком"},
+    {"href": "participants.html?t=725", "title": "Участники и рейтинг", "desc": "20 из 20 · MMR и ELO markery"}
+  ],
     "start": "2026-11-14",
     "accent": "#ffcc33",
     "accent2": "#1f3b8f",
