@@ -7,7 +7,7 @@
 (function () {
   if (window.__dvShare) return; window.__dvShare = 1;
   // v1.2 (13.11.2026): общий слой интерфейса (нижнее меню на телефоне, читаемость) — assets/dv-ui.js
-  try { var ui = document.createElement('script'); ui.src = '/assets/dv-ui.js?v=1'; ui.defer = true; document.head.appendChild(ui); } catch (e) {}
+  try { var ui = document.createElement('script'); ui.src = '/assets/dv-ui.js?v=2'; ui.defer = true; document.head.appendChild(ui); } catch (e) {}
   // v1.2: окно «установите как приложение» — не на первом визите, а со второго
   try { if (!localStorage.getItem('dv_seen')) { localStorage.setItem('dv_seen', '1'); var K = 'mgs_pwa_promo_hide_until'; if (!(+localStorage.getItem(K) > Date.now())) localStorage.setItem(K, String(Date.now() + 6 * 3600e3));
     var kill = function () { var p = document.getElementById('mgsPwaPromo'); if (p) p.remove(); };

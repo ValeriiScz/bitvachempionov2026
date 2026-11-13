@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- DOVOD · live.html · v1.0 · 2026-11-13 · «Live-центр»: все турниры, которые идут сейчас (и стартуют в ближайшие 3 дня), на одном экране —
+     как live-раздел у букмекеров: сверху один плеер (выбранный турнир и стол), ниже по каждому турниру — текущая игра, столы с эфирами
+     и живая таблица (топ с линией выхода в финал / призов, «мой игрок»). До старта — отсчёт, рассадка первой игры и фавориты по MMR.
+     Данные: data/tournaments.js (какие турниры, у кого есть смотровая t.watch), data/live.js loadGames(id) (результаты с mafgame раз в 20 с),
+     эфиры — тот же источник, что у смотровых (data/streams.js, data/streams_{id}.json, Google-таблица data/gsheet.js),
+     аватары и MMR — data/participants_{id}.json. Отладка: live.html?ids=692,673 — показать прошедшие турниры как будто идут. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Live-центр · DOVOD</title>
+<meta name="description" content="Live-центр DOVOD: все идущие турниры по спортивной мафии — эфиры столов и живые турнирные таблицы на одном экране.">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#05060a;--panel:#0b0d14;--panel2:#11141d;--ink:#eef3fb;--mut:#a4adbd;--dim:#79808f;--line2:rgba(255,255,255,.10);
+    --cyan:#26e0ff;--yel:#f5ff35;--red:#db514e;--lilac:#c14bbd;--disp:'Unbounded',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;}
+  *{box-sizing:border-box}
+  html,body{max-width:100%;overflow-x:hidden}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(900px 500px at 80% -10%,rgba(219,81,78,.08),transparent 60%),radial-gradient(700px 420px at 0% 10%,rgba(38,224,255,.07),transparent 60%),
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px) 0 0/100% 46px,linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) 0 0/46px 100%}
+  .dv-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;margin:0;font:700 10px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;background:#05060a;border-bottom:1px solid var(--line2)}
+  .dv-crumb a{color:#8a91a0;text-decoration:none}.dv-crumb a.dv-home{color:var(--yel);font-weight:800}.dv-crumb i{color:#39404c;font-style:normal}.dv-crumb span{color:#5f6675}
+  .wrap{max-width:1280px;margin:0 auto;padding:22px 16px 90px}
+  .hero{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .kick{display:flex;align-items:center;gap:8px;font:800 10.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#ff8a86;margin-bottom:10px}
+  .kick i{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(219,81,78,.2);animation:pl 1.4s infinite}
+  @keyframes pl{50%{opacity:.35}}
+  h1{margin:0;font:900 clamp(28px,5vw,48px)/.95 var(--disp);text-transform:uppercase;letter-spacing:-.01em}
+  .sub{color:var(--mut);font-size:13.5px;margin-top:8px;max-width:640px}
+  .upd{font:700 11px/1 var(--mono);color:var(--dim);letter-spacing:.06em}
+  /* раскладка: телефон — плеер сверху, ниже лента; компьютер — плеер слева (липкий), лента справа */
+  .lay{display:grid;grid-template-columns:1fr;gap:16px}
+  @media (min-width:1100px){.lay{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}.stage{position:sticky;top:14px}}
+  /* плеер */
+  .stage{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line2);border-radius:14px;overflow:hidden}
+  .scr{position:relative;aspect-ratio:16/9;background:#000}
+  .scr iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:18px;
+    background:radial-gradient(520px 280px at 50% 0%,rgba(245,255,53,.07),transparent 70%),repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 12px,transparent 12px 24px)}
+  .ph .pi{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(245,255,53,.1);color:var(--yel);font-size:22px;border:1px solid rgba(245,255,53,.35)}
+  .ph b{font:800 15.5px/1.3 Inter;color:var(--ink)}.ph small{font:500 12.5px/1.45 Inter;color:var(--mut);max-width:440px}
+  .ph .cd{font:800 26px/1 var(--mono);color:var(--yel)}
+  .sbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 14px;border-top:1px solid var(--line2)}
+  .sbar .t{font:800 13.5px/1.25 Inter;min-width:0}.sbar .t small{display:block;font:600 11.5px/1.3 Inter;color:var(--mut);margin-top:2px}
+  .sbar .sp{flex:1}
+  .lvb{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:999px;background:rgba(219,81,78,.18);color:#ff8a86;font:800 10px/1 var(--mono);letter-spacing:.1em}
+  .lvb i{width:7px;height:7px;border-radius:50%;background:var(--red);animation:pl 1.4s infinite}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 14px;border-radius:10px;font:800 12.5px/1 Inter;text-decoration:none;white-space:nowrap;border:1px solid var(--line2);color:#cfd5df;background:rgba(255,255,255,.03);cursor:pointer}
+  .btn.y{background:var(--yel);color:#05060a;border-color:transparent}
+  .btn.mg{border-color:rgba(249,214,39,.45);color:#f9d627;background:rgba(249,214,39,.05)}.btn.mg img{width:15px;height:15px}
+  .seats{display:flex;flex-wrap:wrap;gap:5px;padding:0 14px 13px}
+  .seat{display:inline-flex;align-items:center;gap:6px;padding:4px 8px 4px 4px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line2);font:600 12px/1 Inter;color:#cfd5df}
+  .seat .n{font:800 10px/1 var(--mono);color:var(--dim);min-width:12px;text-align:center}
+  .seat.me{border-color:var(--yel);color:var(--yel)}
+  /* лента турниров */
+  .feed{display:flex;flex-direction:column;gap:14px;min-width:0}
+  .tb{--acc:var(--cyan);position:relative;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid color-mix(in srgb,var(--acc) 30%,transparent);border-radius:14px;overflow:hidden}
+  .tb::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(var(--acc),transparent)}
+  .tb.sel{box-shadow:0 0 0 1px var(--acc),0 10px 34px rgba(0,0,0,.4)}
+  .th{display:flex;gap:12px;align-items:flex-start;padding:13px 14px 10px 16px}
+  .th .tt{flex:1;min-width:0}
+  .th .k{font:800 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .th .k b{color:var(--acc)}
+  .th h2{margin:5px 0 0;font:800 17px/1.2 Inter}
+  .th h2 a{color:var(--ink);text-decoration:none}.th h2 a:hover{color:var(--acc)}
+  .th .gm{margin-top:5px;font:700 12px/1.3 Inter;color:var(--mut)}
+  .th .gm b{color:var(--ink)}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 12px 16px}
+  .tab{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 13px;border-radius:10px;border:1px solid var(--line2);background:rgba(255,255,255,.03);color:#cfd5df;font:800 12.5px/1 Inter;cursor:pointer}
+  .tab .st{font:700 10px/1 var(--mono);color:var(--dim)}
+  .tab.on{background:var(--acc);color:#05060a;border-color:transparent}.tab.on .st{color:rgba(5,6,10,.65)}
+  .tab.off{opacity:.55}
+  .tab .pv{font-size:10px}
+  .acts{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 12px 16px}
+  /* таблица */
+  .st0{padding:0 14px 14px 16px}
+  .stt{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 6px;font:800 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  .stt a{color:var(--acc);text-decoration:none;letter-spacing:.04em;text-transform:none;font:700 12px/1 Inter}
+  table.lb{width:100%;border-collapse:collapse;font:600 13px/1.2 Inter}
+  .lb td{padding:6px 4px;border-top:1px solid rgba(255,255,255,.06);white-space:nowrap}
+  .lb td.pl{width:26px;font:800 11px/1 var(--mono);color:var(--dim);text-align:center}
+  .lb td.nm{width:100%;max-width:0;overflow:hidden;text-overflow:ellipsis}
+  .lb td.nm .av{display:inline-block;width:22px;height:22px;border-radius:50%;vertical-align:middle;margin-right:7px;background:#1b1e27 center/cover;border:2px solid var(--rc,#3a404d)}
+  .lb td.g{font:700 11px/1 var(--mono);color:var(--dim);text-align:right}
+  .lb td.s{font:800 13px/1 var(--mono);color:var(--ink);text-align:right;width:58px}
+  .lb td.d{font:700 10.5px/1 var(--mono);text-align:right;width:44px}
+  .lb td.d.up{color:#7ce6a0}.lb td.d.dn{color:#ff8a86}
+  .lb tr.me td{background:rgba(245,255,53,.07)}.lb tr.me td.nm{color:var(--yel)}
+  .lb tr.cut td{padding:0;border-top:1px dashed color-mix(in srgb,var(--acc) 70%,transparent)}
+  .lb tr.cut td span{display:block;padding:3px 4px;font:800 9.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+  .lb tr.p1 td.pl{color:#f5d76e}.lb tr.p2 td.pl{color:#d7dde6}.lb tr.p3 td.pl{color:#d18a4a}
+  .note{font:500 12.5px/1.45 Inter;color:var(--mut)}
+  .empty{padding:28px 16px;text-align:center;border:1px dashed var(--line2);border-radius:14px;color:var(--mut)}
+  .empty b{display:block;color:var(--ink);font:800 16px/1.3 Inter;margin-bottom:6px}
+  .foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line2);font-size:12px;color:var(--dim);line-height:1.7}
+  .foot a{color:var(--mut)}
+  .rf{position:fixed;left:12px;bottom:12px;z-index:5}
+  #__refbtn{display:none!important} /* у live.js своя кнопка «⟳» — здесь обновление в шапке */
+  @media (max-width:560px){.wrap{padding-top:14px}.sub{display:none}h1{font-size:28px}.th h2{font-size:15.5px}}
+</style>
+<!-- PWA · 2026-07-16 · v12: манифест + iOS-меты + регистрация sw.js + промо-плашка установки (iPhone/Android). Стратегии кэша — в sw.js; live /mafgame/* кэш обходит -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#05060a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="DOVOD">
+<script>
+/* SW только по http/https — локальный просмотр file:// не падает */
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+}
+/* Промо-плашка «установите как приложение»: iPhone — инструкция Safari/«На экран Домой»,
+   Android — кнопка установки (beforeinstallprompt) или инструкция про меню Chrome.
+   Не показывается: внутри установленного приложения (standalone) и 14 дней после «Позже». */
+(function(){try{
+  if(!/^https?:$/.test(location.protocol))return;
+  if((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)return;
+  var KEY='mgs_pwa_promo_hide_until';
+  try{if(Date.now()<(+localStorage.getItem(KEY)||0))return;}catch(e){}
+  var deferred=null,shown=false;
+  addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;
+    var b=document.getElementById('mgsPwaGo');if(b){b.style.display='inline-block';}});
+  function hide(days){try{localStorage.setItem(KEY,String(Date.now()+days*864e5));}catch(e){}
+    var el=document.getElementById('mgsPwaPromo');if(el)el.parentNode.removeChild(el);}
+  function show(){
+    if(shown)return;shown=true;
+    var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/.test(ua),isAndroid=/Android/.test(ua);
+    var how;
+    if(isIOS){how='iPhone: откройте сайт в <b>Safari</b> → кнопка «Поделиться» <b>⬆</b> → <b>«На экран “Домой”»</b>.';}
+    else if(isAndroid){how='Android: <b>Chrome</b> → меню <b>⋮</b> → <b>«Установить приложение»</b> (или «Добавить на гл. экран»).';}
+    else{how='В Chrome/Edge: значок установки в адресной строке (справа).';}
+    var tb=document.querySelector('.tabbar'),off='14px';
+    try{if(tb&&getComputedStyle(tb).display!=='none')off='calc(14px + 66px)';}catch(e){}
+    var d=document.createElement('div');d.id='mgsPwaPromo';
+    d.innerHTML='<style>#mgsPwaPromo{position:fixed;left:12px;right:12px;bottom:'+off+';z-index:99990;max-width:520px;margin:0 auto;'+
+      'background:linear-gradient(180deg,#12294a,#0f2138);border:1px solid rgba(212,175,55,.45);border-radius:14px;'+
+      'box-shadow:0 14px 40px rgba(0,0,0,.55);padding:12px 14px;font-family:Manrope,-apple-system,system-ui,sans-serif;color:#eef3fb;}'+
+      '#mgsPwaPromo .t{font-weight:800;font-size:13.5px;color:#f0d98a;margin:0 0 4px;}'+
+      '#mgsPwaPromo .h{font-size:12px;line-height:1.45;color:#9fb2cc;}#mgsPwaPromo .h b{color:#eef3fb;}'+
+      '#mgsPwaPromo .r{display:flex;gap:8px;margin-top:9px;align-items:center;}'+
+      '#mgsPwaPromo button{font:inherit;font-size:12px;font-weight:800;border-radius:9px;padding:7px 13px;cursor:pointer;}'+
+      '#mgsPwaGo{display:none;background:linear-gradient(100deg,#d4af37,#a5822b);border:0;color:#0a1626;}'+
+      '#mgsPwaLater{background:transparent;border:1px solid rgba(212,175,55,.35);color:#9fb2cc;}</style>'+
+      '<div class="t">📲 DOVOD можно установить как приложение</div>'+
+      '<div class="h">Иконка на экране, полноэкранный режим и быстрый доступ к live-статистике.<br>'+how+'</div>'+
+      '<div class="r"><button id="mgsPwaGo">Установить</button><button id="mgsPwaLater">Позже</button></div>';
+    document.body.appendChild(d);
+    var go=document.getElementById('mgsPwaGo');
+    if(deferred)go.style.display='inline-block';
+    go.onclick=function(){if(!deferred)return;deferred.prompt();deferred.userChoice.then(function(){hide(365);});};
+    document.getElementById('mgsPwaLater').onclick=function(){hide(14);};
+  }
+  if(document.readyState==='loading')addEventListener('DOMContentLoaded',function(){setTimeout(show,900);});
+  else setTimeout(show,900);
+}catch(e){}})();
+</script>
+</head>
+<body>
+<nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><span>Live-центр</span></nav>
+<div class="wrap">
+  <div class="hero">
+    <div><div class="kick"><i></i>DOVOD · live</div><h1>Live-центр</h1>
+      <div class="sub">Все турниры, что идут сейчас: эфиры столов и живые таблицы на одном экране. Нажми на стол — эфир переключится наверху.</div></div>
+    <div class="upd" id="upd"></div>
+  </div>
+  <div class="lay" id="lay">
+    <div class="stage" id="stage"><div class="scr"><div class="ph"><div class="pi">▶</div><b>Загрузка…</b></div></div></div>
+    <div class="feed" id="feed"></div>
+  </div>
+  <div class="foot">Результаты — mafgame.org, обновляются сами раз в 20 секунд. Эфиры — YouTube-трансляции организаторов. MMR — mafiastats.com.
+    Подробно по каждому турниру — его смотровая (все столы, следить за игроком) и страница турнира (рассадка, пересечения, сила столов).</div>
+</div>
+<script src="data/tournaments.js"></script>
+<script src="data/streams.js"></script>
+<script src="data/gsheet.js"></script>
+<script src="data/live.js"></script>
+<script>
+window.__liveSoft=1; window._autoref=1; /* без автоперезагрузки страницы — опрашиваем сами */
+const R=['','I','II','III','IV','V','VI'];
+const TIERC={L:'#ff4d6d',S:'#ff9f43',A:'#f5d76e',B:'#7ce6a0',C:'#7fd8ff',D:'#8e99b3',E:'#5f6779',F:'#4b5160'};
+/* линия в таблице: финал топ-10 (по умолчанию), у турниров без финала — призы */
+const CUT={664:{n:3,lab:'призовые места'},757:{n:3,lab:'призовые места'}};
+const DEF_AV='https://mafgame.org/build/assets/avatar-default2-33e44bae.png';
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function prg(){return new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'}));}
+function emb(id){const b=/^live:/.test(id)?'https://www.youtube.com/embed/live_stream?channel='+encodeURIComponent(id.slice(5))+'&':'https://www.youtube.com/embed/'+encodeURIComponent(id)+'?';
+  return b+'autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1';}
+function cdText(iso){if(!iso)return '';const s=Math.floor((new Date(iso)-Date.now())/1000);if(s<=0)return '';const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return (d?d+' д ':'')+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');}
+function hm(iso){return iso?new Date(iso).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Prague'}):'';}
+function dm(iso){return iso?new Date(iso).toLocaleDateString('ru-RU',{day:'numeric',month:'long',timeZone:'Europe/Prague'}):'';}
+
+/* какие турниры: со смотровой, идут сегодня или стартуют в ближайшие 3 дня; ?ids= — отладка на прошедших */
+const Q=new URLSearchParams(location.search);const FORCE=(Q.get('ids')||'').split(',').filter(Boolean);
+const TODAY=ymd(prg()),LIM=ymd(new Date(prg().getTime()+3*864e5));
+const DB=(window.TOURNAMENTS_DB&&TOURNAMENTS_DB.tournaments)||[];
+const LIST=DB.filter(t=>t.watch&&(FORCE.length?FORCE.includes(String(t.id)):(t.status!=='finished'&&t.start&&t.start<=LIM&&(t.liveTo||t.start)>=TODAY)))
+  .sort((a,b)=>String(a.start).localeCompare(String(b.start))||(b.stars||0)-(a.stars||0));
+const T={}; /* id → {t, tour, players, P (по нику), av, games, cur, rows, prev, st} */
+let SEL=null; /* {id, table} — что в плеере */
+try{const s=JSON.parse(sessionStorage.getItem('lc_sel')||'null');if(s)SEL=s;}catch(e){}
+
+async function loadBase(t){
+  const id=String(t.id);const o=T[id]={t,games:[],rows:[],prev:{},cur:-1};
+  const [P,TJ,A]=await Promise.all([
+    fetch('data/participants_'+id+'.json').then(r=>r.ok?r.json():null).catch(()=>null),
+    fetch('data/tournament_'+id+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})),
+    fetch('data/avatars_'+id+'.json').then(r=>r.ok?r.json():{}).catch(()=>({}))]);
+  o.players=(P&&P.players)||[];o.P={};o.players.forEach(p=>o.P[p.nick]=p);o.tour=TJ||{};o.av=(A&&A.avatars)||{};
+  o.live=inWindow(o)||!!FORCE.length;
+  try{const sj=await fetch('data/streams_'+id+'.json?cb='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null);if(sj&&sj.days){window.STREAMS_DB=window.STREAMS_DB||{};STREAMS_DB[id]=sj;}}catch(e){}
+  if(window.DOVOD_SHEET){try{const ss=await DOVOD_SHEET.streams(id);if(ss&&ss.n){const b=Object.assign({gamesDay1:6,days:{}},(window.STREAMS_DB||{})[id]||{});b.days=JSON.parse(JSON.stringify(b.days||{}));Object.keys(ss.days).forEach(d=>{b.days[d]=Object.assign(b.days[d]||{},ss.days[d]);});if(ss.final)b.final=ss.final;b.test=false;window.STREAMS_DB=window.STREAMS_DB||{};STREAMS_DB[id]=b;}}catch(e){}}
+}
+function inWindow(o){const a=o.tour.live_from||o.t.liveFrom||o.t.start,b=o.tour.live_to||o.t.liveTo||a;const t=ymd(prg());return !!a&&t>=a&&t<=b;}
+async function loadGames_(id){const o=T[id];let G=null;
+  try{G=window.loadGames?await window.loadGames(id):null;}catch(e){}
+  if(G&&G.games){o.games=G.games;}
+  o.live=inWindow(o)||!!FORCE.length;
+  compute(o);}
+function compute(o){
+  const gs=o.games;let cur=gs.findIndex(g=>g.tables.some(t=>t.winner==='unknown'));
+  o.played=gs.filter(g=>g.tables.length&&g.tables.every(t=>t.winner!=='unknown')).length;
+  if(cur<0)cur=gs.length?gs.length-1:-1;o.cur=cur;
+  const agg={};gs.forEach(g=>g.tables.forEach(t=>{if(t.winner==='unknown')return;t.seats.forEach(x=>{if(!x||!x.name)return;const a=agg[x.name]=agg[x.name]||{n:x.name,s:0,g:0,w:0};a.s+=x.sigma||0;a.g++;if(x.result==='W')a.w++;});}));
+  const rows=Object.values(agg).sort((a,b)=>b.s-a.s);
+  const old={};(o.rows||[]).forEach((r,i)=>old[r.n]=i);
+  rows.forEach((r,i)=>{if(old[r.n]!=null&&old[r.n]!==i)o.prev[r.n]=old[r.n]-i;});
+  o.rows=rows;
+}
+function SDB(id){return (window.STREAMS_DB&&STREAMS_DB[id])||null;}
+function dayOf(o){const st=SDB(o.t.id);const dd=(st&&st.dayDates)||null;const t=ymd(prg());let d=null;
+  if(dd){Object.keys(dd).forEach(k=>{if(t>=dd[k])d=k;});if(d)return d;}
+  const q=o.games.slice(0,o.cur+1).filter(x=>x.stage!=='Финал').length;return q<=((st&&st.gamesDay1)||6)?'1':'2';}
+function streamId(o,table){const st=SDB(String(o.t.id));if(!st)return null;const g=o.games[o.cur];if(g&&g.stage==='Финал')return st.final||null;return ((st.days||{})[dayOf(o)]||{})[String(table)]||null;}
+function tablesOf(o){const g=o.games[o.cur];if(g&&g.tables.length)return g.tables.map(t=>t.table_num);const n=+(o.tour.tables||0)||(o.t.id==='664'?4:o.t.id==='725'?2:3);return [...Array(n)].map((_,i)=>i+1);}
+function myOf(o){try{return localStorage.getItem('t'+o.t.id+'_my')||localStorage.getItem(o.t.id+'_my')||null;}catch(e){return null;}}
+function avOf(o,n){return o.av[n]||(o.P[n]&&o.P[n].av)||'';}
+function tierOf(o,n){return o.P[n]&&o.P[n].r_ms_tier;}
+
+function pickDefault(){
+  if(SEL&&T[SEL.id])return;
+  const first=LIST.map(t=>T[String(t.id)]).find(o=>o&&o.live)||T[String((LIST[0]||{}).id)];
+  if(!first){SEL=null;return;}
+  const my=myOf(first);let tb=1;const g=first.games[first.cur];
+  if(g&&my){const x=g.tables.find(t=>t.seats.some(s=>s&&s.name===my));if(x)tb=x.table_num;}
+  SEL={id:String(first.t.id),table:tb};
+}
+function select(id,table){SEL={id:String(id),table:+table};try{sessionStorage.setItem('lc_sel',JSON.stringify(SEL));}catch(e){}renderStage(true);renderFeed();
+  if(window.matchMedia('(max-width:1099px)').matches)document.getElementById('stage').scrollIntoView({behavior:'smooth',block:'start'});}
+
+let lastSrc=null;
+function renderStage(force){
+  const el=document.getElementById('stage');
+  if(!SEL||!T[SEL.id]){el.innerHTML='';return;}
+  const o=T[SEL.id],t=o.t,sid=streamId(o,SEL.table);const g=o.games[o.cur];
+  const src=sid?emb(sid):null;
+  const scr=el.querySelector('.scr');
+  if(!scr||force||src!==lastSrc){lastSrc=src;
+    const iso=o.tour.start_iso;const cd=cdText(iso);
+    const ph=`<div class="ph"><div class="pi">▶</div><b>${cd?'Старт '+esc(dm(iso))+' в '+esc(hm(iso)):'Эфир этого стола появится здесь'}</b>${cd?`<div class="cd" id="lcCd">${cd}</div>`:''}<small>${sid?'':'Ссылки на трансляции организаторы публикуют перед стартом — подставим сразу. Таблица и рассадка ниже уже живые.'}</small></div>`;
+    el.innerHTML=`<div class="scr">${src?`<iframe src="${src}" title="Эфир" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`:ph}</div><div class="sbar" id="sbar"></div><div class="seats" id="sseats"></div>`;}
+  const live=o.live&&o.played<o.games.length;
+  const gl=g?(g.stage==='Финал'?'Финал · игра '+(o.games.slice(0,o.cur+1).filter(x=>x.stage==='Финал').length):'Игра '+(o.games.slice(0,o.cur+1).filter(x=>x.stage!=='Финал').length)):'';
+  document.getElementById('sbar').innerHTML=`${live?'<span class="lvb"><i></i>LIVE</span>':''}<div class="t">${esc(t.name)}<small>${g&&g.stage==='Финал'?'финальный стол':'Стол '+(R[SEL.table]||SEL.table)}${gl?' · '+esc(gl):''}${o.tour.referees_by_table&&o.tour.referees_by_table[SEL.table]?' · судья '+esc(o.tour.referees_by_table[SEL.table]):''}</small></div><span class="sp"></span><a class="btn y" href="${esc(t.watch)}">▶ Смотровая</a>${sid?`<a class="btn" href="${esc(window.ytWatchURL?ytWatchURL(sid):'#')}" target="_blank" rel="noopener">YouTube ↗</a>`:''}`;
+  const tb=g&&g.tables.find(x=>x.table_num===SEL.table);const my=myOf(o);
+  document.getElementById('sseats').innerHTML=tb?tb.seats.map(s=>s&&s.name?`<span class="seat${s.name===my?' me':''}"><span class="n">${s.seat}</span>${esc(s.name)}</span>`:'').join(''):'';
+}
+function tblock(o){
+  const t=o.t,id=String(t.id),g=o.games[o.cur];const my=myOf(o);const iso=o.tour.start_iso;const started=o.played>0||(g&&g.tables.some(x=>x.winner!=='unknown'));
+  const live=o.live&&started&&o.played<o.games.length;const done=o.games.length&&o.played>=o.games.length;
+  const qn=o.games.filter(x=>x.stage!=='Финал').length,fn=o.games.length-qn;
+  const gl=g?(g.stage==='Финал'?'Финал · игра <b>'+o.games.slice(0,o.cur+1).filter(x=>x.stage==='Финал').length+'</b> из '+fn:'Игра <b>'+o.games.slice(0,o.cur+1).filter(x=>x.stage!=='Финал').length+'</b> из '+qn):'';
+  const status=done?'<span style="color:#7ce6a0">завершён</span>':live?'<span class="lvb"><i></i>LIVE</span>':(cdText(iso)?'старт '+esc(dm(iso))+' · '+esc(hm(iso))+' · через '+cdText(iso):'скоро');
+  const tabs=tablesOf(o).map(n=>{const sid=streamId(o,n);const on=SEL&&SEL.id===id&&SEL.table===n;const tbx=g&&g.tables.find(x=>x.table_num===n);const st=tbx?(tbx.winner==='unknown'?(started?'идёт':''):'✓'):'';
+    const mine=my&&tbx&&tbx.seats.some(s=>s&&s.name===my);
+    return `<button type="button" class="tab${on?' on':''}${sid?'':' off'}" onclick="select('${id}',${n})">${sid?'<span class="pv">▶</span>':''}${g&&g.stage==='Финал'?'Финал':'Стол '+(R[n]||n)}${mine?' ★':''}${st?`<span class="st">${st}</span>`:''}</button>`;}).join('');
+  /* таблица */
+  const cut=CUT[id]||{n:10,lab:'выход в финал'};
+  let lb='';
+  if(o.rows.length){const N=Math.max(cut.n+2,10);let rows=o.rows.slice(0,N);const mi=my?o.rows.findIndex(r=>r.n===my):-1;
+    const tr=(r,i)=>{const d=o.prev[r.n];const tc=TIERC[tierOf(o,r.n)]||'#3a404d';const a=avOf(o,r.n);
+      return `<tr class="${r.n===my?'me ':''}p${i+1}"><td class="pl">${i+1}</td><td class="nm"><span class="av" style="--rc:${tc};background-image:url('${esc(a||DEF_AV)}')"></span>${esc(r.n)}</td><td class="d ${d>0?'up':d<0?'dn':''}">${d>0?'▲'+d:d<0?'▼'+(-d):''}</td><td class="g">${r.g}</td><td class="s">${r.s.toFixed(2)}</td></tr>`+(i+1===cut.n&&!done?`<tr class="cut"><td colspan="5"><span>▲ ${esc(cut.lab)}</span></td></tr>`:'');};
+    lb=`<table class="lb"><tbody>${rows.map(tr).join('')}${mi>=N?'<tr><td colspan="5" style="text-align:center;color:var(--dim)">···</td></tr>'+tr(o.rows[mi],mi):''}</tbody></table>`;}
+  else{const fav=o.players.filter(p=>p.r_ms_mmr).sort((a,b)=>b.r_ms_mmr-a.r_ms_mmr).slice(0,5);
+    lb=`<div class="note" style="margin-bottom:6px">Таблица появится после первой игры. Фавориты по MMR:</div><table class="lb"><tbody>${fav.map((p,i)=>`<tr class="${p.nick===my?'me':''}"><td class="pl">${i+1}</td><td class="nm"><span class="av" style="--rc:${TIERC[p.r_ms_tier]||'#3a404d'};background-image:url('${esc(p.av||DEF_AV)}')"></span>${esc(p.nick)}</td><td class="g">${esc(p.r_ms_tier||'')}</td><td class="s">${Math.round(p.r_ms_mmr)}</td></tr>`).join('')}</tbody></table>`;}
+  const mg=t.mafgame||('https://mafgame.org/tournaments/'+id+'/view');
+  return `<section class="tb${SEL&&SEL.id===id?' sel':''}" style="--acc:${esc(t.accent||'#26e0ff')}">
+    <div class="th"><div class="tt"><div class="k"><b>${esc(t.city||'')}</b>${t.stars?'<span>'+'★'.repeat(t.stars)+'</span>':''}${status}</div>
+      <h2><a href="${esc(t.page||'#')}">${esc(t.name)}</a></h2>${gl?`<div class="gm">${gl}${o.played?' · сыграно игр: '+o.played:''}</div>`:''}</div></div>
+    <div class="tabs">${tabs}</div>
+    <div class="st0"><div class="stt"><span>${o.rows.length?'Таблица · Σ':'До старта'}</span><a href="${esc((t.page||'#')+(o.rows.length?'#stages':''))}">вся таблица →</a></div>${lb}</div>
+    <div class="acts"><a class="btn y" href="${esc(t.watch)}">▶ Смотровая</a><a class="btn" href="${esc(t.page||'#')}">Страница турнира</a><a class="btn mg" href="${esc(mg)}" target="_blank" rel="noopener"><img src="assets/mafgame-logo.svg" alt="">mafgame ↗</a></div>
+  </section>`;
+}
+function renderFeed(){
+  const f=document.getElementById('feed');
+  f.innerHTML=LIST.map(t=>T[String(t.id)]?tblock(T[String(t.id)]):'').join('');
+}
+function stamp(){document.getElementById('upd').textContent='обновлено '+new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+
+(async function(){
+  if(!LIST.length){document.getElementById('lay').innerHTML=`<div class="empty"><b>Сейчас турниров в эфире нет</b>Ближайшие — в разделе «Турниры». Live-центр оживёт сам, когда начнётся турнир со смотровой.<br><br><a class="btn y" href="tournaments.html">Все турниры →</a></div>`;return;}
+  await Promise.all(LIST.map(t=>loadBase(t).catch(()=>{})));
+  for(const t of LIST){if(T[String(t.id)])await loadGames_(String(t.id));} /* по очереди: live.js держит общий флаг __liveOn */
+  pickDefault();renderStage(true);renderFeed();stamp();
+  /* опрос: раз в 20 с, вкладка в фоне — нет; плеер не перезагружаем, если эфир тот же */
+  setInterval(async()=>{if(document.hidden)return;for(const t of LIST){const o=T[String(t.id)];if(o&&(o.live||FORCE.length))await loadGames_(String(t.id));}renderStage(false);renderFeed();stamp();
+    const c=document.getElementById('lcCd');if(c&&SEL&&T[SEL.id])c.textContent=cdText(T[SEL.id].tour.start_iso)||'скоро';},20000);
+})();
+</script>
+<script src="/assets/share.js?v=4" defer></script>
+</body>
+</html>

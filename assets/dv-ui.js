@@ -15,7 +15,7 @@
            ['ser','Серии','/series.html','M4 18V9M10 18V5M16 18v-7M22 18H2'],
            ['more','Ещё','#','M5 12h.01M12 12h.01M19 12h.01']];
   function active(){
-    if(path==='index.html'||path==='')return 'now';
+    if(path==='index.html'||path===''||path==='live.html')return 'now';
     if(/^(tournaments|tournament|participants|seating|cards|standings|results|roles|player|markers|ce6|teams|wc2026|logisticpro|t\d)/.test(path))return 'tour';
     if(/^(calendar|season)/.test(path))return 'cal';
     if(/^(series|mcl|gmc)/.test(path))return 'ser';

@@ -219,6 +219,10 @@ body{
 .lt .bt a{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;font:800 14px/1 Inter,system-ui,sans-serif;text-decoration:none;border-radius:999px}
 .lt .bt .w{background:#f5ff35;color:#05060a;box-shadow:0 8px 26px rgba(245,255,53,.18)}
 .lt .bt .p{border:1px solid rgba(38,224,255,.5);color:#26e0ff}
+.lt .lcb{display:flex;align-items:center;gap:12px;margin:14px 18px 0;padding:12px 16px;border-radius:14px;text-decoration:none;color:#05060a;background:linear-gradient(135deg,#f5ff35,#d8e62a);box-shadow:0 10px 30px rgba(245,255,53,.18)}
+.lt .lcb .d{flex:none;width:10px;height:10px;border-radius:50%;background:#05060a;opacity:.55}.lt .lcb.on .d{background:#db514e;opacity:1;box-shadow:0 0 0 4px rgba(219,81,78,.25);animation:lcp 1.4s infinite}@keyframes lcp{50%{opacity:.35}}
+.lt .lcb .lt1{flex:1;min-width:0}.lt .lcb b{display:block;font:900 17px/1.1 Unbounded,Inter,sans-serif;text-transform:uppercase}.lt .lcb small{display:block;margin-top:3px;font:700 12px/1.3 Inter,sans-serif;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lt .lcb .ar{font:900 22px/1 Inter}
+@media (max-width:899px){.lt .lcb{margin:12px 14px 0}}
 .lt .bt .m{border:1px solid rgba(249,214,39,.5);color:#f9d627;background:rgba(249,214,39,.06)}.lt .bt .m img{width:15px;height:15px}
 .lt .bt .s{border:1px solid rgba(193,75,189,.55);color:#e7a6e3;background:rgba(193,75,189,.08);font-size:13px}
 .lt .nx{border-top:1px solid rgba(255,255,255,.08);padding:10px 18px 14px;font-size:12.5px;color:#a4adbd;display:flex;flex-wrap:wrap;gap:6px 16px}
@@ -472,7 +476,7 @@ var tc=document.getElementById('tCal');
 if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','турниров')+' · <b>'+fS+'</b> '+pl(fS,'этап','этапа','этапов')+' впереди';
 })();</script>
 <script src="data/tournaments.js"></script>
-<script src="assets/strength.js?v=2"></script>
+<script src="assets/strength.js?v=3"></script>
 <script src="assets/posters.js"></script>
 <script>
 /* «Сейчас на турнирах» (15.10.2026): ближайший DOVOD-турнир со страницей/смотровой — постер, статус (идёт / обратный отсчёт),
@@ -501,6 +505,9 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
   if(!t){el.innerHTML='<div class="lth">Ближайшие турниры<s></s></div>'+nx;el.hidden=false;return;}
   var pt=String(t.posterTitle||t.name).split('|');
   var head='<div class="lth">'+(live?'Сейчас на турнире':'Скоро на турнире')+'<s></s>'+(act.length>1?act.length+' турнира':'')+'</div>';
+  /* 13.11: Live-центр — все эфиры и живые таблицы турниров одним экраном (live.html). Кнопка — первой строкой блока */
+  var lcLim=ymd(new Date(now.getTime()+3*864e5)), lcAny=act.filter(function(x){return x.watch&&x.start<=lcLim;}), lcLive=lcAny.some(function(x){return x.liveFrom&&today>=x.liveFrom&&today<=(x.liveTo||x.liveFrom);});
+  if(lcAny.length)head='<a class="lcb'+(lcLive?' on':'')+'" href="live.html"><span class="d"></span><span class="lt1"><b>Live-центр</b><small>'+(lcLive?'идёт сейчас: ':'скоро: ')+lcAny.map(function(x){return esc(x.city);}).join(' · ')+' — все эфиры и таблицы</small></span><span class="ar">→</span></a>'+head;
   var poster=t.art&&!(window.DV_POSTER&&DV_POSTER.has(t.poster))?'<a class="pst art" href="'+t.page+'" style="background-image:url(\''+esc(t.art)+'\')" aria-label="'+esc(t.name)+'"></a>':(window.DV_POSTER&&DV_POSTER.has(t.poster))?'<a class="pst dvpo" href="'+t.page+'">'+DV_POSTER.inner(t.poster,{sub:esc(String(t.dates).replace(/\s*\d{4}$/,''))+' · '+esc(t.city)})+'</a>':'<a class="pst" href="'+t.page+'"><span class="pk">'+esc(pt.length>1?pt[0]:'DOVOD · турнир')+' · '+'★'.repeat(t.stars||0)+'</span><span class="pn">'+(pt.length>1?esc(pt[1]).replace(/ /,'<b>').replace(/$/,'</b>'):esc(pt[0]))+'</span><span class="pm">'+esc(t.city)+' · '+esc(String(t.dates).replace(/\s*\d{4}$/,''))+'</span><span class="py">'+String(t.start).slice(0,4)+'</span></a>';
   var st=live?'<span class="st on"><i></i>Идёт · live с mafgame</span>':'<span class="st">Скоро · '+esc(String(t.statusLabel||'').replace(/^Скоро\s*·\s*/,''))+'</span>';
   var nm=esc(t.name).replace(/: (.*)$/,': <b>$1</b>');

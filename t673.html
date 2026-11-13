@@ -767,6 +767,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 <div class="cardviewer" id="cardViewer" role="dialog" aria-modal="true"></div>
 <div class="peekbd" id="peekbd"></div><div class="peek" id="peek" role="dialog"></div>
 <script src="data/streams.js"></script>
+<script src="assets/streams-tab.js?v=1"></script>
 <script src="data/gsheet.js"></script>
 <script src="data/live.js"></script>
 <script>
@@ -1009,7 +1010,7 @@ const RENDER={
       <div class="note" style="margin:0 0 12px">${CFG.quals} игр × ${CFG.tables} стола · каждый играет все ${CFG.quals} · тап по игроку — все его столы. Цветная метка у стола — его сила по ELO (см. «Сила столов»).</div>
       <div id="seatArea"></div></div>`;
   },
-  streams(){return `<div class="view"><div class="secttl">&#9654; Трансляции</div>${streamsPanel()}</div>`;},
+  streams(){return `<div class="view"><div class="secttl">&#9654; Трансляции</div>${window.DVST?DVST.html(CFG,D):streamsPanel()}</div>`;},
   my(){return `<div class="view"><div class="mymini">${esc((D.tour&&(D.tour.short||D.tour.tournament_name))||'')}</div><div class="secttl" id="myTtl">&#9823; Страница игрока</div><div id="myTop"></div><div id="myArea"></div></div>`;},
   roster(){return `<div class="view"><div class="secttl">&#8801; Состав по ELO</div><div class="srcline">ELO, места и ранги — <a href="https://markery.online" target="_blank" rel="noopener">markery.online</a> · составы и аватарки — <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a></div>
       <div class="segwrap" id="rTop"></div>
