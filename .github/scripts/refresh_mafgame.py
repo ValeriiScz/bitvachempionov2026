@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-refresh_mafgame · v1.3.1 · 2026-11-10 (ручной перезапуск: часовой cron GitHub фактически срабатывает раз в ~8 ч, заявка Gangster на Prague Cup не попала) · v1.3 · 2026-10-19 (отмена/перенос пересчитываются каждый прогон по названию: «[ОТМЕНЁН]», «Отмена», «ОТМЕНА», «[ПЕРЕНОС]», «Перенос на …»; префикс срезается) · v1.2.1 · 2026-10-19 (ручной перезапуск — ночной cron задержан GitHub) · v1.2 · 2026-10-13 (played пересчитывается каждый прогон: start < TODAY и не отменён) · v1.1 · 2026-09-06
+refresh_mafgame · v1.4 · 2026-11-13 (составы на страницах набора participants_{id}.json обновляются каждый прогон: новые, выписавшиеся, заявки → подтверждения; раньше это были снимки на день добавления турнира) · v1.3.1 · 2026-11-10 (ручной перезапуск: часовой cron GitHub фактически срабатывает раз в ~8 ч, заявка Gangster на Prague Cup не попала) · v1.3 · 2026-10-19 (отмена/перенос пересчитываются каждый прогон по названию: «[ОТМЕНЁН]», «Отмена», «ОТМЕНА», «[ПЕРЕНОС]», «Перенос на …»; префикс срезается) · v1.2.1 · 2026-10-19 (ручной перезапуск — ночной cron задержан GitHub) · v1.2 · 2026-10-13 (played пересчитывается каждый прогон: start < TODAY и не отменён) · v1.1 · 2026-09-06
 Назначение: каждую ночь обновить данные сайта DOVOD из mafgame.org без участия человека.
 Запускается GitHub Actions (.github/workflows/refresh-data.yml), работает на серверах GitHub —
 ни мак Валерия, ни Claude для этого не нужны.
@@ -12,6 +12,7 @@ refresh_mafgame · v1.3.1 · 2026-11-10 (ручной перезапуск: ча
   4  пересборка data/season.js
   5  даты в data/meta.js и версия кэша в sw.js
   6  сводка изменений для отчёта Actions
+  7  составы страниц набора data/participants_{id}.json (v1.4)
 
 Что делает: тянет реестр турниров года, сверяет с датасетом, вшитым в calendar.html,
 обновляет даты/города/звёзды/призовые, добавляет новые турниры, убирает снятые,
@@ -87,8 +88,11 @@ def fetch_listing():
         time.sleep(PAUSE)
     return rows
 
+RAW = {}   # tid → props страницы /participants (v1.4: нужны составам страниц набора)
+
 def fetch_regs(tid):
     p = fetch_page('/tournaments/%d/participants' % tid)
+    RAW[tid] = p
     out, seen = [], set()
     def add(lst, flag, nested):
         for x in (lst or []):
@@ -238,6 +242,131 @@ def bump_meta_and_sw(bump_sw=True):
         s.replace(mm.group(0), "const CACHE_VERSION = 'dovod-v%d';" % (cur + 1)))
     return cur + 1
 
+# ── 7 · составы страниц набора (v1.4) ─────────────────────────────────────────
+def _mtier(v, th):
+    if v is None:
+        return None
+    for k in ['L', 'S', 'A', 'B', 'C', 'D', 'E']:
+        if v >= th[k]:
+            return k
+    return 'F'
+
+CTRY = {'Czech Republic': ('CZ', 'Чехия', '🇨🇿'), 'Poland': ('PL', 'Польша', '🇵🇱'), 'Germany': ('DE', 'Германия', '🇩🇪'),
+        'Ukraine': ('UA', 'Украина', '🇺🇦'), 'Netherlands': ('NL', 'Нидерланды', '🇳🇱'), 'Belgium': ('BE', 'Бельгия', '🇧🇪'),
+        'Republic of Moldova': ('MD', 'Молдова', '🇲🇩'), 'Moldova': ('MD', 'Молдова', '🇲🇩'), 'Israel': ('IL', 'Израиль', '🇮🇱'),
+        'Portugal': ('PT', 'Португалия', '🇵🇹'), 'Switzerland': ('CH', 'Швейцария', '🇨🇭'), 'Spain': ('ES', 'Испания', '🇪🇸'),
+        'Cyprus': ('CY', 'Кипр', '🇨🇾'), 'Austria': ('AT', 'Австрия', '🇦🇹'), 'Serbia': ('RS', 'Сербия', '🇷🇸'),
+        'Turkey': ('TR', 'Турция', '🇹🇷'), 'Romania': ('RO', 'Румыния', '🇷🇴'), 'Georgia': ('GE', 'Грузия', '🇬🇪'),
+        'Lithuania': ('LT', 'Литва', '🇱🇹'), 'Latvia': ('LV', 'Латвия', '🇱🇻'), 'Estonia': ('EE', 'Эстония', '🇪🇪'),
+        'Slovakia': ('SK', 'Словакия', '🇸🇰'), 'Hungary': ('HU', 'Венгрия', '🇭🇺')}
+CTRY.update({v[1]: v for v in list(CTRY.values())})
+
+def refresh_participants():
+    """Каждый незавершённый турнир с файлом data/participants_{id}.json сверяется с mafgame:
+    новые игроки добавляются (MMR из data/mmr.json, ELO из реестра — до прогонов роботов),
+    выписавшиеся убираются, статус заявка/подтверждён обновляется. Архив (ms_frozen) не трогаем.
+    Пустой ответ платформы при непустом составе — не пишем (предохранитель)."""
+    import csv, glob
+    try:
+        MMR = json.load(io.open('data/mmr.json', encoding='utf-8')).get('players', {})
+        th = json.load(io.open('data/research/mmr_tiers.json', encoding='utf-8'))['thresholds']
+    except Exception as e:
+        log('  составы: нет mmr.json/mmr_tiers.json (%s) — пропуск' % e)
+        return []
+    ELO, REG = {}, {}
+    try:
+        for r in csv.DictReader(io.open('data/registry/elo_history.csv', encoding='utf-8')):
+            if r.get('elo_all'):
+                u = r['mafgame_uid']
+                if u not in ELO or r['snapshot'] >= ELO[u]['snapshot']:
+                    ELO[u] = r
+        for r in csv.DictReader(io.open('data/registry/players.csv', encoding='utf-8')):
+            REG[r['mafgame_uid']] = r
+    except Exception:
+        pass
+    changes = []
+    for f in sorted(glob.glob('data/participants_*.json')):
+        try:
+            tid = int(re.search(r'_(\d+)\.json$', f).group(1))
+            d = json.load(io.open(f, encoding='utf-8'))
+        except Exception:
+            continue
+        m = d.get('meta') or {}
+        if m.get('ms_frozen') or not m.get('start') or m['start'] < TODAY:
+            continue
+        p = RAW.get(tid)
+        if p is None:
+            try:
+                p = fetch_page('/tournaments/%d/participants' % tid)
+                time.sleep(PAUSE)
+            except Exception as e:
+                log('  состав %d: пропуск (%s)' % (tid, e))
+                continue
+        rows, seen = [], set()
+        for x in (p.get('players') or []):
+            if isinstance(x, dict) and x.get('user_id') and x['user_id'] not in seen:
+                seen.add(x['user_id'])
+                rows.append((x['user_id'], x.get('nickname') or (x.get('user') or {}).get('nickname') or '',
+                             x.get('user') or {}, 'confirmed', x.get('player_number')))
+        for a in (p.get('applications') or []) + (p.get('no_team_applications') or []):
+            if not isinstance(a, dict) or not a.get('user_id') or a['user_id'] in seen:
+                continue
+            if a.get('status') not in (None, 'applied', 'confirmed'):
+                continue   # отклонённые/отозванные заявки не показываем
+            seen.add(a['user_id'])
+            us = a.get('user') or {}
+            rows.append((a['user_id'], us.get('nickname') or '', us,
+                         'confirmed' if a.get('status') == 'confirmed' else 'applied', None))
+        old = {pl['uid']: pl for pl in d.get('players', [])}
+        if not rows and old:
+            log('  состав %d: платформа отдала пустой список при %d в файле — не трогаю' % (tid, len(old)))
+            continue
+        out, added, upd = [], [], []
+        for uid, nick, us, st, pn in rows:
+            pl = old.get(uid)
+            if pl:
+                if pl.get('status') != st:
+                    upd.append('%s → %s' % (pl.get('nick'), 'подтверждён' if st == 'confirmed' else 'заявка'))
+                    pl['status'] = st
+                if pn is not None:
+                    pl['player_number'] = pn
+                if us.get('avatar') and not pl.get('av'):
+                    pl['av'] = us['avatar']
+                out.append(pl)
+                continue
+            mm = MMR.get(str(uid)) or {}
+            e = ELO.get(str(uid))
+            rg = REG.get(str(uid)) or {}
+            cl = us.get('club') or {}
+            out.append({'nick': nick, 'uid': uid, 'real': us.get('display_name'), 'av': us.get('avatar'),
+                        'status': st, 'club': cl.get('name') or rg.get('club') or None,
+                        'cc': (CTRY.get(rg.get('country')) or (None,))[0],
+                        'country': (CTRY.get(rg.get('country')) or (None, rg.get('country') or None))[1],
+                        'flag': (CTRY.get(rg.get('country')) or (None, None, None))[2],
+                        'markery_id': int(e['markery_id']) if e and e.get('markery_id') else None,
+                        'r_elo_cur': round(float(e['elo_all'])) if e else None,
+                        'r_tier': e.get('tier') if e else None, 'r_elo_ly': None, 'mg_rank': None, 'm_rank': None,
+                        'player_number': pn, 'mk_match': 'id' if e else None,
+                        'elo_snap': e['snapshot'] if e else None,
+                        'series': None, 'series_place': None, 'series_score': None, 'ms': None,
+                        'r_ms_mmr': mm.get('mmr'), 'r_ms_rank': mm.get('rank'), 'r_ms_tier': _mtier(mm.get('mmr'), th),
+                        'added': TODAY})
+            added.append(nick)
+        gone = [pl.get('nick') for u, pl in old.items() if u not in seen]
+        if not (added or gone or upd):
+            continue
+        conf = sum(1 for o in out if o['status'] == 'confirmed')
+        m['players_confirmed'] = conf
+        m['roster_snap'] = TODAY
+        d['meta'], d['players'] = m, out
+        io.open(f, 'w', encoding='utf-8').write(json.dumps(d, ensure_ascii=False, indent=1))
+        line = '%s (%d): подтв. %d, всего %d' % (m.get('name', tid), tid, conf, len(out))
+        if added: line += ' · +' + ', '.join(added)
+        if gone:  line += ' · выписались: ' + ', '.join(gone)
+        if upd:   line += ' · ' + ', '.join(upd)
+        changes.append(line)
+    return changes
+
 # ── 6 · прогон ────────────────────────────────────────────────────────────────
 def main():
     log('Реестр турниров %d с mafgame:' % YEAR)
@@ -268,6 +397,7 @@ def main():
     log('составов получено: %d' % len(fresh))
 
     rep = patch(D, new, fresh)
+    rosters = refresh_participants()
     io.open(CAL, 'w', encoding='utf-8').write(s[:i + 8] + json.dumps(D, ensure_ascii=False) + s[j + 1:])
     S = build_season(D)
     # оболочку сбрасываем только когда поменялся сам календарь: новые/снятые турниры,
@@ -292,6 +422,7 @@ def main():
     block('Переносы дат', rep['moved'])
     block('Снято с календаря', rep['removed'])
     block('Статус отмена/перенос', rep['status'])
+    block('Составы страниц набора', rosters)
     lines.append('Обновлено полей: %d · составов: %d' % (rep['fields'], rep['regs']))
     summary = '\n'.join(lines)
     log('')

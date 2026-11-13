@@ -483,7 +483,7 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
   function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
   var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'})), today=ymd(now), lim=ymd(new Date(now.getTime()+10*864e5));
   var act=db.tournaments.filter(function(t){return t.status!=='finished'&&t.page&&t.start&&today<=(t.liveTo||t.start)&&t.start<=lim;})
-    .sort(function(a,b){return String(a.start).localeCompare(String(b.start));});
+    .sort(function(a,b){return String(a.start).localeCompare(String(b.start))||(b.stars||0)-(a.stars||0)||(b.players||0)-(a.players||0);}); /* 13.11: в один день — крупнее наверх (GMC 4★ над Кругом избранных 2★) */
   /* v10.11: «Дальше» — все турниры на 3 недели вперёд карточками с картинками (t.thumb → t.art); + финал MCL (его нет в tournaments.js — страница лиги mcl2026.html) */
   /* v10.12 (12.11): окно «три недели» доводим до воскресенья той недели — турниры идут по выходным */
   var d3=new Date(now.getTime()+21*864e5); d3=new Date(d3.getTime()+((7-d3.getDay())%7)*864e5); var lim3=ymd(d3);
