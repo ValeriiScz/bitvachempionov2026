@@ -1257,14 +1257,14 @@
    "country": "Чехия",
    "flag": "🇨🇿",
    "markery_id": 11148,
-   "r_elo_cur": 991,
+   "r_elo_cur": 965,
    "r_tier": "D",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 35,
    "mk_match": "id",
-   "elo_snap": "2026-10-15",
+   "elo_snap": "2026-11-13",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -1272,7 +1272,9 @@
    "r_ms_mmr": 1240.1,
    "r_ms_rank": 689,
    "r_ms_tier": "D",
-   "added": "2026-11-13"
+   "added": "2026-11-13",
+   "r_rank": 6847,
+   "mk_last": "2026-10-17"
   }
  ]
 }

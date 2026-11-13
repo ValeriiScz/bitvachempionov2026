@@ -1214,14 +1214,14 @@
    "country": "Молдова",
    "flag": "🇲🇩",
    "markery_id": 19165,
-   "r_elo_cur": 999,
+   "r_elo_cur": 1016,
    "r_tier": "C",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-10-26",
+   "elo_snap": "2026-11-13",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -1229,7 +1229,9 @@
    "r_ms_mmr": 1498.0,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "added": "2026-11-13"
+   "added": "2026-11-13",
+   "r_rank": 1546,
+   "mk_last": "2026-10-31"
   }
  ],
  "stats": {
