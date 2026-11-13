@@ -21,14 +21,24 @@
   "Динозавр": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2137/448b5bea0111a717a0c7eb42e508ed5c360efb5d.png",
   "Бабушка Хлоя": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2274/8e5d88f55bcc8955e66aae479780e3f6f334ca17.png"
  },
- "judges": {},
+ "judges": {
+  "1": {
+   "name": "Весная",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2241/30ff2d3d73b10ff630dee6fa64dff21e936489d3.png"
+  },
+  "2": {
+   "name": "Shepard",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2387/903d464a11586a815ce31235977808ab916a15af.png"
+  }
+ },
  "duty": null,
  "commentator": null,
  "referees": [
   {
    "name": "Г-жа Кот",
    "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2249/24559f189d42915df543dfc3851b26a01cc60132.png",
-   "main": true
+   "main": true,
+   "role": "Главный судья"
   },
   {
    "name": "Весная",

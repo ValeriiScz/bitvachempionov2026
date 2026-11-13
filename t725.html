@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t725.html · v1.0 · 2026-11-13 · «Круг избранных» (mafgame 725, Кишинёв 14–15.11, 2★): 20 игроков, 12 квал × 2 стола (все играют каждую) → финал топ-10, 4 игры ×1.3; копия t801 v1.1 без полуфинала. Судьи: Г-жа Кот (ГС), Весная, Shepard.
+<!-- DOVOD · t725.html · v1.1 · 2026-11-13 · эфиры (data/streams_725.json), судьи по столам I Весная / II Shepard, постер — обложка эфира организаторов · v1.0 · 2026-11-13 · «Круг избранных» (mafgame 725, Кишинёв 14–15.11, 2★): 20 игроков, 12 квал × 2 стола (все играют каждую) → финал топ-10, 4 игры ×1.3; копия t801 v1.1 без полуфинала. Судьи: Г-жа Кот (ГС), Весная, Shepard.
      Данные: data/*_725* (состав и рассадка с mafgame 13.11; игры — live через live.js). Эфиры — watch725.html. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -841,7 +841,7 @@ const TIER_ORD={L:-1,S:0,A:1,B:2,C:3,D:4,E:5,F:6};
 const CFG={id:'725',ls:'t725_',name:'Круг избранных',short:'Круг избранных',kick:'Круг избранных · 2★ · Кишинёв',h1:'Круг <b>избранных</b> 2026',
   dates:'14–15 ноября 2026',place:'Кишинёв',startLab:'старт 14 ноября',startShort:'14.11',
   quals:12,tables:2,semiN:0,semis:0,finalN:10,finals:4,fmt:'12+4',day1:6,
-  intro:'Двухзвёздочный турнир клуба mafia.md в Кишинёве, 14–15 ноября: 20 игроков, 12 игр квалификации на двух столах (все играют каждую игру), затем финал топ‑10 из четырёх игр (×1.3, баллы квалификации сохраняются). Судьи: Г-жа Кот (главный судья), Весная, Shepard. Рассадка квалификации уже опубликована на mafgame — пересечения и сила столов открыты.',
+  intro:'Двухзвёздочный турнир клуба mafia.md в Кишинёве, 14–15 ноября: 20 игроков, 12 игр квалификации на двух столах (все играют каждую игру), затем финал топ‑10 из четырёх игр (×1.3, баллы квалификации сохраняются). Главный судья — Г-жа Кот, за столами: стол I — Весная, стол II — Shepard. Эфиры организаторов — во вкладке «Трансляции» и в смотровой. Рассадка квалификации уже опубликована на mafgame — пересечения и сила столов открыты.',
   watch:'watch725.html',mafgame:'https://mafgame.org/tournaments/725/view'};
 const START='2026-11-14T10:00:00+01:00'; /* ГИПОТЕЗА: время старта на mafgame не указано — 10:00 по Праге (11:00 Кишинёв) до расписания организатора */
 const DEF_AV='https://mafgame.org/build/assets/avatar-default2-33e44bae.png';
@@ -961,7 +961,7 @@ function renderTop(){
   const eloAvg=eloVals.length?Math.round(eloVals.reduce((a,b)=>a+b,0)/eloVals.length):null;const mmrVals=D.players.map(p=>num(p.r_ms_mmr)).filter(v=>v!=null);const mmrAvg=mmrVals.length?Math.round(mmrVals.reduce((a,b)=>a+b,0)/mmrVals.length):null;
   const started=(D.gp||t.games_played||0)>0;
   document.getElementById('topband').innerHTML=`
-    <div class="poster dvposter"><div class="dvp"><div class="dvk">DOVOD · Молдова · 2★</div><div class="dvt">Круг<br><b>избранных</b></div><div class="dvy">2026</div><div class="dvs">Кишинёв · 14–15.11</div></div></div></div>
+    <div class="poster dvposter" style="padding:0"><img src="assets/krug725_card.jpg" alt="Круг избранных" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"></div></div>
     <div class="info"><div class="kick"><i></i>${CFG.kick}</div><h1>${CFG.h1}</h1>
       <div class="meta">${CFG.dates} · ${CFG.place} · ${D.players.length} игроков · ${CFG.tables} стола</div>
       <div class="chips">

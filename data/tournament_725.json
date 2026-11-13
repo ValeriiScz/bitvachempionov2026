@@ -5,7 +5,7 @@
  "date": "2026-11-14 — 2026-11-15",
  "location": "Кишинёв, Молдова",
  "club": "mafia.md",
- "organizer": "клуб mafia.md · главный судья Г-жа Кот",
+ "organizer": "клуб mafia.md · главный судья Г-жа Кот · стол I — Весная, стол II — Shepard",
  "players_total": 20,
  "days": 2,
  "stars": 2,
@@ -26,5 +26,9 @@
   "Г-жа Кот",
   "Весная",
   "Shepard"
- ]
+ ],
+ "referees_by_table": {
+  "1": "Весная",
+  "2": "Shepard"
+ }
 }

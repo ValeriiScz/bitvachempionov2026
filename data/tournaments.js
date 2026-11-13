@@ -242,6 +242,9 @@ window.TOURNAMENTS_DB = {
   {
     "id": "725",
     "theme": "dovod",
+    "art": "assets/krug725_card.jpg",
+    "thumb": "assets/krug725_thumb.jpg",
+    "artRatio": "16 / 9",
     "name": "Круг избранных",
     "posterTitle": "Круг|избранных",
     "dates": "14–15 ноября 2026",
@@ -260,7 +263,7 @@ window.TOURNAMENTS_DB = {
     "mmrN": 19,
     "mmrTiers": {"S": 2, "A": 1, "B": 3, "C": 8, "D": 5, "-": 1},
     "mmrTop": [["Білий", 1909, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_21/3aef373a6b5b3d37237f963dd9006ebbaa583b04.png"], ["Bard", 1887, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1031/1fa426591383a408e84f609803cd3197c731dade.png"], ["Магнат", 1715, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png"], ["Гелиус", 1640, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1225/6909824e7e8ea37161592e938b3973869e0e5423.png"], ["Annvie", 1596, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2211/f38bc016b9690b3fce1e608211792492a9c7ef7b.png"], ["Mermaid", 1573, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1063/69cfe81d666c583bea5148278d07fb3f07e09aff.png"], ["Амфибия", 1489, "C", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2942/994ab60d53813eb61dcdf6382a54421a415ac1b3.png"], ["Динозавр", 1454, "C", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2137/448b5bea0111a717a0c7eb42e508ed5c360efb5d.png"], ["Dron", 1436, "C", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1552/160339851587c86d3b4bac3786f96cf2988c76de.png"], ["KRASNII", 1427, "C", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2337/58436cd9de6a9b8348c93e505db938f4fc267998.png"]],
-    "organizer": "клуб mafia.md",
+    "organizer": "клуб mafia.md · главный судья Г-жа Кот",
     "page": "t725.html",
   "watch": "watch725.html",
   "liveFrom": "2026-11-14",
@@ -274,8 +277,8 @@ window.TOURNAMENTS_DB = {
     {"href": "participants.html?t=725", "title": "Участники и рейтинг", "desc": "20 из 20 · MMR и ELO markery"}
   ],
     "start": "2026-11-14",
-    "accent": "#ffcc33",
-    "accent2": "#1f3b8f",
+    "accent": "#e8b34a",
+    "accent2": "#f3d89a",
     "strength": {"lvl": "ровный", "rank": 20, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 69.9, "eq": 47.6, "pts": 5, "cplus": 14, "proj": false, "reg": 20, "exp": 20, "places": 10}
   },
   {
