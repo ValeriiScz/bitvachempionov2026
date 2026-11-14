@@ -1,4 +1,4 @@
-/* DOVOD · assets/watch-ui.js · v2.2 · 2026-11-13 (режим «Все столы»: компьютер — сетка во весь экран под высоту окна, телефон боком — все столы на весь экран, мини-плеер только в «Один стол») · v2.1 · 2026-11-13 (столы снова прежними карточками; «Все столы» — клавиша A в подсказке) · v2.0 · 2026-11-13 · смотровая: два разных интерфейса — телефон и компьютер (дизайн-ревью)
+/* DOVOD · assets/watch-ui.js · v2.3 · 2026-11-14 (компьютер, «Все столы»: все окна помещаются в экран по высоте — и «большой + остальные» (главный слева, остальные столбиком справа, без выпадания вниз), и «сетка»; ширина эфира подбирается под высоту окна браузера) · v2.2 · 2026-11-13 (режим «Все столы»: компьютер — сетка во весь экран под высоту окна, телефон боком — все столы на весь экран, мини-плеер только в «Один стол») · v2.1 · 2026-11-13 (столы снова прежними карточками; «Все столы» — клавиша A в подсказке) · v2.0 · 2026-11-13 · смотровая: два разных интерфейса — телефон и компьютер (дизайн-ревью)
    Работает с любой смотровой watchNNN.html по общим id (#stage, #tabs, #modes, #qnav, #seatP, #followP, #topP, #fsel) и
    глобальным S / D / tableOf / seatOf страницы. Ничего в логике страниц не меняет — только раскладка и удобство.
    ТЕЛЕФОН: эфир наверху; столы → режимы → ссылки под эфиром; мини-плеер в углу при прокрутке; телефон боком —
@@ -63,6 +63,8 @@
     '.dvw-btn{min-height:38px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.03);color:#eef3fb;font:700 13px Inter,sans-serif;cursor:pointer}.dvw-btn.on{border-color:#f5ff35;color:#f5ff35}'+
     'body.dvw-theater .body{grid-template-columns:minmax(0,1fr)!important}'+
     'body.dvw-all .body{grid-template-columns:minmax(0,1fr) 320px!important}'+
+    'body.dvw-all #stage .multi.nn.focus{grid-template-columns:var(--mainfr) 1fr!important;grid-auto-rows:auto;align-items:start}body.dvw-all #stage .multi.nn.focus .pl.main{grid-column:1!important;grid-row:1 / span var(--mini)!important}body.dvw-all #stage .multi.nn.focus .pl:not(.main){grid-column:2!important}'+
+    'body.dvw-all #stage{margin-left:auto;margin-right:auto}'+
     'body.dvw-all #stage .multi.nn.row{grid-template-columns:repeat(var(--cols),min(calc((100% - 8px * (var(--cols) - 1)) / var(--cols)),calc((100vh - 230px) / 2 * 16 / 9)))!important;justify-content:center}'+
     'body.dvw-all.dvw-theater #stage{max-width:none}'+
     'body.dvw-theater #stage{max-width:calc((100vh - 150px) * 16 / 9);margin:0 auto}'+
@@ -158,12 +160,29 @@
   function help(){if($('.dvw-help'))return;var d=document.createElement('div');d.className='dvw-help';
     d.innerHTML='<div><h4>Горячие клавиши</h4><kbd>1–6</kbd>стол<br><kbd>←</kbd><kbd>→</kbd>предыдущая / следующая игра<br><kbd>M</kbd>звук главного эфира<br><kbd>A</kbd>все столы · <kbd>O</kbd>один стол<br><kbd>T</kbd>режим «Кино»<br><kbd>F</kbd>найти игрока<br><kbd>Esc</kbd>закрыть</div>';
     d.onclick=function(){d.remove();};document.body.appendChild(d);}
+  /* ── компьютер, «Все столы»: подогнать ширину сетки под высоту окна, чтобы все столы были видны без прокрутки ── */
+  function fitAll(){
+    var st=$('#stage');if(!st)return;var S=g('S');
+    if(!PC.matches||!S||S.mode!=='all'||document.body.classList.contains('dvw-xx')){if(st.__fit){st.style.maxWidth='';st.__fit=0;}return;}
+    var m=$('.multi.nn',st);if(!m)return;var n=$$('.pl',m).length;if(n<2){if(st.__fit){st.style.maxWidth='';st.__fit=0;}return;}
+    var top=st.getBoundingClientRect().top+window.scrollY;var H=window.innerHeight-Math.max(60,top)-14;if(H<240)H=240;
+    var lab=26,gap=8,W;
+    if(m.classList.contains('focus')){var mini=Math.max(1,n-1);var colW=function(w){return w*mini/(mini+1);};
+      /* главный: высота = ширина*9/16 + подпись; справа mini окон столбиком: (w/(mini+1))*9/16*mini + подписи */
+      W=(H-lab)*16/9*(mini+1)/mini;var side=function(w){return (w/(mini+1))*9/16*mini+mini*(lab+gap);};
+      while(side(W)>H&&W>300)W-=20;}
+    else{var cols=parseInt(getComputedStyle(m).getPropertyValue('--cols'))||Math.ceil(Math.sqrt(n));var rows=Math.ceil(n/cols);
+      var ch=(H-rows*(lab+gap))/rows;W=cols*ch*16/9+(cols-1)*gap;}
+    W=Math.floor(W);var key=W+':'+n+':'+m.className;if(st.__fit===key)return;st.__fit=key;st.style.maxWidth=W+'px';
+  }
+  window.addEventListener('resize',function(){var st=$('#stage');if(st)st.__fit=0;fitAll();});
   /* ── запуск ── */
-  function tick(){enhanceFollow();followBar();var S=g('S');if(S){document.body.classList.toggle('dvw-one',S.mode==='one');document.body.classList.toggle('dvw-all',S.mode==='all');}}
+  function tick(){enhanceFollow();followBar();fitAll();var S=g('S');if(S){document.body.classList.toggle('dvw-one',S.mode==='one');document.body.classList.toggle('dvw-all',S.mode==='all');}}
   function init(){
     if(PH.matches)phone();
     if(PC.matches)desktop();
     tick();setInterval(tick,1500);
+    var stg=$('#stage');if(stg&&'MutationObserver' in window)new MutationObserver(function(){clearTimeout(stg.__ft);stg.__ft=setTimeout(fitAll,60);}).observe(stg,{childList:true});
     var fp=$('#followP');if(fp&&'MutationObserver' in window)new MutationObserver(function(){enhanceFollow();followBar();}).observe(fp,{childList:true,subtree:true});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
