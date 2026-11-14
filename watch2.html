@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  DOVOD · watch2.html · новая смотровая турнира · v1.0 · 2026-11-14
+  DOVOD · watch2.html · новая смотровая турнира · v1.1 · 2026-11-14
   Назначение: эфир и вся информация о турнире на одной странице. Один файл на все турниры: watch2.html?id=664.
   Прежние смотровые watch{id}.html не тронуты и работают как раньше.
   Данные: те же источники, что у live.html - data/tournaments.js, participants/tournament/avatars/streams_{id}.json,
@@ -8,6 +8,7 @@
   Оглавление: 1) стили  2) расчёты (core)  3) общие блоки (ui)  4) логика страницы
   Режимы: «Эфир», «Все столы» (большой + остальные / сетка; телефон боком - на весь экран), «Турнир».
   Вкладки: Таблица · Столы · Дальше · Мои. Сила стола - метод и названия сайта (спокойный · мягкий · ровный · сильный · элитный).
+  v1.1 (14.11): сразу из последнего снимка, свежие протоколы в фоне; без снимка - понятное «загружаю протоколы».
   История: v1.0 - из прототипов _preview_watch_v0.1-0.2 (в _Архив) с правками Валерия 14.11: кружочки в «Дальше»,
   сила стола по методу сайта, компактные «Мои».
 -->
@@ -251,10 +252,13 @@ async function loadT(id){
   const t=DATA.t[id]={id,name:cln(m.name||tj.tournament_name||('Турнир '+id)),short:cln(tj.short||m.name||('Турнир '+id)),city:m.city||'',country:m.country||'',stars:m.stars||0,np:m.players||Object.keys(pl).length,
     accent:m.accent||tj.accent||'#ffce00',color:m.accent||tj.accent||'#ffce00',page:m.page||'',prize:m.prize||'',judges:tj.referees_by_table||{},cut:c.n,cutLabel:c.lab,pl,games:[],gt:0,
     inWin:!!a&&td>=a&&td<=b,status:m.status||''};
-  await refreshT(id);return t;
+  /* сразу - последний снимок игр с этого устройства; свежие протоколы подтягиваются в фоне (mafgame бывает медленным, до 30 с) */
+  try{const sv=JSON.parse(localStorage.getItem('dv2_g_'+id)||'null');if(sv&&sv.length){t.games=sv;t.gt=sv.length;t._cached=true;}}catch(e){}
+  return t;
 }
 async function refreshT(id){const t=DATA.t[id];if(!t)return false;let G=null;try{G=window.loadGames?await window.loadGames(id):null;}catch(e){}
-  if(!G||!G.games||!G.games.length)return false;const g=adapt(G.games),sig=JSON.stringify(g);if(sig===t._sig)return false;t._sig=sig;t.games=g;t.gt=g.length;t._ts=null;
+  t._tried=true;if(!G||!G.games||!G.games.length)return false;const g=adapt(G.games),sig=JSON.stringify(g);t._cached=false;if(sig===t._sig)return false;t._sig=sig;t.games=g;t.gt=g.length;t._ts=null;
+  try{localStorage.setItem('dv2_g_'+id,sig);}catch(e){}
   g.forEach(x=>x.tb.forEach(tb=>tb.s.forEach(s=>{if(!t.pl[s[1]])t.pl[s[1]]=[null,'','',''];})));return true;}
 /* опрос: раз в 20 с, вкладка в фоне не опрашивает */
 function poll(ids,cb){setInterval(async()=>{if(document.hidden)return;let ch=false;for(const id of ids){const t=DATA.t[id];if(t&&(t.inWin||!finished(t)))ch=(await refreshT(id))||ch;}stamp();cb(ch);},20000);
@@ -493,6 +497,8 @@ document.addEventListener('change',e=>{if(S&&e.target.id==='auto'){S.auto=e.targ
   if(!ID){$('app').innerHTML='<div class="empty">Турнир не найден. <a href="live2.html" style="color:var(--ac)">Live-центр</a></div>';return;}
   $('ttl').textContent='Загрузка…';
   try{t=await loadT(ID);}catch(e){t=null;}
+  if(t&&!t.games.length){$('app').dataset.wait='1';$('ttl').textContent=t.short;const box=document.createElement('div');box.className='empty';box.id='waitbox';box.innerHTML='Загружаю протоколы mafgame…<br><small>mafgame сейчас отвечает медленно, это может занять до 30 секунд</small>';$('app').before(box);$('app').style.display='none';
+    await refreshT(ID);$('waitbox').remove();$('app').style.display='';}
   if(!t||!t.games.length){$('app').innerHTML=`<div class="empty">${t?esc(t.name)+': рассадку и игры mafgame ещё не опубликовал.':'Турнир не найден.'}<br><br><a href="live2.html" style="color:var(--ac)">Live-центр</a></div>`;if(t)$('ttl').textContent=t.short;return;}
   K='pw_'+ID+'_';stamp();const c=curGame(t);
   S={lay:LSG('pw_lay',innerWidth<1000?'big':'grid'),mode:LSG(K+'mode','air'),tab:LSG(K+'tab','table'),table:+qs.get('tb')||1,g:c,vg:c,follow:LSG(K+'follow',[]),main:LSG(K+'main',''),auto:LSG(K+'auto',false),open:null,openMy:{},q:'',allNext:false};
@@ -502,6 +508,7 @@ document.addEventListener('change',e=>{if(S&&e.target.id==='auto'){S.auto=e.targ
   const old=(DB.find(x=>String(x.id)===ID)||{}).watch;
   $('foot').innerHTML=`${esc(t.name)} · протоколы mafgame.org, обновляются сами раз в 20 секунд · MMR - mafiastats.com · эфиры - YouTube организаторов.${t.page?` <a href="${esc(t.page)}" style="color:var(--ac)">Страница турнира</a>.`:''}${old?` <a href="${esc(old)}" style="color:var(--mu);text-decoration:underline">Прежняя смотровая</a>.`:''}`;
   renderAll();
+  if(t._cached)refreshT(ID).then(ch=>{stamp();if(ch){const c2=curGame(t);S.vg=c2;S.g=c2;followMain();renderAll();}});
   poll([ID],ch=>{if(ch){const c2=curGame(t);if(S.vg<c2&&S.g===S.vg){S.vg=c2;S.g=c2;}followMain();renderAll();}else renderBar();});
 })();
 </script></body></html>

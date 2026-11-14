@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  DOVOD · live2.html · новый live-центр · v1.0 · 2026-11-14
+  DOVOD · live2.html · новый live-центр · v1.1 · 2026-11-14
   Назначение: общая страница «что сейчас происходит» - все идущие турниры, их столы и эфиры, лента результатов,
   мои игроки с разных турниров и ближайшие турниры. Подробности по турниру - в его смотровой (watch2.html?id=).
   Прежний live.html не тронут и работает как раньше.
@@ -8,6 +8,7 @@
   Google-таблица правок, игры - data/live.js, опрос раз в 20 секунд). Отладка на прошедших: ?ids=615,645.
   Оглавление: 1) стили  2) расчёты (core)  3) общие блоки (ui)  4) логика страницы
   Схема: от 1280 px - три колонки (турниры и столы · эфир и лента · таблица и столы), 860-1279 - две, уже - одна.
+  v1.1 (14.11): страница рисуется сразу из последнего снимка, протоколы mafgame подтягиваются в фоне (mafgame отвечал до 30 с - была пустая «Загрузка…»).
   История: v1.0 - из прототипов _preview_live_v0.1-0.2 (в _Архив) с правками Валерия 14.11: спокойные кнопки,
   раскрывающаяся лента результатов, несколько «моих игроков» и их стата, понятный набор эфиров (до 4),
   свой цвет у каждого турнира, сила стола по методу сайта.
@@ -224,10 +225,13 @@ async function loadT(id){
   const t=DATA.t[id]={id,name:cln(m.name||tj.tournament_name||('Турнир '+id)),short:cln(tj.short||m.name||('Турнир '+id)),city:m.city||'',country:m.country||'',stars:m.stars||0,np:m.players||Object.keys(pl).length,
     accent:m.accent||tj.accent||'#ffce00',color:m.accent||tj.accent||'#ffce00',page:m.page||'',prize:m.prize||'',judges:tj.referees_by_table||{},cut:c.n,cutLabel:c.lab,pl,games:[],gt:0,
     inWin:!!a&&td>=a&&td<=b,status:m.status||''};
-  await refreshT(id);return t;
+  /* сразу - последний снимок игр с этого устройства; свежие протоколы подтягиваются в фоне (mafgame бывает медленным, до 30 с) */
+  try{const sv=JSON.parse(localStorage.getItem('dv2_g_'+id)||'null');if(sv&&sv.length){t.games=sv;t.gt=sv.length;t._cached=true;}}catch(e){}
+  return t;
 }
 async function refreshT(id){const t=DATA.t[id];if(!t)return false;let G=null;try{G=window.loadGames?await window.loadGames(id):null;}catch(e){}
-  if(!G||!G.games||!G.games.length)return false;const g=adapt(G.games),sig=JSON.stringify(g);if(sig===t._sig)return false;t._sig=sig;t.games=g;t.gt=g.length;t._ts=null;
+  t._tried=true;if(!G||!G.games||!G.games.length)return false;const g=adapt(G.games),sig=JSON.stringify(g);t._cached=false;if(sig===t._sig)return false;t._sig=sig;t.games=g;t.gt=g.length;t._ts=null;
+  try{localStorage.setItem('dv2_g_'+id,sig);}catch(e){}
   g.forEach(x=>x.tb.forEach(tb=>tb.s.forEach(s=>{if(!t.pl[s[1]])t.pl[s[1]]=[null,'','',''];})));return true;}
 /* опрос: раз в 20 с, вкладка в фоне не опрашивает */
 function poll(ids,cb){setInterval(async()=>{if(document.hidden)return;let ch=false;for(const id of ids){const t=DATA.t[id];if(t&&(t.inWin||!finished(t)))ch=(await refreshT(id))||ch;}stamp();cb(ch);},20000);
@@ -407,7 +411,7 @@ function renderStage(){
   else $('scapw').innerHTML=cap;
 }
 function tcHTML(t){
-  if(!t.games.length)return `<div class="tc" style="--a:${esc(t.color)}"><div class="th"><span class="l1"><span class="ct">${esc(t.city)}</span><span>${stars(t.stars)}</span></span><b>${esc(t.short)}</b><span class="l2">рассадку mafgame ещё не опубликовал</span></div></div>`;
+  if(!t.games.length)return `<div class="tc" style="--a:${esc(t.color)}"><div class="th"><span class="l1"><span class="ct">${esc(t.city)}</span><span>${stars(t.stars)}</span></span><b>${esc(t.short)}</b><span class="l2">${t._tried?'рассадку mafgame ещё не опубликовал':'загружаю протоколы mafgame…'}</span></div></div>`;
   const c=curGame(t),T=table(t),fin=finished(t),multi=L.wins==='multi';
   const mine=L.my.filter(n=>t.pl[n]).map(n=>T.rows.find(a=>a.n===n)).filter(a=>a&&a.pos>3);
   return `<div class="tc${L.rid===t.id?' sel':''}" style="--a:${esc(t.color)}">
@@ -493,6 +497,7 @@ let rsT=0;addEventListener('resize',()=>{clearTimeout(rsT);rsT=setTimeout(()=>{r
   if(WIDE()&&!L.sel){const lt=liveTables();if(lt.length)L.sel=lt[0];}
   $('foot').innerHTML='Результаты - протоколы mafgame.org, обновляются сами раз в 20 секунд. MMR - mafiastats.com. Эфиры - YouTube организаторов. Подробно по каждому турниру - его смотровая. <a href="live.html" style="color:var(--mu);text-decoration:underline">Прежний live-центр</a>.';
   renderAll();
+  TS.forEach(t=>refreshT(t.id).then(ch=>{stamp();if(!L.rid||!DATA.t[L.rid].games.length)L.rid=(TS.find(x=>x.games.length&&!finished(x))||{}).id||L.rid;if(WIDE()&&!L.sel){const lt=liveTables();if(lt.length)L.sel=lt[0];}renderAll();}));
   poll(TS.map(t=>t.id),ch=>{if(ch)renderAll();else renderBar();});
 })();
 </script></body></html>
