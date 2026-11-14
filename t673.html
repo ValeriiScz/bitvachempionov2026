@@ -655,6 +655,7 @@
   .dvt b{color:#f5ff35;font-weight:900;text-shadow:0 0 18px rgba(245,255,53,.35);}
   .dvy{position:absolute;right:14px;bottom:8px;font:900 64px/1 Unbounded,sans-serif;color:transparent;-webkit-text-stroke:1px rgba(38,224,255,.55);}
   .dvs{margin-top:10px;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#79808f;text-transform:uppercase;}
+.mvA{font:700 10px/1 "JetBrains Mono",ui-monospace,monospace;margin-left:4px;white-space:nowrap}.mvA.mvu{color:#4ade80}.mvA.mvd{color:#ff6b6b}
 </style>
 <!-- PWA · 2026-07-16 · v12: манифест + iOS-меты + регистрация sw.js + промо-плашка установки (iPhone/Android). Стратегии кэша — в sw.js; live /mafgame/* кэш обходит -->
 <link rel="manifest" href="manifest.json">
@@ -1134,6 +1135,10 @@ function paintStages(){
   if(stGame>scope.length)stGame=0;
   const list=(stGame>0)?scope.slice(0,stGame):scope;
   const agg=aggregateN(list),rows=agg.rows;
+  /* v14.3 (14.11.2026): ▲▼ - на сколько мест игрок поднялся или опустился после последней полностью сыгранной игры (как в live-центре) */
+  let ldI=-1;list.forEach((g,i)=>{if(g.tables.length&&g.tables.every(t=>t.winner!=='unknown'))ldI=i;});
+  const prevPl={};if(ldI>0)aggregateN(list.slice(0,ldI)).rows.forEach(r=>{prevPl[r.name]=r.place;});
+  const mvA=n=>{const w=prevPl[n],p=rows.find(r=>r.name===n);if(!w||!p)return '';const d=w-p.place;return d>0?`<span class="mvA mvu" title="после последней игры: +${d}">▲${d}</span>`:d<0?`<span class="mvA mvd" title="после последней игры: ${d}">▼${-d}</span>`:'';};
   let ctrl=winNote;
   if(multi)ctrl+='<div class="rounds">'+['all'].concat(D.stagesPresent).map(st=>`<button class="rbtn stg ${st===stStage?'active':''}" data-st="${st}">${st==='all'?'Итог':STAB[st]}</button>`).join('')+'</div>';
   const rgp=[{lab:'',items:[{g:0,t:'Все'}]}];let rqi=0;scope.forEach((game,i)=>{const stt=game.stage||'Квалификация';let lab;if(stt==='Квалификация'){rqi++;lab=rqi<=gamesDay1()?'День 1':'День 2';}else if(stt==='Полуфинал')lab='Полуфинал';else lab='Финал';if(rgp[rgp.length-1].lab!==lab)rgp.push({lab,items:[]});rgp[rgp.length-1].items.push({g:i+1,t:String(i+1)});});
@@ -1148,13 +1153,13 @@ function paintStages(){
   if(stMode==='total'){
     head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th><th class="grp co" title="доп всего (вкл Ci и минусы)">доп</th><th class="x" title="плюсовые допы">доп+</th><th class="x" title="минусовые допы (штрафы)">доп−</th><th class="x">Ci</th><th class="grp" title="побед / игр">Поб/Игр</th><th title="первый убиенный — сколько раз убит в 1-ю ночь, от этого зависит Ci">ПУ</th><th class="x sp"></th><th class="x" title="средний доп за игру">ср.доп</th><th class="x" title="ср.доп при победе">ср.W</th><th class="x" title="ср.доп при поражении">ср.L</th></tr>';
     const cut=cutAfter(list);
-    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td><td class="grp co">${fmt(p.aps+p.ci)}</td><td class="x">${fmt(p.apsPos)}</td><td class="x">${fmt(p.apsNeg)}</td><td class="x">${fmt(p.ci)}</td><td class="grp"><b class="win">${p.w}</b><span class="na">/${p.g}</span></td><td>${p.k?p.k:'<span class="na">·</span>'}</td><td class="x sp"></td><td class="x">${p.g?fmt(p.aps/p.g):'·'}</td><td class="x">${p.wg?fmt(p.apsW/p.wg):'·'}</td><td class="x">${p.lg?fmt(p.apsL/p.lg):'·'}</td></tr>`+((cut&&p.place===cut.n&&rows.length>cut.n)?cutRow(cut):'')).join('');
+    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}${mvA(p.name)}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td><td class="grp co">${fmt(p.aps+p.ci)}</td><td class="x">${fmt(p.apsPos)}</td><td class="x">${fmt(p.apsNeg)}</td><td class="x">${fmt(p.ci)}</td><td class="grp"><b class="win">${p.w}</b><span class="na">/${p.g}</span></td><td>${p.k?p.k:'<span class="na">·</span>'}</td><td class="x sp"></td><td class="x">${p.g?fmt(p.aps/p.g):'·'}</td><td class="x">${p.wg?fmt(p.apsW/p.wg):'·'}</td><td class="x">${p.lg?fmt(p.apsL/p.lg):'·'}</td></tr>`+((cut&&p.place===cut.n&&rows.length>cut.n)?cutRow(cut):'')).join('');
     note.innerHTML='Компактно: Σ · доп-всего · Поб/Игр · ПУ (первый убиенный — сколько раз убит в 1-ю ночь, влияет на Ci). Подробно: доп+, доп−, Ci и средние допы (общий/при победе/при поражении) — <b>листайте вправо →</b>. Σ = WPTS + доп + Ci. '+(D.demo?'<b style="color:#f0906f">Демо — случайные цифры.</b>':'');hlMe(body);
   }else{
     const RLc=[['Citizen','Мир'],['Sheriff','Шер'],['Mafia','Маф'],['Don','Дон']];
     head.innerHTML='<tr><th class="l">#</th><th class="l">Игрок</th><th class="sig">Σ</th>'+RLc.map(([k,l],i)=>`<th class="${i===0?'grp':''}" title="${l}: победы/игр">${l}</th>`).join('')+RLc.map(([k,l],i)=>`<th class="x${i===0?' grp':''}" title="${l}: баллы">${l}·Σ</th>`).join('')+'<th class="x sp"></th>'+RLc.map(([k,l])=>`<th class="x" title="${l}: средний доп за игру в роли">${l}·доп/игру</th>`).join('')+'</tr>';
     const cut2=cutAfter(list);
-    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td>`+RLc.map(([k],i)=>{const r=p.roles[k];return `<td class="${i===0?'grp':''}">${r.g?`<b class="win">${r.w}</b><span class="na">/${r.g}</span>`:'<span class="na">·</span>'}</td>`;}).join('')+RLc.map(([k],i)=>{const r=p.roles[k];return `<td class="x${i===0?' grp':''}">${r.g?fmt(r.sigma):'·'}</td>`;}).join('')+'<td class="x sp"></td>'+RLc.map(([k])=>{const r=p.roles[k];return `<td class="x">${r.g?fmt(r.aps/r.g):'·'}</td>`;}).join('')+'</tr>'+((cut2&&p.place===cut2.n&&rows.length>cut2.n)?cutRow(cut2):'')).join('');
+    body.innerHTML=rows.map(p=>`<tr><td class="l">${p.place}${mvA(p.name)}</td><td class="l">${plink(p.name)}</td><td class="sig">${fmt(p.sigma)}</td>`+RLc.map(([k],i)=>{const r=p.roles[k];return `<td class="${i===0?'grp':''}">${r.g?`<b class="win">${r.w}</b><span class="na">/${r.g}</span>`:'<span class="na">·</span>'}</td>`;}).join('')+RLc.map(([k],i)=>{const r=p.roles[k];return `<td class="x${i===0?' grp':''}">${r.g?fmt(r.sigma):'·'}</td>`;}).join('')+'<td class="x sp"></td>'+RLc.map(([k])=>{const r=p.roles[k];return `<td class="x">${r.g?fmt(r.aps/r.g):'·'}</td>`;}).join('')+'</tr>'+((cut2&&p.place===cut2.n&&rows.length>cut2.n)?cutRow(cut2):'')).join('');
     note.innerHTML='По ролям: <b>побед / игр</b> в каждой роли. В «Подробно» добавляются Σ по каждой роли и <b>средний доп за игру в роли</b> (доп в роли ÷ игр в роли) — <b>листайте таблицу вправо →</b>.';hlMe(body);
   }
 }
