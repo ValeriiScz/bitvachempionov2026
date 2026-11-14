@@ -206,6 +206,7 @@ body{background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px)
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});}
 </script>
 <style>.top tr.me td{background:rgba(245,255,53,.10);color:var(--yel)!important;font-weight:800}.top tr.me td:first-child{border-radius:6px 0 0 6px}.top tr.me td:last-child{border-radius:0 6px 6px 0}.top tr.gap td{text-align:center;color:#79808f;padding:2px 0;border:0}</style>
+<style>#eco{display:none!important}</style>
 </head>
 <body>
 <nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><a href="t664.html">GMC 2026 · финал</a><i>/</i><span>Смотровая</span></nav>
@@ -253,7 +254,7 @@ const mono=n=>((n||'?').replace(/[^A-Za-zА-Яа-яЁё0-9]/g,'').slice(0,2).toU
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:v}catch(e){return d}},set(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}};
 
 let D={players:[],P:{},games:[],tour:{},judges:{}};
-let S={mode:(location.hash==='#studio')?'studio':(LS.get('w664_mode','one')==='all'?'all':'one'),sday:null,layout:LS.get('w664_layout','focus'),table:null,view:null,follow:LS.get(CFG.ls+'my',null)||LS.get('w664_follow',null),soundOn:false,auto:LS.get('w664_auto','1')==='1',sound:1,eco:(function(){const v=LS.get('w664_eco',null);if(v==='1'||v==='0')return v==='1';return window.matchMedia('(max-width:1024px)').matches;})()};
+let S={mode:(location.hash==='#studio')?'studio':(LS.get('w664_mode','one')==='all'?'all':'one'),sday:null,layout:LS.get('w664_layout','focus'),table:null,view:null,follow:LS.get(CFG.ls+'my',null)||LS.get('w664_follow',null),soundOn:false,auto:LS.get('w664_auto','1')==='1',sound:1,eco:false};
 
 /* v3.0: ссылка со страницы турнира: watch664.html?t=2 (стол) / ?p=ник (следить) */
 (function(){try{const q=new URLSearchParams(location.search);const t=+q.get('t');const p=q.get('p');
@@ -406,7 +407,7 @@ function toggleSound(t){if(t!==S.sound&&S.mode==='all'){S.soundOn=true;pickMain(
   paintSound();if(S.soundOn)toast('Звук включён. Если тихо — нажмите звук в самом плеере');}
 function paintSound(){document.querySelectorAll('#stage .pl').forEach(p=>{const t=+p.dataset.t;const on=S.soundOn&&(p.classList.contains('main'));p.classList.toggle('act',on&&S.mode==='all');const b=p.querySelector('.snd');if(b){b.classList.toggle('on',on);b.textContent=on?'🔊 звук':'🔇 включить звук';}});renderTabsSoundMark();}
 window.matchMedia('(orientation:landscape) and (max-width:1024px)').addEventListener('change',e=>{if(e.matches&&S.mode==='all'){const st=document.getElementById('stage');if(st)setTimeout(()=>st.scrollIntoView({behavior:'smooth',block:'start'}),250);}});
-function setEco(on){S.eco=!!on;LS.set('w664_eco',S.eco?'1':'0');S.soundOn=false;renderStage(true);renderEco();}
+function setEco(on){on=false;S.eco=false; /* 14.11: режим «Экономия» убран (решение Валерия) */LS.set('w664_eco',S.eco?'1':'0');S.soundOn=false;renderStage(true);renderEco();}
 function renderEco(){document.querySelectorAll('#eco button').forEach(b=>b.classList.toggle('on',(b.dataset.e==='1')===S.eco));}
 function renderTabsSoundMark(){document.querySelectorAll('#tabs button[data-t]').forEach(b=>{const i=b.querySelector('.sp');if(i)i.textContent=(S.mode==='all'&&+b.dataset.t===S.sound)?(S.soundOn?'🔊':'▣'):'';});}
 /* v3.1: «в лайв» — все живые окна на самый свежий момент эфира и play. Перемотка за конец записи у live-эфира
