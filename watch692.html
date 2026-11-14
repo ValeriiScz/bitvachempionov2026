@@ -167,6 +167,7 @@ button{font:inherit;color:inherit}
 <script>
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});}
 </script>
+<style>.top tr.me td{background:rgba(245,255,53,.10);color:var(--yel)!important;font-weight:800}.top tr.me td:first-child{border-radius:6px 0 0 6px}.top tr.me td:last-child{border-radius:0 6px 6px 0}.top tr.gap td{text-align:center;color:#79808f;padding:2px 0;border:0}</style>
 </head>
 <body>
 <nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><a href="t692.html">Central Cup 2026</a><i>/</i><span>Смотровая</span></nav>
@@ -367,7 +368,7 @@ function setFollow(n){S.follow=n||null;LS.set('w692_follow',S.follow);if(S.follo
 function renderTop(){
   const el=document.getElementById('topP');const R=D.rows||[];
   if(!R.length){el.innerHTML=`<div class="panel"><h3>Таблица</h3><div class="note" style="margin:0">Появится после первого сыгранного стола.</div></div>`;return;}
-  el.innerHTML=`<div class="panel"><h3>Таблица · топ‑12<small>Σ · сыграно игр: ${D.played}</small></h3><table class="top">${R.slice(0,12).map((r,i)=>`<tr class="${i===CFG.finalN?'cut':''}${r.n===S.follow?' me':''}"><td class="n">${i+1}</td><td>${esc(r.n)}</td><td class="v">${r.s.toFixed(2)}</td></tr>`).join('')}</table><div class="note">Пунктир — линия выхода в финал (топ‑${CFG.finalN}). Неофициальный пересчёт по протоколам; полная таблица — <a href="${CFG.page}#stages">на странице турнира</a>.</div></div>`;
+  el.innerHTML=`<div class="panel"><h3>Таблица · топ‑12<small>Σ · сыграно игр: ${D.played}</small></h3><table class="top">${R.slice(0,12).map((r,i)=>`<tr class="${i===CFG.finalN?'cut':''}${r.n===S.follow?' me':''}"><td class="n">${i+1}</td><td>${esc(r.n)}</td><td class="v">${r.s.toFixed(2)}</td></tr>`).join('')}${(()=>{const k=S.follow?R.findIndex(r=>r.n===S.follow):-1;return k>=12?`<tr class="gap"><td colspan="3">···</td></tr><tr class="me"><td class="n">${k+1}</td><td>${esc(R[k].n)}</td><td class="v">${R[k].s.toFixed(2)}</td></tr>`:'';})()}</table><div class="note">Пунктир — линия выхода в финал (топ‑${CFG.finalN}). Неофициальный пересчёт по протоколам; полная таблица — <a href="${CFG.page}#stages">на странице турнира</a>.</div></div>`;
 }
 function renderStatus(){
   const st=SDB();const gi=D.cur;const t=D.tour;
