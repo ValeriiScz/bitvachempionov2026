@@ -1,4 +1,4 @@
-/* DOVOD · assets/watch-my.js · v1.0 · 2026-11-14
+/* DOVOD · assets/watch-my.js · v1.1 · 2026-11-14 (без дубля: старая панель «Следить за игроком» спрятана — её функции здесь: главный игрок, «эфир за главным в каждой новой игре») · v1.0 · 2026-11-14
    «★ Мои игроки» в смотровых (watch*.html): следить сразу за несколькими игроками (до 8) — как «Для зрителей» на ЧМ-2026.
    · сводка по каждому: место и Σ (▲▼ за последнюю сыгранную игру), сейчас — стол и место (кнопка «▶»), дальше — следующая игра,
      путь «игра:стол» на весь турнир, в сыгранных — роль и победа/поражение (роль в будущей игре заранее неизвестна никому);
@@ -20,6 +20,8 @@
   var OPEN=false;try{OPEN=localStorage.getItem('dvw_my_open')==='1';}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(FAV));}catch(e){}}
   var css=document.createElement('style');css.textContent=
+  '#followP{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}'+
+  '.dvm-auto{display:flex;align-items:center;gap:8px;margin:8px 0 2px;font:600 12.5px/1.3 Inter;color:#cfd5df;cursor:pointer}.dvm-auto input{width:18px;height:18px;accent-color:#f5ff35}'+
   '.dvm{margin:0 0 12px}.dvm .panel{margin:0}'+
   '.dvm-h{display:flex;align-items:center;gap:8px;cursor:default}.dvm-h h3{margin:0!important;flex:1;display:flex;align-items:center;gap:8px}'+
   '.dvm-h .cnt{font:800 11px/1 "JetBrains Mono",monospace;color:#9aa3b2}.dvm-tg{display:none;min-width:40px;min-height:36px;border-radius:9px;border:1px solid rgba(255,255,255,.16);background:none;color:#cfd5df;font:800 14px/1 Inter;cursor:pointer}'+
@@ -73,9 +75,10 @@
     if(!box.parentNode)return null;
     box.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a,n=b.dataset.n;
       if(a==='tg'){OPEN=box.classList.contains('closed');box.classList.toggle('closed',!OPEN);try{localStorage.setItem('dvw_my_open',OPEN?'1':'');}catch(e){}return;}
-      if(a==='rm'){FAV=FAV.filter(function(x){return x!==n;});save();sig='';render();return;}
+      if(a==='rm'){FAV=FAV.filter(function(x){return x!==n;});save();var S3=g('S');if(S3&&S3.follow===n){setMain(FAV[0]||'');}sig='';render();return;}
       if(a==='main'){setMain(n);sig='';setTimeout(render,50);return;}
       if(a==='go'){goTable(+b.dataset.t);return;}
+      if(a==='auto'){var fa=$('#fauto');var S2=g('S');if(fa){fa.checked=b.checked;fa.dispatchEvent(new Event('change',{bubbles:true}));}else if(S2){S2.auto=b.checked;}sig='';return;}
       if(a==='pth'){var r=b.closest('.dvm-r');if(r)r.classList.toggle('open');return;}});
     return box;
   }
@@ -90,7 +93,7 @@
     var games=D.games,cur=D.cur||0;var rows=agg(games);
     var lastDone=-1;games.forEach(function(gm,gi){if(gm.tables.length&&gm.tables.every(done))lastDone=gi;});
     var prev=lastDone>=0?agg(games,lastDone-1):[];
-    var s2=[FAV.join(','),cur,rows.map(function(r){return r.n+r.s.toFixed(2);}).join(','),S&&S.follow,box.className,games.map(function(gm){return gm.tables.map(function(t){return t.winner;}).join('');}).join('|')].join('#');
+    var s2=[FAV.join(','),cur,rows.map(function(r){return r.n+r.s.toFixed(2);}).join(','),S&&S.follow,S&&S.auto,box.className,games.map(function(gm){return gm.tables.map(function(t){return t.winner;}).join('');}).join('|')].join('#');
     if(s2===sig){mark();return;}sig=s2;
     var keep=$('.dvm-q input',box);var qv=keep?keep.value:'';
     var gm=games[cur];var fin=isFin(gm,games);
@@ -116,7 +119,7 @@
     box.innerHTML='<div class="panel"><div class="dvm-h"><h3>★ Мои игроки <span class="cnt">'+FAV.length+'/'+MAX+'</span></h3><button type="button" class="dvm-tg" data-a="tg" aria-label="Свернуть/развернуть">'+(box.classList.contains('closed')?'▾':'▴')+'</button></div>'+
       (FAV.length?'<div class="dvm-mini" data-a="tg">'+mini+'</div>':'')+
       '<div class="dvm-body"><div class="dvm-q"><input type="search" autocomplete="off" placeholder="'+(FAV.length?'добавить игрока…':'Найти игрока — следить за несколькими сразу')+'" aria-label="Добавить игрока"><div class="dvm-ql" hidden></div></div>'+
-      (FAV.length?(nowH?'<div class="dvm-now">'+nowH+'</div>':'')+rowsH:'<div class="dvm-empty">Добавь одного или нескольких игроков — здесь будет, где каждый сидит сейчас и дальше, место в таблице, путь по столам и роли в сыгранных играх.</div>')+'</div></div>';
+      (S&&S.follow&&FAV.indexOf(S.follow)>=0?'<label class="dvm-auto"><input type="checkbox" data-a="auto" '+(S.auto?'checked':'')+'> Эфир за главным ('+esc(S.follow)+') — сам переключается на его стол в каждой новой игре</label>':'')+(FAV.length?(nowH?'<div class="dvm-now">'+nowH+'</div>':'')+rowsH:'<div class="dvm-empty">Добавь одного или нескольких игроков — здесь будет, где каждый сидит сейчас и дальше, место в таблице, путь по столам и роли в сыгранных играх.</div>')+'</div></div>';
     if(!FAV.length&&PH.matches)box.classList.remove('closed');
     var ni=$('.dvm-q input',box);if(ni&&qv)ni.value=qv;searchUI();mark();
   }
