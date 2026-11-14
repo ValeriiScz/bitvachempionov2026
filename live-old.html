@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- DOVOD · live.html · v1.5 · 2026-11-14 · ▲▼ — движение мест за последнюю сыгранную игру у всех турниров (раньше — только если таблица менялась при открытой странице); таблица — все игроки, прокрутка внутри блока · v1.4 · 2026-11-14 · «Столы · кто где»: у каждого игрока доп за эту игру (зелёный +, красный −), проигравшие в сыгранной игре приглушены · v1.3 · 2026-11-14 · у каждого турнира переключатель «Таблица | Столы»: в «Столах» — номер игры (сыграна ✓ / идёт ● / впереди), по выбранной игре все столы с составом (место, аватар, ник, тир), сила стола относительно столов этого турнира (спокойный…элитный — шкала «Сила стола»), результат и ▶ эфир; можно листать игры, не уходя с трансляции · v1.2 · 2026-11-14 · режим «Все эфиры»: до 4 трансляций сеткой одновременно (любые турниры и столы; тап по столу — добавить/убрать), звук — в самом окне · v1.1 · 2026-11-14 · «Мой игрок» на весь Live-центр: место, Σ и стол в каждом турнире, где он играет (в таблице — его строка под топом); по умолчанию — стол, где есть эфир (раньше брался турнир без ссылки); турнир из одной стадии (GMC) не путается с финалом · v1.0 · 2026-11-13 · «Live-центр»: все турниры, которые идут сейчас (и стартуют в ближайшие 3 дня), на одном экране —
+     как live-раздел у букмекеров: сверху один плеер (выбранный турнир и стол), ниже по каждому турниру — текущая игра, столы с эфирами
+     и живая таблица (топ с линией выхода в финал / призов, «мой игрок»). До старта — отсчёт, рассадка первой игры и фавориты по MMR.
+     Данные: data/tournaments.js (какие турниры, у кого есть смотровая t.watch), data/live.js loadGames(id) (результаты с mafgame раз в 20 с),
+     эфиры — тот же источник, что у смотровых (data/streams.js, data/streams_{id}.json, Google-таблица data/gsheet.js),
+     аватары и MMR — data/participants_{id}.json. Отладка: live.html?ids=692,673 — показать прошедшие турниры как будто идут. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Live-центр · DOVOD</title>
+<meta name="description" content="Live-центр DOVOD: все идущие турниры по спортивной мафии — эфиры столов и живые турнирные таблицы на одном экране.">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32">
+<link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#05060a;--panel:#0b0d14;--panel2:#11141d;--ink:#eef3fb;--mut:#a4adbd;--dim:#79808f;--line2:rgba(255,255,255,.10);
+    --cyan:#26e0ff;--yel:#f5ff35;--red:#db514e;--lilac:#c14bbd;--disp:'Unbounded',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;}
+  *{box-sizing:border-box}
+  html,body{max-width:100%;overflow-x:hidden}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(900px 500px at 80% -10%,rgba(219,81,78,.08),transparent 60%),radial-gradient(700px 420px at 0% 10%,rgba(38,224,255,.07),transparent 60%),
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px) 0 0/100% 46px,linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) 0 0/46px 100%}
+  .dv-crumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 14px;margin:0;font:700 10px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;background:#05060a;border-bottom:1px solid var(--line2)}
+  .dv-crumb a{color:#8a91a0;text-decoration:none}.dv-crumb a.dv-home{color:var(--yel);font-weight:800}.dv-crumb i{color:#39404c;font-style:normal}.dv-crumb span{color:#5f6675}
+  .wrap{max-width:1280px;margin:0 auto;padding:22px 16px 90px}
+  .hero{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .kick{display:flex;align-items:center;gap:8px;font:800 10.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#ff8a86;margin-bottom:10px}
+  .kick i{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(219,81,78,.2);animation:pl 1.4s infinite}
+  @keyframes pl{50%{opacity:.35}}
+  h1{margin:0;font:900 clamp(28px,5vw,48px)/.95 var(--disp);text-transform:uppercase;letter-spacing:-.01em}
+  .sub{color:var(--mut);font-size:13.5px;margin-top:8px;max-width:640px}
+  .upd{font:700 11px/1 var(--mono);color:var(--dim);letter-spacing:.06em}
+  .hr2{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+  .myp{display:flex;align-items:center;gap:8px;min-height:42px;padding:0 6px 0 12px;border-radius:12px;border:1px solid rgba(245,255,53,.4);background:rgba(245,255,53,.05)}
+  .myp span{font:800 11px/1 var(--mono);letter-spacing:.08em;color:var(--yel);white-space:nowrap}
+  .myp input{width:260px;max-width:52vw;background:transparent;border:0;outline:0;color:var(--ink);font:600 14px/1 Inter;padding:10px 0}
+  .myp button{width:30px;height:30px;border-radius:8px;border:0;background:rgba(255,255,255,.06);color:var(--mut);font:700 16px/1 Inter;cursor:pointer}
+  .mine{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 14px 12px 16px;padding:10px 12px;border-radius:12px;background:rgba(245,255,53,.08);border:1px solid rgba(245,255,53,.35);font:600 13px/1.3 Inter;color:var(--ink)}
+  .mine .pl{font:900 22px/1 var(--disp);color:var(--yel)}.mine .pl small{font:700 11px/1 Inter;color:var(--mut);margin-left:3px}
+  .mine .nm{font-weight:800}.mine .sub2{color:var(--mut);font-size:12px}
+  .mine button{margin-left:auto}
+  @media (max-width:560px){.hr2{align-items:stretch;width:100%}.myp input{width:100%;max-width:none;flex:1}}
+  /* раскладка: телефон — плеер сверху, ниже лента; компьютер — плеер слева (липкий), лента справа */
+  .lay{display:grid;grid-template-columns:1fr;gap:16px}
+  @media (min-width:1100px){.lay{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}.stage{position:sticky;top:14px}}
+  .modes{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+  .modes button{min-height:42px;padding:0 16px;border-radius:12px;border:1px solid var(--line2);background:rgba(255,255,255,.03);color:#cfd5df;font:800 13px/1 Inter;cursor:pointer}
+  .modes button.on{background:var(--yel);color:#05060a;border-color:transparent}
+  .modes .mh{font:600 12px/1.3 Inter;color:var(--mut);margin-left:6px}
+  .lay.multi{grid-template-columns:1fr!important}.lay.multi .stage{position:static}
+  @media (min-width:1100px){.lay.multi .feed{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}}
+  .mgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px;background:#000}
+  .mgrid.n1{grid-template-columns:1fr}
+  @media (max-width:640px){.mgrid{grid-template-columns:1fr}}
+  .mc{position:relative;aspect-ratio:16/9;background:#000}
+  .mc iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .mc .ml{position:absolute;left:8px;top:8px;z-index:2;padding:5px 9px;border-radius:8px;background:rgba(5,6,10,.82);font:800 11.5px/1.2 Inter;color:#fff;pointer-events:none;max-width:70%}
+  .mc .ml small{display:block;font:600 10.5px/1.2 Inter;color:var(--mut)}
+  .mc .mx{position:absolute;right:8px;top:8px;z-index:2;width:32px;height:32px;border-radius:8px;border:0;background:rgba(5,6,10,.82);color:#fff;font:700 16px/1 Inter;cursor:pointer}
+  .mc.empty{display:flex;align-items:center;justify-content:center;text-align:center;color:var(--mut);font:600 12.5px/1.4 Inter;padding:14px;border:1px dashed rgba(255,255,255,.12)}
+  .tab.in{box-shadow:0 0 0 2px var(--yel) inset}
+  /* плеер */
+  .stage{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line2);border-radius:14px;overflow:hidden}
+  .scr{position:relative;aspect-ratio:16/9;background:#000}
+  .scr iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:18px;
+    background:radial-gradient(520px 280px at 50% 0%,rgba(245,255,53,.07),transparent 70%),repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 12px,transparent 12px 24px)}
+  .ph .pi{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(245,255,53,.1);color:var(--yel);font-size:22px;border:1px solid rgba(245,255,53,.35)}
+  .ph b{font:800 15.5px/1.3 Inter;color:var(--ink)}.ph small{font:500 12.5px/1.45 Inter;color:var(--mut);max-width:440px}
+  .ph .cd{font:800 26px/1 var(--mono);color:var(--yel)}
+  .sbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 14px;border-top:1px solid var(--line2)}
+  .sbar .t{font:800 13.5px/1.25 Inter;min-width:0}.sbar .t small{display:block;font:600 11.5px/1.3 Inter;color:var(--mut);margin-top:2px}
+  .sbar .sp{flex:1}
+  .lvb{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:999px;background:rgba(219,81,78,.18);color:#ff8a86;font:800 10px/1 var(--mono);letter-spacing:.1em}
+  .lvb i{width:7px;height:7px;border-radius:50%;background:var(--red);animation:pl 1.4s infinite}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 14px;border-radius:10px;font:800 12.5px/1 Inter;text-decoration:none;white-space:nowrap;border:1px solid var(--line2);color:#cfd5df;background:rgba(255,255,255,.03);cursor:pointer}
+  .btn.y{background:var(--yel);color:#05060a;border-color:transparent}
+  .btn.mg{border-color:rgba(249,214,39,.45);color:#f9d627;background:rgba(249,214,39,.05)}.btn.mg img{width:15px;height:15px}
+  .seats{display:flex;flex-wrap:wrap;gap:5px;padding:0 14px 13px}
+  .seat{display:inline-flex;align-items:center;gap:6px;padding:4px 8px 4px 4px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line2);font:600 12px/1 Inter;color:#cfd5df}
+  .seat .n{font:800 10px/1 var(--mono);color:var(--dim);min-width:12px;text-align:center}
+  .seat.me{border-color:var(--yel);color:var(--yel)}
+  /* лента турниров */
+  .feed{display:flex;flex-direction:column;gap:14px;min-width:0}
+  .tb{--acc:var(--cyan);position:relative;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid color-mix(in srgb,var(--acc) 30%,transparent);border-radius:14px;overflow:hidden}
+  .tb::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(var(--acc),transparent)}
+  .tb.sel{box-shadow:0 0 0 1px var(--acc),0 10px 34px rgba(0,0,0,.4)}
+  .th{display:flex;gap:12px;align-items:flex-start;padding:13px 14px 10px 16px}
+  .th .tt{flex:1;min-width:0}
+  .th .k{font:800 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .th .k b{color:var(--acc)}
+  .th h2{margin:5px 0 0;font:800 17px/1.2 Inter}
+  .th h2 a{color:var(--ink);text-decoration:none}.th h2 a:hover{color:var(--acc)}
+  .th .gm{margin-top:5px;font:700 12px/1.3 Inter;color:var(--mut)}
+  .th .gm b{color:var(--ink)}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 12px 16px}
+  .tab{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 13px;border-radius:10px;border:1px solid var(--line2);background:rgba(255,255,255,.03);color:#cfd5df;font:800 12.5px/1 Inter;cursor:pointer}
+  .tab .st{font:700 10px/1 var(--mono);color:var(--dim)}
+  .tab.on{background:var(--acc);color:#05060a;border-color:transparent}.tab.on .st{color:rgba(5,6,10,.65)}
+  .tab.off{opacity:.55}
+  .tab .pv{font-size:10px}
+  .acts{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 12px 16px}
+  /* таблица */
+  .st0{padding:0 14px 14px 16px}
+  .stt{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 6px;font:800 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  .stt a{color:var(--acc);text-decoration:none;letter-spacing:.04em;text-transform:none;font:700 12px/1 Inter}
+  .lbw{max-height:520px;overflow-y:auto;scrollbar-width:thin;margin-right:-4px;padding-right:4px}
+  @media (max-width:700px){.lbw{max-height:440px}}
+  table.lb{width:100%;border-collapse:collapse;font:600 13px/1.2 Inter}
+  .lb td{padding:6px 4px;border-top:1px solid rgba(255,255,255,.06);white-space:nowrap}
+  .lb td.pl{width:26px;font:800 11px/1 var(--mono);color:var(--dim);text-align:center}
+  .lb td.nm{width:100%;max-width:0;overflow:hidden;text-overflow:ellipsis}
+  .lb td.nm .av{display:inline-block;width:22px;height:22px;border-radius:50%;vertical-align:middle;margin-right:7px;background:#1b1e27 center/cover;border:2px solid var(--rc,#3a404d)}
+  .lb td.g{font:700 11px/1 var(--mono);color:var(--dim);text-align:right}
+  .lb td.s{font:800 13px/1 var(--mono);color:var(--ink);text-align:right;width:58px}
+  .lb td.d{font:700 10.5px/1 var(--mono);text-align:right;width:44px}
+  .lb td.d.up{color:#7ce6a0}.lb td.d.dn{color:#ff8a86}
+  .lb tr.me td{background:rgba(245,255,53,.07)}.lb tr.me td.nm{color:var(--yel)}
+  .lb tr.cut td{padding:0;border-top:1px dashed color-mix(in srgb,var(--acc) 70%,transparent)}
+  .lb tr.cut td span{display:block;padding:3px 4px;font:800 9.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+  .lb tr.p1 td.pl{color:#f5d76e}.lb tr.p2 td.pl{color:#d7dde6}.lb tr.p3 td.pl{color:#d18a4a}
+  .note{font:500 12.5px/1.45 Inter;color:var(--mut)}
+  .vw{display:flex;gap:4px;padding:0 14px 10px 16px}.vw button{flex:1;min-height:38px;border-radius:10px;border:1px solid var(--line2);background:rgba(255,255,255,.03);color:#cfd5df;font:800 12.5px/1 Inter;cursor:pointer}
+  .vw button.on{background:color-mix(in srgb,var(--acc) 22%,transparent);border-color:var(--acc);color:#fff}
+  .gsw{display:flex;align-items:center;gap:6px;padding:0 14px 10px 16px}.gsw .gs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;flex:1;padding-bottom:3px}
+  .gsw .ar2{flex:none;width:36px;height:36px;border-radius:9px;border:1px solid var(--line2);background:none;color:#cfd5df;font:800 15px/1 Inter;cursor:pointer}.gsw .ar2:disabled{opacity:.3}
+  .gs button{flex:none;min-width:38px;height:36px;border-radius:9px;border:1px solid var(--line2);background:none;color:var(--mut);font:800 12px/1 var(--mono);cursor:pointer;position:relative}
+  .gs button.d{color:#7ce6a0;border-color:rgba(124,230,160,.3)}.gs button.lv{color:#ff8a86;border-color:rgba(219,81,78,.55)}.gs button.lv::after{content:'';position:absolute;top:4px;right:4px;width:6px;height:6px;border-radius:50%;background:#db514e}
+  .gs button.on{background:var(--acc);color:#05060a;border-color:transparent}.gs button.f{border-style:dashed}
+  .tcs{display:flex;flex-direction:column;gap:8px;padding:0 14px 14px 16px}
+  .tc2{border:1px solid var(--line2);border-radius:12px;background:rgba(255,255,255,.02);overflow:hidden}
+  .tc2.cur{border-color:color-mix(in srgb,var(--acc) 60%,transparent)}
+  .tc2h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.06)}
+  .tc2h b{font:800 13px/1 Inter}.tc2h small{font:600 11.5px/1 Inter;color:var(--mut)}
+  .sb{display:inline-flex;align-items:center;padding:3px 8px;border-radius:6px;border:1px solid var(--sc);color:var(--sc);font:800 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+  .rs{font:800 10.5px/1 Inter;padding:3px 7px;border-radius:999px}.rs.red{background:rgba(219,81,78,.18);color:#ff8a86}.rs.blk{background:rgba(255,255,255,.1);color:#e6e8ee}.rs.go{background:rgba(219,81,78,.12);color:#ff8a86}.rs.fu{color:var(--dim)}
+  .tc2h .pb{margin-left:auto;min-height:32px;padding:0 11px;border-radius:8px;border:1px solid color-mix(in srgb,var(--acc) 60%,transparent);background:none;color:#fff;font:800 12px/1 Inter;cursor:pointer}
+  .tc2h .pb.on{background:var(--acc);color:#05060a}
+  .sts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px;padding:8px}
+  .s2{display:flex;align-items:center;gap:5px;min-width:0;padding:4px 5px;border-radius:8px;background:rgba(255,255,255,.03);font:600 11.5px/1.15 Inter;color:#dfe3ea}
+  .s2 .sn{font:800 9.5px/1 var(--mono);color:var(--dim);flex:none;width:12px;text-align:right}
+  .s2 .a{flex:none;width:20px;height:20px;border-radius:50%;background:#1b1e27 center/cover;border:2px solid var(--rc,#3a404d)}
+  .s2 .n{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .s2.me{box-shadow:0 0 0 1px var(--yel) inset;color:var(--yel)}.s2.w{background:rgba(124,230,160,.08)}.s2.l{opacity:.5}.s2.l.me{opacity:.8}
+  .s2 .dp{margin-left:auto;flex:none;font:800 10.5px/1 var(--mono);color:var(--mut)}.s2 .dp.p{color:#7ce6a0}.s2 .dp.m{color:#ff8a86}
+  @media (max-width:700px){.sts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .empty{padding:28px 16px;text-align:center;border:1px dashed var(--line2);border-radius:14px;color:var(--mut)}
+  .empty b{display:block;color:var(--ink);font:800 16px/1.3 Inter;margin-bottom:6px}
+  .foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line2);font-size:12px;color:var(--dim);line-height:1.7}
+  .foot a{color:var(--mut)}
+  .rf{position:fixed;left:12px;bottom:12px;z-index:5}
+  #__refbtn{display:none!important} /* у live.js своя кнопка «⟳» — здесь обновление в шапке */
+  @media (max-width:560px){.wrap{padding-top:14px}.sub{display:none}h1{font-size:28px}.th h2{font-size:15.5px}}
+</style>
+<!-- PWA · 2026-07-16 · v12: манифест + iOS-меты + регистрация sw.js + промо-плашка установки (iPhone/Android). Стратегии кэша — в sw.js; live /mafgame/* кэш обходит -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#05060a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="DOVOD">
+<script>
+/* SW только по http/https — локальный просмотр file:// не падает */
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+}
+/* Промо-плашка «установите как приложение»: iPhone — инструкция Safari/«На экран Домой»,
+   Android — кнопка установки (beforeinstallprompt) или инструкция про меню Chrome.
+   Не показывается: внутри установленного приложения (standalone) и 14 дней после «Позже». */
+(function(){try{
+  if(!/^https?:$/.test(location.protocol))return;
+  if((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)return;
+  var KEY='mgs_pwa_promo_hide_until';
+  try{if(Date.now()<(+localStorage.getItem(KEY)||0))return;}catch(e){}
+  var deferred=null,shown=false;
+  addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;
+    var b=document.getElementById('mgsPwaGo');if(b){b.style.display='inline-block';}});
+  function hide(days){try{localStorage.setItem(KEY,String(Date.now()+days*864e5));}catch(e){}
+    var el=document.getElementById('mgsPwaPromo');if(el)el.parentNode.removeChild(el);}
+  function show(){
+    if(shown)return;shown=true;
+    var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/.test(ua),isAndroid=/Android/.test(ua);
+    var how;
+    if(isIOS){how='iPhone: откройте сайт в <b>Safari</b> → кнопка «Поделиться» <b>⬆</b> → <b>«На экран “Домой”»</b>.';}
+    else if(isAndroid){how='Android: <b>Chrome</b> → меню <b>⋮</b> → <b>«Установить приложение»</b> (или «Добавить на гл. экран»).';}
+    else{how='В Chrome/Edge: значок установки в адресной строке (справа).';}
+    var tb=document.querySelector('.tabbar'),off='14px';
+    try{if(tb&&getComputedStyle(tb).display!=='none')off='calc(14px + 66px)';}catch(e){}
+    var d=document.createElement('div');d.id='mgsPwaPromo';
+    d.innerHTML='<style>#mgsPwaPromo{position:fixed;left:12px;right:12px;bottom:'+off+';z-index:99990;max-width:520px;margin:0 auto;'+
+      'background:linear-gradient(180deg,#12294a,#0f2138);border:1px solid rgba(212,175,55,.45);border-radius:14px;'+
+      'box-shadow:0 14px 40px rgba(0,0,0,.55);padding:12px 14px;font-family:Manrope,-apple-system,system-ui,sans-serif;color:#eef3fb;}'+
+      '#mgsPwaPromo .t{font-weight:800;font-size:13.5px;color:#f0d98a;margin:0 0 4px;}'+
+      '#mgsPwaPromo .h{font-size:12px;line-height:1.45;color:#9fb2cc;}#mgsPwaPromo .h b{color:#eef3fb;}'+
+      '#mgsPwaPromo .r{display:flex;gap:8px;margin-top:9px;align-items:center;}'+
+      '#mgsPwaPromo button{font:inherit;font-size:12px;font-weight:800;border-radius:9px;padding:7px 13px;cursor:pointer;}'+
+      '#mgsPwaGo{display:none;background:linear-gradient(100deg,#d4af37,#a5822b);border:0;color:#0a1626;}'+
+      '#mgsPwaLater{background:transparent;border:1px solid rgba(212,175,55,.35);color:#9fb2cc;}</style>'+
+      '<div class="t">📲 DOVOD можно установить как приложение</div>'+
+      '<div class="h">Иконка на экране, полноэкранный режим и быстрый доступ к live-статистике.<br>'+how+'</div>'+
+      '<div class="r"><button id="mgsPwaGo">Установить</button><button id="mgsPwaLater">Позже</button></div>';
+    document.body.appendChild(d);
+    var go=document.getElementById('mgsPwaGo');
+    if(deferred)go.style.display='inline-block';
+    go.onclick=function(){if(!deferred)return;deferred.prompt();deferred.userChoice.then(function(){hide(365);});};
+    document.getElementById('mgsPwaLater').onclick=function(){hide(14);};
+  }
+  if(document.readyState==='loading')addEventListener('DOMContentLoaded',function(){setTimeout(show,900);});
+  else setTimeout(show,900);
+}catch(e){}})();
+</script>
+</head>
+<body>
+<nav class="dv-crumb"><a class="dv-home" href="/">DOVOD</a><i>/</i><a href="tournaments.html">Турниры</a><i>/</i><span>Live-центр</span></nav>
+<div class="wrap">
+  <div class="hero">
+    <div><div class="kick"><i></i>DOVOD · live</div><h1>Live-центр</h1>
+      <div class="sub">Все турниры, что идут сейчас: эфиры столов и живые таблицы на одном экране. Нажми на стол — эфир переключится наверху.</div></div>
+    <div class="hr2"><label class="myp"><span>★ Мой игрок</span><input id="myIn" list="myList" placeholder="ник — покажу место в каждом турнире" autocomplete="off"><button type="button" id="myX" title="сбросить">×</button></label><datalist id="myList"></datalist><div class="upd" id="upd"></div></div>
+  </div>
+  <div class="modes" id="modes"><button type="button" data-m="one">▶ Один эфир</button><button type="button" data-m="multi">▦ Все эфиры · до 4</button><span class="mh" id="mh"></span></div>
+  <div class="lay" id="lay">
+    <div class="stage" id="stage"><div class="scr"><div class="ph"><div class="pi">▶</div><b>Загрузка…</b></div></div></div>
+    <div class="feed" id="feed"></div>
+  </div>
+  <div class="foot">Результаты — mafgame.org, обновляются сами раз в 20 секунд. Эфиры — YouTube-трансляции организаторов. MMR — mafiastats.com.
+    Подробно по каждому турниру — его смотровая (все столы, следить за игроком) и страница турнира (рассадка, пересечения, сила столов).</div>
+</div>
+<script src="data/tournaments.js"></script>
+<script src="data/streams.js"></script>
+<script src="data/gsheet.js"></script>
+<script src="data/live.js"></script>
+<script>
+window.__liveSoft=1; window._autoref=1; /* без автоперезагрузки страницы — опрашиваем сами */
+const R=['','I','II','III','IV','V','VI'];
+const TIERC={L:'#ff4d6d',S:'#ff9f43',A:'#f5d76e',B:'#7ce6a0',C:'#7fd8ff',D:'#8e99b3',E:'#5f6779',F:'#4b5160'};
+/* линия в таблице: финал топ-10 (по умолчанию), у турниров без финала — призы */
+const CUT={664:{n:3,lab:'призовые места'},757:{n:3,lab:'призовые места'}};
+const DEF_AV='https://mafgame.org/build/assets/avatar-default2-33e44bae.png';
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function prg(){return new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Prague'}));}
+function emb(id){const b=/^live:/.test(id)?'https://www.youtube.com/embed/live_stream?channel='+encodeURIComponent(id.slice(5))+'&':'https://www.youtube.com/embed/'+encodeURIComponent(id)+'?';
+  return b+'autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1';}
+function cdText(iso){if(!iso)return '';const s=Math.floor((new Date(iso)-Date.now())/1000);if(s<=0)return '';const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return (d?d+' д ':'')+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');}
+function hm(iso){return iso?new Date(iso).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Prague'}):'';}
+function dm(iso){return iso?new Date(iso).toLocaleDateString('ru-RU',{day:'numeric',month:'long',timeZone:'Europe/Prague'}):'';}
+
+/* какие турниры: со смотровой, идут сегодня или стартуют в ближайшие 3 дня; ?ids= — отладка на прошедших */
+const Q=new URLSearchParams(location.search);const FORCE=(Q.get('ids')||'').split(',').filter(Boolean);
+const TODAY=ymd(prg()),LIM=ymd(new Date(prg().getTime()+3*864e5));
+const DB=(window.TOURNAMENTS_DB&&TOURNAMENTS_DB.tournaments)||[];
+const LIST=DB.filter(t=>t.watch&&(FORCE.length?FORCE.includes(String(t.id)):(t.status!=='finished'&&t.start&&t.start<=LIM&&(t.liveTo||t.start)>=TODAY)))
+  .sort((a,b)=>String(a.start).localeCompare(String(b.start))||(b.stars||0)-(a.stars||0));
+const T={}; /* id → {t, tour, players, P (по нику), av, games, cur, rows, prev, st} */
+let SEL=null; /* {id, table} — что в плеере */
+try{const s=JSON.parse(sessionStorage.getItem('lc_sel')||'null');if(s)SEL=s;}catch(e){}
+
+async function loadBase(t){
+  const id=String(t.id);const o=T[id]={t,games:[],rows:[],prev:{},cur:-1};
+  const [P,TJ,A]=await Promise.all([
+    fetch('data/participants_'+id+'.json').then(r=>r.ok?r.json():null).catch(()=>null),
+    fetch('data/tournament_'+id+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})),
+    fetch('data/avatars_'+id+'.json').then(r=>r.ok?r.json():{}).catch(()=>({}))]);
+  o.players=(P&&P.players)||[];o.P={};o.players.forEach(p=>o.P[p.nick]=p);o.tour=TJ||{};o.av=(A&&A.avatars)||{};
+  o.live=inWindow(o)||!!FORCE.length;
+  try{const sj=await fetch('data/streams_'+id+'.json?cb='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null);if(sj&&sj.days){window.STREAMS_DB=window.STREAMS_DB||{};STREAMS_DB[id]=sj;}}catch(e){}
+  if(window.DOVOD_SHEET){try{const ss=await DOVOD_SHEET.streams(id);if(ss&&ss.n){const b=Object.assign({gamesDay1:6,days:{}},(window.STREAMS_DB||{})[id]||{});b.days=JSON.parse(JSON.stringify(b.days||{}));Object.keys(ss.days).forEach(d=>{b.days[d]=Object.assign(b.days[d]||{},ss.days[d]);});if(ss.final)b.final=ss.final;b.test=false;window.STREAMS_DB=window.STREAMS_DB||{};STREAMS_DB[id]=b;}}catch(e){}}
+}
+function inWindow(o){const a=o.tour.live_from||o.t.liveFrom||o.t.start,b=o.tour.live_to||o.t.liveTo||a;const t=ymd(prg());return !!a&&t>=a&&t<=b;}
+async function loadGames_(id){const o=T[id];let G=null;
+  try{G=window.loadGames?await window.loadGames(id):null;}catch(e){}
+  if(G&&G.games){o.games=G.games;}
+  o.live=inWindow(o)||!!FORCE.length;
+  compute(o);}
+function compute(o){
+  const gs=o.games;let cur=gs.findIndex(g=>g.tables.some(t=>t.winner==='unknown'));
+  o.played=gs.filter(g=>g.tables.length&&g.tables.every(t=>t.winner!=='unknown')).length;
+  if(cur<0)cur=gs.length?gs.length-1:-1;o.cur=cur;
+  const agg={};gs.forEach(g=>g.tables.forEach(t=>{if(t.winner==='unknown')return;t.seats.forEach(x=>{if(!x||!x.name)return;const a=agg[x.name]=agg[x.name]||{n:x.name,s:0,g:0,w:0};a.s+=x.sigma||0;a.g++;if(x.result==='W')a.w++;});}));
+  const rows=Object.values(agg).sort((a,b)=>b.s-a.s);
+  /* ▲▼ — против таблицы до последней полностью сыгранной игры */
+  let ld=-1;gs.forEach((g,i)=>{if(g.tables.length&&g.tables.every(t=>t.winner!=='unknown'))ld=i;});
+  const base={};gs.forEach((g,i)=>{if(i>=ld)return;g.tables.forEach(t=>{if(t.winner==='unknown')return;t.seats.forEach(x=>{if(!x||!x.name)return;base[x.name]=(base[x.name]||0)+(x.sigma||0);});});});
+  const bord=Object.keys(base).sort((a,b)=>base[b]-base[a]);const bi={};bord.forEach((n,i)=>bi[n]=i);
+  o.prev={};if(ld>0)rows.forEach((r,i)=>{if(bi[r.n]!=null&&bi[r.n]!==i)o.prev[r.n]=bi[r.n]-i;});
+  o.rows=rows;
+}
+function SDB(id){return (window.STREAMS_DB&&STREAMS_DB[id])||null;}
+function dayOf(o){const st=SDB(o.t.id);const dd=(st&&st.dayDates)||null;const t=ymd(prg());let d=null;
+  if(dd){Object.keys(dd).forEach(k=>{if(t>=dd[k])d=k;});if(d)return d;}
+  const q=o.games.slice(0,o.cur+1).filter(x=>x.stage!=='Финал').length;return q<=((st&&st.gamesDay1)||6)?'1':'2';}
+function streamId(o,table){const st=SDB(String(o.t.id));if(!st)return null;const g=o.games[o.cur];if(isFin(o,g))return st.final||null;return ((st.days||{})[dayOf(o)]||{})[String(table)]||null;}
+function tablesOf(o){const g=o.games[o.cur];if(g&&g.tables.length)return g.tables.map(t=>t.table_num);const n=+(o.tour.tables||0)||(o.t.id==='664'?4:o.t.id==='725'?2:3);return [...Array(n)].map((_,i)=>i+1);}
+const VIEW={},GSEL={};try{Object.assign(VIEW,JSON.parse(localStorage.getItem('lc_view')||'{}'));}catch(e){}
+function setView(id,v){VIEW[id]=v;try{localStorage.setItem('lc_view',JSON.stringify(VIEW));}catch(e){}renderFeed();}
+function setG(id,gi){GSEL[id]=gi;renderFeed();const el=document.querySelector('.gs button.on');}
+let MYG=null;try{MYG=localStorage.getItem('lc_my')||null;}catch(e){}
+function inT(o,n){return !!n&&(!!o.P[n]||o.rows.some(r=>r.n===n));}
+function myOf(o){if(MYG&&inT(o,MYG))return MYG;try{return localStorage.getItem('t'+o.t.id+'_my')||localStorage.getItem(o.t.id+'_my')||null;}catch(e){return null;}}
+function setMy(n){MYG=n||null;try{n?localStorage.setItem('lc_my',n):localStorage.removeItem('lc_my');}catch(e){}renderFeed();renderStage(false);}
+/* «Финал» только если у турнира есть и другие стадии (у GMC одна стадия — это обычные игры) */
+function glab(o,b){const g=o.games[o.cur];if(!g)return '';const f=isFin(o,g);const same=o.games.filter(x=>isFin(o,x)===f);const k=o.games.slice(0,o.cur+1).filter(x=>isFin(o,x)===f).length;return (f?'Финал · игра ':'Игра ')+(b?'<b>'+k+'</b>':k)+(b?' из '+same.length:'');}
+function isFin(o,g){return !!g&&g.stage==='Финал'&&o.games.some(x=>x.stage!=='Финал');}
+function avOf(o,n){return o.av[n]||(o.P[n]&&o.P[n].av)||'';}
+function tierOf(o,n){return o.P[n]&&o.P[n].r_ms_tier;}
+
+function pickDefault(){
+  if(SEL&&T[SEL.id])return;
+  const all=LIST.map(t=>T[String(t.id)]).filter(Boolean);
+  /* 1) стол моего игрока, где есть эфир; 2) первый идущий турнир со ссылкой; 3) первый идущий */
+  for(const o of all){const my=myOf(o),g=o.games[o.cur];if(my&&g){const x=g.tables.find(t=>t.seats.some(s=>s&&s.name===my));if(x&&streamId(o,x.table_num)){SEL={id:String(o.t.id),table:x.table_num};return;}}}
+  for(const o of all.filter(o=>o.live)){for(const n of tablesOf(o)){if(streamId(o,n)){SEL={id:String(o.t.id),table:n};return;}}}
+  const first=all.find(o=>o.live)||all[0];if(!first){SEL=null;return;}
+  SEL={id:String(first.t.id),table:1};
+}
+let MODE='one',MULTI=[];try{MODE=localStorage.getItem('lc_mode')||'one';MULTI=JSON.parse(localStorage.getItem('lc_multi')||'[]');}catch(e){}
+function saveMulti(){try{localStorage.setItem('lc_multi',JSON.stringify(MULTI));localStorage.setItem('lc_mode',MODE);}catch(e){}}
+function mkey(x){return x.id+':'+x.table;}
+function fillMulti(){ /* по умолчанию: столы с эфиром по кругу по идущим турнирам — до 4 */
+  MULTI=MULTI.filter(x=>T[x.id]&&streamId(T[x.id],x.table));if(MULTI.length)return;
+  const lists=LIST.map(t=>T[String(t.id)]).filter(o=>o&&o.live).map(o=>tablesOf(o).filter(n=>streamId(o,n)).map(n=>({id:String(o.t.id),table:n})));
+  for(let i=0;MULTI.length<4&&lists.some(l=>l[i]);i++)lists.forEach(l=>{if(l[i]&&MULTI.length<4)MULTI.push(l[i]);});}
+function setMode(m){MODE=m;if(m==='multi')fillMulti();saveMulti();renderModes();renderStage(true);renderFeed();}
+function renderModes(){document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.m===MODE));
+  document.getElementById('lay').classList.toggle('multi',MODE==='multi');
+  document.getElementById('mh').textContent=MODE==='multi'?'Тап по столу ниже — добавить или убрать окно. Звук включается в самом окне.':'';}
+function select(id,table){if(MODE==='multi'){const k=id+':'+table,i=MULTI.findIndex(x=>mkey(x)===k);if(i>=0)MULTI.splice(i,1);else{if(!streamId(T[String(id)],table))return;MULTI.push({id:String(id),table:+table});if(MULTI.length>4)MULTI.shift();}saveMulti();renderStage(true);renderFeed();return;}
+  SEL={id:String(id),table:+table};try{sessionStorage.setItem('lc_sel',JSON.stringify(SEL));}catch(e){}renderStage(true);renderFeed();
+  if(window.matchMedia('(max-width:1099px)').matches)document.getElementById('stage').scrollIntoView({behavior:'smooth',block:'start'});}
+
+let lastSrc=null;
+let lastMulti=null;
+function renderMulti(force){const el=document.getElementById('stage');
+  const items=MULTI.filter(x=>T[x.id]);const key=items.map(x=>mkey(x)+'='+streamId(T[x.id],x.table)).join('|');
+  if(!force&&key===lastMulti&&el.querySelector('.mgrid')){items.forEach((x,i)=>{const o=T[x.id];const l=el.querySelector('#ml'+i);if(l)l.innerHTML=mlab(o,x);});return;}
+  lastMulti=key;lastSrc=null;
+  const cells=items.map((x,i)=>{const o=T[x.id],sid=streamId(o,x.table);return `<div class="mc">${sid?`<iframe src="${emb(sid)}" title="Эфир" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`:''}<div class="ml" id="ml${i}">${mlab(o,x)}</div><button type="button" class="mx" title="убрать" onclick="select('${x.id}',${x.table})">×</button></div>`;});
+  if(!cells.length)cells.push('<div class="mc empty">Выбери столы ниже — до 4 эфиров одновременно</div>');
+  el.innerHTML=`<div class="mgrid${cells.length===1?' n1':''}">${cells.join('')}</div>`;}
+function mlab(o,x){const g=o.games[o.cur];const sh=o.t.city||o.t.name;return `${esc(sh)} · ${isFin(o,g)?'финальный стол':'Стол '+(R[x.table]||x.table)}<small>${esc(glab(o,false))}</small>`;}
+function renderStage(force){
+  if(MODE==='multi')return renderMulti(force);
+  lastMulti=null;
+  const el=document.getElementById('stage');
+  if(!SEL||!T[SEL.id]){el.innerHTML='';return;}
+  const o=T[SEL.id],t=o.t,sid=streamId(o,SEL.table);const g=o.games[o.cur];
+  const src=sid?emb(sid):null;
+  const scr=el.querySelector('.scr');
+  if(!scr||force||src!==lastSrc){lastSrc=src;
+    const iso=o.tour.start_iso;const cd=cdText(iso);
+    const ph=`<div class="ph"><div class="pi">▶</div><b>${cd?'Старт '+esc(dm(iso))+' в '+esc(hm(iso)):'Эфир этого стола появится здесь'}</b>${cd?`<div class="cd" id="lcCd">${cd}</div>`:''}<small>${sid?'':'Ссылки на трансляции организаторы публикуют перед стартом — подставим сразу. Таблица и рассадка ниже уже живые.'}</small></div>`;
+    el.innerHTML=`<div class="scr">${src?`<iframe src="${src}" title="Эфир" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`:ph}</div><div class="sbar" id="sbar"></div><div class="seats" id="sseats"></div>`;}
+  const live=o.live&&o.played<o.games.length;
+  const gl=glab(o,false);
+  document.getElementById('sbar').innerHTML=`${live?'<span class="lvb"><i></i>LIVE</span>':''}<div class="t">${esc(t.name)}<small>${isFin(o,g)?'финальный стол':'Стол '+(R[SEL.table]||SEL.table)}${gl?' · '+esc(gl):''}${o.tour.referees_by_table&&o.tour.referees_by_table[SEL.table]?' · судья '+esc(o.tour.referees_by_table[SEL.table]):''}</small></div><span class="sp"></span><a class="btn y" href="${esc(t.watch)}">▶ Смотровая</a>${sid?`<a class="btn" href="${esc(window.ytWatchURL?ytWatchURL(sid):'#')}" target="_blank" rel="noopener">YouTube ↗</a>`:''}`;
+  const tb=g&&g.tables.find(x=>x.table_num===SEL.table);const my=myOf(o);
+  document.getElementById('sseats').innerHTML=tb?tb.seats.map(s=>s&&s.name?`<span class="seat${s.name===my?' me':''}"><span class="n">${s.seat}</span>${esc(s.name)}</span>`:'').join(''):'';
+}
+function mineBlock(o){const my=MYG&&inT(o,MYG)?MYG:null;if(!my)return '';
+  const i=o.rows.findIndex(r=>r.n===my),r=o.rows[i];const g=o.games[o.cur];const tb=g&&g.tables.find(t=>t.seats.some(s=>s&&s.name===my));
+  const seat=tb&&tb.seats.find(s=>s&&s.name===my);const id=String(o.t.id);
+  const pl=r?`<span class="pl">${i+1}<small>место из ${o.rows.length}</small></span>`:`<span class="pl">—<small>ещё не играл</small></span>`;
+  const sub=r?`Σ ${r.s.toFixed(2)} · игр ${r.g} · побед ${r.w}`:'';
+  const now=tb?`сейчас: ${isFin(o,g)?'финальный стол':'стол '+(R[tb.table_num]||tb.table_num)}${seat?', место '+seat.seat:''}`:'';
+  return `<div class="mine">${pl}<div><div class="nm">★ ${esc(my)}</div><div class="sub2">${[sub,now].filter(Boolean).join(' · ')}</div></div>${tb&&streamId(o,tb.table_num)?`<button type="button" class="btn y" onclick="select('${id}',${tb.table_num})">▶ его стол</button>`:''}</div>`;}
+/* сила стола: очки по тирам MMR (L4 S3 A2 B1) — как «Сила стола» на страницах турнира; категория — z против всех столов этого турнира */
+const TPTS={L:4,S:3,A:2,B:1};
+const SCAT=[['элитный','#e0405a'],['сильный','#e07a3c'],['ровный','#c9a74a'],['мягкий','#6f93b4'],['спокойный','#3fa7c4']];
+function tpts(o,tb){return tb.seats.reduce((a,x)=>a+(x&&TPTS[tierOf(o,x.name)]||0),0);}
+function tstat(o){if(o.__ts&&o.__ts.k===o.games.length)return o.__ts;const v=[];o.games.forEach(g=>{if(isFin(o,g))return;g.tables.forEach(t=>{if(t.seats.length>=6)v.push(tpts(o,t));});});
+  const m=v.length?v.reduce((a,b)=>a+b,0)/v.length:0;const sd=v.length>1?Math.sqrt(v.reduce((a,b)=>a+(b-m)*(b-m),0)/(v.length-1)):0;return o.__ts={k:o.games.length,m,sd};}
+function tcat(o,tb){const st=tstat(o);if(!st.sd)return SCAT[2];const z=(tpts(o,tb)-st.m)/st.sd;return z>=2?SCAT[0]:z>=1?SCAT[1]:z>-1?SCAT[2]:z>-2?SCAT[3]:SCAT[4];}
+function gstate(g){if(!g||!g.tables.length)return 'f';const d=g.tables.filter(t=>t.winner&&t.winner!=='unknown').length;return d===g.tables.length?'d':(d>0||g.tables.some(t=>t.seats.some(s=>s&&s.result)))?'lv':'f';}
+function tablesView(o){const id=String(o.t.id);const gs=o.games;if(!gs.length)return '<div class="tcs"><div class="note">Рассадку mafgame ещё не опубликовал.</div></div>';
+  let gi=GSEL[id];if(gi==null||gi>=gs.length)gi=Math.max(0,o.cur);const g=gs[gi];const my=myOf(o);const fin=isFin(o,g);
+  const lab=(k)=>{const x=gs[k];return isFin(o,x)?'Ф'+(gs.slice(0,k+1).filter(y=>isFin(o,y)).length):String(gs.slice(0,k+1).filter(y=>!isFin(o,y)).length);};
+  const sw=gs.map((x,k)=>{const st=k===o.cur&&o.live&&gstate(x)!=='d'?'lv':gstate(x);return `<button type="button" class="${st==='d'?'d':st==='lv'?'lv':'f'}${k===gi?' on':''}" onclick="setG('${id}',${k})" title="игра ${k+1}${st==='d'?' · сыграна':st==='lv'?' · идёт':' · впереди'}">${lab(k)}</button>`;}).join('');
+  const cards=g.tables.slice().sort((a,b)=>a.table_num-b.table_num).map(tb=>{const c=tcat(o,tb);const w=tb.winner;const sid=gi===o.cur?streamId(o,tb.table_num):null;
+    const res=w==='red_win'?'<span class="rs red">победа красных</span>':w==='black_win'?'<span class="rs blk">победа чёрных</span>':(gi===o.cur&&o.live?'<span class="rs go">идёт</span>':'<span class="rs fu">впереди</span>');
+    const on=MODE==='multi'?MULTI.some(x=>x.id===id&&x.table===tb.table_num):(SEL&&SEL.id===id&&SEL.table===tb.table_num);
+    const ref=o.tour.referees_by_table&&o.tour.referees_by_table[tb.table_num];
+    const seats=tb.seats.slice().sort((a,b)=>(a.seat||0)-(b.seat||0)).map(x=>x&&x.name?`<span class="s2${x.name===my?' me':''}${x.result==='W'?' w':''}${x.result==='L'&&w&&w!=='unknown'?' l':''}" title="${esc(x.name)}${tierOf(o,x.name)?' · '+tierOf(o,x.name):''}"><span class="sn">${x.seat||''}</span><span class="a" style="--rc:${TIERC[tierOf(o,x.name)]||'#3a404d'};background-image:url('${esc(avOf(o,x.name)||DEF_AV)}')"></span><span class="n">${esc(x.name)}</span>${(x.result&&x.aps!=null&&(x.aps||w!=='unknown'))?`<span class="dp ${x.aps>0?'p':x.aps<0?'m':''}" title="доп за игру">${x.aps>0?'+':''}${(+x.aps).toFixed(2).replace(/\.?0+$/,'')||'0'}</span>`:''}</span>`:'').join('');
+    return `<div class="tc2${gi===o.cur?' cur':''}"><div class="tc2h"><b>${fin?'Финальный стол':'Стол '+(R[tb.table_num]||tb.table_num)}</b><span class="sb" style="--sc:${c[1]}" title="сила стола относительно всех столов этого турнира">${c[0]}</span>${res}${(()=>{const v=tb.seats.map(x=>x&&o.P[x.name]&&o.P[x.name].r_ms_mmr).filter(Boolean);const st=tb.seats.filter(x=>x&&/^[LSA]$/.test(tierOf(o,x.name)||'')).length;return `<small>${v.length?'Ø MMR '+Math.round(v.reduce((a,b)=>a+b,0)/v.length):''}${st?' · A и выше: '+st:''}</small>`;})()}${ref?`<small>судья ${esc(ref)}</small>`:''}${sid?`<button type="button" class="pb${on?' on':''}" onclick="select('${id}',${tb.table_num})">▶ ${MODE==='multi'?(on?'в сетке':'в сетку'):'эфир'}</button>`:''}</div><div class="sts">${seats}</div></div>`;}).join('');
+  return `<div class="gsw"><button type="button" class="ar2" ${gi<=0?'disabled':''} onclick="setG('${id}',${gi-1})">‹</button><div class="gs" id="gs${id}">${sw}</div><button type="button" class="ar2" ${gi>=gs.length-1?'disabled':''} onclick="setG('${id}',${gi+1})">›</button></div>
+    <div class="note" style="padding:0 14px 8px 16px">${gi===o.cur?(o.live&&gstate(g)!=='d'?'Сейчас идёт эта игра':'Текущая игра'):(gi<o.cur?'Игра сыграна':'Игра впереди')} · ${fin?'финал':'игра '+lab(gi)} · сила стола — относительно всех столов турнира, по тирам MMR</div>
+    <div class="tcs">${cards}</div>`;}
+function tblock(o){
+  const t=o.t,id=String(t.id),g=o.games[o.cur];const my=myOf(o);const iso=o.tour.start_iso;const started=o.played>0||(g&&g.tables.some(x=>x.winner!=='unknown'));
+  const live=o.live&&started&&o.played<o.games.length;const done=o.games.length&&o.played>=o.games.length;
+  const qn=o.games.filter(x=>x.stage!=='Финал').length,fn=o.games.length-qn;
+  const gl=glab(o,true);
+  const status=done?'<span style="color:#7ce6a0">завершён</span>':live?'<span class="lvb"><i></i>LIVE</span>':(cdText(iso)?'старт '+esc(dm(iso))+' · '+esc(hm(iso))+' · через '+cdText(iso):'скоро');
+  const tabs=tablesOf(o).map(n=>{const sid=streamId(o,n);const on=SEL&&SEL.id===id&&SEL.table===n;const tbx=g&&g.tables.find(x=>x.table_num===n);const st=tbx?(tbx.winner==='unknown'?(started?'идёт':''):'✓'):'';
+    const mine=my&&tbx&&tbx.seats.some(s=>s&&s.name===my);
+    const inM=MODE==='multi'&&MULTI.some(x=>x.id===id&&x.table===n);
+    return `<button type="button" class="tab${MODE==='multi'?(inM?' on in':''):(on?' on':'')}${sid?'':' off'}" onclick="select('${id}',${n})">${sid?'<span class="pv">▶</span>':''}${isFin(o,g)?'Финал':'Стол '+(R[n]||n)}${mine?' ★':''}${st?`<span class="st">${st}</span>`:''}</button>`;}).join('');
+  /* таблица */
+  const cut=CUT[id]||{n:10,lab:'выход в финал'};
+  let lb='';
+  if(o.rows.length){const N=o.rows.length;let rows=o.rows.slice(0,N);const mi=-1; /* 14.11: все игроки, прокрутка внутри блока */
+    const tr=(r,i)=>{const d=o.prev[r.n];const tc=TIERC[tierOf(o,r.n)]||'#3a404d';const a=avOf(o,r.n);
+      return `<tr class="${r.n===my?'me ':''}p${i+1}"><td class="pl">${i+1}</td><td class="nm"><span class="av" style="--rc:${tc};background-image:url('${esc(a||DEF_AV)}')"></span>${esc(r.n)}</td><td class="d ${d>0?'up':d<0?'dn':''}">${d>0?'▲'+d:d<0?'▼'+(-d):''}</td><td class="g">${r.g}</td><td class="s">${r.s.toFixed(2)}</td></tr>`+(i+1===cut.n&&!done?`<tr class="cut"><td colspan="5"><span>▲ ${esc(cut.lab)}</span></td></tr>`:'');};
+    lb=`<div class="lbw"><table class="lb"><tbody>${rows.map(tr).join('')}${mi>=N?'<tr><td colspan="5" style="text-align:center;color:var(--dim)">···</td></tr>'+tr(o.rows[mi],mi):''}</tbody></table></div>`;}
+  else{const fav=o.players.filter(p=>p.r_ms_mmr).sort((a,b)=>b.r_ms_mmr-a.r_ms_mmr).slice(0,5);
+    lb=`<div class="note" style="margin-bottom:6px">Таблица появится после первой игры. Фавориты по MMR:</div><table class="lb"><tbody>${fav.map((p,i)=>`<tr class="${p.nick===my?'me':''}"><td class="pl">${i+1}</td><td class="nm"><span class="av" style="--rc:${TIERC[p.r_ms_tier]||'#3a404d'};background-image:url('${esc(p.av||DEF_AV)}')"></span>${esc(p.nick)}</td><td class="g">${esc(p.r_ms_tier||'')}</td><td class="s">${Math.round(p.r_ms_mmr)}</td></tr>`).join('')}</tbody></table>`;}
+  const mg=t.mafgame||('https://mafgame.org/tournaments/'+id+'/view');
+  return `<section class="tb${SEL&&SEL.id===id?' sel':''}" style="--acc:${esc(t.accent||'#26e0ff')}">
+    <div class="th"><div class="tt"><div class="k"><b>${esc(t.city||'')}</b>${t.stars?'<span>'+'★'.repeat(t.stars)+'</span>':''}${status}</div>
+      <h2><a href="${esc(t.page||'#')}">${esc(t.name)}</a></h2>${gl?`<div class="gm">${gl}${o.played?' · сыграно игр: '+o.played:''}</div>`:''}</div></div>
+    ${mineBlock(o)}
+    <div class="vw"><button type="button" class="${(VIEW[id]||'t')==='t'?'on':''}" onclick="setView('${id}','t')">Таблица</button><button type="button" class="${VIEW[id]==='s'?'on':''}" onclick="setView('${id}','s')">Столы · кто где</button></div>
+    ${VIEW[id]==='s'?tablesView(o):`<div class="tabs">${tabs}</div>
+    <div class="st0"><div class="stt"><span>${o.rows.length?'Таблица · Σ':'До старта'}</span><a href="${esc((t.page||'#')+(o.rows.length?'#stages':''))}">вся таблица →</a></div>${lb}</div>`}
+    <div class="acts"><a class="btn y" href="${esc(t.watch)}">▶ Смотровая</a><a class="btn" href="${esc(t.page||'#')}">Страница турнира</a><a class="btn mg" href="${esc(mg)}" target="_blank" rel="noopener"><img src="assets/mafgame-logo.svg" alt="">mafgame ↗</a></div>
+  </section>`;
+}
+function renderFeed(){
+  const f=document.getElementById('feed');
+  const keep={};f.querySelectorAll('section.tb').forEach((sec,i)=>{const w=sec.querySelector('.lbw');if(w)keep[i]=w.scrollTop;});
+  f.innerHTML=LIST.map(t=>T[String(t.id)]?tblock(T[String(t.id)]):'').join('');
+  f.querySelectorAll('section.tb').forEach((sec,i)=>{const w=sec.querySelector('.lbw');if(!w)return;if(keep[i]!=null)w.scrollTop=keep[i];else{const me=w.querySelector('tr.me');if(me&&me.offsetTop>w.clientHeight-40)w.scrollTop=me.offsetTop-w.clientHeight/2;}});
+  f.querySelectorAll('.gs').forEach(g=>{const b=g.querySelector('button.on');if(b)g.scrollLeft=b.offsetLeft-g.clientWidth/2+b.offsetWidth/2;});
+}
+function stamp(){document.getElementById('upd').textContent='обновлено '+new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+
+(async function(){
+  if(!LIST.length){document.getElementById('lay').innerHTML=`<div class="empty"><b>Сейчас турниров в эфире нет</b>Ближайшие — в разделе «Турниры». Live-центр оживёт сам, когда начнётся турнир со смотровой.<br><br><a class="btn y" href="tournaments.html">Все турниры →</a></div>`;return;}
+  await Promise.all(LIST.map(t=>loadBase(t).catch(()=>{})));
+  for(const t of LIST){if(T[String(t.id)])await loadGames_(String(t.id));} /* по очереди: live.js держит общий флаг __liveOn */
+  /* «Мой игрок»: подсказки — все игроки идущих турниров */
+  const names=[...new Set(LIST.flatMap(t=>{const o=T[String(t.id)];return o?o.players.map(p=>p.nick):[];}))].sort((a,b)=>a.localeCompare(b,'ru'));
+  document.getElementById('myList').innerHTML=names.map(n=>`<option value="${esc(n)}">`).join('');
+  const mi=document.getElementById('myIn');mi.value=MYG||'';
+  mi.addEventListener('change',()=>{const v=mi.value.trim();const hit=names.find(n=>n.toLowerCase()===v.toLowerCase());setMy(hit||null);if(hit)mi.value=hit;});
+  document.getElementById('myX').onclick=()=>{mi.value='';setMy(null);};
+  pickDefault();document.querySelectorAll('#modes button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));if(MODE==='multi')fillMulti();renderModes();renderStage(true);renderFeed();stamp();
+  /* опрос: раз в 20 с, вкладка в фоне — нет; плеер не перезагружаем, если эфир тот же */
+  setInterval(async()=>{if(document.hidden)return;for(const t of LIST){const o=T[String(t.id)];if(o&&(o.live||FORCE.length))await loadGames_(String(t.id));}renderStage(false);renderFeed();stamp();
+    const c=document.getElementById('lcCd');if(c&&SEL&&T[SEL.id])c.textContent=cdText(T[SEL.id].tour.start_iso)||'скоро';},20000);
+})();
+</script>
+<script src="/assets/share.js?v=4" defer></script>
+</body>
+</html>

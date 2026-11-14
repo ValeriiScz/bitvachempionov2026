@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <!--
-  DOVOD · watch2.html · новая смотровая турнира · v1.1 · 2026-11-14
+  DOVOD · watch2.html · новая смотровая турнира · v1.2 · 2026-11-14
   Назначение: эфир и вся информация о турнире на одной странице. Один файл на все турниры: watch2.html?id=664.
-  Прежние смотровые watch{id}.html не тронуты и работают как раньше.
+  Прежние смотровые watch{id}.html переадресуют сюда; открыть прежнюю - watch{id}.html?old=1.
   Данные: те же источники, что у live.html - data/tournaments.js, participants/tournament/avatars/streams_{id}.json,
   Google-таблица правок (data/gsheet.js), игры - data/live.js (опрос раз в 20 секунд).
   Оглавление: 1) стили  2) расчёты (core)  3) общие блоки (ui)  4) логика страницы
   Режимы: «Эфир», «Все столы» (большой + остальные / сетка; телефон боком - на весь экран), «Турнир».
   Вкладки: Таблица · Столы · Дальше · Мои. Сила стола - метод и названия сайта (спокойный · мягкий · ровный · сильный · элитный).
+  v1.2 (14.11): стала основной - watch{id}.html переадресуют сюда (прежняя - watch{id}.html?old=1);
+  пока у турнира нет рассадки - возвращает на прежнюю смотровую (там анонс и эфиры до старта).
   v1.1 (14.11): сразу из последнего снимка, свежие протоколы в фоне; без снимка - понятное «загружаю протоколы».
   История: v1.0 - из прототипов _preview_watch_v0.1-0.2 (в _Архив) с правками Валерия 14.11: кружочки в «Дальше»,
   сила стола по методу сайта, компактные «Мои».
@@ -188,7 +190,7 @@ input.q:focus{border-color:var(--acc)}
 }
 </style></head><body>
 <header class="bar">
-  <a class="bk" href="live2.html" title="Live-центр">←</a>
+  <a class="bk" href="live.html" title="Live-центр">←</a>
   <div class="ti"><b id="ttl"></b><span id="meta"></span></div>
   <div class="seg" id="modes"><button data-m="air" title="Эфир">▶<span> Эфир</span></button><button data-m="all" title="Все столы">⊞<span> Все столы</span></button><button data-m="info" title="Турнир">☰<span> Турнир</span></button></div>
 </header>
@@ -494,19 +496,20 @@ document.addEventListener('input',e=>{
 });
 document.addEventListener('change',e=>{if(S&&e.target.id==='auto'){S.auto=e.target.checked;save();if(S.auto){followMain();renderAll();}}});
 (async function(){
-  if(!ID){$('app').innerHTML='<div class="empty">Турнир не найден. <a href="live2.html" style="color:var(--ac)">Live-центр</a></div>';return;}
+  if(!ID){$('app').innerHTML='<div class="empty">Турнир не найден. <a href="live.html" style="color:var(--ac)">Live-центр</a></div>';return;}
   $('ttl').textContent='Загрузка…';
   try{t=await loadT(ID);}catch(e){t=null;}
   if(t&&!t.games.length){$('app').dataset.wait='1';$('ttl').textContent=t.short;const box=document.createElement('div');box.className='empty';box.id='waitbox';box.innerHTML='Загружаю протоколы mafgame…<br><small>mafgame сейчас отвечает медленно, это может занять до 30 секунд</small>';$('app').before(box);$('app').style.display='none';
     await refreshT(ID);$('waitbox').remove();$('app').style.display='';}
-  if(!t||!t.games.length){$('app').innerHTML=`<div class="empty">${t?esc(t.name)+': рассадку и игры mafgame ещё не опубликовал.':'Турнир не найден.'}<br><br><a href="live2.html" style="color:var(--ac)">Live-центр</a></div>`;if(t)$('ttl').textContent=t.short;return;}
+  if(t&&!t.games.length){const old=(DB.find(x=>String(x.id)===ID)||{}).watch;if(old&&old!=='watch2.html'){location.replace(old+'?old=1');return;}}
+  if(!t||!t.games.length){$('app').innerHTML=`<div class="empty">${t?esc(t.name)+': рассадку и игры mafgame ещё не опубликовал.':'Турнир не найден.'}<br><br><a href="live.html" style="color:var(--ac)">Live-центр</a></div>`;if(t)$('ttl').textContent=t.short;return;}
   K='pw_'+ID+'_';stamp();const c=curGame(t);
   S={lay:LSG('pw_lay',innerWidth<1000?'big':'grid'),mode:LSG(K+'mode','air'),tab:LSG(K+'tab','table'),table:+qs.get('tb')||1,g:c,vg:c,follow:LSG(K+'follow',[]),main:LSG(K+'main',''),auto:LSG(K+'auto',false),open:null,openMy:{},q:'',allNext:false};
   if(!['air','all','info'].includes(S.mode))S.mode='air';
   document.documentElement.style.setProperty('--acc',t.accent||'#ffce00');document.title=t.short+' · смотровая · DOVOD';
   if(!qs.get('tb'))followMain();
   const old=(DB.find(x=>String(x.id)===ID)||{}).watch;
-  $('foot').innerHTML=`${esc(t.name)} · протоколы mafgame.org, обновляются сами раз в 20 секунд · MMR - mafiastats.com · эфиры - YouTube организаторов.${t.page?` <a href="${esc(t.page)}" style="color:var(--ac)">Страница турнира</a>.`:''}${old?` <a href="${esc(old)}" style="color:var(--mu);text-decoration:underline">Прежняя смотровая</a>.`:''}`;
+  $('foot').innerHTML=`${esc(t.name)} · протоколы mafgame.org, обновляются сами раз в 20 секунд · MMR - mafiastats.com · эфиры - YouTube организаторов.${t.page?` <a href="${esc(t.page)}" style="color:var(--ac)">Страница турнира</a>.`:''}${old?` <a href="${esc(old)}?old=1" style="color:var(--mu);text-decoration:underline">Прежняя смотровая</a>.`:''}`;
   renderAll();
   if(t._cached)refreshT(ID).then(ch=>{stamp();if(ch){const c2=curGame(t);S.vg=c2;S.g=c2;followMain();renderAll();}});
   poll([ID],ch=>{if(ch){const c2=curGame(t);if(S.vg<c2&&S.g===S.vg){S.vg=c2;S.g=c2;}followMain();renderAll();}else renderBar();});
