@@ -1,4 +1,4 @@
-/* DOVOD · assets/streams-tab.js · v1.1 · 2026-11-13 (цвет кнопок и плеера — акцент турнира var(--gold)) · v1.0 · 2026-11-13
+/* DOVOD · assets/streams-tab.js · v1.2 · 2026-11-14 (турнир из одной стадии — не финал: эфир по дням и столам) · v1.1 · 2026-11-13 (цвет кнопок и плеера — акцент турнира var(--gold)) · v1.0 · 2026-11-13
    Вкладка «Трансляции» на странице турнира (t*.html): эфир прямо во вкладке, а не голые кнопки.
    · сверху — встроенный плеер YouTube: в дни турнира — текущая игра (день по дате, финал — эфир финала),
      после турнира — записи; переключатель «День · Стол / Финал / Студия»;
@@ -41,7 +41,7 @@
   function auto(list,st,CFG,D){if(!list.length)return null;
     var games=(D&&(D.realGames||D.games))||[];var cur=games.findIndex(function(g){return g.tables.some(function(t){return t.winner==='unknown';});});
     var g=cur>=0?games[cur]:null;
-    if(g&&g.stage==='Финал'){var f=list.find(function(x){return x.fin;});if(f)return f.k;}
+    if(g&&g.stage==='Финал'&&games.some(function(x){return x.stage!=='Финал';})){var f=list.find(function(x){return x.fin;});if(f)return f.k;}
     var dd=st.dayDates||{},t=today(),day=null;Object.keys(dd).forEach(function(k){if(t>=dd[k])day=k;});
     var my=null;try{my=localStorage.getItem(CFG.ls+'my');}catch(e){}
     var myT=null;if(g&&my){var tb=g.tables.find(function(x){return x.seats.some(function(s){return s&&s.name===my;});});if(tb)myT=tb.table_num;}

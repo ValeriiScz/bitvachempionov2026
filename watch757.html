@@ -253,7 +253,7 @@ function compute(){
 }
 function tableOf(nick,gi){const g=D.games[gi];if(!g)return null;const t=g.tables.find(t=>t.seats.some(x=>x&&x.name===nick));return t?t.table_num:null;}
 function seatOf(nick,gi){const g=D.games[gi];if(!g)return null;for(const t of g.tables){const x=t.seats.find(x=>x&&x.name===nick);if(x)return {t:t.table_num,seat:x.seat};}return null;}
-function isFinal(gi){const g=D.games[gi];return !!g&&g.stage==='Финал';}
+function isFinal(gi){const g=D.games[gi];return !!g&&g.stage==='Финал'&&D.games.some(x=>x.stage!=='Финал');} /* 14.11: одна стадия (GMC) — не финал */
 function gLabel(gi){const g=D.games[gi];if(!g)return '';if(g.stage==='Финал'||g.stage==='Полуфинал'){const k=D.games.slice(0,gi+1).filter(x=>x.stage===g.stage).length;return g.stage+' · игра '+k;}const q=D.games.slice(0,gi+1).filter(x=>x.stage!=='Финал'&&x.stage!=='Полуфинал').length;return 'Игра '+q+' из '+CFG.quals;}
 
 /* ── 5. эфиры ── */

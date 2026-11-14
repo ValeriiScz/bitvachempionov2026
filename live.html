@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · live.html · v1.0 · 2026-11-13 · «Live-центр»: все турниры, которые идут сейчас (и стартуют в ближайшие 3 дня), на одном экране —
+<!-- DOVOD · live.html · v1.1 · 2026-11-14 · «Мой игрок» на весь Live-центр: место, Σ и стол в каждом турнире, где он играет (в таблице — его строка под топом); по умолчанию — стол, где есть эфир (раньше брался турнир без ссылки); турнир из одной стадии (GMC) не путается с финалом · v1.0 · 2026-11-13 · «Live-центр»: все турниры, которые идут сейчас (и стартуют в ближайшие 3 дня), на одном экране —
      как live-раздел у букмекеров: сверху один плеер (выбранный турнир и стол), ниже по каждому турниру — текущая игра, столы с эфирами
      и живая таблица (топ с линией выхода в финал / призов, «мой игрок»). До старта — отсчёт, рассадка первой игры и фавориты по MMR.
      Данные: data/tournaments.js (какие турниры, у кого есть смотровая t.watch), data/live.js loadGames(id) (результаты с mafgame раз в 20 с),
@@ -35,6 +35,16 @@
   h1{margin:0;font:900 clamp(28px,5vw,48px)/.95 var(--disp);text-transform:uppercase;letter-spacing:-.01em}
   .sub{color:var(--mut);font-size:13.5px;margin-top:8px;max-width:640px}
   .upd{font:700 11px/1 var(--mono);color:var(--dim);letter-spacing:.06em}
+  .hr2{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+  .myp{display:flex;align-items:center;gap:8px;min-height:42px;padding:0 6px 0 12px;border-radius:12px;border:1px solid rgba(245,255,53,.4);background:rgba(245,255,53,.05)}
+  .myp span{font:800 11px/1 var(--mono);letter-spacing:.08em;color:var(--yel);white-space:nowrap}
+  .myp input{width:260px;max-width:52vw;background:transparent;border:0;outline:0;color:var(--ink);font:600 14px/1 Inter;padding:10px 0}
+  .myp button{width:30px;height:30px;border-radius:8px;border:0;background:rgba(255,255,255,.06);color:var(--mut);font:700 16px/1 Inter;cursor:pointer}
+  .mine{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 14px 12px 16px;padding:10px 12px;border-radius:12px;background:rgba(245,255,53,.08);border:1px solid rgba(245,255,53,.35);font:600 13px/1.3 Inter;color:var(--ink)}
+  .mine .pl{font:900 22px/1 var(--disp);color:var(--yel)}.mine .pl small{font:700 11px/1 Inter;color:var(--mut);margin-left:3px}
+  .mine .nm{font-weight:800}.mine .sub2{color:var(--mut);font-size:12px}
+  .mine button{margin-left:auto}
+  @media (max-width:560px){.hr2{align-items:stretch;width:100%}.myp input{width:100%;max-width:none;flex:1}}
   /* раскладка: телефон — плеер сверху, ниже лента; компьютер — плеер слева (липкий), лента справа */
   .lay{display:grid;grid-template-columns:1fr;gap:16px}
   @media (min-width:1100px){.lay{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}.stage{position:sticky;top:14px}}
@@ -169,7 +179,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   <div class="hero">
     <div><div class="kick"><i></i>DOVOD · live</div><h1>Live-центр</h1>
       <div class="sub">Все турниры, что идут сейчас: эфиры столов и живые таблицы на одном экране. Нажми на стол — эфир переключится наверху.</div></div>
-    <div class="upd" id="upd"></div>
+    <div class="hr2"><label class="myp"><span>★ Мой игрок</span><input id="myIn" list="myList" placeholder="ник — покажу место в каждом турнире" autocomplete="off"><button type="button" id="myX" title="сбросить">×</button></label><datalist id="myList"></datalist><div class="upd" id="upd"></div></div>
   </div>
   <div class="lay" id="lay">
     <div class="stage" id="stage"><div class="scr"><div class="ph"><div class="pi">▶</div><b>Загрузка…</b></div></div></div>
@@ -239,19 +249,26 @@ function SDB(id){return (window.STREAMS_DB&&STREAMS_DB[id])||null;}
 function dayOf(o){const st=SDB(o.t.id);const dd=(st&&st.dayDates)||null;const t=ymd(prg());let d=null;
   if(dd){Object.keys(dd).forEach(k=>{if(t>=dd[k])d=k;});if(d)return d;}
   const q=o.games.slice(0,o.cur+1).filter(x=>x.stage!=='Финал').length;return q<=((st&&st.gamesDay1)||6)?'1':'2';}
-function streamId(o,table){const st=SDB(String(o.t.id));if(!st)return null;const g=o.games[o.cur];if(g&&g.stage==='Финал')return st.final||null;return ((st.days||{})[dayOf(o)]||{})[String(table)]||null;}
+function streamId(o,table){const st=SDB(String(o.t.id));if(!st)return null;const g=o.games[o.cur];if(isFin(o,g))return st.final||null;return ((st.days||{})[dayOf(o)]||{})[String(table)]||null;}
 function tablesOf(o){const g=o.games[o.cur];if(g&&g.tables.length)return g.tables.map(t=>t.table_num);const n=+(o.tour.tables||0)||(o.t.id==='664'?4:o.t.id==='725'?2:3);return [...Array(n)].map((_,i)=>i+1);}
-function myOf(o){try{return localStorage.getItem('t'+o.t.id+'_my')||localStorage.getItem(o.t.id+'_my')||null;}catch(e){return null;}}
+let MYG=null;try{MYG=localStorage.getItem('lc_my')||null;}catch(e){}
+function inT(o,n){return !!n&&(!!o.P[n]||o.rows.some(r=>r.n===n));}
+function myOf(o){if(MYG&&inT(o,MYG))return MYG;try{return localStorage.getItem('t'+o.t.id+'_my')||localStorage.getItem(o.t.id+'_my')||null;}catch(e){return null;}}
+function setMy(n){MYG=n||null;try{n?localStorage.setItem('lc_my',n):localStorage.removeItem('lc_my');}catch(e){}renderFeed();renderStage(false);}
+/* «Финал» только если у турнира есть и другие стадии (у GMC одна стадия — это обычные игры) */
+function glab(o,b){const g=o.games[o.cur];if(!g)return '';const f=isFin(o,g);const same=o.games.filter(x=>isFin(o,x)===f);const k=o.games.slice(0,o.cur+1).filter(x=>isFin(o,x)===f).length;return (f?'Финал · игра ':'Игра ')+(b?'<b>'+k+'</b>':k)+(b?' из '+same.length:'');}
+function isFin(o,g){return !!g&&g.stage==='Финал'&&o.games.some(x=>x.stage!=='Финал');}
 function avOf(o,n){return o.av[n]||(o.P[n]&&o.P[n].av)||'';}
 function tierOf(o,n){return o.P[n]&&o.P[n].r_ms_tier;}
 
 function pickDefault(){
   if(SEL&&T[SEL.id])return;
-  const first=LIST.map(t=>T[String(t.id)]).find(o=>o&&o.live)||T[String((LIST[0]||{}).id)];
-  if(!first){SEL=null;return;}
-  const my=myOf(first);let tb=1;const g=first.games[first.cur];
-  if(g&&my){const x=g.tables.find(t=>t.seats.some(s=>s&&s.name===my));if(x)tb=x.table_num;}
-  SEL={id:String(first.t.id),table:tb};
+  const all=LIST.map(t=>T[String(t.id)]).filter(Boolean);
+  /* 1) стол моего игрока, где есть эфир; 2) первый идущий турнир со ссылкой; 3) первый идущий */
+  for(const o of all){const my=myOf(o),g=o.games[o.cur];if(my&&g){const x=g.tables.find(t=>t.seats.some(s=>s&&s.name===my));if(x&&streamId(o,x.table_num)){SEL={id:String(o.t.id),table:x.table_num};return;}}}
+  for(const o of all.filter(o=>o.live)){for(const n of tablesOf(o)){if(streamId(o,n)){SEL={id:String(o.t.id),table:n};return;}}}
+  const first=all.find(o=>o.live)||all[0];if(!first){SEL=null;return;}
+  SEL={id:String(first.t.id),table:1};
 }
 function select(id,table){SEL={id:String(id),table:+table};try{sessionStorage.setItem('lc_sel',JSON.stringify(SEL));}catch(e){}renderStage(true);renderFeed();
   if(window.matchMedia('(max-width:1099px)').matches)document.getElementById('stage').scrollIntoView({behavior:'smooth',block:'start'});}
@@ -268,20 +285,27 @@ function renderStage(force){
     const ph=`<div class="ph"><div class="pi">▶</div><b>${cd?'Старт '+esc(dm(iso))+' в '+esc(hm(iso)):'Эфир этого стола появится здесь'}</b>${cd?`<div class="cd" id="lcCd">${cd}</div>`:''}<small>${sid?'':'Ссылки на трансляции организаторы публикуют перед стартом — подставим сразу. Таблица и рассадка ниже уже живые.'}</small></div>`;
     el.innerHTML=`<div class="scr">${src?`<iframe src="${src}" title="Эфир" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`:ph}</div><div class="sbar" id="sbar"></div><div class="seats" id="sseats"></div>`;}
   const live=o.live&&o.played<o.games.length;
-  const gl=g?(g.stage==='Финал'?'Финал · игра '+(o.games.slice(0,o.cur+1).filter(x=>x.stage==='Финал').length):'Игра '+(o.games.slice(0,o.cur+1).filter(x=>x.stage!=='Финал').length)):'';
-  document.getElementById('sbar').innerHTML=`${live?'<span class="lvb"><i></i>LIVE</span>':''}<div class="t">${esc(t.name)}<small>${g&&g.stage==='Финал'?'финальный стол':'Стол '+(R[SEL.table]||SEL.table)}${gl?' · '+esc(gl):''}${o.tour.referees_by_table&&o.tour.referees_by_table[SEL.table]?' · судья '+esc(o.tour.referees_by_table[SEL.table]):''}</small></div><span class="sp"></span><a class="btn y" href="${esc(t.watch)}">▶ Смотровая</a>${sid?`<a class="btn" href="${esc(window.ytWatchURL?ytWatchURL(sid):'#')}" target="_blank" rel="noopener">YouTube ↗</a>`:''}`;
+  const gl=glab(o,false);
+  document.getElementById('sbar').innerHTML=`${live?'<span class="lvb"><i></i>LIVE</span>':''}<div class="t">${esc(t.name)}<small>${isFin(o,g)?'финальный стол':'Стол '+(R[SEL.table]||SEL.table)}${gl?' · '+esc(gl):''}${o.tour.referees_by_table&&o.tour.referees_by_table[SEL.table]?' · судья '+esc(o.tour.referees_by_table[SEL.table]):''}</small></div><span class="sp"></span><a class="btn y" href="${esc(t.watch)}">▶ Смотровая</a>${sid?`<a class="btn" href="${esc(window.ytWatchURL?ytWatchURL(sid):'#')}" target="_blank" rel="noopener">YouTube ↗</a>`:''}`;
   const tb=g&&g.tables.find(x=>x.table_num===SEL.table);const my=myOf(o);
   document.getElementById('sseats').innerHTML=tb?tb.seats.map(s=>s&&s.name?`<span class="seat${s.name===my?' me':''}"><span class="n">${s.seat}</span>${esc(s.name)}</span>`:'').join(''):'';
 }
+function mineBlock(o){const my=MYG&&inT(o,MYG)?MYG:null;if(!my)return '';
+  const i=o.rows.findIndex(r=>r.n===my),r=o.rows[i];const g=o.games[o.cur];const tb=g&&g.tables.find(t=>t.seats.some(s=>s&&s.name===my));
+  const seat=tb&&tb.seats.find(s=>s&&s.name===my);const id=String(o.t.id);
+  const pl=r?`<span class="pl">${i+1}<small>место из ${o.rows.length}</small></span>`:`<span class="pl">—<small>ещё не играл</small></span>`;
+  const sub=r?`Σ ${r.s.toFixed(2)} · игр ${r.g} · побед ${r.w}`:'';
+  const now=tb?`сейчас: ${isFin(o,g)?'финальный стол':'стол '+(R[tb.table_num]||tb.table_num)}${seat?', место '+seat.seat:''}`:'';
+  return `<div class="mine">${pl}<div><div class="nm">★ ${esc(my)}</div><div class="sub2">${[sub,now].filter(Boolean).join(' · ')}</div></div>${tb&&streamId(o,tb.table_num)?`<button type="button" class="btn y" onclick="select('${id}',${tb.table_num})">▶ его стол</button>`:''}</div>`;}
 function tblock(o){
   const t=o.t,id=String(t.id),g=o.games[o.cur];const my=myOf(o);const iso=o.tour.start_iso;const started=o.played>0||(g&&g.tables.some(x=>x.winner!=='unknown'));
   const live=o.live&&started&&o.played<o.games.length;const done=o.games.length&&o.played>=o.games.length;
   const qn=o.games.filter(x=>x.stage!=='Финал').length,fn=o.games.length-qn;
-  const gl=g?(g.stage==='Финал'?'Финал · игра <b>'+o.games.slice(0,o.cur+1).filter(x=>x.stage==='Финал').length+'</b> из '+fn:'Игра <b>'+o.games.slice(0,o.cur+1).filter(x=>x.stage!=='Финал').length+'</b> из '+qn):'';
+  const gl=glab(o,true);
   const status=done?'<span style="color:#7ce6a0">завершён</span>':live?'<span class="lvb"><i></i>LIVE</span>':(cdText(iso)?'старт '+esc(dm(iso))+' · '+esc(hm(iso))+' · через '+cdText(iso):'скоро');
   const tabs=tablesOf(o).map(n=>{const sid=streamId(o,n);const on=SEL&&SEL.id===id&&SEL.table===n;const tbx=g&&g.tables.find(x=>x.table_num===n);const st=tbx?(tbx.winner==='unknown'?(started?'идёт':''):'✓'):'';
     const mine=my&&tbx&&tbx.seats.some(s=>s&&s.name===my);
-    return `<button type="button" class="tab${on?' on':''}${sid?'':' off'}" onclick="select('${id}',${n})">${sid?'<span class="pv">▶</span>':''}${g&&g.stage==='Финал'?'Финал':'Стол '+(R[n]||n)}${mine?' ★':''}${st?`<span class="st">${st}</span>`:''}</button>`;}).join('');
+    return `<button type="button" class="tab${on?' on':''}${sid?'':' off'}" onclick="select('${id}',${n})">${sid?'<span class="pv">▶</span>':''}${isFin(o,g)?'Финал':'Стол '+(R[n]||n)}${mine?' ★':''}${st?`<span class="st">${st}</span>`:''}</button>`;}).join('');
   /* таблица */
   const cut=CUT[id]||{n:10,lab:'выход в финал'};
   let lb='';
@@ -295,6 +319,7 @@ function tblock(o){
   return `<section class="tb${SEL&&SEL.id===id?' sel':''}" style="--acc:${esc(t.accent||'#26e0ff')}">
     <div class="th"><div class="tt"><div class="k"><b>${esc(t.city||'')}</b>${t.stars?'<span>'+'★'.repeat(t.stars)+'</span>':''}${status}</div>
       <h2><a href="${esc(t.page||'#')}">${esc(t.name)}</a></h2>${gl?`<div class="gm">${gl}${o.played?' · сыграно игр: '+o.played:''}</div>`:''}</div></div>
+    ${mineBlock(o)}
     <div class="tabs">${tabs}</div>
     <div class="st0"><div class="stt"><span>${o.rows.length?'Таблица · Σ':'До старта'}</span><a href="${esc((t.page||'#')+(o.rows.length?'#stages':''))}">вся таблица →</a></div>${lb}</div>
     <div class="acts"><a class="btn y" href="${esc(t.watch)}">▶ Смотровая</a><a class="btn" href="${esc(t.page||'#')}">Страница турнира</a><a class="btn mg" href="${esc(mg)}" target="_blank" rel="noopener"><img src="assets/mafgame-logo.svg" alt="">mafgame ↗</a></div>
@@ -310,6 +335,12 @@ function stamp(){document.getElementById('upd').textContent='обновлено 
   if(!LIST.length){document.getElementById('lay').innerHTML=`<div class="empty"><b>Сейчас турниров в эфире нет</b>Ближайшие — в разделе «Турниры». Live-центр оживёт сам, когда начнётся турнир со смотровой.<br><br><a class="btn y" href="tournaments.html">Все турниры →</a></div>`;return;}
   await Promise.all(LIST.map(t=>loadBase(t).catch(()=>{})));
   for(const t of LIST){if(T[String(t.id)])await loadGames_(String(t.id));} /* по очереди: live.js держит общий флаг __liveOn */
+  /* «Мой игрок»: подсказки — все игроки идущих турниров */
+  const names=[...new Set(LIST.flatMap(t=>{const o=T[String(t.id)];return o?o.players.map(p=>p.nick):[];}))].sort((a,b)=>a.localeCompare(b,'ru'));
+  document.getElementById('myList').innerHTML=names.map(n=>`<option value="${esc(n)}">`).join('');
+  const mi=document.getElementById('myIn');mi.value=MYG||'';
+  mi.addEventListener('change',()=>{const v=mi.value.trim();const hit=names.find(n=>n.toLowerCase()===v.toLowerCase());setMy(hit||null);if(hit)mi.value=hit;});
+  document.getElementById('myX').onclick=()=>{mi.value='';setMy(null);};
   pickDefault();renderStage(true);renderFeed();stamp();
   /* опрос: раз в 20 с, вкладка в фоне — нет; плеер не перезагружаем, если эфир тот же */
   setInterval(async()=>{if(document.hidden)return;for(const t of LIST){const o=T[String(t.id)];if(o&&(o.live||FORCE.length))await loadGames_(String(t.id));}renderStage(false);renderFeed();stamp();
