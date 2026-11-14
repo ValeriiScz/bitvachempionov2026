@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · live.html · v1.1 · 2026-11-14 · «Мой игрок» на весь Live-центр: место, Σ и стол в каждом турнире, где он играет (в таблице — его строка под топом); по умолчанию — стол, где есть эфир (раньше брался турнир без ссылки); турнир из одной стадии (GMC) не путается с финалом · v1.0 · 2026-11-13 · «Live-центр»: все турниры, которые идут сейчас (и стартуют в ближайшие 3 дня), на одном экране —
+<!-- DOVOD · live.html · v1.2 · 2026-11-14 · режим «Все эфиры»: до 4 трансляций сеткой одновременно (любые турниры и столы; тап по столу — добавить/убрать), звук — в самом окне · v1.1 · 2026-11-14 · «Мой игрок» на весь Live-центр: место, Σ и стол в каждом турнире, где он играет (в таблице — его строка под топом); по умолчанию — стол, где есть эфир (раньше брался турнир без ссылки); турнир из одной стадии (GMC) не путается с финалом · v1.0 · 2026-11-13 · «Live-центр»: все турниры, которые идут сейчас (и стартуют в ближайшие 3 дня), на одном экране —
      как live-раздел у букмекеров: сверху один плеер (выбранный турнир и стол), ниже по каждому турниру — текущая игра, столы с эфирами
      и живая таблица (топ с линией выхода в финал / призов, «мой игрок»). До старта — отсчёт, рассадка первой игры и фавориты по MMR.
      Данные: data/tournaments.js (какие турниры, у кого есть смотровая t.watch), data/live.js loadGames(id) (результаты с mafgame раз в 20 с),
@@ -48,6 +48,22 @@
   /* раскладка: телефон — плеер сверху, ниже лента; компьютер — плеер слева (липкий), лента справа */
   .lay{display:grid;grid-template-columns:1fr;gap:16px}
   @media (min-width:1100px){.lay{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}.stage{position:sticky;top:14px}}
+  .modes{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+  .modes button{min-height:42px;padding:0 16px;border-radius:12px;border:1px solid var(--line2);background:rgba(255,255,255,.03);color:#cfd5df;font:800 13px/1 Inter;cursor:pointer}
+  .modes button.on{background:var(--yel);color:#05060a;border-color:transparent}
+  .modes .mh{font:600 12px/1.3 Inter;color:var(--mut);margin-left:6px}
+  .lay.multi{grid-template-columns:1fr!important}.lay.multi .stage{position:static}
+  @media (min-width:1100px){.lay.multi .feed{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}}
+  .mgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px;background:#000}
+  .mgrid.n1{grid-template-columns:1fr}
+  @media (max-width:640px){.mgrid{grid-template-columns:1fr}}
+  .mc{position:relative;aspect-ratio:16/9;background:#000}
+  .mc iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .mc .ml{position:absolute;left:8px;top:8px;z-index:2;padding:5px 9px;border-radius:8px;background:rgba(5,6,10,.82);font:800 11.5px/1.2 Inter;color:#fff;pointer-events:none;max-width:70%}
+  .mc .ml small{display:block;font:600 10.5px/1.2 Inter;color:var(--mut)}
+  .mc .mx{position:absolute;right:8px;top:8px;z-index:2;width:32px;height:32px;border-radius:8px;border:0;background:rgba(5,6,10,.82);color:#fff;font:700 16px/1 Inter;cursor:pointer}
+  .mc.empty{display:flex;align-items:center;justify-content:center;text-align:center;color:var(--mut);font:600 12.5px/1.4 Inter;padding:14px;border:1px dashed rgba(255,255,255,.12)}
+  .tab.in{box-shadow:0 0 0 2px var(--yel) inset}
   /* плеер */
   .stage{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line2);border-radius:14px;overflow:hidden}
   .scr{position:relative;aspect-ratio:16/9;background:#000}
@@ -181,6 +197,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
       <div class="sub">Все турниры, что идут сейчас: эфиры столов и живые таблицы на одном экране. Нажми на стол — эфир переключится наверху.</div></div>
     <div class="hr2"><label class="myp"><span>★ Мой игрок</span><input id="myIn" list="myList" placeholder="ник — покажу место в каждом турнире" autocomplete="off"><button type="button" id="myX" title="сбросить">×</button></label><datalist id="myList"></datalist><div class="upd" id="upd"></div></div>
   </div>
+  <div class="modes" id="modes"><button type="button" data-m="one">▶ Один эфир</button><button type="button" data-m="multi">▦ Все эфиры · до 4</button><span class="mh" id="mh"></span></div>
   <div class="lay" id="lay">
     <div class="stage" id="stage"><div class="scr"><div class="ph"><div class="pi">▶</div><b>Загрузка…</b></div></div></div>
     <div class="feed" id="feed"></div>
@@ -270,11 +287,34 @@ function pickDefault(){
   const first=all.find(o=>o.live)||all[0];if(!first){SEL=null;return;}
   SEL={id:String(first.t.id),table:1};
 }
-function select(id,table){SEL={id:String(id),table:+table};try{sessionStorage.setItem('lc_sel',JSON.stringify(SEL));}catch(e){}renderStage(true);renderFeed();
+let MODE='one',MULTI=[];try{MODE=localStorage.getItem('lc_mode')||'one';MULTI=JSON.parse(localStorage.getItem('lc_multi')||'[]');}catch(e){}
+function saveMulti(){try{localStorage.setItem('lc_multi',JSON.stringify(MULTI));localStorage.setItem('lc_mode',MODE);}catch(e){}}
+function mkey(x){return x.id+':'+x.table;}
+function fillMulti(){ /* по умолчанию: столы с эфиром по кругу по идущим турнирам — до 4 */
+  MULTI=MULTI.filter(x=>T[x.id]&&streamId(T[x.id],x.table));if(MULTI.length)return;
+  const lists=LIST.map(t=>T[String(t.id)]).filter(o=>o&&o.live).map(o=>tablesOf(o).filter(n=>streamId(o,n)).map(n=>({id:String(o.t.id),table:n})));
+  for(let i=0;MULTI.length<4&&lists.some(l=>l[i]);i++)lists.forEach(l=>{if(l[i]&&MULTI.length<4)MULTI.push(l[i]);});}
+function setMode(m){MODE=m;if(m==='multi')fillMulti();saveMulti();renderModes();renderStage(true);renderFeed();}
+function renderModes(){document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.m===MODE));
+  document.getElementById('lay').classList.toggle('multi',MODE==='multi');
+  document.getElementById('mh').textContent=MODE==='multi'?'Тап по столу ниже — добавить или убрать окно. Звук включается в самом окне.':'';}
+function select(id,table){if(MODE==='multi'){const k=id+':'+table,i=MULTI.findIndex(x=>mkey(x)===k);if(i>=0)MULTI.splice(i,1);else{if(!streamId(T[String(id)],table))return;MULTI.push({id:String(id),table:+table});if(MULTI.length>4)MULTI.shift();}saveMulti();renderStage(true);renderFeed();return;}
+  SEL={id:String(id),table:+table};try{sessionStorage.setItem('lc_sel',JSON.stringify(SEL));}catch(e){}renderStage(true);renderFeed();
   if(window.matchMedia('(max-width:1099px)').matches)document.getElementById('stage').scrollIntoView({behavior:'smooth',block:'start'});}
 
 let lastSrc=null;
+let lastMulti=null;
+function renderMulti(force){const el=document.getElementById('stage');
+  const items=MULTI.filter(x=>T[x.id]);const key=items.map(x=>mkey(x)+'='+streamId(T[x.id],x.table)).join('|');
+  if(!force&&key===lastMulti&&el.querySelector('.mgrid')){items.forEach((x,i)=>{const o=T[x.id];const l=el.querySelector('#ml'+i);if(l)l.innerHTML=mlab(o,x);});return;}
+  lastMulti=key;lastSrc=null;
+  const cells=items.map((x,i)=>{const o=T[x.id],sid=streamId(o,x.table);return `<div class="mc">${sid?`<iframe src="${emb(sid)}" title="Эфир" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`:''}<div class="ml" id="ml${i}">${mlab(o,x)}</div><button type="button" class="mx" title="убрать" onclick="select('${x.id}',${x.table})">×</button></div>`;});
+  if(!cells.length)cells.push('<div class="mc empty">Выбери столы ниже — до 4 эфиров одновременно</div>');
+  el.innerHTML=`<div class="mgrid${cells.length===1?' n1':''}">${cells.join('')}</div>`;}
+function mlab(o,x){const g=o.games[o.cur];const sh=o.t.city||o.t.name;return `${esc(sh)} · ${isFin(o,g)?'финальный стол':'Стол '+(R[x.table]||x.table)}<small>${esc(glab(o,false))}</small>`;}
 function renderStage(force){
+  if(MODE==='multi')return renderMulti(force);
+  lastMulti=null;
   const el=document.getElementById('stage');
   if(!SEL||!T[SEL.id]){el.innerHTML='';return;}
   const o=T[SEL.id],t=o.t,sid=streamId(o,SEL.table);const g=o.games[o.cur];
@@ -305,7 +345,8 @@ function tblock(o){
   const status=done?'<span style="color:#7ce6a0">завершён</span>':live?'<span class="lvb"><i></i>LIVE</span>':(cdText(iso)?'старт '+esc(dm(iso))+' · '+esc(hm(iso))+' · через '+cdText(iso):'скоро');
   const tabs=tablesOf(o).map(n=>{const sid=streamId(o,n);const on=SEL&&SEL.id===id&&SEL.table===n;const tbx=g&&g.tables.find(x=>x.table_num===n);const st=tbx?(tbx.winner==='unknown'?(started?'идёт':''):'✓'):'';
     const mine=my&&tbx&&tbx.seats.some(s=>s&&s.name===my);
-    return `<button type="button" class="tab${on?' on':''}${sid?'':' off'}" onclick="select('${id}',${n})">${sid?'<span class="pv">▶</span>':''}${isFin(o,g)?'Финал':'Стол '+(R[n]||n)}${mine?' ★':''}${st?`<span class="st">${st}</span>`:''}</button>`;}).join('');
+    const inM=MODE==='multi'&&MULTI.some(x=>x.id===id&&x.table===n);
+    return `<button type="button" class="tab${MODE==='multi'?(inM?' on in':''):(on?' on':'')}${sid?'':' off'}" onclick="select('${id}',${n})">${sid?'<span class="pv">▶</span>':''}${isFin(o,g)?'Финал':'Стол '+(R[n]||n)}${mine?' ★':''}${st?`<span class="st">${st}</span>`:''}</button>`;}).join('');
   /* таблица */
   const cut=CUT[id]||{n:10,lab:'выход в финал'};
   let lb='';
@@ -341,7 +382,7 @@ function stamp(){document.getElementById('upd').textContent='обновлено 
   const mi=document.getElementById('myIn');mi.value=MYG||'';
   mi.addEventListener('change',()=>{const v=mi.value.trim();const hit=names.find(n=>n.toLowerCase()===v.toLowerCase());setMy(hit||null);if(hit)mi.value=hit;});
   document.getElementById('myX').onclick=()=>{mi.value='';setMy(null);};
-  pickDefault();renderStage(true);renderFeed();stamp();
+  pickDefault();document.querySelectorAll('#modes button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));if(MODE==='multi')fillMulti();renderModes();renderStage(true);renderFeed();stamp();
   /* опрос: раз в 20 с, вкладка в фоне — нет; плеер не перезагружаем, если эфир тот же */
   setInterval(async()=>{if(document.hidden)return;for(const t of LIST){const o=T[String(t.id)];if(o&&(o.live||FORCE.length))await loadGames_(String(t.id));}renderStage(false);renderFeed();stamp();
     const c=document.getElementById('lcCd');if(c&&SEL&&T[SEL.id])c.textContent=cdText(T[SEL.id].tour.start_iso)||'скоро';},20000);
