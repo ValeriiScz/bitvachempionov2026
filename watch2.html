@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  DOVOD · watch2.html · новая смотровая турнира · v1.2 · 2026-11-14
+  DOVOD · watch2.html · новая смотровая турнира · v1.3 · 2026-11-14
   Назначение: эфир и вся информация о турнире на одной странице. Один файл на все турниры: watch2.html?id=664.
   Прежние смотровые watch{id}.html переадресуют сюда; открыть прежнюю - watch{id}.html?old=1.
   Данные: те же источники, что у live.html - data/tournaments.js, participants/tournament/avatars/streams_{id}.json,
@@ -8,6 +8,7 @@
   Оглавление: 1) стили  2) расчёты (core)  3) общие блоки (ui)  4) логика страницы
   Режимы: «Эфир», «Все столы» (большой + остальные / сетка; телефон боком - на весь экран), «Турнир».
   Вкладки: Таблица · Столы · Дальше · Мои. Сила стола - метод и названия сайта (спокойный · мягкий · ровный · сильный · элитный).
+  v1.3 (14.11): вернул «⏭ в лайв» / «⏭ все в лайв» (как в прежних смотровых).
   v1.2 (14.11): стала основной - watch{id}.html переадресуют сюда (прежняя - watch{id}.html?old=1);
   пока у турнира нет рассадки - возвращает на прежнюю смотровую (там анонс и эфиры до старта).
   v1.1 (14.11): сразу из последнего снимка, свежие протоколы в фоне; без снимка - понятное «загружаю протоколы».
@@ -88,7 +89,11 @@ input.q:focus{border-color:var(--acc)}
 .circ{display:flex;flex-wrap:wrap;gap:3px}.circ span{display:inline-flex;border-radius:50%}.circ span.me{box-shadow:0 0 0 2px var(--ac)}
 .gc{cursor:default}
 #__refbtn,#__hidnote{display:none!important}
-.sndb{position:absolute;right:8px;top:8px;z-index:3;min-height:32px;padding:0 10px;border-radius:9px;border:1px solid var(--acc);background:rgba(0,0,0,.78);color:var(--acc);font:700 12px Inter,sans-serif}.sndb.on{border-color:var(--ln);color:var(--tx)}
+.vctl{position:absolute;right:8px;top:8px;z-index:3;display:flex;gap:6px}
+.golv{min-height:32px;padding:0 10px;border-radius:9px;border:1px solid rgba(255,107,107,.6);background:rgba(0,0,0,.78);color:#ff8a86;font:700 12px Inter,sans-serif;white-space:nowrap}
+.allbar .golv{background:rgba(255,107,107,.08)}
+#dvtoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#11141d;border:1px solid var(--ln);color:var(--tx);padding:10px 14px;border-radius:10px;font-size:13px;z-index:99;opacity:0;transition:opacity .2s;pointer-events:none}#dvtoast.on{opacity:1}
+.sndb{min-height:32px;padding:0 10px;border-radius:9px;border:1px solid var(--acc);background:rgba(0,0,0,.78);color:var(--acc);font:700 12px Inter,sans-serif}.sndb.on{border-color:var(--ln);color:var(--tx)}
 
 .bar{position:sticky;top:0;z-index:20;height:52px;display:flex;align-items:center;gap:10px;padding:0 12px;background:rgba(7,9,13,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--ln)}
 .bar .bk{width:36px;height:36px;border-radius:10px;border:1px solid var(--ln);flex:none;display:flex;align-items:center;justify-content:center}
@@ -324,6 +329,19 @@ function playerHTML(t,tb,gi,opt){
 }
 /* звук без перезагрузки плеера: команды YouTube через postMessage (как в текущих смотровых) */
 function ytCmd(fr,func){try{fr.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}),'*');}catch(e){}}
+/* «⏭ в лайв»: плееры сообщают длительность эфира; перемотка за конец у live-эфира YouTube ставит на самый свежий момент.
+   Если плеер ещё не отдал длительность - перезагружаем окно (старт сразу с live). Тот же приём, что в прежних смотровых (goLive). */
+const YTD=new WeakMap();
+window.addEventListener('message',e=>{if(!/youtube/.test(e.origin))return;let d;try{d=JSON.parse(e.data);}catch(x){return;}
+  const fr=[...document.querySelectorAll('iframe[data-k]')].find(f=>f.contentWindow===e.source);if(!fr)return;const st=YTD.get(fr)||{};st.ok=1;
+  if(d.info){if(d.info.duration)st.dur=d.info.duration;if(d.info.progressState&&d.info.progressState.seekableEnd)st.dur=d.info.progressState.seekableEnd;if(d.info.muted!==undefined)st.muted=d.info.muted;}YTD.set(fr,st);});
+setInterval(()=>{document.querySelectorAll('iframe[data-k]').forEach(f=>{const st=YTD.get(f);if(st&&st.ok)return;try{f.contentWindow.postMessage(JSON.stringify({event:'listening',id:f.dataset.k,channel:'widget'}),'*');}catch(x){}});},2000);
+function goLive(root){let n=0;(root||document).querySelectorAll('iframe[data-k]').forEach(fr=>{const st=YTD.get(fr)||{};
+  if(st.dur){try{fr.contentWindow.postMessage(JSON.stringify({event:'command',func:'seekTo',args:[st.dur+3600,true]}),'*');}catch(x){}ytCmd(fr,'playVideo');}
+  else{const u=fr.getAttribute('src');fr.setAttribute('src','about:blank');setTimeout(()=>fr.setAttribute('src',u),60);YTD.delete(fr);}n++;});
+  toast(n?(n>1?'Все эфиры - на самый свежий момент':'Эфир - на самый свежий момент'):'Нет запущенных эфиров');}
+function toast(m){let el=document.getElementById('dvtoast');if(!el){el=document.createElement('div');el.id='dvtoast';document.body.appendChild(el);}el.textContent=m;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),2200);}
+function liveBtn(all){return `<button class="golv" data-act="golive" title="Перемотать ${all?'все эфиры':'эфир'} на самый свежий момент и запустить">⏭ ${all?'все в лайв':'в лайв'}</button>`;}
 /* звук включается только после нажатия человека (иначе браузер не запустит эфир): до этого все плееры без звука */
 window.__snd=false;
 function sndBtn(){return `<button class="sndb${window.__snd?' on':''}" data-act="snd">${window.__snd?'🔊 звук':'🔇 включить звук'}</button>`;}
@@ -411,13 +429,13 @@ function renderStage(){
   $('app').dataset.mode=S.mode;
   if(sig!==stageSig){stageSig=sig;
     if(all){$('vid').innerHTML=tbs.map(tb=>`<div class="cell video" data-cell="${tb.n}"><div class="lab"><button data-act="main" data-tb="${tb.n}">Стол ${ROM[tb.n]}<i class="snd" style="font-style:normal"></i></button><button data-act="air" data-tb="${tb.n}" data-g="${S.vg}" title="только этот стол">⤢</button></div>${playerHTML(t,tb.n,S.vg)}</div>`).join('');}
-    else{$('vid').innerHTML=playerHTML(t,S.table,S.vg,{sound:true,cap:(isFinG(t,t.games[S.vg])?'Финальный стол':'Стол '+ROM[S.table])+' · игра '+(S.vg+1)})+(streamId(t,S.table,S.vg)&&ONSITE?sndBtn():'');}
+    else{$('vid').innerHTML=playerHTML(t,S.table,S.vg,{sound:true,cap:(isFinG(t,t.games[S.vg])?'Финальный стол':'Стол '+ROM[S.table])+' · игра '+(S.vg+1)})+(streamId(t,S.table,S.vg)&&ONSITE?`<div class="vctl">${liveBtn(false)}${sndBtn()}</div>`:'');}
   }
   if(all){
     const big=S.lay==='big',v=$('vid');v.className='multi'+(big?' big':'');
     v.style.setProperty('--c',big?Math.max(1,n-1):(n<=4?2:3));v.style.setProperty('--lc',n<=2?n:n<=4?2:3);
     v.querySelectorAll('.cell').forEach(c=>{const m=+c.dataset.cell===S.table;c.classList.toggle('main',m);const s=c.querySelector('.snd');if(s)s.textContent=m?(window.__snd?' · 🔊':' · 🔇 включить звук'):'';});
-    $('allbar').innerHTML=`<div class="seg"><button data-act="lay" data-l="big" class="${S.lay==='big'?'on':''}">большой + остальные</button><button data-act="lay" data-l="grid" class="${S.lay==='grid'?'on':''}">сетка</button></div><span>Тап по названию стола - он главный и звук там; ещё тап - звук выключить. Поверни телефон - столы на весь экран.</span>`;
+    $('allbar').innerHTML=`<div class="seg"><button data-act="lay" data-l="big" class="${S.lay==='big'?'on':''}">большой + остальные</button><button data-act="lay" data-l="grid" class="${S.lay==='grid'?'on':''}">сетка</button></div>${ONSITE?liveBtn(true):''}<span>Тап по названию стола - он главный и звук там; ещё тап - звук выключить. Поверни телефон - столы на весь экран.</span>`;
   }else{$('vid').className='video';$('allbar').innerHTML='';}
   $('minicap').innerHTML=`<b>Стол ${ROM[S.table]} · игра ${S.vg+1}</b>эфир идёт в углу<br><button class="btn sm" style="margin-top:4px" data-act="mode" data-m="air">развернуть эфир</button>`;
   const c=curGame(t);
@@ -481,6 +499,7 @@ document.addEventListener('click',e=>{
   else if(a==='air'){S.table=+b.dataset.tb;S.vg=+b.dataset.g;S.g=S.vg;if(S.mode==='all')S.mode='air';renderBar();renderStage();renderNow();if(innerWidth<1000&&S.mode==='air')window.scrollTo({top:0,behavior:'smooth'});}
   else if(a==='main'){const same=S.table===+b.dataset.tb;S.table=+b.dataset.tb;window.__snd=same?!window.__snd:true;renderStage();renderNow();soundTo($('vid'),window.__snd?t.id+'-'+S.table:'-');}
   else if(a==='snd'){window.__snd=!window.__snd;soundTo($('vid'),window.__snd?t.id+'-'+S.table:'-');const o=$('vid').querySelector('.sndb');if(o)o.outerHTML=sndBtn();}
+  else if(a==='golive'){goLive($('vid'));}
   else if(a==='lay'){S.lay=b.dataset.l;LSS('pw_lay',S.lay);renderStage();}
   else if(a==='game'){S.g=+b.dataset.g;if(b.dataset.go){S.tab='now';save();renderTabs();}renderNow();}
   else if(a==='open'){S.open=S.open===b.dataset.n?null:b.dataset.n;renderTable();}

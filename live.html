@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  DOVOD · live.html · live-центр · v2.2 · 2026-11-14 (новая версия - бывший live2.html v1.1)
+  DOVOD · live.html · live-центр · v2.3 · 2026-11-14 («⏭ в лайв» / «⏭ все в лайв») · v2.2 · 2026-11-14 (новая версия - бывший live2.html v1.1)
   Назначение: общая страница «что сейчас происходит» - все идущие турниры, их столы и эфиры, лента результатов,
   мои игроки с разных турниров и ближайшие турниры. Подробности по турниру - в его смотровой (watch2.html?id=).
   Прежний live-центр v1.5 - live-old.html; live2.html переадресует сюда.
@@ -87,7 +87,11 @@ input.q:focus{border-color:var(--acc)}
 .circ{display:flex;flex-wrap:wrap;gap:3px}.circ span{display:inline-flex;border-radius:50%}.circ span.me{box-shadow:0 0 0 2px var(--ac)}
 .gc{cursor:default}
 #__refbtn,#__hidnote{display:none!important}
-.sndb{position:absolute;right:8px;top:8px;z-index:3;min-height:32px;padding:0 10px;border-radius:9px;border:1px solid var(--acc);background:rgba(0,0,0,.78);color:var(--acc);font:700 12px Inter,sans-serif}.sndb.on{border-color:var(--ln);color:var(--tx)}
+.vctl{position:absolute;right:8px;top:8px;z-index:3;display:flex;gap:6px}
+.golv{min-height:32px;padding:0 10px;border-radius:9px;border:1px solid rgba(255,107,107,.6);background:rgba(0,0,0,.78);color:#ff8a86;font:700 12px Inter,sans-serif;white-space:nowrap}
+.allbar .golv{background:rgba(255,107,107,.08)}
+#dvtoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#11141d;border:1px solid var(--ln);color:var(--tx);padding:10px 14px;border-radius:10px;font-size:13px;z-index:99;opacity:0;transition:opacity .2s;pointer-events:none}#dvtoast.on{opacity:1}
+.sndb{min-height:32px;padding:0 10px;border-radius:9px;border:1px solid var(--acc);background:rgba(0,0,0,.78);color:var(--acc);font:700 12px Inter,sans-serif}.sndb.on{border-color:var(--ln);color:var(--tx)}
 
 /* на этой странице кнопки спокойные: без жёлтой заливки */
 .btn.pri{background:none;color:var(--tx);border-color:#5b6473}
@@ -295,6 +299,19 @@ function playerHTML(t,tb,gi,opt){
 }
 /* звук без перезагрузки плеера: команды YouTube через postMessage (как в текущих смотровых) */
 function ytCmd(fr,func){try{fr.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}),'*');}catch(e){}}
+/* «⏭ в лайв»: плееры сообщают длительность эфира; перемотка за конец у live-эфира YouTube ставит на самый свежий момент.
+   Если плеер ещё не отдал длительность - перезагружаем окно (старт сразу с live). Тот же приём, что в прежних смотровых (goLive). */
+const YTD=new WeakMap();
+window.addEventListener('message',e=>{if(!/youtube/.test(e.origin))return;let d;try{d=JSON.parse(e.data);}catch(x){return;}
+  const fr=[...document.querySelectorAll('iframe[data-k]')].find(f=>f.contentWindow===e.source);if(!fr)return;const st=YTD.get(fr)||{};st.ok=1;
+  if(d.info){if(d.info.duration)st.dur=d.info.duration;if(d.info.progressState&&d.info.progressState.seekableEnd)st.dur=d.info.progressState.seekableEnd;if(d.info.muted!==undefined)st.muted=d.info.muted;}YTD.set(fr,st);});
+setInterval(()=>{document.querySelectorAll('iframe[data-k]').forEach(f=>{const st=YTD.get(f);if(st&&st.ok)return;try{f.contentWindow.postMessage(JSON.stringify({event:'listening',id:f.dataset.k,channel:'widget'}),'*');}catch(x){}});},2000);
+function goLive(root){let n=0;(root||document).querySelectorAll('iframe[data-k]').forEach(fr=>{const st=YTD.get(fr)||{};
+  if(st.dur){try{fr.contentWindow.postMessage(JSON.stringify({event:'command',func:'seekTo',args:[st.dur+3600,true]}),'*');}catch(x){}ytCmd(fr,'playVideo');}
+  else{const u=fr.getAttribute('src');fr.setAttribute('src','about:blank');setTimeout(()=>fr.setAttribute('src',u),60);YTD.delete(fr);}n++;});
+  toast(n?(n>1?'Все эфиры - на самый свежий момент':'Эфир - на самый свежий момент'):'Нет запущенных эфиров');}
+function toast(m){let el=document.getElementById('dvtoast');if(!el){el=document.createElement('div');el.id='dvtoast';document.body.appendChild(el);}el.textContent=m;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),2200);}
+function liveBtn(all){return `<button class="golv" data-act="golive" title="Перемотать ${all?'все эфиры':'эфир'} на самый свежий момент и запустить">⏭ ${all?'все в лайв':'в лайв'}</button>`;}
 /* звук включается только после нажатия человека (иначе браузер не запустит эфир): до этого все плееры без звука */
 window.__snd=false;
 function sndBtn(){return `<button class="sndb${window.__snd?' on':''}" data-act="snd">${window.__snd?'🔊 звук':'🔇 включить звук'}</button>`;}
@@ -390,7 +407,7 @@ function renderStage(){
   const el=$('stage');
   if(L.wins==='multi'){
     validMulti();
-    if(stMode!=='multi'){stMode='multi';el.innerHTML='<div class="multi" id="mw"></div><div class="scap"><div class="tx"><span id="mhint"></span></div></div>';}
+    if(stMode!=='multi'){stMode='multi';el.innerHTML='<div class="multi" id="mw"></div><div class="scap"><div class="tx"><span id="mhint"></span></div>'+(ONSITE?liveBtn(true):'')+'</div>';}
     const mw=$('mw'),want=L.multi.map(key);
     [...mw.querySelectorAll('.cell')].forEach(c=>{if(!want.includes(c.dataset.k))c.remove();});
     L.multi.forEach(x=>{if(mw.querySelector(`.cell[data-k="${key(x)}"]`))return;const t=DATA.t[x.id];
@@ -407,7 +424,7 @@ function renderStage(){
   const t=DATA.t[L.sel.id],c=curGame(t),tb=t.games[c].tb.find(x=>x.n===L.sel.tb)||t.games[c].tb[0],sig='one|'+t.id+'|'+tb.n;
   const mine=tb.s.filter(s=>L.my.includes(s[1])).map(s=>s[1]);
   const cap=`<div class="scap" style="--a:${t.color}"><div class="tx"><b><i class="dot"></i>${esc(t.short)} · стол ${ROM[tb.n]}</b><span>игра ${c+1} из ${t.gt}${mine.length?' · здесь ★ '+mine.map(esc).join(', '):''}</span></div><a class="btn sm go" href="${WATCH(t.id,tb.n)}">Смотровая →</a><button class="btn sm only-m" data-act="close" title="закрыть эфир">✕</button></div>`;
-  if(sig!==stMode){stMode=sig;el.innerHTML=`<div class="video">${playerHTML(t,tb.n,c,{sound:true,cap:(t.city||t.short)+' · стол '+ROM[tb.n]})}${streamId(t,tb.n,c)&&ONSITE?sndBtn():''}</div><div id="scapw">${cap}</div>`;}
+  if(sig!==stMode){stMode=sig;el.innerHTML=`<div class="video">${playerHTML(t,tb.n,c,{sound:true,cap:(t.city||t.short)+' · стол '+ROM[tb.n]})}${streamId(t,tb.n,c)&&ONSITE?`<div class="vctl">${liveBtn(false)}${sndBtn()}</div>`:''}</div><div id="scapw">${cap}</div>`;}
   else $('scapw').innerHTML=cap;
 }
 function tcHTML(t){
@@ -472,6 +489,7 @@ document.addEventListener('click',e=>{
     L.sel={id,tb:+b.dataset.tb};L.rid=id;saveS();renderAll();if(!WIDE())window.scrollTo({top:0,behavior:'smooth'});}
   else if(a==='mtog'){const k=b.dataset.id+'-'+b.dataset.tb,i=L.multi.findIndex(q=>key(q)===k);if(i>=0){L.multi.splice(i,1);if(L.snd===k)L.snd=null;}else if(L.multi.length<MAXW)L.multi.push({id:b.dataset.id,tb:+b.dataset.tb});else{const h=$('mhint');if(h)h.textContent='Уже 4 окна - сначала убери одно («✕» на окне).';return;}
     L.rid=b.dataset.id;saveS();renderAll();}
+  else if(a==='golive'){goLive($('stage'));}
   else if(a==='mrm'){L.multi=L.multi.filter(q=>key(q)!==b.dataset.k);if(L.snd===b.dataset.k)L.snd=null;saveS();renderAll();}
   else if(a==='msnd'){L.snd=L.snd===b.dataset.k?null:b.dataset.k;soundTo($('stage'),L.snd||'-');renderStage();}
   else if(a==='snd'){window.__snd=!window.__snd;soundTo($('stage'),window.__snd&&L.sel?L.sel.id+'-'+L.sel.tb:'-');const o=$('stage').querySelector('.sndb');if(o)o.outerHTML=sndBtn();}
