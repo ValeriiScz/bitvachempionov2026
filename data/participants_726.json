@@ -8,7 +8,7 @@
   "fee": "100.00",
   "stars": 3,
   "expected": 40,
-  "players_confirmed": 35,
+  "players_confirmed": 36,
   "rating_note": "Состав — подтверждённые на mafgame (снимок 12.11: 34 из 40). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку.",
   "ms_snap": "2026-11-12",
   "ms_ladder": {
@@ -21,7 +21,7 @@
    "E": 925
   },
   "elo_snap": "2026-11-13",
-  "roster_snap": "2026-11-13"
+  "roster_snap": "2026-11-14"
  },
  "players": [
   {
@@ -1275,6 +1275,34 @@
    "added": "2026-11-13",
    "r_rank": 6847,
    "mk_last": "2026-10-17"
+  },
+  {
+   "nick": "Асе",
+   "uid": 3178,
+   "real": "Svitlana Polezhaieva",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3178/9733576bbd97723907da7f8eff57c8603548fe1d.png",
+   "status": "confirmed",
+   "club": "PUDRA mafia club",
+   "cc": null,
+   "country": null,
+   "flag": null,
+   "markery_id": null,
+   "r_elo_cur": null,
+   "r_tier": null,
+   "r_elo_ly": null,
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": 36,
+   "mk_match": null,
+   "elo_snap": null,
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": null,
+   "r_ms_mmr": 1530.5,
+   "r_ms_rank": null,
+   "r_ms_tier": "B",
+   "added": "2026-11-14"
   }
  ]
 }

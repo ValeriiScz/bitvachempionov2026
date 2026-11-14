@@ -8,7 +8,7 @@
   "fee": "110.00",
   "stars": 3,
   "expected": 30,
-  "players_confirmed": 17,
+  "players_confirmed": 16,
   "rating_note": "ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026",
   "ms_snap": "2026-11-12",
   "ms_ladder": {
@@ -20,7 +20,7 @@
    "D": 1125,
    "E": 925
   },
-  "roster_snap": "2026-11-13"
+  "roster_snap": "2026-11-14"
  },
  "players": [
   {
@@ -393,34 +393,6 @@
    "added": "2026-11-13"
   },
   {
-   "nick": "Саботаж",
-   "uid": 68,
-   "real": "Александр Ботте",
-   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_68/e5f69d0c89c3ecec9dee013970b56f8219c70d70.png",
-   "status": "confirmed",
-   "club": "Bengal Mafia Club",
-   "cc": "PT",
-   "country": "Португалия",
-   "flag": "🇵🇹",
-   "markery_id": 9999,
-   "r_elo_cur": 1336,
-   "r_tier": "S",
-   "r_elo_ly": null,
-   "mg_rank": null,
-   "m_rank": null,
-   "player_number": 13,
-   "mk_match": "id",
-   "elo_snap": "2026-10-26",
-   "series": null,
-   "series_place": null,
-   "series_score": null,
-   "ms": null,
-   "r_ms_mmr": 1914.6,
-   "r_ms_rank": 49,
-   "r_ms_tier": "S",
-   "added": "2026-11-13"
-  },
-  {
    "nick": "Ru",
    "uid": 1417,
    "real": "Руслан Гафаров",
@@ -436,7 +408,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 14,
+   "player_number": 13,
    "mk_match": "id",
    "elo_snap": "2026-09-06",
    "series": null,
@@ -464,7 +436,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 15,
+   "player_number": 14,
    "mk_match": "id",
    "elo_snap": "2026-10-26",
    "series": null,
@@ -492,7 +464,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 16,
+   "player_number": 15,
    "mk_match": "id",
    "elo_snap": "2026-06-25",
    "series": null,
@@ -520,7 +492,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 17,
+   "player_number": 16,
    "mk_match": "id",
    "elo_snap": "2026-10-26",
    "series": null,
