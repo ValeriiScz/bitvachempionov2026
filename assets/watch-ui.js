@@ -1,4 +1,4 @@
-/* DOVOD · assets/watch-ui.js · v2.5 · 2026-11-14 (компьютер: эфир и в «Один стол» подгоняется под высоту экрана с учётом кнопок столов внизу; шапка в одну строку — подсказки клавиш только на широких экранах, «большой/сетка» переехали в шапку) · v2.4 · 2026-11-14 (кнопка «⏭ Все в лайв» на всех смотровых — рядом с режимами: перематывает все запущенные эфиры на самый свежий момент; где у страницы своей кнопки не было — перезапускает окна) · v2.3 · 2026-11-14 (компьютер, «Все столы»: все окна помещаются в экран по высоте — и «большой + остальные» (главный слева, остальные столбиком справа, без выпадания вниз), и «сетка»; ширина эфира подбирается под высоту окна браузера) · v2.2 · 2026-11-13 (режим «Все столы»: компьютер — сетка во весь экран под высоту окна, телефон боком — все столы на весь экран, мини-плеер только в «Один стол») · v2.1 · 2026-11-13 (столы снова прежними карточками; «Все столы» — клавиша A в подсказке) · v2.0 · 2026-11-13 · смотровая: два разных интерфейса — телефон и компьютер (дизайн-ревью)
+/* DOVOD · assets/watch-ui.js · v2.6 · 2026-11-14 (управление понятнее: «Вид» и «Раскладка» — переключатели-сегменты с подписью, раскладка видна только в «Все столы», «⏭ Все в лайв» — отдельная кнопка-действие; на кнопках столов — сила стола словом (спокойный…элитный) вместо Ø MMR) · v2.5 · 2026-11-14 (компьютер: эфир и в «Один стол» подгоняется под высоту экрана с учётом кнопок столов внизу; шапка в одну строку — подсказки клавиш только на широких экранах, «большой/сетка» переехали в шапку) · v2.4 · 2026-11-14 (кнопка «⏭ Все в лайв» на всех смотровых — рядом с режимами: перематывает все запущенные эфиры на самый свежий момент; где у страницы своей кнопки не было — перезапускает окна) · v2.3 · 2026-11-14 (компьютер, «Все столы»: все окна помещаются в экран по высоте — и «большой + остальные» (главный слева, остальные столбиком справа, без выпадания вниз), и «сетка»; ширина эфира подбирается под высоту окна браузера) · v2.2 · 2026-11-13 (режим «Все столы»: компьютер — сетка во весь экран под высоту окна, телефон боком — все столы на весь экран, мини-плеер только в «Один стол») · v2.1 · 2026-11-13 (столы снова прежними карточками; «Все столы» — клавиша A в подсказке) · v2.0 · 2026-11-13 · смотровая: два разных интерфейса — телефон и компьютер (дизайн-ревью)
    Работает с любой смотровой watchNNN.html по общим id (#stage, #tabs, #modes, #qnav, #seatP, #followP, #topP, #fsel) и
    глобальным S / D / tableOf / seatOf страницы. Ничего в логике страниц не меняет — только раскладка и удобство.
    ТЕЛЕФОН: эфир наверху; столы → режимы → ссылки под эфиром; мини-плеер в углу при прокрутке; телефон боком —
@@ -24,6 +24,18 @@
   '.dvw-ql{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:60;max-height:320px;overflow:auto;background:#0f1320;border:1px solid rgba(255,255,255,.14);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.6);padding:4px}'+
   '.dvw-ql button{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:4px 10px;border:0;border-radius:8px;background:none;color:#eef3fb;font:600 14px Inter,sans-serif;text-align:left;cursor:pointer}'+
   '.dvw-ql button:hover,.dvw-ql button.on{background:rgba(38,224,255,.12)}.dvw-ql img{width:28px;height:28px;border-radius:50%;object-fit:cover}.dvw-ql small{margin-left:auto;color:#9aa3b2;font-size:12px}'+
+  '#modes{display:inline-flex!important;align-items:center;gap:2px!important;padding:3px!important;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.03);width:auto!important;flex-wrap:nowrap!important}'+
+  '#modes::before,#layout::before{content:attr(data-cap);padding:0 8px 0 6px;font:800 9.5px/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#79808f;white-space:nowrap}'+
+  '#modes button{border:0!important;border-radius:9px!important;background:none!important;color:#aab2c0!important;box-shadow:none!important;min-height:36px;padding:0 13px!important;font-weight:800!important;white-space:nowrap}'+
+  '@media(max-width:820px){#modes::before,#layout::before{display:none}#modes{display:flex!important;width:auto!important;margin:0 14px!important}#modes button{flex:1}.dvw-live{margin:8px 14px 0!important;width:calc(100% - 28px)}}'+
+  '#modes button.on{background:#eef3fb!important;color:#05060a!important}'+
+  '#layout{display:inline-flex!important;align-items:center;gap:2px!important;padding:3px!important;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.03);justify-content:flex-start!important}'+
+  'body:not(.dvw-all) #layout{display:none!important}'+
+  '#layout .lay,#layout{flex-wrap:nowrap}#layout .lay{display:inline-flex!important;gap:2px!important}'+
+  '#layout button{border:0!important;border-radius:9px!important;background:none!important;color:#aab2c0!important;min-height:36px;padding:0 12px!important;font:800 12px/1 Inter,sans-serif!important;letter-spacing:0!important;text-transform:none!important}'+
+  '#layout button.on{background:#eef3fb!important;color:#05060a!important}'+
+  '.dvw-live{margin-left:6px}'+
+  '#tabs .s .dvw-str{font:800 10px/1 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase}'+
   '.dvw-live{min-height:38px;padding:0 14px;border-radius:999px;border:1px solid rgba(219,81,78,.6);background:rgba(219,81,78,.12);color:#ff8a86;font:800 13px Inter,sans-serif;cursor:pointer;white-space:nowrap}.dvw-live:hover{background:rgba(219,81,78,.22)}'+
   '.dvw-hid{position:absolute!important;opacity:0!important;pointer-events:none!important;height:0!important;width:0!important}'+
   /* телефон */
@@ -179,19 +191,33 @@
   }
   window.addEventListener('resize',function(){var st=$('#stage');if(st)st.__fit=0;fitAll();});
   /* ── «⏭ Все в лайв»: на всех смотровых, рядом с режимами ── */
-  function liveBtn(){var m=$('#modes');if(!m||$('.dvw-live',m))return;var b=document.createElement('button');b.type='button';b.className='dvw-live';
+  function liveBtn(){var m=$('#modes');if(!m||$('.dvw-live'))return;var b=document.createElement('button');b.type='button';b.className='dvw-live';
     b.innerHTML='⏭ Все в лайв';b.title='Перемотать все эфиры на самый свежий момент и запустить';
     b.onclick=function(){var gl=g('goLive');if(typeof gl==='function'){gl();return;}var n=0;
       $$('#stage iframe').forEach(function(fr){var u=fr.getAttribute('src');if(!u)return;fr.setAttribute('src','about:blank');setTimeout(function(){fr.setAttribute('src',u);},60);n++;});
       var t=g('toast');if(typeof t==='function')t(n?'Эфиры перезапущены — на самом свежем моменте':'Нет запущенных эфиров');};
-    m.appendChild(b);}
+    m.parentNode.insertBefore(b,m.nextSibling);m.setAttribute('data-cap','Вид');var ly=$('#layout');if(ly)ly.setAttribute('data-cap','Раскладка');}
+  /* ── сила стола словом на кнопках столов (как «Сила стола» на странице турнира): очки тиров MMR L4 S3 A2 B1, z против всех столов турнира ── */
+  var TP={L:4,S:3,A:2,B:1},SC=[['элитный','#e0405a'],['сильный','#e07a3c'],['ровный','#c9a74a'],['мягкий','#6f93b4'],['спокойный','#3fa7c4']],TST=null;
+  function tierN(n){var D=g('D');var p=D&&D.P&&D.P[n];return p&&p.r_ms_tier;}
+  function tpts(tb){return tb.seats.reduce(function(a,x){return a+(x&&TP[tierN(x.name)]||0);},0);}
+  function tabStrength(){var D=g('D');if(!D||!D.games||!D.games.length)return;
+    var fin=function(gm){return gm.stage==='Финал'&&D.games.some(function(x){return x.stage!=='Финал';});};
+    if(!TST||TST.k!==D.games.length){var v=[];D.games.forEach(function(gm){if(fin(gm))return;gm.tables.forEach(function(t){if(t.seats.length>=6)v.push(tpts(t));});});
+      var m=v.length?v.reduce(function(a,b){return a+b;},0)/v.length:0;var sd=v.length>1?Math.sqrt(v.reduce(function(a,b){return a+(b-m)*(b-m);},0)/(v.length-1)):0;TST={k:D.games.length,m:m,sd:sd};}
+    var gm=D.games[D.cur||0];if(!gm)return;
+    $$('#tabs button[data-t]').forEach(function(b){var t=+b.dataset.t;var tb=gm.tables.find(function(x){return x.table_num===t;});var sp=$('.s',b);if(!sp||!tb||!TST.sd)return;
+      var z=(tpts(tb)-TST.m)/TST.sd;var c=z>=2?SC[0]:z>=1?SC[1]:z>-1?SC[2]:z>-2?SC[3]:SC[4];
+      var judge=sp.getAttribute('data-j');if(judge==null){judge=sp.textContent;if(/^Ø/.test(judge))judge='';sp.setAttribute('data-j',judge);}
+      var h='<b class="dvw-str" style="color:'+c[1]+'">'+c[0]+'</b>'+(judge?' · '+esc(judge):'');if(sp.innerHTML!==h)sp.innerHTML=h;});}
   /* ── запуск ── */
-  function tick(){enhanceFollow();followBar();fitAll();var S=g('S');if(S){document.body.classList.toggle('dvw-one',S.mode==='one');document.body.classList.toggle('dvw-all',S.mode==='all');}}
+  function tick(){enhanceFollow();followBar();fitAll();tabStrength();var S=g('S');if(S){document.body.classList.toggle('dvw-one',S.mode==='one');document.body.classList.toggle('dvw-all',S.mode==='all');}}
   function init(){
-    liveBtn();
     if(PH.matches)phone();
     if(PC.matches)desktop();
+    liveBtn();
     tick();setInterval(tick,1500);
+    var tbs=$('#tabs');if(tbs&&'MutationObserver' in window)new MutationObserver(function(){clearTimeout(tbs.__t);tbs.__t=setTimeout(tabStrength,40);}).observe(tbs,{childList:true});
     var stg=$('#stage');if(stg&&'MutationObserver' in window)new MutationObserver(function(){clearTimeout(stg.__ft);stg.__ft=setTimeout(fitAll,60);}).observe(stg,{childList:true});
     var fp=$('#followP');if(fp&&'MutationObserver' in window)new MutationObserver(function(){enhanceFollow();followBar();}).observe(fp,{childList:true,subtree:true});
   }
