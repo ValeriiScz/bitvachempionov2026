@@ -1,4 +1,4 @@
-/* DOVOD · assets/watch-my.js · v1.1 · 2026-11-14 (без дубля: старая панель «Следить за игроком» спрятана — её функции здесь: главный игрок, «эфир за главным в каждой новой игре») · v1.0 · 2026-11-14
+/* DOVOD · assets/watch-my.js · v1.2 · 2026-11-14 (компактно: игрок = одна строка «ник · стол · место · ▶», подробности по тапу; блок сворачивается и на компьютере; отдельный список «по столам» убран - стол и «вместе» видны в строке) · v1.1 · 2026-11-14 (без дубля: старая панель «Следить за игроком» спрятана — её функции здесь: главный игрок, «эфир за главным в каждой новой игре») · v1.0 · 2026-11-14
    «★ Мои игроки» в смотровых (watch*.html): следить сразу за несколькими игроками (до 8) — как «Для зрителей» на ЧМ-2026.
    · сводка по каждому: место и Σ (▲▼ за последнюю сыгранную игру), сейчас — стол и место (кнопка «▶»), дальше — следующая игра,
      путь «игра:стол» на весь турнир, в сыгранных — роль и победа/поражение (роль в будущей игре заранее неизвестна никому);
@@ -17,7 +17,7 @@
   var PH=window.matchMedia('(max-width:820px)');
   var CF=g('CFG')||{};var KEY='dvw_fav_'+(CF.id||location.pathname);
   var FAV=[];try{FAV=JSON.parse(localStorage.getItem(KEY)||'[]')||[];}catch(e){}
-  var OPEN=false;try{OPEN=localStorage.getItem('dvw_my_open')==='1';}catch(e){}
+  var OPEN=!PH.matches;try{var o0=localStorage.getItem('dvw_my_open');if(o0==='1')OPEN=true;else if(o0==='0'||(o0===''&&PH.matches))OPEN=false;}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(FAV));}catch(e){}}
   var css=document.createElement('style');css.textContent=
   '#followP{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}'+
@@ -32,10 +32,12 @@
   '.dvm-now{display:flex;flex-direction:column;gap:6px;margin:10px 0 6px}.dvm-nt{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);font:600 13px/1.3 Inter}'+
   '.dvm-nt b{font:800 12px/1 "JetBrains Mono",monospace;color:#f5ff35;min-width:58px}.dvm-nt .tg2{font:800 10.5px/1 Inter;color:#05060a;background:#f5ff35;border-radius:999px;padding:3px 7px}'+
   '.dvm-nt button,.dvm-r .go{margin-left:auto;min-height:34px;padding:0 12px;border-radius:9px;border:1px solid rgba(245,255,53,.6);background:none;color:#f5ff35;font:800 12px Inter;cursor:pointer}'+
-  '.dvm-r{padding:10px 0;border-top:1px solid rgba(255,255,255,.07)}.dvm-r:first-of-type{border-top:0}'+
-  '.dvm-r .dvm-tp{display:flex;align-items:center;gap:10px}.dvm-r img.av{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none;border:2px solid rgba(245,255,53,.6)}'+
+  '.dvm-r{padding:6px 0;border-top:1px solid rgba(255,255,255,.07)}.dvm-r:first-of-type{border-top:0}'+
+  '.dvm-r .dvm-tp{cursor:pointer;min-height:40px}.dvm-r .dvm-det{display:none;padding:2px 0 6px}.dvm-r.open .dvm-det{display:block}.dvm-r .chv{color:#9aa3b2;font:800 12px/1 Inter;width:14px;text-align:center;flex:none}.dvm-r.open .chv{transform:rotate(180deg)}'+
+  '.dvm-r .tg2{font:800 10px/1 Inter;color:#05060a;background:#f5ff35;border-radius:999px;padding:2px 6px;margin-left:4px}.dvm-r .dvm-tp .go{margin-left:0;min-width:40px;padding:0 10px;flex:none}.dvm-nx{font:600 12px/1.35 Inter;color:#aab2c0}'+
+  '.dvm-r .dvm-tp{display:flex;align-items:center;gap:10px}.dvm-r img.av{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:none;border:2px solid rgba(245,255,53,.6)}'+
   '.dvm-r .nm{flex:1;min-width:0}.dvm-r .nm b{font:800 14px/1.2 Inter;color:#eef3fb}.dvm-r .nm b.main::after{content:" · главный";font:700 10.5px Inter;color:#f5ff35}'+
-  '.dvm-r .nm small{display:block;font:600 12px/1.35 Inter;color:#aab2c0}.dvm-r .dvm-pl{font:900 20px/1 Unbounded,Inter,sans-serif;color:#f5ff35;text-align:right}.dvm-r .dvm-pl small{display:block;font:700 10px/1.2 Inter;color:#9aa3b2}'+
+  '.dvm-r .nm b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dvm-r .nm small{display:block;font:600 12px/1.35 Inter;color:#aab2c0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dvm-r .dvm-pl{font:900 15px/1.1 Unbounded,Inter,sans-serif;color:#f5ff35;text-align:right;flex:none}.dvm-r .dvm-pl small{display:block;font:700 10px/1.3 Inter;color:#9aa3b2;white-space:nowrap}'+
   '.dvm-r .up{color:#7ce6a0}.dvm-r .dn{color:#ff8a86}'+
   '.dvm-r .acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.dvm-r .acts button{min-height:32px;padding:0 10px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:none;color:#cfd5df;font:700 12px Inter;cursor:pointer}'+
   '.dvm-path{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}.dvm-path span{display:inline-flex;align-items:center;gap:3px;min-width:34px;justify-content:center;padding:4px 6px;border-radius:7px;border:1px solid rgba(255,255,255,.12);font:700 11px/1 "JetBrains Mono",monospace;color:#cfd5df}'+
@@ -49,8 +51,8 @@
   '#topP tr.dvw-favr td{color:#f5ff35;background:rgba(245,255,53,.06)}#topP tr.dvw-favr td:nth-child(2)::before{content:"★ "}'+
   '#tabs button .dvm-b{display:inline-flex;align-items:center;justify-content:center;margin-left:6px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#f5ff35;color:#05060a;font:800 10.5px/1 Inter}'+
   /* телефон: свёрнуто — одна строка с чипами */
-  '.dvm-r .acts .pth{display:none}'+
-  '@media(max-width:820px){.dvm{margin:8px 14px}.dvm-tg{display:inline-flex;align-items:center;justify-content:center}.dvm.closed .dvm-body{display:none}.dvm.closed .dvm-mini{display:flex}.dvm-opp{display:none}.dvm-r:not(.open) .dvm-path{display:none}.dvm-path span{min-width:30px;padding:4px 5px}.dvm-r .acts .pth{display:inline-flex}.dvm-r .acts .mn{display:none}}';
+  '.dvm.closed .dvm-body{display:none}.dvm.closed .dvm-mini{display:flex;cursor:pointer}.dvm-tg{display:inline-flex;align-items:center;justify-content:center}'+
+  '@media(max-width:820px){.dvm{margin:8px 14px}.dvm-path span{min-width:30px;padding:4px 5px}.dvm-r .acts .mn{display:none}}';
   document.head.appendChild(css);
 
   function avatarSrc(n){var D=g('D')||{};var p=(D.P||{})[n];return (D.av&&D.av[n])||(p&&p.av)||'';}
@@ -65,21 +67,21 @@
   function goTable(t){var b=$('#tabs button[data-t="'+t+'"]');var S=g('S');if(S&&S.mode!=='one'){var o=$('#modes [data-m="one"]');if(o)o.click();}if(b)b.click();window.scrollTo({top:0,behavior:'smooth'});}
   function setMain(n){var sel=$('#fsel');if(sel){sel.value=n;sel.dispatchEvent(new Event('change',{bubbles:true}));}}
 
-  var box=null,sig='';
+  var box=null,sig='',OPR={};
   function mount(){
     if(box&&document.body.contains(box))return box;
-    box=document.createElement('div');box.className='dvm'+(PH.matches&&!OPEN?' closed':'');
+    box=document.createElement('div');box.className='dvm'+(!OPEN?' closed':'');
     var seat=$('#seatP'),fp=$('#followP');
     if(PH.matches){var q=$('#qnav')||$('#modes');if(q&&q.parentNode)q.parentNode.insertBefore(box,q.nextSibling);else if(fp)fp.parentNode.insertBefore(box,fp);}
     else{if(seat&&seat.parentNode)seat.parentNode.insertBefore(box,seat.nextSibling);else if(fp)fp.parentNode.insertBefore(box,fp);}
     if(!box.parentNode)return null;
     box.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a,n=b.dataset.n;
-      if(a==='tg'){OPEN=box.classList.contains('closed');box.classList.toggle('closed',!OPEN);try{localStorage.setItem('dvw_my_open',OPEN?'1':'');}catch(e){}return;}
+      if(a==='tg'){OPEN=box.classList.contains('closed');box.classList.toggle('closed',!OPEN);try{localStorage.setItem('dvw_my_open',OPEN?'1':'0');}catch(e){}sig='';render();return;}
       if(a==='rm'){FAV=FAV.filter(function(x){return x!==n;});save();var S3=g('S');if(S3&&S3.follow===n){setMain(FAV[0]||'');}sig='';render();return;}
       if(a==='main'){setMain(n);sig='';setTimeout(render,50);return;}
       if(a==='go'){goTable(+b.dataset.t);return;}
       if(a==='auto'){var fa=$('#fauto');var S2=g('S');if(fa){fa.checked=b.checked;fa.dispatchEvent(new Event('change',{bubbles:true}));}else if(S2){S2.auto=b.checked;}sig='';return;}
-      if(a==='pth'){var r=b.closest('.dvm-r');if(r)r.classList.toggle('open');return;}});
+      if(a==='pth'){var r=b.closest('.dvm-r');if(r){var on=!r.classList.contains('open');r.classList.toggle('open',on);OPR[r.dataset.n]=on;}return;}});
     return box;
   }
   function searchUI(){var wrap=$('.dvm-q',box);if(!wrap)return;var inp=$('input',wrap),list=$('.dvm-ql',wrap);if(inp.__ok)return;inp.__ok=1;
@@ -98,8 +100,7 @@
     var keep=$('.dvm-q input',box);var qv=keep?keep.value:'';
     var gm=games[cur];var fin=isFin(gm,games);
     /* в этой игре — по столам */
-    var byT={};FAV.forEach(function(n){var w=where(games,cur,n);if(w)(byT[w.t]=byT[w.t]||[]).push(n+' <small style="color:#9aa3b2">м.'+w.seat+'</small>');});
-    var nowH=Object.keys(byT).sort(function(a,b){return a-b;}).map(function(t){return '<div class="dvm-nt"><b>'+(fin?'Финал':'Стол '+ROM[t])+'</b>'+byT[t].join(', ')+(byT[t].length>1?'<span class="tg2">играют вместе</span>':'')+'<button type="button" data-a="go" data-t="'+t+'">▶</button></div>';}).join('');
+    var byT={};FAV.forEach(function(n){var w=where(games,cur,n);if(w)(byT[w.t]=byT[w.t]||[]).push(n);});
     var gl=fin?'финал':'игра '+(games.slice(0,cur+1).filter(function(x){return !isFin(x,games);}).length);
     var rowsH=FAV.map(function(n){
       var i=rows.findIndex(function(r){return r.n===n;}),r=rows[i],pi=prev.findIndex(function(r){return r.n===n;});
@@ -109,18 +110,21 @@
       var path=games.map(function(gm2,gi){var ww=where(games,gi,n);if(!ww)return '';var c=gi===cur?'cur':done(ww.tb)?(ww.x.result==='W'?'w':'l'):'fut';var rl=ww.x.role&&RLS[ww.x.role];var side=(ww.x.role==='Mafia'||ww.x.role==='Don')?' blk':ww.x.role?' red':'';
         return '<span class="'+c+side+'" title="игра '+(gi+1)+' · стол '+ROM[ww.t]+' · место '+ww.seat+(rl?' · '+rl:'')+(c==='w'?' · победа':c==='l'?' · поражение':'')+'">'+(gi+1)+':'+(isFin(gm2,games)?'Ф':ROM[ww.t])+(rl?'<i>'+rl+'</i>':'')+'</span>';}).join('');
       var main=S&&S.follow===n;
-      var sub=(w?'сейчас ('+gl+'): '+(fin?'финальный стол':'стол '+ROM[w.t])+', место '+w.seat:'в этой игре отдыхает')+(nx?' · дальше: игра '+(nx.gi+1)+', '+(isFin(games[nx.gi],games)?'финал':'стол '+ROM[nx.w.t])+', место '+nx.w.seat:'');
+      var mates=w?(byT[w.t]||[]).filter(function(x){return x!==n;}):[];
+      var sub=w?(fin?'финальный стол':'стол '+ROM[w.t])+' · место '+w.seat+(mates.length?'<span class="tg2">вместе</span>':''):'в этой игре отдыхает';
+      var nxt=(nx?'Дальше: игра '+(nx.gi+1)+', '+(isFin(games[nx.gi],games)?'финал':'стол '+ROM[nx.w.t])+', место '+nx.w.seat:'')+(mates.length?(nx?' · ':'')+'за этим столом ещё твои: '+mates.map(esc).join(', '):'');
       var a=avatarSrc(n);
-      return '<div class="dvm-r"><div class="dvm-tp">'+(a?'<img class="av" src="'+esc(a)+'" alt="" onerror="this.remove()">':'')+'<div class="nm"><b class="'+(main?'main':'')+'">'+esc(n)+'</b><small>'+sub+'</small></div>'+
-        '<div class="dvm-pl">'+(r?(i+1):'—')+'<small>'+(r?'из '+rows.length+' · Σ '+r.s.toFixed(2)+(d?' <span class="'+(d>0?'up':'dn')+'">'+(d>0?'▲'+d:'▼'+(-d))+'</span>':''):'ещё не играл')+'</small></div></div>'+
-        (opp?'<div class="dvm-opp">'+opp+'</div>':'')+'<div class="dvm-path">'+path+'</div>'+
-        '<div class="acts">'+(w?'<button type="button" class="go" data-a="go" data-t="'+w.t+'" style="margin-left:0">▶ смотреть его стол</button>':'')+(main?'':'<button type="button" class="mn" data-a="main" data-n="'+esc(n)+'">★ главный (эфир за ним)</button>')+'<button type="button" class="pth" data-a="pth">путь по играм ▾</button><button type="button" data-a="rm" data-n="'+esc(n)+'">убрать</button></div></div>';}).join('');
+      return '<div class="dvm-r'+(OPR[n]?' open':'')+'" data-n="'+esc(n)+'"><div class="dvm-tp" data-a="pth" title="подробнее">'+(a?'<img class="av" src="'+esc(a)+'" alt="" onerror="this.remove()">':'')+'<div class="nm"><b class="'+(main?'main':'')+'">'+esc(n)+'</b><small>'+sub+'</small></div>'+
+        '<div class="dvm-pl">'+(r?'#'+(i+1):'-')+'<small>'+(r?'Σ '+r.s.toFixed(2)+(d?' <span class="'+(d>0?'up':'dn')+'">'+(d>0?'▲'+d:'▼'+(-d))+'</span>':''):'не играл')+'</small></div>'+
+        (w?'<button type="button" class="go" data-a="go" data-t="'+w.t+'" aria-label="смотреть его стол">▶</button>':'')+'<span class="chv">▾</span></div>'+
+        '<div class="dvm-det">'+(nxt?'<div class="dvm-nx">'+nxt+'</div>':'')+(opp?'<div class="dvm-opp">'+opp+'</div>':'')+'<div class="dvm-path">'+path+'</div>'+
+        '<div class="acts">'+(main?'':'<button type="button" class="mn" data-a="main" data-n="'+esc(n)+'">★ главный (эфир за ним)</button>')+'<button type="button" data-a="rm" data-n="'+esc(n)+'">убрать</button></div></div></div>';}).join('');
     var mini=FAV.map(function(n){var w=where(games,cur,n);var i=rows.findIndex(function(r){return r.n===n;});return '<span>'+esc(n)+' <b>'+(i>=0?'#'+(i+1):'')+'</b>'+(w?' · '+(fin?'Ф':ROM[w.t]):'')+'</span>';}).join('');
     box.innerHTML='<div class="panel"><div class="dvm-h"><h3>★ Мои игроки <span class="cnt">'+FAV.length+'/'+MAX+'</span></h3><button type="button" class="dvm-tg" data-a="tg" aria-label="Свернуть/развернуть">'+(box.classList.contains('closed')?'▾':'▴')+'</button></div>'+
       (FAV.length?'<div class="dvm-mini" data-a="tg">'+mini+'</div>':'')+
       '<div class="dvm-body"><div class="dvm-q"><input type="search" autocomplete="off" placeholder="'+(FAV.length?'добавить игрока…':'Найти игрока — следить за несколькими сразу')+'" aria-label="Добавить игрока"><div class="dvm-ql" hidden></div></div>'+
-      (S&&S.follow&&FAV.indexOf(S.follow)>=0?'<label class="dvm-auto"><input type="checkbox" data-a="auto" '+(S.auto?'checked':'')+'> Эфир за главным ('+esc(S.follow)+') — сам переключается на его стол в каждой новой игре</label>':'')+(FAV.length?(nowH?'<div class="dvm-now">'+nowH+'</div>':'')+rowsH:'<div class="dvm-empty">Добавь одного или нескольких игроков — здесь будет, где каждый сидит сейчас и дальше, место в таблице, путь по столам и роли в сыгранных играх.</div>')+'</div></div>';
-    if(!FAV.length&&PH.matches)box.classList.remove('closed');
+      (S&&S.follow&&FAV.indexOf(S.follow)>=0?'<label class="dvm-auto"><input type="checkbox" data-a="auto" '+(S.auto?'checked':'')+'> Эфир сам идёт за главным ('+esc(S.follow)+')</label>':'')+(FAV.length?rowsH:'<div class="dvm-empty">Добавь одного или нескольких игроков — здесь будет, где каждый сидит сейчас и дальше, место в таблице, путь по столам и роли в сыгранных играх.</div>')+'</div></div>';
+    if(!FAV.length)box.classList.remove('closed');
     var ni=$('.dvm-q input',box);if(ni&&qv)ni.value=qv;searchUI();mark();
   }
   /* подсветка ★ на плитках, в таблице, на кнопках столов */
