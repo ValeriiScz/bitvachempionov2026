@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · live.html · v1.4 · 2026-11-14 · «Столы · кто где»: у каждого игрока доп за эту игру (зелёный +, красный −), проигравшие в сыгранной игре приглушены · v1.3 · 2026-11-14 · у каждого турнира переключатель «Таблица | Столы»: в «Столах» — номер игры (сыграна ✓ / идёт ● / впереди), по выбранной игре все столы с составом (место, аватар, ник, тир), сила стола относительно столов этого турнира (спокойный…элитный — шкала «Сила стола»), результат и ▶ эфир; можно листать игры, не уходя с трансляции · v1.2 · 2026-11-14 · режим «Все эфиры»: до 4 трансляций сеткой одновременно (любые турниры и столы; тап по столу — добавить/убрать), звук — в самом окне · v1.1 · 2026-11-14 · «Мой игрок» на весь Live-центр: место, Σ и стол в каждом турнире, где он играет (в таблице — его строка под топом); по умолчанию — стол, где есть эфир (раньше брался турнир без ссылки); турнир из одной стадии (GMC) не путается с финалом · v1.0 · 2026-11-13 · «Live-центр»: все турниры, которые идут сейчас (и стартуют в ближайшие 3 дня), на одном экране —
+<!-- DOVOD · live.html · v1.5 · 2026-11-14 · ▲▼ — движение мест за последнюю сыгранную игру у всех турниров (раньше — только если таблица менялась при открытой странице); таблица — все игроки, прокрутка внутри блока · v1.4 · 2026-11-14 · «Столы · кто где»: у каждого игрока доп за эту игру (зелёный +, красный −), проигравшие в сыгранной игре приглушены · v1.3 · 2026-11-14 · у каждого турнира переключатель «Таблица | Столы»: в «Столах» — номер игры (сыграна ✓ / идёт ● / впереди), по выбранной игре все столы с составом (место, аватар, ник, тир), сила стола относительно столов этого турнира (спокойный…элитный — шкала «Сила стола»), результат и ▶ эфир; можно листать игры, не уходя с трансляции · v1.2 · 2026-11-14 · режим «Все эфиры»: до 4 трансляций сеткой одновременно (любые турниры и столы; тап по столу — добавить/убрать), звук — в самом окне · v1.1 · 2026-11-14 · «Мой игрок» на весь Live-центр: место, Σ и стол в каждом турнире, где он играет (в таблице — его строка под топом); по умолчанию — стол, где есть эфир (раньше брался турнир без ссылки); турнир из одной стадии (GMC) не путается с финалом · v1.0 · 2026-11-13 · «Live-центр»: все турниры, которые идут сейчас (и стартуют в ближайшие 3 дня), на одном экране —
      как live-раздел у букмекеров: сверху один плеер (выбранный турнир и стол), ниже по каждому турниру — текущая игра, столы с эфирами
      и живая таблица (топ с линией выхода в финал / призов, «мой игрок»). До старта — отсчёт, рассадка первой игры и фавориты по MMR.
      Данные: data/tournaments.js (какие турниры, у кого есть смотровая t.watch), data/live.js loadGames(id) (результаты с mafgame раз в 20 с),
@@ -109,6 +109,8 @@
   .st0{padding:0 14px 14px 16px}
   .stt{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 6px;font:800 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
   .stt a{color:var(--acc);text-decoration:none;letter-spacing:.04em;text-transform:none;font:700 12px/1 Inter}
+  .lbw{max-height:520px;overflow-y:auto;scrollbar-width:thin;margin-right:-4px;padding-right:4px}
+  @media (max-width:700px){.lbw{max-height:440px}}
   table.lb{width:100%;border-collapse:collapse;font:600 13px/1.2 Inter}
   .lb td{padding:6px 4px;border-top:1px solid rgba(255,255,255,.06);white-space:nowrap}
   .lb td.pl{width:26px;font:800 11px/1 var(--mono);color:var(--dim);text-align:center}
@@ -282,8 +284,11 @@ function compute(o){
   if(cur<0)cur=gs.length?gs.length-1:-1;o.cur=cur;
   const agg={};gs.forEach(g=>g.tables.forEach(t=>{if(t.winner==='unknown')return;t.seats.forEach(x=>{if(!x||!x.name)return;const a=agg[x.name]=agg[x.name]||{n:x.name,s:0,g:0,w:0};a.s+=x.sigma||0;a.g++;if(x.result==='W')a.w++;});}));
   const rows=Object.values(agg).sort((a,b)=>b.s-a.s);
-  const old={};(o.rows||[]).forEach((r,i)=>old[r.n]=i);
-  rows.forEach((r,i)=>{if(old[r.n]!=null&&old[r.n]!==i)o.prev[r.n]=old[r.n]-i;});
+  /* ▲▼ — против таблицы до последней полностью сыгранной игры */
+  let ld=-1;gs.forEach((g,i)=>{if(g.tables.length&&g.tables.every(t=>t.winner!=='unknown'))ld=i;});
+  const base={};gs.forEach((g,i)=>{if(i>=ld)return;g.tables.forEach(t=>{if(t.winner==='unknown')return;t.seats.forEach(x=>{if(!x||!x.name)return;base[x.name]=(base[x.name]||0)+(x.sigma||0);});});});
+  const bord=Object.keys(base).sort((a,b)=>base[b]-base[a]);const bi={};bord.forEach((n,i)=>bi[n]=i);
+  o.prev={};if(ld>0)rows.forEach((r,i)=>{if(bi[r.n]!=null&&bi[r.n]!==i)o.prev[r.n]=bi[r.n]-i;});
   o.rows=rows;
 }
 function SDB(id){return (window.STREAMS_DB&&STREAMS_DB[id])||null;}
@@ -398,10 +403,10 @@ function tblock(o){
   /* таблица */
   const cut=CUT[id]||{n:10,lab:'выход в финал'};
   let lb='';
-  if(o.rows.length){const N=Math.max(cut.n+2,10);let rows=o.rows.slice(0,N);const mi=my?o.rows.findIndex(r=>r.n===my):-1;
+  if(o.rows.length){const N=o.rows.length;let rows=o.rows.slice(0,N);const mi=-1; /* 14.11: все игроки, прокрутка внутри блока */
     const tr=(r,i)=>{const d=o.prev[r.n];const tc=TIERC[tierOf(o,r.n)]||'#3a404d';const a=avOf(o,r.n);
       return `<tr class="${r.n===my?'me ':''}p${i+1}"><td class="pl">${i+1}</td><td class="nm"><span class="av" style="--rc:${tc};background-image:url('${esc(a||DEF_AV)}')"></span>${esc(r.n)}</td><td class="d ${d>0?'up':d<0?'dn':''}">${d>0?'▲'+d:d<0?'▼'+(-d):''}</td><td class="g">${r.g}</td><td class="s">${r.s.toFixed(2)}</td></tr>`+(i+1===cut.n&&!done?`<tr class="cut"><td colspan="5"><span>▲ ${esc(cut.lab)}</span></td></tr>`:'');};
-    lb=`<table class="lb"><tbody>${rows.map(tr).join('')}${mi>=N?'<tr><td colspan="5" style="text-align:center;color:var(--dim)">···</td></tr>'+tr(o.rows[mi],mi):''}</tbody></table>`;}
+    lb=`<div class="lbw"><table class="lb"><tbody>${rows.map(tr).join('')}${mi>=N?'<tr><td colspan="5" style="text-align:center;color:var(--dim)">···</td></tr>'+tr(o.rows[mi],mi):''}</tbody></table></div>`;}
   else{const fav=o.players.filter(p=>p.r_ms_mmr).sort((a,b)=>b.r_ms_mmr-a.r_ms_mmr).slice(0,5);
     lb=`<div class="note" style="margin-bottom:6px">Таблица появится после первой игры. Фавориты по MMR:</div><table class="lb"><tbody>${fav.map((p,i)=>`<tr class="${p.nick===my?'me':''}"><td class="pl">${i+1}</td><td class="nm"><span class="av" style="--rc:${TIERC[p.r_ms_tier]||'#3a404d'};background-image:url('${esc(p.av||DEF_AV)}')"></span>${esc(p.nick)}</td><td class="g">${esc(p.r_ms_tier||'')}</td><td class="s">${Math.round(p.r_ms_mmr)}</td></tr>`).join('')}</tbody></table>`;}
   const mg=t.mafgame||('https://mafgame.org/tournaments/'+id+'/view');
@@ -417,7 +422,9 @@ function tblock(o){
 }
 function renderFeed(){
   const f=document.getElementById('feed');
+  const keep={};f.querySelectorAll('section.tb').forEach((sec,i)=>{const w=sec.querySelector('.lbw');if(w)keep[i]=w.scrollTop;});
   f.innerHTML=LIST.map(t=>T[String(t.id)]?tblock(T[String(t.id)]):'').join('');
+  f.querySelectorAll('section.tb').forEach((sec,i)=>{const w=sec.querySelector('.lbw');if(!w)return;if(keep[i]!=null)w.scrollTop=keep[i];else{const me=w.querySelector('tr.me');if(me&&me.offsetTop>w.clientHeight-40)w.scrollTop=me.offsetTop-w.clientHeight/2;}});
   f.querySelectorAll('.gs').forEach(g=>{const b=g.querySelector('button.on');if(b)g.scrollLeft=b.offsetLeft-g.clientWidth/2+b.offsetWidth/2;});
 }
 function stamp(){document.getElementById('upd').textContent='обновлено '+new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});}
