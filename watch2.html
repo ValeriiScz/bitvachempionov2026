@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  DOVOD · watch2.html · новая смотровая турнира · v1.3 · 2026-11-14
+  DOVOD · watch2.html · новая смотровая турнира · v1.6 · 2026-11-15
   Назначение: эфир и вся информация о турнире на одной странице. Один файл на все турниры: watch2.html?id=664.
   Прежние смотровые watch{id}.html переадресуют сюда; открыть прежнюю - watch{id}.html?old=1.
   Данные: те же источники, что у live.html - data/tournaments.js, participants/tournament/avatars/streams_{id}.json,
@@ -8,6 +8,9 @@
   Оглавление: 1) стили  2) расчёты (core)  3) общие блоки (ui)  4) логика страницы
   Режимы: «Эфир», «Все столы» (большой + остальные / сетка; телефон боком - на весь экран), «Турнир».
   Вкладки: Таблица · Столы · Дальше · Мои. Сила стола - метод и названия сайта (спокойный · мягкий · ровный · сильный · элитный).
+  v1.6 (15.11): компьютер - «◧ скрыть таблицы» (эфиры на всю ширину), эфиры вписываются в высоту окна; номера игр переносятся в строки (раньше 11+ были недоступны); места за столом подряд - 1-5 слева, 6-10 справа.
+  v1.5 (14.11): «Мои» с телефона - поиск с подсказками-кнопками (вместо datalist), ✕ у каждого игрока.
+  v1.4 (14.11): телефон, режим «Турнир» - кнопки звука и «в лайв» не налезают на мини-эфир, они в подписи рядом.
   v1.3 (14.11): вернул «⏭ в лайв» / «⏭ все в лайв» (как в прежних смотровых).
   v1.2 (14.11): стала основной - watch{id}.html переадресуют сюда (прежняя - watch{id}.html?old=1);
   пока у турнира нет рассадки - возвращает на прежнюю смотровую (там анонс и эфиры до старта).
@@ -77,13 +80,14 @@ a{color:inherit;text-decoration:none}
 .seat .pt{font-size:11px}
 .tag{font:700 10px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:6px;border:1px solid var(--ln);color:var(--mu)}
 .tag.go{color:var(--live);border-color:#5a2020}.tag.r{color:#ff8f9c;border-color:#5a2030}.tag.b{color:#c3cad6;border-color:#3a4250}.tag.hot{color:var(--acc);border-color:#5a4a10}
-.gstrip{display:flex;gap:4px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
+.gstrip{display:flex;flex-wrap:wrap;gap:4px;padding:2px 0 8px}
 .gstrip button{flex:none;min-width:36px;height:36px;border-radius:9px;border:1px solid var(--ln);background:var(--p2);font:700 12px 'JetBrains Mono',monospace;color:var(--mu)}
 .gstrip button.done{color:var(--grn);border-color:#1f4a30}.gstrip button.cur{color:var(--live);border-color:#6a2525}.gstrip button.on{background:var(--tx);color:#0b0d10;border-color:var(--tx)}
 input.q{width:100%;height:40px;border-radius:10px;border:1px solid var(--ln);background:var(--p2);color:var(--tx);padding:0 12px;font:inherit;outline:0}
 input.q:focus{border-color:var(--acc)}
 .sb.hot i.on{background:#e0405a}
 .sw{font:700 10px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase}
+.seats:not(.one){grid-auto-flow:column;grid-template-rows:repeat(var(--sr,5),auto)} /* места подряд: 1-5 слева, 6-10 справа */
 .seats.one{grid-template-columns:minmax(0,1fr)}
 .seat .dp{font-size:11px;min-width:38px;text-align:right}.seat .pt{min-width:40px;text-align:right}
 .circ{display:flex;flex-wrap:wrap;gap:3px}.circ span{display:inline-flex;border-radius:50%}.circ span.me{box-shadow:0 0 0 2px var(--ac)}
@@ -131,7 +135,9 @@ input.q:focus{border-color:var(--acc)}
 .myr .tp{display:flex;align-items:center;gap:8px;min-height:48px;padding:4px 2px;width:100%;text-align:left}
 .myr .tp .nm{flex:1;min-width:0}.myr .tp .nm b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.myr .tp .nm small{display:block;font-size:12px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .myr .tp .pl{text-align:right;flex:none;font:700 14px 'JetBrains Mono',monospace;color:var(--ac)}.myr .tp .pl small{display:block;font:400 10px 'JetBrains Mono',monospace;color:var(--mu)}
-.myr .chv{color:var(--mu);width:14px;text-align:center;flex:none;font-size:11px}.myr.open .chv{transform:rotate(180deg)}
+.myr .chv{color:var(--mu);width:32px;height:40px;text-align:center;flex:none;font-size:13px}
+.myr .x{color:var(--mu);width:32px;height:40px;flex:none;font-size:14px;border-left:1px solid var(--ln)}
+.addl{display:grid;gap:4px;margin:6px 0 4px}.addl button{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 10px;border-radius:10px;background:var(--p2);border:1px solid var(--ln);text-align:left}.addl button span:not(.av){flex:1;font-weight:600}.addl button small{color:var(--mu)}.addl button b{color:var(--ac);font-size:16px}.myr.open .chv{transform:rotate(180deg)}
 .myr .dt{display:none;padding:2px 2px 10px;font-size:12px;color:#b8c0cc}.myr.open .dt{display:block}
 .myr .dt .ch{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
 .myr .tg2{font:700 10px Inter;background:var(--ac);color:#000;border-radius:999px;padding:1px 6px;margin-left:5px}
@@ -143,6 +149,8 @@ input.q:focus{border-color:var(--acc)}
 .app[data-mode=info] .video{width:128px;flex:none;border-radius:8px}
 .app[data-mode=info] .video .ph span,.app[data-mode=info] .video .ph b{display:none}
 .app[data-mode=info] .chips{display:none}
+.app[data-mode=info] .vctl{display:none}
+.minicap .mc{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.minicap .mc .golv,.minicap .mc .sndb{min-height:32px;padding:0 9px;font-size:12px}
 .app[data-mode=info] .minicap{display:block;flex:1;min-width:0;font-size:12px;color:var(--mu)}.app[data-mode=info] .minicap b{display:block;color:var(--tx);font-size:13px}
 .only-d{display:none!important}
 .panel>.tabs{display:none}
@@ -183,11 +191,15 @@ input.q:focus{border-color:var(--acc)}
   .panel>.tabs{display:grid;background:var(--p);flex:none}
   .panel .secs{overflow:auto;flex:1}
   .tbl{border:0;border-radius:0;margin:-10px}.sec#s-table .q{margin-bottom:10px}
+  .app.wide:not([data-mode=info]){grid-template-columns:minmax(0,1fr)}
+  .app.wide:not([data-mode=info]) .panel{display:none}
+  .app:not([data-mode=info]) .top{max-width:calc((100vh - var(--off,150px)) / var(--vf,.5625));width:100%;justify-self:center}
   .app[data-mode=info]{grid-template-columns:clamp(220px,22vw,300px) minmax(0,1fr)}
   .app[data-mode=info] .stage{display:block;padding:0;border:0}
   .app[data-mode=info] .video{width:100%;border-radius:12px}
   .app[data-mode=info] .chips{display:grid;grid-auto-flow:row;grid-template-columns:1fr 1fr}
   .app[data-mode=info] .minicap,.app[data-mode=info] .under{display:none}
+  .app[data-mode=info] .vctl{display:flex}
   .app[data-mode=info] .panel{position:static;max-height:none;border:0;background:none;overflow:visible}
   .app[data-mode=info] .panel .tabs{display:none}
   .app[data-mode=info] .secs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;overflow:visible;align-items:start}
@@ -197,6 +209,7 @@ input.q:focus{border-color:var(--acc)}
 <header class="bar">
   <a class="bk" href="live.html" title="Live-центр">←</a>
   <div class="ti"><b id="ttl"></b><span id="meta"></span></div>
+  <button class="btn sm only-d" id="ptog" data-act="ptog" title="Скрыть или показать таблицы справа - эфиры на всю ширину"></button>
   <div class="seg" id="modes"><button data-m="air" title="Эфир">▶<span> Эфир</span></button><button data-m="all" title="Все столы">⊞<span> Все столы</span></button><button data-m="info" title="Турнир">☰<span> Турнир</span></button></div>
 </header>
 <main class="app" id="app" data-mode="air">
@@ -399,7 +412,7 @@ function tcardHTML(t,gi,tb,o){
       ${going?'<span class="tag go">идёт</span>':tb.w?`<span class="tag ${tb.w}">${winLab(tb.w)}</span>`:''}
       <span class="sp"></span>${j?`<span class="st">судья ${esc(j)}</span>`:''}
       ${o.noBtn?'':`<button class="btn sm${going&&!o.quiet?' pri':''}" data-act="air" data-id="${t.id}" data-tb="${tb.n}" data-g="${gi}">▶ ${tb.w?'запись':'эфир'}</button>`}</div>
-    <div class="seats${o.detail?' one':''}">${sorted.map(s=>{const me=o.follow.includes(s[1]),r=ROLE[s[2]];
+    <div class="seats${o.detail?' one':''}" style="--sr:${Math.ceil(sorted.length/2)}">${sorted.map(s=>{const me=o.follow.includes(s[1]),r=ROLE[s[2]];
       const pts=tb.w&&r?(o.detail?`<span class="role ${r[1]}">${r[0]}</span>${s[7]?'<span title="убит первым" class="mu">✝</span>':''}<span class="dp num ${s[4]>0?'pos':s[4]<0?'neg':'mu'}" title="допы и штрафы${s[8]?', в том числе запись чёрных '+f2(s[8]):''}">${s[4]?sgn(s[4]):'·'}</span>${s[6]?`<span class="dp num mu" title="компенсация Ci">Ci ${f2(s[6])}</span>`:''}<span class="pt num ${s[3]>0?'pos':s[3]<0?'neg':'mu'}"><b>${sgn(s[3])}</b></span>`
         :`<span class="role ${r[1]}">${r[0]}</span><span class="pt num ${s[3]>0?'pos':s[3]<0?'neg':'mu'}">${sgn(s[3])}</span>`):`<span class="pt num mu">${(t.pl[s[1]]||[])[1]||''}</span>`;
       return `<div class="seat${me?' me':''}"><span class="sn num">${s[0]}</span>${av(t,s[1],20)}<span class="nm">${esc(s[1])}</span>${pts}</div>`;}).join('')}</div>
@@ -420,6 +433,7 @@ function renderBar(){
   $('ttl').textContent=t.short;
   $('meta').innerHTML=(fin?'<span>завершён</span>':t.inWin?'<span class="live">LIVE</span>':'<span>скоро</span>')+`<span>${isFinG(t,t.games[c])?'финал · ':''}игра ${c+1} из ${t.gt}</span><span class="only-d">${esc(t.city)} · ${stars(t.stars)}</span><span class="only-d">обновлено ${esc(DATA.snap)}</span>`;
   document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));
+  $('app').classList.toggle('wide',!!S.hide);const pt=$('ptog');pt.style.display=S.mode==='info'?'none':'';pt.textContent=S.hide?'◨ показать таблицы':'◧ скрыть таблицы';
 }
 let stageSig='';
 function renderStage(){
@@ -431,13 +445,15 @@ function renderStage(){
     if(all){$('vid').innerHTML=tbs.map(tb=>`<div class="cell video" data-cell="${tb.n}"><div class="lab"><button data-act="main" data-tb="${tb.n}">Стол ${ROM[tb.n]}<i class="snd" style="font-style:normal"></i></button><button data-act="air" data-tb="${tb.n}" data-g="${S.vg}" title="только этот стол">⤢</button></div>${playerHTML(t,tb.n,S.vg)}</div>`).join('');}
     else{$('vid').innerHTML=playerHTML(t,S.table,S.vg,{sound:true,cap:(isFinG(t,t.games[S.vg])?'Финальный стол':'Стол '+ROM[S.table])+' · игра '+(S.vg+1)})+(streamId(t,S.table,S.vg)&&ONSITE?`<div class="vctl">${liveBtn(false)}${sndBtn()}</div>`:'');}
   }
+  {const big=S.lay==='big',k=.5625;let vf=k,off=150;if(all){off=205;vf=big?k*(1+1/Math.max(1,n-1)):Math.ceil(n/(n<=4?2:3))*k/(n<=4?2:3);}
+    $('app').style.setProperty('--vf',vf.toFixed(4));$('app').style.setProperty('--off',off+'px');}
   if(all){
     const big=S.lay==='big',v=$('vid');v.className='multi'+(big?' big':'');
     v.style.setProperty('--c',big?Math.max(1,n-1):(n<=4?2:3));v.style.setProperty('--lc',n<=2?n:n<=4?2:3);
     v.querySelectorAll('.cell').forEach(c=>{const m=+c.dataset.cell===S.table;c.classList.toggle('main',m);const s=c.querySelector('.snd');if(s)s.textContent=m?(window.__snd?' · 🔊':' · 🔇 включить звук'):'';});
     $('allbar').innerHTML=`<div class="seg"><button data-act="lay" data-l="big" class="${S.lay==='big'?'on':''}">большой + остальные</button><button data-act="lay" data-l="grid" class="${S.lay==='grid'?'on':''}">сетка</button></div>${ONSITE?liveBtn(true):''}<span>Тап по названию стола - он главный и звук там; ещё тап - звук выключить. Поверни телефон - столы на весь экран.</span>`;
   }else{$('vid').className='video';$('allbar').innerHTML='';}
-  $('minicap').innerHTML=`<b>Стол ${ROM[S.table]} · игра ${S.vg+1}</b>эфир идёт в углу<br><button class="btn sm" style="margin-top:4px" data-act="mode" data-m="air">развернуть эфир</button>`;
+  $('minicap').innerHTML=`<b>Стол ${ROM[S.table]} · игра ${S.vg+1}</b><div class="mc"><button class="btn sm" data-act="mode" data-m="air">развернуть</button>${streamId(t,S.table,S.vg)&&ONSITE?sndBtn()+liveBtn(false):''}</div>`;
   const c=curGame(t);
   $('chips').innerHTML=tbs.length>1?tbs.map(tb=>{const x=strength(t,tb),fv=tb.s.filter(s=>S.follow.includes(s[1])).length;
     return `<button class="chip${tb.n===S.table?' on':''}" data-act="${all?'main':'air'}" data-tb="${tb.n}" data-g="${S.vg}">${!tb.w&&S.vg===c&&!finished(t)?'<i class="dot"></i>':''}${fv?`<i class="fav">★${fv>1?fv:''}</i>`:''}<b>${ROM[tb.n]}</b><small>${stBars(x)}<span style="color:${x.col}">${x.word}</span></small></button>`;}).join(''):'';
@@ -474,14 +490,14 @@ function renderMy(){
   const opts=Object.keys(t.pl).sort((a,b)=>a.localeCompare(b)).map(n=>`<option value="${esc(n)}">`).join('');
   const byT={};S.follow.forEach(n=>{const w=whereIs(t,c,n);if(w&&!fin)(byT[w.tb]=byT[w.tb]||[]).push(n);});
   if(S.main&&!S.follow.includes(S.main))S.main='';
-  let h=`<h3>Мои игроки <span>${S.follow.length} из 8</span></h3><input class="q" id="add" list="pls" placeholder="Добавить игрока - ник" autocomplete="off"><datalist id="pls">${opts}</datalist>`;
+  let h=`<h3>Мои игроки <span>${S.follow.length} из 8</span></h3>${S.follow.length<8?`<input class="q" id="add" placeholder="Добавить игрока - начни вводить ник" autocomplete="off" autocapitalize="off"><div class="addl" id="addl"></div>`:'<div class="note">Уже 8 - чтобы добавить нового, убери кого-то (✕).</div>'}`;
   if(!S.follow.length)h+='<div class="note">Добавь себя или тех, за кого болеешь: место, балл за последнюю игру, где сидит сейчас и за какими столами дальше. Они подсветятся в таблице и на столах.</div>';
   if(S.main)h+=`<label class="auto"><input type="checkbox" id="auto" ${S.auto?'checked':''}> Эфир сам идёт за главным (${esc(S.main)})</label>`;else h+='<div style="height:8px"></div>';
   S.follow.forEach(n=>{const a=T.rows.find(x=>x.n===n);if(!a)return;const p=path(t,n),w=fin?null:whereIs(t,c,n),nx=p.find(x=>x.gi>c),mates=w?(byT[w.tb]||[]).filter(x=>x!==n):[];
     const strong=w?w.o.s.filter(s=>s[1]!==n&&/^[LSA]$/.test((t.pl[s[1]]||[])[1]||'')).map(s=>esc(s[1])+' ('+t.pl[s[1]][1]+')'):[];
     h+=`<div class="myr${S.openMy[n]?' open':''}" data-n="${esc(n)}"><div class="tp">${av(t,n,30)}<button class="nm" data-act="myopen" data-n="${esc(n)}" style="text-align:left"><b>${esc(n)}${S.main===n?' <span class="mu" style="font-weight:500;font-size:11px">· главный</span>':''}</b><small>${w?'стол '+ROM[w.tb]+' · место '+w.seat:fin?'турнир сыгран':'в этой игре не играет'}${mates.length?'<span class="tg2">вместе</span>':''}</small></button>
         <span class="pl">#${a.pos}<small>Σ ${f2(a.sum)} ${a.d>0?`<span class="up">▲${a.d}</span>`:a.d<0?`<span class="dn">▼${-a.d}</span>`:''}</small></span>
-        ${w?`<button class="btn sm" data-act="air" data-tb="${w.tb}" data-g="${c}" aria-label="смотреть его стол">▶</button>`:''}<button class="chv" data-act="myopen" data-n="${esc(n)}">▾</button></div>
+        ${w?`<button class="btn sm" data-act="air" data-tb="${w.tb}" data-g="${c}" aria-label="смотреть его стол">▶</button>`:''}<button class="chv" data-act="myopen" data-n="${esc(n)}" aria-label="подробнее">▾</button><button class="x" data-act="follow" data-n="${esc(n)}" aria-label="убрать" title="убрать">✕</button></div>
       <div class="dt">${a.last?`Последняя игра (${T.lg+1}): <b class="${a.last.v>0?'pos':a.last.v<0?'neg':''}">${sgn(a.last.v)}</b>. `:''}${nx?`Дальше: игра ${nx.gi+1}, стол ${ROM[nx.tb]}, место ${nx.seat}. `:''}${mates.length?'За этим столом ещё твои: '+mates.map(esc).join(', ')+'. ':''}${w?(strong.length?'Сильные за столом: '+strong.join(', ')+'.':'За столом нет игроков уровня A и выше.'):''}
         <div class="ch">${p.map(chipG).join('')}</div>
         <div style="display:flex;gap:6px;flex-wrap:wrap">${S.main===n?'':`<button class="btn sm" data-act="mainp" data-n="${esc(n)}">★ главный (эфир за ним)</button>`}<button class="btn sm" data-act="follow" data-n="${esc(n)}">убрать</button></div></div></div>`;});
@@ -498,20 +514,22 @@ document.addEventListener('click',e=>{
   else if(a==='mode'){S.mode=b.dataset.m;save();renderBar();renderStage();}
   else if(a==='air'){S.table=+b.dataset.tb;S.vg=+b.dataset.g;S.g=S.vg;if(S.mode==='all')S.mode='air';renderBar();renderStage();renderNow();if(innerWidth<1000&&S.mode==='air')window.scrollTo({top:0,behavior:'smooth'});}
   else if(a==='main'){const same=S.table===+b.dataset.tb;S.table=+b.dataset.tb;window.__snd=same?!window.__snd:true;renderStage();renderNow();soundTo($('vid'),window.__snd?t.id+'-'+S.table:'-');}
-  else if(a==='snd'){window.__snd=!window.__snd;soundTo($('vid'),window.__snd?t.id+'-'+S.table:'-');const o=$('vid').querySelector('.sndb');if(o)o.outerHTML=sndBtn();}
+  else if(a==='snd'){window.__snd=!window.__snd;soundTo($('vid'),window.__snd?t.id+'-'+S.table:'-');document.querySelectorAll('.sndb').forEach(o=>{o.outerHTML=sndBtn();});}
   else if(a==='golive'){goLive($('vid'));}
+  else if(a==='ptog'){S.hide=!S.hide;LSS('pw_hide',S.hide);renderBar();}
   else if(a==='lay'){S.lay=b.dataset.l;LSS('pw_lay',S.lay);renderStage();}
   else if(a==='game'){S.g=+b.dataset.g;if(b.dataset.go){S.tab='now';save();renderTabs();}renderNow();}
   else if(a==='open'){S.open=S.open===b.dataset.n?null:b.dataset.n;renderTable();}
   else if(a==='myopen'){const n=b.dataset.n;S.openMy[n]=!S.openMy[n];const r=b.closest('.myr');if(r)r.classList.toggle('open',S.openMy[n]);}
   else if(a==='mainp'){S.main=b.dataset.n;S.auto=true;save();followMain();renderAll();}
-  else if(a==='follow'){const n=b.dataset.n,i=S.follow.indexOf(n);if(i>=0)S.follow.splice(i,1);else if(S.follow.length<8)S.follow.push(n);if(!S.main&&S.follow.length)S.main=S.follow[0];save();renderAll();}
+  else if(a==='follow'){const n=b.dataset.n,i=S.follow.indexOf(n);if(i>=0){S.follow.splice(i,1);if(S.main===n)S.main=S.follow[0]||'';}else if(S.follow.length<8)S.follow.push(n);if(!S.main&&S.follow.length)S.main=S.follow[0];save();renderAll();if(i<0&&b.closest('#addl')){const a2=$('add');if(a2)a2.focus();}}
   else if(a==='allnext'){S.allNext=true;renderNext();}
 });
 document.addEventListener('input',e=>{
   if(!S)return;
   if(e.target.id==='q'){S.q=e.target.value;$('tblbody').innerHTML=tableHTML(t,{follow:S.follow,open:S.open,q:S.q});}
-  if(e.target.id==='add'){const v=e.target.value.trim();if(t.pl[v]&&!S.follow.includes(v)&&S.follow.length<8){S.follow.push(v);if(!S.main)S.main=v;save();renderAll();}}
+  if(e.target.id==='add'){const q=e.target.value.trim().toLowerCase(),c=curGame(t);
+    $('addl').innerHTML=q?Object.keys(t.pl).filter(n=>!S.follow.includes(n)&&n.toLowerCase().includes(q)).sort((a,b)=>a.localeCompare(b)).slice(0,8).map(n=>{const w=whereIs(t,c,n);return `<button data-act="follow" data-n="${esc(n)}">${av(t,n,26)}<span>${esc(n)}</span><small>${w?'стол '+ROM[w.tb]:''}</small><b>＋</b></button>`;}).join('')||'<div class="note">никого не нашли</div>':'';}
 });
 document.addEventListener('change',e=>{if(S&&e.target.id==='auto'){S.auto=e.target.checked;save();if(S.auto){followMain();renderAll();}}});
 (async function(){
@@ -523,7 +541,7 @@ document.addEventListener('change',e=>{if(S&&e.target.id==='auto'){S.auto=e.targ
   if(t&&!t.games.length){const old=(DB.find(x=>String(x.id)===ID)||{}).watch;if(old&&old!=='watch2.html'){location.replace(old+'?old=1');return;}}
   if(!t||!t.games.length){$('app').innerHTML=`<div class="empty">${t?esc(t.name)+': рассадку и игры mafgame ещё не опубликовал.':'Турнир не найден.'}<br><br><a href="live.html" style="color:var(--ac)">Live-центр</a></div>`;if(t)$('ttl').textContent=t.short;return;}
   K='pw_'+ID+'_';stamp();const c=curGame(t);
-  S={lay:LSG('pw_lay',innerWidth<1000?'big':'grid'),mode:LSG(K+'mode','air'),tab:LSG(K+'tab','table'),table:+qs.get('tb')||1,g:c,vg:c,follow:LSG(K+'follow',[]),main:LSG(K+'main',''),auto:LSG(K+'auto',false),open:null,openMy:{},q:'',allNext:false};
+  S={hide:LSG('pw_hide',false),lay:LSG('pw_lay',innerWidth<1000?'big':'grid'),mode:LSG(K+'mode','air'),tab:LSG(K+'tab','table'),table:+qs.get('tb')||1,g:c,vg:c,follow:LSG(K+'follow',[]),main:LSG(K+'main',''),auto:LSG(K+'auto',false),open:null,openMy:{},q:'',allNext:false};
   if(!['air','all','info'].includes(S.mode))S.mode='air';
   document.documentElement.style.setProperty('--acc',t.accent||'#ffce00');document.title=t.short+' · смотровая · DOVOD';
   if(!qs.get('tb'))followMain();
