@@ -8,7 +8,7 @@
   "fee": "100.00",
   "stars": 3,
   "expected": 40,
-  "players_confirmed": 36,
+  "players_confirmed": 37,
   "rating_note": "Состав — подтверждённые на mafgame (снимок 12.11: 34 из 40). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку.",
   "ms_snap": "2026-11-12",
   "ms_ladder": {
@@ -21,7 +21,7 @@
    "E": 925
   },
   "elo_snap": "2026-11-13",
-  "roster_snap": "2026-11-14"
+  "roster_snap": "2026-11-15"
  },
  "players": [
   {
@@ -1303,6 +1303,34 @@
    "r_ms_rank": null,
    "r_ms_tier": "B",
    "added": "2026-11-14"
+  },
+  {
+   "nick": "Tapok",
+   "uid": 561,
+   "real": "Тимур",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_561/3b6199eba3053f42603cffa3d110a2a0a0a47d18.png",
+   "status": "confirmed",
+   "club": "White Mafia Club Wroclaw",
+   "cc": "PL",
+   "country": "Польша",
+   "flag": "🇵🇱",
+   "markery_id": 11142,
+   "r_elo_cur": 947,
+   "r_tier": "D",
+   "r_elo_ly": null,
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": 37,
+   "mk_match": "id",
+   "elo_snap": "2026-10-26",
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": null,
+   "r_ms_mmr": 1221.2,
+   "r_ms_rank": 702,
+   "r_ms_tier": "D",
+   "added": "2026-11-15"
   }
  ]
 }
