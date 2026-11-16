@@ -8,7 +8,7 @@
   "fee": "100.00",
   "stars": 3,
   "expected": 40,
-  "players_confirmed": 37,
+  "players_confirmed": 38,
   "rating_note": "Состав — подтверждённые на mafgame (снимок 12.11: 34 из 40). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку.",
   "ms_snap": "2026-11-16",
   "ms_ladder": {
@@ -21,7 +21,7 @@
    "E": 925
   },
   "elo_snap": "2026-11-13",
-  "roster_snap": "2026-11-15"
+  "roster_snap": "2026-11-16"
  },
  "players": [
   {
@@ -1352,6 +1352,34 @@
    "r_ms_rank": 708,
    "r_ms_tier": "D",
    "added": "2026-11-15"
+  },
+  {
+   "nick": "Nick",
+   "uid": 1037,
+   "real": "Макар Макарович",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1037/496a221dccca668d60768f4cedbd464430d6918d.png",
+   "status": "confirmed",
+   "club": null,
+   "cc": "ES",
+   "country": "Испания",
+   "flag": "🇪🇸",
+   "markery_id": 15257,
+   "r_elo_cur": 1280,
+   "r_tier": "A",
+   "r_elo_ly": null,
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": 38,
+   "mk_match": "id",
+   "elo_snap": "2026-10-26",
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": null,
+   "r_ms_mmr": 1951.8,
+   "r_ms_rank": 39,
+   "r_ms_tier": "L",
+   "added": "2026-11-16"
   }
  ]
 }
