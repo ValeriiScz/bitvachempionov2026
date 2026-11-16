@@ -92,8 +92,8 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-14",
     "accent": "#ffce00",
     "accent2": "#dd0000",
-    "strength": {"lvl": "ровный", "rank": 18, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.9, "eq": 24.4, "pts": 19, "cplus": 28, "proj": false, "reg": 40, "exp": 40, "places": 10},
-    "mvp": "Licht"
+    "mvp": "Licht",
+    "strength": {"lvl": "ровный", "rank": 18, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.9, "eq": 24.4, "pts": 19, "cplus": 28, "proj": false, "reg": 40, "exp": 40, "places": 10}
   },
   {
     "id": "757",
@@ -285,8 +285,8 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-14",
     "accent": "#e8b34a",
     "accent2": "#f3d89a",
-    "strength": {"lvl": "ровный", "rank": 20, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 69.9, "eq": 47.6, "pts": 5, "cplus": 14, "proj": false, "reg": 20, "exp": 20, "places": 10},
-    "mvp": "Магнат"
+    "mvp": "Магнат",
+    "strength": {"lvl": "ровный", "rank": 20, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 69.9, "eq": 47.6, "pts": 5, "cplus": 14, "proj": false, "reg": 20, "exp": 20, "places": 10}
   },
   {
     "id": "615",
