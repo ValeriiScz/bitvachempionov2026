@@ -1,4 +1,4 @@
-"""whatif.py · v2.2 · 2026-11-09 (крайние сценарии планки — сетка «явка × кто забирает призы»: потолок «ад», максимум явки, топы/гонка/лидеры/чужие берут призы, пол — Валерий) · v2.1 · 2026-11-09 (новые сценарии: DOVOD не едет на Dutch Open; возможный Краков 2★ 21.11 вместо отменённого Вроцлава; оба вместе; стресс — без прошедшего Брюсселя) · v2.0.1 · 2026-11-02 (сценарий Prague Cup: запрещённое слово заменено на «гонка» — правило Валерия 21.10, Глоссарий §5) · v2.0 · 2026-11-02 (после MGP: 13 сценариев по выбору Валерия — явка, Dutch/Кипр/Prague Cup, дуэль Tommy–Сью, исходы финалов GMC и MCL, MCL как 3★) · v1.3 · 2026-10-21 (дюжина: все с шансом ≥5%, до 24; +2 сценария с TOPS; убраны нереалистичные: MGP-отмена, MCL-перенос, 2★ не в зачёт — Валерий) — «Сценарии»: 10 «что если» для гонки за дюжину (Валерий, 21.10).
+"""whatif.py · v2.3 · 2026-11-16 (сценарий про уже сыгранный турнир пропускается: после 14.11 контура GMC в модели нет — шаг падал, гонка не пересобиралась с 14.11) · v2.2 · 2026-11-09 (крайние сценарии планки — сетка «явка × кто забирает призы»: потолок «ад», максимум явки, топы/гонка/лидеры/чужие берут призы, пол — Валерий) · v2.1 · 2026-11-09 (новые сценарии: DOVOD не едет на Dutch Open; возможный Краков 2★ 21.11 вместо отменённого Вроцлава; оба вместе; стресс — без прошедшего Брюсселя) · v2.0.1 · 2026-11-02 (сценарий Prague Cup: запрещённое слово заменено на «гонка» — правило Валерия 21.10, Глоссарий §5) · v2.0 · 2026-11-02 (после MGP: 13 сценариев по выбору Валерия — явка, Dutch/Кипр/Prague Cup, дуэль Tommy–Сью, исходы финалов GMC и MCL, MCL как 3★) · v1.3 · 2026-10-21 (дюжина: все с шансом ≥5%, до 24; +2 сценария с TOPS; убраны нереалистичные: MGP-отмена, MCL-перенос, 2★ не в зачёт — Валерий) — «Сценарии»: 10 «что если» для гонки за дюжину (Валерий, 21.10).
 Каждый сценарий — та же модель (gd_sim + gd_strength2), в которой меняется одно условие: отменён турнир, все записались,
 финал сыгран без игроков гонки и т. п. На выходе для каждого: планка 12-го (сырая и ×1.07), состав дюжины словами,
 кто заходит/выпадает по сравнению с базой. Пишет OUTP('whatif.json'); build_race.py кладёт его в RACE.whatif.
@@ -65,15 +65,20 @@ def scen_group_prague():
 def scen_duel():
     se=copy.deepcopy(BASE); force(se,N('Tommy','Сью'),stars_min=3); return se
 def scen_gmc_outsiders():
-    se=copy.deepcopy(BASE); contour_of(se,GMC)['race_pen']=8.0; return se
+    se=copy.deepcopy(BASE); ev=contour_of(se,GMC)
+    if ev is None: return None          # v2.3: турнир уже сыгран
+    ev['race_pen']=8.0; return se
 def scen_final_boost(pid,users,val):
     def f():
         se=copy.deepcopy(BASE); ev=contour_of(se,pid)
+        if ev is None: return None      # v2.3: турнир уже сыгран
         for u in users: ev['fin'][u]=1.0
         ev['boost']={u:val for u in users}; return se
     return f
 def scen_mcl3():
-    se=copy.deepcopy(BASE); ev=contour_of(se,MCL); full=g.SERIAL_GRID_2026[3]; base=float(full[-1])
+    se=copy.deepcopy(BASE); ev=contour_of(se,MCL)
+    if ev is None: return None
+    full=g.SERIAL_GRID_2026[3]; base=float(full[-1])
     ev['stars']=3; ev['grid']=[x for x in full if x>base]; ev['base']=base; return se
 def scen_skip(nicks, eid):
     def f():
@@ -153,7 +158,9 @@ import os
 ONLY=set(filter(None,os.environ.get('WHATIF_ONLY','').split(',')))
 for key,title,desc,fn in SCEN:
     if ONLY and key not in ONLY and key!='base': continue
-    se=fn(); r=run(se)
+    se=fn()
+    if se is None: print(f'{title:38s} пропущен: турнир уже сыгран'); continue
+    r=run(se)
     if base is None: base=r
     top=sorted(r['p12'].items(),key=lambda x:-x[1])
     dozen=[{'nick':g.NICK[u],'uid':u,'rank':rank.get(u),'p12':round(p,3),'ex':round(r['ex'][u],1)} for i,(u,p) in enumerate(top) if i<16 or (p>=0.05 and i<24)]

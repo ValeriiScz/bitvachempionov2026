@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.20 | 2026-11-16 | закрыты 664 GMC (чемпион Licht) и 725 Круг избранных (чемпион Магнат) — таблицы 1:1 с mafgame; −644 Lodz Mafia Open (отменён; данные в data/ сохранены)
 // MafgameStat | tournaments.js | v4.19 | 2026-11-13 | +725 Круг избранных (Кишинёв, 14–15.11, 2★): карточка, состав, страница t725 и смотровая watch725 (рассадка с mafgame)
 // MafgameStat | tournaments.js | v4.18 | 2026-11-12 | +726 Prague Cup и +644 Lodz Mafia Open (оба 5–6.12, 3★): карточки и составы с mafgame
 // MafgameStat | tournaments.js | v4.17 | 2026-11-11 | 801: +Саботаж (mafgame 11.11) — 34 подтверждены при ожидаемых 33; ср. ELO/MMR пересчитаны
@@ -58,9 +59,9 @@ window.TOURNAMENTS_DB = {
     "days": 2,
     "stars": 4,
     "prize": "3000 €",
-    "status": "upcoming",
-    "phase": 3,
-    "statusLabel": "Скоро · финал самого большого серийника 2026 · 40 финалистов",
+    "status": "finished",
+    "phase": 1,
+    "statusLabel": "Завершён · 18 игр на участника · чемпион Licht",
     "mmrAvg": 1482,
     "mmrN": 40,
     "mmrTiers": {"L": 4, "S": 2, "A": 3, "B": 3, "C": 16, "D": 7, "E": 5},
@@ -68,17 +69,19 @@ window.TOURNAMENTS_DB = {
     "organizer": "Mafia Club Cologne · орг KEX · главный судья финала Рыба-мÓя",
     "format": "18 игр на участника",
     "mafgame": "https://mafgame.org/tournaments/664/view",
-    "note": "Финал German Mafia Cup Europa Edition 2026: 28 серий отбора в 22 городах 11 стран, 230 игроков. В финале 40 подтверждённых участников (mafgame, снимок 09.11). Страница турнира с рассадкой откроется, когда mafgame опубликует рассадку.",
+    "note": "Завершён 15.11.2026. Чемпион — Licht (Σ 16.16), 2-е Tommy (14.88), 3-е Zico (13.71). Финал серийника German Mafia Cup Europa Edition 2026: 40 финалистов из 28 серий отбора, по 18 игр на участника, место по сумме без финального стола. MVP — Licht. Таблица 1:1 с официальной mafgame.",
+    "champion": "Licht",
+    "top3": ["Licht", "Tommy", "Zico"],
     "sections": [
       {
         "href": "t664.html",
         "title": "Страница турнира",
-        "desc": "Информация · Дорога в Кёльн · Состав · Рассадка · Результаты"
+        "desc": "Итоги · Результаты · Игроки · Столы"
       },
       {
         "href": "watch664.html",
         "title": "▶ Смотровая · эфиры",
-        "desc": "четыре стола в одном окне, следить за игроком"
+        "desc": "записи эфиров: четыре стола в одном окне"
       },
       {
         "href": "gmc2026.html",
@@ -89,7 +92,8 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-14",
     "accent": "#ffce00",
     "accent2": "#dd0000",
-    "strength": {"lvl": "ровный", "rank": 18, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.9, "eq": 24.4, "pts": 19, "cplus": 28, "proj": false, "reg": 40, "exp": 40, "places": 10}
+    "strength": {"lvl": "ровный", "rank": 18, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.9, "eq": 24.4, "pts": 19, "cplus": 28, "proj": false, "reg": 40, "exp": 40, "places": 10},
+    "mvp": "Licht"
   },
   {
     "id": "757",
@@ -210,7 +214,7 @@ window.TOURNAMENTS_DB = {
     "stars": 3,
     "status": "upcoming",
     "phase": 2,
-    "statusLabel": "Скоро · идёт набор: 34 из 40 подтверждены · в ту же дату — Лодзь (Lodz Mafia Open)",
+    "statusLabel": "Скоро · идёт набор: 34 из 40 подтверждены",
     "eloAvg": 1064,
     "eloN": 34,
     "eloTotal": 35,
@@ -221,7 +225,7 @@ window.TOURNAMENTS_DB = {
     "organizer": "Adrenaline · главный судья YeS",
     "page": "participants.html?t=726",
     "mafgame": "https://mafgame.org/tournaments/726/view",
-    "note": "mafgame: 3★, ожидается 40 игроков, взнос 100 €, клуб-организатор Adrenaline, главный судья YeS. На 12.11 подтверждены 34 — в составе Lюц, Gangster, Буржуй, Korolevich, RAMZES, DOVOD. В те же 5–6 декабря — Lodz Mafia Open (3★): Сью, Landing и Afina подали заявки на оба турнира.",
+    "note": "mafgame: 3★, ожидается 40 игроков, взнос 100 €, клуб-организатор Adrenaline, главный судья YeS. На 12.11 подтверждены 34 — в составе Lюц, Gangster, Буржуй, Korolevich, RAMZES, DOVOD.",
     "sections": [
       {
         "href": "participants.html?t=726",
@@ -253,9 +257,9 @@ window.TOURNAMENTS_DB = {
     "players": 20,
     "days": 2,
     "stars": 2,
-    "status": "upcoming",
-    "phase": 2,
-    "statusLabel": "Скоро · 20 из 20 · рассадка квалификации опубликована",
+    "status": "finished",
+    "phase": 1,
+    "statusLabel": "Завершён · 16 игр (12 квал + 4 финала) · чемпион Магнат",
     "eloAvg": 1044,
     "eloN": 19,
     "eloTotal": 20,
@@ -270,57 +274,19 @@ window.TOURNAMENTS_DB = {
   "liveTo": "2026-11-15",
   "format": "12 квал × 2 стола (все играют каждую) → финал топ-10 (4 игры, ×1.3)",
     "mafgame": "https://mafgame.org/tournaments/725/view",
-    "note": "mafgame: 2★, 20 игроков (все подтверждены на 13.11), клуб-организатор mafia.md, Кишинёв. В те же даты — финал GMC в Кёльне.",
+    "note": "Завершён 15.11.2026. Чемпион — Магнат (Σ 14.135), 2-е Dron (13.975), 3-е Mermaid (12.565). 12 игр квалификации на двух столах + финал топ-10 из 4 игр (×1.3). MVP — Магнат. Таблица 1:1 с официальной mafgame.",
+    "champion": "Магнат",
+    "top3": ["Магнат", "Dron", "Mermaid"],
     "sections": [
-    {"href": "t725.html", "title": "Страница турнира", "desc": "рассадка, пересечения, сила столов, live-таблица"},
-    {"href": "watch725.html", "title": "▶ Смотровая · эфиры", "desc": "два стола в одном окне, следить за игроком"},
+    {"href": "t725.html", "title": "Страница турнира", "desc": "Итоги · Результаты · Игроки · Столы"},
+    {"href": "watch725.html", "title": "▶ Смотровая · эфиры", "desc": "записи эфиров: два стола и финал"},
     {"href": "participants.html?t=725", "title": "Участники и рейтинг", "desc": "20 из 20 · MMR и ELO markery"}
   ],
     "start": "2026-11-14",
     "accent": "#e8b34a",
     "accent2": "#f3d89a",
-    "strength": {"lvl": "ровный", "rank": 20, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 69.9, "eq": 47.6, "pts": 5, "cplus": 14, "proj": false, "reg": 20, "exp": 20, "places": 10}
-  },
-  {
-    "id": "644",
-    "theme": "dovod",
-    "name": "Lodz Mafia Open: Harmony of Amaterasu",
-    "posterTitle": "Lodz Mafia Open|Amaterasu",
-    "dates": "5–6 декабря 2026",
-    "city": "Лодзь",
-    "country": "Польша",
-    "players": 30,
-    "days": 2,
-    "stars": 3,
-    "status": "upcoming",
-    "phase": 2,
-    "statusLabel": "Скоро · идёт набор: 3 заявки, подтверждённых пока нет · в ту же дату — Prague Cup",
-    "eloAvg": 1048,
-    "eloN": 3,
-    "eloTotal": 3,
-    "mmrAvg": 1544,
-    "mmrN": 3,
-    "mmrTiers": {"A": 2, "D": 1},
-    "mmrTop": [["Сью", 1722, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1398/269388ba5e06d783f8c16aae7bb0c84505ab9054.png"], ["Landing", 1655, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1481/b033e4506014e23586818760a88ede88a7b79d3d.png"], ["Afina", 1254, "D", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_2862/81dd2353160caae1683e164eff2dd7f1a10b3d7b.png"]],
-    "organizer": "White Mafia Club Lodz · главный судья LiYu",
-    "page": "participants.html?t=644",
-    "mafgame": "https://mafgame.org/tournaments/644/view",
-    "note": "mafgame: 3★, ожидается 30 игроков, взнос 110 €, клуб-организатор White Mafia Club Lodz, главный судья LiYu. На 12.11 три заявки (Сью, Landing, Afina) — все трое уже подтверждены и на Prague Cup в те же даты, так что состав Лодзи ещё сложится.",
-    "sections": [
-      {
-        "href": "participants.html?t=644",
-        "title": "Участники и рейтинг",
-        "desc": "заявки · MMR и ELO markery"
-      },
-      {
-        "soon": true,
-        "title": "Страница турнира",
-        "desc": "рассадка, сила столов, live-результаты"
-      }
-    ],
-    "start": "2026-12-05",
-    "accent": "#e94560",
-    "accent2": "#f5e6c8"
+    "strength": {"lvl": "ровный", "rank": 20, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 69.9, "eq": 47.6, "pts": 5, "cplus": 14, "proj": false, "reg": 20, "exp": 20, "places": 10},
+    "mvp": "Магнат"
   },
   {
     "id": "615",

@@ -11,12 +11,12 @@
  "fee_eur": 120,
  "stars": 4,
  "format": "Регламент mafgame: каждый участник играет 18 игр за два дня; 40 финалистов — 1-е и 2-е места 28 серий отбора и замены из очереди третьих мест.",
- "closed": false,
+ "closed": true,
  "in_progress": false,
  "live_from": "2026-11-13",
  "live_to": "2026-11-16",
- "upcoming": true,
- "games_played": 0,
+ "upcoming": false,
+ "games_played": 18,
  "games_total": 18,
  "final_coef": 1,
  "accent": "#ffce00",
@@ -29,5 +29,365 @@
   "Trinity",
   "Кура"
  ],
- "prize_eur": 3000
+ "prize_eur": 3000,
+ "champion": "Licht",
+ "winners": [
+  "Licht",
+  "Tommy",
+  "Zico"
+ ],
+ "standings": [
+  {
+   "place": 1,
+   "name": "Licht",
+   "sigma": 16.1643,
+   "stage": "финал",
+   "wins": 14,
+   "games": 18
+  },
+  {
+   "place": 2,
+   "name": "Tommy",
+   "sigma": 14.8786,
+   "stage": "финал",
+   "wins": 13,
+   "games": 18
+  },
+  {
+   "place": 3,
+   "name": "Zico",
+   "sigma": 13.7071,
+   "stage": "финал",
+   "wins": 13,
+   "games": 18
+  },
+  {
+   "place": 4,
+   "name": "ParadoXx",
+   "sigma": 13.65,
+   "stage": "финал",
+   "wins": 13,
+   "games": 18
+  },
+  {
+   "place": 5,
+   "name": "Niko",
+   "sigma": 12.6929,
+   "stage": "финал",
+   "wins": 9,
+   "games": 18
+  },
+  {
+   "place": 6,
+   "name": "El_professor",
+   "sigma": 12.6571,
+   "stage": "финал",
+   "wins": 12,
+   "games": 18
+  },
+  {
+   "place": 7,
+   "name": "iceBerg",
+   "sigma": 12.2714,
+   "stage": "финал",
+   "wins": 11,
+   "games": 18
+  },
+  {
+   "place": 8,
+   "name": "Mauder",
+   "sigma": 11.5,
+   "stage": "финал",
+   "wins": 12,
+   "games": 18
+  },
+  {
+   "place": 9,
+   "name": "Skywalker",
+   "sigma": 10.6571,
+   "stage": "финал",
+   "wins": 10,
+   "games": 18
+  },
+  {
+   "place": 10,
+   "name": "Гіппократ",
+   "sigma": 10.45,
+   "stage": "финал",
+   "wins": 11,
+   "games": 18
+  },
+  {
+   "place": 11,
+   "name": "Mr. Smith🚀",
+   "sigma": 10.3,
+   "stage": "финал",
+   "wins": 11,
+   "games": 18
+  },
+  {
+   "place": 12,
+   "name": "RAMZES",
+   "sigma": 9.8143,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 13,
+   "name": "Blackout",
+   "sigma": 9.7571,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 14,
+   "name": "Приезжий",
+   "sigma": 9.3571,
+   "stage": "финал",
+   "wins": 9,
+   "games": 18
+  },
+  {
+   "place": 15,
+   "name": "Грешник",
+   "sigma": 9.1143,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 16,
+   "name": "Sэм",
+   "sigma": 8.7429,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 17,
+   "name": "Ириска",
+   "sigma": 8.7,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 18,
+   "name": "qUAest0r",
+   "sigma": 8.6,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 19,
+   "name": "AquaMarine",
+   "sigma": 8.4214,
+   "stage": "финал",
+   "wins": 9,
+   "games": 18
+  },
+  {
+   "place": 20,
+   "name": "KEX",
+   "sigma": 8.4143,
+   "stage": "финал",
+   "wins": 5,
+   "games": 18
+  },
+  {
+   "place": 21,
+   "name": "YeS",
+   "sigma": 8.3,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 22,
+   "name": "Ракета",
+   "sigma": 8.15,
+   "stage": "финал",
+   "wins": 9,
+   "games": 18
+  },
+  {
+   "place": 23,
+   "name": "Константа (Douro Dons)",
+   "sigma": 8,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 24,
+   "name": "TOMASSINO",
+   "sigma": 7.95,
+   "stage": "финал",
+   "wins": 9,
+   "games": 18
+  },
+  {
+   "place": 25,
+   "name": "mobi.",
+   "sigma": 7.9,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 26,
+   "name": "Agent",
+   "sigma": 7.7643,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 27,
+   "name": "Пуфик",
+   "sigma": 7.6071,
+   "stage": "финал",
+   "wins": 6,
+   "games": 18
+  },
+  {
+   "place": 28,
+   "name": "Мориарти",
+   "sigma": 7.55,
+   "stage": "финал",
+   "wins": 7,
+   "games": 18
+  },
+  {
+   "place": 29,
+   "name": "Классик",
+   "sigma": 6.9214,
+   "stage": "финал",
+   "wins": 7,
+   "games": 18
+  },
+  {
+   "place": 30,
+   "name": "Эклектик",
+   "sigma": 6.6143,
+   "stage": "финал",
+   "wins": 8,
+   "games": 18
+  },
+  {
+   "place": 31,
+   "name": "Carpe Diem",
+   "sigma": 6.5643,
+   "stage": "финал",
+   "wins": 7,
+   "games": 18
+  },
+  {
+   "place": 32,
+   "name": "Kokocik",
+   "sigma": 6.5429,
+   "stage": "финал",
+   "wins": 6,
+   "games": 18
+  },
+  {
+   "place": 33,
+   "name": "Capybara",
+   "sigma": 6.4571,
+   "stage": "финал",
+   "wins": 6,
+   "games": 18
+  },
+  {
+   "place": 34,
+   "name": "Sova",
+   "sigma": 5.5714,
+   "stage": "финал",
+   "wins": 6,
+   "games": 18
+  },
+  {
+   "place": 35,
+   "name": "MiLady",
+   "sigma": 5.5286,
+   "stage": "финал",
+   "wins": 6,
+   "games": 18
+  },
+  {
+   "place": 36,
+   "name": "yesterday",
+   "sigma": 5.4571,
+   "stage": "финал",
+   "wins": 6,
+   "games": 18
+  },
+  {
+   "place": 37,
+   "name": "Медовая",
+   "sigma": 4.55,
+   "stage": "финал",
+   "wins": 7,
+   "games": 18
+  },
+  {
+   "place": 38,
+   "name": "404",
+   "sigma": 4.3071,
+   "stage": "финал",
+   "wins": 5,
+   "games": 18
+  },
+  {
+   "place": 39,
+   "name": "Akteur",
+   "sigma": 4.2071,
+   "stage": "финал",
+   "wins": 4,
+   "games": 18
+  },
+  {
+   "place": 40,
+   "name": "Maridzaki",
+   "sigma": 3.7571,
+   "stage": "финал",
+   "wins": 5,
+   "games": 18
+  }
+ ],
+ "reconciliation": "Сверено с официальной таблицей mafgame 16.11.2026: Финал 40/40 — совпадают до сотых (кроме округления Ci в протоколах mafgame: Niko: Ci по играм 1.16, в таблице 1.1429; Capybara: Ci по играм 0.87, в таблице 0.8571; MiLady: Ci по играм 0.22, в таблице 0.2286; в таблице — официальные суммы).",
+ "awards": {
+  "most_valuable_players": [
+   "Licht (5.55)",
+   "Tommy (4.90)",
+   "Niko (4.80)"
+  ],
+  "most_valuable_mafia": [
+   "Blackout (2.90)",
+   "Tommy (2.40)",
+   "ParadoXx (2.40)"
+  ],
+  "most_valuable_citizen": [
+   "Licht (4.45)",
+   "KEX (3.15)",
+   "Пуфик (2.75)"
+  ],
+  "best_don": [
+   "ParadoXx (3/0.40)",
+   "RAMZES (3/0.26)",
+   "Sэм (2/0.40)"
+  ],
+  "best_sheriff": [
+   "Ракета (3/0.15)",
+   "Licht (2/0.40)",
+   "YeS (2/0.33)"
+  ],
+  "most_killed": [
+   "Niko (5)"
+  ]
+ },
+ "mvp": "Licht"
 }
