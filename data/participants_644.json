@@ -10,7 +10,7 @@
   "expected": 30,
   "players_confirmed": 0,
   "rating_note": "Состав — заявки на mafgame (снимок 12.11: 3 заявки, подтверждённых пока нет). MMR — mafiastats.com; ELO/тир — markery.online, последний снимок по игроку.",
-  "ms_snap": "2026-11-12",
+  "ms_snap": "2026-11-16",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
@@ -48,13 +48,13 @@
    "ms": {
     "id": 63074,
     "rating": 1721.9,
-    "rank": 107,
+    "rank": 108,
     "games": 491,
     "wr": 49.49,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1721.9,
-   "r_ms_rank": 107,
+   "r_ms_rank": 108,
    "r_ms_tier": "A",
    "r_rank": 172,
    "mk_last": "2026-11-07"
@@ -84,13 +84,13 @@
    "ms": {
     "id": 63185,
     "rating": 1254.5,
-    "rank": 673,
+    "rank": 676,
     "games": 159,
     "wr": 46.54,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1254.5,
-   "r_ms_rank": 673,
+   "r_ms_rank": 676,
    "r_ms_tier": "D",
    "r_rank": 8247,
    "mk_last": "2026-10-10"
@@ -120,13 +120,13 @@
    "ms": {
     "id": 1476,
     "rating": 1655.4,
-    "rank": 139,
+    "rank": 141,
     "games": 221,
     "wr": 47.51,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1655.4,
-   "r_ms_rank": 139,
+   "r_ms_rank": 141,
    "r_ms_tier": "A",
    "r_rank": 1641,
    "mk_last": "2026-11-07"

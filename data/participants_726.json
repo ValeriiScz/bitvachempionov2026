@@ -10,7 +10,7 @@
   "expected": 40,
   "players_confirmed": 37,
   "rating_note": "Состав — подтверждённые на mafgame (снимок 12.11: 34 из 40). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку.",
-  "ms_snap": "2026-11-12",
+  "ms_snap": "2026-11-16",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
@@ -49,13 +49,13 @@
    "ms": {
     "id": 927,
     "rating": 1559.6,
-    "rank": 239,
+    "rank": 246,
     "games": 315,
     "wr": 50.48,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1559.6,
-   "r_ms_rank": 239,
+   "r_ms_rank": 246,
    "r_ms_tier": "B",
    "r_rank": 1154,
    "mk_last": "2026-10-25"
@@ -85,13 +85,13 @@
    "ms": {
     "id": 789,
     "rating": 1024.8,
-    "rank": 760,
+    "rank": 767,
     "games": 246,
     "wr": 43.9,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1024.8,
-   "r_ms_rank": 760,
+   "r_ms_rank": 767,
    "r_ms_tier": "E",
    "r_rank": 8258,
    "mk_last": "2026-09-12"
@@ -121,13 +121,13 @@
    "ms": {
     "id": 1476,
     "rating": 1655.4,
-    "rank": 139,
+    "rank": 141,
     "games": 221,
     "wr": 47.51,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1655.4,
-   "r_ms_rank": 139,
+   "r_ms_rank": 141,
    "r_ms_tier": "A",
    "r_rank": 1641,
    "mk_last": "2026-11-07"
@@ -156,14 +156,14 @@
    "series_score": null,
    "ms": {
     "id": 61626,
-    "rating": 1894.7,
-    "rank": 57,
-    "games": 557,
-    "wr": 48.29,
+    "rating": 1831.6,
+    "rank": 67,
+    "games": 572,
+    "wr": 47.9,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1894.7,
-   "r_ms_rank": 57,
+   "r_ms_mmr": 1831.6,
+   "r_ms_rank": 67,
    "r_ms_tier": "S",
    "r_rank": 125,
    "mk_last": "2026-10-31"
@@ -193,13 +193,13 @@
    "ms": {
     "id": 63563,
     "rating": 1940.6,
-    "rank": 41,
+    "rank": 44,
     "games": 656,
     "wr": 50.76,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1940.6,
-   "r_ms_rank": 41,
+   "r_ms_rank": 44,
    "r_ms_tier": "S",
    "r_rank": 228,
    "mk_last": "2026-10-31"
@@ -228,13 +228,13 @@
    "series_score": null,
    "ms": {
     "id": 65724,
-    "rating": 1491.0,
+    "rating": 1491.1,
     "rank": null,
     "games": 9,
     "wr": 55.56,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1491.0,
+   "r_ms_mmr": 1491.1,
    "r_ms_rank": null,
    "r_ms_tier": "C",
    "r_rank": 3824,
@@ -264,13 +264,13 @@
    "series_score": null,
    "ms": {
     "id": 1313,
-    "rating": 1436.1,
+    "rating": 1436.8,
     "rank": null,
     "games": 49,
     "wr": 57.14,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1436.1,
+   "r_ms_mmr": 1436.8,
    "r_ms_rank": null,
    "r_ms_tier": "C",
    "r_rank": 6410,
@@ -301,13 +301,13 @@
    "ms": {
     "id": 809,
     "rating": 1522.9,
-    "rank": 284,
+    "rank": 288,
     "games": 352,
     "wr": 49.15,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1522.9,
-   "r_ms_rank": 284,
+   "r_ms_rank": 288,
    "r_ms_tier": "B",
    "r_rank": 531,
    "mk_last": "2026-11-07"
@@ -372,14 +372,14 @@
    "series_score": null,
    "ms": {
     "id": 383,
-    "rating": 1857.0,
-    "rank": 63,
-    "games": 482,
-    "wr": 50.83,
+    "rating": 1884.6,
+    "rank": 58,
+    "games": 500,
+    "wr": 50.6,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1857.0,
-   "r_ms_rank": 63,
+   "r_ms_mmr": 1884.6,
+   "r_ms_rank": 58,
    "r_ms_tier": "S",
    "r_rank": 132,
    "mk_last": "2026-11-07"
@@ -409,13 +409,13 @@
    "ms": {
     "id": 62869,
     "rating": 1400.9,
-    "rank": 479,
+    "rank": 481,
     "games": 154,
     "wr": 43.51,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1400.9,
-   "r_ms_rank": 479,
+   "r_ms_rank": 481,
    "r_ms_tier": "C"
   },
   {
@@ -443,13 +443,13 @@
    "ms": {
     "id": 105,
     "rating": 1727.3,
-    "rank": 102,
+    "rank": 104,
     "games": 383,
     "wr": 50.39,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1727.3,
-   "r_ms_rank": 102,
+   "r_ms_rank": 104,
    "r_ms_tier": "A",
    "r_rank": 203,
    "mk_last": "2026-10-18"
@@ -478,13 +478,13 @@
    "series_score": null,
    "ms": {
     "id": 1551,
-    "rating": 1388.8,
+    "rating": 1389.9,
     "rank": null,
     "games": 21,
     "wr": 42.86,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1388.8,
+   "r_ms_mmr": 1389.9,
    "r_ms_rank": null,
    "r_ms_tier": "C",
    "r_rank": 7104,
@@ -515,13 +515,13 @@
    "ms": {
     "id": 983,
     "rating": 1600.3,
-    "rank": 186,
+    "rank": 190,
     "games": 608,
     "wr": 46.55,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1600.3,
-   "r_ms_rank": 186,
+   "r_ms_rank": 190,
    "r_ms_tier": "B",
    "r_rank": 361,
    "mk_last": "2026-11-07"
@@ -551,13 +551,13 @@
    "ms": {
     "id": 808,
     "rating": 1826.2,
-    "rank": 68,
+    "rank": 69,
     "games": 508,
     "wr": 47.24,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1826.2,
-   "r_ms_rank": 68,
+   "r_ms_rank": 69,
    "r_ms_tier": "S",
    "r_rank": 166,
    "mk_last": "2026-11-07"
@@ -587,13 +587,13 @@
    "ms": {
     "id": 63439,
     "rating": 965.1,
-    "rank": 772,
+    "rank": 776,
     "games": 354,
     "wr": 42.66,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 965.1,
-   "r_ms_rank": 772,
+   "r_ms_rank": 776,
    "r_ms_tier": "E",
    "r_rank": 8406,
    "mk_last": "2026-10-24"
@@ -695,13 +695,13 @@
    "ms": {
     "id": 63862,
     "rating": 1528.3,
-    "rank": 272,
+    "rank": 277,
     "games": 343,
     "wr": 51.31,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1528.3,
-   "r_ms_rank": 272,
+   "r_ms_rank": 277,
    "r_ms_tier": "B",
    "r_rank": 574,
    "mk_last": "2026-10-17"
@@ -730,15 +730,15 @@
    "series_score": null,
    "ms": {
     "id": 654,
-    "rating": 1777.2,
-    "rank": 86,
-    "games": 348,
-    "wr": 52.59,
+    "rating": 1860.8,
+    "rank": 64,
+    "games": 366,
+    "wr": 53.55,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1777.2,
-   "r_ms_rank": 86,
-   "r_ms_tier": "A",
+   "r_ms_mmr": 1860.8,
+   "r_ms_rank": 64,
+   "r_ms_tier": "S",
    "r_rank": 204,
    "mk_last": "2026-11-07"
   },
@@ -767,13 +767,13 @@
    "ms": {
     "id": 63074,
     "rating": 1721.9,
-    "rank": 107,
+    "rank": 108,
     "games": 491,
     "wr": 49.49,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1721.9,
-   "r_ms_rank": 107,
+   "r_ms_rank": 108,
    "r_ms_tier": "A",
    "r_rank": 172,
    "mk_last": "2026-11-07"
@@ -802,13 +802,13 @@
    "series_score": null,
    "ms": {
     "id": 58520,
-    "rating": 1411.1,
+    "rating": 1412.0,
     "rank": null,
     "games": 141,
     "wr": 49.65,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1411.1,
+   "r_ms_mmr": 1412.0,
    "r_ms_rank": null,
    "r_ms_tier": "C",
    "r_rank": 5048,
@@ -838,13 +838,13 @@
    "series_score": null,
    "ms": {
     "id": 65858,
-    "rating": 1450.8,
+    "rating": 1357.0,
     "rank": null,
-    "games": 52,
-    "wr": 50,
+    "games": 70,
+    "wr": 45.71,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1450.8,
+   "r_ms_mmr": 1357.0,
    "r_ms_rank": null,
    "r_ms_tier": "C",
    "r_rank": 2931,
@@ -875,13 +875,13 @@
    "ms": {
     "id": 63185,
     "rating": 1254.5,
-    "rank": 673,
+    "rank": 676,
     "games": 159,
     "wr": 46.54,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1254.5,
-   "r_ms_rank": 673,
+   "r_ms_rank": 676,
    "r_ms_tier": "D",
    "r_rank": 8247,
    "mk_last": "2026-10-10"
@@ -947,13 +947,13 @@
    "ms": {
     "id": 59103,
     "rating": 2054.4,
-    "rank": 29,
+    "rank": 28,
     "games": 559,
     "wr": 53.85,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 2054.4,
-   "r_ms_rank": 29,
+   "r_ms_rank": 28,
    "r_ms_tier": "L",
    "r_rank": 100,
    "mk_last": "2026-11-07"
@@ -1019,13 +1019,13 @@
    "ms": {
     "id": 60010,
     "rating": 1778.8,
-    "rank": 85,
+    "rank": 89,
     "games": 420,
     "wr": 54.29,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1778.8,
-   "r_ms_rank": 85,
+   "r_ms_rank": 89,
    "r_ms_tier": "A",
    "r_rank": 283,
    "mk_last": "2026-11-07"
@@ -1055,13 +1055,13 @@
    "ms": {
     "id": 57895,
     "rating": 1261.6,
-    "rank": 668,
+    "rank": 672,
     "games": 280,
     "wr": 45,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1261.6,
-   "r_ms_rank": 668,
+   "r_ms_rank": 672,
    "r_ms_tier": "D",
    "r_rank": 7338,
    "mk_last": "2026-10-25"
@@ -1091,13 +1091,13 @@
    "ms": {
     "id": 1429,
     "rating": 1179.1,
-    "rank": 716,
+    "rank": 722,
     "games": 199,
     "wr": 46.73,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1179.1,
-   "r_ms_rank": 716,
+   "r_ms_rank": 722,
    "r_ms_tier": "D",
    "r_rank": 7608,
    "mk_last": "2026-10-25"
@@ -1198,14 +1198,14 @@
    "series_score": null,
    "ms": {
     "id": 63564,
-    "rating": 2123.1,
-    "rank": 16,
-    "games": 503,
-    "wr": 53.08,
+    "rating": 2179.7,
+    "rank": 8,
+    "games": 518,
+    "wr": 53.67,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 2123.1,
-   "r_ms_rank": 16,
+   "r_ms_mmr": 2179.7,
+   "r_ms_rank": 8,
    "r_ms_tier": "L",
    "r_rank": 70,
    "mk_last": "2026-11-07"
@@ -1235,13 +1235,13 @@
    "ms": {
     "id": 21,
     "rating": 1663.5,
-    "rank": 135,
+    "rank": 136,
     "games": 516,
     "wr": 45.74,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1663.5,
-   "r_ms_rank": 135,
+   "r_ms_rank": 136,
    "r_ms_tier": "A",
    "r_rank": 99,
    "mk_last": "2026-11-06"
@@ -1268,9 +1268,16 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
-   "r_ms_mmr": 1240.1,
-   "r_ms_rank": 689,
+   "ms": {
+    "id": 406,
+    "rating": 1242.2,
+    "rank": 692,
+    "games": 414,
+    "wr": 44.44,
+    "conf": "mafgame-id"
+   },
+   "r_ms_mmr": 1242.2,
+   "r_ms_rank": 692,
    "r_ms_tier": "D",
    "added": "2026-11-13",
    "r_rank": 6847,
@@ -1298,7 +1305,14 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 66423,
+    "rating": 1530.5,
+    "rank": null,
+    "games": 25,
+    "wr": 60,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1530.5,
    "r_ms_rank": null,
    "r_ms_tier": "B",
@@ -1326,9 +1340,16 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 427,
+    "rating": 1221.2,
+    "rank": 708,
+    "games": 177,
+    "wr": 44.63,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1221.2,
-   "r_ms_rank": 702,
+   "r_ms_rank": 708,
    "r_ms_tier": "D",
    "added": "2026-11-15"
   }

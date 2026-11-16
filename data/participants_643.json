@@ -10,7 +10,7 @@
   "expected": 30,
   "players_confirmed": 16,
   "rating_note": "ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026",
-  "ms_snap": "2026-11-12",
+  "ms_snap": "2026-11-16",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
@@ -45,13 +45,13 @@
    "ms": {
     "id": 1476,
     "rating": 1655.4,
-    "rank": 139,
+    "rank": 141,
     "games": 221,
     "wr": 47.51,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1655.4,
-   "r_ms_rank": 139,
+   "r_ms_rank": 141,
    "r_ms_tier": "A"
   },
   {
@@ -76,13 +76,13 @@
    "ms": {
     "id": 63563,
     "rating": 1940.6,
-    "rank": 41,
+    "rank": 44,
     "games": 656,
     "wr": 50.76,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1940.6,
-   "r_ms_rank": 41,
+   "r_ms_rank": 44,
    "r_ms_tier": "S"
   },
   {
@@ -107,13 +107,13 @@
    "ms": {
     "id": 60010,
     "rating": 1778.8,
-    "rank": 85,
+    "rank": 89,
     "games": 420,
     "wr": 54.29,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1778.8,
-   "r_ms_rank": 85,
+   "r_ms_rank": 89,
    "r_ms_tier": "A"
   },
   {
@@ -137,13 +137,13 @@
    "elo_snap": null,
    "ms": {
     "id": 65858,
-    "rating": 1450.8,
+    "rating": 1357.0,
     "rank": null,
-    "games": 52,
-    "wr": 50,
+    "games": 70,
+    "wr": 45.71,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1450.8,
+   "r_ms_mmr": 1357.0,
    "r_ms_rank": null,
    "r_ms_tier": "C"
   },
@@ -168,14 +168,14 @@
    "elo_snap": null,
    "ms": {
     "id": 46030,
-    "rating": 1615.3,
-    "rank": 172,
+    "rating": 1614.2,
+    "rank": 177,
     "games": 263,
     "wr": 56.27,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 1615.3,
-   "r_ms_rank": 172,
+   "r_ms_mmr": 1614.2,
+   "r_ms_rank": 177,
    "r_ms_tier": "B"
   },
   {
@@ -199,14 +199,14 @@
    "elo_snap": "2026-10-15",
    "ms": {
     "id": 63564,
-    "rating": 2123.1,
-    "rank": 16,
-    "games": 503,
-    "wr": 53.08,
+    "rating": 2179.7,
+    "rank": 8,
+    "games": 518,
+    "wr": 53.67,
     "conf": "mafgame-id"
    },
-   "r_ms_mmr": 2123.1,
-   "r_ms_rank": 16,
+   "r_ms_mmr": 2179.7,
+   "r_ms_rank": 8,
    "r_ms_tier": "L"
   },
   {
@@ -293,13 +293,13 @@
    "ms": {
     "id": 63185,
     "rating": 1254.5,
-    "rank": 673,
+    "rank": 676,
     "games": 159,
     "wr": 46.54,
     "conf": "mafgame-id"
    },
    "r_ms_mmr": 1254.5,
-   "r_ms_rank": 673,
+   "r_ms_rank": 676,
    "r_ms_tier": "D"
   },
   {
@@ -386,7 +386,14 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 651,
+    "rating": 1471.4,
+    "rank": null,
+    "games": 19,
+    "wr": 42.11,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1471.4,
    "r_ms_rank": null,
    "r_ms_tier": "C",
@@ -414,9 +421,16 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 789,
+    "rating": 1024.8,
+    "rank": 767,
+    "games": 246,
+    "wr": 43.9,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1024.8,
-   "r_ms_rank": 760,
+   "r_ms_rank": 767,
    "r_ms_tier": "E",
    "added": "2026-11-13"
   },
@@ -442,9 +456,16 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 63074,
+    "rating": 1721.9,
+    "rank": 108,
+    "games": 491,
+    "wr": 49.49,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1721.9,
-   "r_ms_rank": 107,
+   "r_ms_rank": 108,
    "r_ms_tier": "A",
    "added": "2026-11-13"
   },
@@ -470,9 +491,16 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 497,
+    "rating": 1396.0,
+    "rank": 491,
+    "games": 174,
+    "wr": 51.72,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1396.0,
-   "r_ms_rank": 485,
+   "r_ms_rank": 491,
    "r_ms_tier": "C",
    "added": "2026-11-13"
   },
@@ -498,9 +526,16 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 427,
+    "rating": 1221.2,
+    "rank": 708,
+    "games": 177,
+    "wr": 44.63,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1221.2,
-   "r_ms_rank": 702,
+   "r_ms_rank": 708,
    "r_ms_tier": "D",
    "added": "2026-11-13"
   }
