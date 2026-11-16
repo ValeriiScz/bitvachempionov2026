@@ -1,9 +1,9 @@
-"""build_race.py · v2.4 · 2026-11-16 (в генератор уходит дата финала серии — «один турнир в день» и в браузере) · v2.3 · 2026-10-20 (вклад финалов серийников чистыми: sum_noser = тот же сезон без финалов; finals_detail — средний результат в каждом финале; small_field в model) · v2.0 · 2026-10-19 (сила v2 из gd_strength2: ELO/σ/форма в RACE.rows[].sd; коридор «по результатам ↔ по маркерам» для n_eff<10; пул баллов по выходным RACE.pool; ожидаемые баллы за старт; p12/Σ сервера v2) · v1.5 · 2026-10-13 (рабочая планка: нижняя граница вниз до 5, верхняя вверх, ширина ≥5) · v1.4 · 2026-10-13 (планки считаются из сценариев 0–3; уровни генератора — только явка) · v1.3 · 2026-09-21 (TARGET 4.0, планы игроков players_expert, финалы 2★ на 10 мест) · v1.2 (T/OUT из gd_cfg) · v1.1 · 2026-09-17 (v1.0 — 2026-09-14) — собирает data/race2026.js для страницы «Гонка за золотую дюжину» из результатов модели.
+"""build_race.py · v2.5 · 2026-11-16 (планка: поправка ×1.18 к приросту от нынешнего 12-го, а не ×1.07 ко всей сумме; сценарии — thr_adj) · v2.4 · 2026-11-16 (в генератор уходит дата финала серии — «один турнир в день» и в браузере) · v2.3 · 2026-10-20 (вклад финалов серийников чистыми: sum_noser = тот же сезон без финалов; finals_detail — средний результат в каждом финале; small_field в model) · v2.0 · 2026-10-19 (сила v2 из gd_strength2: ELO/σ/форма в RACE.rows[].sd; коридор «по результатам ↔ по маркерам» для n_eff<10; пул баллов по выходным RACE.pool; ожидаемые баллы за старт; p12/Σ сервера v2) · v1.5 · 2026-10-13 (рабочая планка: нижняя граница вниз до 5, верхняя вверх, ширина ≥5) · v1.4 · 2026-10-13 (планки считаются из сценариев 0–3; уровни генератора — только явка) · v1.3 · 2026-09-21 (TARGET 4.0, планы игроков players_expert, финалы 2★ на 10 мест) · v1.2 (T/OUT из gd_cfg) · v1.1 · 2026-09-17 (v1.0 — 2026-09-14) — собирает data/race2026.js для страницы «Гонка за золотую дюжину» из результатов модели.
 Вход: tickets2026.json, plan2026.json, scenarios3.json, леджеры. Выход: window.RACE = {...}
 v1.1: у игроков sim три оценки силы — beta (вся история с 2024, веса 1/.5/.25), b12 (12 месяцев), b26 (только 2026) — для переключателя «Форма» в генераторе."""
 import json, collections, numpy as np, gd_data as g, gd_sim, gd_strength2
 from gd_sim import Season
-from gd_cfg import T, out as OUTP
+from gd_cfg import T, adj, INC_K, out as OUTP
 Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
 import calendar_expert, players_expert
@@ -89,7 +89,7 @@ for rec in rows:
         'finals_c':[SHORT.get(c['name'][:10],c['name']) for c in se.events if c['type']=='contour' and u in c['cand']]}
 for rec in rows:
     tv=(__import__('gd_strength2').ELO.get(rec['uid']) or {}); rec['sd']['tier']=tv.get('tier'); rec['sd']['elo_date']=tv.get('date_all')
-thr_main=res_main['thr']*1.07
+thr_main=adj(res_main['thr'],mid[11][0])   # v2.5: поправка к приросту
 # пул баллов по выходным (один турнир в день): лучшее событие даты по топ-5
 by_date=collections.OrderedDict()
 for e in events:
@@ -139,7 +139,7 @@ SIM={'players':players,'forms':{'all':'вся история (с 2024, свеж�
 import os as _os
 WHATIF=json.load(open(OUTP('whatif.json'))) if _os.path.exists(OUTP('whatif.json')) else None
 RACE={'snapshot':T,'whatif':WHATIF,'sim':SIM,'thr12_now':mid[11][0],'planks':planks,'events':events,'rows':rows,'hist':hist,'pool':RACE_POOL,
-      'model':{'version':'v2.4 · 21.10.2026','thr_coef':1.07,'small_field':[gd_strength2.SMALL_FIELD,gd_strength2.SMALL_TOPK],'attendance':'заявки × дни до старта (история календаря 26.08–19.10) + петля R1 в розыгрыше','lead_none':gd_sim.LEAD_NONE,'lead_conf':gd_sim.LEAD_CONF,'r1':[gd_sim.R1_NEAR,gd_sim.R1_FAR,gd_sim.R1_UP,gd_sim.R1_DOWN],'strength':'gd_strength2','tau':gd_strength2.TAU,'rho':gd_strength2.RHO_FORM,'C':gd_sim.C,'race_boost':gd_sim.RACE_BOOST,'elo_fit':ST.info,'thr_v2':{'med':float(np.median(thr_main)),'p10':float(np.percentile(thr_main,10)),'p90':float(np.percentile(thr_main,90))},'target':{'top20':5.5,'top30':4.0},'S':2000},
+      'model':{'version':'v2.4 · 21.10.2026','thr_coef':1.0,'inc_k':INC_K,'small_field':[gd_strength2.SMALL_FIELD,gd_strength2.SMALL_TOPK],'attendance':'заявки × дни до старта (история календаря 26.08–19.10) + петля R1 в розыгрыше','lead_none':gd_sim.LEAD_NONE,'lead_conf':gd_sim.LEAD_CONF,'r1':[gd_sim.R1_NEAR,gd_sim.R1_FAR,gd_sim.R1_UP,gd_sim.R1_DOWN],'strength':'gd_strength2','tau':gd_strength2.TAU,'rho':gd_strength2.RHO_FORM,'C':gd_sim.C,'race_boost':gd_sim.RACE_BOOST,'elo_fit':ST.info,'thr_v2':{'med':float(np.median(thr_main)),'p10':float(np.percentile(thr_main,10)),'p90':float(np.percentile(thr_main,90))},'target':{'top20':5.5,'top30':4.0},'S':2000},
       'method':'Σ = 10 лучших турниров года, не более 2 серийных. Финал = 6–10 место на 4★ ≈ 12 баллов, топ-5 на 4★ ≈ 24. Частоты — за последние 12 месяцев, сглажены к среднему топ-30.'}
 open(OUTP('race2026.js'),'w',encoding='utf-8').write('/* race2026.js — данные страницы «Гонка за золотую дюжину». Генератор: _scripts_golden_dozen_v0.9/build_race.py. Руками не править. */\nwindow.RACE='+json.dumps(RACE,ensure_ascii=False,separators=(',',':'))+';\n')
 import os; print('race2026.js', os.path.getsize(OUTP('race2026.js'))//1024,'КБ; планки',planks,'; игроков',len(rows),'; событий',len(events))

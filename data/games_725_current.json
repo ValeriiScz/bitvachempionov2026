@@ -156,7 +156,8 @@
        "result": "W"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -303,7 +304,8 @@
        "result": "W"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -456,7 +458,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -603,7 +606,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -756,7 +760,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -903,7 +908,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -1056,7 +1062,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -1203,7 +1210,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -1356,7 +1364,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -1503,7 +1512,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -1656,7 +1666,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -1803,7 +1814,8 @@
        "result": "W"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -1956,7 +1968,8 @@
        "result": "W"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -2103,7 +2116,8 @@
        "result": "W"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -2256,7 +2270,8 @@
        "result": "W"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -2403,7 +2418,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -2556,7 +2572,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -2703,7 +2720,8 @@
        "result": "W"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -2856,7 +2874,8 @@
        "result": "W"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -3003,7 +3022,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -3156,7 +3176,8 @@
        "result": "W"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -3303,7 +3324,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },
@@ -3456,7 +3478,8 @@
        "result": "W"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Весная"
     },
     {
      "table_num": 2,
@@ -3603,7 +3626,8 @@
        "result": "L"
       }
      ],
-     "comment": null
+     "comment": null,
+     "referee": "Shepard"
     }
    ]
   },

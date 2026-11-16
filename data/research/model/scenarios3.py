@@ -1,11 +1,11 @@
-"""scenarios3 · v2.1 · 2026-10-20 (при gd_sim.LEAD_RULE сценарии 1/2/3 различаются множителем явки незаписанных LEAD_NONE_MULT 1 / 1.5 / 2.5; записанные — по срокам) · v2.0 · 2026-10-13 — планки гонки: сценарии 0 (только заявки), 1 (обычный ритм), 2 (ездят активно), 3 (по максимуму); различаются только явкой, порог ×1.07 (остаток недооценки на бэктесте 2024/2025)."""
+"""scenarios3 · v2.2 · 2026-11-16 (поправка планки — к приросту от нынешнего 12-го: gd_cfg.adj) · v2.1 · 2026-10-20 (при gd_sim.LEAD_RULE сценарии 1/2/3 различаются множителем явки незаписанных LEAD_NONE_MULT 1 / 1.5 / 2.5; записанные — по срокам) · v2.0 · 2026-10-13 — планки гонки: сценарии 0 (только заявки), 1 (обычный ритм), 2 (ездят активно), 3 (по максимуму); различаются только явкой, порог ×1.07 (остаток недооценки на бэктесте 2024/2025)."""
 import numpy as np, json, gd_data as g, gd_sim, calendar_expert, players_expert
 gd_sim.PLAYER_TARGET=players_expert.TARGET
-from gd_cfg import T, out as OUTP
+from gd_cfg import adj,  T, out as OUTP
 from gd_sim import Season
 Season.FINALISTS_PLAY=True
 fut=[t for t in g.CAL['tournaments'] if t['start']>T and not t.get('cancelled') and t['pts']]
-mid=g.standings(2026,T); top=[u for s,u in mid[:30]]
+mid=g.standings(2026,T); top=[u for s,u in mid[:30]]; NOW12=mid[11][0]   # v2.2: поправка к приросту
 out={}
 # v2.0 (13.10.2026): сценарии различаются ТОЛЬКО явкой, без «сдвига силы».
 #   Проверка по леджерам: топ-30 гонки после 14.09 играли не лучше, а хуже, чем до (2025: место 32 %→41 % поля, топ-5 38 %→23 %;
@@ -13,11 +13,11 @@ out={}
 #   Сценарий 0 — «только заявки»: обычные турниры только у уже записанных (+ финалы серийников) → нижняя планка «пол».
 for name,k,shift,mult in (('1 обычный ритм',(5.5,4.0),0.0,1.0),('2 ездят активно',(6.5,5.0),0.0,1.5),('3 ездят по максимуму',(7.5,6.0),0.0,2.5)):
     gd_sim.EVENT_WEIGHT=calendar_expert.W; gd_sim.TARGET_TOP20_MEAN,gd_sim.TARGET_TOP30_MEAN=k; gd_sim.RACE_BETA_SHIFT=shift; gd_sim.LEAD_NONE_MULT=mult
-    se=Season(2026,T,cal_future=fut,verbose=False); res=se.run(S=2500,seed=5,frailty=None); thr=res['thr']*1.07; pool=res['pool']
+    se=Season(2026,T,cal_future=fut,verbose=False); res=se.run(S=2500,seed=5,frailty=None); thr=adj(res['thr'],NOW12); pool=res['pool']
     # средняя доля топ-10 у топ-30 при таком сдвиге (для описания сценария)
     order=np.argsort(-res['p12']); groups={'внутри':[g.NICK[pool[i]] for i in order if res['p12'][i]>=0.85],'скорее':[g.NICK[pool[i]] for i in order if 0.55<=res['p12'][i]<0.85],'борьба':[g.NICK[pool[i]] for i in order if 0.2<=res['p12'][i]<0.55]}
     print(f"\n### сценарий {name}: топ-20 ≈ {k[0]}, места 21–30 ≈ {k[1]} турниров, сдвиг силы +{shift}")
-    print(f"   планка (с поправкой +7%): медиана {np.median(thr):.0f}, 50% {np.percentile(thr,25):.0f}–{np.percentile(thr,75):.0f}, 80% {np.percentile(thr,10):.0f}–{np.percentile(thr,90):.0f}")
+    print(f"   планка (с поправкой ×1.18 к приросту): медиана {np.median(thr):.0f}, 50% {np.percentile(thr,25):.0f}–{np.percentile(thr,75):.0f}, 80% {np.percentile(thr,10):.0f}–{np.percentile(thr,90):.0f}")
     for kk,v in groups.items(): print(f"   {kk} ({len(v)}): {v}")
     out[name]={'k':k,'shift':shift,'thr_med':float(np.median(thr)),'thr25':float(np.percentile(thr,25)),'thr75':float(np.percentile(thr,75)),'thr10':float(np.percentile(thr,10)),'thr90':float(np.percentile(thr,90)),'groups':groups}
 # сценарий 0: только уже записанные (без прогноза явки незаписанных)
@@ -28,7 +28,7 @@ for ev in se.events:
     for u in se.pool:
         if ev['regs'].get(u) is None: ev['p'][u]=0.0
     ev['pv']=np.array([ev['p'][u] for u in se.pool])
-res=se.run(S=2500,seed=5,frailty=None); thr=res['thr']*1.07
+res=se.run(S=2500,seed=5,frailty=None); thr=adj(res['thr'],NOW12)
 print(f"\n### сценарий 0 только заявки: планка медиана {np.median(thr):.0f}, 80% {np.percentile(thr,10):.0f}–{np.percentile(thr,90):.0f}")
 out['0 только заявки']={'k':None,'shift':0,'thr_med':float(np.median(thr)),'thr25':float(np.percentile(thr,25)),'thr75':float(np.percentile(thr,75)),'thr10':float(np.percentile(thr,10)),'thr90':float(np.percentile(thr,90))}
 gd_sim.PLAYER_TARGET=_pt
