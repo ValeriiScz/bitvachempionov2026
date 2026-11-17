@@ -21,7 +21,7 @@
    "E": 925
   },
   "elo_snap": "2026-11-13",
-  "roster_snap": "2026-11-16"
+  "roster_snap": "2026-11-17"
  },
  "players": [
   {
@@ -1380,6 +1380,34 @@
    "r_ms_rank": 39,
    "r_ms_tier": "L",
    "added": "2026-11-16"
+  },
+  {
+   "nick": "Саботаж",
+   "uid": 68,
+   "real": "Александр Ботте",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_68/e5f69d0c89c3ecec9dee013970b56f8219c70d70.png",
+   "status": "applied",
+   "club": "Bengal Mafia Club",
+   "cc": "PT",
+   "country": "Португалия",
+   "flag": "🇵🇹",
+   "markery_id": 9999,
+   "r_elo_cur": 1336,
+   "r_tier": "S",
+   "r_elo_ly": null,
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": null,
+   "mk_match": "id",
+   "elo_snap": "2026-10-26",
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": null,
+   "r_ms_mmr": 1914.6,
+   "r_ms_rank": 52,
+   "r_ms_tier": "S",
+   "added": "2026-11-17"
   }
  ]
 }
