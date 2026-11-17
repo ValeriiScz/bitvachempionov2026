@@ -20,7 +20,7 @@
    "D": 1125,
    "E": 925
   },
-  "elo_snap": "2026-11-13",
+  "elo_snap": "2026-11-17",
   "roster_snap": "2026-11-16"
  },
  "players": [
@@ -42,7 +42,7 @@
    "m_rank": null,
    "player_number": 1,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -57,7 +57,7 @@
    "r_ms_mmr": 1850.1,
    "r_ms_rank": 65,
    "r_ms_tier": "S",
-   "r_rank": 133,
+   "r_rank": 134,
    "mk_last": "2026-11-07"
   },
   {
@@ -78,7 +78,7 @@
    "m_rank": null,
    "player_number": 2,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -93,7 +93,7 @@
    "r_ms_mmr": 1472.3,
    "r_ms_rank": 367,
    "r_ms_tier": "C",
-   "r_rank": 8140,
+   "r_rank": 8147,
    "mk_last": "2026-10-14"
   },
   {
@@ -107,14 +107,14 @@
    "country": "Нидерланды",
    "flag": "🇳🇱",
    "markery_id": 9752,
-   "r_elo_cur": 1282,
+   "r_elo_cur": 1291,
    "r_tier": "A",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 3,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -129,8 +129,8 @@
    "r_ms_mmr": 1884.6,
    "r_ms_rank": 58,
    "r_ms_tier": "S",
-   "r_rank": 132,
-   "mk_last": "2026-11-07"
+   "r_rank": 126,
+   "mk_last": "2026-11-14"
   },
   {
    "nick": "Круглая",
@@ -150,7 +150,7 @@
    "m_rank": null,
    "player_number": 4,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -165,7 +165,7 @@
    "r_ms_mmr": 1281.0,
    "r_ms_rank": 655,
    "r_ms_tier": "D",
-   "r_rank": 8104,
+   "r_rank": 8111,
    "mk_last": "2026-10-03"
   },
   {
@@ -186,7 +186,7 @@
    "m_rank": null,
    "player_number": 5,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -201,7 +201,7 @@
    "r_ms_mmr": 1282.2,
    "r_ms_rank": 651,
    "r_ms_tier": "D",
-   "r_rank": 758,
+   "r_rank": 760,
    "mk_last": "2026-11-07"
   },
   {
@@ -214,15 +214,15 @@
    "cc": "NL",
    "country": "Нидерланды",
    "flag": "🇳🇱",
-   "markery_id": 21498,
-   "r_elo_cur": 997,
-   "r_tier": "C",
+   "markery_id": 19242,
+   "r_elo_cur": 915,
+   "r_tier": "E",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 6,
-   "mk_match": "id",
-   "elo_snap": "2026-07-03",
+   "mk_match": "uid",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -236,7 +236,9 @@
    },
    "r_ms_mmr": 1206.0,
    "r_ms_rank": 715,
-   "r_ms_tier": "D"
+   "r_ms_tier": "D",
+   "r_rank": 8073,
+   "mk_last": "2026-11-14"
   },
   {
    "nick": "Tommy",
@@ -249,14 +251,14 @@
    "country": "Нидерланды",
    "flag": "🇳🇱",
    "markery_id": 9749,
-   "r_elo_cur": 1598,
+   "r_elo_cur": 1618,
    "r_tier": "S",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 7,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -271,8 +273,8 @@
    "r_ms_mmr": 2126.2,
    "r_ms_rank": 19,
    "r_ms_tier": "L",
-   "r_rank": 25,
-   "mk_last": "2026-11-07"
+   "r_rank": 23,
+   "mk_last": "2026-11-14"
   },
   {
    "nick": "Funt",
@@ -292,7 +294,7 @@
    "m_rank": null,
    "player_number": 8,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -321,14 +323,14 @@
    "country": "Нидерланды",
    "flag": "🇳🇱",
    "markery_id": 17164,
-   "r_elo_cur": 1249,
+   "r_elo_cur": 1278,
    "r_tier": "A",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 9,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -343,8 +345,8 @@
    "r_ms_mmr": 1861.0,
    "r_ms_rank": 63,
    "r_ms_tier": "S",
-   "r_rank": 161,
-   "mk_last": "2026-08-22"
+   "r_rank": 138,
+   "mk_last": "2026-11-14"
   },
   {
    "nick": "DreamLord",
@@ -357,14 +359,14 @@
    "country": null,
    "flag": null,
    "markery_id": 12726,
-   "r_elo_cur": 929,
+   "r_elo_cur": 921,
    "r_tier": "E",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 10,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -379,8 +381,8 @@
    "r_ms_mmr": 1498.9,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 7885,
-   "mk_last": "2026-10-31"
+   "r_rank": 8006,
+   "mk_last": "2026-11-11"
   },
   {
    "nick": "Zico",
@@ -393,14 +395,14 @@
    "country": "Нидерланды",
    "flag": "🇳🇱",
    "markery_id": 18914,
-   "r_elo_cur": 926,
-   "r_tier": "E",
+   "r_elo_cur": 955,
+   "r_tier": "D",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 11,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -415,8 +417,8 @@
    "r_ms_mmr": 1163.6,
    "r_ms_rank": 729,
    "r_ms_tier": "D",
-   "r_rank": 7924,
-   "mk_last": "2026-11-07"
+   "r_rank": 7288,
+   "mk_last": "2026-11-14"
   },
   {
    "nick": "KEX",
@@ -429,14 +431,14 @@
    "country": "Германия",
    "flag": "🇩🇪",
    "markery_id": 10439,
-   "r_elo_cur": 1451,
+   "r_elo_cur": 1441,
    "r_tier": "S",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 12,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -451,8 +453,8 @@
    "r_ms_mmr": 2078.8,
    "r_ms_rank": 24,
    "r_ms_tier": "L",
-   "r_rank": 56,
-   "mk_last": "2026-11-07"
+   "r_rank": 60,
+   "mk_last": "2026-11-14"
   },
   {
    "nick": "Стикс",
@@ -472,7 +474,7 @@
    "m_rank": null,
    "player_number": 13,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -487,7 +489,7 @@
    "r_ms_mmr": 1370.5,
    "r_ms_rank": 531,
    "r_ms_tier": "C",
-   "r_rank": 7664,
+   "r_rank": 7674,
    "mk_last": "2026-07-04"
   },
   {
@@ -501,14 +503,14 @@
    "country": "Швейцария",
    "flag": "🇨🇭",
    "markery_id": 16374,
-   "r_elo_cur": 1215,
+   "r_elo_cur": 1238,
    "r_tier": "A",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": 14,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -523,8 +525,8 @@
    "r_ms_mmr": 1860.8,
    "r_ms_rank": 64,
    "r_ms_tier": "S",
-   "r_rank": 204,
-   "mk_last": "2026-11-07"
+   "r_rank": 174,
+   "mk_last": "2026-11-14"
   },
   {
    "nick": "Jerry Hurper",
@@ -544,7 +546,7 @@
    "m_rank": null,
    "player_number": 15,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -559,7 +561,7 @@
    "r_ms_mmr": 1564.7,
    "r_ms_rank": 239,
    "r_ms_tier": "B",
-   "r_rank": 475,
+   "r_rank": 474,
    "mk_last": "2026-11-07"
   },
   {
@@ -580,7 +582,7 @@
    "m_rank": null,
    "player_number": 16,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -595,7 +597,7 @@
    "r_ms_mmr": 1234.0,
    "r_ms_rank": null,
    "r_ms_tier": "D",
-   "r_rank": 7821,
+   "r_rank": 7830,
    "mk_last": "2026-10-18"
   },
   {
@@ -650,7 +652,7 @@
    "m_rank": null,
    "player_number": 18,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -665,7 +667,7 @@
    "r_ms_mmr": 1297.6,
    "r_ms_rank": null,
    "r_ms_tier": "D",
-   "r_rank": 7369,
+   "r_rank": 7371,
    "mk_last": "2026-11-07"
   },
   {
@@ -713,7 +715,7 @@
    "m_rank": null,
    "player_number": 20,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -728,7 +730,7 @@
    "r_ms_mmr": 1826.2,
    "r_ms_rank": 69,
    "r_ms_tier": "S",
-   "r_rank": 166,
+   "r_rank": 168,
    "mk_last": "2026-11-07"
   },
   {
@@ -749,7 +751,7 @@
    "m_rank": null,
    "player_number": 21,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -785,7 +787,7 @@
    "m_rank": null,
    "player_number": 22,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -800,7 +802,7 @@
    "r_ms_mmr": 1239.5,
    "r_ms_rank": null,
    "r_ms_tier": "D",
-   "r_rank": 8393,
+   "r_rank": 8400,
    "mk_last": "2026-07-31"
   },
   {
@@ -821,7 +823,7 @@
    "m_rank": null,
    "player_number": 23,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -836,7 +838,7 @@
    "r_ms_mmr": 1721.9,
    "r_ms_rank": 108,
    "r_ms_tier": "A",
-   "r_rank": 172,
+   "r_rank": 175,
    "mk_last": "2026-11-07"
   },
   {
@@ -857,7 +859,7 @@
    "m_rank": null,
    "player_number": 24,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -872,7 +874,7 @@
    "r_ms_mmr": 1600.3,
    "r_ms_rank": 190,
    "r_ms_tier": "B",
-   "r_rank": 361,
+   "r_rank": 362,
    "mk_last": "2026-11-07"
   },
   {
@@ -920,7 +922,7 @@
    "m_rank": null,
    "player_number": 26,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -928,7 +930,7 @@
    "r_ms_mmr": null,
    "r_ms_rank": null,
    "r_ms_tier": null,
-   "r_rank": 2025,
+   "r_rank": 2027,
    "mk_last": "2026-08-22"
   },
   {
@@ -976,7 +978,7 @@
    "m_rank": null,
    "player_number": 28,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -991,7 +993,7 @@
    "r_ms_mmr": 1196.7,
    "r_ms_rank": 718,
    "r_ms_tier": "D",
-   "r_rank": 7106,
+   "r_rank": 7108,
    "mk_last": "2026-10-18"
   },
   {
@@ -1012,7 +1014,7 @@
    "m_rank": null,
    "player_number": 29,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -1027,7 +1029,7 @@
    "r_ms_mmr": 2143.4,
    "r_ms_rank": 16,
    "r_ms_tier": "L",
-   "r_rank": 140,
+   "r_rank": 141,
    "mk_last": "2026-11-07"
   },
   {
@@ -1048,7 +1050,7 @@
    "m_rank": null,
    "player_number": 30,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -1063,7 +1065,7 @@
    "r_ms_mmr": 1528.1,
    "r_ms_rank": null,
    "r_ms_tier": "B",
-   "r_rank": 770,
+   "r_rank": 771,
    "mk_last": "2026-08-30"
   },
   {
@@ -1084,7 +1086,7 @@
    "m_rank": null,
    "player_number": 31,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -1099,7 +1101,7 @@
    "r_ms_mmr": 1727.3,
    "r_ms_rank": 104,
    "r_ms_tier": "A",
-   "r_rank": 203,
+   "r_rank": 202,
    "mk_last": "2026-10-18"
   },
   {
@@ -1147,7 +1149,7 @@
    "m_rank": null,
    "player_number": 33,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -1185,7 +1187,7 @@
    "m_rank": null,
    "player_number": 34,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -1200,7 +1202,7 @@
    "r_ms_mmr": 1313.9,
    "r_ms_rank": null,
    "r_ms_tier": "D",
-   "r_rank": 7744,
+   "r_rank": 7755,
    "mk_last": "2026-11-07"
   },
   {
@@ -1221,7 +1223,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-13",
+   "elo_snap": "2026-11-17",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -1237,7 +1239,7 @@
    "r_ms_rank": null,
    "r_ms_tier": "C",
    "added": "2026-11-13",
-   "r_rank": 1546,
+   "r_rank": 1551,
    "mk_last": "2026-10-31"
   }
  ],
