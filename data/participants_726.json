@@ -10,7 +10,7 @@
   "expected": 40,
   "players_confirmed": 41,
   "rating_note": "Состав — подтверждённые на mafgame (снимок 12.11: 34 из 40). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку.",
-  "ms_snap": "2026-11-16",
+  "ms_snap": "2026-11-18",
   "ms_ladder": {
    "L": 1950,
    "S": 1800,
@@ -1343,7 +1343,14 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 723,
+    "rating": 1951.8,
+    "rank": 39,
+    "games": 434,
+    "wr": 52.76,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1951.8,
    "r_ms_rank": 39,
    "r_ms_tier": "L",
@@ -1373,7 +1380,14 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 55,
+    "rating": 1914.6,
+    "rank": 52,
+    "games": 758,
+    "wr": 50,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1914.6,
    "r_ms_rank": 52,
    "r_ms_tier": "S",
@@ -1403,7 +1417,14 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 59545,
+    "rating": 1709.5,
+    "rank": 114,
+    "games": 463,
+    "wr": 49.89,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 1709.5,
    "r_ms_rank": 114,
    "r_ms_tier": "A",
@@ -1467,7 +1488,14 @@
    "series": null,
    "series_place": null,
    "series_score": null,
-   "ms": null,
+   "ms": {
+    "id": 3848,
+    "rating": 2078.8,
+    "rank": 24,
+    "games": 1184,
+    "wr": 48.06,
+    "conf": "mafgame-id"
+   },
    "r_ms_mmr": 2078.8,
    "r_ms_rank": 24,
    "r_ms_tier": "L",
