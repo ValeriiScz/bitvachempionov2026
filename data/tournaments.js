@@ -93,7 +93,7 @@ window.TOURNAMENTS_DB = {
     "accent": "#ffce00",
     "accent2": "#dd0000",
     "mvp": "Licht",
-    "strength": {"lvl": "ровный", "rank": 18, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.9, "eq": 24.4, "pts": 19, "cplus": 28, "proj": false, "reg": 40, "exp": 40, "places": 10}
+    "strength": {"lvl": "сильный", "rank": 12, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.9, "eq": 24.4, "pts": 19, "cplus": 28, "proj": false, "reg": 40, "exp": 40, "places": 10}
   },
   {
     "id": "757",
@@ -146,7 +146,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-21",
     "accent": "#c65ab4",
     "accent2": "#db514e",
-    "strength": {"lvl": "элитный", "rank": 6, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "подиум", "ch": 30.1, "eq": 27.3, "pts": 9, "cplus": 7, "proj": false, "reg": 10, "exp": 10, "places": 3}
+    "strength": {"lvl": "сильный", "rank": 7, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "топ-3", "ch": 30.1, "eq": 27.3, "pts": 9, "cplus": 7, "proj": false, "reg": 10, "exp": 10, "places": 3}
   },
   {
     "id": "801",
@@ -199,7 +199,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-28",
     "accent": "#f2c75c",
     "accent2": "#ae1c28",
-    "strength": {"lvl": "элитный", "rank": 7, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.7, "eq": 28.6, "pts": 26, "cplus": 20, "proj": false, "reg": 34, "exp": 33, "places": 10}
+    "strength": {"lvl": "сильный", "rank": 11, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.7, "eq": 28.6, "pts": 26, "cplus": 20, "proj": false, "reg": 34, "exp": 33, "places": 10}
   },
   {
     "id": "726",
@@ -241,7 +241,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-12-05",
     "accent": "#2bb39a",
     "accent2": "#0c5c56",
-    "strength": {"lvl": "элитный", "rank": 7, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 21.9, "eq": 19.0, "pts": 30, "cplus": 30, "proj": true, "reg": 41, "exp": 50, "places": 8}
+    "strength": {"lvl": "элитный", "rank": 4, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 25.3, "eq": 19.6, "pts": 30, "cplus": 30, "proj": true, "reg": 41, "exp": 50, "places": 10}
   },
   {
     "id": "725",
@@ -286,7 +286,7 @@ window.TOURNAMENTS_DB = {
     "accent": "#e8b34a",
     "accent2": "#f3d89a",
     "mvp": "Магнат",
-    "strength": {"lvl": "ровный", "rank": 20, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 69.9, "eq": 47.6, "pts": 5, "cplus": 14, "proj": false, "reg": 20, "exp": 20, "places": 10}
+    "strength": {"lvl": "ровный", "rank": 18, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "топ-5", "ch": 37.2, "eq": 23.8, "pts": 5, "cplus": 14, "proj": false, "reg": 20, "exp": 20, "places": 5}
   },
   {
     "id": "615",
@@ -341,7 +341,7 @@ window.TOURNAMENTS_DB = {
     ],
     "start": "2026-11-07",
     "mvp": "Flash",
-    "strength": {"lvl": "элитный", "rank": 4, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 34.2, "eq": 32.3, "pts": 29, "cplus": 21, "proj": false, "reg": 30, "exp": 30, "places": 10}
+    "strength": {"lvl": "сильный", "rank": 14, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 34.2, "eq": 32.3, "pts": 29, "cplus": 21, "proj": false, "reg": 30, "exp": 30, "places": 10}
   },
   {
     "id": "645",
@@ -398,7 +398,7 @@ window.TOURNAMENTS_DB = {
     "artPaper": "#efeeec",
     "posterTitle": "White Mafia|Best Player",
     "mvp": "Landing",
-    "strength": {"lvl": "сильный", "rank": 14, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "подиум", "ch": 29.5, "eq": 23.1, "pts": 5, "cplus": 11, "proj": false, "reg": 12, "exp": 12, "places": 3}
+    "strength": {"lvl": "элитный", "rank": 6, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "топ-3", "ch": 29.5, "eq": 23.1, "pts": 5, "cplus": 11, "proj": false, "reg": 12, "exp": 12, "places": 3}
   },
   {
     "id": "673",
@@ -451,7 +451,7 @@ window.TOURNAMENTS_DB = {
       "TOPS"
     ],
     "mvp": "Tripok",
-    "strength": {"lvl": "мягкий", "rank": 27, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 51.7, "eq": 32.3, "pts": 7, "cplus": 24, "proj": false, "reg": 30, "exp": 30, "places": 10}
+    "strength": {"lvl": "спокойный", "rank": 37, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 51.7, "eq": 32.3, "pts": 7, "cplus": 24, "proj": false, "reg": 30, "exp": 30, "places": 10}
   },
   {
     "id": "692",
@@ -507,7 +507,7 @@ window.TOURNAMENTS_DB = {
       "TOPS"
     ],
     "mvp": "Korolevich",
-    "strength": {"lvl": "сильный", "rank": 11, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 36.8, "eq": 29.4, "pts": 22, "cplus": 23, "proj": false, "reg": 33, "exp": 33, "places": 10}
+    "strength": {"lvl": "сильный", "rank": 17, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 36.8, "eq": 29.4, "pts": 22, "cplus": 23, "proj": false, "reg": 33, "exp": 33, "places": 10}
   },
   {
     "id": "687",
@@ -562,7 +562,7 @@ window.TOURNAMENTS_DB = {
       "Xenon"
     ],
     "mvp": "Xenon",
-    "strength": {"lvl": "элитный", "rank": 8, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 29.1, "eq": 24.4, "pts": 27, "cplus": 27, "proj": false, "reg": 40, "exp": 40, "places": 10}
+    "strength": {"lvl": "элитный", "rank": 5, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 29.1, "eq": 24.4, "pts": 27, "cplus": 27, "proj": false, "reg": 40, "exp": 40, "places": 10}
   },
   {
     "id": "710",
@@ -588,7 +588,7 @@ window.TOURNAMENTS_DB = {
     "mmrN": 55,
     "eloN": 54,
     "eloTotal": 55,
-    "strength": {"lvl": "элитный", "rank": 3, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 16.3, "eq": 17.9, "pts": 53, "cplus": 43, "proj": false, "reg": 55, "exp": 55, "places": 10}
+    "strength": {"lvl": "элитный", "rank": 1, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 16.3, "eq": 17.9, "pts": 53, "cplus": 43, "proj": false, "reg": 55, "exp": 55, "places": 10}
   },
   {
     "id": "694",
@@ -672,7 +672,7 @@ window.TOURNAMENTS_DB = {
       "aptah"
     ],
     "mvp": "Lюц",
-    "strength": {"lvl": "сильный", "rank": 13, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 40.8, "eq": 32.3, "pts": 19, "cplus": 20, "proj": false, "reg": 30, "exp": 30, "places": 10}
+    "strength": {"lvl": "ровный", "rank": 25, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 40.8, "eq": 32.3, "pts": 19, "cplus": 20, "proj": false, "reg": 30, "exp": 30, "places": 10}
   },
   {
     "id": "693",
@@ -810,7 +810,7 @@ window.TOURNAMENTS_DB = {
       "SANYURIK"
     ],
     "mvp": "Lюц",
-    "strength": {"lvl": "спокойный", "rank": 34, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 42.0, "eq": 24.4, "pts": 10, "cplus": 23, "proj": false, "reg": 40, "exp": 40, "places": 10}
+    "strength": {"lvl": "мягкий", "rank": 26, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 42.0, "eq": 24.4, "pts": 10, "cplus": 23, "proj": false, "reg": 40, "exp": 40, "places": 10}
   },
   {
     "id": "702",
@@ -887,7 +887,7 @@ window.TOURNAMENTS_DB = {
       "RAMZES"
     ],
     "mvp": "ParadoXx",
-    "strength": {"lvl": "спокойный", "rank": 35, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 42.7, "eq": 24.4, "pts": 12, "cplus": 23, "proj": false, "reg": 40, "exp": 40, "places": 10}
+    "strength": {"lvl": "мягкий", "rank": 29, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 42.7, "eq": 24.4, "pts": 12, "cplus": 23, "proj": false, "reg": 40, "exp": 40, "places": 10}
   },
   {
     "id": "634",
@@ -967,7 +967,7 @@ window.TOURNAMENTS_DB = {
       "Саботаж"
     ],
     "mvp": "KEX",
-    "strength": {"lvl": "сильный", "rank": 17, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 30.5, "eq": 22.2, "pts": 23, "cplus": 30, "proj": false, "reg": 44, "exp": 44, "places": 10}
+    "strength": {"lvl": "сильный", "rank": 8, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 30.5, "eq": 22.2, "pts": 23, "cplus": 30, "proj": false, "reg": 44, "exp": 44, "places": 10}
   },
   {
     "id": "667",
@@ -1034,7 +1034,7 @@ window.TOURNAMENTS_DB = {
       "Золушка"
     ],
     "mvp": "Tommy",
-    "strength": {"lvl": "сильный", "rank": 12, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 17.0, "eq": 13.5, "pts": 41, "cplus": 44, "proj": false, "reg": 73, "exp": 70, "places": 10}
+    "strength": {"lvl": "элитный", "rank": 2, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 16.6, "eq": 13.5, "pts": 44, "cplus": 45, "proj": false, "reg": 73, "exp": 70, "places": 10}
   },
   {
     "id": "826",
@@ -1085,7 +1085,7 @@ window.TOURNAMENTS_DB = {
       "Season's"
     ],
     "mvp": "Логика",
-    "strength": {"lvl": "элитный", "rank": 2, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 21.8, "eq": 31.2, "pts": 42, "cplus": 29, "proj": false, "reg": 31, "exp": 30, "places": 10}
+    "strength": {"lvl": "элитный", "rank": 3, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 21.9, "eq": 31.2, "pts": 44, "cplus": 29, "proj": false, "reg": 31, "exp": 30, "places": 10}
   },
   {
     "id": "622",

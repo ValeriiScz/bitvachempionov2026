@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_mafiastats · v2.0 · 2026-11-12 (прогноз силы для собирающихся турниров: по уже записанным, цель пропорционально уменьшена) · v1.9 · 2026-11-12 (сила состава для всех рейтинговых турниров и серий календаря за 6 мес.: две группы, поправка на размер — шанс эталона A, data/strength.json/.js) · v1.8 · 2026-11-12 (сила турнира = очки L3/S2/A1, при равенстве — число C и выше) · v1.7 · 2026-11-12 (архив заморожен: составы завершённых турниров не обновляются, MMR на дату снимка; сила турнира strength — 5 уровней к турнирам сайта за 6 полных месяцев) · v1.6.1 · 2026-11-12 (mmrTop — топ-10 состава по MMR для кружков на плашке) · v1.5 · 2026-11-12 (распределение по тирам MMR mmrTiers на карточках незавершённых турниров) · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
+refresh_mafiastats · v2.2 · 2026-11-18 (сила состава — АБСОЛЮТНЫЙ шанс игрока уровня A (MMR 1700) попасть в зону, которая даёт баллы: серия — топ-2, турнир до 12 — топ-3, 13–29 — топ-5, 30+ — финал топ-10; уровни — постоянные пороги, без сравнения турниров между собой; больше поля — ниже шанс — сильнее. Собирающиеся: пустые места до ожидаемого размера — игроками без MMR. Временное решение Валерия 18.11, «потом перевзвесим плотно») · v2.1 · 2026-11-18 (сила состава: 1) цель по ФАКТИЧЕСКОМУ размеру сыгранного турнира и не больше N−1 — турниры на 5–10 человек с целью «финал 10» выходили «элитными»; 2) поправка на размер поля — коэффициент делится на коэффициент обычного состава того же размера (случайные составы из базы MMR): малые поля с финалом на половину участников выглядели сильнее одинакового по уровню большого) · v2.0 · 2026-11-12 (прогноз силы для собирающихся турниров: по уже записанным, цель пропорционально уменьшена) · v1.9 · 2026-11-12 (сила состава для всех рейтинговых турниров и серий календаря за 6 мес.: две группы, поправка на размер — шанс эталона A, data/strength.json/.js) · v1.8 · 2026-11-12 (сила турнира = очки L3/S2/A1, при равенстве — число C и выше) · v1.7 · 2026-11-12 (архив заморожен: составы завершённых турниров не обновляются, MMR на дату снимка; сила турнира strength — 5 уровней к турнирам сайта за 6 полных месяцев) · v1.6.1 · 2026-11-12 (mmrTop — топ-10 состава по MMR для кружков на плашке) · v1.5 · 2026-11-12 (распределение по тирам MMR mmrTiers на карточках незавершённых турниров) · v1.4 · 2026-11-10 (ср. MMR на карточках незавершённых турниров в tournaments.js — сам, по составу) · v1.3 · 2026-11-06 (тестовая шкала тиров для отдельных турниров: apply/variants в mmr_tiers.json) · v1.2 · 2026-11-06 (тир по MMR — калибровка «шанс финала», data/research/mmr_tiers.json) · v1.1 · 2026-11-03 (тир по MMR: линейка markery по долям) · v1.0 · 2026-11-03
 Назначение: подтянуть единый рейтинг MMR с mafiastats.com (открытый API, без ключей)
 для игроков сайта DOVOD — без участия человека. Запускается GitHub Actions
 (.github/workflows/refresh-mafiastats.yml).
@@ -312,6 +312,27 @@ def ref_chance(mmrs, K, beta):
         tot += w * sum(dp[:K]); x += step
     return tot
 
+# v2.2: цель — зона, которая реально даёт баллы (Валерий 18.11): серия — топ-2; турнир до 12 — топ-3; 13–29 — топ-5; 30+ — финал топ-10.
+def target_k(grp, n):
+    if grp == 'series': return min(2, n - 1)
+    return 3 if n <= 12 else (5 if n < 30 else 10)
+# пороги шанса игрока A (в %, меньше — сильнее): <A элитный · <B сильный · <C ровный · <D мягкий · иначе спокойный.
+# Подобраны по распределению 18.11 (≈ по пятой части турниров в каждом уровне), дальше — постоянные.
+ABS_LEVELS = {'rated': [(30, 'элитный'), (37, 'сильный'), (42, 'ровный'), (49, 'мягкий'), (101, 'спокойный')],
+              'series': [(28, 'элитный'), (31, 'сильный'), (34, 'ровный'), (38, 'мягкий'), (101, 'спокойный')]}
+_KT = {}
+def k_typical(N, K, pool, beta):
+    """v2.1: коэффициент «обычного» состава того же размера — среднее по 30 случайным составам из базы MMR (сид фиксирован)."""
+    key = (N, K)
+    if key not in _KT:
+        import random
+        rnd = random.Random(N * 1000 + K); xs = []
+        for _ in range(30):
+            f = rnd.sample(pool, N) if len(pool) >= N else [rnd.choice(pool) for _ in range(N)]
+            xs.append(ref_chance(f, K, beta) / (K / (N + 1.0)))
+        _KT[key] = sum(xs) / len(xs)
+    return _KT[key]
+
 def strength(today=None, only=None, reset=False):
     today = today or datetime.date.today()
     beta, miss, th = calib()
@@ -344,38 +365,38 @@ def strength(today=None, only=None, reset=False):
         T[tid]['mmr'] = [p.get('r_ms_mmr') for p in d.get('players') or []]
     vals = {}
     for tid, x in T.items():
-        if tid in old and old[tid].get('frozen'):
+        if tid in old and old[tid].get('frozen') and old[tid].get('m') == 'abs':   # v2.2: замороженные старой метрикой — пересчитать один раз
             vals[tid] = old[tid]; continue
         mmr = x['mmr']; known = [v for v in mmr if v is not None]
         if len(mmr) < 5 or len(known) < 5: continue
         full = [v if v is not None else miss for v in mmr]
-        N = len(full); E = max(x['exp'], N)
-        Kf = 3 if E <= 12 else 10                       # цель по ожидаемому размеру
-        proj = x['start'] > tday and x['exp'] and N < 0.95 * x['exp']
-        K = max(1, round(Kf * N / E)) if proj else Kf   # v2.0: набор идёт — пересчёт «как если бы турнир был на N человек»
-        ch = ref_chance(full, K, beta); eq = K / (N + 1.0)
+        N = len(full)
+        proj = bool(x['start'] > tday and x['exp'] and N < 0.95 * x['exp'])
+        if proj: full = full + [miss] * (x['exp'] - N)   # v2.2: ещё не записанные — как игроки без MMR
+        M = len(full)
+        K = target_k(x['grp'], M)
+        ch = ref_chance(full, K, beta)
         tc = [tier(v) for v in known]
-        vals[tid] = {'grp': x['grp'], 'n': N, 'goal': 'подиум' if Kf == 3 else 'финал', 'places': K, 'ch': round(ch * 100, 1), 'eq': round(eq * 100, 1),
-                     'k': round(ch / eq, 3), 'pts': sum(PTS.get(z, 0) for z in tc), 'cplus': sum(1 for z in tc if z in 'LSABC'),
-                     'start': x['start'], 'end': x['end'], 'frozen': x['end'] < tday, 'proj': bool(proj), 'reg': N, 'exp': x['exp']}
+        vals[tid] = {'grp': x['grp'], 'n': N, 'm': 'abs', 'goal': 'финал' if K == 10 else 'топ-%d' % K, 'places': K, 'ch': round(ch * 100, 1), 'eq': round(K / (M + 1.0) * 100, 1),
+                     'pts': sum(PTS.get(z, 0) for z in tc), 'cplus': sum(1 for z in tc if z in 'LSABC'),
+                     'start': x['start'], 'end': x['end'], 'frozen': x['end'] < tday, 'proj': proj, 'reg': N, 'exp': x['exp']}
     out = {}
     for grp, gname in (('rated', 'рейтинговых турниров'), ('series', 'серий')):
         pool = {k: v for k, v in vals.items() if v['grp'] == grp}
-        base = [v['k'] for v in pool.values() if not v.get('proj')]   # шкала — по собранным составам; прогнозы встают в неё, не сдвигая
+        base = [v['ch'] for v in pool.values() if not v.get('proj')]
         for tid, v in pool.items():
-            ks = base + ([v['k']] if v.get('proj') else [])
-            if len(ks) < 5: continue
-            weaker = sum(1 for z in ks if z > v['k']); share = weaker / (len(ks) - 1)
-            v = dict(v, lvl=next(n for t_, n in LEVELS if share < t_), rank=1 + sum(1 for z in ks if z < v['k']), of=len(ks), win='%s, %s' % (gname, label))
+            ks = base + ([v['ch']] if v.get('proj') else [])
+            lv = next(n for t_, n in ABS_LEVELS[grp] if v['ch'] < t_)
+            v = dict(v, lvl=lv, rank=1 + sum(1 for z in ks if z < v['ch']), of=len(ks), win='%s, %s' % (gname, label))
             out[tid] = v
     io.open(SPATH, 'w', encoding='utf-8').write(json.dumps({'snap': tday, 'ref_mmr': REF_MMR, 'beta': beta, 't': out}, ensure_ascii=False, separators=(',', ':')) + '\n')
-    io.open(os.path.join(BASE, 'data', 'strength.js'), 'w', encoding='utf-8').write('/* сила состава — генерирует refresh_mafiastats.py; не править руками */\nwindow.DV_STRENGTH=' + json.dumps({k: {f: v[f] for f in ('lvl', 'rank', 'of', 'win', 'grp', 'goal', 'ch', 'eq', 'pts', 'cplus', 'proj', 'reg', 'exp', 'places')} for k, v in out.items()}, ensure_ascii=False, separators=(',', ':')) + ';\n')
+    io.open(os.path.join(BASE, 'data', 'strength.js'), 'w', encoding='utf-8').write('/* сила состава — генерирует refresh_mafiastats.py; не править руками */\nwindow.DV_STRENGTH=' + json.dumps({k: {f: v[f] for f in ('lvl', 'rank', 'of', 'win', 'grp', 'goal', 'ch', 'eq', 'pts', 'cplus', 'proj', 'reg', 'exp', 'places') if f in v} for k, v in out.items()}, ensure_ascii=False, separators=(',', ':')) + ';\n')
     # карточки сайта
     path = os.path.join(BASE, 'data', 'tournaments.js'); s = io.open(path, encoding='utf-8').read(); n = 0
     for tid in re.findall(r'\{\s*"id":\s*"(\d+)"', s):
         m = re.search(r'\{\s*"id":\s*"%s"' % tid, s); a0 = m.start(); b0 = s.find('\n  }', a0); blk = s[a0:b0]
         v = out.get(tid)
-        if v: r = json.dumps({f: v[f] for f in ('lvl', 'rank', 'of', 'win', 'grp', 'goal', 'ch', 'eq', 'pts', 'cplus', 'proj', 'reg', 'exp', 'places')}, ensure_ascii=False)
+        if v: r = json.dumps({f: v[f] for f in ('lvl', 'rank', 'of', 'win', 'grp', 'goal', 'ch', 'eq', 'pts', 'cplus', 'proj', 'reg', 'exp', 'places') if f in v}, ensure_ascii=False)
         nb = re.sub(r',\n    "strength":\s*\{[^}]*\}', '', blk)
         if v: nb = nb + ',\n    "strength": ' + r
         if nb != blk: s = s[:a0] + nb + s[b0:]; n += 1
