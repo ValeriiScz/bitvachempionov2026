@@ -21,7 +21,7 @@
    "E": 925
   },
   "elo_snap": "2026-11-17",
-  "roster_snap": "2026-11-17"
+  "roster_snap": "2026-11-18"
  },
  "players": [
   {
@@ -1500,6 +1500,34 @@
    "r_ms_rank": 24,
    "r_ms_tier": "L",
    "added": "2026-11-17"
+  },
+  {
+   "nick": "Tripok",
+   "uid": 263,
+   "real": "Bohdan",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_263/4281f453dafa967aa19b4f5e30653e3719a0d317.png",
+   "status": "applied",
+   "club": "DarKStadt",
+   "cc": "DE",
+   "country": "Германия",
+   "flag": "🇩🇪",
+   "markery_id": 10035,
+   "r_elo_cur": 1279,
+   "r_tier": "A",
+   "r_elo_ly": null,
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": null,
+   "mk_match": "id",
+   "elo_snap": "2026-10-26",
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": null,
+   "r_ms_mmr": 1850.1,
+   "r_ms_rank": 65,
+   "r_ms_tier": "S",
+   "added": "2026-11-18"
   }
  ]
 }
