@@ -174,6 +174,14 @@
   .fsp-go{background:#e8c46a;color:#07080d;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:9px 14px}
   .fsp-n{font-size:12px;font-weight:700;color:#e8c46a}
   @media (max-width:520px){.fsp{flex-direction:column;align-items:flex-start}.fsp-lg{width:76px;height:76px}}
+  .gmcp.done{background-image:none}
+  .gmcp-fin{display:inline-block;background:#1f7a4d;color:#fff;letter-spacing:.14em;padding:3px 8px;margin-right:8px}
+  .gmcp-pod{display:grid;grid-template-columns:1fr 1.15fr 1fr;align-items:end;gap:8px;margin-top:14px;max-width:420px;pointer-events:none}
+  .gmcp-pod .gp{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;padding:10px 4px;background:rgba(242,239,232,.04);border:1px solid rgba(255,206,0,.25)}
+  .gmcp-pod .gp img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #ffce00;background:#1b1b20}
+  .gmcp-pod .p1{order:2;padding-top:14px;border-color:#ffce00;background:linear-gradient(180deg,rgba(255,206,0,.16),rgba(242,239,232,.03))}.gmcp-pod .p1 img{width:64px;height:64px}
+  .gmcp-pod .p2{order:1}.gmcp-pod .p3{order:3}
+  .gmcp-pod em{font-style:normal;font-size:18px;line-height:1}.gmcp-pod b{font-family:Georgia,serif;font-size:15px;color:#f2efe8}.gmcp-pod span{font-size:11px;color:#bdb8ad}
   .gmcp{position:relative;overflow:hidden;margin-top:14px;border:1px solid rgba(255,206,0,.35);background:#07070a url(assets/gmc664_eagle.png) right 22px center/auto 70% no-repeat;margin-bottom:18px}
   .gmcp::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#2a2a2e 0 33.33%,#dd0000 33.33% 66.66%,#ffce00 66.66%)}
   .gmcp-bg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,7,10,.98) 45%,rgba(7,7,10,.72) 75%,rgba(7,7,10,.55) 100%)}
@@ -367,23 +375,28 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     </div>
   </a>
 
-  <!-- v1.8 (10.11.2026): GMC — промоблок в стиле финала (чёрный/красный/золото), три входа: финал в Кёльне, карта «Дорога в Кёльн», отбор -->
-  <div class="gmcp" id="gmcp">
-    <a class="gmcp-bg" href="t664.html" aria-label="Финал German Mafia Cup 2026"></a>
+  <div class="sec"><span class="dia">◆</span> Расписание до конца года</div>
+  <div class="upc" id="upc"><div class="upc-h"><b>серии и финалы · все серийники</b><a href="calendar.html?preset=1&type=ser&view=feed">все серии в календаре →</a></div><div id="upcList"></div></div>
+
+  <!-- v1.9 (19.11.2026): GMC завершён - промоблок с итогами (пьедестал, цифры), перенесён ниже расписания -->
+  <div class="gmcp done" id="gmcp">
+    <a class="gmcp-bg" href="t664.html" aria-label="Итоги German Mafia Cup 2026"></a>
     <div class="gmcp-b">
-      <div class="gmcp-e">Финал · Кёльн · 14–15 ноября · ★★★★</div>
+      <div class="gmcp-e"><span class="gmcp-fin">✓ Завершён</span> Финал · Кёльн · 14–15 ноября · ★★★★</div>
       <div class="gmcp-t">GERMAN <i>MAFIA</i> <u>CUP</u> 2026</div>
-      <div class="gmcp-m tmeta">28 серий отбора в 22 городах — самый большой серийник федерации. В Кёльне 40 финалистов, 18 игр, 3000 €.</div>
+      <div class="gmcp-pod">
+        <div class="gp p2"><img src="https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_650/a71d5bc0efb9d54508be8de08ad3a4e3d362bf1c.png" alt="" referrerpolicy="no-referrer" loading="lazy"><em>🥈</em><b>Tommy</b><span>14.88</span></div>
+        <div class="gp p1"><img src="https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1333/b9f25e2884743a6bfaa6478e135e76b5cc57529a.png" alt="" referrerpolicy="no-referrer" loading="lazy"><em>🏆</em><b>Licht</b><span>16.16 · MVP</span></div>
+        <div class="gp p3"><img src="https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_1198/96cb7cae3bd193ed0d46469b6bd98ce366c26473.png" alt="" referrerpolicy="no-referrer" loading="lazy"><em>🥉</em><b>Zico</b><span>13.71</span></div>
+      </div>
+      <div class="gmcp-m">28 серий отбора в 22 городах, 230 игроков в сериях, 40 финалистов, 18 игр без финального стола, 3000 €. Licht забрал и титул, и MVP.</div>
       <div class="gmcp-r">
-        <a class="gmcp-go" href="t664.html">Финал в Кёльне →</a>
+        <a class="gmcp-go" href="t664.html">Итоги финала →</a>
         <a class="gmcp-l" href="t664.html#road">✈ Дорога в Кёльн · карта</a>
         <a class="gmcp-l" href="gmc2026.html">Отбор · серии и замены</a>
       </div>
     </div>
   </div>
-
-  <div class="sec"><span class="dia">◆</span> Расписание до конца года</div>
-  <div class="upc" id="upc"><div class="upc-h"><b>серии и финалы · все серийники</b><a href="calendar.html?preset=1&type=ser&view=feed">все серии в календаре →</a></div><div id="upcList"></div></div>
 
   <div class="sec"><span class="dia">◆</span> Остальные серийники</div>
   <p class="tagline" style="margin:0 0 14px">Двухзвёздочные лиги: финал платит по сетке федерации 2026 — победителю 22 балла, 10-му — 2 (официальная поправка 13.10; с 13.10 mafgame начислил так же — PSP и CEC пересчитаны). Нажми на плашку — регламент, кто уже прошёл, что осталось.</p>
@@ -449,7 +462,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     const fin=u.kind==='final';
     const lnk=fin&&/GMC|German/i.test(u.contour||'')?'t664.html':''; /* v1.8: финал GMC в расписании ведёт на страницу финала */
     html+=`<${lnk?'a href="'+lnk+'"':'div'} class="upc-l${fin?' fin':''}"${lnk?' style="text-decoration:none;color:inherit"':''}><span class="upc-d">${dd(u.date)}</span><span class="upc-t">${fin?'финал '+'★'.repeat(u.stars||0):'серия'}</span><span class="upc-c">${u.contour}</span><span class="upc-w">${u.city||''}${u.country?', '+u.country:''}</span>`+
-      (fin&&lnk?`<span class="upc-r"><b>40</b> финалистов · <span style="color:#ffce00">страница →</span></span>`:fin?`<span class="upc-r"><b>${u.qualified||0}</b>${u.size?'/'+u.size:''} прошли${lnk?' · <span style="color:#ffce00">страница →</span>':''}</span>`:`<span class="upc-r ${u.regs>=u.exp?'full':''}"><b>${u.regs}</b>/${u.exp} записано</span>`)+`</${lnk?'a':'div'}>`;});
+      (fin&&lnk?`<span class="upc-r"><b>40</b> финалистов · <span style="color:#ffce00">страница →</span></span>`:fin?`<span class="upc-r"><b>${u.qualified||0}</b>${u.size?'/'+u.size:''} ${/MCL/.test(u.contour||'')?'прошли':'в зачёте'}${lnk?' · <span style="color:#ffce00">страница →</span>':''}</span>`:`<span class="upc-r ${u.regs>=u.exp?'full':''}"><b>${u.regs}</b>/${u.exp} записано</span>`)+`</${lnk?'a':'div'}>`;});
   document.getElementById('upcList').innerHTML=up.length?html:'<div class="upc-l"><span class="upc-w">До конца года серий и финалов больше нет.</span></div>';
   // плашки остальных
   const rest=S.contours.filter(c=>!c.page);
@@ -459,7 +472,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     <div class="pod">${c.podium&&c.podium.length?c.podium.map((p,i)=>`${['🥇','🥈','🥉'][i]} <b>${p.nick}</b> ${p.pts}`).join('<br>'):'итоги на mafgame ещё не опубликованы'}</div></button>`:`<button class="stile" data-id="${c.id}">
     <div class="st">${'★'.repeat(c.stars)} · финал ${dd(c.final_date)}</div>
     <div class="sn">${c.short}</div>
-    <div class="sm">серий <b>${c.series_played}</b> из ${c.series_total}${c.series_ahead?` · впереди ${c.series_ahead}`:' · все сыграны'}<br>прошли <b>${c.qualified.length}</b> · ${c.city}</div>
+    <div class="sm">серий <b>${c.series_played}</b> из ${c.series_total}${c.series_ahead?` · впереди ${c.series_ahead}`:' · все сыграны'}<br>${(()=>{const m=parseInt((c.final_size||'').replace(/\D+/,' ').trim())||0;return m&&c.qualified.length>m?`в зачёте <b>${c.qualified.length}</b> на ${m} мест`:`прошли <b>${c.qualified.length}</b>`})()} · ${c.city}</div>
     <div class="bar"><i style="width:${Math.round(c.series_played/Math.max(1,c.series_total)*100)}%"></i></div></button>`).join('');
   const det=document.getElementById('sdet');
   function show(c){
@@ -475,7 +488,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
       <div class="k">Как пройти в финал</div><p>${c.rule}</p><div class="src">${c.rule_src}</div>
       <div class="k">Финал</div><div class="grid"><div class="cell"><b>Когда и где</b><span>${c.final}</span></div><div class="cell"><b>Формат</b><span>${c.final_size||'—'}</span></div><div class="cell"><b>Призовой</b><span>${c.prize||'—'}</span></div><div class="cell"><b>Баллы рейтинга</b><span>${c.points.max} победителю … ${c.points.min} за ${c.points.places}-е место — баллы только у ${c.points.places} мест${c.points.field&&c.points.field>c.points.places?` из ${c.points.field} в финале, остальные финалисты — ${c.points.base}`:''}; участникам серий ${c.points.base}</span></div></div>
       <div class="k">Серии: сыграно ${c.series_played} из ${c.series_total}${c.planned?` (по регламенту ${c.planned})`:''}</div>${nx?`<ul>${nx}</ul>`:'<p>Все серии сыграны — ждём финал.</p>'}${st}
-      <div class="k">Уже прошли (${c.qualified.length})<span style="color:var(--dim);font-weight:600;letter-spacing:0;text-transform:none;margin-left:8px">золотым — из топ-30 гонки</span></div><div class="qual">${q}</div>
+      <div class="k">В зачёте на финал (${c.qualified.length})<span style="color:var(--dim);font-weight:600;letter-spacing:0;text-transform:none;margin-left:8px">золотым — из топ-30 гонки</span></div><div class="qual">${q}</div><p style="font-size:12px;color:var(--dim);margin-top:6px">По таблицам серий и правилу прохода. Официального состава финала на mafgame пока нет.</p>
       <div class="links"><a href="${c.mafgame}" target="_blank" rel="noopener">страница на mafgame ↗</a><a href="calendar.html?preset=1&type=ser&view=feed">серии в календаре</a><a href="race.html">гонка за дюжину</a></div>`;
     det.classList.add('on'); document.querySelectorAll('.stile').forEach(b=>b.classList.toggle('on',b.dataset.id==String(c.id)));
     det.scrollIntoView({behavior:'smooth',block:'nearest'});
