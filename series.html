@@ -18,7 +18,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700;800&family=Lilita+One&family=Pacifico&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0b0b0e; --panel:#131318; --panel2:#17171d;
@@ -158,6 +158,22 @@
 
   /* промо серийника MCL (страница лиги в своём бренде) */
   /* v1.8: промоблок GMC — финал в Кёльне */
+  /* v1.9 (19.11.2026): Four Seasons - промоблок всемирной лиги (6★), времена года + золото MafGame */
+  .fsp{position:relative;display:flex;gap:18px;align-items:center;overflow:hidden;margin-top:14px;margin-bottom:14px;padding:20px 18px;text-decoration:none;color:#f3efe6;border:1px solid rgba(232,196,106,.45);
+    background:radial-gradient(50% 80% at 0% 0%,rgba(94,200,255,.18),transparent 70%),radial-gradient(50% 80% at 100% 0%,rgba(255,122,61,.16),transparent 70%),radial-gradient(50% 80% at 0% 100%,rgba(127,215,122,.14),transparent 70%),radial-gradient(50% 80% at 100% 100%,rgba(255,126,182,.14),transparent 70%),#07080d}
+  .fsp::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#5ec8ff 0 25%,#7fd77a 25% 50%,#ffc83d 50% 75%,#ff7a3d 75%)}
+  .fsp-lg{position:relative;flex:none;width:92px;height:92px}
+  .fsp-lg::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#5ec8ff,#7fd77a,#ff7eb6,#ffc83d,#ff7a3d,#5ec8ff);animation:fsspin 14s linear infinite}
+  .fsp-lg img{position:relative;width:100%;height:100%;border-radius:50%;border:3px solid #07080d;display:block}
+  @keyframes fsspin{to{transform:rotate(360deg)}}
+  .fsp-e{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#e8c46a;font-weight:700}
+  .fsp-t{font-family:Cinzel,Georgia,serif;font-weight:900;font-size:clamp(24px,6vw,36px);letter-spacing:.06em;line-height:1.05;margin-top:6px;background:linear-gradient(180deg,#fff6d6,#e8c46a 60%,#a77d2b);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .fsp-s{color:#f9d627;letter-spacing:.14em;font-size:14px;margin-top:4px;text-shadow:0 0 10px rgba(249,214,39,.5)}
+  .fsp-m{margin-top:8px;font-size:13px;color:#cfc7b4;max-width:52ch;line-height:1.5}
+  .fsp-r{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:12px}
+  .fsp-go{background:#e8c46a;color:#07080d;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:9px 14px}
+  .fsp-n{font-size:12px;font-weight:700;color:#e8c46a}
+  @media (max-width:520px){.fsp{flex-direction:column;align-items:flex-start}.fsp-lg{width:76px;height:76px}}
   .gmcp{position:relative;overflow:hidden;margin-top:14px;border:1px solid rgba(255,206,0,.35);background:#07070a url(assets/gmc664_eagle.png) right 22px center/auto 70% no-repeat;margin-bottom:18px}
   .gmcp::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#2a2a2e 0 33.33%,#dd0000 33.33% 66.66%,#ffce00 66.66%)}
   .gmcp-bg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,7,10,.98) 45%,rgba(7,7,10,.72) 75%,rgba(7,7,10,.55) 100%)}
@@ -320,12 +336,23 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
          onerror="this.onerror=null;this.src='https://mafgame.org/logo-without-text.png'" alt="MAFGAME">
     <div class="wordmark">Серийники</div>
   </div>
-  <p class="tagline">MCL, GMC и другие серии сезона — зачёт, финалисты, разбор</p>
+  <p class="tagline">Four Seasons, MCL, GMC и другие серии сезона — зачёт, финалисты, разбор</p>
   <div class="asof" id="asof" title="MCL Europe обновляется роботом дважды в день; остальные серийники и список прошедших — раз в неделю, по воскресеньям">
     <span class="dot"></span><span>Серии, финалисты и ближайшие игры — данные на <b id="asofd">—</b> <i id="asofa"></i></span>
   </div>
 
   <div class="rule"></div>
+
+  <a class="fsp" href="fourseasons2026.html">
+    <div class="fsp-lg"><img src="assets/fourseasons_logo.png" alt="Four Seasons"></div>
+    <div>
+      <div class="fsp-e">Всемирная лига · финал 19-20.12 · Лимасол</div>
+      <div class="fsp-t">FOUR SEASONS</div>
+      <div class="fsp-s">★★★★★★</div>
+      <div class="fsp-m">Единственный шестизвёздочный серийник федерации. Баллов в гонку не даёт - в финал проходят только победители отборочных. 12 мест на весь год.</div>
+      <div class="fsp-r"><span class="fsp-go">Кто уже в финале →</span><span class="fsp-n">9 / 12 мест</span></div>
+    </div>
+  </a>
 
   <a class="mclp" href="mcl2026.html">
     <video class="mclp-v" src="assets/mcl/intro.mp4" poster="assets/mcl/hero.jpg" muted playsinline loop preload="none"></video>
