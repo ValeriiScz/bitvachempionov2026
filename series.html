@@ -478,7 +478,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   function show(c){
     if(c.done){det.innerHTML=`<h3>${c.name}</h3><p style="color:var(--mut);font-size:12.5px">${c.tag?c.tag+' · ':''}${'★'.repeat(c.stars)} · финал ${dd(c.final_date)} · ${c.city||''} · завершён</p>
       <div class="k">Итог финала</div>${c.podium&&c.podium.length?`<div class="podium">${c.podium.map((p,i)=>`<span>${['🥇','🥈','🥉'][i]} ${p.nick}<small>${p.pts} баллов${p.rank?' · #'+p.rank+' гонки':''}</small></span>`).join('')}</div><p style="margin-top:8px">В финале с баллами — ${c.final_players} игроков.</p>`:'<p>Финал сыгран, итоги на mafgame ещё не опубликованы — появятся после закрытия турнира.</p>'}
-      <div class="k">Сезон</div><p>Серий сыграно ${c.series_played} из ${c.series_total}, в сериях играли ${c.players} человек. ${c.rule}</p>
+      <div class="k">План и факт</div><p>${c.planned?`По регламенту: ${c.planned}. `:''}Сыграно серий: ${c.series_played} из ${c.series_total}, в сериях играли ${c.players} человек.${c.final_size?` Финал по плану: ${c.final_size}`:''}${c.final_players?`, в финальной таблице с баллами ${c.final_players}.`:'.'}</p><p style="font-size:12.5px;color:var(--mut)">${c.rule}</p>
       <div class="links"><a href="${c.mafgame}" target="_blank" rel="noopener">страница на mafgame ↗</a><a href="race.html">гонка за дюжину</a></div>`;
       det.classList.add('on'); document.querySelectorAll('.stile').forEach(b=>b.classList.toggle('on',b.dataset.id==String(c.id))); det.scrollIntoView({behavior:'smooth',block:'nearest'}); return;}
     const q=c.qualified.map(x=>`<span class="${x.rank&&x.rank<=30?'top':''}">${x.nick}${x.rank?`<small>#${x.rank}</small>`:''}</span>`).join('')||'<span>пока никого</span>';

@@ -65,6 +65,11 @@
 .dv-crumb a:hover{color:#eef3fb}
 .dv-crumb i{color:#39404c;font-style:normal}
 .dv-crumb span{color:#5f6675}
+.pf-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin:8px 0 10px}
+.pf-r{border:1px solid rgba(255,255,255,.08);border-radius:10px;background:var(--panel);padding:10px 12px;font-size:12.5px;line-height:1.5}
+.pf-h{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:4px}.pf-h b{color:var(--ink);font-size:13px}
+.pf-h span{font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}.pf-h .ok{color:#5fe39b}.pf-h .no{color:#ff7a7a}.pf-h .mut{color:var(--mut)}
+.pf-p,.pf-f{color:var(--mut)}.pf-f{color:var(--ink)}.pf-p i,.pf-f i{font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);display:inline-block;width:38px}
 </style>
 </head>
 <body>
@@ -78,6 +83,13 @@
   <div class="disc"><b>Как устроен зачёт.</b> Никаких таблиц среднего балла: <b>топ-2 каждой отборочной серии проходит в финал напрямую</b> (10 игроков × 9 игр на серию). Финал — <b>14 ноября, Кёльн</b>, 18 игр каждому, приз от 3000&nbsp;€; организаторы планируют финал на 50–60 человек. Освободившиеся места отдают третьим местам серий; очередь на странице — по допам.</div>
   <div class="nav" id="nav"></div>
   <div id="content"></div>
+  <!-- v2.4 (19.11.2026): «План и факт» - для истории, статический блок; цифры факта на 19.11.2026 -->
+  <div class="pf">
+    <div class="sec">История · план и факт</div>
+    <div class="note">Зафиксировано 19.11.2026, после финала. Что организаторы обещали в начале сезона и что получилось на деле - чтобы через год было видно, что не вышло и почему.</div>
+    <div class="pf-l"><div class="pf-r"><div class="pf-h"><b>Серий отбора</b><span class="ok">в плане</span></div><div class="pf-p"><i>план</i>25-30 (пост канала 05.02: план 30, создано 25)</div><div class="pf-f"><i>факт</i><b>28</b> в 22 городах 11 стран, февраль-октябрь</div></div><div class="pf-r"><div class="pf-h"><b>Слотов в финал</b><span class="ok">в плане</span></div><div class="pf-p"><i>план</i>топ-2 каждой серии</div><div class="pf-f"><i>факт</i><b>56</b> слотов, все разобраны</div></div><div class="pf-r"><div class="pf-h"><b>Финал: сколько человек</b><span class="no">меньше плана</span></div><div class="pf-p"><i>план</i>50-60</div><div class="pf-f"><i>факт</i><b>40</b>: 37 обладателей слотов и 3 замены из очереди третьих мест</div></div><div class="pf-r"><div class="pf-h"><b>Финал: формат</b><span class="ok">в плане</span></div><div class="pf-p"><i>план</i>18 игр</div><div class="pf-f"><i>факт</i>18 игр без финального стола, место по сумме</div></div><div class="pf-r"><div class="pf-h"><b>Финал: когда и где</b><span class="ok">в плане</span></div><div class="pf-p"><i>план</i>14-15.11, Кёльн</div><div class="pf-f"><i>факт</i>14-15.11, Кёльн</div></div><div class="pf-r"><div class="pf-h"><b>Призовой фонд</b><span class="ok">верхняя граница</span></div><div class="pf-p"><i>план</i>от 2500-3000 €</div><div class="pf-f"><i>факт</i><b>3000 €</b></div></div><div class="pf-r"><div class="pf-h"><b>Игроков в сериях</b><span class="mut">плана не было</span></div><div class="pf-p"><i>план</i>-</div><div class="pf-f"><i>факт</i><b>230</b> человек, 252 игры</div></div></div>
+    <div class="blk"><div class="b"><b style="color:var(--ink)">Что не получилось: финал на 50-60 человек.</b> Из 56 обладателей слотов в Кёльн приехали 37, ещё 19 не поехали (почему - у каждого своё, нам неизвестно). Очередь замен из третьих мест была длиной 23 человека, но из неё взяли только троих: финал ограничили 40 местами, и остальные слоты не заполняли. Серий при этом сыграли столько, сколько обещали, и призовой фонд вышел по верхней границе.</div></div>
+  </div>
   <div class="foot" id="foot"></div>
 </div>
 
