@@ -8,7 +8,7 @@
   "fee": "110.00",
   "stars": 3,
   "expected": 30,
-  "players_confirmed": 16,
+  "players_confirmed": 15,
   "rating_note": "ELO/тир — markery.online, последний снимок по игроку из прошлых турниров DOVOD (не у всех есть); место — рейтинг mafgame 2026",
   "ms_snap": "2026-11-18",
   "ms_ladder": {
@@ -20,7 +20,7 @@
    "D": 1125,
    "E": 925
   },
-  "roster_snap": "2026-11-14"
+  "roster_snap": "2026-11-19"
  },
  "players": [
   {
@@ -55,37 +55,6 @@
    "r_ms_tier": "A"
   },
   {
-   "nick": "Буржуй",
-   "uid": 287,
-   "real": "Bohdan",
-   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_287/3ddee352574f767cc2ee00cb7690d518c58915a2.png",
-   "status": "confirmed",
-   "club": "White Mafia Club Wroclaw",
-   "cc": "",
-   "country": "",
-   "flag": "",
-   "markery_id": 10054,
-   "r_elo_cur": 1218,
-   "r_tier": "A",
-   "r_elo_ly": null,
-   "mg_rank": 15,
-   "m_rank": null,
-   "player_number": 2,
-   "mk_match": "id",
-   "elo_snap": "2026-10-15",
-   "ms": {
-    "id": 63563,
-    "rating": 1940.6,
-    "rank": 44,
-    "games": 656,
-    "wr": 50.76,
-    "conf": "mafgame-id"
-   },
-   "r_ms_mmr": 1940.6,
-   "r_ms_rank": 44,
-   "r_ms_tier": "S"
-  },
-  {
    "nick": "Не Злая",
    "uid": 152,
    "real": "Karina Litvin",
@@ -101,7 +70,7 @@
    "r_elo_ly": null,
    "mg_rank": 29,
    "m_rank": null,
-   "player_number": 3,
+   "player_number": 2,
    "mk_match": "id",
    "elo_snap": "2026-09-06",
    "ms": {
@@ -132,7 +101,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 4,
+   "player_number": 3,
    "mk_match": null,
    "elo_snap": null,
    "ms": {
@@ -163,7 +132,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 5,
+   "player_number": 4,
    "mk_match": null,
    "elo_snap": null,
    "ms": {
@@ -194,7 +163,7 @@
    "r_elo_ly": null,
    "mg_rank": 5,
    "m_rank": null,
-   "player_number": 6,
+   "player_number": 5,
    "mk_match": "id",
    "elo_snap": "2026-10-15",
    "ms": {
@@ -225,7 +194,7 @@
    "r_elo_ly": null,
    "mg_rank": 76,
    "m_rank": null,
-   "player_number": 7,
+   "player_number": 6,
    "mk_match": "id",
    "elo_snap": "2026-06-27",
    "ms": {
@@ -256,7 +225,7 @@
    "r_elo_ly": null,
    "mg_rank": 101,
    "m_rank": null,
-   "player_number": 8,
+   "player_number": 7,
    "mk_match": "id",
    "elo_snap": "2026-06-27",
    "ms": {
@@ -287,7 +256,7 @@
    "r_elo_ly": null,
    "mg_rank": 119,
    "m_rank": null,
-   "player_number": 9,
+   "player_number": 8,
    "mk_match": "id",
    "elo_snap": "2026-06-27",
    "ms": {
@@ -318,7 +287,7 @@
    "r_elo_ly": null,
    "mg_rank": 114,
    "m_rank": null,
-   "player_number": 10,
+   "player_number": 9,
    "mk_match": "id",
    "elo_snap": "2026-10-15",
    "ms": {
@@ -349,7 +318,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 11,
+   "player_number": 10,
    "mk_match": null,
    "elo_snap": null,
    "ms": {
@@ -380,7 +349,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 12,
+   "player_number": 11,
    "mk_match": null,
    "elo_snap": null,
    "series": null,
@@ -415,7 +384,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 13,
+   "player_number": 12,
    "mk_match": "id",
    "elo_snap": "2026-09-06",
    "series": null,
@@ -450,7 +419,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 14,
+   "player_number": 13,
    "mk_match": "id",
    "elo_snap": "2026-10-26",
    "series": null,
@@ -485,7 +454,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 15,
+   "player_number": 14,
    "mk_match": "id",
    "elo_snap": "2026-06-25",
    "series": null,
@@ -520,7 +489,7 @@
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
-   "player_number": 16,
+   "player_number": 15,
    "mk_match": "id",
    "elo_snap": "2026-10-26",
    "series": null,

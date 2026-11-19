@@ -8,7 +8,7 @@
   "fee": "100.00",
   "stars": 3,
   "expected": 40,
-  "players_confirmed": 44,
+  "players_confirmed": 45,
   "rating_note": "Состав — подтверждённые на mafgame (снимок 12.11: 34 из 40). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку.",
   "ms_snap": "2026-11-18",
   "ms_ladder": {
@@ -21,7 +21,7 @@
    "E": 925
   },
   "elo_snap": "2026-11-17",
-  "roster_snap": "2026-11-18"
+  "roster_snap": "2026-11-19"
  },
  "players": [
   {
@@ -1584,6 +1584,34 @@
    "r_ms_rank": null,
    "r_ms_tier": "C",
    "added": "2026-11-18"
+  },
+  {
+   "nick": "Baudouin",
+   "uid": 3032,
+   "real": "Daryna Bachevska",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_3032/a546c380ba7760851bf38b43125fa83c46a6aadd.png",
+   "status": "confirmed",
+   "club": "Mafia-Club \"Domino\"",
+   "cc": null,
+   "country": null,
+   "flag": null,
+   "markery_id": null,
+   "r_elo_cur": null,
+   "r_tier": null,
+   "r_elo_ly": null,
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": 45,
+   "mk_match": null,
+   "elo_snap": null,
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": null,
+   "r_ms_mmr": null,
+   "r_ms_rank": null,
+   "r_ms_tier": null,
+   "added": "2026-11-19"
   }
  ]
 }
