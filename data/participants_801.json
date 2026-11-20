@@ -21,7 +21,7 @@
    "E": 925
   },
   "elo_snap": "2026-11-20",
-  "roster_snap": "2026-11-17"
+  "roster_snap": "2026-11-20"
  },
  "players": [
   {
@@ -1205,6 +1205,34 @@
    "added": "2026-11-17",
    "r_rank": 122,
    "mk_last": "2026-11-14"
+  },
+  {
+   "nick": "Pliskin",
+   "uid": 1181,
+   "real": "Ivan S.",
+   "av": "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_1181/1de6b109f6f0513104e999e39b26372050fffd3b.png",
+   "status": "applied",
+   "club": "UMC",
+   "cc": null,
+   "country": null,
+   "flag": null,
+   "markery_id": null,
+   "r_elo_cur": null,
+   "r_tier": null,
+   "r_elo_ly": null,
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": null,
+   "mk_match": null,
+   "elo_snap": null,
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": null,
+   "r_ms_mmr": 1354.9,
+   "r_ms_rank": null,
+   "r_ms_tier": "C",
+   "added": "2026-11-20"
   }
  ],
  "stats": {
