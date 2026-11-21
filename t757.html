@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t757.html · v1.0 · 2026-11-10 · финал MCL Europe 2026 (mafgame 757, Прага 21–22.11): 10 человек, 16 игр, один стол — укороченная страница на движке t645 v2.1 (без пересечений, силы столов, рассадки по соперникам, судей); тема MCL
+<!-- DOVOD · t757.html · v1.1 · 2026-11-21 · рассадка во вкладке «Игры» до результатов · v1.0 · 2026-11-10 · финал MCL Europe 2026 (mafgame 757, Прага 21–22.11): 10 человек, 16 игр, один стол — укороченная страница на движке t645 v2.1 (без пересечений, силы столов, рассадки по соперникам, судей); тема MCL
      Данные: data/*_757* (participants, tournament, avatars; игры — live с mafgame в дни турнира через live.js). Эфир — watch757.html. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -933,7 +933,7 @@ function applyLocks(){ /* 26.10: до рассадки/старта раздел
   const g=D.realGames||[];
   const seat=g.some(x=>(x.tables||[]).some(t=>(t.seats||[]).length));
   const res=g.some(x=>(x.tables||[]).some(t=>t.winner&&t.winner!=='unknown'));
-  const NEED_SEAT=['together','seating','strength','luck','stages','games','roles','judges'],NEED_RES=['games','roles'];
+  const NEED_SEAT=['together','seating','strength','luck','stages','games','roles','judges'],NEED_RES=['roles'];
   SECTIONS.forEach(s=>{if(s.perm)return;delete s.locked;delete s.lockTag;
     if(!seat&&NEED_SEAT.includes(s.id)){s.locked=1;s.lockTag='после рассадки';}
     else if(!res&&NEED_RES.includes(s.id)){s.locked=1;s.lockTag='после старта';}});
@@ -1082,7 +1082,7 @@ const RENDER={
       <div class="note" id="stNote"></div></div>`;
   },
   games(){
-    if(!D.gp)return statsEmpty('&#9654; Игры');
+    if(!D.gp&&!(D.seatlist||[]).length)return statsEmpty('&#9654; Игры');
     return `<div class="view"><div class="secttl">&#9654; Игры по столам</div><div id="gmTop"></div><div id="gmArea"></div></div>`;
   },
   roles(){
@@ -1106,7 +1106,7 @@ function plink(name){return `<span class="plink" data-p="${esc(name)}" onclick="
 function goPlayer(name){curPlayer=name;show('my');}
 function fullToggle(){return '<span class="lbl" style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim)">Таблица:</span><span class="seg"><button class="'+(statFull?'':'on')+'" onclick="setFull(0)">Компактно</button><button class="'+(statFull?'on':'')+'" onclick="setFull(1)">Подробно</button></span>';}
 function setFull(v){statFull=!!v;show(cur);}
-function statsEmpty(t){return `<div class="view"><div class="secttl">${t}</div><div class="panel"><div class="stub"><div class="si">&#9203;</div><h3>Результатов пока нет</h3><p>Появится после первого сыгранного стола (${CFG.startShort}). Чтобы проверить сейчас — включите режим <b>Демо</b> на вкладке «Обзор»: все игры заполнятся случайными результатами (полный турнир: квалификация → финал).</p><button class="btn" onclick="show('overview')">← К обзору</button></div></div></div>`;}
+function statsEmpty(t){return `<div class="view"><div class="secttl">${t}</div><div class="panel"><div class="stub"><div class="si">&#9203;</div><h3>Результатов пока нет</h3><p>${(D.seatlist||[]).length?'Рассадка уже есть - смотрите <a class="lnk" style="margin:0" href="#games" onclick="show(\'games\');return false">«Игры»</a>. ':''}Появится после первого сыгранного стола (${CFG.startShort}). Чтобы проверить сейчас — включите режим <b>Демо</b> на вкладке «Обзор»: все игры заполнятся случайными результатами (полный турнир: квалификация → финал).</p><button class="btn" onclick="show('overview')">← К обзору</button></div></div></div>`;}
 function demoPanel(){return `<div class="panel"><div class="demobar">
     <span style="font-weight:800;font-size:12.5px;color:var(--gold-hi)">Данные:</span>
     <span class="seg"><button class="${D.demo?'':'on'}" onclick="setDemo(false)">Онлайн</button><button class="${D.demo?'on':''}" onclick="setDemo(true)">Демо</button></span>
@@ -1165,6 +1165,7 @@ function makeDemo(){
 function computeStats(){
   D.gplist=(D.games||[]).filter(g=>g.tables.some(t=>t.winner!=='unknown')); /* v13.6: live-частично — считаем стол сразу после ввода результата, не ждём всю игру (aggregateN пропускает unknown сам) */
   D.gp=D.gplist.length;
+D.seatlist=(D.games||[]).filter(g=>g.tables.some(t=>(t.seats||[]).some(x=>x&&x.name))); /* v1.1 (21.11): рассадка видна до результатов */
   const agg=aggregateN(D.gplist);
   D.rows=agg.rows;D.STAT={};agg.rows.forEach(r=>D.STAT[r.name]=r);
   D.redWins=agg.red;D.blackWins=agg.black;D.aps=agg.apsSum;D.tbls=agg.tables;
@@ -1222,7 +1223,7 @@ function paintStages(){
 /* ── Игры (по раундам) ── */
 function gmCur(){return Math.max(0,D.gplist.length-1);}
 function gameTableHtml(t,gnum,stage){
-  const wl=t.winner==='red_win'?'<span class="gwin gwin-red">победа красных</span>':(t.winner==='black_win'?'<span class="gwin gwin-blk">победа чёрных</span>':'<span class="gwin" style="color:var(--dim)">ещё играет</span>');
+  const wl=t.winner==='red_win'?'<span class="gwin gwin-red">победа красных</span>':(t.winner==='black_win'?'<span class="gwin gwin-blk">победа чёрных</span>':'<span class="gwin" style="color:var(--dim)">'+((typeof gnum==='number'&&gnum>(D.gp||0)+1)?'впереди':((D.gp||0)?'идёт':'первая игра'))+'</span>');
   const wcls=t.winner==='red_win'?' win-red':(t.winner==='black_win'?' win-blk':'');
   const aps=t.seats.filter(x=>x&&x.name).map(x=>x.aps||0);const mx=aps.length?Math.max(...aps):0,mn=aps.length?Math.min(...aps):0;
   let cells='';
@@ -1232,7 +1233,7 @@ function gameTableHtml(t,gnum,stage){
       `<img class="sav" src="${esc(avOf(st.name)||'')}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'">`+
       `<div class="sname">${esc(st.name)}</div>`+
       `<div class="grole">${st.role?`<span class="rp rp-${st.role}">${RSHORT[st.role]}</span>`:''}</div>`+
-      `<div class="gdop">доп <b class="gdopv ${dc}">${fmt(ap)}</b></div></div>`;});
+      (t.winner&&t.winner!=='unknown'?`<div class="gdop">доп <b class="gdopv ${dc}">${fmt(ap)}</b></div>`:'')+`</div>`;});
   const su=(typeof gnum==='number')?streamOf(gnum,t.table_num,stage):null;
   const sb=su?`<a class="strm-sm" href="${esc(su)}" target="_blank" rel="noopener">&#9654; стрим</a>`:'';
   const cb=(!stage||!/Полуфинал|Финал/i.test(String(stage)))?catBadge(gnum,t.table_num,false):'';
@@ -1244,7 +1245,7 @@ function gameTableHtml(t,gnum,stage){
 function initGames(){if(jumpGame!=null){gmRound=jumpGame;jumpGame=null;}else{gmRound=(viewMode==='current')?gmCur():0;}if(gmRound<0)gmRound=0;paintGames();highlightJump();}
 function paintGames(){
   const top=document.getElementById('gmTop'),area=document.getElementById('gmArea');if(!top)return;
-  const list=D.gplist;if(gmRound>=list.length)gmRound=list.length-1;
+  const list=(D.seatlist&&D.seatlist.length>D.gplist.length)?D.seatlist:D.gplist;if(gmRound>=list.length)gmRound=list.length-1;
   const grp=[];let qi=0;list.forEach((g,i)=>{const stg=g.stage||'Квалификация';let lab;if(stg==='Квалификация'){qi++;lab=qi<=gamesDay1()?'День 1':'День 2';}else if(stg==='Полуфинал')lab='Полуфинал';else lab='Финал';if(!grp.length||grp[grp.length-1].lab!==lab)grp.push({lab,items:[]});grp[grp.length-1].items.push(i);});
   top.innerHTML='<div class="ggroups">'+grp.map(gr=>`<div class="rgroup"><div class="rglab">${gr.lab}</div><div class="rounds">`+gr.items.map(i=>`<button class="rbtn ${i===gmRound?'active':''}${i===gmCur()?' cur':''}" data-i="${i}">${i+1}</button>`).join('')+'</div></div>').join('')+'</div>';
   top.querySelectorAll('.rbtn').forEach(b=>b.onclick=()=>{gmRound=+b.dataset.i;paintGames();});
