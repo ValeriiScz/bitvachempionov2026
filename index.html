@@ -554,6 +554,10 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
 .ytl .yb a{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;font-weight:700;font-size:13px;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.28)}
 .ytl .yb a.yr{background:#e62117;border-color:#e62117}
 .ytl .yb a:hover{border-color:#ff4a3d}
+.ytl .yl{font-size:14.5px;line-height:1.5;color:#fff;font-weight:600}
+.ytl .yf{font-size:13px;line-height:1.5;color:#ffd9d6;background:rgba(230,33,23,.12);border-left:3px solid #e62117;padding:8px 10px}
+.ytl .yp{font-size:12.5px;line-height:1.6;color:rgba(255,255,255,.8)}
+.ytl .yb a.yg{border-color:rgba(245,255,53,.55);color:#f5ff35}
 @media (max-width:760px){.ytl{grid-template-columns:1fr}.ytl .yt{font-size:18px}}
 </style>
 <script>
@@ -571,9 +575,12 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
     var meta2=[t.format,t.prize?('призовой фонд '+t.prize):''].filter(Boolean).map(esc).join(' · ');
     box.innerHTML='<div class="yv"><iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&playsinline=1&rel=0" title="'+esc(t.name)+' - прямой эфир" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div>'+
       '<div class="yi"><div class="yh"><i class="yd"></i>Прямой эфир</div><div class="yt">'+esc(t.name)+'</div>'+
-      (meta?'<div class="ym">'+meta+'</div>':'')+(meta2?'<div class="ym">'+meta2+'</div>':'')+
+      (meta?'<div class="ym">'+meta+'</div>':'')+(meta2&&!t.streamPromo?'<div class="ym">'+meta2+'</div>':'')+
+      (t.streamPromo?(function(P){return (P.lead?'<div class="yl">'+esc(P.lead)+'</div>':'')+(P.crew?'<div class="ym"><b>'+esc(P.crew)+'</b></div>':'')+
+        (P.fun?'<div class="yf">🎁 '+esc(P.fun)+'</div>':'')+(P.players?'<div class="yp">'+esc(P.players)+'</div>':'');})(t.streamPromo):'')+
       '<div class="yb"><a class="yr" href="'+esc(url)+'" target="_blank" rel="noopener">▶ Смотреть на YouTube</a>'+
-      (t.page?'<a href="'+esc(t.page)+'">Таблица live →</a>':'')+(t.watch?'<a href="'+esc(t.watch)+'">Смотровая</a>':'')+'</div></div>';
+      (t.page?'<a href="'+esc(t.page)+'">Таблица live →</a>':'')+(t.watch?'<a href="'+esc(t.watch)+'">Смотровая</a>':'')+
+      ((t.streamPromo&&t.streamPromo.links)||[]).map(function(l){return '<a class="yg" href="'+esc(l[1])+'" target="_blank" rel="noopener">'+esc(l[0])+'</a>';}).join('')+'</div></div>';
     box.hidden=false;
   }catch(e){}
 })();

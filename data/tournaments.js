@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.9 | 2026-11-21 | 757: streamPromo - текст к эфиру на главной (финал, судья, студия, лоты и квиз, финалисты, ссылки на донат)
 // MafgameStat | tournaments.js | v4.8 | 2026-11-21 | 757 MCL финал: stream/streamUrl (YouTube 2axF6I6LQKs), liveFrom/liveTo 21-22.11
 // MafgameStat | tournaments.js | v4.20 | 2026-11-16 | закрыты 664 GMC (чемпион Licht) и 725 Круг избранных (чемпион Магнат) — таблицы 1:1 с mafgame; −644 Lodz Mafia Open (отменён; данные в data/ сохранены)
 // MafgameStat | tournaments.js | v4.19 | 2026-11-13 | +725 Круг избранных (Кишинёв, 14–15.11, 2★): карточка, состав, страница t725 и смотровая watch725 (рассадка с mafgame)
@@ -108,6 +109,7 @@ window.TOURNAMENTS_DB = {
     "streamUrl": "https://www.youtube.com/live/2axF6I6LQKs",
     "liveFrom": "2026-11-21",
     "liveTo": "2026-11-22",
+    "streamPromo": {"lead": "Главный финал сезона MCL Europe: 10 лучших игроков трёх регионов, 16 игр за 2 дня, призовой фонд 2000 €. Старт в 10:30 CET.", "crew": "Судья - ГС YeS · студия аналитики - Буржуй", "fun": "На стриме розыгрыши и квиз. Поддержи своего финалиста: донат за его лот с ником игрока в сообщении - кто задонатит за игрока больше всех, забирает его лот. Автору самого крупного доната финала - фирменный магнит MAFS от клуба MafiaCL.", "players": "KEX 🇩🇪 · Грешник 🇪🇸 · LogisticPro 🇵🇱 · qUAest0r 🇨🇿 · DOVOD 🇨🇿 · TOPS 🇨🇿 · Монтгомери 🇨🇾 · Алиса 🇮🇱 · Kiwi 🇮🇱 · Айвенго 🇮🇱", "links": [["Донат и лоты", "https://destream.net/live/Mafs/donate"], ["Буст в Telegram", "https://t.me/boost/mafses"]], "src": "FACT: пост организаторов MCL, 21.11.2026"},
     "name": "MCL Europe 2026 — финал",
     "posterTitle": "MCL Europe|Final",
     "dates": "21–22 ноября 2026",
