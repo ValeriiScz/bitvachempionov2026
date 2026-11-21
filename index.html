@@ -274,6 +274,8 @@ body{
 
     <div class="tiles">
 
+      <section class="ytl" id="ytLive" hidden aria-label="Прямой эфир"></section>
+
       <section class="lt" id="liveTile" hidden aria-label="Сейчас на турнирах"></section>
 
 
@@ -535,6 +537,45 @@ if(tc) tc.innerHTML='<b>'+fT+'</b> '+pl(fT,'турнир','турнира','ту
       return '<a class="tb" href="'+(t.watch||t.page)+'"><span class="play">▶</span><span class="tn">Стол '+(R[tb.table_num]||tb.table_num)+'</span>'+(avg?'<span class="te">Ø '+avg+'</span>':'')+'<div class="tp">'+top+'</div></a>';}).join('');
     pv.innerHTML='<div class="pvh">'+(live?'Сейчас':'Первым')+': '+esc(g.stage||'Игра')+' · игра '+q+' · кто за столами</div><div class="tbs">'+cards+'</div>';
   }).catch(function(){});
+})();
+</script>
+<style>
+/* 21.11.2026: блок прямого эфира (YouTube) на всю ширину сетки - турнир с полем stream в окне liveFrom..liveTo */
+.ytl{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0;border:1px solid rgba(230,33,23,.7);background:#0b0b0d;overflow:hidden}
+.ytl .yv{position:relative;aspect-ratio:16/9;background:#000}
+.ytl .yv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ytl .yi{padding:18px 20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.ytl .yh{display:flex;align-items:center;gap:9px;font:700 11px/1 var(--mono,monospace);letter-spacing:.2em;text-transform:uppercase;color:#ff4a3d}
+.ytl .yd{width:10px;height:10px;border-radius:50%;background:#e62117;box-shadow:0 0 0 0 rgba(230,33,23,.7);animation:ytp 1.4s infinite}
+@keyframes ytp{0%{box-shadow:0 0 0 0 rgba(230,33,23,.7);opacity:1}70%{box-shadow:0 0 0 9px rgba(230,33,23,0);opacity:.55}100%{box-shadow:0 0 0 0 rgba(230,33,23,0);opacity:1}}
+.ytl .yt{font-weight:800;font-size:20px;line-height:1.2;color:#fff}
+.ytl .ym{font-size:13px;color:rgba(255,255,255,.72);line-height:1.5}
+.ytl .yb{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.ytl .yb a{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;font-weight:700;font-size:13px;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.28)}
+.ytl .yb a.yr{background:#e62117;border-color:#e62117}
+.ytl .yb a:hover{border-color:#ff4a3d}
+@media (max-width:760px){.ytl{grid-template-columns:1fr}.ytl .yt{font-size:18px}}
+</style>
+<script>
+/* 21.11.2026: прямой эфир на главной. Берём из TOURNAMENTS_DB турнир с полем stream, статус не finished,
+   сегодня (Europe/Prague) в окне liveFrom..liveTo. Рисуем плеер + кнопки в #ytLive. */
+(function(){
+  try{
+    var box=document.getElementById('ytLive'); var DB=window.TOURNAMENTS_DB; if(!box||!DB||!DB.tournaments) return;
+    var today=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Prague',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    var t=DB.tournaments.find(function(x){return x.stream&&x.status!=='finished'&&x.liveFrom&&x.liveTo&&today>=x.liveFrom&&today<=x.liveTo;});
+    if(!t) return;
+    var esc=function(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+    var id=encodeURIComponent(t.stream), url=t.streamUrl||('https://www.youtube.com/watch?v='+id);
+    var meta=[t.dates,t.city].filter(Boolean).map(esc).join(' · ');
+    var meta2=[t.format,t.prize?('призовой фонд '+t.prize):''].filter(Boolean).map(esc).join(' · ');
+    box.innerHTML='<div class="yv"><iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&playsinline=1&rel=0" title="'+esc(t.name)+' - прямой эфир" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div>'+
+      '<div class="yi"><div class="yh"><i class="yd"></i>Прямой эфир</div><div class="yt">'+esc(t.name)+'</div>'+
+      (meta?'<div class="ym">'+meta+'</div>':'')+(meta2?'<div class="ym">'+meta2+'</div>':'')+
+      '<div class="yb"><a class="yr" href="'+esc(url)+'" target="_blank" rel="noopener">▶ Смотреть на YouTube</a>'+
+      (t.page?'<a href="'+esc(t.page)+'">Таблица live →</a>':'')+(t.watch?'<a href="'+esc(t.watch)+'">Смотровая</a>':'')+'</div></div>';
+    box.hidden=false;
+  }catch(e){}
 })();
 </script>
 <script src="/assets/share.js?v=4" defer></script>
