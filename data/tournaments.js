@@ -225,9 +225,9 @@ window.TOURNAMENTS_DB = {
     "eloAvg": 1084,
     "eloN": 44,
     "eloTotal": 45,
-    "mmrAvg": 1539,
-    "mmrN": 44,
-    "mmrTiers": {"L": 4, "S": 7, "A": 6, "B": 6, "C": 9, "D": 9, "E": 3, "-": 1},
+    "mmrAvg": 1534,
+    "mmrN": 45,
+    "mmrTiers": {"L": 4, "S": 7, "A": 6, "B": 6, "C": 9, "D": 10, "E": 3, "-": 1},
     "mmrTop": [["Lюц", 2180, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1050/05d587e41edd71e3a3dc89f2b04b75c964af8cfe.png"], ["KEX", 2079, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_44/a6bfae05ca17bcfaa2961020a9b44f5860c2f4fe.png"], ["Gangster", 2054, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2547/eb53900c47fc03a2b681bbcbe62f994021e9f4d8.png"], ["Nick", 1952, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1037/496a221dccca668d60768f4cedbd464430d6918d.png"], ["Буржуй", 1941, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_287/3ddee352574f767cc2ee00cb7690d518c58915a2.png"], ["Саботаж", 1915, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_68/e5f69d0c89c3ecec9dee013970b56f8219c70d70.png"], ["RAMZES", 1885, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_499/a4d55d9d5fa815a6c00f4e29d18ab1fba282f6fe.png"], ["ParadoXx", 1861, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png"], ["Tripok", 1850, "S", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_263/4281f453dafa967aa19b4f5e30653e3719a0d317.png"], ["Korolevich", 1832, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_461/58bb4e89d26946125a2acc449c729d44547c1485.png"]],
     "organizer": "Adrenaline · главный судья YeS",
     "page": "participants.html?t=726",
@@ -248,7 +248,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-12-05",
     "accent": "#2bb39a",
     "accent2": "#0c5c56",
-    "strength": {"lvl": "элитный", "rank": 4, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 24.6, "eq": 19.6, "pts": 32, "cplus": 32, "proj": true, "reg": 45, "exp": 50, "places": 10}
+    "strength": {"lvl": "элитный", "rank": 4, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 24.7, "eq": 19.6, "pts": 32, "cplus": 32, "proj": true, "reg": 46, "exp": 50, "places": 10}
   },
   {
     "id": "725",

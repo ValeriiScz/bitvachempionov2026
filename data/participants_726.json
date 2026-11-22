@@ -8,7 +8,7 @@
   "fee": "100.00",
   "stars": 3,
   "expected": 40,
-  "players_confirmed": 45,
+  "players_confirmed": 46,
   "rating_note": "Состав — подтверждённые на mafgame (снимок 12.11: 34 из 40). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку.",
   "ms_snap": "2026-11-18",
   "ms_ladder": {
@@ -21,7 +21,7 @@
    "E": 925
   },
   "elo_snap": "2026-11-20",
-  "roster_snap": "2026-11-19"
+  "roster_snap": "2026-11-22"
  },
  "players": [
   {
@@ -1624,6 +1624,34 @@
    "added": "2026-11-19",
    "r_rank": 2376,
    "mk_last": "2026-08-30"
+  },
+  {
+   "nick": "Kokocik",
+   "uid": 833,
+   "real": "Iryna",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_833/49611ec38d274c9951c4652dc75c69f4bc4b9461.png",
+   "status": "confirmed",
+   "club": "DarKStadt",
+   "cc": "DE",
+   "country": "Германия",
+   "flag": "🇩🇪",
+   "markery_id": 10048,
+   "r_elo_cur": 1002,
+   "r_tier": "C",
+   "r_elo_ly": null,
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": 46,
+   "mk_match": "id",
+   "elo_snap": "2026-09-06",
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": null,
+   "r_ms_mmr": 1299.2,
+   "r_ms_rank": 628,
+   "r_ms_tier": "D",
+   "added": "2026-11-22"
   }
  ]
 }
