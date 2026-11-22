@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-11-21",
+ "snapshot": "2026-11-22",
  "parents": [
   {
    "file": "2025_478.json",
@@ -229,7 +229,7 @@
    "start_date": "2026-12-12",
    "stars": 2,
    "series": 12,
-   "played": 9,
+   "played": 10,
    "final": true
   }
  ],
