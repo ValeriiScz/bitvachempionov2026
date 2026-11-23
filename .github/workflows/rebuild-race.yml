@@ -53,7 +53,7 @@ jobs:
           if [ -z "$RACE_PASS" ]; then echo "::error::секрет RACE_PASS не задан — Settings → Secrets and variables → Actions → New repository secret (Name RACE_PASS)"; exit 1; fi
           echo "секрет на месте"
       - name: Зависимости
-        run: pip install --quiet numpy cryptography
+        run: pip install --quiet numpy scipy cryptography   # scipy - точный перебор «Финишной прямой» (finish.py, 23.11.2026)
       - name: Режим
         id: mode
         run: |

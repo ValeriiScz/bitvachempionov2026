@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v3.9 · 16.11.2026 · «Сценарии»: крупно — планка с поправкой (как на «Планке»), сырая — в скобках; раньше крупно стояла сырая, и цифры вкладок не сходились · v3.8 · 16.11.2026 · поправка планки — к приросту (×1.18 к тому, что добавится к нынешнему 12-му), а не ×1.07 ко всей сумме · v3.7 · 16.11.2026 · генератор: один турнир в день и для финалов серий (Benelux 12.12 = Кипр-зима — или туда, или туда); «Сценарии» — текст без устаревшего GMC · v3.6 · 21.10.2026 · слова: «старт» → «турнир», «пузырь» → «гонка» (Валерий) · v3.5 · 21.10.2026 · «Сценарии»: в каждой карточке «X мест заняты» и «за оставшиеся Y — Z игроков», черта между проходящими и догоняющими, у борющихся — шанс «≈ k из 10» и полоска; в заголовке карточки — короткая сводка · v3.4 · 21.10.2026 · вкладка «Сценарии» (12 «что если» из whatif.py: планка, дюжина, кто двигается — словами); на «Планке» — поправка ×1.07 с объяснением курсивом и сырые цифры · v3.3 · 20.10.2026 · «Откуда ≈Σ»: обычные турниры + финалы серийников чистыми; колонка «финалы» в генераторе; описание финалов и малых полей в модели · v3.2 · 20.10.2026 · гейт: пароль без учёта регистра; ошибка страницы после верного пароля больше не выдаётся за «пароль не подошёл» (показывает причину, сбрасывает выбранного игрока) · v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
+<!-- race.html v4.0 · 23.11.2026 · «Финишная прямая» - режим по умолчанию (RACE.finish из finish.py): кто прошёл математически, шансы, что кому нужно, при каком раскладе выпадет; прежние вкладки - «Гонка в течение года» (архив) · v3.9 · 16.11.2026 · «Сценарии»: крупно — планка с поправкой (как на «Планке»), сырая — в скобках; раньше крупно стояла сырая, и цифры вкладок не сходились · v3.8 · 16.11.2026 · поправка планки — к приросту (×1.18 к тому, что добавится к нынешнему 12-му), а не ×1.07 ко всей сумме · v3.7 · 16.11.2026 · генератор: один турнир в день и для финалов серий (Benelux 12.12 = Кипр-зима — или туда, или туда); «Сценарии» — текст без устаревшего GMC · v3.6 · 21.10.2026 · слова: «старт» → «турнир», «пузырь» → «гонка» (Валерий) · v3.5 · 21.10.2026 · «Сценарии»: в каждой карточке «X мест заняты» и «за оставшиеся Y — Z игроков», черта между проходящими и догоняющими, у борющихся — шанс «≈ k из 10» и полоска; в заголовке карточки — короткая сводка · v3.4 · 21.10.2026 · вкладка «Сценарии» (12 «что если» из whatif.py: планка, дюжина, кто двигается — словами); на «Планке» — поправка ×1.07 с объяснением курсивом и сырые цифры · v3.3 · 20.10.2026 · «Откуда ≈Σ»: обычные турниры + финалы серийников чистыми; колонка «финалы» в генераторе; описание финалов и малых полей в модели · v3.2 · 20.10.2026 · гейт: пароль без учёта регистра; ошибка страницы после верного пароля больше не выдаётся за «пароль не подошёл» (показывает причину, сбрасывает выбранного игрока) · v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
 <meta name="description" content="Рейтинг MAFGAME 2026: сколько и каких турниров нужно до золотой дюжины, пул баллов по выходным, модель расчёта, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -331,6 +331,63 @@ ul.wml{margin:6px 0 0;padding-left:18px;color:#c3cad6;font-size:13px} ul.wml li{
 .wcut{align-self:stretch;display:inline-flex;align-items:center;padding:0 6px;border-left:2px solid #e7a0a0;font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#e7a0a0}
 .wi .wb p.wnote{font-size:12px;color:#7e8595;font-style:italic;margin-top:2px}
 .wbar{display:block;height:3px;background:rgba(255,255,255,.08);margin-top:3px} .wbar i{display:block;height:100%;background:var(--ye)} .wchip.w-below .wbar i{background:#a7aebb}
+
+/* ===== v4.0 · Финишная прямая ===== */
+.msw{display:flex;gap:8px;margin:22px 0 0}
+.shell.locked .msw,.shell.locked #finView{display:none}
+.msw button{flex:1 1 0;cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#aab1be;padding:13px 12px;border-radius:2px;font:700 10.5px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-align:center}
+.msw button small{display:block;margin-top:4px;font:600 9px/1.3 var(--mono);letter-spacing:.08em;color:#6c7382;text-transform:none}
+.msw button.on{border-color:var(--ye);background:rgba(245,255,53,.1);color:var(--ye)}
+.shell.mode-fin .tabs,.shell.mode-fin .pane,.shell.mode-fin .hd .sub,.shell.mode-fin .hd .kpis,.shell.mode-fin .nav .pri{display:none!important}
+.shell.mode-year #finView{display:none}
+#finView{margin:26px 0 0}
+.fk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.fk div{border:1px solid var(--line);padding:14px 13px;background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(0,0,0,.3))}
+.fk b{display:block;font:900 clamp(20px,5vw,30px)/1 var(--disp);letter-spacing:-.03em;color:var(--ye)}
+.fk b small{font:700 12px/1 var(--mono);color:#8a91a0;margin-left:6px;letter-spacing:0}
+.fk span{display:block;margin-top:7px;font:700 9px/1.45 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#8a91a0}
+.fans{margin:14px 0 0;border:1px solid rgba(245,255,53,.35);background:rgba(245,255,53,.05);padding:14px 16px;font-size:14.5px;line-height:1.55;color:#dfe4ee}
+.fans b{color:var(--ye)}
+.fh{display:flex;align-items:center;gap:12px;margin:34px 0 6px;font:700 10px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ye)}
+.fh s{flex:1;height:1px;background:var(--line);text-decoration:none}
+.fhn{margin:0 0 12px;color:#8a91a0;font-size:13px;line-height:1.5}
+.fg{margin:16px 0 6px;display:flex;align-items:baseline;gap:10px;font:700 11px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.fg i{font-style:normal;width:10px;height:10px;border-radius:50%;flex:none;background:var(--gc)}
+.fg small{font:600 10.5px/1.4 var(--mono);letter-spacing:.02em;text-transform:none;color:#7e8595}
+.fr{border:1px solid var(--line);border-left:3px solid var(--gc);margin:0 0 6px;background:rgba(255,255,255,.025)}
+.fr.me{background:rgba(245,255,53,.06)}
+.frh{display:grid;grid-template-columns:26px minmax(0,1.1fr) 46px minmax(90px,2fr) 54px 16px;gap:8px;align-items:center;padding:10px 10px;cursor:pointer}
+.frh .rk{font:700 12px/1 var(--mono);color:#7e8595}
+.frh .nk{font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.frh .nk small{display:block;font:600 10px/1.3 var(--mono);color:#7e8595;margin-top:3px;letter-spacing:.02em}
+.frh .sg{font:800 15px/1 var(--mono);text-align:right}
+.frh .ch{font:800 14px/1 var(--mono);text-align:right;color:var(--gc)}
+.frh .ar{color:#5f6675;font-size:11px;transition:.15s}.fr.open .frh .ar{transform:rotate(90deg)}
+.fb{position:relative;height:18px}
+.fb .ax{position:absolute;left:0;right:0;top:8px;height:2px;background:rgba(255,255,255,.08)}
+.fb .pk{position:absolute;top:0;bottom:0;background:rgba(245,255,53,.16);border-left:1px solid rgba(245,255,53,.5);border-right:1px solid rgba(245,255,53,.5)}
+.fb .rg{position:absolute;top:7px;height:4px;background:var(--gc);opacity:.55;border-radius:2px}
+.fb .dt{position:absolute;top:4px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--gc);border:2px solid #05060a}
+.frd{display:none;padding:4px 12px 14px 12px;border-top:1px dashed var(--line);font-size:13.5px;line-height:1.55;color:#c8cfdb}
+.fr.open .frd{display:block}
+.frd h4{margin:14px 0 6px;font:700 9.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#8a91a0}
+.frd p{margin:6px 0}.frd b{color:var(--ink)}
+.frd ol{margin:4px 0 0;padding-left:20px}.frd li{margin:3px 0}
+.cnd{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.cnd div{border:1px solid var(--line);padding:9px 8px;text-align:center}
+.cnd b{display:block;font:800 17px/1 var(--mono)}.cnd span{display:block;margin-top:5px;font:600 9.5px/1.35 var(--mono);color:#8a91a0}
+.tg{display:inline-block;padding:1px 6px;border:1px solid rgba(255,255,255,.18);font:600 10px/1.5 var(--mono);color:#aab1be;margin-left:6px;white-space:nowrap}
+.fdt{margin:8px 0 0}.fdt summary{cursor:pointer;color:var(--cy);font:700 10.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase}.fdt ol{color:#aab1be}
+.fout{margin:8px 0 0;color:#6c7382;font-size:12.5px;line-height:1.6}
+.wkd{margin:14px 0 6px;font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cy)}
+.fev{border:1px solid var(--line);padding:11px 12px;margin:0 0 6px;background:rgba(255,255,255,.025)}
+.fev .t{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;font-weight:700;font-size:14.5px}
+.fev .t i{font-style:normal;color:var(--ye);font-size:12px;letter-spacing:.05em}.fev .t small{font:600 10.5px/1.3 var(--mono);color:#7e8595}
+.fev .g{margin:7px 0 0;display:flex;flex-wrap:wrap;gap:4px}
+.fev .g span{padding:2px 6px;border:1px solid rgba(255,255,255,.12);font:600 10.5px/1.4 var(--mono);color:#aab1be}.fev .g span b{color:var(--ink)}
+.fev .w{margin:7px 0 0;font-size:12.5px;color:#8a91a0;line-height:1.5}.fev .w b{color:#c8cfdb;font-weight:600}
+.fhow{color:#aab1be;font-size:13.5px;line-height:1.6}.fhow ol{padding-left:20px;margin:6px 0}.fhow li{margin:5px 0}.fhow b{color:var(--ink)}
+@media (max-width:720px){.fk{grid-template-columns:repeat(2,minmax(0,1fr))}.frh{grid-template-columns:22px minmax(0,1fr) 40px 50px 14px}.frh .fb{display:none}.cnd{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <style id="dvcrumbcss">.dv-crumb{position:relative;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;max-width:1080px;margin:0 auto;padding:12px 15px 0;font:700 10px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#79808f}.dv-crumb a{color:#c3cad6;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.14)}.dv-crumb a:hover{color:#f5ff35;border-color:#f5ff35}.dv-crumb i{font-style:normal;opacity:.5}
 /* ── закрытый раздел: гейт ── */
@@ -384,6 +441,12 @@ ul.wml{margin:6px 0 0;padding-left:18px;color:#c3cad6;font-size:13px} ul.wml li{
     <div class="gerr" id="gerr">Пароль не подошёл.</div>
     <div class="gnote">Данные гонки лежат на сервере зашифрованными и расшифровываются в вашем браузере. Пароль никуда не отправляется. Пароль — у автора: <a href="https://t.me/SivValerii" target="_blank" rel="noopener" style="color:#c3cad6">@SivValerii</a>.</div>
   </div>
+
+  <div class="msw" id="msw" hidden>
+    <button data-m="fin" class="on">Финишная прямая<small>кто проходит и что кому нужно</small></button>
+    <button data-m="year">Гонка в течение года<small>архив: таблица, модель, сценарии, калькулятор</small></button>
+  </div>
+  <div id="finView" hidden></div>
 
   <div class="tabs" id="tabs" role="tablist">
     <button class="tab on" data-t="me"><i>01</i>Я в гонке</button>
@@ -567,6 +630,113 @@ function initRace(){
   document.querySelector('.nav .pri').addEventListener('click',e=>{e.preventDefault();showTab('calc');$('#pane-calc').scrollIntoView({behavior:'smooth'})});
   window.addEventListener('hashchange',()=>showTab(location.hash.slice(1),false));
 
+
+  // ---------- v4.0 · режимы: «Финишная прямая» (по умолчанию) и «Гонка в течение года» (архив) ----------
+  const FINISH=R.finish, shellEl=document.getElementById('shell');
+  function setMode(m){
+    if(!FINISH) m='year';
+    shellEl.classList.toggle('mode-fin',m==='fin'); shellEl.classList.toggle('mode-year',m!=='fin');
+    document.querySelectorAll('#msw button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+    if(m==='fin'){try{history.replaceState(null,'','#finish')}catch(e){}}
+  }
+  if(FINISH){
+    $('#msw').hidden=false; $('#finView').hidden=false; drawFinish();
+    $('#msw').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; setMode(b.dataset.m); if(b.dataset.m==='year') showTab('me');});
+    $('#tabs').addEventListener('click',()=>setMode('year'));
+    window.addEventListener('hashchange',()=>{const h=location.hash.slice(1); setMode(TABS.includes(h)?'year':'fin');});
+    document.querySelector('.nav .pri').addEventListener('click',()=>setMode('year'));
+  }
+  function drawFinish(){
+    const F=FINISH, esc=x=>String(x==null?'':x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const EVM={}; F.events.forEach(e=>EVM[e.id]=e);
+    const pct=p=>p>=0.995?(p>=1?'100%':'>99%'):(p<0.005?(p>0?'<1%':'0%'):Math.round(p*100)+'%');
+    const plW=(n,a,b,c)=>(n%10===1&&n%100!==11)?a:((n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?b:c);
+    let me=null; try{me=+localStorage.getItem('dovod_race_me')||null}catch(e){}
+    const GR=[
+      ['in_math','#5ee08a','Прошли математически','не выпадут ни при каких результатах, даже если все соперники запишутся везде'],
+      ['in_regs','#5ee08a','Прошли, если не будет новых заявок','соперники, уже записанные на турниры, обойти не успевают'],
+      ['sure','#26e0ff','Практически прошли','в модели не выпали ни разу; вылет возможен только при редком совпадении результатов'],
+      ['fight','#f5ff35','Борьба за места','исход решают оставшиеся турниры'],
+      ['hard','#db514e','Нужен подвиг','шанс меньше 5 из 100, но математически живы']];
+    const grp=r=>r.st==='in_math'?'in_math':r.st==='in_regs'?'in_regs':r.st==='out_math'?'out':(r.p12>=0.995?'sure':(r.p12>=0.05?'fight':'hard'));
+    const rows=F.rows.map(r=>Object.assign({g:grp(r)},r));
+    const live=rows.filter(r=>r.g!=='out'&&!(r.g==='hard'&&r.p12<=0&&r.rank>20));
+    const far=rows.filter(r=>r.g==='hard'&&r.p12<=0&&r.rank>20), outs=rows.filter(r=>r.g==='out');
+    const cnt=k=>rows.filter(r=>r.g===k).length;
+    const nEv=F.events.length, nWk=F.weeks.length, P=F.plank;
+    const lo=Math.min(P.q10-25,...live.map(r=>r.sigma))-2, hi=Math.max(P.q90+25,...live.map(r=>Math.min(r.p90,P.q90+45)))+2, X=v=>Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100));
+    const dd=d=>+d.slice(8,10)+'.'+d.slice(5,7);
+    const place=k=>k==='any'?'достаточно сыграть':(k===1?'только 1-е место':(k<=3?'топ-'+k:(k<=10?'место '+k+' и выше':'место '+k+' и выше (вне финала)')));
+    function needHtml(r,key,label){
+      const n=r.need&&r.need[key]; if(!n) return '';
+      if(n.done) return `<p><b>${label} (${P[key]})</b> - уже набрано.</p>`;
+      const mine=[],other=[]; let any=false;
+      Object.keys(n.one).sort((a,b)=>(EVM[a]?EVM[a].date:'').localeCompare(EVM[b]?EVM[b].date:'')||((EVM[b]||{}).stars||0)-((EVM[a]||{}).stars||0)).forEach(id=>{const e=EVM[id],k=n.one[id]; if(!e) return; const reg=r.evs.includes(+id);
+        if(k==null){ if(reg) mine.push(`<li>${esc(e.short)} ${dd(e.date)} - одного этого турнира не хватит даже с победой</li>`); return; }
+        any=true; (reg?mine:other).push(`<li>${esc(e.short)} ${dd(e.date)} - <b>${place(k)}</b></li>`);});
+      let h=`<p><b>${label} (Σ ${P[key]})</b>, нужно ещё ${Math.max(0,Math.round(P[key]-r.sigma))}:</p>`;
+      if(mine.length) h+=`<ol>${mine.join('')}</ol>`;
+      ['2','3'].forEach(m=>{const x=n.multi&&n.multi[m]; if(x) h+=`<p>Или ${m==='2'?'два турнира':'три турнира'} сразу (${x.ev.map(id=>esc(EVM[id].short)).join(' + ')}): на каждом <b>${place(x.place)}</b>.</p>`;});
+      if(other.length) h+=`<details class="fdt"><summary>Если дозаявиться ещё куда-то</summary><ol>${other.join('')}</ol></details>`;
+      if(!any&&!(n.multi&&(n.multi['2']||n.multi['3']))) h+=`<p>Ни один турнир в одиночку не выводит на этот балл.</p>`;
+      return h;
+    }
+    function condHtml(r){
+      const c=r.cond,K=F.key; if(!c||!K||c.go<0.3||r.g==='sure'||r.g==='in_math'||r.g==='in_regs') return '';
+      const cell=(x,l)=>x?`<div><b>${pct(x[0])}</b><span>${l}</span></div>`:`<div><b style="color:#5f6675">·</b><span>${l}</span></div>`;
+      return `<h4>${esc(K.short)} ${dd(K.date)} решает</h4><div class="cnd">${cell(c.top3,'если в топ-3')}${cell(c.fin,'если в финале (4-10)')}${cell(c.out,'если мимо финала')}${cell(c.skip,'если не поедет')}</div>`;
+    }
+    function riskHtml(r){
+      if(!r.risk||!r.risk.length) return '';
+      const li=r.risk.map(x=>`<li><b>${esc(x.nick)}</b> (сейчас ${Math.round(x.now)}): ${x.res.map(y=>esc(y.ev)+' - '+(y.place===1?'1-е место':'место '+y.place+' или выше')).join(', ')}</li>`).join('');
+      const n=r.risk.length, res=r.risk.reduce((a,x)=>a+x.res.length,0);
+      return `<h4>При каком раскладе выпадет</h4><p>Самый короткий сценарий: <b>${esc(r.nick)}</b> больше не набирает, а ${n} ${plW(n,'соперник','соперника','соперников')} одновременно ${plW(n,'делает','делают','делают')} ${res} ${plW(res,'результат','результата','результатов')}${r.risk_regs?'. Все они уже записаны на эти турниры':'. Для этого части соперников нужно ещё дозаявиться'}:</p><ol>${li}</ol>`;
+    }
+    function rowHtml(r,gc){
+      const above=r.rank<=12, gap=above?r.sigma-F.now13:r.sigma-F.now12;
+      const sub=above?(gap>0?'+'+Math.round(gap)+' над 13-м':'вровень с 13-м'):(gap<0?Math.round(gap)+' до 12-го':'вровень с 12-м');
+      const ev=r.evs.map(id=>EVM[id]?esc(EVM[id].short):'').filter(Boolean);
+      let d=`<p>Сейчас <b>Σ ${Math.round(r.sigma)}</b>, ${r.rank}-е место (${sub}). Модель к концу года: <b>Σ ${r.exp}</b>, коридор ${r.p10}-${r.p90}. Максимум, если выиграть всё: ${Math.round(r.max)}.</p>`+
+        `<p>Записан: ${ev.length?ev.join(', '):'пока никуда'}.</p>`;
+      if(r.g==='in_math') d+=`<p>Перебрали все варианты: двенадцать человек обойти его не могут. Место в дюжине гарантировано.</p>`;
+      if(r.g==='in_regs') d+=`<p>Если новых заявок не будет, обойти его не успевают. Вылет возможен только в теории, если соперники дозаявятся и выиграют почти всё.</p>`;
+      d+=condHtml(r);
+      if(r.need&&(r.g==='fight'||r.g==='hard'||(r.g==='sure'&&!r.need.q90.done))){d+=`<h4>Что нужно, чтобы пройти</h4>`+needHtml(r,'q50','Проходной по модели')+(r.need.q90.done?'':`<details class="fdt"><summary>А чтобы с запасом (Σ ${P.q90})</summary>${needHtml(r,'q90','С запасом')}</details>`)}
+      d+=riskHtml(r);
+      return `<div class="fr${r.uid===me?' me open':''}" style="--gc:${gc}"><div class="frh"><span class="rk">${r.rank}</span><span class="nk">${esc(r.nick)}${r.uid===me?' <span class="tg">вы</span>':''}<small>${sub}</small></span><span class="sg">${Math.round(r.sigma)}</span>`+
+        `<span class="fb"><i class="ax"></i><i class="pk" style="left:${X(P.q10)}%;width:${X(P.q90)-X(P.q10)}%"></i><i class="rg" style="left:${X(r.sigma)}%;width:${Math.max(0,X(r.p90)-X(r.sigma))}%"></i><i class="dt" style="left:${X(r.sigma)}%"></i></span>`+
+        `<span class="ch">${r.g==='in_math'||r.g==='in_regs'?'✓':pct(r.p12)}</span><span class="ar">▶</span></div><div class="frd">${d}</div></div>`;
+    }
+    let list='';
+    GR.forEach(([k,gc,t,sub])=>{const rs=live.filter(r=>r.g===k); if(!rs.length) return;
+      list+=`<div class="fg" style="--gc:${gc};color:${gc}"><i></i>${t} · ${rs.length}<small>${sub}</small></div>`+rs.map(r=>rowHtml(r,gc)).join('');});
+    const nm=cnt('in_math'), nr=cnt('in_regs'), ns=cnt('sure'), nf=cnt('fight');
+    const names=k=>rows.filter(r=>r.g===k).map(r=>esc(r.nick)).join(', ');
+    let ans=nm?`Математически прошли <b>${nm}</b>: ${names('in_math')}. `:`<b>Математически не прошёл пока никто</b>: впереди ${nEv} ${plW(nEv,'турнир','турнира','турниров')}, и в теории двенадцать соперников ещё могут обойти любого. `;
+    if(nr) ans+=`При уже поданных заявках ${plW(nr,'недосягаем','недосягаемы','недосягаемы')} <b>${names('in_regs')}</b>. `;
+    if(ns) ans+=`Практически прошли (в модели не выпали ни разу, но формально могут): <b>${names('sure')}</b>. `;
+    ans+=`За оставшиеся места борются <b>${nf}</b> ${plW(nf,'игрок','игрока','игроков')}. Проходной балл по модели - <b>${P.q50}</b> (коридор ${P.q10}-${P.q90}), сейчас у 12-го ${Math.round(F.now12)}.`;
+    let cal=''; F.weeks.forEach(w=>{const es=F.events.filter(e=>e.wk===w); if(!es.length) return;
+      const d0=es[0].date, d1=es[es.length-1].date; cal+=`<div class="wkd">Выходные ${dd(w)} · ${es.length} ${plW(es.length,'турнир','турнира','турниров')}</div>`+
+      es.sort((a,b)=>b.stars-a.stars||a.fin-b.fin).map(e=>`<div class="fev"><div class="t">${esc(e.short)}<i>${'★'.repeat(e.stars)}</i><small>${dd(e.date)}${e.N?' · '+e.N+' '+plW(e.N,'участник','участника','участников'):''}${e.fin?' · играют только финалисты серии':''}</small></div>`+
+        `<div class="g">${[[1,0],[2,1],[3,2],[5,4],[10,9]].filter(x=>e.grid[x[1]]!=null).map(x=>`<span>${x[0]}-е <b>${Math.round(e.grid[x[1]])}</b></span>`).join('')}<span>участие <b>${Math.round(e.tail)}</b></span></div>`+
+        `<div class="w">${e.regs.length?'Из гонки записаны: <b>'+e.regs.map(esc).join(', ')+'</b>':'Из первых сорока гонки пока никто не записан'}</div></div>`).join('');});
+    $('#finView').innerHTML=
+      `<div class="fk"><div><b>${Math.round(F.now12)}</b><span>у 12-го места сейчас</span></div><div><b>${P.q50}<small>${P.q10}-${P.q90}</small></b><span>проходной балл по модели</span></div>`+
+      `<div><b>${nWk}<small>${nEv} ${plW(nEv,'турнир','турнира','турниров')}</small></b><span>${plW(nWk,'выходные остались','выходных осталось','выходных осталось')}</span></div><div><b>${nm+nr}<small>+ ${ns} почти</small></b><span>уже прошли</span></div></div>`+
+      `<div class="fans">${ans}</div>`+
+      `<div class="fh">01 · Кто где<s></s></div><p class="fhn">Нажмите на игрока: что ему нужно на каждом турнире и при каком раскладе он выпадет. Жёлтая полоса на шкале - коридор проходного балла, точка - баллы сейчас, хвост - куда может дойти по модели.</p>`+list+
+      (far.length?`<p class="fout">Математически ещё живы, но шансов по модели нет: ${far.map(r=>esc(r.nick)+' ('+Math.round(r.sigma)+')').join(', ')}.</p>`:'')+
+      (outs.length?`<p class="fout">Выбыли математически (не догоняют, даже выиграв всё): ${outs.map(r=>esc(r.nick)).join(', ')}.</p>`:'')+
+      `<div class="fh">02 · Что осталось сыграть<s></s></div><p class="fhn">Баллы за место по сетке турнира. В одни выходные можно сыграть только один турнир.</p>`+cal+
+      `<div class="fh">03 · Как это посчитано<s></s></div><div class="fhow"><ol>`+
+      `<li><b>«Прошёл математически»</b> - строгая проверка${F.exact?' точным перебором':''}: игрок больше ничего не набирает, а соперники берут лучшие места на всех оставшихся турнирах. Если даже так двенадцать человек его не обходят - место гарантировано. Равенство баллов считаем риском.</li>`+
+      `<li><b>«Если не будет новых заявок»</b> - та же проверка, но соперники играют только те турниры, куда уже записаны, и свои финалы серий.</li>`+
+      `<li><b>Шансы и проходной балл</b> - модель гонки: ${F.S} розыгрышей конца сезона с учётом заявок, силы игроков и сеток баллов. Проходной - медиана балла 12-го места, в скобках коридор 10-90%.</li>`+
+      `<li><b>«Что нужно»</b> - точный пересчёт зачёта игрока (10 лучших турниров, серийных не больше двух): какое место на турнире даёт нужную сумму.</li>`+
+      `<li>Данные обновляются автоматически каждый день. Снимок: ${F.T.split('-').reverse().join('.')}. Подробная модель, сценарии и калькулятор - во вкладке «Гонка в течение года».</li></ol></div>`;
+    $('#finView').addEventListener('click',e=>{const h=e.target.closest('.frh'); if(h) h.parentNode.classList.toggle('open');});
+  }
   // ---------- планки ----------
   $('#planks').innerHTML=`
     <div class="plank f"><div class="k">0 · только заявки</div><div class="v">${P.floor}<small>${P.regs[0]}–${P.regs[1]}</small></div><div class="d">Играют только те, кто уже записан (с поправкой на срок), плюс финалы серийников. Никто больше не записывается.</div></div>
@@ -1024,7 +1194,7 @@ function initRace(){
   }
   $('#mgGo').addEventListener('click',calc); ['#mgUrl','#mkUrl'].forEach(s=>$(s).addEventListener('keydown',e=>{if(e.key==='Enter')calc()}));
   // стартовая вкладка — из хэша
-  showTab((location.hash||'#me').slice(1),false);
+  if(FINISH&&!TABS.includes(location.hash.slice(1))){showTab('me',false);setMode('fin');}else{showTab((location.hash||'#me').slice(1),false);setMode('year');}
 }
 
 /* ── гейт: vault/race.json → window.RACE → initRace() ── */
