@@ -20,7 +20,7 @@
    "D": 1125,
    "E": 925
   },
-  "elo_snap": "2026-11-20"
+  "elo_snap": "2026-11-24"
  },
  "players": [
   {
@@ -34,14 +34,14 @@
    "country": "Чехия",
    "flag": "🇨🇿",
    "markery_id": 17343,
-   "r_elo_cur": 1079,
+   "r_elo_cur": 1086,
    "r_tier": "B",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-20",
+   "elo_snap": "2026-11-24",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -56,8 +56,8 @@
    "r_ms_mmr": 1555.9,
    "r_ms_rank": 247,
    "r_ms_tier": "B",
-   "r_rank": 531,
-   "mk_last": "2026-11-07"
+   "r_rank": 503,
+   "mk_last": "2026-11-21"
   },
   {
    "nick": "LogisticPro",
@@ -70,14 +70,14 @@
    "country": "Польша",
    "flag": "🇵🇱",
    "markery_id": 10996,
-   "r_elo_cur": 1215,
+   "r_elo_cur": 1214,
    "r_tier": "A",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-20",
+   "elo_snap": "2026-11-24",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -92,8 +92,8 @@
    "r_ms_mmr": 1713.8,
    "r_ms_rank": 108,
    "r_ms_tier": "A",
-   "r_rank": 202,
-   "mk_last": "2026-10-18"
+   "r_rank": 201,
+   "mk_last": "2026-11-21"
   },
   {
    "nick": "Монтгомери",
@@ -106,14 +106,14 @@
    "country": "Кипр",
    "flag": "🇨🇾",
    "markery_id": 14171,
-   "r_elo_cur": 810,
+   "r_elo_cur": 815,
    "r_tier": "F",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-20",
+   "elo_snap": "2026-11-24",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -128,8 +128,8 @@
    "r_ms_mmr": 1187.8,
    "r_ms_rank": 723,
    "r_ms_tier": "D",
-   "r_rank": 8469,
-   "mk_last": "2026-11-15"
+   "r_rank": 8452,
+   "mk_last": "2026-11-21"
   },
   {
    "nick": "***Алиса***",
@@ -142,14 +142,14 @@
    "country": "Израиль",
    "flag": "🇮🇱",
    "markery_id": 10852,
-   "r_elo_cur": 1088,
+   "r_elo_cur": 1085,
    "r_tier": "B",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-20",
+   "elo_snap": "2026-11-24",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -164,8 +164,8 @@
    "r_ms_mmr": 1620.1,
    "r_ms_rank": null,
    "r_ms_tier": "B",
-   "r_rank": 491,
-   "mk_last": "2026-10-03"
+   "r_rank": 512,
+   "mk_last": "2026-11-21"
   },
   {
    "nick": "Kiwi",
@@ -178,14 +178,14 @@
    "country": "Израиль",
    "flag": "🇮🇱",
    "markery_id": 15141,
-   "r_elo_cur": 1050,
+   "r_elo_cur": 1045,
    "r_tier": "C",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-20",
+   "elo_snap": "2026-11-24",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -200,8 +200,8 @@
    "r_ms_mmr": 1265.6,
    "r_ms_rank": 673,
    "r_ms_tier": "D",
-   "r_rank": 761,
-   "mk_last": "2026-11-06"
+   "r_rank": 804,
+   "mk_last": "2026-11-21"
   },
   {
    "nick": "KEX",
@@ -214,14 +214,14 @@
    "country": "Германия",
    "flag": "🇩🇪",
    "markery_id": 10439,
-   "r_elo_cur": 1441,
+   "r_elo_cur": 1448,
    "r_tier": "S",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-20",
+   "elo_snap": "2026-11-24",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -236,8 +236,8 @@
    "r_ms_mmr": 2126.6,
    "r_ms_rank": 19,
    "r_ms_tier": "L",
-   "r_rank": 60,
-   "mk_last": "2026-11-14"
+   "r_rank": 59,
+   "mk_last": "2026-11-21"
   },
   {
    "nick": "qUAest0r",
@@ -257,7 +257,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-20",
+   "elo_snap": "2026-11-24",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -272,8 +272,8 @@
    "r_ms_mmr": 1243.7,
    "r_ms_rank": 695,
    "r_ms_tier": "D",
-   "r_rank": 6488,
-   "mk_last": "2026-11-14"
+   "r_rank": 6468,
+   "mk_last": "2026-11-21"
   },
   {
    "nick": "DOVOD",
@@ -286,14 +286,14 @@
    "country": "Чехия",
    "flag": "🇨🇿",
    "markery_id": 17342,
-   "r_elo_cur": 1245,
+   "r_elo_cur": 1248,
    "r_tier": "A",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-20",
+   "elo_snap": "2026-11-24",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -308,8 +308,8 @@
    "r_ms_mmr": 1828.6,
    "r_ms_rank": 69,
    "r_ms_tier": "S",
-   "r_rank": 168,
-   "mk_last": "2026-11-07"
+   "r_rank": 166,
+   "mk_last": "2026-11-21"
   },
   {
    "nick": "Грешник",
@@ -322,14 +322,14 @@
    "country": "Турция",
    "flag": "🇹🇷",
    "markery_id": 11195,
-   "r_elo_cur": 1230,
+   "r_elo_cur": 1220,
    "r_tier": "A",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-20",
+   "elo_snap": "2026-11-24",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -344,8 +344,8 @@
    "r_ms_mmr": 1768.7,
    "r_ms_rank": 91,
    "r_ms_tier": "A",
-   "r_rank": 186,
-   "mk_last": "2026-11-14"
+   "r_rank": 198,
+   "mk_last": "2026-11-21"
   },
   {
    "nick": "Айвенго",
@@ -357,15 +357,15 @@
    "cc": "IL",
    "country": "Израиль",
    "flag": "🇮🇱",
-   "markery_id": null,
-   "r_elo_cur": null,
-   "r_tier": null,
+   "markery_id": 11982,
+   "r_elo_cur": 960,
+   "r_tier": "D",
    "r_elo_ly": null,
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": null,
-   "elo_snap": null,
+   "mk_match": "uid",
+   "elo_snap": "2026-11-24",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -379,7 +379,9 @@
    },
    "r_ms_mmr": 1440.0,
    "r_ms_rank": null,
-   "r_ms_tier": "C"
+   "r_ms_tier": "C",
+   "r_rank": 7069,
+   "mk_last": "2026-11-21"
   }
  ],
  "stats": {
