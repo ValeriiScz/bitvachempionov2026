@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Гонка за золотую дюжину · DOVOD</title>
-<!-- race.html v4.2 · 25.11.2026 · «Конструктор» вместо «Сыграй расклад»: линия игрока из результатов турниров, старт - прогноз модели (finish.forecast), место меняется в два касания, «+» добавляет турнир · v4.1 · 25.11.2026 · «Финишная прямая» перекроена: лестница с чертой и шкалой, матрица «турнир решает», «Сыграй расклад» (расставь места - таблица пересчитается) · v4.0 · 23.11.2026 · «Финишная прямая» - режим по умолчанию (RACE.finish из finish.py): кто прошёл математически, шансы, что кому нужно, при каком раскладе выпадет; прежние вкладки - «Гонка в течение года» (архив) · v3.9 · 16.11.2026 · «Сценарии»: крупно — планка с поправкой (как на «Планке»), сырая — в скобках; раньше крупно стояла сырая, и цифры вкладок не сходились · v3.8 · 16.11.2026 · поправка планки — к приросту (×1.18 к тому, что добавится к нынешнему 12-му), а не ×1.07 ко всей сумме · v3.7 · 16.11.2026 · генератор: один турнир в день и для финалов серий (Benelux 12.12 = Кипр-зима — или туда, или туда); «Сценарии» — текст без устаревшего GMC · v3.6 · 21.10.2026 · слова: «старт» → «турнир», «пузырь» → «гонка» (Валерий) · v3.5 · 21.10.2026 · «Сценарии»: в каждой карточке «X мест заняты» и «за оставшиеся Y — Z игроков», черта между проходящими и догоняющими, у борющихся — шанс «≈ k из 10» и полоска; в заголовке карточки — короткая сводка · v3.4 · 21.10.2026 · вкладка «Сценарии» (12 «что если» из whatif.py: планка, дюжина, кто двигается — словами); на «Планке» — поправка ×1.07 с объяснением курсивом и сырые цифры · v3.3 · 20.10.2026 · «Откуда ≈Σ»: обычные турниры + финалы серийников чистыми; колонка «финалы» в генераторе; описание финалов и малых полей в модели · v3.2 · 20.10.2026 · гейт: пароль без учёта регистра; ошибка страницы после верного пароля больше не выдаётся за «пароль не подошёл» (показывает причину, сбрасывает выбранного игрока) · v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
+<!-- race.html v4.3 · 25.11.2026 · конструктор под телефон: панель игрока снизу (турниры чипами, места крупной сеткой, стрелки по игрокам), нажатие на всю строку · v4.2 · 25.11.2026 · «Конструктор» вместо «Сыграй расклад»: линия игрока из результатов турниров, старт - прогноз модели (finish.forecast), место меняется в два касания, «+» добавляет турнир · v4.1 · 25.11.2026 · «Финишная прямая» перекроена: лестница с чертой и шкалой, матрица «турнир решает», «Сыграй расклад» (расставь места - таблица пересчитается) · v4.0 · 23.11.2026 · «Финишная прямая» - режим по умолчанию (RACE.finish из finish.py): кто прошёл математически, шансы, что кому нужно, при каком раскладе выпадет; прежние вкладки - «Гонка в течение года» (архив) · v3.9 · 16.11.2026 · «Сценарии»: крупно — планка с поправкой (как на «Планке»), сырая — в скобках; раньше крупно стояла сырая, и цифры вкладок не сходились · v3.8 · 16.11.2026 · поправка планки — к приросту (×1.18 к тому, что добавится к нынешнему 12-му), а не ×1.07 ко всей сумме · v3.7 · 16.11.2026 · генератор: один турнир в день и для финалов серий (Benelux 12.12 = Кипр-зима — или туда, или туда); «Сценарии» — текст без устаревшего GMC · v3.6 · 21.10.2026 · слова: «старт» → «турнир», «пузырь» → «гонка» (Валерий) · v3.5 · 21.10.2026 · «Сценарии»: в каждой карточке «X мест заняты» и «за оставшиеся Y — Z игроков», черта между проходящими и догоняющими, у борющихся — шанс «≈ k из 10» и полоска; в заголовке карточки — короткая сводка · v3.4 · 21.10.2026 · вкладка «Сценарии» (12 «что если» из whatif.py: планка, дюжина, кто двигается — словами); на «Планке» — поправка ×1.07 с объяснением курсивом и сырые цифры · v3.3 · 20.10.2026 · «Откуда ≈Σ»: обычные турниры + финалы серийников чистыми; колонка «финалы» в генераторе; описание финалов и малых полей в модели · v3.2 · 20.10.2026 · гейт: пароль без учёта регистра; ошибка страницы после верного пароля больше не выдаётся за «пароль не подошёл» (показывает причину, сбрасывает выбранного игрока) · v3.1 · 20.10.2026 · явка v2 (заявки × сроки, петля R1), незаписанные серым, в вердикте строка «что держит прогноз — сила или поездки» и таблица «если сыграть N турниров» (вернули компактно) · v3.0 · 19.10.2026 · страница пересобрана под игрока: вкладки «Я в гонке» (вердикт словами, коридор по результатам/маркерам при малой выборке, маршрут по датам с баллами чистыми, конкуренты за место), «Таблица» (прогноз словами), «Пул баллов» (дорожная карта по выходным, один турнир в день), «Модель» (три слоя + схема системной динамики: запасы, потоки, петли R1–R3/B1–B3, числа выбранного игрока), «Планка», «Генератор», «Посчитать себя». Сила v2 (gd_strength2: ELO-опора, σ, форма). Предыдущая v2.2 (13.10.2026) — в _Архив/ -->
 <meta name="description" content="Рейтинг MAFGAME 2026: сколько и каких турниров нужно до золотой дюжины, пул баллов по выходным, модель расчёта, калькулятор по своему профилю.">
 <meta name="theme-color" content="#05060a">
 <link rel="manifest" href="manifest.json">
@@ -427,7 +427,11 @@ ul.wml{margin:6px 0 0;padding-left:18px;color:#c3cad6;font-size:13px} ul.wml li{
 .sg2.z{width:14px!important;margin-left:-7px;top:0;height:11px;border-radius:3px;background:none;border:1px solid var(--ec);box-shadow:none;z-index:2}.sg2.z b{color:var(--ec);font-size:8.5px}
 .sg2.on{outline:2px solid #fff;z-index:3}
 .cbar .add{position:absolute;top:4px;margin-left:5px;width:22px;height:22px;border-radius:50%;border:1px dashed rgba(255,255,255,.4);background:none;color:#c3cad6;font:700 14px/1 var(--mono);cursor:pointer;padding:0}
-.cpk{margin:2px 0 10px 27px;padding:10px 12px;background:#10131a;border-left:3px solid var(--ec,var(--ye))}
+.cr{cursor:pointer}
+.cpk{margin:2px 0 10px 27px;padding:10px 12px;background:#10131a;border-left:3px solid var(--ye)}
+.cph{display:flex;align-items:center;gap:8px;margin:0 0 8px}.cph div{flex:1;min-width:0}.cph b{font-size:15px}.cph small{display:block;font:600 10.5px/1.3 var(--mono);color:#8a91a0;margin-top:2px}
+.cph button{cursor:pointer;width:34px;height:34px;border:1px solid var(--line);background:none;color:#c3cad6;font:700 18px/1 var(--mono);border-radius:3px;flex:none}
+.cpe button.on{border-color:var(--ec);background:rgba(255,255,255,.1)}.cpe button.un{border-style:dashed;opacity:.75}.cpe+.cpp{margin-top:10px}
 .cpt{font:700 11px/1.4 var(--mono);color:#dfe4ee;margin:0 0 8px}.cpt i{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--ec);margin-right:6px}
 .cpp{display:flex;flex-wrap:wrap;gap:5px}
 .cpp button{cursor:pointer;min-width:38px;padding:7px 6px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.04);color:var(--ink);font:800 14px/1 var(--mono);border-radius:3px}
@@ -438,7 +442,12 @@ ul.wml{margin:6px 0 0;padding-left:18px;color:#c3cad6;font-size:13px} ul.wml li{
 .cpe button{cursor:pointer;text-align:left;padding:8px 10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.04);color:var(--ink);font:700 12.5px/1.2 Inter,system-ui,sans-serif;border-radius:3px}
 .cpe button i{display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--ec);margin-right:6px}.cpe button small{display:block;margin-top:3px;font:600 9.5px/1.2 var(--mono);color:#8a91a0}
 .cadd{margin:10px 0 0}.cadd select{width:100%;padding:10px;background:#0b0d13;color:#c3cad6;border:1px dashed var(--line);font:600 12px/1 var(--mono)}
-@media (max-width:720px){.cr{grid-template-columns:18px minmax(0,1fr) auto auto;grid-template-areas:"rk nk mv sg" "bar bar bar bar";gap:3px 6px;padding:7px 2px 4px}.cr .rk{grid-area:rk}.cr .nk{grid-area:nk}.cr .sg{grid-area:sg}.cr .mv{grid-area:mv}.cbar{grid-area:bar}.cpk{margin-left:0}}
+@media (max-width:720px){
+.cpk{position:fixed;left:0;right:0;bottom:calc(62px + env(safe-area-inset-bottom,0px));z-index:60;margin:0;padding:10px 12px 12px;border-left:0;border-top:2px solid var(--ye);background:#0d1017;box-shadow:0 -14px 30px rgba(0,0,0,.7)}
+.cpe{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.cpe::-webkit-scrollbar{display:none}.cpe button{flex:none}
+.cpp{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.cpp button{min-width:0;padding:11px 4px;font-size:17px}.cpp button.w{grid-column:span 3;font-size:12px}.cpp button.x{grid-column:span 2}
+#conWrap.pk{padding-bottom:250px}.cbar{height:34px}.sg2{height:24px}.cbar .bs{top:11px}.cr.sel{background:rgba(255,255,255,.07)}
+.cr{grid-template-columns:18px minmax(0,1fr) auto auto;grid-template-areas:"rk nk mv sg" "bar bar bar bar";gap:3px 6px;padding:7px 2px 4px}.cr .rk{grid-area:rk}.cr .nk{grid-area:nk}.cr .sg{grid-area:sg}.cr .mv{grid-area:mv}.cbar{grid-area:bar}.cpk{margin-left:0}}
 .fev{border:1px solid var(--line);padding:10px 12px;margin:0 0 6px;background:rgba(255,255,255,.025)}
 .fev .t{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;font-weight:700;font-size:14px}
 .fev .t i{font-style:normal;color:var(--ye);font-size:12px}.fev .t small{font:600 10.5px/1.3 var(--mono);color:#7e8595}
@@ -794,24 +803,30 @@ function initRace(){
         const r=x.r, ni=x.i<12, wi=was.includes(r.uid), d=Math.round(x.s-r.sigma); let acc=r.sigma;
         const segs=x.segs.map(g=>{const l=X2(acc), w=Math.max(0,X2(acc+g.d)-l); acc+=g.d; const e=EVM[g.id], lab=g.pl>=OUT?'·':g.pl;
           return `<i class="sg2${g.d<=0?' z':''}${pick&&pick.u===r.uid&&pick.id===g.id?' on':''}" data-u="${r.uid}" data-id="${g.id}" title="${esc(e.short)}: ${g.pl>=OUT?'вне финала':g.pl+'-е место'}, ${Math.round(g.p)} б., в зачёт +${Math.round(g.d)}" style="left:${l}%;width:${g.d>0?w:0}%;--ec:${ECOL[g.id]}"><b>${lab}</b></i>`;}).join('');
-        h+=`<div class="cr${ni?'':' outz'}${r.uid===me?' me':''}" data-u="${r.uid}"><span class="rk">${x.i+1}</span><span class="nk">${esc(r.nick)}</span><span class="sg">${Math.round(x.s)}${d>0?`<small>+${d}</small>`:''}</span>`+
+        h+=`<div class="cr${ni?'':' outz'}${r.uid===me?' me':''}${pick&&pick.u===r.uid?' sel':''}" data-u="${r.uid}"><span class="rk">${x.i+1}</span><span class="nk">${esc(r.nick)}</span><span class="sg">${Math.round(x.s)}${d>0?`<small>+${d}</small>`:''}</span>`+
           `<span class="mv ${ni&&!wi?'i':(!ni&&wi?'o':'u')}">${ni&&!wi?'▲ зашёл':(!ni&&wi?'▼ выпал':'')}</span>`+
           `<span class="cbar"><i class="ax"></i><i class="pk" style="left:${X2(thr)}%"></i><i class="bs" style="left:0;width:${X2(r.sigma)}%"></i>${segs}<button class="add" data-plus="${r.uid}" style="left:${X2(acc)}%" aria-label="добавить турнир">+</button></span></div>`;
-        if(pick&&pick.u===r.uid) h+=pickHtml(r);});
+        if(pick&&pick.u===r.uid) h+=pickHtml(r,x);});
       const rest=cRows.filter(r=>!shownSet.has(r.uid));
       h+=`</div>`+(rest.length?`<div class="cadd"><select id="conAdd"><option value="">+ добавить игрока в конструктор</option>${rest.map(r=>`<option value="${r.uid}">${r.rank}. ${esc(r.nick)} · ${Math.round(r.sigma)}</option>`).join('')}</select></div>`:'');
       W.innerHTML=h;
+      W.dataset.vis=vis.map(x=>x.r.uid).join(','); W.classList.toggle('pk',!!pick);
+      if(pick&&window.innerWidth<=720){const row=W.querySelector('.cr[data-u="'+pick.u+'"]'), sh=document.getElementById('cpk'); if(row&&sh){const lim=sh.getBoundingClientRect().top-8, bt=row.getBoundingClientRect().bottom, tp=row.getBoundingClientRect().top; if(bt>lim) window.scrollBy({top:bt-lim,behavior:'smooth'}); else if(tp<60) window.scrollBy({top:tp-70,behavior:'smooth'});}}
       if(anim) W.querySelectorAll('.cr').forEach(el=>{const o=old[el.dataset.u]; if(o==null) return; const dy=o-el.getBoundingClientRect().top; if(Math.abs(dy)<2) return;
         el.style.transform=`translateY(${dy}px)`; el.style.transition='none'; requestAnimationFrame(()=>{el.style.transition='transform .35s ease'; el.style.transform='';});});
     }
-    function pickHtml(r){
-      const my=PL[r.uid]||{};
-      if(pick.id==null){ const opts=evSorted.filter(e=>!(e.id in my)&&(!e.fin||e.regs.includes(r.nick)));
-        return `<div class="cpk"><div class="cpt">${esc(r.nick)}: какой турнир добавить?</div><div class="cpe">${opts.map(e=>{const busy=Object.keys(my).find(k=>EVM[k].wk===e.wk);
-          return `<button data-pe="${e.id}" style="--ec:${ECOL[e.id]}"><i></i>${esc(e.short.replace(' (финал серии)',''))}<small>${dd(e.date)} · ${'★'.repeat(e.stars)}${r.evs.includes(e.id)?' · записан':''}${busy?' · вместо '+esc(EVM[busy].short.replace(' (финал серии)','')):''}</small></button>`}).join('')||'<span class="cpt">все доступные турниры уже стоят</span>'}</div></div>`; }
-      const e=EVM[pick.id], cur=my[pick.id], n=Math.min(10,e.grid.length);
-      let bt=''; for(let k=1;k<=n;k++){bt+=`<button data-pp="${k}" class="${cur===k?'on':''}">${k}<small>${Math.round(e.grid[k-1])}</small></button>`;}
-      return `<div class="cpk" style="--ec:${ECOL[e.id]}"><div class="cpt"><i></i>${esc(r.nick)} · ${esc(e.short)} ${dd(e.date)}: какое место?</div><div class="cpp">${bt}<button data-pp="${OUT}" class="w${cur>=OUT?' on':''}">вне финала<small>${Math.round(e.tail)}</small></button><button data-pp="x" class="w x">не играет</button></div></div>`;
+    function pickHtml(r,x){
+      const my=PL[r.uid]||{}, sh=n=>esc(n.replace(' (финал серии)',''));
+      const mine=evSorted.filter(e=>e.id in my), oth=evSorted.filter(e=>!(e.id in my)&&(!e.fin||e.regs.includes(r.nick))).sort((a,b)=>(r.evs.includes(b.id)-r.evs.includes(a.id))||b.stars-a.stars||a.date.localeCompare(b.date));
+      const chip=(e,has)=>{const busy=!has&&Object.keys(my).find(k=>EVM[k].wk===e.wk);
+        return `<button data-pe="${e.id}" class="${pick.id===e.id?'on':''}${has?'':' un'}" style="--ec:${ECOL[e.id]}"><i></i>${sh(e.short)}<small>${dd(e.date)} · ${has?(my[e.id]>=OUT?'вне финала':my[e.id]+'-е место'):(busy?'вместо '+sh(EVM[busy].short):(r.evs.includes(e.id)?'записан':'добавить'))}</small></button>`};
+      let bt='';
+      if(pick.id!=null){const e=EVM[pick.id], cur=my[pick.id], n=Math.min(10,e.grid.length);
+        for(let k=1;k<=n;k++){bt+=`<button data-pp="${k}" class="${cur===k?'on':''}">${k}<small>${Math.round(e.grid[k-1])}</small></button>`;}
+        bt=`<div class="cpp" style="--ec:${ECOL[e.id]}">${bt}<button data-pp="${OUT}" class="w${cur>=OUT?' on':''}">вне финала<small>${Math.round(e.tail)}</small></button>${cur!=null?'<button data-pp="x" class="w x">убрать</button>':''}</div>`;}
+      else bt=`<div class="cpt" style="margin:8px 0 0;color:#8a91a0">выберите турнир выше</div>`;
+      return `<div class="cpk" id="cpk"><div class="cph"><button data-nav="-1" aria-label="предыдущий игрок">‹</button><div><b>${esc(r.nick)}</b><small>${x.i+1}-е место · Σ ${Math.round(x.s)}${x.s>r.sigma?' (+'+Math.round(x.s-r.sigma)+')':''}</small></div><button data-nav="1" aria-label="следующий игрок">›</button><button data-nav="0" aria-label="закрыть">✕</button></div>`+
+        `<div class="cpe">${mine.map(e=>chip(e,1)).join('')}${oth.map(e=>chip(e,0)).join('')}</div>${bt}</div>`;
     }
     function conRandom(){PL={}; evSorted.filter(e=>!e.fin&&e.stars>=3).forEach(e=>{const c=cRows.filter(r=>e.regs.includes(r.nick)&&!Object.keys(PL[r.uid]||{}).some(k=>EVM[k].wk===e.wk)).map(r=>r.uid);
       for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];} c.forEach((u,i)=>{(PL[u]=PL[u]||{})[e.id]=i<10?i+1:OUT;});});}
@@ -827,7 +842,7 @@ function initRace(){
       `<div class="ldr" id="ldr" style="margin-top:22px">${ladder}</div>`+
       (outs.length?`<p class="fline" style="text-align:left">Без шансов по модели: ${outs.slice(0,6).join(', ')}${outs.length>6?' и ещё '+(outs.length-6):''}.</p>`:'')+
       hm+
-      `<div class="fh"><em>${hm?'03':'02'}</em>Конструктор<s></s></div><p class="fline" style="text-align:left;margin:0 0 10px">Линия игрока собрана из результатов: серое - баллы сейчас, цветные куски - турниры, цифра - место. Нажмите на кусок, чтобы поменять место, или на <b>+</b>, чтобы добавить турнир. Таблица пересчитается сразу.</p><div id="conWrap"></div>`+
+      `<div class="fh"><em>${hm?'03':'02'}</em>Конструктор<s></s></div><p class="fline" style="text-align:left;margin:0 0 10px">Линия игрока собрана из результатов: серое - баллы сейчас, цветные куски - турниры, цифра - место. Нажмите на игрока или на кусок - откроется панель: турниры игрока и места. <b>+</b> добавляет турнир, стрелки листают игроков. Таблица пересчитается сразу.</p><div id="conWrap"></div>`+
       `<div class="fh"><em>${hm?'04':'03'}</em>Сколько дают за место<s></s></div>${cal}`+
       `<details class="fhow" style="margin-top:22px"><summary>Как это посчитано</summary><ol>`+
       `<li><b>Галочка ✓</b> - строгая проверка перебором: игрок больше не набирает, соперники берут лучшие места. Если двенадцать человек всё равно его не обходят - он прошёл. ${nMath?'':'Сейчас при условии «все соперники могут дозаявиться куда угодно» так не прошёл никто; галочка стоит у тех, кого не догнать при уже поданных заявках.'}</li>`+
@@ -840,12 +855,15 @@ function initRace(){
       const x0=br.left-lr.left+br.width*X(P.q10)/100, x1=br.left-lr.left+br.width*X(P.q90)/100; const d=document.createElement('div'); d.className='pband'; d.style.left=x0+'px'; d.style.width=(x1-x0)+'px'; d.innerHTML=`<b>проходной ${P.q10}-${P.q90}</b>`; L.appendChild(d);}
     band(); window.addEventListener('resize',band); document.querySelectorAll('#msw button').forEach(b=>b.addEventListener('click',()=>setTimeout(band,30)));
     L.addEventListener('click',e=>{const h=e.target.closest('.lr'); if(h){h.classList.toggle('open');}});
-    $('#conWrap').addEventListener('click',e=>{const t=e.target.closest('[data-act],[data-plus],[data-pe],[data-pp],.sg2'); if(!t) return;
+    $('#conWrap').addEventListener('click',e=>{const t=e.target.closest('[data-act],[data-plus],[data-pe],[data-pp],[data-nav],.sg2,.cr'); if(!t||e.target.closest('select')) return;
+      const first=u=>{const my=PL[u]||{}, ids=Object.keys(my).sort((a,b)=>EVM[a].date.localeCompare(EVM[b].date)); return ids.length?+ids[0]:null;};
       if(t.dataset.act){pick=null; mode=t.dataset.act==='rnd'?'':t.dataset.act; if(t.dataset.act==='fc') loadForecast(); else if(t.dataset.act==='zero') PL={}; else conRandom();}
-      else if(t.dataset.plus){const u=+t.dataset.plus; pick=(pick&&pick.u===u&&pick.id==null)?null:{u,id:null};}
+      else if(t.dataset.nav){const d=+t.dataset.nav; if(!d) pick=null; else {const v=($('#conWrap').dataset.vis||'').split(',').map(Number), i=v.indexOf(pick.u), u=v[(i+d+v.length)%v.length]; pick={u,id:first(u)};}}
+      else if(t.dataset.plus){const u=+t.dataset.plus; pick={u,id:null};}
       else if(t.dataset.pe){pick={u:pick.u,id:+t.dataset.pe};}
-      else if(t.dataset.pp){const v=t.dataset.pp; setPlace(pick.u,pick.id,v==='x'?null:+v); pick=null; mode='';}
-      else {const u=+t.dataset.u,id=+t.dataset.id; pick=(pick&&pick.u===u&&pick.id===id)?null:{u,id};}
+      else if(t.dataset.pp){const v=t.dataset.pp; setPlace(pick.u,pick.id,v==='x'?null:+v); if(v==='x') pick={u:pick.u,id:null}; mode='';}
+      else if(t.classList.contains('sg2')){const u=+t.dataset.u,id=+t.dataset.id; pick=(pick&&pick.u===u&&pick.id===id)?null:{u,id};}
+      else {const u=+t.dataset.u; pick=(pick&&pick.u===u)?null:{u,id:first(u)};}
       conDraw(true);});
     $('#conWrap').addEventListener('change',e=>{if(e.target.id==='conAdd'&&e.target.value){const u=+e.target.value; shownSet.add(u); pick={u,id:null}; conDraw(true);}});
     conDraw(false);
