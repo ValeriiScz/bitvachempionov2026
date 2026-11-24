@@ -1,4 +1,4 @@
-"""finish.py · v1.1 · 2026-11-25 (сетка 15 мест - для «Сыграй расклад» на странице) · v1.0 · 2026-11-23 - «Финишная прямая» гонки за Золотую Дюжину: кто прошёл математически, кто борется и что кому нужно.
+"""finish.py · v1.2 · 2026-11-25 (forecast: прогнозные места по турнирам - старт «Конструктора») · v1.1 · 2026-11-25 (сетка 15 мест - для «Сыграй расклад» на странице) · v1.0 · 2026-11-23 - «Финишная прямая» гонки за Золотую Дюжину: кто прошёл математически, кто борется и что кому нужно.
 Шаг конвейера после build_race: читает открытый race2026.js (GD_OUT), считает блок finish и дописывает его в window.RACE.finish.
 Что считает:
   1) статус каждого игрока:
@@ -190,12 +190,37 @@ for s0, u in mid[:TOPN]:
             row['risk_n'] = sum(len(x['res']) for x in sc)
     rows.append(row)
 
-F = {'v': '1.1', 'T': T, 'now12': now12, 'now13': now13, 'plank': plank, 'S': S, 'exact': HAVE_MILP,
+# ---- прогнозный расклад для «Конструктора»: самый типичный розыгрыш модели (каждый игрок ближе всего к своей медиане).
+#      Один и тот же seed даёт один и тот же мир при любом track, поэтому места по каждому обычному турниру берём из одного розыгрыша;
+#      финалы серий - место, соответствующее средним баллам игрока в финале (модель не ведёт места финалов по розыгрышам).
+cont = [u for s1, u in mid[:TOPN] if u in idx]; FC = {}; SF = 800; taken = set()
+regs_ev = [e for e in se.events if e['type'] != 'contour' and any(e['p'].get(u, 0) >= 0.3 for u in cont)]
+runs = {e['id']: se.run(S=SF, seed=11, frailty=None, track=e['id']) for e in regs_ev}
+if runs:
+    r0 = next(iter(runs.values())); top = [idx[u] for s1, u in mid[:20] if u in idx]
+    dist = np.abs(r0['sums'][:, top] - np.median(r0['sums'][:, top], axis=0)).sum(axis=1) + 3 * np.abs(r0['thr'] - np.median(r0['thr']))
+    sb = int(np.argmin(dist))
+    for e in regs_ev:
+        rr = runs[e['id']]; lst = [[u, int(rr['trkr'][sb, idx[u]])] for u in cont if rr['trk'][sb, idx[u]] >= 0]
+        for u, pl in lst: taken.add((u, wk(e['date'])))
+        if lst: FC[str(e['id'])] = sorted(lst, key=lambda x: x[1])
+    for e in se.events:
+        if e['type'] != 'contour' or e['id'] not in r0['ser_play']: continue
+        gr = [float(x) for x in e['grid']]; lst = []; used = set()
+        for u in sorted([u for u in cont if u in e['fin'] and r0['ser_play'][e['id']][idx[u]] >= 0.5 and (u, wk(e['date'])) not in taken],
+                        key=lambda u: -r0['ser_by'][e['id']][idx[u]] / max(r0['ser_play'][e['id']][idx[u]], 1e-9)):
+            avg = r0['ser_by'][e['id']][idx[u]] / max(r0['ser_play'][e['id']][idx[u]], 1e-9)
+            pl = min(range(len(gr)), key=lambda k: abs(gr[k] - avg)) + 1
+            while pl in used: pl += 1
+            used.add(pl); lst.append([u, pl]); taken.add((u, wk(e['date'])))
+        if lst: FC[str(e['id'])] = lst
+
+F = {'v': '1.2', 'T': T, 'now12': now12, 'now13': now13, 'plank': plank, 'S': S, 'exact': HAVE_MILP,
      'key': {'id': key['id'], 'short': key['short'], 'date': key['date'], 'stars': key['stars']} if key else None,
      'weeks': WEEKS,
      'events': [{'id': e['id'], 'date': e['date'], 'wk': e['wk'], 'name': e['name'], 'short': e['short'], 'stars': e['stars'], 'fin': e['fin'], 'N': e['N'], 'grid': e['grid'][:15], 'tail': e['gridfull'][-1],
                  'regs': [g.NICK.get(u, '?') for s1, u in mid[:TOPN] if u in e['regs']]} for e in EV],
-     'rows': rows}
+     'forecast': FC, 'rows': rows}
 json.dump(F, open(OUTP('finish.json'), 'w'), ensure_ascii=False)
 # дописать в открытый race2026.js (если он уже собран build_race)
 try:
