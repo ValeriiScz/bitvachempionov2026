@@ -1,4 +1,4 @@
-"""finish.py · v1.0 · 2026-11-23 - «Финишная прямая» гонки за Золотую Дюжину: кто прошёл математически, кто борется и что кому нужно.
+"""finish.py · v1.1 · 2026-11-25 (сетка 15 мест - для «Сыграй расклад» на странице) · v1.0 · 2026-11-23 - «Финишная прямая» гонки за Золотую Дюжину: кто прошёл математически, кто борется и что кому нужно.
 Шаг конвейера после build_race: читает открытый race2026.js (GD_OUT), считает блок finish и дописывает его в window.RACE.finish.
 Что считает:
   1) статус каждого игрока:
@@ -190,10 +190,10 @@ for s0, u in mid[:TOPN]:
             row['risk_n'] = sum(len(x['res']) for x in sc)
     rows.append(row)
 
-F = {'v': '1.0', 'T': T, 'now12': now12, 'now13': now13, 'plank': plank, 'S': S, 'exact': HAVE_MILP,
+F = {'v': '1.1', 'T': T, 'now12': now12, 'now13': now13, 'plank': plank, 'S': S, 'exact': HAVE_MILP,
      'key': {'id': key['id'], 'short': key['short'], 'date': key['date'], 'stars': key['stars']} if key else None,
      'weeks': WEEKS,
-     'events': [{'id': e['id'], 'date': e['date'], 'wk': e['wk'], 'name': e['name'], 'short': e['short'], 'stars': e['stars'], 'fin': e['fin'], 'N': e['N'], 'grid': e['grid'][:10], 'tail': e['gridfull'][-1],
+     'events': [{'id': e['id'], 'date': e['date'], 'wk': e['wk'], 'name': e['name'], 'short': e['short'], 'stars': e['stars'], 'fin': e['fin'], 'N': e['N'], 'grid': e['grid'][:15], 'tail': e['gridfull'][-1],
                  'regs': [g.NICK.get(u, '?') for s1, u in mid[:TOPN] if u in e['regs']]} for e in EV],
      'rows': rows}
 json.dump(F, open(OUTP('finish.json'), 'w'), ensure_ascii=False)
