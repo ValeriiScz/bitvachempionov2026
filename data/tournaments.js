@@ -178,9 +178,9 @@ window.TOURNAMENTS_DB = {
     "eloAvg": 1127,
     "eloN": 28,
     "eloTotal": 33,
-    "mmrAvg": 1602,
+    "mmrAvg": 1600,
     "mmrN": 28,
-    "mmrTiers": {"L": 4, "S": 6, "A": 2, "B": 5, "C": 2, "D": 9, "-": 5},
+    "mmrTiers": {"L": 4, "S": 6, "A": 2, "B": 4, "C": 3, "D": 9, "-": 5},
     "mmrTop": [["Flame", 2142, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2589/0371b90e7ab581f2eb51a0d438b6b7d23cc20566.png"], ["KEX", 2127, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_44/a6bfae05ca17bcfaa2961020a9b44f5860c2f4fe.png"], ["Tommy", 2126, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_650/a71d5bc0efb9d54508be8de08ad3a4e3d362bf1c.png"], ["Nick", 1952, "L", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1037/496a221dccca668d60768f4cedbd464430d6918d.png"], ["Саботаж", 1913, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_68/e5f69d0c89c3ecec9dee013970b56f8219c70d70.png"], ["Licht", 1893, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1333/b9f25e2884743a6bfaa6478e135e76b5cc57529a.png"], ["Tripok", 1890, "S", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_263/4281f453dafa967aa19b4f5e30653e3719a0d317.png"], ["RAMZES", 1884, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_499/a4d55d9d5fa815a6c00f4e29d18ab1fba282f6fe.png"], ["ParadoXx", 1861, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_709/dbee97c29e0e3c355d090f6dd6a1600b3b238b6c.png"], ["DOVOD", 1829, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1493/1f30664fe58edefde9864af8e39d1508286597f7.png"]],
     "organizer": "UMC · Q-Factory · главный судья Рыба-мÓя",
     "format": "11 отборочных → полуфинал 30 (2 игры) → финал 10 (4 игры)",
@@ -206,7 +206,7 @@ window.TOURNAMENTS_DB = {
     "start": "2026-11-28",
     "accent": "#f2c75c",
     "accent2": "#ae1c28",
-    "strength": {"lvl": "сильный", "rank": 11, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.5, "eq": 29.4, "pts": 26, "cplus": 19, "proj": false, "reg": 33, "exp": 33, "places": 10}
+    "strength": {"lvl": "сильный", "rank": 11, "of": 42, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.7, "eq": 29.4, "pts": 26, "cplus": 19, "proj": false, "reg": 33, "exp": 33, "places": 10}
   },
   {
     "id": "726",
