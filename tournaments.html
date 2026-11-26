@@ -228,7 +228,12 @@ const ART={667:'assets/cyprus667.jpg',713:'assets/protocol4.jpg'};
 function starsBox(n,mini){n=+n||0;if(!n)return '';return `<span class="stars s${n}${mini?' mini':''}" title="${n}★ — вес турнира в рейтинге mafgame"><span class="sg"><i>${'★'.repeat(n)}</i><u>${'★'.repeat(5-n)}</u></span><span class="sl"><b>${n} ${n===1?'звезда':n<5?'звезды':'звёзд'}</b></span></span>`;}
 function starsLegend(){return `<div class="slegend"><span class="lt">★ Звёзды — вес турнира в рейтинге mafgame</span><span>больше звёзд — больше баллов за места</span></div>`;}
 const TCOL={L:'#ffd700',S:'#e8c87a',A:'#67e08f',B:'#7aa7d6',C:'#b48cf0',D:'#8a919d',E:'#5c6470',F:'#3a3f4b'};
-function strChip(t){return window.DVS?DVS.html(t.strength):'';}
+function strChip(t){return window.DVS?DVS.html(t.strength||DVS.byId(t.id)):'';}
+/* КАНОН КАРТОЧКИ v1.0 (26.11.2026): состояние считаем по датам, а не только по полю status.
+   gathering - сбор состава · upcoming - скоро · live - идёт (liveFrom..liveTo) · played - сыгран, итоги ещё не внесены · finished - завершён */
+function pragueDay(){return new Date(Date.now()+1*3600e3).toISOString().slice(0,10);}
+function stateOf(t){if(t.status==='finished')return 'finished';if(isLive(t))return 'live';const end=t.liveTo||t.liveFrom||t.start;if(end&&pragueDay()>end)return 'played';return t.status==='gathering'?'gathering':'upcoming';}
+const STLAB={gathering:'сбор состава',upcoming:'скоро',live:'идёт · live',played:'сыгран · итоги скоро'};
 function whoBlock(t){const top=(t.mmrTop||[]).slice(0,10),c=t.mmrTiers||{};if(!top.length)return '';
   const N=Object.values(c).reduce((a,b)=>a+b,0)||t.players||0;const up=ks=>ks.split('').reduce((a,k)=>a+(c[k]||0),0);
   const href='participants.html?t='+t.id;const ini=n=>esc(String(n).replace(/[^A-Za-zА-Яа-яЁёІіЇїЄє0-9]/g,'').slice(0,2).toUpperCase()||'?');
@@ -236,8 +241,9 @@ function whoBlock(t){const top=(t.mmrTop||[]).slice(0,10),c=t.mmrTiers||{};if(!t
   const lv=[['A','LSA'],['B','LSAB'],['C','LSABC']].map(([k,ks])=>`<div style="--tc:${TCOL[k]}"><b>${up(ks)}<small>из ${N}</small></b><span>${k} и выше</span></div>`).join('');
   return `<div class="who"><div class="wk">Кто едет · топ-10 по MMR</div><a class="row" href="${href}" aria-label="Состав турнира">${pp}</a></div>`;}
 function card(t,big){
-  const [a1,a2]=accOf(t);const live=isLive(t);const st=live?'live':t.status;
-  const lab=live?'идёт · live':t.status==='gathering'?'сбор состава':t.status==='upcoming'?'скоро':esc(t.status);
+  const [a1,a2]=accOf(t);const state=stateOf(t),live=state==='live';const st=state==='played'?'upcoming':state;
+  const lab=STLAB[state]||esc(t.status);
+  const canReg=(state==='gathering'||state==='upcoming')&&t.reg!=='closed';
   const [p1,p2]=String(t.posterTitle||t.name).split('|');const y=String(t.start||'').slice(0,4);
   const art=t.art||(t.theme==='cyprus'?ART[667]:t.theme==='protocol'?ART[713]:'');
   const vis=(window.DV_POSTER&&DV_POSTER.has(t.poster))?`<a class="vis dvpo" href="${mainHref(t)}">${DV_POSTER.inner(t.poster,{sub:esc(t.dates)+' · '+esc(t.city)})}<span class="badge ${st}">${lab}</span></a>`:art?`<a class="vis${t.artPaper?' paper':''}" href="${mainHref(t)}" style="${t.artPaper?'background:'+t.artPaper:''}"><img src="${esc(art)}" alt="${esc(t.name)}" loading="lazy" onerror="this.remove()"><span class="badge ${st}">${lab}</span></a>`
@@ -245,18 +251,19 @@ function card(t,big){
   const btns=[t.page?`<a class="btn" href="${t.page}">Страница турнира →</a>`:'',t.watch?`<a class="btn w" href="${t.watch}">▶ Смотровая</a>`:'',
     `<a class="btn g" href="participants.html?t=${t.id}">Участники и ELO</a>`,t.mafgame?`<a class="btn g" href="${t.mafgame}" target="_blank" rel="noopener">mafgame ↗</a>`:''].join('');
   const stars=t.stars?`<span class="ms" title="${t.stars}★ — вес турнира в рейтинге mafgame">${'★'.repeat(t.stars)}</span>`:'';
-  const watchNow=t.watch&&(live||(t.start&&(new Date(t.start)-Date.now())<3*864e5));
+  const watchNow=t.watch&&(live||state==='played'||(t.start&&(new Date(t.start)-Date.now())<3*864e5));
   return `<div class="tc${big?' big':''} st${t.stars||0}" style="--acc:${a1};--acc2:${a2}">${vis}<div class="bd">
     <div class="meta">${esc(String(t.dates||'').replace(/\s*\d{4}$/,''))} · ${esc(t.city)} ${stars}</div>
     <a class="nm" href="${mainHref(t)}">${esc(t.name)}</a>
     <div class="fx">${strChip(t)}<span class="chip"><b>${t.players}</b> игроков</span>${t.mmrAvg!=null?`<span class="chip" title="средний MMR mafiastats.com по ${t.mmrN} игрокам">ср. MMR <b>${t.mmrAvg}</b></span>`:''}${t.prize?`<span class="chip">приз <b>${esc(t.prize)}</b></span>`:''}</div>
     ${t.status!=='finished'?whoBlock(t):''}
-    <div class="btns"><a class="btn pri" href="${mainHref(t)}">Открыть турнир</a>${watchNow?`<a class="btn w" href="${t.watch}">▶ Эфиры</a>`:''}<a class="btn g" href="participants.html?t=${t.id}">Состав</a>${t.status!=='finished'?`<a class="btn mg" href="${esc(t.mafgame||'https://mafgame.org/tournaments/'+t.id+'/view')}" target="_blank" rel="noopener" title="mafgame: записаться, выписаться, проверить заявку"><img src="assets/mafgame-logo.svg" alt="" width="15" height="15">${live?'mafgame':'Запись'} ↗</a>`:''}</div>
+    <div class="btns"><a class="btn pri" href="${mainHref(t)}">Открыть турнир</a>${watchNow?`<a class="btn w" href="${t.watch}">▶ Смотровая</a>`:''}<a class="btn g" href="participants.html?t=${t.id}">Состав</a><a class="btn mg" href="${esc(t.mafgame||'https://mafgame.org/tournaments/'+t.id+'/view')}" target="_blank" rel="noopener" title="${canReg?'mafgame: записаться, выписаться, проверить заявку':'страница турнира на mafgame'}"><img src="assets/mafgame-logo.svg" alt="" width="15" height="15">${canReg?'Запись':'mafgame'} ↗</a></div>
   </div></div>`;
 }
 (d=>{
   const ts=d.tournaments;
-  const act=ts.filter(t=>t.status!=='finished').sort((a,b)=>(isLive(b)-isLive(a))||String(a.start||'').localeCompare(String(b.start||'')));
+  const ORD={live:0,upcoming:1,gathering:1,played:2};
+  const act=ts.filter(t=>t.status!=='finished').sort((a,b)=>(ORD[stateOf(a)]-ORD[stateOf(b)])||String(a.start||'').localeCompare(String(b.start||'')));
   const arc=ts.filter(t=>t.status==='finished').sort((a,b)=>String(b.start||'').localeCompare(String(a.start||'')));
   document.getElementById('nact').textContent=act.length?act.length+' '+(act.length===1?'турнир':act.length<5?'турнира':'турниров'):'';
   document.getElementById('narc').textContent=arc.length+' турниров';
