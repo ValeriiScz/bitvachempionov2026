@@ -123,75 +123,8 @@ window.TOURNAMENTS_DB = {
     "eloTotal": 20,
     "mmrAvg": 1495,
     "mmrN": 20,
-    "mmrTiers": {
-      "S": 2,
-      "A": 2,
-      "B": 7,
-      "C": 5,
-      "D": 4
-    },
-    "mmrTop": [
-      [
-        "Bard",
-        1922,
-        "S",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1031/1fa426591383a408e84f609803cd3197c731dade.png"
-      ],
-      [
-        "Магнат",
-        1804,
-        "S",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png"
-      ],
-      [
-        "Мини",
-        1710,
-        "A",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_317/c9e2e25fbac508a1012c0a81d87406f703b3e58c.png"
-      ],
-      [
-        "Гелиус",
-        1693,
-        "A",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1225/6909824e7e8ea37161592e938b3973869e0e5423.png"
-      ],
-      [
-        "Тян",
-        1572,
-        "B",
-        "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3041/944ff7b2056ca906fcaaa174df015ae3ca8c3e0f.png"
-      ],
-      [
-        "Annvie",
-        1570,
-        "B",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2211/f38bc016b9690b3fce1e608211792492a9c7ef7b.png"
-      ],
-      [
-        "Maverick",
-        1560,
-        "B",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1657/113c46e18eb1f0829d8677456a66a8e412e76de6.png"
-      ],
-      [
-        "Dron",
-        1550,
-        "B",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1552/160339851587c86d3b4bac3786f96cf2988c76de.png"
-      ],
-      [
-        "adapt",
-        1526,
-        "B",
-        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1596/6544b3ef4b805b2b1748c54d2ca4502e0ced5659.png"
-      ],
-      [
-        "Фанта3ёр",
-        1515,
-        "B",
-        "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3326/9afb9f31f4e3e0d6d3fa6105720a2ea3386c7b96.png"
-      ]
-    ],
+    "mmrTiers": {"S": 2, "A": 2, "B": 7, "C": 5, "D": 4},
+    "mmrTop": [["Bard", 1922, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1031/1fa426591383a408e84f609803cd3197c731dade.png"], ["Магнат", 1804, "S", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png"], ["Мини", 1710, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_317/c9e2e25fbac508a1012c0a81d87406f703b3e58c.png"], ["Гелиус", 1693, "A", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1225/6909824e7e8ea37161592e938b3973869e0e5423.png"], ["Тян", 1572, "B", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3041/944ff7b2056ca906fcaaa174df015ae3ca8c3e0f.png"], ["Annvie", 1570, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2211/f38bc016b9690b3fce1e608211792492a9c7ef7b.png"], ["Maverick", 1560, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1657/113c46e18eb1f0829d8677456a66a8e412e76de6.png"], ["Dron", 1550, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1552/160339851587c86d3b4bac3786f96cf2988c76de.png"], ["adapt", 1526, "B", "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1596/6544b3ef4b805b2b1748c54d2ca4502e0ced5659.png"], ["Фанта3ёр", 1515, "B", "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3326/9afb9f31f4e3e0d6d3fa6105720a2ea3386c7b96.png"]],
     "organizer": "Decem Mafia Club · организатор Bard · главный судья Mermaid",
     "liveFrom": "2026-11-28",
     "liveTo": "2026-11-29",
@@ -217,7 +150,8 @@ window.TOURNAMENTS_DB = {
         "title": "Участники и рейтинг",
         "desc": "20 из 20 · MMR и ELO markery"
       }
-    ]
+    ],
+    "strength": {"lvl": "сильный", "rank": 16, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "топ-5", "ch": 35.7, "eq": 23.8, "pts": 6, "cplus": 16, "proj": false, "reg": 20, "exp": 20, "places": 5}
   },
   {
     "id": "757",
