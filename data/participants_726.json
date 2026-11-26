@@ -8,7 +8,7 @@
   "fee": "100.00",
   "stars": 3,
   "expected": 40,
-  "players_confirmed": 45,
+  "players_confirmed": 46,
   "rating_note": "Состав — подтверждённые на mafgame (снимок 12.11: 34 из 40). MMR — mafiastats.com (у новых для сайта игроков подтянется роботом); ELO/тир — markery.online, последний снимок по игроку.",
   "ms_snap": "2026-11-26",
   "ms_ladder": {
@@ -21,7 +21,7 @@
    "E": 925
   },
   "elo_snap": "2026-11-26",
-  "roster_snap": "2026-11-25"
+  "roster_snap": "2026-11-26"
  },
  "players": [
   {
@@ -1645,6 +1645,34 @@
    "added": "2026-11-19",
    "r_rank": 2370,
    "mk_last": "2026-08-30"
+  },
+  {
+   "nick": "Гамбитик",
+   "uid": 1413,
+   "real": "Юрий Шолом",
+   "av": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1413/c6d66080078a6e6d8caa51041ac10b34010971ed.png",
+   "status": "confirmed",
+   "club": "Mafia-Club \"Domino\"",
+   "cc": null,
+   "country": null,
+   "flag": null,
+   "markery_id": 17006,
+   "r_elo_cur": 945,
+   "r_tier": "D",
+   "r_elo_ly": null,
+   "mg_rank": null,
+   "m_rank": null,
+   "player_number": 46,
+   "mk_match": "id",
+   "elo_snap": "2026-07-15",
+   "series": null,
+   "series_place": null,
+   "series_score": null,
+   "ms": null,
+   "r_ms_mmr": 1379.7,
+   "r_ms_rank": null,
+   "r_ms_tier": "C",
+   "added": "2026-11-26"
   }
  ]
 }
