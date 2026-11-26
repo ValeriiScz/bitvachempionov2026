@@ -20,7 +20,7 @@
    "D": 1125,
    "E": 925
   },
-  "elo_snap": "2026-11-24"
+  "elo_snap": "2026-11-26"
  },
  "players": [
   {
@@ -41,7 +41,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-24",
+   "elo_snap": "2026-11-26",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -56,7 +56,7 @@
    "r_ms_mmr": 1555.9,
    "r_ms_rank": 247,
    "r_ms_tier": "B",
-   "r_rank": 503,
+   "r_rank": 501,
    "mk_last": "2026-11-21"
   },
   {
@@ -77,7 +77,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-24",
+   "elo_snap": "2026-11-26",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -113,7 +113,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-24",
+   "elo_snap": "2026-11-26",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -128,7 +128,7 @@
    "r_ms_mmr": 1187.8,
    "r_ms_rank": 723,
    "r_ms_tier": "D",
-   "r_rank": 8452,
+   "r_rank": 8450,
    "mk_last": "2026-11-21"
   },
   {
@@ -149,7 +149,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-24",
+   "elo_snap": "2026-11-26",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -164,7 +164,7 @@
    "r_ms_mmr": 1620.1,
    "r_ms_rank": null,
    "r_ms_tier": "B",
-   "r_rank": 512,
+   "r_rank": 509,
    "mk_last": "2026-11-21"
   },
   {
@@ -185,7 +185,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-24",
+   "elo_snap": "2026-11-26",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -200,7 +200,7 @@
    "r_ms_mmr": 1265.6,
    "r_ms_rank": 673,
    "r_ms_tier": "D",
-   "r_rank": 804,
+   "r_rank": 803,
    "mk_last": "2026-11-21"
   },
   {
@@ -221,7 +221,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-24",
+   "elo_snap": "2026-11-26",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -236,7 +236,7 @@
    "r_ms_mmr": 2126.6,
    "r_ms_rank": 19,
    "r_ms_tier": "L",
-   "r_rank": 59,
+   "r_rank": 60,
    "mk_last": "2026-11-21"
   },
   {
@@ -257,7 +257,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-24",
+   "elo_snap": "2026-11-26",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -272,7 +272,7 @@
    "r_ms_mmr": 1243.7,
    "r_ms_rank": 695,
    "r_ms_tier": "D",
-   "r_rank": 6468,
+   "r_rank": 6469,
    "mk_last": "2026-11-21"
   },
   {
@@ -293,7 +293,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-24",
+   "elo_snap": "2026-11-26",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -329,7 +329,7 @@
    "m_rank": null,
    "player_number": null,
    "mk_match": "id",
-   "elo_snap": "2026-11-24",
+   "elo_snap": "2026-11-26",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -364,8 +364,8 @@
    "mg_rank": null,
    "m_rank": null,
    "player_number": null,
-   "mk_match": "uid",
-   "elo_snap": "2026-11-24",
+   "mk_match": "id",
+   "elo_snap": "2026-11-26",
    "series": null,
    "series_place": null,
    "series_score": null,
@@ -380,7 +380,7 @@
    "r_ms_mmr": 1440.0,
    "r_ms_rank": null,
    "r_ms_tier": "C",
-   "r_rank": 7069,
+   "r_rank": 7070,
    "mk_last": "2026-11-21"
   }
  ],
