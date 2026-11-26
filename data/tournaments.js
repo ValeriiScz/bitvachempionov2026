@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.10 | 2026-11-26 | +685 Arena Moldova Cup, Grand Final (Кишинёв 28-29.11, 2★): страница t685, смотровая watch685, состав с mafgame
 // MafgameStat | tournaments.js | v4.9 | 2026-11-21 | 757: streamPromo - текст к эфиру на главной (финал, судья, студия, лоты и квиз, финалисты, ссылки на донат)
 // MafgameStat | tournaments.js | v4.8 | 2026-11-21 | 757 MCL финал: stream/streamUrl (YouTube 2axF6I6LQKs), liveFrom/liveTo 21-22.11
 // MafgameStat | tournaments.js | v4.20 | 2026-11-16 | закрыты 664 GMC (чемпион Licht) и 725 Круг избранных (чемпион Магнат) — таблицы 1:1 с mafgame; −644 Lodz Mafia Open (отменён; данные в data/ сохранены)
@@ -96,6 +97,127 @@ window.TOURNAMENTS_DB = {
     "accent2": "#dd0000",
     "mvp": "Licht",
     "strength": {"lvl": "сильный", "rank": 12, "of": 43, "win": "рейтинговых турниров, май 2026 – сейчас", "grp": "rated", "goal": "финал", "ch": 33.9, "eq": 24.4, "pts": 19, "cplus": 28, "proj": false, "reg": 40, "exp": 40, "places": 10}
+  },
+  {
+    "id": "685",
+    "theme": "dovod",
+    "art": "assets/arena685_card.jpg",
+    "thumb": "assets/arena685_thumb.jpg",
+    "artRatio": "16 / 9",
+    "page": "t685.html",
+    "watch": "watch685.html",
+    "name": "Arena Moldova Cup",
+    "posterTitle": "Arena Moldova|Cup",
+    "dates": "28-29 ноября 2026",
+    "city": "Кишинёв",
+    "country": "Молдова",
+    "players": 20,
+    "days": 2,
+    "stars": 2,
+    "prize": "1200 €",
+    "status": "upcoming",
+    "phase": 3,
+    "statusLabel": "Скоро · финал серии: 20 игроков, 12 игр на двух столах и финал топ-10",
+    "eloAvg": 1043,
+    "eloN": 12,
+    "eloTotal": 20,
+    "mmrAvg": 1495,
+    "mmrN": 20,
+    "mmrTiers": {
+      "S": 2,
+      "A": 2,
+      "B": 7,
+      "C": 5,
+      "D": 4
+    },
+    "mmrTop": [
+      [
+        "Bard",
+        1922,
+        "S",
+        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1031/1fa426591383a408e84f609803cd3197c731dade.png"
+      ],
+      [
+        "Магнат",
+        1804,
+        "S",
+        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2602/9aee83c5f8d4ec1a39626ca0e7dcab344cdd8638.png"
+      ],
+      [
+        "Мини",
+        1710,
+        "A",
+        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_317/c9e2e25fbac508a1012c0a81d87406f703b3e58c.png"
+      ],
+      [
+        "Гелиус",
+        1693,
+        "A",
+        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1225/6909824e7e8ea37161592e938b3973869e0e5423.png"
+      ],
+      [
+        "Тян",
+        1572,
+        "B",
+        "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3041/944ff7b2056ca906fcaaa174df015ae3ca8c3e0f.png"
+      ],
+      [
+        "Annvie",
+        1570,
+        "B",
+        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2211/f38bc016b9690b3fce1e608211792492a9c7ef7b.png"
+      ],
+      [
+        "Maverick",
+        1560,
+        "B",
+        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1657/113c46e18eb1f0829d8677456a66a8e412e76de6.png"
+      ],
+      [
+        "Dron",
+        1550,
+        "B",
+        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1552/160339851587c86d3b4bac3786f96cf2988c76de.png"
+      ],
+      [
+        "adapt",
+        1526,
+        "B",
+        "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1596/6544b3ef4b805b2b1748c54d2ca4502e0ced5659.png"
+      ],
+      [
+        "Фанта3ёр",
+        1515,
+        "B",
+        "https://web-prod.s3.nl-ams.scw.cloud/files/uploads/avatars/user_3326/9afb9f31f4e3e0d6d3fa6105720a2ea3386c7b96.png"
+      ]
+    ],
+    "organizer": "Decem Mafia Club · организатор Bard · главный судья Mermaid",
+    "liveFrom": "2026-11-28",
+    "liveTo": "2026-11-29",
+    "start": "2026-11-28",
+    "format": "12 игр × 2 стола (все играют каждую) → финал топ-10 (5 игр, ×1.3)",
+    "mafgame": "https://mafgame.org/tournaments/685/view",
+    "note": "Grand Final серии Arena Moldova Cup 2026: 20 игроков по итогам десяти отборочных серий. Призовой фонд 1200 €: 450 / 250 / 150 € и 350 € MVP. Состав - подтверждённые на mafgame (20 из 20), восемь играют по регламенту замен.",
+    "accent": "#f2c230",
+    "accent2": "#ffe28a",
+    "sections": [
+      {
+        "href": "t685.html",
+        "title": "Страница финала",
+        "desc": "Информация · Состав · Рассадка · Таблица · Игры"
+      },
+      {
+        "href": "watch685.html",
+        "title": "▶ Смотровая · эфиры",
+        "desc": "столы, live-таблица, следить за игроком"
+      },
+      {
+        "href": "participants.html?t=685",
+        "title": "Участники и рейтинг",
+        "desc": "20 из 20 · MMR и ELO markery"
+      }
+    ]
   },
   {
     "id": "757",
