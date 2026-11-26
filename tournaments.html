@@ -213,6 +213,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
     рейтинг игроков обновлён <b id="ratedate">—</b> · ELO, места и ранги — <a href="https://markery.online" target="_blank" rel="noopener">markery.online</a> · турниры, составы и протоколы — <a href="https://mafgame.org" target="_blank" rel="noopener">mafgame.org</a>
   </div>
 </div>
+<script src="data/strength.js"></script><!-- 26.11.2026: запасной источник силы состава для карточек -->
 <script src="assets/strength.js?v=6"></script>
 <script src="data/tournaments.js"></script>
 <script src="assets/posters.js"></script>
@@ -268,7 +269,7 @@ function card(t,big){
       return `<a class="ar st${t.stars||0}" style="--acc:${a1}" href="${t.page||('tournament.html?t='+t.id)}">
       <div class="ad">${esc(t.dates)}<br>${esc(t.city)}</div>
       <div><div class="an">${esc(t.name)}</div>
-        <div class="ax">${t.stars?`<span class="ms">${'★'.repeat(t.stars)}</span>`:''}${window.DVS&&t.strength?DVS.html(t.strength,true):''}<span class="aml">${t.players} игроков${t.mmrAvg!=null?' · MMR '+t.mmrAvg:''}</span></div>
+        <div class="ax">${t.stars?`<span class="ms">${'★'.repeat(t.stars)}</span>`:''}${window.DVS&&(t.strength||DVS.byId(t.id))?DVS.html(t.strength||DVS.byId(t.id),true):''}<span class="aml">${t.players} игроков${t.mmrAvg!=null?' · MMR '+t.mmrAvg:''}</span></div>
         ${pod}${fmt?`<div class="am">${esc(fmt)}</div>`:''}</div>
       <span class="ago">→</span></a>`;}).join('');
 })(window.TOURNAMENTS_DB);
