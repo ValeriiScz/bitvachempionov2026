@@ -5,7 +5,7 @@
  "date": "2026-11-28 — 2026-11-29",
  "location": "Кишинёв, Молдова",
  "club": "Decem Mafia Club",
- "organizer": "Decem Mafia Club · организатор Bard · главный судья Mermaid",
+ "organizer": "Decem Mafia Club · организатор Bard · главный судья Mermaid · стол I - Mermaid, стол II - Mariposa",
  "players_total": 20,
  "days": 2,
  "fee_eur": 100,
@@ -26,5 +26,9 @@
  "referees": [
   "Mermaid",
   "Mariposa"
- ]
+ ],
+ "referees_by_table": {
+  "1": "Mermaid",
+  "2": "Mariposa"
+ }
 }

@@ -21,7 +21,16 @@
   "Гелиус": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1225/6909824e7e8ea37161592e938b3973869e0e5423.png",
   "Арбуз": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_2325/3a39169c996576622d4cef4c29ddf6d8e0f107d7.png"
  },
- "judges": {},
+ "judges": {
+  "1": {
+   "name": "Mermaid",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_1063/69cfe81d666c583bea5148278d07fb3f07e09aff.png"
+  },
+  "2": {
+   "name": "Mariposa",
+   "avatar": "https://storage.googleapis.com/mafgame-prod/files/uploads/avatars/user_256/0a31d69b147c7b851eed3916f30fff25ea4562b3.png"
+  }
+ },
  "duty": null,
  "commentator": null,
  "referees": [
