@@ -11,15 +11,135 @@
  "fee_eur": 120,
  "stars": 4,
  "format": "16 игр за одним столом, все 10 финалистов играют каждую игру; место по сумме баллов.",
- "closed": false,
+ "closed": true,
  "in_progress": false,
  "live_from": "2026-11-20",
  "live_to": "2026-11-23",
- "upcoming": true,
- "games_played": 0,
+ "upcoming": false,
+ "games_played": 16,
  "games_total": 16,
  "final_coef": 1,
  "accent": "#c65ab4",
  "start_iso": "2026-11-21T10:00:00+01:00",
- "note": "Состав — подтверждённые на mafgame (снимок 10.11). Призовой фонд лиги 2000 €."
+ "note": "Состав — подтверждённые на mafgame (снимок 10.11). Призовой фонд лиги 2000 €.",
+ "champion": "KEX",
+ "winners": [
+  "KEX",
+  "TOPS",
+  "DOVOD"
+ ],
+ "standings": [
+  {
+   "place": 1,
+   "name": "KEX",
+   "sigma": 11.35,
+   "stage": "final",
+   "wins": 11,
+   "games": 16
+  },
+  {
+   "place": 2,
+   "name": "TOPS",
+   "sigma": 10.6833,
+   "stage": "final",
+   "wins": 11,
+   "games": 16
+  },
+  {
+   "place": 3,
+   "name": "DOVOD",
+   "sigma": 7.8667,
+   "stage": "final",
+   "wins": 7,
+   "games": 16
+  },
+  {
+   "place": 4,
+   "name": "Монтгомери",
+   "sigma": 7.7167,
+   "stage": "final",
+   "wins": 8,
+   "games": 16
+  },
+  {
+   "place": 5,
+   "name": "LogisticPro",
+   "sigma": 7.2333,
+   "stage": "final",
+   "wins": 8,
+   "games": 16
+  },
+  {
+   "place": 6,
+   "name": "qUAest0r",
+   "sigma": 6.55,
+   "stage": "final",
+   "wins": 7,
+   "games": 16
+  },
+  {
+   "place": 7,
+   "name": "***Алиса***",
+   "sigma": 6.2,
+   "stage": "final",
+   "wins": 7,
+   "games": 16
+  },
+  {
+   "place": 8,
+   "name": "Kiwi",
+   "sigma": 5.9,
+   "stage": "final",
+   "wins": 6,
+   "games": 16
+  },
+  {
+   "place": 9,
+   "name": "Айвенго",
+   "sigma": 5.45,
+   "stage": "final",
+   "wins": 6,
+   "games": 16
+  },
+  {
+   "place": 10,
+   "name": "Грешник",
+   "sigma": 5.2167,
+   "stage": "final",
+   "wins": 5,
+   "games": 16
+  }
+ ],
+ "reconciliation": "Сверено с официальной таблицей mafgame 27.11.2026: Final 10/10 — совпадают до сотых (кроме округления Ci в протоколах mafgame: DOVOD: Ci по играм 0.26, в таблице 0.2667; в таблице — официальные суммы).",
+ "awards": {
+  "most_valuable_players": [
+   "KEX (3.10)",
+   "DOVOD (2.35)",
+   "TOPS (2.30)"
+  ],
+  "most_valuable_mafia": [
+   "KEX (1.50)",
+   "Kiwi (1.00)",
+   "qUAest0r (0.70)"
+  ],
+  "most_valuable_citizen": [
+   "DOVOD (1.95)",
+   "TOPS (1.90)",
+   "KEX (1.60)"
+  ],
+  "best_don": [
+   "qUAest0r (3/0.14)",
+   "KEX (1/0.40)",
+   "Грешник (1/0.23)"
+  ],
+  "best_sheriff": [
+   "qUAest0r (2/0.02)",
+   "Грешник (1/0.40)",
+   "***Алиса*** (1/0.25)"
+  ],
+  "most_killed": [
+   "Айвенго (3)"
+  ]
+ },
+ "mvp": "KEX"
 }
