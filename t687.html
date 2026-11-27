@@ -264,9 +264,10 @@
   .rbtn.played{background:rgba(38,224,255,.16);border-color:rgba(38,224,255,.4);}
   .rbtn.next{box-shadow:0 0 0 2px var(--gold);}
   .rbtn.upcoming{opacity:.45;}
-  .tables{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
-  .twrap{background:rgba(5,6,10,.45);border:1px solid var(--line2);border-radius:16px;padding:10px 10px 12px;}
-  .thdr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .tables{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:16px;} /* 27.11: на телефоне стол не шире экрана */
+  .twrap{min-width:0;background:rgba(5,6,10,.45);border:1px solid var(--line2);border-radius:16px;padding:10px 10px 12px;}
+  .thdr{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-bottom:8px;min-width:0;}
+  .thdr .tnum{white-space:nowrap;}
   .tnum{font-family:var(--disp);font-size:15px;color:var(--gold-hi);font-weight:800;}
   .tgl{font-size:11px;color:var(--mut);font-weight:800;background:rgba(38,224,255,.1);border:1px solid var(--line2);border-radius:7px;padding:2px 8px;}
   .tjudge{margin-left:auto;font-size:10.5px;color:var(--gold-hi);background:rgba(38,224,255,.14);border:1px solid var(--line2);border-radius:14px;padding:3px 9px 3px 4px;display:inline-flex;align-items:center;gap:6px;}

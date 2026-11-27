@@ -1,3 +1,4 @@
+// MafgameStat | tournaments.js | v4.17 | 2026-11-27 | 757 MCL Europe финал -> finished (чемпион KEX 11.35, TOPS 10.68, DOVOD 7.87; MVP KEX; 16 игр)
 // MafgameStat | tournaments.js | v4.11 | 2026-11-26 | канон карточки v1.0: приз «N €», даты и названия без длинных тире, поле reg (closed - записи нет), 757 закрыт (чемпион KEX)
 // MafgameStat | tournaments.js | v4.10 | 2026-11-26 | +685 Arena Moldova Cup, Grand Final (Кишинёв 28-29.11, 2★): страница t685, смотровая watch685, состав с mafgame
 // MafgameStat | tournaments.js | v4.9 | 2026-11-21 | 757: streamPromo - текст к эфиру на главной (финал, судья, студия, лоты и квиз, финалисты, ссылки на донат)
@@ -167,6 +168,13 @@ window.TOURNAMENTS_DB = {
     "streamUrl": "https://www.youtube.com/live/2axF6I6LQKs",
     "liveFrom": "2026-11-21",
     "liveTo": "2026-11-22",
+    "champion": "KEX",
+    "top3": [
+      "KEX",
+      "TOPS",
+      "DOVOD"
+    ],
+    "mvp": "KEX",
     "streamPromo": {"lead": "Главный финал сезона MCL Europe: 10 лучших игроков трёх регионов, 16 игр за 2 дня, призовой фонд 2000 €. Старт в 10:30 CET.", "crew": "Судья - ГС YeS · студия аналитики - Буржуй", "fun": "На стриме розыгрыши и квиз. Поддержи своего финалиста: донат за его лот с ником игрока в сообщении - кто задонатит за игрока больше всех, забирает его лот. Автору самого крупного доната финала - фирменный магнит MAFS от клуба MafiaCL.", "players": "KEX 🇩🇪 · Грешник 🇪🇸 · LogisticPro 🇵🇱 · qUAest0r 🇨🇿 · DOVOD 🇨🇿 · TOPS 🇨🇿 · Монтгомери 🇨🇾 · Алиса 🇮🇱 · Kiwi 🇮🇱 · Айвенго 🇮🇱", "links": [["Донат и лоты", "https://destream.net/live/Mafs/donate"], ["Буст в Telegram", "https://t.me/boost/mafses"]], "src": "FACT: пост организаторов MCL, 21.11.2026"},
     "name": "MCL Europe 2026: финал",
     "posterTitle": "MCL Europe|Final",
