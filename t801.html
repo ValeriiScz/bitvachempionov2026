@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t801.html · v1.3 · 2026-11-28 · залы по столам (rooms_by_table): плашка «зал -1.08» у каждого стола в рассадке и играх + блок «Залы по столам» в Рассадке и Обзоре · v1.2 · 2026-11-27 · телефон: рассадка не шире экрана (сетка столов minmax(min(300px,100%)), шапка стола переносится) · v1.1 · 2026-11-11 · судьи по столам: I Рыба-мÓя (ГС), II Кура, III Кирпич (со слов Валерия) · v1.0 · 2026-11-11 · Four Seasons: Dutch Open 2026 (mafgame 801, Амстердам 28–29.11): полная страница на движке t692 v2.0 (квал 11 × 3 стола → полуфинал 30 × 2 → финал 10 × 4), состав MMR/ELO и прогноз из t615, постер организатора, тема Dutch Open
+<!-- DOVOD · t801.html · v1.4 · 2026-11-28 · пропуск игрока виден в его расписании: строка «ПРОПУСК» в таблице игр и карточка «ПРОПУСК» между столами; пропуск считается по рассадке · v1.3 · 2026-11-28 · залы по столам (rooms_by_table): плашка «зал -1.08» у каждого стола в рассадке и играх + блок «Залы по столам» в Рассадке и Обзоре · v1.2 · 2026-11-27 · телефон: рассадка не шире экрана (сетка столов minmax(min(300px,100%)), шапка стола переносится) · v1.1 · 2026-11-11 · судьи по столам: I Рыба-мÓя (ГС), II Кура, III Кирпич (со слов Валерия) · v1.0 · 2026-11-11 · Four Seasons: Dutch Open 2026 (mafgame 801, Амстердам 28–29.11): полная страница на движке t692 v2.0 (квал 11 × 3 стола → полуфинал 30 × 2 → финал 10 × 4), состав MMR/ELO и прогноз из t615, постер организатора, тема Dutch Open
      Данные: data/*_801* (рассадка с mafgame 15.10, ELO markery 15.10). Эфиры — watch801.html. Стиль: DOVOD-неон, акцент cyan раздела «Турниры». -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -297,7 +297,10 @@
   .seattbl th{background:rgba(38,224,255,.08);color:var(--gold-hi);font-family:var(--disp);font-weight:700;font-size:11.5px;padding:7px 4px;text-align:center;border-bottom:1px solid var(--line2);}
   .seattbl td{padding:6px 4px;text-align:center;border-bottom:1px solid var(--line2);}
   .seattbl tr:last-child td{border-bottom:none;}
-  .seattbl tr.rest td{background:rgba(224,101,77,.10);color:#f0906f;font-weight:800;font-style:italic;}
+  .seattbl tr.rest td{background:rgba(224,101,77,.22);color:#ffb39a;font-weight:900;letter-spacing:.06em;border-top:2px solid rgba(224,101,77,.6);border-bottom:2px solid rgba(224,101,77,.6);}
+  .skipcard{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;background:repeating-linear-gradient(135deg,rgba(224,101,77,.16) 0 12px,rgba(224,101,77,.06) 12px 24px);border:2px dashed rgba(224,101,77,.75);}
+  .skipcard .skipbig{font-family:var(--disp);font-size:22px;font-weight:900;color:#ffb39a;letter-spacing:.08em;}
+  .skipcard .skipsub{font-size:12.5px;color:#f6d27a;margin-top:4px;}
   .seattbl .gn{color:var(--gold-hi);font-weight:800;}
   .opp{font-size:12px;line-height:1.7;color:var(--ink);}
   .opp .cnt{display:inline-block;min-width:18px;text-align:center;background:var(--gold);color:#0b0d14;border-radius:6px;font-size:10px;font-weight:800;padding:1px 5px;margin-right:6px;}
@@ -1449,11 +1452,11 @@ function initSeating(){seatMode='games';seatGame=seatJump||((viewMode==='current
 function drawSeating(){
   const area=document.getElementById('seatArea');if(!area)return;
   if(seatMode==='player'&&seatPlayer){
-    const occ=(D.occ[seatPlayer]||[]).slice().sort((a,b)=>a.g-b.g);const tc={};occ.forEach(o=>tc[o.t]=(tc[o.t]||0)+1);const skip=D.skip[seatPlayer];
+    const occ=(D.occ[seatPlayer]||[]).slice().sort((a,b)=>a.g-b.g);const tc={};occ.forEach(o=>tc[o.t]=(tc[o.t]||0)+1);const skip=skipsOf(seatPlayer).join(', ');
     area.innerHTML=`<div class="phdr"><img src="${esc(avOf(seatPlayer)||DEF_AV)}" referrerpolicy="no-referrer" onerror="this.src='${DEF_AV}'">
       <div><div class="pn">${esc(seatPlayer)}</div><div class="ps">${occ.length} игр${skip?' · пропуск игры '+skip:''} · ${Object.keys(tc).sort().map(t=>'Стол '+ROMAN[t]+' — '+tc[t]).join(' · ')}</div></div>
       <button class="btn ghost" style="margin-left:auto" onclick="seatMode='games';drawSeating()">← к играм</button></div>
-      <div class="tables">${occ.map(o=>tableHtml(o.g,o.t,seatPlayer,true)).join('')}</div>`;
+      <div class="tables">${(()=>{const sk=skipsOf(seatPlayer);const items=occ.map(o=>({g:o.g,h:tableHtml(o.g,o.t,seatPlayer,true)})).concat(sk.map(g=>({g,h:skipCard(g)})));return items.sort((a,b)=>a.g-b.g).map(x=>x.h).join('');})()}</div>`;
   }else{
     const rounds=D.games.map((_,i)=>{const g=i+1;const cls=g<=D.played?'played':(g===D.played+1?'next':'upcoming');return `<button class="rbtn ${cls} ${g===seatGame?'active':''}" onclick="seatGame=${g};drawSeating()">${g}</button>`;}).join('');
     const tables=Object.keys(D.seatByGame[seatGame]||{}).map(Number).sort((a,b)=>a-b).map(t=>tableHtml(seatGame,t,null,false)).join('');
@@ -1476,6 +1479,10 @@ function tableHtml(g,t,target,showG){
 }
 
 /* ── v13: Моё / Кто с кем / Судьи / стримы ── */
+/* v1.4 (28.11): пропуски игрока считаем по опубликованной рассадке отбора (skip_801.json нет): игра отбора, где игрока нет ни за одним столом */
+function skipsOf(nick){const out=[];const fx=D.skip&&D.skip[nick];if(fx)out.push(+fx);const occ=new Set((D.occ[nick]||[]).map(o=>o.g));
+  D.games.forEach((G,i)=>{const g=i+1;if(/Полуфинал|Финал/i.test(String(G.stage||'')))return;if(!(G.tables||[]).some(t=>(t.seats||[]).length))return;if(!occ.has(g)&&!out.includes(g))out.push(g);});return out.sort((a,b)=>a-b);}
+function skipCard(g){return `<div class="twrap skipcard"><div class="skipbig">⏸ ПРОПУСК</div><div class="skipsub">игра ${g} · отдыхаете</div></div>`;}
 function nextOccOf(nick){const occ=(D.occ[nick]||[]).slice().sort((a,b)=>a.g-b.g);return occ.find(o=>o.g>(D.played||0))||null;}
 function streamOf(gnum,table,stage){
   const s=window.STREAMS_DB&&window.STREAMS_DB[CFG.id];if(!s)return chURL();
@@ -1503,7 +1510,7 @@ function nextGamePanel(nick,compact){
   if(!nick||!D.occ[nick])return '';
   const total=D.games.length,played=D.played||0;
   if(total&&played>=total)return '';
-  const skip=D.skip[nick];
+  const skip=skipsOf(nick).find(g=>g===played+1);
   const restNote=(skip&&skip===played+1)?`<div class="note" style="margin:8px 0 0">&#9208; В игре ${skip} — отдых, дальше по расписанию ниже.</div>`:'';
   const nx=nextOccOf(nick);
   if(!nx){
@@ -1582,7 +1589,7 @@ function drawMy(){
       <div class="rcards">${rcards}</div><div class="note" style="margin-top:8px">Крупно — Σ и <b class="win">победы</b>/игры в роли; ниже ср.доп против среднего по турниру, W/L — при победе/поражении. Тап по строке лога — открыть эту игру и стол в «Играх»; ▶ — стрим.</div></div>
       <div class="panel scrollT" style="padding:0"><table class="tbl full" style="font-size:12px"><thead><tr><th>Игра</th><th>Стол</th><th>Роль</th><th>Рез</th><th>доп</th><th>Ci</th><th class="sig">Σ</th>${myFull?'<th class="grp" title="место после этой игры">Место</th>':''}<th title="трансляция стола">&#9654;</th></tr></thead><tbody>${log}</tbody></table></div>`;
   }
-  const occ=(D.occ[name]||[]);const bySlot={};occ.forEach(o=>bySlot[o.g]={t:o.t,slot:o.slot});const skip=D.skip[name];const total=D.games.length||11;
+  const occ=(D.occ[name]||[]);const bySlot={};occ.forEach(o=>bySlot[o.g]={t:o.t,slot:o.slot});const skipL=skipsOf(name);const skip=skipL[0];const total=D.games.length||11;
   /* v14.2: рассадка делится по стадиям — раньше игры шли сквозной нумерацией 1…17 и было
      не понять, где кончилась квалификация. Теперь у каждой стадии свой заголовок и своя нумерация. */
   let rows='',curStage='';
@@ -1590,9 +1597,9 @@ function drawMy(){
     const stg=((D.gplist&&D.gplist[g-1])||{}).stage||'Квалификация';
     const stNum=(()=>{let k=0;for(let i=1;i<=g;i++){const s2=((D.gplist&&D.gplist[i-1])||{}).stage||'Квалификация';if(s2===stg)k++;}return k;})();
     if(stg!==curStage){curStage=stg;rows+=`<tr class="stgrow"><td colspan="6">${esc(stg)}</td></tr>`;}
-    if(g===skip)rows+=`<tr class="rest${done?' dim':''}"><td class="gn">${stNum}</td><td colspan="5">— отдых —</td></tr>`;
+    if(skipL.includes(g))rows+=`<tr class="rest${done?' dim':''}"><td class="gn">${stNum}</td><td colspan="5">⏸ ПРОПУСК - отдыхаете</td></tr>`;
     else if(bySlot[g])rows+=`<tr class="${done?'dim':''}${nxt?' hotrow':''}"><td class="gn">${stNum}</td><td>${ROMAN[bySlot[g].t]}</td><td>${bySlot[g].slot}</td><td>${catBadge(g,bySlot[g].t,false)}</td><td>${oppBadge(name,g)}</td><td>${(u=>u?`<a class="ytm" href="${esc(u)}" target="_blank" rel="noopener">&#9654;</a>`:'<span class="na">·</span>')(streamOf(g,bySlot[g].t,null))}</td></tr>`;}
-  if(rows)html+=`<div class="panel"><h3>Рассадка по играм</h3>${skip?`<div class="skipband">&#9208; Пропуск игры ${skip} — отдыхает</div>`:''}<div class="opleg">Сильные соперники (${D.STRONG_TXT||'B и выше'}) — обводка по тиру: <span><i class="f-S"></i>S</span><span><i class="f-A"></i>A</span><span><i class="f-B"></i>B</span><span class="na">· тап — кто за столом</span></div><table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th><th>Сила стола</th><th title="сильные соперники за столом: тир L/S/A/B">Сильные соперники</th><th title="трансляция стола в этот день">&#9654;</th></tr></thead><tbody>${rows}</tbody></table><div class="note" style="margin-top:6px">Серым — сыгранные, золотой рамкой — следующая. «Сила стола» — категория всего стола по ELO, «Соперники» — рассадка: категория девяти соперников без вас, от спокойной до экстремальной (см. «Столы»).</div></div>`;
+  if(rows)html+=`<div class="panel"><h3>Рассадка по играм</h3>${skipL.length?`<div class="skipband">&#9208; Пропуск: игра ${skipL.join(', ')} - отдыхаете</div>`:''}<div class="opleg">Сильные соперники (${D.STRONG_TXT||'B и выше'}) — обводка по тиру: <span><i class="f-S"></i>S</span><span><i class="f-A"></i>A</span><span><i class="f-B"></i>B</span><span class="na">· тап — кто за столом</span></div><table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th><th>Сила стола</th><th title="сильные соперники за столом: тир L/S/A/B">Сильные соперники</th><th title="трансляция стола в этот день">&#9654;</th></tr></thead><tbody>${rows}</tbody></table><div class="note" style="margin-top:6px">Серым — сыгранные, золотой рамкой — следующая. «Сила стола» — категория всего стола по ELO, «Соперники» — рассадка: категория девяти соперников без вас, от спокойной до экстремальной (см. «Столы»).</div></div>`;
   html+=luckPanel(name);
   const opp=D.opp[name]||{};const topOpp=Object.entries(opp).sort((a,b)=>b[1]-a[1]).slice(0,6);
   if(topOpp.length){
