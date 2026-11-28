@@ -1,3 +1,4 @@
+// MafgameStat · data/streams.js · v2.6 · 2026-11-28 · 801: в 1-й день 9 игр (Валерий)
 // MafgameStat · data/streams.js · v2.5 · 2026-11-28 · 801 Dutch Open: 7 эфиров из плейлиста (день 1/2 × 3 стола + финал)
 // MafgameStat · data/streams.js · v2.4 · 2026-11-27 · 757: эфир дня 2 - 8X0Z0ElsXiM (от Валерия)
 // MafgameStat · data/streams.js · v2.3 · 2026-11-21 · 757 эфир (финал MCL Europe 2026, Прага, один стол: 2axF6I6LQKs на оба дня)
@@ -28,7 +29,7 @@ window.STREAMS_DB = {
   },
   "692": {"gamesDay1": 6, "days": {"1": {}, "2": {}}},
   "801": {
-    "gamesDay1": 8,   /* ГИПОТЕЗА: сколько отборочных игр в 1-й день - уточнить по факту */
+    "gamesDay1": 9,   /* FACT: в 1-й день 9 игр отбора (Валерий, 28.11) */
     "playlist": "https://www.youtube.com/playlist?list=PLZIQ0_eNl35o",
     "dayDates": {"1":"2026-11-28","2":"2026-11-29"},
     "days": {
