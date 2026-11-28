@@ -1,5 +1,5 @@
 /* ============================================================================
-   MafgameStat · sw.js (Service Worker для PWA) · v1.16 · 2026-10-29 (data/*.js — network-first: свежие цифры с первого захода) · v1.15 · 2026-10-20 (HTML network-first — фикс «пароль не подошёл» на закрытых страницах после деплоя) · v1.14 · 2026-08-27 (кэш v19.3: ФИКС — медиа и Range-запросы мимо воркера (из-за 206 не открывался ролик-анонс); v19.2: календарь с городами в клетках и карточками серий, кнопка «наверх»; v19.1: карточки победителей 9 серий из канала, финал золотым в календаре; MCL разрезан на 4 страницы — mcl2026/mcl-standings/mcl-series/mcl-lab + data/mcl2026.js в прекэше; видео не кэшируем)
+   MafgameStat · sw.js (Service Worker для PWA) · v1.17 · 2026-11-28 (сбой сети больше не подменяет страницу главной: свой кэш → повтор → заглушка «нет связи» на том же адресе) · v1.16 · 2026-10-29 (data/*.js — network-first: свежие цифры с первого захода) · v1.15 · 2026-10-20 (HTML network-first — фикс «пароль не подошёл» на закрытых страницах после деплоя) · v1.14 · 2026-08-27 (кэш v19.3: ФИКС — медиа и Range-запросы мимо воркера (из-за 206 не открывался ролик-анонс); v19.2: календарь с городами в клетках и карточками серий, кнопка «наверх»; v19.1: карточки победителей 9 серий из канала, финал золотым в календаре; MCL разрезан на 4 страницы — mcl2026/mcl-standings/mcl-series/mcl-lab + data/mcl2026.js в прекэше; видео не кэшируем)
    Назначение: офлайн-кэш ОБОЛОЧКИ сайта (html/js/иконки) + установка как
    приложение. Данные турниров НЕ замораживаются кэшем.
 
@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'dovod-v710';
+const CACHE_VERSION = 'dovod-v711';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
@@ -79,6 +79,14 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+function offlinePage(){
+  const html='<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+
+    '<title>Нет связи · DOVOD</title><style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#07080c;color:#eef;font:16px/1.5 system-ui,sans-serif;text-align:center;padding:24px}'+
+    'button{margin-top:16px;padding:12px 22px;font:700 15px system-ui;background:#f5ff35;color:#111;border:0;border-radius:10px}</style></head><body><div>'+
+    '<div style="font-size:40px">📶</div><h2 style="margin:8px 0">Нет связи с сайтом</h2><p style="opacity:.75;margin:0">Страница откроется сама, как только появится интернет.</p>'+
+    '<button onclick="location.reload()">Обновить</button></div><script>setTimeout(function(){location.reload()},5000)<\/script></body></html>';
+  return new Response(html, { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
+}
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return; /* не-GET не трогаем */
@@ -121,7 +129,13 @@ self.addEventListener('fetch', (e) => {
       fetch(req).then(res => {
         if (res && res.status === 200) { const copy = res.clone(); caches.open(SHELL_CACHE).then(c => c.put(req, copy)).catch(() => {}); }
         return res;
-      }).catch(() => caches.match(req).then(c => c || caches.match('index.html')))
+      }).catch(() => caches.match(req, { ignoreSearch: true }).then(c => c ||
+        /* v1.17 (28.11.2026): раньше при сбое сети ЛЮБАЯ страница подменялась главной (index.html) —
+           на турнире в Амстердаме страница турнира «выбрасывала на главную». Теперь: свой кэш этой страницы →
+           повтор запроса через 1.5 с → маленькая заглушка «нет связи» на ЭТОМ ЖЕ адресе с автоповтором.
+           Главная отдаётся только на запрос самой главной. */
+        new Promise(r => setTimeout(r, 1500)).then(() => fetch(req)).catch(() =>
+          (url.pathname === '/' || /\/index\.html$/.test(url.pathname)) ? caches.match('index.html').then(i => i || offlinePage()) : offlinePage())))
     );
     return;
   }
