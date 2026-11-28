@@ -18,7 +18,7 @@
    ============================================================================ */
 'use strict';
 
-const CACHE_VERSION = 'dovod-v713';
+const CACHE_VERSION = 'dovod-v714';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const DATA_CACHE  = CACHE_VERSION + '-data';
 
