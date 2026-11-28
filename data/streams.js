@@ -1,3 +1,4 @@
+// MafgameStat · data/streams.js · v2.5 · 2026-11-28 · 801 Dutch Open: 7 эфиров из плейлиста (день 1/2 × 3 стола + финал)
 // MafgameStat · data/streams.js · v2.4 · 2026-11-27 · 757: эфир дня 2 - 8X0Z0ElsXiM (от Валерия)
 // MafgameStat · data/streams.js · v2.3 · 2026-11-21 · 757 эфир (финал MCL Europe 2026, Прага, один стол: 2axF6I6LQKs на оба дня)
 // MafgameStat · data/streams.js · v2.2 · 2026-11-05 · 615: 7 эфиров из плейлиста MAFGAME «Four Seasons : Black circle» (день 1/2 × 3 стола + финал) · v2.1 · 2026-11-05 · +615 (Black Circle, 3 стола): 8 игр в 1-й день
@@ -26,6 +27,16 @@ window.STREAMS_DB = {
     "final": "-Erzky4iGgk"
   },
   "692": {"gamesDay1": 6, "days": {"1": {}, "2": {}}},
+  "801": {
+    "gamesDay1": 8,   /* ГИПОТЕЗА: сколько отборочных игр в 1-й день - уточнить по факту */
+    "playlist": "https://www.youtube.com/playlist?list=PLZIQ0_eNl35o",
+    "dayDates": {"1":"2026-11-28","2":"2026-11-29"},
+    "days": {
+      "1": {"1":"uw0ijIzdMrE","2":"JRo1s7-0-ec","3":"C28sz5iLQjE"},
+      "2": {"1":"DmtGJPq8y-o","2":"FIZeZV2_cAI","3":"tvPUNl9rEIg"}
+    },
+    "final": "g98MBYYyuYM"
+  },
   "615": {
     "gamesDay1": 8,
     "playlist": "https://www.youtube.com/playlist?list=PLK60rFZ_wrrQ",

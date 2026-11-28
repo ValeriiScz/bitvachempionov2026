@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t801.html · v1.2 · 2026-11-27 · телефон: рассадка не шире экрана (сетка столов minmax(min(300px,100%)), шапка стола переносится) · v1.1 · 2026-11-11 · судьи по столам: I Рыба-мÓя (ГС), II Кура, III Кирпич (со слов Валерия) · v1.0 · 2026-11-11 · Four Seasons: Dutch Open 2026 (mafgame 801, Амстердам 28–29.11): полная страница на движке t692 v2.0 (квал 11 × 3 стола → полуфинал 30 × 2 → финал 10 × 4), состав MMR/ELO и прогноз из t615, постер организатора, тема Dutch Open
+<!-- DOVOD · t801.html · v1.3 · 2026-11-28 · залы по столам (rooms_by_table): плашка «зал -1.08» у каждого стола в рассадке и играх + блок «Залы по столам» в Рассадке и Обзоре · v1.2 · 2026-11-27 · телефон: рассадка не шире экрана (сетка столов minmax(min(300px,100%)), шапка стола переносится) · v1.1 · 2026-11-11 · судьи по столам: I Рыба-мÓя (ГС), II Кура, III Кирпич (со слов Валерия) · v1.0 · 2026-11-11 · Four Seasons: Dutch Open 2026 (mafgame 801, Амстердам 28–29.11): полная страница на движке t692 v2.0 (квал 11 × 3 стола → полуфинал 30 × 2 → финал 10 × 4), состав MMR/ELO и прогноз из t615, постер организатора, тема Dutch Open
      Данные: data/*_801* (рассадка с mafgame 15.10, ELO markery 15.10). Эфиры — watch801.html. Стиль: DOVOD-неон, акцент cyan раздела «Турниры». -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -257,6 +257,9 @@
   .tgl{font-size:11px;color:var(--mut);font-weight:800;background:rgba(38,224,255,.1);border:1px solid var(--line2);border-radius:7px;padding:2px 8px;}
   .tjudge{margin-left:auto;font-size:10.5px;color:var(--gold-hi);background:rgba(38,224,255,.14);border:1px solid var(--line2);border-radius:14px;padding:3px 9px 3px 4px;display:inline-flex;align-items:center;gap:6px;}
   .tjudge img{width:20px;height:20px;border-radius:50%;object-fit:cover;}
+  .troom{font-size:11px;font-weight:800;color:#0b0d14;background:#7ef0ff;border-radius:7px;padding:3px 8px;white-space:nowrap;}
+  .rmpanel .rmrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:6px 0;}
+  .rmpanel .rmrow b{min-width:58px;color:var(--gold-hi);font-size:13px;}
   .seatgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;padding:8px;background:linear-gradient(180deg,rgba(31,90,57,.14),rgba(38,224,255,.05));border:1px solid var(--line2);border-radius:14px;position:relative;}
   .seatgrid::before{content:"стол";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--disp);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(38,224,255,.35);pointer-events:none;}
   .scell{background:rgba(38,224,255,.06);border:1px solid var(--line2);border-radius:11px;padding:8px 3px 6px;text-align:center;cursor:pointer;position:relative;transition:border-color .12s,background .12s;z-index:1;}
@@ -1023,6 +1026,7 @@ const RENDER={
     const jud=(!Object.keys(D.judges).length&&D.refs&&D.refs.length)?`<div class="panel"><h3>Судейская бригада</h3><div class="judges">`+D.refs.map(j=>jcard({name:j.name,avatar:j.avatar,role:j.main?'Главный судья':''},j.main?'ГС':'Судья')).join('')+`</div><div class="note" style="margin-top:8px">Кто судит какой стол — появится в протоколах mafgame в день турнира.</div></div>`:Object.keys(D.judges).length?`<div class="panel"><h3>Судейская бригада</h3><div class="judges">`+
       Object.keys(D.judges).sort().map(k=>jcard(D.judges[k],'Стол '+(ROMAN[k]||k))).join('')+(D.duty?jcard(D.duty,'Дежурный СК'):'')+(D.commentator?jcard(D.commentator,'Эфир'):'')+`</div><div class="note" style="margin-top:8px">Стол I — главный судья. Тап по @ — телеграм.</div></div>`:'';
     return `<div class="view"><div class="secttl">&#9670; Обзор турнира</div>
+      ${t.closed?'':roomsPanel()}
       ${resultsPanel()}
       ${demoPanel()}
       ${myPanel()}
@@ -1039,7 +1043,7 @@ const RENDER={
   },
   seating(){
     if(!D.games.length)return `<div class="view"><div class="secttl">&#9638; Интерактивная рассадка</div><div class="panel"><div class="stub"><div class="si">&#9638;</div><h3>Рассадка недоступна</h3><p>Данные рассадки не загрузились.</p></div></div></div>`;
-    return `<div class="view"><div class="secttl">&#9638; Интерактивная рассадка</div>
+    return `<div class="view"><div class="secttl">&#9638; Интерактивная рассадка</div>${roomsPanel()}
       <div class="note" style="margin:0 0 12px">${CFG.quals} игр × ${CFG.tables} стола · каждый играет 10 из 11 (одну отдыхает) · тап по игроку — все его столы. Цветная метка у стола — его сила по ELO (см. «Сила столов»).</div>
       <div id="seatArea"></div></div>`;
   },
@@ -1215,7 +1219,7 @@ function gameTableHtml(t,gnum,stage){
   /* v14.1: комментарий судьи к столу — mafgame отдаёт его в game_comments, там написано,
      за что поставлены допы и штрафы. Раньше это было видно только на самом mafgame. */
   const cm = t.comment ? `<details class="jcm"><summary>Комментарий судьи</summary><div class="jcmt">${esc(String(t.comment)).replace(/\n/g,'<br>')}</div></details>` : '';
-  return `<div class="twrap${wcls}"><div class="thdr"><span class="tnum">Стол ${ROMAN[t.table_num]||t.table_num}</span>${cb} ${wl}${sb}</div><div class="seatgrid gseat">${cells}</div>${cm}</div>`;
+  return `<div class="twrap${wcls}"><div class="thdr"><span class="tnum">Стол ${ROMAN[t.table_num]||t.table_num}</span>${(typeof gnum==='number')?roomChip(gnum,t.table_num):''}${cb} ${wl}${sb}</div><div class="seatgrid gseat">${cells}</div>${cm}</div>`;
 }
 function initGames(){if(jumpGame!=null){gmRound=jumpGame;jumpGame=null;}else{gmRound=(viewMode==='current')?gmCur():0;}if(gmRound<0)gmRound=0;paintGames();highlightJump();}
 function paintGames(){
@@ -1468,7 +1472,7 @@ function tableHtml(g,t,target,showG){
   const eloBadge=catBadge(g,t,true);
   const su=(typeof streamOf==='function')?streamOf(g,t,null):null;
   const sb=su?`<a class="strm-sm" href="${esc(su)}" target="_blank" rel="noopener">&#9654; стрим</a>`:'';
-  return `<div class="twrap"><div class="thdr">${showG?`<span class="tgl">Игра ${g}</span>`:''}<span class="tnum">Стол ${ROMAN[t]}</span>${jh}${eloBadge}${sb}</div><div class="seatgrid">${cells}</div></div>`;
+  return `<div class="twrap"><div class="thdr">${showG?`<span class="tgl">Игра ${g}</span>`:''}<span class="tnum">Стол ${ROMAN[t]}</span>${roomChip(g,t)}${jh}${eloBadge}${sb}</div><div class="seatgrid">${cells}</div></div>`;
 }
 
 /* ── v13: Моё / Кто с кем / Судьи / стримы ── */
@@ -1480,6 +1484,11 @@ function streamOf(gnum,table,stage){
 }
 /* v13.2: пока конкретных ссылок нет — кнопки ведут на канал mafgame (видно, как выглядят); впишем ссылки в streams.js — сами переключатся на видео */
 function chURL(){return (window.STREAMS_DB&&window.STREAMS_DB.channel)||'https://www.youtube.com/@mafgameorg';}
+/* v1.3 (28.11): залы по столам - tournament_801.json rooms_by_table {день:{стол:"-1.08"}}; день игры: полуфинал/финал - 2-й, отбор - по gamesDay1 */
+function dayOfGame(g){const G=D.games[g-1];if(!G)return null;if(/Полуфинал|Финал/i.test(String(G.stage||'')))return 2;const q=D.games.slice(0,g).filter(x=>!/Полуфинал|Финал/i.test(String(x.stage||''))).length;return q<=gamesDay1()?1:2;}
+function roomOf(g,t){const R=D.tour&&D.tour.rooms_by_table;if(!R)return null;const G=D.games[g-1];if(G&&/^Финал/i.test(String(G.stage||'')))return null;const d=dayOfGame(g);return d&&R[d]&&R[d][t]?R[d][t]:null;}
+function roomChip(g,t){const r=roomOf(g,t);return r?`<span class="troom" title="зал (номер комнаты)">зал ${esc(r)}</span>`:'';}
+function roomsPanel(){const R=D.tour&&D.tour.rooms_by_table;if(!R)return '';const row=d=>R[d]?`<div class="rmrow"><b>День ${d}</b>`+Object.keys(R[d]).sort().map(t=>`<span class="troom">Стол ${ROMAN[t]||t} · зал ${esc(R[d][t])}</span>`).join('')+'</div>':'';return `<div class="panel rmpanel"><h3>🚪 Залы по столам</h3>${row('1')}${row('2')}</div>`;}
 function gamesDay1(){const st=window.STREAMS_DB&&window.STREAMS_DB[CFG.id];return (st&&st.gamesDay1)||8;}
 function streamsPanel(){
   const st=window.STREAMS_DB&&window.STREAMS_DB[CFG.id];
