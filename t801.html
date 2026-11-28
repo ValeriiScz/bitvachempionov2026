@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- DOVOD · t801.html · v1.4 · 2026-11-28 · пропуск игрока виден в его расписании: строка «ПРОПУСК» в таблице игр и карточка «ПРОПУСК» между столами; пропуск считается по рассадке · v1.3 · 2026-11-28 · залы по столам (rooms_by_table): плашка «зал -1.08» у каждого стола в рассадке и играх + блок «Залы по столам» в Рассадке и Обзоре · v1.2 · 2026-11-27 · телефон: рассадка не шире экрана (сетка столов minmax(min(300px,100%)), шапка стола переносится) · v1.1 · 2026-11-11 · судьи по столам: I Рыба-мÓя (ГС), II Кура, III Кирпич (со слов Валерия) · v1.0 · 2026-11-11 · Four Seasons: Dutch Open 2026 (mafgame 801, Амстердам 28–29.11): полная страница на движке t692 v2.0 (квал 11 × 3 стола → полуфинал 30 × 2 → финал 10 × 4), состав MMR/ELO и прогноз из t615, постер организатора, тема Dutch Open
+<!-- DOVOD · t801.html · v1.5 · 2026-11-28 · тиры и сила столов по MMR (было по ELO): буква у игрока = тир MMR, в карточке стола число = MMR (ELO в подсказке) · v1.4 · 2026-11-28 · пропуск игрока виден в его расписании: строка «ПРОПУСК» в таблице игр и карточка «ПРОПУСК» между столами; пропуск считается по рассадке · v1.3 · 2026-11-28 · залы по столам (rooms_by_table): плашка «зал -1.08» у каждого стола в рассадке и играх + блок «Залы по столам» в Рассадке и Обзоре · v1.2 · 2026-11-27 · телефон: рассадка не шире экрана (сетка столов minmax(min(300px,100%)), шапка стола переносится) · v1.1 · 2026-11-11 · судьи по столам: I Рыба-мÓя (ГС), II Кура, III Кирпич (со слов Валерия) · v1.0 · 2026-11-11 · Four Seasons: Dutch Open 2026 (mafgame 801, Амстердам 28–29.11): полная страница на движке t692 v2.0 (квал 11 × 3 стола → полуфинал 30 × 2 → финал 10 × 4), состав MMR/ELO и прогноз из t615, постер организатора, тема Dutch Open
      Данные: data/*_801* (рассадка с mafgame 15.10, ELO markery 15.10). Эфиры — watch801.html. Стиль: DOVOD-неон, акцент cyan раздела «Турниры». -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -533,7 +533,7 @@
   .smc:hover{background:rgba(255,255,255,.06);}
   .smc .ce{font:800 14px/1 var(--disp);}
   .smc .cn{font:700 8px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.85;}
-  .smc .ceo{font:600 9px/1 var(--mono);letter-spacing:.02em;opacity:.55;margin-top:1px;white-space:nowrap;} /* средний ELO стола — тихой строкой под категорией */
+  .smc .ceo{font:600 9px/1 var(--mono);letter-spacing:.02em;opacity:.55;margin-top:1px;white-space:nowrap;} /* средний MMR стола — тихой строкой под категорией */
   .smc.k1{background:rgba(255,61,90,.30);} .smc.k2{background:rgba(255,138,61,.24);} .smc.k3{background:rgba(245,215,110,.16);} .smc.k4{background:rgba(127,216,255,.16);} .smc.k5{background:rgba(38,224,255,.22);}
   .smc .ce{color:#fff;text-shadow:0 0 8px currentColor;}
   .smc.mine{box-shadow:0 0 0 2px var(--gold-hi),0 0 14px rgba(38,224,255,.5);}
@@ -916,7 +916,7 @@ function computeSeating(){
         names.forEach(m=>{if(m!==n){(D.opp[n]=D.opp[n]||{})[m]=(D.opp[n][m]||0)+1;}});});});
     if(done)D.played=gnum;});
   D.INFO={};D.RATE={};
-  D.players.forEach(p=>{D.INFO[p.nick]={real:p.real,cc:p.cc,flag:p.flag,country:p.country,club:p.club};D.RATE[p.nick]={tier:p.r_tier,elo:p.r_elo_cur,elo26:p.r_elo_ly,mg:p.mg_rank,mid:p.markery_id,uid:p.uid,msid:p.ms&&p.ms.id,av:p.av};});
+  D.players.forEach(p=>{D.INFO[p.nick]={real:p.real,cc:p.cc,flag:p.flag,country:p.country,club:p.club};D.RATE[p.nick]={tier:(p.r_ms_mmr?p.r_ms_tier:null),etier:p.r_tier,mmr:p.r_ms_mmr,elo:p.r_elo_cur,elo26:p.r_elo_ly,mg:p.mg_rank,mid:p.markery_id,uid:p.uid,msid:p.ms&&p.ms.id,av:p.av};});
   computeStrength();
 }
 function avOf(n){return D.avatars[n]||(D.RATE[n]&&D.RATE[n].av)||'';}
@@ -1047,7 +1047,7 @@ const RENDER={
   seating(){
     if(!D.games.length)return `<div class="view"><div class="secttl">&#9638; Интерактивная рассадка</div><div class="panel"><div class="stub"><div class="si">&#9638;</div><h3>Рассадка недоступна</h3><p>Данные рассадки не загрузились.</p></div></div></div>`;
     return `<div class="view"><div class="secttl">&#9638; Интерактивная рассадка</div>${roomsPanel()}
-      <div class="note" style="margin:0 0 12px">${CFG.quals} игр × ${CFG.tables} стола · каждый играет 10 из 11 (одну отдыхает) · тап по игроку — все его столы. Цветная метка у стола — его сила по ELO (см. «Сила столов»).</div>
+      <div class="note" style="margin:0 0 12px">${CFG.quals} игр × ${CFG.tables} стола · каждый играет 10 из 11 (одну отдыхает) · тап по игроку — все его столы. Цветная метка у стола — его сила по MMR (см. «Сила столов»).</div>
       <div id="seatArea"></div></div>`;
   },
   streams(){return `<div class="view"><div class="secttl">&#9654; Трансляции</div>${window.DVST?DVST.html(CFG,D):streamsPanel()}</div>`;},
@@ -1599,7 +1599,7 @@ function drawMy(){
     if(stg!==curStage){curStage=stg;rows+=`<tr class="stgrow"><td colspan="6">${esc(stg)}</td></tr>`;}
     if(skipL.includes(g))rows+=`<tr class="rest${done?' dim':''}"><td class="gn">${stNum}</td><td colspan="5">⏸ ПРОПУСК - отдыхаете</td></tr>`;
     else if(bySlot[g])rows+=`<tr class="${done?'dim':''}${nxt?' hotrow':''}"><td class="gn">${stNum}</td><td>${ROMAN[bySlot[g].t]}</td><td>${bySlot[g].slot}</td><td>${catBadge(g,bySlot[g].t,false)}</td><td>${oppBadge(name,g)}</td><td>${(u=>u?`<a class="ytm" href="${esc(u)}" target="_blank" rel="noopener">&#9654;</a>`:'<span class="na">·</span>')(streamOf(g,bySlot[g].t,null))}</td></tr>`;}
-  if(rows)html+=`<div class="panel"><h3>Рассадка по играм</h3>${skipL.length?`<div class="skipband">&#9208; Пропуск: игра ${skipL.join(', ')} - отдыхаете</div>`:''}<div class="opleg">Сильные соперники (${D.STRONG_TXT||'B и выше'}) — обводка по тиру: <span><i class="f-S"></i>S</span><span><i class="f-A"></i>A</span><span><i class="f-B"></i>B</span><span class="na">· тап — кто за столом</span></div><table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th><th>Сила стола</th><th title="сильные соперники за столом: тир L/S/A/B">Сильные соперники</th><th title="трансляция стола в этот день">&#9654;</th></tr></thead><tbody>${rows}</tbody></table><div class="note" style="margin-top:6px">Серым — сыгранные, золотой рамкой — следующая. «Сила стола» — категория всего стола по ELO, «Соперники» — рассадка: категория девяти соперников без вас, от спокойной до экстремальной (см. «Столы»).</div></div>`;
+  if(rows)html+=`<div class="panel"><h3>Рассадка по играм</h3>${skipL.length?`<div class="skipband">&#9208; Пропуск: игра ${skipL.join(', ')} - отдыхаете</div>`:''}<div class="opleg">Сильные соперники (${D.STRONG_TXT||'B и выше'}) — обводка по тиру: <span><i class="f-S"></i>S</span><span><i class="f-A"></i>A</span><span><i class="f-B"></i>B</span><span class="na">· тап — кто за столом</span></div><table class="seattbl"><thead><tr><th>Игра</th><th>Стол</th><th>Место</th><th>Сила стола</th><th title="сильные соперники за столом: тир L/S/A/B">Сильные соперники</th><th title="трансляция стола в этот день">&#9654;</th></tr></thead><tbody>${rows}</tbody></table><div class="note" style="margin-top:6px">Серым — сыгранные, золотой рамкой — следующая. «Сила стола» — категория всего стола по MMR, «Соперники» — рассадка: категория девяти соперников без вас, от спокойной до экстремальной (см. «Столы»).</div></div>`;
   html+=luckPanel(name);
   const opp=D.opp[name]||{};const topOpp=Object.entries(opp).sort((a,b)=>b[1]-a[1]).slice(0,6);
   if(topOpp.length){
@@ -1842,8 +1842,9 @@ function median(a){const q=a.slice().sort((x,y)=>x-y);const m=q.length>>1;return
 const fp=v=>String(Math.round(v*10)/10).replace('.',',');
 function computeStrength(){
   D.TS={};D.OS={};D.LUCK={};D.STRONG='LSAB';D.STRONG_TXT='B и выше';
-  const elos=Object.values(D.RATE).map(r=>r.elo).filter(Boolean);const med=median(elos)||1100;
-  const eloOf=n=>(D.RATE[n]&&D.RATE[n].elo)||med;
+  /* v1.5 (28.11): сила столов и соперники - по MMR и тирам MMR (канон с 06.11), ELO - справочно */
+  const elos=Object.values(D.RATE).map(r=>r.mmr).filter(Boolean);const med=median(elos)||1500;
+  const eloOf=n=>(D.RATE[n]&&D.RATE[n].mmr)||med;
   const tabs=[],seats=[];
   (D.games||[]).forEach((g,gi)=>{if(/Полуфинал|Финал/i.test(String(g.stage||'')))return;/* v13.8: всё, что не полу/финал — квалификация; live мог назвать стадию «Игры» */g.tables.forEach(t=>{const names=t.seats.map(s=>s&&s.name).filter(Boolean);if(names.length<6)return;
     const e=names.map(eloOf);const avg=mean(e);tabs.push({g:gi+1,t:t.table_num,avg,names});
@@ -1861,7 +1862,7 @@ function computeStrength(){
   D.tblMean=mean(tabs.map(x=>x.avg));
   /* v2.0 (30.10.2026, решение Валерия): сила стола — по составу. Очки за тир игрока: L 4, S 3, A 2, B 1, ниже 0; очки стола — сумма.
      Категория — относительно столов этого же турнира: z = (очки − среднее)/sd; ≥1.5 элитный, 0.5–1.5 сильный, ±0.5 ровный, −0.5…−1.5 мягкий, ≤−1.5 спокойный.
-     Средний ELO стола остаётся в подсказке; сравнение со случайным жребием — только в «Кому как рассадило» (соперники игрока). */
+     Средний MMR стола остаётся в подсказке; сравнение со случайным жребием — только в «Кому как рассадило» (соперники игрока). */
   const TW={L:3.5,S:3,A:2,B:1.5,C:0.5};/* v3.1 (06.11.2026, решение Валерия): шкала одна на все турниры — C 0.5 · B 1.5 · A 2 · S 3 · L 3.5; C даёт вклад в силу, но не «сильный соперник» */const tierOf=n=>(D.RATE[n]&&D.RATE[n].tier)||'';
   tabs.forEach(x=>{x.pts=x.names.reduce((s,n)=>s+(TW[tierOf(n)]||0),0);const c={};x.names.forEach(n=>{const t=tierOf(n);if(TW[t])c[t]=(c[t]||0)+1;});x.comp=['L','S','A','B','C'].filter(t=>c[t]).map(t=>t+'×'+c[t]).join(' · ')||'без L/S/A/B/C';});
   /* «Сильные соперники» (06.11.2026, решение Валерия): по умолчанию B и выше; если у больше чем половины мест квалификации сильных соперников больше 5 — поднимаем планку до A, затем до S. Одна мерка на весь турнир */
@@ -1889,12 +1890,12 @@ function computeStrength(){
   D.catRange=[null,1,2,3,4,5].map(c=>{if(!c)return null;const v=tabs.filter(x=>x.cat===c).map(x=>x.pts);return v.length?{min:Math.min(...v),max:Math.max(...v),n:v.length}:null;});
 }
 function catBadge(g,t,withElo){const T=D.TS&&D.TS[g+'-'+t];if(!T)return '';const c=CAT[T.cat];
-  return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${t}" title="${c.n} стол · ${fp(T.pts)} очк. (${T.comp}) · средний ELO ${Math.round(T.avg)} · #${T.rank} из ${D.tblN} столов квалификации">${c.n}${withElo?` <small>${T.comp}</small>`:''}</span>`;}
+  return `<span class="kb pk ${c.k}" data-g="${g}" data-t="${t}" title="${c.n} стол · ${fp(T.pts)} очк. (${T.comp}) · средний MMR ${Math.round(T.avg)} · #${T.rank} из ${D.tblN} столов квалификации">${c.n}${withElo?` <small>${T.comp}</small>`:''}</span>`;}
 function oppBadge(nick,g){const o=D.OS&&D.OS[nick+'|'+g];if(!o)return '<span class="na">·</span>';const RK={};D.STRONG.split('').forEach((t,i)=>RK[t]=i);
   const top=(o.opp||[]).map(m=>({m,t:(D.RATE[m]&&D.RATE[m].tier)||''})).filter(x=>x.t in RK).sort((a,b)=>RK[a.t]-RK[b.t]);
   /* v2.1 (31.10): фото сильных соперников внахлёст, обводка — цвет тира; без фото — буква тира */
   const pills=top.length?top.map(x=>{const av=avOf(x.m);return av?`<img class="oav f-${x.t}" src="${esc(av)}" alt="${esc(x.m)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'tpill tp-${x.t} opt',textContent:'${x.t}'}))">`:`<span class="tpill tp-${x.t} opt">${x.t}</span>`;}).join(''):'<span class="na" title="топ-игроков за столом нет">—</span>';
-  return `<span class="pk oppt" data-g="${g}" data-t="${o.t}" data-p="${esc(nick)}" title="сильные соперники: ${esc(top.map(x=>x.m+' ('+x.t+')').join(', ')||'нет')} · средний ELO соперников ${Math.round(o.avg)}">${pills}</span>`;}
+  return `<span class="pk oppt" data-g="${g}" data-t="${o.t}" data-p="${esc(nick)}" title="сильные соперники: ${esc(top.map(x=>x.m+' ('+x.t+')').join(', ')||'нет')} · средний MMR соперников ${Math.round(o.avg)}">${pills}</span>`;}
 function luckVerdict(L){const p=Math.round(L.pct);const z=L.z||0;const ps=(p>0?'+':'')+p+'%';
   if(z>=2)return {t:'самый тяжёлый путь',s:`сильных соперников на ${ps} больше среднего — один из самых трудных путей турнира`,k:'k1'};
   if(z>=1)return {t:'тяжёлый путь',s:`сильных соперников на ${ps} больше среднего`,k:'k2'};
@@ -1925,11 +1926,11 @@ function paintStrength(){const area=document.getElementById('strArea');if(!area)
   const gd1=gamesDay1();
   let grid=`<div class="smx" style="grid-template-columns:44px repeat(${tbls.length},minmax(0,1fr))"><div class="smh"></div>`+tbls.map(t=>`<div class="smh">Стол ${ROMAN[t]}<small>${D.judges[t]?esc(D.judges[t].name):''}</small></div>`).join('');
   games.forEach(g=>{grid+=`<div class="smg${g===gd1?' dayend':''}${g<=(D.played||0)?' done':''}${g===(D.played||0)+1?' nextg':''}"><b>${g}</b><small>${g<=gd1?'Д1':'Д2'}</small></div>`+tbls.map(t=>{const T=D.TS[g+'-'+t];if(!T)return '<div class="smc empty"></div>';const c=CAT[T.cat];
-    const mine=myPlayer&&T.names.includes(myPlayer);return `<button class="smc ${c.k}${mine?' mine':''}" data-g="${g}" data-t="${t}" title="${c.n} · ${fp(T.pts)} очк. (${T.comp}) · Ø ELO ${Math.round(T.avg)} · ${T.names.join(', ')}"><span class="ce">${fp(T.pts)}</span><span class="cn">${c.n}</span><span class="ceo">Ø ${Math.round(T.avg)}</span>${mine?'<span class="youb">вы</span>':''}</button>`;}).join('');});
+    const mine=myPlayer&&T.names.includes(myPlayer);return `<button class="smc ${c.k}${mine?' mine':''}" data-g="${g}" data-t="${t}" title="${c.n} · ${fp(T.pts)} очк. (${T.comp}) · Ø MMR ${Math.round(T.avg)} · ${T.names.join(', ')}"><span class="ce">${fp(T.pts)}</span><span class="cn">${c.n}</span><span class="ceo">Ø ${Math.round(T.avg)}</span>${mine?'<span class="youb">вы</span>':''}</button>`;}).join('');});
   grid+='</div>';
   const legend=[1,2,3,4,5].filter(c=>D.catRange[c]).map(c=>{const r=D.catRange[c];return `<div class="lgi"><span class="kb ${CAT[c].k}">${CAT[c].n}</span><span class="lgt">${r?`${r.n} столов · ${r.min===r.max?fp(r.min):fp(r.min)+'–'+fp(r.max)} очк.`:'—'}</span><span class="lgd">${CAT[c].d}</span></div>`;}).join('');
   const hot=Object.values(D.TS).sort((a,b)=>b.pts-a.pts||b.avg-a.avg).slice(0,5).map(x=>`<div class="hotrowx"><span class="kb pk ${CAT[x.cat].k}" data-g="${x.g}" data-t="${x.t}">#${x.rank}</span><b>игра ${x.g} · стол ${ROMAN[x.t]}</b><span class="na">${fp(x.pts)} очк. · ${x.comp} · Ø ${Math.round(x.avg)}</span><div class="hotn">${x.names.slice().sort((a,b)=>(D.RATE[b]&&D.RATE[b].elo||0)-(D.RATE[a]&&D.RATE[a].elo||0)).map(n=>{const tr=D.RATE[n]&&D.RATE[n].tier;return `<span class="plink" data-p="${esc(n)}" onclick="goPlayer(this.dataset.p)">${esc(n)}${tr?` <span class="tpill tp-${tr}" style="font-size:9px;padding:0 5px">${tr}</span>`:''}</span>`;}).join(' · ')}</div></div>`).join('');
-  area.innerHTML=`<div class="note" style="margin:0 0 12px">Сила стола — по составу: сколько за ним сильных игроков (тиры markery, снимок ${esc(D.stats.snapshot||'2026-09-06')}). Очки: L — 3,5, S — 3, A — 2, B — 1,5, C — 0,5, остальные — 0. Одна шкала на все турниры. В клетке — очки стола; средний стол этого турнира — <b>${D.ptsMean.toFixed(1)} очка</b>, категории считаются относительно него. Средний ELO стола — в подсказке. Тап по клетке — рассадка этого стола.</div>
+  area.innerHTML=`<div class="note" style="margin:0 0 12px">Сила стола — по составу: сколько за ним сильных игроков (тиры markery, снимок ${esc(D.stats.snapshot||'2026-09-06')}). Очки: L — 3,5, S — 3, A — 2, B — 1,5, C — 0,5, остальные — 0. Одна шкала на все турниры. В клетке — очки стола; средний стол этого турнира — <b>${D.ptsMean.toFixed(1)} очка</b>, категории считаются относительно него. Средний MMR стола — в подсказке. Тап по клетке — рассадка этого стола.</div>
     <div class="panel" style="padding:10px">${grid}<div class="note" style="margin-top:8px">Строки — игры (Д1/Д2 — день по плану трансляций, уточним по факту), столбцы — столы с судьями. Золотая рамка — ваш стол, если выбран «мой игрок».</div></div>
     <div class="panel"><h3>Категории столов</h3><div class="lgl">${legend}</div><div class="note" style="margin-top:8px">Как считаем: очки стола сравниваем со средним столом этого турнира (${D.ptsMean.toFixed(1)} очка, обычное отклонение ±${D.ptsSd.toFixed(1)}). Сильно выше — «элитный», выше — «сильный», около среднего — «ровный», ниже — «мягкий», сильно ниже — «спокойный». Шкала своя у каждого турнира: на очень сильном турнире «ровный» стол тоже сильный.</div></div>
     <div class="panel"><h3>Пять самых жарких столов</h3>${hot}</div>
@@ -2054,7 +2055,7 @@ window.addEventListener('popstate',()=>{if(vwOpen)closeCard(true);});
 
 /* ── превью стола по тапу на плашку категории / квадратик (мини-шторка) ── */
 function openPeek(g,t,me){const names=((D.seatByGame[g]||{})[t])||[];if(!names.length)return;const T=D.TS&&D.TS[g+'-'+t];const c=T?CAT[T.cat]:null;const j=D.judges[t];
-  const rows=names.map((n,i)=>{const R=D.RATE[n]||{},I=D.INFO[n]||{};return `<div class="pkr${n===me?' me':''}${n===myPlayer&&n!==me?' my':''}" data-p="${esc(n)}"><span class="pks">${i+1}</span><img src="${esc(avOf(n)||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'"><span class="pkn">${I.flag||''} ${esc(n)}</span>${R.tier?`<span class="tpill tp-${R.tier}">${R.tier}</span>`:''}<span class="pke">${R.elo?Math.round(R.elo):'—'}</span></div>`;}).join('');
+  const rows=names.map((n,i)=>{const R=D.RATE[n]||{},I=D.INFO[n]||{};return `<div class="pkr${n===me?' me':''}${n===myPlayer&&n!==me?' my':''}" data-p="${esc(n)}"><span class="pks">${i+1}</span><img src="${esc(avOf(n)||DEF_AV)}" referrerpolicy="no-referrer" loading="lazy" onerror="this.src='${DEF_AV}'"><span class="pkn">${I.flag||''} ${esc(n)}</span>${R.tier?`<span class="tpill tp-${R.tier}">${R.tier}</span>`:''}<span class="pke" title="MMR mafiastats${R.elo?' · ELO '+Math.round(R.elo):''}">${R.mmr?Math.round(R.mmr):'нов.'}</span></div>`;}).join('');
   const el=document.getElementById('peek');el.innerHTML=`<div class="pkh"><b>Игра ${g} · стол ${ROMAN[t]||t}</b>${c?`<span class="kb ${c.k}">${c.n}</span>`:''}${j?`<span class="pkj">${esc(j.name)}</span>`:''}<button class="pkx" onclick="closePeek()" aria-label="закрыть">✕</button></div><div class="pkl">${rows}</div><button class="btn ghost pkgo" data-g="${g}" data-t="${t}">открыть в рассадке →</button>`;
   el.querySelector('.pkgo').onclick=()=>{closePeek();seatJump=g;show('seating');setTimeout(()=>{const w=[...document.querySelectorAll('#seatArea .twrap')].find(x=>x.querySelector('.tnum')&&x.querySelector('.tnum').textContent.trim()==='Стол '+ROMAN[t]);if(w){w.style.boxShadow='0 0 0 2px var(--gold)';w.scrollIntoView({block:'center',behavior:'smooth'});setTimeout(()=>w.style.boxShadow='',2500);}},120);};
   el.querySelectorAll('.pkr').forEach(r=>r.onclick=()=>{closePeek();goPlayer(r.dataset.p);});
